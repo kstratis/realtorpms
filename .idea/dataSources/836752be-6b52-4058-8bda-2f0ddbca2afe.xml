@@ -9,8 +9,8 @@
     </database>
     <schema id="3" parent="2" name="public">
       <ObjectId>2200</ObjectId>
-      <IntrospectionTimestamp>2017-07-01.13:59:03.948</IntrospectionTimestamp>
-      <IntrospectionStateNumber>1003</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2017-07-01.21:13:31.351</IntrospectionTimestamp>
+      <IntrospectionStateNumber>1006</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -29,76 +29,127 @@
     <schema id="8" parent="2" name="information_schema">
       <ObjectId>11748</ObjectId>
     </schema>
-    <sequence id="9" parent="3" name="users_id_seq">
+    <sequence id="9" parent="3" name="properties_id_seq">
+      <ObjectId>16413</ObjectId>
+      <StateNumber>1006</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+    </sequence>
+    <sequence id="10" parent="3" name="users_id_seq">
       <ObjectId>16402</ObjectId>
       <StateNumber>1003</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
     </sequence>
-    <table id="10" parent="3" name="ar_internal_metadata">
+    <table id="11" parent="3" name="ar_internal_metadata">
       <ObjectId>16394</ObjectId>
       <StateNumber>1002</StateNumber>
     </table>
-    <table id="11" parent="3" name="schema_migrations">
+    <table id="12" parent="3" name="properties">
+      <ObjectId>16415</ObjectId>
+      <StateNumber>1006</StateNumber>
+    </table>
+    <table id="13" parent="3" name="schema_migrations">
       <ObjectId>16386</ObjectId>
       <StateNumber>1001</StateNumber>
     </table>
-    <table id="12" parent="3" name="users">
+    <table id="14" parent="3" name="users">
       <ObjectId>16404</ObjectId>
       <StateNumber>1003</StateNumber>
     </table>
-    <column id="13" parent="10" name="key">
+    <column id="15" parent="11" name="key">
       <Position>1</Position>
       <DataType>varchar|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>1002</StateNumber>
     </column>
-    <column id="14" parent="10" name="value">
+    <column id="16" parent="11" name="value">
       <Position>2</Position>
       <DataType>varchar|0</DataType>
       <StateNumber>1002</StateNumber>
     </column>
-    <column id="15" parent="10" name="created_at">
+    <column id="17" parent="11" name="created_at">
       <Position>3</Position>
       <DataType>timestamp|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>1002</StateNumber>
     </column>
-    <column id="16" parent="10" name="updated_at">
+    <column id="18" parent="11" name="updated_at">
       <Position>4</Position>
       <DataType>timestamp|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>1002</StateNumber>
     </column>
-    <index id="17" parent="10" name="ar_internal_metadata_pkey">
+    <index id="19" parent="11" name="ar_internal_metadata_pkey">
       <ObjectId>16400</ObjectId>
       <ColNames>key</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="18" parent="10" name="ar_internal_metadata_pkey">
+    <key id="20" parent="11" name="ar_internal_metadata_pkey">
       <ObjectId>16401</ObjectId>
       <ColNames>key</ColNames>
       <UnderlyingIndexName>ar_internal_metadata_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="19" parent="11" name="version">
+    <column id="21" parent="12" name="id">
+      <Position>1</Position>
+      <DataType>bigint|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1006</StateNumber>
+      <SequenceName>properties_id_seq</SequenceName>
+      <DefaultExpression>nextval(&apos;properties_id_seq&apos;::regclass)</DefaultExpression>
+    </column>
+    <column id="22" parent="12" name="description">
+      <Position>2</Position>
+      <DataType>text|0</DataType>
+      <StateNumber>1006</StateNumber>
+    </column>
+    <column id="23" parent="12" name="user_id">
+      <Position>3</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>1006</StateNumber>
+    </column>
+    <column id="24" parent="12" name="created_at">
+      <Position>4</Position>
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1006</StateNumber>
+    </column>
+    <column id="25" parent="12" name="updated_at">
+      <Position>5</Position>
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1006</StateNumber>
+    </column>
+    <index id="26" parent="12" name="properties_pkey">
+      <ObjectId>16422</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="27" parent="12" name="properties_pkey">
+      <ObjectId>16423</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>properties_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="28" parent="13" name="version">
       <Position>1</Position>
       <DataType>varchar|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>1001</StateNumber>
     </column>
-    <index id="20" parent="11" name="schema_migrations_pkey">
+    <index id="29" parent="13" name="schema_migrations_pkey">
       <ObjectId>16392</ObjectId>
       <ColNames>version</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="21" parent="11" name="schema_migrations_pkey">
+    <key id="30" parent="13" name="schema_migrations_pkey">
       <ObjectId>16393</ObjectId>
       <ColNames>version</ColNames>
       <UnderlyingIndexName>schema_migrations_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="22" parent="12" name="id">
+    <column id="31" parent="14" name="id">
       <Position>1</Position>
       <DataType>bigint|0</DataType>
       <NotNull>1</NotNull>
@@ -106,49 +157,49 @@
       <SequenceName>users_id_seq</SequenceName>
       <DefaultExpression>nextval(&apos;users_id_seq&apos;::regclass)</DefaultExpression>
     </column>
-    <column id="23" parent="12" name="first_name">
+    <column id="32" parent="14" name="first_name">
       <Position>2</Position>
       <DataType>varchar|0</DataType>
       <StateNumber>1003</StateNumber>
     </column>
-    <column id="24" parent="12" name="last_name">
+    <column id="33" parent="14" name="last_name">
       <Position>3</Position>
       <DataType>varchar|0</DataType>
       <StateNumber>1003</StateNumber>
     </column>
-    <column id="25" parent="12" name="email">
+    <column id="34" parent="14" name="email">
       <Position>4</Position>
       <DataType>varchar|0</DataType>
       <StateNumber>1003</StateNumber>
     </column>
-    <column id="26" parent="12" name="user_type">
+    <column id="35" parent="14" name="user_type">
       <Position>5</Position>
       <DataType>varchar|0</DataType>
       <StateNumber>1003</StateNumber>
     </column>
-    <column id="27" parent="12" name="branch_office">
+    <column id="36" parent="14" name="branch_office">
       <Position>6</Position>
       <DataType>varchar|0</DataType>
       <StateNumber>1003</StateNumber>
     </column>
-    <column id="28" parent="12" name="created_at">
+    <column id="37" parent="14" name="created_at">
       <Position>7</Position>
       <DataType>timestamp|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>1003</StateNumber>
     </column>
-    <column id="29" parent="12" name="updated_at">
+    <column id="38" parent="14" name="updated_at">
       <Position>8</Position>
       <DataType>timestamp|0</DataType>
       <NotNull>1</NotNull>
       <StateNumber>1003</StateNumber>
     </column>
-    <index id="30" parent="12" name="users_pkey">
+    <index id="39" parent="14" name="users_pkey">
       <ObjectId>16411</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="31" parent="12" name="users_pkey">
+    <key id="40" parent="14" name="users_pkey">
       <ObjectId>16412</ObjectId>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>users_pkey</UnderlyingIndexName>
