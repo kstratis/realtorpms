@@ -1,0 +1,15 @@
+<% content_for :stylesheets do %>
+    #ministyle{ color: red }
+    #top_menu {display: none}
+    #right_menu {float: right; background-color: yellow; color: black}
+<% end %>
+<% content_for :mini_pages do %>
+    <ul>
+      <li>sub menu 1</li>
+      <li>sub menu 2</li>
+      <li>sub menu 3</li>
+    </ul>
+    <%= yield %>
+
+<% end %>
+<%= render template: 'layouts/application' %>
