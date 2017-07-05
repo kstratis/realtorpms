@@ -1,0 +1,63 @@
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
+.btn {
+  padding: 8px;
+  font-size: 13.3px;
+  border-radius: 3px;
+  outline: none !important;
+  @include transition( background-color .1s ease );
+
+  /*&.btn-default,*/
+  &.btn-primary,
+  &.btn-default,
+  &.btn-success,
+  &.btn-info,
+  &.btn-warning,
+  &.btn-danger,
+  &.btn-link {
+    text-transform: uppercase;
+  }
+
+
+  &.btn-primary {
+    &, &:hover, &:active, &:focus { border: 1px solid #4c6bbe; }
+  }
+
+  &.btn-primary:not(.active)        { background-color: #4c6bbe; }
+  &.btn-primary:not(.active):hover  { background-color: #5372c5; }
+  &.btn-primary:not(.active):active { background-color: #405fb2; }
+  &.btn-primary:not(.active):focus  { background-color: #3c5bae; }
+
+  &.btn-link {
+    text-decoration: none;
+  }
+
+  &.btn-link:hover  { background-color: #ececec; }
+  &.btn-link:active { background-color: #ececec; }
+  &.btn-link:focus  { background-color: #e4e4e4; }
+
+}
+
+//including again from bootstrap to prevent from overriding these
+
+.btn-lg {
+  // line-height: ensure even-numbered height of button next to large input
+  @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $btn-border-radius-large);
+}
+.btn-sm {
+  // line-height: ensure proper height of button next to small input
+  @include button-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $btn-border-radius-small);
+}
+.btn-xs {
+  @include button-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-small, $btn-border-radius-small);
+}
+
+.btn-group > a.btn-primary {
+  border-right: 1px solid #6480cc;
+}
+
+.btn-group > .btn-primary.dropdown-toggle {
+  border-left: 1px solid #3353a7;
+  margin-left: 0px;
+}

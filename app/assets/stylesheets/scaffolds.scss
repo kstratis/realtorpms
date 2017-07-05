@@ -1,17 +1,25 @@
-body {
-  background-color: #fff;
-  color: #333;
-  margin: 33px;
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
+@import "common-mixins";
+
+html {
+  background-color: #dddddd;
+  height: 100%;
 }
 
-p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
+body {
+  background-color: #dddddd;
+  line-height: 1.5em;
+  color: #454545;
+  text-align: left;
+  font-family: Roboto, helvetica, sans-serif;
+  font-size: 14px;
+  margin: 0 auto;
+  padding: 0;
 }
+
+//p, ol, ul, td {
+//  font-size: 13px;
+//  line-height: 18px;
+//}
 
 pre {
   background-color: #eee;
@@ -19,18 +27,24 @@ pre {
   font-size: 11px;
 }
 
-a {
-  color: #000;
-
-  &:visited {
-    color: #666;
-  }
-
-  &:hover {
-    color: #fff;
-    background-color: #000;
+a{
+  @include setLinkStyleAll {
+    color: #ffffff;
   }
 }
+
+//a {
+//  color: #000;
+//
+//  &:visited {
+//    color: #666;
+//  }
+//
+//  &:hover {
+//    color: #fff;
+//    background-color: #000;
+//  }
+//}
 
 th {
   padding-bottom: 5px;
