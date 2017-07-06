@@ -2,12 +2,41 @@
 @import "bootstrap";
 @import "fonts";
 @import "buttons";
+@import "common-mixins";
 
 
 /* Universal */
 
+html {
+  background-color: #f8faff;
+  height: 100%;
+}
+
 body {
-  padding-top: 60px;
+  padding: 60px 0 0 0;
+  background-color: #f8faff;
+  line-height: 1.5em;
+  // font color
+  color: #454545;
+  text-align: left;
+  font-family: Roboto, helvetica, sans-serif;
+  font-size: 14px;
+  margin: 0 auto;
+}
+
+// This is fot
+.pr-container{
+  border: 0 none;
+  border-radius: 3px;
+  background-color: #fff;
+  margin-top: 60px;
+  //padding: 0px;
+  //margin-bottom: 10px;
+  @include box-shadow( 0 1px 0 #c5cad8, 0 2px 3px #d4d8e3 );
+}
+
+.navbar-background-coloring{
+  background-color: #050f2c;
 }
 
 section {
@@ -25,6 +54,8 @@ textarea {
 .center h1 {
   margin-bottom: 10px;
 }
+
+
 
 /* Typography */
 
@@ -65,4 +96,47 @@ p {
 #logo:hover {
   color: #fff;
   text-decoration: none;
+}
+
+/* footer */
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  color: #777;
+}
+
+footer a {
+  color: #555;
+}
+
+footer a:hover {
+  color: #222;
+}
+
+footer small {
+  float: left;
+}
+
+footer ul {
+  float: right;
+  list-style: none;
+}
+
+footer ul li {
+  float: left;
+  margin-left: 15px;
+}
+
+/* links */
+
+ul.nav.navbar-nav > li > a{
+  color: #cdcfd5;
+  &:hover {
+    @include setLinkStyleAll {
+      color: #ffffff;
+      background-color: transparent;
+    }
+  }
 }
