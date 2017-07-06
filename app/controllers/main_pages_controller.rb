@@ -1,4 +1,5 @@
 class MainPagesController < ApplicationController
+
   def home
   end
 
@@ -6,5 +7,9 @@ class MainPagesController < ApplicationController
   end
 
   def about
+    end
+
+  def contact
   end
+
 end
