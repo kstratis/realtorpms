@@ -7,7 +7,7 @@ class MainPagesController < ApplicationController
   end
 
   def about
-    end
+  end
 
   def contact
   end
