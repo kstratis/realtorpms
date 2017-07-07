@@ -1,6 +1,8 @@
 <header class="navbar navbar-fixed-top navbar-background-coloring">
-  <div class="container">
-    <%= link_to 'Property X', root_path, id: 'logo' %>
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <%= link_to 'Property X', root_path, id: 'logo', class: 'navbar-brand' %>
+    </div>
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to 'Home', root_path %></li>

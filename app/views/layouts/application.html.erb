@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+
+    <meta name="format-detection"
+          content="telephone=no">
+
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
+          name='viewport' />
+
+    <meta name="apple-mobile-web-app-capable"
+          content="yes">
     <!-- full_title is defined in app/helpers/application_helper.rb. title is provided by each view file
          using the keyword 'provide' If the view file doesn't provide such value, 'full title' returns
          a generic title -->
@@ -12,6 +23,7 @@
   </head>
   <body>
     <%= render 'layouts/header' %>
+    <%= render 'layouts/sidebar' %>
     <div class="container">
       <%= yield %>
       <%= render 'layouts/footer' %>
