@@ -3,7 +3,12 @@
 @import "fonts";
 @import "buttons";
 @import "common-mixins";
-
+@import "icons";
+//@mixin inline-svg($color, $svg-content) {
+//  $start: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512"><style>path { fill:#{$color}; }</style>';
+//  $end:   '</svg>';
+//  background-image: url('data:image/svg+xml;utf8, #{$start}#{$svg-content}#{$end}');
+//}
 
 /* Universal */
 
@@ -13,6 +18,7 @@ html {
 }
 
 body {
+  //font-weight: 100;
   padding: 80px 0 0 90px;
   background-color: #f8faff;
   line-height: 1.5em;
@@ -143,17 +149,51 @@ ul.nav.navbar-nav > li > a{
 /* side navbar */
 
 #sidebar {
-  padding: 60px 0 0 0;
+  padding: 50px 0 0 0;
   color: white;
   overflow-x: hidden;
   overflow-y: hidden;
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 90px;
+  width: 100px;
   left: 0;
   //background: rgba(1,67,88,1);
+  //background: #0a67a8;
   background: #182359;
   z-index: 200;
 }
+
+/* side navbar menu options */
+
+.side-menu-entry > a.entry-anchor-wrapper{
+  letter-spacing: 1.5px;
+  padding: 10px 5px 5px 5px;
+  text-align: center;
+  font-size: 12px;
+  color: #99b2cb;
+  .pr-icon{
+    &.icon-properties {
+      padding: 25px;
+      @include inline-svg(#99b2cb, $properties-icon-content);
+    }
+    &.icon-partners {
+      padding: 25px;
+      @include inline-svg(#99b2cb, $partners-icon-content);
+    }
+  }
+  &:hover{
+    background: #050f2c;
+    color: #00aeff;
+    .pr-icon{
+      &.icon-properties {
+        @include inline-svg(#00aeff, $properties-icon-content);
+      }
+      &.icon-partners {
+        @include inline-svg(#00aeff, $partners-icon-content);
+      }
+    }
+  }
+}
+
 
