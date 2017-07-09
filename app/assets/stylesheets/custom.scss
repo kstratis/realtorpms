@@ -1,5 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import 'navbar-fixed-side';
 @import "fonts";
 @import "buttons";
 @import "common-mixins";
@@ -19,7 +20,7 @@ html {
 
 body {
   //font-weight: 100;
-  padding: 80px 0 0 90px;
+  //padding: 80px 0 0 70px;
   background-color: #f8faff;
   line-height: 1.5em;
   // font color
@@ -28,13 +29,22 @@ body {
   font-family: Roboto, helvetica, sans-serif;
   font-size: 14px;
   margin: 0 auto;
+  //text-align: center;
 }
 
 // This is fot
 .pr-container{
+  //position: relative;
+
+  //padding:5px;
+  //margin:5px;
+  //margin-left: 15px;
+  //margin-right: 125px;
   border: 0 none;
   border-radius: 3px;
   background-color: #fff;
+  //overflow-x: hidden;
+  //flex-wrap: wrap;
   //margin: 60px 15px 15px 15px;
   //padding: 0px;
   //margin-bottom: 10px;
@@ -43,6 +53,7 @@ body {
 
 .navbar-background-coloring{
   background-color: #050f2c;
+  //border-bottom: 1px solid #f8faff;
 }
 
 section {
@@ -150,28 +161,53 @@ ul.nav.navbar-nav > li > a{
 
 #sidebar {
   padding: 50px 0 0 0;
-  color: white;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 100px;
-  left: 0;
+  border-color: transparent;
+  //color: white;
+  //overflow-x: hidden;
+  //overflow-y: hidden;
+  //overflow: auto;
+  //position: fixed;
+  //top: 0;
+  //bottom: 0;
+  //left: 100px;
+  //margin-left: -100px;
+  //width: 100px;
+  //left: 0;
   //background: rgba(1,67,88,1);
   //background: #0a67a8;
+  //background: #182359;
   background: #182359;
-  z-index: 200;
+  //z-index: 200;
 }
 
 /* side navbar menu options */
 
 .side-menu-entry > a.entry-anchor-wrapper{
+  // This is for the left strip
+  /* --------------- */
+  position: relative;
+  z-index: 9;
+  width: 100%;
+  height: 100%;
+  /* --------------- */
   letter-spacing: 1.5px;
   padding: 10px 5px 5px 5px;
   text-align: center;
   font-size: 12px;
   color: #99b2cb;
+  // This is for the left strip
+  /* --------------- */
+  &:before{
+    content: "";
+    position: absolute;
+    z-index: -1;
+    background: #182359;
+    left: 2px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+  }
+  /* --------------- */
   .pr-icon{
     &.icon-properties {
       padding: 25px;
@@ -183,7 +219,8 @@ ul.nav.navbar-nav > li > a{
     }
   }
   &:hover{
-    background: #050f2c;
+    background: #f16145;
+    //background: #f8faff;
     color: #00aeff;
     .pr-icon{
       &.icon-properties {
