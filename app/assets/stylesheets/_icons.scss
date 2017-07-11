@@ -34,6 +34,14 @@ $partners-icon-content: '<path d="M344.465 35.957c-14.475-14.473-32.45-25.175-51
   &.lg { width: 200px; height: 200px; }
   &.xl { width: 300px; height: 300px; }
 
+  &.house-colored{
+    background-image: url( house_colored.svg );
+  }
+
+  &.agent-colored{
+    background-image: url( agent_colored.svg );
+  }
+
   //&.no-results {
   //  background-image: url( /assets/images/not_found/nothing_here.svg );
   //}
