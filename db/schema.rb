@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170711115847) do
+ActiveRecord::Schema.define(version: 20170711134809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,15 @@ ActiveRecord::Schema.define(version: 20170711115847) do
     t.boolean "balconies"
     t.boolean "storage_room"
     t.boolean "garden"
+    t.integer "type"
+    t.integer "orientation"
+    t.integer "view"
+    t.integer "heating"
+    t.boolean "gas"
+    t.boolean "solar_heating"
+    t.boolean "furnitures"
+    t.boolean "fit_for_students"
+    t.boolean "fireplace"
   end
 
   create_table "users", force: :cascade do |t|
