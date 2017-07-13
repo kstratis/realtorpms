@@ -59,8 +59,6 @@ textarea {
   margin-bottom: 10px;
 }
 
-
-
 /* Typography */
 
 h1 {
@@ -180,28 +178,35 @@ ul.nav.navbar-nav > li > a{
     bottom: 0;
   }
   /* --------------- */
-  .pr-icon{
-    &.icon-properties {
-      padding: 25px;
-      @include inline-svg(#99b2cb, $properties-icon-content);
-    }
-    &.icon-partners {
-      padding: 25px;
-      @include inline-svg(#99b2cb, $partners-icon-content);
-    }
-  }
+  // These are inlined svgs with the intention of changing their stroke/fill on hover
+  // This is
+  //.pr-icon{
+  //  &.icon-properties {
+  //    padding: 25px;
+  //    @include inline-svg(#99b2cb, $properties-icon-content);
+  //  }
+  //  &.icon-partners {
+  //    padding: 25px;
+  //    @include inline-svg(#99b2cb, $partners-icon-content);
+  //  }
+  //}
+  //&:hover{
+  //  background: #f16145;
+  //  //background: #f8faff;
+  //  color: #ffffff;
+  //  .pr-icon{
+  //    &.icon-properties {
+  //      @include inline-svg(#ffffff, $properties-icon-content);
+  //    }
+  //    &.icon-partners {
+  //      @include inline-svg(#ffffff, $partners-icon-content);
+  //    }
+  //  }
+  //}
+  /* --------------- */
   &:hover{
-    background: #f16145;
-    //background: #f8faff;
     color: #ffffff;
-    .pr-icon{
-      &.icon-properties {
-        @include inline-svg(#ffffff, $properties-icon-content);
-      }
-      &.icon-partners {
-        @include inline-svg(#ffffff, $partners-icon-content);
-      }
-    }
+    background: #f16145;
   }
 }
 
