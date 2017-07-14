@@ -1,19 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  email: MyString
-  first_name: MyString
-  last_name: MyString
-  age: 1
-  phone1: 1
-  phone2: 1
-  office_branch: MyString
-
-two:
-  email: MyString
-  first_name: MyString
-  last_name: MyString
-  age: 1
-  phone1: 1
-  phone2: 1
-  office_branch: MyString
+#one:
+#  email: MyString
+#  first_name: MyString
+#  last_name: MyString
+#  age: 1
+#  phone1: 1
+#  phone2: 1
+#  office_branch: MyString
+#
+#two:
+#  email: MyString
+#  first_name: MyString
+#  last_name: MyString
+#  age: 1
+#  phone1: 1
+#  phone2: 1
+#  office_branch: MyString
