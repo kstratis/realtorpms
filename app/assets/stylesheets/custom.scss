@@ -5,6 +5,8 @@
 @import "buttons";
 @import "common-mixins";
 @import "icons";
+
+$gray-medium-light: #eaeaea;
 //@mixin inline-svg($color, $svg-content) {
 //  $start: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512"><style>path { fill:#{$color}; }</style>';
 //  $end:   '</svg>';
@@ -210,4 +212,67 @@ ul.nav.navbar-nav > li > a{
   }
 }
 
+/* miscellaneous */
 
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
+}
+
+/* sidebar */
+
+aside {
+  section.user_info {
+    margin-top: 10px;
+    text-align: left;
+  }
+  section {
+    padding: 10px 0;
+    margin-top: 20px;
+    &:first-child {
+      padding-top: 0;
+    }
+    div.user_info_avatar{
+      width: 90px;
+      min-height: 90px;
+      height: auto;
+      float: left;
+      margin: 3px;
+      padding: 3px;
+    }
+    div.user_info_text{
+      display: block;
+      padding-top: 30px;
+    }
+    img{
+      border: 1px solid #cdcfd5;
+      border-radius: 50%;
+      max-width: 100%;
+      height: auto;
+    }
+    span {
+      display: block;
+
+      margin-bottom: 3px;
+      line-height: 1;
+      &.name{
+        font-size: 14px;
+        text-transform: uppercase;
+        text-decoration: underline;
+      }
+    }
+
+  }
+}
+
+.gravatar {
+  float: left;
+  margin-right: 10px;
+}
+
+.gravatar_edit {
+  margin-top: 15px;
+}

@@ -1,0 +1,18 @@
+<% provide(:title, @user.first_name + @user.last_name) %>
+<div class="center jumbotron pr-container">
+  <div class="row">
+    <aside class="col-md-4">
+      <section class="user_info">
+        <div class="user_info_avatar">
+          <%= gravatar_for @user %>
+        </div>
+        <div class="user_info_text">
+          <span class="name"><%== @user.first_name + '&nbsp;' + @user.last_name %></span>
+          <span class="email"><%= @user.email %></span>
+        </div>
+      </section>
+    </aside>
+  </div>
+
+
+</div>
