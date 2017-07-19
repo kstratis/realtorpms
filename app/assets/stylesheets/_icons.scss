@@ -52,6 +52,10 @@
     background-image: url( settings_colored.svg );
   }
 
+  &.add-user-colored{
+    background-image: url( add_user_colored.svg );
+  }
+
   & ~ .pr-icon-desc {
     display: block;
     text-align: center;

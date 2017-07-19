@@ -1,5 +1,32 @@
-<% provide(:title, 'Sign up') %>
-<div class="center jumbotron pr-container">
-<h1>Sign up</h1>
-<p>This will be a signup page for new users.</p>
+<% provide(:title, 'User Registration') %>
+<div class="center pr-signup-container pr-container">
+
+  <i class="pr-icon sm add-user-colored"></i>
+
+  <span class="title">Signup</span>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="pr-form-container">
+      <%= form_for(@user) do |f| %>
+          <%= f.label :first_name %>
+          <%= f.text_field :first_name, placeholder: 'i.e. John', class: 'glowing-border' %>
+
+          <%= f.label :last_name %>
+          <%= f.text_field :last_name, placeholder: 'i.e. Doe', class: 'glowing-border' %>
+
+          <%= f.label :email %>
+          <%= f.email_field :email, placeholder: 'i.e. jdoe@example.com', class: 'glowing-border' %>
+
+          <%= f.label :password %>
+          <%= f.password_field :password, placeholder: 'Please use at least 6 characters', class: 'glowing-border' %>
+
+          <%= f.label :password_confirmation, 'Password confirmation' %>
+          <%= f.password_field :password_confirmation, placeholder: 'Retype your password', class: 'glowing-border' %>
+
+          <%= f.submit 'Create account', class: 'btn btn-primary' %>
+      <% end %>
+      </div>
+    </div>
+  </div>
 </div>

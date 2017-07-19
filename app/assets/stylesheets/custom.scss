@@ -277,3 +277,50 @@ aside {
 .gravatar_edit {
   margin-top: 15px;
 }
+
+/* forms */
+.pr-signup-container{
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+span.title{
+  display: block;
+  margin-bottom: 25px;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+input, textarea, select, .uneditable-input {
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+label{
+  text-align: left;
+}
+
+.glowing-border {
+  border: 1px solid #cdcfd5;
+  border-radius: 3px;
+  transition: box-shadow linear .1s
+}
+
+.glowing-border:focus {
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 8px #9ecaed;
+}
+
+.pr-form-container{
+  padding: 15px 20px 15px 20px;
+  border-radius: 3px;
+  border: 1px solid #cdcfd5;
+}
