@@ -8,7 +8,7 @@
     <div class="col-md-12">
       <div class="pr-form-container">
       <%= form_for(@user) do |f| %>
-        <%#= render 'shared/error_messages' %>
+        <%= render 'shared/error_messages' %>
 
         <%= f.label :first_name %>
         <%= f.text_field :first_name, placeholder: 'i.e. John', class: 'glowing-border form-control' %>
