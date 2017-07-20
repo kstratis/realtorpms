@@ -8,22 +8,30 @@
     <div class="col-md-12">
       <div class="pr-form-container">
       <%= form_for(@user) do |f| %>
-          <%= f.label :first_name %>
-          <%= f.text_field :first_name, placeholder: 'i.e. John', class: 'glowing-border' %>
+        <%#= render 'shared/error_messages' %>
 
-          <%= f.label :last_name %>
-          <%= f.text_field :last_name, placeholder: 'i.e. Doe', class: 'glowing-border' %>
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name, placeholder: 'i.e. John', class: 'glowing-border form-control' %>
+        <%= inline_error :first_name, 'First name'%>
 
-          <%= f.label :email %>
-          <%= f.email_field :email, placeholder: 'i.e. jdoe@example.com', class: 'glowing-border' %>
 
-          <%= f.label :password %>
-          <%= f.password_field :password, placeholder: 'Please use at least 6 characters', class: 'glowing-border' %>
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name, placeholder: 'i.e. Doe', class: 'glowing-border form-control' %>
+        <%= inline_error :last_name, 'Last name'%>
 
-          <%= f.label :password_confirmation, 'Password confirmation' %>
-          <%= f.password_field :password_confirmation, placeholder: 'Retype your password', class: 'glowing-border' %>
+        <%= f.label :email %>
+        <%= f.email_field :email, placeholder: 'i.e. jdoe@example.com', class: 'glowing-border form-control' %>
+        <%= inline_error :email, 'Email'%>
 
-          <%= f.submit 'Create account', class: 'btn btn-primary' %>
+        <%= f.label :password %>
+        <%= f.password_field :password, placeholder: 'Please use at least 6 characters', class: 'glowing-border form-control' %>
+        <%= inline_error :password, 'Password'%>
+
+        <%= f.label :password_confirmation, 'Password confirmation' %>
+        <%= f.password_field :password_confirmation, placeholder: 'Retype your password', class: 'glowing-border form-control' %>
+        <%= inline_error :password_confirmation, 'Password confirmation'%>
+
+        <%= f.submit 'Create account', class: 'btn btn-primary' %>
       <% end %>
       </div>
     </div>
