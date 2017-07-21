@@ -56,6 +56,18 @@
     background-image: url( add_user_colored.svg );
   }
 
+  &.padlock1-colored{
+    background-image: url( padlocks/padlock1_colored.svg );
+  }
+
+  &.padlock2-colored{
+    background-image: url( padlocks/padlock2_colored.svg );
+  }
+
+  &.padlock3-colored{
+    background-image: url( padlocks/padlock3_colored.svg );
+  }
+
   & ~ .pr-icon-desc {
     display: block;
     text-align: center;
