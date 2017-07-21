@@ -1,0 +1,32 @@
+.navbar-toggle{
+  border: 1px solid #ffffff;
+}
+
+.navbar-toggle .icon-bar {
+  background-color: #ffffff;
+}
+
+.navbar-background-coloring{
+  background-color: #050f2c;
+  z-index: 100000;
+}
+
+div.pr-account-header{
+  text-align: center;
+  #logo{
+    float: none;
+  }
+}
+
+@media (min-width: 768px){
+  div.pr-account-header{
+    float: none;
+  }
+}
+
+.nav-collapse, .nav-collapse.collapse {
+  overflow: visible;
+}
+.navbar .btn-navbar {
+  display: none;
+}

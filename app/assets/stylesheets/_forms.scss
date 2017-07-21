@@ -1,0 +1,28 @@
+@import "common-mixins";
+
+/* forms */
+.pr-signup-container{
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+span.title{
+  display: block;
+  margin-bottom: 25px;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+input, textarea, select, .uneditable-input {
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+  @include box_sizing;
+}
+
+.pr-form-container{
+  padding: 15px 20px 15px 20px;
+  border-radius: 3px;
+  border: 1px solid #cdcfd5;
+}

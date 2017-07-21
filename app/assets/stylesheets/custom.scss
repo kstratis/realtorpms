@@ -1,10 +1,12 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import 'navbar-fixed-side';
+@import "navbar-top";
+@import "navbar-fixed-side";
 @import "fonts";
 @import "buttons";
 @import "common-mixins";
 @import "icons";
+@import "forms";
 
 $gray-medium-light: #eaeaea;
 //@mixin inline-svg($color, $svg-content) {
@@ -42,20 +44,6 @@ body {
   border-radius: 3px;
   background-color: #fff;
   @include box-shadow( 0 1px 0 #c5cad8, 0 2px 3px #d4d8e3 );
-}
-
-.navbar-toggle{
-  border: 1px solid #ffffff;
-}
-
-.navbar-toggle .icon-bar {
-  background-color: #ffffff;
-}
-
-.navbar-background-coloring{
-  background-color: #050f2c;
-  z-index: 100000;
-  //border-bottom: 1px solid #f8faff;
 }
 
 section {
@@ -291,27 +279,6 @@ aside {
   margin-top: 15px;
 }
 
-/* forms */
-.pr-signup-container{
-  border-radius: 6px;
-  padding: 15px;
-  margin-bottom: 10px;
-}
-
-span.title{
-  display: block;
-  margin-bottom: 25px;
-  font-size: 20px;
-  text-transform: uppercase;
-}
-
-input, textarea, select, .uneditable-input {
-  padding: 10px;
-  width: 100%;
-  margin-bottom: 10px;
-  @include box_sizing;
-}
-
 input {
   height: auto !important;
 }
@@ -334,15 +301,4 @@ label{
   box-shadow: 0 0 8px #9ecaed;
 }
 
-.pr-form-container{
-  padding: 15px 20px 15px 20px;
-  border-radius: 3px;
-  border: 1px solid #cdcfd5;
-}
 
-.nav-collapse, .nav-collapse.collapse {
-  overflow: visible;
-}
-.navbar .btn-navbar {
-  display: none;
-}
