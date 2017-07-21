@@ -1,21 +1,29 @@
-<header class="navbar navbar-fixed-top navbar-background-coloring">
+<div class="navbar navbar-fixed-top navbar-background-coloring">
   <div class="container-fluid">
     <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle Navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
       <%= link_to 'Property X', root_path, id: 'logo', class: 'navbar-brand' %>
-    </div>
-    <nav>
-      <ul class="nav navbar-nav navbar-right">
+    </div> <!-- end div class="navbar-header" -->
+
+    <div class="collapse navbar-collapse navbar-right">
+      <ul class="nav navbar-nav ">
         <li><%= link_to 'Home', root_path %></li>
         <li><%= link_to 'Help', help_path %></li>
         <li><%= link_to 'Log in', '#' %></li>
         <li id="ministyle"><a href="http://localhost:3000/mini_pages/dashboard">Special Item</a></li>
       </ul>
-    </nav>
+      </div>
+
   </div>
-</header>
-<div>
+</div>
+<!--<div>-->
   <%#= <div id="mini_pages"> %>
 
     <%#= content_for?(:mini_pages) ? yield(:mini_pages) : yield %>
 <%#= </div> %>
-</div>
+<!--</div>-->

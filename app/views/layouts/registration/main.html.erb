@@ -23,15 +23,16 @@
 </head>
 <body>
 <%= render 'layouts/header' %>
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <%= yield %>
-      <%#= debug(params) if Rails.env.development? %>
+<div class="pr-body-container">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <%= yield %>
+        <%#= debug(params) if Rails.env.development? %>
+      </div>
     </div>
   </div>
-</div>
 <!-- end of container-fluid -->
+</div>>
 </body>
 </html>

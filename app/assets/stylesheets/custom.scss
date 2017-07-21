@@ -20,6 +20,10 @@ html {
   //height: 100%;
 }
 
+div.pr-body-container{
+  margin-top: 65px;
+}
+
 body {
   background-color: #f8faff;
   line-height: 1.5em;
@@ -33,15 +37,24 @@ body {
 
 
 .pr-container{
-  margin-top: 65px;
+  //margin-top: 65px;
   border: 0 none;
   border-radius: 3px;
   background-color: #fff;
   @include box-shadow( 0 1px 0 #c5cad8, 0 2px 3px #d4d8e3 );
 }
 
+.navbar-toggle{
+  border: 1px solid #ffffff;
+}
+
+.navbar-toggle .icon-bar {
+  background-color: #ffffff;
+}
+
 .navbar-background-coloring{
   background-color: #050f2c;
+  z-index: 100000;
   //border-bottom: 1px solid #f8faff;
 }
 
@@ -310,7 +323,9 @@ label{
 .glowing-border {
   border: 1px solid #cdcfd5;
   border-radius: 3px;
-  transition: box-shadow linear .1s
+  transition: box-shadow linear .1s;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 .glowing-border:focus {
@@ -323,4 +338,11 @@ label{
   padding: 15px 20px 15px 20px;
   border-radius: 3px;
   border: 1px solid #cdcfd5;
+}
+
+.nav-collapse, .nav-collapse.collapse {
+  overflow: visible;
+}
+.navbar .btn-navbar {
+  display: none;
 }

@@ -11,24 +11,24 @@
         <%= render 'shared/error_messages' %>
 
         <%= f.label :first_name %>
-        <%= f.text_field :first_name, placeholder: 'i.e. John', class: 'glowing-border form-control' %>
+        <%= f.text_field :first_name, placeholder: 'i.e. John', class: 'glowing-border' %>
         <%= inline_error :first_name, 'First name'%>
 
 
         <%= f.label :last_name %>
-        <%= f.text_field :last_name, placeholder: 'i.e. Doe', class: 'glowing-border form-control' %>
+        <%= f.text_field :last_name, placeholder: 'i.e. Doe', class: 'glowing-border' %>
         <%= inline_error :last_name, 'Last name'%>
 
         <%= f.label :email %>
-        <%= f.email_field :email, placeholder: 'i.e. jdoe@example.com', class: 'glowing-border form-control' %>
+        <%= f.email_field :email, placeholder: 'i.e. jdoe@example.com', class: 'glowing-border' %>
         <%= inline_error :email, 'Email'%>
 
         <%= f.label :password %>
-        <%= f.password_field :password, placeholder: 'Please use at least 6 characters', class: 'glowing-border form-control' %>
+        <%= f.password_field :password, placeholder: 'Please use at least 6 characters', class: 'glowing-border' %>
         <%= inline_error :password, 'Password'%>
 
         <%= f.label :password_confirmation, 'Password confirmation' %>
-        <%= f.password_field :password_confirmation, placeholder: 'Retype your password', class: 'glowing-border form-control' %>
+        <%= f.password_field :password_confirmation, placeholder: 'Retype your password', class: 'glowing-border' %>
         <%= inline_error :password_confirmation, 'Password confirmation'%>
 
         <%= f.submit 'Create account', class: 'btn btn-primary' %>
