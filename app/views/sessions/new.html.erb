@@ -1,0 +1,25 @@
+<% provide(:title, 'Log in') %>
+<div class="center pr-signup-container pr-container">
+
+  <i class="pr-icon sm padlock1-colored"></i>
+  <span class="title">Log in</span>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="pr-form-container">
+        <%= form_for(:session, url: login_path) do |f| %>
+            <%#= render 'shared/error_messages' %>
+
+            <%= f.label :email %>
+            <%= f.email_field :email, class: 'glowing-border' %>
+
+            <%= f.label :password %>
+            <%= f.password_field :password, class: 'glowing-border' %>
+
+            <%= f.submit 'Log in', class: 'btn btn-primary' %>
+        <% end %>
+        <p>New user? <%= link_to 'Sign up now!', signup_path %></p>
+      </div>
+    </div>
+  </div>
+</div>
