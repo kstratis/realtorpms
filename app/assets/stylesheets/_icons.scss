@@ -68,6 +68,10 @@
     background-image: url( padlocks/padlock3_colored.svg );
   }
 
+  &.edit-user-colored{
+    background-image: url( edit_colored.svg );
+  }
+
   & ~ .pr-icon-desc {
     display: block;
     text-align: center;

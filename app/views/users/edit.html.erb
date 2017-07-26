@@ -1,0 +1,47 @@
+<% provide(:title, 'Edit user') %>
+<div class="center pr-signup-container pr-container">
+
+  <i class="pr-icon sm edit-user-colored"></i>
+  <span class="title">Edit profile</span>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="pr-form-container">
+        <%= form_for(@user) do |f| %>
+            <%= render 'shared/error_messages' %>
+
+            <%= f.label :first_name %>
+            <%= f.text_field :first_name, placeholder: 'i.e. John', class: 'glowing-border' %>
+            <%= inline_error :first_name, 'First name'%>
+
+            <%= f.label :last_name %>
+            <%= f.text_field :last_name, placeholder: 'i.e. Doe', class: 'glowing-border' %>
+            <%= inline_error :last_name, 'Last name'%>
+
+            <%= f.label :email %>
+            <%= f.email_field :email, placeholder: 'i.e. jdoe@example.com', class: 'glowing-border' %>
+            <%= inline_error :email, 'Email'%>
+
+            <%= f.label :age %>
+            <%= f.text_field :age, placeholder: 'i.e. 30', class: 'glowing-border' %>
+            <%= inline_error :age, 'Age'%>
+
+            <%= f.label :phone1, 'Phone' %>
+            <%= f.text_field :phone1, placeholder: 'i.e. 695 55 55 300', class: 'glowing-border' %>
+            <%= inline_error :phone1, 'Phone'%>
+
+            <%= f.label :password %>
+            <%= f.password_field :password, placeholder: 'Please use at least 6 characters', class: 'glowing-border' %>
+            <%= inline_error :password, 'Password'%>
+
+            <%= f.label :password_confirmation, 'Password confirmation' %>
+            <%= f.password_field :password_confirmation, placeholder: 'Retype your password', class: 'glowing-border' %>
+            <%= inline_error :password_confirmation, 'Password confirmation'%>
+
+            <%= f.submit 'Save changes', class: 'btn btn-primary' %>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>
