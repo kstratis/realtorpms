@@ -43,7 +43,8 @@ body {
   border: 0 none;
   border-radius: 3px;
   background-color: #fff;
-  @include box-shadow( 0 1px 0 #c5cad8, 0 2px 3px #d4d8e3 );
+  //@include box-shadow( 0 1px 0 #c5cad8, 0 2px 3px #d4d8e3 );
+  @include box-shadow( 0 -1px 1px #d4d8e3, 0 2px 3px #d4d8e3 );
 }
 
 section {
