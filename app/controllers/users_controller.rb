@@ -1,11 +1,15 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update]
   before_action :correct_user,   only: [:edit, :update]
-  layout 'registration/main', except: [:show, :edit, :update]  # show the barebones version only when signing up
+  layout 'registration/main', except: [:show, :edit, :update, :index]  # show the barebones version only when signing up
 
   # GET the new user registration page
   def new  # This is basically the registration page in GET
     @user = User.new
+  end
+
+  def index
+    @users = User.all
   end
 
   # POST to the new user registration page

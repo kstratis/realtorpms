@@ -15,12 +15,25 @@
       </a>
     </li>
 
-    <li class="side-menu-entry">
-      <a href="#" class="entry-anchor-wrapper ">
-      <i class="pr-icon sm agent-colored"></i>
-      <div class="hidden-sm hidden-xs"><span>ΣΥΝΕΡΓΑΤΕΣ</span></div>
-      </a>
-    </li>
+
+    <%= content_tag :li, :class => 'side-menu-entry' do %>
+      <%= link_to users_path, :class => 'entry-anchor-wrapper' do %>
+        <%= content_tag :i, '', :class => 'pr-icon sm agent-colored' %>
+        <%= content_tag :div, '', :class => 'hidden-sm hidden-xs' do %>
+            <%= content_tag :span, 'ΣΥΝΕΡΓΑΤΕΣ' %>
+        <% end %>
+      <% end %>
+    <%end %>
+
+
+
+
+    <!--<li class="side-menu-entry">-->
+      <!--<a href="#" class="entry-anchor-wrapper ">-->
+      <!--<i class="pr-icon sm agent-colored"></i>-->
+      <!--<div class="hidden-sm hidden-xs"><span>ΣΥΝΕΡΓΑΤΕΣ</span></div>-->
+      <!--</a>-->
+    <!--</li>-->
 
     <li class="side-menu-entry">
       <a href="#" class="entry-anchor-wrapper ">
