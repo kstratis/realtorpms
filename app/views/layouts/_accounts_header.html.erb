@@ -1,8 +1,9 @@
 <div class="navbar navbar-fixed-top navbar-background-coloring">
   <div class="container-fluid">
     <div class="navbar-header pr-account-header">
-      <span id="logo" class="navbar-brand">Property X</span>
-      <%#= link_to 'Property X', root_path, id: 'logo', class: 'navbar-brand' %>
+      <%= link_to root_url, id: 'home_anchor_logo' do %>
+          <span id="logo" class="navbar-brand">Property X</span>
+      <% end %>
     </div> <!-- end div class="navbar-header" -->
   </div>
 </div>

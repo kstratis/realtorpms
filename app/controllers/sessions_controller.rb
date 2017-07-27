@@ -12,6 +12,7 @@ class SessionsController < ApplicationController
       # +params[:session][:remember_me] ? remember(user) : forget(user)+, remeber(user)
       # would always get called
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+      flash[:success] = 'You have successfully signed in.'
       redirect_back_or user
     else
       flash.now[:danger] = 'Invalid email/password combination' # Not quite right!
@@ -21,6 +22,7 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out if logged_in?
+    flash[:danger] = 'You have successfully signed out.'
     redirect_to root_url
   end
 
