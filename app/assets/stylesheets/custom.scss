@@ -311,3 +311,22 @@ label{
   cursor: pointer;
 }
 
+.turbolinks-progress-bar {
+  z-index: 2000;
+  height: 2px;
+  background-color: #77b6ff;
+  box-shadow: 0 0 10px rgba(119,182,255,0.7);
+}
+
+#page-transition{
+  -webkit-animation-duration: 500ms;
+  -moz-animation-duration: 500ms;
+  -ms-transition-animation-duration: 500ms;
+}
+
+//.fadeIn{
+//  -webkit-animation: fadeIn 1s; /* Safari 4+ */
+//  -moz-animation:    fadeIn 1s; /* Fx 5+ */
+//  -o-animation:      fadeIn 1s; /* Opera 12+ */
+//  animation:         fadeIn 1s; /* IE 10+, Fx 29+ */
+//}
