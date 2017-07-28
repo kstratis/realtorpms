@@ -3,23 +3,14 @@
   <div class="row">
     <div class="col-md-12">
 
+      <%# Here we call render not on a string with the name of a partial, but rather on a user variable of class User;
+          in this context, Rails automatically looks for a partial called _user.html.erb, which we must create.
+          This is a definite improvement, but we can do even better: we can call render directly on the @users variable
+          Here Rails infers that @users is a list of User objects; moreover, when called with a collection of users,
+          Rails automatically iterates through them and renders each one with the _user.html.erb partial
+          (inferring the name of the partial from the name of the class). %>
+      <%= render @users %>
 
-
-      <% @users.each do |user| %>
-        <%= link_to user do %>
-          <aside class="col-md-4">
-            <section class="user_info user_info_card">
-              <div class="user_info_avatar">
-                <%= gravatar_for user %>
-              </div>
-              <div class="user_info_text">
-                <span class="name"><%== user.first_name + '&nbsp;' + user.last_name %></span>
-                <span class="email"><%= user.email %></span>
-              </div>
-            </section>
-          </aside>
-         <% end %>
-      <% end %>
       <div class="clearfix"></div>
       <%= will_paginate %>
     </div>
