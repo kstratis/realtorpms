@@ -16,4 +16,3 @@
 //= require turbolinks_transitions
 //= require bootstrap-sprockets
 //= require_tree .
-

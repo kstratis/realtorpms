@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  self.per_page = 12
   attr_accessor :remember_token
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i  # checks the email format
   before_save { self.email = email.downcase }  # makes sure everything is lower case
