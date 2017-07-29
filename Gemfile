@@ -38,6 +38,10 @@ gem 'will_paginate', '~> 3.1.6'
 
 gem 'bootstrap-will_paginate', '1.0.0'
 
+# gem 'rails-sweetalert2-confirm'
+#
+# gem 'rails-assets-sweetalert2', source: 'https://rails-assets.org'
+
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
