@@ -324,6 +324,11 @@ label{
   -ms-transition-animation-duration: 500ms;
 }
 
+.disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
 //.fadeIn{
 //  -webkit-animation: fadeIn 1s; /* Safari 4+ */
 //  -moz-animation:    fadeIn 1s; /* Fx 5+ */

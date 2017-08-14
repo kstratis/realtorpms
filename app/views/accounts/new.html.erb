@@ -1,0 +1,51 @@
+<% provide(:title, 'User Registration') %>
+<div class="center pr-signup-container pr-container">
+
+  <i class="pr-icon sm add-user-colored"></i>
+  <span class="title">Signup</span>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="pr-form-container">
+        <%= form_for(@account) do |account| %>
+            <%= render 'shared/error_messages' %>
+
+            <%# This is the account name %>
+            <%= account.label :subdomain %>
+            <%= account.text_field :subdomain, placeholder: 'i.e. myportal', class: 'glowing-border' %>
+            <%= inline_error @account, :subdomain, 'Subdomain'%>
+
+            <%# This is for the nested user fields %>
+            <%= account.fields_for :owner do |owner| %>
+              <%= owner.label :first_name %>
+              <%= owner.text_field :first_name, placeholder: 'i.e. John', class: 'glowing-border' %>
+              <%= inline_error @account.owner, :first_name, 'First name'%>
+
+              <%= owner.label :last_name %>
+              <%= owner.text_field :last_name, placeholder: 'i.e. Doe', class: 'glowing-border' %>
+              <%= inline_error @account.owner, :last_name, 'Last name'%>
+
+              <%= owner.label :email %>
+              <%= owner.email_field :email, placeholder: 'i.e. jdoe@example.com', class: 'glowing-border' %>
+              <%= inline_error @account.owner, :email, 'Email'%>
+
+              <%= owner.label :password %>
+              <%= owner.password_field :password, placeholder: 'Please use at least 6 characters', class: 'glowing-border' %>
+              <%= inline_error @account.owner, :password, 'Password'%>
+
+              <%= owner.label :password_confirmation, 'Password confirmation' %>
+              <%= owner.password_field :password_confirmation, placeholder: 'Retype your password', class: 'glowing-border' %>
+              <%= inline_error @account.owner, :password_confirmation, 'Password confirmation'%>
+            <% end %>
+
+            <%= account.submit 'Create account', class: 'btn btn-primary' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

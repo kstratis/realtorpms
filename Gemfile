@@ -38,10 +38,12 @@ gem 'will_paginate', '~> 3.1.6'
 
 gem 'bootstrap-will_paginate', '1.0.0'
 
+gem 'launchy', '2.4.3'
 # gem 'rails-sweetalert2-confirm'
 #
-# gem 'rails-assets-sweetalert2', source: 'https://rails-assets.org'
+gem 'rails-assets-sweetalert2', source: 'https://rails-assets.org'
 
+gem 'sweet-alert2-rails'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
@@ -52,10 +54,12 @@ gem 'bootstrap-will_paginate', '1.0.0'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+  gem 'factory_girl', '4.8.0'
+  gem 'rspec-rails', '3.6.0'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '~> 2.13'
+  gem 'capybara', '2.15.1'
   gem 'selenium-webdriver'
 end
 

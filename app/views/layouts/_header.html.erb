@@ -12,13 +12,12 @@
 
     <div class="collapse navbar-collapse navbar-right">
       <ul class="nav navbar-nav ">
-        <li><%= link_to 'Home', root_path %></li>
-        <li><%= link_to 'Help', help_path %></li>
         <!-- Logged in is defined in the sessions_helper and is automatically available in all views.
              However we have also made it available in all controllers by including in the "master"
              controller +application_controller+ -->
         <% if logged_in? %>
-            <li><%= link_to 'Users', '#' %></li>
+            <li><%= link_to "Signed is as #{current_user.email}", '#' %></li>
+            <li><%= link_to 'Users', users_path %></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 Account <b class="caret"></b>

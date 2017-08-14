@@ -12,10 +12,14 @@
 //
 
 
-//= require jquery3
-//= require rails-ujs
+//#= require jquery3
+//#= require rails-ujs
+//= require jquery2
+//= require jquery_ujs
 //= require turbolinks
 //= require turbolinks_transitions
 //= require bootstrap-sprockets
+//= require sweetalert2
+//= require sweet-alert2-rails
 //= require_tree .
 

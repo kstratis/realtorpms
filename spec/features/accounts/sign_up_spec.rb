@@ -1,0 +1,35 @@
+require 'rails_helper'
+
+feature 'Accounts' do
+  scenario 'creating an account' do
+    visit new_account_path
+    # save_and_open_page
+    fill_in 'Subdomain', with: 'demoportal'
+    fill_in 'First name', with: 'demouser'
+    fill_in 'Last name', with: 'demouser_last_name'
+    fill_in 'Email', with: 'demouser@example.com'
+    fill_in 'Password', with: 'abc123abc' , exact: true
+    fill_in 'Password confirmation', with: 'abc123abc'
+    click_button 'Create account'
+    within('.alert-success') do
+      success_message = 'Welcome to PropertyX! Your account has been successfully created.'
+      expect(page).to have_content(success_message)
+    end
+    expect(page).to have_link('Signed is as demouser@example.com')
+    expect(page.current_url).to eq('http://demoportal.lvh.me/')
+  end
+end
+
+
+
+# test 'invalid signup information' do
+#   get signup_path
+#   assert_no_difference 'User.count' do
+#     post users_path, params: { user: { first_name: '',
+#                                        last_name: '',
+#                                        email: 'user@invalid',
+#                                        password: '',
+#                                        password_confirmation: ''} }
+#   end
+#   assert_template 'users/new'
+# end
