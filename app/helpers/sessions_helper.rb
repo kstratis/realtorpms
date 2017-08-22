@@ -49,15 +49,61 @@ module SessionsHelper
     @current_user = nil
   end
 
+  def build_redirection_url(stored_url, subdomain)
+    # extracted_subdomain = stored_url.host.split('.')[0..-3].join('.')
+    extracted_hostname = stored_url.host.split('.').last(2).join('.')
+    #puts "extracted subdomain is: #{extracted_subdomain}"
+    #puts "extracted hostname is: #{extracted_hostname}"
+    port =  stored_url.port.blank? ? nil : ":#{stored_url.port}"
+    # puts "full redirection url is: #{stored_url.scheme}://#{subdomain}.#{extracted_hostname}#{port}#{stored_url.path}"
+    "#{stored_url.scheme}://#{subdomain}.#{extracted_hostname}#{port}#{stored_url.path}"
+  end
+
   # Redirects to stored location (or to the default).
-  def redirect_back_or(default)
-    redirect_to(session[:forwarding_url] || default)
-    session.delete(:forwarding_url)
+  def redirect_back_or(default, subdomain)
+    # puts "subdomain is: #{subdomain}"
+    # puts "the url is: #{session[:forwarding_url]}"
+
+    # obj.host.split('.')[0..-3].join(".")
+    # saved_url = session[:forwarding_url]
+    begin
+      stored_url = URI.parse(session[:forwarding_url])
+    rescue
+      stored_url = nil
+    end
+
+
+    # full_redirection_url = build_redirection_url(stored_url, subdomain)
+    # puts "full redirection url is: #{stored_url.scheme}://#{subdomain}.#{extracted_hostname}#{stored_url.path}"
+    # obj.host.split('.').last(2).join('.')
+    # puts "the domain is: #{uri.domain}"
+    # redirect_to uri(subdomain: subdomain)
+    # redirect_to subdomain: subdomain
+    if stored_url.nil?
+      redirect_to root_url(subdomain: subdomain) # make the subdomain explicit
+    else
+      redirect_to build_redirection_url(stored_url, subdomain)
+      session.delete(:forwarding_url)
+    end
+
   end
 
   # Stores the URL trying to be accessed.
   def store_location
     session[:forwarding_url] = request.original_url if request.get?
   end
+
+
+
+  # Retrieves the subdomain
+  def get_subdomain(user)
+    subdomain = Account.get_subdomain(user)
+    if request.subdomain.blank?
+      subdomain
+    else
+      request.subdomain == subdomain ? subdomain : nil
+    end
+  end
+
 
 end

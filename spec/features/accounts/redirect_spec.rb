@@ -1,0 +1,16 @@
+require 'rails_helper'
+
+feature 'Accounts subdomain redirection' do
+
+  scenario 'Getting the login screen with erroneous subdomain should redirect user to main login' do
+    visit 'http://sdadasasdasd.lvh.me/login'
+    expect(page.current_url).to eq('http://lvh.me/login')
+  end
+
+  scenario 'Getting the login screen with proper subdomain allows for subdomain-scoped logging in' do
+    Account.create!(subdomain: 'exampledomain')
+    visit 'http://exampledomain.lvh.me/login'
+    expect(page.current_url).to eq('http://exampledomain.lvh.me/login')
+  end
+
+end

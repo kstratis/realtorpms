@@ -36,17 +36,3 @@ feature 'Accounts' do
   end
 
 end
-
-
-
-# test 'invalid signup information' do
-#   get signup_path
-#   assert_no_difference 'User.count' do
-#     post users_path, params: { user: { first_name: '',
-#                                        last_name: '',
-#                                        email: 'user@invalid',
-#                                        password: '',
-#                                        password_confirmation: ''} }
-#   end
-#   assert_template 'users/new'
-# end
