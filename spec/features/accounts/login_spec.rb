@@ -38,7 +38,7 @@ feature 'Logging in the system' do
     end
   end
 
-  context 'with subdomain' do
+  context 'with subdomain and no remember path' do
     it 'can log in' do
       visit 'http://test1.lvh.me'
       fill_in 'Email', with: account.owner.email
