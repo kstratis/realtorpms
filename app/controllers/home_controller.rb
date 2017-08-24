@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   # before_action :logged_in_user, only: [:index]
-  layout 'marketing/external'  # show the barebones version only when signing up/in
+  layout 'website/skeleton'  # show the barebones version only when signing up/in
 
   def index
   end

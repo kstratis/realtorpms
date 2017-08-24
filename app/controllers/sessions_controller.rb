@@ -15,6 +15,7 @@ class SessionsController < ApplicationController
       if subdomain.nil?  # This case is for when user tries to login to an existing subdomain that he/she doesn't belong to
         flash[:danger] = 'Unauthorized domain. Please check your spelling.' # Not quite right!
         redirect_to login_url(subdomain: false)
+        # redirect_to login_path
       else
         log_in user
         # note that both 1 and 0 are true in the boolean context. if we had done

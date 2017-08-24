@@ -3,8 +3,13 @@
   <h2>
     This page should advertise the product.
   </h2>
-  <%= link_to 'Sign up now!', new_account_path, class: 'btn btn-lg btn-primary' %>
-  <%= link_to 'Login!', login_path, class: 'btn btn-lg btn-primary' %>
+  <% if logged_in? %>
+      <p><strong>You are currently logged in as <u><%= current_user.email %></u></strong></p>
+      <p><strong><%= link_to 'Dashboard', root_url(subdomain: get_subdomain(current_user)) %></strong></p>
+  <% else %>
+      <%= link_to 'Sign up now!', new_account_path, class: 'btn btn-lg btn-primary' %>
+      <%= link_to 'Login!', login_path, class: 'btn btn-lg btn-primary' %>
+  <%	 end %>
 
   <%#= link_to 'Sign up now!', new_account_path, class: 'btn btn-lg btn-primary' %>
 </div>

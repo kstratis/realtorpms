@@ -1,3 +1,5 @@
+require 'constraints/subdomain_required'
+
 Rails.application.routes.draw do
 
 
@@ -12,6 +14,14 @@ Rails.application.routes.draw do
   # root 'users#index'
 
   # root 'main_pages#home'
+  constraints(SubdomainRequired) do
+    scope module: 'accounts' do
+      root to: 'dashboard#index', as: :account_root
+      resources :properties
+      resources :users
+    end
+  end
+
 
   root to: 'home#index'
 
@@ -27,8 +37,6 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
 
-  resources :users
-  resources :properties
 
   # root 'application#hello'
 end
