@@ -8,7 +8,7 @@
     <div class="col-md-12">
       <div class="pr-form-container">
         <%= form_for(@account) do |account| %>
-            <%= render 'shared/error_messages' %>
+            <%= render 'shared/error_messages', locals: {model: @account} %>
 
             <%# This is the account name %>
             <%= account.label :subdomain %>
