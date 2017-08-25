@@ -162,7 +162,7 @@ ul.nav.navbar-nav > li > a{
 
 /* side navbar menu options */
 
-.side-menu-entry > a.entry-anchor-wrapper{
+li.side-menu-entry > a.entry-anchor-wrapper{
   // This is for the left strip
   /* --------------- */
   position: relative;
@@ -220,6 +220,10 @@ ul.nav.navbar-nav > li > a{
   }
 }
 
+li.side-menu-entry.active > a.entry-anchor-wrapper {
+  //color: #ffffff;
+  background: #03A9F4;
+}
 /* miscellaneous */
 
 .debug_dump {
