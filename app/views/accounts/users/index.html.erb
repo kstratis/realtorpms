@@ -1,5 +1,34 @@
 <% provide(:title, 'Users Index') %>
+
 <div class="center jumbotron pr-container">
+
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <!--<div class="back-button-style pull-left">-->
+        <!--<i class="pr-icon cs back-button"></i>-->
+      <!--</div>-->
+
+      <div class="invitation-container pull-right" >
+        <%= link_to new_invitation_path, :class => 'invite-user', :id => 'invite-user-button' do %>
+          <i class="pr-icon xs invite-user-colored2"></i>
+          <span class="subtitle">Invite User</span>
+        <% end %>
+      </div>
+
+      <%# Here we call render not on a string with the name of a partial, but rather on a user variable of class User;
+          in this context, Rails automatically looks for a partial called _user.html.erb, which we must create.
+          This is a definite improvement, but we can do even better: we can call render directly on the @users variable
+          Here Rails infers that @users is a list of User objects; moreover, when called with a collection of users,
+          Rails automatically iterates through them and renders each one with the _user.html.erb partial
+          (inferring the name of the partial from the name of the class). %>
+      <%#= render @users %>
+
+      <div class="clearfix"></div>
+      <%#= will_paginate %>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-12">
 

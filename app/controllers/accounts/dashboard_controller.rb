@@ -1,4 +1,3 @@
-
 module Accounts
   class DashboardController < Accounts::BaseController
     def index

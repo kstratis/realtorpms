@@ -1,0 +1,25 @@
+<% provide(:title, 'Edit user') %>
+<div class="center pr-signup-container pr-container">
+
+  <i class="pr-icon sm invite-user-colored"></i>
+  <span class="title">Invite new user</span>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="pr-form-container">
+
+        <%= form_for @invitation do |invitation| %>
+
+            <%= render 'shared/error_messages', locals: {model: @invitation} %>
+
+            <%= invitation.label :email %>
+            <%= invitation.email_field :email, placeholder: 'i.e. jdoe@example.com', class: 'glowing-border' %>
+            <%= inline_error @invitation, :email, 'Email'%>
+
+            <%= invitation.submit 'Invite User', class: 'btn btn-primary' %>
+            <%#= invitation.submit 'Invite User', data: { confirm: 'Are you sure?', 'sweet-alert-type': 'question' }, class: 'btn btn-primary' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

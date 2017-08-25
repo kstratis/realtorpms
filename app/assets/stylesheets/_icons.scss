@@ -76,6 +76,18 @@
     background-image: url( edit_colored.svg );
   }
 
+  &.invite-user-colored{
+    background-image: url( invite_user_colored.svg );
+  }
+
+  &.invite-user-colored2{
+    background-image: url( invite_user_colored2.svg );
+  }
+
+  &.back-button{
+    background-image: url( back_button.svg );
+  }
+
   & ~ .pr-icon-desc {
     display: block;
     text-align: center;
