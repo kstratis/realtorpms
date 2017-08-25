@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Adding books' do
+feature 'Adding properties' do
   let(:account) { FactoryGirl.create(:account) }
 
   context "as the account's owner" do
@@ -11,9 +11,14 @@ feature 'Adding books' do
       click_button 'Log in'
     end
 
-    it 'can add a property' do
-      visit new_property_path
-      # click_link 'Add new property'
+    it 'can add a new property' do
+      expect(page.current_url).to eq('http://test1.lvh.me/')
+      # Alternatively use this:
+      # set_subdomain(account.subdomain)
+      # visit new_property_path
+      # save_and_open_page
+      click_link 'ΑΚΙΝΗΤΑ'
+      click_link 'New Property'
       fill_in 'Description', with: 'mezoneta sti kifisia'
       fill_in 'Price', with: '500000'
       fill_in 'Size', with: '150'
