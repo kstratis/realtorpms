@@ -23,4 +23,8 @@ feature 'Inviting users' do
     click_button 'Invite User'
     expect(page).to have_content('test@example.com has been successfully invited.')
     expect(page.current_url).to eq(users_url)
+
+    email = find_email('test@example.com')
+    expect(email).to be_present
+    expect(email.subject).to eq("Invitation to join #{account.name} on Twist")
   end end
