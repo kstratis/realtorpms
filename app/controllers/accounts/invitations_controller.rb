@@ -7,8 +7,19 @@ module Accounts
     end
 
     def create
+      # @invitation = current_account.invitations.new(invitation_params)
+      # @invitation.save
+      # InvitationMailer.invite(@invitation).deliver_later
+      # flash[:notice] = "#{@invitation.email} has been invited."
+      # redirect_to root_path
+
+
+
+
       @invitation = current_account.invitations.new(invitation_params)
       if @invitation.save
+        # This actually sends out the email
+        InvitationMailer.invite(@invitation).deliver_now
         flash[:success] = "#{@invitation.email} has been successfully invited."
         redirect_to users_path
       else

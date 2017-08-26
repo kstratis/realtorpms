@@ -26,5 +26,5 @@ feature 'Inviting users' do
 
     email = find_email('test@example.com')
     expect(email).to be_present
-    expect(email.subject).to eq("Invitation to join #{account.name} on Twist")
+    expect(email.subject).to eq("Invitation to join the #{account.subdomain} domain on Landia")
   end end
