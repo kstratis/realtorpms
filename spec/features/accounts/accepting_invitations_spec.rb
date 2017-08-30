@@ -12,6 +12,9 @@ feature 'Accepting invitations' do
   end
 
   scenario 'accepts an invitation' do
+    # expect(account.users.count).to eq(1)
+    # puts account.users.count
+
     email = open_email('test@example.com')
     # puts email
     accept_link = links_in_email(email).first
@@ -25,5 +28,11 @@ feature 'Accepting invitations' do
     click_button 'Accept Invitation'
     expect(page).to have_content("You have joined the #{account.subdomain} account.")
     expect(page.current_url).to eq(root_url(subdomain: account.subdomain))
+    # After the invited user joins our subdomain the domain user count should be 1
+    # puts "accounts before: #{account.users.count}"
+    account.users << account.owner
+    # Since I can't add the owner to domain users in factory girl I do it here manually and then verify
+    puts "accounts after: #{account.users.count}"
+    expect(account.users.count).to eq(2)
   end
 end
