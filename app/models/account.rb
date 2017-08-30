@@ -4,11 +4,11 @@ class Account < ApplicationRecord
   has_many :invitations
 
   # Originally had these 2 lines
-  # has_many :memberships
-  # has_many :users, through: :memberships
+  has_many :memberships
+  has_many :users, through: :memberships
 
   # which I replaced with this line
-  has_many :users
+  # has_many :users
 
   belongs_to :owner, class_name: 'User', optional: true
   # belongs_to :owner, class_name: 'User'
