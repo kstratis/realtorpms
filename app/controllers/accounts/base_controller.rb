@@ -23,7 +23,17 @@ module Accounts
     end
 
     def correct_subdomain
-      subdomain = get_subdomain(current_user)
+      puts 'correct subdomain called'
+      puts caller[0][/`.*'/][1..-2]
+      puts "current user is: #{current_user.first_name}"
+      puts "current account owner is: #{User.find(current_account.owner_id).first_name}"
+      if current_account.owner_id == current_user.id
+        subdomain = get_subdomain(current_user)
+      else
+        subdomain = current_user.account.subdomain
+      end
+
+      puts "subdomain is: #{subdomain}"
       unless request.subdomain == subdomain
         render_404
       end

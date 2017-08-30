@@ -19,7 +19,14 @@ Rails.application.routes.draw do
       root to: 'dashboard#index', as: :account_root
       resources :properties
       resources :users
-      resources :invitations, only: [:new, :create]
+      resources :invitations, only: [:new, :create] do
+        member do
+          get :accept
+          patch :accepted
+        end
+      end
+
+      # resources :invitations, only: [:new, :create]
     end
   end
 

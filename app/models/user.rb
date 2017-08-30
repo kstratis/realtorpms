@@ -11,6 +11,11 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
+  # Later on...
+  # has_many :memberships
+  # has_many :accounts, through: :memberships
+
+
   # Basically class methods defined on singleton class
   class << self
     # Returns the hash digest of the given string.

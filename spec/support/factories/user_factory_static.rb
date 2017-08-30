@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :user do
-    email 'user-demo@example.com'
-    first_name 'user_first_name'
-    last_name 'user_last_name'
+    email 'account.owner@example.com'
+    first_name 'first name of account owner of test1 subdomain'
+    last_name 'last name of account owner of test1 subdomain'
     password 'abc123'
   end
 end
