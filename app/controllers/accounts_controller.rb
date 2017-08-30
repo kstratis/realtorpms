@@ -9,8 +9,8 @@ class AccountsController < ApplicationController
 
   def create
     @account = Account.new(account_params)
-    # @account.users << @account.owner
     if @account.save
+      @account.users << @account.owner
       log_in(@account.owner)
       flash[:success] = 'Welcome to PropertyX! Your account has been successfully created.'
       # redirect_to @account.owner

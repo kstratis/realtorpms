@@ -10,8 +10,8 @@ class Account < ApplicationRecord
   # which I replaced with this line
   has_many :users
 
-  # belongs_to :owner, class_name: 'User', optional: true
-  belongs_to :owner, class_name: 'User'
+  belongs_to :owner, class_name: 'User', optional: true
+  # belongs_to :owner, class_name: 'User'
 
   accepts_nested_attributes_for :owner
 
