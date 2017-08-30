@@ -13,13 +13,33 @@ feature 'Accounts subdomain redirection' do
   end
 
   scenario 'Getting the login screen with proper subdomain allows for subdomain-scoped logging in' do
-    Account.create!(subdomain: 'exampledomain')
+    Account.create!(
+      subdomain: 'exampledomain',
+      owner_attributes:{
+          email: 'fd@gmail.com',
+          first_name: 'Freddie',
+          last_name: 'Mercury',
+          password: 'abc123',
+          password_confirmation: 'abc123',
+          account_id: self
+      }
+    )
     visit 'http://exampledomain.lvh.me/login'
     expect(page.current_url).to eq('http://exampledomain.lvh.me/login')
   end
 
   scenario 'Getting the login screen with proper subdomain and remember path' do
-    Account.create!(subdomain: 'exampledomain')
+    Account.create!(
+        subdomain: 'exampledomain',
+        owner_attributes:{
+            email: 'fd@gmail.com',
+            first_name: 'Freddie',
+            last_name: 'Mercury',
+            password: 'abc123',
+            password_confirmation: 'abc123',
+            account_id: self
+        }
+    )
     visit 'http://exampledomain.lvh.me/users'
     expect(page.current_url).to eq('http://exampledomain.lvh.me/login')
   end

@@ -13,11 +13,11 @@ feature 'Accepting invitations' do
 
   scenario 'accepts an invitation' do
     email = open_email('test@example.com')
-    puts email
+    # puts email
     accept_link = links_in_email(email).first
     expect(accept_link).to be_present
     visit accept_link
-    save_and_open_page
+    # save_and_open_page
     fill_in 'First name', with: 'demouser_first_name'
     fill_in 'Last name', with: 'demouser_last_name'
     fill_in 'Password', with: 'password'

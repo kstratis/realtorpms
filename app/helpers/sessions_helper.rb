@@ -97,7 +97,6 @@ module SessionsHelper
 
   # Retrieves the subdomain
   def get_subdomain(user)
-    puts "the user in get_subdomain is: #{user.first_name}"
     subdomain = Account.get_subdomain(user)
     if request.subdomain.blank?
       subdomain

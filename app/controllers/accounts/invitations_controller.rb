@@ -13,7 +13,6 @@ module Accounts
     end
 
     def accepted
-      puts 'accepted is firing'
       @invitation = Invitation.find(params[:id])
       user_params = params[:user].permit(
           :email,
@@ -26,10 +25,10 @@ module Accounts
       user = User.create!(user_params)
       current_account.users << user
       log_in(user)
-      puts "current_account.subdomain is #{current_account.subdomain}"
+      # puts "current_account.subdomain is #{current_account.subdomain}"
       # redirect_to root_url
       flash[:success] = "You have joined the #{current_account.subdomain} account."
-      puts "the redirect will be on: #{root_url(subdomain: current_account.subdomain)}"
+      # puts "the redirect will be on: #{root_url(subdomain: current_account.subdomain)}"
       redirect_to root_url(subdomain: current_account.subdomain)
     end
 

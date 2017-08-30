@@ -20,11 +20,23 @@ feature 'Accounts' do
   end
 
   scenario 'Ensure subdomain uniqueness' do
-    Account.create!(subdomain: 'test')
+    # We change the owner attributes here because we want to make
+    # sure that any errors will come from subdomain uniqueness
+    Account.create!(
+        subdomain: 'exampledomain',
+        owner_attributes:{
+            email: 'fd@gmail.com',
+            first_name: 'Freddie',
+            last_name: 'Mercury',
+            password: 'abc123',
+            password_confirmation: 'abc123',
+            account_id: self
+        }
+    )
     visit new_account_path
-    fill_in 'Subdomain', with: 'test'
-    fill_in 'First name', with: 'demouser'
-    fill_in 'Last name', with: 'demouser_last_name'
+    fill_in 'Subdomain', with: 'exampledomain'
+    fill_in 'First name', with: 'Freddie'
+    fill_in 'Last name', with: 'Mercury'
     fill_in 'Email', with: 'demouser@example.com'
     fill_in 'Password', with: 'abc123abc' , exact: true
     fill_in 'Password confirmation', with: 'abc123abc'

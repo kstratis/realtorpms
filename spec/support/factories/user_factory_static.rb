@@ -4,5 +4,6 @@ FactoryGirl.define do
     first_name 'first name of account owner of test1 subdomain'
     last_name 'last name of account owner of test1 subdomain'
     password 'abc123'
+    account_id :account
   end
 end
