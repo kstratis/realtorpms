@@ -1,4 +1,6 @@
 class Account < ApplicationRecord
+  belongs_to :owner, class_name: 'User', optional: true
+  accepts_nested_attributes_for :owner
   validates :subdomain, presence: true, length: { maximum: 50 }, uniqueness: true
 
   has_many :invitations
@@ -10,10 +12,6 @@ class Account < ApplicationRecord
   # which I replaced with this line
   # has_many :users
 
-  belongs_to :owner, class_name: 'User', optional: true
-  # belongs_to :owner, class_name: 'User'
-
-  accepts_nested_attributes_for :owner
 
   # These basically are class methods
   class << self
