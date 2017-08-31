@@ -1,7 +1,6 @@
 module Accounts
   class BaseController < ApplicationController
     before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
-
     # before_action :correct_subdomain
 
     # this is only called from the template properties#index
