@@ -9,12 +9,12 @@ module Accounts
     end
 
     def accept
-      @invitation = Invitation.find(params[:id])
+      @invitation = Invitation.find_by!(token: params[:id])
       @user = User.new
     end
 
     def accepted
-      @invitation = Invitation.find(params[:id])
+      @invitation = Invitation.find_by!(token: params[:id])
       user_params = params[:user].permit(
           :email,
           :first_name,

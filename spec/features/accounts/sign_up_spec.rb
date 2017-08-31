@@ -29,8 +29,7 @@ feature 'Accounts' do
             first_name: 'Freddie',
             last_name: 'Mercury',
             password: 'abc123',
-            password_confirmation: 'abc123',
-            account_id: self
+            password_confirmation: 'abc123'
         }
     )
     visit new_account_path

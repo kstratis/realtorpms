@@ -2,8 +2,13 @@
   <div class='content col-md-offset-4 col-md-4'>
     <h2>Accepting an invitation</h2>
 
-    You are accepting an invitation to join the <%= @invitation.account.subdomain %> account.
+    <p>You are accepting an invitation to join the <%= @invitation.account.subdomain %> account.</p>
 
+    <!--<p>-->
+      <%#= link_to 'Sign in as an existing user', new_user_session_path %>
+    <!--</p>-->
+
+    <p>Sign up as a new user</p>
     <%= form_for(@invitation, as: :user, url: :accepted_invitation) do |inv| %>
 
         <%= fields_for @user do |f| %>
