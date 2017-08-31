@@ -34,7 +34,6 @@ module Accounts
       if current_account.owner_id == current_user.id
         subdomain = get_subdomain(current_user)
       else
-        puts 'inside else'
         subdomain = current_user.account.subdomain
         # subdomain = current_account.subdomain
       end
