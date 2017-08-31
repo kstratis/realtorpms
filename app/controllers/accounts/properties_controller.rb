@@ -1,7 +1,6 @@
 module Accounts
   class PropertiesController < Accounts::BaseController
     before_action :set_property, only: [:show, :edit, :update, :destroy]
-
     # GET /properties
     # GET /properties.json
     def index
@@ -78,5 +77,7 @@ module Accounts
       def property_params
         params.require(:property).permit(:description, :price, :size)
       end
+
+
   end
 end

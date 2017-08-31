@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery with: :exception, prepend: true
   # protect_from_forgery prepend: true
   include SessionsHelper
+  rescue_from ActiveRecord::RecordNotFound, with: -> { render_404  }
 
   def hello
     render html: 'hello, world!'

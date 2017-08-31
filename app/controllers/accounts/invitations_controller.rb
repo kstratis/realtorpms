@@ -1,6 +1,7 @@
 module Accounts
   class InvitationsController < Accounts::BaseController
-    skip_before_action :logged_in_user, :correct_subdomain, only: [:accept, :accepted]
+    # skip_before_action :logged_in_user, :correct_subdomain, only: [:accept, :accepted]
+    skip_before_action :logged_in_user, only: [:accept, :accepted]
     before_action :authorize_owner!, except: [:accept, :accepted]
 
     def new
