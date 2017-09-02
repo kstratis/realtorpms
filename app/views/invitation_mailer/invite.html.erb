@@ -1,6 +1,7 @@
 <p>You have been invited to join the <%= @invitation.account.subdomain %> domain on Landia.</p>
 
 <p>
-  <% accept_url = accept_invitation_url(@invitation, subdomain: @invitation.account.subdomain )%>
+  <%# accept_url = accept_invitation_url(@invitation, subdomain: @invitation.account.subdomain )%>
+  <% accept_url = accept_invitation_url(@invitation)%>
   <%= link_to 'Accept Invitation', accept_url %>
 </p>

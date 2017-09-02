@@ -1,36 +1,12 @@
 module Accounts
   class InvitationsController < Accounts::BaseController
     # skip_before_action :logged_in_user, :correct_subdomain, only: [:accept, :accepted]
-    skip_before_action :logged_in_user, only: [:accept, :accepted]
-    before_action :authorize_owner!, except: [:accept, :accepted]
+    # skip_before_action :logged_in_user, only: [:accept, :accepted]
+    # before_action :authorize_owner!, except: [:accept, :accepted]
+    before_action :authorize_owner!
 
     def new
       @invitation = Invitation.new
-    end
-
-    def accept
-      @invitation = Invitation.find_by!(token: params[:id])
-      @user = User.new
-    end
-
-    def accepted
-      @invitation = Invitation.find_by!(token: params[:id])
-      user_params = params[:user].permit(
-          :email,
-          :first_name,
-          :last_name,
-          :password,
-          :password_confirmation
-      )
-      # +create!+ is an active record method not a users controller one
-      user = User.create!(user_params)
-      current_account.users << user
-      log_in(user)
-      # puts "current_account.subdomain is #{current_account.subdomain}"
-      # redirect_to root_url
-      flash[:success] = "You have joined the #{current_account.subdomain} account."
-      # puts "the redirect will be on: #{root_url(subdomain: current_account.subdomain)}"
-      redirect_to root_url(subdomain: current_account.subdomain)
     end
 
     def create

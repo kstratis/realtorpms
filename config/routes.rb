@@ -19,12 +19,13 @@ Rails.application.routes.draw do
       root to: 'dashboard#index', as: :account_root
       resources :properties
       resources :users
-      resources :invitations, only: [:new, :create] do
-        member do
-          get :accept
-          patch :accepted
-        end
-      end
+      resources :invitations, only: [:new, :create]
+      # resources :invitations, only: [:new, :create] do
+      #   member do
+      #     get :accept
+      #     patch :accepted
+      #   end
+      # end
 
       # resources :invitations, only: [:new, :create]
     end
@@ -45,6 +46,8 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
 
+  get '/invitations/:id/accept', to: 'invitationreceivers#accept', as: :accept_invitation
+  patch '/invitations/:id/accepted', to: 'invitationreceivers#accepted', as: :accepted_invitation
 
   # root 'application#hello'
 end
