@@ -43,8 +43,8 @@ feature 'Accepting invitations' do
 
     visit accept_link
     click_link 'Sign in as an existing user'
-    user = FactoryGirl.create(:user)
-    fill_in 'Email', with: user.email
+    user2 = FactoryGirl.create(:user2)
+    fill_in 'Email', with: user2.email
     fill_in 'Password', with: 'password'
     click_button 'Log in'
 
