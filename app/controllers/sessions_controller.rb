@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
 
   def new
     redirect_to root_url if logged_in?
+    # This is used in case a users attempts to access a subdomain that doesn't exist
     unless request.subdomain.blank?
       redirect_to login_url(subdomain: false) unless Account.subdomain_exists?(request.subdomain)
     end
@@ -11,6 +12,20 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
+      # Special case accepting invitations
+      if session.key?('forwarding_url') && /\/invitations\/\w+\/accept/.match(session[:forwarding_url])
+        puts 'ALL GOOD THIS IS THE PATH'
+        log_in user
+        # note that both 1 and 0 are true in the boolean context. if we had done
+        # +params[:session][:remember_me] ? remember(user) : forget(user)+, remeber(user)
+        # would always get called
+        params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+        # flash[:success] = 'You have successfully signed in.'
+        # redirect_to login_url(subdomain: false)
+        puts 'RDIRECT'
+        redirect_to build_redirection_url(URI.parse(session[:forwarding_url]), nil) and return
+      end
+
       subdomain = get_subdomain(user)
       if subdomain.nil?  # This case is for when user tries to login to an existing subdomain that he/she doesn't belong to
         flash[:danger] = 'Unauthorized domain. Please check your spelling.' # Not quite right!

@@ -55,6 +55,10 @@ module SessionsHelper
     #puts "extracted subdomain is: #{extracted_subdomain}"
     #puts "extracted hostname is: #{extracted_hostname}"
     port =  stored_url.port.blank? ? nil : ":#{stored_url.port}"
+
+    if subdomain.blank?
+      return "#{stored_url.scheme}://#{extracted_hostname}#{port}#{stored_url.path}"
+    end
     # puts "full redirection url is: #{stored_url.scheme}://#{subdomain}.#{extracted_hostname}#{port}#{stored_url.path}"
     "#{stored_url.scheme}://#{subdomain}.#{extracted_hostname}#{port}#{stored_url.path}"
   end
@@ -90,6 +94,7 @@ module SessionsHelper
 
   # Stores the URL trying to be accessed.
   def store_location
+    puts "request is being stored: #{request.original_url}"
     session[:forwarding_url] = request.original_url if request.get?
   end
 

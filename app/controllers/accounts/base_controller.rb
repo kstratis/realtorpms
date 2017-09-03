@@ -40,7 +40,6 @@ module Accounts
 
       # puts "subdomain is: #{subdomain}"
       unless request.subdomain == subdomain
-        puts 'LALALA'
         render_404
       end
     end
