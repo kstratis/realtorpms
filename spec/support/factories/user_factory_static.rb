@@ -14,4 +14,11 @@ FactoryGirl.define do
     password 'abc123'
   end
 
+  factory :user3, :class => User do
+    email 'third.account.owner@example.com'
+    first_name 'Hulk'
+    last_name 'Hogan'
+    password 'abc123'
+  end
+
 end

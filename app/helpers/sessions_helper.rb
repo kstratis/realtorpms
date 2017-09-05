@@ -101,12 +101,18 @@ module SessionsHelper
 
   # Retrieves the subdomain
   def get_subdomain(user)
-    subdomain = Account.get_subdomain(user)
-    if request.subdomain.blank?
-      subdomain
-    else
-      request.subdomain == subdomain ? subdomain : nil
-    end
+
+
+    # subdomain = Account.get_subdomain(user)
+    # if request.subdomain.blank?
+    #   subdomain
+    # else
+    #   request.subdomain == subdomain ? subdomain : nil
+    # end
+
+
+
+
   end
 
 

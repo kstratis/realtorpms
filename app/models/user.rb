@@ -16,8 +16,8 @@ class User < ApplicationRecord
   # has_one :account
 
   # Later on...
-  # has_many :memberships
-  # has_many :accounts, through: :memberships
+  has_many :memberships
+  has_many :accounts, through: :memberships
 
 
   # Basically class methods defined on singleton class

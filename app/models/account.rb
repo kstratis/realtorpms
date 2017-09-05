@@ -17,6 +17,16 @@ class Account < ApplicationRecord
   class << self
     # Returns the registered subdomain
     def get_subdomain(user)
+      # unless current_account.owner == current_user ||
+      #     current_account.users.exists?(current_user.id)
+
+
+
+
+
+
+
+
       # This will only work if the user is also the account owner
       self.find_by(owner_id: user.id).subdomain
     end
