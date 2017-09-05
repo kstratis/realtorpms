@@ -3,9 +3,7 @@ class InvitationreceiversController < ApplicationController
   layout 'website/skeleton'  # show the barebones version only when signing up/in
 
   def accept
-    puts "the request is: #{request.original_url}"
-    store_location
-
+    store_location unless logged_in?
     @invitation = Invitation.find_by!(token: params[:id])
     @user = User.new
   end
@@ -14,18 +12,25 @@ class InvitationreceiversController < ApplicationController
 
     # +find_by!+ throws exception if invitation is not found
     @invitation = Invitation.find_by!(token: params[:id])
-    user_params = params[:user].permit(
-        :email,
-        :first_name,
-        :last_name,
-        :password,
-        :password_confirmation
-    )
-    # +create!+ is an active record method not a users controller one
-    user = User.create!(user_params)
-    puts @invitation
+
+
+    if logged_in?
+      user = current_user
+    else
+      user_params = params[:user].permit(
+          :email,
+          :first_name,
+          :last_name,
+          :password,
+          :password_confirmation
+      )
+      # +create!+ is an active record method not a users controller one
+      user = User.create!(user_params)
+      log_in(user)
+    end
+
     current_account.users << user
-    log_in(user)
+
     # puts "current_account.subdomain is #{current_account.subdomain}"
     # redirect_to root_url
     flash[:success] = "You have successfully joined the #{current_account.subdomain} organization."

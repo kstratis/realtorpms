@@ -26,7 +26,7 @@ feature 'Accepting invitations' do
     fill_in 'Password', with: 'password'
     fill_in 'Password confirmation', with: 'password'
     click_button 'Accept Invitation'
-    expect(page).to have_content("You have joined the #{account.subdomain} account.")
+    expect(page).to have_content("You have successfully joined the #{account.subdomain} organization.")
     expect(page.current_url).to eq(root_url(subdomain: account.subdomain))
     # After the invited user joins our subdomain the domain user count should be 1
     # puts "accounts before: #{account.users.count}"
@@ -43,16 +43,21 @@ feature 'Accepting invitations' do
 
     visit accept_link
     click_link 'Sign in as an existing user'
+
     user2 = FactoryGirl.create(:user2)
     fill_in 'Email', with: user2.email
-    fill_in 'Password', with: 'password'
+    fill_in 'Password', with: 'abc123'
     click_button 'Log in'
 
-    invitation_url = accept_invitation_url(invitation, subdomain: account.subdomain)
+
+    # invitation_url = accept_invitation_url(invitation, subdomain: account.subdomain)
+    # set subdomain to false to counter the +set_subdomain+ in the before hook
+    invitation_url = accept_invitation_url(invitation, subdomain: false)
     expect(page.current_url).to eq(invitation_url)
     expect(page).to_not have_content('Sign in as an existing user')
     click_button 'Accept Invitation'
-    expect(page).to have_content("You have joined the #{account.name} account.")
+
+    expect(page).to have_content("You have successfully joined the #{account.subdomain} organization.")
     expect(page.current_url).to eq(root_url)
   end
 

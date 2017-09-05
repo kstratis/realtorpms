@@ -14,7 +14,6 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       # Special case accepting invitations
       if session.key?('forwarding_url') && /\/invitations\/\w+\/accept/.match(session[:forwarding_url])
-        puts 'ALL GOOD THIS IS THE PATH'
         log_in user
         # note that both 1 and 0 are true in the boolean context. if we had done
         # +params[:session][:remember_me] ? remember(user) : forget(user)+, remeber(user)
@@ -22,7 +21,6 @@ class SessionsController < ApplicationController
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
         # flash[:success] = 'You have successfully signed in.'
         # redirect_to login_url(subdomain: false)
-        puts 'RDIRECT'
         redirect_to build_redirection_url(URI.parse(session[:forwarding_url]), nil) and return
       end
 
