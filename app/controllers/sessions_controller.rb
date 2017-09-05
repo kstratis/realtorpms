@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
       end
 
       # ---------------
-      if request.subdomain # if subdomain exists in url
+      unless request.subdomain.blank? # if subdomain exists in url
         account = Account.find_by_subdomain!(request.subdomain) # get account or 404
         unless account.owner == user || account.users.exists?(user.id)
           render_401 and return
@@ -33,16 +33,20 @@ class SessionsController < ApplicationController
         log_in user
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
         flash[:success] = 'You have successfully signed in.'
-        redirect_back_or(nil, request.subdomain)
-      else
-        puts 'asds'
+        redirect_back_or(nil, request.subdomain) and return
+      end
+      log_in user
+      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+      flash[:success] = 'You have successfully signed in.'
+      redirect_to root_url(subdomain: false)
+      # puts 'asds'
 
 
         # unless current_account.owner == current_user ||
         #     current_account.users.exists?(current_user.id)
 
 
-      end
+
 
 
       # subdomain = get_subdomain(user)
