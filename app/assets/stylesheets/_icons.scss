@@ -88,6 +88,10 @@
     background-image: url( back_button.svg );
   }
 
+  &.account-switch{
+    background-image: url( account_switch.svg );
+  }
+
   & ~ .pr-icon-desc {
     display: block;
     text-align: center;

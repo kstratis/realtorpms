@@ -1,6 +1,9 @@
 module Accounts
   class BaseController < ApplicationController
-    before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
+    # before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
+    before_action :logged_in_user, :allowed_subdomains, only: [:index, :edit, :update, :destroy]
+    after_action :store_referer_url, only: [:index, :edit, :update, :destroy]
+
     # before_action :correct_subdomain
 
     # this is only called from the template properties#index
@@ -21,6 +24,29 @@ module Accounts
       unless logged_in?
         store_location
         redirect_to login_url
+      end
+    end
+
+    def store_referer_url
+      session[:referer_url] = request.original_url if request.get?
+    end
+
+    def allowed_subdomains
+      subdomain_list = []
+      current_user.all_accounts.each do |account|
+        subdomain_list << account.subdomain
+      end
+      puts session[:referer_url]
+      unless session[:referer_url].blank?
+        previous_subdomain = URI.parse(session[:referer_url]).host.split('.')[0..-3].join('.')
+        if previous_subdomain != request.subdomain
+          Account.find_by!(subdomain: request.subdomain)
+          if subdomain_list.include? request.subdomain
+            flash.now[:success] = "You switched to the #{request.subdomain} organization"
+          else
+            render_401 and return
+          end
+        end
       end
     end
 

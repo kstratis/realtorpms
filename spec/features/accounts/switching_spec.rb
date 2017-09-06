@@ -11,25 +11,29 @@ describe 'Switching accounts' do
 
   before do
     account2.users << account.owner
-    visit login_url
+    visit login_path
     fill_in 'Email', with: account.owner.email
     fill_in 'Password', with: 'abc123'
     click_button 'Log in'
+    # save_and_open_page
     # login_as(account.owner)
   end
 
   it 'can switch between accounts' do
     set_subdomain(account.subdomain)
-    visit root_url
+    visit root_url(subdomain: nil)
 
-    click_link 'Property X'
+
+    click_link("Landia")
     expect(page.current_url).to eq(root_url(subdomain: nil))
-    click_link 'Account #2'
+
+    click_link 'test2'
     expect(page.current_url).to eq(root_url(subdomain: account2.subdomain))
+    save_and_open_page
 
-    click_link 'Twist'
+    click_link("Landia")
     expect(page.current_url).to eq(root_url(subdomain: nil))
-    click_link 'Account #1'
+    click_link 'test1'
     expect(page.current_url).to eq(root_url(subdomain: account.subdomain))
   end
 end

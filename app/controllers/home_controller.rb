@@ -1,18 +1,20 @@
 class HomeController < ApplicationController
-  # before_action :logged_in_user, only: [:index]
+
   layout 'website/skeleton'  # show the barebones version only when signing up/in
 
   def index
   end
 
+  # Use this action instead of directly linking to other urls from view
+  # when we want use the flash functionality
+  def switch
+    if request.subdomain.blank?
+      redirect_to root_url(subdomain: nil)
+    else
+      flash[:success] = "You are now signed in to #{request.subdomain}."
+      redirect_to account_root_url(subdomain: request.subdomain)
+    end
+  end
 
-  # private
-    # Confirms a logged-in user.
-    # def logged_in_user
-    #   unless logged_in?
-    #     store_location
-    #     redirect_to login_url
-    #   end
-    # end
 
 end

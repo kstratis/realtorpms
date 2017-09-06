@@ -51,4 +51,12 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, nil)
   end
 
+  def owned_accounts
+    Account.where(owner: self)
+  end
+
+  def all_accounts
+    owned_accounts + accounts
+  end
+
 end
