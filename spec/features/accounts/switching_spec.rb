@@ -23,16 +23,15 @@ describe 'Switching accounts' do
     set_subdomain(account.subdomain)
     visit root_url(subdomain: nil)
 
-
-    click_link("Landia")
+    click_link('Landia')
     expect(page.current_url).to eq(root_url(subdomain: nil))
 
     click_link 'test2'
     expect(page.current_url).to eq(root_url(subdomain: account2.subdomain))
-    save_and_open_page
 
-    click_link("Landia")
+    click_link('Landia')
     expect(page.current_url).to eq(root_url(subdomain: nil))
+
     click_link 'test1'
     expect(page.current_url).to eq(root_url(subdomain: account.subdomain))
   end

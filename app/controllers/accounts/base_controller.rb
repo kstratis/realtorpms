@@ -36,10 +36,9 @@ module Accounts
       current_user.all_accounts.each do |account|
         subdomain_list << account.subdomain
       end
-      puts session[:referer_url]
       unless session[:referer_url].blank?
         previous_subdomain = URI.parse(session[:referer_url]).host.split('.')[0..-3].join('.')
-        if previous_subdomain != request.subdomain
+        unless previous_subdomain == request.subdomain
           Account.find_by!(subdomain: request.subdomain)
           if subdomain_list.include? request.subdomain
             flash.now[:success] = "You switched to the #{request.subdomain} organization"

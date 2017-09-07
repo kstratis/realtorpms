@@ -10,9 +10,12 @@ class SessionsController < ApplicationController
   end
 
   def create
+
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
+
       # Special case accepting invitations
+      # ----------------------------------
       if session.key?('forwarding_url') && /\/invitations\/\w+\/accept/.match(session[:forwarding_url])
         log_in user
         # note that both 1 and 0 are true in the boolean context. if we had done
@@ -23,9 +26,14 @@ class SessionsController < ApplicationController
         # redirect_to login_url(subdomain: false)
         redirect_to build_redirection_url(URI.parse(session[:forwarding_url]), nil) and return
       end
+      # ----------------------------------
 
-      # ---------------
+
+      # Log in with a given subdomain in URL - No ambiguity
       unless request.subdomain.blank? # if subdomain exists in url
+        # puts request.original_url
+        # puts "LALALA #{request.subdomain}"
+
         account = Account.find_by_subdomain!(request.subdomain) # get account or 404
         unless account.owner == user || account.users.exists?(user.id)
           render_401 and return
@@ -33,42 +41,25 @@ class SessionsController < ApplicationController
         log_in user
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
         flash[:success] = 'You have successfully signed in.'
+
         redirect_back_or(nil, request.subdomain) and return
       end
+
+
+      # Log in without a subdomain in URL. This can onlly happen in root/login path.
+      # All other routes are automatically protected with a subdomain constraint.
       log_in user
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       flash[:success] = 'You have successfully signed in.'
-      redirect_to root_url(subdomain: false)
-      # puts 'asds'
+      # Check the account count. If accounts.count > 1 redirect to account switcher
+      # otherwise simply redirect the user to his/her default subdomain
+      unless user.accounts.count == 0
+        redirect_to root_url(subdomain: false) and return
+      end
+
+      redirect_to root_url(subdomain: Account.find_by(owner_id: user.id).subdomain)
 
 
-        # unless current_account.owner == current_user ||
-        #     current_account.users.exists?(current_user.id)
-
-
-
-
-
-      # subdomain = get_subdomain(user)
-      # if subdomain.nil?  # This case is for when user tries to login to an existing subdomain that he/she doesn't belong to
-      #   flash[:danger] = 'Unauthorized domain. Please check your spelling.' # Not quite right!
-      #   redirect_to login_url(subdomain: false)
-      #   # redirect_to login_path
-      # else
-      #   log_in user
-      #   # note that both 1 and 0 are true in the boolean context. if we had done
-      #   # +params[:session][:remember_me] ? remember(user) : forget(user)+, remeber(user)
-      #   # would always get called
-      #   params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      #   flash[:success] = 'You have successfully signed in.'
-      #
-      #   # redirect_back_or users_path
-      #
-      #   redirect_back_or(user, subdomain)
-      #
-      #   # redirect_to root_url(subdomain: subdomain)
-      # end
-      # ----------------
     else
       flash.now[:danger] = 'Invalid email/password combination' # Not quite right!
       render 'new'
