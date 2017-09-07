@@ -28,11 +28,8 @@ class SessionsController < ApplicationController
       end
       # ----------------------------------
 
-
       # Log in with a given subdomain in URL - No ambiguity
       unless request.subdomain.blank? # if subdomain exists in url
-        # puts request.original_url
-        # puts "LALALA #{request.subdomain}"
 
         account = Account.find_by_subdomain!(request.subdomain) # get account or 404
         unless account.owner == user || account.users.exists?(user.id)
@@ -45,7 +42,6 @@ class SessionsController < ApplicationController
         redirect_back_or(nil, request.subdomain) and return
       end
 
-
       # Log in without a subdomain in URL. This can onlly happen in root/login path.
       # All other routes are automatically protected with a subdomain constraint.
       log_in user
@@ -54,11 +50,10 @@ class SessionsController < ApplicationController
       # Check the account count. If accounts.count > 1 redirect to account switcher
       # otherwise simply redirect the user to his/her default subdomain
       unless user.accounts.count == 0
-        redirect_to root_url(subdomain: false) and return
+        redirect_to account_list_url(subdomain: false) and return
       end
 
       redirect_to root_url(subdomain: Account.find_by(owner_id: user.id).subdomain)
-
 
     else
       flash.now[:danger] = 'Invalid email/password combination' # Not quite right!

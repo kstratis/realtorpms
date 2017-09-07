@@ -1,0 +1,34 @@
+<div class="center jumbotron pr-container">
+
+
+      <i class="pr-icon md account-switch"></i>
+      <h2>Account switch screen.</h2>
+      <h2>Please pick one of your organizations</h2>
+      <ul class="accounts">
+        <% current_user.all_accounts.each do |account| %>
+            <li>
+              <%#= link_to root_url(subdomain: account.subdomain) do %>
+              <%= link_to account_switch_url(subdomain: account.subdomain) do %>
+                  <%= account.subdomain %>
+              <% end %>
+              <% if account.owner == current_user %>
+                  <span class="label">Account Owner</span>
+              <%else%>
+                  <span class="label">Regular User</span>
+              <%end%>
+            </li>
+        <% end %>
+      </ul>
+      <!--<p><strong>You are currently logged in as <u><%#= current_user.email %></u></strong></p>-->
+      <!--<p><strong>**<%#= link_to 'Dashboard', root_url(subdomain: get_subdomain(current_user)) %></strong></p>-->
+
+
+
+  <%#= link_to 'Sign up now!', new_account_path, class: 'btn btn-lg btn-primary' %>
+</div>
+
+<%#= link_to image_tag('rails.png', alt: 'Rails logo'), 'http://rubyonrails.org/' %>
+
+
+
+

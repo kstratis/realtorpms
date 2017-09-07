@@ -8,4 +8,9 @@ FactoryGirl.define do
     subdomain 'test2'
     association :owner, :factory => :user2
   end
+
+  factory :account3, :class => Account do
+    subdomain 'test3'
+    association :owner, :factory => :user3
+  end
 end
