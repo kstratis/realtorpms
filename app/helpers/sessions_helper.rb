@@ -98,9 +98,6 @@ module SessionsHelper
   end
 
 
-
-
-
   # Retrieves the subdomain
   def get_subdomain(user)
 

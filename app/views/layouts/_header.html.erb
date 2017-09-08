@@ -8,6 +8,11 @@
         <span class="icon-bar"></span>
       </button>
       <%= link_to 'Landia', account_root_path, id: 'logo', class: 'navbar-brand' %>
+        <% if owner?  %>
+          <span class="label navbar-tag"><%= fa_icon('id-badge fw', text: 'ADMINISTRATOR') %></span>
+          <% else %>
+          <span class="label navbar-tag"><%= fa_icon('id-badge fw', text: 'USER') %></span>
+        <% end %>
     </div> <!-- end div class="navbar-header" -->
 
     <div class="collapse navbar-collapse navbar-right">
@@ -16,18 +21,51 @@
              However we have also made it available in all controllers by including in the "master"
              controller +application_controller+ -->
         <% if logged_in? %>
-            <li><%= link_to "Signed is as #{current_user.email}", '#' %></li>
-            <li><%= link_to 'Users', users_path %></li>
+            <%#= link_to "Signed is as #{current_user.email}", current_user, class: 'email-entry' %>
+            <!--<li><span>Signed is as <%#=current_user.email%></span></li>-->
+            <!--<li><i class="pr-icon navbar-offset css account-switch-navbar"></i></li>-->
+            <% if current_user.get_account_count > 1 %>
+            <li>
+              <%= link_to account_list_path, class: 'navbar-offset', title: 'Switch accounts' do %>
+                <%= content_tag :i, '', :class => 'pr-icon css account-switch-navbar' %>
+              <% end %>
+            </li>
+            <% end %>
+
+
+
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                Account <b class="caret"></b>
+                <!--Account <b class="caret"></b>-->
+
+                  <%= gravatar_for current_user, size: 64, classname: 'avatar-outline' %>
+                <span class="">&nbsp;<%= current_user.first_name %>&nbsp;</span><span class="caret"></span>
+
+                <!--<div class="user_info_avatar">-->
+
+                <!--</div>-->
               </a>
               <ul class="dropdown-menu">
-                <li><%= link_to 'Overview', current_user %></li>
-                <li><%= link_to 'My account', edit_user_path(current_user) %></li>
-                <li class="divider"></li>
+
                 <li>
-                  <%= link_to 'Log out', logout_path, method: :delete %>
+
+                  <%= link_to edit_user_path(current_user), class: 'entry' do %>
+                    <%= content_tag :span, fa_icon('id-card-o lg fw', text: 'Profile') %>
+                  <% end %>
+                </li>
+
+                <li>
+                  <%= link_to edit_user_path(current_user) do %>
+                      <%= content_tag :span, fa_icon('envelope-o lg fw', text: 'Messages') %>
+                  <% end %>
+                </li>
+
+                <li class="divider"></li>
+
+                <li>
+                  <%= link_to logout_path, method: :delete do %>
+                      <%= content_tag :span, fa_icon('sign-out lg fw', text: 'Log out') %>
+                  <% end %>
                 </li>
               </ul>
             </li>
@@ -42,13 +80,14 @@
   </div>
 </div>
 <script>
+    var dropdownEl = $('.dropdown');
     // Add slideDown animation to Bootstrap dropdown when expanding.
-    $('.dropdown').on('show.bs.dropdown', function() {
+    dropdownEl.on('show.bs.dropdown', function() {
         $(this).find('.dropdown-menu').first().stop(true, true).slideDown(150);
     });
 
     // Add slideUp animation to Bootstrap dropdown when collapsing.
-    $('.dropdown').on('hide.bs.dropdown', function() {
+    dropdownEl.on('hide.bs.dropdown', function() {
         $(this).find('.dropdown-menu').first().stop(true, true).slideUp(150);
     });
 </script>

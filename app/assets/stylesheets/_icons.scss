@@ -29,6 +29,7 @@
 
   &.xs { width:  25px; height:  25px; vertical-align: middle;}
   &.cs { width:  35px; height:  35px; }
+  &.css { width:  45px; height:  45px; }
   &.sm { width:  50px; height:  50px; }
   &.smm { width:  65px; height:  65px; }
   &.smmm { width:  85px; height:  85px; }
@@ -90,6 +91,10 @@
 
   &.account-switch{
     background-image: url( account_switch.svg );
+  }
+
+  &.account-switch-navbar{
+    background-image: url( switch3_accounts_colored.svg );
   }
 
   & ~ .pr-icon-desc {

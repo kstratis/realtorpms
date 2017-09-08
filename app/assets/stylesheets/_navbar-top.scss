@@ -1,5 +1,17 @@
+li.dropdown > a.dropdown-toggle{
+  //padding: 10px 0 0 0;
+  margin-top: 1px;
+  padding: 10px;
+  width: 100%;
+  &:visited{
+    background: transparent;
+  }
+}
+
+
 .navbar-toggle{
   border: 1px solid #ffffff;
+  padding: 0;
 }
 
 .navbar-toggle .icon-bar {
@@ -8,7 +20,13 @@
 
 .navbar-background-coloring{
   background-color: #050f2c;
+  //background-color: #1d2834;
   z-index: 1000;
+}
+
+.email-entry{
+  background: #fd5282;
+  color: #ffffff !important;
 }
 
 div.pr-account-header{
@@ -29,4 +47,49 @@ div.pr-account-header{
 }
 .navbar .btn-navbar {
   display: none;
+}
+
+ul.dropdown-menu > li > a{
+  font-family: Roboto, helvetica, sans-serif;
+  padding: 10px 15px;
+}
+
+ul.dropdown-menu > li > a:hover{
+  //background: #1d2834;
+  background: #050f2c;
+  color: #ffffff;
+}
+
+
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus{
+  background: transparent;
+
+}
+
+.entry{
+  padding: 15px;
+}
+
+.avatar-outline{
+  display: inline;
+  width: 32px;
+  border-radius: 50%;
+}
+
+.navbar-tag {
+  background: #3080eb !important;
+  color: #ffffff !important;
+  padding:5px;
+  text-transform: uppercase;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+ul.nav.navbar-nav > li > a.navbar-offset{
+  margin: 1px 5px 0 0;
+  padding: 2px 0 0 0;
+  background: transparent !important;
+  &:hover{
+    background: #fd5282 !important;
+  }
 }

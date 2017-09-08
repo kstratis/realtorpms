@@ -15,7 +15,7 @@ feature 'Accounts' do
       success_message = 'Welcome to PropertyX! Your account has been successfully created.'
       expect(page).to have_content(success_message)
     end
-    expect(page).to have_link('Signed is as demouser@example.com')
+    expect(page).to have_content('demouser')
     expect(page.current_url).to eq('http://demoportal.lvh.me/')
   end
 

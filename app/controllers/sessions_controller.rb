@@ -47,13 +47,29 @@ class SessionsController < ApplicationController
       log_in user
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       flash[:success] = 'You have successfully signed in.'
-      # Check the account count. If accounts.count > 1 redirect to account switcher
+      # Check the account count. If accounts.count > 0 redirect to account switcher
       # otherwise simply redirect the user to his/her default subdomain
-      unless user.accounts.count == 0
-        redirect_to account_list_url(subdomain: false) and return
-      end
+      # puts total_accounts(user)
+      # user_accounts_count = user.accounts.count
 
-      redirect_to root_url(subdomain: Account.find_by(owner_id: user.id).subdomain)
+      redirect_to account_list_url(subdomain: false) and return if user.get_account_count > 1
+      unless user.has_owning_accounts?.zero?
+        redirect_to root_url(subdomain: Account.find_by(owner_id: user.id).subdomain) and return
+      end
+      redirect_to root_url(subdomain: user.accounts.first!.subdomain)
+
+      # redirect_to root_url(subdomain: user.accounts.first!.subdomain)
+
+
+      # unless user_accounts_count == 0
+      #   if user_accounts_count > 1
+      #     redirect_to account_list_url(subdomain: false) and return
+      #   else
+      #     redirect_to root_url(subdomain: user.accounts.first!.subdomain) and return
+      #   end
+      # end
+      # puts "inside outer"
+      # redirect_to root_url(subdomain: Account.find_by(owner_id: user.id).subdomain)
 
     else
       flash.now[:danger] = 'Invalid email/password combination' # Not quite right!

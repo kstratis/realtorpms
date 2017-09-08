@@ -45,6 +45,8 @@ gem 'rails-assets-sweetalert2', source: 'https://rails-assets.org'
 
 gem 'sweet-alert2-rails'
 
+gem 'font-awesome-rails'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

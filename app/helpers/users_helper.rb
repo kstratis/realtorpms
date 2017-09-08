@@ -1,10 +1,10 @@
 module UsersHelper
   # Adds gravatar support
   # Returns the Gravatar for the given user.
-  def gravatar_for(user, size: 128)
+  def gravatar_for(user, size: 128, classname: 'gravatar')
     gravatar_id = Digest::MD5::hexdigest(user.email.downcase)
     gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
-    image_tag(gravatar_url, alt: user.first_name + user.last_name, class: 'gravatar')
+    image_tag(gravatar_url, alt: user.first_name + user.last_name, class: classname)
   end
 
   # entity can be an account object model or a user (@account.owner)

@@ -32,6 +32,22 @@ class User < ApplicationRecord
     def new_token
       SecureRandom.urlsafe_base64
     end
+
+  end
+
+  # 1 if the user owns an account (paying customer).
+  # 0 otherwise
+  def has_owning_accounts?
+    Account.find_by(owner_id: self.id) ? 1 : 0
+  end
+
+  # How many accounts this user belongs to (as a user)
+  def get_membership_accounts
+    self.accounts.count
+  end
+
+  def get_account_count
+    has_owning_accounts? + get_membership_accounts
   end
 
   # Remembers a user in the database for use in persistent sessions.

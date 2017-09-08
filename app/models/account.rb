@@ -1,7 +1,7 @@
 class Account < ApplicationRecord
   belongs_to :owner, class_name: 'User', optional: true
   accepts_nested_attributes_for :owner
-  validates :subdomain, presence: true, length: { maximum: 50 }, uniqueness: true
+  validates :subdomain, presence: true, length: { maximum: 20 }, uniqueness: true
 
   has_many :invitations
 
@@ -15,18 +15,11 @@ class Account < ApplicationRecord
 
   # These basically are class methods
   class << self
+
     # Returns the registered subdomain
     def get_subdomain(user)
       # unless current_account.owner == current_user ||
       #     current_account.users.exists?(current_user.id)
-
-
-
-
-
-
-
-
       # This will only work if the user is also the account owner
       self.find_by(owner_id: user.id).subdomain
     end
