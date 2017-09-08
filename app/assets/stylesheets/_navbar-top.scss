@@ -8,7 +8,6 @@ li.dropdown > a.dropdown-toggle{
   }
 }
 
-
 .navbar-toggle{
   border: 1px solid #ffffff;
   padding: 0;
@@ -89,7 +88,16 @@ ul.nav.navbar-nav > li > a.navbar-offset{
   margin: 1px 5px 0 0;
   padding: 2px 0 0 0;
   background: transparent !important;
-  &:hover{
-    background: #fd5282 !important;
+
+  i{
+    //margin-top: 2px;
+    border: 1px solid #050f2c;
+    border-radius: 50%;
+
+    transition: all .1s linear;
+    &:hover{
+      box-shadow: 0 0 0 2px #ffffff;
+      background-color: #fd5282 !important;
+    }
   }
 }
