@@ -1,5 +1,7 @@
 class Property < ApplicationRecord
   belongs_to :user
+
+
   enum type: [:neoclassical, :protected_property, :loft, :traditional, :villa, :stone,  :studio,
               :prefabricated, :precast]
   enum orientation: [:front_facing, :airy, :on_corner, :inwards_facing]

@@ -19,6 +19,10 @@ class User < ApplicationRecord
   has_many :memberships
   has_many :accounts, through: :memberships
 
+  # Much later on...
+  # has_many :assignments
+  # has_many :properties, through: :assignments
+
 
   # Basically class methods defined on singleton class
   class << self

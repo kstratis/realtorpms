@@ -21,4 +21,11 @@ FactoryGirl.define do
     password 'abc123'
   end
 
+  factory :userExternal, :class => User do
+    email 'external@example.com'
+    first_name 'Johny'
+    last_name 'Mnemonic'
+    password 'abc123'
+  end
+
 end
