@@ -20,11 +20,12 @@ class User < ApplicationRecord
   has_many :accounts, through: :memberships
 
   # Much later on...
-  # has_many :assignments
-  # has_many :properties, through: :assignments
+  has_many :assignments
+  has_many :properties, through: :assignments
+  # has_many :properties, -> (account) { where('account_id = ?', account.id) }, through: :assignments
 
 
-  # Basically class methods defined on singleton class
+           # Basically class methods defined on singleton class
   class << self
     # Returns the hash digest of the given string.
     def digest(string)

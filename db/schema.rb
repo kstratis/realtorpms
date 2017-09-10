@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170831123414) do
+ActiveRecord::Schema.define(version: 20170909145729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,15 @@ ActiveRecord::Schema.define(version: 20170831123414) do
     t.datetime "updated_at", null: false
     t.integer "owner_id"
     t.index ["subdomain"], name: "index_accounts_on_subdomain"
+  end
+
+  create_table "assignments", force: :cascade do |t|
+    t.bigint "property_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["property_id"], name: "index_assignments_on_property_id"
+    t.index ["user_id"], name: "index_assignments_on_user_id"
   end
 
   create_table "invitations", force: :cascade do |t|
@@ -73,6 +82,8 @@ ActiveRecord::Schema.define(version: 20170831123414) do
     t.boolean "fit_for_students"
     t.boolean "fireplace"
     t.integer "user_id"
+    t.bigint "account_id"
+    t.index ["account_id"], name: "index_properties_on_account_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -92,7 +103,10 @@ ActiveRecord::Schema.define(version: 20170831123414) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "assignments", "properties"
+  add_foreign_key "assignments", "users"
   add_foreign_key "invitations", "accounts"
   add_foreign_key "memberships", "accounts"
   add_foreign_key "memberships", "users"
+  add_foreign_key "properties", "accounts"
 end

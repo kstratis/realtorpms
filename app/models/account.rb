@@ -4,7 +4,7 @@ class Account < ApplicationRecord
   validates :subdomain, presence: true, length: { maximum: 20 }, uniqueness: true
 
   has_many :invitations
-
+  has_many :properties
   # Originally had these 2 lines
   has_many :memberships
   has_many :users, through: :memberships
