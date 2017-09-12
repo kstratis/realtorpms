@@ -8,11 +8,14 @@
         <span class="icon-bar"></span>
       </button>
       <%= link_to 'Landia', account_root_path, id: 'logo', class: 'navbar-brand' %>
+      <div class="account-info">
+      <span title="Current subdomain" class="label navbar-tag-usertype"><%= fa_icon('database fw', text: current_account.subdomain) %></span>
         <% if owner?  %>
-          <span class="label navbar-tag"><%= fa_icon('id-badge fw', text: 'ADMINISTRATOR') %></span>
+          <span title="User type" class="label navbar-tag-usertype"><%= fa_icon('id-badge fw', text: 'ADMINISTRATOR') %></span>
           <% else %>
-          <span class="label navbar-tag"><%= fa_icon('id-badge fw', text: 'USER') %></span>
+          <span title="User type" class="label navbar-tag-usertype"><%= fa_icon('id-badge fw', text: 'USER') %></span>
         <% end %>
+      </div>
     </div> <!-- end div class="navbar-header" -->
 
     <div class="collapse navbar-collapse navbar-right">

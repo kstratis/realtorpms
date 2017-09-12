@@ -10,7 +10,6 @@ li.dropdown > a.dropdown-toggle{
 
 .navbar-toggle{
   border: 1px solid #ffffff;
-  padding: 0;
 }
 
 .navbar-toggle .icon-bar {
@@ -19,7 +18,6 @@ li.dropdown > a.dropdown-toggle{
 
 .navbar-background-coloring{
   background-color: #050f2c;
-  //background-color: #1d2834;
   z-index: 1000;
 }
 
@@ -35,12 +33,6 @@ div.pr-account-header{
   }
 }
 
-@media (min-width: 768px){
-  div.pr-account-header{
-    float: none;
-  }
-}
-
 .nav-collapse, .nav-collapse.collapse {
   overflow: visible;
 }
@@ -48,15 +40,33 @@ div.pr-account-header{
   display: none;
 }
 
+@media (min-width: 768px){
+  div.pr-account-header{
+    float: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .navbar-nav .open .dropdown-menu > li > a {
+    color: #cdcfd5;
+    &:hover{
+      color: #ffffff;
+      box-shadow: 0 0 0 1px #ffffff;
+      background-color: #fd5282 !important;
+    }
+  }
+  ul.nav.navbar-nav > li > a.navbar-offset{
+    padding: 2px 0 0 5px !important;
+  }
+}
+
 ul.dropdown-menu > li > a{
   font-family: Roboto, helvetica, sans-serif;
   padding: 10px 15px;
-}
-
-ul.dropdown-menu > li > a:hover{
-  //background: #1d2834;
-  background: #050f2c;
-  color: #ffffff;
+  &:hover{
+    background: #050f2c;
+    color: #ffffff;
+  }
 }
 
 
@@ -75,14 +85,27 @@ ul.dropdown-menu > li > a:hover{
   border-radius: 50%;
 }
 
-.navbar-tag {
-  background: #3080eb !important;
-  color: #ffffff !important;
-  padding:5px;
-  text-transform: uppercase;
-  margin-top: 15px;
-  font-weight: bold;
+.account-info{
+  display: inline-block;
+  span{
+    display: block;
+  }
 }
+
+.navbar-tag-usertype {
+  text-align: left !important;
+  display: inline-block;
+  background: #fd5282 !important;
+  color: #ffffff !important;
+  text-transform: uppercase;
+  margin-top: 3px;
+  //margin-bottom: 2px;
+  font-weight: bold;
+  min-width: 100px !important;
+
+}
+
+
 
 ul.nav.navbar-nav > li > a.navbar-offset{
   margin: 1px 5px 0 0;
@@ -97,6 +120,18 @@ ul.nav.navbar-nav > li > a.navbar-offset{
     transition: all .1s linear;
     &:hover{
       box-shadow: 0 0 0 2px #ffffff;
+      background-color: #fd5282 !important;
+    }
+  }
+}
+
+ul.dropdown-menu {
+  background: #050f2c;
+  li > a {
+    color: #cdcfd5;
+    &:hover {
+      color: #ffffff;
+      box-shadow: 0 0 0 1px #ffffff;
       background-color: #fd5282 !important;
     }
   }
