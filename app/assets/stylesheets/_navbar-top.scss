@@ -69,7 +69,6 @@ ul.dropdown-menu > li > a{
   }
 }
 
-
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus{
   background: transparent;
 
@@ -99,24 +98,17 @@ ul.dropdown-menu > li > a{
   color: #ffffff !important;
   text-transform: uppercase;
   margin-top: 3px;
-  //margin-bottom: 2px;
   font-weight: bold;
   min-width: 100px !important;
-
 }
-
-
 
 ul.nav.navbar-nav > li > a.navbar-offset{
   margin: 1px 5px 0 0;
   padding: 2px 0 0 0;
   background: transparent !important;
-
   i{
-    //margin-top: 2px;
     border: 1px solid #050f2c;
     border-radius: 50%;
-
     transition: all .1s linear;
     &:hover{
       box-shadow: 0 0 0 2px #ffffff;
