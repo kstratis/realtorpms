@@ -11,9 +11,8 @@
       <!--</div>-->
 
       <div class="invitation-container pull-right" >
-        <%= link_to new_invitation_path, :class => 'invite-user', :id => 'invite-user-button' do %>
-          <i class="pr-icon xs invite-user-colored2"></i>
-          <span class="subtitle">Invite User</span>
+        <%= link_to new_invitation_path, :class => 'btn btn-primary btn-sm invite-user', :id => 'invite-user-button' do %>
+          <span class="subtitle"><%=fa_icon('plus fw')%> Invite User</span>
         <% end %>
       </div>
 
@@ -31,6 +30,11 @@
   </div>
   <div class="row">
     <div class="col-md-12">
+
+      <div class="input-group user-search">
+        <span class="input-group-addon" id="basic-addon1"><%=fa_icon('search fw')%></span>
+        <input type="text" class="form-control" placeholder="π.χ. Γιώργος Σταθόπουλος" aria-describedby="basic-addon1">
+      </div>
 
       <%# Here we call render not on a string with the name of a partial, but rather on a user variable of class User;
           in this context, Rails automatically looks for a partial called _user.html.erb, which we must create.
