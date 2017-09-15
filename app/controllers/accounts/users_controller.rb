@@ -1,3 +1,4 @@
+require 'users_helper'
 module Accounts
   class UsersController < Accounts::BaseController
     # before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
@@ -17,7 +18,42 @@ module Accounts
     end
 
     def index
+      # if params[:page]
+      #   respond_to do |format|
+      #     format.json do
+      #       render json: @organization.to_json
+      #     end
+      # end
       @users = User.paginate(page: params[:page])
+      # @userslist = { users: User.paginate(page: params[:page])}
+      @userslist = {:users => Array.new}
+
+
+      # All the data I need - SOS
+      # puts @users.total_entries # total user entries
+      # puts @users.total_pages # page count
+      # puts @users.current_page # current page
+
+      @users.each do |user|
+        hash = {
+            id: user.id,
+            avatar_url: "https://secure.gravatar.com/avatar/#{Digest::MD5::hexdigest(user.email.downcase)}?s=64",
+            name: "#{user.first_name.first}. #{user.last_name}",
+            email: user.email,
+            type: user.admin ? 'Admin' : 'User',
+            registration: user.created_at.to_formatted_s(:long)
+        }
+        @userslist[:users] << hash
+      end
+
+
+      respond_to do |format|
+          format.html
+          format.json {render json: @userslist.to_json, status: 200}
+
+
+      end
+
     end
 
     # POST to the new user registration page

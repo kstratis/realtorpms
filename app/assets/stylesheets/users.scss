@@ -18,14 +18,78 @@ span.subtitle{
   }
 }
 
-  .back-button-style{
-    margin-left: 15px;
-    padding: 5px 10px 0 10px;
-    border: 1px solid black;
-    //background: gray;
-    border-radius: 6px;
+.user-search{
+  padding: 30px 15px;
+}
+
+#usersTableContainer{
+  padding: 0 15px 5px 15px;  // external padding
+}
+
+#usersTable{
+  input[type=checkbox]{
+    transform: scale(1.5);
   }
 
-  .user-search{
-    padding: 15px !important;
+  tbody > tr:nth-of-type(odd){
+    background: #f0f1f4;
   }
+  thead > tr > th {
+    span{
+      padding-left: 10px;
+    }
+
+    text-align: left;
+  }
+  td{
+
+    color: #444;
+    border-color: transparent;
+    text-align: left;
+    div.table-entry {
+      padding: 10px;
+    }
+    div.table-entry-image {
+      padding: 5px;
+    }
+    .action-buttons-container > .table-icon-entry{
+      margin: 0 5px 0 0;
+      display: inline-block;
+      color: #444;
+      border-radius: 50%;
+      transition: all .1s linear;
+      &:hover{
+        color:black;
+      }
+    }
+  }
+}
+
+.avatar-table-entry{
+  width: 32px;
+  margin-right: 8px;
+  border-radius: 50%;
+}
+
+.btn-custom{
+  padding: 11px 20px;
+}
+.glyphicon-search{
+  top: 3px;
+  font-weight: bold;
+}
+
+.centered {
+  img {
+    max-width: 70px;
+  }
+  border: 1px solid #fd5282;
+  border-radius: 50%;
+  background: #ffffff;
+  z-index: 999999;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  //transform: translate(-50%, -50%);
+}

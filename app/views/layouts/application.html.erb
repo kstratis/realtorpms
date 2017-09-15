@@ -15,6 +15,8 @@
 
     <meta name="turbolinks-cache-control" content="no-cache">
 
+
+
     <!-- full_title is defined in app/helpers/application_helper.rb. title is provided by each view file
          using the keyword 'provide' If the view file doesn't provide such value, 'full title' returns
          a generic title -->
@@ -22,6 +24,8 @@
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'hello-world-bundle' %>
+    <%#= javascript_pack_tag 'hello_react' %>
     <%= render 'layouts/shim' %>
   </head>
   <body>

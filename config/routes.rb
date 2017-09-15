@@ -3,6 +3,7 @@ require 'constraints/subdomain_required'
 Rails.application.routes.draw do
 
 
+  get 'hello_world', to: 'hello_world#index'
   # get 'sessions/new'
 
   # get 'users/new'

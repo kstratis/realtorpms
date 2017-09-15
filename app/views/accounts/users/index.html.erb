@@ -12,7 +12,13 @@
 
       <div class="invitation-container pull-right" >
         <%= link_to new_invitation_path, :class => 'btn btn-primary btn-sm invite-user', :id => 'invite-user-button' do %>
-          <span class="subtitle"><%=fa_icon('plus fw')%> Invite User</span>
+          <span class="subtitle"><%=fa_icon('envelope fw')%> Invite User</span>
+        <% end %>
+      </div>
+
+      <div class="invitation-container pull-right" >
+        <%= link_to new_invitation_path, :class => 'btn btn-primary btn-sm invite-user', :id => 'invite-user-button' do %>
+            <span class="subtitle"><%=fa_icon('plus fw')%> Add User</span>
         <% end %>
       </div>
 
@@ -30,10 +36,16 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-
-      <div class="input-group user-search">
-        <span class="input-group-addon" id="basic-addon1"><%=fa_icon('search fw')%></span>
-        <input type="text" class="form-control" placeholder="π.χ. Γιώργος Σταθόπουλος" aria-describedby="basic-addon1">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="input-group user-search">
+          <!--<span class="input-group-addon" id="basic-addon1"><%=fa_icon('search fw')%></span>-->
+          <input type="text" class="form-control input-lg glowing-border" placeholder="π.χ. Γιώργος Σταθόπουλος" aria-describedby="basic-addon1">
+          <span class="input-group-btn">
+            <button class="btn btn-primary btn-custom" type="button">
+                <i class="glyphicon glyphicon-search"></i>
+            </button>
+          </span>
+        </div>
       </div>
 
       <%# Here we call render not on a string with the name of a partial, but rather on a user variable of class User;
@@ -42,7 +54,10 @@
           Here Rails infers that @users is a list of User objects; moreover, when called with a collection of users,
           Rails automatically iterates through them and renders each one with the _user.html.erb partial
           (inferring the name of the partial from the name of the class). %>
-      <%= render @users %>
+      <%#= render @users %>
+      <div class="col-md-12">
+        <%= react_component('UsersList', props: @userslist, prerender: false) %>
+      </div>
 
       <div class="clearfix"></div>
       <%= will_paginate %>

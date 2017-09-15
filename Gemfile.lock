@@ -114,6 +114,7 @@ GEM
       thor (>= 0.14, < 2.0)
     launchy (2.4.3)
       addressable (~> 2.3)
+    libv8 (5.9.211.38.1)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -129,6 +130,8 @@ GEM
     mime-types-data (3.2016.0521)
     mini_mime (0.1.4)
     mini_portile2 (2.2.0)
+    mini_racer (0.1.14)
+      libv8 (~> 5.9)
     minitest (5.10.3)
     minitest-reporters (1.1.18)
       ansi
@@ -290,6 +293,7 @@ DEPENDENCIES
   jquery-rails (~> 4.3.1)
   launchy (= 2.4.3)
   listen (>= 3.1.5, < 3.2)
+  mini_racer
   minitest-reporters (= 1.1.18)
   pg (~> 0.21)
   puma (~> 3.10)
