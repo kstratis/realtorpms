@@ -52,7 +52,11 @@ export default class UsersList extends React.Component {
             <thead>
             <tr>
 
-              <th><div className={'table-entry'}><input type="checkbox" /></div></th>
+              <th>
+                <div className={'table-entry'}>
+                  <input type="checkbox" id="check_all" name="check_all" />
+                </div>
+              </th>
               <th><span>User</span></th>
               <th><span>Email</span></th>
               <th><span>User type</span></th>
