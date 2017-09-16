@@ -56,11 +56,12 @@
           (inferring the name of the partial from the name of the class). %>
       <%#= render @users %>
       <div class="col-md-12">
+        <%#= react_component('UsersList', props: @userslist, prerender: false) %>
         <%= react_component('UsersList', props: @userslist, prerender: false) %>
       </div>
 
       <div class="clearfix"></div>
-      <%= will_paginate %>
+      <%#= will_paginate %>
     </div>
   </div>
 </div>

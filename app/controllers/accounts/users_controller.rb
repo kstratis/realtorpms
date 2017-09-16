@@ -46,10 +46,16 @@ module Accounts
         @userslist[:users] << hash
       end
 
+      @total_pages = @users.total_pages
+      @current_page = @users.current_page
+
 
       respond_to do |format|
           format.html
           format.json {render json: @userslist.to_json, status: 200}
+          # format.json {render json: {userslist: @userslist.to_json,
+          #                            total_pages: @users.total_pages,
+          #                            current_page: @users.current_page}, status: 200}
 
 
       end

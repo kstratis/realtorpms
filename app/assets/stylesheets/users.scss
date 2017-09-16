@@ -92,18 +92,43 @@ span.subtitle{
   //transform: translate(-50%, -50%);
 }
 
-
 input[type="checkbox"] {
-    /* Styling checkbox */
-  -webkit-appearance: none;
-  background-color: #fafafa;
-  border: 1px solid #cacece;
-  width: 24px;
-  //height: 24px;
-  margin: 0 !important;
-  //box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
-  padding: 10px 0 10px 0;
-  border-radius: 2px;
-  display: block;
-  position: relative;
+  zoom: 1.5;
 }
+
+//input[type="checkbox"] {
+//    /* Styling checkbox */
+//  -webkit-appearance: none;
+//  background-color: #fafafa;
+//  border: 1px solid #cacece;
+//  width: 24px;
+//  //height: 24px;
+//  margin: 0 !important;
+//  //box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+//  padding: 10px 0 10px 0;
+//  border-radius: 2px;
+//
+//  display: block;
+//  position: relative;
+//}
+
+//label input {
+//  display: none;/* <-- hide the default checkbox */
+//}
+//label span {/* <-- style the artificial checkbox */
+//  margin: 2px 0 0 0 !important;
+//  height: 18px;
+//  width: 18px;
+//  background: #ffffff;
+//  border: 1px solid grey;
+//  display: block;
+//  position: relative;
+//  //padding: 10px 0 10px 0;
+//}
+//[type=checkbox]:checked + span:before {/* <-- style its checked state..with a ticked icon */
+//  content: '\2714';
+//  position: absolute;
+//  font-size: 16px;
+//  top: -3px;
+//  left: 1px;
+//}
