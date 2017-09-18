@@ -9,7 +9,10 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-on-rails": "^9.0.2",
-    "react-paginate": "^4.4.3"
+    "react-paginate": "^4.4.3",
+    "react-ultimate-pagination": "^1.0.2",
+    "react-ultimate-pagination-bootstrap-3": "^1.0.2",
+    "react-ultimate-pagination-bootstrap-4": "^1.0.2"
   },
   "devDependencies": {
     "webpack-dev-server": "^2.7.1"

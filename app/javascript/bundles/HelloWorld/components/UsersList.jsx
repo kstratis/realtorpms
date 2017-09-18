@@ -3,6 +3,8 @@ import React from 'react';
 import axios from 'axios';
 import spinner_URL from 'images/spinners/double_ring.svg';
 import ReactPaginate from 'react-paginate';
+// import ReactUltimatePagination from 'react-ultimate-pagination';
+// import UltimatePagination from 'reactUltimatePaginationBootstrap3';
 
 export default class UsersList extends React.Component {
   // static propTypes = {
