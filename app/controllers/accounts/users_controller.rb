@@ -24,9 +24,9 @@ module Accounts
       #       render json: @organization.to_json
       #     end
       # end
-      @users = User.paginate(page: params[:page])
+      @users = User.paginate(page: params[:page], :per_page => 10)
       # @userslist = { users: User.paginate(page: params[:page])}
-      @userslist = {:users => Array.new}
+      @userslist = {:dataset => Array.new}
 
 
       # All the data I need - SOS
@@ -43,19 +43,21 @@ module Accounts
             type: user.admin ? 'Admin' : 'User',
             registration: user.created_at.to_formatted_s(:long)
         }
-        @userslist[:users] << hash
+        @userslist[:dataset] << hash
       end
 
-      @total_pages = @users.total_pages
+      @total_entries = @users.total_entries
       @current_page = @users.current_page
+      @results_per_page = 10
 
 
       respond_to do |format|
           format.html
-          format.json {render json: @userslist.to_json, status: 200}
-          # format.json {render json: {userslist: @userslist.to_json,
-          #                            total_pages: @users.total_pages,
-          #                            current_page: @users.current_page}, status: 200}
+          # format.json {render json: @userslist.to_json, status: 200}
+          format.json {render json: {results_per_page: @results_per_page,
+                                    userslist: @userslist,
+                                     total_entries: @users.total_entries,
+                                     current_page: @users.current_page }, status: 200}
 
 
       end

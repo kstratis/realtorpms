@@ -4284,12 +4284,11 @@ react-on-rails@^9.0.0-beta.12, react-on-rails@^9.0.2:
     react-redux "^5.0.6"
 
 react-paginate@^4.4.3:
-  version "4.4.3"
-  resolved "https://registry.yarnpkg.com/react-paginate/-/react-paginate-4.4.3.tgz#11817ece628fa59c54a2df7968c854ed64b99077"
+  version "4.4.4"
+  resolved "https://registry.yarnpkg.com/react-paginate/-/react-paginate-4.4.4.tgz#0126110e8b8438b08a2c97b59e8391d72ae0b0f3"
   dependencies:
     classnames "^2.2.5"
     prop-types "^15.5.7"
-    react "^15.0.0"
     react-addons-create-fragment "^15.0.0"
 
 react-redux@^5.0.6:
@@ -4303,7 +4302,7 @@ react-redux@^5.0.6:
     loose-envify "^1.1.0"
     prop-types "^15.5.10"
 
-react@^15.0.0, react@^15.6.1:
+react@^15.6.1:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/react/-/react-15.6.1.tgz#baa8434ec6780bde997cdc380b79cd33b96393df"
   dependencies:
