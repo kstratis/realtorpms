@@ -8,3 +8,5 @@ Turbolinks.BrowserAdapter.prototype.showProgressBarAfterDelay = function() {
 $(document).on('turbolinks:load', function(){
   $('#page-transition').addClass('animated fadeIn');
 });
+
+

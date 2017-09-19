@@ -22,25 +22,39 @@ span.subtitle{
   padding: 30px 15px;
 }
 
-#usersTableContainer{
+.dataTableContainer{
   padding: 0 15px 5px 15px;  // external padding
 }
 
-#usersTable{
+.dataTable{
+  border: 0 none;
+  border-radius: 3px;
+  background-color: #fff;
+  -webkit-box-shadow: 0 -1px 1px #d4d8e3, 0 2px 3px #d4d8e3;
+  box-shadow: 0 -1px 1px #d4d8e3, 0 2px 3px #d4d8e3;
 
-  tbody > tr:nth-of-type(odd){
-    background: #f0f1f4;
-  }
   thead > tr > th {
+    padding: 15px 0 15px 8px;
     div.table-entry{
       margin-left: 10px;
     }
-    span{
+    span {
       padding-left: 10px;
     }
     text-align: left;
   }
-  td{
+
+  tbody > tr:nth-of-type(odd){
+    background: #f0f1f4;
+  }
+
+  //tbody > tr > td {
+  //  vertical-align: middle;
+  //}
+
+  tbody > tr > td{
+    vertical-align: middle;
+    line-height: 1.6;
     color: #444;
     border-color: transparent;
     text-align: left;
@@ -48,7 +62,7 @@ span.subtitle{
       padding: 10px;
     }
     div.table-entry-image {
-      padding: 5px;
+      padding: 10px;
     }
     .action-buttons-container > .table-icon-entry{
       margin: 0 5px 0 0;

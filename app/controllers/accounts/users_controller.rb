@@ -18,22 +18,19 @@ module Accounts
     end
 
     def index
-      # if params[:page]
-      #   respond_to do |format|
-      #     format.json do
-      #       render json: @organization.to_json
-      #     end
-      # end
+      if params[:page]
+        param = Integer(params[:page]) rescue nil
+        unless param.is_a? Integer
+          puts 'otinanai'
+          render_404 and return
+        end
+      end
       @users = User.paginate(page: params[:page], :per_page => 10)
-      # @userslist = { users: User.paginate(page: params[:page])}
       @userslist = {:dataset => Array.new}
-
-
-      # All the data I need - SOS
+      # All the data we need - SOS
       # puts @users.total_entries # total user entries
       # puts @users.total_pages # page count
       # puts @users.current_page # current page
-
       @users.each do |user|
         hash = {
             id: user.id,
@@ -45,21 +42,16 @@ module Accounts
         }
         @userslist[:dataset] << hash
       end
-
+      # The following entries are only for the first render
       @total_entries = @users.total_entries
       @current_page = @users.current_page
       @results_per_page = 10
-
-
       respond_to do |format|
           format.html
-          # format.json {render json: @userslist.to_json, status: 200}
           format.json {render json: {results_per_page: @results_per_page,
                                     userslist: @userslist,
                                      total_entries: @users.total_entries,
                                      current_page: @users.current_page }, status: 200}
-
-
       end
 
     end

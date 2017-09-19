@@ -15,23 +15,36 @@ export default class UsersList extends React.Component {
    * @param props - Comes from your rails view embedded in html thanks to react_on_rails.
    */
   constructor(props) {
-    // console.log(props);
-    // console.log(typeof(props.initial_payload.dataset_wrapper.dataset));
-    // console.log(props.initial_payload.dataset_wrapper.dataset);
     super(props);
-
     this.state = { users: this.props.initial_payload.dataset_wrapper.dataset,
                    resultsPerPage: this.props.initial_payload.results_per_page,
                    isLoading: false,
                    pageCount: Math.ceil(this.props.initial_payload.total_entries / this.props.initial_payload.results_per_page),
                    selectedPage: this.getSelectedPage()
                   };
+    // bind always returns a new function. This new function is important because without a reference to it
+    // we won't be able to remove it as a listener in componentWillUnmount leading us to memory leaks.
+    // https://gist.github.com/Restuta/e400a555ba24daa396cc
+    this.bound_onBackButton = this.handleBackButton.bind(this);
+  }
 
+  componentDidMount() {
+    window.addEventListener("popstate", this.bound_onBackButton);
+  }
 
-    // console.log('the page count is:', Math.ceixxl(this.props.initial_payload.total_entries / 10));
-    // for (var i in this.state.users) {
-    //   console.log(this.state.users[i]);
-    // }
+  componentWillUnmount() {
+    window.removeEventListener("popstate", this.bound_onBackButton);
+  }
+
+  // Turbolinks also have some sort of history state management. We don't want React to get in its way.
+  // This function will only be used when turbolinks are not in use. That is all ajax requests.
+  // If the 'turbolinks' key appears anywhere in history.state that means we need to bailout and let
+  // turbolinks handle the re-rendering.
+  handleBackButton(e) {
+    const backPage = this.getSelectedPage();
+    if (!('turbolinks' in e.state)){
+      this.handlePageClick(backPage, true, true);
+    }
   }
 
   // We want this to be reflected in the React component. That's why we subtract 1
@@ -45,18 +58,41 @@ export default class UsersList extends React.Component {
     this.setState({ name });
   };
 
-  advanceByTwo () {
+  advanceByTwo (e) {
     console.log('RUNNING');
+
+    // const breakButtons = this.refs.pagination.getElementsByClassName('break-button'),
+    const breakButtons = this.breakButtons.getElementsByClassName('break-button'),
+      elementArray = Array.prototype.slice.call(breakButtons),
+      index = elementArray.indexOf(e.target);
+
+    if (index === 0 && (elementArray.length > 1 || this.state.selectedPage > 10 )) {
+      alert("tapped left");
+      console.log('tapped left');
+    } else if (index === 1) {
+      console.log('tapped right');
+    }
+
+    this.handlePageClick(this.state.selectedPage + 2, true);
+    // const breakButtons = this.refs.pagination.getElementsByClassName('break-button'),
+    //   elementArray = Array.prototype.slice.call(breakButtons),
+    //   index = elementArray.indexOf(e.target);
+    //
+    // if (index === 0 && (elementArray.length > 1 || selectedPage > 10 )) {
+    //   alert("tapped left");
+    // } else if (index === 1) {
+    //   alert("tapped right");
+    // }
   }
 
-  handlePageClick = (pageNumber) => {
-    console.log('selected page number is:', pageNumber);
-    const selected = pageNumber.selected;
-    history.pushState(null, null, `?page=${selected+1}`);
+  handlePageClick = (pageNumber, pageNo=false, backButtonInvoked=false) => {
+    const selected = pageNo ? pageNumber : pageNumber.selected;
+    // console.log('selected page number is:', selected + 1);
+    if (!backButtonInvoked) history.pushState({jsonpage: selected+1}, null, `?page=${selected+1}`);
     this.setState({currentPage: selected, isLoading:true }, () => {
       axios.get(`/users.json?page=${selected +1}`) // +1 because rails will_paginate starts from 1 while this starts from 0
         .then(function (response) {
-          console.log(response);
+          // console.log(response);
           let newData = response.data.userslist;
           this.setState({ users: newData.dataset,
                           pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),
@@ -65,7 +101,7 @@ export default class UsersList extends React.Component {
                         });
         }.bind(this))
         .catch(function (error) {
-          console.log(error);
+          console.warn(error);
           this.setState({ isLoading: false });
         }.bind(this))
     });
@@ -74,11 +110,11 @@ export default class UsersList extends React.Component {
 
   render() {
     return (
-      <div id="usersTableContainer">
+      <div className="dataTablePage">
         {this.state.isLoading
           ? <div className={'centered'}><img src={spinner_URL} /></div>
-          : <div className={'tableContainer'}>
-              <table id="usersTable" className="table table-striped pr-table">
+          : <div className={'dataTableContainer'}>
+              <table id="usersTable" className="table table-striped pr-table dataTable">
                 <thead>
                   <tr>
                     <th><span>User</span></th>
@@ -91,7 +127,8 @@ export default class UsersList extends React.Component {
                 <tbody>
                 {this.state.users.map((user) => (
                   <tr key={user.id}>
-                    <td><div className={'table-entry-image'}><img className="avatar-table-entry" src={user['avatar_url']}/><span>{user['name']}</span></div></td>
+                    {/*<td><div className={'table-entry-image'}><img className="avatar-table-entry" src={user['avatar_url']}/><span>{user['name']}</span></div></td>*/}
+                    <td><div className={'table-entry'}><img className="avatar-table-entry" src={user['avatar_url']}/><span>{user['name']}</span></div></td>
                     <td><div className={'table-entry'}><span>{user['email']}</span></div></td>
                     <td><div className={'table-entry'}><span>{user['type']}</span></div></td>
                     <td><div className={'table-entry'}><span>{user['registration']}</span></div></td>
@@ -106,10 +143,13 @@ export default class UsersList extends React.Component {
                 ))}
                 </tbody>
               </table>
-              <ReactPaginate previousLabel={"Previous"}
-                             nextLabel={"Next"}
-                             breakLabel={<a href="">...</a>}
-                             breakClassName={"break-me"}
+              <ReactPaginate previousLabel={"❮"}
+                             nextLabel={"❯"}
+                             breakLabel={
+                               <span className="break-button"
+                                     ref={(span) => { this.breakButtons = span; }}
+                                     onClick={this.advanceByTwo.bind(this)}>...</span>}
+                             breakClassName={"break-button"}
                              pageCount={this.state.pageCount}
                              marginPagesDisplayed={2}
                              pageRangeDisplayed={5}
@@ -123,7 +163,6 @@ export default class UsersList extends React.Component {
                              previousClassName={'previous'}/>
             </div>
           }
-          <div onClick={(e)=>this.handlePageClick()} className={'btn btn-primary'}>Next page</div>
         </div>
       );
   }
