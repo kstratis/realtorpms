@@ -27,6 +27,7 @@ export default class UsersList extends React.Component {
     // we won't be able to remove it as a listener in componentWillUnmount leading us to memory leaks.
     // https://gist.github.com/Restuta/e400a555ba24daa396cc
     this.bound_onHistoryButton = this.handleHistoryButton.bind(this);
+    this.determineDirection = this.determineDirection.bind(this);
   }
 
   componentDidMount() {
@@ -59,74 +60,25 @@ export default class UsersList extends React.Component {
     this.setState({ name });
   };
 
+  determineDirection (element) {
+    let ellipsisDomElement = $(element).parent();
+    let direction = '+';
+    ellipsisDomElement.nextAll().each((i, element)=>{
+      if ($(element).hasClass('active')){
+        direction = '-';
+        return false;
+      }
+    });
+    return direction;
+  };
+
   advanceByTwo (e) {
-    console.log('RUNNING');
-    // console.log(this.breakButton);
-    // const breakButtons = this.refs.pagination.getElementsByClassName('break-button'),
-    // const breakButtons = document.getElementsByClassName('break-button-content'),
-    // const breakButtons = this.breakButtons,
-    //   elementArray = Array.prototype.slice.call(breakButtons),
-    //   index = elementArray.indexOf(e.target);
-
-    let breakButtons = $('li.break-button');
-    // console.log(e.target);
-    console.log(breakButtons);
-    // console.log(e.target);
-    // console.log(index);
-
-
-    if (breakButtons.length > 1) {
-      console.log('ok two of them');
-      let c1 = $(breakButtons[0]).nextAll().each((i, element)=>{
-        console.log(element);
-        if ($(element).hasClass('active')){
-          console.log('found it in first');
-          return false;
-
-        }
-      });
-      let c2 = $(breakButtons[1]).nextAll().each((i, element)=>{
-        console.log(element);
-        if ($(element).hasClass('active')){
-          console.log('found it in second');
-          return false;
-        }
-      });
+    const sign = this.determineDirection(e.target);
+    if (sign === '+') {
+      this.handlePageClick(this.state.selectedPage + 2, true);
+    } else{
+      this.handlePageClick(this.state.selectedPage - 2, true);
     }
-    // else if (elementArray.length === 1){
-    //   if (this.state.selectedPage > 10){
-    //     console.log('tapped left');
-    //   }
-    //   else{
-    //     console.log('tapped right')
-    //   }
-    // }
-
-
-
-    // if (index === 0 && (elementArray.length > 1 || this.state.selectedPage > 10 )) {
-    //   // alert("tapped left");
-    //   console.log('tapped left');
-    // } else if (index === 1) {
-    //   console.log('tapped right');
-    // }
-
-
-    // *** SOS
-    // this.handlePageClick(this.state.selectedPage + 2, true);
-    // *** SOS
-
-
-
-    // const breakButtons = this.refs.pagination.getElementsByClassName('break-button'),
-    //   elementArray = Array.prototype.slice.call(breakButtons),
-    //   index = elementArray.indexOf(e.target);
-    //
-    // if (index === 0 && (elementArray.length > 1 || selectedPage > 10 )) {
-    //   alert("tapped left");
-    // } else if (index === 1) {
-    //   alert("tapped right");
-    // }
   }
 
   handlePageClick = (pageNumber, pageNo=false, backButtonInvoked=false) => {
@@ -191,10 +143,6 @@ export default class UsersList extends React.Component {
                              nextLabel={"❯"}
                              breakLabel={
                                <span className="break-button-content"
-                                     ref={(component) => {
-                                       // this.breakButton = [];
-                                       this.breakButtons.push(component)
-                                     }}
                                      onClick={this.advanceByTwo.bind(this)}>...</span>}
                              breakClassName={"break-button"}
                              pageCount={this.state.pageCount}
