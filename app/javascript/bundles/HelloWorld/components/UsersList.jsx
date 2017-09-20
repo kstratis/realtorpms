@@ -22,25 +22,26 @@ export default class UsersList extends React.Component {
                    pageCount: Math.ceil(this.props.initial_payload.total_entries / this.props.initial_payload.results_per_page),
                    selectedPage: this.getSelectedPage()
                   };
+    this.breakButtons = [];
     // bind always returns a new function. This new function is important because without a reference to it
     // we won't be able to remove it as a listener in componentWillUnmount leading us to memory leaks.
     // https://gist.github.com/Restuta/e400a555ba24daa396cc
-    this.bound_onBackButton = this.handleBackButton.bind(this);
+    this.bound_onHistoryButton = this.handleHistoryButton.bind(this);
   }
 
   componentDidMount() {
-    window.addEventListener("popstate", this.bound_onBackButton);
+    window.addEventListener("popstate", this.bound_onHistoryButton);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("popstate", this.bound_onBackButton);
+    window.removeEventListener("popstate", this.bound_onHistoryButton);
   }
 
   // Turbolinks also have some sort of history state management. We don't want React to get in its way.
   // This function will only be used when turbolinks are not in use. That is all ajax requests.
   // If the 'turbolinks' key appears anywhere in history.state that means we need to bailout and let
   // turbolinks handle the re-rendering.
-  handleBackButton(e) {
+  handleHistoryButton(e) {
     const backPage = this.getSelectedPage();
     if (!('turbolinks' in e.state)){
       this.handlePageClick(backPage, true, true);
@@ -60,20 +61,63 @@ export default class UsersList extends React.Component {
 
   advanceByTwo (e) {
     console.log('RUNNING');
-
+    // console.log(this.breakButton);
     // const breakButtons = this.refs.pagination.getElementsByClassName('break-button'),
-    const breakButtons = this.breakButtons.getElementsByClassName('break-button'),
-      elementArray = Array.prototype.slice.call(breakButtons),
-      index = elementArray.indexOf(e.target);
+    // const breakButtons = document.getElementsByClassName('break-button-content'),
+    // const breakButtons = this.breakButtons,
+    //   elementArray = Array.prototype.slice.call(breakButtons),
+    //   index = elementArray.indexOf(e.target);
 
-    if (index === 0 && (elementArray.length > 1 || this.state.selectedPage > 10 )) {
-      alert("tapped left");
-      console.log('tapped left');
-    } else if (index === 1) {
-      console.log('tapped right');
+    let breakButtons = $('li.break-button');
+    // console.log(e.target);
+    console.log(breakButtons);
+    // console.log(e.target);
+    // console.log(index);
+
+
+    if (breakButtons.length > 1) {
+      console.log('ok two of them');
+      let c1 = $(breakButtons[0]).nextAll().each((i, element)=>{
+        console.log(element);
+        if ($(element).hasClass('active')){
+          console.log('found it in first');
+          return false;
+
+        }
+      });
+      let c2 = $(breakButtons[1]).nextAll().each((i, element)=>{
+        console.log(element);
+        if ($(element).hasClass('active')){
+          console.log('found it in second');
+          return false;
+        }
+      });
     }
+    // else if (elementArray.length === 1){
+    //   if (this.state.selectedPage > 10){
+    //     console.log('tapped left');
+    //   }
+    //   else{
+    //     console.log('tapped right')
+    //   }
+    // }
 
-    this.handlePageClick(this.state.selectedPage + 2, true);
+
+
+    // if (index === 0 && (elementArray.length > 1 || this.state.selectedPage > 10 )) {
+    //   // alert("tapped left");
+    //   console.log('tapped left');
+    // } else if (index === 1) {
+    //   console.log('tapped right');
+    // }
+
+
+    // *** SOS
+    // this.handlePageClick(this.state.selectedPage + 2, true);
+    // *** SOS
+
+
+
     // const breakButtons = this.refs.pagination.getElementsByClassName('break-button'),
     //   elementArray = Array.prototype.slice.call(breakButtons),
     //   index = elementArray.indexOf(e.target);
@@ -146,8 +190,11 @@ export default class UsersList extends React.Component {
               <ReactPaginate previousLabel={"❮"}
                              nextLabel={"❯"}
                              breakLabel={
-                               <span className="break-button"
-                                     ref={(span) => { this.breakButtons = span; }}
+                               <span className="break-button-content"
+                                     ref={(component) => {
+                                       // this.breakButton = [];
+                                       this.breakButtons.push(component)
+                                     }}
                                      onClick={this.advanceByTwo.bind(this)}>...</span>}
                              breakClassName={"break-button"}
                              pageCount={this.state.pageCount}
