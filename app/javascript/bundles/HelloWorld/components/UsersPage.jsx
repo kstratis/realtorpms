@@ -6,7 +6,7 @@ import ReactPaginate from 'react-paginate';
 // import ReactUltimatePagination from 'react-ultimate-pagination';
 // import UltimatePagination from 'reactUltimatePaginationBootstrap3';
 
-export default class Search extends React.Component {
+export default class UsersPage extends React.Component {
   // static propTypes = {
   //   name: PropTypes.string.isRequired, // this is passed from the Rails view
   // };

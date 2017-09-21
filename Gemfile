@@ -48,7 +48,7 @@ gem 'sweet-alert2-rails'
 
 gem 'font-awesome-rails'
 
-gem 'react_on_rails', '9.0.2'
+gem 'react_on_rails', '9.0.3'
 gem 'webpacker', '~> 3.0'
 
 

@@ -36,17 +36,9 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <div class="col-md-6 col-md-offset-3">
-        <div class="input-group user-search">
-          <!--<span class="input-group-addon" id="basic-addon1"><%=fa_icon('search fw')%></span>-->
-          <input type="text" class="form-control input-lg glowing-border" placeholder="π.χ. Γιώργος Σταθόπουλος" aria-describedby="basic-addon1">
-          <span class="input-group-btn">
-            <button class="btn btn-primary btn-custom" type="button">
-                <i class="glyphicon glyphicon-search"></i>
-            </button>
-          </span>
-        </div>
-      </div>
+      <!--<div class="col-md-6 col-md-offset-3">-->
+        <%= react_component('Search', prerender: false) %>
+      <!--</div>-->
 
       <%# Here we call render not on a string with the name of a partial, but rather on a user variable of class User;
           in this context, Rails automatically looks for a partial called _user.html.erb, which we must create.

@@ -16,7 +16,7 @@ export default class UsersList extends React.Component {
    */
   constructor(props) {
     super(props);
-    this.state = { users: this.props.initial_payload.dataset_wrapper.dataset,
+    this.state = { dataset: this.props.initial_payload.dataset_wrapper.dataset,
                    resultsPerPage: this.props.initial_payload.results_per_page,
                    isLoading: false,
                    pageCount: Math.ceil(this.props.initial_payload.total_entries / this.props.initial_payload.results_per_page),
@@ -90,7 +90,7 @@ export default class UsersList extends React.Component {
         .then(function (response) {
           // console.log(response);
           let newData = response.data.userslist;
-          this.setState({ users: newData.dataset,
+          this.setState({ dataset: newData.dataset,
                           pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),
                           isLoading: false,
                           selectedPage: selected
@@ -121,13 +121,13 @@ export default class UsersList extends React.Component {
                   </tr>
                 </thead>
                 <tbody>
-                {this.state.users.map((user) => (
-                  <tr key={user.id}>
-                    {/*<td><div className={'table-entry-image'}><img className="avatar-table-entry" src={user['avatar_url']}/><span>{user['name']}</span></div></td>*/}
-                    <td><div className={'table-entry'}><img className="avatar-table-entry" src={user['avatar_url']}/><span>{user['name']}</span></div></td>
-                    <td><div className={'table-entry'}><span>{user['email']}</span></div></td>
-                    <td><div className={'table-entry'}><span>{user['type']}</span></div></td>
-                    <td><div className={'table-entry'}><span>{user['registration']}</span></div></td>
+                {this.state.dataset.map((entry) => (
+                  <tr key={entry.id}>
+                    {/*<td><div className={'table-entry-image'}><img className="avatar-table-entry" src={entry['avatar_url']}/><span>{entry['name']}</span></div></td>*/}
+                    <td><div className={'table-entry'}><img className="avatar-table-entry" src={entry['avatar_url']}/><span>{entry['name']}</span></div></td>
+                    <td><div className={'table-entry'}><span>{entry['email']}</span></div></td>
+                    <td><div className={'table-entry'}><span>{entry['type']}</span></div></td>
+                    <td><div className={'table-entry'}><span>{entry['registration']}</span></div></td>
                     <td>
                       <div className="action-buttons-container table-entry">
                         <a title="Edit user" className="table-icon-entry" href=""><i className="fa fa-pencil fa-fw fa-lg"> </i></a>

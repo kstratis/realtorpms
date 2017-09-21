@@ -97,6 +97,10 @@
     background-image: url( switch_accounts_colored.svg );
   }
 
+  &.search-user{
+    background-image: url( search_user.svg );
+  }
+
   & ~ .pr-icon-desc {
     display: block;
     text-align: center;
