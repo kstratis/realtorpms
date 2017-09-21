@@ -5,12 +5,18 @@ import UsersList from "./UsersList";
 import Search from "./Search";
 
 export default class UsersPage extends React.Component {
-  // static propTypes = {
-  //   name: PropTypes.string.isRequired, // this is passed from the Rails view
-  // };
+  // These are passed from the Rails view on the first render
+  static propTypes = {
+    initial_payload: PropTypes.shape({
+      dataset_wrapper: PropTypes.object.isRequired,
+      results_per_page: PropTypes.number.isRequired,
+      total_entries: PropTypes.number.isRequired,
+      current_page: PropTypes.number
+    })
+  };
 
   /**
-   * @param props - Comes from your rails view embedded in html thanks to react_on_rails.
+   * @param props - Comes from your rails view embedded in html thanks to react_on_rails
    */
   constructor(props) {
     super(props);
@@ -46,9 +52,9 @@ export default class UsersPage extends React.Component {
     window.removeEventListener("popstate", this.bound_onHistoryButton);
   }
 
-  handlePageClick (pageNumber, pageNo=false, backButtonInvoked=false)  {
+  handlePageClick (pageNumber, pageNo=false, browserButtonInvoked=false)  {
     const selected = pageNo ? pageNumber : pageNumber.selected;
-    if (!backButtonInvoked) history.pushState({jsonpage: selected+1}, null, `?page=${selected+1}`);
+    if (!browserButtonInvoked) history.pushState({jsonpage: selected+1}, null, `?page=${selected+1}`);
     this.setState({currentPage: selected, isLoading:true }, () => {
       axios.get(`/users.json?page=${selected +1}`) // +1 because rails will_paginate starts from 1 while this starts from 0
         .then(function (response) {
@@ -98,7 +104,6 @@ export default class UsersPage extends React.Component {
       this.handlePageClick(this.state.selectedPage - 2, true);
     }
   }
-
 
   render() {
     return (
