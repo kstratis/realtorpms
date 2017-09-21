@@ -37,7 +37,7 @@
   <div class="row">
     <div class="col-md-12">
       <!--<div class="col-md-6 col-md-offset-3">-->
-        <%= react_component('Search', prerender: false) %>
+        <%#= react_component('Search', prerender: false) %>
       <!--</div>-->
 
       <%# Here we call render not on a string with the name of a partial, but rather on a user variable of class User;
@@ -47,9 +47,9 @@
           Rails automatically iterates through them and renders each one with the _user.html.erb partial
           (inferring the name of the partial from the name of the class). %>
       <%#= render @users %>
-      <div class="col-md-12">
+      <!--<div class="col-md-12">-->
         <%#= react_component('UsersList', props: @userslist, prerender: false) %>
-        <%= react_component('UsersList', props: {
+        <%= react_component('UsersPage', props: {
             initial_payload: {
                 dataset_wrapper: @userslist,
                 results_per_page: @results_per_page,
@@ -57,7 +57,7 @@
                 current_page: @current_page
             }
           }, prerender: false) %>
-      </div>
+      <!--</div>-->
 
       <div class="clearfix"></div>
       <%#= will_paginate %>
