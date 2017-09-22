@@ -27,7 +27,8 @@ export default class UsersPage extends React.Component {
       pageCount: Math.ceil(this.props.initial_payload.total_entries / this.props.initial_payload.results_per_page),
       /* This is required only in initial loading.
        * We want this to be reflected in our React component. That's why we subtract 1 */
-      selectedPage: this.getSelectedPage()
+      selectedPage: this.getSelectedPage(),
+      searchInput: ''
     };
 
     // bind always returns a new function. This new function is important because without a reference to it
@@ -37,6 +38,7 @@ export default class UsersPage extends React.Component {
     this.breakButtons = [];
     this.handlePageClick = this.handlePageClick.bind(this);
     this.determineDirection = this.determineDirection.bind(this);
+    this.handleSearchInput = this.handleSearchInput.bind(this);
   }
 
   getSelectedPage () {
@@ -105,10 +107,18 @@ export default class UsersPage extends React.Component {
     }
   }
 
+  handleSearchInput (e) {
+    this.setState({searchInput: e.target.value});
+
+
+  }
+
   render() {
     return (
       <div>
-        <Search />
+        <Search
+          searchInput={this.state.searchInput}
+          handleSearchInput = {(e) => this.handleSearchInput(e)} />
         <div className="col-md-12">
           <UsersList
             dataset={this.state.dataset}
