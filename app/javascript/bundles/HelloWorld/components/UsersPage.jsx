@@ -40,6 +40,7 @@ export default class UsersPage extends React.Component {
     this.handlePageClick = this.handlePageClick.bind(this);
     this.determineDirection = this.determineDirection.bind(this);
     this.handleSearchInput = this.handleSearchInput.bind(this);
+    this.handleAjaxRequest = this.handleAjaxRequest.bind(this);
   }
 
   getSelectedPage () {
@@ -63,28 +64,9 @@ export default class UsersPage extends React.Component {
       ? `${window.location.pathname}?${searchParams.toString()}`
       : window.location.pathname;
 
-    if (!browserButtonInvoked) {
-      // let searchParams = new URLSearchParams(window.location.search);
-      // searchParams.set('page', selected + 1);
-      history.pushState({jsonpage: selected+1}, null, newUrlParams);
-    }
-    this.setState({isLoading:true }, () => {
-
-      axios.get(`/users.json?${searchParams.toString()}`) // +1 because rails will_paginate starts from 1 while this starts from 0
-        .then(function (response) {
-          // console.log(response);
-          let newData = response.data.userslist;
-          this.setState({ dataset: newData.dataset,
-            pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),
-            isLoading: false,
-            selectedPage: response.data.current_page - 1
-          });
-        }.bind(this))
-        .catch(function (error) {
-          console.warn(error);
-          this.setState({ isLoading: false });
-        }.bind(this))
-    });
+    if (!browserButtonInvoked) history.pushState({jsonpage: selected+1}, null, newUrlParams);
+    // console.log(searchParams.toString());
+    this.handleAjaxRequest(`?${searchParams.toString()}`);
   };
 
   // Turbolinks also have some sort of history state management. We don't want React to get in its way.
@@ -120,28 +102,25 @@ export default class UsersPage extends React.Component {
   }
 
   handleSearchInput (e) {
-
-    console.log(e.target.value);
-    console.log(typeof(e.target.value));
-    let keyword = e.target.value;
     this.setState({searchInput: e.target.value});
     let searchParams = new URLSearchParams(window.location.search);
-    let jsonsearch = '';
-    if (keyword !== undefined && keyword.length > 0){
-      searchParams.set('search', keyword);
-      jsonsearch = `?search=${keyword}`;
-    } else if (keyword === ''){
-      searchParams.delete('search');
-      jsonsearch = `?page=1`;
-    }
     searchParams.delete('page');
+    if (e.target.value !== undefined && e.target.value.length > 0){
+      searchParams.set('search', e.target.value);
+    } else {
+      searchParams.delete('search');
+    }
     let newUrlParams = searchParams.toString()
       ? `${window.location.pathname}?${searchParams.toString()}`
       : window.location.pathname;
+    history.replaceState(null, '', newUrlParams);
+    searchParams.toString() ? this.handleAjaxRequest(`?${searchParams.toString()}`) : this.handleAjaxRequest();
+  }
+
+  handleAjaxRequest (query='') {
     this.setState({isLoading: true}, () => {
-      axios.get(`/users.json${jsonsearch}`) // +1 because rails will_paginate starts from 1 while this starts from 0
+      axios.get(`/users.json${query}`) // +1 because rails will_paginate starts from 1 while this starts from 0
         .then(function (response) {
-          // console.log(response);
           let newData = response.data.userslist;
           this.setState({ dataset: newData.dataset,
             pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),
@@ -154,25 +133,6 @@ export default class UsersPage extends React.Component {
           this.setState({ isLoading: false });
         }.bind(this))
     });
-    history.replaceState(null, '', newUrlParams);
-    // this.setState({currentPage: selected, isLoading:true }, () => {
-    //   axios.get(`/users.json?page=${selected +1}`) // +1 because rails will_paginate starts from 1 while this starts from 0
-    //     .then(function (response) {
-    //       // console.log(response);
-    //       let newData = response.data.userslist;
-    //       this.setState({ dataset: newData.dataset,
-    //         pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),
-    //         isLoading: false,
-    //         selectedPage: selected
-    //       });
-    //     }.bind(this))
-    //     .catch(function (error) {
-    //       console.warn(error);
-    //       this.setState({ isLoading: false });
-    //     }.bind(this))
-    // });
-    // this.setState({searchInput: e.target.value});
-
   }
 
   render() {
