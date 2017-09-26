@@ -41,7 +41,6 @@ export default class UsersPage extends React.Component {
     this.handlePageClick = this.handlePageClick.bind(this);
     this.determineDirection = this.determineDirection.bind(this);
     this.handleSearchInput = this.handleSearchInput.bind(this);
-    this.URLhandling = this.URLhandling.bind(this);
   }
 
   getSelectedPage () {
@@ -59,9 +58,12 @@ export default class UsersPage extends React.Component {
 
   handlePageClick (pageNumber, pageNo=false, browserButtonInvoked=false)  {
     const selected = pageNo ? pageNumber : pageNumber.selected;
-
     // if (!browserButtonInvoked) history.pushState({jsonpage: selected+1}, null, `?page=${selected+1}`);
-    if (!browserButtonInvoked) this.URLhandling('page', 'pushState', selected+1 );
+    if (!browserButtonInvoked) {
+      let searchParams = new URLSearchParams(window.location.search);
+      searchParams.set('page', selected + 1);
+      history.pushState({jsonpage: selected+1}, null, `${window.location.pathname}?${searchParams.toString()}`);
+    }
     // history.pushState({jsonpage: selected+1}, null, `?page=${selected+1}`);
     this.setState({currentPage: selected, isLoading:true }, () => {
       axios.get(`/users.json?page=${selected +1}`) // +1 because rails will_paginate starts from 1 while this starts from 0
@@ -113,18 +115,12 @@ export default class UsersPage extends React.Component {
     }
   }
 
-  URLhandling (term, historyType, jsonpage=null) {
-    if ('URLSearchParams' in window) {
-      let searchParams = new URLSearchParams(window.location.search);
-      searchParams.set(term, Number.isInteger(e.target.value) ? e.target.value + 1 : e.target.value );
-      let newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
-      history[historyType](jsonpage ? {jsonpage: jsonpage} : null, '', newRelativePathQuery);
-    }
-  }
-
   handleSearchInput (e) {
+    let keyword = e.target.value;
     this.setState({searchInput: e.target.value});
-    this.URLhandling('search', 'replaceState');
+    let searchParams = new URLSearchParams(window.location.search);
+    keyword ? searchParams.set('search', keyword) : searchParams.delete('search');
+    history.replaceState(null, '', `${window.location.pathname}?${searchParams.toString()}`);
   }
 
   render() {
