@@ -4,6 +4,7 @@ import axios from 'axios';
 import UsersList from "./UsersList";
 import Search from "./Search";
 const URLSearchParams = require('url-search-params');
+import debounce from './helpers';
 
 export default class UsersPage extends React.Component {
   // These are passed from the Rails view on the first render
@@ -40,7 +41,10 @@ export default class UsersPage extends React.Component {
     this.handlePageClick = this.handlePageClick.bind(this);
     this.determineDirection = this.determineDirection.bind(this);
     this.handleSearchInput = this.handleSearchInput.bind(this);
-    this.handleAjaxRequest = this.handleAjaxRequest.bind(this);
+    // this.handleSearchInput = debounce(this.handleSearchInput, 1000);
+    // this.method = debounce(this.method,1000);
+
+    this.handleAjaxRequest = debounce(this.handleAjaxRequest.bind(this), 500);
   }
 
   getSelectedPage () {
@@ -102,7 +106,7 @@ export default class UsersPage extends React.Component {
   }
 
   handleSearchInput (e) {
-    this.setState({searchInput: e.target.value});
+    this.setState({searchInput: e.target.value, isLoading: true});
     let searchParams = new URLSearchParams(window.location.search);
     searchParams.delete('page');
     if (e.target.value !== undefined && e.target.value.length > 0){
@@ -114,6 +118,7 @@ export default class UsersPage extends React.Component {
       ? `${window.location.pathname}?${searchParams.toString()}`
       : window.location.pathname;
     history.replaceState(null, '', newUrlParams);
+
     searchParams.toString() ? this.handleAjaxRequest(`?${searchParams.toString()}`) : this.handleAjaxRequest();
   }
 
