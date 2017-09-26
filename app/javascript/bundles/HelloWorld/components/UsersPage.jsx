@@ -62,6 +62,7 @@ export default class UsersPage extends React.Component {
     let newUrlParams = searchParams.toString()
       ? `${window.location.pathname}?${searchParams.toString()}`
       : window.location.pathname;
+
     if (!browserButtonInvoked) {
       // let searchParams = new URLSearchParams(window.location.search);
       // searchParams.set('page', selected + 1);
