@@ -80,4 +80,10 @@ class User < ApplicationRecord
     owned_accounts + accounts
   end
 
+  def self.search(search)
+    if search
+      where('last_name LIKE ?', "%#{search}%")
+    end
+  end
+
 end

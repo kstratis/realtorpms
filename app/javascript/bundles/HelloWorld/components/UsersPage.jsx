@@ -4,7 +4,6 @@ import axios from 'axios';
 import UsersList from "./UsersList";
 import Search from "./Search";
 const URLSearchParams = require('url-search-params');
-// import URLSearchParams from 'url-search-params';
 
 export default class UsersPage extends React.Component {
   // These are passed from the Rails view on the first render
@@ -58,22 +57,26 @@ export default class UsersPage extends React.Component {
 
   handlePageClick (pageNumber, pageNo=false, browserButtonInvoked=false)  {
     const selected = pageNo ? pageNumber : pageNumber.selected;
-    // if (!browserButtonInvoked) history.pushState({jsonpage: selected+1}, null, `?page=${selected+1}`);
+    let searchParams = new URLSearchParams(window.location.search);
+    searchParams.set('page', selected + 1);
+    let newUrlParams = searchParams.toString()
+      ? `${window.location.pathname}?${searchParams.toString()}`
+      : window.location.pathname;
     if (!browserButtonInvoked) {
-      let searchParams = new URLSearchParams(window.location.search);
-      searchParams.set('page', selected + 1);
-      history.pushState({jsonpage: selected+1}, null, `${window.location.pathname}?${searchParams.toString()}`);
+      // let searchParams = new URLSearchParams(window.location.search);
+      // searchParams.set('page', selected + 1);
+      history.pushState({jsonpage: selected+1}, null, newUrlParams);
     }
-    // history.pushState({jsonpage: selected+1}, null, `?page=${selected+1}`);
-    this.setState({currentPage: selected, isLoading:true }, () => {
-      axios.get(`/users.json?page=${selected +1}`) // +1 because rails will_paginate starts from 1 while this starts from 0
+    this.setState({isLoading:true }, () => {
+
+      axios.get(`/users.json?${searchParams.toString()}`) // +1 because rails will_paginate starts from 1 while this starts from 0
         .then(function (response) {
           // console.log(response);
           let newData = response.data.userslist;
           this.setState({ dataset: newData.dataset,
             pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),
             isLoading: false,
-            selectedPage: selected
+            selectedPage: response.data.current_page - 1
           });
         }.bind(this))
         .catch(function (error) {
@@ -116,11 +119,59 @@ export default class UsersPage extends React.Component {
   }
 
   handleSearchInput (e) {
+
+    console.log(e.target.value);
+    console.log(typeof(e.target.value));
     let keyword = e.target.value;
     this.setState({searchInput: e.target.value});
     let searchParams = new URLSearchParams(window.location.search);
-    keyword ? searchParams.set('search', keyword) : searchParams.delete('search');
-    history.replaceState(null, '', `${window.location.pathname}?${searchParams.toString()}`);
+    let jsonsearch = '';
+    if (keyword !== undefined && keyword.length > 0){
+      searchParams.set('search', keyword);
+      jsonsearch = `?search=${keyword}`;
+    } else if (keyword === ''){
+      searchParams.delete('search');
+      jsonsearch = `?page=1`;
+    }
+    searchParams.delete('page');
+    let newUrlParams = searchParams.toString()
+      ? `${window.location.pathname}?${searchParams.toString()}`
+      : window.location.pathname;
+    this.setState({isLoading: true}, () => {
+      axios.get(`/users.json${jsonsearch}`) // +1 because rails will_paginate starts from 1 while this starts from 0
+        .then(function (response) {
+          // console.log(response);
+          let newData = response.data.userslist;
+          this.setState({ dataset: newData.dataset,
+            pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),
+            isLoading: false,
+            selectedPage: response.data.current_page - 1
+          });
+        }.bind(this))
+        .catch(function (error) {
+          console.warn(error);
+          this.setState({ isLoading: false });
+        }.bind(this))
+    });
+    history.replaceState(null, '', newUrlParams);
+    // this.setState({currentPage: selected, isLoading:true }, () => {
+    //   axios.get(`/users.json?page=${selected +1}`) // +1 because rails will_paginate starts from 1 while this starts from 0
+    //     .then(function (response) {
+    //       // console.log(response);
+    //       let newData = response.data.userslist;
+    //       this.setState({ dataset: newData.dataset,
+    //         pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),
+    //         isLoading: false,
+    //         selectedPage: selected
+    //       });
+    //     }.bind(this))
+    //     .catch(function (error) {
+    //       console.warn(error);
+    //       this.setState({ isLoading: false });
+    //     }.bind(this))
+    // });
+    // this.setState({searchInput: e.target.value});
+
   }
 
   render() {

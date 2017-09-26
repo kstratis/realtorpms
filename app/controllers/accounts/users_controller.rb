@@ -18,14 +18,25 @@ module Accounts
     end
 
     def index
+      # page number validation
       if params[:page]
         param = Integer(params[:page]) rescue nil
         unless param.is_a? Integer
-          puts 'otinanai'
           render_404 and return
         end
       end
-      @users = User.paginate(page: params[:page], :per_page => 10)
+
+      @users = User.all
+
+      if params[:search]
+        @users = @users.search(params[:search])
+      end
+
+      # puts @users.to_yaml
+
+
+      @users = @users.paginate(page: params[:page], :per_page => 10)
+      # @users = User.paginate(page: params[:page], :per_page => 10)
       @userslist = {:dataset => Array.new}
       # All the data we need - SOS
       # puts @users.total_entries # total user entries
@@ -49,7 +60,7 @@ module Accounts
       respond_to do |format|
           format.html
           format.json {render json: {results_per_page: @results_per_page,
-                                    userslist: @userslist,
+                                     userslist: @userslist,
                                      total_entries: @users.total_entries,
                                      current_page: @users.current_page }, status: 200}
       end
