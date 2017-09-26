@@ -57,6 +57,7 @@ module Accounts
       @total_entries = @users.total_entries
       @current_page = @users.current_page
       @results_per_page = 10
+      @initial_search = params[:search] || ''
       respond_to do |format|
           format.html
           format.json {render json: {results_per_page: @results_per_page,

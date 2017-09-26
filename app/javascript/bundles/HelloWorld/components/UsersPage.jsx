@@ -29,7 +29,7 @@ export default class UsersPage extends React.Component {
       /* This is required only in initial loading.
        * We want this to be reflected in our React component. That's why we subtract 1 */
       selectedPage: this.getSelectedPage(),
-      searchInput: ''
+      searchInput: this.props.initial_payload.initial_search
     };
 
     // bind always returns a new function. This new function is important because without a reference to it
