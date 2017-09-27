@@ -61,6 +61,7 @@ export default class UsersPage extends React.Component {
   }
 
   handlePageClick (pageNumber, pageNo=false, browserButtonInvoked=false)  {
+    this.setState({isLoading: true});
     const selected = pageNo ? pageNumber : pageNumber.selected;
     let searchParams = new URLSearchParams(window.location.search);
     searchParams.set('page', selected + 1);
@@ -123,21 +124,19 @@ export default class UsersPage extends React.Component {
   }
 
   handleAjaxRequest (query='') {
-    this.setState({isLoading: true}, () => {
-      axios.get(`/users.json${query}`) // +1 because rails will_paginate starts from 1 while this starts from 0
-        .then(function (response) {
-          let newData = response.data.userslist;
-          this.setState({ dataset: newData.dataset,
-            pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),
-            isLoading: false,
-            selectedPage: response.data.current_page - 1
-          });
-        }.bind(this))
-        .catch(function (error) {
-          console.warn(error);
-          this.setState({ isLoading: false });
-        }.bind(this))
-    });
+    axios.get(`/users.json${query}`) // +1 because rails will_paginate starts from 1 while this starts from 0
+      .then(function (response) {
+        let newData = response.data.userslist;
+        this.setState({ dataset: newData.dataset,
+          pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),
+          isLoading: false,
+          selectedPage: response.data.current_page - 1
+        });
+      }.bind(this))
+      .catch(function (error) {
+        console.warn(error);
+        this.setState({ isLoading: false });
+      }.bind(this))
   }
 
   render() {

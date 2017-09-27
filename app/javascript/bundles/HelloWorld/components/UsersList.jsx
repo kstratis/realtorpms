@@ -16,7 +16,7 @@ const UsersList = ({isLoading, dataset, advanceByTwo, pageCount, handlePageClick
                 <tr>
                   <th><span>User</span></th>
                   <th><span>Email</span></th>
-                  <th><span>User type</span></th>
+                  <th><span>User Type</span></th>
                   <th><span>Registration</span></th>
                   <th><span>Operations</span></th>
                 </tr>

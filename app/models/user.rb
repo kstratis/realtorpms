@@ -80,9 +80,12 @@ class User < ApplicationRecord
     owned_accounts + accounts
   end
 
+
+  # We use the postgres unaccent to cater for unicode accents and ilike for case insensitive searches
+  # https://gist.github.com/jfragoulis/9914900
   def self.search(search)
     if search
-      where('last_name LIKE ?', "%#{search}%")
+      where('unaccent(last_name) ILIKE unaccent(?)', "%#{search}%").or(where('unaccent(first_name) ILIKE unaccent(?)', "%#{search}%"))
     end
   end
 
