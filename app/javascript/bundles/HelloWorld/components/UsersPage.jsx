@@ -44,7 +44,7 @@ export default class UsersPage extends React.Component {
     // this.handleSearchInput = debounce(this.handleSearchInput, 1000);
     // this.method = debounce(this.method,1000);
 
-    this.handleAjaxRequest = debounce(this.handleAjaxRequest.bind(this), 500);
+    this.handleAjaxRequest = debounce(this.handleAjaxRequest.bind(this), 300);
   }
 
   getSelectedPage () {

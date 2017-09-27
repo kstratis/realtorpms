@@ -101,6 +101,10 @@
     background-image: url( search_user.svg );
   }
 
+  &.no-results{
+    background-image: url( no_search_results.svg );
+  }
+
   & ~ .pr-icon-desc {
     display: block;
     text-align: center;
