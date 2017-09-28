@@ -49,7 +49,7 @@ gem 'sweet-alert2-rails'
 gem 'font-awesome-rails'
 
 gem 'react_on_rails', '9.0.3'
-gem 'webpacker', '~> 3.0'
+gem 'webpacker', github: 'rails/webpacker'
 
 
 # Use Redis adapter to run Action Cable in production
@@ -61,7 +61,7 @@ gem 'webpacker', '~> 3.0'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  gem 'factory_girl', '4.8.0'
+  gem 'factory_girl', '4.8.1'
   gem 'rspec-rails', '3.6.1'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

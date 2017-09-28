@@ -44,7 +44,9 @@ export default class UsersPage extends React.Component {
     // this.handleSearchInput = debounce(this.handleSearchInput, 1000);
     // this.method = debounce(this.method,1000);
 
-    this.handleAjaxRequest = debounce(this.handleAjaxRequest.bind(this), 300);
+    this.handleAjaxRequest = this.handleAjaxRequest.bind(this);
+    this.handleAjaxRequestDelayed = debounce(this.handleAjaxRequest, 300);
+    this.compoundDelayedAction = debounce(this.compoundDelayedAction.bind(this), 300);
   }
 
   getSelectedPage () {
@@ -71,7 +73,7 @@ export default class UsersPage extends React.Component {
 
     if (!browserButtonInvoked) history.pushState({jsonpage: selected+1}, null, newUrlParams);
     // console.log(searchParams.toString());
-    this.handleAjaxRequest(`?${searchParams.toString()}`);
+    this.handleAjaxRequestDelayed(`?${searchParams.toString()}`);
   };
 
   // Turbolinks also have some sort of history state management. We don't want React to get in its way.
@@ -118,9 +120,9 @@ export default class UsersPage extends React.Component {
     let newUrlParams = searchParams.toString()
       ? `${window.location.pathname}?${searchParams.toString()}`
       : window.location.pathname;
-    history.replaceState(null, '', newUrlParams);
-
-    searchParams.toString() ? this.handleAjaxRequest(`?${searchParams.toString()}`) : this.handleAjaxRequest();
+    // Use this to debounce both the ajax request and the history replaceState
+    // https://github.com/ReactTraining/history/issues/291
+    this.compoundDelayedAction(searchParams, newUrlParams);
   }
 
   handleAjaxRequest (query='') {
@@ -137,6 +139,11 @@ export default class UsersPage extends React.Component {
         console.warn(error);
         this.setState({ isLoading: false });
       }.bind(this))
+  }
+
+  compoundDelayedAction (searchParams, newUrlParams) {
+    history.replaceState(null, '', newUrlParams);
+    searchParams.toString() ? this.handleAjaxRequest(`?${searchParams.toString()}`) : this.handleAjaxRequest();
   }
 
   render() {

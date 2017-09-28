@@ -10,9 +10,6 @@
     "react-dom": "^15.6.1",
     "react-on-rails": "^9.0.2",
     "react-paginate": "^4.4.3",
-    "react-ultimate-pagination": "^1.0.2",
-    "react-ultimate-pagination-bootstrap-3": "^1.0.2",
-    "react-ultimate-pagination-bootstrap-4": "^1.0.2",
     "url-search-params": "^0.10.0"
   },
   "devDependencies": {

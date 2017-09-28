@@ -95,13 +95,18 @@ span.subtitle{
   img {
     max-width: 70px;
   }
-  border: 1px solid #fd5282;
+  //border: 1px solid #fd5282;
   border-radius: 50%;
-  background: #ffffff;
+  //background: #ffffff;
   z-index: 999999;
   position: fixed;
   top: 50%;
   left: 50%;
+  box-shadow: 0 -1px 1px #d4d8e3, 0 2px 3px #d4d8e3;
+  background-color: #fff;
+
+
+  //margin: 5px;
   /* bring your own prefixes */
   //transform: translate(-50%, -50%);
 }
