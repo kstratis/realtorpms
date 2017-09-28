@@ -85,7 +85,7 @@ class User < ApplicationRecord
   # https://gist.github.com/jfragoulis/9914900
   def self.search(search)
     if search
-      where('unaccent(last_name) ILIKE unaccent(?)', "%#{search}%").or(where('unaccent(first_name) ILIKE unaccent(?)', "%#{search}%"))
+      where('unaccent(last_name) ILIKE unaccent(?)', "%#{search}%").or(where('unaccent(first_name) ILIKE unaccent(?)', "%#{search}%")).or(where('email LIKE ?', "%#{search}%"))
     end
   end
 
