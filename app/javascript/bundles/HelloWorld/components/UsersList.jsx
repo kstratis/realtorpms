@@ -1,26 +1,42 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-// noinspection NpmUsedModulesInstalled
-import spinner_URL from 'images/spinners/double_ring.svg';
+// noinspection NpmUsedModulesInstalled;
+// import spinner_URL from 'images/spinners/double_ring.svg';
 import ReactPaginate from 'react-paginate';
 
-const UsersList = ({isLoading, dataset, advanceByTwo, pageCount, handlePageClick, selectedPage}) => {
+const UsersList = ({isLoading, dataset, advanceByTwo, pageCount, handlePageClick, selectedPage, handleSort, sortedBy, sortedDirection}) => {
 
   return (
+
     <div className="dataTablePage">
       {isLoading
-        ? <div className={'centered'}><img src={spinner_URL} /></div>
+        ? <div className={'centered'}><div className={'spinner'} /></div>
+        // ? <div className={'centered'}><img src={spinner_URL} /></div>
         : dataset.length > 0
           ? <div className={'dataTableContainer'}>
               <table id="usersTable" className="table table-striped pr-table dataTable">
                 <thead>
-                <tr>
-                  <th><span>User</span></th>
-                  <th><span>Email</span></th>
-                  <th><span>User Type</span></th>
-                  <th><span>Registration</span></th>
-                  <th><span>Operations</span></th>
-                </tr>
+                  <tr>
+                    <th>
+                      <a className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'last_name')}>
+                        <span>User</span>
+                        {sortedBy === 'last_name'
+                          ? sortedDirection === 'asc'
+                            ? <span className={'sortable-icon-container'}>
+                                <i title='Ascending order' className="fa fa-chevron-circle-up fa-lg fa-fw pull-right" aria-hidden="true"> </i>
+                              </span>
+                            : <span className={'sortable-icon-container'}>
+                                <i title='Descending order' className="fa fa-chevron-circle-down fa-lg fa-fw pull-right" aria-hidden="true"> </i>
+                              </span>
+                          : ''
+                        }
+                      </a>
+                    </th>
+                    <th><span>Email</span></th>
+                    <th><span>User Type</span></th>
+                    <th><span>Registration</span></th>
+                    <th><span>Operations</span></th>
+                  </tr>
                 </thead>
                 <tbody>
                 {dataset.map((entry) => (
@@ -59,7 +75,7 @@ const UsersList = ({isLoading, dataset, advanceByTwo, pageCount, handlePageClick
                              previousClassName={'previous'} />
             </div>
         : <div className={"no-users"}>
-            <i className="pr-icon lg no-results"></i>
+            <i className="pr-icon lg no-results"> </i>
             <h3>No users found.</h3>
           </div>
       }
@@ -71,9 +87,12 @@ UsersList.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   dataset: PropTypes.array.isRequired,
   advanceByTwo: PropTypes.func.isRequired,
+  handleSort: PropTypes.func.isRequired,
   pageCount: PropTypes.number.isRequired,
   handlePageClick: PropTypes.func.isRequired,
-  selectedPage: PropTypes.number.isRequired
+  selectedPage: PropTypes.number.isRequired,
+  sortedBy: PropTypes.string.isRequired,
+  sortedDirection: PropTypes.string.isRequired
 };
 
 export default UsersList;

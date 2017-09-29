@@ -28,8 +28,20 @@ module Accounts
 
       @users = User.all
 
+
       if params[:search]
         @users = @users.search(params[:search])
+      end
+
+      puts '-------------'
+      puts params[:sortedBy]
+      puts '-------------'
+
+
+      if params[:sortedBy]
+        @users = @users.order("#{params[:sortedBy]}": params[:sortedDirection])
+      else
+        @users = @users.order(:created_at)
       end
 
       # puts @users.to_yaml
@@ -49,7 +61,8 @@ module Accounts
             name: "#{user.first_name.first}. #{user.last_name}",
             email: user.email,
             type: user.admin ? 'Admin' : 'User',
-            registration: user.created_at.to_formatted_s(:long)
+            # registration: user.created_at.to_formatted_s(:long)
+            registration: user.created_at.strftime('%d %B %y')
         }
         @userslist[:dataset] << hash
       end

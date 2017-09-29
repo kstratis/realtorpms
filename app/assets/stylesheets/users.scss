@@ -160,3 +160,31 @@ input[type="checkbox"] {
   padding: 20px 0;
   background: #f0f1f4;
 }
+
+.sortable-header-name{
+  color: #333333;
+  display: block;
+  &:hover{
+    text-decoration: none;
+    //background: #eceff4;
+  }
+  span > i{
+    color: #4c6bbe;
+    display: block;
+    margin-top: 3px;
+  }
+}
+
+
+.spinner{
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: 75px;
+  height: 75px;
+  background-size: auto 95%;
+  background-repeat: no-repeat;
+  background-position: center center ;
+  background-image: url( spinners/double_ring.svg );
+}

@@ -30,7 +30,12 @@ export default class UsersPage extends React.Component {
       /* This is required only in initial loading.
        * We want this to be reflected in our React component. That's why we subtract 1 */
       selectedPage: this.getSelectedPage(),
-      searchInput: this.props.initial_payload.initial_search
+      searchInput: this.props.initial_payload.initial_search,
+      sortedBy: 'date',
+      sortedDirection: 'desc'
+      // sorting: {
+      //
+      // }
     };
 
     // bind always returns a new function. This new function is important because without a reference to it
@@ -41,12 +46,12 @@ export default class UsersPage extends React.Component {
     this.handlePageClick = this.handlePageClick.bind(this);
     this.determineDirection = this.determineDirection.bind(this);
     this.handleSearchInput = this.handleSearchInput.bind(this);
-    // this.handleSearchInput = debounce(this.handleSearchInput, 1000);
-    // this.method = debounce(this.method,1000);
-
+    this.handleSort = this.handleSort.bind(this);
     this.handleAjaxRequest = this.handleAjaxRequest.bind(this);
     this.handleAjaxRequestDelayed = debounce(this.handleAjaxRequest, 300);
     this.compoundDelayedAction = debounce(this.compoundDelayedAction.bind(this), 300);
+
+
   }
 
   getSelectedPage () {
@@ -146,6 +151,35 @@ export default class UsersPage extends React.Component {
     searchParams.toString() ? this.handleAjaxRequest(`?${searchParams.toString()}`) : this.handleAjaxRequest();
   }
 
+  handleSort (e, field) {
+    e.preventDefault();
+    let searchParams = new URLSearchParams(window.location.search);
+    let activePage = searchParams.get('page') || 1;
+    console.log(activePage);
+
+    // const selected = pageNo ? pageNumber : pageNumber.selected;
+    let direction = this.state.sortedDirection === 'asc' ? 'desc' : 'asc';
+
+    searchParams.set('sortedBy', field);
+    searchParams.set('sortedDirection', direction);
+
+    let newUrlParams = searchParams.toString()
+      ? `${window.location.pathname}?${searchParams.toString()}`
+      : window.location.pathname;
+
+    history.replaceState(null, '', newUrlParams);
+
+
+
+    //
+    // if (!browserButtonInvoked) history.pushState({jsonpage: selected+1}, null, newUrlParams);
+    console.log('sorting requested on', field);
+    this.setState({isLoading: true, sortedBy: field, sortedDirection: direction}, () => {
+      this.handleAjaxRequestDelayed(`?sortedBy=${field}&sortedDirection=${direction}`);
+    });
+
+  }
+
   render() {
     return (
       <div>
@@ -155,6 +189,9 @@ export default class UsersPage extends React.Component {
         <div className="col-md-12">
           <UsersList
             dataset={this.state.dataset}
+            handleSort={this.handleSort}
+            sortedBy={this.state.sortedBy}
+            sortedDirection={this.state.sortedDirection}
             resultsPerPage={this.state.resultsPerPage}
             isLoading={this.state.isLoading}
             selectedPage={this.state.selectedPage}
