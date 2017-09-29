@@ -32,9 +32,38 @@ const UsersList = ({isLoading, dataset, advanceByTwo, pageCount, handlePageClick
                         }
                       </a>
                     </th>
-                    <th><span>Email</span></th>
+                    <th>
+                      <a className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'email')}>
+                        <span>Email</span>
+                        {sortedBy === 'email'
+                          ? sortedDirection === 'asc'
+                            ? <span className={'sortable-icon-container'}>
+                                <i title='Ascending order' className="fa fa-chevron-circle-up fa-lg fa-fw pull-right" aria-hidden="true"> </i>
+                              </span>
+                            : <span className={'sortable-icon-container'}>
+                                <i title='Descending order' className="fa fa-chevron-circle-down fa-lg fa-fw pull-right" aria-hidden="true"> </i>
+                              </span>
+                          : ''
+                        }
+                      </a>
+                    </th>
                     <th><span>User Type</span></th>
-                    <th><span>Registration</span></th>
+                    <th><span>Assignments</span></th>
+                    <th>
+                      <a className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'created_at')}>
+                        <span>Registration</span>
+                        {sortedBy === 'created_at'
+                          ? sortedDirection === 'asc'
+                            ? <span className={'sortable-icon-container'}>
+                                <i title='Ascending order' className="fa fa-chevron-circle-up fa-lg fa-fw pull-right" aria-hidden="true"> </i>
+                              </span>
+                            : <span className={'sortable-icon-container'}>
+                                <i title='Descending order' className="fa fa-chevron-circle-down fa-lg fa-fw pull-right" aria-hidden="true"> </i>
+                              </span>
+                          : ''
+                        }
+                      </a>
+                    </th>
                     <th><span>Operations</span></th>
                   </tr>
                 </thead>
@@ -44,6 +73,7 @@ const UsersList = ({isLoading, dataset, advanceByTwo, pageCount, handlePageClick
                     <td><div className={'table-entry'}><img className="avatar-table-entry" src={entry['avatar_url']}/><span>{entry['name']}</span></div></td>
                     <td><div className={'table-entry'}><span>{entry['email']}</span></div></td>
                     <td><div className={'table-entry'}><span>{entry['type']}</span></div></td>
+                    <td><div className={'table-entry'}><span>{entry['assignments']}</span></div></td>
                     <td><div className={'table-entry'}><span>{entry['registration']}</span></div></td>
                     <td>
                       <div className="action-buttons-container table-entry">

@@ -31,11 +31,8 @@ export default class UsersPage extends React.Component {
        * We want this to be reflected in our React component. That's why we subtract 1 */
       selectedPage: this.getSelectedPage(),
       searchInput: this.props.initial_payload.initial_search,
-      sortedBy: 'date',
-      sortedDirection: 'desc'
-      // sorting: {
-      //
-      // }
+      sortedBy: this.props.initial_payload.initial_sort_field,
+      sortedDirection: this.props.initial_payload.initial_sort_direction
     };
 
     // bind always returns a new function. This new function is important because without a reference to it
@@ -66,20 +63,6 @@ export default class UsersPage extends React.Component {
   componentWillUnmount() {
     window.removeEventListener("popstate", this.bound_onHistoryButton);
   }
-
-  handlePageClick (pageNumber, pageNo=false, browserButtonInvoked=false)  {
-    this.setState({isLoading: true});
-    const selected = pageNo ? pageNumber : pageNumber.selected;
-    let searchParams = new URLSearchParams(window.location.search);
-    searchParams.set('page', selected + 1);
-    let newUrlParams = searchParams.toString()
-      ? `${window.location.pathname}?${searchParams.toString()}`
-      : window.location.pathname;
-
-    if (!browserButtonInvoked) history.pushState({jsonpage: selected+1}, null, newUrlParams);
-    // console.log(searchParams.toString());
-    this.handleAjaxRequestDelayed(`?${searchParams.toString()}`);
-  };
 
   // Turbolinks also have some sort of history state management. We don't want React to get in its way.
   // This function will only be used when turbolinks are not in use. That is all ajax requests.
@@ -113,6 +96,19 @@ export default class UsersPage extends React.Component {
     }
   }
 
+  handlePageClick (pageNumber, pageNo=false, browserButtonInvoked=false)  {
+    this.setState({isLoading: true});
+    const selected = pageNo ? pageNumber : pageNumber.selected;
+    let searchParams = new URLSearchParams(window.location.search);
+    searchParams.set('page', selected + 1);
+    let newUrlParams = searchParams.toString()
+      ? `${window.location.pathname}?${searchParams.toString()}`
+      : window.location.pathname;
+    if (!browserButtonInvoked) history.pushState({jsonpage: selected+1}, null, newUrlParams);
+    // console.log(searchParams.toString());
+    this.handleAjaxRequestDelayed(`?${searchParams.toString()}`);
+  };
+
   handleSearchInput (e) {
     this.setState({searchInput: e.target.value, isLoading: true});
     let searchParams = new URLSearchParams(window.location.search);
@@ -127,6 +123,19 @@ export default class UsersPage extends React.Component {
       : window.location.pathname;
     // Use this to debounce both the ajax request and the history replaceState
     // https://github.com/ReactTraining/history/issues/291
+    this.compoundDelayedAction(searchParams, newUrlParams);
+  }
+
+  handleSort (e, field) {
+    e.preventDefault();
+    let direction = this.state.sortedDirection === 'asc' ? 'desc' : 'asc';
+    this.setState({isLoading: true, sortedBy: field, sortedDirection: direction});
+    let searchParams = new URLSearchParams(window.location.search);
+    searchParams.set('sortedBy', field);
+    searchParams.set('sortedDirection', direction);
+    let newUrlParams = searchParams.toString()
+      ? `${window.location.pathname}?${searchParams.toString()}`
+      : window.location.pathname;
     this.compoundDelayedAction(searchParams, newUrlParams);
   }
 
@@ -149,35 +158,6 @@ export default class UsersPage extends React.Component {
   compoundDelayedAction (searchParams, newUrlParams) {
     history.replaceState(null, '', newUrlParams);
     searchParams.toString() ? this.handleAjaxRequest(`?${searchParams.toString()}`) : this.handleAjaxRequest();
-  }
-
-  handleSort (e, field) {
-    e.preventDefault();
-    let searchParams = new URLSearchParams(window.location.search);
-    let activePage = searchParams.get('page') || 1;
-    console.log(activePage);
-
-    // const selected = pageNo ? pageNumber : pageNumber.selected;
-    let direction = this.state.sortedDirection === 'asc' ? 'desc' : 'asc';
-
-    searchParams.set('sortedBy', field);
-    searchParams.set('sortedDirection', direction);
-
-    let newUrlParams = searchParams.toString()
-      ? `${window.location.pathname}?${searchParams.toString()}`
-      : window.location.pathname;
-
-    history.replaceState(null, '', newUrlParams);
-
-
-
-    //
-    // if (!browserButtonInvoked) history.pushState({jsonpage: selected+1}, null, newUrlParams);
-    console.log('sorting requested on', field);
-    this.setState({isLoading: true, sortedBy: field, sortedDirection: direction}, () => {
-      this.handleAjaxRequestDelayed(`?sortedBy=${field}&sortedDirection=${direction}`);
-    });
-
   }
 
   render() {

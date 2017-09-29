@@ -28,24 +28,17 @@ module Accounts
 
       @users = User.all
 
-
       if params[:search]
         @users = @users.search(params[:search])
       end
 
-      puts '-------------'
-      puts params[:sortedBy]
-      puts '-------------'
-
-
-      if params[:sortedBy]
+      if params[:sortedBy] && params[:sortedDirection]
         @users = @users.order("#{params[:sortedBy]}": params[:sortedDirection])
       else
         @users = @users.order(:created_at)
       end
 
       # puts @users.to_yaml
-
 
       @users = @users.paginate(page: params[:page], :per_page => 10)
       # @users = User.paginate(page: params[:page], :per_page => 10)
@@ -61,8 +54,9 @@ module Accounts
             name: "#{user.first_name.first}. #{user.last_name}",
             email: user.email,
             type: user.admin ? 'Admin' : 'User',
+            assignments: user.properties.count,
             # registration: user.created_at.to_formatted_s(:long)
-            registration: user.created_at.strftime('%d %B %y')
+            registration: user.created_at.strftime('%d %b. %y')
         }
         @userslist[:dataset] << hash
       end
@@ -71,6 +65,8 @@ module Accounts
       @current_page = @users.current_page
       @results_per_page = 10
       @initial_search = params[:search] || ''
+      @initial_sort_field = params[:sortedBy] || 'created_at'
+      @initial_sort_direction = params[:sortedDirection] || 'desc'
       respond_to do |format|
           format.html
           format.json {render json: {results_per_page: @results_per_page,
