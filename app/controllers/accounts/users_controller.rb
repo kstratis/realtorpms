@@ -32,8 +32,8 @@ module Accounts
         @users = @users.search(params[:search])
       end
 
-      if params[:sortedBy] && params[:sortedDirection]
-        @users = @users.order("#{params[:sortedBy]}": params[:sortedDirection])
+      if params[:sorting] && params[:ordering]
+        @users = @users.order("#{params[:sorting]}": params[:ordering])
       else
         @users = @users.order(:created_at)
       end
@@ -66,7 +66,7 @@ module Accounts
       @results_per_page = 10
       @initial_search = params[:search] || ''
       @initial_sort_field = params[:sortedBy] || 'created_at'
-      @initial_sort_direction = params[:sortedDirection] || 'desc'
+      @initial_ordering = params[:ordering] || 'desc'
       respond_to do |format|
           format.html
           format.json {render json: {results_per_page: @results_per_page,

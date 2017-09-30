@@ -4,7 +4,7 @@ import React from 'react';
 // import spinner_URL from 'images/spinners/double_ring.svg';
 import ReactPaginate from 'react-paginate';
 
-const UsersList = ({isLoading, dataset, advanceByTwo, pageCount, handlePageClick, selectedPage, handleSort, sortedBy, sortedDirection}) => {
+const UsersList = ({isLoading, dataset, advanceByTwo, pageCount, handlePageClick, selectedPage, handleSort, sorting, ordering}) => {
 
   return (
 
@@ -20,13 +20,13 @@ const UsersList = ({isLoading, dataset, advanceByTwo, pageCount, handlePageClick
                     <th>
                       <a className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'last_name')}>
                         <span>User</span>
-                        {sortedBy === 'last_name'
-                          ? sortedDirection === 'asc'
+                        {sorting === 'last_name'
+                          ? ordering === 'asc'
                             ? <span className={'sortable-icon-container'}>
-                                <i title='Ascending order' className="fa fa-chevron-circle-up fa-lg fa-fw pull-right" aria-hidden="true"> </i>
+                                <i title='Ascending order' className="fa fa-chevron-up fa-lg fa-fw pull-right" aria-hidden="true"> </i>
                               </span>
                             : <span className={'sortable-icon-container'}>
-                                <i title='Descending order' className="fa fa-chevron-circle-down fa-lg fa-fw pull-right" aria-hidden="true"> </i>
+                                <i title='Descending order' className="fa fa-chevron-down fa-lg fa-fw pull-right" aria-hidden="true"> </i>
                               </span>
                           : ''
                         }
@@ -35,8 +35,8 @@ const UsersList = ({isLoading, dataset, advanceByTwo, pageCount, handlePageClick
                     <th>
                       <a className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'email')}>
                         <span>Email</span>
-                        {sortedBy === 'email'
-                          ? sortedDirection === 'asc'
+                        {sorting === 'email'
+                          ? ordering === 'asc'
                             ? <span className={'sortable-icon-container'}>
                                 <i title='Ascending order' className="fa fa-chevron-circle-up fa-lg fa-fw pull-right" aria-hidden="true"> </i>
                               </span>
@@ -52,8 +52,8 @@ const UsersList = ({isLoading, dataset, advanceByTwo, pageCount, handlePageClick
                     <th>
                       <a className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'created_at')}>
                         <span>Registration</span>
-                        {sortedBy === 'created_at'
-                          ? sortedDirection === 'asc'
+                        {sorting === 'created_at'
+                          ? ordering === 'asc'
                             ? <span className={'sortable-icon-container'}>
                                 <i title='Ascending order' className="fa fa-chevron-circle-up fa-lg fa-fw pull-right" aria-hidden="true"> </i>
                               </span>
@@ -121,8 +121,8 @@ UsersList.propTypes = {
   pageCount: PropTypes.number.isRequired,
   handlePageClick: PropTypes.func.isRequired,
   selectedPage: PropTypes.number.isRequired,
-  sortedBy: PropTypes.string.isRequired,
-  sortedDirection: PropTypes.string.isRequired
+  sorting: PropTypes.string.isRequired,
+  ordering: PropTypes.string.isRequired
 };
 
 export default UsersList;

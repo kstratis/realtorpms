@@ -31,8 +31,8 @@ export default class UsersPage extends React.Component {
        * We want this to be reflected in our React component. That's why we subtract 1 */
       selectedPage: this.getSelectedPage(),
       searchInput: this.props.initial_payload.initial_search,
-      sortedBy: this.props.initial_payload.initial_sort_field,
-      sortedDirection: this.props.initial_payload.initial_sort_direction
+      sorting: this.props.initial_payload.initial_sort_field,
+      ordering: this.props.initial_payload.initial_ordering
     };
 
     // bind always returns a new function. This new function is important because without a reference to it
@@ -128,11 +128,11 @@ export default class UsersPage extends React.Component {
 
   handleSort (e, field) {
     e.preventDefault();
-    let direction = this.state.sortedDirection === 'asc' ? 'desc' : 'asc';
-    this.setState({isLoading: true, sortedBy: field, sortedDirection: direction});
+    let direction = this.state.ordering === 'asc' ? 'desc' : 'asc';
+    this.setState({isLoading: true, sorting: field, ordering: direction});
     let searchParams = new URLSearchParams(window.location.search);
-    searchParams.set('sortedBy', field);
-    searchParams.set('sortedDirection', direction);
+    searchParams.set('sorting', field);
+    searchParams.set('ordering', direction);
     let newUrlParams = searchParams.toString()
       ? `${window.location.pathname}?${searchParams.toString()}`
       : window.location.pathname;
@@ -170,8 +170,8 @@ export default class UsersPage extends React.Component {
           <UsersList
             dataset={this.state.dataset}
             handleSort={this.handleSort}
-            sortedBy={this.state.sortedBy}
-            sortedDirection={this.state.sortedDirection}
+            sorting={this.state.sorting}
+            ordering={this.state.ordering}
             resultsPerPage={this.state.resultsPerPage}
             isLoading={this.state.isLoading}
             selectedPage={this.state.selectedPage}
