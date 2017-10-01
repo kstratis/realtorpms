@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import axios from 'axios';
-import UsersList from "./UsersList";
+import UsersList from "./UsersList.jsx";
 import Search from "./Search";
 const URLSearchParams = require('url-search-params');
 import debounce from './helpers';
@@ -31,7 +31,7 @@ export default class UsersPage extends React.Component {
        * We want this to be reflected in our React component. That's why we subtract 1 */
       selectedPage: this.getSelectedPage(),
       searchInput: this.props.initial_payload.initial_search,
-      sorting: this.props.initial_payload.initial_sort_field,
+      sorting: this.props.initial_payload.initial_sorting,
       ordering: this.props.initial_payload.initial_ordering
     };
 
@@ -61,7 +61,11 @@ export default class UsersPage extends React.Component {
   }
 
   componentWillUnmount() {
+    // console.log(window.location.pathname);
+    // history.replaceState({ turbolinks: {} }, '', `users?page=3`);
     window.removeEventListener("popstate", this.bound_onHistoryButton);
+
+
   }
 
   // Turbolinks also have some sort of history state management. We don't want React to get in its way.

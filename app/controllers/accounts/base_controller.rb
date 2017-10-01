@@ -15,7 +15,9 @@ module Accounts
     helper_method :current_account
 
     def owner?
+      # puts 'RUNIIIIING'
       current_account.owner == current_user
+      # false
     end
 
     helper_method :owner?

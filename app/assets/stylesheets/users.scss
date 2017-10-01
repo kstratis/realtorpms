@@ -35,6 +35,7 @@ span.subtitle{
 
   thead > tr > th {
     padding: 15px 0 15px 8px;
+
     div.table-entry{
       margin-left: 10px;
     }
@@ -53,6 +54,7 @@ span.subtitle{
   //}
 
   tbody > tr > td{
+    padding: 5px!important;
     vertical-align: middle;
     line-height: 1.6;
     color: #444;
@@ -187,4 +189,8 @@ input[type="checkbox"] {
   background-repeat: no-repeat;
   background-position: center center ;
   background-image: url( spinners/double_ring.svg );
+}
+
+.min-width{
+  min-width: 180px;
 }

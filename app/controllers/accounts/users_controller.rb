@@ -3,13 +3,13 @@ module Accounts
   class UsersController < Accounts::BaseController
     # before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
     before_action :correct_user,   only: [:edit, :update]
-    before_action :admin_user,     only: :destroy
+    before_action :owner_exclusive, only: [:edit, :destroy]
     layout 'registration/main', except: [:show, :edit, :update, :index]  # show the barebones version only when signing up
 
     def destroy
-      User.find(params[:id]).destroy
-      flash[:success] = 'User successfully deleted'
-      redirect_to users_url
+        User.find(params[:id]).destroy
+        flash[:success] = 'User successfully deleted'
+        redirect_to users_url
     end
 
     # GET the new user registration page
@@ -54,7 +54,9 @@ module Accounts
             name: "#{user.first_name.first}. #{user.last_name}",
             email: user.email,
             type: user.admin ? 'Admin' : 'User',
-            assignments: user.properties.count,
+            view_entity_path: user_path(user.id),
+            edit_entity_path: edit_user_path(user.id),
+            # assignments: user.properties.count,
             # registration: user.created_at.to_formatted_s(:long)
             registration: user.created_at.strftime('%d %b. %y')
         }
@@ -65,8 +67,9 @@ module Accounts
       @current_page = @users.current_page
       @results_per_page = 10
       @initial_search = params[:search] || ''
-      @initial_sort_field = params[:sortedBy] || 'created_at'
+      @initial_sorting = params[:sorting] || 'created_at'
       @initial_ordering = params[:ordering] || 'desc'
+
       respond_to do |format|
           format.html
           format.json {render json: {results_per_page: @results_per_page,
@@ -138,6 +141,13 @@ module Accounts
       # Confirms an admin user.
       def admin_user
         redirect_to(root_url) unless current_user.admin?
+      end
+
+      def owner_exclusive
+        unless owner?
+          flash[:danger] = 'Only the account owner may perform this action.'
+          redirect_to users_url
+        end
       end
 
   end

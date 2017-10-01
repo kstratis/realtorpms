@@ -30,7 +30,7 @@
           (inferring the name of the partial from the name of the class). %>
       <%#= render @users %>
 
-      <div class="clearfix"></div>
+      <!--<div class="clearfix"></div>-->
       <%#= will_paginate %>
     </div>
   </div>
@@ -56,8 +56,8 @@
                 total_entries: @total_entries,
                 current_page: @current_page,
                 initial_search: @initial_search,
-                initial_sort_field: @initial_sort_field,
-                initial_sort_direction: @initial_sort_direction
+                initial_sorting: @initial_sorting,
+                initial_ordering: @initial_ordering
             }
           }, prerender: false) %>
       <!--</div>-->
