@@ -23,6 +23,7 @@ feature 'Adding properties' do
       fill_in 'Price', with: '500000'
       fill_in 'Size', with: '150'
       click_button 'Add new property'
+      # save_and_open_page
       expect(page).to have_content('Property successfully created.')
     end
   end

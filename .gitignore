@@ -15,7 +15,7 @@
 
 /node_modules
 /yarn-error.log
-
+.DS_Store
 .byebug_history
 .idea
 /public/packs

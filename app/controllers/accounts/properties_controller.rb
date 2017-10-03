@@ -25,8 +25,9 @@ module Accounts
     # POST /properties.json
     def create
       @property = Property.new(property_params)
+      @property.account_id = current_account.id
       @property.user_id = current_user.id if current_user
-      if @property.save
+      if @property.save!
         flash[:success] = 'Property successfully created.'
         redirect_to @property
       else
