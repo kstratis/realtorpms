@@ -49,7 +49,7 @@ gem 'sweet-alert2-rails'
 gem 'font-awesome-rails'
 
 gem 'react_on_rails', '9.0.3'
-gem 'webpacker', github: 'rails/webpacker'
+gem 'webpacker', '3.0.2'
 
 
 # Use Redis adapter to run Action Cable in production
