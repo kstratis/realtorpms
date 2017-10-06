@@ -69,6 +69,8 @@ group :development, :test do
   gem 'capybara', '2.15.1'
   gem 'selenium-webdriver'
   gem 'email_spec', '2.1.1'
+  gem 'phantomjs'
+  gem 'poltergeist'
 end
 
 group :development do

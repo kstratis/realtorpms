@@ -1,34 +1,28 @@
 require 'rails_helper'
 
-feature 'Adding properties' do
+feature 'Listing users', js: true do
   let(:account) { FactoryGirl.create(:account) }
 
   context "as the account's owner" do
     before do
-      visit 'http://lvh.me/login'
+      # Capybara.app_host = 'http://lvh.me'
+      # Capybara.always_include_port = true
+      visit("http://lvh.me:#{Capybara.current_session.server.port}/login")
+      # visit login_path
       fill_in 'Email', with: account.owner.email
       fill_in 'Password', with: account.owner.password
       click_button 'Log in'
     end
 
     it 'can list users' do
-      expect(page.current_url).to eq('http://test1.lvh.me/')
-      # user-2@starwars.com
-      # Alternatively use this:
+      expect(page.current_url).to eq("http://test1.lvh.me:#{Capybara.current_session.server.port}/")
+      # After this line we can use all rails helpers
       set_subdomain(account.subdomain)
       visit users_path
-      # visit 'http://lvh.me/users'
-      save_and_open_page
-      # click_link 'ΑΚΙΝΗΤΑ'
-      # click_link 'New Property'
-      # fill_in 'Description', with: 'mezoneta sti kifisia'
-      # fill_in 'Price', with: '500000'
-      # fill_in 'Size', with: '150'
-      # click_button 'Add new property'
-      # save_and_open_page
-      expect(page).to have_content('user-2@starwars.com')
-
-      # expect(page).to have_content('Property successfully created.')
+      # There should be only one user here
+      expect(page).to have_content('account.owner@example.com')
     end
+
+
   end
 end

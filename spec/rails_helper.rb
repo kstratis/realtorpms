@@ -70,4 +70,6 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 end
 
-Capybara.app_host = 'http://lvh.me'
+# Capybara.app_host = 'http://lvh.me'
+# Capybara.app_host = "http://#{site}"
+# Capybara.always_include_port = true
