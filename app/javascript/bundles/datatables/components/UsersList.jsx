@@ -70,7 +70,7 @@ const UsersList = ({isLoading, dataset, advanceByTwo, pageCount, handlePageClick
               <tbody>
               {dataset.map((entry) => (
                 <tr key={entry.id}>
-                  <td><div className={'table-entry'}><img className="avatar-table-entry" src={entry['avatar_url']}/><span>{entry['name']}</span></div></td>
+                  <td><div className={'table-entry'}><img className="avatar-table-entry" src={entry['avatar_url']}/><span><a className={'user-entry-color'} href={entry['view_entity_path']}>{entry['name']}</a></span></div></td>
                   <td><div className={'table-entry'}><span>{entry['email']}</span></div></td>
                   <td><div className={'table-entry'}><span>{entry['type']}</span></div></td>
                   {/*<td><div className={'table-entry'}></div></td>*/}

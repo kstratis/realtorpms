@@ -47,8 +47,6 @@ export default class UsersPage extends React.Component {
     this.handleAjaxRequest = this.handleAjaxRequest.bind(this);
     this.handleAjaxRequestDelayed = debounce(this.handleAjaxRequest, 300);
     this.compoundDelayedAction = debounce(this.compoundDelayedAction.bind(this), 300);
-
-
   }
 
   getSelectedPage () {
@@ -61,11 +59,7 @@ export default class UsersPage extends React.Component {
   }
 
   componentWillUnmount() {
-    // console.log(window.location.pathname);
-    // history.replaceState({ turbolinks: {} }, '', `users?page=3`);
     window.removeEventListener("popstate", this.bound_onHistoryButton);
-
-
   }
 
   // Turbolinks also have some sort of history state management. We don't want React to get in its way.

@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+a.user-entry-color{
+  color: #444;
+}
+
 span.subtitle{
   display: inline;
   margin: 0;
@@ -38,6 +42,7 @@ span.subtitle{
 
     div.table-entry{
       margin-left: 10px;
+
     }
     span {
       padding-left: 10px;
