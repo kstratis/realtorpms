@@ -261,6 +261,7 @@ aside {
       display: inline-block;
       padding: 27px 0 0 5px;
     }
+
     div.user_info_type{
       display: inline-block;
       padding: 27px 0 0 5px;
@@ -285,6 +286,18 @@ aside {
     }
 
   }
+}
+
+section.user_info_detailed_text{
+  border-left: 1px solid #000;
+  overflow: unset;
+  p  {
+    padding-left: 15px;
+    font-size: 16px;
+    text-align: left;
+  }
+  //display: inline-block;
+  //padding: 27px 0 0 5px;
 }
 
 .gravatar {

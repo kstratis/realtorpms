@@ -1,18 +1,28 @@
 <% provide(:title, 'Profile: ' + @user.first_name + ' ' + @user.last_name) %>
 <div class="center jumbotron pr-container">
   <div class="row">
-    <aside class="col-md-4">
-      <section class="user_info">
-        <div class="user_info_avatar">
-          <%= link_to('https://en.gravatar.com/emails/', target: '_blank', rel: 'nofollow', title: 'Edit your avatar picture') do %>
-            <%= gravatar_for @user %>
-          <% end %>
-        </div>
-        <div class="user_info_text">
-          <span class="name"><%== @user.first_name + '&nbsp;' + @user.last_name %></span>
-          <span class="email"><%= @user.email %></span>
-        </div>
-      </section>
-    </aside>
+    <div class="col-md-12">
+      <div class="col-md-2">
+        <section class="user_info">
+          <div class="user_info_avatar">
+            <%= link_to('https://en.gravatar.com/emails/', target: '_blank', rel: 'nofollow', title: 'Edit your avatar picture') do %>
+              <%= gravatar_for @user %>
+            <% end %>
+          </div>
+        </section>
+      </div>
+      <div class="col-md-10">
+        <section class="user_info_detailed_text">
+          <!--<p><span class="name"><%== @user.first_name + '&nbsp;' + @user.last_name %></span></p>-->
+          <!--<p><span class="email"><%= @user.email %></span></p>-->
+          <p><span>First name: <%= @user.first_name %></span></p>
+          <p><span>Last name: <%= @user.last_name %></span></p>
+          <p><span>Email: <%= @user.email %></span></p>
+          <p><span>Age: <%= @user.email %></span></p>
+          <p><span>Phone: <%= @user.phone1 %></span></p>
+          <p><span>Registered at: <%= @user.created_at %></span></p>
+        </section>
+      </div>
+    </div>
   </div>
 </div>
