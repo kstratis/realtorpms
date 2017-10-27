@@ -2,26 +2,73 @@
 <div class="center jumbotron pr-container">
   <div class="row">
     <div class="col-md-12">
-      <div class="col-md-2">
-        <section class="user_info">
-          <div class="user_info_avatar">
-            <%= link_to('https://en.gravatar.com/emails/', target: '_blank', rel: 'nofollow', title: 'Edit your avatar picture') do %>
-              <%= gravatar_for @user %>
-            <% end %>
-          </div>
-        </section>
+      <div class="col-md-3 col-md-offset-0 col-sm-6 col-sm-offset-3 col-xs-12">
+        <div class="pr-avatar-wrapper">
+          <section class="user_info">
+            <div class="user_info_avatar">
+              <%= link_to('https://en.gravatar.com/emails/', target: '_blank', rel: 'nofollow', title: 'Edit your avatar picture') do %>
+                <%= gravatar_for @user, size: 256, big_default_size: true %>
+              <% end %>
+            </div>
+          </section>
+        </div>
       </div>
-      <div class="col-md-10">
-        <section class="user_info_detailed_text">
-          <!--<p><span class="name"><%== @user.first_name + '&nbsp;' + @user.last_name %></span></p>-->
-          <!--<p><span class="email"><%= @user.email %></span></p>-->
-          <p><span>First name: <%= @user.first_name %></span></p>
-          <p><span>Last name: <%= @user.last_name %></span></p>
-          <p><span>Email: <%= @user.email %></span></p>
-          <p><span>Age: <%= @user.email %></span></p>
-          <p><span>Phone: <%= @user.phone1 %></span></p>
-          <p><span>Registered at: <%= @user.created_at %></span></p>
-        </section>
+      <div class="col-md-9">
+        <div class="user_info_detailed_text">
+          <table class="table table-striped pr-table dataTable">
+            <tbody>
+            <tr>
+              <td class="col-md-3 title">
+                <div class="table-entry"><span><strong>Name</strong></span></div>
+              </td>
+              <td class="col-md-9">
+                <div class="table-entry"><span><%== @user.first_name + '&nbsp;' + @user.last_name %></span></div>
+              </td>
+            </tr>
+            <tr>
+              <td class="col-md-3 title">
+                <div class="table-entry"><span><strong>Email</strong></span></div>
+              </td>
+              <td class="col-md-9">
+                <div class="table-entry"><span><%= @user.email %></span></div>
+              </td>
+            </tr>
+            <tr>
+              <td class="col-md-3 title">
+                <div class="table-entry"><span><strong>Age</strong></span></div>
+              </td>
+              <td class="col-md-9">
+                <div class="table-entry"><span><%= @user.age %></span></div>
+              </td>
+            </tr>
+            <tr>
+              <td class="col-md-3 title">
+                <div class="table-entry"><span><strong>Telephone</strong></span></div>
+              </td>
+              <td class="col-md-9">
+                <div class="table-entry"><span><%= @user.phone1 %></span></div>
+              </td>
+            </tr>
+            <tr>
+              <td class="col-md-3 title">
+                <div class="table-entry"><span><strong>Registered at</strong></span></div>
+              </td>
+              <td class="col-md-9">
+                <div class="table-entry"><span><%= @user.created_at.strftime('%d %B %y') %></span></div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <hr/>
+
+      <div class="row">
+        <div class="col-md-12">
+          <h3>asdasd</h3>
+        </div>
+
       </div>
     </div>
   </div>

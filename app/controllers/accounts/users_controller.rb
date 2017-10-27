@@ -1,4 +1,5 @@
-require 'users_helper'
+# require 'users_helper'
+
 module Accounts
   class UsersController < Accounts::BaseController
     # before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
@@ -50,7 +51,7 @@ module Accounts
       @users.each do |user|
         hash = {
             id: user.id,
-            avatar_url: "https://secure.gravatar.com/avatar/#{Digest::MD5::hexdigest(user.email.downcase)}?s=64",
+            avatar_url: helpers.gravatar_for(user, size: 64, link_only: true),
             name: "#{user.first_name.first}. #{user.last_name}",
             email: user.email,
             type: user.admin ? 'Admin' : 'User',
