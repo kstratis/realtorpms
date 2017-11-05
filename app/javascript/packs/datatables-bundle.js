@@ -1,10 +1,10 @@
 import ReactOnRails from 'react-on-rails';
 
 import HelloWorld from '../bundles/datatables/components/HelloWorld';
-import UsersPage from '../bundles/datatables/components/UsersPage';
+import DataTable from '../bundles/datatables/components/DataTable';
 
 // This is how react_on_rails can see the HelloWorld in the browser.
 ReactOnRails.register({
   HelloWorld,
-  UsersPage
+  DataTable
 });

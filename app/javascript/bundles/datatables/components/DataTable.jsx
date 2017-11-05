@@ -1,18 +1,21 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import axios from 'axios';
-import UsersList from "./UsersList.jsx";
+// import UsersList from "./UsersList";
+// import PropertiesList from "./PropertiesList";
 import Search from "./Search";
-const URLSearchParams = require('url-search-params');
-import debounce from './helpers';
 
-export default class UsersPage extends React.Component {
+const URLSearchParams = require('url-search-params');
+import {debounce, capitalizeFirstLetter} from "./helpers";
+
+export default class DataTable extends React.Component {
   // These are passed from the Rails view on the first render
   static propTypes = {
     initial_payload: PropTypes.shape({
       dataset_wrapper: PropTypes.object.isRequired,
       results_per_page: PropTypes.number.isRequired,
       total_entries: PropTypes.number.isRequired,
+      object_type: PropTypes.string.isRequired,
       current_page: PropTypes.number
     })
   };
@@ -23,6 +26,7 @@ export default class UsersPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      Entity: null,
       dataset: this.props.initial_payload.dataset_wrapper.dataset,
       resultsPerPage: this.props.initial_payload.results_per_page,
       isLoading: false,
@@ -49,10 +53,34 @@ export default class UsersPage extends React.Component {
     this.compoundDelayedAction = debounce(this.compoundDelayedAction.bind(this), 300);
   }
 
-  getSelectedPage () {
+  getSelectedPage() {
     const selectedPage = new URL(window.location.href).searchParams.get('page') || 1;
-    return (parseInt(selectedPage)-1);
+    return (parseInt(selectedPage) - 1);
   };
+
+  componentWillMount() {
+    let type = capitalizeFirstLetter(this.props.initial_payload.object_type);
+    let entityName = `${type}List`;
+    import(`./${entityName}`).then(entityName => {
+
+      console.log('printing');
+      console.log(entityName);
+      this.setState({Entity: entityName});
+      // console.log(entityName);
+    });
+
+
+    // if (this.props.initial_payload.object_type === 'users'){
+    //   import('./UsersList').then(UsersList => {
+    //     this.setState({ UsersList });
+    //   });
+    // } else{
+    //   import('./PropertiesList').then(PropertiesList => {
+    //     this.setState({ UsersList });
+    //   });
+    // }
+
+  }
 
   componentDidMount() {
     window.addEventListener("popstate", this.bound_onHistoryButton);
@@ -68,16 +96,16 @@ export default class UsersPage extends React.Component {
   // turbolinks handle the re-rendering.
   handleHistoryButton(e) {
     const historyPage = this.getSelectedPage();
-    if (!('turbolinks' in e.state)){
+    if (!('turbolinks' in e.state)) {
       this.handlePageClick(historyPage, true, true);
     }
   }
 
-  determineDirection (element) {
+  determineDirection(element) {
     let ellipsisDomElement = $(element).parent();
     let direction = '+';
-    ellipsisDomElement.nextAll().each((i, element)=>{
-      if ($(element).hasClass('active')){
+    ellipsisDomElement.nextAll().each((i, element) => {
+      if ($(element).hasClass('active')) {
         direction = '-';
         return false;
       }
@@ -85,16 +113,16 @@ export default class UsersPage extends React.Component {
     return direction;
   };
 
-  advanceByTwo (e) {
+  advanceByTwo(e) {
     const sign = this.determineDirection(e.target);
     if (sign === '+') {
       this.handlePageClick(this.state.selectedPage + 2, true);
-    } else{
+    } else {
       this.handlePageClick(this.state.selectedPage - 2, true);
     }
   }
 
-  handlePageClick (pageNumber, pageNo=false, browserButtonInvoked=false)  {
+  handlePageClick(pageNumber, pageNo = false, browserButtonInvoked = false) {
     this.setState({isLoading: true});
     const selected = pageNo ? pageNumber : pageNumber.selected;
     let searchParams = new URLSearchParams(window.location.search);
@@ -102,16 +130,16 @@ export default class UsersPage extends React.Component {
     let newUrlParams = searchParams.toString()
       ? `${window.location.pathname}?${searchParams.toString()}`
       : window.location.pathname;
-    if (!browserButtonInvoked) history.pushState({jsonpage: selected+1}, null, newUrlParams);
+    if (!browserButtonInvoked) history.pushState({jsonpage: selected + 1}, null, newUrlParams);
     // console.log(searchParams.toString());
     this.handleAjaxRequestDelayed(`?${searchParams.toString()}`);
   };
 
-  handleSearchInput (e) {
+  handleSearchInput(e) {
     this.setState({searchInput: e.target.value, isLoading: true});
     let searchParams = new URLSearchParams(window.location.search);
     searchParams.delete('page');
-    if (e.target.value !== undefined && e.target.value.length > 0){
+    if (e.target.value !== undefined && e.target.value.length > 0) {
       searchParams.set('search', e.target.value);
     } else {
       searchParams.delete('search');
@@ -124,7 +152,7 @@ export default class UsersPage extends React.Component {
     this.compoundDelayedAction(searchParams, newUrlParams);
   }
 
-  handleSort (e, field) {
+  handleSort(e, field) {
     e.preventDefault();
     let direction = this.state.ordering === 'asc' ? 'desc' : 'asc';
     this.setState({isLoading: true, sorting: field, ordering: direction});
@@ -137,11 +165,13 @@ export default class UsersPage extends React.Component {
     this.compoundDelayedAction(searchParams, newUrlParams);
   }
 
-  handleAjaxRequest (query='') {
-    axios.get(`/users.json${query}`) // +1 because rails will_paginate starts from 1 while this starts from 0
+  handleAjaxRequest(query = '') {
+    let entity = this.props.initial_payload.object_type;
+    axios.get(`/${entity}.json${query}`) // +1 because rails will_paginate starts from 1 while this starts from 0
       .then(function (response) {
         let newData = response.data.userslist;
-        this.setState({ dataset: newData.dataset,
+        this.setState({
+          dataset: newData.dataset,
           pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),
           isLoading: false,
           selectedPage: response.data.current_page - 1
@@ -149,35 +179,40 @@ export default class UsersPage extends React.Component {
       }.bind(this))
       .catch(function (error) {
         console.warn(error);
-        this.setState({ isLoading: false });
+        this.setState({isLoading: false});
       }.bind(this))
   }
 
-  compoundDelayedAction (searchParams, newUrlParams) {
+  compoundDelayedAction(searchParams, newUrlParams) {
     history.replaceState(null, '', newUrlParams);
     searchParams.toString() ? this.handleAjaxRequest(`?${searchParams.toString()}`) : this.handleAjaxRequest();
   }
 
   render() {
-    return (
-      <div>
-        <Search
-          searchInput={this.state.searchInput}
-          handleSearchInput = {(e) => this.handleSearchInput(e)} />
-        <div className="col-md-12">
-          <UsersList
-            dataset={this.state.dataset}
-            handleSort={this.handleSort}
-            sorting={this.state.sorting}
-            ordering={this.state.ordering}
-            resultsPerPage={this.state.resultsPerPage}
-            isLoading={this.state.isLoading}
-            selectedPage={this.state.selectedPage}
-            pageCount={this.state.pageCount}
-            handlePageClick={this.handlePageClick}
-            advanceByTwo={(e) => this.advanceByTwo(e)}/>
+    const Entity = this.state.Entity;
+    if (!Entity) {
+      return <div className={'centered'}><div className={'spinner'} /></div>;
+    } else {
+      return (
+        <div>
+          <Search
+            searchInput={this.state.searchInput}
+            handleSearchInput={(e) => this.handleSearchInput(e)}/>
+          <div className="col-md-12">
+            <Entity.default
+              dataset={this.state.dataset}
+              handleSort={this.handleSort}
+              sorting={this.state.sorting}
+              ordering={this.state.ordering}
+              resultsPerPage={this.state.resultsPerPage}
+              isLoading={this.state.isLoading}
+              selectedPage={this.state.selectedPage}
+              pageCount={this.state.pageCount}
+              handlePageClick={this.handlePageClick}
+              advanceByTwo={(e) => this.advanceByTwo(e)}/>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
