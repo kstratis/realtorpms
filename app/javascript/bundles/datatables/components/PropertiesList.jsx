@@ -9,6 +9,7 @@ const PropertiesList = ({isLoading, dataset, advanceByTwo, pageCount, handlePage
   return (
 
     <div className="dataTablePage col-md-12">
+      <h1>hello</h1>
       {isLoading
         ? <div className={'centered'}><div className={'spinner'} /></div>
         // ? <div className={'centered'}><img src={spinner_URL} /></div>

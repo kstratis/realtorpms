@@ -1,10 +1,65 @@
 module Accounts
   class PropertiesController < Accounts::BaseController
     before_action :set_property, only: [:show, :edit, :update, :destroy]
+    before_action :check_page_validity, only: [:index]
     # GET /properties
     # GET /properties.json
     def index
+      # page number validation
       @properties = Property.all
+
+      if params[:search]
+        @properties = @properties.search(params[:search])
+      end
+
+      if params[:sorting] && params[:ordering]
+        @properties = @properties.order("#{params[:sorting]}": params[:ordering])
+      else
+        @properties = @properties.order(:created_at)
+      end
+
+      # puts @properties.to_yaml
+
+      @properties = @properties.paginate(page: params[:page], :per_page => 10)
+      # @users = User.paginate(page: params[:page], :per_page => 10)
+      @propertieslist = {:dataset => Array.new}
+
+      @properties.each do |property|
+        hash = {
+            id: property.id,
+
+            description: property.description,
+            size: property.size,
+            type: property.price,
+            view_entity_path: user_path(property.id),
+            edit_entity_path: edit_user_path(property.id),
+            # assignments: property.properties.count,
+            # registration: property.created_at.to_formatted_s(:long)
+            registration: property.created_at.strftime('%d %b. %y')
+        }
+        @propertieslist[:dataset] << hash
+      end
+
+      @total_entries = @properties.total_entries
+      @current_page = @properties.current_page
+      @results_per_page = 10
+      @initial_search = params[:search] || ''
+      @initial_sorting = params[:sorting] || 'created_at'
+      @initial_ordering = params[:ordering] || 'desc'
+
+      respond_to do |format|
+        format.html
+        format.json {render json: {results_per_page: @results_per_page,
+                                   userslist: @propertieslist,
+                                   total_entries: @properties.total_entries,
+                                   current_page: @properties.current_page }, status: 200}
+      end
+
+
+
+
+
+
     end
 
     # GET /properties/1

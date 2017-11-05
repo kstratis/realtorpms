@@ -59,27 +59,12 @@ export default class DataTable extends React.Component {
   };
 
   componentWillMount() {
+    // Dynamically import functional component
     let type = capitalizeFirstLetter(this.props.initial_payload.object_type);
     let entityName = `${type}List`;
     import(`./${entityName}`).then(entityName => {
-
-      console.log('printing');
-      console.log(entityName);
       this.setState({Entity: entityName});
-      // console.log(entityName);
     });
-
-
-    // if (this.props.initial_payload.object_type === 'users'){
-    //   import('./UsersList').then(UsersList => {
-    //     this.setState({ UsersList });
-    //   });
-    // } else{
-    //   import('./PropertiesList').then(PropertiesList => {
-    //     this.setState({ UsersList });
-    //   });
-    // }
-
   }
 
   componentDidMount() {

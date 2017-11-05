@@ -5,6 +5,7 @@ module Accounts
     # before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
     before_action :correct_user,   only: [:edit, :update]
     before_action :owner_exclusive, only: [:edit, :destroy]
+    before_action :check_page_validity, only: [:index]
     layout 'registration/main', except: [:show, :edit, :update, :index]  # show the barebones version only when signing up
 
     def destroy

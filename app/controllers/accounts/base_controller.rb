@@ -6,6 +6,15 @@ module Accounts
 
     # before_action :correct_subdomain
 
+    def check_page_validity
+      if params[:page]
+        param = Integer(params[:page]) rescue nil
+        unless param.is_a? Integer
+          render_404 and return
+        end
+      end
+    end
+
     # this is only called from the template properties#index
     def current_account
       # this results in 404 in production
@@ -70,7 +79,6 @@ module Accounts
         render_404
       end
     end
-
 
 
   end
