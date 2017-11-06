@@ -9,95 +9,28 @@ const PropertiesList = ({isLoading, dataset, advanceByTwo, pageCount, handlePage
   return (
 
     <div className="dataTablePage col-md-12">
-      <h1>hello</h1>
       {isLoading
-        ? <div className={'centered'}><div className={'spinner'} /></div>
+        ? <div className={'centered'}>
+          <div className={'spinner'}/>
+        </div>
         // ? <div className={'centered'}><img src={spinner_URL} /></div>
         : dataset.length > 0
-          ? <div className={'dataTableContainer'}>
-            <table id="usersTable" className="table table-striped pr-table dataTable">
-              <thead>
-              <tr>
-                <th>
-                  <a className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'last_name')}>
-                    <span>User</span>
-                    {sorting === 'last_name'
-                      ? ordering === 'asc'
-                        ? <span className={'sortable-icon-container'}>
-                                <i title='Ascending order' className="fa fa-chevron-up fa-lg fa-fw pull-right" aria-hidden="true"> </i>
-                              </span>
-                        : <span className={'sortable-icon-container'}>
-                                <i title='Descending order' className="fa fa-chevron-down fa-lg fa-fw pull-right" aria-hidden="true"> </i>
-                              </span>
-                      : ''
-                    }
-                  </a>
-                </th>
-                <th>
-                  <a className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'email')}>
-                    <span>Email</span>
-                    {sorting === 'email'
-                      ? ordering === 'asc'
-                        ? <span className={'sortable-icon-container'}>
-                                <i title='Ascending order' className="fa fa-chevron-circle-up fa-lg fa-fw pull-right" aria-hidden="true"> </i>
-                              </span>
-                        : <span className={'sortable-icon-container'}>
-                                <i title='Descending order' className="fa fa-chevron-circle-down fa-lg fa-fw pull-right" aria-hidden="true"> </i>
-                              </span>
-                      : ''
-                    }
-                  </a>
-                </th>
-                <th><span>User Type</span></th>
-                {/*<th><span>Assignments</span></th>*/}
-                <th>
-                  <a className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'created_at')}>
-                    <span>Registration</span>
-                    {sorting === 'created_at'
-                      ? ordering === 'asc'
-                        ? <span className={'sortable-icon-container'}>
-                                <i title='Ascending order' className="fa fa-chevron-circle-up fa-lg fa-fw pull-right" aria-hidden="true"> </i>
-                              </span>
-                        : <span className={'sortable-icon-container'}>
-                                <i title='Descending order' className="fa fa-chevron-circle-down fa-lg fa-fw pull-right" aria-hidden="true"> </i>
-                              </span>
-                      : ''
-                    }
-                  </a>
-                </th>
-                <th><span>Quick Actions</span></th>
-              </tr>
-              </thead>
-              <tbody>
+          ? <div className={'PropertyListContainer'}>
+            <div>
               {dataset.map((entry) => (
-                <tr key={entry.id}>
-                  <td><div className={'table-entry'}><img className="avatar-table-entry" src={entry['avatar_url']}/><span><a className={'user-entry-color'} href={entry['view_entity_path']}>{entry['name']}</a></span></div></td>
-                  <td><div className={'table-entry'}><span>{entry['email']}</span></div></td>
-                  <td><div className={'table-entry'}><span>{entry['type']}</span></div></td>
-                  {/*<td><div className={'table-entry'}></div></td>*/}
-                  <td><div className={'table-entry'}><span>{entry['registration']}</span></div></td>
-                  <td>
-                    <div className="action-buttons-container table-entry">
-                      <div className="btn-group min-width" role="group" aria-label="...">
-                        {/*<div className="btn-group" role="group" aria-label="..."><a title="User Assignments" className="btn btn-default" href=""><i className="pr-icon action-button-graphic xs assignments"> </i></a></div>*/}
-                        <div className="btn-group" role="group" aria-label="..."><a title="View Profile" className="btn btn-default" href={entry['view_entity_path']}><i className="pr-icon action-button-graphic xs bar-chart"> </i></a></div>
-                        <div className="btn-group" role="group" aria-label="..."><a title="Edit User" className="btn btn-default" href={entry['edit_entity_path']}><i className="pr-icon action-button-graphic xs pencil"> </i></a></div>
-                        <div className="btn-group" role="group" aria-label="..."><a title="Delete User"
-                                                                                    className="btn btn-default"
-                                                                                    href={entry['view_entity_path']}
-                                                                                    data-method="delete"
-                                                                                    data-confirm="Are you sure?"
-                                                                                    rel="nofollow"><i className="pr-icon action-button-graphic xs user-delete"> </i></a></div>
-                        {/*<a title="Edit user" className="btn btn-default" href=""><i className="fa fa-pencil fa-fw fa-lg"> </i></a>*/}
-                        {/*<a title="Deactivate user" className="btn btn-default" href=""><i className="fa fa-power-off fa-fw fa-lg"> </i></a>*/}
-                        {/*<a title="Delete user user" className="btn btn-default" href=""><i className="fa fa-trash fa-fw fa-lg"> </i></a>*/}
-                      </div>
-                    </div>
-                  </td>
-                </tr>
+                <div className={'col-lg-3 col-md-4 col-xs-6 property-container'} key={entry.id}>
+                  <div className={'property'}>
+                  <div>{entry['description']}</div>
+                  <div>{entry['size']}</div>
+                  <div>{entry['price']}</div>
+                  </div>
+
+
+
+                </div>
               ))}
-              </tbody>
-            </table>
+            </div>
+            <div className={'clearfix'}></div>
             <ReactPaginate previousLabel={"❮"}
                            nextLabel={"❯"}
                            breakLabel={
@@ -114,7 +47,7 @@ const PropertiesList = ({isLoading, dataset, advanceByTwo, pageCount, handlePage
                            forcePage={selectedPage}
                            pageClassName={"page"}
                            nextClassName={'next'}
-                           previousClassName={'previous'} />
+                           previousClassName={'previous'}/>
           </div>
           : <div className={"no-users"}>
             <i className="pr-icon lg no-results"> </i>

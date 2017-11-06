@@ -373,3 +373,15 @@ label{
 //  -o-animation:      fadeIn 1s; /* Opera 12+ */
 //  animation:         fadeIn 1s; /* IE 10+, Fx 29+ */
 //}
+.property{
+
+  //border: 1px solid #eee;
+  padding: 5px;
+  //border-radius: 3px;
+  margin-bottom: 25px;
+  height: 250px;
+  box-shadow: 0 0 11px 0 #b1b1b1;
+  border-radius: 4px;
+  //@include box-shadow( 0 -1px 1px #d4d8e3, 0 2px 3px #d4d8e3 );
+
+}
