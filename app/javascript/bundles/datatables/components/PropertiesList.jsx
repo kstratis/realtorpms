@@ -20,7 +20,7 @@ const PropertiesList = ({isLoading, dataset, advanceByTwo, pageCount, handlePage
               {dataset.map((entry) => (
                 <div className={'col-lg-3 col-md-4 col-xs-6 property-container'} key={entry.id}>
                   <div className={'property'}>
-                  <div>{entry['description']}</div>
+                    <div><a href={entry['view_entity_path']}>{entry['description']}</a></div>
                   <div>{entry['size']}</div>
                   <div>{entry['price']}</div>
                   </div>
@@ -30,7 +30,7 @@ const PropertiesList = ({isLoading, dataset, advanceByTwo, pageCount, handlePage
                 </div>
               ))}
             </div>
-            <div className={'clearfix'}></div>
+            <div className={'clearfix'}> </div>
             <ReactPaginate previousLabel={"❮"}
                            nextLabel={"❯"}
                            breakLabel={

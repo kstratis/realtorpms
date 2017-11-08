@@ -31,8 +31,8 @@ module Accounts
             description: property.description,
             size: property.size,
             type: property.price,
-            view_entity_path: user_path(property.id),
-            edit_entity_path: edit_user_path(property.id),
+            view_entity_path: property_path(property.id),
+            edit_entity_path: edit_property_path(property.id),
             # assignments: property.properties.count,
             # registration: property.created_at.to_formatted_s(:long)
             registration: property.created_at.strftime('%d %b. %y')
