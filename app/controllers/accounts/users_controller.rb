@@ -1,5 +1,3 @@
-# require 'users_helper'
-
 module Accounts
   class UsersController < Accounts::BaseController
     # before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
