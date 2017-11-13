@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import UserEntry from './UserEntry';
 // noinspection NpmUsedModulesInstalled;
 // import spinner_URL from 'images/spinners/double_ring.svg';
 import ReactPaginate from 'react-paginate';
@@ -69,7 +70,7 @@ const UsersList = ({isLoading, dataset, advanceByTwo, pageCount, handlePageClick
               </thead>
               <tbody>
               {dataset.map((entry) => (
-
+                <UserEntry key={entry['id']} entry={entry} handleAssign={handleAssign} />
               ))}
               </tbody>
             </table>
