@@ -21,6 +21,8 @@ Rails.application.routes.draw do
       resources :properties
       resources :users
       resources :invitations, only: [:new, :create]
+      post '/assignments/property/:pid/user/:uid', to: 'assignments#create'
+
       # resources :invitations, only: [:new, :create] do
       #   member do
       #     get :accept

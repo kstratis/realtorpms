@@ -62,9 +62,12 @@ module Accounts
 
     end
 
+
     # GET /properties/1
     # GET /properties/1.json
     def show
+      @property = Property.find(params[:id])
+      print_users
     end
 
     # GET /properties/new

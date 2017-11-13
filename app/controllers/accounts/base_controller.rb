@@ -1,5 +1,6 @@
 module Accounts
   class BaseController < ApplicationController
+    include UserDatatable
     # before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
     before_action :logged_in_user, :allowed_subdomains, only: [:index, :edit, :update, :destroy]
     after_action :store_referer_url, only: [:index, :edit, :update, :destroy]
@@ -25,6 +26,8 @@ module Accounts
 
     def owner?
       # puts 'RUNIIIIING'
+      # puts
+      # puts current_account.owner == current_user
       current_account.owner == current_user
       # false
     end

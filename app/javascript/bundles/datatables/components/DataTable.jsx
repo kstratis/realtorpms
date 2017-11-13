@@ -1,6 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import axios from 'axios';
+
+
+import ReactOnRails from 'react-on-rails';
+
 // import UsersList from "./UsersList";
 // import PropertiesList from "./PropertiesList";
 import Search from "./Search";
@@ -16,7 +20,9 @@ export default class DataTable extends React.Component {
       results_per_page: PropTypes.number.isRequired,
       total_entries: PropTypes.number.isRequired,
       object_type: PropTypes.string.isRequired,
-      current_page: PropTypes.number
+      current_page: PropTypes.number,
+      select_mode: PropTypes.bool,
+      pid: PropTypes.number // This is the property id
     })
   };
 
@@ -36,8 +42,11 @@ export default class DataTable extends React.Component {
       selectedPage: this.getSelectedPage(),
       searchInput: this.props.initial_payload.initial_search,
       sorting: this.props.initial_payload.initial_sorting,
-      ordering: this.props.initial_payload.initial_ordering
+      ordering: this.props.initial_payload.initial_ordering,
     };
+
+    axios.defaults.headers.common['X-CSRF-Token'] = ReactOnRails.authenticityToken();
+
 
     // bind always returns a new function. This new function is important because without a reference to it
     // we won't be able to remove it as a listener in componentWillUnmount leading us to memory leaks.
@@ -49,6 +58,7 @@ export default class DataTable extends React.Component {
     this.handleSearchInput = this.handleSearchInput.bind(this);
     this.handleSort = this.handleSort.bind(this);
     this.handleAjaxRequest = this.handleAjaxRequest.bind(this);
+    this.handleAssign = this.handleAssign.bind(this);
     this.handleAjaxRequestDelayed = debounce(this.handleAjaxRequest, 300);
     this.compoundDelayedAction = debounce(this.compoundDelayedAction.bind(this), 300);
   }
@@ -173,6 +183,45 @@ export default class DataTable extends React.Component {
     searchParams.toString() ? this.handleAjaxRequest(`?${searchParams.toString()}`) : this.handleAjaxRequest();
   }
 
+  handleAssign (e) {
+    e.preventDefault();
+    // console.log(e.target.dataset);
+    // console.log(e.target.dataset.uid);
+    let pid = this.props.initial_payload.pid;
+    let uid = parseInt(e.target.dataset.uid);
+    let entity = this.props.initial_payload.object_type;
+    axios.post(`/assignments/property/${pid}/user/${uid}.json`) // +1 because rails will_paginate starts from 1 while this starts from 0
+      .then(function (response) {
+        console.log('logging the response');
+        console.log(response);
+        console.log(this.state.dataset);
+        // copy current state
+        let new_dataset = this.state.dataset.slice();
+        let el = new_dataset.find((user) => user.id === uid);
+        let position = new_dataset.indexOf(el);
+        // copy the object that needs to be modified
+        let obj = Object.assign({}, new_dataset[position]);
+        // modify the copy
+        obj.is_assigned = !obj.is_assigned;
+        // replace the array item with the new object
+        new_dataset[position] = obj;
+        this.setState({
+          dataset: new_dataset
+        });
+        // let newData = response.data.userslist;
+        // this.setState({
+        //   dataset: newData.dataset,
+        //   pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),
+        //   isLoading: false,
+        //   selectedPage: response.data.current_page - 1
+        // });
+      }.bind(this))
+      .catch(function (error) {
+        console.warn(error);
+        this.setState({isLoading: false});
+      }.bind(this))
+  }
+
   render() {
     const Entity = this.state.Entity;
     if (!Entity) {
@@ -193,6 +242,8 @@ export default class DataTable extends React.Component {
               isLoading={this.state.isLoading}
               selectedPage={this.state.selectedPage}
               pageCount={this.state.pageCount}
+              // selectMode={this.state.selectMode}
+              handleAssign={this.props.initial_payload.select_mode ? this.handleAssign : null}
               handlePageClick={this.handlePageClick}
               advanceByTwo={(e) => this.advanceByTwo(e)}/>
           </div>

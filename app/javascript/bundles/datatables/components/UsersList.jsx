@@ -4,7 +4,7 @@ import React from 'react';
 // import spinner_URL from 'images/spinners/double_ring.svg';
 import ReactPaginate from 'react-paginate';
 
-const UsersList = ({isLoading, dataset, advanceByTwo, pageCount, handlePageClick, selectedPage, handleSort, sorting, ordering}) => {
+const UsersList = ({isLoading, dataset, advanceByTwo, pageCount, handlePageClick, selectedPage, handleSort, sorting, ordering, handleAssign}) => {
 
   return (
 
@@ -69,31 +69,7 @@ const UsersList = ({isLoading, dataset, advanceByTwo, pageCount, handlePageClick
               </thead>
               <tbody>
               {dataset.map((entry) => (
-                <tr key={entry.id}>
-                  <td><div className={'table-entry'}><img className="avatar-table-entry" src={entry['avatar_url']}/><span><a className={'user-entry-color'} href={entry['view_entity_path']}>{entry['name']}</a></span></div></td>
-                  <td><div className={'table-entry'}><span>{entry['email']}</span></div></td>
-                  <td><div className={'table-entry'}><span>{entry['type']}</span></div></td>
-                  {/*<td><div className={'table-entry'}></div></td>*/}
-                  <td><div className={'table-entry'}><span>{entry['registration']}</span></div></td>
-                  <td>
-                    <div className="action-buttons-container table-entry">
-                      <div className="btn-group min-width" role="group" aria-label="...">
-                        {/*<div className="btn-group" role="group" aria-label="..."><a title="User Assignments" className="btn btn-default" href=""><i className="pr-icon action-button-graphic xs assignments"> </i></a></div>*/}
-                        <div className="btn-group" role="group" aria-label="..."><a title="View Profile" className="btn btn-default" href={entry['view_entity_path']}><i className="pr-icon action-button-graphic xs bar-chart"> </i></a></div>
-                        <div className="btn-group" role="group" aria-label="..."><a title="Edit User" className="btn btn-default" href={entry['edit_entity_path']}><i className="pr-icon action-button-graphic xs pencil"> </i></a></div>
-                        <div className="btn-group" role="group" aria-label="..."><a title="Delete User"
-                                                                                    className="btn btn-default"
-                                                                                    href={entry['view_entity_path']}
-                                                                                    data-method="delete"
-                                                                                    data-confirm="Are you sure?"
-                                                                                    rel="nofollow"><i className="pr-icon action-button-graphic xs user-delete"> </i></a></div>
-                        {/*<a title="Edit user" className="btn btn-default" href=""><i className="fa fa-pencil fa-fw fa-lg"> </i></a>*/}
-                        {/*<a title="Deactivate user" className="btn btn-default" href=""><i className="fa fa-power-off fa-fw fa-lg"> </i></a>*/}
-                        {/*<a title="Delete user user" className="btn btn-default" href=""><i className="fa fa-trash fa-fw fa-lg"> </i></a>*/}
-                      </div>
-                    </div>
-                  </td>
-                </tr>
+
               ))}
               </tbody>
             </table>

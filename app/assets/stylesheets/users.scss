@@ -54,6 +54,13 @@ span.subtitle{
     background: #f0f1f4;
   }
 
+  .ef-btn{
+
+    &:focus{
+    background: #ffffff;
+  }
+  }
+
   //tbody > tr > td {
   //  vertical-align: middle;
   //}
@@ -201,3 +208,4 @@ input[type="checkbox"] {
 .min-width{
   min-width: 180px;
 }
+
