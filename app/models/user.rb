@@ -21,7 +21,8 @@ class User < ApplicationRecord
 
   # Much later on...
   has_many :assignments
-  has_many :properties, through: :assignments
+  # https://stackoverflow.com/a/38845388/178728
+  has_many :properties, -> { distinct }, through: :assignments
   # has_many :properties, -> (account) { where('account_id = ?', account.id) }, through: :assignments
 
 
