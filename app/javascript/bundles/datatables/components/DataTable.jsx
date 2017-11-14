@@ -242,6 +242,7 @@ export default class DataTable extends React.Component {
               isLoading={this.state.isLoading}
               selectedPage={this.state.selectedPage}
               pageCount={this.state.pageCount}
+
               // selectMode={this.state.selectMode}
               handleAssign={this.props.initial_payload.select_mode ? this.handleAssign : null}
               handlePageClick={this.handlePageClick}
