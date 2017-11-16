@@ -1,4 +1,5 @@
 import ReactOnRails from 'react-on-rails';
+
 import HelloWorld from '../bundles/datatables/components/HelloWorld';
 import UsersListWithDatatable from '../bundles/datatables/components/UsersList';
 import UsersListAssignableWithDatatable from '../bundles/datatables/components/UsersListAssignable';
