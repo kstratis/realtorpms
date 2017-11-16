@@ -11,8 +11,8 @@ const PropertiesList = ({handlePageClick, handleSort, handleAssign, advanceByTwo
     <div className="dataTablePage col-md-12">
       {isLoading
         ? <div className={'centered'}>
-          <div className={'spinner'}/>
-        </div>
+            <div className={'spinner'}/>
+          </div>
         // ? <div className={'centered'}><img src={spinner_URL} /></div>
         : dataset.length > 0
           ? <div className={'PropertyListContainer'}>

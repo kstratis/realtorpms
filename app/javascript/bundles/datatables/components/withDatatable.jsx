@@ -69,7 +69,6 @@ function withDatatable(WrappedComponent) {
 
     componentDidMount() {
       window.addEventListener("popstate", this.bound_onHistoryButton);
-      console.log('all good');
     }
 
     componentWillUnmount() {
