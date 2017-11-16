@@ -49,7 +49,7 @@
       <%#= render @users %>
       <!--<div class="col-md-12">-->
         <%#= react_component('UsersList', props: @userslist, prerender: false) %>
-        <%= react_component('DataTable', props: {
+        <%= react_component('UsersListWithDatatable', props: {
             initial_payload: {
                 dataset_wrapper: @userslist,
                 results_per_page: @results_per_page,
