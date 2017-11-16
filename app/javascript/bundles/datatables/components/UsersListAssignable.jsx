@@ -5,14 +5,14 @@ import withDatatable from './withDatatable';
 // import spinner_URL from 'images/spinners/double_ring.svg';
 import ReactPaginate from 'react-paginate';
 
-const UsersList = ({handlePageClick, handleSort, handleAssign, advanceByTwo, isLoading, dataset, pageCount, selectedPage, sorting, ordering}) => {
+const UsersListAssignable = ({handlePageClick, handleSort, handleAssign, advanceByTwo, isLoading, dataset, pageCount, selectedPage, sorting, ordering}) => {
 
   return (
     <div className="dataTablePage col-md-12">
       {isLoading
         ? <div className={'centered'}>
-            <div className={'spinner'} />
-          </div>
+          <div className={'spinner'} />
+        </div>
         : dataset.length > 0
           ? <div className={'dataTableContainer'}>
             <table id="usersTable" className="table table-striped pr-table dataTable">
@@ -102,31 +102,17 @@ const UsersList = ({handlePageClick, handleSort, handleAssign, advanceByTwo, isL
                   <td>
                     <div className="action-buttons-container table-entry">
                       <div className="btn-group min-width" role="group" aria-label="...">
-                        <div className="btn-group">
-
-                          <div className="btn-group" role="group" aria-label="...">
-                            <a title="View Profile" className="btn btn-default" href={entry['view_entity_path']}>
-                              <i className="pr-icon action-button-graphic xs bar-chart"> </i>
-                            </a>
-                          </div>
-
-                          <div className="btn-group" role="group" aria-label="...">
-                            <a title="Edit User" className="btn btn-default" href={entry['edit_entity_path']}>
-                              <i className="pr-icon action-button-graphic xs pencil"> </i>
-                            </a>
-                          </div>
-
-                          <div className="btn-group" role="group" aria-label="...">
-                            <a title="Delete User"
-                               className="btn btn-default"
-                               href={entry['view_entity_path']}
-                               data-method="delete"
-                               data-confirm="Are you sure?"
-                               rel="nofollow">
-                              <i className="pr-icon action-button-graphic xs user-delete"> </i>
-                            </a>
-                          </div>
-                        </div>
+                        <a onClick={handleAssign}
+                           data-uid={entry['id']}
+                           title='View Profile'
+                           className='btn btn-default ef-btn'
+                           href={entry['view_entity_path']}>
+                          {
+                            entry['is_assigned']
+                              ? 'UNASSIGN'
+                              : 'ASSIGN'
+                          }
+                        </a>
                       </div>
                     </div>
                   </td>
@@ -154,14 +140,14 @@ const UsersList = ({handlePageClick, handleSort, handleAssign, advanceByTwo, isL
           </div>
           : <div className={"no-users"}>
             <i className="pr-icon lg no-results"> </i>
-            <h3>No users found.</h3>
+            <h3>No users available.</h3>
           </div>
       }
     </div>
   );
 };
 
-UsersList.propTypes = {
+UsersListAssignable.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   dataset: PropTypes.array.isRequired,
   advanceByTwo: PropTypes.func.isRequired,
@@ -173,8 +159,8 @@ UsersList.propTypes = {
   ordering: PropTypes.string.isRequired
 };
 
-const UsersListWithDatatable = withDatatable(UsersList);
+const UsersListAssignableWithDatatable = withDatatable(UsersListAssignable);
 
-export default UsersListWithDatatable;
+export default UsersListAssignableWithDatatable;
 
 

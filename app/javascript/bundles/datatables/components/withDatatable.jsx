@@ -22,7 +22,6 @@ function withDatatable(WrappedComponent) {
         total_entries: PropTypes.number.isRequired,
         object_type: PropTypes.string.isRequired,
         current_page: PropTypes.number,
-        select_mode: PropTypes.bool,
         pid: PropTypes.number // This is the property id
       })
     };

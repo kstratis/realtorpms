@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import withDatatable from './withDatatable';
 // noinspection NpmUsedModulesInstalled;
 // import spinner_URL from 'images/spinners/double_ring.svg';
 import ReactPaginate from 'react-paginate';
 
-const PropertiesList = ({isLoading, dataset, advanceByTwo, pageCount, handlePageClick, selectedPage, handleSort, sorting, ordering}) => {
+const PropertiesList = ({handlePageClick, handleSort, handleAssign, advanceByTwo, isLoading, dataset, pageCount, selectedPage, sorting, ordering}) => {
+// const PropertiesList = ({isLoading, dataset, advanceByTwo, pageCount, handlePageClick, selectedPage, handleSort, sorting, ordering}) => {
 
   return (
 
@@ -51,7 +53,7 @@ const PropertiesList = ({isLoading, dataset, advanceByTwo, pageCount, handlePage
           </div>
           : <div className={"no-users"}>
             <i className="pr-icon lg no-results"> </i>
-            <h3>No users found.</h3>
+            <h3>No properties available.</h3>
           </div>
       }
     </div>
@@ -70,6 +72,6 @@ PropertiesList.propTypes = {
   ordering: PropTypes.string.isRequired
 };
 
-export default PropertiesList;
+const PropertiesListWithDatatable = withDatatable(PropertiesList);
 
-
+export default PropertiesListWithDatatable;

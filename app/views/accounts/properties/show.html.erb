@@ -24,7 +24,7 @@
       </div>
 
 
-      <%= react_component('DataTable', props: {
+      <%= react_component('UsersListAssignableWithDatatable', props: {
           initial_payload: {
               dataset_wrapper: @userslist,
               results_per_page: @results_per_page,
@@ -34,7 +34,6 @@
               initial_sorting: @initial_sorting,
               initial_ordering: @initial_ordering,
               object_type: 'users',
-              select_mode: true,
               pid: @property.id
           }
       }, prerender: false) %>
