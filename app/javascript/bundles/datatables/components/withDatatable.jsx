@@ -32,7 +32,6 @@ function withDatatable(WrappedComponent) {
     constructor(props) {
       super(props);
       this.state = {
-        Entity: null,
         dataset: this.props.initial_payload.dataset_wrapper.dataset,
         resultsPerPage: this.props.initial_payload.results_per_page,
         isLoading: false,
@@ -66,16 +65,6 @@ function withDatatable(WrappedComponent) {
     getSelectedPage() {
       const selectedPage = new URL(window.location.href).searchParams.get('page') || 1;
       return (parseInt(selectedPage) - 1);
-    }
-    ;
-
-    componentWillMount() {
-      // Dynamically import functional component
-      let type = capitalizeFirstLetter(this.props.initial_payload.object_type);
-      let entityName = `${type}List`;
-      import(`./${entityName}`).then(entityName => {
-        this.setState({Entity: entityName});
-      });
     }
 
     componentDidMount() {

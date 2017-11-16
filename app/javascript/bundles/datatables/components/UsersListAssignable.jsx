@@ -1,12 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withDatatable from './withDatatable';
-// noinspection NpmUsedModulesInstalled;
-// import spinner_URL from 'images/spinners/double_ring.svg';
 import ReactPaginate from 'react-paginate';
+import withDatatable from './withDatatable';
 
 const UsersListAssignable = ({handlePageClick, handleSort, handleAssign, advanceByTwo, isLoading, dataset, pageCount, selectedPage, sorting, ordering}) => {
-
   return (
     <div className="dataTablePage col-md-12">
       {isLoading

@@ -1,9 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withDatatable from './withDatatable';
-// noinspection NpmUsedModulesInstalled;
-// import spinner_URL from 'images/spinners/double_ring.svg';
 import ReactPaginate from 'react-paginate';
+import withDatatable from './withDatatable';
 
 const PropertiesList = ({handlePageClick, handleSort, handleAssign, advanceByTwo, isLoading, dataset, pageCount, selectedPage, sorting, ordering}) => {
 // const PropertiesList = ({isLoading, dataset, advanceByTwo, pageCount, handlePageClick, selectedPage, handleSort, sorting, ordering}) => {
