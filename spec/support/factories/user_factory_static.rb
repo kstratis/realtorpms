@@ -28,4 +28,13 @@ FactoryGirl.define do
     password 'abc123'
   end
 
+  factory :usersequence, :class => User do
+    sequence(:email) { |n| "user#{n}@hotmail.com" }
+    sequence(:first_name) { |n| "John#{n}" }
+    sequence(:last_name) { |n| "Smith#{n}" }
+    password 'abc123'
+  end
+
+
+
 end

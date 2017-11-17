@@ -71,6 +71,7 @@ group :development, :test do
   gem 'email_spec', '2.1.1'
   gem 'phantomjs'
   gem 'poltergeist'
+  gem 'database_cleaner'
 end
 
 group :development do
