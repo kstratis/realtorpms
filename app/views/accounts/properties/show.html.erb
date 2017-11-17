@@ -33,7 +33,10 @@
               initial_search: @initial_search,
               initial_sorting: @initial_sorting,
               initial_ordering: @initial_ordering,
-              object_type: 'users',
+              # proprty_users means to get the users
+              # plus the assigned status of each one
+              # from the properties controller
+              object_type: 'property_users',
               pid: @property.id
           }
       }, prerender: false) %>

@@ -66,6 +66,7 @@ module Accounts
     # GET /properties/1
     # GET /properties/1.json
     def show
+      puts 'show called'
       @property = Property.find(params[:id])
       print_users
     end

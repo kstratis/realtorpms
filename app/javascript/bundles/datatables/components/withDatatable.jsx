@@ -153,8 +153,24 @@ function withDatatable(WrappedComponent) {
     }
 
     handleAjaxRequest(query = '') {
-      let entity = this.props.initial_payload.object_type;
-      axios.get(`/${entity}.json${query}`) // +1 because rails will_paginate starts from 1 while this starts from 0
+      const object_type = this.props.initial_payload.object_type;
+      let resource;
+      switch (object_type) {
+        case 'property_users':
+          resource = `/properties/${this.props.initial_payload.pid}.json${query}`;
+          break;
+        case 'users':
+          resource = `/users.json${query}`;
+          break;
+        case 'properties':
+          resource = `/properties.json${query}`;
+          break;
+        default:
+          console.warn('No resource specified');
+      }
+      // axios.get(`/${entity}.json${query}`) // +1 because rails will_paginate starts from 1 while this starts from 0
+      // axios.get(`/properties/3.json${query}`) // +1 because rails will_paginate starts from 1 while this starts from 0
+      axios.get(resource) // +1 because rails will_paginate starts from 1 while this starts from 0
         .then(function (response) {
           let newData = response.data.userslist;
           this.setState({

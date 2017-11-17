@@ -4,16 +4,12 @@ import ReactPaginate from 'react-paginate';
 import withDatatable from './withDatatable';
 
 const PropertiesList = ({handlePageClick, handleSort, handleAssign, advanceByTwo, isLoading, dataset, pageCount, selectedPage, sorting, ordering}) => {
-// const PropertiesList = ({isLoading, dataset, advanceByTwo, pageCount, handlePageClick, selectedPage, handleSort, sorting, ordering}) => {
-
   return (
-
     <div className="dataTablePage col-md-12">
       {isLoading
         ? <div className={'centered'}>
             <div className={'spinner'}/>
           </div>
-        // ? <div className={'centered'}><img src={spinner_URL} /></div>
         : dataset.length > 0
           ? <div className={'PropertyListContainer'}>
             <div>

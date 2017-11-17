@@ -18,6 +18,7 @@ module Accounts
     end
 
     def index
+      # puts 'the other one'
       print_users
     end
 

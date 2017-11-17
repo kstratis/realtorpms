@@ -4,6 +4,7 @@ import ReactPaginate from 'react-paginate';
 import withDatatable from './withDatatable';
 
 const UsersListAssignable = ({handlePageClick, handleSort, handleAssign, advanceByTwo, isLoading, dataset, pageCount, selectedPage, sorting, ordering}) => {
+  {console.log(dataset)}
   return (
     <div className="dataTablePage col-md-12">
       {isLoading
