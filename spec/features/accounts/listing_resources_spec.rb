@@ -44,12 +44,12 @@ feature 'Listing resources', js: true do
       set_subdomain(account.subdomain)
       visit properties_path
       # puts page.current_url
-      # find('li.page > a', text: '2', match: :prefer_exact).click
+      find('li.page > a', text: '2', match: :prefer_exact).click
       # we have to expect for somethong so that enough time is given to the ajax request to complete
-      # expect(page).to have_css('li.page')
-      # find('li.page > a', text: '3', match: :prefer_exact).click
-      # expect(page).to have_css('li.page')
-      save_and_open_page
+      expect(page).to have_css('li.page')
+      find('li.page > a', text: '3', match: :prefer_exact).click
+      expect(page).to have_css('li.page')
+      # save_and_open_page
       # find('li.page > a', text: '3', match: :prefer_exact).click
       # expect(page).to have_css('li.page')
       # find('li.page > a', text: '4', match: :prefer_exact).click
