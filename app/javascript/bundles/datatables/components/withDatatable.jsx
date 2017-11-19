@@ -193,12 +193,15 @@ function withDatatable(WrappedComponent) {
 
     handleAssign(e) {
       e.preventDefault();
+      console.log('executing handle assign');
       // console.log(e.target.dataset);
       // console.log(e.target.dataset.uid);
-      let pid = this.props.initial_payload.pid;
-      let uid = parseInt(e.target.dataset.uid);
+      let pid = this.props.initial_payload['pid'];
+      let uid = parseInt(e.target.dataset['uid']);
+      // Get the type of method from data-method
+      const method = e.target.dataset['methodtype'];
       let entity = this.props.initial_payload.object_type;
-      axios.post(`/assignments/property/${pid}/user/${uid}.json`) // +1 because rails will_paginate starts from 1 while this starts from 0
+      axios[method](`/assignments/property/${pid}/user/${uid}.json`) // +1 because rails will_paginate starts from 1 while this starts from 0
         .then(function (response) {
           console.log('logging the response');
           console.log(response);
@@ -211,6 +214,7 @@ function withDatatable(WrappedComponent) {
           let obj = Object.assign({}, new_dataset[position]);
           // modify the copy
           obj.is_assigned = !obj.is_assigned;
+          method === 'delete' ? obj.assignments_count-- : obj.assignments_count++;
           // replace the array item with the new object
           new_dataset[position] = obj;
           this.setState({
@@ -226,6 +230,7 @@ function withDatatable(WrappedComponent) {
         }.bind(this))
         .catch(function (error) {
           console.warn(error);
+          console.error('Unable to make the assignment. Please contact support');
           this.setState({isLoading: false});
         }.bind(this))
     }

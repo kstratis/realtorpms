@@ -68,6 +68,23 @@ const UsersListAssignable = ({handlePageClick, handleSort, handleAssign, advance
                     }
                   </a>
                 </th>
+                <th>
+                  <a className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'assignments_count')}>
+                    <span>Total assignments</span>
+                    {sorting === 'assignments_count'
+                      ? ordering === 'asc'
+                        ? <span className={'sortable-icon-container'}>
+                                <i title='Ascending order' className="fa fa-chevron-circle-up fa-lg fa-fw pull-right"
+                                   aria-hidden="true"> </i>
+                              </span>
+                        : <span className={'sortable-icon-container'}>
+                                <i title='Descending order' className="fa fa-chevron-circle-down fa-lg fa-fw pull-right"
+                                   aria-hidden="true"> </i>
+                              </span>
+                      : ''
+                    }
+                  </a>
+                </th>
                 <th><span>Quick Actions</span></th>
               </tr>
               </thead>
@@ -98,10 +115,19 @@ const UsersListAssignable = ({handlePageClick, handleSort, handleAssign, advance
                   </td>
 
                   <td>
+                    <div className={'table-entry'}>
+                      <span className="pr-centered-td">{entry['assignments_count']}</span>
+                    </div>
+                  </td>
+
+                  <td>
                     <div className="action-buttons-container table-entry">
                       <div className="btn-group min-width" role="group" aria-label="...">
                         <a onClick={handleAssign}
                            data-uid={entry['id']}
+                           // we use methodtype instead of method because
+                           // otherwise ujs steps in and hijacks the ajax request
+                           data-methodtype={ entry['is_assigned'] ? 'delete' : 'post' }
                            title='View Profile'
                            className='btn btn-default ef-btn'
                            href={entry['view_entity_path']}>

@@ -40,7 +40,8 @@ module UserDatatable
           # assignments: user.properties.count,
           # registration: user.created_at.to_formatted_s(:long)
           registration: user.created_at.strftime('%d %b. %y'),
-          is_assigned: @property ? @property.users.exists?(user.id) : nil
+          is_assigned: @property ? @property.users.exists?(user.id) : nil,
+          assignments_count: @property ? user.properties.count : nil,
           # property_id: property ? property.id : nil
       }
       @userslist[:dataset] << hash
