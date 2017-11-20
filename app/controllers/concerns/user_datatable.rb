@@ -14,7 +14,22 @@ module UserDatatable
     end
 
     if params[:sorting] && params[:ordering]
-      @users = @users.order("#{params[:sorting]}": params[:ordering])
+      if params['sorting'] == 'assignments_count'
+        # query = 'SELECT u.*, count(a.user_id) AS total_assignments FROM users AS u JOIN assignments AS a ON a.user_id = u.id GROUP BY u.id ORDER BY total_assignments;'
+        # query = 'SELECT u.* FROM "users" AS u JOIN "assignments" AS a ON a.user_id = u.id GROUP BY u.id ORDER BY count(a.user_id);'
+
+        @users = @users.left_outer_joins(:assignments).group(:id).order('count(assignments.user_id) DESC, last_name DESC')
+        # @users = @users.find_by_sql(query)
+        # byebug
+        # @users = @users.order("count('assignments')")
+        # @users = @users.sort_by(&:get_total_properties)
+
+        # @users = User.sorted_by_assignments_count(@users)
+        # @users = User.sorted_by_assignments_count(@users)
+      else
+        @users = @users.order("#{params[:sorting]}": params[:ordering])
+      end
+      # @users = @users.order("#{params[:sorting]}": params[:ordering])
     else
       @users = @users.order(:created_at)
     end
@@ -61,5 +76,9 @@ module UserDatatable
                                  total_entries: @users.total_entries,
                                  current_page: @users.current_page}, status: 200}
     end
+  end
+
+  def get_total_properties
+    properties.count
   end
 end

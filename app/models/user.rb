@@ -25,8 +25,7 @@ class User < ApplicationRecord
   has_many :properties, -> { distinct }, through: :assignments
   # has_many :properties, -> (account) { where('account_id = ?', account.id) }, through: :assignments
 
-
-           # Basically class methods defined on singleton class
+  # Basically class methods defined on singleton class
   class << self
     # Returns the hash digest of the given string.
     def digest(string)
@@ -81,6 +80,13 @@ class User < ApplicationRecord
     owned_accounts + accounts
   end
 
+  def get_total_properties
+    properties.count
+  end
+
+  def self.sorted_by_assignments_count(dataset)
+    dataset.sort_by(&:get_total_properties)
+  end
 
   # We use the postgres unaccent to cater for unicode accents and ilike for case insensitive searches
   # https://gist.github.com/jfragoulis/9914900
