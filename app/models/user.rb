@@ -17,12 +17,12 @@ class User < ApplicationRecord
 
   # Later on...
   has_many :memberships
-  has_many :accounts, through: :memberships
+  has_many :accounts, through: :memberships, dependent: :destroy
 
   # Much later on...
   has_many :assignments
   # https://stackoverflow.com/a/38845388/178728
-  has_many :properties, -> { distinct }, through: :assignments
+  has_many :properties, -> { distinct }, through: :assignments, dependent: :destroy
   # has_many :properties, -> (account) { where('account_id = ?', account.id) }, through: :assignments
 
   # Basically class methods defined on singleton class
