@@ -16,7 +16,7 @@ const UsersList = ({handlePageClick, handleSort, handleAssign, advanceByTwo, isL
               <thead>
               <tr>
                 <th>
-                  <a className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'last_name')}>
+                  <a id='sort_by_name' className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'last_name')}>
                     <span>User</span>
                     {sorting === 'last_name'
                       ? ordering === 'asc'
@@ -33,7 +33,7 @@ const UsersList = ({handlePageClick, handleSort, handleAssign, advanceByTwo, isL
                   </a>
                 </th>
                 <th>
-                  <a className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'email')}>
+                  <a id='sort_by_email' className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'email')}>
                     <span>Email</span>
                     {sorting === 'email'
                       ? ordering === 'asc'
@@ -51,7 +51,7 @@ const UsersList = ({handlePageClick, handleSort, handleAssign, advanceByTwo, isL
                 </th>
                 <th><span>User Type</span></th>
                 <th>
-                  <a className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'created_at')}>
+                  <a id='sort_by_date' className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'created_at')}>
                     <span>Registration</span>
                     {sorting === 'created_at'
                       ? ordering === 'asc'
