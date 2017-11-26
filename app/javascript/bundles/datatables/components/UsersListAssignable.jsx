@@ -4,7 +4,6 @@ import ReactPaginate from 'react-paginate';
 import withDatatable from './withDatatable';
 
 const UsersListAssignable = ({handlePageClick, handleSort, handleAssign, advanceByTwo, isLoading, dataset, pageCount, selectedPage, sorting, ordering}) => {
-  {console.log(dataset)}
   return (
     <div className="dataTablePage col-md-12">
       {isLoading
@@ -17,7 +16,7 @@ const UsersListAssignable = ({handlePageClick, handleSort, handleAssign, advance
               <thead>
               <tr>
                 <th>
-                  <a className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'last_name')}>
+                  <a id='sort_by_name' className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'last_name')}>
                     <span>User</span>
                     {sorting === 'last_name'
                       ? ordering === 'asc'
@@ -34,7 +33,7 @@ const UsersListAssignable = ({handlePageClick, handleSort, handleAssign, advance
                   </a>
                 </th>
                 <th>
-                  <a className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'email')}>
+                  <a id='sort_by_email' className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'email')}>
                     <span>Email</span>
                     {sorting === 'email'
                       ? ordering === 'asc'
@@ -52,7 +51,7 @@ const UsersListAssignable = ({handlePageClick, handleSort, handleAssign, advance
                 </th>
                 <th><span>User Type</span></th>
                 <th>
-                  <a className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'created_at')}>
+                  <a id='sort_by_date' className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'created_at')}>
                     <span>Registration</span>
                     {sorting === 'created_at'
                       ? ordering === 'asc'
@@ -69,7 +68,7 @@ const UsersListAssignable = ({handlePageClick, handleSort, handleAssign, advance
                   </a>
                 </th>
                 <th>
-                  <a className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'assignments_count')}>
+                  <a id='sort_by_assignments' className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'assignments_count')}>
                     <span>Total assignments</span>
                     {sorting === 'assignments_count'
                       ? ordering === 'asc'

@@ -29,7 +29,6 @@ FactoryGirl.define do
   end
 
   factory :usersequence, :class => User do
-
     sequence(:email) { |n| "user#{n}@hotmail.com" }
     sequence(:first_name) { |n| "John#{n}" }
     sequence(:last_name) { |n| "Smith#{n}" }

@@ -18,7 +18,7 @@ module UserDatatable
         # query = 'SELECT u.*, count(a.user_id) AS total_assignments FROM users AS u JOIN assignments AS a ON a.user_id = u.id GROUP BY u.id ORDER BY total_assignments;'
         # query = 'SELECT u.* FROM "users" AS u JOIN "assignments" AS a ON a.user_id = u.id GROUP BY u.id ORDER BY count(a.user_id);'
 
-        @users = @users.left_outer_joins(:assignments).group(:id).order('count(assignments.user_id) DESC, last_name DESC')
+        @users = @users.left_outer_joins(:assignments).group(:id).order("count(assignments.user_id) #{params[:ordering]}, last_name DESC")
         # @users = @users.find_by_sql(query)
         # byebug
         # @users = @users.order("count('assignments')")

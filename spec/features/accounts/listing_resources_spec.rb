@@ -1,5 +1,10 @@
 require 'rails_helper'
 
+# This test only test for listing and pagination of users and properties
+# and also tests the users sort by email filtering option. Registration
+# and name remain untested as it would require a very specific dataset
+# with a very specific timing to test against them.
+
 feature 'Listing resources', js: true do
   let(:account) { FactoryGirl.create(:account) }
   let(:account2) { FactoryGirl.create(:account2, subdomain: 'test2') }
@@ -55,6 +60,7 @@ feature 'Listing resources', js: true do
       # Test sorting by email -ascending order
       click_link('sort_by_email')
       expect(page).to have_css('li.page')
+      # td:nth-of-type(5) is the email column
       within('tbody tr:first-of-type td:nth-of-type(2) > div.table-entry > span'  ) {
         # puts page.text prints all text within the selectors scope.
         expect(page).to have_text('account.owner@example.com')
