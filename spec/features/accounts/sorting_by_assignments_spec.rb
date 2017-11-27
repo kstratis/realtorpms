@@ -41,26 +41,50 @@ feature 'Listing resources', js: true do
       # It doesn't matter which property we visit since the user table
       # will now include the assignment count
       visit property_path(5)
-      click_link('sort_by_assignments')
+      click_link('sort_by_assignments') # ascending order
       expect(page).to have_css('li.page')
-      # td:nth-of-type(5) is the email column
+      click_link('sort_by_assignments') # descending order
+
+      # We know beforehand that this user is user3@hotmail.com and that he has
+      # been assigned a total of 21 properties including the property with id 5.
+      # Confirm it's this user
+      # td:nth-of-type(5) is the email column of the first entry
       within('tbody tr:first-of-type td:nth-of-type(2) > div.table-entry > span'  ) {
         expect(page).to have_text('user3@hotmail.com')
       }
-      # td:nth-of-type(5) is the assignments column
+      # Confirm his/her property count
+      # td:nth-of-type(5) is the assignments column of the first entry
       within('tbody tr:first-of-type td:nth-of-type(5) > div.table-entry > span'  ) {
         expect(page).to have_text('21')
       }
-
+      # Do the same for the user 'below him'
+      # td:nth-of-type(5) is the email column of the first entry
       within('tbody tr:nth-of-type(2) td:nth-of-type(2) > div.table-entry > span'  ) {
         expect(page).to have_text('user2@hotmail.com')
       }
-
+      # td:nth-of-type(5) is the assignments column of the first entry
       within('tbody tr:nth-of-type(2) td:nth-of-type(5) > div.table-entry > span'  ) {
         expect(page).to have_text('11')
       }
 
-      save_and_open_page
+      # Press the button next to the first user.
+      # Since we know that property 5 is already assigned the text should read 'UNASSIGN'.
+      # However due to i18n this will change and thus we use the data attributes to get such info
+      button_method = find('#usersTable > tbody > tr:nth-child(1) > td:nth-child(6) > div > div > a.assign-toggle')[:'data-methodtype']
+      find('#usersTable > tbody > tr:nth-child(1) > td:nth-child(6) > div > div > a.assign-toggle').click
+
+      # According to whether this user has already been assigned property 5, expect his/her
+      # total count to change accordingly after the click.
+      if button_method == 'delete'
+        within('#usersTable > tbody > tr:nth-child(1) > td:nth-child(5) > div > span') {
+          expect(page).to have_text('20')
+        }
+      else
+        within('#usersTable > tbody > tr:nth-child(1) > td:nth-child(5) > div > span') {
+          expect(page).to have_text('22')
+        }
+      end
+
     end
   end
 end

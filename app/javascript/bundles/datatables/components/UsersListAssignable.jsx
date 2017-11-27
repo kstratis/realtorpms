@@ -127,8 +127,8 @@ const UsersListAssignable = ({handlePageClick, handleSort, handleAssign, advance
                            // we use methodtype instead of method because
                            // otherwise ujs steps in and hijacks the ajax request
                            data-methodtype={ entry['is_assigned'] ? 'delete' : 'post' }
-                           title='View Profile'
-                           className='btn btn-default ef-btn'
+                           title='Assign toggle'
+                           className='btn btn-default ef-btn assign-toggle'
                            href={entry['view_entity_path']}>
                           {
                             entry['is_assigned']
