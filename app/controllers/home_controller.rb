@@ -6,13 +6,16 @@ class HomeController < ApplicationController
     @subdomain = nil
     if logged_in?
       if current_user.accounts.count == 0
-        @subdomain = Account.find_by(owner_id: current_user.id).subdomain
+        # exclude the admin case who may not have a linked account
+        unless current_user.admin?
+          @subdomain = Account.find_by(owner_id: current_user.id).subdomain
+        end
       end
     end
   end
 
   # Use this action instead of directly linking to other urls from view
-  # when we want use the flash functionality
+  # when we need use the flash functionality
   def switch
     if request.subdomain.blank?
       redirect_to root_url(subdomain: nil)

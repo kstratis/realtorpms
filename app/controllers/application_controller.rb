@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
     render html: 'hello, world!'
   end
 
+  def app_logger
+    @@app_logger ||= Logger.new("#{Rails.root}/log/app.log", formatter: proc { |severity, datetime, progname, msg| "#{datetime}: #{msg}\n" })
+  end
+
   # def not_found
   #   raise ActionController::RoutingError.new('Not Found')
   # end

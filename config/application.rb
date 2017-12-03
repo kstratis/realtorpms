@@ -13,6 +13,12 @@ module Propertyx
     # This loads the Robot font family
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
 
+
+    # config.logger = Logger.new("#{Rails.root}/log/app.log")
+    # config.logger.level = Logger::WARN
+    # config.colorize_logging
+    # config.log_level = :warn
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

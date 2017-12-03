@@ -38,16 +38,19 @@ User.create!(first_name: 'Johny',
              password_confirmation: 'abc123',
              admin: false)
 
+# This account belongs to tstark@gmail.com
 Account.create!(
     subdomain: 'shakalaka',
     owner: User.second
 )
 
+# This account belongs to hh@gmail.com
 Account.create!(
     subdomain: 'bluedomain',
     owner: User.third
 )
 
+# This account belongs to jm@gmail.com
 Account.create!(
     subdomain: 'reddomain',
     owner: User.fourth
