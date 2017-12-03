@@ -7,7 +7,7 @@ class HomeController < ApplicationController
     if logged_in?
       if current_user.accounts.count == 0
         # exclude the admin case who may not have a linked account
-        unless current_user.admin?
+        unless current_user.is_admin?
           @subdomain = Account.find_by(owner_id: current_user.id).subdomain
         end
       end
@@ -26,7 +26,7 @@ class HomeController < ApplicationController
   end
 
   def accounts
-
+    @accounts = current_user.is_admin? ? Account.all : current_user.all_accounts
   end
 
 

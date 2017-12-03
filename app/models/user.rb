@@ -55,6 +55,10 @@ class User < ApplicationRecord
     has_owning_accounts? + get_membership_accounts
   end
 
+  def is_admin?
+    admin?
+  end
+
   # Remembers a user in the database for use in persistent sessions.
   def remember
     self.remember_token = User.new_token

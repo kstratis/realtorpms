@@ -5,7 +5,7 @@
       <h2>Account switch screen.</h2>
       <h2>Please pick one of your organizations</h2>
       <ul class="accounts">
-        <% current_user.all_accounts.each do |account| %>
+        <% @accounts.each do |account| %>
             <li>
               <%#= link_to root_url(subdomain: account.subdomain) do %>
               <%= link_to account_switch_url(subdomain: account.subdomain) do %>

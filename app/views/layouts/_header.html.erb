@@ -11,8 +11,10 @@
       <div class="account-info">
       <span title="Current subdomain" class="label navbar-tag-usertype"><%= fa_icon('database fw', text: current_account.subdomain) %></span>
         <% if owner?  %>
+          <span title="User type" class="label navbar-tag-usertype"><%= fa_icon('id-badge fw', text: 'ACCOUNT OWNER') %></span>
+        <% elsif current_user.admin? %>
           <span title="User type" class="label navbar-tag-usertype"><%= fa_icon('id-badge fw', text: 'ADMINISTRATOR') %></span>
-          <% else %>
+        <% else %>
           <span title="User type" class="label navbar-tag-usertype"><%= fa_icon('id-badge fw', text: 'USER') %></span>
         <% end %>
       </div>

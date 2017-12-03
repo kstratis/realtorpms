@@ -25,11 +25,7 @@ module Accounts
     helper_method :current_account
 
     def owner?
-      # puts 'RUNIIIIING'
-      # puts
-      # puts current_account.owner == current_user
       current_account.owner == current_user
-      # false
     end
 
     helper_method :owner?
@@ -47,7 +43,8 @@ module Accounts
 
     def allowed_subdomains
       subdomain_list = []
-      current_user.all_accounts.each do |account|
+      accounts = current_user.is_admin? ? Account.all : current_user.all_accounts
+      accounts.each do |account|
         subdomain_list << account.subdomain
       end
       unless session[:referer_url].blank?

@@ -15,8 +15,6 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       # Special case accepting invitations
       # ----------------------------------
-      app_logger.info("-=HELLO WORLD=-")
-
       if session.key?('forwarding_url') && /\/invitations\/\w+\/accept/.match(session[:forwarding_url])
         log_in user
         # note that both 1 and 0 are true in the boolean context. if we had done
@@ -31,12 +29,8 @@ class SessionsController < ApplicationController
 
       # Log in with a given subdomain in URL - No ambiguity
       unless request.subdomain.blank? # if subdomain exists in url
-        app_logger.warn("-=this should never print=-")
-
-
-
         account = Account.find_by_subdomain!(request.subdomain) # get account or 404
-        unless account.owner == user || account.users.exists?(user.id)
+        unless account.owner == user || account.users.exists?(user.id) || user.is_admin?
           render_401 and return
         end
         log_in user
@@ -53,14 +47,7 @@ class SessionsController < ApplicationController
       flash[:success] = 'You have successfully signed in.'
       # Check the account count. If accounts.count > 0 redirect to account switcher
       # otherwise simply redirect the user to his/her default subdomain
-      # puts total_accounts(user)
-      # user_accounts_count = user.accounts.count
-      #
-      #
-      app_logger.debug("-=game on=-")
-      app_logger.debug("-=user account count is: #{user.get_account_count}=-")
-
-
+      redirect_to account_list_url(subdomain: false) and return if user.admin?
       redirect_to account_list_url(subdomain: false) and return if user.get_account_count > 1
       unless user.has_owning_accounts?.zero?
         redirect_to root_url(subdomain: Account.find_by(owner_id: user.id).subdomain) and return
