@@ -71,6 +71,7 @@ group :development, :test do
   gem 'phantomjs'
   gem 'poltergeist'
   gem 'database_cleaner'
+  gem 'spring-commands-rspec'
 end
 
 group :development do

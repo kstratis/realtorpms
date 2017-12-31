@@ -13,6 +13,14 @@ module Propertyx
     # This loads the Robot font family
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
 
+    config.generators do |g|
+      g.test_framework :rspec,
+      fixtures: true,
+      view_specs: false,
+      helper_specs: false,
+      routing_specs: false
+    end
+
 
     # config.logger = Logger.new("#{Rails.root}/log/app.log")
     # config.logger.level = Logger::WARN
