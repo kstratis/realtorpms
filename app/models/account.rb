@@ -3,11 +3,11 @@ class Account < ApplicationRecord
   accepts_nested_attributes_for :owner
   validates :subdomain, presence: true, length: { maximum: 20 }, uniqueness: true
 
-  has_many :invitations
-  has_many :properties
+  has_many :invitations, dependent: :destroy
+  has_many :properties, dependent: :destroy
   # Originally had these 2 lines
   has_many :memberships
-  has_many :users, through: :memberships
+  has_many :users, through: :memberships, dependent: :destroy
 
   # which I replaced with this line
   # has_many :users

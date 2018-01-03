@@ -18,6 +18,7 @@ module DatasetHelpers
     @second_user = @account.users.second
     @third_user = @account.users.third
 
+    # Mind that we only assign 36 of the available properties
     @properties[0..20].map { |property| @third_user.properties << property }
     @properties[21..30].map { |property| @second_user.properties << property }
     @properties[31..35].map { |property| @first_user.properties << property }

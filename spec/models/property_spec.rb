@@ -5,7 +5,9 @@ RSpec.describe Property, type: :model do
   before do
     use_regular_dataset
   end
-
+  # Deleting a property should:
+  # 1) decrement properties by 1
+  # 2) decrement Assignment by -1. Check dataset_helpers.rb
   it "can successfully be deleted" do
     property = @first_user.properties.first
     expect(Property.count).to eq(50)
