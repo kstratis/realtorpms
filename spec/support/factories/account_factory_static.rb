@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :account do
     subdomain 'test1'
-    association :owner, :factory => :user
+    association :owner, :factory => :owner
   end
 
   factory :account2, :class => Account do
