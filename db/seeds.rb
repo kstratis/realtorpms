@@ -10,6 +10,7 @@
 # The create! method is just like the create method, except it raises an exception
 # for an invalid user rather than returning false
 
+# Owners
 User.create!(first_name: 'Konstantinos',
              last_name: 'Stratis',
              email: 'konos5@gmail.com',
@@ -57,7 +58,7 @@ Account.create!(
 )
 
 
-# Special shakalaka user
+# Special shakalaka users
 specialuser1 = User.create!(first_name: 'Will',
                             last_name: 'Smith',
                             email: 'wm@gmail.com',
@@ -72,10 +73,22 @@ specialuser2 = User.create!(first_name: 'John',
                             password_confirmation: 'abc123',
                             admin: false)
 
+# Special bluedomain user
+specialuser3 = User.create!(first_name: 'Lakis',
+last_name: 'Gavalas',
+    email: 'lg@gmail.com',
+    password: 'abc123',
+    password_confirmation: 'abc123',
+    admin: false)
+
+# ------------------------------------------------------------
+
 shakalaka = Account.find_by(subdomain: 'shakalaka')
+bluedomain = Account.find_by(subdomain: 'bluedomain')
 
 shakalaka.users << specialuser1
 shakalaka.users << specialuser2
+bluedomain.users << specialuser3
 
 
 99.times do |n|
@@ -108,3 +121,18 @@ smithuser = shakalaka.users.find_by(email: 'wm@gmail.com')
   smithuser.properties << property
 end
 
+lguser = bluedomain.users.find_by(email: 'lg@gmail.com')
+
+5.times do |n|
+  description = Faker::HitchhikersGuideToTheGalaxy.location
+  size = Faker::Number.number(3)
+  price = Faker::Number.number(6)
+  property = Property.create!(
+      description: description,
+      size: size,
+      price: price,
+      account: shakalaka
+  )
+
+  lguser.properties << property
+end

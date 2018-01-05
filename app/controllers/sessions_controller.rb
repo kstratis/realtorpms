@@ -52,7 +52,12 @@ class SessionsController < ApplicationController
       unless user.has_owning_accounts?.zero?
         redirect_to root_url(subdomain: Account.find_by(owner_id: user.id).subdomain) and return
       end
-      redirect_to root_url(subdomain: user.accounts.first!.subdomain)
+
+      if user.accounts.exists?
+        redirect_to root_url(subdomain: user.accounts.first.subdomain)
+      else
+        redirect_to account_list_url(subdomain: false)
+      end
 
       # redirect_to root_url(subdomain: user.accounts.first!.subdomain)
 

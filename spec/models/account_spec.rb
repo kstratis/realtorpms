@@ -12,9 +12,9 @@ RSpec.describe Account, type: :model do
     expect {
       @account.destroy
     }.to not_change { User.count }
+     .and change { Account.count }.by(-1)
      .and change { Property.count }.by(-50)
      .and change { Assignment.count }.by(-36) # This is because we only assign 36 properties out of 50. See dataset_helpers.rb
-
   end
 
 end

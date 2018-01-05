@@ -1,33 +1,29 @@
 <div class="center jumbotron pr-container">
-
-
-      <i class="pr-icon md account-switch"></i>
-      <h2>Account switch screen.</h2>
-      <h2>Please pick one of your organizations</h2>
-      <ul class="accounts">
-        <% @accounts.each do |account| %>
-            <li>
-              <%#= link_to root_url(subdomain: account.subdomain) do %>
-              <%= link_to account_switch_url(subdomain: account.subdomain) do %>
-                  <%= account.subdomain %>
-              <% end %>
-              <% if account.owner == current_user %>
-                  <span class="label">Account Owner</span>
-              <%else%>
-                  <span class="label">Regular User</span>
-              <%end%>
-            </li>
-        <% end %>
-      </ul>
-      <!--<p><strong>You are currently logged in as <u><%#= current_user.email %></u></strong></p>-->
-      <!--<p><strong>**<%#= link_to 'Dashboard', root_url(subdomain: get_subdomain(current_user)) %></strong></p>-->
-
-
-
-  <%#= link_to 'Sign up now!', new_account_path, class: 'btn btn-lg btn-primary' %>
+  <% if @accounts.empty? %>
+    <i class="pr-icon lg no-results"> </i>
+    <h2>Your user account doesn't seem to be associated with any active domains.</h2>
+    <h2>Please contact your LANDIA administrator.</h2>
+  <% else %>
+    <i class="pr-icon md account-switch"></i>
+    <h2>Account switch screen.</h2>
+    <h2>Please pick one of your organizations</h2>
+    <ul class="accounts">
+      <% @accounts.each do |account| %>
+        <li>
+          <%#= link_to root_url(subdomain: account.subdomain) do %>
+          <%= link_to account_switch_url(subdomain: account.subdomain) do %>
+            <%= account.subdomain %>
+          <% end %>
+          <% if account.owner == current_user %>
+            <span class="label">Account Owner</span>
+          <% else %>
+            <span class="label">Regular User</span>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
 </div>
-
-<%#= link_to image_tag('rails.png', alt: 'Rails logo'), 'http://rubyonrails.org/' %>
 
 
 
