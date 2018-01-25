@@ -373,17 +373,37 @@ label{
 //  -o-animation:      fadeIn 1s; /* Opera 12+ */
 //  animation:         fadeIn 1s; /* IE 10+, Fx 29+ */
 //}
-.property{
 
-  //border: 1px solid #eee;
+.card-controls-container{
+  top: 65%;
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity, 0.2s ease-in-out;
+
+}
+
+.card-controls{
+  border-radius: 3px;
+  @include box-shadow( 0 -1px 1px #d4d8e3, 0 2px 3px #d4d8e3 );
+  a.card-control-button span i.fa{
+    color: #444;
+  }
+}
+
+.property{
   padding: 5px;
-  //border-radius: 3px;
   margin-bottom: 25px;
-  height: 250px;
+  height: 300px;
   box-shadow: 0 0 11px 0 #b1b1b1;
   border-radius: 4px;
-  //@include box-shadow( 0 -1px 1px #d4d8e3, 0 2px 3px #d4d8e3 );
-
+  @include box-shadow( 0 -1px 1px #d4d8e3, 0 2px 3px #d4d8e3 );
+  &:hover{
+    .card-controls-container{
+      opacity: 1;
+      visibility: visible;
+    }
+  }
 }
 
 .pr-centered-td{
