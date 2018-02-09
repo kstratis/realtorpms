@@ -1,7 +1,4 @@
-$('.pr-form-container').html("<%= escape_javascript(render('created')) %>")
-
-
-$('.pr-form-container').fadeOut(function(){
-  $(this).replaceWith("<%= escape_javascript(render('created')) %>".hide());
-  $('.form-success').fadeIn("slow");
+$('.pr-form-container').fadeOut('fast', function(){
+  $(this).replaceWith("<%= escape_javascript(render('created')) %>").hide();
+  $('.form-success').fadeIn();
 });
