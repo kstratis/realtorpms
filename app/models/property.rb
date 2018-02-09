@@ -5,7 +5,7 @@ class Property < ApplicationRecord
   # https://stackoverflow.com/a/38845388/178728
   has_many :users, -> { distinct }, through: :assignments, dependent: :destroy
 
-  enum type: [:neoclassical, :protected_property, :loft, :traditional, :villa, :stone,  :studio,
+  enum propertytype: [:neoclassical, :protected_property, :loft, :traditional, :villa, :stone,  :studio,
               :prefabricated, :precast]
   enum orientation: [:front_facing, :airy, :on_corner, :inwards_facing]
   enum view: [:sea, :mountain, :forest, :infinite]

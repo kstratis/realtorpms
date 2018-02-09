@@ -28,8 +28,7 @@ const PropertiesList = ({handlePageClick, handleSort, handleAssign, advanceByTwo
                     <div>{'hello world'}</div>
                     <div className={'col-md-12 col-sm-12 col-xs-12 card-controls-container'}>
                       <div className="btn-group btn-group-sm card-controls" role="group" aria-label="...">
-                        <button onClick={() => this.simpleDialog.show()}>Open Modal</button>
-                        <a className={'card-control-button btn btn-default'} role={'group'}><span><i className={'fa fa-eye fa-lg fa-fw '}></i></span></a>
+                        <a className={'card-control-button btn btn-default'} onClick={() => this.simpleDialog.show()} role={'group'}><span><i className={'fa fa-eye fa-lg fa-fw '}></i></span></a>
                         <a className={'card-control-button btn btn-default'} role={'group'}><span><i className={'fa fa-pencil fa-lg fa-fw'}></i></span></a>
                         <a className={'card-control-button btn btn-default'} role={'group'}><span><i className={'fa fa-trash fa-lg fa-fw'}></i></span></a>
                       </div>

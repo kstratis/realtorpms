@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170927113724) do
+ActiveRecord::Schema.define(version: 20180207131743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,7 +73,6 @@ ActiveRecord::Schema.define(version: 20170927113724) do
     t.boolean "balconies"
     t.boolean "storage_room"
     t.boolean "garden"
-    t.integer "type"
     t.integer "orientation"
     t.integer "view"
     t.integer "heating"
@@ -84,6 +83,7 @@ ActiveRecord::Schema.define(version: 20170927113724) do
     t.boolean "fireplace"
     t.integer "user_id"
     t.bigint "account_id"
+    t.integer "propertytype"
     t.index ["account_id"], name: "index_properties_on_account_id"
   end
 

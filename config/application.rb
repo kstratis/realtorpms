@@ -21,6 +21,8 @@ module Propertyx
       routing_specs: false
     end
 
+    config.action_view.embed_authenticity_token_in_remote_forms = true
+
 
     # config.logger = Logger.new("#{Rails.root}/log/app.log")
     # config.logger.level = Logger::WARN
