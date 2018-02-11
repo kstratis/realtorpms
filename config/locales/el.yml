@@ -1,0 +1,40 @@
+---
+el:
+  activerecord:
+    models:
+      invitation: "Πρόσκληση"
+    attributes:
+      invitation:
+        email_label: "Διεύθυνση ηλεκτρονικού ταχυδρομείου"
+        email_placeholder: "π.χ. nikosdimitriou@gmail.com"
+    errors:
+      messages:
+        record_invalid: ! 'Η επικύρωση απέτυχε: %{errors}'
+  # Mine starts here
+  sidebar:
+    main: "Κεντρική"
+    properties: "Ακίνητα"
+    partners: "Συνεργάτες"
+    settings: "Ρυθμίσεις"
+  partners:
+    add: "Προσθήκη συνεργάτη"
+    invite: "Πρόσκληση συνεργάτη"
+  main:
+    heading: "Κεντρική"
+    subheading: "Διαβαθμισμένη πρόσβαση"
+  invitations:
+    new:
+      heading: "Πρόσκληση νέου συνεργάτη"
+      inv_button: "Αποστολή πρόσκλησης"
+  datatables:
+    users:
+      partner: "Συνεργάτης"
+      email: "Email"
+      usertype: "Διαβάθμιση"
+      registration: "Εγγραφή"
+      actions: "Ενέργειες"
+      admin: "Διαχειριστής"
+      user: "Χρήστης"
+  time:
+    formats:
+      regular: "%d %b. %y"

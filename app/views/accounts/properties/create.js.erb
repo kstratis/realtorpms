@@ -1,4 +1,5 @@
 $('.pr-form-container').fadeOut('fast', function(){
-  $(this).replaceWith("<%= escape_javascript(render('created')) %>").hide();
-  $('.form-success').fadeIn();
+  var myblock = $("<%= escape_javascript(render('created')) %>").hide();
+  $(this).replaceWith(myblock);
+  $('#form-success').fadeIn('fast');
 });

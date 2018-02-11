@@ -3,7 +3,21 @@ import React from 'react';
 import ReactPaginate from 'react-paginate';
 import withDatatable from './withDatatable';
 
-const UsersList = ({handlePageClick, handleSort, handleAssign, advanceByTwo, isLoading, dataset, pageCount, selectedPage, sorting, ordering}) => {
+
+// import { addLocaleData } from 'react-intl';
+// import en from 'react-intl/locale-data/en';
+// import { defaultMessages } from './../../../locales/default';
+// import { IntlProvider, injectIntl, intlShape } from 'react-intl';
+// import {formatMessage} from "react-intl/src/format";
+
+// import { formatMessage } from 'react-intl';
+
+// addLocaleData([...en, ...gr]);
+
+// const locale =  defaultLocale;
+// const messages = translations[locale];
+
+const UsersList = ({handlePageClick, handleSort, handleAssign, advanceByTwo, isLoading, dataset, pageCount, selectedPage, sorting, ordering, i18n}) => {
   return (
     <div className="dataTablePage col-md-12">
       {isLoading
@@ -17,7 +31,7 @@ const UsersList = ({handlePageClick, handleSort, handleAssign, advanceByTwo, isL
               <tr>
                 <th>
                   <a id='sort_by_name' className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'last_name')}>
-                    <span>User</span>
+                    <span>{i18n['users_datatable']['partner']}</span>
                     {sorting === 'last_name'
                       ? ordering === 'asc'
                         ? <span className={'sortable-icon-container'}>
@@ -34,7 +48,7 @@ const UsersList = ({handlePageClick, handleSort, handleAssign, advanceByTwo, isL
                 </th>
                 <th>
                   <a id='sort_by_email' className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'email')}>
-                    <span>Email</span>
+                    <span>{i18n['users_datatable']['email']}</span>
                     {sorting === 'email'
                       ? ordering === 'asc'
                         ? <span className={'sortable-icon-container'}>
@@ -49,10 +63,10 @@ const UsersList = ({handlePageClick, handleSort, handleAssign, advanceByTwo, isL
                     }
                   </a>
                 </th>
-                <th><span>User Type</span></th>
+                <th><span>{i18n['users_datatable']['usertype']}</span></th>
                 <th>
                   <a id='sort_by_date' className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'created_at')}>
-                    <span>Registration</span>
+                    <span>{i18n['users_datatable']['registration']}</span>
                     {sorting === 'created_at'
                       ? ordering === 'asc'
                         ? <span className={'sortable-icon-container'}>
@@ -67,7 +81,7 @@ const UsersList = ({handlePageClick, handleSort, handleAssign, advanceByTwo, isL
                     }
                   </a>
                 </th>
-                <th><span>Quick Actions</span></th>
+                <th><span>{i18n['users_datatable']['actions']}</span></th>
               </tr>
               </thead>
               <tbody>
@@ -86,7 +100,7 @@ const UsersList = ({handlePageClick, handleSort, handleAssign, advanceByTwo, isL
 
                   <td>
                     <div className={'table-entry'}>
-                      <span>{entry['type']}</span>
+                      <span>{entry['type'] ? i18n['users_datatable']['admin'] : i18n['users_datatable']['user'] }</span>
                     </div>
                   </td>
 

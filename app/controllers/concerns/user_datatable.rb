@@ -49,12 +49,13 @@ module UserDatatable
           avatar_url: helpers.gravatar_for(user, size: 64, link_only: true),
           name: "#{user.first_name.first}. #{user.last_name}",
           email: user.email,
-          type: user.admin ? 'Admin' : 'User',
+          type: user.admin,
           view_entity_path: user_path(user.id),
           edit_entity_path: edit_user_path(user.id),
           # assignments: user.properties.count,
           # registration: user.created_at.to_formatted_s(:long)
-          registration: user.created_at.strftime('%d %b. %y'),
+          # registration: user.created_at.strftime('%d %b. %y'),
+          registration: l(user.created_at, format: :regular),
           is_assigned: @property ? @property.users.exists?(user.id) : nil,
           assignments_count: @property ? user.properties.count : nil,
           # property_id: property ? property.id : nil

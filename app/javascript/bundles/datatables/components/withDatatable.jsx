@@ -3,12 +3,36 @@ import React from 'react';
 import axios from 'axios';
 import ReactOnRails from 'react-on-rails';
 
+
+// import { addLocaleData } from 'react-intl';
+// import en from 'react-intl/locale-data/en';
+// import el from 'react-intl/locale-data/el';
+// import { translations } from './../../../locales/translations';
+// import { defaultLocale, defaultMessages } from './../../../locales/default';
+
+// import { addLocaleData } from 'react-intl';
+// import en from 'react-intl/locale-data/en';
+// import de from 'react-intl/locale-data/de';
+
+// import { translations } from '../../../translations';
+// import { defaultLocale } from '../../../default';
+
+// import { IntlProvider, injectIntl, intlShape } from 'react-intl';
+
+
 // import UsersList from "./UsersList";
 // import PropertiesList from "./PropertiesList";
 import Search from "./Search";
 
+
 const URLSearchParams = require('url-search-params');
 import {debounce, capitalizeFirstLetter} from "./helpers";
+
+
+// addLocaleData([...en, ...el]);
+
+// const locale =  'el';
+// const messages = translations[locale];
 
 function withDatatable(WrappedComponent) {
 
@@ -42,6 +66,7 @@ function withDatatable(WrappedComponent) {
         searchInput: this.props.initial_payload.initial_search,
         sorting: this.props.initial_payload.initial_sorting,
         ordering: this.props.initial_payload.initial_ordering,
+        i18n: this.props.i18n
       };
 
       axios.defaults.headers.common['X-CSRF-Token'] = ReactOnRails.authenticityToken();
@@ -75,10 +100,10 @@ function withDatatable(WrappedComponent) {
       window.removeEventListener("popstate", this.bound_onHistoryButton);
     }
 
-// Turbolinks also have some sort of history state management. We don't want React to get in its way.
-// This function will only be used when turbolinks are not in use. That is all ajax requests.
-// If the 'turbolinks' key appears anywhere in history.state that means we need to bailout and let
-// turbolinks handle the re-rendering.
+    // Turbolinks also have some sort of history state management. We don't want React to get in its way.
+    // This function will only be used when turbolinks are not in use. That is all ajax requests.
+    // If the 'turbolinks' key appears anywhere in history.state that means we need to bailout and let
+    // turbolinks handle the re-rendering.
     handleHistoryButton(e) {
       const historyPage = this.getSelectedPage();
       if (!('turbolinks' in e.state)) {
@@ -247,7 +272,8 @@ function withDatatable(WrappedComponent) {
             handleAssign={this.handleAssign}
             advanceByTwo={this.advanceByTwo}
             {...this.state} />
-        </div>);
+        </div>
+      );
     }
   }
 }

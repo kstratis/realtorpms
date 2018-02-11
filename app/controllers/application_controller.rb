@@ -5,6 +5,16 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   rescue_from ActiveRecord::RecordNotFound, with: -> { render_404  }
 
+  before_action :set_locale
+
+  def set_locale
+    I18n.locale = params[:locale] || I18n.default_locale
+  end
+
+  # def default_url_options
+  #   { locale: I18n.locale }
+  # end
+
   def hello
     render html: 'hello, world!'
   end

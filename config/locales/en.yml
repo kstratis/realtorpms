@@ -28,6 +28,35 @@
 #
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  activerecord:
+    models:
+      invitation: "Invitation"
+    attributes:
+      invitation:
+        email_label: "Email"
+        email_placeholder: "i.e. johnsmith@gmail.com"
+  sidebar:
+    main: "Dashboard"
+    properties: "Properties"
+    partners: "Partners"
+    settings: "Settings"
+  partners:
+    add: "Add partner"
+    invite: "Invite partner"
+  main:
+    heading: "Dashboard"
+    subheading: "This is the dashboard for logged in users"
+  invitations:
+    new:
+      heading: "Add new partner"
+      inv_button: "Send invitation"
+  datatables:
+    users:
+      partner: "Partner"
+      email: "Email"
+      usertype: "Type"
+      registration: "Registration"
+      actions: "Actions"
+      admin: "Administrator"
+      user: "User"

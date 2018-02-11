@@ -10,16 +10,18 @@
         <!--<i class="pr-icon cs back-button"></i>-->
       <!--</div>-->
 
-      <div class="invitation-container pull-right" >
-        <%= link_to new_invitation_path, :class => 'btn btn-primary btn-sm invite-user', :id => 'invite-user-button' do %>
-          <span class="subtitle"><%=fa_icon('envelope fw')%> Invite User</span>
-        <% end %>
-      </div>
+      <div class="btn-group pull-right" role="group" aria-label="...">
+        <!--<div class="invitation-container" >-->
+          <%= link_to new_invitation_path, :class => 'btn btn-primary btn-sm invite-user', :id => 'invite-user-button' do %>
+            <span class="subtitle"><%=fa_icon('envelope fw')%> <%= t 'partners.invite' %></span>
+          <% end %>
+        <!--</div>-->
 
-      <div class="invitation-container pull-right" >
-        <%= link_to new_invitation_path, :class => 'btn btn-primary btn-sm invite-user', :id => 'invite-user-button' do %>
-            <span class="subtitle"><%=fa_icon('plus fw')%> Add User</span>
-        <% end %>
+        <!--<div class="invitation-container" >-->
+          <%= link_to new_invitation_path, :class => 'btn btn-primary btn-sm add-user', :id => 'add-user-button' do %>
+              <span class="subtitle"><%=fa_icon('plus fw')%> <%= t 'partners.add' %></span>
+          <% end %>
+        <!--</div>-->
       </div>
 
       <%# Here we call render not on a string with the name of a partial, but rather on a user variable of class User;
@@ -59,6 +61,10 @@
                 initial_sorting: @initial_sorting,
                 initial_ordering: @initial_ordering,
                 object_type: 'users'
+            },
+            i18n: {
+                users_datatable: t('datatables.users')
+
             }
           }, prerender: false) %>
       <!--</div>-->

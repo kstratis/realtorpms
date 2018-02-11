@@ -12,6 +12,8 @@ ReactOnRails.configure do |config|
   # Below options are used with the use of this test helper:
   # ReactOnRails::TestHelper.configure_rspec_to_compile_assets(config)
   ################################################################################
+  #
+  # config.i18n_dir = Rails.root.join("app", "javascript", "locales")
 
   # If you are using this in your spec_helper.rb (or rails_helper.rb):
   #

@@ -10,6 +10,8 @@ module Propertyx
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
+    config.i18n.default_locale = :el
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
     # This loads the Robot font family
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
 
