@@ -265,7 +265,8 @@ function withDatatable(WrappedComponent) {
         <div>
           <Search
             searchInput={this.state.searchInput}
-            handleSearchInput={(e) => this.handleSearchInput(e)}/>
+            handleSearchInput={(e) => this.handleSearchInput(e)}
+            i18n={this.props.i18n} />
           <WrappedComponent
             handlePageClick={this.handlePageClick}
             handleSort={this.handleSort}

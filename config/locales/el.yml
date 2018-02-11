@@ -10,7 +10,21 @@ el:
     errors:
       messages:
         record_invalid: ! 'Η επικύρωση απέτυχε: %{errors}'
-  # Mine starts here
+  js:
+    datatables:
+      users:
+        partner: "Συνεργάτης"
+        email: "Email"
+        usertype: "Είδος λογαριασμού"
+        registration: "Εγγραφή"
+        actions: "Ενέργειες"
+        admin: "Διαχειριστής"
+        user: "Χρήστης"
+        tooltip_view_profile: "Προβολή προφίλ"
+        tooltip_edit_profile: "Επεξεργασία"
+        tooltip_delete_profile: "Διαγραφή"
+    search:
+      placeholder: "π.χ. Δημήτρης Στεφάνου"
   sidebar:
     main: "Κεντρική"
     properties: "Ακίνητα"
@@ -26,15 +40,7 @@ el:
     new:
       heading: "Πρόσκληση νέου συνεργάτη"
       inv_button: "Αποστολή πρόσκλησης"
-  datatables:
-    users:
-      partner: "Συνεργάτης"
-      email: "Email"
-      usertype: "Διαβάθμιση"
-      registration: "Εγγραφή"
-      actions: "Ενέργειες"
-      admin: "Διαχειριστής"
-      user: "Χρήστης"
+
   time:
     formats:
-      regular: "%d %b. %y"
+      regular: "%d %b %y"

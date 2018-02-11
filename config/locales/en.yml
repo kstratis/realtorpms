@@ -36,6 +36,21 @@ en:
       invitation:
         email_label: "Email"
         email_placeholder: "i.e. johnsmith@gmail.com"
+  js:
+    datatables:
+      users:
+        partner: "Partner"
+        email: "Email"
+        usertype: "Account type"
+        registration: "Registration"
+        actions: "Actions"
+        admin: "Administrator"
+        user: "User"
+        tooltip_view_profile: "View profile"
+        tooltip_edit_profile: "Edit"
+        tooltip_delete_profile: "Delete"
+    search:
+      placeholder: "i.e. John Smith"
   sidebar:
     main: "Dashboard"
     properties: "Properties"
@@ -51,12 +66,6 @@ en:
     new:
       heading: "Add new partner"
       inv_button: "Send invitation"
-  datatables:
-    users:
-      partner: "Partner"
-      email: "Email"
-      usertype: "Type"
-      registration: "Registration"
-      actions: "Actions"
-      admin: "Administrator"
-      user: "User"
+  time:
+    formats:
+      regular: "%d %b %y"

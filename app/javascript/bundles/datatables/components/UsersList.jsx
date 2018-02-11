@@ -3,20 +3,6 @@ import React from 'react';
 import ReactPaginate from 'react-paginate';
 import withDatatable from './withDatatable';
 
-
-// import { addLocaleData } from 'react-intl';
-// import en from 'react-intl/locale-data/en';
-// import { defaultMessages } from './../../../locales/default';
-// import { IntlProvider, injectIntl, intlShape } from 'react-intl';
-// import {formatMessage} from "react-intl/src/format";
-
-// import { formatMessage } from 'react-intl';
-
-// addLocaleData([...en, ...gr]);
-
-// const locale =  defaultLocale;
-// const messages = translations[locale];
-
 const UsersList = ({handlePageClick, handleSort, handleAssign, advanceByTwo, isLoading, dataset, pageCount, selectedPage, sorting, ordering, i18n}) => {
   return (
     <div className="dataTablePage col-md-12">
@@ -116,19 +102,19 @@ const UsersList = ({handlePageClick, handleSort, handleAssign, advanceByTwo, isL
                         <div className="btn-group">
 
                           <div className="btn-group" role="group" aria-label="...">
-                            <a title="View Profile" className="btn btn-default" href={entry['view_entity_path']}>
+                            <a title={i18n['users_datatable']['tooltip_view_profile']} className="btn btn-default" href={entry['view_entity_path']}>
                               <i className="pr-icon action-button-graphic xs bar-chart"> </i>
                             </a>
                           </div>
 
                           <div className="btn-group" role="group" aria-label="...">
-                            <a title="Edit User" className="btn btn-default" href={entry['edit_entity_path']}>
+                            <a title={i18n['users_datatable']['tooltip_edit_profile']} className="btn btn-default" href={entry['edit_entity_path']}>
                               <i className="pr-icon action-button-graphic xs pencil"> </i>
                             </a>
                           </div>
 
                           <div className="btn-group" role="group" aria-label="...">
-                            <a title="Delete User"
+                            <a title={i18n['users_datatable']['tooltip_delete_profile']}
                                className="btn btn-default"
                                href={entry['view_entity_path']}
                                data-method="delete"
