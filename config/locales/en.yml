@@ -36,6 +36,24 @@ en:
       invitation:
         email_label: "Email"
         email_placeholder: "i.e. johnsmith@gmail.com"
+      property:
+        description: "Description"
+        description_placeholder: "i.e. Luxe 3 Story Loft Rooftop"
+        propertytype: "Type"
+        price: "Price"
+        size: "Size"
+        construction: "Construction"
+        enums:
+          propertytype:
+            neoclassical: "Neoclassical"
+            protected_property: "Protected property"
+            loft: "Loft"
+            traditional: "Traditional"
+            villa: "Villa"
+            stone: "Stone"
+            studio: "Studio"
+            prefabricated: "Prefabricated"
+            precast: "Precast"
   js:
     datatables:
       users:
@@ -49,8 +67,13 @@ en:
         tooltip_view_profile: "View profile"
         tooltip_edit_profile: "Edit"
         tooltip_delete_profile: "Delete"
-    search:
+      properties:
+        description: "Description"
+    users_search:
       placeholder: "i.e. John Smith"
+    properties_search:
+      placeholder: "i.e. 24 Oxford Street"
+
   sidebar:
     main: "Dashboard"
     properties: "Properties"
@@ -66,6 +89,10 @@ en:
     new:
       heading: "Add new partner"
       inv_button: "Send invitation"
+  properties:
+    new:
+      heading: "Add new property"
+      add_button: "Add property"
   time:
     formats:
       regular: "%d %b %y"

@@ -2,7 +2,7 @@
 <div class="center pr-signup-container pr-container">
 
   <i class="pr-icon sm add-property-colored"></i>
-  <span class="title">Add new property</span>
+  <span class="title"><%= t 'properties.new.heading' %></span>
 
 
   <div class="row">
@@ -12,17 +12,23 @@
         <%= form_for(@property, remote: true) do |property| %>
             <%#= render 'shared/error_messages' %>
           <div class="form-group">
+
+                <%#= property.label Property.human_attribute_name("description") %>
                 <%= property.label :description %>
-                <%= property.text_field :description, placeholder: 'i.e. 3-bedroom flat in Kifissia', class: 'glowing-border' %>
+                <%= property.text_field :description, placeholder: Property.human_attribute_name("description_placeholder"), class: 'glowing-border' %>
                 <%#= inline_error @property.owner, :first_name, 'First name'%>
 
                 <%= property.label :propertytype %>
-                <%= property.select :propertytype, Property.propertytypes.keys, {}, class: 'form-control' %>
+                <!-- original -->
+                <%#= property.select :propertytype, Property.propertytypes.keys, {}, class: 'form-control' %>
+                <!-- end of original -->
+                <%= property.select :propertytype, Property.propertytypes.keys.collect { |propertytype| [ Property.human_enum_name(:propertytype, propertytype), propertytype ] }, {},  class: 'form-control' %>
                 <%#= property.text_field :type, placeholder: 'i.e. 3-bedroom flat in Kifissia', class: 'glowing-border' %>
                 <%#= inline_error @property.owner, :first_name, 'First name'%>
 
                 <%#= property.label :construction %>
                 <%#= property.text_field :size, placeholder: 'i.e. 90', class: 'glowing-border' %>
+
 
                 <%= property.label :price %>
                 <%= property.text_field :price, placeholder: 'i.e. 250000', class: 'glowing-border' %>
@@ -32,7 +38,11 @@
                 <%= property.text_field :size, placeholder: 'i.e. 90', class: 'glowing-border' %>
                 <%#= inline_error @property.owner, :email, 'Email'%>
 
-            <%= property.submit 'Add new property', class: 'btn btn-primary' %>
+                <%= property.label :construction %>
+                <%= property.select(:construction, options_for_select( 1940..Time.zone.now.year+2 , Time.zone.now.year), {}, class: 'form-control') %>
+                <%#= property.text_field :price, placeholder: 'i.e. 250000', class: 'glowing-border' %>
+
+            <%= property.submit t('properties.new.add_button'), class: 'btn btn-primary' %>
           </div>
         <% end %>
       </div>

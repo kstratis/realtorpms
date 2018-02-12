@@ -3,10 +3,29 @@ el:
   activerecord:
     models:
       invitation: "Πρόσκληση"
+      property: "Ακίνητο"
     attributes:
       invitation:
         email_label: "Διεύθυνση ηλεκτρονικού ταχυδρομείου"
         email_placeholder: "π.χ. nikosdimitriou@gmail.com"
+      property:
+        description: "Περιγραφή"
+        description_placeholder: "π.χ. Μεζονέτα 180τ.μ. Κηφισιά"
+        propertytype: "Είδος"
+        price: "Τιμή"
+        size: "Εμβαδόν"
+        construction: "Κατασκευή"
+        enums:
+          propertytype:
+            neoclassical: "Νεοκλασικό"
+            protected_property: "Διατηρητέο"
+            loft: "Loft"
+            traditional: "Παραδοσιακό"
+            villa: "Βίλα"
+            stone: "Πέτρινο"
+            studio: "Studio"
+            prefabricated: "Λυόμενο"
+            precast: "Προκατασκευή"
     errors:
       messages:
         record_invalid: ! 'Η επικύρωση απέτυχε: %{errors}'
@@ -23,8 +42,12 @@ el:
         tooltip_view_profile: "Προβολή προφίλ"
         tooltip_edit_profile: "Επεξεργασία"
         tooltip_delete_profile: "Διαγραφή"
-    search:
+      properties:
+        description: "Περιγραφή"
+    users_search:
       placeholder: "π.χ. Δημήτρης Στεφάνου"
+    properties_search:
+      placeholder: "π.χ. Βούλα 80τ.μ."
   sidebar:
     main: "Κεντρική"
     properties: "Ακίνητα"
@@ -40,7 +63,10 @@ el:
     new:
       heading: "Πρόσκληση νέου συνεργάτη"
       inv_button: "Αποστολή πρόσκλησης"
-
+  properties:
+    new:
+      heading: "Προσθήκη νέου ακινήτου"
+      add_button: "Προσθήκη"
   time:
     formats:
       regular: "%d %b %y"

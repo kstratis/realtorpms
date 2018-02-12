@@ -17,7 +17,7 @@ const UsersList = ({handlePageClick, handleSort, handleAssign, advanceByTwo, isL
               <tr>
                 <th>
                   <a id='sort_by_name' className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'last_name')}>
-                    <span>{i18n['users_datatable']['partner']}</span>
+                    <span>{i18n['datatable']['partner']}</span>
                     {sorting === 'last_name'
                       ? ordering === 'asc'
                         ? <span className={'sortable-icon-container'}>
@@ -34,7 +34,7 @@ const UsersList = ({handlePageClick, handleSort, handleAssign, advanceByTwo, isL
                 </th>
                 <th>
                   <a id='sort_by_email' className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'email')}>
-                    <span>{i18n['users_datatable']['email']}</span>
+                    <span>{i18n['datatable']['email']}</span>
                     {sorting === 'email'
                       ? ordering === 'asc'
                         ? <span className={'sortable-icon-container'}>
@@ -49,10 +49,10 @@ const UsersList = ({handlePageClick, handleSort, handleAssign, advanceByTwo, isL
                     }
                   </a>
                 </th>
-                <th><span>{i18n['users_datatable']['usertype']}</span></th>
+                <th><span>{i18n['datatable']['usertype']}</span></th>
                 <th>
                   <a id='sort_by_date' className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'created_at')}>
-                    <span>{i18n['users_datatable']['registration']}</span>
+                    <span>{i18n['datatable']['registration']}</span>
                     {sorting === 'created_at'
                       ? ordering === 'asc'
                         ? <span className={'sortable-icon-container'}>
@@ -67,7 +67,7 @@ const UsersList = ({handlePageClick, handleSort, handleAssign, advanceByTwo, isL
                     }
                   </a>
                 </th>
-                <th><span>{i18n['users_datatable']['actions']}</span></th>
+                <th><span>{i18n['datatable']['actions']}</span></th>
               </tr>
               </thead>
               <tbody>
@@ -86,7 +86,7 @@ const UsersList = ({handlePageClick, handleSort, handleAssign, advanceByTwo, isL
 
                   <td>
                     <div className={'table-entry'}>
-                      <span>{entry['type'] ? i18n['users_datatable']['admin'] : i18n['users_datatable']['user'] }</span>
+                      <span>{entry['type'] ? i18n['datatable']['admin'] : i18n['datatable']['user'] }</span>
                     </div>
                   </td>
 
@@ -102,19 +102,19 @@ const UsersList = ({handlePageClick, handleSort, handleAssign, advanceByTwo, isL
                         <div className="btn-group">
 
                           <div className="btn-group" role="group" aria-label="...">
-                            <a title={i18n['users_datatable']['tooltip_view_profile']} className="btn btn-default" href={entry['view_entity_path']}>
+                            <a title={i18n['datatable']['tooltip_view_profile']} className="btn btn-default" href={entry['view_entity_path']}>
                               <i className="pr-icon action-button-graphic xs bar-chart"> </i>
                             </a>
                           </div>
 
                           <div className="btn-group" role="group" aria-label="...">
-                            <a title={i18n['users_datatable']['tooltip_edit_profile']} className="btn btn-default" href={entry['edit_entity_path']}>
+                            <a title={i18n['datatable']['tooltip_edit_profile']} className="btn btn-default" href={entry['edit_entity_path']}>
                               <i className="pr-icon action-button-graphic xs pencil"> </i>
                             </a>
                           </div>
 
                           <div className="btn-group" role="group" aria-label="...">
-                            <a title={i18n['users_datatable']['tooltip_delete_profile']}
+                            <a title={i18n['datatable']['tooltip_delete_profile']}
                                className="btn btn-default"
                                href={entry['view_entity_path']}
                                data-method="delete"

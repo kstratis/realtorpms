@@ -8,7 +8,7 @@ const Search = ({searchInput, handleSearchInput, i18n}) => {
       <div className="input-group user-search">
         <input type="text"
                className="form-control input-lg glowing-border"
-               placeholder={i18n['users_search']['placeholder']}
+               placeholder={i18n['search']['placeholder']}
                aria-describedby="basic-addon1"
                value={searchInput}
                onChange={handleSearchInput} />
