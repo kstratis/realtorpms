@@ -13,16 +13,22 @@ el:
         last_name: "Επώνυμο"
         email: "Email"
         age: "Ηλικία"
+        age_placeholder: "π.χ. 30"
         phone1: "Τηλέφωνο"
+        phone1_placeholder: "π.χ. 697 25 00 111"
         locale: "Γλώσσα εμφάνισης"
         password: "Νέος κωδικός"
+        password_placeholder: "Απαιτούνται τουλάχιστον 6 χαρ/ρες"
         password_confirmation: "Επανάληψη νέου κωδικού"
+        password_confirmation_placeholder: "Πληκτρολογήστε ξανά τον νέο σας κωδικό"
       property:
         description: "Περιγραφή"
         description_placeholder: "π.χ. Μεζονέτα 180τ.μ. Κηφισιά"
         propertytype: "Είδος"
         price: "Τιμή"
+        price_placeholder: "π.χ. 120000"
         size: "Εμβαδόν"
+        size_placeholder: "π.χ. 80"
         construction: "Κατασκευή"
         enums:
           propertytype:

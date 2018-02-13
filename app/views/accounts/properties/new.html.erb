@@ -22,7 +22,9 @@
                 <!-- original -->
                 <%#= property.select :propertytype, Property.propertytypes.keys, {}, class: 'form-control' %>
                 <!-- end of original -->
-                <%= property.select :propertytype, Property.propertytypes.keys.collect { |propertytype| [ Property.human_enum_name(:propertytype, propertytype), propertytype ] }, {},  class: 'form-control' %>
+
+                <%= property.select :propertytype, Property.propertytypes.keys.collect { |propertytype| [ Property.human_enum_name(:propertytype, propertytype), propertytype ] }, {},  class: 'form-control glowing-border-select' %>
+
                 <%#= property.text_field :type, placeholder: 'i.e. 3-bedroom flat in Kifissia', class: 'glowing-border' %>
                 <%#= inline_error @property.owner, :first_name, 'First name'%>
 
@@ -31,11 +33,11 @@
 
 
                 <%= property.label :price %>
-                <%= property.text_field :price, placeholder: 'i.e. 250000', class: 'glowing-border' %>
+                <%= property.text_field :price, placeholder: Property.human_attribute_name("price_placeholder"), class: 'glowing-border' %>
                 <%#= inline_error @property.owner, :last_name, 'Last name'%>
 
                 <%= property.label :size %>
-                <%= property.text_field :size, placeholder: 'i.e. 90', class: 'glowing-border' %>
+                <%= property.text_field :size, placeholder: Property.human_attribute_name("size_placeholder"), class: 'glowing-border' %>
                 <%#= inline_error @property.owner, :email, 'Email'%>
 
                 <%= property.label :construction %>
