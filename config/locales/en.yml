@@ -36,6 +36,15 @@ en:
       invitation:
         email_label: "Email"
         email_placeholder: "i.e. johnsmith@gmail.com"
+      user:
+        first_name: "First name"
+        last_name: "Last name"
+        email: "Email"
+        age: "Age"
+        phone1: "Telephone"
+        locale: "Language"
+        password: "New password"
+        password_confirmation: "Confirm new password"
       property:
         description: "Description"
         description_placeholder: "i.e. Luxe 3 Story Loft Rooftop"
@@ -89,6 +98,10 @@ en:
     new:
       heading: "Add new partner"
       inv_button: "Send invitation"
+  users:
+    edit:
+      heading: "Edit profile"
+      save_button: "Save changes"
   properties:
     new:
       heading: "Add new property"
@@ -96,3 +109,6 @@ en:
   time:
     formats:
       regular: "%d %b %y"
+  languages:
+    english: "English"
+    greek: "Greek"

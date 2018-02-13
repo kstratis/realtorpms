@@ -8,6 +8,15 @@ el:
       invitation:
         email_label: "Διεύθυνση ηλεκτρονικού ταχυδρομείου"
         email_placeholder: "π.χ. nikosdimitriou@gmail.com"
+      user:
+        first_name: "Όνομα"
+        last_name: "Επώνυμο"
+        email: "Email"
+        age: "Ηλικία"
+        phone1: "Τηλέφωνο"
+        locale: "Γλώσσα εμφάνισης"
+        password: "Νέος κωδικός"
+        password_confirmation: "Επανάληψη νέου κωδικού"
       property:
         description: "Περιγραφή"
         description_placeholder: "π.χ. Μεζονέτα 180τ.μ. Κηφισιά"
@@ -63,6 +72,10 @@ el:
     new:
       heading: "Πρόσκληση νέου συνεργάτη"
       inv_button: "Αποστολή πρόσκλησης"
+  users:
+    edit:
+      heading: "Επεξεργασία προφίλ"
+      save_button: "Αποθήκευση"
   properties:
     new:
       heading: "Προσθήκη νέου ακινήτου"
@@ -70,3 +83,6 @@ el:
   time:
     formats:
       regular: "%d %b %y"
+  languages:
+    english: "Αγγλικά"
+    greek: "Ελληνικά"

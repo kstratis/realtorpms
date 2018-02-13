@@ -2,7 +2,7 @@
 <div class="center pr-signup-container pr-container">
 
   <i class="pr-icon sm edit-user-colored"></i>
-  <span class="title">Edit profile</span>
+  <span class="title"><%= t 'users.edit.heading' %></span>
 
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
@@ -26,19 +26,22 @@
             <%= f.text_field :age, placeholder: 'i.e. 30', class: 'glowing-border' %>
             <%= inline_error @user, :age, 'Age'%>
 
-            <%= f.label :phone1, 'Phone' %>
+            <%= f.label :phone1 %>
             <%= f.text_field :phone1, placeholder: 'i.e. 695 55 55 300', class: 'glowing-border' %>
             <%= inline_error @user, :phone1, 'Phone'%>
+
+            <%= f.label :locale %>
+            <%= f.select :locale, options_for_select(User.lng_list, @user.locale), {}, class: 'form-control' %>
 
             <%= f.label :password %>
             <%= f.password_field :password, placeholder: 'Please use at least 6 characters', class: 'glowing-border' %>
             <%= inline_error @user, :password, 'Password'%>
 
-            <%= f.label :password_confirmation, 'Password confirmation' %>
+            <%= f.label :password_confirmation %>
             <%= f.password_field :password_confirmation, placeholder: 'Retype your password', class: 'glowing-border' %>
             <%= inline_error @user, :password_confirmation, 'Password confirmation'%>
 
-            <%= f.submit 'Save changes', class: 'btn btn-primary' %>
+            <%= f.submit t('users.edit.save_button'), class: 'btn btn-primary' %>
         <% end %>
 
       </div>

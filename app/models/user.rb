@@ -38,6 +38,10 @@ class User < ApplicationRecord
       SecureRandom.urlsafe_base64
     end
 
+    def lng_list
+      [[I18n.t('languages.english'), 'en'], [I18n.t('languages.greek'), 'el']]
+    end
+
   end
 
   # 1 if the user owns an account (paying customer).
