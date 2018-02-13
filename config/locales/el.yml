@@ -63,6 +63,11 @@ el:
       placeholder: "π.χ. Δημήτρης Στεφάνου"
     properties_search:
       placeholder: "π.χ. Βούλα 80τ.μ."
+  navbar:
+    profile: "Προφίλ"
+    account: "Λογαριασμός"
+    messages: "Μηνύματα"
+    logout: "Αποσύνδεση"
   sidebar:
     main: "Κεντρική"
     properties: "Ακίνητα"

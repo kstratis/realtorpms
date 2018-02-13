@@ -88,6 +88,11 @@ en:
       placeholder: "i.e. John Smith"
     properties_search:
       placeholder: "i.e. 24 Oxford Street"
+  navbar:
+    profile: "Profile"
+    account: "Account"
+    messages: "Messages"
+    logout: "Logout"
   sidebar:
     main: "Dashboard"
     properties: "Properties"

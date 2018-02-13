@@ -55,13 +55,20 @@
                 <li>
 
                   <%= link_to edit_user_path(current_user), class: 'entry' do %>
-                    <%= content_tag :span, fa_icon('id-card-o lg fw', text: 'Profile') %>
+                    <%= content_tag :span, fa_icon('id-card-o lg fw', text: t('navbar.profile')) %>
+                  <% end %>
+                </li>
+
+                <li>
+
+                  <%= link_to edit_user_path(current_user), class: 'entry' do %>
+                    <%= content_tag :span, fa_icon('credit-card lg fw', text: t('navbar.account')) %>
                   <% end %>
                 </li>
 
                 <li>
                   <%= link_to edit_user_path(current_user) do %>
-                      <%= content_tag :span, fa_icon('envelope-o lg fw', text: 'Messages') %>
+                      <%= content_tag :span, fa_icon('envelope-o lg fw', text: t('navbar.messages')) %>
                   <% end %>
                 </li>
 
@@ -69,7 +76,7 @@
 
                 <li>
                   <%= link_to logout_path, method: :delete do %>
-                      <%= content_tag :span, fa_icon('sign-out lg fw', text: 'Log out') %>
+                      <%= content_tag :span, fa_icon('sign-out lg fw', text: t('navbar.logout')) %>
                   <% end %>
                 </li>
               </ul>
