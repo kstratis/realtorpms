@@ -116,6 +116,9 @@ en:
     new:
       heading: "Add new property"
       add_button: "Add property"
+    index:
+      heading: "Properties"
+      new_button: "Add new property"
   time:
     formats:
       regular: "%d %b %y"

@@ -23,7 +23,6 @@
         </p>
       </div>
 
-
       <%= react_component('UsersListAssignableWithDatatable', props: {
           initial_payload: {
               dataset_wrapper: @userslist,
@@ -33,11 +32,15 @@
               initial_search: @initial_search,
               initial_sorting: @initial_sorting,
               initial_ordering: @initial_ordering,
-              # proprty_users means to get the users
+              # property_users means to get the users
               # plus the assigned status of each one
               # from the properties controller
               object_type: 'property_users',
               pid: @property.id
+          },
+          i18n: {
+              datatable: t('js.datatables.properties'),
+              search: t('js.properties_search')
           }
       }, prerender: false) %>
 

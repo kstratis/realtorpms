@@ -9,7 +9,7 @@
   <div class="row">
     <div class="col-md-12">
 
-      <h3>Properties</h3>
+      <h3><%= t 'properties.index.heading' %></h3>
 
       <%= react_component('PropertiesListWithDatatable', props: {
           initial_payload: {
@@ -62,7 +62,7 @@
       <br>
 
       <% if owner? %>
-        <%= link_to 'New Property', new_property_path %>
+        <%= link_to t('properties.index.new_button'), new_property_path %>
       <% end %>
 
 

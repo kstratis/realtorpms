@@ -91,6 +91,9 @@ el:
     new:
       heading: "Προσθήκη νέου ακινήτου"
       add_button: "Προσθήκη"
+    index:
+      heading: "Κατάλογος ακινήτων"
+      new_button: "Προσθήκη ακινήτου"
   time:
     formats:
       regular: "%d %b %y"
