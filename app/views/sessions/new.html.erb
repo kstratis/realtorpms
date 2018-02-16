@@ -2,7 +2,7 @@
 <div class="center pr-signup-container pr-container">
 
   <i class="pr-icon sm padlock1-colored"></i>
-  <span class="title">Log in</span>
+  <span class="title"><%= t 'login.heading' %></span>
 
   <div class="row">
     <div class="col-md-12">
@@ -10,22 +10,23 @@
         <%= form_for(:session, url: login_path) do |f| %>
             <%#= render 'shared/error_messages' %>
 
-            <%= f.label :email %>
+            <%= f.label User.human_attribute_name("email") %>
             <%= f.email_field :email, class: 'glowing-border' %>
 
-            <%= f.label :password %>
+            <%= f.label User.human_attribute_name("password") %>
             <%= f.password_field :password, class: 'glowing-border' %>
 
             <%= f.label :remember_me, class: 'checkbox inline' do %>
-                <%= f.check_box :remember_me %>
-                <span>Remember me on this computer</span>
-            <% end %>
+            <%= f.check_box :remember_me %>
+            <span><%= User.human_attribute_name("remember_me") %></span>
+          <% end %>
 
-            <%= f.submit 'Log in', class: 'btn btn-primary' %>
+          <%= f.submit t('login.login_button'), class: 'btn btn-primary' %>
+
         <% end %>
 
         <% if request.subdomain.blank? %>
-          <p class="new_user_prompt">New user? <%= link_to 'Sign up now!', new_account_url(subdomain: false) %></p>
+          <p class="new_user_prompt"><%= t('login.new_user_prompt') %> <%= link_to t('login.sign_up_now'), new_account_url(subdomain: false) %></p>
         <% end %>
       </div>
     </div>

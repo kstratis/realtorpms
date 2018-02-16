@@ -45,10 +45,11 @@ en:
         phone1: "Telephone"
         phone1_placeholder: "i.e. 813-440-5026"
         locale: "Language"
-        password: "New password"
+        password: "Password"
         password_placeholder: "At least 6 characters long"
         password_confirmation: "Confirm new password"
         password_confirmation_placeholder: "Type your new password again"
+        remember_me: "Remember me on this computer"
       property:
         description: "Description"
         description_placeholder: "i.e. Luxe 3 Story Loft Rooftop"
@@ -116,6 +117,10 @@ en:
     new:
       heading: "Add new property"
       add_button: "Add property"
+    created:
+      message: "Property successfully added"
+      return: "Return"
+      add_another: "Add another"
     index:
       heading: "Properties"
       new_button: "Add new property"
@@ -125,3 +130,8 @@ en:
   languages:
     english: "English"
     greek: "Greek"
+  login:
+    heading: "Log in"
+    login_button: "Log in"
+    new_user_prompt: "New user?"
+    sign_up_now: "Register a new account here!"

@@ -44,7 +44,7 @@
                 <%= property.select(:construction, options_for_select( 1940..Time.zone.now.year+2 , Time.zone.now.year), {}, class: 'form-control') %>
                 <%#= property.text_field :price, placeholder: 'i.e. 250000', class: 'glowing-border' %>
 
-            <%= property.submit t('properties.new.add_button'), class: 'btn btn-primary' %>
+                <%= property.submit t('properties.new.add_button'), class: 'btn btn-primary' %>
           </div>
         <% end %>
       </div>

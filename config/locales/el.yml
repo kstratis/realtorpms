@@ -4,6 +4,7 @@ el:
     models:
       invitation: "Πρόσκληση"
       property: "Ακίνητο"
+      user: "Χρήστης"
     attributes:
       invitation:
         email_label: "Διεύθυνση ηλεκτρονικού ταχυδρομείου"
@@ -17,10 +18,11 @@ el:
         phone1: "Τηλέφωνο"
         phone1_placeholder: "π.χ. 697 25 00 111"
         locale: "Γλώσσα εμφάνισης"
-        password: "Νέος κωδικός"
+        password: "Κωδικός"
         password_placeholder: "Απαιτούνται τουλάχιστον 6 χαρ/ρες"
         password_confirmation: "Επανάληψη νέου κωδικού"
         password_confirmation_placeholder: "Πληκτρολογήστε ξανά τον νέο σας κωδικό"
+        remember_me: "Να με θυμάσαι σε αυτήν τη συσκευή"
       property:
         description: "Περιγραφή"
         description_placeholder: "π.χ. Μεζονέτα 180τ.μ. Κηφισιά"
@@ -91,6 +93,10 @@ el:
     new:
       heading: "Προσθήκη νέου ακινήτου"
       add_button: "Προσθήκη"
+    created:
+      message: "Η προσθήκη ακινήτου ολοκληρώθηκε επιτυχώς"
+      return: "Επιστροφή"
+      add_another: "Προσθήκη νέου"
     index:
       heading: "Κατάλογος ακινήτων"
       new_button: "Προσθήκη ακινήτου"
@@ -100,3 +106,9 @@ el:
   languages:
     english: "Αγγλικά"
     greek: "Ελληνικά"
+  login:
+    heading: "Είσοδος στην εφαρμογή"
+    login_button: "Είσοδος"
+    new_user_prompt: "Είστε νέος χρήστης;"
+    sign_up_now: "Εγγραφείτε τώρα!"
+

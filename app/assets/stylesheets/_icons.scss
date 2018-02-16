@@ -137,6 +137,10 @@
     background-image: url( bar_chart.svg );
   }
 
+  &.checkmark{
+    background-image: url( checkmark.svg );
+  }
+
   & ~ .pr-icon-desc {
     display: block;
     text-align: center;
