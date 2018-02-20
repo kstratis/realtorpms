@@ -136,3 +136,8 @@ lguser = bluedomain.users.find_by(email: 'lg@gmail.com')
 
   lguser.properties << property
 end
+
+Country.create!(
+    name: 'Greece',
+    initials: 'GR'
+)
