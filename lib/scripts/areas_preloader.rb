@@ -5,14 +5,19 @@ myvar = 0
 
 sheet.each_with_index do |row, index|
   next if index == 0
-  case row[3].to_i
+  level = row[3].to_i
+  case level
     when 1
-      pp "Level 1 - #{row}"
-      RootArea.create!(areaid: 'Lakis',
-                   )
-
+      RootArea.create!(area_id: row[0].to_i,
+                       localname: row[1].to_s,
+                       globalname: row[2].to_s)
+      pp "Level 1 - #{row} - OK!"
     when 2
-      pp "Level 2 - #{row}"
+      # RootArea.find_by(area_id: row[4].to_i).branch_areas <<
+      BranchArea.create!(area_id: row[0].to_i,
+                       localname: row[1].to_s,
+                       globalname: row[2].to_s)
+      pp "Level 2 - #{row} - GOOD!"
     when 3
       pp "Level 3 - #{row}"
     else
@@ -22,7 +27,5 @@ sheet.each_with_index do |row, index|
   myvar+=1
 end
   # pp row[0]
-
-
 
 puts "-=Total number of rows was: #{myvar}=-"
