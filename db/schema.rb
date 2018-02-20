@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180220102801) do
+ActiveRecord::Schema.define(version: 20180220215425) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20180220102801) do
     t.integer "area_id"
     t.string "localname"
     t.string "globalname"
-    t.integer "parent_id"
+    t.integer "root_area_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["area_id"], name: "index_branch_areas_on_area_id", unique: true
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20180220102801) do
     t.integer "area_id"
     t.string "localname"
     t.string "globalname"
-    t.integer "parent_id"
+    t.integer "branch_area_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["area_id"], name: "index_leaf_areas_on_area_id", unique: true
@@ -143,9 +143,9 @@ ActiveRecord::Schema.define(version: 20180220102801) do
 
   add_foreign_key "assignments", "properties"
   add_foreign_key "assignments", "users"
-  add_foreign_key "branch_areas", "root_areas", column: "parent_id", primary_key: "area_id"
+  add_foreign_key "branch_areas", "root_areas", primary_key: "area_id"
   add_foreign_key "invitations", "accounts"
-  add_foreign_key "leaf_areas", "branch_areas", column: "parent_id", primary_key: "area_id"
+  add_foreign_key "leaf_areas", "branch_areas", primary_key: "area_id"
   add_foreign_key "memberships", "accounts"
   add_foreign_key "memberships", "users"
   add_foreign_key "properties", "accounts"
