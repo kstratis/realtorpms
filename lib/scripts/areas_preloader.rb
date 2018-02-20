@@ -8,6 +8,9 @@ sheet.each_with_index do |row, index|
   case row[3].to_i
     when 1
       pp "Level 1 - #{row}"
+      RootArea.create!(areaid: 'Lakis',
+                   )
+
     when 2
       pp "Level 2 - #{row}"
     when 3
