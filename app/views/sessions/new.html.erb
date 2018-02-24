@@ -2,7 +2,7 @@
 <div class="center pr-signup-container pr-container">
 
   <i class="pr-icon sm padlock1-colored"></i>
-  <span class="title"><%= t 'login.heading' %></span>
+  <span class="title"><%= t 'sessions.heading' %></span>
 
   <div class="row">
     <div class="col-md-12">
@@ -21,12 +21,12 @@
             <span><%= User.human_attribute_name("remember_me") %></span>
           <% end %>
 
-          <%= f.submit t('login.login_button'), class: 'btn btn-primary' %>
+          <%= f.submit t('sessions.login_button'), class: 'btn btn-primary' %>
 
         <% end %>
 
         <% if request.subdomain.blank? %>
-          <p class="new_user_prompt"><%= t('login.new_user_prompt') %> <%= link_to t('login.sign_up_now'), new_account_url(subdomain: false) %></p>
+          <p class="new_user_prompt"><%= t('sessions.new_user_prompt') %> <%= link_to t('sessions.sign_up_now'), new_account_url(subdomain: false) %></p>
         <% end %>
       </div>
     </div>

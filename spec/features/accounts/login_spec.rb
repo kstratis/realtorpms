@@ -9,9 +9,10 @@ feature 'Logging in the system' do
 
     it 'can log in' do
       visit 'http://lvh.me/login'
-      fill_in 'Email', with: account.owner.email
-      fill_in 'Password', with: account.owner.password
-      click_button 'Log in'
+      save_and_open_page
+      fill_in 'session_email', with: account.owner.email
+      fill_in 'session_password', with: account.owner.password
+      click_button 'Είσοδος'
       expect(page.current_url).to eq('http://test1.lvh.me/')
     end
 

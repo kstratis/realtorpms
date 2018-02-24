@@ -35,7 +35,7 @@ class SessionsController < ApplicationController
         end
         log_in user
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-        flash[:success] = 'You have successfully signed in.'
+        flash[:success] = I18n.t 'sessions.flash_error'
 
         redirect_back_or(nil, request.subdomain) and return
       end
@@ -44,7 +44,7 @@ class SessionsController < ApplicationController
       # All other routes are automatically protected with a subdomain constraint.
       log_in user
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      flash[:success] = 'You have successfully signed in.'
+      flash[:success] = I18n.t 'sessions.flash_success'
       # Check the account count. If accounts.count > 0 redirect to account switcher
       # otherwise simply redirect the user to his/her default subdomain
       redirect_to account_list_url(subdomain: false) and return if user.admin?
@@ -73,14 +73,15 @@ class SessionsController < ApplicationController
       # redirect_to root_url(subdomain: Account.find_by(owner_id: user.id).subdomain)
 
     else
-      flash.now[:danger] = 'Invalid email/password combination' # Not quite right!
+      # flash.now[:danger] = 'Invalid email/password combination' # Not quite right!
+      flash.now[:danger] = I18n.t 'sessions.flash_error'
       render 'new'
     end
   end
 
   def destroy
     log_out if logged_in?
-    flash[:danger] = 'You have successfully signed out.'
+    flash[:danger] = I18n.t 'sessions.flash_logout'
     redirect_to root_url(subdomain: request.subdomain) # make the subdomain explicit
   end
 

@@ -106,9 +106,11 @@ el:
   languages:
     english: "Αγγλικά"
     greek: "Ελληνικά"
-  login:
+  sessions:
     heading: "Είσοδος στην εφαρμογή"
     login_button: "Είσοδος"
     new_user_prompt: "Είστε νέος χρήστης;"
     sign_up_now: "Εγγραφείτε τώρα!"
-
+    flash_error: "Τα στοιχεία σύνδεσης δεν είναι σωστά!"
+    flash_success: "Συνδεθήκατε επιτυχώς."
+    flash_logout: "Έχετε αποσυνδεθεί."

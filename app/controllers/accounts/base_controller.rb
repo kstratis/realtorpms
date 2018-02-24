@@ -1,8 +1,8 @@
 module Accounts
   class BaseController < ApplicationController
     include UserDatatable
-    # before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
     before_action :logged_in_user, :allowed_subdomains, only: [:index, :edit, :update, :destroy]
+    # before_action :logged_in_user, :allowed_subdomains
     after_action :store_referer_url, only: [:index, :edit, :update, :destroy]
 
     # before_action :correct_subdomain
@@ -31,6 +31,7 @@ module Accounts
     helper_method :owner?
 
     def logged_in_user
+      puts 'RUNNING'
       unless logged_in?
         store_location
         redirect_to login_url
