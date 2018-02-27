@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180220215425) do
+ActiveRecord::Schema.define(version: 20180226145645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,18 @@ ActiveRecord::Schema.define(version: 20180220215425) do
     t.index ["area_id"], name: "index_leaf_areas_on_area_id", unique: true
   end
 
+  create_table "locations", force: :cascade do |t|
+    t.integer "area_id"
+    t.string "localname"
+    t.string "globalname"
+    t.integer "level"
+    t.integer "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "country_id"
+    t.index ["area_id", "country_id"], name: "index_locations_on_area_id_and_country_id", unique: true
+  end
+
   create_table "memberships", force: :cascade do |t|
     t.bigint "account_id"
     t.bigint "user_id"
@@ -112,6 +124,7 @@ ActiveRecord::Schema.define(version: 20180220215425) do
     t.integer "user_id"
     t.bigint "account_id"
     t.integer "propertytype"
+    t.integer "location_id"
     t.index ["account_id"], name: "index_properties_on_account_id"
   end
 
@@ -146,7 +159,9 @@ ActiveRecord::Schema.define(version: 20180220215425) do
   add_foreign_key "branch_areas", "root_areas", primary_key: "area_id"
   add_foreign_key "invitations", "accounts"
   add_foreign_key "leaf_areas", "branch_areas", primary_key: "area_id"
+  add_foreign_key "locations", "countries"
   add_foreign_key "memberships", "accounts"
   add_foreign_key "memberships", "users"
   add_foreign_key "properties", "accounts"
+  add_foreign_key "properties", "locations"
 end

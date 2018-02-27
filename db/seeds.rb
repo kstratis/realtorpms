@@ -57,6 +57,9 @@ Account.create!(
     owner: User.fourth
 )
 
+l1 = Location.find_by(area_id: 106314)
+l2 = Location.find_by(area_id: 117003)
+l3 = Location.find_by(area_id: 106289)
 
 # Special shakalaka users
 specialuser1 = User.create!(first_name: 'Will',
@@ -115,7 +118,8 @@ smithuser = shakalaka.users.find_by(email: 'wm@gmail.com')
       description: description,
       size: size,
       price: price,
-      account: shakalaka
+      account: shakalaka,
+      location: l1
   )
 
   smithuser.properties << property
@@ -131,13 +135,10 @@ lguser = bluedomain.users.find_by(email: 'lg@gmail.com')
       description: description,
       size: size,
       price: price,
-      account: shakalaka
+      account: shakalaka,
+      location: l2
   )
 
   lguser.properties << property
 end
 
-Country.create!(
-    name: 'Greece',
-    initials: 'GR'
-)

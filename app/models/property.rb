@@ -1,6 +1,7 @@
 class Property < ApplicationRecord
   # belongs_to :user
   belongs_to :account
+  belongs_to :location, optional: true
   has_many :assignments
   # https://stackoverflow.com/a/38845388/178728
   has_many :users, -> { distinct }, through: :assignments, dependent: :destroy
