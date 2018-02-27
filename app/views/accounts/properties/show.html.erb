@@ -1,14 +1,72 @@
-<p id="notice"><%= notice %></p>
+<% provide(:title, 'Property: ' + @property.description) %>
+<div class="center jumbotron pr-container">
+  <div class="row">
+    <div class="col-md-12">
 
-<p>
-  <strong>Description:</strong>
-  <%= @property.description %>
-</p>
+      <div>
+        <p id="notice"><%= notice %></p>
+      </div>
 
-<p>
-  <strong>User:</strong>
-  <%= @property.user_id %>
-</p>
+      <div>
+        <p>
+          <strong>Description:</strong>
+          <%= @property.description %>
+        </p>
+      </div>
 
-<%= link_to 'Edit', edit_property_path(@property) %> |
-<%= link_to 'Back', properties_path %>
+      <div>
+        <p>
+          <strong>Assigned to:</strong>
+          <% @property.users.each do |user| %>
+            <p><%= link_to "#{user.first_name} #{user.last_name}", user_path(user)%></p>
+          <% end %>
+        </p>
+      </div>
+
+      <%= react_component('UsersListAssignableWithDatatable', props: {
+          initial_payload: {
+              dataset_wrapper: @userslist,
+              results_per_page: @results_per_page,
+              total_entries: @total_entries,
+              current_page: @current_page,
+              initial_search: @initial_search,
+              initial_sorting: @initial_sorting,
+              initial_ordering: @initial_ordering,
+              # property_users means to get the users
+              # plus the assigned status of each one
+              # from the properties controller
+              object_type: 'property_users',
+              pid: @property.id
+          },
+          i18n: {
+              datatable: t('js.datatables.properties'),
+              search: t('js.properties_search')
+          }
+      }, prerender: false) %>
+
+
+
+      <%= link_to 'Edit', edit_property_path(@property) %> |
+      <%= link_to 'Back', properties_path %>
+
+
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+</div>
+
+
+
+
+
+<!--<div class="pr-avatar-wrapper">-->
+<!--<section class="user_info">-->
+<!--<div class="user_info_avatar">-->
+<%#= link_to('https://en.gravatar.com/emails/', target: '_blank', rel: 'nofollow', title: 'Edit your avatar picture') do %>
+<%#= gravatar_for @user, size: 256, big_default_size: true %>
+<%# end %>
+<!--</div>-->
+<!--</section>-->
+<!--</div>-->
+

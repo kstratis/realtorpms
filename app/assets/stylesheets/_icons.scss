@@ -15,6 +15,12 @@
   text-align: center;
 }
 
+.action-button-graphic {
+  display: block !important;
+  background-size: auto 100% !important;
+  padding: 0 !important
+}
+
 .pr-icon {
   //padding: 18px 18px;
 
@@ -26,9 +32,12 @@
   background-repeat: no-repeat;
   background-position: center center ;
 
-
+  &.xxxs { width:  15px; height:  15px; vertical-align: middle;}
+  &.xxs { width:  20px; height:  20px; vertical-align: middle;}
   &.xs { width:  25px; height:  25px; vertical-align: middle;}
+  &.xss { width:  30px; height:  30px; vertical-align: middle;}
   &.cs { width:  35px; height:  35px; }
+  &.css { width:  45px; height:  45px; }
   &.sm { width:  50px; height:  50px; }
   &.smm { width:  65px; height:  65px; }
   &.smmm { width:  85px; height:  85px; }
@@ -86,6 +95,50 @@
 
   &.back-button{
     background-image: url( back_button.svg );
+  }
+
+  &.account-switch{
+    background-image: url( account_switch.svg );
+  }
+
+  &.account-switch-navbar{
+    background-image: url( switch_accounts_colored.svg );
+  }
+
+  &.search-user{
+    background-image: url( search_user.svg );
+  }
+
+  &.no-results{
+    background-image: url( no_search_results.svg );
+  }
+
+  &.assignments{
+    background-image: url( assignments2.svg );
+  }
+
+  &.pencil{
+    background-image: url( pencil_2.svg );
+  }
+
+  &.user-delete{
+    background-image: url( trash_2.svg );
+  }
+
+  &.user-deactivate{
+    background-image: url( pause_2.svg );
+  }
+
+  &.partner-info{
+    background-image: url( business_card.svg );
+  }
+
+  &.bar-chart{
+    background-image: url( bar_chart.svg );
+  }
+
+  &.checkmark{
+    background-image: url( checkmark.svg );
   }
 
   & ~ .pr-icon-desc {

@@ -4,50 +4,33 @@
     <li class="side-menu-entry">
       <a href="/" class="entry-anchor-wrapper ">
         <i class="pr-icon sm stats-colored"></i>
-        <div class="hidden-sm hidden-xs"><span>ΚΕΝΤΡΙΚΗ</span></div>
+        <div class="hidden-sm hidden-xs"><span><%= t 'sidebar.main' %></span></div>
       </a>
     </li>
 
-    <!--<li class="side-menu-entry">-->
-      <!--<a href="#" class="entry-anchor-wrapper ">-->
-      <!--<i class="pr-icon sm house-colored"></i>-->
-      <!--<div class="hidden-sm hidden-xs"><span>ΑΚΙΝΗΤΑ</span></div>-->
-      <!--</a>-->
-    <!--</li>-->
-
-    <%= content_tag :li, :class => 'side-menu-entry ' + lambda{current_page?(properties_path) ? 'active' : ''}.call do %>
-        <%= link_to properties_path, :class => 'entry-anchor-wrapper' do %>
-            <%= content_tag :i, '', :class => 'pr-icon sm house-colored' %>
-            <%= content_tag :div, '', :class => 'hidden-sm hidden-xs' do %>
-                <%= content_tag :span, 'ΑΚΙΝΗΤΑ' %>
-            <% end %>
+    <%= content_tag :li, :class => 'side-menu-entry ' + lambda {current_page?(properties_path) ? 'active' : ''}.call do %>
+      <%= link_to properties_path, :class => 'entry-anchor-wrapper' do %>
+        <%= content_tag :i, '', :class => 'pr-icon sm house-colored' %>
+        <%= content_tag :div, '', :class => 'hidden-sm hidden-xs' do %>
+          <%= content_tag :span, t('sidebar.properties') %>
         <% end %>
-    <%end %>
+      <% end %>
+    <% end %>
 
 
-    <%= content_tag :li, :class => 'side-menu-entry ' + lambda{current_page?(users_path) ? 'active' : ''}.call  do %>
+    <%= content_tag :li, :class => 'side-menu-entry ' + lambda {current_page?(users_path) ? 'active' : ''}.call do %>
       <%= link_to users_path, :class => 'entry-anchor-wrapper' do %>
         <%= content_tag :i, '', :class => 'pr-icon sm agent-colored' %>
         <%= content_tag :div, '', :class => 'hidden-sm hidden-xs' do %>
-            <%= content_tag :span, 'ΣΥΝΕΡΓΑΤΕΣ' %>
+          <%= content_tag :span, t('sidebar.partners') %>
         <% end %>
       <% end %>
-    <%end %>
-
-
-
-
-    <!--<li class="side-menu-entry">-->
-      <!--<a href="#" class="entry-anchor-wrapper ">-->
-      <!--<i class="pr-icon sm agent-colored"></i>-->
-      <!--<div class="hidden-sm hidden-xs"><span>ΣΥΝΕΡΓΑΤΕΣ</span></div>-->
-      <!--</a>-->
-    <!--</li>-->
+    <% end %>
 
     <li class="side-menu-entry">
       <a href="#" class="entry-anchor-wrapper ">
         <i class="pr-icon sm settings-colored"></i>
-        <div class="hidden-sm hidden-xs"><span>ΡΥΘΜΙΣΕΙΣ</span></div>
+        <div class="hidden-sm hidden-xs"><span><%= t 'sidebar.settings' %></span></div>
       </a>
     </li>
 

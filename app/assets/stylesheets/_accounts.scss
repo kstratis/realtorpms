@@ -1,0 +1,33 @@
+.accounts {
+  list-style-type: none;
+  padding: 0;
+
+  li {
+    border: 1px solid #eee;
+    padding: 10px;
+    font-weight: bold;
+
+    &:hover {
+      background: #eee;
+    }
+  }
+}
+
+.label{
+  text-align: right;
+  width: auto;
+  min-width: 16px;
+  display: inline-block;
+
+  border: 1px solid #cccccc;
+  //text-shadow: 0 1px 0 #ffffff;
+  //width: 20px;
+  font-weight: normal;
+  font-size: 12px;
+  padding: 4px 5px;
+  background: #eeeeee;
+  color: black;
+  &:hover {
+    cursor: default;
+  }
+}

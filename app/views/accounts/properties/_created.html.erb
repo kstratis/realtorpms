@@ -1,0 +1,12 @@
+<div id="form-success">
+  <div>
+    <div class="row">
+      <div><h2><%= t 'properties.created.message' %></h2></div>
+      <div><i class="pr-icon sm checkmark"> </i></div>
+    </div>
+    <div class="row">
+      <%= link_to t('properties.created.return'), '', class: 'btn btn-danger back-button' %>
+      <%= link_to t('properties.created.add_another'), new_property_path, class: 'btn btn-primary' %>
+    </div>
+  </div>
+</div>

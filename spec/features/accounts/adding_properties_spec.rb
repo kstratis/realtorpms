@@ -12,9 +12,9 @@ feature 'Adding properties' do
     end
 
     it 'can add a new property' do
+      # set_subdomain(account.subdomain)
       expect(page.current_url).to eq('http://test1.lvh.me/')
       # Alternatively use this:
-      # set_subdomain(account.subdomain)
       # visit new_property_path
       # save_and_open_page
       click_link 'ΑΚΙΝΗΤΑ'

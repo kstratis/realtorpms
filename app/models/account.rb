@@ -1,24 +1,25 @@
 class Account < ApplicationRecord
-  validates :subdomain, presence: true, length: { maximum: 50 }, uniqueness: true
+  belongs_to :owner, class_name: 'User', optional: true
+  accepts_nested_attributes_for :owner
+  validates :subdomain, presence: true, length: { maximum: 20 }, uniqueness: true
 
-  has_many :invitations
-
+  has_many :invitations, dependent: :destroy
+  has_many :properties, dependent: :destroy
   # Originally had these 2 lines
   has_many :memberships
-  has_many :users, through: :memberships
+  has_many :users, through: :memberships, dependent: :destroy
 
   # which I replaced with this line
   # has_many :users
 
-  belongs_to :owner, class_name: 'User', optional: true
-  # belongs_to :owner, class_name: 'User'
-
-  accepts_nested_attributes_for :owner
 
   # These basically are class methods
   class << self
+
     # Returns the registered subdomain
     def get_subdomain(user)
+      # unless current_account.owner == current_user ||
+      #     current_account.users.exists?(current_user.id)
       # This will only work if the user is also the account owner
       self.find_by(owner_id: user.id).subdomain
     end
