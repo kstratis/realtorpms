@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170830173056) do
+ActiveRecord::Schema.define(version: 20180226145645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "unaccent"
 
   create_table "accounts", force: :cascade do |t|
     t.string "subdomain"
@@ -23,12 +24,63 @@ ActiveRecord::Schema.define(version: 20170830173056) do
     t.index ["subdomain"], name: "index_accounts_on_subdomain"
   end
 
+  create_table "assignments", force: :cascade do |t|
+    t.bigint "property_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["property_id"], name: "index_assignments_on_property_id"
+    t.index ["user_id"], name: "index_assignments_on_user_id"
+  end
+
+  create_table "branch_areas", force: :cascade do |t|
+    t.integer "area_id"
+    t.string "localname"
+    t.string "globalname"
+    t.integer "root_area_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["area_id"], name: "index_branch_areas_on_area_id", unique: true
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string "name"
+    t.string "initials"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "continent"
+  end
+
   create_table "invitations", force: :cascade do |t|
     t.string "email"
     t.bigint "account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "token"
     t.index ["account_id"], name: "index_invitations_on_account_id"
+    t.index ["token"], name: "index_invitations_on_token"
+  end
+
+  create_table "leaf_areas", force: :cascade do |t|
+    t.integer "area_id"
+    t.string "localname"
+    t.string "globalname"
+    t.integer "branch_area_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["area_id"], name: "index_leaf_areas_on_area_id", unique: true
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.integer "area_id"
+    t.string "localname"
+    t.string "globalname"
+    t.integer "level"
+    t.integer "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "country_id"
+    t.index ["area_id", "country_id"], name: "index_locations_on_area_id_and_country_id", unique: true
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -61,7 +113,6 @@ ActiveRecord::Schema.define(version: 20170830173056) do
     t.boolean "balconies"
     t.boolean "storage_room"
     t.boolean "garden"
-    t.integer "type"
     t.integer "orientation"
     t.integer "view"
     t.integer "heating"
@@ -71,6 +122,19 @@ ActiveRecord::Schema.define(version: 20170830173056) do
     t.boolean "fit_for_students"
     t.boolean "fireplace"
     t.integer "user_id"
+    t.bigint "account_id"
+    t.integer "propertytype"
+    t.integer "location_id"
+    t.index ["account_id"], name: "index_properties_on_account_id"
+  end
+
+  create_table "root_areas", force: :cascade do |t|
+    t.integer "area_id"
+    t.string "localname"
+    t.string "globalname"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["area_id"], name: "index_root_areas_on_area_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -86,11 +150,18 @@ ActiveRecord::Schema.define(version: 20170830173056) do
     t.string "password_digest"
     t.string "remember_digest"
     t.boolean "admin", default: false
-    t.integer "account_id"
+    t.string "locale"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "assignments", "properties"
+  add_foreign_key "assignments", "users"
+  add_foreign_key "branch_areas", "root_areas", primary_key: "area_id"
   add_foreign_key "invitations", "accounts"
+  add_foreign_key "leaf_areas", "branch_areas", primary_key: "area_id"
+  add_foreign_key "locations", "countries"
   add_foreign_key "memberships", "accounts"
   add_foreign_key "memberships", "users"
+  add_foreign_key "properties", "accounts"
+  add_foreign_key "properties", "locations"
 end

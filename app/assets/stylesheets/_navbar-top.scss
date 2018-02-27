@@ -1,3 +1,13 @@
+li.dropdown > a.dropdown-toggle{
+  //padding: 10px 0 0 0;
+  margin-top: 1px;
+  padding: 10px;
+  width: 100%;
+  &:visited{
+    background: transparent;
+  }
+}
+
 .navbar-toggle{
   border: 1px solid #ffffff;
 }
@@ -11,15 +21,14 @@
   z-index: 1000;
 }
 
+.email-entry{
+  background: #fd5282;
+  color: #ffffff !important;
+}
+
 div.pr-account-header{
   text-align: center;
   #logo{
-    float: none;
-  }
-}
-
-@media (min-width: 768px){
-  div.pr-account-header{
     float: none;
   }
 }
@@ -29,4 +38,95 @@ div.pr-account-header{
 }
 .navbar .btn-navbar {
   display: none;
+}
+
+@media (min-width: 768px){
+  div.pr-account-header{
+    float: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .navbar-nav .open .dropdown-menu > li > a {
+    color: #cdcfd5;
+    &:hover{
+      color: #ffffff;
+      box-shadow: 0 0 0 1px #ffffff;
+      background-color: #fd5282 !important;
+    }
+  }
+  ul.nav.navbar-nav > li > a.navbar-offset{
+    padding: 2px 0 0 5px !important;
+  }
+}
+
+ul.dropdown-menu > li > a{
+  font-family: Roboto, helvetica, sans-serif;
+  padding: 10px 15px;
+  &:hover{
+    background: #050f2c;
+    color: #ffffff;
+  }
+}
+
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus{
+  background: transparent;
+
+}
+
+.entry{
+  padding: 15px;
+}
+
+.avatar-outline{
+  display: inline;
+  width: 32px;
+  border-radius: 50%;
+  border: 1px solid #6feab3;
+  padding: 1px;
+}
+
+.account-info{
+  display: inline-block;
+  span{
+    display: block;
+  }
+}
+
+.navbar-tag-usertype {
+  text-align: left !important;
+  display: inline-block;
+  background: #fd5282 !important;
+  color: #ffffff !important;
+  text-transform: uppercase;
+  margin-top: 3px;
+  font-weight: bold;
+  min-width: 100px !important;
+}
+
+ul.nav.navbar-nav > li > a.navbar-offset{
+  margin: 1px 5px 0 0;
+  padding: 2px 0 0 0;
+  background: transparent !important;
+  i{
+    border: 1px solid #050f2c;
+    border-radius: 50%;
+    transition: all .1s linear;
+    &:hover{
+      box-shadow: 0 0 0 2px #ffffff;
+      background-color: #fd5282 !important;
+    }
+  }
+}
+
+ul.dropdown-menu {
+  background: #050f2c;
+  li > a {
+    color: #cdcfd5;
+    &:hover {
+      color: #ffffff;
+      box-shadow: 0 0 0 1px #ffffff;
+      background-color: #fd5282 !important;
+    }
+  }
 }

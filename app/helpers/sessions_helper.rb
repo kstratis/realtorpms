@@ -55,6 +55,10 @@ module SessionsHelper
     #puts "extracted subdomain is: #{extracted_subdomain}"
     #puts "extracted hostname is: #{extracted_hostname}"
     port =  stored_url.port.blank? ? nil : ":#{stored_url.port}"
+
+    if subdomain.blank?
+      return "#{stored_url.scheme}://#{extracted_hostname}#{port}#{stored_url.path}"
+    end
     # puts "full redirection url is: #{stored_url.scheme}://#{subdomain}.#{extracted_hostname}#{port}#{stored_url.path}"
     "#{stored_url.scheme}://#{subdomain}.#{extracted_hostname}#{port}#{stored_url.path}"
   end
@@ -94,16 +98,24 @@ module SessionsHelper
   end
 
 
-
   # Retrieves the subdomain
   def get_subdomain(user)
-    subdomain = Account.get_subdomain(user)
-    if request.subdomain.blank?
-      subdomain
-    else
-      request.subdomain == subdomain ? subdomain : nil
-    end
+
+
+    # subdomain = Account.get_subdomain(user)
+    # if request.subdomain.blank?
+    #   subdomain
+    # else
+    #   request.subdomain == subdomain ? subdomain : nil
+    # end
+
+
+
+
   end
+
+
+
 
 
 end

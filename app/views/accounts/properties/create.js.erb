@@ -1,0 +1,8 @@
+$('.pr-form-container').fadeOut('fast', function(){
+  var myblock = $("<%= escape_javascript(render('created')) %>").hide();
+  $(this).replaceWith(myblock);
+  $('#form-success').fadeIn('fast');
+  $('.back-button').returnOnClick("<%= properties_path %>");
+});
+
+

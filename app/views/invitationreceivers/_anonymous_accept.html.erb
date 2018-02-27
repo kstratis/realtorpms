@@ -1,0 +1,34 @@
+<p>
+  <%= link_to 'Sign in as an existing user', login_path %>
+</p>
+
+<hr>
+
+<p>
+  <h3>Sign up as a new user</h3>
+</p>
+
+<p>Sign up as a new user</p>
+
+<%= form_for(@invitation, as: :user, url: :accepted_invitation) do |inv| %>
+
+    <%= fields_for @user do |f| %>
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'glowing-border', value: @invitation.email %>
+
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name, placeholder: 'i.e. John', class: 'glowing-border' %>
+
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name, placeholder: 'i.e. Doe', class: 'glowing-border' %>
+
+        <%= f.label :password %>
+        <%= f.password_field :password, placeholder: 'Please use at least 6 characters', class: 'glowing-border' %>
+
+        <%= f.label :password_confirmation, 'Password confirmation' %>
+        <%= f.password_field :password_confirmation, placeholder: 'Retype your password', class: 'glowing-border' %>
+    <% end %>
+
+    <%= inv.submit 'Accept Invitation', class: 'btn btn-primary' %>
+
+<% end %>
