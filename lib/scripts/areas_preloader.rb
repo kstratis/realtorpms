@@ -13,6 +13,8 @@ ActiveRecord::Base.transaction do
                        globalname: row[2].to_s,
                        level: row[3].to_i,
                        parent_id: row[4] ? row[4].to_i : nil,
+                       parent_localname: row[5] ? row[5].to_s : nil,
+                       parent_globalname: row[6] ? row[6].to_s : nil,
                        country: c)
       pp "Level 1, Row No #{index}, Data: #{row} - OK!"
       myvar+=1
