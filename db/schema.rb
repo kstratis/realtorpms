@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180302101516) do
+ActiveRecord::Schema.define(version: 20180302102336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,16 +33,6 @@ ActiveRecord::Schema.define(version: 20180302101516) do
     t.index ["user_id"], name: "index_assignments_on_user_id"
   end
 
-  create_table "branch_areas", force: :cascade do |t|
-    t.integer "area_id"
-    t.string "localname"
-    t.string "globalname"
-    t.integer "root_area_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["area_id"], name: "index_branch_areas_on_area_id", unique: true
-  end
-
   create_table "countries", force: :cascade do |t|
     t.string "name"
     t.string "initials"
@@ -59,16 +49,6 @@ ActiveRecord::Schema.define(version: 20180302101516) do
     t.string "token"
     t.index ["account_id"], name: "index_invitations_on_account_id"
     t.index ["token"], name: "index_invitations_on_token"
-  end
-
-  create_table "leaf_areas", force: :cascade do |t|
-    t.integer "area_id"
-    t.string "localname"
-    t.string "globalname"
-    t.integer "branch_area_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["area_id"], name: "index_leaf_areas_on_area_id", unique: true
   end
 
   create_table "locations", force: :cascade do |t|
@@ -130,15 +110,6 @@ ActiveRecord::Schema.define(version: 20180302101516) do
     t.index ["account_id"], name: "index_properties_on_account_id"
   end
 
-  create_table "root_areas", force: :cascade do |t|
-    t.integer "area_id"
-    t.string "localname"
-    t.string "globalname"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["area_id"], name: "index_root_areas_on_area_id", unique: true
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "first_name"
@@ -158,9 +129,7 @@ ActiveRecord::Schema.define(version: 20180302101516) do
 
   add_foreign_key "assignments", "properties"
   add_foreign_key "assignments", "users"
-  add_foreign_key "branch_areas", "root_areas", primary_key: "area_id"
   add_foreign_key "invitations", "accounts"
-  add_foreign_key "leaf_areas", "branch_areas", primary_key: "area_id"
   add_foreign_key "locations", "countries"
   add_foreign_key "memberships", "accounts"
   add_foreign_key "memberships", "users"
