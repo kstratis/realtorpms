@@ -23,7 +23,24 @@
                 <%#= property.select :propertytype, Property.propertytypes.keys, {}, class: 'form-control' %>
                 <!-- end of original -->
 
-                <%= property.select :propertytype, Property.propertytypes.keys.collect { |propertytype| [ Property.human_enum_name(:propertytype, propertytype), propertytype ] }, {},  class: 'form-control glowing-border-select' %>
+                <!-- THIS ONE IS VALID -->
+                <%#= property.select :propertytype, Property.propertytypes.keys.collect { |propertytype| [ Property.human_enum_name(:propertytype, propertytype), propertytype ] }, {},  class: 'form-control glowing-border-select' %>
+
+                <%= react_component('PropertyType', props: {
+                    id: 'property_propertytype',
+                    name: 'property[propertytype]',
+                    className: 'react-select-propertytype',
+                    options: Property.propertytypes.keys.collect { |propertytype| { label: Property.human_enum_name(:propertytype, propertytype), value: propertytype} },
+                    i18n: {
+                      datatable: t('js.datatables.properties'),
+                      search: t('js.properties_search')
+                    }
+                }, prerender: false) %>
+
+
+
+
+
 
                 <%#= property.text_field :type, placeholder: 'i.e. 3-bedroom flat in Kifissia', class: 'glowing-border' %>
                 <%#= inline_error @property.owner, :first_name, 'First name'%>
@@ -43,6 +60,15 @@
                 <%= property.label :construction %>
                 <%= property.select(:construction, options_for_select( 1940..Time.zone.now.year+2 , Time.zone.now.year), {}, class: 'form-control') %>
                 <%#= property.text_field :price, placeholder: 'i.e. 250000', class: 'glowing-border' %>
+
+            <%#= react_component('PropertyType', props: {
+
+                # i18n: {
+                #     datatable: t('js.datatables.properties'),
+                #     search: t('js.properties_search')
+                # }
+            }, prerender: false) %>
+
 
                 <%= property.submit t('properties.new.add_button'), class: 'btn btn-primary' %>
           </div>

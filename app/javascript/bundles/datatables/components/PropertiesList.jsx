@@ -9,7 +9,7 @@ const PropertiesList = ({handlePageClick, handleSort, handleAssign, advanceByTwo
 
     <div className="dataTablePage col-md-12">
       <SkyLight hideOnOverlayClicked ref={ref => this.simpleDialog = ref} title="Hi, I'm a simple modal">
-        Hello, I dont have any callback.
+        Hello, I dont have any callbacks.
       </SkyLight>
       {/* CARD START */}
       {isLoading

@@ -4,6 +4,8 @@ import ReactOnRails from 'react-on-rails';
 import UsersListWithDatatable from '../bundles/datatables/components/UsersList';
 import UsersListAssignableWithDatatable from '../bundles/datatables/components/UsersListAssignable';
 import PropertiesListWithDatatable from '../bundles/datatables/components/PropertiesList';
+import PropertyType from '../bundles/datatables/components/Select';
+
 
 // import { addLocaleData } from 'react-intl';
 // import en from 'react-intl/locale-data/en';
@@ -16,5 +18,6 @@ ReactOnRails.register({
   // HelloWorld,
   UsersListWithDatatable,
   UsersListAssignableWithDatatable,
-  PropertiesListWithDatatable
+  PropertiesListWithDatatable,
+  PropertyType
 });
