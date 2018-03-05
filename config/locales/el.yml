@@ -47,6 +47,9 @@ el:
       messages:
         record_invalid: ! 'Η επικύρωση απέτυχε: %{errors}'
   js:
+    components:
+      select:
+       placeholder: "Επιλέξτε..."
     datatables:
       users:
         partner: "Συνεργάτης"

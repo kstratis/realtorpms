@@ -1,10 +1,10 @@
 import ReactOnRails from 'react-on-rails';
 
 // import HelloWorld from '../bundles/datatables/components/HelloWorld';
-import UsersListWithDatatable from '../bundles/datatables/components/UsersList';
-import UsersListAssignableWithDatatable from '../bundles/datatables/components/UsersListAssignable';
-import PropertiesListWithDatatable from '../bundles/datatables/components/PropertiesList';
-import PropertyType from '../bundles/datatables/components/Select';
+import UsersListWithDatatable from '../bundles/datatables/UsersList';
+import UsersListAssignableWithDatatable from '../bundles/datatables/UsersListAssignable';
+import PropertiesListWithDatatable from '../bundles/datatables/PropertiesList';
+import SimpleSelect from '../bundles/components/SimpleSelect';
 
 
 // import { addLocaleData } from 'react-intl';
@@ -19,5 +19,6 @@ ReactOnRails.register({
   UsersListWithDatatable,
   UsersListAssignableWithDatatable,
   PropertiesListWithDatatable,
-  PropertyType
+  SimpleSelect
+  // PropertyType
 });

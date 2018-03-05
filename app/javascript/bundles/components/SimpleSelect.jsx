@@ -2,7 +2,7 @@ import React from 'react';
 import Select from 'react-select';
 import '!style-loader!css-loader!react-select/dist/react-select.css';
 
-class PropertyType extends React.Component {
+class SimpleSelect extends React.Component {
   state = {
     selectedOption: '',
   };
@@ -13,22 +13,21 @@ class PropertyType extends React.Component {
     const { selectedOption } = this.state;
     const value = selectedOption && selectedOption.value;
     console.log(value);
+    // console.log(this.props.name);
 
     return (
       <Select
         id={this.props.id}
-        name={this.props.name}
+        inputProps={{ 'data-name': this.props.name }}
+        name={this.props.name }
         value={value}
         className={this.props.className}
         onChange={this.handleChange}
         options={this.props.options}
-        // options={[
-        //   { value: 'one', label: 'One' },
-        //   { value: 'two', label: 'Two' },
-        // ]}
+        placeholder={this.props.i18n.select.placeholder}
       />
     );
   }
 }
 
-export default PropertyType;
+export default SimpleSelect;

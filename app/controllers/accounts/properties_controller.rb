@@ -96,9 +96,9 @@ module Accounts
           format.html { redirect_to @property, notice: 'Property was successfully created.' }
           format.js
       #     format.json { render :show, status: :created, location: @property }
-      #   else
-      #     format.html { render :new }
-      #     format.json { render json: @property.errors, status: :unprocessable_entity }
+        else
+          format.html { render :new }
+          format.js
         end
       end
     end
@@ -135,7 +135,7 @@ module Accounts
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def property_params
-        params.require(:property).permit(:description, :propertytype, :price, :size)
+        params.require(:property).permit(:description, :propertytype, :price, :size, :construction)
       end
 
 

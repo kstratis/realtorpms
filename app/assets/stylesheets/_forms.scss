@@ -25,6 +25,7 @@ input, textarea, select, .uneditable-input {
   padding: 15px 20px 15px 20px;
   border-radius: 3px;
   border: 1px solid #cdcfd5;
+  overflow: hidden;
 }
 
 .pr-form-container-inapp{
@@ -64,4 +65,32 @@ input, textarea, select, .uneditable-input {
 .new_user_prompt{
   margin: 25px 0 0 0;
   padding: 0;
+}
+
+.simple-select{
+  text-align: left;
+  margin-bottom: 10px;
+  .Select-clear{
+    padding-top: 3px;
+  }
+}
+
+.help-block{
+  padding-left: 2px;
+  text-align: left;
+  font-style: italic;
+}
+
+.has-error .Select-control, .has-error input {
+    border-color: #a94442;
+}
+
+#pp{
+  boder: 1px solid black;
+
+}
+
+
+#property_description {
+  margin-bottom: 0;
 }
