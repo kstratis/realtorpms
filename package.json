@@ -15,6 +15,7 @@
     "react-paginate": "^4.4.3",
     "react-select": "^1.2.1",
     "react-skylight": "^0.5.0",
+    "uppy": "^0.23.2",
     "url-search-params": "^0.10.0"
   },
   "devDependencies": {

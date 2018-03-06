@@ -20,6 +20,7 @@
 //= require turbolinks_transitions
 //= require turbolinks_flash
 //= require bootstrap-sprockets
+//= require activestorage
 //= require sweetalert2
 //= require sweet-alert2-rails
 //= require_tree .
