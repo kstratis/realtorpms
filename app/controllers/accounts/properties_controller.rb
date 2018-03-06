@@ -79,9 +79,12 @@ module Accounts
     def edit
     end
 
-    def uploads
-      @property = Property.new(property_params)
-    end
+    # def uploads
+    #   # @property = Property.new(property_params)
+    #   puts property_params
+    #   @property.images.attach(property_params[:images])
+    #
+    # end
 
     # POST /properties
     # POST /properties.json
@@ -139,9 +142,9 @@ module Accounts
       end
 
       # Never trust parameters from the scary internet, only allow the white list through.
-      def property_params
-        params.require(:property).permit(:description, :propertytype, :price, :size, :construction, images: [])
-      end
+      # def property_params
+      #   params.permit(:name, :type, :files, :description, :propertytype, :price, :size, :construction, images: [])
+      # end
 
 
   end
