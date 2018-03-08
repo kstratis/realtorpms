@@ -26,6 +26,7 @@ el:
       property:
         description: "Περιγραφή"
         description_placeholder: "π.χ. Μεζονέτα 180τ.μ. Κηφισιά"
+        propertycategory: "Κατηγορία"
         propertytype: "Είδος"
         price: "Τιμή"
         price_placeholder: "π.χ. 120000"
@@ -43,6 +44,12 @@ el:
             studio: "Studio"
             prefabricated: "Λυόμενο"
             precast: "Προκατασκευή"
+          propertycategory:
+            apartment: "Διαμέρισμα"
+            terraced: "Μονοκατοικία"
+            maisonette: "Μεζονέτα"
+            building: "Κτίριο"
+            home: "Οικία"
     errors:
       messages:
         record_invalid: ! 'Η επικύρωση απέτυχε: %{errors}'

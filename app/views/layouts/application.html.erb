@@ -22,12 +22,9 @@
     <title><%= full_title(yield(:title)) %></title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-
-    <link rel="stylesheet" href="https://transloadit.edgly.net/releases/uppy/v0.23.2/dist/uppy.min.css">
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'components-bundle' %>
     <%= javascript_pack_tag 'application' %>
-
 
     <%#= javascript_pack_tag 'hello_react' %>
     <%= render 'layouts/shim' %>

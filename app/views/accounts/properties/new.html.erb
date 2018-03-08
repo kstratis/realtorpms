@@ -6,87 +6,112 @@
 
 
   <div class="row">
-    <!--<div class="col-md-6 col-md-offset-3">-->
+
     <div class="col-md-12 ">
-      <div class="pr-form-container UppyForm">
-
-        <%= form_for(@property, remote: true) do |property| %>
-          <%#= render 'shared/error_messages' %>
 
 
+      <%= form_for(@property, remote: true) do |property| %>
+        <div class="pr-form-container">
+          <div class="col-md-6 col-md-border">
 
-          <div id="pp" class="col-md-6">
-          <div class="form-group">
-
-            <%#= property.label Property.human_attribute_name("description") %>
-            <%= property.label :description %>
-            <%= property.text_field :description, placeholder: Property.human_attribute_name("description_placeholder"), class: 'glowing-border' %>
-          </div>
-
-          <div class="form-group">
-
-            <%= property.label :propertytype %>
-
-            <!-- THIS ONE WAS THE ORIGINAL -->
-            <%#= property.select :propertytype, Property.propertytypes.keys, {}, class: 'form-control' %>
-            <!-- THIS ONE EVENTUALLY REPLACED IT -->
-            <%#= property.select :propertytype, Property.propertytypes.keys.collect { |propertytype| [ Property.human_enum_name(:propertytype, propertytype), propertytype ] }, {},  class: 'form-control glowing-border-select' %>
-            <%= react_component('SimpleSelect', props: {
-                id: 'property_propertytype',
-                name: 'property[propertytype]',
-                className: 'simple-select',
-                options: Property.propertytypes.keys.collect {|propertytype| {label: Property.human_enum_name(:propertytype, propertytype), value: propertytype}},
-
-                i18n: {
-                    select: t('js.components.select'),
-                    # datatable: t('js.datatables.properties'),
-                    # search: t('js.properties_search')
-                }
-            }, prerender: false) %>
-          </div>
+            <%#= render 'shared/error_messages' %>
 
 
+            <div class="form-group">
+
+              <%#= property.label Property.human_attribute_name("description") %>
+              <%= property.label :description %>
+              <%= property.text_field :description, placeholder: Property.human_attribute_name("description_placeholder"), class: 'glowing-border' %>
+            </div>
+
+
+            <div class="form-group">
+
+              <%= property.label :propertycategory %>
+
+              <!-- THIS ONE WAS THE ORIGINAL -->
+              <%#= property.select :propertytype, Property.propertytypes.keys, {}, class: 'form-control' %>
+              <!-- THIS ONE EVENTUALLY REPLACED IT -->
+              <%#= property.select :propertytype, Property.propertytypes.keys.collect { |propertytype| [ Property.human_enum_name(:propertytype, propertytype), propertytype ] }, {},  class: 'form-control glowing-border-select' %>
+              <%= react_component('SimpleSelect', props: {
+                  id: 'property_propertycategory',
+                  name: 'property[propertycategory]',
+                  className: 'simple-select',
+                  options: Property.propertycategories.keys.collect {|propertycategory| {label: Property.human_enum_name(:propertycategory, propertycategory), value: propertycategory}},
+
+                  i18n: {
+                      select: t('js.components.select'),
+                      # datatable: t('js.datatables.properties'),
+                      # search: t('js.properties_search')
+                  }
+              }, prerender: false) %>
+            </div>
+
+
+            <div class="form-group">
+
+              <%= property.label :propertytype %>
+
+              <!-- THIS ONE WAS THE ORIGINAL -->
+              <%#= property.select :propertytype, Property.propertytypes.keys, {}, class: 'form-control' %>
+              <!-- THIS ONE EVENTUALLY REPLACED IT -->
+              <%#= property.select :propertytype, Property.propertytypes.keys.collect { |propertytype| [ Property.human_enum_name(:propertytype, propertytype), propertytype ] }, {},  class: 'form-control glowing-border-select' %>
+              <%= react_component('SimpleSelect', props: {
+                  id: 'property_propertytype',
+                  name: 'property[propertytype]',
+                  className: 'simple-select',
+                  options: Property.propertytypes.keys.collect {|propertytype| {label: Property.human_enum_name(:propertytype, propertytype), value: propertytype}},
+
+                  i18n: {
+                      select: t('js.components.select'),
+                      # datatable: t('js.datatables.properties'),
+                      # search: t('js.properties_search')
+                  }
+              }, prerender: false) %>
+            </div>
 
 
 
 
-          <%#= property.text_field :type, placeholder: 'i.e. 3-bedroom flat in Kifissia', class: 'glowing-border' %>
-          <%#= inline_error @property.owner, :first_name, 'First name'%>
 
-          <%#= property.label :construction %>
-          <%#= property.text_field :size, placeholder: 'i.e. 90', class: 'glowing-border' %>
 
-          <div class="form-group">
+            <%#= property.text_field :type, placeholder: 'i.e. 3-bedroom flat in Kifissia', class: 'glowing-border' %>
+            <%#= inline_error @property.owner, :first_name, 'First name'%>
 
-            <%= property.label :price %>
-            <%= property.text_field :price, placeholder: Property.human_attribute_name("price_placeholder"), class: 'glowing-border' %>
-            <%#= inline_error @property.owner, :last_name, 'Last name'%>
-          </div>
+            <%#= property.label :construction %>
+            <%#= property.text_field :size, placeholder: 'i.e. 90', class: 'glowing-border' %>
 
-          <div class="form-group">
+            <div class="form-group">
 
-            <%= property.label :size %>
-            <%= property.text_field :size, placeholder: Property.human_attribute_name("size_placeholder"), class: 'glowing-border' %>
-          </div>
+              <%= property.label :price %>
+              <%= property.text_field :price, placeholder: Property.human_attribute_name("price_placeholder"), class: 'glowing-border' %>
+              <%#= inline_error @property.owner, :last_name, 'Last name'%>
+            </div>
 
-          <div class="form-group">
+            <div class="form-group">
 
-            <%= property.label :construction %>
-            <%#= property.select(:construction, options_for_select( 1940..Time.zone.now.year+2 , Time.zone.now.year), {}, class: 'form-control') %>
-            <%= react_component('SimpleSelect', props: {
-                id: 'property_construction',
-                name: 'property[construction]',
-                className: 'simple-select',
-                # options: Property.propertytypes.keys.collect { |propertytype| { label: Property.human_enum_name(:propertytype, propertytype), value: propertytype} },
-                options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
+              <%= property.label :size %>
+              <%= property.text_field :size, placeholder: Property.human_attribute_name("size_placeholder"), class: 'glowing-border' %>
+            </div>
 
-                i18n: {
-                    select: t('js.components.select'),
-                    # datatable: t('js.datatables.properties'),
-                    # search: t('js.properties_search')
-                }
-            }, prerender: false) %>
-          </div>
+            <div class="form-group">
+
+              <%= property.label :construction %>
+              <%#= property.select(:construction, options_for_select( 1940..Time.zone.now.year+2 , Time.zone.now.year), {}, class: 'form-control') %>
+              <%= react_component('SimpleSelect', props: {
+                  id: 'property_construction',
+                  name: 'property[construction]',
+                  className: 'simple-select',
+                  # options: Property.propertytypes.keys.collect { |propertytype| { label: Property.human_enum_name(:propertytype, propertytype), value: propertytype} },
+                  options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
+
+                  i18n: {
+                      select: t('js.components.select'),
+                      # datatable: t('js.datatables.properties'),
+                      # search: t('js.properties_search')
+                  }
+              }, prerender: false) %>
+            </div>
 
             <!--<div class="btn btn-default" id="test">Uploader window</div>-->
             <!--<div id="uuu"></div>-->
@@ -95,12 +120,12 @@
 
             <div class="form-group">
               <%= property.label :images %>
-              <%= property.file_field :images, multiple: true %>
+              <%= property.file_field :images, multiple: true, direct_upload: true, class: 'form-control' %>
             </div>
 
-          <%#= property.text_field :price, placeholder: 'i.e. 250000', class: 'glowing-border' %>
+            <%#= property.text_field :price, placeholder: 'i.e. 250000', class: 'glowing-border' %>
 
-          <%#= react_component('PropertyType', props: {
+            <%#= react_component('PropertyType', props: {
 
                 # i18n: {
                 #     datatable: t('js.datatables.properties'),
@@ -109,19 +134,28 @@
             }, prerender: false) %>
 
 
-          <%= property.submit t('properties.new.add_button'), class: 'btn btn-primary' %>
+            <%= property.submit t('properties.new.add_button'), class: 'btn btn-primary' %>
           </div>
-          <div id="files_upload" class="col-md-6">
+          <!--<div class="col-md-6 ">-->
 
 
+            <!--<div class="form-group">-->
 
-          </div>
-          </div>
-        <% end %>
+              <!--<%= property.label :size %>-->
+              <!--<%= property.text_field :size, placeholder: Property.human_attribute_name("size_placeholder"), class: 'glowing-border' %>-->
+            <!--</div>-->
+
+          <!--</div>-->
         </div>
+
+
+      <% end %>
+
+    </div>
   </div>
 </div>
-</div>
+
+
 
 
 

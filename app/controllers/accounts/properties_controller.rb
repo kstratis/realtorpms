@@ -91,7 +91,7 @@ module Accounts
     def create
       @property = Property.new(property_params)
       @property.account = current_account
-      @property.images.attach(property_params[:images])
+      # @property.images.attach(property_params[:images])
       # @property.user_id = current_user.id if current_user
       # if @property.save!
       #   flash[:success] = 'Property successfully created.'
@@ -142,9 +142,9 @@ module Accounts
       end
 
       # Never trust parameters from the scary internet, only allow the white list through.
-      # def property_params
-      #   params.permit(:name, :type, :files, :description, :propertytype, :price, :size, :construction, images: [])
-      # end
+      def property_params
+        params.require(:property).permit(:description, :propertycategory, :propertytype, :price, :size, :construction, images: [])
+      end
 
 
   end

@@ -9,6 +9,6 @@
 
 
 // import * as gello from '../bundles/utilities/file_uploader';
-console.log('Hello World from Webpacker');
+console.log('Hello from Webpacker');
 
 // console.log(uppy);

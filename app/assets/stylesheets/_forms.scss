@@ -94,3 +94,10 @@ input, textarea, select, .uneditable-input {
 #property_description {
   margin-bottom: 0;
 }
+
+@media(min-width: 300px) {
+  .col-md-border {
+    border-right: 1px solid #eee;
+
+  }
+}

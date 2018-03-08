@@ -26,6 +26,7 @@ en:
       property:
         description: "Description"
         description_placeholder: "i.e. Luxe 3 Story Loft Rooftop"
+        propertycategory: "Κατηγορία"
         propertytype: "Type"
         price: "Price"
         price_placeholder: "i.e. 120000"
@@ -43,10 +44,19 @@ en:
             studio: "Studio"
             prefabricated: "Prefabricated"
             precast: "Precast"
+          propertycategory:
+            apartment: "Apartment"
+            terraced: "Terraced"
+            maisonette: "Maisonette"
+            building: "Building"
+            home: "Home"
     errors:
       messages:
         record_invalid: ! 'Validation failed: %{errors}'
   js:
+    components:
+      select:
+        placeholder: "Choose..."
     datatables:
       users:
         partner: "Partner"

@@ -12,7 +12,7 @@ class SimpleSelect extends React.Component {
   render() {
     const { selectedOption } = this.state;
     const value = selectedOption && selectedOption.value;
-    console.log(value);
+    // console.log(value);
     // console.log(this.props.name);
 
     return (
