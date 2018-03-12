@@ -8,7 +8,7 @@
 // layout file, like app/views/layouts/application.html.erb
 
 
-// import * as gello from '../bundles/utilities/file_uploader';
+// import * as gello from '../bundles/components/file_uploader';
 console.log('Hello from Webpacker');
 
 // console.log(uppy);

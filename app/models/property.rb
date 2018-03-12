@@ -13,6 +13,6 @@ class Property < ApplicationRecord
   enum orientation: [:front_facing, :airy, :on_corner, :inwards_facing]
   enum view: [:sea, :mountain, :forest, :infinite]
   enum heating: [:central, :prive]
-  validates :description, length: { maximum: 250 }, presence: true
-  validates :propertytype, presence: true
+  # validates :description, length: { maximum: 250 }, presence: true
+  # validates :propertytype, presence: true
 end

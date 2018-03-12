@@ -12,7 +12,7 @@
 
       <%= form_for(@property, remote: true) do |property| %>
         <div class="pr-form-container">
-          <div class="col-md-6 col-md-border">
+          <div class="col-md-4 col-md-border">
 
             <%#= render 'shared/error_messages' %>
 
@@ -120,7 +120,7 @@
 
             <div class="form-group">
               <%= property.label :images %>
-              <%= property.file_field :images, multiple: true, direct_upload: true, class: 'form-control' %>
+              <%= property.file_field :images, multiple: true, direct_upload: false, class: 'form-control' %>
             </div>
 
             <%#= property.text_field :price, placeholder: 'i.e. 250000', class: 'glowing-border' %>
@@ -134,18 +134,20 @@
             }, prerender: false) %>
 
 
+
+
             <%= property.submit t('properties.new.add_button'), class: 'btn btn-primary' %>
           </div>
-          <!--<div class="col-md-6 ">-->
+          <div class="col-md-8 ">
 
 
-            <!--<div class="form-group">-->
+            <div class="form-group">
+              <div id="uppy"></div>
+              <%#= property.label :size %>
+              <%#= property.text_field :size, placeholder: Property.human_attribute_name("size_placeholder"), class: 'glowing-border' %>
+            </div>
 
-              <!--<%= property.label :size %>-->
-              <!--<%= property.text_field :size, placeholder: Property.human_attribute_name("size_placeholder"), class: 'glowing-border' %>-->
-            <!--</div>-->
-
-          <!--</div>-->
+          </div>
         </div>
 
 
