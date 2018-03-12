@@ -3,27 +3,51 @@ const Dashboard = require('uppy/lib/plugins/Dashboard');
 const XHRUpload = require('uppy/lib/plugins/XHRUpload');
 
 $(document).on('turbolinks:load', function(e) {
-
+  const uppyDomNode = $('#uppy');
+  // Bail out if uppy shouldn't be included in this screen
+  if (window.location.pathname !== uppyDomNode.data('uppyUrlListener')) return;
+  const translations = uppyDomNode.data('i18n').uppy;
   const uppy = Uppy({
     debug: true,
-    autoProceed: true,
-
-
+    editable: false,
+    autoProceed: false,
     restrictions: {
       maxFileSize: 2000000,
-      maxNumberOfFiles: 10,
+      maxNumberOfFiles: 20,
       allowedFileTypes: ['image/*']
     }
   }).use(Dashboard, {
     inline: true,
     target: '#uppy',
+    locale: {
+      strings: {
+        name: translations.filename,
+        editing: translations.editing,
+        dropPaste: translations.dropPaste,
+        browse: translations.browse,
+        done: translations.done,
+        uploadXFiles: {
+          0: translations.uploadSingleFile,
+          1: translations.uploadMultipleFiles
+        },
+        uploadXNewFiles: {
+          0: translations.uploadSingleFileExtra,
+          1: translations.uploadMultipleFilesExtra
+        },
+        uploading: translations.uploading,
+        uploadComplete: translations.uploadComplete,
+        uploadFailed: translations.uploadFailed,
+        pleasePressRetry: translations.pleasePressRetry,
+        paused: translations.paused,
+        error: translations.error,
+        retry: translations.retry
+      }
+    },
+    note: translations.notes,
     replaceTargetContent: true,
-    note: 'Images and video only, 2–3 files, up to 2 MB',
     maxHeight: 450,
-    metaFields: [
-      {id: 'license', name: 'License', placeholder: 'specify license'},
-      {id: 'caption', name: 'Caption', placeholder: 'describe what the image is about'}
-    ]
+    showProgressDetails: false,
+    hideProgressAfterFinish: false
   }).use(XHRUpload, {
     endpoint: 'uploads',
     bundle: true,
@@ -36,5 +60,3 @@ $(document).on('turbolinks:load', function(e) {
       console.log('Upload result:', result)
     })
 });
-
-// export default uppy;
