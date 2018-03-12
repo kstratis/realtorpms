@@ -35,7 +35,7 @@ class SessionsController < ApplicationController
         end
         log_in user
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-        flash[:success] = I18n.t 'sessions.flash_error'
+        flash[:success] = I18n.t 'sessions.flash_success'
 
         redirect_back_or(nil, request.subdomain) and return
       end
