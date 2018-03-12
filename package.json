@@ -2,7 +2,7 @@
   "name": "propertyx",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "^3.2.1",
+    "@rails/webpacker": "^3.3.0",
     "axios": "^0.16.2",
     "babel-preset-react": "^6.24.1",
     "intl": "^1.2.5",

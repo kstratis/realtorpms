@@ -15,6 +15,7 @@ class SimpleSelect extends React.Component {
     // console.log(value);
     // console.log(this.props.name);
 
+
     return (
       <Select
         id={this.props.id}
