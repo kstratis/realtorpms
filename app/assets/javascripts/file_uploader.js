@@ -31,14 +31,14 @@ $(document).on('turbolinks:load', function(e) {
   });
 
   addEventListener("direct-upload:start", event => {
-    console.log('started');
     const {id} = event.detail;
     const element = document.getElementById(`direct-upload-${id}`);
     element.classList.remove("direct-upload--pending")
   });
 
   addEventListener("direct-upload:progress", event => {
-    const {id, progress} = event.detail;
+    const {id, file, progress} = event.detail;
+    // console.log(file);
     const progressElement = document.getElementById(`direct-upload-progress-${id}`);
     progressElement.style.width = `${progress}%`
   });
