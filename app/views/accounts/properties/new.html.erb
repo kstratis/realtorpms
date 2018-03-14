@@ -120,7 +120,7 @@
 
             <div class="form-group">
               <%= property.label :images %>
-              <%= property.file_field :images, multiple: true, direct_upload: false, class: 'form-control' %>
+              <%= property.file_field :images, multiple: true, direct_upload: true, class: 'form-control' %>
             </div>
 
             <%#= property.text_field :price, placeholder: 'i.e. 250000', class: 'glowing-border' %>
@@ -141,17 +141,17 @@
           <div class="col-md-8 ">
 
 
-            <div class="form-group">
-              <%= content_tag :div, class: "", id: "uppy", data: {
+            <!--<div class="form-group">-->
+              <%#= content_tag :div, class: "", id: "uppy", data: {
                   i18n: {
                     uppy: t('js.uppy'),
                   },
                   uppy_url_listener: new_property_path
                   } do %>
-              <% end %>
+              <%# end %>
               <%#= property.label :size %>
               <%#= property.text_field :size, placeholder: Property.human_attribute_name("size_placeholder"), class: 'glowing-border' %>
-            </div>
+            <!--</div>-->
 
           </div>
         </div>

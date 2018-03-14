@@ -121,7 +121,7 @@ module Accounts
     # POST /properties
     # POST /properties.json
     def create
-      # puts 'INSIDE CREATE'
+      puts 'INSIDE CREATE'
       # puts property_params[:images]
       # puts property_params[:images].class
       @property = Property.new(property_params)
