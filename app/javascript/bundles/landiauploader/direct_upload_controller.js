@@ -3,19 +3,23 @@ import { dispatchEvent } from "./helpers"
 
 export class DirectUploadController {
   constructor(input, file) {
-    this.input = input
+    this.input = input || null;
     this.file = file
-    this.directUpload = new DirectUpload(this.file, this.url, this)
-    this.dispatch("initialize")
+    this.directUpload = new DirectUpload(this.file, this.url, this);
+    // this.dispatch("initialize")
   }
 
   start(callback) {
-    const hiddenInput = document.createElement("input")
-    hiddenInput.type = "hidden"
-    hiddenInput.name = this.input.name
-    this.input.insertAdjacentElement("beforebegin", hiddenInput)
+    const hiddenInput = document.createElement("input");
+    hiddenInput.type = "hidden";
+    console.log('printing the input name');
+    // hiddenInput.name = this.input.name;
+    hiddenInput.name = this.input;
+    $(hiddenInput).insertBefore($('input[type=submit]'));
+    this.input = hiddenInput;
+    // this.input.insertAdjacentElement("beforebegin", hiddenInput);
 
-    this.dispatch("start")
+    // this.dispatch("start")
 
     this.directUpload.create((error, attributes) => {
       if (error) {
@@ -25,7 +29,7 @@ export class DirectUploadController {
         hiddenInput.value = attributes.signed_id
       }
 
-      this.dispatch("end")
+      // this.dispatch("end")
       callback(error)
     })
   }
@@ -38,7 +42,8 @@ export class DirectUploadController {
   }
 
   get url() {
-    return this.input.getAttribute("data-direct-upload-url")
+    return 'http://shakalaka.lvh.me:3000/rails/active_storage/direct_uploads'
+    // return this.input.getAttribute("data-direct-upload-url")
   }
 
   dispatch(name, detail = {}) {

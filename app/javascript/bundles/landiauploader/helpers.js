@@ -31,10 +31,10 @@ export function dispatchEvent(element, type, eventInit = {}) {
   event.detail = detail || {}
 
   try {
-    element.disabled = false
+    // element.disabled = false
     element.dispatchEvent(event)
   } finally {
-    element.disabled = disabled
+    // element.disabled = disabled
   }
 
   return event
