@@ -16,6 +16,7 @@ export class DirectUploadController {
     // hiddenInput.name = this.input.name;
     hiddenInput.name = this.input;
     $(hiddenInput).insertBefore($('input[type=submit]'));
+    // super important
     this.input = hiddenInput;
     // this.input.insertAdjacentElement("beforebegin", hiddenInput);
 
