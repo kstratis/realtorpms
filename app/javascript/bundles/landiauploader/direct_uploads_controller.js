@@ -34,13 +34,18 @@ export class DirectUploadsController {
   }
 
   createDirectUploadControllers() {
-    const controllers = []
-    this.inputs.forEach(input => {
-      toArray(input.files).forEach(file => {
-        const controller = new DirectUploadController(input, file)
-        controllers.push(controller)
-      })
-    })
+    console.log('******************************');
+    console.log(window.uppy_uploader.state.files);
+    console.log('******************************');
+    const controllers = [];
+    $.each(window.uppy_uploader.state.files, (uppyfilename, filewrapper) =>{
+      console.log(filewrapper.data);
+        toArray(input.files).forEach(file => {
+          const controller = new DirectUploadController(input, file)
+          controllers.push(controller)
+        })
+
+    });
     return controllers
   }
 

@@ -1,5 +1,5 @@
 // $(document).ready(function(){
-//   $("#new_property").on("ajax:beforeSend", function(e, xhr, settings) {
+  // $("#new_property").on("ajax:beforeSend", function(e, xhr, settings) {
 //     e.preventDefault();
 //     console.log('existing data');
 //     console.log(e);
