@@ -96,3 +96,14 @@ input, textarea, select, .uneditable-input {
 
   }
 }
+
+.progress-container{
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  min-height: 300px;
+}

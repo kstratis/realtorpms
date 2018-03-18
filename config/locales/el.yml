@@ -17,7 +17,7 @@ el:
         age_placeholder: "π.χ. 30"
         phone1: "Τηλέφωνο"
         phone1_placeholder: "π.χ. 697 25 00 111"
-        locale: "Γλώσσα εμφάνισης"
+        locale: "Γλώσσα διεπαφής"
         password: "Κωδικός"
         password_placeholder: "Απαιτούνται τουλάχιστον 6 χαρ/ρες"
         password_confirmation: "Επανάληψη νέου κωδικού"

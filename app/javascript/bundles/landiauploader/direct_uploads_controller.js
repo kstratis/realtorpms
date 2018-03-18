@@ -1,12 +1,18 @@
 import { DirectUploadController } from "./direct_upload_controller"
 import { findElements, dispatchEvent, toArray } from "./helpers"
 
-const inputSelector = "input[type=file][data-direct-upload-url]:not([disabled])"
+const inputSelector = "input[type=file][data-direct-upload-url]:not([disabled])";
+// const inputSelector = document.getElementById('inputEmitter');
+// const inputSelector = document.getElementsByClassName('emitters');
+// const inputSelector = ['.emitters'];
+// var y = document.getElementsByClassName('foo');
 
 export class DirectUploadsController {
   constructor(form) {
-    this.form = form
+    this.form = form;
+    // this.inputs = findElements(form, inputSelector)
     this.inputs = findElements(form, inputSelector).filter(input => input.files.length)
+    // this.inputs = inputSelector;
   }
 
   start(callback) {
@@ -42,12 +48,14 @@ export class DirectUploadsController {
     console.log('------------------------------');
 
     const controllers = [];
+    const mockEmitter = this.inputs[0];
     $.each(window.uppy_uploader.state.files, (uppyfilename, filewrapper) => {
       console.log(filewrapper.data);
+      filewrapper.data['id'] = filewrapper.id;
         // toArray(input.files).forEach(file => {
         // const controller = new DirectUploadController(input, filewrapper.data);
 
-      const controller = new DirectUploadController('property[images][]', filewrapper.data);
+      const controller = new DirectUploadController(mockEmitter, filewrapper.data);
       controllers.push(controller)
         // })
 

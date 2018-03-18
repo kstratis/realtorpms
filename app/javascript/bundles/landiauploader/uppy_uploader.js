@@ -39,6 +39,10 @@ $(document).on('turbolinks:load', function(e) {
     inline: true,
     target: '#uppy',
     hideUploadButton: true,
+    disableInformer: true,
+    disableStatusBar: true,
+    showProgressDetails: false,
+    hideProgressAfterFinish: true,
     locale: {
       strings: {
         name: translations.filename,
@@ -66,28 +70,58 @@ $(document).on('turbolinks:load', function(e) {
     note: translations.notes,
     replaceTargetContent: true,
     maxHeight: 450,
-    showProgressDetails: false,
-    hideProgressAfterFinish: false
+
   })
-  //   .use(XHRUpload, {
-  //   endpoint: '/properties',
-  //   bundle: true,
-  //   formData: true,
-  //   fieldName: 'images[]',
-  //   headers: {
-  //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  //   }
-  // })
+    .use(XHRUpload, {
+    endpoint: '/properties',
+    bundle: true,
+    formData: true,
+    fieldName: 'images[]',
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  })
     .run();
     // .on('complete', (result) => {
     //   console.log('Upload result:', result)
     // });
+  // uppy.on('upload-started', (file, upload) => {
+  //   console.log('I got the start');
+  //   console.log('the upload is:');
+  //   console.log(upload);
+  //   uppy.setFileState(file.id, {
+  //     progress: Object.assign({}, file.progress, {
+  //       uploadStarted: Date.now(),
+  //       uploadComplete: false,
+  //       bytesUploaded: upload.bytesUploaded,
+  //       bytesTotal: file.size
+  //     })
+  //   })
+  // });
+  //
+  // uppy.on('upload-progress', (file, progress) => {
+  //   console.log('I got progress!!!!');
+  //   console.log(progress);
+  //   uppy.setFileState(file.id, {
+  //     progress: Object.assign({}, file.progress, {
+  //       bytesUploaded: upload.bytesUploaded,
+  //       bytesTotal: file.size,
+  //       percentage: Math.floor((upload.bytesUploaded / 600000 * 100).toFixed(2))
+  //     })
+  //   });
+  // });
+
+
+
+
+
+
   window.uppy_uploader = uppy;
 });
 
 
 
-
+// uppy.setFileState('uppy-kleidariapng-image/png-114836-1519211548209', { progress: 95  });
 
 
 

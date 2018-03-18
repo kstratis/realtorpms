@@ -6,7 +6,7 @@ export class DirectUploadController {
     this.input = input || null;
     this.file = file
     this.directUpload = new DirectUpload(this.file, this.url, this);
-    // this.dispatch("initialize")
+    this.dispatch("initialize")
   }
 
   start(callback) {
@@ -14,13 +14,13 @@ export class DirectUploadController {
     hiddenInput.type = "hidden";
     console.log('printing the input name');
     // hiddenInput.name = this.input.name;
-    hiddenInput.name = this.input;
+    hiddenInput.name = 'property[special]';
     $(hiddenInput).insertBefore($('input[type=submit]'));
     // super important
-    this.input = hiddenInput;
+    // this.input = hiddenInput;
     // this.input.insertAdjacentElement("beforebegin", hiddenInput);
 
-    // this.dispatch("start")
+    this.dispatch("start")
 
     this.directUpload.create((error, attributes) => {
       if (error) {
@@ -30,20 +30,20 @@ export class DirectUploadController {
         hiddenInput.value = attributes.signed_id
       }
 
-      // this.dispatch("end")
+      this.dispatch("end")
       callback(error)
     })
   }
 
   uploadRequestDidProgress(event) {
-    const progress = event.loaded / event.total * 100
+    const progress = Math.floor(event.loaded / event.total * 100).toFixed(2);
     if (progress) {
-      this.dispatch("progress", { progress })
+      this.dispatch("progress", { progress: progress, bytesUploaded: event.loaded })
     }
   }
 
   get url() {
-    return 'http://shakalaka.lvh.me:3000/rails/active_storage/direct_uploads'
+    return `${window.location.origin}/rails/active_storage/direct_uploads`;
     // return this.input.getAttribute("data-direct-upload-url")
   }
 
