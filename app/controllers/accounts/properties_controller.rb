@@ -79,44 +79,6 @@ module Accounts
     def edit
     end
 
-    def uploads
-      # @property = Property.new(property_params)
-      puts 'GOT THE MESSAGE'
-      # puts params
-      # session[:forwarding_url] = request.original_url if request.get?
-
-      session[:attachments] = params['files']
-      puts params['files'][0]
-      # FileUtils.cp()
-
-      params['files'].each do |attachment|
-
-        FileUtils.cp(attachment.path, "#{Rails.root.join('extra_storage')}/demo/#{attachment.original_filename}")
-          # byebug
-        # f
-        # puts attachment
-        # puts '********'
-        # byebug
-      #
-      end
-
-      puts 'NNNNNNNEW'
-      # puts params['files'][0]
-
-      # Rails.root.join("storage")
-      # puts '-=PRINTING THE CURRENT ATTACHMENTS=-'
-
-      # puts session[:attachments]
-      respond_to do |format|
-        format.json { render status: 200, json: {
-            message: "Successfully created file."
-        }.to_json }
-
-      end
-
-      # @property.images.attach(property_params[:images])
-
-    end
 
     # POST /properties
     # POST /properties.json
@@ -189,7 +151,7 @@ module Accounts
       # Never trust parameters from the scary internet, only allow the white list through.
       def property_params
         # params.require(:property).permit(:description, :propertycategory, :propertytype, :price, :size, :construction)
-        params.require(:property).permit(:description, :propertycategory, :propertytype, :price, :size, :construction, :special, images: [], )
+        params.require(:property).permit(:description, :propertycategory, :propertytype, :price, :size, :construction, images: [])
       end
 
 

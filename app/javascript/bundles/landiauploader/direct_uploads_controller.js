@@ -1,19 +1,19 @@
 import { DirectUploadController } from "./direct_upload_controller"
 import { findElements, dispatchEvent, toArray } from "./helpers"
 
-// const inputSelector = "input[type=file][data-direct-upload-url]:not([disabled])";
+const inputSelector = "input[type=file][data-direct-upload-url]:not([disabled])";
 // const inputSelector = document.getElementById('inputEmitter');
 // const inputSelector = document.getElementsByClassName('emitters');
 // const inputSelector = ['.emitters'];
-const inputSelector = "input.emitters:not([disabled]";
+// const inputSelector = "input.emitters:not([disabled]";
 // var y = document.getElementsByClassName('foo');
 
 export class DirectUploadsController {
   constructor(form) {
     this.form = form;
     console.log('Inside DirectUploadsController constructor');
-    this.inputs = findElements(form, inputSelector);
-    // this.inputs = findElements(form, inputSelector).filter(input => input.files.length);
+    // this.inputs = findElements(form, inputSelector);
+    this.inputs = findElements(form, inputSelector).filter(input => input.files.length);
     // this.inputs = findElements(form, inputSelector).filter(input => true);
     // console.log(typeof this.inputs);
     console.log('#####');
