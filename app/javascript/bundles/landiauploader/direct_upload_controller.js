@@ -12,9 +12,9 @@ export class DirectUploadController {
   start(callback) {
     const hiddenInput = document.createElement("input");
     hiddenInput.type = "hidden";
-    console.log('printing the input name');
+    // console.log('printing the input name');
     // hiddenInput.name = this.input.name;
-    hiddenInput.name = 'property[special]';
+    hiddenInput.name = 'property[images][]';
     $(hiddenInput).insertBefore($('input[type=submit]'));
     // super important
     // this.input = hiddenInput;
@@ -29,9 +29,9 @@ export class DirectUploadController {
       } else {
         hiddenInput.value = attributes.signed_id
       }
-
-      this.dispatch("end")
-      callback(error)
+      console.log('File finished uploading');
+      this.dispatch("end");
+      callback(error);
     })
   }
 

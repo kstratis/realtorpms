@@ -6,8 +6,8 @@ let started = false
 
 export function start() {
   if (!started) {
-    started = true
-    document.addEventListener("submit", didSubmitForm)
+    started = true;
+    document.addEventListener("submit", didSubmitForm);
     document.addEventListener("ajax:before", didSubmitRemoteElement)
   }
 }
@@ -23,6 +23,8 @@ function didSubmitRemoteElement(event) {
 }
 
 function handleFormSubmissionEvent(event) {
+  console.log('handleFormSubmissionEvent called');
+
   const form = event.target
 
   if (form.hasAttribute(processingAttribute)) {
@@ -34,6 +36,7 @@ function handleFormSubmissionEvent(event) {
   const { inputs } = controller
 
   if (inputs.length) {
+    console.log('INSIDE THE INPUTS LENGTH');
     event.preventDefault()
     form.setAttribute(processingAttribute, "")
     inputs.forEach(disable)
@@ -49,14 +52,18 @@ function handleFormSubmissionEvent(event) {
 }
 
 function submitForm(form) {
+  console.log('this should only print once');
   let button = findElement(form, "input[type=submit]")
   if (button) {
+    console.log('inside if')
     const { disabled } = button
     button.disabled = false
     button.focus()
     button.click()
     button.disabled = disabled
   } else {
+    console.log('inside else')
+
     button = document.createElement("input")
     button.type = "submit"
     button.style = "display:none"

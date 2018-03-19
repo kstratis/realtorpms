@@ -8,4 +8,4 @@ function autostart() {
   }
 }
 
-setTimeout(autostart, 1)
+setTimeout(autostart, 1);

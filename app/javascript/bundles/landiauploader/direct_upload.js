@@ -2,15 +2,16 @@ import { FileChecksum } from "./file_checksum"
 import { BlobRecord } from "./blob_record"
 import { BlobUpload } from "./blob_upload"
 
-let id = 0
+let id = 0;
 
 export class DirectUpload {
   constructor(file, url, delegate) {
-    this.id = ++id
-    this.file = file
-    this.url = url
-    this.delegate = delegate
+    this.id = ++id;
+    this.file = file;
+    this.url = url;
+    this.delegate = delegate;
   }
+
 
   create(callback) {
     FileChecksum.create(this.file, (error, checksum) => {

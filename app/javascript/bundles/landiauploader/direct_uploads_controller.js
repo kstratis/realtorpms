@@ -1,17 +1,27 @@
 import { DirectUploadController } from "./direct_upload_controller"
 import { findElements, dispatchEvent, toArray } from "./helpers"
 
-const inputSelector = "input[type=file][data-direct-upload-url]:not([disabled])";
+// const inputSelector = "input[type=file][data-direct-upload-url]:not([disabled])";
 // const inputSelector = document.getElementById('inputEmitter');
 // const inputSelector = document.getElementsByClassName('emitters');
 // const inputSelector = ['.emitters'];
+const inputSelector = "input.emitters:not([disabled]";
 // var y = document.getElementsByClassName('foo');
 
 export class DirectUploadsController {
   constructor(form) {
     this.form = form;
-    // this.inputs = findElements(form, inputSelector)
-    this.inputs = findElements(form, inputSelector).filter(input => input.files.length)
+    console.log('Inside DirectUploadsController constructor');
+    this.inputs = findElements(form, inputSelector);
+    // this.inputs = findElements(form, inputSelector).filter(input => input.files.length);
+    // this.inputs = findElements(form, inputSelector).filter(input => true);
+    // console.log(typeof this.inputs);
+    console.log('#####');
+    console.log(this.inputs.constructor);
+    console.log(this.inputs);
+    console.log('#####');
+
+    // console.log(DirectUploadsController.caller);
     // this.inputs = inputSelector;
   }
 
@@ -30,7 +40,8 @@ export class DirectUploadsController {
           }
         })
       } else {
-        callback()
+        console.log('no other controller');
+        callback();
         this.dispatch("end")
       }
     }
@@ -40,9 +51,9 @@ export class DirectUploadsController {
   }
 
   createDirectUploadControllers() {
-    console.log('******************************');
-    console.log(window.uppy_uploader.state.files);
-    console.log('******************************');
+    // console.log('******************************');
+    // console.log(window.uppy_uploader.state.files);
+    // console.log('******************************');
     console.log('------------------------------');
     console.log(this.inputs);
     console.log('------------------------------');

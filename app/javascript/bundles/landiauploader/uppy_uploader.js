@@ -72,15 +72,15 @@ $(document).on('turbolinks:load', function(e) {
     maxHeight: 450,
 
   })
-    .use(XHRUpload, {
-    endpoint: '/properties',
-    bundle: true,
-    formData: true,
-    fieldName: 'images[]',
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-  })
+  //   .use(XHRUpload, {
+  //   endpoint: '/properties',
+  //   bundle: true,
+  //   formData: true,
+  //   fieldName: 'images[]',
+  //   headers: {
+  //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  //   }
+  // })
     .run();
     // .on('complete', (result) => {
     //   console.log('Upload result:', result)

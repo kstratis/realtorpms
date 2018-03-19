@@ -1,6 +1,13 @@
 // $(document).on('turbolinks:load', function(e) {
-//   // console.log('FIRED');
-//   addEventListener("direct-upload:initialize", event => {
+//   console.log('FORM SUBMITTER FIRING');
+//   $('#new_property').on("ajax:beforeSend", event => {
+//     console.log('************');
+//     console.log('This is the ajax:beforeSend event logged');
+//     console.log('This is the event: ');
+//     console.log(event);
+//     console.log('************');
+//   });
+// });
 //     // e.preventDefault();
 //
 //     console.log('RUNNNNNNNNNNNING');
@@ -28,5 +35,4 @@
 //     // console.log(window.uppy_uploader.state.files);
 //     // window.uppy_uploader.upload();
 //     // return false;
-//   })
-// });
+
