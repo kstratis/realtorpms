@@ -1,13 +1,50 @@
-// $(document).on('turbolinks:load', function(e) {
-//   console.log('FORM SUBMITTER FIRING');
-//   $('#new_property').on("ajax:beforeSend", event => {
-//     console.log('************');
-//     console.log('This is the ajax:beforeSend event logged');
-//     console.log('This is the event: ');
+$(document).on('turbolinks:load', function(e) {
+  console.log('FORM SUBMITTER FIRING');
+
+  $('#new_property').on("ajax:before", event => {
+    console.log('************');
+    console.log('This is the ajax:before event logged');
+
+    if ($('#nonformsubmitter').length > 0) {
+      console.log('exists');
+      event.preventDefault();
+      return false;
+    }
+    // console.log('This is the event: ');
 //     console.log(event);
+    console.log('************');
+  });
+
+  $('#new_property').on("ajax:send", event => {
+    console.log('************');
+    console.log('This is the ajax:send event logged');
+    // console.log('This is the event: ');
+//     console.log(event);
+    console.log('************');
+  });
+//   $('#new_property').on("ajax:success", event => {
+//     console.log('************');
+//     console.log('This is the ajax:success event logged');
+//     // console.log('This is the event: ');
+// //     console.log(event);
 //     console.log('************');
 //   });
-// });
+//   $('#new_property').on("ajax:error", event => {
+//     console.log('************');
+//     console.log('This is the ajax:error event logged');
+//     console.log(event);
+//     // console.log('This is the event: ');
+// //     console.log(event);
+//     console.log('************');
+//   });
+//   $('#new_property').on("ajax:complete", event => {
+//     console.log('************');
+//     console.log('This is the ajax:complete event logged');
+//     // console.log('This is the event: ');
+// //     console.log(event);
+//     console.log('************');
+//   });
+});
 //     // e.preventDefault();
 //
 //     console.log('RUNNNNNNNNNNNING');

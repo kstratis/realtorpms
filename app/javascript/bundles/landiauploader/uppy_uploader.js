@@ -9,18 +9,18 @@ const Form = require('uppy/lib/plugins/Form');
 export { start, DirectUpload }
 
 
-
+start();
 console.log('working');
 
 $(document).on('turbolinks:load', function(e) {
 
-  function autostart() {
-    // if (window.ActiveStorage) {
-      start()
-    // }
-  }
-
-  setTimeout(autostart, 1);
+  // function autostart() {
+  //   // if (window.ActiveStorage) {
+  //     start()
+  //   // }
+  // }
+  // console.log('hyello from uppy uploader');
+  // setTimeout(autostart, 1);
 
   const uppyDomNode = $('#uppy');
   // Bail out if uppy shouldn't be included in this screen

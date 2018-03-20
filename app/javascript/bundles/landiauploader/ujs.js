@@ -6,6 +6,7 @@ let started = false
 
 export function start() {
   if (!started) {
+    console.log('ujs started registering listeners');
     started = true;
     document.addEventListener("submit", didSubmitForm);
     document.addEventListener("ajax:before", didSubmitRemoteElement)
@@ -13,6 +14,7 @@ export function start() {
 }
 
 function didSubmitForm(event) {
+  console.log('calling handleFormSubmissionEvent');
   handleFormSubmissionEvent(event)
 }
 
@@ -25,27 +27,29 @@ function didSubmitRemoteElement(event) {
 function handleFormSubmissionEvent(event) {
   console.log('handleFormSubmissionEvent called');
 
-  const form = event.target
+  const form = event.target;
 
   if (form.hasAttribute(processingAttribute)) {
-    event.preventDefault()
-    return
+    console.log('form is processing. just return');
+    event.preventDefault();
+    return;
   }
 
-  const controller = new DirectUploadsController(form)
-  const { inputs } = controller
+  const controller = new DirectUploadsController(form);
+  const { inputs } = controller;
 
+  // if (Object.keys(window.uppy_uploader.getState().files).length) {
   if (inputs.length) {
     console.log('INSIDE THE INPUTS LENGTH');
-    event.preventDefault()
-    form.setAttribute(processingAttribute, "")
-    inputs.forEach(disable)
+    event.preventDefault();
+    form.setAttribute(processingAttribute, "");
+    inputs.forEach(disable);
     controller.start(error => {
-      form.removeAttribute(processingAttribute)
+      form.removeAttribute(processingAttribute);
       if (error) {
-        inputs.forEach(enable)
+        inputs.forEach(enable);
       } else {
-        submitForm(form)
+        submitForm(form);
       }
     })
   }
@@ -59,6 +63,7 @@ function submitForm(form) {
     const { disabled } = button
     button.disabled = false
     button.focus()
+    console.log('THE FORM SEND IS BEING CLICKED NOW');
     button.click()
     button.disabled = disabled
   } else {

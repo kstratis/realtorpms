@@ -113,18 +113,36 @@
               }, prerender: false) %>
             </div>
 
+
+            <input id="nonformsubmitter" type="hidden">
             <!--<div class="btn btn-default" id="test">Uploader window</div>-->
-            <!--<div id="uuu"></div>-->
             <!--<img src="" style="width: auto;" id="kkk" />-->
 
-            <!--<input id="inputEmitter" class="emitters form-control" type="hidden" name="property[images][]">-->
-            <input id="inputEmitter" class="emitters form-control" type="hidden">
-
+            <!-- **************************  -->
 
             <div class="form-group">
               <%= property.label :images %>
-              <%= property.file_field :images, multiple: true, direct_upload: true, class: 'form-control' %>
+              <input id="property_images" class="emitters form-control" type="text" name="property[images][]">
             </div>
+
+            <!-- **************************  -->
+
+            <!--<input id="inputEmitter" class="emitters form-control" type="hidden">-->
+            <%#= property.text_field :images, value: '', class: 'emitters form-control', multiple: true, name: "property[images][]" %>
+
+            <%#= property.hidden_field :task_id, :value => task.id%>
+            <%#= property.text_field :description, placeholder: Property.human_attribute_name("description_placeholder"), class: 'glowing-border' %>
+
+
+
+            <!-- **************************  -->
+
+            <!--<div class="form-group">-->
+              <%#= property.label :images %>
+              <%#= property.file_field :images, multiple: true, direct_upload: true, class: 'form-control' %>
+            <!--</div>-->
+
+            <!-- **************************  -->
 
             <%#= property.text_field :price, placeholder: 'i.e. 250000', class: 'glowing-border' %>
 
