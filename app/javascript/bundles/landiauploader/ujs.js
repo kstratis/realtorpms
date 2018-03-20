@@ -38,8 +38,8 @@ function handleFormSubmissionEvent(event) {
   const controller = new DirectUploadsController(form);
   const { inputs } = controller;
 
-  // if (Object.keys(window.uppy_uploader.getState().files).length) {
-  if (inputs.length) {
+  if (inputs.length && Object.keys(window.uppy_uploader.getState().files).length) {
+  // if (inputs.length) {
     console.log('INSIDE THE INPUTS LENGTH');
     event.preventDefault();
     form.setAttribute(processingAttribute, "");

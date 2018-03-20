@@ -107,7 +107,9 @@ $(document).on('turbolinks:load', function(e) {
   //     })
   //   });
   // });
-
+  // uppy.on('file-added', (file) => {
+  //   console.log('Added file', file)
+  // });
 
 
 
