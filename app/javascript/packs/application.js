@@ -8,7 +8,7 @@
 // layout file, like app/views/layouts/application.html.erb
 
 
-import * as uploader from '../bundles/landiauploader/uppy_uploader';
+// import * as uploader from '../bundles/landiauploader/uppy_uploader';
 console.log('Hello from Webpacker');
 
 // console.log(uppy);

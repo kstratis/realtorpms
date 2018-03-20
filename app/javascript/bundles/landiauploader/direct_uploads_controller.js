@@ -33,39 +33,39 @@ export class DirectUploadsController {
     startNextController()
   }
 
-  createDirectUploadControllers() {
-    console.log('******************************');
-    console.log(window.uppy_uploader.state.files);
-    console.log('******************************');
-    console.log('------------------------------');
-    console.log(this.inputs);
-    console.log('------------------------------');
-
-    const controllers = [];
-    $.each(window.uppy_uploader.state.files, (uppyfilename, filewrapper) => {
-      console.log(filewrapper.data);
-        // toArray(input.files).forEach(file => {
-        // const controller = new DirectUploadController(input, filewrapper.data);
-
-      const controller = new DirectUploadController('property[images][]', filewrapper.data);
-      controllers.push(controller)
-        // })
-
-    });
-    return controllers
-  }
-
-  // Original Method
   // createDirectUploadControllers() {
+  //   console.log('******************************');
+  //   console.log(window.uppy_uploader.state.files);
+  //   console.log('******************************');
+  //   console.log('------------------------------');
+  //   console.log(this.inputs);
+  //   console.log('------------------------------');
+  //
   //   const controllers = [];
-  //   this.inputs.forEach(input => {
-  //     toArray(input.files).forEach(file => {
-  //       const controller = new DirectUploadController(input, file);
-  //       controllers.push(controller)
-  //     })
+  //   $.each(window.uppy_uploader.state.files, (uppyfilename, filewrapper) => {
+  //     console.log(filewrapper.data);
+  //       // toArray(input.files).forEach(file => {
+  //       // const controller = new DirectUploadController(input, filewrapper.data);
+  //
+  //     const controller = new DirectUploadController('property[images][]', filewrapper.data);
+  //     controllers.push(controller)
+  //       // })
+  //
   //   });
   //   return controllers
   // }
+
+  // Original Method
+  createDirectUploadControllers() {
+    const controllers = [];
+    this.inputs.forEach(input => {
+      toArray(input.files).forEach(file => {
+        const controller = new DirectUploadController(input, file);
+        controllers.push(controller)
+      })
+    });
+    return controllers
+  }
 
   dispatch(name, detail = {}) {
     return dispatchEvent(this.form, `direct-uploads:${name}`, { detail })
