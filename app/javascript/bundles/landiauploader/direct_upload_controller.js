@@ -13,12 +13,12 @@ export class DirectUploadController {
     const hiddenInput = document.createElement("input");
     hiddenInput.type = "hidden";
     // console.log('printing the input name');
-    hiddenInput.name = this.input.name;
-    // hiddenInput.name = 'property[images][]';
-    // $(hiddenInput).insertBefore($('input[type=submit]'));
+    // hiddenInput.name = this.input.name;
+    hiddenInput.name = 'property[images][]';
+    $(hiddenInput).insertBefore($('input[type=submit]'));
     // super important
     // this.input = hiddenInput;
-    this.input.insertAdjacentElement("beforebegin", hiddenInput);
+    // this.input.insertAdjacentElement("beforebegin", hiddenInput);
 
     this.dispatch("start")
 

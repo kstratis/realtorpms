@@ -9,9 +9,6 @@ const Form = require('uppy/lib/plugins/Form');
 export { start, DirectUpload }
 
 
-
-console.log('working');
-
 $(document).on('turbolinks:load', function(e) {
 
   function autostart() {
