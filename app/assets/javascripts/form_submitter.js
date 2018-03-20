@@ -5,7 +5,7 @@ $(document).on('turbolinks:load', function(e) {
     console.log('************');
     console.log('This is the ajax:before event logged');
 
-    if ($('#nonformsubmitter').length > 0) {
+    if ($('#preventformsubmit').length > 0) {
       console.log('exists');
       event.preventDefault();
       return false;

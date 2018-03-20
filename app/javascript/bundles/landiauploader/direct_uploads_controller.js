@@ -41,7 +41,7 @@ export class DirectUploadsController {
         })
       } else {
         console.log('no other controller');
-        document.getElementById('nonformsubmitter').remove();
+        document.getElementById('preventformsubmit').remove();
         callback();
         this.dispatch("end")
       }

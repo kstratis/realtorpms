@@ -24,6 +24,15 @@ function didSubmitRemoteElement(event) {
   }
 }
 
+function attachDOMFormBlocker(form){
+  const submitButton = form.querySelector('input[type=submit]');
+  const inputBlocker = document.createElement('input');
+  inputBlocker.id = 'preventformsubmit';
+  inputBlocker.type = "hidden";
+  submitButton.insertAdjacentElement('beforebegin', inputBlocker);
+  return true;
+}
+
 function handleFormSubmissionEvent(event) {
   console.log('handleFormSubmissionEvent called');
 
@@ -43,6 +52,8 @@ function handleFormSubmissionEvent(event) {
     console.log('INSIDE THE INPUTS LENGTH');
     event.preventDefault();
     form.setAttribute(processingAttribute, "");
+    // consol
+    attachDOMFormBlocker(form);
     inputs.forEach(disable);
     controller.start(error => {
       form.removeAttribute(processingAttribute);
