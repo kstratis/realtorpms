@@ -114,16 +114,27 @@
             </div>
 
 
-            <input id="nonformsubmitter" type="hidden">
+
+            <!-- WATCH OUT FOR THIS ONE -->
+            <!--<input id="nonformsubmitter" type="hidden">-->
+
+
+
+
+
+
+
+
+
             <!--<div class="btn btn-default" id="test">Uploader window</div>-->
             <!--<img src="" style="width: auto;" id="kkk" />-->
 
             <!-- **************************  -->
 
-            <div class="form-group">
-              <%= property.label :images %>
-              <input id="property_images" class="emitters form-control" type="text" name="property[images][]">
-            </div>
+            <!--<div class="form-group">-->
+              <%#= property.label :images %>
+              <!--<input id="property_images" class="emitters form-control" type="text" name="property[images][]">-->
+            <!--</div>-->
 
             <!-- **************************  -->
 
@@ -137,10 +148,10 @@
 
             <!-- **************************  -->
 
-            <!--<div class="form-group">-->
-              <%#= property.label :images %>
-              <%#= property.file_field :images, multiple: true, direct_upload: true, class: 'form-control' %>
-            <!--</div>-->
+            <div class="form-group">
+              <%= property.label :images %>
+              <%= property.file_field :images, multiple: true, direct_upload: true, class: 'form-control' %>
+            </div>
 
             <!-- **************************  -->
 
