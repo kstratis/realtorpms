@@ -6,51 +6,123 @@
 
 
   <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <div class="pr-form-container">
 
-        <%= form_for(@property, remote: true) do |property| %>
+    <div class="col-md-12 ">
+
+
+      <%= form_for(@property, remote: true) do |property| %>
+        <div class="pr-form-container">
+          <div class="col-md-4 col-md-border">
+
             <%#= render 'shared/error_messages' %>
-          <div class="form-group">
-
-                <%#= property.label Property.human_attribute_name("description") %>
-                <%= property.label :description %>
-                <%= property.text_field :description, placeholder: Property.human_attribute_name("description_placeholder"), class: 'glowing-border' %>
-                <%#= inline_error @property.owner, :first_name, 'First name'%>
-
-                <%= property.label :propertytype %>
-                <!-- original -->
-                <%#= property.select :propertytype, Property.propertytypes.keys, {}, class: 'form-control' %>
-                <!-- end of original -->
-
-                <%= property.select :propertytype, Property.propertytypes.keys.collect { |propertytype| [ Property.human_enum_name(:propertytype, propertytype), propertytype ] }, {},  class: 'form-control glowing-border-select' %>
-
-                <%#= property.text_field :type, placeholder: 'i.e. 3-bedroom flat in Kifissia', class: 'glowing-border' %>
-                <%#= inline_error @property.owner, :first_name, 'First name'%>
-
-                <%#= property.label :construction %>
-                <%#= property.text_field :size, placeholder: 'i.e. 90', class: 'glowing-border' %>
 
 
-                <%= property.label :price %>
-                <%= property.text_field :price, placeholder: Property.human_attribute_name("price_placeholder"), class: 'glowing-border' %>
-                <%#= inline_error @property.owner, :last_name, 'Last name'%>
+            <div class="form-group">
 
-                <%= property.label :size %>
-                <%= property.text_field :size, placeholder: Property.human_attribute_name("size_placeholder"), class: 'glowing-border' %>
-                <%#= inline_error @property.owner, :email, 'Email'%>
+              <%#= property.label Property.human_attribute_name("description") %>
+              <%= property.label :description %>
+              <%= property.text_field :description, placeholder: Property.human_attribute_name("description_placeholder"), class: 'glowing-border' %>
+            </div>
 
-                <%= property.label :construction %>
-                <%= property.select(:construction, options_for_select( 1940..Time.zone.now.year+2 , Time.zone.now.year), {}, class: 'form-control') %>
-                <%#= property.text_field :price, placeholder: 'i.e. 250000', class: 'glowing-border' %>
 
-                <%= property.submit t('properties.new.add_button'), class: 'btn btn-primary' %>
+            <div class="form-group">
+
+              <%= property.label :propertycategory %>
+
+              <!-- THIS ONE WAS THE ORIGINAL -->
+              <%#= property.select :propertytype, Property.propertytypes.keys, {}, class: 'form-control' %>
+              <!-- THIS ONE EVENTUALLY REPLACED IT -->
+              <%#= property.select :propertytype, Property.propertytypes.keys.collect { |propertytype| [ Property.human_enum_name(:propertytype, propertytype), propertytype ] }, {},  class: 'form-control glowing-border-select' %>
+              <%= react_component('SimpleSelect', props: {
+                  id: 'property_propertycategory',
+                  name: 'property[propertycategory]',
+                  className: 'simple-select',
+                  options: Property.propertycategories.keys.collect {|propertycategory| {label: Property.human_enum_name(:propertycategory, propertycategory), value: propertycategory}},
+                  i18n: {
+                      select: t('js.components.select'),
+                  }
+              }, prerender: false) %>
+            </div>
+
+
+            <div class="form-group">
+
+              <%= property.label :propertytype %>
+
+              <!-- THIS ONE WAS THE ORIGINAL -->
+              <%#= property.select :propertytype, Property.propertytypes.keys, {}, class: 'form-control' %>
+              <!-- THIS ONE EVENTUALLY REPLACED IT -->
+              <%#= property.select :propertytype, Property.propertytypes.keys.collect { |propertytype| [ Property.human_enum_name(:propertytype, propertytype), propertytype ] }, {},  class: 'form-control glowing-border-select' %>
+              <%= react_component('SimpleSelect', props: {
+                  id: 'property_propertytype',
+                  name: 'property[propertytype]',
+                  className: 'simple-select',
+                  options: Property.propertytypes.keys.collect {|propertytype| {label: Property.human_enum_name(:propertytype, propertytype), value: propertytype}},
+                  i18n: {
+                      select: t('js.components.select'),
+                  }
+              }, prerender: false) %>
+            </div>
+
+            <div class="form-group">
+
+              <%= property.label :price %>
+              <%= property.text_field :price, placeholder: Property.human_attribute_name("price_placeholder"), class: 'glowing-border' %>
+              <%#= inline_error @property.owner, :last_name, 'Last name'%>
+            </div>
+
+            <div class="form-group">
+              <%= property.label :size %>
+              <%= property.text_field :size, placeholder: Property.human_attribute_name("size_placeholder"), class: 'glowing-border' %>
+            </div>
+
+            <div class="form-group">
+              <%= property.label :construction %>
+              <%#= property.select(:construction, options_for_select( 1940..Time.zone.now.year+2 , Time.zone.now.year), {}, class: 'form-control') %>
+              <%= react_component('SimpleSelect', props: {
+                  id: 'property_construction',
+                  name: 'property[construction]',
+                  className: 'simple-select',
+                  # options: Property.propertytypes.keys.collect { |propertytype| { label: Property.human_enum_name(:propertytype, propertytype), value: propertytype} },
+                  options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
+                  i18n: {
+                      select: t('js.components.select'),
+                  }
+              }, prerender: false) %>
+            </div>
+            <!-- This guards against unwanted ujs form submission -->
+            <input id="preventformsubmit" type="hidden">
+            <input id="property_images" class="emitters form-control" type="hidden" name="property[images][]">
+            <div class="form-group">
+              <%= property.submit t('properties.new.add_button'), class: 'btn btn-primary' %>
+            </div>
           </div>
-        <% end %>
-      </div>
+          <div class="col-md-8 ">
+
+
+            <div class="form-group">
+              <%= content_tag :div, class: "", id: "uppy", data: {
+                  i18n: {
+                    uppy: t('js.uppy'),
+                  },
+                  uppy_url_listener: new_property_path
+                  } do %>
+              <% end %>
+              <%#= property.label :size %>
+              <%#= property.text_field :size, placeholder: Property.human_attribute_name("size_placeholder"), class: 'glowing-border' %>
+            </div>
+
+          </div>
+        </div>
+
+
+      <% end %>
+
     </div>
   </div>
 </div>
+
+
 
 
 

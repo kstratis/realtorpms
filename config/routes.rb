@@ -21,7 +21,11 @@ Rails.application.routes.draw do
       resources :properties
       resources :users
       resources :invitations, only: [:new, :create]
+      # post '/properties/uploads', to: 'properties#uploads'
       # create a new assignment
+      #
+      post '/properties/uploads', to: 'properties#uploads'
+      #
       post '/assignments/property/:pid/user/:uid', to: 'assignments#create'
       # delete an existing assignment
       delete '/assignments/property/:pid/user/:uid', to: 'assignments#destroy'

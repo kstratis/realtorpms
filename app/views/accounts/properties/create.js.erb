@@ -1,8 +1,13 @@
-$('.pr-form-container').fadeOut('fast', function(){
-  var myblock = $("<%= escape_javascript(render('created')) %>").hide();
-  $(this).replaceWith(myblock);
-  $('#form-success').fadeIn('fast');
-  $('.back-button').returnOnClick("<%= properties_path %>");
+<% if @property.errors.empty? %>
+  $('.pr-form-container').fadeOut('fast', function () {
+    var myblock = $("<%= escape_javascript(render('created')) %>").hide();
+    $(this).replaceWith(myblock);
+    $('#form-success').fadeIn('fast');
+    $('.back-button').returnOnClick("<%= properties_path %>");
 });
-
-
+<% else %>
+  console.log('<%= @property.errors.to_json.html_safe %>');
+// console.log('<%#= raw(@property.errors.messages) %>');
+  $("#new_property").render_form_errors('property', JSON.parse('<%= @property.errors.to_json.html_safe %>'));
+  // $('#error-div').html('<%#= j(render :partial => 'shared/error_messages', :object => @course) %>');
+<% end %>

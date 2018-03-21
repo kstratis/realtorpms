@@ -26,6 +26,7 @@ en:
       property:
         description: "Description"
         description_placeholder: "i.e. Luxe 3 Story Loft Rooftop"
+        propertycategory: "Category"
         propertytype: "Type"
         price: "Price"
         price_placeholder: "i.e. 120000"
@@ -43,10 +44,19 @@ en:
             studio: "Studio"
             prefabricated: "Prefabricated"
             precast: "Precast"
+          propertycategory:
+            apartment: "Apartment"
+            terraced: "Terraced"
+            maisonette: "Maisonette"
+            building: "Building"
+            home: "Home"
     errors:
       messages:
         record_invalid: ! 'Validation failed: %{errors}'
   js:
+    components:
+      select:
+        placeholder: "Choose..."
     datatables:
       users:
         partner: "Partner"
@@ -65,6 +75,24 @@ en:
       placeholder: "i.e. John Smith"
     properties_search:
       placeholder: "i.e. 24 Oxford Street"
+    uppy:
+      dropPaste: "Drop files here, paste or"
+      browse: "browse"
+      notes: "Only images are allowed. Max file size 2MB/file. Max number of files < 20."
+      filename: "Filename:"
+      editing: "Editing"
+      done: "Close"
+      uploadSingleFile: "Upload %{smart_count} file"
+      uploadMultipleFiles: "Upload %{smart_count} files"
+      uploadSingleFileExtra: "Upload +%{smart_count} file"
+      uploadMultipleFilesExtra: "Upload +%{smart_count} files"
+      uploading: "Uploading"
+      uploadComplete: "Uploading complete"
+      uploadFailed: "Uploading failed"
+      pleasePressRetry: "Please press the retry button"
+      paused: "Paused"
+      error: "Error"
+      retry: "Please try again"
   navbar:
     profile: "Profile"
     account: "Account"

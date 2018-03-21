@@ -25,6 +25,7 @@ input, textarea, select, .uneditable-input {
   padding: 15px 20px 15px 20px;
   border-radius: 3px;
   border: 1px solid #cdcfd5;
+  overflow: hidden;
 }
 
 .pr-form-container-inapp{
@@ -48,20 +49,61 @@ input, textarea, select, .uneditable-input {
 }
 
 .glowing-border {
-  border: 1px solid #cdcfd5;
+  border: 1px solid #ccc;
   border-radius: 3px;
-  transition: box-shadow linear .1s;
+  //transition: box-shadow linear .1s;
   padding-top: 8px;
   padding-bottom: 8px;
 }
 
 .glowing-border:focus {
   outline: none;
-  border-color: #9ecaed;
-  box-shadow: 0 0 8px #9ecaed;
+  border-color: #007eff;
+  background: #fff;
+  box-shadow: inset 0 1px 1px rgba(0,0,0, 0.075), 0 0 0 3px rgba(0,126,255, 0.1)
 }
 
 .new_user_prompt{
   margin: 25px 0 0 0;
   padding: 0;
+}
+
+.simple-select{
+  text-align: left;
+  margin-bottom: 10px;
+  .Select-clear{
+    padding-top: 3px;
+  }
+}
+
+.help-block{
+  padding-left: 2px;
+  text-align: left;
+  font-style: italic;
+}
+
+.has-error .Select-control, .has-error input {
+    border-color: #a94442;
+}
+
+#property_description {
+  margin-bottom: 0;
+}
+
+@media(min-width: 300px) {
+  .col-md-border {
+    border-right: 1px solid #eee;
+
+  }
+}
+
+.progress-container{
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  min-height: 300px;
 }

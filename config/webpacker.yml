@@ -7,8 +7,11 @@ default: &default
   cache_path: tmp/cache/webpacker
 
   # Additional paths webpack should lookup modules
-  # ['app/assets', 'engine/foo/app/assets']
-  resolved_paths: ['app/assets']
+  # See here: https://github.com/rails/webpacker/issues/1337
+  # Up to Rails 5.1 this used to be `resolved_paths: ['app/assets/']`
+  # In Rails 5.2 this should become `resolved_paths: ['app/assets/javascripts']` as webpacker now picks up .scss by default
+  # resolved_paths: ['app/assets/javascripts']
+  resolved_paths: []
 
   # Reload manifest.json on all requests so we reload latest compiled packs
   cache_manifest: false

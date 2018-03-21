@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180226145645) do
+ActiveRecord::Schema.define(version: 2018_03_07_191639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,27 @@ ActiveRecord::Schema.define(version: 20180226145645) do
     t.index ["subdomain"], name: "index_accounts_on_subdomain"
   end
 
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
   create_table "assignments", force: :cascade do |t|
     t.bigint "property_id"
     t.bigint "user_id"
@@ -31,16 +52,6 @@ ActiveRecord::Schema.define(version: 20180226145645) do
     t.datetime "updated_at", null: false
     t.index ["property_id"], name: "index_assignments_on_property_id"
     t.index ["user_id"], name: "index_assignments_on_user_id"
-  end
-
-  create_table "branch_areas", force: :cascade do |t|
-    t.integer "area_id"
-    t.string "localname"
-    t.string "globalname"
-    t.integer "root_area_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["area_id"], name: "index_branch_areas_on_area_id", unique: true
   end
 
   create_table "countries", force: :cascade do |t|
@@ -61,16 +72,6 @@ ActiveRecord::Schema.define(version: 20180226145645) do
     t.index ["token"], name: "index_invitations_on_token"
   end
 
-  create_table "leaf_areas", force: :cascade do |t|
-    t.integer "area_id"
-    t.string "localname"
-    t.string "globalname"
-    t.integer "branch_area_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["area_id"], name: "index_leaf_areas_on_area_id", unique: true
-  end
-
   create_table "locations", force: :cascade do |t|
     t.integer "area_id"
     t.string "localname"
@@ -80,6 +81,8 @@ ActiveRecord::Schema.define(version: 20180226145645) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "country_id"
+    t.string "parent_localname"
+    t.string "parent_globalname"
     t.index ["area_id", "country_id"], name: "index_locations_on_area_id_and_country_id", unique: true
   end
 
@@ -125,16 +128,8 @@ ActiveRecord::Schema.define(version: 20180226145645) do
     t.bigint "account_id"
     t.integer "propertytype"
     t.integer "location_id"
+    t.integer "propertycategory"
     t.index ["account_id"], name: "index_properties_on_account_id"
-  end
-
-  create_table "root_areas", force: :cascade do |t|
-    t.integer "area_id"
-    t.string "localname"
-    t.string "globalname"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["area_id"], name: "index_root_areas_on_area_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -156,9 +151,7 @@ ActiveRecord::Schema.define(version: 20180226145645) do
 
   add_foreign_key "assignments", "properties"
   add_foreign_key "assignments", "users"
-  add_foreign_key "branch_areas", "root_areas", primary_key: "area_id"
   add_foreign_key "invitations", "accounts"
-  add_foreign_key "leaf_areas", "branch_areas", primary_key: "area_id"
   add_foreign_key "locations", "countries"
   add_foreign_key "memberships", "accounts"
   add_foreign_key "memberships", "users"

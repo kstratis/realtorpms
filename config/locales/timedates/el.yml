@@ -100,7 +100,7 @@ el:
     format: ! '%{attribute} %{message}'
     messages:
       accepted: πρέπει να είναι αποδεκτό
-      blank: δεν πρέπει να είναι κενό
+      blank: Το πεδίο είναι υποχρεωτικό
       confirmation: δεν ταιριάζει με την επικύρωση
       empty: δεν πρέπει να είναι άδειο
       equal_to: πρέπει να είναι ίσο με %{count}

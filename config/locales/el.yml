@@ -17,7 +17,7 @@ el:
         age_placeholder: "π.χ. 30"
         phone1: "Τηλέφωνο"
         phone1_placeholder: "π.χ. 697 25 00 111"
-        locale: "Γλώσσα εμφάνισης"
+        locale: "Γλώσσα διεπαφής"
         password: "Κωδικός"
         password_placeholder: "Απαιτούνται τουλάχιστον 6 χαρ/ρες"
         password_confirmation: "Επανάληψη νέου κωδικού"
@@ -26,6 +26,7 @@ el:
       property:
         description: "Περιγραφή"
         description_placeholder: "π.χ. Μεζονέτα 180τ.μ. Κηφισιά"
+        propertycategory: "Κατηγορία"
         propertytype: "Είδος"
         price: "Τιμή"
         price_placeholder: "π.χ. 120000"
@@ -43,10 +44,19 @@ el:
             studio: "Studio"
             prefabricated: "Λυόμενο"
             precast: "Προκατασκευή"
+          propertycategory:
+            apartment: "Διαμέρισμα"
+            terraced: "Μονοκατοικία"
+            maisonette: "Μεζονέτα"
+            building: "Κτίριο"
+            home: "Οικία"
     errors:
       messages:
         record_invalid: ! 'Η επικύρωση απέτυχε: %{errors}'
   js:
+    components:
+      select:
+       placeholder: "Επιλέξτε..."
     datatables:
       users:
         partner: "Συνεργάτης"
@@ -65,6 +75,24 @@ el:
       placeholder: "π.χ. Δημήτρης Στεφάνου"
     properties_search:
       placeholder: "π.χ. Βούλα 80τ.μ."
+    uppy:
+      dropPaste: "Σύρετε τα αρχεία σας εδώ ή"
+      browse: "επιλέξτε"
+      notes: "Μόνο φωτογραφίες. Ανώτατο μέγεθος 2MB/αρχείο. Επιτρεπόμενο πλήθος < 20."
+      filename: "Όνομα αρχείου:"
+      editing: "Μετονομασία"
+      done: "Κλείσιμο"
+      uploadSingleFile: "Μεταφόρτωση %{smart_count} αρχείου"
+      uploadMultipleFiles: "Μεταφόρτωση %{smart_count} αρχείων"
+      uploadSingleFileExtra: "Μεταφόρτωση +%{smart_count} αρχείου"
+      uploadMultipleFilesExtra: "Μεταφόρτωση +%{smart_count} αρχείων"
+      uploading: "Μεταφόρτωση"
+      uploadComplete: "Η μεταφόρτωση ολοκληρώθηκε"
+      uploadFailed: "Η μεταφόρτωση απέτυχε"
+      pleasePressRetry: "Προσπαθήστε ξανά"
+      paused: "Παύση"
+      error: "Σφάλμα"
+      retry: "Προσπαθήστε ξανά"
   navbar:
     profile: "Προφίλ"
     account: "Λογαριασμός"

@@ -7,9 +7,12 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.4'
+gem 'rails', '~> 5.2.0.rc1'
+# gem 'rails', :git => 'https://github.com/rails/rails'
 gem 'bootstrap-sass', '3.3.7'
 gem 'bcrypt', '3.1.11'
+
+# gem 'bootsnap'
 # gem 'rake', '~> 12.1.0'
 
 # Use postgresql as the database for Active Record
@@ -49,9 +52,11 @@ gem 'sweet-alert2-rails'
 gem 'font-awesome-rails'
 
 gem 'react_on_rails', '10.0.2'
-gem 'webpacker', '3.2.2'
+gem 'webpacker'
 
 gem "roo", "~> 2.7.0"
+
+gem "aws-sdk-s3", require: false
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'

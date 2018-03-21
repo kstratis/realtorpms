@@ -1,0 +1,65 @@
+import { DirectUpload } from "./direct_upload"
+import { dispatchEvent } from "./helpers"
+
+export class DirectUploadController {
+  constructor(input, file) {
+    this.input = input || null;
+    this.file = file
+    this.directUpload = new DirectUpload(this.file, this.url, this);
+    this.dispatch("initialize")
+  }
+
+  start(callback) {
+    const hiddenInput = document.createElement("input");
+    hiddenInput.type = "hidden";
+    // This following 2 lines were changed
+    hiddenInput.name = 'property[images][]';
+    $(hiddenInput).insertBefore($('input[type=submit]'));
+    this.dispatch("start")
+    this.directUpload.create((error, attributes) => {
+      if (error) {
+        hiddenInput.parentNode.removeChild(hiddenInput)
+        this.dispatchError(error)
+      } else {
+        hiddenInput.value = attributes.signed_id
+      }
+      this.dispatch("end");
+      callback(error);
+    })
+  }
+
+  uploadRequestDidProgress(event) {
+    const progress = Math.floor(event.loaded / event.total * 100).toFixed(2);
+    if (progress) {
+      this.dispatch("progress", { progress: progress, bytesUploaded: event.loaded })
+    }
+  }
+
+  get url() {
+    // This following line was changed
+    return `${window.location.origin}/rails/active_storage/direct_uploads`;
+  }
+
+  dispatch(name, detail = {}) {
+    detail.file = this.file
+    detail.id = this.directUpload.id
+    return dispatchEvent(this.input, `direct-upload:${name}`, { detail })
+  }
+
+  dispatchError(error) {
+    const event = this.dispatch("error", { error })
+    if (!event.defaultPrevented) {
+      alert(error)
+    }
+  }
+
+  // DirectUpload delegate
+  directUploadWillCreateBlobWithXHR(xhr) {
+    this.dispatch("before-blob-request", { xhr })
+  }
+
+  directUploadWillStoreFileWithXHR(xhr) {
+    this.dispatch("before-storage-request", { xhr })
+    xhr.upload.addEventListener("progress", event => this.uploadRequestDidProgress(event))
+  }
+}
