@@ -19,6 +19,5 @@
 //= require bootstrap-sprockets
 //= require sweetalert2
 //= require sweet-alert2-rails
-//= require activestorage
 //= require_tree .
 

@@ -36,6 +36,7 @@ function handleFormSubmissionEvent(event) {
   if (inputs.length) {
     event.preventDefault()
     form.setAttribute(processingAttribute, "")
+    console.log('YOOOOOOLLO');
     inputs.forEach(disable)
     controller.start(error => {
       form.removeAttribute(processingAttribute)

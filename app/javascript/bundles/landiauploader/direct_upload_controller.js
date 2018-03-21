@@ -4,32 +4,32 @@ import { dispatchEvent } from "./helpers"
 export class DirectUploadController {
   constructor(input, file) {
     this.input = input || null;
-    this.file = file
+    this.file = file;
     this.directUpload = new DirectUpload(this.file, this.url, this);
-    // this.dispatch("initialize")
+    this.dispatch("initialize");
   }
 
   start(callback) {
     const hiddenInput = document.createElement("input");
     hiddenInput.type = "hidden";
-    console.log('printing the input name');
-    // hiddenInput.name = this.input.name;
-    hiddenInput.name = this.input;
-    $(hiddenInput).insertBefore($('input[type=submit]'));
-    this.input = hiddenInput;
-    // this.input.insertAdjacentElement("beforebegin", hiddenInput);
+    // console.log('printing the input name');
+    hiddenInput.name = this.input.name;
+    // hiddenInput.name = this.input;
+    // $(hiddenInput).insertBefore($('input[type=submit]'));
+    // this.input = hiddenInput;
+    this.input.insertAdjacentElement("beforebegin", hiddenInput);
 
-    // this.dispatch("start")
+    this.dispatch("start");
 
     this.directUpload.create((error, attributes) => {
       if (error) {
         hiddenInput.parentNode.removeChild(hiddenInput)
-        this.dispatchError(error)
+        this.dispatchError(error);
       } else {
         hiddenInput.value = attributes.signed_id
       }
 
-      // this.dispatch("end")
+      this.dispatch("end");
       callback(error)
     })
   }
@@ -42,31 +42,31 @@ export class DirectUploadController {
   }
 
   get url() {
-    return 'http://shakalaka.lvh.me:3000/rails/active_storage/direct_uploads'
-    // return this.input.getAttribute("data-direct-upload-url")
+    // return 'http://shakalaka.lvh.me:3000/rails/active_storage/direct_uploads'
+    return this.input.getAttribute("data-direct-upload-url");
   }
 
   dispatch(name, detail = {}) {
-    detail.file = this.file
-    detail.id = this.directUpload.id
-    return dispatchEvent(this.input, `direct-upload:${name}`, { detail })
+    detail.file = this.file;
+    detail.id = this.directUpload.id;
+    return dispatchEvent(this.input, `direct-upload:${name}`, { detail });
   }
 
   dispatchError(error) {
-    const event = this.dispatch("error", { error })
+    const event = this.dispatch("error", { error });
     if (!event.defaultPrevented) {
-      alert(error)
+      alert(error);
     }
   }
 
   // DirectUpload delegate
 
   directUploadWillCreateBlobWithXHR(xhr) {
-    this.dispatch("before-blob-request", { xhr })
+    this.dispatch("before-blob-request", { xhr });
   }
 
   directUploadWillStoreFileWithXHR(xhr) {
-    this.dispatch("before-storage-request", { xhr })
-    xhr.upload.addEventListener("progress", event => this.uploadRequestDidProgress(event))
+    this.dispatch("before-storage-request", { xhr });
+    xhr.upload.addEventListener("progress", event => this.uploadRequestDidProgress(event));
   }
 }
