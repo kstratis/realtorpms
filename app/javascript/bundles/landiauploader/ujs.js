@@ -24,14 +24,14 @@ function didSubmitRemoteElement(event) {
   }
 }
 
-function attachDOMFormBlocker(form){
-  const submitButton = form.querySelector('input[type=submit]');
-  const inputBlocker = document.createElement('input');
-  inputBlocker.id = 'preventformsubmit';
-  inputBlocker.type = "hidden";
-  submitButton.insertAdjacentElement('beforebegin', inputBlocker);
-  return true;
-}
+// function attachDOMFormBlocker(form){
+//   const submitButton = form.querySelector('input[type=submit]');
+//   const inputBlocker = document.createElement('input');
+//   inputBlocker.id = 'preventformsubmit';
+//   inputBlocker.type = "hidden";
+//   submitButton.insertAdjacentElement('beforebegin', inputBlocker);
+//   return true;
+// }
 
 function handleFormSubmissionEvent(event) {
   console.log('handleFormSubmissionEvent called');

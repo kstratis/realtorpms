@@ -86,7 +86,6 @@ export class DirectUploadsController {
   //   });
   //   return controllers
   // }
-
   dispatch(name, detail = {}) {
     return dispatchEvent(this.form, `direct-uploads:${name}`, { detail })
   }

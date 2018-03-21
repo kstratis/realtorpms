@@ -1,27 +1,43 @@
 $(document).on('turbolinks:load', function(e) {
   console.log('FORM SUBMITTER FIRING');
 
-  $('#new_property').on("ajax:before", event => {
+  $('#new_property').on("ajax:before", function(event, xhr, opts) {
     console.log('************');
     console.log('This is the ajax:before event logged');
 
     if ($('#preventformsubmit').length > 0) {
-      console.log('exists');
-      event.preventDefault();
-      return false;
+
+      if (Object.keys(window.uppy_uploader.getState().files).length){
+        console.log('exists');
+        event.preventDefault();
+        return false;
+      } else{
+        console.log('OK. This is the event');
+        console.log(event);
+
+        $(event.target).find('#property_images').remove();
+        // console.log(myel);
+        // console.log(xhr);
+        // console.log(opts);
+
+        // event.preventDefault();
+        // return false;
+        // console.log(status.data);
+      }
+
     }
     // console.log('This is the event: ');
 //     console.log(event);
     console.log('************');
   });
 
-  $('#new_property').on("ajax:send", event => {
-    console.log('************');
-    console.log('This is the ajax:send event logged');
-    // console.log('This is the event: ');
-//     console.log(event);
-    console.log('************');
-  });
+//   $('#new_property').on("ajax:send", event => {
+//     console.log('************');
+//     console.log('This is the ajax:send event logged');
+//     // console.log('This is the event: ');
+// //     console.log(event);
+//     console.log('************');
+//   });
 //   $('#new_property').on("ajax:success", event => {
 //     console.log('************');
 //     console.log('This is the ajax:success event logged');
