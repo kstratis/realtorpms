@@ -33,7 +33,9 @@ function handleFormSubmissionEvent(event) {
   const controller = new DirectUploadsController(form)
   const { inputs } = controller
 
+  console.log('just before');
   if (inputs.length) {
+    console.log('just after');
     event.preventDefault()
     form.setAttribute(processingAttribute, "")
     console.log('YOOOOOOLLO');
@@ -51,6 +53,7 @@ function handleFormSubmissionEvent(event) {
 
 function submitForm(form) {
   let button = findElement(form, "input[type=submit]")
+  console.log('entered submitForm');
   if (button) {
     const { disabled } = button
     button.disabled = false
