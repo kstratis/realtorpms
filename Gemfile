@@ -51,7 +51,7 @@ gem 'sweet-alert2-rails'
 
 gem 'font-awesome-rails'
 
-gem 'react_on_rails', '10.0.2'
+gem 'react_on_rails', '10.1.3'
 gem 'webpacker'
 
 gem "roo", "~> 2.7.0"
