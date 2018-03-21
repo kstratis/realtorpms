@@ -9,6 +9,7 @@ $(document).on('turbolinks:load', function(e) {
 
       if (Object.keys(window.uppy_uploader.getState().files).length){
         console.log('exists');
+
         event.preventDefault();
         return false;
       } else{
