@@ -7,8 +7,9 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
+import { start } from '../bundles/activestorageModifiedv52rc1/index';
+import * as uploader from '../bundles/uploaders/uppy_uploader';
 
-import * as uploader from '../bundles/landiauploader/uppy_uploader';
-console.log('Hello from Webpacker');
-
-// console.log(uppy);
+$(document).on('turbolinks:load', function(e) {
+  start();
+});

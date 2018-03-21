@@ -38,11 +38,8 @@
                   name: 'property[propertycategory]',
                   className: 'simple-select',
                   options: Property.propertycategories.keys.collect {|propertycategory| {label: Property.human_enum_name(:propertycategory, propertycategory), value: propertycategory}},
-
                   i18n: {
                       select: t('js.components.select'),
-                      # datatable: t('js.datatables.properties'),
-                      # search: t('js.properties_search')
                   }
               }, prerender: false) %>
             </div>
@@ -61,25 +58,11 @@
                   name: 'property[propertytype]',
                   className: 'simple-select',
                   options: Property.propertytypes.keys.collect {|propertytype| {label: Property.human_enum_name(:propertytype, propertytype), value: propertytype}},
-
                   i18n: {
                       select: t('js.components.select'),
-                      # datatable: t('js.datatables.properties'),
-                      # search: t('js.properties_search')
                   }
               }, prerender: false) %>
             </div>
-
-
-
-
-
-
-            <%#= property.text_field :type, placeholder: 'i.e. 3-bedroom flat in Kifissia', class: 'glowing-border' %>
-            <%#= inline_error @property.owner, :first_name, 'First name'%>
-
-            <%#= property.label :construction %>
-            <%#= property.text_field :size, placeholder: 'i.e. 90', class: 'glowing-border' %>
 
             <div class="form-group">
 
@@ -89,13 +72,11 @@
             </div>
 
             <div class="form-group">
-
               <%= property.label :size %>
               <%= property.text_field :size, placeholder: Property.human_attribute_name("size_placeholder"), class: 'glowing-border' %>
             </div>
 
             <div class="form-group">
-
               <%= property.label :construction %>
               <%#= property.select(:construction, options_for_select( 1940..Time.zone.now.year+2 , Time.zone.now.year), {}, class: 'form-control') %>
               <%= react_component('SimpleSelect', props: {
@@ -104,69 +85,17 @@
                   className: 'simple-select',
                   # options: Property.propertytypes.keys.collect { |propertytype| { label: Property.human_enum_name(:propertytype, propertytype), value: propertytype} },
                   options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
-
                   i18n: {
                       select: t('js.components.select'),
-                      # datatable: t('js.datatables.properties'),
-                      # search: t('js.properties_search')
                   }
               }, prerender: false) %>
             </div>
-
-
-
-            <!-- WATCH OUT FOR THIS ONE -->
+            <!-- This guards against unwanted ujs form submission -->
             <input id="preventformsubmit" type="hidden">
-
-
-
-
-
-
-
-            <!--<div class="btn btn-default" id="test">Uploader window</div>-->
-            <!--<img src="" style="width: auto;" id="kkk" />-->
-
-            <!-- **************************  -->
-
-            <!--<div class="form-group">-->
-              <%#= property.label :images %>
-              <input id="property_images" class="emitters form-control" type="hidden" name="property[images][]">
-            <!--</div>-->
-
-            <!-- **************************  -->
-
-            <!--<input id="inputEmitter" class="emitters form-control" type="hidden">-->
-            <%#= property.text_field :images, value: '', class: 'emitters form-control', multiple: true, name: "property[images][]" %>
-
-            <%#= property.hidden_field :task_id, :value => task.id%>
-            <%#= property.text_field :description, placeholder: Property.human_attribute_name("description_placeholder"), class: 'glowing-border' %>
-
-
-
-            <!-- **************************  -->
-
-            <!--<div class="form-group">-->
-              <%#= property.label :images %>
-              <%#= property.file_field :images, multiple: true, direct_upload: true, class: 'form-control' %>
-            <!--</div>-->
-
-            <!-- **************************  -->
-
-            <%#= property.text_field :price, placeholder: 'i.e. 250000', class: 'glowing-border' %>
-
-            <%#= react_component('PropertyType', props: {
-
-                # i18n: {
-                #     datatable: t('js.datatables.properties'),
-                #     search: t('js.properties_search')
-                # }
-            }, prerender: false) %>
-
-
-
-
-            <%= property.submit t('properties.new.add_button'), class: 'btn btn-primary' %>
+            <input id="property_images" class="emitters form-control" type="hidden" name="property[images][]">
+            <div class="form-group">
+              <%= property.submit t('properties.new.add_button'), class: 'btn btn-primary' %>
+            </div>
           </div>
           <div class="col-md-8 ">
 

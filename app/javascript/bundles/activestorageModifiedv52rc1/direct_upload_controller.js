@@ -12,16 +12,10 @@ export class DirectUploadController {
   start(callback) {
     const hiddenInput = document.createElement("input");
     hiddenInput.type = "hidden";
-    // console.log('printing the input name');
-    // hiddenInput.name = this.input.name;
+    // This following 2 lines were changed
     hiddenInput.name = 'property[images][]';
     $(hiddenInput).insertBefore($('input[type=submit]'));
-    // super important
-    // this.input = hiddenInput;
-    // this.input.insertAdjacentElement("beforebegin", hiddenInput);
-
     this.dispatch("start")
-
     this.directUpload.create((error, attributes) => {
       if (error) {
         hiddenInput.parentNode.removeChild(hiddenInput)
@@ -29,7 +23,6 @@ export class DirectUploadController {
       } else {
         hiddenInput.value = attributes.signed_id
       }
-      console.log('File finished uploading');
       this.dispatch("end");
       callback(error);
     })
@@ -43,8 +36,8 @@ export class DirectUploadController {
   }
 
   get url() {
+    // This following line was changed
     return `${window.location.origin}/rails/active_storage/direct_uploads`;
-    // return this.input.getAttribute("data-direct-upload-url")
   }
 
   dispatch(name, detail = {}) {
@@ -61,7 +54,6 @@ export class DirectUploadController {
   }
 
   // DirectUpload delegate
-
   directUploadWillCreateBlobWithXHR(xhr) {
     this.dispatch("before-blob-request", { xhr })
   }

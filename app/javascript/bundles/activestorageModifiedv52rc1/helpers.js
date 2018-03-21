@@ -31,8 +31,6 @@ export function dispatchEvent(element, type, eventInit = {}) {
   event.detail = detail || {}
 
   try {
-    console.log(`firing the event ${type} on: ${element}`);
-    console.log(element);
     element.disabled = false
     element.dispatchEvent(event)
   } finally {
