@@ -53,7 +53,7 @@ function handleFormSubmissionEvent(event) {
     event.preventDefault();
     form.setAttribute(processingAttribute, "");
     // consol
-    attachDOMFormBlocker(form);
+    // attachDOMFormBlocker(form);
     inputs.forEach(disable);
     controller.start(error => {
       form.removeAttribute(processingAttribute);
