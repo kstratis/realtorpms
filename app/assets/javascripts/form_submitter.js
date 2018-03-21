@@ -12,9 +12,13 @@ $(document).on('turbolinks:load', function(e) {
         event.preventDefault();
         return false;
       } else{
-        console.log('OK. This is the event');
-        console.log(event);
-
+        // console.log('OK. This is the event');
+        // console.log(event);
+        // console.log(xhr);
+        // console.log(opts);
+        // window.sevent = event;
+        // window.xhr = xhr;
+        // window.options = opts;
         $(event.target).find('#property_images').remove();
         // console.log(myel);
         // console.log(xhr);
