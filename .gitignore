@@ -20,6 +20,7 @@
 .idea
 /public/packs
 /public/packs-test
+/public/assets/
 /app/javascript/locales
 /storage
 /extra_storage
