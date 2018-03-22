@@ -46,7 +46,7 @@ gem 'launchy', '2.4.3'
 # gem 'rails-sweetalert2-confirm'
 #
 gem 'rails-assets-sweetalert2', source: 'https://rails-assets.org'
-
+gem 'rails_12factor'
 gem 'sweet-alert2-rails'
 
 gem 'font-awesome-rails'
