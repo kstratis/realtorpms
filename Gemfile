@@ -11,7 +11,7 @@ gem 'rails', '~> 5.2.0.rc1'
 # gem 'rails', :git => 'https://github.com/rails/rails'
 gem 'bootstrap-sass', '3.3.7'
 gem 'bcrypt', '3.1.11'
-
+gem 'babel-transpiler'
 # gem 'bootsnap'
 # gem 'rake', '~> 12.1.0'
 

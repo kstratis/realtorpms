@@ -14,8 +14,6 @@ module Propertyx
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
     # This loads the Robot font family
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
-
-
     # config.assets.paths << Rails.root.join('node_modules')
 
 
