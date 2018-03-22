@@ -55,8 +55,8 @@ Rails.application.routes.draw do
   get  '/contact', to: 'main_pages#contact'
   get  '/signup',  to: 'users#new'
 
-  get    '/sign_in',   to: 'sessions#new', as: :login
-  post   '/sign_in',   to: 'sessions#create', as: :login_post
+  get    '/login',   to: 'sessions#new'
+  post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
 
   get '/invitations/:id/accept', to: 'invitationreceivers#accept', as: :accept_invitation
