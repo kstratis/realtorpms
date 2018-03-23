@@ -16,7 +16,6 @@ module Propertyx
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
     # config.assets.paths << Rails.root.join('node_modules')
 
-
     config.generators do |g|
       g.test_framework :rspec,
       fixtures: true,

@@ -108,10 +108,12 @@ module Accounts
       # end
       respond_to do |format|
         if @property.save
+          puts 'form saving successfully'
           format.html { redirect_to @property, notice: 'Property was successfully created.' }
           format.js
       #     format.json { render :show, status: :created, location: @property }
         else
+          puts 'there were form errors'
           format.html { render :new }
           format.js
         end
