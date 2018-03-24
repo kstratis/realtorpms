@@ -1,8 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
-
 @import "common-mixins";
-@import "alerts";
 @import "accounts";
 
 $gray-medium-light: #eaeaea;
@@ -233,6 +231,18 @@ li.side-menu-entry.active > a.entry-anchor-wrapper {
   margin-top: 45px;
   @include box_sizing;
 }
+
+/* alerts */
+.alert{
+  animation: fadein 0.5s;
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+// ***************
 
 /* sidebar */
 
