@@ -113,7 +113,10 @@ module Accounts
           format.js
       #     format.json { render :show, status: :created, location: @property }
         else
-          puts 'there were form errors'
+          puts 'ALERT! The form didn\'t save due to errors.'
+          @property.errors.each do |field, error|
+            puts "#{field}: #{error}"
+          end
           format.html { render :new }
           format.js
         end

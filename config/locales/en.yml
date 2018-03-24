@@ -93,6 +93,9 @@ en:
       paused: "Paused"
       error: "Error"
       retry: "Please try again"
+    jqvalidator:
+      required: "This field is required"
+      digits: "This field requires digits only"
   navbar:
     profile: "Profile"
     account: "Account"

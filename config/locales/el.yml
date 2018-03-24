@@ -93,6 +93,9 @@ el:
       paused: "Παύση"
       error: "Σφάλμα"
       retry: "Προσπαθήστε ξανά"
+    jqvalidator:
+      required: "Το πεδίο είναι υποχρεωτικό"
+      digits: "Παρακαλώ εισάγετε μόνο αριθμητικά ψηφία"
   navbar:
     profile: "Προφίλ"
     account: "Λογαριασμός"
