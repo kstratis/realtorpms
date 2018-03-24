@@ -36,7 +36,6 @@
               <!-- https://github.com/JedWatson/react-select/issues/1827#issuecomment-316768651 -->
               <%= react_component('SimpleSelect', props: {
                   className: 'simple-select',
-                  required: true,
                   options: Property.propertycategories.keys.collect {|propertycategory| {label: Property.human_enum_name(:propertycategory, propertycategory), value: propertycategory}},
                   formdata:{
                       formid: 'new_property',
@@ -64,14 +63,22 @@
               <!-- THIS ONE EVENTUALLY REPLACED IT -->
               <%#= property.select :propertytype, Property.propertytypes.keys.collect { |propertytype| [ Property.human_enum_name(:propertytype, propertytype), propertytype ] }, {},  class: 'form-control glowing-border-select' %>
               <%= react_component('SimpleSelect', props: {
-                  id: 'property_propertytype',
-                  name: 'property[propertytype]',
                   className: 'simple-select',
                   options: Property.propertytypes.keys.collect {|propertytype| {label: Property.human_enum_name(:propertytype, propertytype), value: propertytype}},
+                  formdata:{
+                      formid: 'new_property',
+                      elementid: 'property_propertytype'
+                  },
                   i18n: {
                       select: t('js.components.select'),
                   }
               }, prerender: false) %>
+              <input id="property_propertytype"
+                     name="property[propertytype]"
+                     class="proxy-form-input"
+                     tabIndex=-1
+                     value=""
+                     required>
             </div>
 
             <div class="form-group">

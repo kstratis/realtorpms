@@ -22,7 +22,7 @@ input, textarea, select, .uneditable-input {
 }
 
 .pr-form-container{
-  padding: 15px 20px 15px 20px;
+  padding: 115px 20px 15px 20px;
   border-radius: 3px;
   border: 1px solid #cdcfd5;
   overflow: hidden;
@@ -91,9 +91,11 @@ input, textarea, select, .uneditable-input {
   font-weight: normal;
 }
 
-#property_description {
+// This sets the proper error message alignment
+form input, .simple-select {
   margin-bottom: 0;
 }
+
 
 @media(min-width: 300px) {
   .col-md-border {
@@ -125,3 +127,14 @@ input, textarea, select, .uneditable-input {
   position: absolute;
   left: -999em;
 }
+
+.uppy-DashboardItem-progress{
+  //cursor: not-allowed;
+  //pointer-events: none;
+}
+
+.UppyIcon-progressCircle{
+  cursor: not-allowed !important;
+  pointer-events: none;
+}
+

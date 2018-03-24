@@ -1,26 +1,28 @@
 $(document).on('turbolinks:load', function(e) {
 
-  var jqvalidatorDomNode = $('#jqvalidator');
-  var jqtranslations = jqvalidatorDomNode.data('i18n').jqvalidator;
-  $.extend( $.validator.messages, jqtranslations );
+  if (window.location.pathname === '/properties/new' ) {
+    var jqvalidatorDomNode = $('#jqvalidator');
+    var jqtranslations = jqvalidatorDomNode.data('i18n').jqvalidator;
+    $.extend($.validator.messages, jqtranslations);
 
-  $('#new_property').validate({
-    rules: {
-      'property[description]': {
-        required: true,
-        maxlength: 250
-      },
-      'property[propertycategory]': {
-        required: true
-      },
-      'property[price]': {
-        digits: true
-      },
-      'property[size]': {
-        digits: true
+    $('#new_property').validate({
+      rules: {
+        'property[description]': {
+          required: true,
+          maxlength: 250
+        },
+        'property[propertycategory]': {
+          required: true
+        },
+        'property[price]': {
+          digits: true
+        },
+        'property[size]': {
+          digits: true
+        }
       }
-    }
-  });
+    });
+  }
 
 
   $('#new_property').on("ajax:before", function(event, xhr, opts) {
