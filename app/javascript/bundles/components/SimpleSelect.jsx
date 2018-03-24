@@ -18,13 +18,22 @@ class SimpleSelect extends React.Component {
   state = {
     selectedOption: '',
   };
-  handleChange = (selectedOption) => {
-    this.setState({ selectedOption });
+
+  updateExternalDOM = (selectedOption) => {
     // JQuery form validator specifics. Requires JQuery.
     // Manipulating a form element outside of this React component should be relatively safe
-    document.getElementById(`${this.props.formdata.elementid}`).value = selectedOption ? selectedOption.value : '';
-    $(`#${this.props.formdata.formid}`).valid();
+    const elementID = $(`#${this.props.formdata.elementid}`);
+    const formID = $(`#${this.props.formdata.formid}`);
+    elementID.val(selectedOption ? selectedOption.value : '');
+    const validator = formID.validate();
+    validator.element(elementID);
   };
+
+  handleChange = (selectedOption) => {
+    this.setState({ selectedOption });
+    this.updateExternalDOM(selectedOption);
+  };
+
   render() {
     const { selectedOption } = this.state;
     const value = selectedOption && selectedOption.value;
