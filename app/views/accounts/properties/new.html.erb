@@ -36,7 +36,7 @@
               <!-- https://github.com/JedWatson/react-select/issues/1827#issuecomment-316768651 -->
               <%= react_component('SimpleSelect', props: {
                   className: 'simple-select',
-                  options: Property.propertycategories.keys.collect {|propertycategory| {label: Property.human_enum_name(:propertycategory, propertycategory), value: propertycategory}},
+                  options: Property.categories.keys.collect {|propertycategory| {label: Property.human_enum_name(:propertycategory, propertycategory), value: propertycategory}},
                   formdata:{
                       formid: 'new_property',
                       elementid: 'property_propertycategory'
@@ -64,7 +64,7 @@
               <%#= property.select :propertytype, Property.propertytypes.keys.collect { |propertytype| [ Property.human_enum_name(:propertytype, propertytype), propertytype ] }, {},  class: 'form-control glowing-border-select' %>
               <%= react_component('SimpleSelect', props: {
                   className: 'simple-select',
-                  options: Property.propertytypes.keys.collect {|propertytype| {label: Property.human_enum_name(:propertytype, propertytype), value: propertytype}},
+                  options: Property.residentialsubcategories.keys.collect {|propertytype| {label: Property.human_enum_name(:propertytype, propertytype), value: propertytype}},
                   formdata:{
                       formid: 'new_property',
                       elementid: 'property_propertytype'

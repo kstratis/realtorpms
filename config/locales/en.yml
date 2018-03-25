@@ -34,22 +34,53 @@ en:
         size_placeholder: "i.e. 90"
         construction: "Construction"
         enums:
-          propertytype:
-            neoclassical: "Neoclassical"
-            protected_property: "Protected property"
-            loft: "Loft"
-            traditional: "Traditional"
-            villa: "Villa"
-            stone: "Stone"
-            studio: "Studio"
-            prefabricated: "Prefabricated"
-            precast: "Precast"
-          propertycategory:
+          category:
+            residential: "Residential"
+            commercial: "Commercial"
+            land: "Land"
+            other: "Other properties"
+          residentialsubcategory:
             apartment: "Apartment"
-            terraced: "Terraced"
+            studio: "Studio"
             maisonette: "Maisonette"
+            detached: "Detached House"
+            villa: "Villa"
+            loft: "Loft"
+            bungalow: "Bungalow"
             building: "Building"
-            home: "Home"
+            complex: "Apartment complex"
+          commercialsubcategory:
+            office: "Office"
+            commercialstore: "Store"
+            warehouse: "Warehouse"
+            industrial: "Industrial space"
+            craft: "Craft space"
+            hotel: "Hotel"
+            commercialbusiness: "Business building"
+            hall: "Hall"
+            showroom: "Showroom"
+          landsubcategory:
+            plot: "Land Plot"
+            parcels: "Parcels"
+            island: "Island"
+            othercategories: "Other categories"
+          othersubcategory:
+            parking: "Parking"
+            unitbusiness: "Business"
+            prefabricated: "Prefabricated"
+            detachable: "Detachable"
+            air: "Air"
+            othersubcategory: "Other"
+          type:
+            neoclassical: "Νεοκλασικό"
+            protected_property: "Διατηρητέο"
+            loft: "Loft"
+            traditional: "Παραδοσιακό"
+            villa: "Βίλα"
+            stone: "Πέτρινο"
+            studio: "Studio"
+            prefabricated: "Λυόμενο"
+            precast: "Προκατασκευή"
     errors:
       messages:
         record_invalid: ! 'Validation failed: %{errors}'

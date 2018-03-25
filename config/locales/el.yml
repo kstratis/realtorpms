@@ -34,7 +34,44 @@ el:
         size_placeholder: "π.χ. 80"
         construction: "Κατασκευή"
         enums:
-          propertytype:
+          category:
+            residential: "Κατοικία"
+            commercial: "Επαγγελματική στέγη"
+            land: "Γη"
+            other: "Λοιπά ακίνητα"
+          residentialsubcategory:
+            apartment: "Διαμέρισμα"
+            studio: "Studio / Γκαρσονιέρα"
+            maisonette: "Μεζονέτα"
+            detached: "Μονοκατοικία"
+            villa: "Βίλλα"
+            loft: "Loft"
+            bungalow: "Bungalow"
+            building: "Κτίριο"
+            complex: "Συγκρότημα διαμερισμάτων"
+          commercialsubcategory:
+            office: "Γραφείο"
+            commercialstore: "Κατάστημα"
+            warehouse: "Αποθήκη"
+            industrial: "Βιομηχανικός χώρος"
+            craft: "Βιοτεχνικός χώρος"
+            hotel: "Ξενοδοχείο"
+            commercialbusiness: "Κτίριο επαγγελματικών χώρων"
+            hall: "Αίθουσα"
+            showroom: "Εκθεσιακός χώρος"
+          landsubcategory:
+            plot: "Οικόπεδο"
+            parcels: "Αγροτεμάχιο"
+            island: "Νησί"
+            othercategories: "Λοιπές κατηγορίες"
+          othersubcategory:
+            parking: "Parking"
+            unitbusiness: "Επιχείρηση"
+            prefabricated: "Προκατασκευασμένο"
+            detachable: "Λυόμενο"
+            air: "Αέρας"
+            othersubcategory: "Λοιπές κατηγορίες ακινήτων"
+          type:
             neoclassical: "Νεοκλασικό"
             protected_property: "Διατηρητέο"
             loft: "Loft"
@@ -44,12 +81,6 @@ el:
             studio: "Studio"
             prefabricated: "Λυόμενο"
             precast: "Προκατασκευή"
-          propertycategory:
-            apartment: "Διαμέρισμα"
-            terraced: "Μονοκατοικία"
-            maisonette: "Μεζονέτα"
-            building: "Κτίριο"
-            home: "Οικία"
     errors:
       messages:
         record_invalid: ! 'Η επικύρωση απέτυχε: %{errors}'
