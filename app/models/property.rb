@@ -2,6 +2,7 @@ class Property < ApplicationRecord
   # belongs_to :user
   belongs_to :account
   belongs_to :location, optional: true
+  belongs_to :category, optional: true
   has_many :assignments
   has_many_attached :images
   # https://stackoverflow.com/a/38845388/178728
