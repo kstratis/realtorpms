@@ -5,6 +5,7 @@ import UsersListWithDatatable from '../bundles/datatables/UsersList';
 import UsersListAssignableWithDatatable from '../bundles/datatables/UsersListAssignable';
 import PropertiesListWithDatatable from '../bundles/datatables/PropertiesList';
 import SimpleSelect from '../bundles/components/SimpleSelect';
+import DependantSelect from '../bundles/components/DependantSelect';
 
 
 // import { addLocaleData } from 'react-intl';
@@ -19,6 +20,7 @@ ReactOnRails.register({
   UsersListWithDatatable,
   UsersListAssignableWithDatatable,
   PropertiesListWithDatatable,
-  SimpleSelect
+  SimpleSelect,
+  DependantSelect
   // PropertyType
 });
