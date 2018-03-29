@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_27_173453) do
+ActiveRecord::Schema.define(version: 2018_03_29_093607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -133,7 +133,6 @@ ActiveRecord::Schema.define(version: 2018_03_27_173453) do
     t.boolean "fireplace"
     t.integer "user_id"
     t.bigint "account_id"
-    t.integer "propertytype"
     t.integer "location_id"
     t.integer "category"
     t.integer "subcategory"

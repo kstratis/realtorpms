@@ -1,5 +1,6 @@
 $(document).on('turbolinks:load', function(e) {
 
+  // This shouldn't be hardcoded
   if (window.location.pathname === '/properties/new' ) {
     var jqvalidatorDomNode = $('#jqvalidator');
     var jqtranslations = jqvalidatorDomNode.data('i18n').jqvalidator;
@@ -11,7 +12,10 @@ $(document).on('turbolinks:load', function(e) {
           required: true,
           maxlength: 250
         },
-        'property[propertycategory]': {
+        'property[category]': {
+          required: true
+        },
+        'property[subcategory]': {
           required: true
         },
         'property[price]': {
@@ -23,7 +27,6 @@ $(document).on('turbolinks:load', function(e) {
       }
     });
   }
-
 
   $('#new_property').on("ajax:before", function(event, xhr, opts) {
     if ($('#preventformsubmit').length > 0) {

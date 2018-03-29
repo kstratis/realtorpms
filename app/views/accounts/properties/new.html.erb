@@ -24,15 +24,15 @@
               <%= property.text_field :description, placeholder: Property.human_attribute_name("description_placeholder"), class: 'glowing-border' %>
             </div>
 
-
-
             <%= react_component('DependantSelect', props: {
-                  className: 'simple-select',
-                  options: dependant_options,
+                  className: 'simple-select-container',
+                  options: get_options,
                   # options: Property.categories.keys.collect {|propertycategory| {label: Property.human_enum_name(:propertycategory, propertycategory), value: propertycategory}},
                   formdata: {
                       formid: 'new_property',
-                      elementid: 'property_propertycategory'
+                      categoryid: 'property_category',
+                      subcategoryid: 'property_subcategory'
+
                   },
                   i18n: {
                       select: t('js.components.select'),
@@ -110,9 +110,9 @@
             </div>
 
             <div class="form-group">
-              <%= property.label :construction %>
+              <%#= property.label :construction %>
               <%#= property.select(:construction, options_for_select( 1940..Time.zone.now.year+2 , Time.zone.now.year), {}, class: 'form-control') %>
-              <%= react_component('SimpleSelect', props: {
+              <%#= react_component('SimpleSelect', props: {
                   id: 'property_construction',
                   name: 'property[construction]',
                   className: 'simple-select',
