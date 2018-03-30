@@ -19,16 +19,19 @@ class DependantSelect extends React.Component {
   };
 
   state = {
-    slaveDisabled: true,
-    nonControllerOptions: []
+    slaveDisabled: true,  // This changes according to the controlling parent
+    nonControllerOptions: []  // The subcategory component gets its options from state according to parent selection
   };
 
+  // Set the subcategory's options according to parent selection
   handleOptions = (selectedOption, controller) => {
+    // controller is the parent. When 'onChanged' fires on subcategory dropdown, do nothing
     if (!controller) return;
+    // when it fires on the parent, set subcategory's options and enable it
     if (selectedOption) {
       this.setState({nonControllerOptions: this.formatOptions(this.props.options[selectedOption.value], false)});
       this.setState({slaveDisabled: false});
-    } else{
+    } else{  // otherwise if 'x' is pressed on parent, clear subcategory's selection, fire the validator and disable it.
       // Handle the controller (subcategory component
       this.subcategorySelectComp.clearSelection();
       this.subcategorySelectComp.updateExternalDOM(selectedOption);
@@ -37,6 +40,9 @@ class DependantSelect extends React.Component {
   };
 
   // TODO This can be further optimized to save the if/else statement
+  // This transforms parent/child options data for use with the select component.
+  // Parent's data are coming from rails. These data when filtered by key become the child's option
+  // Get an overview here: https://repl.it/@kstratis/Transformationsfinal
   formatOptions = (options, isController) => {
     const data = options;
     const iterable = isController ? Object.keys(data) : data['subcategory'];
@@ -63,7 +69,8 @@ class DependantSelect extends React.Component {
         <div className="form-group">
           <label htmlFor="property_category">{'Κατηγορία'}</label>
           <SimpleSelect
-            identity={'property_category_container'}
+            id={'property_category_container'}
+            identity={'property_category_component'}
             inputID={this.props.formdata.categoryid}
             inputName={this.props.formdata.categoryname}
             formID={this.props.formdata.formid}
@@ -79,7 +86,8 @@ class DependantSelect extends React.Component {
         <div className="form-group">
           <label htmlFor="property_subcategory">{'Υποκατηγορία'}</label>
           <SimpleSelect
-            identity={'property_subcategory_container'}
+            id={'property_subcategory_container'}
+            identity={'property_subcategory_component'}
             inputID={this.props.formdata.subcategoryid}
             inputName={this.props.formdata.subcategoryname}
             formID={this.props.formdata.formid}
