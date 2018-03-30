@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SimpleSelect from './SimpleSelect'
 
-
 class DependantSelect extends React.Component {
 
   static propTypes = {
@@ -31,12 +30,13 @@ class DependantSelect extends React.Component {
       this.setState({slaveDisabled: false});
     } else{
       // Handle the controller (subcategory component
-      this.subcategorySelectComp.setState({selectedOption: ''});
+      this.subcategorySelectComp.clearSelection();
       this.subcategorySelectComp.updateExternalDOM(selectedOption);
       this.setState({slaveDisabled: true});
     }
   };
 
+  // TODO This can be further optimized to save the if/else statement
   formatOptions = (options, isController) => {
     const data = options;
     const iterable = isController ? Object.keys(data) : data['subcategory'];

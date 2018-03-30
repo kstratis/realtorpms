@@ -34,6 +34,10 @@ class SimpleSelect extends React.Component {
     this.textInput.value = value;
   }
 
+  clearSelection () {
+    this.setState({selectedOption: ''});
+  }
+
   state = {
     selectedOption: '',
   };
@@ -53,22 +57,15 @@ class SimpleSelect extends React.Component {
   handleChange = (selectedOption) => {
     this.setState({selectedOption});
     this.updateExternalDOM(selectedOption);
-    console.log(selectedOption);
     // check if we are dealing with dependant or solo select
     if (typeof this.props.handleOptions === "function") {
       this.props.handleOptions(selectedOption, this.props.controller);
     }
   };
 
-  clearValue = () => {
-    this.select.setInputValue('');
-  };
-
   render() {
     const {selectedOption} = this.state;
     const value = selectedOption && selectedOption.value;
-    // const value = selectedOption;
-
     return (
       <div>
         <Select
@@ -81,6 +78,7 @@ class SimpleSelect extends React.Component {
           options={this.props.options}
           placeholder={this.props.i18n.select.placeholder}
           disabled={this.props.disabled}
+          searchable={false}
         />
         <input id={this.props.inputID}
                name={this.props.inputName}
