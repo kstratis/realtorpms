@@ -8,15 +8,18 @@ class SimpleSelect extends React.Component {
   static propTypes = {
     identity: PropTypes.string,
     formID: PropTypes.string,
-    inputID: PropTypes.string.isRequired,
-    inputName: PropTypes.string.isRequired,
+    inputID: PropTypes.string,
+    inputName: PropTypes.string,
     controller: PropTypes.bool,
     options: PropTypes.array,
     handleOptions: PropTypes.func,
-    disabled: PropTypes.bool.isRequired,
+    disabled: PropTypes.bool,
     onRef: PropTypes.func,
+    // soloMode guards against dynamically setting the dropdown options
+    // and gettings a ref which is needed in DependantSelect
+    soloMode: PropTypes.bool,
     i18n: PropTypes.shape({
-      select: PropTypes.object.isRequired
+      select: PropTypes.object
     })
   };
 
@@ -27,12 +30,17 @@ class SimpleSelect extends React.Component {
 
   // This stores a component reference so it can be used from the parent
   componentDidMount() {
-    this.props.onRef(this)
+    if (!this.props.soloMode) {
+      this.props.onRef(this)
+    }
+
   }
 
   // Same as above but destroys the reference instead
   componentWillUnmount() {
-    this.props.onRef(undefined)
+    if (!this.props.soloMode) {
+      this.props.onRef(undefined)
+    }
   }
 
   // This operates outside react and is used to store the value
@@ -42,7 +50,7 @@ class SimpleSelect extends React.Component {
   }
 
   // This is called from DependantSelect to clear the component's value
-  clearSelection () {
+  clearSelection() {
     this.setState({selectedOption: ''});
   }
 
@@ -69,8 +77,10 @@ class SimpleSelect extends React.Component {
     this.setState({selectedOption});
     this.updateExternalDOM(selectedOption);
     // check if we are dealing with dependant or solo select
-    if (typeof this.props.handleOptions === "function") {
-      this.props.handleOptions(selectedOption, this.props.controller);
+    if (!this.props.soloMode) {
+      if (typeof this.props.handleOptions === "function") {
+        this.props.handleOptions(selectedOption, this.props.controller);
+      }
     }
   };
 

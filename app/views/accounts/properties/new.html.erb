@@ -16,18 +16,25 @@
 
             <%#= render 'shared/error_messages' %>
 
-
             <div class="form-group">
-
-              <%#= property.label Property.human_attribute_name("description") %>
-              <%= property.label :description %>
-              <%= property.text_field :description, placeholder: Property.human_attribute_name("description_placeholder"), class: 'glowing-border' %>
+              <%= property.label :businesstype %>
+              <%= react_component('SimpleSelect', props: {
+                    inputID: 'property_businesstype',
+                    inputName: 'property[businesstype]',
+                    formID: 'new_property',
+                    className: 'simple-select',
+                    options: Property.businesstypes.keys.collect { |businesstype| { label: Property.human_enum_name(:businesstype, businesstype), value: businesstype} },
+                    soloMode: true,
+                    i18n: {
+                        select: t('js.components.select'),
+                    }
+                }, prerender: false) %>
             </div>
 
+            <!-- DependantSelect will generate the form-group div and label tags automatically (it's nested) -->
             <%= react_component('DependantSelect', props: {
                   className: 'simple-select-container',
                   options: get_options,
-                  # options: Property.categories.keys.collect {|propertycategory| {label: Property.human_enum_name(:propertycategory, propertycategory), value: propertycategory}},
                   formdata: {
                       formid: 'new_property',
                       categoryid: 'property_category',
@@ -41,8 +48,7 @@
               }, prerender: false) %>
 
 
-            <!--<div class="form-group">-->
-
+              <!--<div class="form-group">-->
               <%#= property.label :propertycategory %>
               <!-- THIS ONE WAS THE ORIGINAL -->
               <%#= property.select :propertytype, Property.propertytypes.keys, {}, class: 'form-control' %>
@@ -50,56 +56,8 @@
               <%#= property.select :propertytype, Property.propertytypes.keys.collect { |propertytype| [ Property.human_enum_name(:propertytype, propertytype), propertytype ] }, {},  class: 'form-control glowing-border-select' %>
               <!-- For using React select with jqueryvalidation plugin see this: -->
               <!-- https://github.com/JedWatson/react-select/issues/1827#issuecomment-316768651 -->
-              <%#= react_component('SimpleSelect', props: {
-                  className: 'simple-select',
-                  options: Property.categories.keys.collect {|propertycategory| {label: Property.human_enum_name(:propertycategory, propertycategory), value: propertycategory}},
-                  formdata:{
-                      formid: 'new_property',
-                      elementid: 'property_propertycategory'
-                  },
-                  i18n: {
-                      select: t('js.components.select'),
-                  }
-              }, prerender: false) %>
-              <!--<input id="property_propertycategory"-->
-                     <!--name="property[propertycategory]"-->
-                     <!--class="proxy-form-input"-->
-                     <!--tabIndex=-1-->
-                     <!--value=""-->
-                     <!--required>-->
-            <!--</div>-->
-
-
-            <!--<div class="form-group">-->
-
-              <%#= property.label :propertytype %>
-
-              <!-- THIS ONE WAS THE ORIGINAL -->
-              <%#= property.select :propertytype, Property.propertytypes.keys, {}, class: 'form-control' %>
-              <!-- THIS ONE EVENTUALLY REPLACED IT -->
-              <%#= property.select :propertytype, Property.propertytypes.keys.collect { |propertytype| [ Property.human_enum_name(:propertytype, propertytype), propertytype ] }, {},  class: 'form-control glowing-border-select' %>
-              <%#= react_component('SimpleSelect', props: {
-                  className: 'simple-select',
-                  options: Property.residentialsubcategories.keys.collect {|propertytype| {label: Property.human_enum_name(:propertytype, propertytype), value: propertytype}},
-                  formdata:{
-                      formid: 'new_property',
-                      elementid: 'property_propertytype'
-                  },
-                  i18n: {
-                      select: t('js.components.select'),
-                  }
-              }, prerender: false) %>
-              <!--<input id="property_propertytype"-->
-                     <!--name="property[propertytype]"-->
-                     <!--class="proxy-form-input"-->
-                     <!--tabIndex=-1-->
-                     <!--value=""-->
-                     <!--required>-->
-            <!--</div>-->
 
             <div class="form-group">
-
-              <!--<div><i class="pr-icon xs floor"> </i></div>-->
               <%= property.label :price %>
               <%= property.text_field :price, placeholder: Property.human_attribute_name("price_placeholder"), class: 'glowing-border' %>
               <%#= inline_error @property.owner, :last_name, 'Last name'%>

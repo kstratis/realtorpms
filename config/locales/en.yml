@@ -25,52 +25,55 @@ en:
         remember_me: "Remember me on this computer"
       property:
         description: "Description"
+        businesstype: "Entry type"
         description_placeholder: "i.e. Luxe 3 Story Loft Rooftop"
-        propertycategory: "Category"
-        propertytype: "Type"
         price: "Price"
         price_placeholder: "i.e. 120000"
         size: "Size"
         size_placeholder: "i.e. 90"
         construction: "Construction"
         enums:
+          businesstype:
+            sell: "Sell"
+            rent: "Rent"
+            sell_rent: "Sell & Rent"
           category:
             residential: "Residential"
             commercial: "Commercial"
             land: "Land"
             other: "Other properties"
-          residentialsubcategory:
+          residential:
             apartment: "Apartment"
             studio: "Studio"
             maisonette: "Maisonette"
-            detached: "Detached House"
+            detached_house: "Detached House"
             villa: "Villa"
             loft: "Loft"
             bungalow: "Bungalow"
             building: "Building"
-            complex: "Apartment complex"
-          commercialsubcategory:
+            apartment_complex: "Apartment complex"
+          commercial:
             office: "Office"
-            commercialstore: "Store"
+            public_store: "Store"
             warehouse: "Warehouse"
-            industrial: "Industrial space"
-            craft: "Craft space"
+            industrial_space: "Industrial space"
+            craft_space: "Craft space"
             hotel: "Hotel"
-            commercialbusiness: "Business building"
+            business_building: "Business building"
             hall: "Hall"
             showroom: "Showroom"
           landsubcategory:
-            plot: "Land Plot"
+            land_plot: "Land Plot"
             parcels: "Parcels"
             island: "Island"
-            othercategories: "Other categories"
+            other_categories: "Other categories"
           othersubcategory:
             parking: "Parking"
-            unitbusiness: "Business"
+            business: "Business"
             prefabricated: "Prefabricated"
             detachable: "Detachable"
             air: "Air"
-            othersubcategory: "Other"
+            other_various: "Other"
           type:
             neoclassical: "Νεοκλασικό"
             protected_property: "Διατηρητέο"
@@ -88,6 +91,8 @@ en:
     components:
       select:
         placeholder: "Choose..."
+        category: "Category"
+        subcategory: "Subcategory"
     datatables:
       users:
         partner: "Partner"

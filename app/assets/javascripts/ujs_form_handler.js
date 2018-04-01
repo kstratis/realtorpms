@@ -8,9 +8,9 @@ $(document).on('turbolinks:load', function(e) {
 
     $('#new_property').validate({
       rules: {
-        'property[description]': {
-          required: true,
-          maxlength: 250
+        'property[businesstype]': {
+          required: true
+          // maxlength: 250
         },
         'property[category]': {
           required: true

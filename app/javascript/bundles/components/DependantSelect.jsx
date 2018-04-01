@@ -67,7 +67,7 @@ class DependantSelect extends React.Component {
     return (
       <div>
         <div className="form-group">
-          <label htmlFor="property_category">{'Κατηγορία'}</label>
+          <label htmlFor="property_category">{this.props.i18n.select.category}</label>
           <SimpleSelect
             id={'property_category_container'}
             identity={'property_category_component'}
@@ -81,10 +81,11 @@ class DependantSelect extends React.Component {
             i18n={this.props.i18n}
             disabled={false}
             onRef={ref => (this.categorySelectComp = ref)}
+            soloMode={false}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="property_subcategory">{'Υποκατηγορία'}</label>
+          <label htmlFor="property_subcategory">{this.props.i18n.select.subcategory}</label>
           <SimpleSelect
             id={'property_subcategory_container'}
             identity={'property_subcategory_component'}
@@ -98,6 +99,7 @@ class DependantSelect extends React.Component {
             i18n={this.props.i18n}
             disabled={this.state.slaveDisabled}
             onRef={ref => (this.subcategorySelectComp = ref)}
+            soloMode={false}
           />
         </div>
       </div>

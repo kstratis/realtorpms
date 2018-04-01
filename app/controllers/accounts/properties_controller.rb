@@ -156,7 +156,7 @@ module Accounts
       # Never trust parameters from the scary internet, only allow the white list through.
       def property_params
         # params.require(:property).permit(:description, :propertycategory, :propertytype, :price, :size, :construction)
-        params.require(:property).permit(:description, :category, :subcategory, :price, :size, :construction, images: [])
+        params.require(:property).permit(:description, :businesstype, :category, :subcategory, :price, :size, :construction, images: [])
       end
 
 
