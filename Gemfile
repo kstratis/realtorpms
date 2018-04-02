@@ -43,11 +43,12 @@ gem 'will_paginate', '~> 3.1.6'
 gem 'bootstrap-will_paginate', '1.0.0'
 
 gem 'launchy', '2.4.3'
-# gem 'rails-sweetalert2-confirm'
-#
+
 gem 'rails-assets-sweetalert2', source: 'https://rails-assets.org'
-gem 'rails_12factor'
+
 gem 'sweet-alert2-rails'
+
+gem 'rails_12factor'
 
 gem 'font-awesome-rails'
 

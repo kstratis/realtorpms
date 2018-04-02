@@ -17,8 +17,8 @@ export class BlobUpload {
   }
 
   create(callback) {
-    this.callback = callback
-    this.xhr.send(this.file)
+    this.callback = callback;
+    this.xhr.send(this.file.slice());
   }
 
   requestDidLoad(event) {
