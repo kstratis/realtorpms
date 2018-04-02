@@ -30,7 +30,11 @@ en:
         price: "Price"
         price_placeholder: "i.e. 120000"
         size: "Size"
-        size_placeholder: "i.e. 90"
+        size_placeholder: "i.e. 80"
+        bedrooms: "Bedrooms"
+        bedrooms_placeholder: "i.e. 2"
+        bathrooms: "Bathrooms"
+        bathrooms_placeholder: "i.e. 2"
         construction: "Construction"
         enums:
           businesstype:

@@ -47,7 +47,6 @@ $(document).on('turbolinks:load', function(e) {
 
   addEventListener("direct-upload:end", function(event) {
     var file = event.detail.file;
-    console.log(errorExists);
     if (!errorExists) {
       window.uppy_uploader.emit('upload-success', window.uppy_uploader.getState().files[file.id], {message: 'Completed Successfully'});
     } else{

@@ -15,6 +15,7 @@ class SimpleSelect extends React.Component {
     handleOptions: PropTypes.func,
     disabled: PropTypes.bool,
     onRef: PropTypes.func,
+    searchable: PropTypes.bool,
     // soloMode guards against dynamically setting the dropdown options
     // and gettings a ref which is needed in DependantSelect
     soloMode: PropTypes.bool,
@@ -99,7 +100,7 @@ class SimpleSelect extends React.Component {
           options={this.props.options}
           placeholder={this.props.i18n.select.placeholder}
           disabled={this.props.disabled}
-          searchable={false}
+          searchable={this.props.searchable}
         />
         <input id={this.props.inputID}
                name={this.props.inputName}

@@ -31,6 +31,10 @@ el:
         price_placeholder: "π.χ. 120000"
         size: "Εμβαδόν"
         size_placeholder: "π.χ. 80"
+        bedrooms: "Υπνοδωμάτια"
+        bedrooms_placeholder: "π.χ. 2"
+        bathrooms: "Μπάνια"
+        bathrooms_placeholder: "π.χ. 2"
         construction: "Κατασκευή"
         enums:
           businesstype:

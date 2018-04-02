@@ -22,6 +22,9 @@ $(document).on('turbolinks:load', function(e) {
         },
         'property[size]': {
           digits: true
+        },
+        'property[bedrooms]': {
+          digits: true
         }
       }
     });

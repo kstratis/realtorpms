@@ -53,7 +53,8 @@ gem 'rails_12factor'
 gem 'font-awesome-rails'
 
 gem 'react_on_rails', '10.1.3'
-gem 'webpacker', '3.3.1'
+
+gem 'webpacker', '~> 3.4'
 
 gem "roo", "~> 2.7.0"
 
@@ -103,4 +104,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'mini_racer', platforms: :ruby
 
-ruby "2.5.0"
+ruby "2.5.1"

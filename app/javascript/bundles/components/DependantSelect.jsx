@@ -13,6 +13,7 @@ class DependantSelect extends React.Component {
       subcategoryname: PropTypes.string.isRequired,
     }),
     options: PropTypes.object.isRequired,
+    searchable: PropTypes.bool,
     i18n: PropTypes.shape({
       select: PropTypes.object.isRequired
     })
@@ -82,6 +83,7 @@ class DependantSelect extends React.Component {
             disabled={false}
             onRef={ref => (this.categorySelectComp = ref)}
             soloMode={false}
+            searchable={this.props.searchable}
           />
         </div>
         <div className="form-group">
@@ -100,6 +102,7 @@ class DependantSelect extends React.Component {
             disabled={this.state.slaveDisabled}
             onRef={ref => (this.subcategorySelectComp = ref)}
             soloMode={false}
+            searchable={this.props.searchable}
           />
         </div>
       </div>

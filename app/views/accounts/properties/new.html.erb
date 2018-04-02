@@ -25,6 +25,7 @@
                     className: 'simple-select',
                     options: Property.businesstypes.keys.collect { |businesstype| { label: Property.human_enum_name(:businesstype, businesstype), value: businesstype} },
                     soloMode: true,
+                    searchable: false,
                     i18n: {
                         select: t('js.components.select'),
                     }
@@ -35,6 +36,7 @@
             <%= react_component('DependantSelect', props: {
                   className: 'simple-select-container',
                   options: get_options,
+                  searchable: false,
                   formdata: {
                       formid: 'new_property',
                       categoryid: 'property_category',
@@ -57,11 +59,7 @@
               <!-- For using React select with jqueryvalidation plugin see this: -->
               <!-- https://github.com/JedWatson/react-select/issues/1827#issuecomment-316768651 -->
 
-            <div class="form-group">
-              <%= property.label :price %>
-              <%= property.text_field :price, placeholder: Property.human_attribute_name("price_placeholder"), class: 'glowing-border' %>
-              <%#= inline_error @property.owner, :last_name, 'Last name'%>
-            </div>
+
 
             <div class="form-group">
               <%= property.label :size %>
@@ -69,14 +67,16 @@
             </div>
 
             <div class="form-group">
-              <%#= property.label :construction %>
-              <%#= property.select(:construction, options_for_select( 1940..Time.zone.now.year+2 , Time.zone.now.year), {}, class: 'form-control') %>
-              <%#= react_component('SimpleSelect', props: {
-                  id: 'property_construction',
-                  name: 'property[construction]',
+              <%= property.label :construction %>
+              <%= react_component('SimpleSelect', props: {
+                  inputID: 'property_construction',
+                  inputName: 'property[construction]',
+                  formID: 'new_property',
                   className: 'simple-select',
                   # options: Property.propertytypes.keys.collect { |propertytype| { label: Property.human_enum_name(:propertytype, propertytype), value: propertytype} },
                   options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
+                  searchable: true,
+                  soloMode: true,
                   i18n: {
                       select: t('js.components.select'),
                   }
@@ -97,10 +97,34 @@
                 }
             } do %>
             <% end %>
+
+            <div class="form-group">
+              <%= property.label :bedrooms %>
+              <%= property.text_field :bedrooms, placeholder: Property.human_attribute_name("bedrooms_placeholder"), class: 'glowing-border' %>
+              <%#= inline_error @property.owner, :last_name, 'Last name'%>
+            </div>
+
+            <div class="form-group">
+              <%= property.label :bathrooms %>
+              <%= property.text_field :bathrooms, placeholder: Property.human_attribute_name("bathrooms_placeholder"), class: 'glowing-border' %>
+              <%#= inline_error @property.owner, :last_name, 'Last name'%>
+            </div>
+
+            <div class="form-group">
+              <%= property.label :price %>
+              <%= property.text_field :price, placeholder: Property.human_attribute_name("price_placeholder"), class: 'glowing-border' %>
+              <%#= inline_error @property.owner, :last_name, 'Last name'%>
+            </div>
+
             <div class="form-group">
               <%= property.submit t('properties.new.add_button'), class: 'btn btn-primary' %>
             </div>
+
+
+
           </div>
+
+
           <div class="col-md-8 ">
 
 
