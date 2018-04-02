@@ -132,6 +132,9 @@ en:
     jqvalidator:
       required: "This field is required"
       digits: "This field requires digits only"
+    swal:
+      file_upload_fail_title: "Oops..."
+      file_upload_fail_body: "Something has gone wrong... Pleace check your network connection and try again."
   navbar:
     profile: "Profile"
     account: "Account"

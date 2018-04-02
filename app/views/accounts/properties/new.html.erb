@@ -91,6 +91,12 @@
                 }
             } do %>
             <% end %>
+            <%= content_tag :div, class: "", id: "swal", data: {
+                i18n: {
+                    swal: t('js.swal'),
+                }
+            } do %>
+            <% end %>
             <div class="form-group">
               <%= property.submit t('properties.new.add_button'), class: 'btn btn-primary' %>
             </div>

@@ -10,7 +10,6 @@ $(document).on('turbolinks:load', function(e) {
       rules: {
         'property[businesstype]': {
           required: true
-          // maxlength: 250
         },
         'property[category]': {
           required: true

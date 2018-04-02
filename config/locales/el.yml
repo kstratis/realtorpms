@@ -133,6 +133,9 @@ el:
     jqvalidator:
       required: "Το πεδίο είναι υποχρεωτικό"
       digits: "Παρακαλώ εισάγετε μόνο αριθμητικά ψηφία"
+    swal:
+      file_upload_fail_title: "Ούπς..."
+      file_upload_fail_body: "Φαίνεται κάτι πήγε στραβά... Ελέγξτε τη σύνδεση του δικτύου και προσπαθήστε πάλι."
   navbar:
     profile: "Προφίλ"
     account: "Λογαριασμός"
