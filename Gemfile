@@ -54,7 +54,7 @@ gem 'font-awesome-rails'
 
 gem 'react_on_rails', '10.1.3'
 
-gem 'webpacker', '~> 3.4'
+gem 'webpacker', '~> 3.4.3'
 
 gem "roo", "~> 2.7.0"
 
