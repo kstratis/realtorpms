@@ -102,4 +102,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'mini_racer', platforms: :ruby
 
-ruby "2.5.0"
+ruby "2.5.1"
