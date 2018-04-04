@@ -7,7 +7,7 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.0.rc1'
+gem 'rails', '~> 5.2.0.rc2'
 # gem 'rails', :git => 'https://github.com/rails/rails'
 gem 'bootstrap-sass', '3.3.7'
 gem 'bcrypt', '3.1.11'
@@ -43,16 +43,18 @@ gem 'will_paginate', '~> 3.1.6'
 gem 'bootstrap-will_paginate', '1.0.0'
 
 gem 'launchy', '2.4.3'
-# gem 'rails-sweetalert2-confirm'
-#
+
 gem 'rails-assets-sweetalert2', source: 'https://rails-assets.org'
-gem 'rails_12factor'
+
 gem 'sweet-alert2-rails'
+
+gem 'rails_12factor'
 
 gem 'font-awesome-rails'
 
 gem 'react_on_rails', '10.1.3'
-gem 'webpacker', '3.3.1'
+
+gem 'webpacker', '~> 3.4'
 
 gem "roo", "~> 2.7.0"
 

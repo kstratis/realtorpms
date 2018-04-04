@@ -25,31 +25,69 @@ en:
         remember_me: "Remember me on this computer"
       property:
         description: "Description"
+        businesstype: "Entry type"
         description_placeholder: "i.e. Luxe 3 Story Loft Rooftop"
-        propertycategory: "Category"
-        propertytype: "Type"
         price: "Price"
         price_placeholder: "i.e. 120000"
         size: "Size"
-        size_placeholder: "i.e. 90"
+        size_placeholder: "i.e. 80"
+        bedrooms: "Bedrooms"
+        bedrooms_placeholder: "i.e. 2"
+        bathrooms: "Bathrooms"
+        bathrooms_placeholder: "i.e. 2"
         construction: "Construction"
         enums:
-          propertytype:
-            neoclassical: "Neoclassical"
-            protected_property: "Protected property"
-            loft: "Loft"
-            traditional: "Traditional"
-            villa: "Villa"
-            stone: "Stone"
-            studio: "Studio"
-            prefabricated: "Prefabricated"
-            precast: "Precast"
-          propertycategory:
+          businesstype:
+            sell: "Sell"
+            rent: "Rent"
+            sell_rent: "Sell & Rent"
+          category:
+            residential: "Residential"
+            commercial: "Commercial"
+            land: "Land"
+            other: "Other properties"
+          residential:
             apartment: "Apartment"
-            terraced: "Terraced"
+            studio: "Studio"
             maisonette: "Maisonette"
+            detached_house: "Detached House"
+            villa: "Villa"
+            loft: "Loft"
+            bungalow: "Bungalow"
             building: "Building"
-            home: "Home"
+            apartment_complex: "Apartment complex"
+          commercial:
+            office: "Office"
+            public_store: "Store"
+            warehouse: "Warehouse"
+            industrial_space: "Industrial space"
+            craft_space: "Craft space"
+            hotel: "Hotel"
+            business_building: "Business building"
+            hall: "Hall"
+            showroom: "Showroom"
+          landsubcategory:
+            land_plot: "Land Plot"
+            parcels: "Parcels"
+            island: "Island"
+            other_categories: "Other categories"
+          othersubcategory:
+            parking: "Parking"
+            business: "Business"
+            prefabricated: "Prefabricated"
+            detachable: "Detachable"
+            air: "Air"
+            other_various: "Other"
+          type:
+            neoclassical: "Νεοκλασικό"
+            protected_property: "Διατηρητέο"
+            loft: "Loft"
+            traditional: "Παραδοσιακό"
+            villa: "Βίλα"
+            stone: "Πέτρινο"
+            studio: "Studio"
+            prefabricated: "Λυόμενο"
+            precast: "Προκατασκευή"
     errors:
       messages:
         record_invalid: ! 'Validation failed: %{errors}'
@@ -57,6 +95,8 @@ en:
     components:
       select:
         placeholder: "Choose..."
+        category: "Category"
+        subcategory: "Subcategory"
     datatables:
       users:
         partner: "Partner"
@@ -93,6 +133,12 @@ en:
       paused: "Paused"
       error: "Error"
       retry: "Please try again"
+    jqvalidator:
+      required: "This field is required"
+      digits: "This field requires digits only"
+    swal:
+      file_upload_fail_title: "Oops..."
+      file_upload_fail_body: "Something has gone wrong... Pleace check your network connection and try again."
   navbar:
     profile: "Profile"
     account: "Account"

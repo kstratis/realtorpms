@@ -15,19 +15,24 @@ export class DirectUpload {
 
   create(callback) {
     FileChecksum.create(this.file, (error, checksum) => {
-      const blob = new BlobRecord(this.file, checksum, this.url)
-      notify(this.delegate, "directUploadWillCreateBlobWithXHR", blob.xhr)
+      if (error) {
+        callback(error);
+        return
+      }
+      const blob = new BlobRecord(this.file, checksum, this.url);
+      notify(this.delegate, "directUploadWillCreateBlobWithXHR", blob.xhr);
+
       blob.create(error => {
         if (error) {
-          callback(error)
+          callback(error);
         } else {
-          const upload = new BlobUpload(blob)
-          notify(this.delegate, "directUploadWillStoreFileWithXHR", upload.xhr)
+          const upload = new BlobUpload(blob);
+          notify(this.delegate, "directUploadWillStoreFileWithXHR", upload.xhr);
           upload.create(error => {
             if (error) {
-              callback(error)
+              callback(error);
             } else {
-              callback(null, blob.toJSON())
+              callback(null, blob.toJSON());
             }
           })
         }

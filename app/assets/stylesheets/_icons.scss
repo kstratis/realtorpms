@@ -141,6 +141,10 @@
     background-image: url( checkmark.svg );
   }
 
+  &.floor{
+    background-image: url( stairs.svg );
+  }
+
   & ~ .pr-icon-desc {
     display: block;
     text-align: center;

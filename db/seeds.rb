@@ -115,8 +115,9 @@ smithuser = shakalaka.users.find_by(email: 'wm@gmail.com')
   size = Faker::Number.number(3)
   price = Faker::Number.number(6)
   property = Property.create!(
-      description: description,
-      propertytype: 'traditional',
+      businesstype: 'sell',
+      category: 'residential',
+      subcategory: 'apartment',
       size: size,
       price: price,
       account: shakalaka,
@@ -133,8 +134,9 @@ lguser = bluedomain.users.find_by(email: 'lg@gmail.com')
   size = Faker::Number.number(3)
   price = Faker::Number.number(6)
   property = Property.create!(
-      description: description,
-      propertytype: 'traditional',
+      businesstype: 'rent',
+      category: 'residential',
+      subcategory: 'apartment',
       size: size,
       price: price,
       account: shakalaka,

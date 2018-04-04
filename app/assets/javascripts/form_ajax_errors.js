@@ -1,10 +1,10 @@
 $.fn.render_form_errors = function (model_name, errors) {
-  console.log('running YOLO ');
+  // console.log('running YOLO ');
   var input;
   var form = this;
   var name;
 
-  console.log(form);
+  // console.log(form);
 
   this.clear_form_errors();
   // console.log(this);
@@ -17,7 +17,7 @@ $.fn.render_form_errors = function (model_name, errors) {
   $.each(errors, function (field, messages) {
     input = form.find('input, select, textarea').filter(function () {
       name = $(this).attr('name') || $(this).data('name'); // caters for react-select component
-      console.log(name);
+      // console.log(name);
       if (name) {
         return name.match(new RegExp(model_name + '\\[' + field + '\\(?'))
       }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_07_191639) do
+ActiveRecord::Schema.define(version: 2018_03_31_200830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,13 @@ ActiveRecord::Schema.define(version: 2018_03_07_191639) do
     t.datetime "updated_at", null: false
     t.index ["property_id"], name: "index_assignments_on_property_id"
     t.index ["user_id"], name: "index_assignments_on_user_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.string "parent_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "countries", force: :cascade do |t|
@@ -126,9 +133,10 @@ ActiveRecord::Schema.define(version: 2018_03_07_191639) do
     t.boolean "fireplace"
     t.integer "user_id"
     t.bigint "account_id"
-    t.integer "propertytype"
     t.integer "location_id"
-    t.integer "propertycategory"
+    t.integer "category"
+    t.integer "subcategory"
+    t.integer "businesstype"
     t.index ["account_id"], name: "index_properties_on_account_id"
   end
 

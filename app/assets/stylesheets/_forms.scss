@@ -86,9 +86,16 @@ input, textarea, select, .uneditable-input {
     border-color: #a94442;
 }
 
-#property_description {
+.error{
+  color: #a94442;
+  font-weight: normal;
+}
+
+// This sets the proper error message alignment
+form input, .simple-select {
   margin-bottom: 0;
 }
+
 
 @media(min-width: 300px) {
   .col-md-border {
@@ -107,3 +114,27 @@ input, textarea, select, .uneditable-input {
   overflow: hidden;
   min-height: 300px;
 }
+
+.proxy-form-input{
+  padding: 0 !important;
+  margin: 0 !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+  max-height: 0 !important;
+  max-width: 0 !important;
+  overflow: hidden;
+  position: absolute;
+  left: -999em;
+}
+
+.uppy-DashboardItem-progress{
+  //cursor: not-allowed;
+  //pointer-events: none;
+}
+
+.UppyIcon-progressCircle{
+  cursor: not-allowed !important;
+  pointer-events: none;
+}
+

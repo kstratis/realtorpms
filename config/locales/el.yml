@@ -25,16 +25,60 @@ el:
         remember_me: "Να με θυμάσαι σε αυτήν τη συσκευή"
       property:
         description: "Περιγραφή"
+        businesstype: "Τύπος καταχώρησης"
         description_placeholder: "π.χ. Μεζονέτα 180τ.μ. Κηφισιά"
-        propertycategory: "Κατηγορία"
-        propertytype: "Είδος"
         price: "Τιμή"
         price_placeholder: "π.χ. 120000"
         size: "Εμβαδόν"
         size_placeholder: "π.χ. 80"
+        bedrooms: "Υπνοδωμάτια"
+        bedrooms_placeholder: "π.χ. 2"
+        bathrooms: "Μπάνια"
+        bathrooms_placeholder: "π.χ. 2"
         construction: "Κατασκευή"
         enums:
-          propertytype:
+          businesstype:
+            sell: "Πώληση"
+            rent: "Ενοικίαση"
+            sell_rent: "Πώληση & Ενοικίαση"
+          category:
+            residential: "Κατοικία"
+            commercial: "Επαγγελματική στέγη"
+            land: "Γη"
+            other_properties: "Λοιπά ακίνητα"
+          residential:
+            apartment: "Διαμέρισμα"
+            studio: "Studio / Γκαρσονιέρα"
+            maisonette: "Μεζονέτα"
+            detached_house: "Μονοκατοικία"
+            villa: "Βίλλα"
+            loft: "Loft"
+            bungalow: "Bungalow"
+            building: "Κτίριο"
+            apartment_complex: "Συγκρότημα διαμερισμάτων"
+          commercial:
+            office: "Γραφείο"
+            public_store: "Κατάστημα"
+            warehouse: "Αποθήκη"
+            industrial_space: "Βιομηχανικός χώρος"
+            craft_space: "Βιοτεχνικός χώρος"
+            hotel: "Ξενοδοχείο"
+            business_building: "Κτίριο επαγγελματικών χώρων"
+            hall: "Αίθουσα"
+            showroom: "Εκθεσιακός χώρος"
+          land:
+            land_plot: "Οικόπεδο"
+            parcels: "Αγροτεμάχιο"
+            island: "Νησί"
+            other_categories: "Λοιπές κατηγορίες"
+          other_properties:
+            parking: "Parking"
+            business: "Επιχείρηση"
+            prefabricated: "Προκατασκευασμένο"
+            detachable: "Λυόμενο"
+            air: "Αέρας"
+            other_various: "Λοιπές κατηγορίες ακινήτων"
+          type:
             neoclassical: "Νεοκλασικό"
             protected_property: "Διατηρητέο"
             loft: "Loft"
@@ -44,12 +88,6 @@ el:
             studio: "Studio"
             prefabricated: "Λυόμενο"
             precast: "Προκατασκευή"
-          propertycategory:
-            apartment: "Διαμέρισμα"
-            terraced: "Μονοκατοικία"
-            maisonette: "Μεζονέτα"
-            building: "Κτίριο"
-            home: "Οικία"
     errors:
       messages:
         record_invalid: ! 'Η επικύρωση απέτυχε: %{errors}'
@@ -57,6 +95,9 @@ el:
     components:
       select:
        placeholder: "Επιλέξτε..."
+       category: "Κατηγορία"
+       subcategory: "Υποκατηγορία"
+
     datatables:
       users:
         partner: "Συνεργάτης"
@@ -93,6 +134,12 @@ el:
       paused: "Παύση"
       error: "Σφάλμα"
       retry: "Προσπαθήστε ξανά"
+    jqvalidator:
+      required: "Το πεδίο είναι υποχρεωτικό"
+      digits: "Παρακαλώ εισάγετε μόνο αριθμητικά ψηφία"
+    swal:
+      file_upload_fail_title: "Ούπς..."
+      file_upload_fail_body: "Φαίνεται κάτι πήγε στραβά... Ελέγξτε τη σύνδεση του δικτύου και προσπαθήστε πάλι."
   navbar:
     profile: "Προφίλ"
     account: "Λογαριασμός"
