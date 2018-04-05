@@ -1,7 +1,5 @@
 const Uppy = require('uppy/lib/core');
 const Dashboard = require('uppy/lib/plugins/Dashboard');
-// import '!style-loader!css-loader!uppy/dist/uppy.css';
-
 
 $(document).on('turbolinks:load', function(e) {
   const uppyDomNode = $('#uppy');

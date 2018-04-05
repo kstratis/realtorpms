@@ -1,3 +1,7 @@
 plugins:
-  postcss-smart-import: {}
+  postcss-import: {}
   postcss-cssnext: {}
+#  These are the old settings
+#  postcss-smart-import: {}
+#  postcss-cssnext: {}
+

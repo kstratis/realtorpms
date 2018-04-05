@@ -15,14 +15,17 @@
 
     <meta name="turbolinks-cache-control" content="no-cache">
 
-
     <!-- full_title is defined in app/helpers/application_helper.rb. title is provided by each view file
          using the keyword 'provide' If the view file doesn't provide such value, 'full title' returns
          a generic title -->
     <title><%= full_title(yield(:title)) %></title>
     <%= csrf_meta_tags %>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <link href="https://transloadit.edgly.net/releases/uppy/v0.23.2/dist/uppy.min.css" rel="stylesheet">
+
+    <!-- This stylesheet is the uppy.scss. It needs to be placed before the main scss
+         cause it overrides something in the transitions rules which breaks the system.
+         It uses postcss to load the file. Check .postcssrc.yml -->
+    <%= stylesheet_pack_tag 'stylesheets/styles' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'components-bundle' %>
