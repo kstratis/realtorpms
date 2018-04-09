@@ -19,7 +19,7 @@ module Accounts
 
     def index
       # puts 'the other one'
-      print_users
+      filter_users
     end
 
     # POST to the new user registration page

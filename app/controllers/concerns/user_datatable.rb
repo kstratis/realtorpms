@@ -1,5 +1,5 @@
 module UserDatatable
-  def print_users
+  def filter_users
     if params[:page]
       param = Integer(params[:page]) rescue nil
       unless param.is_a? Integer
