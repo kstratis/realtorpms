@@ -79,6 +79,16 @@ module Accounts
     def edit
     end
 
+    def locations
+      puts 'INSIDE the locations'
+      filter_locations
+
+      # respond_to do |format|
+      #   format.json {render json: {message: 'Working! OK!'}, status: 200}
+      # end
+
+    end
+
 
     # POST /properties
     # POST /properties.json

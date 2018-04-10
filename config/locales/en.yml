@@ -36,6 +36,7 @@ en:
         bathrooms: "Bathrooms"
         bathrooms_placeholder: "i.e. 2"
         construction: "Construction"
+        location: "Location"
         enums:
           businesstype:
             sell: "Sell"

@@ -7,12 +7,12 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.0.rc2'
+gem 'rails', '~> 5.2.0'
 # gem 'rails', :git => 'https://github.com/rails/rails'
 gem 'bootstrap-sass', '3.3.7'
 gem 'bcrypt', '3.1.11'
 gem 'babel-transpiler'
-# gem 'bootsnap'
+gem 'bootsnap'
 # gem 'rake', '~> 12.1.0'
 
 # Use postgresql as the database for Active Record

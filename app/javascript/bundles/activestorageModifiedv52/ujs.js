@@ -57,7 +57,7 @@ function submitForm(form) {
   } else {
     button = document.createElement("input");
     button.type = "submit";
-    button.style = "display:none";
+    button.style.display = "none";
     form.appendChild(button);
     button.click();
     form.removeChild(button);

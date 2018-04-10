@@ -228,9 +228,9 @@ function withDatatable(WrappedComponent) {
       let entity = this.props.initial_payload.object_type;
       axios[method](`/assignments/property/${pid}/user/${uid}.json`) // +1 because rails will_paginate starts from 1 while this starts from 0
         .then(function (response) {
-          console.log('logging the response');
-          console.log(response);
-          console.log(this.state.dataset);
+          // console.log('logging the response');
+          // console.log(response);
+          // console.log(this.state.dataset);
           // copy current state
           let new_dataset = this.state.dataset.slice();
           let el = new_dataset.find((user) => user.id === uid);

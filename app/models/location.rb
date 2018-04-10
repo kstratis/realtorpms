@@ -8,7 +8,8 @@ class Location < ApplicationRecord
     def search(search)
       if search
         # where('unaccent(last_name) ILIKE unaccent(?)', "%#{search}%").or(where('unaccent(first_name) ILIKE unaccent(?)', "%#{search}%")).or(where('email LIKE ?', "%#{search}%"))
-        puts search
+        where('unaccent(localname) ILIKE unaccent(?)', "%#{search}%").limit(5)
+        # puts search
       end
     end
 

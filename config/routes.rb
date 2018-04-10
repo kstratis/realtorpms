@@ -18,12 +18,15 @@ Rails.application.routes.draw do
   constraints(SubdomainRequired) do
     scope module: 'accounts' do
       root to: 'dashboard#index', as: :account_root
+      get '/properties/locations', to: 'properties#locations'
       resources :properties
       resources :users
       resources :invitations, only: [:new, :create]
       # post '/properties/uploads', to: 'properties#uploads'
       # create a new assignment
       #
+      #
+
       post '/properties/uploads', to: 'properties#uploads'
       #
       post '/assignments/property/:pid/user/:uid', to: 'assignments#create'

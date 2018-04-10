@@ -36,6 +36,7 @@ el:
         bathrooms: "Μπάνια"
         bathrooms_placeholder: "π.χ. 2"
         construction: "Κατασκευή"
+        location: "Τοποθεσία"
         enums:
           businesstype:
             sell: "Πώληση"

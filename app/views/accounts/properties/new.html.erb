@@ -50,6 +50,24 @@
               }, prerender: false) %>
 
 
+            <div class="form-group">
+              <%= property.label :location %>
+              <%= react_component('AjaxSelect', props: {
+                  inputID: 'property_location',
+                  inputName: 'property[location]',
+                  formID: 'new_property',
+                  className: 'simple-select',
+                  # options: Property.propertytypes.keys.collect { |propertytype| { label: Property.human_enum_name(:propertytype, propertytype), value: propertytype} },
+                  # options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
+                  searchable: true,
+                  soloMode: true,
+                  i18n: {
+                      select: t('js.components.select'),
+                  }
+              }, prerender: false) %>
+            </div>
+
+
               <!--<div class="form-group">-->
               <%#= property.label :propertycategory %>
               <!-- THIS ONE WAS THE ORIGINAL -->
@@ -110,11 +128,7 @@
               <%#= inline_error @property.owner, :last_name, 'Last name'%>
             </div>
 
-            <div class="form-group">
-              <%= property.label :price %>
-              <%= property.text_field :price, placeholder: Property.human_attribute_name("price_placeholder"), class: 'glowing-border' %>
-              <%#= inline_error @property.owner, :last_name, 'Last name'%>
-            </div>
+
 
             <div class="form-group">
               <%= property.submit t('properties.new.add_button'), class: 'btn btn-primary' %>
@@ -139,6 +153,16 @@
               <%#= property.label :size %>
               <%#= property.text_field :size, placeholder: Property.human_attribute_name("size_placeholder"), class: 'glowing-border' %>
             </div>
+
+
+            <div class="form-group">
+              <%= property.label :price %>
+              <%= property.text_field :price, placeholder: Property.human_attribute_name("price_placeholder"), class: 'glowing-border' %>
+              <%#= inline_error @property.owner, :last_name, 'Last name'%>
+            </div>
+
+
+
 
           </div>
         </div>
