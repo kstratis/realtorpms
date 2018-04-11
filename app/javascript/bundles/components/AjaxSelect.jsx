@@ -51,7 +51,8 @@ class SimpleSelect extends React.Component {
   }
 
   onChange (value) {
-    this.setState({value: value})
+    this.setState({value: value});
+    this.updateExternalDOM(value);
   }
 
   // This operates outside react and is used to store the value

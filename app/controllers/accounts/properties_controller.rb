@@ -95,35 +95,19 @@ module Accounts
     def create
       puts 'INSIDE CREATE'
       # puts property_params[:images]
-      # puts property_params[:images].class
       @property = Property.new(property_params)
+      # When only having the associated object's id (location) and not the object itself,
+      # look at the following link for a trick to bypass this. It involves form changes (id & name)
+      # and the introduction of an accessor property plus the following line
+      # https://stackoverflow.com/a/43476033/178728
+      @property.location = Location.find(@property.locationid)
       @property.account = current_account
-
-      # puts session[:attachments]
-
-
-      # session[:attachments].each do |attachment|
-      #   @property.images.attach(io: File.read(attachment['tempfile']),
-      #                           filename: attachment['original_filename'],
-      #                           content_type: attachment['content_type'])
-      # end
-      # @property.images.attach(session[:attachments])
-      # @property.images.attach(property_params[:images])
-      # @property.user_id = current_user.id if current_user
-      # if @property.save!
-      #   flash[:success] = 'Property successfully created.'
-      #   redirect_to @property
-      # else
-      #   render 'new'
-      # end
       respond_to do |format|
         if @property.save
           puts 'form saving successfully'
           format.html { redirect_to @property, notice: 'Property was successfully created.' }
           format.js
-      #     format.json { render :show, status: :created, location: @property }
         else
-          puts 'ALERT! The form didn\'t save due to errors.'
           @property.errors.each do |field, error|
             puts "#{field}: #{error}"
           end
@@ -166,7 +150,7 @@ module Accounts
       # Never trust parameters from the scary internet, only allow the white list through.
       def property_params
         # params.require(:property).permit(:description, :propertycategory, :propertytype, :price, :size, :construction)
-        params.require(:property).permit(:description, :businesstype, :category, :subcategory, :price, :size, :construction, images: [])
+        params.require(:property).permit(:description, :businesstype, :category, :subcategory, :locationid, :bedrooms, :bathrooms, :price, :size, :construction, images: [])
       end
 
 

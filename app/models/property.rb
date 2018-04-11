@@ -7,6 +7,16 @@ class Property < ApplicationRecord
   has_many_attached :images
   # https://stackoverflow.com/a/38845388/178728
   has_many :users, -> { distinct }, through: :assignments, dependent: :destroy
+  attr_accessor :locationid
+
+
+  # before_validation :yolo
+  # before_create do
+  #   puts 'HOOK RUNNING'
+  #   # puts self.location
+  #   # self.location = Location.find(self.location)
+  #   # self.url = self.url.split('facebook.com/').last
+  # end
 
 
   # enum propertycategory: [:apartment, :terraced, :maisonette, :building, :home]
@@ -39,4 +49,18 @@ class Property < ApplicationRecord
   enum heating: [:central, :prive]
   # validates :description, length: { maximum: 250 }, presence: true
   # validates :propertytype, presence: true
+  #
+  # def self.location(location_id)
+  #   self.location = Location.find(location_id)
+    # dataset.sort_by(&:get_total_properties)
+  # end
+
+  # def self.location_text
+  #   self.location.to_s
+  # end
+  # def yolo
+  #   puts 'INSIDDDDDDDDDDDD'
+  #
+  # end
+
 end

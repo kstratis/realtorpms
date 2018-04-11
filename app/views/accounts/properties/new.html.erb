@@ -53,8 +53,8 @@
             <div class="form-group">
               <%= property.label :location %>
               <%= react_component('AjaxSelect', props: {
-                  inputID: 'property_location',
-                  inputName: 'property[location]',
+                  inputID: 'property_locationid',
+                  inputName: 'property[locationid]',
                   formID: 'new_property',
                   className: 'simple-select',
                   # options: Property.propertytypes.keys.collect { |propertytype| { label: Property.human_enum_name(:propertytype, propertytype), value: propertytype} },
