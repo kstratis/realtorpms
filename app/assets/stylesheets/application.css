@@ -15,6 +15,7 @@
  *= require_self
  *= require_tree .
  *= require animate
+ *= require icomoon
  *= require sweetalert2
  *= require font-awesome
  */

@@ -4,6 +4,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Async } from 'react-select';
 import ReactOnRails from "react-on-rails";
+import { debounce } from "../utilities/helpers";
 import '!style-loader!css-loader!react-select/dist/react-select.css';
 
 
@@ -32,8 +33,13 @@ class SimpleSelect extends React.Component {
     super(props);
     this.setTextInputValue = this.setTextInputValue.bind(this);
     this.onChange = this.onChange.bind(this);
+    // this.getOptionsDelayed = debounce(this.getOptions.bind(this), 300);
+
     this.getOptions = this.getOptions.bind(this);
+    // this.handleAjaxRequest = this.handleAjaxRequest.bind(this);
+    this.handleAjaxRequestDelayed = debounce(this.handleAjaxRequest.bind(this), 300);
     axios.defaults.headers.common['X-CSRF-Token'] = ReactOnRails.authenticityToken();
+
   }
 
   // This stores a component reference so it can be used from the parent
@@ -66,6 +72,22 @@ class SimpleSelect extends React.Component {
     this.setState({selectedOption: ''});
   }
 
+  handleAjaxRequest(query, callback) {
+    axios.get(`/properties/locations.json?search=${query}`) // +1 because rails will_paginate starts from 1 while this starts from 0
+      .then((response) => {
+        console.log(response.data);
+        callback(null, { options: response.data.locations.dataset });
+        // return { options: response.data.locations.dataset}
+      });
+  }
+
+  getOptions (input, callback) {
+    if (!input) {
+      return Promise.resolve({ options: [] });
+    }
+    this.handleAjaxRequestDelayed(input, callback);
+  }
+
   state = {
     selectedOption: '',
     value: ''
@@ -95,18 +117,6 @@ class SimpleSelect extends React.Component {
         this.props.handleOptions(selectedOption, this.props.controller);
       }
     }
-  };
-
-
-  getOptions = (input) => {
-    if (!input) {
-      return Promise.resolve({ options: [] });
-    }
-    return axios.get(`/properties/locations.json?search=${input}`) // +1 because rails will_paginate starts from 1 while this starts from 0
-      .then(function (response) {
-        console.log(response.data);
-        return { options: response.data.locations.dataset}
-      });
   };
 
   render() {

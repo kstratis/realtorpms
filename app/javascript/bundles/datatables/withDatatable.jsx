@@ -26,7 +26,7 @@ import Search from "./Search";
 
 
 const URLSearchParams = require('url-search-params');
-import {debounce, capitalizeFirstLetter} from "./helpers";
+import {debounce, capitalizeFirstLetter} from "../utilities/helpers";
 
 
 // addLocaleData([...en, ...el]);
