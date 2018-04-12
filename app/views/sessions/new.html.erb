@@ -9,7 +9,6 @@
       <div class="pr-form-container">
         <%= form_for(:session, url: login_path) do |f| %>
             <%#= render 'shared/error_messages' %>
-
             <%= f.label User.human_attribute_name("email") %>
             <%= f.email_field :email, class: 'glowing-border' %>
 

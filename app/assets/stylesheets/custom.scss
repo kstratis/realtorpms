@@ -14,7 +14,7 @@ $gray-medium-light: #eaeaea;
 html {
   background-color: #f8faff;
   //background-color: #f1f4f5;
-  //height: 100%;
+  height: 100%;
 }
 
 div.pr-body-container{
@@ -23,6 +23,8 @@ div.pr-body-container{
 }
 
 body {
+  height: 100%;
+
   background-color: #f8faff;
   line-height: 1.5em;
   // main font color
@@ -479,3 +481,9 @@ label{
 //.select-style select:focus {
 //  outline: none;
 //}
+
+.registration-special{
+  background-image: url(background/sessions_background.svg) !important;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
