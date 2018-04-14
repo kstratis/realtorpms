@@ -2,21 +2,11 @@ class Property < ApplicationRecord
   # belongs_to :user
   belongs_to :account
   belongs_to :location, optional: true
-  # belongs_to :category, optional: true
   has_many :assignments
   has_many_attached :images
   # https://stackoverflow.com/a/38845388/178728
   has_many :users, -> { distinct }, through: :assignments, dependent: :destroy
   attr_accessor :locationid
-
-
-  # before_validation :yolo
-  # before_create do
-  #   puts 'HOOK RUNNING'
-  #   # puts self.location
-  #   # self.location = Location.find(self.location)
-  #   # self.url = self.url.split('facebook.com/').last
-  # end
 
 
   # enum propertycategory: [:apartment, :terraced, :maisonette, :building, :home]
@@ -29,38 +19,26 @@ class Property < ApplicationRecord
                      :office, :public_store, :warehouse, :industrial_space, :craft_space, :hotel, :business_building, :hall, :showroom,
                      :land_plot, :parcels, :island, :other_categories,
                      :parking, :business, :prefabricated, :detachable, :air, :other_various]
-
-
   # enum residentialsubcategory: [:apartment, :studio, :maisonette, :detached, :villa, :loft, :bungalow, :building, :complex]
   # enum commercialsubcategory: [:office, :commercialstore, :warehouse, :industrial, :craft, :hotel, :commercialbusiness, :hall, :showroom]
   # enum landsubcategory: [:plot, :parcels, :island, :othercategories]
   # enum othersubcategory: [:parking, :unitbusiness, :prefabricated, :detachable, :air, :othersubcategory]
   # enum residentialsubcategory: [:apartment, :terraced, :maisonette, :building, :home]
-  #
-
-
-
-
-
   # enum type: [:neoclassical, :protected_property, :loft, :traditional, :villa, :stone,  :studio,
   #             :prefabricated, :precast]
   enum orientation: [:front_facing, :airy, :on_corner, :inwards_facing]
   enum view: [:sea, :mountain, :forest, :infinite]
   enum heating: [:central, :prive]
-  # validates :description, length: { maximum: 250 }, presence: true
-  # validates :propertytype, presence: true
-  #
-  # def self.location(location_id)
-  #   self.location = Location.find(location_id)
-    # dataset.sort_by(&:get_total_properties)
-  # end
 
-  # def self.location_text
-  #   self.location.to_s
-  # end
-  # def yolo
-  #   puts 'INSIDDDDDDDDDDDD'
-  #
-  # end
+  # Validations should match their ujs_form_handler.js counterparts
+  validates :businesstype, presence: true
+  validates :category, presence: true
+  validates :subcategory, presence: true
+  validates :locationid, presence: true
+  validates :size, numericality: { only_integer: true }, allow_blank: true
+  validates :price, numericality: { only_integer: true }, allow_blank: true
+  validates :bedrooms, numericality: { only_integer: true }, allow_blank: true
+  validates :bathrooms, numericality: { only_integer: true }, allow_blank: true
+
 
 end

@@ -25,6 +25,9 @@ $(document).on('turbolinks:load', function(e) {
         },
         'property[bedrooms]': {
           digits: true
+        },
+        'property[bathrooms]': {
+          digits: true
         }
       }
     });
@@ -33,7 +36,6 @@ $(document).on('turbolinks:load', function(e) {
   $('#new_property').on("ajax:before", function(event, xhr, opts) {
     if ($('#preventformsubmit').length > 0) {
       if (Object.keys(window.uppy_uploader.getState().files).length){
-
         event.preventDefault();
         return false;
       } else{

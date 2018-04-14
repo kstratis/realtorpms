@@ -172,6 +172,9 @@ en:
       message: "Property successfully added"
       return: "Return"
       add_another: "Add another"
+    not_created:
+      message: "Error adding new property"
+      add_another: "Try again"
     index:
       heading: "Properties"
       new_button: "Add new property"

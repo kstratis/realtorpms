@@ -106,13 +106,13 @@ module Accounts
         if @property.save
           puts 'form saving successfully'
           format.html { redirect_to @property, notice: 'Property was successfully created.' }
-          format.js
+          format.js { render :create_result }
         else
           @property.errors.each do |field, error|
             puts "#{field}: #{error}"
           end
           format.html { render :new }
-          format.js
+          format.js { render :create_result }
         end
       end
     end
