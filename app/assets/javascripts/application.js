@@ -20,5 +20,7 @@
 //= require sweetalert2
 //= require sweet-alert2-rails
 //= require jquery.validate
+//= require bootstrap-datepicker/core
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.el.js
 //= require_tree .
 

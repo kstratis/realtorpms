@@ -37,11 +37,20 @@ el:
         bathrooms_placeholder: "π.χ. 2"
         construction: "Κατασκευή"
         location: "Τοποθεσία"
+        floor: "Όροφος"
+        levels: "Επίπεδα"
+        availability: "Διαθεσιμότητα"
+        availability_placeholder: "Επιλέξτε ημερομηνία"
         enums:
           businesstype:
             sell: "Πώληση"
             rent: "Ενοικίαση"
             sell_rent: "Πώληση & Ενοικίαση"
+          floor:
+            basement: "Υπόγειο"
+            semi_basement: "Ημιυπόγειο"
+            ground_floor: "Ισόγειο"
+            mezzanine: "Ημιόροφος"
           category:
             residential: "Κατοικία"
             commercial: "Επαγγελματική στέγη"

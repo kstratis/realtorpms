@@ -15,7 +15,7 @@
  *= require_self
  *= require_tree .
  *= require animate
- *= require icomoon
+ *= require bootstrap-datepicker3
  *= require sweetalert2
  *= require font-awesome
  */

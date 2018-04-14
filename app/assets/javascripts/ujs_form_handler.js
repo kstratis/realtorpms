@@ -1,5 +1,6 @@
 $(document).on('turbolinks:load', function(e) {
 
+  // This handles client side validations
   // This shouldn't be hardcoded
   if (window.location.pathname === '/properties/new' ) {
     var jqvalidatorDomNode = $('#jqvalidator');
@@ -31,8 +32,18 @@ $(document).on('turbolinks:load', function(e) {
         }
       }
     });
+
+    // This handles the date picker
+    var currentLocaleDomNode = $('#current_locale');
+    var locale = currentLocaleDomNode.data('i18n').locale;
+    $('.datepicker').datepicker({
+      language: locale,
+      autoclose: true
+    });
+
   }
 
+  // This handle the form submitting
   $('#new_property').on("ajax:before", function(event, xhr, opts) {
     if ($('#preventformsubmit').length > 0) {
       if (Object.keys(window.uppy_uploader.getState().files).length){

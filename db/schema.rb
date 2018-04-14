@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_31_200830) do
+ActiveRecord::Schema.define(version: 2018_04_14_114558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,6 +137,9 @@ ActiveRecord::Schema.define(version: 2018_03_31_200830) do
     t.integer "category"
     t.integer "subcategory"
     t.integer "businesstype"
+    t.integer "floor"
+    t.integer "levels"
+    t.datetime "availability"
     t.index ["account_id"], name: "index_properties_on_account_id"
   end
 

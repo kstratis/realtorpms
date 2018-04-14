@@ -13,6 +13,7 @@ gem 'bootstrap-sass', '3.3.7'
 gem 'bcrypt', '3.1.11'
 gem 'babel-transpiler'
 gem 'bootsnap'
+gem 'bootstrap-datepicker-rails'
 # gem 'rake', '~> 12.1.0'
 
 # Use postgresql as the database for Active Record

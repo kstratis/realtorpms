@@ -89,10 +89,36 @@
               <%= property.text_field :size, placeholder: Property.human_attribute_name("size_placeholder"), class: 'glowing-border' %>
             </div>
 
+
+
+            <div class="form-group">
+
+              <%= property.label :floor do %>
+                <% content_tag :span do %>
+                  <i class="icon-vertical_arrows"></i>&nbsp; <%= t('activerecord.attributes.property.floor') %>
+                <% end %>
+              <% end %>
+
+              <%= react_component('SimpleSelect', props: {
+                  inputID: 'property_floor',
+                  inputName: 'property[floor]',
+                  formID: 'new_property',
+                  className: 'simple-select',
+                  options: Property.floors.keys.collect {|floor| {label: Property.human_enum_name(:floor, floor), value: floor}} + (1..50).collect {|floor| {label: floor, value: floor}},
+                  # options: Property.propertytypes.keys.collect { |propertytype| { label: Property.human_enum_name(:propertytype, propertytype), value: propertytype} },
+                  # options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
+                  searchable: true,
+                  soloMode: true,
+                  i18n: {
+                      select: t('js.components.select'),
+                  }
+              }, prerender: false) %>
+            </div>
+
             <div class="form-group">
 
               <%= property.label :construction do %>
-                <% content_tag :span  do %>
+                <% content_tag :span do %>
                   <i class="icon-construction2"></i>&nbsp; <%= t('activerecord.attributes.property.construction') %>
                 <% end %>
               <% end %>
@@ -110,9 +136,38 @@
                   }
               }, prerender: false) %>
             </div>
+
+            <div class="form-group">
+              <%= property.label :levels do %>
+                <%= content_tag :span, fa_icon('building fw', text: t('activerecord.attributes.property.levels')) %>
+              <% end %>
+              <%= react_component('SimpleSelect', props: {
+                  inputID: 'property_levels',
+                  inputName: 'property[levels]',
+                  formID: 'new_property',
+                  className: 'simple-select',
+                  options: (1..10).collect {|level| {label: level, value: level}},
+                  soloMode: true,
+                  searchable: false,
+                  i18n: {
+                      select: t('js.components.select'),
+                  }
+              }, prerender: false) %>
+              <%#= property.text_field :levels, placeholder: Property.human_attribute_name("levels_placeholder"), class: 'glowing-border' %>
+              <%#= inline_error @property.owner, :last_name, 'Last name'%>
+            </div>
+
+
+
             <!-- This guards against unwanted ujs form submission -->
             <input id="preventformsubmit" type="hidden">
             <input id="property_images" class="emitters form-control" type="hidden" name="property[images][]">
+            <%= content_tag :div, class: "", id: "current_locale", data: {
+                i18n: {
+                    locale: I18n.locale,
+                }
+            } do %>
+            <% end %>
             <%= content_tag :div, class: "", id: "jqvalidator", data: {
                 i18n: {
                     jqvalidator: t('js.jqvalidator'),
@@ -142,11 +197,37 @@
               <%#= inline_error @property.owner, :last_name, 'Last name'%>
             </div>
 
+
+
+
+
             <div class="form-group">
               <%= property.label :price do %>
                 <%= content_tag :span, fa_icon('eur fw', text: t('activerecord.attributes.property.price')) %>
               <% end %>
               <%= property.text_field :price, placeholder: Property.human_attribute_name("price_placeholder"), class: 'glowing-border' %>
+              <%#= inline_error @property.owner, :last_name, 'Last name'%>
+            </div>
+
+            <div class="form-group">
+              <%= property.label :availability do %>
+                <%= content_tag :span, fa_icon('calendar fw', text: t('activerecord.attributes.property.availability')) %>
+              <% end %>
+              <%= property.text_field :availability, placeholder: Property.human_attribute_name("availability_placeholder"), class: 'glowing-border datepicker' %>
+
+              <%#= react_component('Dates', props: {
+                  inputID: 'property_availability',
+                  inputName: 'property[availability]',
+                  formID: 'new_property',
+                  className: 'dates',
+                  # options: (1..10).collect {|level| {label: level, value: level}},
+                  # soloMode: true,
+                  # searchable: false,
+                  i18n: {
+                      select: t('js.components.select'),
+                  }
+              }, prerender: false) %>
+              <%#= property.text_field :levels, placeholder: Property.human_attribute_name("levels_placeholder"), class: 'glowing-border' %>
               <%#= inline_error @property.owner, :last_name, 'Last name'%>
             </div>
 

@@ -37,11 +37,20 @@ en:
         bathrooms_placeholder: "i.e. 2"
         construction: "Construction"
         location: "Location"
+        floor: "Floor"
+        levels: "Levels"
+        availability: "Availability"
+        availability_placeholder: "Pick a date"
         enums:
           businesstype:
             sell: "Sell"
             rent: "Rent"
             sell_rent: "Sell & Rent"
+          floor:
+            basement: "Basement"
+            semi_basement: "Semi-basement"
+            ground_floor: "Ground floor"
+            mezzanine: "Mezzanine"
           category:
             residential: "Residential"
             commercial: "Commercial"
