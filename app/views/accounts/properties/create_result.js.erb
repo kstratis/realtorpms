@@ -1,4 +1,3 @@
-console.log('running singular');
 $('.pr-form-container').fadeOut('fast', function () {
   var myblock = $("<%= escape_javascript(@property.errors.empty? ? render('created') : render('not_created'))%>").hide();
   $(this).replaceWith(myblock);
