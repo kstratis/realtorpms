@@ -11,11 +11,12 @@
 // about supported directives.
 //
 
-//= require jquery2
+//= require jquery3
 //= require jquery_ujs
 //= require turbolinks
 //= require turbolinks_transitions
 //= require turbolinks_flash
+//= require popper
 //= require bootstrap-sprockets
 //= require sweetalert2
 //= require sweet-alert2-rails
