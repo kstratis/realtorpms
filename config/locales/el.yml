@@ -41,6 +41,7 @@ el:
         levels: "Επίπεδα"
         availability: "Διαθεσιμότητα"
         availability_placeholder: "Επιλέξτε ημερομηνία"
+
         enums:
           businesstype:
             sell: "Πώληση"
