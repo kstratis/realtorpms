@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 describe 'Logging in the system without subdomain in url' do
-  let(:account) { FactoryGirl.create(:account, subdomain: 'test1') }
-  let(:account2) { FactoryGirl.create(:account2, subdomain: 'test2') }
-  let(:account3) { FactoryGirl.create(:account3, subdomain: 'test3') }
-  let(:userExternal) { FactoryGirl.create(:userExternal) }
+  let(:account) { FactoryBot.create(:account, subdomain: 'test1') }
+  let(:account2) { FactoryBot.create(:account2, subdomain: 'test2') }
+  let(:account3) { FactoryBot.create(:account3, subdomain: 'test3') }
+  let(:userExternal) { FactoryBot.create(:userExternal) }
 
   context 'as a user' do
 

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'Inviting users' do
-  let(:account) { FactoryGirl.create(:account) }
+  let(:account) { FactoryBot.create(:account) }
   before do
     set_subdomain(account.subdomain)
     visit 'http://lvh.me/login'

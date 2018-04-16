@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :account do
     subdomain 'test1'
     association :owner, :factory => :owner
@@ -16,7 +16,7 @@ FactoryGirl.define do
 end
 
 
-# FactoryGirl.define do
+# FactoryBot.define do
 #   factory :account do
 #     subdomain 'reddomain'
 #     # sequence(:name) { |n| "Test Project #{n}" }

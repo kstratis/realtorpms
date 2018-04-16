@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'Account permissions' do
-  let(:account) { FactoryGirl.create(:account) }
+  let(:account) { FactoryBot.create(:account) }
   before do
     set_subdomain(account.subdomain)
   end
@@ -28,8 +28,8 @@ feature 'Account permissions' do
   end
 
   context 'a user of the account' do
-    # user2 = FactoryGirl.create(:user2)
-    let(:user2) { FactoryGirl.create(:user2) }
+    # user2 = FactoryBot.create(:user2)
+    let(:user2) { FactoryBot.create(:user2) }
     before do
       account.users << user2
       # save_and_open_page
@@ -47,7 +47,7 @@ feature 'Account permissions' do
   end
 
   context 'an unauthorized user' do
-    let(:user3) { FactoryGirl.create(:user3) }
+    let(:user3) { FactoryBot.create(:user3) }
     before do
       visit login_url
       fill_in 'Email', with: user3.email

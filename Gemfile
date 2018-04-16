@@ -14,30 +14,30 @@ gem 'bcrypt', '3.1.11'
 gem 'babel-transpiler'
 gem 'bootsnap'
 gem 'bootstrap-datepicker-rails'
-# gem 'rake', '~> 12.1.0'
+gem 'rake', '~> 12.3.1'
 
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 0.21'
+gem 'pg', '~> 1.0.0'
 # Use Puma as the app server
-gem 'puma', '~> 3.10'
+gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '~> 3.2'
+gem 'uglifier', '~> 4.1'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5.0.0'
+gem 'turbolinks', '~> 5.1.1'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 
 gem 'jquery-rails', '~> 4.3.1'
 
-gem 'faker', '~> 1.8.4'
+gem 'faker', '~> 1.8.7'
 
 gem 'will_paginate', '~> 3.1.6'
 
@@ -53,11 +53,11 @@ gem 'rails_12factor'
 
 gem 'font-awesome-rails'
 
-gem 'react_on_rails', '10.1.3'
+gem 'react_on_rails', '10.1.4'
 
 gem 'webpacker', '~> 3.4.3'
 
-gem "roo", "~> 2.7.0"
+gem "roo", "~> 2.7.1"
 
 gem "aws-sdk-s3", require: false
 
@@ -70,14 +70,14 @@ gem "aws-sdk-s3", require: false
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  gem 'factory_girl', '4.8.1'
-  gem 'rspec-rails', '3.6.1'
+  gem 'factory_bot'
+  gem 'rspec-rails', '3.7.2'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '2.15.3'
+  gem 'capybara'
   gem 'selenium-webdriver'
-  gem 'email_spec', '2.1.1'
+  gem 'email_spec', '2.2.0'
   gem 'phantomjs'
   gem 'poltergeist'
   gem 'database_cleaner'

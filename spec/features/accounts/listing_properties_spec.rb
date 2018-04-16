@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'Listing users', js: true do
-  let(:account) { FactoryGirl.create(:account) }
+  let(:account) { FactoryBot.create(:account) }
 
   context "as the account's owner" do
     before do

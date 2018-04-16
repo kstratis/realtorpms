@@ -6,15 +6,15 @@ require 'rails_helper'
 # with a very specific timing to test against them.
 
 feature 'Listing resources', js: true do
-  let(:account) { FactoryGirl.create(:account) }
-  let(:account2) { FactoryGirl.create(:account2, subdomain: 'test2') }
+  let(:account) { FactoryBot.create(:account) }
+  let(:account2) { FactoryBot.create(:account2, subdomain: 'test2') }
   # This is 5 pages of users (10 on each) with a 6th one added for the owner
-  let(:userList) { FactoryGirl.create_list(:usersequence, 50) }
+  let(:userList) { FactoryBot.create_list(:usersequence, 50) }
   # the propertyList sequence will  continue in parallel even if not user.
   # This means that for the first +it+ 0-50 property ids will be given. In the
   # third +it+ where we actually need the property list the ids range will have reached
   # the 100-150.
-  let(:propertyList) { FactoryGirl.create_list(:propertysequence, 50) }
+  let(:propertyList) { FactoryBot.create_list(:propertysequence, 50) }
 
   # This before block runs before each and every +it+ therefore if we have say 3 +it+
   # tests the user id will reach 150 (thanks to +userList.map { |user| account.users << user}+)

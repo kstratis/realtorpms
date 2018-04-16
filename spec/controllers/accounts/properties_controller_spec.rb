@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Accounts::PropertiesController do
   before do
     # Needs to exist (and have called Resque.enqueue) before we trigger the post-receive hook
-    @book = FactoryGirl.create(:property)
+    @book = FactoryBot.create(:property)
   end
 
   it "post-receive hooks" do
