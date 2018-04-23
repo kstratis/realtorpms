@@ -23,6 +23,16 @@ el:
         password_confirmation: "Επανάληψη νέου κωδικού"
         password_confirmation_placeholder: "Πληκτρολογήστε ξανά τον νέο σας κωδικό"
         remember_me: "Να με θυμάσαι σε αυτήν τη συσκευή"
+      extra:
+        neoclassical: "Νεοκλασικό"
+        protected_pr: "Διατηρητέο"
+        loft_pr: "Loft"
+        traditional: "Παραδοσιακό"
+        villa_pr: "Βίλα"
+        stone: "Πέτρινο"
+        studio_pr: "Studio"
+        prefabricated_pr: "Λυόμενο"
+        precast_pr: "Προκατασκευή"
       property:
         description: "Περιγραφή"
         businesstype: "Τύπος καταχώρησης"
@@ -41,8 +51,6 @@ el:
         levels: "Επίπεδα"
         availability: "Διαθεσιμότητα"
         availability_placeholder: "Επιλέξτε ημερομηνία"
-
-
         enums:
           businesstype:
             sell: "Πώληση"

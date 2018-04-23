@@ -251,61 +251,21 @@
 
             <hr />
             <div class="form-group">
-              <label class="col-xs-12 control-label">Τύπος ακινήτου</label>
+              <label class="col-xs-12 control-label">Extras</label>
               <div class="col-xs-12">
-                <%#= property.check_box :subtype, Property.subtypes.keys.collect { |subtype| [ Property.human_enum_name(:subtype, subtype), subtype ] }, {},  class: 'form-control glowing-border-select' %>
-
-                <%#= property.text_field :last_name %>
-<!--                <div class="checkbox pr-checkbox"><label><%#= property.check_box("eula", "accepted", { class: 'eula_check' }, "yes", "no") %></label></div>-->
-
-<!--                <div class="checkbox pr-checkbox"><label><input name="property[yolo]" type="checkbox" /> <%#= t 'activerecord.attributes.property.enums.type.neoclassical' %></label></div>-->
-
-                  <%# puts key %>
-                  <%#= property.check_box  %>
-                  <%#= check_box_tag :subtypes %>
-
-                  <%#= puts subtype %>
-<!--                  <%#= property.label key %><br/>-->
-                <%# Property.subtypes.each do |key, val| %>
-                  <%#= check_box_tag :subtype, { multiple: true }, key, nil %>
-                <%# end %>
-
-                  <%#= property.check_box :subtype, { multiple: true }, 'yolo', nil %>
-                  <%#= property.check_box :subtype, { multiple: true }, 'look', nil %>
-                  <%#= property.check_box :subtype, { multiple: true }, 'yo', nil %>
-
-
-                <%#= property.collection_check_boxes :expertise_ids, Property.subtypes, :id, :name do |b| %>
-<!--                  <div class="collection-check-box">-->
-                    <%#= b.check_box %>
-                    <%#= b.label %>
-<!--                  </div>-->
-                <%# end %>
-
-
-
-<!--                <div class="checkbox pr-checkbox"><label><input type="checkbox" /> <%#= t 'activerecord.attributes.property.enums.type.protected_property' %></label></div>-->
-<!--                <div class="checkbox pr-checkbox"><label><input type="checkbox" /> <%#= t 'activerecord.attributes.property.enums.type.loft' %></label></div>-->
-<!--                <div class="checkbox pr-checkbox"><label><input type="checkbox" /> <%#= t 'activerecord.attributes.property.enums.type.traditional' %></label></div>-->
-<!--                <div class="checkbox pr-checkbox"><label><input type="checkbox" /> <%#= t 'activerecord.attributes.property.enums.type.villa' %></label></div>-->
-<!--                <div class="checkbox pr-checkbox"><label><input type="checkbox" /> <%#= t 'activerecord.attributes.property.enums.type.stone' %></label></div>-->
-<!--                <div class="checkbox pr-checkbox"><label><input type="checkbox" /> <%#= t 'activerecord.attributes.property.enums.type.studio' %></label></div>-->
-<!--                <div class="checkbox pr-checkbox"><label><input type="checkbox" /> <%#= t 'activerecord.attributes.property.enums.type.prefabricated' %></label></div>-->
-<!--                <div class="checkbox pr-checkbox"><label><input type="checkbox" /> <%#= t 'activerecord.attributes.property.enums.type.precast' %></label></div>-->
+                <%= property.collection_check_boxes :extra_ids, Extra.all, :id, :name do |b| %>
+                  <div class="checkbox pr-checkbox">
+                    <h4>'uolo'</h4>
+                    <%#= b.label do %>
+                      <%#= b.check_box + t("activerecord.attributes.extra.#{b.text}") %>
+                    <%# end %>
+                  </div>
+                <% end %>
               </div>
             </div>
 
-
-
-
-
-
-
-
-
           </div>
         </div>
-
 
       <% end %>
 

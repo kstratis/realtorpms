@@ -4,6 +4,7 @@ class Property < ApplicationRecord
   belongs_to :location, optional: true
   has_many :assignments
   has_many_attached :images
+  has_and_belongs_to_many :extras
   # https://stackoverflow.com/a/38845388/178728
   has_many :users, -> { distinct }, through: :assignments, dependent: :destroy
   attr_accessor :locationid
