@@ -92,14 +92,14 @@ el:
             other_various: "Λοιπές κατηγορίες ακινήτων"
           type:
             neoclassical: "Νεοκλασικό"
-            protected_property: "Διατηρητέο"
-            loft: "Loft"
+            protected_pr: "Διατηρητέο"
+            loft_pr: "Loft"
             traditional: "Παραδοσιακό"
-            villa: "Βίλα"
+            villa_pr: "Βίλα"
             stone: "Πέτρινο"
-            studio: "Studio"
-            prefabricated: "Λυόμενο"
-            precast: "Προκατασκευή"
+            studio_pr: "Studio"
+            prefabricated_pr: "Λυόμενο"
+            precast_pr: "Προκατασκευή"
     errors:
       messages:
         record_invalid: ! 'Η επικύρωση απέτυχε: %{errors}'
