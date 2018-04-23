@@ -257,9 +257,20 @@
             <div class="form-group">
               <label class="col-xs-12 control-label">Τύπος ακινήτου</label>
               <div class="col-xs-12">
-                <div class="checkbox pr-checkbox"><label><input type="checkbox" /> Label text</label></div>
-                <div class="checkbox pr-checkbox"><label><input type="checkbox" /> Label text</label></div>
-                <div class="checkbox pr-checkbox"><label><input type="checkbox" /> Label text</label></div>
+
+
+                <%= property.text_field :last_name %>
+<!--                <div class="checkbox pr-checkbox"><label><%#= property.check_box("eula", "accepted", { class: 'eula_check' }, "yes", "no") %></label></div>-->
+
+<!--                <div class="checkbox pr-checkbox"><label><input name="property[yolo]" type="checkbox" /> <%#= t 'activerecord.attributes.property.enums.type.neoclassical' %></label></div>-->
+                <div class="checkbox pr-checkbox"><label><input type="checkbox" /> <%= t 'activerecord.attributes.property.enums.type.protected_property' %></label></div>
+                <div class="checkbox pr-checkbox"><label><input type="checkbox" /> <%= t 'activerecord.attributes.property.enums.type.loft' %></label></div>
+                <div class="checkbox pr-checkbox"><label><input type="checkbox" /> <%= t 'activerecord.attributes.property.enums.type.traditional' %></label></div>
+                <div class="checkbox pr-checkbox"><label><input type="checkbox" /> <%= t 'activerecord.attributes.property.enums.type.villa' %></label></div>
+                <div class="checkbox pr-checkbox"><label><input type="checkbox" /> <%= t 'activerecord.attributes.property.enums.type.stone' %></label></div>
+                <div class="checkbox pr-checkbox"><label><input type="checkbox" /> <%= t 'activerecord.attributes.property.enums.type.studio' %></label></div>
+                <div class="checkbox pr-checkbox"><label><input type="checkbox" /> <%= t 'activerecord.attributes.property.enums.type.prefabricated' %></label></div>
+                <div class="checkbox pr-checkbox"><label><input type="checkbox" /> <%= t 'activerecord.attributes.property.enums.type.precast' %></label></div>
               </div>
             </div>
 
