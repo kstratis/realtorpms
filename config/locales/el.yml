@@ -41,8 +41,8 @@ el:
           prive: "Αυτόνομη"
         orientation:
           title: "Προσανατολισμός"
-          front_facing: "Προσόψεως"
-          bright: "Διαμπερές"
+          facade: "Προσόψεως"
+          through_lot: "Dual aspect"
           corner: "Γωνιακό"
           internal: "Εσωτερικό"
         view:
@@ -61,7 +61,7 @@ el:
         clima: "Κλιματισμός"
         secure_door: "Πόρτα ασφαλείας"
         pool: "Πισίνα"
-        utility_bill_free: "Χωρίς κοινόχρηστα"
+        maintenance_bill_free: "Χωρίς κοινόχρηστα"
         professional_use: "Κατάλληλο για επαγγελματική χρήση"
         storage: "Αποθήκη"
       property:

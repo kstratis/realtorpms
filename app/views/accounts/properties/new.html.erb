@@ -1,9 +1,7 @@
 <% provide(:title, 'Add property') %>
 <div class="pr-signup-container pr-container">
 
-  <i class="pr-icon sm add-property-colored"></i>
-  <span class="title"><%= t 'properties.new.heading' %></span>
-
+  <%= render partial: 'shared/header_strip', locals: {title: 'properties.new.heading', icon: 'add-property-colored' } %>
 
   <div class="row">
 
