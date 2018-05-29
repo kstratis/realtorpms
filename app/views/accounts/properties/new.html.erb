@@ -19,35 +19,35 @@
             <div class="form-group">
               <%= property.label :businesstype %>
               <%= react_component('SimpleSelect', props: {
-                    inputID: 'property_businesstype',
-                    inputName: 'property[businesstype]',
-                    formID: 'new_property',
-                    className: 'simple-select',
-                    options: Property.businesstypes.keys.collect { |businesstype| { label: Property.human_enum_name(:businesstype, businesstype), value: businesstype} },
-                    soloMode: true,
-                    searchable: false,
-                    i18n: {
-                        select: t('js.components.select'),
-                    }
-                }, prerender: false) %>
-            </div>
-
-            <!-- DependantSelect will generate the form-group div and label tags automatically (it's nested) -->
-            <%= react_component('DependantSelect', props: {
-                  className: 'simple-select-container',
-                  options: get_options,
+                  inputID: 'property_businesstype',
+                  inputName: 'property[businesstype]',
+                  formID: 'new_property',
+                  className: 'simple-select',
+                  options: Property.businesstypes.keys.collect {|businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype}},
+                  soloMode: true,
                   searchable: false,
-                  formdata: {
-                      formid: 'new_property',
-                      categoryid: 'property_category',
-                      categoryname: 'property[category]',
-                      subcategoryid: 'property_subcategory',
-                      subcategoryname: 'property[subcategory]',
-                  },
                   i18n: {
                       select: t('js.components.select'),
                   }
               }, prerender: false) %>
+            </div>
+
+            <!-- DependantSelect will generate the form-group div and label tags automatically (it's nested) -->
+            <%= react_component('DependantSelect', props: {
+                className: 'simple-select-container',
+                options: get_options,
+                searchable: false,
+                formdata: {
+                    formid: 'new_property',
+                    categoryid: 'property_category',
+                    categoryname: 'property[category]',
+                    subcategoryid: 'property_subcategory',
+                    subcategoryname: 'property[subcategory]',
+                },
+                i18n: {
+                    select: t('js.components.select'),
+                }
+            }, prerender: false) %>
 
 
             <div class="form-group">
@@ -70,15 +70,14 @@
             </div>
 
 
-              <!--<div class="form-group">-->
-              <%#= property.label :propertycategory %>
-              <!-- THIS ONE WAS THE ORIGINAL -->
-              <%#= property.select :propertytype, Property.propertytypes.keys, {}, class: 'form-control' %>
-              <!-- THIS ONE EVENTUALLY REPLACED IT -->
-              <%#= property.select :propertytype, Property.propertytypes.keys.collect { |propertytype| [ Property.human_enum_name(:propertytype, propertytype), propertytype ] }, {},  class: 'form-control glowing-border-select' %>
-              <!-- For using React select with jqueryvalidation plugin see this: -->
-              <!-- https://github.com/JedWatson/react-select/issues/1827#issuecomment-316768651 -->
-
+            <!--<div class="form-group">-->
+            <%#= property.label :propertycategory %>
+            <!-- THIS ONE WAS THE ORIGINAL -->
+            <%#= property.select :propertytype, Property.propertytypes.keys, {}, class: 'form-control' %>
+            <!-- THIS ONE EVENTUALLY REPLACED IT -->
+            <%#= property.select :propertytype, Property.propertytypes.keys.collect { |propertytype| [ Property.human_enum_name(:propertytype, propertytype), propertytype ] }, {},  class: 'form-control glowing-border-select' %>
+            <!-- For using React select with jqueryvalidation plugin see this: -->
+            <!-- https://github.com/JedWatson/react-select/issues/1827#issuecomment-316768651 -->
 
 
             <div class="form-group">
@@ -88,7 +87,6 @@
               <% end %>
               <%= property.text_field :size, placeholder: Property.human_attribute_name("size_placeholder"), class: 'glowing-border' %>
             </div>
-
 
 
             <div class="form-group">
@@ -158,7 +156,6 @@
             </div>
 
 
-
             <!-- This guards against unwanted ujs form submission -->
             <input id="preventformsubmit" type="hidden">
             <input id="property_images" class="emitters form-control" type="hidden" name="property[images][]">
@@ -224,7 +221,6 @@
             </div>
 
 
-
             <div class="form-group">
               <%= property.submit t('properties.new.add_button'), class: 'btn btn-primary' %>
               <%#= property.submit t('properties.new.add_button'), class: 'btn btn-primary', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Creating property..."} %>
@@ -235,35 +231,47 @@
 
 
           <div class="col-md-8 ">
-
-
             <div class="form-group">
               <%= content_tag :div, class: "", id: "uppy", data: {
                   i18n: {
-                    uppy: t('js.uppy'),
+                      uppy: t('js.uppy'),
                   },
                   uppy_url_listener: new_property_path
-                  } do %>
+              } do %>
               <% end %>
               <%#= property.label :size %>
               <%#= property.text_field :size, placeholder: Property.human_attribute_name("size_placeholder"), class: 'glowing-border' %>
             </div>
 
             <hr />
-            <div class="form-group">
-              <label class="col-xs-12 control-label">Extras</label>
-              <div class="col-xs-12">
-                <%= property.collection_check_boxes :extra_ids, Extra.all, :id, :name do |b| %>
-                  <div class="checkbox pr-checkbox">
-                    <h4>'uolo'</h4>
-                    <%#= b.label do %>
-                      <%#= b.check_box + t("activerecord.attributes.extra.#{b.text}") %>
-                    <%# end %>
+
+            <div class="checkbox-group1">
+            <% %w(housetype heating orientation view).each do |category| %>
+                <div class="form-group">
+                  <div class="col-xs-3">
+                    <label class="col-xs-12 control-label"><%= t("activerecord.attributes.extra.#{category}.title") %></label>
+                    <div class="col-xs-12">
+                      <%= property.collection_check_boxes :extra_ids, Extra.where(subtype: category), :id, :name do |b| %>
+                        <div class="checkbox pr-checkbox">
+                          <%= b.label do %>
+                            <%= b.check_box + t("activerecord.attributes.extra.#{category}.#{b.text}") %>
+                          <% end %>
+                        </div>
+                      <% end %>
+                    </div>
                   </div>
-                <% end %>
+                </div>
+            <% end %>
+
+              <div class="form-group">
+                <div class="col-xs-12">
+                  <label class="col-xs-12 control-label">asdasd</label>
+                  <%#= property.check_box "extra.parking" %>
+                </div>
               </div>
             </div>
 
+            <hr>
           </div>
         </div>
 

@@ -94,7 +94,12 @@ module Accounts
     # POST /properties.json
     def create
       puts 'INSIDE CREATE'
-      # puts property_params[:images]
+      # puts "-before-"
+      # puts property_params
+      # myhash = property_params
+      # myhash[:extra_ids] = myhash[:extra_ids].select { |element| element.present? }
+      # puts "-after-"
+      # puts myhash
       @property = Property.new(property_params)
       # When only having the associated object's id (location) and not the object itself,
       # look at the following link for a trick to bypass this. It involves form changes (id & name)
