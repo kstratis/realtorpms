@@ -1,5 +1,5 @@
 <% provide(:title, 'Add property') %>
-<div class="center pr-signup-container pr-container">
+<div class="pr-signup-container pr-container">
 
   <i class="pr-icon sm add-property-colored"></i>
   <span class="title"><%= t 'properties.new.heading' %></span>
@@ -245,18 +245,27 @@
 
             <hr />
 
-            <div class="checkbox-group1">
+            <div class="multivalue-checkboxes">
             <% %w(housetype heating orientation view).each do |category| %>
                 <div class="form-group">
                   <div class="col-xs-3">
                     <label class="col-xs-12 control-label"><%= t("activerecord.attributes.extra.#{category}.title") %></label>
                     <div class="col-xs-12">
                       <%= property.collection_check_boxes :extra_ids, Extra.where(subtype: category), :id, :name do |b| %>
-                        <div class="checkbox pr-checkbox">
-                          <%= b.label do %>
-                            <%= b.check_box + t("activerecord.attributes.extra.#{category}.#{b.text}") %>
+<!--                         stable-->
+<!--                        <div>-->
+<!--                          <label class="checkbox-inline" for="checkbox1">-->
+<!--                            <input type="checkbox" id="checkbox1" class="checkbox"/>Text hello-->
+<!--                          </label>-->
+<!--                        </div>-->
+                        <div>
+                          <%= b.label({class: 'checkbox-inline'}) do %>
+                            <div class="checkbox-holder">
+                              <%= b.check_box({class: 'checkbox'}) + t("activerecord.attributes.extra.#{category}.#{b.text}") %>
+                            </div>
                           <% end %>
                         </div>
+
                       <% end %>
                     </div>
                   </div>
@@ -271,7 +280,7 @@
               </div>
             </div>
 
-            <hr>
+
           </div>
         </div>
 

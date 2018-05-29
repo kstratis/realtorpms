@@ -148,5 +148,58 @@ form input, .simple-select {
 .uppy-Dashboard-inner{
   width: 100%;
   max-height: 400px !important;
+}
 
+//.checkbox-inline.no_indent,
+//.checkbox-inline.no_indent+.checkbox-inline.no_indent {
+//  margin-left: 0 !important;
+//  margin-right: 10px !important;
+//}
+//.checkbox-inline.no_indent:last-child {
+//  margin-right: 0 !important;
+//}
+
+.radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
+  margin-left: -40px !important;
+  //margin-right: 35px !important;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  .radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
+    margin-left: -25px !important;
+  }
+}
+
+//.checkbox-holder{
+//  overflow: hidden;
+//}
+
+//.form-checkbox{
+//  padding-left: 20px;
+//  margin: 15px 0;
+//  vertical-align: middle;
+
+  //padding-left: 20px;
+  //margin: 15px 0;
+  //margin-top: 15px;
+  //vertical-align: middle;
+//}
+
+//.form-checkbox input[type="checkbox"], .form-checkbox input[type="radio"] {
+//  float: left;
+//  margin: 5px 0 0 -20px;
+//  vertical-align: middle;
+//}
+//
+//input{
+//  overflow: visible;
+//}
+
+//.ccc{
+//  text-align: left !important;
+//}
+
+.checkbox-holder{
+  width: 25px;
+  white-space: nowrap;
+  overflow: visible;
 }
