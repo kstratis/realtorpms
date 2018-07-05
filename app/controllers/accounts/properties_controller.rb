@@ -27,7 +27,7 @@ module Accounts
       @properties.each do |property|
         hash = {
             id: property.id,
-
+            title: property.title,
             description: property.description,
             size: property.size,
             type: property.price,

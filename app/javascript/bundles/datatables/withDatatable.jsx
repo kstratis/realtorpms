@@ -73,7 +73,7 @@ function withDatatable(WrappedComponent) {
 
 
       // bind always returns a new function. This new function is important because without a reference to it
-      // we won't be able to remove it as a listener in componentWillUnmount leading us to memory leaks.
+      // we won't be able to remove it as a listener in componentWillUnmount leaving us with memory leaks.
       // https://gist.github.com/Restuta/e400a555ba24daa396cc
       this.bound_onHistoryButton = this.handleHistoryButton.bind(this);
       this.breakButtons = [];

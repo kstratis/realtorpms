@@ -22,10 +22,10 @@ const PropertiesList = ({handlePageClick, handleSort, handleAssign, advanceByTwo
               {dataset.map((entry) => (
                 <div className={'col-lg-3 col-md-4 col-xs-6 property-container'} key={entry.id}>
                   <div className={'property'}>
-                    <div><a href={entry['view_entity_path']}>{entry['description']}</a></div>
+                    <div><a href={entry['view_entity_path']}>{entry['title']}</a></div>
                     <div>{entry['size']}</div>
                     <div>{entry['price']}</div>
-                    <div>{'hello world'}</div>
+                    <div>{entry['description']}</div>
                     <div className={'col-md-12 col-sm-12 col-xs-12 card-controls-container'}>
                       <div className="btn-group btn-group-sm card-controls" role="group" aria-label="...">
                         <a className={'card-control-button btn btn-default'} onClick={() => this.simpleDialog.show()} role={'group'}><span><i className={'fa fa-eye fa-lg fa-fw '}></i></span></a>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_28_131014) do
+ActiveRecord::Schema.define(version: 2018_07_05_072607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -145,14 +145,16 @@ ActiveRecord::Schema.define(version: 2018_05_28_131014) do
     t.boolean "fireplace"
     t.integer "user_id"
     t.bigint "account_id"
-    t.integer "location_id"
     t.integer "category"
     t.integer "subcategory"
     t.integer "businesstype"
     t.integer "floor"
     t.integer "levels"
     t.datetime "availability"
+    t.bigint "location_id"
+    t.string "title"
     t.index ["account_id"], name: "index_properties_on_account_id"
+    t.index ["location_id"], name: "index_properties_on_location_id"
   end
 
   create_table "users", force: :cascade do |t|

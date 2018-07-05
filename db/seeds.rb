@@ -78,11 +78,11 @@ specialuser2 = User.create!(first_name: 'John',
 
 # Special bluedomain user
 specialuser3 = User.create!(first_name: 'Lakis',
-last_name: 'Gavalas',
-    email: 'lg@gmail.com',
-    password: 'abc123',
-    password_confirmation: 'abc123',
-    admin: false)
+                            last_name: 'Gavalas',
+                            email: 'lg@gmail.com',
+                            password: 'abc123',
+                            password_confirmation: 'abc123',
+                            admin: false)
 
 # ------------------------------------------------------------
 
@@ -98,7 +98,7 @@ bluedomain.users << specialuser3
   first_name = Faker::Name.first_name
 
   last_name = Faker::Name.last_name
-  email = "user-#{n+1}@gmail.com"
+  email = "user-#{n + 1}@gmail.com"
   password = 'abc123'
   user = User.create!(first_name: first_name,
                       last_name: last_name,
@@ -111,38 +111,34 @@ end
 smithuser = shakalaka.users.find_by(email: 'wm@gmail.com')
 
 20.times do |n|
-  description = Faker::HitchhikersGuideToTheGalaxy.location
-  size = Faker::Number.number(3)
-  price = Faker::Number.number(6)
   property = Property.create!(
+      title: Faker::SiliconValley.company,
+      description: Faker::SiliconValley.motto,
       businesstype: 'sell',
       category: 'residential',
       subcategory: 'apartment',
-      size: size,
-      price: price,
+      size: Faker::Number.number(3),
+      price: Faker::Number.number(6),
       account: shakalaka,
       location: l1
   )
-
   smithuser.properties << property
 end
 
 lguser = bluedomain.users.find_by(email: 'lg@gmail.com')
 
 5.times do |n|
-  description = Faker::HitchhikersGuideToTheGalaxy.location
-  size = Faker::Number.number(3)
-  price = Faker::Number.number(6)
   property = Property.create!(
+      title: Faker::ProgrammingLanguage.name,
+      description: Faker::ProgrammingLanguage.creator,
       businesstype: 'rent',
       category: 'residential',
       subcategory: 'apartment',
-      size: size,
-      price: price,
+      size: Faker::Number.number(3),
+      price: Faker::Number.number(6),
       account: shakalaka,
       location: l2
   )
-
   lguser.properties << property
 end
 

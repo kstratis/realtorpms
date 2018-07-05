@@ -30,7 +30,7 @@ class Property < ApplicationRecord
   #
   enum floor: [:basement, :semi_basement, :ground_floor, :mezzanine]
 
-  enum orientation: [:front_facing, :airy, :on_corner, :inwards_facing]
+  enum orientation: [:facade, :airy, :on_corner, :inwards_facing]
   enum view: [:sea, :mountain, :forest, :infinite]
   enum heating: [:central, :prive]
 
@@ -38,7 +38,7 @@ class Property < ApplicationRecord
   validates :businesstype, presence: true
   validates :category, presence: true
   validates :subcategory, presence: true
-  validates :locationid, presence: true
+  # validates :locationid, presence: true
   validates :size, numericality: { only_integer: true }, allow_blank: true
   validates :price, numericality: { only_integer: true }, allow_blank: true
   validates :bedrooms, numericality: { only_integer: true }, allow_blank: true

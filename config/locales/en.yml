@@ -42,7 +42,7 @@ en:
         orientation:
           title: "Orientation"
           facade: "Frontage lot"
-          throught_lot: "Dual-aspect lot"
+          through_lot: "Dual-aspect lot"
           corner: "Corner lot"
           internal: "Inwards facing lot"
         view:
