@@ -15,7 +15,7 @@ gem 'babel-transpiler'
 gem 'bootsnap'
 gem 'bootstrap-datepicker-rails'
 # gem 'rake', '~> 12.1.0'
-gem 'bootstrap', '~> 4.0.0'
+gem 'bootstrap', '~> 4.1.1'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.21'

@@ -1,113 +1,59 @@
-<div class="navbar navbar-fixed-top navbar-background-coloring">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle Navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <%= link_to 'Landia', account_root_path, id: 'logo', class: 'navbar-brand' %>
-      <div class="account-info">
-      <span title="Current subdomain" class="label navbar-tag-usertype"><%= fa_icon('database fw', text: current_account.subdomain) %></span>
-        <% if logged_in? %>
-        <% if owner?  %>
-          <span title="User type" class="label navbar-tag-usertype"><%= fa_icon('id-badge fw', text: 'ACCOUNT OWNER') %></span>
-        <% elsif current_user.admin? %>
-          <span title="User type" class="label navbar-tag-usertype"><%= fa_icon('id-badge fw', text: 'ADMINISTRATOR') %></span>
-        <% else %>
-          <span title="User type" class="label navbar-tag-usertype"><%= fa_icon('id-badge fw', text: 'USER') %></span>
-        <% end %>
-          <% end %>
-      </div>
-    </div> <!-- end div class="navbar-header" -->
+<div>
 
-    <div class="collapse navbar-collapse navbar-right">
-      <ul class="nav navbar-nav ">
-        <!-- Logged in is defined in the sessions_helper and is automatically available in all views.
-             However we have also made it available in all controllers by including in the "master"
-             controller +application_controller+ -->
-        <% if logged_in? %>
-            <%#= link_to "Signed is as #{current_user.email}", current_user, class: 'email-entry' %>
-            <!--<li><span>Signed is as <%#=current_user.email%></span></li>-->
-            <!--<li><i class="pr-icon navbar-offset css account-switch-navbar"></i></li>-->
-            <% if current_user.get_account_count > 1 %>
-            <li>
-              <%= link_to account_list_path, class: 'navbar-offset', title: 'Switch accounts' do %>
-                <%= content_tag :i, '', :class => 'pr-icon css account-switch-navbar' %>
-              <% end %>
-            </li>
-            <% end %>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-
-
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <!--Account <b class="caret"></b>-->
-
-                  <%= gravatar_for current_user, size: 64, classname: 'avatar-outline' %>
-                <span class="">&nbsp;<%= current_user.first_name %>&nbsp;</span><span class="caret"></span>
-
-                <!--<div class="user_info_avatar">-->
-
-                <!--</div>-->
-              </a>
-              <ul class="dropdown-menu">
-
-                <li>
-
-                  <%= link_to edit_user_path(current_user), class: 'entry' do %>
-                    <%= content_tag :span, fa_icon('id-card-o lg fw', text: t('navbar.profile')) %>
-                  <% end %>
-                </li>
-
-                <li>
-
-                  <%= link_to edit_user_path(current_user), class: 'entry' do %>
-                    <%= content_tag :span, fa_icon('credit-card lg fw', text: t('navbar.account')) %>
-                  <% end %>
-                </li>
-
-                <li>
-                  <%= link_to edit_user_path(current_user) do %>
-                      <%= content_tag :span, fa_icon('envelope-o lg fw', text: t('navbar.messages')) %>
-                  <% end %>
-                </li>
-
-                <li class="divider"></li>
-
-                <li>
-                  <%= link_to logout_path, method: :delete do %>
-                      <%= content_tag :span, fa_icon('sign-out lg fw', text: t('navbar.logout')) %>
-                  <% end %>
-                </li>
-              </ul>
-            </li>
-        <% else %>
-            <li><%= link_to 'Log in', login_path %></li>
-        <% end %>
-        <li><%#= link_to 'Log in', '#' %></li>
-        <!--<li id="ministyle"><a href="http://localhost:3000/mini_pages/dashboard">Special Item</a></li>-->
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
       </ul>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown button
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
       </div>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
 
-  </div>
+
+
 </div>
 <script>
-    var dropdownEl = $('.dropdown');
-    // Add slideDown animation to Bootstrap dropdown when expanding.
-    dropdownEl.on('show.bs.dropdown', function() {
-        $(this).find('.dropdown-menu').first().stop(true, true).slideDown(150);
-    });
+  var dropdownEl = $('.dropdown');
+  // Add slideDown animation to Bootstrap dropdown when expanding.
+  dropdownEl.on('show.bs.dropdown', function () {
+    // $(this).find('.dropdown-menu').first().stop(true, true).slideDown(150);
+    $(this).find('.dropdown-menu').addClass('animated fadeIn -webkit-animation-duration: 1s;');
+  });
 
-    // Add slideUp animation to Bootstrap dropdown when collapsing.
-    dropdownEl.on('hide.bs.dropdown', function() {
-        $(this).find('.dropdown-menu').first().stop(true, true).slideUp(150);
-    });
+  // Add slideUp animation to Bootstrap dropdown when collapsing.
+  dropdownEl.on('hide.bs.dropdown', function () {
+    $(this).find('.dropdown-menu').first().stop(true, true).slideUp(150);
+  });
 </script>
 <!--<div>-->
-  <%#= <div id="mini_pages"> %>
+<%#= <div id="mini_pages"> %>
 
-    <%#= content_for?(:mini_pages) ? yield(:mini_pages) : yield %>
+<%#= content_for?(:mini_pages) ? yield(:mini_pages) : yield %>
 <%#= </div> %>
 <!--</div>-->

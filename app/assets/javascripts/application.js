@@ -17,7 +17,7 @@
 //= require turbolinks_transitions
 //= require turbolinks_flash
 //= require popper
-//= require bootstrap-sprockets
+//= require bootstrap
 //= require sweetalert2
 //= require sweet-alert2-rails
 //= require jquery.validate
