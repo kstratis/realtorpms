@@ -74,7 +74,7 @@
                   <% end %>
                 </li>
 
-                <li class="divider"></li>
+                <li class="divider"> </li>
 
                 <li>
                   <%= link_to logout_path, method: :delete do %>
@@ -93,6 +93,7 @@
 
   </div>
 </div>
+</div>
 <script>
     var dropdownEl = $('.dropdown');
     // Add slideDown animation to Bootstrap dropdown when expanding.
@@ -105,9 +106,3 @@
         $(this).find('.dropdown-menu').first().stop(true, true).slideUp(150);
     });
 </script>
-<!--<div>-->
-  <%#= <div id="mini_pages"> %>
-
-    <%#= content_for?(:mini_pages) ? yield(:mini_pages) : yield %>
-<%#= </div> %>
-<!--</div>-->
