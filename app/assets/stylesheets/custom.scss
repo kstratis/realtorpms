@@ -154,7 +154,8 @@ ul.nav.navbar-nav > li > a{
 #sidebar {
   padding: 50px 0 0 0;
   border-color: transparent;
-  background: #182359;
+  //background: #182359;
+  background: #f8faff;
   //background: #232c37;
 }
 
@@ -172,14 +173,16 @@ li.side-menu-entry > a.entry-anchor-wrapper{
   padding: 10px 5px 5px 5px;
   text-align: center;
   font-size: 14px;
-  color: #99b2cb;
+  color: #28313b;
+  //color: #99b2cb;
   // This is for the left strip
   /* --------------- */
   &:before{
     content: "";
     position: absolute;
     z-index: -1;
-    background: #182359;
+    background: #f8faff;
+    //background: #182359;
     //background: #232c37;
     left: 2px;
     top: 0;
@@ -215,7 +218,7 @@ li.side-menu-entry > a.entry-anchor-wrapper{
   //}
   /* --------------- */
   &:hover{
-    color: #ffffff;
+    //color: #ffffff;
     background: #03A9F4;
   }
 }

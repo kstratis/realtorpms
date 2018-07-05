@@ -5,18 +5,13 @@ const Search = ({searchInput, handleSearchInput, i18n}) => {
 
   return (
     <div className="col-md-6 col-md-offset-3">
-      <div className="input-group user-search">
+      <div className="user-search">
         <input type="text"
-               className="form-control input-lg glowing-border"
+               className="input-lg glowing-border"
                placeholder={i18n['search']['placeholder']}
                aria-describedby="basic-addon1"
                value={searchInput}
                onChange={handleSearchInput} />
-        <span className="input-group-btn">
-          <button className="btn btn-primary btn-custom" type="button">
-            <i className="glyphicon glyphicon-search"> </i>
-          </button>
-        </span>
       </div>
     </div>
   );

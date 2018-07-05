@@ -8,21 +8,21 @@
         <span class="icon-bar"></span>
       </button>
       <%= link_to 'Landia', account_root_path, id: 'logo', class: 'navbar-brand' %>
-      <div class="account-info">
-      <span title="Current subdomain" class="label navbar-tag-usertype"><%= fa_icon('database fw', text: current_account.subdomain) %></span>
-        <% if logged_in? %>
-        <% if owner?  %>
-          <span title="User type" class="label navbar-tag-usertype"><%= fa_icon('id-badge fw', text: 'ACCOUNT OWNER') %></span>
-        <% elsif current_user.admin? %>
-          <span title="User type" class="label navbar-tag-usertype"><%= fa_icon('id-badge fw', text: 'ADMINISTRATOR') %></span>
-        <% else %>
-          <span title="User type" class="label navbar-tag-usertype"><%= fa_icon('id-badge fw', text: 'USER') %></span>
-        <% end %>
-          <% end %>
-      </div>
-    </div> <!-- end div class="navbar-header" -->
+<!--      <div class="account-info">-->
+<!--      <span title="Current subdomain" class="label navbar-tag-usertype"><%#= fa_icon('database fw', text: current_account.subdomain) %></span>-->
+        <%# if logged_in? %>
+        <%# if owner?  %>
+<!--          <span title="User type" class="label navbar-tag-usertype"><%#= fa_icon('id-badge fw', text: 'ACCOUNT OWNER') %></span>-->
+        <%# elsif current_user.admin? %>
+<!--          <span title="User type" class="label navbar-tag-usertype"><%#= fa_icon('id-badge fw', text: 'ADMINISTRATOR') %></span>-->
+        <%# else %>
+<!--          <span title="User type" class="label navbar-tag-usertype"><%#= fa_icon('id-badge fw', text: 'USER') %></span>-->
+        <%# end %>
+          <%# end %>
+<!--      </div>-->
+   <!-- </div> --> <!-- end div class="navbar-header" -->
 
-    <div class="collapse navbar-collapse navbar-right">
+    <div class="collapse navbar-collapse navbar-right pull-right">
       <ul class="nav navbar-nav ">
         <!-- Logged in is defined in the sessions_helper and is automatically available in all views.
              However we have also made it available in all controllers by including in the "master"
