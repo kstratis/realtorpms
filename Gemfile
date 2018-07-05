@@ -9,9 +9,12 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.0'
 # gem 'rails', :git => 'https://github.com/rails/rails'
-gem 'bootstrap-sass', '3.3.7'
+# gem 'bootstrap-sass', '3.3.7'
 gem 'bcrypt', '3.1.11'
 gem 'babel-transpiler'
+
+gem 'bootstrap', '~> 4.1.1'
+
 gem 'bootsnap'
 gem 'bootstrap-datepicker-rails'
 gem 'rake', '~> 12.3.1'
@@ -35,7 +38,7 @@ gem 'turbolinks', '~> 5.1.1'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 
-gem 'jquery-rails', '~> 4.3.1'
+gem 'jquery-rails', '~> 4.3.3'
 
 gem 'faker', '~> 1.8.7'
 
@@ -53,9 +56,9 @@ gem 'rails_12factor'
 
 gem 'font-awesome-rails'
 
-gem 'react_on_rails', '10.1.4'
+gem 'react_on_rails', '11.0.9'
 
-gem 'webpacker', '~> 3.4.3'
+gem 'webpacker', '~> 3.5.3'
 
 gem "roo", "~> 2.7.1"
 
