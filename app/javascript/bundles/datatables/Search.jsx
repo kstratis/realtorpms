@@ -4,12 +4,13 @@ import React from 'react';
 const Search = ({searchInput, handleSearchInput, i18n}) => {
 
   return (
-    <div className="col-md-6 col-md-offset-3">
-      <div className="user-search">
-        <input type="text"
-               className="input-lg glowing-border"
+    <div className="col-md-6 offset-md-3">
+      <div className="user-search justify-content-center flex-fill">
+        <input type="search"
+               className="form-control"
                placeholder={i18n['search']['placeholder']}
-               aria-describedby="basic-addon1"
+               aria-describedby="Client search"
+               aria-label="Client search"
                value={searchInput}
                onChange={handleSearchInput} />
       </div>

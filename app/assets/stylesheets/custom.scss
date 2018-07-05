@@ -1,6 +1,6 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
-@import "common-mixins";
+//@import "bootstrap-sprockets";
+//@import "bootstrap";
+//@import "common-mixins";
 
 $gray-medium-light: #eaeaea;
 //@mixin inline-svg($color, $svg-content) {
@@ -495,4 +495,8 @@ label{
 .pr-checkbox input{
   cursor: pointer;
   //text-align: left;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: searchfield-cancel-button;
 }
