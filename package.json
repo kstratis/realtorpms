@@ -18,6 +18,7 @@
     "react-select": "^1.2.1",
     "react-skylight": "^0.5.1",
     "spark-md5": "^3.0.0",
+    "stacked-menu": "^1.1.9",
     "uppy": "^0.23.3",
     "url-search-params": "^0.10.0"
   },

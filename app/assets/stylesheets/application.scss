@@ -13,9 +13,9 @@
 */
 
 @import "bootstrap";
+@import "bootstrap/variable-overrides";
+@import "bootstrap/custom";
+@import "components/components";
+@import "components/variables";
 @import "./*";
 @import "animate";
-
-input[type="search"]::-webkit-search-cancel-button {
-  -webkit-appearance: searchfield-cancel-button;
-}

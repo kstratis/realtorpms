@@ -26,7 +26,9 @@
          It uses postcss to load the file. Check .postcssrc.yml -->
     <%= stylesheet_pack_tag 'stylesheets/styles' %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
     <link rel="stylesheet" href="https://i.icomoon.io/public/temp/11ed69058d/Landia/style.css">
+
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'components-bundle' %>
     <%= javascript_pack_tag 'application' %>
@@ -35,6 +37,9 @@
     <%= render 'layouts/shim' %>
   </head>
   <body>
+
+  <!-- .app -->
+  <div class="app">
 
     <%= render 'layouts/header' %>
 
@@ -58,6 +63,10 @@
         </div>
       </div>
     </div>
+
+
+  </div>
+  <!-- /.app -->
 
     <!-- end of container-fluid -->
   </body>
