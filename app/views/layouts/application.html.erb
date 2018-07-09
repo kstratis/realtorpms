@@ -1,75 +1,72 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="X-UA-Compatible"
-          content="IE=edge">
+<head>
+  <meta http-equiv="X-UA-Compatible"
+        content="IE=edge">
 
-    <meta name="format-detection"
-          content="telephone=no">
+  <meta name="format-detection"
+        content="telephone=no">
 
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
-          name='viewport' />
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
+        name='viewport'/>
 
-    <meta name="apple-mobile-web-app-capable"
-          content="yes">
+  <meta name="apple-mobile-web-app-capable"
+        content="yes">
 
-    <meta name="turbolinks-cache-control" content="no-cache">
+  <meta name="turbolinks-cache-control" content="no-cache">
 
-    <!-- full_title is defined in app/helpers/application_helper.rb. title is provided by each view file
-         using the keyword 'provide' If the view file doesn't provide such value, 'full title' returns
-         a generic title -->
-    <title><%= full_title(yield(:title)) %></title>
-    <%= csrf_meta_tags %>
+  <!-- full_title is defined in app/helpers/application_helper.rb. title is provided by each view file
+       using the keyword 'provide' If the view file doesn't provide such value, 'full title' returns
+       a generic title -->
+  <title><%= full_title(yield(:title)) %></title>
+  <%= csrf_meta_tags %>
 
-    <!-- This stylesheet is the uppy.scss. It needs to be placed before the main scss
-         cause it overrides something in the transitions rules which breaks the system.
-         It uses postcss to load the file. Check .postcssrc.yml -->
-    <%= stylesheet_pack_tag 'stylesheets/styles' %>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <!-- This stylesheet is the uppy.scss. It needs to be placed before the main scss
+       cause it overrides something in the transitions rules which breaks the system.
+       It uses postcss to load the file. Check .postcssrc.yml -->
+  <%= stylesheet_pack_tag 'stylesheets/styles' %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-    <link rel="stylesheet" href="https://i.icomoon.io/public/temp/11ed69058d/Landia/style.css">
+  <!--    <link rel="stylesheet" href="https://i.icomoon.io/public/temp/11ed69058d/Landia/style.css">-->
+  <link rel="stylesheet" href="https://i.icomoon.io/public/temp/e42336f4f6/Landia/style.css">
 
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'components-bundle' %>
-    <%= javascript_pack_tag 'application' %>
-    <%= javascript_pack_tag 'theme' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'components-bundle' %>
+  <%= javascript_pack_tag 'application' %>
+  <%= javascript_pack_tag 'theme' %>
 
-    <%#= javascript_pack_tag 'hello_react' %>
-    <%= render 'layouts/shim' %>
-  </head>
-  <body>
+  <%#= javascript_pack_tag 'hello_react' %>
+  <%= render 'layouts/shim' %>
+</head>
+<body>
 
-  <!-- .app -->
-  <div class="app">
+<!-- .app -->
+<div class="app">
 
-    <%= render 'layouts/header' %>
+  <%= render 'layouts/header' %>
+  <%= render 'layouts/aside' %>
 
-    <div class="container-fluid">
-
-      <div class="row">
-        <div class="col-sm-1 col-lg-1 hidden-xs">
-          <%= render 'layouts/sidebar' %>
-        </div>
-        <div class="col-sm-11 col-lg-11">
-          <div class="pr-body-container">
-            <% flash.each do |message_type, message| %>
-                <div class="alert alert-<%= message_type %>"><%= message %></div>
-            <% end %>
-            <div id="page-transition">
-              <%= yield %>
-            </div>
-            <%= render 'layouts/footer' %>
-            <%= debug(params) if Rails.env.development? %>
-          </div>
-        </div>
+  <!-- .app-main -->
+  <main class="app-main">
+    <!-- .wrapper -->
+    <div class="wrapper">
+      <!-- your awesome app content goes here -->
+      <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>
+      <div id="page-transition">
+        <%= yield %>
       </div>
+      <%= render 'layouts/footer' %>
+      <%= debug(params) if Rails.env.development? %>
     </div>
+    <!-- /.wrapper -->
+  </main>
+  <!-- /.app-main -->
 
+</div>
+<!-- /.app -->
 
-  </div>
-  <!-- /.app -->
-
-    <!-- end of container-fluid -->
-  </body>
+</body>
 
 </html>

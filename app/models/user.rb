@@ -63,6 +63,20 @@ class User < ApplicationRecord
     admin?
   end
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def role
+    if Account.where(owner: self).length > 0
+      'owner'
+    elsif admin?
+      'administrator'
+    else
+      'user'
+    end
+  end
+
   # Remembers a user in the database for use in persistent sessions.
   def remember
     self.remember_token = User.new_token

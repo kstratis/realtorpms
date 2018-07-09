@@ -193,13 +193,23 @@ el:
       file_upload_fail_body: "Φαίνεται κάτι πήγε στραβά... Ελέγξτε τη σύνδεση του δικτύου και προσπαθήστε πάλι."
   navbar:
     profile: "Προφίλ"
-    account: "Λογαριασμός"
+    account:
+      title: "Λογαριασμός"
+      type:
+        owner: "Ιδιοκτήτης"
+        administrator: "Διαχειριστής"
+        user: "Χρήστης"
     messages: "Μηνύματα"
     logout: "Αποσύνδεση"
+    help: "Υποστήριξη"
   sidebar:
     main: "Κεντρική"
     properties: "Ακίνητα"
     partners: "Συνεργάτες"
+    clients: "Πελάτες"
+    assignments: "Αναθέσεις"
+    mappings: "Διασταυρώσεις"
+    integrations: "Γέφυρες"
     settings: "Ρυθμίσεις"
   partners:
     add: "Προσθήκη συνεργάτη"

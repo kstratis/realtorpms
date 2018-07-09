@@ -23,5 +23,6 @@
 //= require jquery.validate
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.el.js
+//= require stacked-menu/dist/js/stacked-menu.js
 //= require_tree .
 

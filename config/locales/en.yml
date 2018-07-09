@@ -192,13 +192,23 @@ en:
       file_upload_fail_body: "Something has gone wrong... Pleace check your network connection and try again."
   navbar:
     profile: "Profile"
-    account: "Account"
+    account:
+      title: "Account"
+      type:
+        owner: "Owner"
+        administrator: "Administrator"
+        user: "User"
     messages: "Messages"
     logout: "Logout"
+    help: "Support"
   sidebar:
     main: "Dashboard"
     properties: "Properties"
     partners: "Partners"
+    clients: "Clients"
+    assignments: "Assignments"
+    mappings: "Mappings"
+    integrations: "Integrations"
     settings: "Settings"
   partners:
     add: "Add partner"
