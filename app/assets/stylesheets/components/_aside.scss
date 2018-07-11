@@ -4,7 +4,8 @@
   left: 0;
   padding: 0;
   color: $app-aside-color;
-  background-color: $app-aside-bg;
+  //background-color: $app-aside-bg;
+  background-color: $app-aside-bg-custom;
   z-index: $zindex-fixed;
   backface-visibility: hidden; // avoid webkit bug render
   @include transition(transform 200ms ease-in-out);

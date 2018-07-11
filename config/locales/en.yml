@@ -201,7 +201,9 @@ en:
     messages: "Messages"
     logout: "Logout"
     help: "Support"
+    search: "Search"
   sidebar:
+    menu: "MENU"
     main: "Dashboard"
     properties: "Properties"
     partners: "Partners"
@@ -209,10 +211,17 @@ en:
     assignments: "Assignments"
     mappings: "Mappings"
     integrations: "Integrations"
+    subscription: "Subscription"
     settings: "Settings"
   partners:
+    title: "Partners"
+    list: "Partner list"
     add: "Add partner"
     invite: "Invite partner"
+  clients:
+    title: "Πελάτες"
+    add: "Προσθήκη πελάτη"
+    list: "Λίστα πελατών"
   main:
     heading: "Dashboard"
     subheading: "This is the dashboard for logged in users"
@@ -225,6 +234,10 @@ en:
       heading: "Edit profile"
       save_button: "Save changes"
   properties:
+    title: "Properties"
+    add: "Add property"
+    list: "Property list"
+    import: "Import properties"
     new:
       heading: "Add new property"
       add_button: "Add property"

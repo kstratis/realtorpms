@@ -4,7 +4,7 @@
   <div class="top-bar">
     <!-- .top-bar-brand -->
     <div class="top-bar-brand">
-      <%= link_to image_tag('brand-inverse.png', height: "32", title: 'Landia'), '/', class: 'navbar-brand' %>
+      <%= link_to image_tag('brand-inverse.png', height: "32", title: 'Landia'), root_path, class: 'navbar-brand' %>
     </div>
     <!-- /.top-bar-brand -->
     <!-- .top-bar-list -->
@@ -30,7 +30,7 @@
                       <span class="oi oi-magnifying-glass"></span>
                     </span>
             </div>
-            <input type="text" class="form-control" aria-label="Search" placeholder="Search"></div>
+            <input type="text" class="form-control" aria-label="Search" placeholder="<%= t 'navbar.search' %>"></div>
         </div>
         <!-- /.top-bar-search -->
       </div>
@@ -316,19 +316,7 @@
           <!-- .dropdown-menu -->
           <div class="dropdown-menu">
             <h6 class="dropdown-header d-none d-md-block d-lg-none"><%= current_user.full_name %></h6>
-
-            <%= link_to user_path(current_user), class: 'dropdown-item' do %>
-              <%= content_tag :span, nil, class: 'dropdown-icon oi oi-person' %> <%= t('navbar.profile') %>
-            <% end %>
-
-            <%= link_to logout_path, class: 'dropdown-item', method: :delete do %>
-              <%= content_tag :span, nil, class: 'dropdown-icon oi oi-account-logout' %> <%= t('navbar.logout') %>
-            <% end %>
-
-            <div class="dropdown-divider"></div>
-            <%= link_to logout_path, class: 'dropdown-item' do %>
-              <%= content_tag :span, nil, class: 'dropdown-icon oi oi-info' %> <%= t('navbar.help') %>
-            <% end %>
+            <%= render 'layouts/dropdown_menu' %>
           </div>
           <!-- /.dropdown-menu -->
         </div>

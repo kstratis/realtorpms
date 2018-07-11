@@ -1,0 +1,12 @@
+<%= link_to user_path(current_user), class: 'dropdown-item' do %>
+  <%= content_tag :span, nil, class: 'dropdown-icon oi oi-person' %> <%= t('navbar.profile') %>
+<% end %>
+
+<%= link_to logout_path, class: 'dropdown-item', method: :delete do %>
+  <%= content_tag :span, nil, class: 'dropdown-icon oi oi-account-logout' %> <%= t('navbar.logout') %>
+<% end %>
+
+<div class="dropdown-divider"></div>
+<%= link_to '#', class: 'dropdown-item' do %>
+  <%= content_tag :span, nil, class: 'dropdown-icon oi oi-info' %> <%= t('navbar.help') %>
+<% end %>

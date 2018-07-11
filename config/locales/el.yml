@@ -202,7 +202,9 @@ el:
     messages: "Μηνύματα"
     logout: "Αποσύνδεση"
     help: "Υποστήριξη"
+    search: "Αναζήτηση"
   sidebar:
+    menu: "ΜΕΝΟΥ"
     main: "Κεντρική"
     properties: "Ακίνητα"
     partners: "Συνεργάτες"
@@ -210,10 +212,17 @@ el:
     assignments: "Αναθέσεις"
     mappings: "Διασταυρώσεις"
     integrations: "Γέφυρες"
+    subscription: "Συνδρομή"
     settings: "Ρυθμίσεις"
   partners:
+    title: "Συνεργάτες"
+    list: "Λίστα συνεργατών"
     add: "Προσθήκη συνεργάτη"
     invite: "Πρόσκληση συνεργάτη"
+  clients:
+    title: "Πελάτες"
+    add: "Προσθήκη πελάτη"
+    list: "Λίστα πελατών"
   main:
     heading: "Κεντρική"
     subheading: "Διαβαθμισμένη πρόσβαση"
@@ -226,6 +235,10 @@ el:
       heading: "Επεξεργασία προφίλ"
       save_button: "Αποθήκευση"
   properties:
+    title: "Ακίνητα"
+    add: "Προσθήκη ακινήτου"
+    list: "Λίστα ακινήτων"
+    import: "Εισαγωγή από αρχείο"
     new:
       heading: "Προσθήκη νέου ακινήτου"
       add_button: "Προσθήκη"

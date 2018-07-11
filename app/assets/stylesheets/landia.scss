@@ -1,30 +1,4 @@
-//@import "bootstrap-sprockets";
-//@import "bootstrap";
-//@import "common-mixins";
-
 $gray-medium-light: #eaeaea;
-//@mixin inline-svg($color, $svg-content) {
-//  $start: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512"><style>path { fill:#{$color}; }</style>';
-//  $end:   '</svg>';
-//  background-image: url('data:image/svg+xml;utf8, #{$start}#{$svg-content}#{$end}');
-//}
-
-/* Universal */
-
-//html, body {
-//  margin: 0;
-//  height: 100%;
-//}
-
-//html {
-  //background-color: #f8faff;
-  //background-color: #f1f4f5;
-  //height: 100%;
-//}
-
-.pr-body-container{
-  //transition: all 1s ease;
-}
 
 body {
   //background-color: #f8faff;
@@ -36,27 +10,23 @@ body {
   margin: 0 auto;
 }
 
-
-.pr-container{
-  //margin-top: 65px;
+.page-container{
+  @include box-shadow( 0 -1px 1px #d4d8e3, 0 2px 3px #d4d8e3 );
+  padding: 15px;
+  margin-bottom: 10px;
   border: 0 none;
   border-radius: 3px;
   background-color: #fff;
-  //@include box-shadow( 0 1px 0 #c5cad8, 0 2px 3px #d4d8e3 );
-  @include box-shadow( 0 -1px 1px #d4d8e3, 0 2px 3px #d4d8e3 );
+  transition: all 1s ease;
 }
-
-//section {
-//  overflow: auto;
-//}
 
 textarea {
   resize: vertical;
 }
 
-//.center {
-//  text-align: center;
-//}
+.centered-title {
+  text-align: center;
+}
 //
 //.center h1 {
 //  margin-bottom: 10px;
@@ -470,7 +440,6 @@ footer {
 input[type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: searchfield-cancel-button;
 }
-
 
 .dropdown-sheets {
   padding-right: 0;

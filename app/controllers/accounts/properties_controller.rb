@@ -77,6 +77,7 @@ module Accounts
 
     # GET /properties/1/edit
     def edit
+      @property = Property.find(params[:id])
     end
 
     def locations

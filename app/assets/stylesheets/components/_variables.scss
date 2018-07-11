@@ -9,6 +9,7 @@ $app-header-shadow:         0 0 0 1px rgba($dark, .05), 0 1px 3px 0 rgba($dark, 
 
 $app-aside-width:         15rem !default;
 $app-aside-bg:            $gray-100 !default;
+$app-aside-bg-custom:     $gray-custom !default;
 $app-aside-color:         inherit !default;
 $app-aside-border-color:  #E9EAEB !default;
 
@@ -43,8 +44,10 @@ $stacked-menu-class-prefix:         'stacked-menu';
 $stacked-menu-breakpoint:           map-get($grid-breakpoints, 'md');
 $stacked-menu-padder:               .5rem;
 $stacked-menu-border-radius:        0;
-$stacked-menu-bg:                   $app-aside-bg;
-$stacked-menu-child-bg:             $app-aside-bg;
+//$stacked-menu-bg:                   $app-aside-bg;
+$stacked-menu-bg:                   $app-aside-bg-custom;
+//$stacked-menu-child-bg:             $app-aside-bg;
+$stacked-menu-child-bg:             $app-aside-bg-custom;
 $stacked-menu-accent-color:         $primary;
 // nav menu
 $stacked-menu-font-size:          $font-size-sm;

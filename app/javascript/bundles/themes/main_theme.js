@@ -335,6 +335,7 @@ const App = {
   handleStackedMenu () {
     if (window.StackedMenu && $('#stacked-menu').length) {
       return new StackedMenu()
+
     }
   },
 
