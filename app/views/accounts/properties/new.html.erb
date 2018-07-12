@@ -1,208 +1,211 @@
 <% provide(:title, 'Add property') %>
+
+<%= render partial: 'shared/breadcrumb', locals: {title: 'properties.new.heading', icon: 'house-colored'} %>
+
 <div class="page-container">
 
-  <%= render partial: 'shared/header_strip', locals: {title: 'properties.new.heading', icon: 'house-colored'} %>
+  <%#= render partial: 'shared/header_strip', locals: {title: 'properties.new.heading', icon: 'house-colored'} %>
 
-<div class="form-container">
-        <%= form_for(@property, remote: true) do |property| %>
+  <%= form_for(@property, remote: true) do |property| %>
     <div class="container">
+      <div class="form-container">
 
-      <div class="row ">
+        <div class="row ">
 
 
-            <div class="col-md-4 col-sm-12">
+          <div class="col-md-4 col-sm-12">
 
-              <%#= render 'shared/error_messages' %>
+            <%#= render 'shared/error_messages' %>
 
-              <div class="form-group">
-                <%= property.label :businesstype %>
-                <%= react_component('SimpleSelect', props: {
-                    inputID: 'property_businesstype',
-                    inputName: 'property[businesstype]',
-                    formID: 'new_property',
-                    className: 'simple-select',
-                    options: Property.businesstypes.keys.collect {|businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype}},
-                    soloMode: true,
-                    searchable: false,
-                    i18n: {
-                        select: t('js.components.select'),
-                    }
-                }, prerender: false) %>
-              </div>
-
-              <!-- DependantSelect will generate the form-group div and label tags automatically (it's nested) -->
-              <%= react_component('DependantSelect', props: {
-                  className: 'simple-select-container',
-                  options: get_options,
+            <div class="form-group">
+              <%= property.label :businesstype %>
+              <%= react_component('SimpleSelect', props: {
+                  inputID: 'property_businesstype',
+                  inputName: 'property[businesstype]',
+                  formID: 'new_property',
+                  className: 'simple-select',
+                  options: Property.businesstypes.keys.collect {|businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype}},
+                  soloMode: true,
                   searchable: false,
-                  formdata: {
-                      formid: 'new_property',
-                      categoryid: 'property_category',
-                      categoryname: 'property[category]',
-                      subcategoryid: 'property_subcategory',
-                      subcategoryname: 'property[subcategory]',
-                  },
                   i18n: {
                       select: t('js.components.select'),
                   }
               }, prerender: false) %>
+            </div>
+
+            <!-- DependantSelect will generate the form-group div and label tags automatically (it's nested) -->
+            <%= react_component('DependantSelect', props: {
+                className: 'simple-select-container',
+                options: get_options,
+                searchable: false,
+                formdata: {
+                    formid: 'new_property',
+                    categoryid: 'property_category',
+                    categoryname: 'property[category]',
+                    subcategoryid: 'property_subcategory',
+                    subcategoryname: 'property[subcategory]',
+                },
+                i18n: {
+                    select: t('js.components.select'),
+                }
+            }, prerender: false) %>
 
 
-              <div class="form-group">
-                <%= property.label :location do %>
-                  <%= content_tag :span, fa_icon('map fw', text: t('activerecord.attributes.property.location')) %>
-                <% end %>
-                <%= react_component('AjaxSelect', props: {
-                    inputID: 'property_locationid',
-                    inputName: 'property[locationid]',
-                    formID: 'new_property',
-                    className: 'simple-select',
-                    # options: Property.propertytypes.keys.collect { |propertytype| { label: Property.human_enum_name(:propertytype, propertytype), value: propertytype} },
-                    # options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
-                    searchable: true,
-                    soloMode: true,
-                    i18n: {
-                        select: t('js.components.select'),
-                    }
-                }, prerender: false) %>
-              </div>
-
-
-              <!--<div class="form-group">-->
-              <%#= property.label :propertycategory %>
-              <!-- THIS ONE WAS THE ORIGINAL -->
-              <%#= property.select :propertytype, Property.propertytypes.keys, {}, class: 'form-control' %>
-              <!-- THIS ONE EVENTUALLY REPLACED IT -->
-              <%#= property.select :propertytype, Property.propertytypes.keys.collect { |propertytype| [ Property.human_enum_name(:propertytype, propertytype), propertytype ] }, {},  class: 'form-control glowing-border-select' %>
-              <!-- For using React select with jqueryvalidation plugin see this: -->
-              <!-- https://github.com/JedWatson/react-select/issues/1827#issuecomment-316768651 -->
-
-
-              <div class="form-group">
-                <%#= property.label :size %>
-                <%= property.label :size do %>
-                  <%= content_tag :span, fa_icon('arrows-alt fw', text: t('activerecord.attributes.property.size')) %>
-                <% end %>
-                <%= property.text_field :size, placeholder: Property.human_attribute_name("size_placeholder"), class: 'glowing-border' %>
-              </div>
-
-
-              <div class="form-group">
-
-                <%= property.label :floor do %>
-                  <% content_tag :span do %>
-                    <i class="icon-vertical_arrows"></i>&nbsp; <%= t('activerecord.attributes.property.floor') %>
-                  <% end %>
-                <% end %>
-
-                <%= react_component('SimpleSelect', props: {
-                    inputID: 'property_floor',
-                    inputName: 'property[floor]',
-                    formID: 'new_property',
-                    className: 'simple-select',
-                    options: Property.floors.keys.collect {|floor| {label: Property.human_enum_name(:floor, floor), value: floor}} + (1..50).collect {|floor| {label: floor, value: floor}},
-                    # options: Property.propertytypes.keys.collect { |propertytype| { label: Property.human_enum_name(:propertytype, propertytype), value: propertytype} },
-                    # options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
-                    searchable: true,
-                    soloMode: true,
-                    i18n: {
-                        select: t('js.components.select'),
-                    }
-                }, prerender: false) %>
-              </div>
-
-              <div class="form-group">
-
-                <%= property.label :construction do %>
-                  <% content_tag :span do %>
-                    <i class="icon-construction2"></i>&nbsp; <%= t('activerecord.attributes.property.construction') %>
-                  <% end %>
-                <% end %>
-                <%= react_component('SimpleSelect', props: {
-                    inputID: 'property_construction',
-                    inputName: 'property[construction]',
-                    formID: 'new_property',
-                    className: 'simple-select',
-                    # options: Property.propertytypes.keys.collect { |propertytype| { label: Property.human_enum_name(:propertytype, propertytype), value: propertytype} },
-                    options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
-                    searchable: true,
-                    soloMode: true,
-                    i18n: {
-                        select: t('js.components.select'),
-                    }
-                }, prerender: false) %>
-              </div>
-
-              <div class="form-group">
-                <%= property.label :levels do %>
-                  <%= content_tag :span, fa_icon('building fw', text: t('activerecord.attributes.property.levels')) %>
-                <% end %>
-                <%= react_component('SimpleSelect', props: {
-                    inputID: 'property_levels',
-                    inputName: 'property[levels]',
-                    formID: 'new_property',
-                    className: 'simple-select',
-                    options: (1..10).collect {|level| {label: level, value: level}},
-                    soloMode: true,
-                    searchable: false,
-                    i18n: {
-                        select: t('js.components.select'),
-                    }
-                }, prerender: false) %>
-                <%#= property.text_field :levels, placeholder: Property.human_attribute_name("levels_placeholder"), class: 'glowing-border' %>
-                <%#= inline_error @property.owner, :last_name, 'Last name'%>
-              </div>
-
-
-              <!-- This guards against unwanted ujs form submission -->
-              <input id="preventformsubmit" type="hidden">
-              <input id="property_images" class="emitters form-control" type="hidden" name="property[images][]">
-              <!-- This makes the current locale available in javascript -->
-              <%= render "accounts/helpers/locale" %>
-              <%= content_tag :div, class: "", id: "jqvalidator", data: {
-                  i18n: {
-                      jqvalidator: t('js.jqvalidator'),
-                  }
-              } do %>
+            <div class="form-group">
+              <%= property.label :location do %>
+                <%= content_tag :span, fa_icon('map fw', text: t('activerecord.attributes.property.location')) %>
               <% end %>
-              <%= content_tag :div, class: "", id: "swal", data: {
+              <%= react_component('AjaxSelect', props: {
+                  inputID: 'property_locationid',
+                  inputName: 'property[locationid]',
+                  formID: 'new_property',
+                  className: 'simple-select',
+                  # options: Property.propertytypes.keys.collect { |propertytype| { label: Property.human_enum_name(:propertytype, propertytype), value: propertytype} },
+                  # options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
+                  searchable: true,
+                  soloMode: true,
                   i18n: {
-                      swal: t('js.swal'),
+                      select: t('js.components.select'),
                   }
-              } do %>
+              }, prerender: false) %>
+            </div>
+
+
+            <!--<div class="form-group">-->
+            <%#= property.label :propertycategory %>
+            <!-- THIS ONE WAS THE ORIGINAL -->
+            <%#= property.select :propertytype, Property.propertytypes.keys, {}, class: 'form-control' %>
+            <!-- THIS ONE EVENTUALLY REPLACED IT -->
+            <%#= property.select :propertytype, Property.propertytypes.keys.collect { |propertytype| [ Property.human_enum_name(:propertytype, propertytype), propertytype ] }, {},  class: 'form-control glowing-border-select' %>
+            <!-- For using React select with jqueryvalidation plugin see this: -->
+            <!-- https://github.com/JedWatson/react-select/issues/1827#issuecomment-316768651 -->
+
+
+            <div class="form-group">
+              <%#= property.label :size %>
+              <%= property.label :size do %>
+                <%= content_tag :span, fa_icon('arrows-alt fw', text: t('activerecord.attributes.property.size')) %>
+              <% end %>
+              <%= property.text_field :size, placeholder: Property.human_attribute_name("size_placeholder"), class: 'glowing-border' %>
+            </div>
+
+
+            <div class="form-group">
+
+              <%= property.label :floor do %>
+                <% content_tag :span do %>
+                  <i class="icon-vertical_arrows"></i>&nbsp; <%= t('activerecord.attributes.property.floor') %>
+                <% end %>
               <% end %>
 
-              <div class="form-group">
-                <%= property.label :bedrooms do %>
-                  <%= content_tag :span, fa_icon('bed fw', text: t('activerecord.attributes.property.bedrooms')) %>
-                <% end %>
-                <%= property.text_field :bedrooms, placeholder: Property.human_attribute_name("bedrooms_placeholder"), class: 'glowing-border' %>
-                <%#= inline_error @property.owner, :last_name, 'Last name'%>
-              </div>
+              <%= react_component('SimpleSelect', props: {
+                  inputID: 'property_floor',
+                  inputName: 'property[floor]',
+                  formID: 'new_property',
+                  className: 'simple-select',
+                  options: Property.floors.keys.collect {|floor| {label: Property.human_enum_name(:floor, floor), value: floor}} + (1..50).collect {|floor| {label: floor, value: floor}},
+                  # options: Property.propertytypes.keys.collect { |propertytype| { label: Property.human_enum_name(:propertytype, propertytype), value: propertytype} },
+                  # options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
+                  searchable: true,
+                  soloMode: true,
+                  i18n: {
+                      select: t('js.components.select'),
+                  }
+              }, prerender: false) %>
+            </div>
 
-              <div class="form-group">
-                <%= property.label :bathrooms do %>
-                  <%= content_tag :span, fa_icon('bath fw', text: t('activerecord.attributes.property.bathrooms')) %>
-                <% end %>
-                <%= property.text_field :bathrooms, placeholder: Property.human_attribute_name("bathrooms_placeholder"), class: 'glowing-border' %>
-                <%#= inline_error @property.owner, :last_name, 'Last name'%>
-              </div>
+            <div class="form-group">
 
-              <div class="form-group">
-                <%= property.label :price do %>
-                  <%= content_tag :span, fa_icon('eur fw', text: t('activerecord.attributes.property.price')) %>
+              <%= property.label :construction do %>
+                <% content_tag :span do %>
+                  <i class="icon-construction2"></i>&nbsp; <%= t('activerecord.attributes.property.construction') %>
                 <% end %>
-                <%= property.text_field :price, placeholder: Property.human_attribute_name("price_placeholder"), class: 'glowing-border' %>
-                <%#= inline_error @property.owner, :last_name, 'Last name'%>
-              </div>
+              <% end %>
+              <%= react_component('SimpleSelect', props: {
+                  inputID: 'property_construction',
+                  inputName: 'property[construction]',
+                  formID: 'new_property',
+                  className: 'simple-select',
+                  # options: Property.propertytypes.keys.collect { |propertytype| { label: Property.human_enum_name(:propertytype, propertytype), value: propertytype} },
+                  options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
+                  searchable: true,
+                  soloMode: true,
+                  i18n: {
+                      select: t('js.components.select'),
+                  }
+              }, prerender: false) %>
+            </div>
 
-              <div class="form-group">
-                <%= property.label :availability do %>
-                  <%= content_tag :span, fa_icon('calendar fw', text: t('activerecord.attributes.property.availability')) %>
-                <% end %>
-                <%= property.text_field :availability, placeholder: Property.human_attribute_name("availability_placeholder"), class: 'glowing-border datepicker' %>
+            <div class="form-group">
+              <%= property.label :levels do %>
+                <%= content_tag :span, fa_icon('building fw', text: t('activerecord.attributes.property.levels')) %>
+              <% end %>
+              <%= react_component('SimpleSelect', props: {
+                  inputID: 'property_levels',
+                  inputName: 'property[levels]',
+                  formID: 'new_property',
+                  className: 'simple-select',
+                  options: (1..10).collect {|level| {label: level, value: level}},
+                  soloMode: true,
+                  searchable: false,
+                  i18n: {
+                      select: t('js.components.select'),
+                  }
+              }, prerender: false) %>
+              <%#= property.text_field :levels, placeholder: Property.human_attribute_name("levels_placeholder"), class: 'glowing-border' %>
+              <%#= inline_error @property.owner, :last_name, 'Last name'%>
+            </div>
 
-                <%#= react_component('Dates', props: {
+
+            <!-- This guards against unwanted ujs form submission -->
+            <input id="preventformsubmit" type="hidden">
+            <input id="property_images" class="emitters form-control" type="hidden" name="property[images][]">
+            <!-- This makes the current locale available in javascript -->
+            <%= render "accounts/helpers/locale" %>
+            <%= content_tag :div, class: "", id: "jqvalidator", data: {
+                i18n: {
+                    jqvalidator: t('js.jqvalidator'),
+                }
+            } do %>
+            <% end %>
+            <%= content_tag :div, class: "", id: "swal", data: {
+                i18n: {
+                    swal: t('js.swal'),
+                }
+            } do %>
+            <% end %>
+
+            <div class="form-group">
+              <%= property.label :bedrooms do %>
+                <%= content_tag :span, fa_icon('bed fw', text: t('activerecord.attributes.property.bedrooms')) %>
+              <% end %>
+              <%= property.text_field :bedrooms, placeholder: Property.human_attribute_name("bedrooms_placeholder"), class: 'glowing-border' %>
+              <%#= inline_error @property.owner, :last_name, 'Last name'%>
+            </div>
+
+            <div class="form-group">
+              <%= property.label :bathrooms do %>
+                <%= content_tag :span, fa_icon('bath fw', text: t('activerecord.attributes.property.bathrooms')) %>
+              <% end %>
+              <%= property.text_field :bathrooms, placeholder: Property.human_attribute_name("bathrooms_placeholder"), class: 'glowing-border' %>
+              <%#= inline_error @property.owner, :last_name, 'Last name'%>
+            </div>
+
+            <div class="form-group">
+              <%= property.label :price do %>
+                <%= content_tag :span, fa_icon('eur fw', text: t('activerecord.attributes.property.price')) %>
+              <% end %>
+              <%= property.text_field :price, placeholder: Property.human_attribute_name("price_placeholder"), class: 'glowing-border' %>
+              <%#= inline_error @property.owner, :last_name, 'Last name'%>
+            </div>
+
+            <div class="form-group">
+              <%= property.label :availability do %>
+                <%= content_tag :span, fa_icon('calendar fw', text: t('activerecord.attributes.property.availability')) %>
+              <% end %>
+              <%= property.text_field :availability, placeholder: Property.human_attribute_name("availability_placeholder"), class: 'glowing-border datepicker' %>
+
+              <%#= react_component('Dates', props: {
                   inputID: 'property_availability',
                   inputName: 'property[availability]',
                   formID: 'new_property',
@@ -214,82 +217,91 @@
                       select: t('js.components.select'),
                   }
               }, prerender: false) %>
-                <%#= property.text_field :levels, placeholder: Property.human_attribute_name("levels_placeholder"), class: 'glowing-border' %>
-                <%#= inline_error @property.owner, :last_name, 'Last name'%>
-              </div>
-
-
-              <div class="form-group">
-                <%= property.submit t('properties.new.add_button'), class: 'btn btn-primary' %>
-                <%#= property.submit t('properties.new.add_button'), class: 'btn btn-primary', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Creating property..."} %>
-              </div>
-
-
+              <%#= property.text_field :levels, placeholder: Property.human_attribute_name("levels_placeholder"), class: 'glowing-border' %>
+              <%#= inline_error @property.owner, :last_name, 'Last name'%>
             </div>
 
 
-            <div class="col-md-8 col-sm-12">
-              <div class="form-group">
-                <%= content_tag :div, class: "", id: "uppy", data: {
-                    i18n: {
-                        uppy: t('js.uppy'),
-                    },
-                    uppy_url_listener: new_property_path
-                } do %>
-                <% end %>
-                <%#= property.label :size %>
-                <%#= property.text_field :size, placeholder: Property.human_attribute_name("size_placeholder"), class: 'glowing-border' %>
+            <div class="form-group">
+              <%= property.submit t('properties.new.add_button'), class: 'btn btn-primary' %>
+              <%#= property.submit t('properties.new.add_button'), class: 'btn btn-primary', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Creating property..."} %>
+            </div>
+
+
+          </div>
+
+
+          <div class="col-md-8 col-sm-12">
+            <div class="form-group">
+              <%= content_tag :div, class: "", id: "uppy", data: {
+                  i18n: {
+                      uppy: t('js.uppy'),
+                  },
+                  uppy_url_listener: new_property_path
+              } do %>
+              <% end %>
+              <%#= property.label :size %>
+              <%#= property.text_field :size, placeholder: Property.human_attribute_name("size_placeholder"), class: 'glowing-border' %>
+            </div>
+
+            <hr/>
+
+            <div class="form-group">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                <label class="custom-control-label" for="customCheck1">Demo check</label>
               </div>
+            </div>
 
-              <hr/>
 
-              <div class="multivalue-checkboxes">
-                <% %w(housetype heating orientation view other).each do |category| %>
-                  <div class="form-group">
-                    <div class="col-xs-3">
-                      <label class="col-xs-12 control-label"><%= t("activerecord.attributes.extra.#{category}.title") %></label>
-                      <div class="col-xs-12">
-                        <%= property.collection_check_boxes :extra_ids, Extra.where(subtype: category), :id, :name do |b| %>
-                          <!--                         stable-->
-                          <!--                        <div>-->
-                          <!--                          <label class="checkbox-inline" for="checkbox1">-->
-                          <!--                            <input type="checkbox" id="checkbox1" class="checkbox"/>Text hello-->
-                          <!--                          </label>-->
-                          <!--                        </div>-->
-                          <div>
-                            <%= b.label({class: 'checkbox-inline'}) do %>
-                              <div class="checkbox-holder">
-                                <%= b.check_box({class: 'checkbox'}) + t("activerecord.attributes.extra.#{category}.#{b.text}") %>
-                              </div>
-                            <% end %>
+
+            <div class="multivalue-checkboxes">
+              <% %w(housetype heating orientation view other).each do |category| %>
+                <div class="form-group">
+                  <div class="col-xs-3">
+                    <label class="col-xs-12 control-label"><%= t("activerecord.attributes.extra.#{category}.title") %></label>
+                    <div class="col-xs-12">
+                      <%= property.collection_check_boxes :extra_ids, Extra.where(subtype: category), :id, :name do |b| %>
+
+                        <div>
+                          <!--original-->
+                          <%#= b.label({class: 'checkbox-inline'}) do %>
+                          <!--<div class="checkbox-holder">-->
+                              <%#= b.check_box({class: 'checkbox'}) + t("activerecord.attributes.extra.#{category}.#{b.text}") %>
+                          <!--</div>-->
+                          <%# end %>
+
+                          <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1" data-com.agilebits.onepassword.user-edited="yes">
+                            <label class="custom-control-label" for="customCheck1">Custom checkbox</label>
                           </div>
 
-                        <% end %>
-                      </div>
+
+                        </div>
+
+                      <% end %>
                     </div>
                   </div>
-                <% end %>
+                </div>
+              <% end %>
 
-                <div class="form-group">
-                  <div class="col-xs-12">
-                    <label class="col-xs-12 control-label">Perigrafi</label>
-                    <%= text_field_tag 'query', 'Enter your search query here' %>
-                  </div>
+              <div class="form-group">
+                <div class="col-xs-12">
+                  <label class="col-xs-12 control-label">Perigrafi</label>
+                  <%= text_field_tag 'query', 'Enter your search query here' %>
                 </div>
               </div>
-
-
             </div>
 
 
+          </div>
 
 
-
-    </div>
-  </div>
+        </div>
+      </div>
   <% end %>
 
-</div>
+  </div>
 </div>
 
 
