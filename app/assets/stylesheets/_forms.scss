@@ -1,11 +1,5 @@
 /* Forms */
 
-.page-container{
-  border-radius: 6px;
-  padding: 15px;
-  margin-bottom: 10px;
-}
-
 .pr-signin{
   margin-top: 160px;
 }
@@ -28,14 +22,14 @@ input[type="checkbox"]{
   width: unset;
 }
 
-.pr-form-container{
+.form-container{
   padding: 15px 20px 15px 20px;
   border-radius: 3px;
   border: 1px solid #cdcfd5;
   overflow: hidden;
 }
 
-.pr-form-container-inapp{
+.form-container-inapp{
   border-radius: 3px;
   border: 1px solid #cdcfd5;
 }
