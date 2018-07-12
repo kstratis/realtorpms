@@ -3,16 +3,14 @@
 
   <%= render partial: 'shared/header_strip', locals: {title: 'properties.new.heading', icon: 'house-colored'} %>
 
-  <div class="container">
-
-    <div class="row ">
-
-      <div class="col-md-12 ">
-
-
+<div class="form-container">
         <%= form_for(@property, remote: true) do |property| %>
-          <div class="form-container">
-            <div class="col-md-4 col-md-border">
+    <div class="container">
+
+      <div class="row ">
+
+
+            <div class="col-md-4 col-sm-12">
 
               <%#= render 'shared/error_messages' %>
 
@@ -230,7 +228,7 @@
             </div>
 
 
-            <div class="col-md-8 ">
+            <div class="col-md-8 col-sm-12">
               <div class="form-group">
                 <%= content_tag :div, class: "", id: "uppy", data: {
                     i18n: {
@@ -282,13 +280,16 @@
 
 
             </div>
-          </div>
 
-        <% end %>
 
-      </div>
+
+
+
     </div>
   </div>
+  <% end %>
+
+</div>
 </div>
 
 

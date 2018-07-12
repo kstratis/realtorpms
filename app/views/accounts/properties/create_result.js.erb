@@ -1,4 +1,4 @@
-$('.pr-form-container').fadeOut('fast', function () {
+$('.form-container').fadeOut('fast', function () {
   var myblock = $("<%= escape_javascript(@property.errors.empty? ? render('created') : render('not_created'))%>").hide();
   $(this).replaceWith(myblock);
   $("#form-" + "<%= @property.errors.empty? ? 'success' : 'error' %>" ).fadeIn('fast');
