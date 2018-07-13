@@ -46,6 +46,16 @@
 <!-- .app -->
 <div class="app">
 
+  <% flash.each do |message_type, message| %>
+  <div class="alert-container">
+    <div class="alert alert-<%= message_type %> alert-dismissible fade show"><%= message %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+  </div>
+  <% end %>
+
   <%= render 'layouts/header' %>
   <%= render 'layouts/aside' %>
 
@@ -54,9 +64,7 @@
     <!-- .wrapper -->
     <div class="wrapper">
       <!-- your awesome app content goes here -->
-      <% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
-      <% end %>
+
       <div id="page-transition">
         <%= yield %>
       </div>
