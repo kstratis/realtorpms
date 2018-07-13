@@ -246,12 +246,12 @@
 
             <hr/>
 
-            <div class="form-group">
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                <label class="custom-control-label" for="customCheck1">Demo check</label>
-              </div>
-            </div>
+<!--            <div class="form-group">-->
+<!--              <div class="custom-control custom-checkbox">-->
+<!--                <input type="checkbox" class="custom-control-input" id="customCheck1">-->
+<!--                <label class="custom-control-label" for="customCheck1">Demo check</label>-->
+<!--              </div>-->
+<!--            </div>-->
 
 
 
@@ -262,23 +262,13 @@
                     <label class="col-xs-12 control-label"><%= t("activerecord.attributes.extra.#{category}.title") %></label>
                     <div class="col-xs-12">
                       <%= property.collection_check_boxes :extra_ids, Extra.where(subtype: category), :id, :name do |b| %>
-
-                        <div>
-                          <!--original-->
-                          <%#= b.label({class: 'checkbox-inline'}) do %>
-                          <!--<div class="checkbox-holder">-->
-                              <%#= b.check_box({class: 'checkbox'}) + t("activerecord.attributes.extra.#{category}.#{b.text}") %>
-                          <!--</div>-->
-                          <%# end %>
-
                           <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="customCheck1" data-com.agilebits.onepassword.user-edited="yes">
-                            <label class="custom-control-label" for="customCheck1">Custom checkbox</label>
+                            <%= b.check_box({class: 'custom-control-input', type: 'checkbox'}) %>
+                            <%#= b.label({class: 'custom-control-label'}) %>
+                            <%= b.label({class: 'custom-control-label'}) do %>
+                              <%= t("activerecord.attributes.extra.#{category}.#{b.text}") %>
+                            <% end %>
                           </div>
-
-
-                        </div>
-
                       <% end %>
                     </div>
                   </div>
