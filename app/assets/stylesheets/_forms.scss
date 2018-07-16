@@ -18,9 +18,9 @@ input, textarea, select, .uneditable-input {
   //@include box_sizing;
 }
 
-//input[type="checkbox"]{
-//  width: unset;
-//}
+input[type="checkbox"]{
+  width: unset;
+}
 
 .form-container{
   //@include box-shadow( 0 -1px 1px #d4d8e3, 0 2px 3px #d4d8e3 );
@@ -36,6 +36,15 @@ input, textarea, select, .uneditable-input {
 .form-container-inapp{
   border-radius: 3px;
   border: 1px solid #cdcfd5;
+}
+
+.app-checkbox{
+  white-space:nowrap;
+}
+
+.checkbox-header{
+
+  padding-left: 10px;
 }
 
 //.checkbox {

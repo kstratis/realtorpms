@@ -25,14 +25,12 @@ class Property < ApplicationRecord
   # enum landsubcategory: [:plot, :parcels, :island, :othercategories]
   # enum othersubcategory: [:parking, :unitbusiness, :prefabricated, :detachable, :air, :othersubcategory]
   # enum residentialsubcategory: [:apartment, :terraced, :maisonette, :building, :home]
-  enum subtype: [:neoclassical, :protected_pr, :loft_pr, :traditional, :villa_pr, :stone,  :studio_pr,
-              :prefabricated_pr, :precast_pr]
-  #
+  # enum subtype: [:neoclassical, :protected_pr, :loft_pr, :traditional, :villa_pr, :stone,  :studio_pr,
+  #             :prefabricated_pr, :precast_pr]
   enum floor: [:basement, :semi_basement, :ground_floor, :mezzanine]
-
-  enum orientation: [:facade, :airy, :on_corner, :inwards_facing]
-  enum view: [:sea, :mountain, :forest, :infinite]
-  enum heating: [:central, :prive]
+  # enum orientation: [:facade, :airy, :on_corner, :inwards_facing]
+  # enum view: [:sea, :mountain, :forest, :infinite]
+  # enum heating: [:central, :prive]
 
   # Validations should match their ujs_form_handler.js counterparts
   validates :businesstype, presence: true
