@@ -5,7 +5,6 @@ $(document).on('turbolinks:load', function(e) {
     var jqvalidatorDomNode = $('#jqvalidator');
     var jqtranslations = jqvalidatorDomNode.data('i18n').jqvalidator;
     $.extend($.validator.messages, jqtranslations);
-
     $('#new_property').validate({
       rules: {
         'property[businesstype]': {

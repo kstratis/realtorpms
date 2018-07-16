@@ -108,6 +108,10 @@ module Accounts
       # https://stackoverflow.com/a/43476033/178728
       @property.location = Location.find(@property.locationid)
       @property.account = current_account
+
+      puts property_params
+
+
       respond_to do |format|
         if @property.save
           puts 'form saving successfully'
@@ -169,6 +173,9 @@ module Accounts
                                          :levels,
                                          :availability,
                                          :construction,
+                                         :roof_deck,
+                                         :storage,
+                                         :garden,
                                          images: [],
                                          extra_ids: [])
       end

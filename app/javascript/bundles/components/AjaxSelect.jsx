@@ -94,7 +94,7 @@ class SimpleSelect extends React.Component {
   };
 
   // This updates the true input field (which is hidden) according to the value selected.
-  // It used JQuery and is relatively safe to use since it's located outside of our React Component
+  // It uses JQuery and is relatively safe to use since it's located outside of our React Component
   updateExternalDOM = (selectedOption) => {
     // JQuery form validator specifics. Requires JQuery.
     // Manipulating a form element outside of this React component should be relatively safe

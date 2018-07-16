@@ -66,7 +66,7 @@ el:
           pool: "Πισίνα"
           fit_for_professional_use: "Κατάλληλο και για επαγ/κή χρήση"
           storage: "Αποθήκη"
-          roof_garden: "Ταράτσα"
+          roof_deck: "Ταράτσα"
           garden: "Κήπος"
       property:
         description: "Περιγραφή"
