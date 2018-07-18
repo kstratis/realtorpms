@@ -42,7 +42,7 @@ el:
         orientation:
           title: "Προσανατολισμός"
           facade: "Προσόψεως"
-          through_lot: "Dual aspect"
+          double_frontage: "Διαμπερές"
           corner: "Γωνιακό"
           internal: "Εσωτερικό"
         view:
@@ -62,12 +62,18 @@ el:
           no_elevator: "Χωρίς ασανσέρ"
           no_utility_bills: "Χωρίς κοινόχρηστα"
           clima: "Κλιματισμός"
-          door_security: "Πόρτα ασφαλείας"
+          security_door: "Πόρτα ασφαλείας"
           pool: "Πισίνα"
           fit_for_professional_use: "Κατάλληλο και για επαγ/κή χρήση"
+        dependent:
           storage: "Αποθήκη"
-          roof_deck: "Ταράτσα"
+          storage_placeholder: "Εμβαδόν αποθήκης"
+          roofdeck: "Ταράτσα"
+          roofdeck_placeholder: "Επιφάνεια ταράτσας"
           garden: "Κήπος"
+          garden_placeholder: "Επιφάνεια κήπου"
+          plot: "Οικόπεδο"
+          plot_placeholder: "Εμβαδόν οικοπέδου"
       property:
         description: "Περιγραφή"
         businesstype: "Τύπος καταχώρησης"
@@ -82,10 +88,18 @@ el:
         bathrooms_placeholder: "π.χ. 2"
         construction: "Κατασκευή"
         location: "Τοποθεσία"
+        address: "Διεύθυνση"
+        address_placeholder: "π.χ. Βασιλίσσης Σοφίας 64, 115 28 "
         floor: "Όροφος"
         levels: "Επίπεδα"
         availability: "Διαθεσιμότητα"
         availability_placeholder: "Επιλέξτε ημερομηνία"
+        notes: "Σημειώσεις"
+        notes_placeholder: "π.χ. Ημιυπαίθριοι χώροι τακτοποιημένοι"
+        adxe: "Κείμενο αγγελίας xe.gr"
+        adxe_placeholder: "ΒΟΥΛΙΑΓΜΕΝΗ Κέντρο, studio 40 τ.μ., ισόγειο, 1 υ/δ, κατασκευή '99, αυτόνομη θέρμανση, καλή κατάσταση, αποτελείται από σαλόνι το οποίο..."
+        adspitogatos: "Κείμενο αγγελίας spitogatos.gr"
+        adspitogatos_placeholder: "ΒΟΥΛΑ: Πανόραμα, Μονοκατοικία 570τ.μ σε οικόπεδο 500τ.μ, 4 επιπέδων, minimal, γωνιακή, 5 υ/δ, ενδοδαπέδια θέρμανση, wc, τζάκι, ασανσέρ..."
         enums:
           businesstype:
             sell: "Πώληση"
@@ -152,7 +166,8 @@ el:
        placeholder: "Επιλέξτε..."
        category: "Κατηγορία"
        subcategory: "Υποκατηγορία"
-
+       required: "Υποχρεωτικό πεδίο"
+       optional: "Προεραιτικό πεδίο"
     datatables:
       users:
         partner: "Συνεργάτης"

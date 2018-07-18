@@ -1,7 +1,9 @@
 module Accounts
   class PropertiesController < Accounts::BaseController
     before_action :set_property, only: [:show, :edit, :update, :destroy]
-    before_action :check_page_validity, only: [:index]
+    # before_
+    # before_action :check_page_validity, only: [:create]
+
     # GET /properties
     # GET /properties.json
     def index
@@ -109,7 +111,7 @@ module Accounts
       @property.location = Location.find(@property.locationid)
       @property.account = current_account
 
-      puts property_params
+      # property_params[:]
 
 
       respond_to do |format|
@@ -152,6 +154,7 @@ module Accounts
     end
 
     private
+
       # Use callbacks to share common setup or constraints between actions.
       def set_property
         @property = Property.find(params[:id])
@@ -173,9 +176,9 @@ module Accounts
                                          :levels,
                                          :availability,
                                          :construction,
-                                         :roof_deck,
-                                         :storage,
-                                         :garden,
+                                         :roofdeck_space,
+                                         :storage_space,
+                                         :garden_space,
                                          images: [],
                                          extra_ids: [])
       end

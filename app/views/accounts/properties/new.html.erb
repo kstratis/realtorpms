@@ -18,7 +18,10 @@
             <%#= render 'shared/error_messages' %>
 
             <div class="form-group">
-              <%= property.label :businesstype %>
+              <%= property.label :businesstype do %>
+                <%= Property.human_attribute_name(:businesstype) %>
+                <abbr title="<%= t('js.components.select.required') %>">*</abbr>
+              <% end %>
               <%= react_component('SimpleSelect', props: {
                   inputID: 'property_businesstype',
                   inputName: 'property[businesstype]',
@@ -53,7 +56,8 @@
 
             <div class="form-group">
               <%= property.label :location do %>
-                <%= content_tag :span, fa_icon('map fw', text: t('activerecord.attributes.property.location')) %>
+                <%= content_tag(:i, nil, class: 'fas fa-map fa-fw') + ' ' + t('activerecord.attributes.property.location') %>
+                <abbr title="<%= t('js.components.select.required') %>">*</abbr>
               <% end %>
               <%= react_component('AjaxSelect', props: {
                   inputID: 'property_locationid',
@@ -70,6 +74,14 @@
               }, prerender: false) %>
             </div>
 
+            <div class="form-group">
+              <%= property.label :address do %>
+                <%= content_tag :span do %>
+                  <%= content_tag(:i, nil, class: 'fas fa-map-marker-alt fa-fw') + ' ' + t('activerecord.attributes.property.address') %>
+                <% end %>
+              <% end %>
+              <%= property.text_field :address, placeholder: Property.human_attribute_name("address_placeholder"), class: 'glowing-border' %>
+            </div>
 
             <!--<div class="form-group">-->
             <%#= property.label :propertycategory %>
@@ -80,11 +92,11 @@
             <!-- For using React select with jqueryvalidation plugin see this: -->
             <!-- https://github.com/JedWatson/react-select/issues/1827#issuecomment-316768651 -->
 
-
             <div class="form-group">
-              <%#= property.label :size %>
               <%= property.label :size do %>
-                <%= content_tag :span, fa_icon('arrows-alt fw', text: t('activerecord.attributes.property.size')) %>
+                <%= content_tag :span do %>
+                  <%= content_tag(:i, nil, class: 'fas fa-arrows-alt fa-fw') + ' ' + t('activerecord.attributes.property.size') %>
+                <% end %>
               <% end %>
               <%= property.text_field :size, placeholder: Property.human_attribute_name("size_placeholder"), class: 'glowing-border' %>
             </div>
@@ -94,7 +106,7 @@
 
               <%= property.label :floor do %>
                 <% content_tag :span do %>
-                  <i class="icon-vertical_arrows"></i>&nbsp; <%= t('activerecord.attributes.property.floor') %>
+                  <%= content_tag(:i, nil, class: 'fas icon-stairs fa-fw') + ' ' + t('activerecord.attributes.property.floor') %>
                 <% end %>
               <% end %>
 
@@ -118,7 +130,7 @@
 
               <%= property.label :construction do %>
                 <% content_tag :span do %>
-                  <i class="icon-construction2"></i>&nbsp; <%= t('activerecord.attributes.property.construction') %>
+                  <%= content_tag(:i, nil, class: 'fas icon-architecture-crane-tool fa-fw') + ' ' + t('activerecord.attributes.property.construction') %>
                 <% end %>
               <% end %>
               <%= react_component('SimpleSelect', props: {
@@ -138,7 +150,7 @@
 
             <div class="form-group">
               <%= property.label :levels do %>
-                <%= content_tag :span, fa_icon('building fw', text: t('activerecord.attributes.property.levels')) %>
+                <%= content_tag(:i, nil, class: 'fas fa-building fa-fw') + ' ' + t('activerecord.attributes.property.levels') %>
               <% end %>
               <%= react_component('SimpleSelect', props: {
                   inputID: 'property_levels',
@@ -177,7 +189,7 @@
 
             <div class="form-group">
               <%= property.label :bedrooms do %>
-                <%= content_tag :span, fa_icon('bed fw', text: t('activerecord.attributes.property.bedrooms')) %>
+                <%= content_tag(:i, nil, class: 'fas fa-bed fa-fw') + ' ' + t('activerecord.attributes.property.bedrooms') %>
               <% end %>
               <%= property.text_field :bedrooms, placeholder: Property.human_attribute_name("bedrooms_placeholder"), class: 'glowing-border' %>
               <%#= inline_error @property.owner, :last_name, 'Last name'%>
@@ -185,7 +197,7 @@
 
             <div class="form-group">
               <%= property.label :bathrooms do %>
-                <%= content_tag :span, fa_icon('bath fw', text: t('activerecord.attributes.property.bathrooms')) %>
+                <%= content_tag(:i, nil, class: 'fas fa-bath fa-fw') + ' ' + t('activerecord.attributes.property.bathrooms') %>
               <% end %>
               <%= property.text_field :bathrooms, placeholder: Property.human_attribute_name("bathrooms_placeholder"), class: 'glowing-border' %>
               <%#= inline_error @property.owner, :last_name, 'Last name'%>
@@ -193,7 +205,7 @@
 
             <div class="form-group">
               <%= property.label :price do %>
-                <%= content_tag :span, fa_icon('eur fw', text: t('activerecord.attributes.property.price')) %>
+                <%= content_tag(:i, nil, class: 'fas fa-euro-sign fa-fw') + ' ' + t('activerecord.attributes.property.price') %>
               <% end %>
               <%= property.text_field :price, placeholder: Property.human_attribute_name("price_placeholder"), class: 'glowing-border' %>
               <%#= inline_error @property.owner, :last_name, 'Last name'%>
@@ -201,7 +213,7 @@
 
             <div class="form-group">
               <%= property.label :availability do %>
-                <%= content_tag :span, fa_icon('calendar fw', text: t('activerecord.attributes.property.availability')) %>
+                <%= content_tag(:i, nil, class: 'fas fa-calendar fa-fw') + ' ' + t('activerecord.attributes.property.availability') %>
               <% end %>
               <%= property.text_field :availability, placeholder: Property.human_attribute_name("availability_placeholder"), class: 'glowing-border datepicker' %>
 
@@ -219,6 +231,13 @@
               }, prerender: false) %>
               <%#= property.text_field :levels, placeholder: Property.human_attribute_name("levels_placeholder"), class: 'glowing-border' %>
               <%#= inline_error @property.owner, :last_name, 'Last name'%>
+            </div>
+
+            <div class="form-group">
+              <%= property.label :notes do %>
+                <%= content_tag(:i, nil, class: 'fas fa-sticky-note fa-fw') + ' ' + t('activerecord.attributes.property.notes') %>
+              <% end %>
+              <%= property.text_area :notes, placeholder: Property.human_attribute_name("notes_placeholder"), class: 'form-control' %>
             </div>
 
 
@@ -244,81 +263,60 @@
               <%#= property.text_field :size, placeholder: Property.human_attribute_name("size_placeholder"), class: 'glowing-border' %>
             </div>
 
-            <hr/>
-
-<!--            <div class="form-group">-->
-<!--              <div class="custom-control custom-checkbox">-->
-<!--                <input type="checkbox" class="custom-control-input" id="customCheck1">-->
-<!--                <label class="custom-control-label" for="customCheck1">Demo check</label>-->
-<!--              </div>-->
-<!--            </div>-->
-
-
 
             <div class="multivalue-checkboxes">
               <div class="form-row justify-content-left">
-              <% %w(housetype heating orientation view other).each do |category| %>
+                <% %w(housetype heating orientation view other).each do |category| %>
 
-                <div class="form-group">
-                  <div class="col-md-2">
-                    <label class="control-label checkbox-header app-checkbox"><strong><%= t("activerecord.attributes.extra.#{category}.title") %></strong></label>
-                    <div class="col-md-12">
-                      <%= property.collection_check_boxes :extra_ids, Extra.where(subtype: category), :id, :name do |b| %>
+                  <div class="form-group">
+                    <div class="col-md-2">
+                      <label class="control-label checkbox-header app-checkbox"><strong><%= t("activerecord.attributes.extra.#{category}.title") %></strong></label>
+                      <div class="col-md-12">
+                        <%= property.collection_check_boxes :extra_ids, Extra.where(subtype: category), :id, :name do |b| %>
                           <div class="custom-control custom-checkbox app-checkbox">
-                            <%= b.check_box({class: "custom-control-input" , type: 'checkbox'}) %>
+                            <%= b.check_box({class: "custom-control-input", type: 'checkbox'}) %>
                             <%#= b.label({class: 'custom-control-label'}) %>
                             <%= b.label({class: 'custom-control-label'}) do %>
                               <%= t("activerecord.attributes.extra.#{category}.#{b.text}") %>
                             <% end %>
                           </div>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+
+
+                <div class="form-group">
+                  <div class="col-md-12">
+                    <div class="col-md-12">
+                      <%= property.collection_check_boxes :extra_ids, Extra.where(subtype: 'dependent'), :id, :name do |b| %>
+                        <div class="custom-control custom-checkbox app-checkbox mt-2">
+                          <%= b.check_box({class: "custom-control-input dependent_check", type: 'checkbox'}) %>
+                          <%= b.label({class: 'custom-control-label dependent_label'}) do %>
+                            <%= t("activerecord.attributes.extra.dependent.#{b.text}") %>
+                          <% end %>
+                          <div class="mt-1">
+                            <input type="number" name="property[storage_space]" class="form-control custom-control-label dependent_input" placeholder="<%= t("activerecord.attributes.extra.dependent.#{b.text}_placeholder") %>">
+                          </div>
+                        </div>
                       <% end %>
                     </div>
                   </div>
                 </div>
-              <% end %>
-
-                <div class="form-group">
-                  <%= property.collection_check_boxes :extra_ids, Extra.where(subtype: 'dependent'), :id, :name do |b| %>
-                    <div class="custom-control custom-checkbox app-checkbox mt-2">
-                      <%= b.check_box({class: "custom-control-input dependent_check", type: 'checkbox'}) %>
-                      <%#= b.label({class: 'custom-control-label'}) %>
-                      <%= b.label({class: 'custom-control-label dependent_label'}) do %>
-                        <%= t("activerecord.attributes.extra.dependent.#{b.text}") %>
-                      <% end %>
-                      <div class="mt-1">
-                        <input type="text" name="property[storage_space]" class="form-control custom-control-label dependent_input" placeholder="e.g. 80">
-                      </div>
-                    </div>
-                  <% end %>
-<!--                  <div class="custom-control custom-checkbox mb-1">-->
-<!--                    <input type="checkbox" class="custom-control-input" name="checker" id="storage_checker">-->
-<!--                    <label class="custom-control-label" for="storage_checker">Αποθήκη</label>-->
-<!--                    <div class="mt-1">-->
-<!--                      <input type="text" name="property[storage_space]" class="form-control custom-control-label" placeholder="e.g. 80">-->
-<!--                    </div>-->
-<!--                  </div>-->
-                </div>
-<!--                <div class="custom-control custom-checkbox mb-1">-->
-<!--                  <input type="checkbox" class="custom-control-input" name="rdGroup3" id="rd7" checked>-->
-<!--                  <label class="custom-control-label" for="rd7">eBay</label>-->
-<!--                  <div class="mt-1">-->
-<!--                    <input type="text" class="form-control custom-control-label" placeholder="e.g. ebay@looper.com" disabled> </div>-->
-<!--                </div>-->
-<!--                <div class="custom-control custom-checkbox mb-1">-->
-<!--                  <input type="checkbox" class="custom-control-input" name="rdGroup3" id="rd6" checked>-->
-<!--                  <label class="custom-control-label" for="rd6">Amazon</label>-->
-<!--                  <div class="mt-1">-->
-<!--                    <input type="text" class="form-control custom-control-label" placeholder="e.g. amazon@looper.com" disabled> </div>-->
-<!--                </div>-->
-<!--                </div>-->
-
-
               </div>
 
-              <div class="form-group">
-                <div class="col-xs-12">
-                  <label class="col-xs-12 control-label">Perigrafi</label>
-                  <%= text_field_tag 'query', 'Enter your search query here' %>
+              <div class="justify-content-center px-3">
+                <div class="form-group">
+                  <strong><%= property.label :adxe %></strong>
+                  <%= property.text_area :adxe, placeholder: Property.human_attribute_name("adxe_placeholder"), class: 'form-control' %>
+                </div>
+              </div>
+
+              <div class="justify-content-center px-3">
+                <div class="form-group">
+                  <strong><%= property.label :adspitogatos %></strong>
+                  <%= property.text_area :adspitogatos, placeholder: Property.human_attribute_name("adspitogatos_placeholder"), class: 'form-control' %>
                 </div>
               </div>
             </div>
@@ -328,6 +326,7 @@
 
 
         </div>
+        <hr/>
       </div>
   <% end %>
 

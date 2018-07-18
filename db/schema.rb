@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_16_105907) do
+ActiveRecord::Schema.define(version: 2018_07_18_115937) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,6 +137,11 @@ ActiveRecord::Schema.define(version: 2018_07_16_105907) do
     t.string "roofdeck_space"
     t.string "storage_space"
     t.string "garden_space"
+    t.string "plot_space"
+    t.string "notes"
+    t.string "adxe"
+    t.string "adspitogatos"
+    t.string "address"
     t.index ["account_id"], name: "index_properties_on_account_id"
     t.index ["location_id"], name: "index_properties_on_location_id"
   end

@@ -68,7 +68,7 @@ class DependantSelect extends React.Component {
     return (
       <div>
         <div className="form-group">
-          <label htmlFor="property_category">{this.props.i18n.select.category}</label>
+          <label htmlFor="property_category">{this.props.i18n.select.category} <abbr title={this.props.i18n.select.required}>*</abbr></label>
           <SimpleSelect
             id={'property_category_container'}
             identity={'property_category_component'}
@@ -87,7 +87,7 @@ class DependantSelect extends React.Component {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="property_subcategory">{this.props.i18n.select.subcategory}</label>
+          <label htmlFor="property_subcategory">{this.props.i18n.select.subcategory} <abbr title={this.props.i18n.select.required}>*</abbr></label>
           <SimpleSelect
             id={'property_subcategory_container'}
             identity={'property_subcategory_component'}

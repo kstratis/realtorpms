@@ -42,7 +42,7 @@ en:
         orientation:
           title: "Orientation"
           facade: "Frontage lot"
-          through_lot: "Dual-aspect lot"
+          double_frontage: "Double frontage"
           corner: "Corner lot"
           internal: "Inwards facing lot"
         view:
@@ -59,14 +59,20 @@ en:
           furnished: "Furnished"
           tents: "Sun shades"
           no_elevator: "No elevator"
-          clima: "Air condition"
-          door_security: "Security door"
+          clima: "Air conditioning"
+          security_door: "Security door"
           pool: "Pool"
           no_utility_bills: "Maintenance bills free"
           professional_use: "Fit for professional use"
+        dependent:
           storage: "Storage space"
-          roof_deck: "Roof deck"
+          storage_placeholder: "Storage size in sq meters"
+          roofdeck: "Roof deck"
+          roofdeck_placeholder: "Roofdeck size in sq meters"
           garden: "Garden"
+          garden_placeholder: "Garden size in sq meters"
+          plot: "Land plot"
+          plot_placeholder: "Garden size in sq meters"
       property:
         description: "Description"
         businesstype: "Entry type"
@@ -81,10 +87,14 @@ en:
         bathrooms_placeholder: "i.e. 2"
         construction: "Construction"
         location: "Location"
+        address: "Address"
+        address_placeholder: "i.e. 51 Mackintosh Place, CF24 4RL"
         floor: "Floor"
         levels: "Levels"
         availability: "Availability"
         availability_placeholder: "Pick a date"
+        notes: "Notes"
+        notes_placeholder: "i.e. Mortgage"
         enums:
           businesstype:
             sell: "Sell"
@@ -151,6 +161,8 @@ en:
         placeholder: "Choose..."
         category: "Category"
         subcategory: "Subcategory"
+        required: "Required field"
+        optional: "Optional field"
     datatables:
       users:
         partner: "Partner"

@@ -1,4 +1,5 @@
 class Property < ApplicationRecord
+  before_validation :handle_dependent_fields, on: :update
   # belongs_to :user
   belongs_to :account
   belongs_to :location, optional: true
@@ -8,6 +9,7 @@ class Property < ApplicationRecord
   # https://stackoverflow.com/a/38845388/178728
   has_many :users, -> { distinct }, through: :assignments, dependent: :destroy
   attr_accessor :locationid
+  # attr_reader :pricepersqmeter
 
 
   # enum propertycategory: [:apartment, :terraced, :maisonette, :building, :home]
@@ -42,5 +44,26 @@ class Property < ApplicationRecord
   validates :bedrooms, numericality: { only_integer: true }, allow_blank: true
   validates :bathrooms, numericality: { only_integer: true }, allow_blank: true
 
+  def pricepersqmeter
+    (price / size).to_s unless price.blank? || size.blank? || size == 0
+  end
+
+  private
+
+    def handle_dependent_fields
+      puts 'runs'
+      # byebug
+      puts extras
+      # puts "yolo ids are: #{property_params[:extra_ids]}"
+      # e = property_params[:extra_ids]
+      edited_extras = extras.reject { |c| c.empty? }.collect { |extra_id| Extra.find(extra_id).name }
+
+      set_diff = %w(roofdeck storage garden plot) - edited_extras
+
+      set_diff.each do |el|
+        puts "the property is: #{el + '_space'}"
+        # @property.send(el + '_space', nil)
+      end
+    end
 
 end
