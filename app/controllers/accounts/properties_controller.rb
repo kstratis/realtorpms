@@ -179,6 +179,10 @@ module Accounts
                                          :roofdeck_space,
                                          :storage_space,
                                          :garden_space,
+                                         :address,
+                                         :notes,
+                                         :adxe,
+                                         :adspitogatos,
                                          images: [],
                                          extra_ids: [])
       end
