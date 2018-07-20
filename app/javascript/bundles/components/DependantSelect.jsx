@@ -19,21 +19,26 @@ class DependantSelect extends React.Component {
     })
   };
 
+  // In dependant select the first component is called the 'master' and can be thought of as the 'parent' of the two.
+  // The dependent one is called the 'slave' and takes the 'slaveOptions' options.
   state = {
     slaveDisabled: true,  // This changes according to the controlling parent
-    nonControllerOptions: []  // The subcategory component gets its options from state according to parent selection
+    slaveOptions: []  // The subcategory component gets its options from state according to parent selection
   };
 
-  // Set the subcategory's options according to parent selection
-  handleOptions = (selectedOption, controller) => {
-    // controller is the parent. When 'onChanged' fires on subcategory dropdown, do nothing
-    if (!controller) return;
-    // when it fires on the parent, set subcategory's options and enable it
+  // Set the subcategory's options according to parent selection.
+  // Mind that this fires for both components (master & slave).
+  handleOptions = (selectedOption, isMaster) => {
+    // 'master' is the parent component. When 'onChanged' fires on subcategory dropdown, do nothing. For example
+    // if 'apartment' is changed to 'villa' you don't nedd to change the property category cause they are both under
+    // 'residential'.
+    if (!isMaster) return;
+    // If it fires on the parent, set subcategory's options and enable it
     if (selectedOption) {
-      this.setState({nonControllerOptions: this.formatOptions(this.props.options[selectedOption.value], false)});
+      this.setState({slaveOptions: this.formatOptions(this.props.options[selectedOption.value], false)});
       this.setState({slaveDisabled: false});
     } else{  // otherwise if 'x' is pressed on parent, clear subcategory's selection, fire the validator and disable it.
-      // Handle the controller (subcategory component
+      // Handle the master (subcategory component
       this.subcategorySelectComp.clearSelection();
       this.subcategorySelectComp.updateExternalDOM(selectedOption);
       this.setState({slaveDisabled: true});
@@ -47,7 +52,9 @@ class DependantSelect extends React.Component {
   formatOptions = (options, isController) => {
     const data = options;
     const iterable = isController ? Object.keys(data) : data['subcategory'];
+    console.log(iterable);
     if (isController){
+      // "transformLevel1"
       return iterable.map((e) => {
         return {
           'label': Object.values(data[e]['category'])[0],
@@ -55,6 +62,7 @@ class DependantSelect extends React.Component {
         }
       });
     } else {
+      // "transformLevel2"
       return iterable.map((e) => {
         return {
           'label': Object.values(e)[0],
@@ -75,7 +83,7 @@ class DependantSelect extends React.Component {
             inputID={this.props.formdata.categoryid}
             inputName={this.props.formdata.categoryname}
             formID={this.props.formdata.formid}
-            controller={true}
+            master={true}
             className={'simple-select'}
             options={this.formatOptions(this.props.options, true)}
             handleOptions={this.handleOptions}
@@ -94,9 +102,9 @@ class DependantSelect extends React.Component {
             inputID={this.props.formdata.subcategoryid}
             inputName={this.props.formdata.subcategoryname}
             formID={this.props.formdata.formid}
-            controller={false}
+            master={false}
             className={'simple-select'}
-            options={this.state.nonControllerOptions}
+            options={this.state.slaveOptions}
             handleOptions={this.handleOptions}
             i18n={this.props.i18n}
             disabled={this.state.slaveDisabled}

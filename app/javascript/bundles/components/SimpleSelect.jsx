@@ -10,7 +10,7 @@ class SimpleSelect extends React.Component {
     formID: PropTypes.string,
     inputID: PropTypes.string,
     inputName: PropTypes.string,
-    controller: PropTypes.bool,
+    isMaster: PropTypes.bool,
     options: PropTypes.array,
     handleOptions: PropTypes.func,
     disabled: PropTypes.bool,
@@ -35,6 +35,8 @@ class SimpleSelect extends React.Component {
     if (!this.props.soloMode) {
       this.props.onRef(this)
     }
+    // Take care of the default value
+    this.state.selectedOption ? this.updateExternalDOM(this.state.selectedOption) : '';
   }
 
   // Same as above but destroys the reference instead
@@ -87,7 +89,7 @@ class SimpleSelect extends React.Component {
     // check if we are dealing with dependant or solo select
     if (!this.props.soloMode) {
       if (typeof this.props.handleOptions === "function") {
-        this.props.handleOptions(selectedOption, this.props.controller);
+        this.props.handleOptions(selectedOption, this.props.isMaster);
       }
     }
   };
