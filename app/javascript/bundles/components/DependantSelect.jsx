@@ -83,7 +83,7 @@ class DependantSelect extends React.Component {
             inputID={this.props.formdata.categoryid}
             inputName={this.props.formdata.categoryname}
             formID={this.props.formdata.formid}
-            master={true}
+            isMaster={true}
             className={'simple-select'}
             options={this.formatOptions(this.props.options, true)}
             handleOptions={this.handleOptions}
@@ -102,7 +102,7 @@ class DependantSelect extends React.Component {
             inputID={this.props.formdata.subcategoryid}
             inputName={this.props.formdata.subcategoryname}
             formID={this.props.formdata.formid}
-            master={false}
+            isMaster={false}
             className={'simple-select'}
             options={this.state.slaveOptions}
             handleOptions={this.handleOptions}
