@@ -37,10 +37,10 @@ class DependantSelect extends React.Component {
     if (selectedOption) {
       this.setState({slaveOptions: this.formatOptions(this.props.options[selectedOption.value], false)});
       this.setState({slaveDisabled: false});
-    } else{  // otherwise if 'x' is pressed on parent, clear subcategory's selection, fire the validator and disable it.
+    } else{  // otherwise if 'x' is pressed on 'master', clear the slave's current selection then fire the validator and disable it.
       // Handle the master (subcategory component
-      this.subcategorySelectComp.clearSelection();
-      this.subcategorySelectComp.updateExternalDOM(selectedOption);
+      this.slaveComponent.clearSelection();
+      this.slaveComponent.updateExternalDOM(selectedOption);
       this.setState({slaveDisabled: true});
     }
   };
@@ -108,7 +108,7 @@ class DependantSelect extends React.Component {
             handleOptions={this.handleOptions}
             i18n={this.props.i18n}
             disabled={this.state.slaveDisabled}
-            onRef={ref => (this.subcategorySelectComp = ref)}
+            onRef={ref => (this.slaveComponent = ref)}
             soloMode={false}
             searchable={this.props.searchable}
           />
