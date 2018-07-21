@@ -23,7 +23,7 @@ class DependantSelect extends React.Component {
 
   constructor(props) {
     super(props);
-    this.formatOptions = this.formatOptions.bind(this);
+    this.buildSelectOptions = this.buildSelectOptions.bind(this);
     this.getCategoryKey = this.getCategoryKey.bind(this);
   }
 
@@ -32,7 +32,7 @@ class DependantSelect extends React.Component {
   state = {
     slaveDisabled: !this.props.storedSlaveOption,  // This changes according to the controlling parent
     // This gets the sibling categories given the stored one.
-    slaveOptions: this.props.storedSlaveOption ? this.formatOptions(this.props.options[this.getCategoryKey()], false) : []
+    slaveOptions: this.props.storedSlaveOption ? this.buildSelectOptions(this.props.options[this.getCategoryKey()], false) : []
     // slaveOptions: []  // The subcategory component gets its options from state according to parent selection
   };
 
@@ -49,7 +49,7 @@ class DependantSelect extends React.Component {
         this.slaveComponent.clearSelection();
         this.slaveComponent.updateExternalDOM('');
       }
-      this.setState({slaveOptions: this.formatOptions(this.props.options[selectedOption.value], false)});
+      this.setState({slaveOptions: this.buildSelectOptions(this.props.options[selectedOption.value], false)});
       this.setState({slaveDisabled: false});
     } else{  // otherwise if 'x' is pressed on 'master', clear the slave's current selection then fire the validator and disable it.
       // Handle the master (subcategory component
@@ -59,11 +59,11 @@ class DependantSelect extends React.Component {
     }
   };
 
-  // TODO This can be further optimized to save the if/else statement
-  // This transforms parent/child options data for use with the select component.
-  // Parent's data are coming from rails. These data when filtered by key become the child's option
+  // This builds the options of the select component based on the given parameters.
+  // i.e. For the 'Master' component it would suffice to iterate over the `this.props.options` keys
+  // The master's data is coming from Rails. When filtered by key the result becomes the slave's options
   // Get an overview here: https://repl.it/@kstratis/Transformationsfinal
-  formatOptions (options, isController) {
+  buildSelectOptions (options, isController) {
     const data = options;
     const iterable = isController ? Object.keys(data) : data['subcategory'];
     // "transformLevel1" / "transformLevel2"
@@ -74,23 +74,6 @@ class DependantSelect extends React.Component {
       }
     });
   }
-    // if (isController){
-    //   // "transformLevel1"
-    //   return iterable.map((e) => {
-    //     return {
-    //       'label': Object.values(data[e]['category'])[0],
-    //       'value': Object.keys(data[e]['category'])[0]
-    //     }
-    //   });
-    // } else {
-    //   // "transformLevel2"
-    //   return iterable.map((e) => {
-    //     return {
-    //       'label': Object.values(e)[0],
-    //       'value': Object.keys(e)[0]
-    //     }
-    //   });
-    // }
 
   // Helper function to retrieve the category value of the master given the slave's one.
   filterFn(arr) {
@@ -148,7 +131,7 @@ class DependantSelect extends React.Component {
             isMaster={true}
             storedOption={this.props.storedMasterOption}
             className={'simple-select'}
-            options={this.formatOptions(this.props.options, true)}
+            options={this.buildSelectOptions(this.props.options, true)}
             handleOptions={this.handleOptions}
             i18n={this.props.i18n}
             disabled={false}
