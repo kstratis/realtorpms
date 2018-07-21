@@ -12,6 +12,8 @@ class DependantSelect extends React.Component {
       subcategoryid: PropTypes.string.isRequired,
       subcategoryname: PropTypes.string.isRequired,
     }),
+    storedMasterOption: PropTypes.object,
+    storedSlaveOption: PropTypes.object,
     options: PropTypes.object.isRequired,
     searchable: PropTypes.bool,
     i18n: PropTypes.shape({
@@ -19,22 +21,34 @@ class DependantSelect extends React.Component {
     })
   };
 
+  constructor(props) {
+    super(props);
+    this.formatOptions = this.formatOptions.bind(this);
+    this.getCategoryKey = this.getCategoryKey.bind(this);
+  }
+
   // In dependant select the first component is called the 'master' and can be thought of as the 'parent' of the two.
   // The dependent one is called the 'slave' and takes the 'slaveOptions' options.
   state = {
-    slaveDisabled: true,  // This changes according to the controlling parent
-    slaveOptions: []  // The subcategory component gets its options from state according to parent selection
+    slaveDisabled: !this.props.storedSlaveOption,  // This changes according to the controlling parent
+    // This gets the sibling categories given the stored one.
+    slaveOptions: this.props.storedSlaveOption ? this.formatOptions(this.props.options[this.getCategoryKey()], false) : []
+    // slaveOptions: []  // The subcategory component gets its options from state according to parent selection
   };
 
   // Set the subcategory's options according to parent selection.
   // Mind that this fires for both components (master & slave).
   handleOptions = (selectedOption, isMaster) => {
-    // 'master' is the parent component. When 'onChanged' fires on subcategory dropdown, do nothing. For example
-    // if 'apartment' is changed to 'villa' you don't nedd to change the property category cause they are both under
-    // 'residential'.
+    // 'master' is the parent component. When 'onChanged' fires on subcategory dropdown, do nothing.
+    // For example if 'apartment' is changed to 'villa' you don't need to change the property category
+    // because they are both under 'residential'.
     if (!isMaster) return;
     // If it fires on the parent, set subcategory's options and enable it
     if (selectedOption) {
+      if (this.masterComponent.state.selectedOption && this.masterComponent.state.selectedOption.value !== selectedOption.value){
+        this.slaveComponent.clearSelection();
+        this.slaveComponent.updateExternalDOM('');
+      }
       this.setState({slaveOptions: this.formatOptions(this.props.options[selectedOption.value], false)});
       this.setState({slaveDisabled: false});
     } else{  // otherwise if 'x' is pressed on 'master', clear the slave's current selection then fire the validator and disable it.
@@ -49,28 +63,76 @@ class DependantSelect extends React.Component {
   // This transforms parent/child options data for use with the select component.
   // Parent's data are coming from rails. These data when filtered by key become the child's option
   // Get an overview here: https://repl.it/@kstratis/Transformationsfinal
-  formatOptions = (options, isController) => {
+  formatOptions (options, isController) {
     const data = options;
     const iterable = isController ? Object.keys(data) : data['subcategory'];
-    console.log(iterable);
-    if (isController){
-      // "transformLevel1"
-      return iterable.map((e) => {
-        return {
-          'label': Object.values(data[e]['category'])[0],
-          'value': Object.keys(data[e]['category'])[0]
-        }
-      });
-    } else {
-      // "transformLevel2"
-      return iterable.map((e) => {
-        return {
-          'label': Object.values(e)[0],
-          'value': Object.keys(e)[0]
-        }
-      });
-    }
-  };
+    // "transformLevel1" / "transformLevel2"
+    return iterable.map((e) => {
+      return {
+        'label': isController ? Object.values(data[e]['category'])[0] : Object.values(e)[0],
+        'value': isController ? Object.keys(data[e]['category'])[0] : Object.keys(e)[0]
+      }
+    });
+  }
+    // if (isController){
+    //   // "transformLevel1"
+    //   return iterable.map((e) => {
+    //     return {
+    //       'label': Object.values(data[e]['category'])[0],
+    //       'value': Object.keys(data[e]['category'])[0]
+    //     }
+    //   });
+    // } else {
+    //   // "transformLevel2"
+    //   return iterable.map((e) => {
+    //     return {
+    //       'label': Object.values(e)[0],
+    //       'value': Object.keys(e)[0]
+    //     }
+    //   });
+    // }
+
+  // Helper function to retrieve the category value of the master given the slave's one.
+  filterFn(arr) {
+    // arr at this point is exactly this:
+    // [ null, null, null, null, null, null, null, null, null ]
+    // [ null, null, null, null, null, null, null, null, null ]
+    // [ null, null, 'land', null ]
+    // [ null, null, null, null, null, null ]
+    // 4 arrays cause we have 4 categories. It is full of nulls
+    // because of no match except one in the third array which
+    // is what we are looking for. Now we pull out the nulls off
+    // of each array which leaves us with 3 empty arrays. If it's
+    // empty retun null, otherwise return it's first
+    // and only element which is our match.
+    const filtered_array = arr.filter(Boolean);
+    return filtered_array.length > 0 ? filtered_array[0] : null
+  }
+
+  // This retrieves the category key given a preselected subcategory.
+  // For example assume that the database has stored a slave's component value
+  // as "{ island: 'Νησί' }". This function allows to retrieve its category which is 'land' through which we'll manage
+  // to get its other siblings which are:
+  // { land_plot: 'Οικόπεδο' },
+  // { parcels: 'Αγροτεμάχιο' },
+  // { island: 'Νησί' },
+  // { other_categories: 'Λοιπές κατηγορίες' },
+  // For detailed info have a look here: https://repl.it/@kstratis/Transformationsfinal
+  // // "transformLevel3"
+  getCategoryKey(){
+    const data = this.props.options;
+    const preselectedOption = this.props.storedSlaveOption;
+    const interim_result = Object.keys(data).map(e => {
+      // This thing below returns an array of flattened arrays. i.e.
+      // [ null, null, 'land', null ]
+      return this.filterFn(Object.values(data[e]['subcategory']).map( el => {
+        return Object.keys(el)[0] === preselectedOption.value ? e : null;
+      }))
+    });
+    // This last line filters out the nulls and picks the
+    // only value left which is a string.
+    return interim_result.filter(Boolean)[0];
+  }
 
   render() {
     return (
@@ -84,12 +146,13 @@ class DependantSelect extends React.Component {
             inputName={this.props.formdata.categoryname}
             formID={this.props.formdata.formid}
             isMaster={true}
+            storedOption={this.props.storedMasterOption}
             className={'simple-select'}
             options={this.formatOptions(this.props.options, true)}
             handleOptions={this.handleOptions}
             i18n={this.props.i18n}
             disabled={false}
-            onRef={ref => (this.categorySelectComp = ref)}
+            onRef={ref => (this.masterComponent = ref)}
             soloMode={false}
             searchable={this.props.searchable}
           />
@@ -103,6 +166,7 @@ class DependantSelect extends React.Component {
             inputName={this.props.formdata.subcategoryname}
             formID={this.props.formdata.formid}
             isMaster={false}
+            storedOption={this.props.storedSlaveOption}
             className={'simple-select'}
             options={this.state.slaveOptions}
             handleOptions={this.handleOptions}

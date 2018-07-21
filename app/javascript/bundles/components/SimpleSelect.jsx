@@ -16,7 +16,7 @@ class SimpleSelect extends React.Component {
     disabled: PropTypes.bool,
     onRef: PropTypes.func,
     searchable: PropTypes.bool,
-    storedValue: PropTypes.any,
+    storedOption: PropTypes.any,
     // soloMode guards against dynamically setting the dropdown options
     // and gettings a ref which is needed in DependantSelect
     soloMode: PropTypes.bool,
@@ -47,7 +47,10 @@ class SimpleSelect extends React.Component {
   }
 
   state = {
-    selectedOption: this.props.storedValue || '',
+    selectedOption: this.props.storedOption || '',
+    // selectedOption: this.props.soloMode
+    //   ? this.props.storedOption || ''
+    //   :
     // selectedOption: '',
   };
 
@@ -84,14 +87,15 @@ class SimpleSelect extends React.Component {
   // to update the childen's dropdown values accordingly
   handleChange = (selectedOption) => {
     // selectedOption is an object of type: {label: "Πώληση", value: "sell"}
-    this.setState({selectedOption});
-    this.updateExternalDOM(selectedOption);
     // check if we are dealing with dependant or solo select
     if (!this.props.soloMode) {
       if (typeof this.props.handleOptions === "function") {
         this.props.handleOptions(selectedOption, this.props.isMaster);
       }
     }
+    this.setState({selectedOption}, () => {
+      this.updateExternalDOM(this.state.selectedOption);
+    });
   };
 
   render() {
