@@ -3,7 +3,7 @@
 jQuery.fn.returnOnClick = function(location) {
   $(this).on('click', function(e) {
     e.preventDefault();
-    history.length === 2 ? Turbolinks.visit(location, { action: 'advance' }) : history.go(-1)
+    history.length === 2 ? Turbolinks.visit(location, { action: 'advance' }) : history.go(-1);
   });
   return this;
 };

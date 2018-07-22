@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import '!style-loader!css-loader!react-select/dist/react-select.css';
 
 class SimpleSelect extends React.Component {
-
   static propTypes = {
     identity: PropTypes.string,
     formID: PropTypes.string,
@@ -33,7 +32,7 @@ class SimpleSelect extends React.Component {
   // This stores a component reference so it can be used from the parent
   componentDidMount() {
     if (!this.props.soloMode) {
-      this.props.onRef(this)
+      this.props.onRef(this);
     }
     // Take care of the default value
     this.state.selectedOption ? this.updateExternalDOM(this.state.selectedOption) : '';
@@ -42,16 +41,12 @@ class SimpleSelect extends React.Component {
   // Same as above but destroys the reference instead
   componentWillUnmount() {
     if (!this.props.soloMode) {
-      this.props.onRef(undefined)
+      this.props.onRef(undefined);
     }
   }
 
   state = {
-    selectedOption: this.props.storedOption || '',
-    // selectedOption: this.props.soloMode
-    //   ? this.props.storedOption || ''
-    //   :
-    // selectedOption: '',
+    selectedOption: this.props.storedOption || ''
   };
 
   // This operates outside react and is used to store the value
@@ -62,38 +57,36 @@ class SimpleSelect extends React.Component {
 
   // This is called from DependantSelect to clear the component's value
   clearSelection() {
-    this.setState({selectedOption: ''});
+    this.setState({ selectedOption: '' });
   }
-
-
 
   // This updates the true input field (which is hidden) according to the value selected.
   // It uses JQuery and is relatively safe to use since it's located outside of our React Component
-  updateExternalDOM = (selectedOption) => {
+  updateExternalDOM = selectedOption => {
     // JQuery form validator specifics. Requires JQuery.
     // Manipulating a form element outside of this React component should be relatively safe
     const element = $(`#${this.props.inputID}`);
     const form = $(`#${this.props.formID}`);
-    console.log(element);
     console.log(form);
+    console.log(element);
     this.setTextInputValue(selectedOption ? selectedOption.value : '');
     const validator = form.validate();
     validator.element(element);
-    console.log($(`#${this.props.inputID}`).val())
+    console.log($(`#${this.props.inputID}`).val());
   };
 
   // This is called on every value change to update the current value and the "true" hidden input field.
   // If it is the parent dropdown that is change it will also call the handleOptions from DependantSelect
   // to update the childen's dropdown values accordingly
-  handleChange = (selectedOption) => {
+  handleChange = selectedOption => {
     // selectedOption is an object of type: {label: "Πώληση", value: "sell"}
     // check if we are dealing with dependant or solo select
     if (!this.props.soloMode) {
-      if (typeof this.props.handleOptions === "function") {
+      if (typeof this.props.handleOptions === 'function') {
         this.props.handleOptions(selectedOption, this.props.isMaster);
       }
     }
-    this.setState({selectedOption}, () => {
+    this.setState({ selectedOption }, () => {
       this.updateExternalDOM(this.state.selectedOption);
     });
   };
@@ -106,7 +99,7 @@ class SimpleSelect extends React.Component {
       <div>
         <Select
           id={this.props.identity}
-          inputProps={{'data-name': this.props.name}}
+          inputProps={{ 'data-name': this.props.name }}
           name={this.props.name}
           value={this.state.selectedOption}
           className={this.props.className}
@@ -116,12 +109,13 @@ class SimpleSelect extends React.Component {
           disabled={this.props.disabled}
           searchable={this.props.searchable}
         />
-        <input id={this.props.inputID}
-               name={this.props.inputName}
-               className="proxy-form-input"
-               ref={(input) => {
-                 this.textInput = input;
-               }}
+        <input
+          id={this.props.inputID}
+          name={this.props.inputName}
+          className="proxy-form-input"
+          ref={input => {
+            this.textInput = input;
+          }}
         />
       </div>
     );
@@ -129,4 +123,3 @@ class SimpleSelect extends React.Component {
 }
 
 export default SimpleSelect;
-

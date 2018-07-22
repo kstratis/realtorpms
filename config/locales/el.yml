@@ -115,7 +115,7 @@ el:
             commercial: "Επαγγελματική στέγη"
             land: "Γη"
             other_properties: "Λοιπά ακίνητα"
-          residential:
+          subcategory:
             apartment: "Διαμέρισμα"
             studio: "Studio / Γκαρσονιέρα"
             maisonette: "Μεζονέτα"
@@ -125,7 +125,6 @@ el:
             bungalow: "Bungalow"
             building: "Κτίριο"
             apartment_complex: "Συγκρότημα διαμερισμάτων"
-          commercial:
             office: "Γραφείο"
             public_store: "Κατάστημα"
             warehouse: "Αποθήκη"
@@ -135,12 +134,10 @@ el:
             business_building: "Κτίριο επαγγελματικών χώρων"
             hall: "Αίθουσα"
             showroom: "Εκθεσιακός χώρος"
-          land:
             land_plot: "Οικόπεδο"
             parcels: "Αγροτεμάχιο"
             island: "Νησί"
             other_categories: "Λοιπές κατηγορίες"
-          other_properties:
             parking: "Parking"
             business: "Επιχείρηση"
             prefabricated: "Προκατασκευασμένο"

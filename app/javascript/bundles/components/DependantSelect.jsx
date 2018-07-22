@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SimpleSelect from './SimpleSelect'
+import SimpleSelect from './SimpleSelect';
 
 class DependantSelect extends React.Component {
-
   static propTypes = {
     formdata: PropTypes.shape({
       formid: PropTypes.string,
       categoryid: PropTypes.string.isRequired,
       categoryname: PropTypes.string.isRequired,
       subcategoryid: PropTypes.string.isRequired,
-      subcategoryname: PropTypes.string.isRequired,
+      subcategoryname: PropTypes.string.isRequired
     }),
     storedMasterOption: PropTypes.object,
     storedSlaveOption: PropTypes.object,
@@ -30,9 +29,11 @@ class DependantSelect extends React.Component {
   // In dependant select the first component is called the 'master' and can be thought of as the 'parent' of the two.
   // The dependent one is called the 'slave' and takes the 'slaveOptions' options.
   state = {
-    slaveDisabled: !this.props.storedSlaveOption,  // This changes according to the controlling parent
+    slaveDisabled: !this.props.storedSlaveOption, // This changes according to the controlling parent
     // This gets the sibling categories given the stored one.
-    slaveOptions: this.props.storedSlaveOption ? this.buildSelectOptions(this.props.options[this.getCategoryKey()], false) : []
+    slaveOptions: this.props.storedSlaveOption
+      ? this.buildSelectOptions(this.props.options[this.getCategoryKey()], false)
+      : []
     // slaveOptions: []  // The subcategory component gets its options from state according to parent selection
   };
 
@@ -45,17 +46,21 @@ class DependantSelect extends React.Component {
     if (!isMaster) return;
     // If it fires on the parent, set subcategory's options and enable it
     if (selectedOption) {
-      if (this.masterComponent.state.selectedOption && this.masterComponent.state.selectedOption.value !== selectedOption.value){
+      if (
+        this.masterComponent.state.selectedOption &&
+        this.masterComponent.state.selectedOption.value !== selectedOption.value
+      ) {
         this.slaveComponent.clearSelection();
         this.slaveComponent.updateExternalDOM('');
       }
-      this.setState({slaveOptions: this.buildSelectOptions(this.props.options[selectedOption.value], false)});
-      this.setState({slaveDisabled: false});
-    } else{  // otherwise if 'x' is pressed on 'master', clear the slave's current selection then fire the validator and disable it.
+      this.setState({ slaveOptions: this.buildSelectOptions(this.props.options[selectedOption.value], false) });
+      this.setState({ slaveDisabled: false });
+    } else {
+      // otherwise if 'x' is pressed on 'master', clear the slave's current selection then fire the validator and disable the field.
       // Handle the master (subcategory component
       this.slaveComponent.clearSelection();
       this.slaveComponent.updateExternalDOM(selectedOption);
-      this.setState({slaveDisabled: true});
+      this.setState({ slaveDisabled: true });
     }
   };
 
@@ -63,15 +68,15 @@ class DependantSelect extends React.Component {
   // i.e. For the 'Master' component it would suffice to iterate over the `this.props.options` keys
   // The master's data is coming from Rails. When filtered by key the result becomes the slave's options
   // Get an overview here: https://repl.it/@kstratis/Transformationsfinal
-  buildSelectOptions (options, isController) {
+  buildSelectOptions(options, isController) {
     const data = options;
     const iterable = isController ? Object.keys(data) : data['subcategory'];
     // "transformLevel1" / "transformLevel2"
-    return iterable.map((e) => {
+    return iterable.map(e => {
       return {
-        'label': isController ? Object.values(data[e]['category'])[0] : Object.values(e)[0],
-        'value': isController ? Object.keys(data[e]['category'])[0] : Object.keys(e)[0]
-      }
+        label: isController ? Object.values(data[e]['category'])[0] : Object.values(e)[0],
+        value: isController ? Object.keys(data[e]['category'])[0] : Object.keys(e)[0]
+      };
     });
   }
 
@@ -89,7 +94,7 @@ class DependantSelect extends React.Component {
     // empty retun null, otherwise return it's first
     // and only element which is our match.
     const filtered_array = arr.filter(Boolean);
-    return filtered_array.length > 0 ? filtered_array[0] : null
+    return filtered_array.length > 0 ? filtered_array[0] : null;
   }
 
   // This retrieves the category key given a preselected subcategory.
@@ -102,15 +107,17 @@ class DependantSelect extends React.Component {
   // { other_categories: 'Λοιπές κατηγορίες' },
   // For detailed info have a look here: https://repl.it/@kstratis/Transformationsfinal
   // // "transformLevel3"
-  getCategoryKey(){
+  getCategoryKey() {
     const data = this.props.options;
     const preselectedOption = this.props.storedSlaveOption;
     const interim_result = Object.keys(data).map(e => {
       // This thing below returns an array of flattened arrays. i.e.
       // [ null, null, 'land', null ]
-      return this.filterFn(Object.values(data[e]['subcategory']).map( el => {
-        return Object.keys(el)[0] === preselectedOption.value ? e : null;
-      }))
+      return this.filterFn(
+        Object.values(data[e]['subcategory']).map(el => {
+          return Object.keys(el)[0] === preselectedOption.value ? e : null;
+        })
+      );
     });
     // This last line filters out the nulls and picks the
     // only value left which is a string.
@@ -121,7 +128,9 @@ class DependantSelect extends React.Component {
     return (
       <div>
         <div className="form-group">
-          <label htmlFor="property_category">{this.props.i18n.select.category} <abbr title={this.props.i18n.select.required}>*</abbr></label>
+          <label htmlFor="property_category">
+            {this.props.i18n.select.category} <abbr title={this.props.i18n.select.required}>*</abbr>
+          </label>
           <SimpleSelect
             id={'property_category_container'}
             identity={'property_category_component'}
@@ -141,7 +150,9 @@ class DependantSelect extends React.Component {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="property_subcategory">{this.props.i18n.select.subcategory} <abbr title={this.props.i18n.select.required}>*</abbr></label>
+          <label htmlFor="property_subcategory">
+            {this.props.i18n.select.subcategory} <abbr title={this.props.i18n.select.required}>*</abbr>
+          </label>
           <SimpleSelect
             id={'property_subcategory_container'}
             identity={'property_subcategory_component'}
@@ -166,4 +177,3 @@ class DependantSelect extends React.Component {
 }
 
 export default DependantSelect;
-

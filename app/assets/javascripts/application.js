@@ -26,4 +26,3 @@
 //= require stacked-menu/dist/js/stacked-menu.js
 //= require stacked-menu/dist/js/stacked-menu.jquery.js
 //= require_tree .
-
