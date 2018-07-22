@@ -42,9 +42,11 @@
                 className: 'simple-select-container',
                 options: get_options,
                 searchable: false,
-                storedMasterOption: {label: "Γη", value: "land"},
+                # storedMasterOption: {label: "Γη", value: "land"},
+                storedMasterOption: {label: Property.human_enum_name(:category, @property.category), value: @property.category},
                 # storedMasterValue: {"label": Property.human_enum_name(:businesstype, @property.businesstype), "value": @property.businesstype},
-                storedSlaveOption: {label: "Νησί", value: "island"},
+                storedSlaveOption: {label: Property.human_enum_name(:subcategory, @property.category), value: @property.subcategory},
+                # storedSlaveOption: {label: "Νησί", value: "island"},
                 # storedSlaveValue: {"label": Property.human_enum_name(:businesstype, @property.businesstype), "value": @property.businesstype},
                 formdata: {
                     formid: "edit_property_#{@property.id}",
