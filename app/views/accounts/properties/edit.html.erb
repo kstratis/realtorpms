@@ -65,7 +65,7 @@
               <%= react_component('AjaxSelect', props: {
                   inputID: 'property_locationid',
                   inputName: 'property[locationid]',
-                  formID: 'new_property',
+                  formID: "edit_property_#{@property.id}",
                   className: 'simple-select',
                   # options: Property.propertytypes.keys.collect { |propertytype| { label: Property.human_enum_name(:propertytype, propertytype), value: propertytype} },
                   # options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
@@ -116,7 +116,7 @@
               <%= react_component('SimpleSelect', props: {
                   inputID: 'property_floor',
                   inputName: 'property[floor]',
-                  formID: 'new_property',
+                  formID: "edit_property_#{@property.id}",
                   className: 'simple-select',
                   options: Property.floors.keys.collect {|floor| {label: Property.human_enum_name(:floor, floor), value: floor}} + (1..50).collect {|floor| {label: floor, value: floor}},
                   # options: Property.propertytypes.keys.collect { |propertytype| { label: Property.human_enum_name(:propertytype, propertytype), value: propertytype} },
@@ -139,7 +139,7 @@
               <%= react_component('SimpleSelect', props: {
                   inputID: 'property_construction',
                   inputName: 'property[construction]',
-                  formID: 'new_property',
+                  formID: "edit_property_#{@property.id}",
                   className: 'simple-select',
                   # options: Property.propertytypes.keys.collect { |propertytype| { label: Property.human_enum_name(:propertytype, propertytype), value: propertytype} },
                   options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
@@ -158,7 +158,7 @@
               <%= react_component('SimpleSelect', props: {
                   inputID: 'property_levels',
                   inputName: 'property[levels]',
-                  formID: 'new_property',
+                  formID: "edit_property_#{@property.id}",
                   className: 'simple-select',
                   options: (1..10).collect {|level| {label: level, value: level}},
                   soloMode: true,
@@ -259,7 +259,7 @@
                   i18n: {
                       uppy: t('js.uppy'),
                   },
-                  uppy_url_listener: new_property_path
+                  uppy_url_listener: edit_property_path
               } do %>
               <% end %>
               <%#= property.label :size %>

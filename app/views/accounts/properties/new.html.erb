@@ -25,7 +25,7 @@
               <%= react_component('SimpleSelect', props: {
                   inputID: 'property_businesstype',
                   inputName: 'property[businesstype]',
-                  formID: 'new_property',
+                  formID: new_property_path,
                   className: 'simple-select',
                   options: Property.businesstypes.keys.collect {|businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype}},
                   soloMode: true,
@@ -41,9 +41,8 @@
                 className: 'simple-select-container',
                 options: get_options,
                 searchable: false,
-                soloMode: false,
                 formdata: {
-                    formid: 'new_property',
+                    formid: new_property_path,
                     categoryid: 'property_category',
                     categoryname: 'property[category]',
                     subcategoryid: 'property_subcategory',
@@ -63,7 +62,7 @@
               <%= react_component('AjaxSelect', props: {
                   inputID: 'property_locationid',
                   inputName: 'property[locationid]',
-                  formID: 'new_property',
+                  formID: new_property_path,
                   className: 'simple-select',
                   # options: Property.propertytypes.keys.collect { |propertytype| { label: Property.human_enum_name(:propertytype, propertytype), value: propertytype} },
                   # options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
@@ -114,7 +113,7 @@
               <%= react_component('SimpleSelect', props: {
                   inputID: 'property_floor',
                   inputName: 'property[floor]',
-                  formID: 'new_property',
+                  formID: new_property_path,
                   className: 'simple-select',
                   options: Property.floors.keys.collect {|floor| {label: Property.human_enum_name(:floor, floor), value: floor}} + (1..50).collect {|floor| {label: floor, value: floor}},
                   # options: Property.propertytypes.keys.collect { |propertytype| { label: Property.human_enum_name(:propertytype, propertytype), value: propertytype} },
@@ -137,7 +136,7 @@
               <%= react_component('SimpleSelect', props: {
                   inputID: 'property_construction',
                   inputName: 'property[construction]',
-                  formID: 'new_property',
+                  formID: new_property_path,
                   className: 'simple-select',
                   # options: Property.propertytypes.keys.collect { |propertytype| { label: Property.human_enum_name(:propertytype, propertytype), value: propertytype} },
                   options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
@@ -156,7 +155,7 @@
               <%= react_component('SimpleSelect', props: {
                   inputID: 'property_levels',
                   inputName: 'property[levels]',
-                  formID: 'new_property',
+                  formID: new_property_path,
                   className: 'simple-select',
                   options: (1..10).collect {|level| {label: level, value: level}},
                   soloMode: true,
@@ -221,7 +220,7 @@
               <%#= react_component('Dates', props: {
                   inputID: 'property_availability',
                   inputName: 'property[availability]',
-                  formID: 'new_property',
+                  formID: new_property_path,
                   className: 'dates',
                   # options: (1..10).collect {|level| {label: level, value: level}},
                   # soloMode: true,
