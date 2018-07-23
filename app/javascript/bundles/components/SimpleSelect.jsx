@@ -34,7 +34,10 @@ class SimpleSelect extends React.Component {
     if (!this.props.soloMode) {
       this.props.onRef(this);
     }
-    // Take care of the default value
+    // Take care of the default value. Mind that you can't validate anything before the validation plugin sets up.
+    // This is why on first render we don't validate anything. We basically defer until the validation plugin fully
+    // loads on page load or the user clicks the form's submit button (which means that the plugin will have loaded by
+    // then
     this.state.selectedOption ? this.updateExternalDOM(this.state.selectedOption, false) : '';
   }
 
@@ -64,21 +67,18 @@ class SimpleSelect extends React.Component {
 
   // This updates the true input field (which is hidden) according to the value selected.
   // It uses JQuery and is relatively safe to use since it's located outside of our React Component
-  updateExternalDOM = (selectedOption, validate=true) => {
+  updateExternalDOM = (selectedOption, validate = true) => {
     // JQuery form validator specifics. Requires JQuery.
     // Manipulating a form element outside of this React component should be relatively safe
     let element = $(`#${this.props.inputID}`);
     let form = $(`#${this.props.formID}`);
     this.setTextInputValue(selectedOption ? selectedOption.value : '');
     if (validate) {
-      console.log(`running validation on form:`);
-      console.log(form);
-      console.log(`running validation on element:`);
-      console.log(element);
       const validator = form.validate();
       this.setState({ validator }, () => {
         validator.element(element);
-        console.log($(`#${this.props.inputID}`).val());
+        // DEBUG
+        // console.log($(`#${this.props.inputID}`).val());
       });
     }
   };
@@ -100,9 +100,6 @@ class SimpleSelect extends React.Component {
   };
 
   render() {
-    // const {selectedOption} = this.state;
-    // const value = selectedOption && selectedOption.value;
-    // console.log(value);
     return (
       <div>
         <Select
