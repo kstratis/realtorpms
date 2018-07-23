@@ -1,6 +1,6 @@
 $(document).on('turbolinks:load', function(e) {
   // This handles the new property form submission
-  $('#new_property').on('ajax:before', function(event, xhr, opts) {
+  $('#new_property, [id^=edit_property_]').on('ajax:before', function(event, xhr, opts) {
     if ($('#preventformsubmit').length > 0) {
       if (Object.keys(window.uppy_uploader.getState().files).length) {
         event.preventDefault();

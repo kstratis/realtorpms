@@ -6,10 +6,10 @@ $(document).on('turbolinks:load', function(e) {
   if (window.location.pathname === '/properties/new' || window.location.pathname.match(/^\/properties\/\d+\/edit$/)) {
     console.log('running validation');
     var jqvalidatorDomNode = $('#jqvalidator');
-    console.log(jqvalidatorDomNode);
     var jqtranslations = jqvalidatorDomNode.data('i18n').jqvalidator;
     $.extend($.validator.messages, jqtranslations);
     $('#new_property, [id^=edit_property_]').validate({
+    // $('#edit_property_96').validate({
       rules: {
         'property[businesstype]': {
           required: true

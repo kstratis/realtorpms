@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', function(e) {
-  if (window.location.pathname === '/properties/new') {
+  if (window.location.pathname === '/properties/new' || window.location.pathname.match(/^\/properties\/\d+\/edit$/)) {
     // Handle the special selectbox fields with text value
     // console.log($('input[type=checkbox]').prop('checked'));
     var elements = $('.dependent_check');

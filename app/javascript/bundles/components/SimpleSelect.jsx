@@ -43,10 +43,12 @@ class SimpleSelect extends React.Component {
     if (!this.props.soloMode) {
       this.props.onRef(undefined);
     }
+    this.state.validator.destroy();
   }
 
   state = {
-    selectedOption: this.props.storedOption || ''
+    selectedOption: this.props.storedOption || '',
+    validator: ''
   };
 
   // This operates outside react and is used to store the value
@@ -65,14 +67,19 @@ class SimpleSelect extends React.Component {
   updateExternalDOM = selectedOption => {
     // JQuery form validator specifics. Requires JQuery.
     // Manipulating a form element outside of this React component should be relatively safe
-    const element = $(`#${this.props.inputID}`);
-    const form = $(`#${this.props.formID}`);
-    console.log(form);
-    console.log(element);
+    let element = $(`#${this.props.inputID}`);
+    let form = $(`#${this.props.formID}`);
     this.setTextInputValue(selectedOption ? selectedOption.value : '');
+    console.log(`running validation on form:`);
+    console.log(form);
+    console.log(`running validation on element:`);
+    console.log(element);
     const validator = form.validate();
-    validator.element(element);
-    console.log($(`#${this.props.inputID}`).val());
+    this.setState({ validator }, () => {
+      validator.element(element);
+      console.log($(`#${this.props.inputID}`).val());
+    });
+
   };
 
   // This is called on every value change to update the current value and the "true" hidden input field.

@@ -50,8 +50,10 @@ class DependantSelect extends React.Component {
         this.masterComponent.state.selectedOption &&
         this.masterComponent.state.selectedOption.value !== selectedOption.value
       ) {
+        // Since we imperativelly control the slave component (no onChange is fired on slave), we have also
+        // call updateExternalDOM to actually update the true value
         this.slaveComponent.clearSelection();
-        this.slaveComponent.updateExternalDOM('');
+        this.slaveComponent.updateExternalDOM(selectedOption);
       }
       this.setState({ slaveOptions: this.buildSelectOptions(this.props.options[selectedOption.value], false) });
       this.setState({ slaveDisabled: false });
@@ -59,7 +61,7 @@ class DependantSelect extends React.Component {
       // otherwise if 'x' is pressed on 'master', clear the slave's current selection then fire the validator and disable the field.
       // Handle the master (subcategory component
       this.slaveComponent.clearSelection();
-      this.slaveComponent.updateExternalDOM(selectedOption);
+      this.slaveComponent.updateExternalDOM('');
       this.setState({ slaveDisabled: true });
     }
   };
