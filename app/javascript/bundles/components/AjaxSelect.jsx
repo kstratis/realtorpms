@@ -1,5 +1,4 @@
 import React from 'react';
-import Select from 'react-select';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Async } from 'react-select';
@@ -21,6 +20,7 @@ class SimpleSelect extends React.Component {
     disabled: PropTypes.bool,
     onRef: PropTypes.func,
     searchable: PropTypes.bool,
+    storedOption: PropTypes.any,
     // soloMode guards against dynamically setting the dropdown options
     // and gettings a ref which is needed in DependantSelect
     soloMode: PropTypes.bool,
@@ -32,7 +32,7 @@ class SimpleSelect extends React.Component {
   constructor(props) {
     super(props);
     this.setTextInputValue = this.setTextInputValue.bind(this);
-    this.onChange = this.onChange.bind(this);
+    // this.onChange = this.onChange.bind(this);
     // this.getOptionsDelayed = debounce(this.getOptions.bind(this), 300);
 
     this.getOptions = this.getOptions.bind(this);
@@ -56,10 +56,10 @@ class SimpleSelect extends React.Component {
     }
   }
 
-  onChange (value) {
-    this.setState({value: value});
-    this.updateExternalDOM(value);
-  }
+  // onChange (value) {
+  //   this.setState({value: value});
+  //   this.updateExternalDOM(value);
+  // }
 
   // This operates outside react and is used to store the value
   // at the true input field which is eventually used by the rails form
@@ -89,7 +89,7 @@ class SimpleSelect extends React.Component {
   }
 
   state = {
-    selectedOption: '',
+    selectedOption: this.props.storedOption || '',
     value: ''
   };
 
@@ -108,27 +108,32 @@ class SimpleSelect extends React.Component {
   // This is called on every value change to update the current value and the "true" hidden input field.
   // If it is the parent dropdown that is change it will also call the handleOptions from DependantSelect
   // to update the childen's dropdown values accordingly
-  handleChange = (selectedOption) => {
-    this.setState({selectedOption});
-    this.updateExternalDOM(selectedOption);
+  handleChange = selectedOption => {
+    // selectedOption is an object of type: {label: "Πώληση", value: "sell"}
     // check if we are dealing with dependant or solo select
     if (!this.props.soloMode) {
-      if (typeof this.props.handleOptions === "function") {
-        this.props.handleOptions(selectedOption, this.props.controller);
+      if (typeof this.props.handleOptions === 'function') {
+        this.props.handleOptions(selectedOption, this.props.isMaster);
       }
     }
+    this.setState({ selectedOption }, () => {
+      this.updateExternalDOM(this.state.selectedOption);
+    });
   };
 
   render() {
-    const {selectedOption} = this.state;
-    const value = selectedOption && selectedOption.value;
+    // const {selectedOption} = this.state;
+    // const value = selectedOption && selectedOption.value;
     return (
       <div>
         <Async
           id={this.props.identity}
           inputProps={{'data-name': this.props.name}}
           name={this.props.name}
+          value={this.state.selectedOption}
           className={this.props.className}
+          onChange={this.handleChange}
+          loadOptions={this.getOptions}
           placeholder={this.props.i18n.select.placeholder}
           disabled={this.props.disabled}
           searchable={this.props.searchable}
@@ -139,26 +144,7 @@ class SimpleSelect extends React.Component {
             // Do no filtering, just return all options
             return options;
           }}
-
-          value={this.state.value}
-          onChange={this.onChange}
-
-          // value="one"
-          loadOptions={this.getOptions}
          />
-
-        {/*<Select*/}
-          {/*// id={this.props.identity}*/}
-          {/*// inputProps={{'data-name': this.props.name}}*/}
-          {/*// name={this.props.name}*/}
-          {/*// value={value}*/}
-          {/*// className={this.props.className}*/}
-          {/*onChange={this.handleChange}*/}
-          {/*options={this.props.options}*/}
-          {/*placeholder={this.props.i18n.select.placeholder}*/}
-          {/*disabled={this.props.disabled}*/}
-          {/*searchable={this.props.searchable}*/}
-        {/*/>*/}
         <input id={this.props.inputID}
                name={this.props.inputName}
                className="proxy-form-input"
