@@ -149,6 +149,7 @@ class DependantSelect extends React.Component {
             onRef={ref => (this.masterComponent = ref)}
             soloMode={false}
             searchable={this.props.searchable}
+            ajaxEnabled={false}
           />
         </div>
         <div className="form-group">
@@ -171,6 +172,7 @@ class DependantSelect extends React.Component {
             onRef={ref => (this.slaveComponent = ref)}
             soloMode={false}
             searchable={this.props.searchable}
+            ajaxEnabled={false}
           />
         </div>
       </div>

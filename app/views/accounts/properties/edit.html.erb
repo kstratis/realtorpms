@@ -30,6 +30,7 @@
                   options: Property.businesstypes.keys.collect {|businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype}},
                   soloMode: true,
                   searchable: false,
+                  ajaxEnabled: false,
                   storedOption: {"label": Property.human_enum_name(:businesstype, @property.businesstype), "value": @property.businesstype},
                   i18n: {
                       select: t('js.components.select'),
@@ -62,7 +63,7 @@
                 <%= content_tag(:i, nil, class: 'fas fa-map fa-fw') + ' ' + t('activerecord.attributes.property.location') %>
                 <abbr title="<%= t('js.components.select.required') %>">*</abbr>
               <% end %>
-              <%= react_component('AjaxSelect', props: {
+              <%= react_component('SimpleSelect', props: {
                   inputID: 'property_locationid',
                   inputName: 'property[locationid]',
                   formID: "edit_property_#{@property.id}",
@@ -71,6 +72,8 @@
                   # options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
                   searchable: true,
                   soloMode: true,
+                  ajaxEnabled: true,
+                  storedOption: {"label": "#{@property.location.localname} - #{@property.location.parent_localname}", "value": @property.location.id},
                   i18n: {
                       select: t('js.components.select'),
                   }

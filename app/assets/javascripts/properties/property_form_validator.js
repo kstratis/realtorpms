@@ -16,6 +16,9 @@ $(document).on('turbolinks:load', function(e) {
         'property[subcategory]': {
           required: true
         },
+        'property[locationid]': {
+          required: true
+        },
         'property[price]': {
           digits: true
         },

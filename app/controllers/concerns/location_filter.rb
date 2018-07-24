@@ -1,4 +1,4 @@
-module LocationFilter
+ module LocationFilter
   def filter_locations
     # @locations = Location.all
 

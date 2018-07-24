@@ -23,12 +23,14 @@
                 <abbr title="<%= t('js.components.select.required') %>">*</abbr>
               <% end %>
               <%= react_component('SimpleSelect', props: {
+                  id: 'a',
                   inputID: 'property_businesstype',
                   inputName: 'property[businesstype]',
                   formID: 'new_property',
                   className: 'simple-select',
                   options: Property.businesstypes.keys.collect {|businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype}},
                   soloMode: true,
+                  ajaxEnabled: false,
                   searchable: false,
                   i18n: {
                       select: t('js.components.select'),
@@ -38,6 +40,7 @@
 
             <!-- DependantSelect will generate the form-group div and label tags automatically (it's nested) -->
             <%= react_component('DependantSelect', props: {
+                id: 'b',
                 className: 'simple-select-container',
                 options: get_options,
                 searchable: false,
@@ -59,7 +62,8 @@
                 <%= content_tag(:i, nil, class: 'fas fa-map fa-fw') + ' ' + t('activerecord.attributes.property.location') %>
                 <abbr title="<%= t('js.components.select.required') %>">*</abbr>
               <% end %>
-              <%= react_component('AjaxSelect', props: {
+              <%= react_component('SimpleSelect', props: {
+                  id: 'c',
                   inputID: 'property_locationid',
                   inputName: 'property[locationid]',
                   formID: 'new_property',
@@ -68,6 +72,7 @@
                   # options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
                   searchable: true,
                   soloMode: true,
+                  ajaxEnabled: true,
                   i18n: {
                       select: t('js.components.select'),
                   }
@@ -111,6 +116,7 @@
               <% end %>
 
               <%= react_component('SimpleSelect', props: {
+                  id: 'd',
                   inputID: 'property_floor',
                   inputName: 'property[floor]',
                   formID: 'new_property',
@@ -120,6 +126,7 @@
                   # options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
                   searchable: true,
                   soloMode: true,
+                  ajaxEnabled: false,
                   i18n: {
                       select: t('js.components.select'),
                   }
@@ -134,6 +141,7 @@
                 <% end %>
               <% end %>
               <%= react_component('SimpleSelect', props: {
+                  id: 'e',
                   inputID: 'property_construction',
                   inputName: 'property[construction]',
                   formID: 'new_property',
@@ -142,6 +150,7 @@
                   options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
                   searchable: true,
                   soloMode: true,
+                  ajaxEnabled: false,
                   i18n: {
                       select: t('js.components.select'),
                   }
@@ -153,12 +162,14 @@
                 <%= content_tag(:i, nil, class: 'fas fa-building fa-fw') + ' ' + t('activerecord.attributes.property.levels') %>
               <% end %>
               <%= react_component('SimpleSelect', props: {
+                  id: 'f',
                   inputID: 'property_levels',
                   inputName: 'property[levels]',
                   formID: 'new_property',
                   className: 'simple-select',
                   options: (1..10).collect {|level| {label: level, value: level}},
                   soloMode: true,
+                  ajaxEnabled: false,
                   searchable: false,
                   i18n: {
                       select: t('js.components.select'),
