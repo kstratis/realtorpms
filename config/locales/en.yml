@@ -234,9 +234,9 @@ en:
     add: "Add partner"
     invite: "Invite partner"
   clients:
-    title: "Πελάτες"
-    add: "Προσθήκη πελάτη"
-    list: "Λίστα πελατών"
+    title: "Clients"
+    add: "Add client"
+    list: "Client list"
   main:
     heading: "Dashboard"
     subheading: "This is the dashboard for logged in users"
@@ -256,6 +256,9 @@ en:
     new:
       heading: "Add new property"
       add_button: "Add property"
+    edit:
+      heading: "Edit property"
+      edit_button: "Update"
     created:
       message: "Property successfully added"
       return: "Return"

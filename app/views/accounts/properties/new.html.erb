@@ -308,7 +308,7 @@
                             <%= t("activerecord.attributes.extra.dependent.#{b.text}") %>
                           <% end %>
                           <div class="mt-1">
-                            <input type="number" name="property[storage_space]" class="form-control custom-control-label dependent_input" placeholder="<%= t("activerecord.attributes.extra.dependent.#{b.text}_placeholder") %>">
+                            <input type="number" name="property[<%= b.text %>_space]" class="form-control custom-control-label dependent_input" placeholder="<%= t("activerecord.attributes.extra.dependent.#{b.text}_placeholder") %>">
                           </div>
                         </div>
                       <% end %>

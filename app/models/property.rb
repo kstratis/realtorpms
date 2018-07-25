@@ -50,19 +50,16 @@ class Property < ApplicationRecord
 
   private
 
+    # In the 'compound' extra fields for roofdeck, storage, garden and plot where each comes with its own input,
+    # make sure that if unchecked on update action, the existing input value will also be cleared.
     def handle_dependent_fields
-      puts 'runs'
-      # byebug
-      puts extras
-      # puts "yolo ids are: #{property_params[:extra_ids]}"
-      # e = property_params[:extra_ids]
-      edited_extras = extras.reject { |c| c.empty? }.collect { |extra_id| Extra.find(extra_id).name }
-
+      edited_extras = extras.reject { |c| c.blank? }.collect { |extra| Extra.find(extra.id).name }
       set_diff = %w(roofdeck storage garden plot) - edited_extras
-
       set_diff.each do |el|
-        puts "the property is: #{el + '_space'}"
-        # @property.send(el + '_space', nil)
+        # DEBUG
+        # puts "the property is: #{el + '_space'}"
+        # This won't do any validations or update the updated_at attribute
+        write_attribute(:"#{el + '_space'}", nil)
       end
     end
 

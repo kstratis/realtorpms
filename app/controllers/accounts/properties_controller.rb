@@ -134,7 +134,7 @@ module Accounts
     def update
       respond_to do |format|
         if @property.update(property_params)
-          format.html { redirect_to @property, notice: 'Property was successfully updated.' }
+          format.html { redirect_to @property, flash: {success: "Property was successfully updated."}}
           format.json { render :show, status: :ok, location: @property }
         else
           format.html { render :edit }
@@ -179,6 +179,7 @@ module Accounts
                                          :roofdeck_space,
                                          :storage_space,
                                          :garden_space,
+                                         :plot_space,
                                          :address,
                                          :notes,
                                          :adxe,

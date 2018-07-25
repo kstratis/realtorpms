@@ -248,7 +248,7 @@
 
 
             <div class="form-group">
-              <%= property.submit t('properties.new.add_button'), class: 'btn btn-primary' %>
+              <%= property.submit t('properties.edit.edit_button'), class: 'btn btn-primary' %>
               <%#= property.submit t('properties.new.add_button'), class: 'btn btn-primary', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Creating property..."} %>
             </div>
 
@@ -303,7 +303,9 @@
                             <%= t("activerecord.attributes.extra.dependent.#{b.text}") %>
                           <% end %>
                           <div class="mt-1">
-                            <input type="number" name="property[storage_space]" class="form-control custom-control-label dependent_input" placeholder="<%= t("activerecord.attributes.extra.dependent.#{b.text}_placeholder") %>">
+                            <%= property.text_field :"#{b.text}_space", placeholder: t("activerecord.attributes.extra.dependent.#{b.text}_placeholder"), class: 'form-control custom-control-label dependent_input' %>
+
+<!--                            <input type="number" name="property[<%#= b.text %>_space]" class="form-control custom-control-label dependent_input" placeholder="<%#= t("activerecord.attributes.extra.dependent.#{b.text}_placeholder") %>">-->
                           </div>
                         </div>
                       <% end %>
