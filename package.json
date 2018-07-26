@@ -24,7 +24,7 @@
     "url-search-params": "^0.10.0"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.1.1",
+    "@fortawesome/fontawesome-free": "^5.2.0",
     "autoprefixer": "^9.0.1",
     "cssnano": "^4.0.3",
     "node-sass": "^4.9.2",
