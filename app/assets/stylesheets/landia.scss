@@ -487,3 +487,16 @@ input[type="search"]::-webkit-search-cancel-button {
     border-left: 1px solid #eee;
   }
 }
+
+#form-success{
+  border: 1px solid var(--success);
+  border-radius: 3px;
+  padding-bottom: 15px;
+  //background-color: ;
+}
+
+#form-error{
+  border: 1px solid var(--success);
+  border-radius: 3px;
+  padding-bottom: 15px;
+}
