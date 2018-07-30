@@ -24,8 +24,10 @@
   <!-- This stylesheet is the uppy.scss. It needs to be placed before the main scss
        cause it overrides something in the transitions rules which breaks the system.
        It uses postcss to load the file. Check .postcssrc.yml -->
-  <%= stylesheet_pack_tag 'stylesheets/styles' %>
+  <%= stylesheet_pack_tag 'stylesheets/uppyjs_styles' %>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_pack_tag 'stylesheets/flatpickr_styles' %>
+
 
   <!--    <link rel="stylesheet" href="https://i.icomoon.io/public/temp/11ed69058d/Landia/style.css">-->
   <!--  <link rel="stylesheet" href="https://i.icomoon.io/public/temp/e42336f4f6/Landia/style.css">-->
@@ -41,6 +43,7 @@
   <%= javascript_pack_tag 'components-bundle' %>
   <%= javascript_pack_tag 'application' %>
   <%= javascript_pack_tag 'theme' %>
+  <%= javascript_pack_tag 'datepicker' %>
 
   <%#= javascript_pack_tag 'hello_react' %>
   <%= render 'layouts/shim' %>

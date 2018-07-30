@@ -228,7 +228,7 @@
               <%= property.label :availability do %>
                 <%= content_tag(:i, nil, class: 'fas fa-calendar fa-fw') + ' ' + t('activerecord.attributes.property.availability') %>
               <% end %>
-              <%= property.text_field :availability, placeholder: Property.human_attribute_name("availability_placeholder"), class: 'glowing-border datepicker' %>
+              <%= property.text_field :availability, placeholder: Property.human_attribute_name("availability_placeholder"), class: 'glowing-border', id: 'avail' %>
 
               <%#= react_component('Dates', props: {
                   inputID: 'property_availability',
