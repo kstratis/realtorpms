@@ -29,7 +29,7 @@ class Property < ApplicationRecord
   # enum residentialsubcategory: [:apartment, :terraced, :maisonette, :building, :home]
   # enum subtype: [:neoclassical, :protected_pr, :loft_pr, :traditional, :villa_pr, :stone,  :studio_pr,
   #             :prefabricated_pr, :precast_pr]
-  enum floor: [:basement, :semi_basement, :ground_floor, :mezzanine]
+  enum floor: [:basement, :semi_basement, :ground_floor, :mezzanine].concat(Array(1..50).map(&:to_s).map(&:to_sym))
   # enum orientation: [:facade, :airy, :on_corner, :inwards_facing]
   # enum view: [:sea, :mountain, :forest, :infinite]
   # enum heating: [:central, :prive]

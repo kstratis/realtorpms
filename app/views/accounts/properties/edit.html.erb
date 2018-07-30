@@ -121,7 +121,9 @@
                   inputName: 'property[floor]',
                   formID: "edit_property_#{@property.id}",
                   className: 'simple-select',
-                  options: Property.floors.keys.collect {|floor| {label: Property.human_enum_name(:floor, floor), value: floor}} + (1..50).collect {|floor| {label: floor, value: floor}},
+                  options: Property.floors.keys.collect {|floor| {label: I18n.t("activerecord.attributes.property.enums.floor.#{floor}", :default => floor.to_s), value: floor}},
+
+                  # options: Property.floors.keys.collect {|floor| {label: Property.human_enum_name(:floor, floor), value: floor}} + (1..50).collect {|floor| {label: floor, value: floor}},
                   # options: Property.propertytypes.keys.collect { |propertytype| { label: Property.human_enum_name(:propertytype, propertytype), value: propertytype} },
                   # options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
                   searchable: true,

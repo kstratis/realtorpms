@@ -50,6 +50,8 @@ gem 'launchy', '2.4.3'
 
 gem 'rails-assets-sweetalert2', source: 'https://rails-assets.org'
 
+gem 'rails-assets-flatpickr', source: 'https://rails-assets.org'
+
 gem 'sweet-alert2-rails'
 
 gem 'rails_12factor'
