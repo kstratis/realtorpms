@@ -7,7 +7,7 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.1'
+gem 'rails', '~> 5.2.1.1'
 # gem 'rails', :git => 'https://github.com/rails/rails'
 # gem 'bootstrap-sass', '3.3.7'
 gem 'bcrypt', '3.1.11'
@@ -20,7 +20,7 @@ gem 'bootstrap-datepicker-rails'
 gem 'rake', '~> 12.3.1'
 
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 1.0.0'
+gem 'pg', '~> 1.1.3'
 # Use Puma as the app server
 gem 'puma', '~> 3.12'
 # Use SCSS for stylesheets
@@ -33,14 +33,14 @@ gem 'uglifier', '~> 4.1'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5.1.1'
+gem 'turbolinks', '~> 5.2.0'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.7'
+gem 'jbuilder', '~> 2.8'
 
 gem 'jquery-rails', '~> 4.3.3'
 
-gem 'faker', '~> 1.8.7'
+gem 'faker', '~> 1.9.1'
 
 gem 'will_paginate', '~> 3.1.6'
 

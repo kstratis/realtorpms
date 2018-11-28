@@ -1,5 +1,5 @@
-import App from "../bundles/themes/main_theme";
+import Looper from "../bundles/themes/main_theme";
 
 $(document).on('turbolinks:load', function(e) {
-  App.init();
+  Looper();
 });
