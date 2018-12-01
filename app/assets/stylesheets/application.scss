@@ -45,13 +45,12 @@
 @import "default/bootstrap/popovers";
 @import "default/bootstrap/utilities";
 
-
 // Theme components
 // ==================================================
 // app plugins
-//@import "stacked-menu/dist/scss/stacked-menu";
+// This is loaded from node_modules. node_modules is explicitly
+// added to the sprockets (sass engine) search path in assets.rb
 @import "stacked-menu/src/scss/stacked-menu";
-
 
 // replace plugins
 @import "default/components/plugins";
@@ -89,15 +88,11 @@
 @import "default/components/countdown";
 @import "default/components/empty-state";
 
-
-
 // pages
 @import "default/components/auth";
 @import "default/components/message";
 
-
 @import "./*";
-//@import "stacked-menu/dist/scss/stacked-menu";
 @import "animate";
 @import "@fortawesome/fontawesome-free/css/all.css";
 @import "open-iconic/font/css/open-iconic-bootstrap.css";

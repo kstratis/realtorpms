@@ -50,7 +50,6 @@ class Theme {
   init () {
     // handle polyfill
     // =============================================================
-    console.log('theme running');
     this.placeholderShown()
     this.objectFitFallback()
 
