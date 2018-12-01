@@ -20,6 +20,7 @@
 // ==================================================
 @import "bootstrap/bootstrap-core";
 
+//@import "./*";
 // Bootstrap components overrides
 // ==================================================
 
@@ -50,6 +51,7 @@
 // app plugins
 //@import "stacked-menu/dist/scss/stacked-menu";
 @import "stacked-menu/dist/css/stacked-menu.css";
+
 
 // replace plugins
 @import "default/components/plugins";
@@ -88,13 +90,13 @@
 @import "default/components/empty-state";
 
 
-//@import "./*";
+
 // pages
 @import "default/components/auth";
 @import "default/components/message";
 
 
-
+@import "./*";
 //@import "stacked-menu/dist/scss/stacked-menu";
 @import "animate";
 @import "@fortawesome/fontawesome-free/css/all.css";
