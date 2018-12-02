@@ -12,9 +12,11 @@
  *
 */
 
-@import "default/variable-bs-overrides";
+@import "theme/variable-bs-overrides";
 @import "bootstrap/bootstrap-functions";
-@import "default/variables";
+@import "theme/variables";
+
+@import "variables-custom";
 
 // Bootstrap and its default variables
 // ==================================================
@@ -24,26 +26,26 @@
 // Bootstrap components overrides
 // ==================================================
 
-@import "default/bootstrap/typography";
-@import "default/bootstrap/code";
-@import "default/bootstrap/embed-responsive";
-@import "default/bootstrap/tables";
-@import "default/bootstrap/buttons";
-@import "default/bootstrap/alerts";
-@import "default/bootstrap/badge";
-@import "default/bootstrap/forms";
-@import "default/bootstrap/input-group";
-@import "default/bootstrap/custom-forms";
-@import "default/bootstrap/list-group";
-@import "default/bootstrap/cards";
-@import "default/bootstrap/dropdowns";
-@import "default/bootstrap/progress";
-@import "default/bootstrap/breadcrumb";
-@import "default/bootstrap/paginations";
-@import "default/bootstrap/navs";
-@import "default/bootstrap/modals";
-@import "default/bootstrap/popovers";
-@import "default/bootstrap/utilities";
+@import "theme/bootstrap/typography";
+@import "theme/bootstrap/code";
+@import "theme/bootstrap/embed-responsive";
+@import "theme/bootstrap/tables";
+@import "theme/bootstrap/buttons";
+@import "theme/bootstrap/alerts";
+@import "theme/bootstrap/badge";
+@import "theme/bootstrap/forms";
+@import "theme/bootstrap/input-group";
+@import "theme/bootstrap/custom-forms";
+@import "theme/bootstrap/list-group";
+@import "theme/bootstrap/cards";
+@import "theme/bootstrap/dropdowns";
+@import "theme/bootstrap/progress";
+@import "theme/bootstrap/breadcrumb";
+@import "theme/bootstrap/paginations";
+@import "theme/bootstrap/navs";
+@import "theme/bootstrap/modals";
+@import "theme/bootstrap/popovers";
+@import "theme/bootstrap/utilities";
 
 // Theme components
 // ==================================================
@@ -53,44 +55,44 @@
 @import "stacked-menu/src/scss/stacked-menu";
 
 // replace plugins
-@import "default/components/plugins";
+@import "theme/components/plugins";
 
 // app layout
-@import "default/components/base";
-@import "default/components/header";
-@import "default/components/aside";
-@import "default/components/page";
-@import "default/components/sidebar";
-@import "default/components/footer";
+@import "theme/components/base";
+@import "theme/components/header";
+@import "theme/components/aside";
+@import "theme/components/page";
+@import "theme/components/sidebar";
+@import "theme/components/footer";
 
 // app components
-@import "default/components/rating";
-@import "default/components/switchers";
-@import "default/components/icons";
-@import "default/components/tiles";
-@import "default/components/avatar";
-@import "default/components/mention";
-@import "default/components/event";
-@import "default/components/hamburger";
-@import "default/components/loader";
-@import "default/components/figure";
-@import "default/components/outbound-link";
-@import "default/components/steps";
-@import "default/components/todos";
-@import "default/components/progress-list";
-@import "default/components/visual-picker";
-@import "default/components/publisher";
-@import "default/components/timeline";
-@import "default/components/conversations";
-@import "default/components/feeds";
-@import "default/components/tasks";
-@import "default/components/metrics";
-@import "default/components/countdown";
-@import "default/components/empty-state";
+@import "theme/components/rating";
+@import "theme/components/switchers";
+@import "theme/components/icons";
+@import "theme/components/tiles";
+@import "theme/components/avatar";
+@import "theme/components/mention";
+@import "theme/components/event";
+@import "theme/components/hamburger";
+@import "theme/components/loader";
+@import "theme/components/figure";
+@import "theme/components/outbound-link";
+@import "theme/components/steps";
+@import "theme/components/todos";
+@import "theme/components/progress-list";
+@import "theme/components/visual-picker";
+@import "theme/components/publisher";
+@import "theme/components/timeline";
+@import "theme/components/conversations";
+@import "theme/components/feeds";
+@import "theme/components/tasks";
+@import "theme/components/metrics";
+@import "theme/components/countdown";
+@import "theme/components/empty-state";
 
 // pages
-@import "default/components/auth";
-@import "default/components/message";
+@import "theme/components/auth";
+@import "theme/components/message";
 
 @import "./*";
 @import "animate";
