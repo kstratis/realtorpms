@@ -3,6 +3,7 @@ import React from 'react';
 import ReactPaginate from 'react-paginate';
 import withDatatable from './withDatatable';
 import SkyLight from 'react-skylight';
+import ClampWrapper from '../components/ClampWrapper';
 
 const PropertiesList = ({
   handlePageClick,
@@ -17,7 +18,7 @@ const PropertiesList = ({
   ordering
 }) => {
   return (
-    <div className="col-md-12">
+    <div className="">
       <SkyLight hideOnOverlayClicked ref={ref => (this.simpleDialog = ref)} title="Hi, I'm a simple modal">
         Hello, I dont have any callbacks.
       </SkyLight>
@@ -28,24 +29,42 @@ const PropertiesList = ({
         </div>
       ) : dataset.length > 0 ? (
         <div className={'PropertyListContainer'}>
-          <div className={'row'}>
-            {dataset.map(entry => (
-              <div className={'col-sm-3'}>
-                <div className="card card-container" key={entry.id}>
-                  <img className="card-img-top card-image" src="https://via.placeholder.com/250x200" alt="Card image cap" />
-                  <div className="card-body">
-                    <h5 className="card-title">{entry.title}</h5>
-                    <p className="card-text">{entry.description}</p>
-                    <a href="#" className="btn btn-primary">
-                      Go somewhere
-                    </a>
-                  </div>
+          <div className={'card-deck'}>
+          {dataset.map((entry, index) => (
+
+            <div>
+              {console.log(index)}
+              {index % 3 === 2
+                ? <div>
+                    <div className="w-100 d-none d-md-block d-lg-none" />
+                    <div className="w-100 d-none d-sm-block d-md-none" />
+                  <div className="w-100 d-none d-md-block d-lg-none" />
+
+                  <div className="w-100 d-none d-lg-block d-xl-none" />
+                  <div className="w-100 d-none d-xl-block" />
                 </div>
+                : ''}
+            <div className="card mb-4" key={entry.id}>
+              <img className="card-img-top img-fluid" src=".../100px180/" alt="Card image cap" />
+              <div className="card-body">
+                <h5 className="card-title">{'Card title'}</h5>
+                <p className="card-text">
+                  {
+                    'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
+                  }
+                </p>
               </div>
-            ))}
+              <div className="card-footer">
+                <small className="text-muted">{'Last updated 3 mins ago'}</small>
+              </div>
+            </div>
+            </div>
+
+
+          ))}
           </div>
           {/* CARD END */}
-          {/*<div className={'clearfix'}> </div>*/}
+          <div className={'clearfix'}> </div>
           <div className={'row'}>
             <ReactPaginate
               previousLabel={'❮'}
@@ -69,6 +88,7 @@ const PropertiesList = ({
               previousClassName={'previous'}
             />
           </div>
+          <ClampWrapper />
         </div>
       ) : (
         <div className={'no-users'}>
