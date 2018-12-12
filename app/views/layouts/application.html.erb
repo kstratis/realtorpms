@@ -21,12 +21,14 @@
   <title><%= full_title(yield(:title)) %></title>
   <%= csrf_meta_tags %>
 
+
   <!-- This stylesheet is the uppy.scss. It needs to be placed before the main scss
        cause it overrides something in the transitions rules which breaks the system.
        It uses postcss to load the file. Check .postcssrc.yml -->
   <%= stylesheet_pack_tag 'stylesheets/uppyjs_styles' %>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= stylesheet_pack_tag 'stylesheets/flatpickr_styles' %>
+<!--  <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">-->
 
 
   <!--    <link rel="stylesheet" href="https://i.icomoon.io/public/temp/11ed69058d/Landia/style.css">-->

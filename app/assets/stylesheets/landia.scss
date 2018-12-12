@@ -64,10 +64,14 @@ h2 {
   color: #777;
 }
 
-p {
-  font-size: 1.1em;
-  line-height: 1.7em;
+.card-footer{
+  padding-left: 10px;
 }
+
+//p {
+//  font-size: 1.1em;
+//  line-height: 1.7em;
+//}
 
 .card-container{
   //width: 18rem;
@@ -77,10 +81,14 @@ p {
   //overflow: hidden;
   max-width: 250px;
   max-height: 200px;
-  width: 250;
+  width: 250px;
   height: 200px;
 }
 
+
+.card-body{
+  min-height: 220px;
+}
 /* header */
 
 //.full-width-container{

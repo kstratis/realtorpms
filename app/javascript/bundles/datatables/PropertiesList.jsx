@@ -30,38 +30,23 @@ const PropertiesList = ({
       ) : dataset.length > 0 ? (
         <div className={'PropertyListContainer'}>
           <div className={'card-deck'}>
-          {dataset.map((entry, index) => (
-
-            <div>
-              {console.log(index)}
-              {index % 3 === 2
-                ? <div>
-                    <div className="w-100 d-none d-md-block d-lg-none" />
-                    <div className="w-100 d-none d-sm-block d-md-none" />
-                  <div className="w-100 d-none d-md-block d-lg-none" />
-
-                  <div className="w-100 d-none d-lg-block d-xl-none" />
-                  <div className="w-100 d-none d-xl-block" />
+            {dataset.map((entry, index) => (
+                <div className={'col-sm-6 col-lg-4'} key={entry.id}>
+                <div className="card mb-4 mt-2">
+                  <img className="card-img-top" src="https://picsum.photos/200/200/?random" alt="Card image cap" />
+                  <div className="card-body">
+                    <h5 className="card-title clamp-2">{entry.title}</h5>
+                    <p className="card-text clamp-2">{entry.description}</p>
+                    <a href="#" className="btn btn-secondary">
+                      Go somewhere
+                    </a>
+                  </div>
+                  <div className="card-footer">
+                    <small className="text-muted">{'Last updated 3 mins ago'}</small>
+                  </div>
                 </div>
-                : ''}
-            <div className="card mb-4" key={entry.id}>
-              <img className="card-img-top img-fluid" src=".../100px180/" alt="Card image cap" />
-              <div className="card-body">
-                <h5 className="card-title">{'Card title'}</h5>
-                <p className="card-text">
-                  {
-                    'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'
-                  }
-                </p>
-              </div>
-              <div className="card-footer">
-                <small className="text-muted">{'Last updated 3 mins ago'}</small>
-              </div>
-            </div>
-            </div>
-
-
-          ))}
+                </div>
+            ))}
           </div>
           {/* CARD END */}
           <div className={'clearfix'}> </div>
