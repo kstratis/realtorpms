@@ -272,6 +272,7 @@ function withDatatable(WrappedComponent) {
             handleSort={this.handleSort}
             handleAssign={this.handleAssign}
             advanceByTwo={this.advanceByTwo}
+            i18n={this.props.i18n}
             {...this.state} />
         </div>
       );

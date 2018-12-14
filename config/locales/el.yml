@@ -183,6 +183,8 @@ el:
       placeholder: "π.χ. Δημήτρης Στεφάνου"
     properties_search:
       placeholder: "π.χ. Βούλα 80τ.μ."
+    properties_view_btn: "Προβολή"
+    properties_edit_btn: "Επεξεργασία"
     uppy:
       dropPaste: "Σύρετε τα αρχεία σας εδώ ή"
       browse: "επιλέξτε"

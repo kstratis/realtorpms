@@ -15,7 +15,8 @@ const PropertiesList = ({
   pageCount,
   selectedPage,
   sorting,
-  ordering
+  ordering,
+  i18n
 }) => {
   return (
     <div className="">
@@ -31,21 +32,28 @@ const PropertiesList = ({
         <div className={'PropertyListContainer'}>
           <div className={'card-deck'}>
             {dataset.map((entry, index) => (
-                <div className={'col-sm-6 col-lg-4'} key={entry.id}>
+              <div className={'col-sm-6 col-lg-4'} key={entry.id}>
                 <div className="card mb-4 mt-2">
-                  <img className="card-img-top" src="https://picsum.photos/200/200/?random" alt="Card image cap" />
+                  <img
+                    className="card-img-top thumb"
+                    src={`https://picsum.photos/640/480/?random&sig=${Math.random()}`}
+                    alt="Card image cap"
+                  />
+                  {/*<img className="card-img-top thumb" src={"https://picsum.photos/1250/800?image=1"} alt="Card image cap" />*/}
                   <div className="card-body">
                     <h5 className="card-title clamp-2">{entry.title}</h5>
-                    <p className="card-text clamp-2">{entry.description}</p>
-                    <a href="#" className="btn btn-secondary">
-                      Go somewhere
-                    </a>
+                    <div className={'desc-container'}>
+                      <p className="card-text clamp-2">{entry.description}</p>
+                    </div>
+
                   </div>
-                  <div className="card-footer">
-                    <small className="text-muted">{'Last updated 3 mins ago'}</small>
+                  <div className="btn-group d-flex" role="group" aria-label="Basic example">
+                    <a href="#" className="btn btn-primary w-100">{i18n.view}</a>
+                    {/*<a href="#" className="btn btn-danger"><i className="fa fa-eye fa-fw"/></a>*/}
+                    <a href="#" className="btn btn-warning w-100">{i18n.edit}</a>
                   </div>
                 </div>
-                </div>
+              </div>
             ))}
           </div>
           {/* CARD END */}

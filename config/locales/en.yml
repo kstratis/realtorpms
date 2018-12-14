@@ -181,6 +181,8 @@ en:
       placeholder: "i.e. John Smith"
     properties_search:
       placeholder: "i.e. 24 Oxford Street"
+    properties_view_btn: "View"
+    properties_edit_btn: "Edit"
     uppy:
       dropPaste: "Drop files here, paste or"
       browse: "browse"
