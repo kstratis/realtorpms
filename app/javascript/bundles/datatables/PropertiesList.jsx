@@ -33,6 +33,7 @@ const PropertiesList = ({
           <div className={'card-deck'}>
             {dataset.map((entry, index) => (
               <div className={'col-sm-6 col-lg-4'} key={entry.id}>
+                {console.log(entry)}
                 <div className="card mb-4 mt-2">
                   <img
                     className="card-img-top thumb"
@@ -45,12 +46,25 @@ const PropertiesList = ({
                     <div className={'desc-container'}>
                       <p className="card-text clamp-2">{entry.description}</p>
                     </div>
-
                   </div>
-                  <div className="btn-group d-flex" role="group" aria-label="Basic example">
-                    <a href="#" className="btn btn-primary w-100">{i18n.view}</a>
+                  <div className={'favourites'}>
+                    <a
+                      title={i18n.favourites_tooltip}
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      className={'tooltips btn-circle'}
+                      href={'#'}>
+                      <i className={'far fa-heart fa-lg fa-fw'} />
+                    </a>
+                  </div>
+                  <div className="card-control-buttons btn-group d-flex" role="group" aria-label="Basic example">
+                    <a href={entry.view_entity_path} className="btn btn-primary w-100">
+                      {i18n.view}
+                    </a>
                     {/*<a href="#" className="btn btn-danger"><i className="fa fa-eye fa-fw"/></a>*/}
-                    <a href="#" className="btn btn-warning w-100">{i18n.edit}</a>
+                    <a href={entry.edit_entity_path} className="btn btn-warning w-100">
+                      {i18n.edit}
+                    </a>
                   </div>
                 </div>
               </div>

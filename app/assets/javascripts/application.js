@@ -22,6 +22,7 @@
 //= require sweet-alert2-rails
 //= require jquery.validate
 //= require clamp
+//= require tooltips
 //= require stacked-menu/dist/js/stacked-menu.js
 //= require stacked-menu/dist/js/stacked-menu.jquery.js
 //= require_tree .

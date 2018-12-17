@@ -183,6 +183,7 @@ en:
       placeholder: "i.e. 24 Oxford Street"
     properties_view_btn: "View"
     properties_edit_btn: "Edit"
+    properties_favourites_tooltip: "Add to favourites"
     uppy:
       dropPaste: "Drop files here, paste or"
       browse: "browse"
@@ -253,6 +254,7 @@ en:
   properties:
     title: "Properties"
     add: "Add property"
+    add_fast: "Add property (fast)"
     list: "Property list"
     import: "Import properties"
     new:

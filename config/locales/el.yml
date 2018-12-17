@@ -185,6 +185,7 @@ el:
       placeholder: "π.χ. Βούλα 80τ.μ."
     properties_view_btn: "Προβολή"
     properties_edit_btn: "Επεξεργασία"
+    properties_favourites_tooltip: "Προσθήκη στα αγαπημένα"
     uppy:
       dropPaste: "Σύρετε τα αρχεία σας εδώ ή"
       browse: "επιλέξτε"
@@ -255,6 +256,7 @@ el:
   properties:
     title: "Ακίνητα"
     add: "Προσθήκη ακινήτου"
+    add_fast: "Προσθήκη ακινήτου (γρήγορη)"
     list: "Λίστα ακινήτων"
     import: "Εισαγωγή από αρχείο"
     new:
