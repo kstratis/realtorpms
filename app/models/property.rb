@@ -8,12 +8,15 @@ class Property < ApplicationRecord
   has_and_belongs_to_many :extras
   # https://stackoverflow.com/a/38845388/178728
   has_many :users, -> { distinct }, through: :assignments, dependent: :destroy
-  attr_accessor :locationid
-  # attr_reader :pricepersqmeter
+  has_many :favorites, dependent: :destroy
 
+  # Collection of properties which have been favorited by a particular user
+  scope :faved_by, -> (user) { joins(:favorites).where(favorites: { user: user }) }
+
+  attr_accessor :locationid
 
   # enum propertycategory: [:apartment, :terraced, :maisonette, :building, :home]
-  #
+
   enum businesstype: [:sell, :rent, :sell_rent]
 
   enum category: [:residential, :commercial, :land, :other]
@@ -46,6 +49,16 @@ class Property < ApplicationRecord
 
   def pricepersqmeter
     (price / size).to_s unless price.blank? || size.blank? || size == 0
+  end
+
+  # If a single property is faved by anyone at all
+  def faved?(property)
+    favorites.find_by(property_id: property.id).present?
+  end
+
+  # If a single property is faved by a particular user
+  def is_faved_by?(user)
+    favorites.find_by(user_id: user.id).present?
   end
 
   private

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_18_115937) do
+ActiveRecord::Schema.define(version: 2018_12_19_070806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,15 @@ ActiveRecord::Schema.define(version: 2018_07_18_115937) do
     t.bigint "property_id", null: false
   end
 
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "property_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["property_id"], name: "index_favorites_on_property_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
   create_table "invitations", force: :cascade do |t|
     t.string "email"
     t.bigint "account_id"
@@ -142,6 +151,7 @@ ActiveRecord::Schema.define(version: 2018_07_18_115937) do
     t.string "adxe"
     t.string "adspitogatos"
     t.string "address"
+    t.integer "favorites_count"
     t.index ["account_id"], name: "index_properties_on_account_id"
     t.index ["location_id"], name: "index_properties_on_location_id"
   end
@@ -165,6 +175,8 @@ ActiveRecord::Schema.define(version: 2018_07_18_115937) do
 
   add_foreign_key "assignments", "properties"
   add_foreign_key "assignments", "users"
+  add_foreign_key "favorites", "properties"
+  add_foreign_key "favorites", "users"
   add_foreign_key "invitations", "accounts"
   add_foreign_key "locations", "countries"
   add_foreign_key "memberships", "accounts"

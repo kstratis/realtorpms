@@ -87,7 +87,7 @@ h2 {
 
 
 .card-body{
-  min-height: 220px;
+  min-height: 150px;
 }
 /* header */
 
@@ -538,4 +538,8 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .favourites{
   padding: 0 0 10px 10px;
+}
+
+i.fas.fa-heart{
+  color: rgb(220, 72, 127);
 }

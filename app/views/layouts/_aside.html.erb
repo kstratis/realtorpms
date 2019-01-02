@@ -96,6 +96,12 @@
                   <%= content_tag :span, t('properties.list'), class: 'menu-text' %>
                 <% end %>
               </li>
+              <li class="menu-item <%= active_for(path: properties_path) %>">
+                <%= link_to properties_path, class: 'menu-link' do %>
+                  <%= content_tag :i, nil, class: 'fas fa-heart fa-fw' %>
+                  <%= content_tag :span, t('properties.favourites'), class: 'menu-text' %>
+                <% end %>
+              </li>
               <li class="menu-item">
                 <%= link_to nil, class: 'menu-link' do %>
                   <%= content_tag :i, nil, class: 'fas fa-file-import fa-fw' %>

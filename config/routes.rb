@@ -19,7 +19,9 @@ Rails.application.routes.draw do
     scope module: 'accounts' do
       root to: 'dashboard#index', as: :account_root
       get '/properties/locations', to: 'properties#locations'
-      resources :properties
+      resources :properties do
+        resource :favorites, only: [:create, :destroy]
+      end
       resources :users
       resources :invitations, only: [:new, :create]
       # post '/properties/uploads', to: 'properties#uploads'

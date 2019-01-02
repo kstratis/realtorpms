@@ -83,6 +83,7 @@ function withDatatable(WrappedComponent) {
       this.handleSort = this.handleSort.bind(this);
       this.handleAjaxRequest = this.handleAjaxRequest.bind(this);
       this.handleAssign = this.handleAssign.bind(this);
+      this.handleFav = this.handleFav.bind(this);
       this.handleAjaxRequestDelayed = debounce(this.handleAjaxRequest, 300);
       this.compoundDelayedAction = debounce(this.compoundDelayedAction.bind(this), 300);
     }
@@ -162,6 +163,58 @@ function withDatatable(WrappedComponent) {
       // Use this to debounce both the ajax request and the history replaceState
       // https://github.com/ReactTraining/history/issues/291
       this.compoundDelayedAction(searchParams, newUrlParams);
+    }
+
+    handleFav(e, url, isFaved, id){
+      e.preventDefault();
+      axios[isFaved ? 'post' : 'delete'](url) // +1 because rails will_paginate starts from 1 while this starts from 0
+        .then(function (response) {
+          console.log(response);
+          console.log(this.state.dataset);
+          const index = this.state.dataset.findIndex((element) => element.id === id);
+          // let newDataset = [];
+          console.log(index);
+          let element = this.state.dataset[index];
+          console.log(element);
+          element['isFaved'] = !element['isFaved'];
+          // this.setState({
+          //   dataset[index]['isFaved']: !!dataset[index]['isFaved']
+          // })
+          // let properties = [];
+          // this.state.dataset.forEach((element, index) => {
+          //   if (element.id === id) {
+          //
+          //     newDataset[id] = { ...this.state.dataset[worker], ...ajax_response, ...extra_data };
+          //   }
+          //
+          // });
+          //
+          //
+          //
+          // for (let propertyIter = 1; propertyIter <= this.state.workersCount; propertyIter++) {
+          //   if (`WORKER_${propertyIter}` === worker) {
+          //     workers[worker] = { ...this.state.workers[worker], ...ajax_response, ...extra_data };
+          //   } else {
+          //     workers[`WORKER_${propertyIter}`] = { ...this.state.workers[`WORKER_${propertyIter}`] };
+          //   }
+          // }
+          let newDataset = [...this.state.dataset, ...element];
+          this.setState({
+            dataset: newDataset
+          });
+
+          // let newData = response.data.userslist;
+          // this.setState({
+          //   dataset: newData.dataset,
+          //   pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),
+          //   isLoading: false,
+          //   selectedPage: response.data.current_page - 1
+          // });
+        }.bind(this))
+        .catch(function (error) {
+          console.warn(error);
+          // this.setState({isLoading: false});
+        }.bind(this))
     }
 
     handleSort(e, field) {
@@ -271,6 +324,7 @@ function withDatatable(WrappedComponent) {
             handlePageClick={this.handlePageClick}
             handleSort={this.handleSort}
             handleAssign={this.handleAssign}
+            handleFav={this.handleFav}
             advanceByTwo={this.advanceByTwo}
             i18n={this.props.i18n}
             {...this.state} />

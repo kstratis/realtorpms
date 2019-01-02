@@ -35,6 +35,8 @@ module Accounts
             type: property.price,
             view_entity_path: property_path(property.id),
             edit_entity_path: edit_property_path(property.id),
+            fav_entity_path: property_favorites_path(property.id),
+            isFaved: property.is_faved_by?(current_user),
             # assignments: property.properties.count,
             # registration: property.created_at.to_formatted_s(:long)
             registration: property.created_at.strftime('%d %b. %y')

@@ -9,6 +9,7 @@ const PropertiesList = ({
   handlePageClick,
   handleSort,
   handleAssign,
+  handleFav,
   advanceByTwo,
   isLoading,
   dataset,
@@ -52,18 +53,30 @@ const PropertiesList = ({
                       title={i18n.favourites_tooltip}
                       data-toggle="tooltip"
                       data-placement="top"
+                      onClick={e => handleFav(e, entry.fav_entity_path, entry.isFaved, entry.id)}
                       className={'tooltips btn-circle'}
                       href={'#'}>
-                      <i className={'far fa-heart fa-lg fa-fw'} />
+                      {entry.isFaved ? <i className="fas fa-heart fa-lg fa-fw" /> : <i className={'far fa-heart fa-lg fa-fw'} />}
                     </a>
                   </div>
                   <div className="card-control-buttons btn-group d-flex" role="group" aria-label="Basic example">
-                    <a href={entry.view_entity_path} className="btn btn-primary w-100">
-                      {i18n.view}
+                    <a
+                      href={entry.view_entity_path}
+                      title={i18n.view}
+                      className="btn btn-primary tooltips w-100"
+                      data-toggle="tooltip"
+                      data-placement="top">
+                      <i className={'fas fa-eye fa-fw'} />
+                      &nbsp;
                     </a>
-                    {/*<a href="#" className="btn btn-danger"><i className="fa fa-eye fa-fw"/></a>*/}
-                    <a href={entry.edit_entity_path} className="btn btn-warning w-100">
-                      {i18n.edit}
+                    <a
+                      href={entry.edit_entity_path}
+                      title={i18n.edit}
+                      className="btn btn-warning tooltips w-100"
+                      data-toggle="tooltip"
+                      data-placement="top">
+                      <i className={'fas fa-pen fa-fw'} />
+                      &nbsp;
                     </a>
                   </div>
                 </div>

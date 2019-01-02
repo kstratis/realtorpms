@@ -256,6 +256,7 @@ en:
     add: "Add property"
     add_fast: "Add property (fast)"
     list: "Property list"
+    favourites: "Favourites"
     import: "Import properties"
     new:
       heading: "Add new property"

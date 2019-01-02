@@ -23,6 +23,8 @@ class User < ApplicationRecord
   has_many :assignments
   # https://stackoverflow.com/a/38845388/178728
   has_many :properties, -> { distinct }, through: :assignments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+
   # has_many :properties, -> (account) { where('account_id = ?', account.id) }, through: :assignments
 
   # Basically class methods defined on singleton class
@@ -104,6 +106,15 @@ class User < ApplicationRecord
 
   def get_total_properties
     properties.count
+  end
+
+  def favorite(property)
+    favorites.find_or_create_by(property: property)
+  end
+
+  def unfavorite(property)
+    favorites.where(property: property).destroy_all
+    property.reload
   end
 
   def self.sorted_by_assignments_count(dataset)
