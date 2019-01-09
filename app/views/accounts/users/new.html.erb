@@ -8,27 +8,27 @@
     <div class="col-md-12">
       <div class="pr-form-container">
       <%= form_for(@user) do |f| %>
-        <%= render 'shared/error_messages' %>
+        <%= render 'shared/error_messages', locals: {model: @user} %>
 
         <%= f.label :first_name %>
         <%= f.text_field :first_name, placeholder: 'i.e. John', class: 'glowing-border' %>
-        <%= inline_error :first_name, 'First name'%>
+        <%= inline_error @user, :first_name, 'First name'%>
 
         <%= f.label :last_name %>
         <%= f.text_field :last_name, placeholder: 'i.e. Doe', class: 'glowing-border' %>
-        <%= inline_error :last_name, 'Last name'%>
+        <%= inline_error @user, :last_name, 'Last name'%>
 
         <%= f.label :email %>
         <%= f.email_field :email, placeholder: 'i.e. jdoe@example.com', class: 'glowing-border' %>
-        <%= inline_error :email, 'Email'%>
+        <%= inline_error @user, :email, 'Email'%>
 
         <%= f.label :password %>
         <%= f.password_field :password, placeholder: 'Please use at least 6 characters', class: 'glowing-border' %>
-        <%= inline_error :password, 'Password'%>
+        <%= inline_error @user, :password, 'Password'%>
 
         <%= f.label :password_confirmation, 'Password confirmation' %>
         <%= f.password_field :password_confirmation, placeholder: 'Retype your password', class: 'glowing-border' %>
-        <%= inline_error :password_confirmation, 'Password confirmation'%>
+        <%= inline_error @user, :password_confirmation, 'Password confirmation'%>
 
         <%= f.submit 'Create account', class: 'btn btn-primary' %>
       <% end %>

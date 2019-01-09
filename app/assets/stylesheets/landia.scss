@@ -543,3 +543,25 @@ input[type="search"]::-webkit-search-cancel-button {
 i.fas.fa-heart{
   color: rgb(220, 72, 127);
 }
+
+.option-container{
+  display: block;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.option{
+  //border: 1px solid #777;
+  //border-radius: 3px;
+  padding: 20px 40px 2px 40px;
+}
+
+.menu-row{
+  margin-top: 10px;
+}
+
+.option-container:hover{
+  background-color: rgba(0, 143, 213, 0.25);
+  cursor: pointer;
+
+}

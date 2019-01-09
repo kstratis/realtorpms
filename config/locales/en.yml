@@ -241,8 +241,10 @@ en:
     add: "Add client"
     list: "Client list"
   main:
+    title: "Dashboard"
     heading: "Dashboard"
     subheading: "This is the dashboard for logged in users"
+    options: "Main menu"
   invitations:
     new:
       heading: "Add new partner"

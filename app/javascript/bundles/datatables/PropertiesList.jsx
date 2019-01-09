@@ -4,21 +4,22 @@ import ReactPaginate from 'react-paginate';
 import withDatatable from './withDatatable';
 import SkyLight from 'react-skylight';
 import ClampWrapper from '../components/ClampWrapper';
+import Image from 'react-graceful-image';
 
 const PropertiesList = ({
-  handlePageClick,
-  handleSort,
-  handleAssign,
-  handleFav,
-  advanceByTwo,
-  isLoading,
-  dataset,
-  pageCount,
-  selectedPage,
-  sorting,
-  ordering,
-  i18n
-}) => {
+                          handlePageClick,
+                          handleSort,
+                          handleAssign,
+                          handleFav,
+                          advanceByTwo,
+                          isLoading,
+                          dataset,
+                          pageCount,
+                          selectedPage,
+                          sorting,
+                          ordering,
+                          i18n
+                        }) => {
   return (
     <div className="">
       <SkyLight hideOnOverlayClicked ref={ref => (this.simpleDialog = ref)} title="Hi, I'm a simple modal">
@@ -27,7 +28,7 @@ const PropertiesList = ({
       {/* CARD START */}
       {isLoading ? (
         <div className={'centered'}>
-          <div className={'spinner'} />
+          <div className={'spinner'}/>
         </div>
       ) : dataset.length > 0 ? (
         <div className={'PropertyListContainer'}>
@@ -36,11 +37,22 @@ const PropertiesList = ({
               <div className={'col-sm-6 col-lg-4'} key={entry.id}>
                 {console.log(entry)}
                 <div className="card mb-4 mt-2">
-                  <img
-                    className="card-img-top thumb"
+                  <Image
+                    // id={'yyy'}
                     src={`https://picsum.photos/640/480/?random&sig=${Math.random()}`}
-                    alt="Card image cap"
+                    className={'card-img-top thumb'}
+                    // width="300"
+                    // height={`${document.getElementById('yyy').clientHeight}px`}
+                    // height={`${this.clientHeight}`}
+                    height={'209px'}
+                    alt="My awesome image"
+                    placeholderColor={'#4dabf5'}
                   />
+                  {/*<img*/}
+                  {/*className="card-img-top thumb"*/}
+                  {/*src={`https://picsum.photos/640/480/?random&sig=${Math.random()}`}*/}
+                  {/*alt="Card image cap"*/}
+                  {/*/>*/}
                   {/*<img className="card-img-top thumb" src={"https://picsum.photos/1250/800?image=1"} alt="Card image cap" />*/}
                   <div className="card-body">
                     <h5 className="card-title clamp-2">{entry.title}</h5>
@@ -56,7 +68,8 @@ const PropertiesList = ({
                       onClick={e => handleFav(e, entry.fav_entity_path, entry.isFaved, entry.id)}
                       className={'tooltips btn-circle'}
                       href={'#'}>
-                      {entry.isFaved ? <i className="fas fa-heart fa-lg fa-fw" /> : <i className={'far fa-heart fa-lg fa-fw'} />}
+                      {entry.isFaved ? <i className="fas fa-heart fa-lg fa-fw"/> :
+                        <i className={'far fa-heart fa-lg fa-fw'}/>}
                     </a>
                   </div>
                   <div className="card-control-buttons btn-group d-flex" role="group" aria-label="Basic example">
@@ -66,7 +79,7 @@ const PropertiesList = ({
                       className="btn btn-primary tooltips w-100"
                       data-toggle="tooltip"
                       data-placement="top">
-                      <i className={'fas fa-eye fa-fw'} />
+                      <i className={'fas fa-eye fa-fw'}/>
                       &nbsp;
                     </a>
                     <a
@@ -75,7 +88,7 @@ const PropertiesList = ({
                       className="btn btn-warning tooltips w-100"
                       data-toggle="tooltip"
                       data-placement="top">
-                      <i className={'fas fa-pen fa-fw'} />
+                      <i className={'fas fa-pen fa-fw'}/>
                       &nbsp;
                     </a>
                   </div>
@@ -84,31 +97,38 @@ const PropertiesList = ({
             ))}
           </div>
           {/* CARD END */}
-          <div className={'clearfix'}> </div>
-          <div className={'row'}>
-            <ReactPaginate
-              previousLabel={'❮'}
-              nextLabel={'❯'}
-              breakLabel={
-                <span className="break-button-content" onClick={advanceByTwo}>
+          <div className={'clearfix'} />
+          <div className={'row d-flex justify-content-center'}>
+
+            <nav aria-label="Results navigation">
+              <ReactPaginate
+                previousLabel={'❮'}
+                nextLabel={'❯'}
+                breakLabel={
+                  <span className="break-button-content page-link" onClick={advanceByTwo}>
                   ...
                 </span>
-              }
-              breakClassName={'break-button'}
-              pageCount={pageCount}
-              marginPagesDisplayed={2}
-              pageRangeDisplayed={5}
-              onPageChange={handlePageClick}
-              containerClassName={'pagination'}
-              subContainerClassName={'pages pagination'}
-              activeClassName={'active'}
-              forcePage={selectedPage}
-              pageClassName={'page'}
-              nextClassName={'next'}
-              previousClassName={'previous'}
-            />
+                }
+                breakClassName={'break-button'}
+                pageCount={pageCount}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={5}
+                onPageChange={handlePageClick}
+                containerClassName={'pagination'}
+                subContainerClassName={'pages pagination'}
+                pageLinkClassName={'page-link'}
+                activeClassName={'active'}
+                forcePage={selectedPage}
+                pageClassName={'page-item'}
+                previousLinkClassName={'page-link'}
+                nextLinkClassName={'page-link'}
+                nextClassName={'next'}
+                previousClassName={'previous'}
+              />
+            </nav>
+
           </div>
-          <ClampWrapper />
+          <ClampWrapper/>
         </div>
       ) : (
         <div className={'no-users'}>

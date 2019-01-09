@@ -1,11 +1,54 @@
-<div class="center jumbotron pr-container">
-  <h1><%= t 'main.heading' %></h1>
+<% provide(:title, t('main.title')) %>
 
-  <h2><%= t 'main.subheading' %></h2>
+<%= render partial: 'shared/breadcrumb', locals: {title: 'main.heading', icon: 'house-colored'} %>
 
-  <%#= link_to 'Sign up now!', new_account_path, class: 'btn btn-lg btn-primary' %>
+<div class="page-container">
+  <div class="container">
+    <div class="app-container">
+
+      <div class="row ">
+        <div class="col">
+          <h2><%= t 'main.options' %></h2>
+        </div>
+      </div>
+
+      <div class="clearfix"></div>
+
+      <div class="row justify-content-md-center menu-row">
+
+        <div class="col-md-auto">
+          <div class="option-container">
+            <div class="option">
+              <i class="pr-icon smm houses"></i>
+              <p><%= t 'main.houses' %></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-auto">
+          <div class="option-container">
+            <div class="option">
+              <i class="pr-icon smm agent-colored"></i>
+              <p><%= t 'main.partners' %></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-auto">
+          <div class="option-container">
+            <div class="option">
+              <i class="pr-icon smm integrations"></i>
+              <p><%= t 'main.integrations' %></p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <%= link_to image_tag('rails.png', alt: 'Rails logo'), 'http://rubyonrails.org/' %>
+
+
 </div>
-
-<%= link_to image_tag('rails.png', alt: 'Rails logo'), 'http://rubyonrails.org/' %>
-
-
