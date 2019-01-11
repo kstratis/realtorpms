@@ -3,32 +3,50 @@ import React from 'react';
 import ReactPaginate from 'react-paginate';
 import withDatatable from './withDatatable';
 import SkyLight from 'react-skylight';
+import Search from './Search';
 import ClampWrapper from '../components/ClampWrapper';
 import Image from 'react-graceful-image';
+import ControlsContainer from './ControlsContainer';
 
 const PropertiesList = ({
-                          handlePageClick,
-                          handleSort,
-                          handleAssign,
-                          handleFav,
-                          advanceByTwo,
-                          isLoading,
-                          dataset,
-                          pageCount,
-                          selectedPage,
-                          sorting,
-                          ordering,
-                          i18n
-                        }) => {
+  handlePageClick,
+  handleSort,
+  handleAssign,
+  handleFav,
+  advanceByTwo,
+  isLoading,
+  dataset,
+  pageCount,
+  selectedPage,
+  sorting,
+  ordering,
+  searchInput,
+  handleSearchInput,
+  i18n
+}) => {
   return (
     <div className="">
-      <SkyLight hideOnOverlayClicked ref={ref => (this.simpleDialog = ref)} title="Hi, I'm a simple modal">
-        Hello, I dont have any callbacks.
-      </SkyLight>
+      <div className={'container'}>
+        <div className={'row'}>
+          <Search
+            handleSearchInput={handleSearchInput}
+            searchInput={searchInput}
+            i18n={i18n}
+          />
+          {/* Generate the needed filters according to the i18n keys of the erb template */}
+          <ControlsContainer
+            i18n={i18n}
+            filters={Object.keys(i18n.filters).map((filter)=> {
+              return {'name': i18n.filters[filter].title, 'fn': handleSort, 'i18n': i18n.filters[filter] }
+            })}
+          />
+        </div>
+      </div>
+
       {/* CARD START */}
       {isLoading ? (
         <div className={'centered'}>
-          <div className={'spinner'}/>
+          <div className={'spinner'} />
         </div>
       ) : dataset.length > 0 ? (
         <div className={'PropertyListContainer'}>
@@ -68,8 +86,11 @@ const PropertiesList = ({
                       onClick={e => handleFav(e, entry.fav_entity_path, entry.isFaved, entry.id)}
                       className={'tooltips btn-circle'}
                       href={'#'}>
-                      {entry.isFaved ? <i className="fas fa-heart fa-lg fa-fw"/> :
-                        <i className={'far fa-heart fa-lg fa-fw'}/>}
+                      {entry.isFaved ? (
+                        <i className="fas fa-heart fa-lg fa-fw" />
+                      ) : (
+                        <i className={'far fa-heart fa-lg fa-fw'} />
+                      )}
                     </a>
                   </div>
                   <div className="card-control-buttons btn-group d-flex" role="group" aria-label="Basic example">
@@ -79,7 +100,7 @@ const PropertiesList = ({
                       className="btn btn-primary tooltips w-100"
                       data-toggle="tooltip"
                       data-placement="top">
-                      <i className={'fas fa-eye fa-fw'}/>
+                      <i className={'fas fa-eye fa-fw'} />
                       &nbsp;
                     </a>
                     <a
@@ -88,7 +109,7 @@ const PropertiesList = ({
                       className="btn btn-warning tooltips w-100"
                       data-toggle="tooltip"
                       data-placement="top">
-                      <i className={'fas fa-pen fa-fw'}/>
+                      <i className={'fas fa-pen fa-fw'} />
                       &nbsp;
                     </a>
                   </div>
@@ -99,15 +120,14 @@ const PropertiesList = ({
           {/* CARD END */}
           <div className={'clearfix'} />
           <div className={'row d-flex justify-content-center'}>
-
             <nav aria-label="Results navigation">
               <ReactPaginate
                 previousLabel={'❮'}
                 nextLabel={'❯'}
                 breakLabel={
                   <span className="break-button-content page-link" onClick={advanceByTwo}>
-                  ...
-                </span>
+                    ...
+                  </span>
                 }
                 breakClassName={'break-button'}
                 pageCount={pageCount}
@@ -126,9 +146,8 @@ const PropertiesList = ({
                 previousClassName={'previous'}
               />
             </nav>
-
           </div>
-          <ClampWrapper/>
+          <ClampWrapper />
         </div>
       ) : (
         <div className={'no-users'}>

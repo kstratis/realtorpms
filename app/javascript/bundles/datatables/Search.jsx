@@ -1,18 +1,19 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const Search = ({searchInput, handleSearchInput, i18n}) => {
-
+const Search = ({ searchInput, handleSearchInput, showFilterType, i18n }) => {
   return (
-    <div className="col-md-6 offset-md-3">
+    <div className="col col-md-5 offset-md-1">
       <div className="user-search justify-content-center flex-fill">
-        <input type="search"
-               className="form-control"
-               placeholder={i18n['search']['placeholder']}
-               aria-describedby="Client search"
-               aria-label="Client search"
-               value={searchInput}
-               onChange={handleSearchInput} />
+        <input
+          type="search"
+          className="form-control"
+          placeholder={i18n['search']['placeholder']}
+          aria-describedby="Client search"
+          aria-label="Client search"
+          value={searchInput}
+          onChange={handleSearchInput}
+        />
       </div>
     </div>
   );
@@ -20,7 +21,8 @@ const Search = ({searchInput, handleSearchInput, i18n}) => {
 
 Search.propTypes = {
   searchInput: PropTypes.string.isRequired,
-  handleSearchInput: PropTypes.func.isRequired
+  handleSearchInput: PropTypes.func.isRequired,
+  i18n: PropTypes.object.isRequired
 };
 
 export default Search;

@@ -179,10 +179,24 @@ el:
         tooltip_delete_profile: "Διαγραφή"
       properties:
         description: "Περιγραφή"
+      filters:
+        title: "Φίλτρα"
+        date:
+          title: "Ημ/νία καταχώρησης"
+          ascending: "Αύξουσα"
+          descending: "Φθίνουσα"
+        price:
+          title: "Τιμή"
+          ascending: "Αύξουσα"
+          descending: "Φθίνουσα"
+        type:
+          title: "Τύπος"
+          sell: "Πώληση"
+          rent: "Ενοικίαση"
     users_search:
       placeholder: "π.χ. Δημήτρης Στεφάνου"
     properties_search:
-      placeholder: "π.χ. Βούλα 80τ.μ."
+      placeholder: "Αναζήτηση επί της περιγραφής του "
     properties_view_btn: "Προβολή"
     properties_edit_btn: "Επεξεργασία"
     properties_favourites_tooltip: "Προσθήκη στα αγαπημένα"
@@ -247,9 +261,10 @@ el:
     heading: "Κεντρική"
     subheading: "Διαβαθμισμένη πρόσβαση"
     options: "Κεντρικό μενού"
-    houses: "Ακίνητα"
+    properties: "Ακίνητα"
     partners: "Συνεργάτες"
     integrations: "Γέφυρες"
+    clients: "Πελάτες"
   invitations:
     new:
       heading: "Πρόσκληση νέου συνεργάτη"

@@ -177,6 +177,20 @@ en:
         tooltip_delete_profile: "Delete"
       properties:
         description: "Description"
+      filters:
+        title: "Filters"
+        date:
+          title: "Entry date"
+          ascending: "Ascending"
+          descending: "Descending"
+        price:
+          title: "Price"
+          ascending: "Αύξουσα"
+          descending: "Φθίνουσα"
+        type:
+          title: "Type"
+          sell: "Sell"
+          rent: "Rent"
     users_search:
       placeholder: "i.e. John Smith"
     properties_search:
@@ -245,6 +259,10 @@ en:
     heading: "Dashboard"
     subheading: "This is the dashboard for logged in users"
     options: "Main menu"
+    houses: "Properties"
+    partners: "Partners"
+    integrations: "Integrations"
+    clients: "Πελάτες"
   invitations:
     new:
       heading: "Add new partner"

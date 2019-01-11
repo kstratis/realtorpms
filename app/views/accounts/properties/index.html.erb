@@ -2,78 +2,95 @@
 
 <%= render partial: 'shared/breadcrumb', locals: {title: 'properties.index.heading', icon: 'house-colored'} %>
 
-<div class  ="page-container">
+<div class="page-container">
   <div class="container">
     <div class="app-container">
 
 
-        <!--    <div class="col-sm-12">-->
+      <!--    <div class="col-sm-12">-->
 
-<!--        <h3><%#= t 'properties.index.heading' %></h3>-->
+      <!--        <h3><%#= t 'properties.index.heading' %></h3>-->
 
-        <%= react_component('PropertiesListWithDatatable', props: {
-            initial_payload: {
-                dataset_wrapper: @propertieslist,
-                results_per_page: @results_per_page,
-                total_entries: @total_entries,
-                current_page: @current_page,
-                initial_search: @initial_search,
-                initial_sorting: @initial_sorting,
-                initial_ordering: @initial_ordering,
-                object_type: 'properties'
-            },
-            i18n: {
-                datatable: t('js.datatables.properties'),
-                search: t('js.properties_search'),
-                view: t('js.properties_view_btn'),
-                edit: t('js.properties_edit_btn'),
-                favourites_tooltip: t('js.properties_favourites_tooltip')
-            }
-        }, prerender: false) %>
+      <%= react_component('PropertiesListWithDatatable', props: {
+          initial_payload: {
+              dataset_wrapper: @propertieslist,
+              results_per_page: @results_per_page,
+              total_entries: @total_entries,
+              current_page: @current_page,
+              initial_search: @initial_search,
+              initial_sorting: @initial_sorting,
+              initial_ordering: @initial_ordering,
+              object_type: 'properties'
+          },
+          i18n: {
+              datatable: t('js.datatables.properties'),
+              search: t('js.properties_search.placeholder'),
+              view: t('js.properties_view_btn'),
+              edit: t('js.properties_edit_btn'),
+              filters: {
+                  sortByDate: {
+                      title: t('js.datatables.filters.date.title'),
+                      option1: t('js.datatables.filters.date.ascending'),
+                      option2: t('js.datatables.filters.date.descending'),
+                  },
+                  sortByPrice: {
+                      title: t('js.datatables.filters.price.title'),
+                      option1: t('js.datatables.filters.price.ascending'),
+                      option2: t('js.datatables.filters.price.descending'),
+                  },
+                  filterByType: {
+                      title: t('js.datatables.filters.type.title'),
+                      option1: t('js.datatables.filters.type.sell'),
+                      option2: t('js.datatables.filters.type.rent'),
+                  }
+              },
+              favourites_tooltip: t('js.properties_favourites_tooltip')
+          }
+      }, prerender: false) %>
 
 
 
 
 
-        <!--<table>-->
-        <!--<thead>-->
-        <!--<tr>-->
-        <!--<th>Description</th>-->
-        <!--<th>Price</th>-->
-        <!--<th>Size</th>-->
+      <!--<table>-->
+      <!--<thead>-->
+      <!--<tr>-->
+      <!--<th>Description</th>-->
+      <!--<th>Price</th>-->
+      <!--<th>Size</th>-->
 
-        <!--<th>User</th>-->
-        <!--<th colspan="3"></th>-->
-        <!--</tr>-->
-        <!--</thead>-->
+      <!--<th>User</th>-->
+      <!--<th colspan="3"></th>-->
+      <!--</tr>-->
+      <!--</thead>-->
 
-        <!--<tbody>-->
-        <%# @properties.each do |property| %>
-        <!--          <tr>-->
-        <!--            <td><%##= property.description %></td>-->
-        <!--            <td><%##= property.price %></td>-->
-        <!--            <td><%##= property.size %></td>-->
-        <!--            <td><%##= property.user_id %></td>-->
-        <%# if owner? %>
-        <td><%#= link_to 'Show', property %></td> <%# end %>
-        <%# if owner? %>
-        <td><%#= link_to 'Edit', edit_property_path(property) %></td> <%# end %>
-        <%# if owner? %>
-        <td><%#= link_to 'Destroy', property, method: :delete, data: { confirm: 'Are you sure?' } %></td> <%# end %>
-        <!--          </tr>-->
-        <%# end %>
-        <!--</tbody>-->
-        <!--</table>-->
-      </div>
-      <br>
-
-      <% if owner? %>
-        <%= link_to t('properties.index.new_button'), new_property_path %>
-      <% end %>
-
-      <!--    </div>-->
-
+      <!--<tbody>-->
+      <%# @properties.each do |property| %>
+      <!--          <tr>-->
+      <!--            <td><%##= property.description %></td>-->
+      <!--            <td><%##= property.price %></td>-->
+      <!--            <td><%##= property.size %></td>-->
+      <!--            <td><%##= property.user_id %></td>-->
+      <%# if owner? %>
+      <td><%#= link_to 'Show', property %></td> <%# end %>
+      <%# if owner? %>
+      <td><%#= link_to 'Edit', edit_property_path(property) %></td> <%# end %>
+      <%# if owner? %>
+      <td><%#= link_to 'Destroy', property, method: :delete, data: { confirm: 'Are you sure?' } %></td> <%# end %>
+      <!--          </tr>-->
+      <%# end %>
+      <!--</tbody>-->
+      <!--</table>-->
     </div>
+    <br>
+
+    <% if owner? %>
+      <%= link_to t('properties.index.new_button'), new_property_path %>
+    <% end %>
+
+    <!--    </div>-->
+
   </div>
+</div>
 
 

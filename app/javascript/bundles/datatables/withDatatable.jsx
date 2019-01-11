@@ -2,32 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import axios from 'axios';
 import ReactOnRails from 'react-on-rails';
-
-
-// import { addLocaleData } from 'react-intl';
-// import en from 'react-intl/locale-data/en';
-// import el from 'react-intl/locale-data/el';
-// import { translations } from './../../../locales/translations';
-// import { defaultLocale, defaultMessages } from './../../../locales/default';
-
-// import { addLocaleData } from 'react-intl';
-// import en from 'react-intl/locale-data/en';
-// import de from 'react-intl/locale-data/de';
-
-// import { translations } from '../../../translations';
-// import { defaultLocale } from '../../../default';
-
-// import { IntlProvider, injectIntl, intlShape } from 'react-intl';
-
-
-// import UsersList from "./UsersList";
-// import PropertiesList from "./PropertiesList";
-import Search from "./Search";
-
-
 const URLSearchParams = require('url-search-params');
-import {debounce, capitalizeFirstLetter} from "../utilities/helpers";
-
+import { debounce, capitalizeFirstLetter } from '../utilities/helpers';
 
 // addLocaleData([...en, ...el]);
 
@@ -35,9 +11,7 @@ import {debounce, capitalizeFirstLetter} from "../utilities/helpers";
 // const messages = translations[locale];
 
 function withDatatable(WrappedComponent) {
-
   return class extends React.Component {
-
     // These are passed from the Rails view on the first render
     static propTypes = {
       initial_payload: PropTypes.shape({
@@ -71,7 +45,6 @@ function withDatatable(WrappedComponent) {
 
       axios.defaults.headers.common['X-CSRF-Token'] = ReactOnRails.authenticityToken();
 
-
       // bind always returns a new function. This new function is important because without a reference to it
       // we won't be able to remove it as a listener in componentWillUnmount leaving us with memory leaks.
       // https://gist.github.com/Restuta/e400a555ba24daa396cc
@@ -90,15 +63,15 @@ function withDatatable(WrappedComponent) {
 
     getSelectedPage() {
       const selectedPage = new URL(window.location.href).searchParams.get('page') || 1;
-      return (parseInt(selectedPage) - 1);
+      return parseInt(selectedPage) - 1;
     }
 
     componentDidMount() {
-      window.addEventListener("popstate", this.bound_onHistoryButton);
+      window.addEventListener('popstate', this.bound_onHistoryButton);
     }
 
     componentWillUnmount() {
-      window.removeEventListener("popstate", this.bound_onHistoryButton);
+      window.removeEventListener('popstate', this.bound_onHistoryButton);
     }
 
     // Turbolinks also have some sort of history state management. We don't want React to get in its way.
@@ -123,8 +96,6 @@ function withDatatable(WrappedComponent) {
       });
       return direction;
     }
-    ;
-
     advanceByTwo(e) {
       const sign = this.determineDirection(e.target);
       if (sign === '+') {
@@ -135,21 +106,19 @@ function withDatatable(WrappedComponent) {
     }
 
     handlePageClick(pageNumber, pageNo = false, browserButtonInvoked = false) {
-      this.setState({isLoading: true});
+      this.setState({ isLoading: true });
       const selected = pageNo ? pageNumber : pageNumber.selected;
       let searchParams = new URLSearchParams(window.location.search);
       searchParams.set('page', selected + 1);
       let newUrlParams = searchParams.toString()
         ? `${window.location.pathname}?${searchParams.toString()}`
         : window.location.pathname;
-      if (!browserButtonInvoked) history.pushState({jsonpage: selected + 1}, null, newUrlParams);
+      if (!browserButtonInvoked) history.pushState({ jsonpage: selected + 1 }, null, newUrlParams);
       // console.log(searchParams.toString());
       this.handleAjaxRequestDelayed(`?${searchParams.toString()}`);
     }
-    ;
-
     handleSearchInput(e) {
-      this.setState({searchInput: e.target.value, isLoading: true});
+      this.setState({ searchInput: e.target.value, isLoading: true });
       let searchParams = new URLSearchParams(window.location.search);
       searchParams.delete('page');
       if (e.target.value !== undefined && e.target.value.length > 0) {
@@ -165,62 +134,38 @@ function withDatatable(WrappedComponent) {
       this.compoundDelayedAction(searchParams, newUrlParams);
     }
 
-    handleFav(e, url, isFaved, id){
+    handleFav(e, url, isFaved, id) {
       e.preventDefault();
       axios[isFaved ? 'post' : 'delete'](url) // +1 because rails will_paginate starts from 1 while this starts from 0
-        .then(function (response) {
-          console.log(response);
-          console.log(this.state.dataset);
-          const index = this.state.dataset.findIndex((element) => element.id === id);
-          // let newDataset = [];
-          console.log(index);
-          let element = this.state.dataset[index];
-          console.log(element);
-          element['isFaved'] = !element['isFaved'];
-          // this.setState({
-          //   dataset[index]['isFaved']: !!dataset[index]['isFaved']
-          // })
-          // let properties = [];
-          // this.state.dataset.forEach((element, index) => {
-          //   if (element.id === id) {
-          //
-          //     newDataset[id] = { ...this.state.dataset[worker], ...ajax_response, ...extra_data };
-          //   }
-          //
-          // });
-          //
-          //
-          //
-          // for (let propertyIter = 1; propertyIter <= this.state.workersCount; propertyIter++) {
-          //   if (`WORKER_${propertyIter}` === worker) {
-          //     workers[worker] = { ...this.state.workers[worker], ...ajax_response, ...extra_data };
-          //   } else {
-          //     workers[`WORKER_${propertyIter}`] = { ...this.state.workers[`WORKER_${propertyIter}`] };
-          //   }
-          // }
-          let newDataset = [...this.state.dataset, ...element];
-          this.setState({
-            dataset: newDataset
-          });
-
-          // let newData = response.data.userslist;
-          // this.setState({
-          //   dataset: newData.dataset,
-          //   pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),
-          //   isLoading: false,
-          //   selectedPage: response.data.current_page - 1
-          // });
-        }.bind(this))
-        .catch(function (error) {
-          console.warn(error);
-          // this.setState({isLoading: false});
-        }.bind(this))
+        .then(
+          function(response) {
+            console.log(response);
+            console.log(this.state.dataset);
+            const index = this.state.dataset.findIndex(element => element.id === id);
+            // let newDataset = [];
+            console.log(index);
+            let element = this.state.dataset[index];
+            console.log(element);
+            element['isFaved'] = !element['isFaved'];
+            let newDataset = [...this.state.dataset, ...element];
+            this.setState({
+              dataset: newDataset
+            });
+          }.bind(this)
+        )
+        .catch(
+          function(error) {
+            console.warn(error);
+            // this.setState({isLoading: false});
+          }.bind(this)
+        );
     }
 
     handleSort(e, field) {
       e.preventDefault();
+      console.log('handleSort clicked');
       let direction = this.state.ordering === 'asc' ? 'desc' : 'asc';
-      this.setState({isLoading: true, sorting: field, ordering: direction});
+      this.setState({ isLoading: true, sorting: field, ordering: direction });
       let searchParams = new URLSearchParams(window.location.search);
       searchParams.set('sorting', field);
       searchParams.set('ordering', direction);
@@ -248,20 +193,25 @@ function withDatatable(WrappedComponent) {
       }
       // axios.get(`/${entity}.json${query}`) // +1 because rails will_paginate starts from 1 while this starts from 0
       // axios.get(`/properties/3.json${query}`) // +1 because rails will_paginate starts from 1 while this starts from 0
-      axios.get(resource) // +1 because rails will_paginate starts from 1 while this starts from 0
-        .then(function (response) {
-          let newData = response.data.userslist;
-          this.setState({
-            dataset: newData.dataset,
-            pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),
-            isLoading: false,
-            selectedPage: response.data.current_page - 1
-          });
-        }.bind(this))
-        .catch(function (error) {
-          console.warn(error);
-          this.setState({isLoading: false});
-        }.bind(this))
+      axios
+        .get(resource) // +1 because rails will_paginate starts from 1 while this starts from 0
+        .then(
+          function(response) {
+            let newData = response.data.userslist;
+            this.setState({
+              dataset: newData.dataset,
+              pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),
+              isLoading: false,
+              selectedPage: response.data.current_page - 1
+            });
+          }.bind(this)
+        )
+        .catch(
+          function(error) {
+            console.warn(error);
+            this.setState({ isLoading: false });
+          }.bind(this)
+        );
     }
 
     compoundDelayedAction(searchParams, newUrlParams) {
@@ -280,58 +230,60 @@ function withDatatable(WrappedComponent) {
       const method = e.target.dataset['methodtype'];
       let entity = this.props.initial_payload.object_type;
       axios[method](`/assignments/property/${pid}/user/${uid}.json`) // +1 because rails will_paginate starts from 1 while this starts from 0
-        .then(function (response) {
-          // console.log('logging the response');
-          // console.log(response);
-          // console.log(this.state.dataset);
-          // copy current state
-          let new_dataset = this.state.dataset.slice();
-          let el = new_dataset.find((user) => user.id === uid);
-          let position = new_dataset.indexOf(el);
-          // copy the object that needs to be modified
-          let obj = Object.assign({}, new_dataset[position]);
-          // modify the copy
-          obj.is_assigned = !obj.is_assigned;
-          method === 'delete' ? obj.assignments_count-- : obj.assignments_count++;
-          // replace the array item with the new object
-          new_dataset[position] = obj;
-          this.setState({
-            dataset: new_dataset
-          });
-          // let newData = response.data.userslist;
-          // this.setState({
-          //   dataset: newData.dataset,
-          //   pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),
-          //   isLoading: false,
-          //   selectedPage: response.data.current_page - 1
-          // });
-        }.bind(this))
-        .catch(function (error) {
-          console.warn(error);
-          console.error('Unable to make the assignment. Please contact support');
-          this.setState({isLoading: false});
-        }.bind(this))
+        .then(
+          function(response) {
+            // console.log('logging the response');
+            // console.log(response);
+            // console.log(this.state.dataset);
+            // copy current state
+            let new_dataset = this.state.dataset.slice();
+            let el = new_dataset.find(user => user.id === uid);
+            let position = new_dataset.indexOf(el);
+            // copy the object that needs to be modified
+            let obj = Object.assign({}, new_dataset[position]);
+            // modify the copy
+            obj.is_assigned = !obj.is_assigned;
+            method === 'delete' ? obj.assignments_count-- : obj.assignments_count++;
+            // replace the array item with the new object
+            new_dataset[position] = obj;
+            this.setState({
+              dataset: new_dataset
+            });
+            // let newData = response.data.userslist;
+            // this.setState({
+            //   dataset: newData.dataset,
+            //   pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),
+            //   isLoading: false,
+            //   selectedPage: response.data.current_page - 1
+            // });
+          }.bind(this)
+        )
+        .catch(
+          function(error) {
+            console.warn(error);
+            console.error('Unable to make the assignment. Please contact support');
+            this.setState({ isLoading: false });
+          }.bind(this)
+        );
     }
 
     render() {
       return (
         <div>
-          <Search
-            searchInput={this.state.searchInput}
-            handleSearchInput={(e) => this.handleSearchInput(e)}
-            i18n={this.props.i18n} />
           <WrappedComponent
             handlePageClick={this.handlePageClick}
             handleSort={this.handleSort}
             handleAssign={this.handleAssign}
             handleFav={this.handleFav}
             advanceByTwo={this.advanceByTwo}
+            handleSearchInput={this.handleSearchInput}
             i18n={this.props.i18n}
-            {...this.state} />
+            {...this.state}
+          />
         </div>
       );
     }
-  }
+  };
 }
 
 export default withDatatable;

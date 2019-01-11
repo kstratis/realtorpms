@@ -544,10 +544,20 @@ i.fas.fa-heart{
   color: rgb(220, 72, 127);
 }
 
-.option-container{
+.option-container {
   display: block;
   text-align: center;
   border-radius: 5px;
+  color: #454545;
+  &:hover {
+    text-decoration: none;
+    background-color: rgba(0, 143, 213, 0.25);
+    cursor: pointer;
+    p {
+      color: #454545;
+    }
+  }
+
 }
 
 .option{
@@ -558,10 +568,4 @@ i.fas.fa-heart{
 
 .menu-row{
   margin-top: 10px;
-}
-
-.option-container:hover{
-  background-color: rgba(0, 143, 213, 0.25);
-  cursor: pointer;
-
 }

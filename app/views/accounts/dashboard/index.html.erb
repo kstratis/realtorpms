@@ -16,32 +16,58 @@
 
       <div class="row justify-content-md-center menu-row">
 
-        <div class="col-md-auto">
-          <div class="option-container">
-            <div class="option">
-              <i class="pr-icon smm houses"></i>
-              <p><%= t 'main.houses' %></p>
-            </div>
-          </div>
-        </div>
 
-        <div class="col-md-auto">
-          <div class="option-container">
-            <div class="option">
-              <i class="pr-icon smm agent-colored"></i>
-              <p><%= t 'main.partners' %></p>
-            </div>
+        <% %w(properties users clients integrations).each do |entry| %>
+          <div class="col-md-auto">
+            <%= link_to respond_to?("#{entry}_path") ? send("#{entry}_path") : '', class: 'option-container' do %>
+              <%= content_tag :div, class: 'option' do %>
+                <%= content_tag :i, nil, class: "pr-icon smm #{entry}" %>
+                <%= content_tag :p, t("main.#{entry}") %>
+              <% end %>
+            <% end %>
           </div>
-        </div>
+        <% end %>
 
-        <div class="col-md-auto">
-          <div class="option-container">
-            <div class="option">
-              <i class="pr-icon smm integrations"></i>
-              <p><%= t 'main.integrations' %></p>
-            </div>
-          </div>
-        </div>
+
+
+<!--        <div class="col-md-auto">-->
+<!--          <div class="option-container">-->
+<!--            <div class="option">-->
+<!--              <i class="pr-icon smm houses"></i>-->
+<!--              <p><%#= t 'main.houses' %></p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <div class="col-md-auto">-->
+<!--          <div class="option-container">-->
+<!--            <div class="option">-->
+<!--              <i class="pr-icon smm agent-colored"></i>-->
+<!--              <p><%#= t 'main.partners' %></p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <div class="col-md-auto">-->
+<!--          <div class="option-container">-->
+<!--            <div class="option">-->
+<!--              <i class="pr-icon smm clients"></i>-->
+<!--              <p><%#= t 'main.clients' %></p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <div class="col-md-auto">-->
+<!--          <div class="option-container">-->
+<!--            <div class="option">-->
+<!--              <i class="pr-icon smm integrations"></i>-->
+<!--              <p><%#= t 'main.integrations' %></p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+
+
 
       </div>
 
