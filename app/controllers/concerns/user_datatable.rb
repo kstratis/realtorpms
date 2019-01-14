@@ -66,6 +66,7 @@ module UserDatatable
     @total_entries = @users.total_entries
     @current_page = @users.current_page
     @results_per_page = 10
+
     @initial_search = params[:search] || ''
     @initial_sorting = params[:sorting] || 'created_at'
     @initial_ordering = params[:ordering] || 'desc'

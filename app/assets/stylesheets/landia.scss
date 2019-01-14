@@ -561,11 +561,25 @@ i.fas.fa-heart{
 }
 
 .option{
-  //border: 1px solid #777;
-  //border-radius: 3px;
   padding: 20px 40px 2px 40px;
 }
 
 .menu-row{
   margin-top: 10px;
 }
+
+.selected-option{
+  background-color: $gray-500;
+  color: #ffffff;
+}
+
+// SOS - You need the following rules in Bootstrap v4.2.1
+//.dropdown-item:first-child{
+//  border-top-left-radius: 0;
+//  border-top-right-radius: 0;
+//}
+//
+//.dropdown-item:last-child{
+//  border-bottom-right-radius: 0;
+//  border-bottom-left-radius: 0;
+//}

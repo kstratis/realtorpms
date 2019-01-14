@@ -194,7 +194,7 @@ en:
     users_search:
       placeholder: "i.e. John Smith"
     properties_search:
-      placeholder: "i.e. 24 Oxford Street"
+      placeholder: "Search in description..."
     properties_view_btn: "View"
     properties_edit_btn: "Edit"
     properties_favourites_tooltip: "Add to favourites"

@@ -1,15 +1,28 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import withDatatable from './withDatatable';
-import ControlsContainer from './ControlsContainer';
 
 class SortFilter extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      selectedIndex: 0
+    };
   }
 
-  updateName = name => {
-    this.setState({ name });
+  componentDidMount() {
+    if (this.props.currentSorting === this.props.slug) {
+      const option = this.props.options.find(option => {
+        return option.sort_order === this.props.currentOrdering;
+      });
+      this.setState({ selectedIndex: option.sn });
+    }
+  }
+
+  handleMenuItemClick = (e, index, filter, order) => {
+    e.preventDefault();
+    this.setState({ selectedIndex: index }, () => {
+      this.props.handleFn(filter, order);
+    });
   };
 
   render() {
@@ -17,21 +30,25 @@ class SortFilter extends React.Component {
       <div className="col-md-auto">
         <div className="dropdown">
           <button
-            className="btn btn-secondary dropdown-toggle"
+            className="btn btn-secondary"
             type="button"
             data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false">
-            {this.props.i18n.title}
+            {this.props.title}&nbsp; <i className="fas fa-sort" />
           </button>
           <div className="dropdown-arrow dropdown-arrow-left" />
           <div className="dropdown-menu">
-            <a className="dropdown-item" href="#" onClick={e => this.props.handleFn(e)}>
-              <i className={'fas fa-sort-amount-up'} /> {this.props.i18n.option1}
-            </a>
-            <a className="dropdown-item" href="#">
-              <i className={'fas fa-sort-amount-down'} /> {this.props.i18n.option2}
-            </a>
+            {this.props.options.map((option, index) => (
+              <a
+                href={''}
+                className={`dropdown-item ${index === this.state.selectedIndex ? 'selected-option' : ''}`}
+                key={option.text}
+                onClick={e => this.handleMenuItemClick(e, index, option.sort_filter, option.sort_order)}>
+                <i className={option.icon} />
+                &nbsp; {option.text}
+              </a>
+            ))}
           </div>
         </div>
       </div>
@@ -40,13 +57,20 @@ class SortFilter extends React.Component {
 }
 
 SortFilter.propTypes = {
-  name: PropTypes.string,
+  slug: PropTypes.string,
+  title: PropTypes.string,
+  currentSorting: PropTypes.string,
+  currentOrdering: PropTypes.string,
   handleFn: PropTypes.func,
-  i18n: PropTypes.shape({
-    title: PropTypes.string,
-    option1: PropTypes.string,
-    option2: PropTypes.string
-  })
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      sn: PropTypes.number.isRequired,
+      text: PropTypes.string.isRequired,
+      sort_filter: PropTypes.string.isRequired,
+      sort_order: PropTypes.string.isRequired,
+      icon: PropTypes.string.isRequired
+    })
+  ).isRequired
 };
 
 export default SortFilter;

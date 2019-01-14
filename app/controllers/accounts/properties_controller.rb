@@ -17,7 +17,7 @@ module Accounts
       if params[:sorting] && params[:ordering]
         @properties = @properties.order("#{params[:sorting]}": params[:ordering])
       else
-        @properties = @properties.order(:created_at)
+        @properties = @properties.order(created_at: 'desc')
       end
 
       # puts @properties.to_yaml

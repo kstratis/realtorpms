@@ -9,12 +9,8 @@ class ControlsContainer extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
-        {this.props.filters.map(filter => {
-          return <SortFilter key={filter['name']} handleFn={filter['fn']} i18n={filter['i18n']} />;
-        })}
-      </React.Fragment>
-    );
+      <SortFilter key={filter['name']} handleFn={filter['fn']} i18n={filter['i18n']} options={''} />
+    )
   }
 }
 

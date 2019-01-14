@@ -183,8 +183,8 @@ el:
         title: "Φίλτρα"
         date:
           title: "Ημ/νία καταχώρησης"
-          ascending: "Αύξουσα"
-          descending: "Φθίνουσα"
+          descending: "Νεότερα πρώτα"
+          ascending: "Παλαιότερα πρώτα"
         price:
           title: "Τιμή"
           ascending: "Αύξουσα"
@@ -196,7 +196,7 @@ el:
     users_search:
       placeholder: "π.χ. Δημήτρης Στεφάνου"
     properties_search:
-      placeholder: "Αναζήτηση επί της περιγραφής του "
+      placeholder: "Αναζητήση επί της περιγραφής ακινήτου..."
     properties_view_btn: "Προβολή"
     properties_edit_btn: "Επεξεργασία"
     properties_favourites_tooltip: "Προσθήκη στα αγαπημένα"

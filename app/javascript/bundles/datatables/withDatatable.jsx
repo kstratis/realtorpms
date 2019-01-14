@@ -136,16 +136,16 @@ function withDatatable(WrappedComponent) {
 
     handleFav(e, url, isFaved, id) {
       e.preventDefault();
-      axios[isFaved ? 'post' : 'delete'](url) // +1 because rails will_paginate starts from 1 while this starts from 0
+      console.log(url);
+      console.log(isFaved);
+      axios[isFaved ? 'delete' : 'post'](url) // +1 because rails will_paginate starts from 1 while this starts from 0
         .then(
           function(response) {
-            console.log(response);
-            console.log(this.state.dataset);
+            // DEBUG
+            // console.log(response);
+            // console.log(this.state.dataset);
             const index = this.state.dataset.findIndex(element => element.id === id);
-            // let newDataset = [];
-            console.log(index);
             let element = this.state.dataset[index];
-            console.log(element);
             element['isFaved'] = !element['isFaved'];
             let newDataset = [...this.state.dataset, ...element];
             this.setState({
@@ -161,14 +161,16 @@ function withDatatable(WrappedComponent) {
         );
     }
 
-    handleSort(e, field) {
-      e.preventDefault();
+    handleSort(field, forcedOrdering='') {
+      // e.persist();
+      // e.preventDefault();
       console.log('handleSort clicked');
-      let direction = this.state.ordering === 'asc' ? 'desc' : 'asc';
-      this.setState({ isLoading: true, sorting: field, ordering: direction });
+      console.log(field, forcedOrdering);
+      let updatedOrdering = forcedOrdering ? forcedOrdering : this.state.ordering === 'asc' ? 'desc' : 'asc';
+      this.setState({ isLoading: true, sorting: field, ordering: updatedOrdering });
       let searchParams = new URLSearchParams(window.location.search);
       searchParams.set('sorting', field);
-      searchParams.set('ordering', direction);
+      searchParams.set('ordering', updatedOrdering);
       let newUrlParams = searchParams.toString()
         ? `${window.location.pathname}?${searchParams.toString()}`
         : window.location.pathname;
@@ -177,6 +179,7 @@ function withDatatable(WrappedComponent) {
 
     handleAjaxRequest(query = '') {
       const object_type = this.props.initial_payload.object_type;
+      console.log(object_type);
       let resource;
       switch (object_type) {
         case 'property_users':

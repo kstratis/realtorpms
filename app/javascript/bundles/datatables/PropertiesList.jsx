@@ -7,6 +7,7 @@ import Search from './Search';
 import ClampWrapper from '../components/ClampWrapper';
 import Image from 'react-graceful-image';
 import ControlsContainer from './ControlsContainer';
+import SortFilter from './SortFilter';
 
 const PropertiesList = ({
   handlePageClick,
@@ -28,18 +29,38 @@ const PropertiesList = ({
     <div className="">
       <div className={'container'}>
         <div className={'row'}>
-          <Search
-            handleSearchInput={handleSearchInput}
-            searchInput={searchInput}
-            i18n={i18n}
-          />
+          <Search handleSearchInput={handleSearchInput} searchInput={searchInput} placeholder={i18n['search']} />
           {/* Generate the needed filters according to the i18n keys of the erb template */}
-          <ControlsContainer
-            i18n={i18n}
-            filters={Object.keys(i18n.filters).map((filter)=> {
-              return {'name': i18n.filters[filter].title, 'fn': handleSort, 'i18n': i18n.filters[filter] }
-            })}
+          <SortFilter
+            handleFn={handleSort}
+            slug={'created_at'}
+            title={i18n.filters.sortByDate.title}
+            currentSorting={sorting}
+            currentOrdering={ordering}
+            options={[
+              {
+                sn: 0,
+                text: i18n.filters.sortByDate.option1,
+                sort_filter: 'created_at',
+                sort_order: 'desc',
+                icon: 'fas fa-sort-amount-up fa-fw'
+              },
+              {
+                sn: 1,
+                text: i18n.filters.sortByDate.option2,
+                sort_filter: 'created_at',
+                sort_order: 'asc',
+                icon: 'fas fa-sort-amount-down fa-fw'
+              }
+            ]}
           />
+
+          {/*<ControlsContainer*/}
+          {/*i18n={i18n}*/}
+          {/*filters={Object.keys(i18n.filters).map((filter)=> {*/}
+          {/*return {'name': i18n.filters[filter].title, 'fn': handleSort, 'i18n': i18n.filters[filter] }*/}
+          {/*})}*/}
+          {/*/>*/}
         </div>
       </div>
 

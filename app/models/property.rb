@@ -61,6 +61,14 @@ class Property < ApplicationRecord
     favorites.find_by(user_id: user.id).present?
   end
 
+  # We use the postgres unaccent to cater for unicode accents and ilike for case insensitive searches
+  # https://gist.github.com/jfragoulis/9914900
+  def self.search(search)
+    if search
+      where('unaccent(last_name) ILIKE unaccent(?)', "%#{search}%").or(where('unaccent(first_name) ILIKE unaccent(?)', "%#{search}%")).or(where('email LIKE ?', "%#{search}%"))
+    end
+  end
+
   private
 
     # In the 'compound' extra fields for roofdeck, storage, garden and plot where each comes with its own input,
