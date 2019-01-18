@@ -1,4 +1,7 @@
 class Property < ApplicationRecord
+
+  include Searchable
+  SEARCH_FIELDS = %w(title description notes adxe adspitogatos)
   before_validation :handle_dependent_fields, on: :update
   # belongs_to :user
   belongs_to :account
@@ -59,14 +62,6 @@ class Property < ApplicationRecord
   # If a single property is faved by a particular user
   def is_faved_by?(user)
     favorites.find_by(user_id: user.id).present?
-  end
-
-  # We use the postgres unaccent to cater for unicode accents and ilike for case insensitive searches
-  # https://gist.github.com/jfragoulis/9914900
-  def self.search(search)
-    if search
-      where('unaccent(last_name) ILIKE unaccent(?)', "%#{search}%").or(where('unaccent(first_name) ILIKE unaccent(?)', "%#{search}%")).or(where('email LIKE ?', "%#{search}%"))
-    end
   end
 
   private

@@ -1,6 +1,8 @@
 module Accounts
   class PropertiesController < Accounts::BaseController
+
     before_action :set_property, only: [:show, :edit, :update, :destroy]
+
     # before_
     # before_action :check_page_validity, only: [:create]
 
