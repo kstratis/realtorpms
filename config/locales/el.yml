@@ -196,7 +196,7 @@ el:
     users_search:
       placeholder: "π.χ. Δημήτρης Στεφάνου"
     properties_search:
-      placeholder: "Αναζητήση επί της περιγραφής ακινήτου..."
+      placeholder: "Αναζητήση ακινήτου..."
     properties_view_btn: "Προβολή"
     properties_edit_btn: "Επεξεργασία"
     properties_favourites_tooltip: "Προσθήκη στα αγαπημένα"

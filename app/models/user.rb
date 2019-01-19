@@ -1,7 +1,12 @@
 class User < ApplicationRecord
+
+  include Searchable
+
+  SEARCH_FIELDS = %w(first_name last_name email)
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i  # checks the email format
+
   self.per_page = 10 # This is for pagination
   attr_accessor :remember_token
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i  # checks the email format
   before_save { self.email = email.downcase }  # makes sure everything is lower case
   validates :first_name, presence: true, length: { maximum: 50 }
   validates :last_name, presence: true, length: { maximum: 50 }
@@ -119,14 +124,6 @@ class User < ApplicationRecord
 
   def self.sorted_by_assignments_count(dataset)
     dataset.sort_by(&:get_total_properties)
-  end
-
-  # We use the postgres unaccent to cater for unicode accents and ilike for case insensitive searches
-  # https://gist.github.com/jfragoulis/9914900
-  def self.search(search)
-    if search
-      where('unaccent(last_name) ILIKE unaccent(?)', "%#{search}%").or(where('unaccent(first_name) ILIKE unaccent(?)', "%#{search}%")).or(where('email LIKE ?', "%#{search}%"))
-    end
   end
 
 end

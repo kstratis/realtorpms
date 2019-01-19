@@ -540,7 +540,7 @@ input[type="search"]::-webkit-search-cancel-button {
   padding: 0 0 10px 10px;
 }
 
-i.fas.fa-heart{
+i.fas.fa-heart.colored{
   color: rgb(220, 72, 127);
 }
 
@@ -571,6 +571,11 @@ i.fas.fa-heart{
 .selected-option{
   background-color: $gray-500;
   color: #ffffff;
+}
+
+
+.highlighted {
+  background-color: #ffd54f;
 }
 
 // SOS - You need the following rules in Bootstrap v4.2.1

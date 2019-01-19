@@ -1,7 +1,9 @@
 class Property < ApplicationRecord
 
   include Searchable
+
   SEARCH_FIELDS = %w(title description notes adxe adspitogatos)
+
   before_validation :handle_dependent_fields, on: :update
   # belongs_to :user
   belongs_to :account

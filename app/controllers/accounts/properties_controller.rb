@@ -15,7 +15,6 @@ module Accounts
       if params[:search]
         @properties = @properties.search(params[:search])
       end
-
       if params[:sorting] && params[:ordering]
         @properties = @properties.order("#{params[:sorting]}": params[:ordering])
       else

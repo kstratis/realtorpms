@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import ReactPaginate from 'react-paginate';
+import Highlighter from 'react-highlight-words';
 import withDatatable from './withDatatable';
 import SkyLight from 'react-skylight';
 import Search from './Search';
@@ -94,9 +95,23 @@ const PropertiesList = ({
                   {/*/>*/}
                   {/*<img className="card-img-top thumb" src={"https://picsum.photos/1250/800?image=1"} alt="Card image cap" />*/}
                   <div className="card-body">
-                    <h5 className="card-title clamp-2">{entry.title}</h5>
+                    <h5 className="card-title clamp-2">
+                      <Highlighter
+                        highlightClassName="highlighted"
+                        searchWords={[searchInput]}
+                        autoEscape={true}
+                        textToHighlight={entry['title']}
+                      />
+                    </h5>
                     <div className={'desc-container'}>
-                      <p className="card-text clamp-2">{entry.description}</p>
+                      <p className="card-text clamp-2">
+                        <Highlighter
+                          highlightClassName="highlighted"
+                          searchWords={[searchInput]}
+                          autoEscape={true}
+                          textToHighlight={entry['description']}
+                        />
+                      </p>
                     </div>
                   </div>
                   <div className={'favourites'}>
@@ -108,7 +123,7 @@ const PropertiesList = ({
                       className={'tooltips btn-circle'}
                       href={'#'}>
                       {entry.isFaved ? (
-                        <i className="fas fa-heart fa-lg fa-fw" />
+                        <i className="fas fa-heart fa-lg fa-fw colored" />
                       ) : (
                         <i className={'far fa-heart fa-lg fa-fw'} />
                       )}

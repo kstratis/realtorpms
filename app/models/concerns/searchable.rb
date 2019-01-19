@@ -6,11 +6,11 @@ module Searchable
   module ClassMethods
 
     def search(term)
-      fields = const_get(:SEARCH_FIELDS)
+      fields = const_get(:SEARCH_FIELDS).dup
       if term && !fields.blank?
         query = "unaccent(#{fields.shift}) ILIKE unaccent('%#{term}%')"
         fields.each do |field|
-          query << " OR unaccent(#{field}) ILIKE unaccent('%#{term}%')"
+          query << "OR unaccent(#{field}) ILIKE unaccent('%#{term}%')"
         end
         where(query)
       end
