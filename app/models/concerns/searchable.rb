@@ -10,7 +10,7 @@ module Searchable
       if term && !fields.blank?
         query = "unaccent(#{fields.shift}) ILIKE unaccent('%#{term}%')"
         fields.each do |field|
-          query << "OR unaccent(#{field}) ILIKE unaccent('%#{term}%')"
+          query << " OR unaccent(#{field}) ILIKE unaccent('%#{term}%')"
         end
         where(query)
       end

@@ -57,11 +57,14 @@ Account.create!(
     owner: User.fourth
 )
 
-l1 = Location.find_by(area_id: 106314)
-l2 = Location.find_by(area_id: 117003)
-l3 = Location.find_by(area_id: 106289)
+l1 = Location.find_by(area_id: 106314) # Lamprini - Galatsi
+l2 = Location.find_by(area_id: 117003) # Palatiani - Ilion
+l3 = Location.find_by(area_id: 106289) # Perissos - N.Ionia
 
-# Special shakalaka users
+# ---------------------------------------------------------
+
+# 2 memorable shakalaka users
+# -------------------------
 specialuser1 = User.create!(first_name: 'Will',
                             last_name: 'Smith',
                             email: 'wm@gmail.com',
@@ -75,8 +78,9 @@ specialuser2 = User.create!(first_name: 'John',
                             password: 'abc123',
                             password_confirmation: 'abc123',
                             admin: false)
-
-# Special bluedomain user
+# -------------------------
+#
+# 1 memorable bluedomain user
 specialuser3 = User.create!(first_name: 'Lakis',
                             last_name: 'Gavalas',
                             email: 'lg@gmail.com',
@@ -84,7 +88,7 @@ specialuser3 = User.create!(first_name: 'Lakis',
                             password_confirmation: 'abc123',
                             admin: false)
 
-# ------------------------------------------------------------
+# ----------------------------------------------------------
 
 shakalaka = Account.find_by(subdomain: 'shakalaka')
 bluedomain = Account.find_by(subdomain: 'bluedomain')
@@ -93,7 +97,7 @@ shakalaka.users << specialuser1
 shakalaka.users << specialuser2
 bluedomain.users << specialuser3
 
-
+# 99 fake users for shakalaka account
 99.times do |n|
   first_name = Faker::Name.first_name
 
@@ -108,8 +112,26 @@ bluedomain.users << specialuser3
   shakalaka.users << user
 end
 
+# --------------------------------------
+# Lets create some fake property owners
+# 20.times do |n|
+  # first_name = Faker::Name.first_name
+  # last_name = Faker::Name.last_name
+  # email = "owner-#{n + 1}@gmail.com"
+  # telephones = Faker::PhoneNumber.phone_number
+
+  # propery_owner = Owner.create!(first_name: Faker::Name.first_name,
+  #                               last_name: Faker::Name.last_name,
+  #                               email: "owner-#{n + 1}@gmail.com",
+  #                               telephones: Faker::PhoneNumber.phone_number)
+  # shakalaka.users << property_owner
+# end
+
+
+
 smithuser = shakalaka.users.find_by(email: 'wm@gmail.com')
 
+# 20 Fake properties belonging to specialuser1 (shakalaka account)
 20.times do |n|
   property = Property.create!(
       title: Faker::SiliconValley.company,
@@ -120,13 +142,19 @@ smithuser = shakalaka.users.find_by(email: 'wm@gmail.com')
       size: Faker::Number.number(3),
       price: Faker::Number.number(6),
       account: shakalaka,
-      location: l1
+      location: l1,
+      owner: Owner.create!(first_name: Faker::Name.first_name,
+                           last_name: Faker::Name.last_name,
+                           email: "owner-#{n + 1}@gmail.com",
+                           telephones: Faker::PhoneNumber.phone_number)
   )
   smithuser.properties << property
 end
 
+# specialuser3 belonging to the bluedomain account
 lguser = bluedomain.users.find_by(email: 'lg@gmail.com')
 
+# 5 fake properties belonging to specialuser3 (bluedomain account)
 5.times do |n|
   property = Property.create!(
       title: Faker::ProgrammingLanguage.name,
@@ -137,7 +165,11 @@ lguser = bluedomain.users.find_by(email: 'lg@gmail.com')
       size: Faker::Number.number(3),
       price: Faker::Number.number(6),
       account: shakalaka,
-      location: l2
+      location: l2,
+      owner: Owner.create!(first_name: Faker::Name.first_name,
+                                  last_name: Faker::Name.last_name,
+                                  email: "owner-#{n + 1}@gmail.com",
+                                  telephones: Faker::PhoneNumber.phone_number)
   )
   lguser.properties << property
 end

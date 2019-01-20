@@ -8,9 +8,12 @@ class Property < ApplicationRecord
   # belongs_to :user
   belongs_to :account
   belongs_to :location, optional: true
+  belongs_to :owner, optional: true
+  accepts_nested_attributes_for :owner
   has_many :assignments
   has_many_attached :images
   has_and_belongs_to_many :extras
+
   # https://stackoverflow.com/a/38845388/178728
   has_many :users, -> { distinct }, through: :assignments, dependent: :destroy
   has_many :favorites, dependent: :destroy

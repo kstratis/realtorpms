@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_19_131715) do
+ActiveRecord::Schema.define(version: 2019_01_19_183504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,6 +123,15 @@ ActiveRecord::Schema.define(version: 2019_01_19_131715) do
     t.index ["user_id"], name: "index_memberships_on_user_id"
   end
 
+  create_table "owners", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "telephones"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "properties", force: :cascade do |t|
     t.text "description"
     t.datetime "created_at", null: false
@@ -152,8 +161,10 @@ ActiveRecord::Schema.define(version: 2019_01_19_131715) do
     t.string "adspitogatos"
     t.string "address"
     t.integer "favorites_count"
+    t.bigint "owner_id"
     t.index ["account_id"], name: "index_properties_on_account_id"
     t.index ["location_id"], name: "index_properties_on_location_id"
+    t.index ["owner_id"], name: "index_properties_on_owner_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -183,4 +194,5 @@ ActiveRecord::Schema.define(version: 2019_01_19_131715) do
   add_foreign_key "memberships", "users"
   add_foreign_key "properties", "accounts"
   add_foreign_key "properties", "locations"
+  add_foreign_key "properties", "owners"
 end

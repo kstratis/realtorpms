@@ -129,6 +129,21 @@ const PropertiesList = ({
                       )}
                     </a>
                   </div>
+                  <div className={"property-owner-name"}>
+                    <Highlighter
+                      highlightClassName="highlighted"
+                      searchWords={[searchInput]}
+                      autoEscape={true}
+                      textToHighlight={entry['owner_name']}
+                    />
+                  </div>
+                  <div className={"property-owner-tel"}><Highlighter
+                    highlightClassName="highlighted"
+                    searchWords={[searchInput]}
+                    autoEscape={true}
+                    textToHighlight={entry['owner_tel']}
+                  /></div>
+
                   <div className="card-control-buttons btn-group d-flex" role="group" aria-label="Basic example">
                     <a
                       href={entry.view_entity_path}

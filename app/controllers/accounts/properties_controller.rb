@@ -40,7 +40,9 @@ module Accounts
             isFaved: property.is_faved_by?(current_user),
             # assignments: property.properties.count,
             # registration: property.created_at.to_formatted_s(:long)
-            registration: property.created_at.strftime('%d %b. %y')
+            registration: property.created_at.strftime('%d %b. %y'),
+            owner_name: property.owner ? "#{property.owner.first_name[0]}. #{property.owner.last_name}" : "-",
+            owner_tel: property.owner ? "#{property.owner.telephones}" : "-",
         }
         @propertieslist[:dataset] << hash
       end
