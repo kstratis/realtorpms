@@ -2,8 +2,6 @@ class Property < ApplicationRecord
 
   include Searchable
 
-  SEARCH_FIELDS = %w(title description notes adxe adspitogatos owner.last_name owner.telephones)
-
   before_validation :handle_dependent_fields, on: :update
   # belongs_to :user
   belongs_to :account
@@ -22,6 +20,7 @@ class Property < ApplicationRecord
   scope :faved_by, -> (user) { joins(:favorites).where(favorites: { user: user }) }
 
   attr_accessor :locationid
+  attr_searchable %w(title description notes adxe adspitogatos owner.last_name owner.telephones)
 
   # enum propertycategory: [:apartment, :terraced, :maisonette, :building, :home]
 

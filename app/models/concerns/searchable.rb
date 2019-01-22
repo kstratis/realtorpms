@@ -5,6 +5,12 @@ module Searchable
 
   module ClassMethods
 
+    # Once the module is included, it specifies which fields to look into
+    def attr_searchable(fields)
+      raise unless fields.kind_of?(Array) && !fields.blank?
+      const_set('SEARCH_FIELDS', fields)
+    end
+
     # Once included in a model it defines a class method which allows us to search through a collection of
     # entries. In order to properly work it requires that a model specifies the +:SEARCH_FIELDS+ constant which dictates
     # which model fields to look into. It also provides (very) limited support for looking through to an associated
