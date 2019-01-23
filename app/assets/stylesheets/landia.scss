@@ -87,7 +87,7 @@ h2 {
 
 
 .card-body{
-  min-height: 150px;
+  min-height: 225px;
 }
 /* header */
 
@@ -591,6 +591,9 @@ i.fas.fa-heart.colored{
   //height: 100%;
   //width: 100%;
   transition: .3s ease;
+  i.far.fa-heart{
+    color: #ffffff;
+  }
   //color: #ffffff;
 }
 
@@ -613,5 +616,5 @@ i.fas.fa-heart.colored{
 
 /* When you move the mouse over the icon, change color */
 .fa-heart:hover {
-  color: #ffffff;
+  color: rgb(220, 72, 127);
 }
