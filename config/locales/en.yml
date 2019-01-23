@@ -197,7 +197,7 @@ en:
       placeholder: "Search in description..."
     properties_view_btn: "View"
     properties_edit_btn: "Edit"
-    properties_favourites_tooltip: "Add to favourites"
+    properties_favourites_tooltip: "Favourites"
     uppy:
       dropPaste: "Drop files here, paste or"
       browse: "browse"

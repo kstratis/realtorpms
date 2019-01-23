@@ -199,7 +199,7 @@ el:
       placeholder: "Αναζητήση ακινήτου..."
     properties_view_btn: "Προβολή"
     properties_edit_btn: "Επεξεργασία"
-    properties_favourites_tooltip: "Προσθήκη στα αγαπημένα"
+    properties_favourites_tooltip: "Aγαπημένα"
     uppy:
       dropPaste: "Σύρετε τα αρχεία σας εδώ ή"
       browse: "επιλέξτε"

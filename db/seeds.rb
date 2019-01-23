@@ -134,8 +134,8 @@ smithuser = shakalaka.users.find_by(email: 'wm@gmail.com')
 # 20 Fake properties belonging to specialuser1 (shakalaka account)
 20.times do |n|
   property = Property.create!(
-      title: Faker::SiliconValley.company,
-      description: Faker::SiliconValley.motto,
+      title: Faker::SiliconValley.motto,
+      description: Faker::SiliconValley.quote,
       businesstype: 'sell',
       category: 'residential',
       subcategory: 'apartment',
@@ -145,7 +145,7 @@ smithuser = shakalaka.users.find_by(email: 'wm@gmail.com')
       location: l1,
       owner: Owner.create!(first_name: Faker::Name.first_name,
                            last_name: Faker::Name.last_name,
-                           email: "owner-#{n + 1}@gmail.com",
+                           email: Faker::SiliconValley.email,
                            telephones: Faker::PhoneNumber.phone_number)
   )
   smithuser.properties << property
@@ -157,8 +157,8 @@ lguser = bluedomain.users.find_by(email: 'lg@gmail.com')
 # 5 fake properties belonging to specialuser3 (bluedomain account)
 5.times do |n|
   property = Property.create!(
-      title: Faker::ProgrammingLanguage.name,
-      description: Faker::ProgrammingLanguage.creator,
+      title: Faker::Lorem.word,
+      description: Faker::Lorem.paragraph,
       businesstype: 'rent',
       category: 'residential',
       subcategory: 'apartment',
@@ -168,7 +168,7 @@ lguser = bluedomain.users.find_by(email: 'lg@gmail.com')
       location: l2,
       owner: Owner.create!(first_name: Faker::Name.first_name,
                                   last_name: Faker::Name.last_name,
-                                  email: "owner-#{n + 1}@gmail.com",
+                                  email: Faker::SiliconValley.email,
                                   telephones: Faker::PhoneNumber.phone_number)
   )
   lguser.properties << property

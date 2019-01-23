@@ -88,33 +88,7 @@ const PropertiesList = ({
                     alt="My awesome image"
                     placeholderColor={'#4dabf5'}
                   />
-                  {/*<img*/}
-                  {/*className="card-img-top thumb"*/}
-                  {/*src={`https://picsum.photos/640/480/?random&sig=${Math.random()}`}*/}
-                  {/*alt="Card image cap"*/}
-                  {/*/>*/}
-                  {/*<img className="card-img-top thumb" src={"https://picsum.photos/1250/800?image=1"} alt="Card image cap" />*/}
-                  <div className="card-body">
-                    <h5 className="card-title clamp-2">
-                      <Highlighter
-                        highlightClassName="highlighted"
-                        searchWords={[searchInput]}
-                        autoEscape={true}
-                        textToHighlight={entry['title']}
-                      />
-                    </h5>
-                    <div className={'desc-container'}>
-                      <p className="card-text clamp-2">
-                        <Highlighter
-                          highlightClassName="highlighted"
-                          searchWords={[searchInput]}
-                          autoEscape={true}
-                          textToHighlight={entry['description']}
-                        />
-                      </p>
-                    </div>
-                  </div>
-                  <div className={'favourites'}>
+                  <div className="overlay">
                     <a
                       title={i18n.favourites_tooltip}
                       data-toggle="tooltip"
@@ -128,21 +102,81 @@ const PropertiesList = ({
                         <i className={'far fa-heart fa-lg fa-fw'} />
                       )}
                     </a>
+
                   </div>
-                  <div className={"property-owner-name"}>
-                    <Highlighter
-                      highlightClassName="highlighted"
-                      searchWords={[searchInput]}
-                      autoEscape={true}
-                      textToHighlight={entry['owner_name']}
-                    />
+                  {/*<img*/}
+                  {/*className="card-img-top thumb"*/}
+                  {/*src={`https://picsum.photos/640/480/?random&sig=${Math.random()}`}*/}
+                  {/*alt="Card image cap"*/}
+                  {/*/>*/}
+                  {/*<img className="card-img-top thumb" src={"https://picsum.photos/1250/800?image=1"} alt="Card image cap" />*/}
+                  <div className="card-body">
+                    <div className={'row'}>
+                      <div className={'col-10'}>
+                        <h5 className="card-title clamp-2">
+                          <Highlighter
+                            highlightClassName="highlighted"
+                            searchWords={[searchInput]}
+                            autoEscape={true}
+                            textToHighlight={entry['title']}
+                          />
+                        </h5>
+                      </div>
+                      <div className={'col-2'}>
+                        <div className={'favourites'}>
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className={'row'}>
+                      <div className={'col-12 desc-container'}>
+                        <p className="card-text clamp-3">
+                          <Highlighter
+                            highlightClassName="highlighted"
+                            searchWords={[searchInput]}
+                            autoEscape={true}
+                            textToHighlight={entry['description']}
+                          />
+                        </p>
+                      </div>
+                    </div>
+
+                    <hr />
+
+                    <div className="row mt-2">
+                      <div className={'col-12'}>
+                        <div className={'property-owner-name'}>
+                          <a href={''} className={'client-icon'}>
+                            <i className={'fas fa-user-tie fa-fw'} />
+                          </a>
+                          &nbsp;
+                          <Highlighter
+                            className={'client-name'}
+                            highlightClassName="highlighted"
+                            searchWords={[searchInput]}
+                            autoEscape={true}
+                            textToHighlight={entry['owner_name']}
+                          />
+                        </div>
+                      </div>
+
+                      <div className={'col-12'}>
+                        <div className={'property-owner-tel'}>
+                          <a href={''} className={'client-icon'}>
+                            <i className={'fas fa-phone fa-fw'} />
+                          </a>
+                          &nbsp;
+                          <Highlighter
+                            highlightClassName="highlighted"
+                            searchWords={[searchInput]}
+                            autoEscape={true}
+                            textToHighlight={entry['owner_tel']}
+                          />
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div className={"property-owner-tel"}><Highlighter
-                    highlightClassName="highlighted"
-                    searchWords={[searchInput]}
-                    autoEscape={true}
-                    textToHighlight={entry['owner_tel']}
-                  /></div>
 
                   <div className="card-control-buttons btn-group d-flex" role="group" aria-label="Basic example">
                     <a
