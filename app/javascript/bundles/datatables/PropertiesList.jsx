@@ -94,7 +94,8 @@ const PropertiesList = ({
                   {/*</div>*/}
 
                   <div className={'thumb-container'}>
-                    <img src={`https://picsum.photos/${getRandomInt(100,800)}/${getRandomInt(100,800)}/?random&sig=${Math.random()}`} className={'card-img-top thumb'} alt={"asd"}/>
+                    {/*<img src={`https://picsum.photos/${getRandomInt(100,800)}/${getRandomInt(100,800)}/?random&sig=${Math.random()}`} className={'card-img-top thumb'} alt={"asd"}/>*/}
+                    <img src={`https://picsum.photos/650/440/?random&sig=${Math.random()}`} className={'card-img-top thumb'} alt={"asd"}/>
                     {/*<img src={`https://picsum.photos/800/300/?random&sig=${Math.random()}`} className={'card-img-top img-fluid'} alt={"asd"}/>*/}
                     {/*<Image*/}
                       {/*// id={'yyy'}*/}
