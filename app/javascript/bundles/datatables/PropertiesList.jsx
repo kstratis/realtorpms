@@ -86,14 +86,16 @@ const PropertiesList = ({
                 {console.log(entry)}
                 <div className="card mb-4 mt-2 ">
 
-                  <div className="placeholder" style="width: 500px;"
-                       data-large={`https://picsum.photos/${getRandomInt(100,800)}/${getRandomInt(100,800)}/?random&sig=${Math.random()}`}>
-                    <img src="https://cdn-images-1.medium.com/freeze/max/27/1*sg-uLNm73whmdOgKlrQdZA.jpeg?q=20"
-                         alt="yolo" className="img-small"/>
-                    <div style={{paddingBottom: "66.6%"}}></div>
-                  </div>
+                  {/*<div className="placeholder" style=""*/}
+                       {/*data-large={`https://picsum.photos/${getRandomInt(100,800)}/${getRandomInt(100,800)}/?random&sig=${Math.random()}`}>*/}
+                    {/*<img src="https://cdn-images-1.medium.com/freeze/max/27/1*sg-uLNm73whmdOgKlrQdZA.jpeg?q=20"*/}
+                         {/*alt="yolo" className="img-small"/>*/}
+                    {/*<div style={{paddingBottom: "66.6%"}}></div>*/}
+                  {/*</div>*/}
 
-                  {/*<div className={'thumb-container'}>*/}
+                  <div className={'thumb-container'}>
+                    <img src={`https://picsum.photos/${getRandomInt(100,800)}/${getRandomInt(100,800)}/?random&sig=${Math.random()}`} className={'card-img-top thumb'} alt={"asd"}/>
+                    {/*<img src={`https://picsum.photos/800/300/?random&sig=${Math.random()}`} className={'card-img-top img-fluid'} alt={"asd"}/>*/}
                     {/*<Image*/}
                       {/*// id={'yyy'}*/}
                       {/*src={`https://picsum.photos/${getRandomInt(100,800)}/${getRandomInt(100,800)}/?random&sig=${Math.random()}`}*/}
@@ -106,7 +108,7 @@ const PropertiesList = ({
                       {/*alt="My awesome image"*/}
                       {/*placeholderColor={'#4dabf5'}*/}
                     {/*/>*/}
-                  {/*</div>*/}
+                  </div>
                   {/*</picture>*/}
                   {/*</div>*/}
                   <div className="overlay">
