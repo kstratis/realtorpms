@@ -10,6 +10,12 @@ import Image from 'react-graceful-image';
 import ControlsContainer from './ControlsContainer';
 import SortFilter from './SortFilter';
 
+const getRandomInt = (min, max) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+};
+
 const PropertiesList = ({
   handlePageClick,
   handleSort,
@@ -28,8 +34,10 @@ const PropertiesList = ({
 }) => {
   return (
     <div className="">
+
       <div className={'container'}>
         <div className={'row'}>
+
           <Search handleSearchInput={handleSearchInput} searchInput={searchInput} placeholder={i18n['search']} />
           {/* Generate the needed filters according to the i18n keys of the erb template */}
           <SortFilter
@@ -76,18 +84,31 @@ const PropertiesList = ({
             {dataset.map((entry, index) => (
               <div className={'col-sm-6 col-lg-4'} key={entry.id}>
                 {console.log(entry)}
-                <div className="card mb-4 mt-2">
-                  <Image
-                    // id={'yyy'}
-                    src={`https://picsum.photos/640/480/?random&sig=${Math.random()}`}
-                    className={'card-img-top thumb'}
-                    // width="300"
-                    // height={`${document.getElementById('yyy').clientHeight}px`}
-                    // height={`${this.clientHeight}`}
-                    height={'209px'}
-                    alt="My awesome image"
-                    placeholderColor={'#4dabf5'}
-                  />
+                <div className="card mb-4 mt-2 ">
+
+                  <div className="placeholder" style="width: 500px;"
+                       data-large={`https://picsum.photos/${getRandomInt(100,800)}/${getRandomInt(100,800)}/?random&sig=${Math.random()}`}>
+                    <img src="https://cdn-images-1.medium.com/freeze/max/27/1*sg-uLNm73whmdOgKlrQdZA.jpeg?q=20"
+                         alt="yolo" className="img-small"/>
+                    <div style={{paddingBottom: "66.6%"}}></div>
+                  </div>
+
+                  {/*<div className={'thumb-container'}>*/}
+                    {/*<Image*/}
+                      {/*// id={'yyy'}*/}
+                      {/*src={`https://picsum.photos/${getRandomInt(100,800)}/${getRandomInt(100,800)}/?random&sig=${Math.random()}`}*/}
+                      {/*// className={'card-img-top thumb'}*/}
+                      {/*className={'thumb'}*/}
+                      {/*// width="300"*/}
+                      {/*// height={`${document.getElementById('yyy').clientHeight}px`}*/}
+                      {/*// height={`${this.clientHeight}`}*/}
+                      {/*// height={'220px'}*/}
+                      {/*alt="My awesome image"*/}
+                      {/*placeholderColor={'#4dabf5'}*/}
+                    {/*/>*/}
+                  {/*</div>*/}
+                  {/*</picture>*/}
+                  {/*</div>*/}
                   <div className="overlay">
                     <a
                       title={i18n.favourites_tooltip}
@@ -102,7 +123,6 @@ const PropertiesList = ({
                         <i className={'far fa-heart fa-lg fa-fw'} />
                       )}
                     </a>
-
                   </div>
                   {/*<img*/}
                   {/*className="card-img-top thumb"*/}
@@ -123,9 +143,9 @@ const PropertiesList = ({
                         </h5>
                       </div>
                       {/*<div className={'col-2'}>*/}
-                        {/*<div className={'favourites'}>*/}
+                      {/*<div className={'favourites'}>*/}
 
-                        {/*</div>*/}
+                      {/*</div>*/}
                       {/*</div>*/}
                     </div>
 
