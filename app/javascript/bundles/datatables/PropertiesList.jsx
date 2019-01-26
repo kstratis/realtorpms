@@ -94,9 +94,15 @@ const PropertiesList = ({
                   {/*</div>*/}
 
                   <div className={'thumb-container'}>
-                    {/*<img src={`https://picsum.photos/${getRandomInt(100,800)}/${getRandomInt(100,800)}/?random&sig=${Math.random()}`} className={'card-img-top thumb'} alt={"asd"}/>*/}
+                    {/*<img src={`https://picsum.photos/${getRandomInt(100,800)}/${getRandomInt(100,800)}/?random&sig=${Math.random()}`} className={'card-img-top thumb'} alt={"thumbnail"}/>*/}
                     <img src={`https://picsum.photos/650/440/?random&sig=${Math.random()}`} className={'card-img-top thumb'} alt={"asd"}/>
-                    {/*<img src={`https://picsum.photos/800/300/?random&sig=${Math.random()}`} className={'card-img-top img-fluid'} alt={"asd"}/>*/}
+                    {/*<img src={`https://picsum.photos/310/220/?random&sig=${Math.random()}`} className={'card-img-top thumb'} alt={"asd"}/>*/}
+
+
+                    {/* SOS*/}
+                    {/*<img src={`https://www.dropbox.com/s/l9pj1s6xzptfke6/korig.JPG?dl=1`} className={'card-img-top thumb'} alt={"asd"}/>*/}
+
+
                     {/*<Image*/}
                       {/*// id={'yyy'}*/}
                       {/*src={`https://picsum.photos/${getRandomInt(100,800)}/${getRandomInt(100,800)}/?random&sig=${Math.random()}`}*/}

@@ -652,6 +652,8 @@ i.fas.fa-heart.colored{
 
 .thumb-container{
   display: flex;
+  // without this it covers the container
+  flex-flow: column;
   justify-content: center;
   align-items: center;
   overflow: hidden;
@@ -659,7 +661,8 @@ i.fas.fa-heart.colored{
 }
 
 .thumb{
-  flex-shrink: 0;
+  object-fit: cover;
+  //flex-shrink: 0;
   min-width: 100%;
   min-height: 100%
 }

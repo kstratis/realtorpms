@@ -19,6 +19,15 @@ gem 'bootsnap'
 gem 'bootstrap-datepicker-rails'
 gem 'rake', '~> 12.3.2'
 
+# image metadata info
+gem 'exifr', '~> 1.3', '>= 1.3.5'
+
+# image manipulation tool
+gem "mini_magick"
+
+# state machine controllers
+gem 'wicked'
+
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1.3'
 # Use Puma as the app server
