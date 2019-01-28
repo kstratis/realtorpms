@@ -59,12 +59,8 @@ module Accounts
         format.json {render json: {results_per_page: @results_per_page,
                                    userslist: @propertieslist,
                                    total_entries: @properties.total_entries,
-                                   current_page: @properties.current_page }, status: 200}
+                                   current_page: @properties.current_page}, status: 200}
       end
-
-
-
-
 
 
     end
@@ -75,11 +71,6 @@ module Accounts
     def show
       @property = Property.find(params[:id])
       filter_users
-    end
-
-    # GET /properties/new
-    def new
-      @property = Property.new
     end
 
     # GET /properties/1/edit
@@ -97,6 +88,10 @@ module Accounts
 
     end
 
+    # GET /properties/new
+    def new
+      @property = Property.new
+    end
 
     # POST /properties
     # POST /properties.json
@@ -109,11 +104,14 @@ module Accounts
       # puts "-after-"
       # puts myhash
       @property = Property.new(property_params)
+
+      # --- SOS left out
       # When only having the associated object's id (location) and not the object itself,
       # look at the following link for a trick to bypass this. It involves form changes (id & name)
       # and the introduction of an accessor property plus the following line
       # https://stackoverflow.com/a/43476033/178728
-      @property.location = Location.find(@property.locationid)
+      # @property.location = Location.find(@property.locationid)
+      # --- SOS
       @property.account = current_account
 
       # property_params[:]
@@ -121,15 +119,24 @@ module Accounts
 
       respond_to do |format|
         if @property.save
-          puts 'form saving successfully'
-          format.html { redirect_to @property, notice: 'Property was successfully created.' }
-          format.js { render :create_result }
+
+          puts 'partial form saving successfully - redirecting to steps'
+          puts @property.id
+
+          # redirect_to wizard_path(steps.first, :product_id => @product.id)
+          #
+          # format.html {redirect_to property_step(@property), notice: 'Property was successfully created.'}
+          # format.html {redirect_to property_build_path('basics', :property_id => @property.id), notice: 'Property was successfully created.'}
+          format.html {redirect_to property_build_path(:basics, :property_id => @property.id)}
+
+
+          # format.js {render :create_result}
         else
           @property.errors.each do |field, error|
             puts "#{field}: #{error}"
           end
-          format.html { render :new }
-          format.js { render :create_result }
+          format.html {render :new}
+          # format.js {render :create_result}
         end
       end
     end
@@ -139,11 +146,11 @@ module Accounts
     def update
       respond_to do |format|
         if @property.update(property_params)
-          format.html { redirect_to @property, flash: {success: "Property was successfully updated."}}
-          format.json { render :show, status: :ok, location: @property }
+          format.html {redirect_to @property, flash: {success: "Property was successfully updated."}}
+          format.json {render :show, status: :ok, location: @property}
         else
-          format.html { render :edit }
-          format.json { render json: @property.errors, status: :unprocessable_entity }
+          format.html {render :edit}
+          format.json {render json: @property.errors, status: :unprocessable_entity}
         end
       end
     end
@@ -153,45 +160,45 @@ module Accounts
     def destroy
       @property.destroy
       respond_to do |format|
-        format.html { redirect_to properties_url, notice: 'Property was successfully destroyed.' }
-        format.json { head :no_content }
+        format.html {redirect_to properties_url, notice: 'Property was successfully destroyed.'}
+        format.json {head :no_content}
       end
     end
 
     private
 
-      # Use callbacks to share common setup or constraints between actions.
-      def set_property
-        @property = Property.find(params[:id])
-      end
+    # Use callbacks to share common setup or constraints between actions.
+    def set_property
+      @property = Property.find(params[:id])
+    end
 
-      # Never trust parameters from the scary internet, only allow the white list through.
-      def property_params
-        # params.require(:property).permit(:description, :propertycategory, :propertytype, :price, :size, :construction)
-        params.require(:property).permit(:description,
-                                         :businesstype,
-                                         :category,
-                                         :subcategory,
-                                         :locationid,
-                                         :bedrooms,
-                                         :bathrooms,
-                                         :price,
-                                         :size,
-                                         :floor,
-                                         :levels,
-                                         :availability,
-                                         :construction,
-                                         :roofdeck_space,
-                                         :storage_space,
-                                         :garden_space,
-                                         :plot_space,
-                                         :address,
-                                         :notes,
-                                         :adxe,
-                                         :adspitogatos,
-                                         images: [],
-                                         extra_ids: [])
-      end
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def property_params
+      # params.require(:property).permit(:description, :propertycategory, :propertytype, :price, :size, :construction)
+      params.require(:property).permit(:description,
+                                       :businesstype,
+                                       :category,
+                                       :subcategory,
+                                       :locationid,
+                                       :bedrooms,
+                                       :bathrooms,
+                                       :price,
+                                       :size,
+                                       :floor,
+                                       :levels,
+                                       :availability,
+                                       :construction,
+                                       :roofdeck_space,
+                                       :storage_space,
+                                       :garden_space,
+                                       :plot_space,
+                                       :address,
+                                       :notes,
+                                       :adxe,
+                                       :adspitogatos,
+                                       images: [],
+                                       extra_ids: [])
+    end
 
 
   end

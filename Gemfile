@@ -25,7 +25,7 @@ gem 'exifr', '~> 1.3', '>= 1.3.5'
 # image manipulation tool
 gem "mini_magick"
 
-# state machine controllers
+# controllers acting like state machines for partial validations
 gem 'wicked'
 
 # Use postgresql as the database for Active Record
