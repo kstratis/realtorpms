@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
 
       resources :properties do
-        resources :build, controller: 'property_steps'
+        # resources :build, controller: 'property_steps'
         resource :favorites, only: [:create, :destroy]
       end
 
