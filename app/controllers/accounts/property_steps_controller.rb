@@ -17,10 +17,17 @@ module Accounts
     end
     #
     #
-    # def create
-    #   @product = Product.create
-    #   redirect_to wizard_path(steps.first, :product_id => @product.id)
-    # end
+    def create
+      puts 'hitting create'
+      @property = Property.create
+      @property.account = current_account
+      if @property.save
+        puts 'prop saved'
+        redirect_to wizard_path(steps.first, :property_id => @property.id)
+      end
+
+      # format.html {redirect_to property_build_path(:basics, :property_id => @property.id)}
+    end
 
   end
 end

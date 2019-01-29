@@ -85,7 +85,8 @@
             <ul class="menu">
               <%= content_tag :li, class: "menu-item  #{active_for(path: new_property_path)}" do %>
                 <!--              <li class="menu-item <%#= active_for(path: new_property_path) %>">-->
-                <%= link_to new_property_path, class: 'menu-link' do %>
+                <%#= link_to new_property_path, class: 'menu-link' do %>
+                <%= button_to property_build_index_path('57'), { method: :post }, class: 'menu-link' do %>
                   <%= content_tag :i, nil, class: 'fas fa-plus fa-fw' %>
                   <%= content_tag :span, t('properties.add'), class: 'menu-text' %>
                 <% end %>
