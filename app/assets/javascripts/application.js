@@ -21,6 +21,7 @@
 //= require sweetalert2
 //= require sweet-alert2-rails
 //= require jquery.validate
+//= require jquery.smartWizard
 //= require clamp-js-main
 //= require tooltips
 //= require stacked-menu/dist/js/stacked-menu.js
