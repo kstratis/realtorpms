@@ -157,6 +157,18 @@ en:
         record_invalid: ! 'Validation failed: %{errors}'
   js:
     components:
+      wizard:
+        stepper:
+          one_title: "Step 1"
+          one_desc: "Property type"
+          two_title: "Step 2"
+          two_desc: "Description"
+          three_title: "Step 3"
+          three_desc: "Details"
+          fourth_title: "Step 4"
+          fourth_desc: "Location"
+          fifth_title: "Step 5"
+          fifth_desc: "Media"
       select:
         placeholder: "Choose..."
         category: "Category"

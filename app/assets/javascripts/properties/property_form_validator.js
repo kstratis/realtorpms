@@ -1,7 +1,9 @@
 $(document).on('turbolinks:load', function(e) {
   if (window.location.pathname === '/properties/new' || window.location.pathname.match(/^\/properties\/\d+\/edit$/)) {
+    // Stores away a reference to either a new property form or an edit form
+    var $propertyform = $('#new_property, [id^=edit_property_]');
 
-    // Handle the property form dependant fields
+    /* Handles the initial state of the form's dependant fields */
     // -------------------------------------
     var elements = $('.dependent_check');
     var status;
@@ -20,13 +22,19 @@ $(document).on('turbolinks:load', function(e) {
     });
     // -------------------------------------
 
-    // Handle the property form validators (new, edit)
+    /* Handles the property form validators (new, edit)
+    *  When a form is submitted the following happen before a proper ajax request is sent to the server:
+    * 1. JQuery validate intercepts the request and runs its validations
+    * 2. If validations pass, active storage takes care of uploading media files
+    * 3. A custom ajax:before handler is fired which checks if the (available) files are uploaded and POSTs the form
+    * */
     // -------------------------------------
-    var jqvalidatorDomNode = $('#jqvalidator');
+    var jqvalidatorDomNode = $('#jqvalidator');  // Gets the DOM containing the translations
     var jqtranslations = jqvalidatorDomNode.data('i18n').jqvalidator;
     $.extend($.validator.messages, jqtranslations);
-    console.log('validation runs');
-    var $v = $('#new_property, [id^=edit_property_]').validate({
+    // The validate method will -by default- hijack the submit form in order to run its validations first.
+    // However once validate() returns a validator reference which can be used to validate on demand.
+    var $v = $propertyform.validate({
       rules: {
         'property[businesstype]': {
           required: true
@@ -56,8 +64,23 @@ $(document).on('turbolinks:load', function(e) {
     });
     // -------------------------------------
 
+    /* This handler makes sure all files are uploaded before actually submitting the form */
+    $propertyform.on('ajax:before', function(event, xhr, opts) {
+      if ($('#preventformsubmit').length > 0) {
+        if (Object.keys(window.uppy_uploader.getState().files).length) {
+          event.preventDefault();
+          return false;
+        } else {
+          // Remove element from DOM before ujs serializes the form
+          $(event.target)
+            .find('#property_images')
+            .remove();
+        }
+      }
+    });
 
-    // Handle the property form wizard
+
+    /* Handles the property form wizard */
     // -------------------------------------
     var $smartwizard = $('#smartwizard');
 
@@ -77,20 +100,12 @@ $(document).on('turbolinks:load', function(e) {
       if (!$v.form()){
         return false;
       }
-      // var elmForm = $('#form-step-' + stepNumber);
-      // stepDirection === 'forward' :- this condition allows to do the form validation
-      // only on forward navigation, that makes easy navigation on backwards still do the validation when going next
-      // if (stepDirection === 'forward' && elmForm) {
-      //   elmForm.validator('validate');
-      //   var elmErr = elmForm.children('.has-error');
-      //   if (elmErr && elmErr.length > 0) {
-      //     // Form validation failed
-      //     return false;
-      //   }
-      // }
-      // return true;
     });
     // -------------------------------------
+
+
+
+
 
   }
 });
