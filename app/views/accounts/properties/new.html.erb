@@ -87,10 +87,7 @@
                     } do %>
                     <% end %>
 
-                    <div class="form-group">
-                      <%= property.submit t('properties.new.add_button'), class: 'btn btn-primary' %>
-                      <%#= property.submit t('properties.new.add_button'), class: 'btn btn-primary', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Creating property..."} %>
-                    </div>
+
 
                   </div>
                   <div class="col-md-8">
@@ -152,6 +149,10 @@
 
           </div> <!-- end of wizard-->
         </div>
+      </div>
+      <div class="form-group">
+        <%= property.submit t('properties.new.add_button'), class: 'btn btn-primary' %>
+        <%#= property.submit t('properties.new.add_button'), class: 'btn btn-primary', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Creating property..."} %>
       </div>
     <% end %>
 
