@@ -45,14 +45,14 @@ class Property < ApplicationRecord
   # enum heating: [:central, :prive]
 
   # Validations should match their ujs_form_handler.js counterparts
-  # validates :businesstype, presence: true
-  # validates :category, presence: true
-  # validates :subcategory, presence: true
+  validates :businesstype, presence: true
+  validates :category, presence: true
+  validates :subcategory, presence: true
   # validates :locationid, presence: true
-  # validates :size, numericality: { only_integer: true }, allow_blank: true
-  # validates :price, numericality: { only_integer: true }, allow_blank: true
-  # validates :bedrooms, numericality: { only_integer: true }, allow_blank: true
-  # validates :bathrooms, numericality: { only_integer: true }, allow_blank: true
+  validates :size, numericality: { only_integer: true }, allow_blank: true
+  validates :price, numericality: { only_integer: true }, allow_blank: true
+  validates :bedrooms, numericality: { only_integer: true }, allow_blank: true
+  validates :bathrooms, numericality: { only_integer: true }, allow_blank: true
 
   def pricepersqmeter
     (price / size).to_s unless price.blank? || size.blank? || size == 0

@@ -119,24 +119,15 @@ module Accounts
 
       respond_to do |format|
         if @property.save
-
-          puts 'partial form saving successfully - redirecting to steps'
-          puts @property.id
-
-          # redirect_to wizard_path(steps.first, :product_id => @product.id)
-          #
-          # format.html {redirect_to property_step(@property), notice: 'Property was successfully created.'}
-          # format.html {redirect_to property_build_path('basics', :property_id => @property.id), notice: 'Property was successfully created.'}
-          format.html {redirect_to property_build_path(:basics, :property_id => @property.id)}
-
-
-          # format.js {render :create_result}
+          puts 'form saving successfully'
+          format.html { redirect_to @property, notice: 'Property was successfully created.' }
+          format.js { render :create_result }
         else
           @property.errors.each do |field, error|
             puts "#{field}: #{error}"
           end
-          format.html {render :new}
-          # format.js {render :create_result}
+          format.html { render :new }
+          format.js { render :create_result }
         end
       end
     end
