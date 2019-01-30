@@ -44,6 +44,7 @@ function handleFormSubmissionEvent(event) {
       }
     })
   }
+  console.log('runs the handling');
 }
 
 function submitForm(form) {

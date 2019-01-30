@@ -5,7 +5,8 @@ $(document).on('turbolinks:load', function(e) {
       if (Object.keys(window.uppy_uploader.getState().files).length) {
         event.preventDefault();
         return false;
-      } else {
+      }
+      else {
         // Remove element from DOM before ujs serializes the form
         $(event.target)
           .find('#property_images')

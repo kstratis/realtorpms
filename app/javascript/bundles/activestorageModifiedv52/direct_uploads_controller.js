@@ -10,6 +10,8 @@ export class DirectUploadsController {
     this.form = form;
     // The following line was changed
     this.inputs = findElements(form, inputSelector);
+    console.log('direct running');
+    console.log(this.inputs);
   }
 
   start(callback) {
@@ -28,6 +30,7 @@ export class DirectUploadsController {
       } else {
         // The following line was added
         document.getElementById('preventformsubmit').remove();
+        console.log('removed the line');
         callback();
         this.dispatch('end');
       }
