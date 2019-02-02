@@ -82,7 +82,15 @@ $(document).on('turbolinks:load', function(e) {
 
     /* Handles the property form wizard */
     // -------------------------------------
-    var $smartwizard = $('#smartwizard');
+    var $smartwizard = $('#smartwizard-new');
+
+    // Track step status
+    var steps = [];
+
+    // Initialize step status on page load
+    $('.step-anchor-nav').each(function(index, element){
+      steps[index] = { 'visited': false}
+    });
 
     $smartwizard.smartWizard({
       theme: 'arrows',
@@ -97,12 +105,43 @@ $(document).on('turbolinks:load', function(e) {
 
     $smartwizard.on('leaveStep', function(e, anchorObject, stepNumber, stepDirection) {
       console.log('leaving');
-      if (!$v.form()){
-        return false;
+
+      console.log(anchorObject);
+      console.log($v.valid());
+      // var lea
+      if (!$v.valid() && stepDirection === 'forward'){
+        console.log('inside if');
+        if (steps[anchorObject.attr('href').split('-')[1]]['visited']){
+          console.log('adds error class')
+        }else{
+          return false;
+        }
+        // console.log('adding error class to ' + stepNumber);
+        // if (stepDirection === 'forward'){
+        //   if (!$v.form()){
+
+          // }
+        // }
+        // anchorObject.attr('href').split('-')[1];
+        // console.log('')
+        // if (stepDirection === 'forward' && steps[stepNumber]['visited']){
+        //   console.log('carry on simply add class')
+        // }else{
+        //   return false;
+        // }
+
       }
+      // if (stepDirection === 'forward' && !$v.form()){
+      //   return false;
+      // }
     });
     // -------------------------------------
 
+    $smartwizard.on('showStep', function(e, anchorObject, stepNumber, stepDirection) {
+
+
+      steps[stepNumber]['visited'] = true;
+    });
 
 
 

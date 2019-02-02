@@ -13,7 +13,7 @@ gem 'rails', '~> 5.2.2'
 gem 'bcrypt', '3.1.12'
 gem 'babel-transpiler'
 
-gem 'bootstrap', '~> 4.1.3'
+gem 'bootstrap', '~> 4.2.1'
 
 gem 'bootsnap'
 gem 'bootstrap-datepicker-rails'
