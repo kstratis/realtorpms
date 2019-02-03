@@ -59,6 +59,10 @@
     border-left: 2px solid $border-color;
   }
 
+  .timeline-dashed-line &::before {
+    border-left-style: dashed;
+  }
+
   .tile {
     position: relative;
     box-shadow: 0 0 0 2px $body-bg;

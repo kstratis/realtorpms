@@ -161,10 +161,11 @@
   color: $navbar-light-color;
 
   .btn-account {
-    color: $navbar-light-color;
+    color: $body-color;
     border-left: 1px solid rgba($dark, .1);
 
     @include hover {
+      color: $body-color;
       background-color: rgba($black, .025);
     }
 
@@ -172,6 +173,7 @@
     &:focus,
     &.focus,
     &.show {
+      color: $body-color;
       background-color: rgba($black, .075);
     }
   }

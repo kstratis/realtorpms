@@ -169,7 +169,7 @@
     padding-top: .75rem;
     padding-bottom: .75rem;
     display: flex;
-    align-items: start;
+    align-items: flex-start;
 
     &:not(:first-child) {
       border-top: 1px solid $border-color;
@@ -253,6 +253,11 @@
       display: block;
       cursor: pointer;
 
+      &:before,
+      &:after {
+        left: -1.25rem;
+      }
+
       &::before {
         border: none;
         background: transparent !important;
@@ -262,6 +267,20 @@
 
     .custom-control-input:checked ~ .custom-control-label:after {
       transform: scale(1.2);
+    }
+  }
+}
+
+.macos {
+  .dropdown-menu,
+  .dropdown-scroll {
+    .custom-control-label {
+      @include media-breakpoint-up(md) {
+        &:before,
+        &:after {
+          top: .2rem;
+        }
+      }
     }
   }
 }

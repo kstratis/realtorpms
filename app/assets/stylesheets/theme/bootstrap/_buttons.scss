@@ -208,32 +208,6 @@
 // Button subtle
 // ==================================================
 
-@mixin button-subtle-variant($bg, $color) {
-  color: $color;
-  background-color: rgba($bg, $subtle-level);
-  border-color: transparent;
-
-  &:hover,
-  &:focus,
-  &.focus {
-    color: $color;
-    background-color: rgba($bg, $subtle-level-hover);
-    box-shadow: none;
-  }
-
-  // Disabled comes first so active can properly restyle
-  &.disabled,
-  &:disabled {
-    background-color: rgba($bg, $subtle-level);
-  }
-
-  &:not(:disabled):not(.disabled).active,
-  &:not(:disabled):not(.disabled):active,
-  .show > &.dropdown-toggle {
-    background-color: rgba($bg, $subtle-level-active);
-  }
-}
-
 @each $color, $value in $theme-colors {
   .btn-subtle-#{$color} {
     $text: darken($value, 5%);

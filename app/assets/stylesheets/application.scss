@@ -12,20 +12,22 @@
  *
 */
 
+// SOS - MAINTAIN THE IMPORT ORDER.
+// Do exactly as demonstrated in `theme.scss` (demo sass file of theme) under the default theme
 @import "theme/variable-bs-overrides";
 @import "bootstrap/bootstrap-functions";
 @import "theme/variables";
+@import "theme/mixins";
 
+// Custom system-wide landia overrides
 @import "variables-custom";
 
 // Bootstrap and its default variables
 // ==================================================
 @import "bootstrap/bootstrap-core";
 
-//@import "./*";
 // Bootstrap components overrides
 // ==================================================
-
 @import "theme/bootstrap/typography";
 @import "theme/bootstrap/code";
 @import "theme/bootstrap/embed-responsive";

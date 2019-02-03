@@ -83,6 +83,13 @@
   }
 }
 
+.row-details {
+  &.collapsing {
+    display: none;
+    transition: none;
+  }
+}
+
 .card-fluid {
   > .table-responsive > .table,
   > .table {
@@ -147,10 +154,6 @@
 
 .col-checker {
   width: 2rem;
-
-  .custom-control-nolabel {
-    top: .125rem;
-  }
 }
 
 .thead-btn {

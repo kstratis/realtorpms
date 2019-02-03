@@ -164,7 +164,7 @@
 
 .conversation-actions {
   padding: 0 .25rem;
-  align-self: start;
+  align-self: flex-start;
   opacity: 0;
   transition: opacity 200ms;
 }

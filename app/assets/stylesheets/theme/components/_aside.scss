@@ -4,6 +4,8 @@
   bottom: 0;
   left: 0;
   padding: 0;
+  width: calc(100vw - 3.5rem);
+  max-width: calc(#{$app-aside-width} + 1.5rem);
   z-index: $zindex-modal;
   transform: translate3d(-100%, 0, 0);
   backface-visibility: hidden; // avoid webkit bug render
@@ -14,12 +16,15 @@
   }
 
   &.show {
-    border: 0;
     transform: translate3d(0, 0, 0);
   }
 
   + .app-main {
     padding-left: 0;
+  }
+
+  .top-bar-brand {
+    width: auto;
   }
 }
 
@@ -135,9 +140,6 @@
 
       @include media-breakpoint-down($breakpoint) {
         top: 0;
-        width: calc(100vw - 3.5rem);
-        min-width: 15rem;
-        max-width: 16.5rem;
         transform: translate3d(-100%, 0, 0);
         z-index: $zindex-modal;
         border-right: 0;
@@ -166,6 +168,12 @@
           &.show {
             display: block;
             animation: fadeInBackdrop 260ms ease forwards;
+          }
+        }
+
+        @include media-breakpoint-up($next) {
+          &.show {
+            display: none;
           }
         }
       }

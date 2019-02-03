@@ -1,26 +1,30 @@
-@mixin switcher-variant($color) {
-  .switcher-input:checked {
-    + .switcher-indicator,
-    + .switcher-indicator:before {
-      border-color: $color;
-    }
-
-    + .switcher-indicator {
-      background-color: $color;
-    }
-  }
-}
-
 .switcher-control {
   margin-bottom: 0;
   position: relative;
-  width: 36px;
   vertical-align: middle;
+  font-weight: bold;
+  font-size: .625rem;
   user-select:none;
+
+  @include switcher-height($switcher-height);
+}
+
+.switcher-control-lg {
+  @include switcher-height($switcher-height-lg);
 }
 
 .switcher-input {
-  display: none;
+  position: absolute;
+  height: 0;
+  width: 0;
+  z-index: -1;
+  opacity: 0;
+
+  &:focus {
+    + .switcher-indicator {
+      box-shadow: $box-shadow;
+    }
+  }
 }
 
 .switcher-indicator {
@@ -28,28 +32,22 @@
   display: block;
   overflow: hidden;
   cursor: pointer;
-  height: 16px;
   padding: 0;
-  line-height: 16px;
   border: 2px solid $switcher-color;
-  border-radius: 16px;
   background-color: $switcher-color;
   transition: all 150ms linear;
-}
 
-.switcher-indicator:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  display: block;
-  width: 16px;
-  margin: 0px;
-  background: $switcher-indicator-color;
-  right: 20px;
-  border: 2px solid $switcher-color;
-  border-radius: 16px;
-  transition: all 150ms ease-in-out;
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: block;
+    margin: 0px;
+    background: $switcher-indicator-color;
+    border: 2px solid $switcher-color;
+    transition: all 150ms ease-in-out;
+  }
 }
 
 .switcher-input:checked {
@@ -75,6 +73,35 @@
   + .switcher-indicator {
     opacity: .38;
     cursor: default;
+  }
+}
+
+// switcher label
+.switcher-label-on,
+.switcher-label-off {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  text-align: center;
+}
+
+.switcher-label-on {
+  display: none;
+  left: 0;
+  color: color-yiq($switcher-active-color);
+
+  .switcher-input:checked ~ & {
+    display: block;
+  }
+}
+
+.switcher-label-off {
+  display: block;
+  right: 0;
+  color: $text-muted;
+
+  .switcher-input:checked ~ & {
+    display: none;
   }
 }
 

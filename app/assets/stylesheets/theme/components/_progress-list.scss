@@ -1,32 +1,11 @@
-@mixin progress-list-state($background, $color: $card-bg) {
-  &::before {
-    background-color: $background;
-  }
-
-  > button {
-    color: $background;
-    background-color: $color;
-    border-color: $color;
-
-    &:focus,
-    &:active {
-      box-shadow: 0 0 0 2px $background;
-    }
-  }
-
-  .progress-indicator {
-    color: $background;
-  }
-}
-
-
 .progress-list {
+  display: flex;
   position: relative;
   margin-bottom: 1.25rem;
   margin-left: 0;
   padding-left: 0;
   list-style: none;
-  display: flex;
+  font-weight: normal;
 
   > li {
     position: relative;

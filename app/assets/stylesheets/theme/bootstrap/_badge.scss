@@ -20,19 +20,6 @@
 
 // Subtle badge
 
-@mixin badge-subtle-variant($bg, $color) {
-  color: $color;
-  background-color: rgba($bg, $subtle-level);
-
-  &[href] {
-    @include hover-focus {
-      color: $color;
-      text-decoration: none;
-      background-color: rgba($bg, $subtle-level-hover);
-    }
-  }
-}
-
 .badge-subtle {
   @each $color, $value in $theme-colors {
     &.badge-#{$color} {

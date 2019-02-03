@@ -300,9 +300,18 @@ $alert-color-level:                 2;
 
 
 // Progress bars
+// ==================================================
 
 $progress-font-size:                .625rem;
 $progress-bg:                       $gray-200;
+
+
+// Toasts
+// ==================================================
+
+$toast-background-color:          rgba($white, .85);
+$toast-header-color:              $gray-600;
+$toast-header-background-color:   rgba($white, .85);
 
 
 // Navs
@@ -320,8 +329,8 @@ $nav-tabs-link-active-color:          $gray-800;
 // Navbar
 // ==================================================
 
-$navbar-light-color:                rgba($black, .8);
-$navbar-light-hover-color:          $black;
+$navbar-light-color:                rgba($black, .4);
+$navbar-light-hover-color:          $body-color;
 $navbar-light-active-color:         $primary;
 $navbar-light-disabled-color:       $gray-500;
 $navbar-light-toggler-border-color: $body-color;

@@ -543,6 +543,56 @@ div.dt-button-info h2 {
   background-color: $dark;
 }
 
+// responsive datatable extension
+table.dataTable>tbody>tr.child {
+  background-color: $light;
+
+  &:hover {
+    background-color: $light !important;
+  }
+
+  ul.dtr-details {
+    display: block;
+
+    > li {
+      border-color: $table-border-color;
+    }
+  }
+}
+
+table.dataTable.dtr-inline.collapsed > tbody {
+   > tr[role="row"] {
+    > td:first-child:before,
+    > th:first-child:before {
+      cursor: pointer;
+      top: 1rem;
+      content: "\f105";
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      font-style: normal;
+      font-variant: normal;
+      text-rendering: auto;
+      line-height: 1;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+      background-color: transparent;
+      color: inherit;
+      border: 0;
+      box-shadow: none;
+      transform: rotate(0);
+      transform-origin: center center;
+      transition: transform 150ms linear;
+    }
+  }
+
+  > tr.parent {
+    > td:first-child:before,
+    > th:first-child:before {
+      background-color: transparent;
+      transform: rotate(90deg);
+    }
+  }
+}
 
 
 // Perfect Scrollbar
@@ -995,8 +1045,9 @@ $plyr-accent:       $primary !default;
 // ==================================================
 
 .select2-dropdown {
-  z-index: $zindex-dropdown;
+  z-index: $zindex-modal + 1;
 }
+
 .select2-container .select2-selection--single {
   height: $input-height;
   background: $custom-select-bg;
@@ -1206,7 +1257,7 @@ $plyr-accent:       $primary !default;
 
 .atwho-view,
 .tribute-container {
-  z-index: $zindex-dropdown;
+  z-index: $zindex-modal + 1;
   min-width: $dropdown-min-width;
   padding: $dropdown-padding-y 0;
   margin: $dropdown-spacer 0 0; // override default ul
@@ -1345,6 +1396,11 @@ $plyr-accent:       $primary !default;
 }
 
 .flatpickr-time {
+
+  .flatpickr-innerContainer + & {
+    border-top: 1px solid $table-border-color !important;
+  }
+
   input,
   .flatpickr-am-pm {
     color: $input-color;
@@ -1579,6 +1635,49 @@ span.flatpickr-weekday {
 .flatpickr-day.startRange.startRange + .endRange,
 .flatpickr-day.endRange.startRange + .endRange {
   box-shadow: -10px 0 0 $component-active-bg;
+}
+
+// weekSelect plugin
+.flatpickr-day.week.selected {
+  box-shadow: none;
+}
+
+// monthSelect plugin
+.flatpickr-day.month.selected {
+  border-radius: 0;
+  box-shadow: none;
+}
+.flatpickr-day.month.selected.startRange,
+.flatpickr-day.month.selected.endRange {
+  border-radius: 0;
+}
+
+// confirmDate Plugin
+.flatpickr-confirm {
+  height: 40px;
+  max-height: 0px;
+  visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: $dropdown-bg;
+  border-top: 1px solid $table-border-color;
+  @include border-bottom-radius($border-radius);
+}
+
+.flatpickr-confirm svg path {
+  fill: inherit;
+}
+
+.flatpickr-confirm.darkTheme {
+  color: white;
+  fill: white;
+}
+
+.flatpickr-confirm.visible {
+  max-height: 40px;
+  visibility: visible
 }
 
 
@@ -1829,20 +1928,6 @@ span.flatpickr-weekday {
 }
 
 // Contextual
-
-@mixin nouislider-variant($color) {
-  .noUi-connect {
-    background-color: $color;
-  }
-  .noUi-handle {
-    border-color: $color;
-    &:hover,
-    &:focus,
-    &:active {
-      box-shadow: 0 0 0 4px rgba($color, .26);
-    }
-  }
-}
 
 @each $color, $value in $theme-colors {
   @if $color != 'secondary' and $color != 'light' {
@@ -2354,8 +2439,8 @@ span.flatpickr-weekday {
 
 
 // Toastr
-// Deprecated – will remove on the next release
-// use native toastr bootstrap component instead
+// Deprecated
+// please consider to using native toastr bootstrap component instead
 // ==================================================
 
 #toast-container {
@@ -2445,10 +2530,6 @@ span.flatpickr-weekday {
   }
 }
 
-.toast {
-  background-color: $dark;
-  color: color-yiq($dark);
-}
 #toast-container > .toast-success,
 .toast-success {
   background-color: $success;
@@ -2505,7 +2586,7 @@ span.flatpickr-weekday {
     &.toast-top-center,
     &.toast-top-right,
     &.toast-top-left {
-      top: $app-header-height;
+      top: calc(#{$app-header-height} - 1px);
     }
 
     &.toast-bottom-center,
@@ -2927,10 +3008,9 @@ span.flatpickr-weekday {
   }
 
   .fc-popover {
-    box-shadow: $dropdown-box-shadow;
-
+    &,
     &.card {
-      box-shadow: $dropdown-box-shadow;
+      box-shadow: 0;
     }
 
     .fc-header {
@@ -3010,4 +3090,25 @@ canvas.particles-js-canvas-el {
 
 #session-timeout-dialog .modal-header > .close {
   display: none;
+}
+
+
+// Parsley
+// ==================================================
+
+.parsley-errors-list {
+  margin: $form-feedback-margin-top 0;
+  padding: 0;
+  display: none;
+  width: 100%;
+  font-size: $form-feedback-font-size;
+  color: $form-feedback-invalid-color;
+
+  &.filled {
+    display: block;
+  }
+
+  > li {
+    display: block;
+  }
 }
