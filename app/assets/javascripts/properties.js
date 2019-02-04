@@ -29,39 +29,39 @@ $(document).on('turbolinks:load', function(e) {
     * 3. A custom ajax:before handler is fired which checks if the (available) files are uploaded and POSTs the form
     * */
     // -------------------------------------
-    var jqvalidatorDomNode = $('#jqvalidator');  // Gets the DOM containing the translations
-    var jqtranslations = jqvalidatorDomNode.data('i18n').jqvalidator;
-    $.extend($.validator.messages, jqtranslations);
-    // The validate method will -by default- hijack the submit form in order to run its validations first.
-    // However once validate() returns a validator reference which can be used to validate on demand.
-    var $v = $propertyform.validate({
-      rules: {
-        'property[businesstype]': {
-          required: true
-        },
-        'property[category]': {
-          required: true
-        },
-        'property[subcategory]': {
-          required: true
-        },
-        'property[locationid]': {
-          required: true
-        },
-        'property[price]': {
-          digits: true
-        },
-        'property[size]': {
-          digits: true
-        },
-        'property[bedrooms]': {
-          digits: true
-        },
-        'property[bathrooms]': {
-          digits: true
-        }
-      }
-    });
+    // var jqvalidatorDomNode = $('#jqvalidator');  // Gets the DOM containing the translations
+    // var jqtranslations = jqvalidatorDomNode.data('i18n').jqvalidator;
+    // $.extend($.validator.messages, jqtranslations);
+    // // The validate method will -by default- hijack the submit form in order to run its validations first.
+    // // However once validate() returns a validator reference which can be used to validate on demand.
+    // var $v = $propertyform.validate({
+    //   rules: {
+    //     'property[businesstype]': {
+    //       required: true
+    //     },
+    //     'property[category]': {
+    //       required: true
+    //     },
+    //     'property[subcategory]': {
+    //       required: true
+    //     },
+    //     'property[locationid]': {
+    //       required: true
+    //     },
+    //     'property[price]': {
+    //       digits: true
+    //     },
+    //     'property[size]': {
+    //       digits: true
+    //     },
+    //     'property[bedrooms]': {
+    //       digits: true
+    //     },
+    //     'property[bathrooms]': {
+    //       digits: true
+    //     }
+    //   }
+    // });
     // -------------------------------------
 
     /* This handler makes sure all files are uploaded before actually submitting the form */
@@ -78,73 +78,6 @@ $(document).on('turbolinks:load', function(e) {
         }
       }
     });
-
-
-    /* Handles the property form wizard */
-    // -------------------------------------
-    var $smartwizard = $('#smartwizard-new');
-
-    // Track step status
-    var steps = [];
-
-    // Initialize step status on page load
-    $('.step-anchor-nav').each(function(index, element){
-      steps[index] = { 'visited': false}
-    });
-
-    $smartwizard.smartWizard({
-      theme: 'arrows',
-      transitionEffect: 'fade',
-      useURLhash: false,
-      showStepURLhash: false,
-      anchorSettings: {
-        anchorClickable: true,
-        enableAllAnchors: true
-      }
-    });
-
-    $smartwizard.on('leaveStep', function(e, anchorObject, stepNumber, stepDirection) {
-      console.log('leaving');
-
-      console.log(anchorObject);
-      console.log($v.valid());
-      // var lea
-      if (!$v.valid() && stepDirection === 'forward'){
-        console.log('inside if');
-        if (steps[anchorObject.attr('href').split('-')[1]]['visited']){
-          console.log('adds error class')
-        }else{
-          return false;
-        }
-        // console.log('adding error class to ' + stepNumber);
-        // if (stepDirection === 'forward'){
-        //   if (!$v.form()){
-
-          // }
-        // }
-        // anchorObject.attr('href').split('-')[1];
-        // console.log('')
-        // if (stepDirection === 'forward' && steps[stepNumber]['visited']){
-        //   console.log('carry on simply add class')
-        // }else{
-        //   return false;
-        // }
-
-      }
-      // if (stepDirection === 'forward' && !$v.form()){
-      //   return false;
-      // }
-    });
-    // -------------------------------------
-
-    $smartwizard.on('showStep', function(e, anchorObject, stepNumber, stepDirection) {
-
-
-      steps[stepNumber]['visited'] = true;
-    });
-
-
-
-
+    
   }
 });
