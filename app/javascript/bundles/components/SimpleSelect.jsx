@@ -5,6 +5,7 @@ import Select from 'react-select';
 import { Async } from 'react-select';
 import ReactOnRails from 'react-on-rails';
 import { debounce } from '../utilities/helpers';
+import FormStepper from '../steppers/form_stepper';
 import '!style-loader!css-loader!react-select/dist/react-select.css';
 
 class SimpleSelect extends React.Component {
@@ -31,12 +32,14 @@ class SimpleSelect extends React.Component {
 
   constructor(props) {
     super(props);
+    this.form_stepper = '';
     this.setTextInputValue = this.setTextInputValue.bind(this);
     this.getOptions = this.getOptions.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.updateExternalDOM = this.updateExternalDOM.bind(this);
     this.handleAjaxRequestDelayed = debounce(this.handleAjaxRequest.bind(this), 300);
     axios.defaults.headers.common['X-CSRF-Token'] = ReactOnRails.authenticityToken();
+    this.form_stepper;
   }
 
   // This stores a component reference so it can be used from the parent
@@ -49,6 +52,8 @@ class SimpleSelect extends React.Component {
     // loads on page load or the user clicks the form's submit button (which means that the plugin will have loaded by
     // then
     this.state.selectedOption ? this.updateExternalDOM(this.state.selectedOption, false) : '';
+    this.form_stepper = new FormStepper();
+
   }
 
   // Same as above but destroys the reference instead
@@ -103,12 +108,25 @@ class SimpleSelect extends React.Component {
     let form = $(`#${this.props.formID}`);
     this.setTextInputValue(selectedOption ? selectedOption.value : '');
     if (validate) {
-      const validator = form.validate();
-      this.setState({ validator }, () => {
-        validator.element(element);
+      $('#stepper-form')
+        .parsley()
+        .on('form:validate', function(formInstance) {
+          const isValid = formInstance.isValid({ group: 'fieldset01' })
+        });
+      // this.form_stepper.validateBy();
+      // element.parsley().on('field:validate', function(fieldInstance){
+        // const isValid = formInstance.isValid({
+        //   group: group
+        // });
+        // console.log('Parsley checking');
+
+      // });
+      // const validator = form.validate();
+      // this.setState({ validator }, () => {
+      //   validator.element(element);
         // DEBUG
         // console.log($(`#${this.props.inputID}`).val());
-      });
+      // });
     }
   };
 
@@ -130,6 +148,9 @@ class SimpleSelect extends React.Component {
   };
 
   render() {
+    const opts = {
+      required: this.props.isRequired ? true : false
+    };
     return (
       <div>
         {!this.props.ajaxEnabled ? (
@@ -169,10 +190,12 @@ class SimpleSelect extends React.Component {
         <input
           id={this.props.inputID}
           name={this.props.inputName}
-          className="proxy-form-input"
+          className={`proxy-form-input ${this.props.inputClassName}`}
+          data-parsley-group={this.props.dataParsleyGroup}
           ref={input => {
             this.textInput = input;
           }}
+          {...opts}
         />
       </div>
     );

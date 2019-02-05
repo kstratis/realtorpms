@@ -14,9 +14,14 @@ class FormStepper {
 
   validateBy(trigger) {
     const $trigger = $(trigger);
+    console.log($trigger);
     const group = $trigger.data().validate;
+    console.log(group); // fieldset01
     const groupId = $trigger.parents('.content').attr('id');
+    console.log(groupId); // test-l-1
     const $groupStep = $(`[data-target="#${groupId}"]`);
+    console.log($groupStep); // li.step.active
+
 
     $('#stepper-form')
       .parsley()

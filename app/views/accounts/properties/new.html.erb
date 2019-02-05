@@ -35,7 +35,8 @@
           </div><!-- /.card-header -->
           <!-- .card-body -->
           <div class="card-body">
-            <form id="stepper-form" name="stepperForm" class="p-lg-4 p-sm-3 p-0">
+            <%= form_for(@property, remote: true, html: { class: "p-lg-4 p-sm-3 p-0", id: "stepper-form", name: "stepperForm" }) do |property| %>
+<!--            <form id="stepper-form" name="stepperForm" class="p-lg-4 p-sm-3 p-0">-->
               <!-- .content -->
               <div id="test-l-1" class="content dstepper-none fade">
                 <!-- fieldset -->
@@ -45,13 +46,34 @@
                   <div class="row">
                     <div class="col-md-4 col-sm-12">
 
-
-
                   <div class="form-group mb-4">
-                    <div class="form-label-group">
-                      <input type="text" id="userid" name="userid" class="form-control" value="bent10@mail.com" autocomplete="off" data-parsley-group="fieldset01" required=""> <label for="userid">Mobile number or email</label>
-                    </div><small class="form-text text-muted"><strong>Type carefully!</strong> You will be sent a SMS / Email confirmation.</small>
-                    <div class="invalid-feedback"> Valid phone number / email is required. </div>
+                    <%= property.label :businesstype do %>
+                      <%= Property.human_attribute_name(:businesstype) %>
+                      <abbr title="<%= t('js.components.select.required') %>">*</abbr>
+                    <% end %>
+                    <%= react_component('SimpleSelect', props: {
+                        id: 'a',
+                        inputID: 'property_businesstype',
+                        inputName: 'property[businesstype]',
+                        inputClassName: 'form-control',
+                        dataParsleyGroup: 'fieldset01',
+                        isRequired: true,
+                        formID: 'new_property',
+                        className: 'simple-select',
+                        options: Property.businesstypes.keys.collect {|businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype}},
+                        soloMode: true,
+                        ajaxEnabled: false,
+                        searchable: false,
+                        i18n: {
+                            select: t('js.components.select'),
+                        }
+                    }, prerender: false) %>
+                    <small class="form-text text-muted">May contain letters, digits, underscores, and should be between 4 and 20 characters long.</small>
+                    <div class="invalid-feedback"> Valid username is required. </div>
+<!--                    <div class="form-label-group">-->
+<!--                      <input type="text" id="userid" name="userid" class="form-control" value="bent10@mail.com" autocomplete="off" data-parsley-group="fieldset01" required=""> <label for="userid">Mobile number or email</label>-->
+<!--                    </div><small class="form-text text-muted"><strong>Type carefully!</strong> You will be sent a SMS / Email confirmation.</small>-->
+<!--                    <div class="invalid-feedback"> Valid phone number / email is required. </div>-->
                   </div><!-- /.form-group -->
                   <!-- .form-group -->
                   <div class="form-group mb-4">
@@ -266,7 +288,8 @@
                   </div>
                 </fieldset><!-- /fieldset -->
               </div><!-- /.content -->
-            </form><!-- /form -->
+<!--            </form>-->
+            <% end %> <!-- /form -->
           </div><!-- /.card-body -->
         </div><!-- /.card -->
       </div><!-- /.bs-stepper -->
