@@ -5,7 +5,6 @@ import Select from 'react-select';
 import { Async } from 'react-select';
 import ReactOnRails from 'react-on-rails';
 import { debounce } from '../utilities/helpers';
-import FormStepper from '../steppers/form_stepper';
 import '!style-loader!css-loader!react-select/dist/react-select.css';
 
 class SimpleSelect extends React.Component {
@@ -14,6 +13,7 @@ class SimpleSelect extends React.Component {
     formID: PropTypes.string,
     inputID: PropTypes.string,
     inputName: PropTypes.string,
+    dataParsleyGroup: PropTypes.string,
     isMaster: PropTypes.bool,
     options: PropTypes.array,
     handleOptions: PropTypes.func,
@@ -39,7 +39,6 @@ class SimpleSelect extends React.Component {
     this.updateExternalDOM = this.updateExternalDOM.bind(this);
     this.handleAjaxRequestDelayed = debounce(this.handleAjaxRequest.bind(this), 300);
     axios.defaults.headers.common['X-CSRF-Token'] = ReactOnRails.authenticityToken();
-    this.form_stepper;
   }
 
   // This stores a component reference so it can be used from the parent
@@ -52,7 +51,6 @@ class SimpleSelect extends React.Component {
     // loads on page load or the user clicks the form's submit button (which means that the plugin will have loaded by
     // then
     this.state.selectedOption ? this.updateExternalDOM(this.state.selectedOption, false) : '';
-    this.form_stepper = new FormStepper();
 
   }
 
@@ -108,11 +106,23 @@ class SimpleSelect extends React.Component {
     let form = $(`#${this.props.formID}`);
     this.setTextInputValue(selectedOption ? selectedOption.value : '');
     if (validate) {
-      $('#stepper-form')
-        .parsley()
-        .on('form:validate', function(formInstance) {
-          const isValid = formInstance.isValid({ group: 'fieldset01' })
-        });
+      console.log('select field changed - validating...');
+      // window.form_stepper.validateBy($('button.next'));
+      // window.form_stepper.validateBy('', this.props.dataParsleyGroup, false);
+      // window.form_stepper.form.refresh();
+      window.form_stepper.validateField(this.props.inputID);
+      // window.form_stepper.form.reset();
+
+      // $('#stepper-form')
+      //   .parsley()
+      //   .on('form:validate', function(formInstance) {
+      //     console.log('form:validate running');
+      //     const isValid = formInstance.isValid({ group: 'fieldset01' })
+      //     console.log(isValid);
+      //   });
+
+
+
       // this.form_stepper.validateBy();
       // element.parsley().on('field:validate', function(fieldInstance){
         // const isValid = formInstance.isValid({

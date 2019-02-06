@@ -4,6 +4,7 @@ class FormStepper {
   constructor() {
     console.log('running');
     this.init();
+    this.form = $('#stepper-form').parsley();
   }
 
   init() {
@@ -12,22 +13,57 @@ class FormStepper {
     this.handleSteps();
   }
 
-  validateBy(trigger) {
-    const $trigger = $(trigger);
-    console.log($trigger);
-    const group = $trigger.data().validate;
-    console.log(group); // fieldset01
-    const groupId = $trigger.parents('.content').attr('id');
-    console.log(groupId); // test-l-1
-    const $groupStep = $(`[data-target="#${groupId}"]`);
+  // validateSelect(group){
+  //   const $form = $('#stepper-form');
+  //   $form.parsley().on('form:validate', function(formInstance) {
+  //     const isValid = formInstance.isValid({
+  //       group: group
+  //     });
+  //   }).validate({
+  //     group: group
+  //   });
+  //
+  //
+  //   $form.parsley().validate({group: group});
+  //   const $activeStep = $('.step.active');
+  //
+  //
+  //
+  //
+  //
+  //
+  // }
+
+  validateField(field){
+    if (field){
+      $(`#${field}`).parsley().validate();
+    }
+  }
+
+  validateBy(trigger, requestedGroup='', onSuccessMove=true) {
+    let $group = '';
+    let $groupId = '';
+    let $groupStep = '';
+    if (trigger && !requestedGroup){
+      const $trigger = $(trigger);
+      $group = $trigger.data().validate;
+      $groupId = $trigger.parents('.content').attr('id');
+      $groupStep = $(`[data-target="#${$groupId}"]`);
+    } else if (!trigger && requestedGroup) {
+      $group = requestedGroup;
+      $groupStep = $('li.step.active');
+    }
+
+    // DEBUG
+    console.log($group); // fieldset01
+    console.log($groupId); // test-l-1
     console.log($groupStep); // li.step.active
 
 
-    $('#stepper-form')
-      .parsley()
+    this.form
       .on('form:validate', function(formInstance) {
         const isValid = formInstance.isValid({
-          group: group
+          group: $group
         });
         // normalize states
         $groupStep.removeClass('success error');
@@ -47,18 +83,33 @@ class FormStepper {
         if (isValid) {
           $groupStep.addClass('success');
           // go to next step or submit
-          if ($trigger.hasClass('submit')) {
+          // .split('-').pop()
+          let currentStep = $groupStep.attr('data-target').split('-').pop();
+          console.log(currentStep);
+
+
+
+          // }
+
+
+
+
+
+          // if ($trigger.hasClass('submit')) {
+        if (currentStep === $('.step').length){
             $('#submitfeedback').toast('show');
             console.log($('#stepper-form').serializeArray());
           } else {
-            stepperDemo.next();
+            onSuccessMove ? stepperDemo.next() : '';
           }
+
+
         } else {
           $groupStep.addClass('error');
         }
       })
       .validate({
-        group: group
+        group: $group
       });
 
     // kill listener
