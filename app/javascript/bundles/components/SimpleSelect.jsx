@@ -13,7 +13,7 @@ class SimpleSelect extends React.Component {
     formID: PropTypes.string,
     inputID: PropTypes.string,
     inputName: PropTypes.string,
-    dataParsleyGroup: PropTypes.string,
+    validatorGroup: PropTypes.string,
     isMaster: PropTypes.bool,
     options: PropTypes.array,
     handleOptions: PropTypes.func,
@@ -26,13 +26,13 @@ class SimpleSelect extends React.Component {
     soloMode: PropTypes.bool,
     ajaxEnabled: PropTypes.bool,
     i18n: PropTypes.shape({
-      select: PropTypes.object
+      select: PropTypes.object,
+      validatorErrMsg: PropTypes.string
     })
   };
 
   constructor(props) {
     super(props);
-    this.form_stepper = '';
     this.setTextInputValue = this.setTextInputValue.bind(this);
     this.getOptions = this.getOptions.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -161,6 +161,8 @@ class SimpleSelect extends React.Component {
     const opts = {
       required: this.props.isRequired ? true : false
     };
+    console.log('printing');
+    console.log(this.props.validatorErrMsg);
     return (
       <div>
         {!this.props.ajaxEnabled ? (
@@ -201,7 +203,8 @@ class SimpleSelect extends React.Component {
           id={this.props.inputID}
           name={this.props.inputName}
           className={`proxy-form-input ${this.props.inputClassName}`}
-          data-parsley-group={this.props.dataParsleyGroup}
+          data-parsley-group={this.props.validatorGroup}
+          data-parsley-required-message={this.props.i18n.validatorErrMsg}
           ref={input => {
             this.textInput = input;
           }}

@@ -19,16 +19,16 @@
             <div class="steps steps-" role="tablist">
               <ul>
                 <li class="step" data-target="#test-l-1">
-                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="oi oi-account-login"></i></span> <span class="d-none d-sm-inline"><%= t('js.components.wizard.stepper.one_desc') %></span></a>
+                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-sign fa-fw"></i></span> <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step1.anchor') %></span></a>
                 </li>
                 <li class="step" data-target="#test-l-2">
-                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="oi oi-person"></i></span> <span class="d-none d-sm-inline"><%= t('js.components.wizard.stepper.two_desc') %></span></a>
+                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="oi oi-person"></i></span> <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step2.anchor') %></span></a>
                 </li>
                 <li class="step" data-target="#test-l-3">
-                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="oi oi-credit-card"></i></span> <span class="d-none d-sm-inline"><%= t('js.components.wizard.stepper.three_desc') %></span></a>
+                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="oi oi-credit-card"></i></span> <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step3.anchor') %></span></a>
                 </li>
                 <li class="step" data-target="#test-l-4">
-                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="oi oi-check"></i></span> <span class="d-none d-sm-inline"><%= t('js.components.wizard.stepper.fourth_desc') %></span></a>
+                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="oi oi-check"></i></span> <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step4.anchor') %></span></a>
                 </li>
               </ul>
             </div><!-- /.steps -->
@@ -41,7 +41,7 @@
               <div id="test-l-1" class="content dstepper-none fade">
                 <!-- fieldset -->
                 <fieldset>
-                  <legend>Provide your account details</legend> <!-- .form-group -->
+                  <legend><%= t('js.forms.properties.wizard.step1.title') %></legend> <!-- .form-group -->
 
                   <div class="row">
                     <div class="col-md-6 col-sm-12">
@@ -56,7 +56,7 @@
                         inputID: 'property_businesstype',
                         inputName: 'property[businesstype]',
                         inputClassName: 'form-control',
-                        dataParsleyGroup: 'fieldset01',
+                        validatorGroup: 'fieldset01',
                         isRequired: true,
                         formID: 'new_property',
                         className: 'simple-select',
@@ -66,9 +66,10 @@
                         searchable: false,
                         i18n: {
                             select: t('js.components.select'),
+                            validatorErrMsg: t('js.validator.required'),
                         }
                     }, prerender: false) %>
-                    <small class="form-text text-muted">May contain letters, digits, underscores, and should be between 4 and 20 characters long.</small>
+                    <small class="form-text text-muted"><%= t('js.forms.properties.wizard.step1.type_of_offer_explanation') %></small>
                     <div class="invalid-feedback"> Valid username is required. </div>
 <!--                    <div class="form-label-group">-->
 <!--                      <input type="text" id="userid" name="userid" class="form-control" value="bent10@mail.com" autocomplete="off" data-parsley-group="fieldset01" required=""> <label for="userid">Mobile number or email</label>-->

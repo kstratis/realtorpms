@@ -159,24 +159,19 @@ el:
         record_invalid: ! 'Η επικύρωση απέτυχε: %{errors}'
   js:
     components:
-      wizard:
-        stepper:
-          one_title: "Βήμα 1ο"
-          one_desc: "Τύπος ακινήτου"
-          two_title: "Βήμα 2ο"
-          two_desc: "Περιγραφή"
-          three_title: "Βήμα 3ο"
-          three_desc: "Λεπτομέρειες"
-          fourth_title: "Βήμα 4ο"
-          fourth_desc: "Τοποθεσία"
-          fifth_title: "Βήμα 5ο"
-          fifth_desc: "Φωτογραφίες"
       select:
        placeholder: "Επιλέξτε..."
        category: "Κατηγορία"
        subcategory: "Υποκατηγορία"
        required: "Υποχρεωτικό πεδίο"
        optional: "Προεραιτικό πεδίο"
+    forms:
+      properties:
+        wizard:
+          step1:
+            anchor: "Τύπος"
+            title: "Βασικές πληροφορίες"
+            type_of_offer_explanation: "Επιλέξτε ανάμεσα σε πώληση, ενοικίαση ή και δύο μαζί"
     datatables:
       users:
         partner: "Συνεργάτης"
@@ -230,7 +225,7 @@ el:
       paused: "Παύση"
       error: "Σφάλμα"
       retry: "Προσπαθήστε ξανά"
-    jqvalidator:
+    validator:
       required: "Το πεδίο είναι υποχρεωτικό"
       digits: "Παρακαλώ εισάγετε μόνο αριθμητικά ψηφία"
     swal:

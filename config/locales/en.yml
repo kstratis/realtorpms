@@ -157,24 +157,19 @@ en:
         record_invalid: ! 'Validation failed: %{errors}'
   js:
     components:
-      wizard:
-        stepper:
-          one_title: "Step 1"
-          one_desc: "Property type"
-          two_title: "Step 2"
-          two_desc: "Description"
-          three_title: "Step 3"
-          three_desc: "Details"
-          fourth_title: "Step 4"
-          fourth_desc: "Location"
-          fifth_title: "Step 5"
-          fifth_desc: "Media"
       select:
         placeholder: "Choose..."
         category: "Category"
         subcategory: "Subcategory"
         required: "Required field"
         optional: "Optional field"
+    forms:
+      properties:
+        wizard:
+          step1:
+            anchor: "Type"
+            title: "Basic Information"
+            type_of_offer_explanation: "Sell, rent or both"
     datatables:
       users:
         partner: "Partner"
@@ -228,9 +223,9 @@ en:
       paused: "Paused"
       error: "Error"
       retry: "Please try again"
-    jqvalidator:
-      required: "This field is required"
-      digits: "This field requires digits only"
+    validator:
+      required: "The field is required"
+      digits: "The field requires digits only"
     swal:
       file_upload_fail_title: "Oops..."
       file_upload_fail_body: "Something has gone wrong... Pleace check your network connection and try again."
