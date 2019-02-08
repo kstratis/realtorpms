@@ -79,8 +79,8 @@ en:
         description_placeholder: "i.e. Luxe 3 Story Loft Rooftop"
         price: "Price"
         price_placeholder: "i.e. 120000"
-        size: "Size"
-        size_placeholder: "i.e. 80"
+        size_title: "Size"
+        size_feedback_html: "i.e. 80."
         bedrooms: "Bedrooms"
         bedrooms_placeholder: "i.e. 2"
         bathrooms: "Bathrooms"
@@ -172,6 +172,10 @@ en:
             type_of_offer_feedback: "Sell, rent or offer both"
             type_of_category_feedback: "Choose a category"
             type_of_subcategory_feedback: "Choose a subcategory"
+          step2:
+            anchor: "Location"
+            title: "Location information"
+            type_of_location_feedback: "Choose an area"
     datatables:
       users:
         partner: "Partner"

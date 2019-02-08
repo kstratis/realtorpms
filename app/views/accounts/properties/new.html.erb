@@ -5,7 +5,6 @@
 <div class="page-container">
   <div class="form-container">
 
-
     <!-- .section-block -->
     <div class="section-block">
       <!-- Default Steps -->
@@ -22,7 +21,7 @@
                   <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-sign fa-fw"> </i></span> <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step1.anchor') %></span></a>
                 </li>
                 <li class="step" data-target="#test-l-2">
-                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="oi oi-person"></i></span> <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step2.anchor') %></span></a>
+                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-map-marked-alt fa-fw"> </i></span> <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step2.anchor') %></span></a>
                 </li>
                 <li class="step" data-target="#test-l-3">
                   <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="oi oi-credit-card"></i></span> <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step3.anchor') %></span></a>
@@ -103,12 +102,31 @@
                         }
                     }, prerender: false) %>
 
+                      <%= render "accounts/helpers/locale" %>
                     <input id="preventformsubmit" type="hidden">
 
-<!--                    <div class="form-label-group">-->
-<!--                      <input type="text" id="username" name="username" class="form-control" value="bent10" autocomplete="off" data-parsley-group="fieldset01" required=""> <label for="username">Username</label>-->
-<!--                    </div><small class="form-text text-muted">May contain letters, digits, underscores, and should be between 4 and 20 characters long.</small>-->
-<!--                    <div class="invalid-feedback"> Valid username is required. </div>-->
+
+                      <div class="form-group mb-4">
+                        <div class="form-label-group">
+                          <%= property.text_field :size,
+                                                  placeholder: Property.human_attribute_name("size_placeholder"),
+                                                  class: 'form-control',
+                                                  autocomplete: "off",
+                                                  required: '',
+                                                  'data-parsley-group': "fieldset01",
+                                                  'data-parsley-type': "integer",
+                                                  'data-parsley-type-message': t("js.validator.digits"),
+                                                  'data-parsley-required-message': t("js.validator.required") %>
+                          <label for="size">
+                            <%= content_tag :span do %>
+                              <%= content_tag(:i, nil, class: 'fas fa-arrows-alt fa-fw') + ' ' + t('activerecord.attributes.property.size_title') %>
+                            <% end %>
+                          </label>
+                        </div>
+                        <small class="form-text text-muted"><%= t('activerecord.attributes.property.size_feedback_html') %>
+                        </small>
+                        <div class="invalid-feedback"></div>
+                      </div>
 
 
                   <hr class="mt-5">

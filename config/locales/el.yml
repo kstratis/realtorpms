@@ -80,8 +80,8 @@ el:
         description_placeholder: "π.χ. Μεζονέτα 180τ.μ. Κηφισιά"
         price: "Τιμή"
         price_placeholder: "π.χ. 120000"
-        size: "Εμβαδόν"
-        size_placeholder: "π.χ. 80"
+        size_title: "Εμβαδόν"
+        size_feedback_html: "π.χ. 80. "
         bedrooms: "Υπνοδωμάτια"
         bedrooms_placeholder: "π.χ. 2"
         bathrooms: "Μπάνια"
@@ -174,6 +174,10 @@ el:
             type_of_offer_feedback: "Επιλέξτε ανάμεσα σε πώληση, ενοικίαση ή και δύο μαζί"
             type_of_category_feedback: "Επιλέξτε κατηγορία"
             type_of_subcategory_feedback: "Επιλέξτε υποκατηγορία"
+          step2:
+            anchor: "Τοποθεσία"
+            title: "Πληροφορίες τοποθεσίας"
+            type_of_location_feedback: "Επιλέξτε περιοχή"
     datatables:
       users:
         partner: "Συνεργάτης"
