@@ -46,6 +46,7 @@ class FormStepper {
     let $groupStep = '';
     if (trigger && !requestedGroup){
       const $trigger = $(trigger);
+      console.log($trigger); // <button> element
       $group = $trigger.data().validate;
       $groupId = $trigger.parents('.content').attr('id');
       $groupStep = $(`[data-target="#${$groupId}"]`);
@@ -55,6 +56,7 @@ class FormStepper {
     }
 
     // DEBUG
+
     console.log($group); // fieldset01
     console.log($groupId); // test-l-1
     console.log($groupStep); // li.step.active
@@ -136,6 +138,10 @@ class FormStepper {
 
       stepperDemo.previous();
     });
+
+    // $('a.step-trigger').on('click', (e) => {
+    //   e.preventDefault();
+    // });
 
     // save creadit card
     $('#savecc').on('click', () => {
