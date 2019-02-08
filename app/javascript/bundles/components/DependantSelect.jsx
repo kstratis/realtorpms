@@ -61,7 +61,7 @@ class DependantSelect extends React.Component {
       // otherwise if 'x' is pressed on 'master', clear the slave's current selection then fire the validator and disable the field.
       // Handle the master (subcategory component
       this.slaveComponent.clearSelection();
-      this.slaveComponent.updateExternalDOM('');
+      this.slaveComponent.updateExternalDOM('', false);
       this.setState({ slaveDisabled: true });
     }
   };
@@ -129,7 +129,7 @@ class DependantSelect extends React.Component {
   render() {
     return (
       <div>
-        <div className="form-group">
+        <div className="form-group mb-4">
           <label htmlFor="property_category">
             {this.props.i18n.select.category} <abbr title={this.props.i18n.select.required}>*</abbr>
           </label>
@@ -138,10 +138,11 @@ class DependantSelect extends React.Component {
             identity={'property_category_component'}
             inputID={this.props.formdata.categoryid}
             inputName={this.props.formdata.categoryname}
+            inputClassName={this.props.formdata.categoryClassName}
+            className={this.props.className}
             formID={this.props.formdata.formid}
             isMaster={true}
             storedOption={this.props.storedMasterOption}
-            className={'simple-select'}
             options={this.buildSelectOptions(this.props.options, true)}
             handleOptions={this.handleOptions}
             i18n={this.props.i18n}
@@ -150,9 +151,12 @@ class DependantSelect extends React.Component {
             soloMode={false}
             searchable={this.props.searchable}
             ajaxEnabled={false}
+            validatorGroup={this.props.validatorGroup}
+            feedback={this.props.formdata.categoryFeedback}
+            isRequired={this.props.isRequired}
           />
         </div>
-        <div className="form-group">
+        <div className="form-group mb-4">
           <label htmlFor="property_subcategory">
             {this.props.i18n.select.subcategory} <abbr title={this.props.i18n.select.required}>*</abbr>
           </label>
@@ -161,10 +165,11 @@ class DependantSelect extends React.Component {
             identity={'property_subcategory_component'}
             inputID={this.props.formdata.subcategoryid}
             inputName={this.props.formdata.subcategoryname}
+            inputClassName={this.props.formdata.subcategoryClassName}
+            className={this.props.className}
             formID={this.props.formdata.formid}
             isMaster={false}
             storedOption={this.props.storedSlaveOption}
-            className={'simple-select'}
             options={this.state.slaveOptions}
             handleOptions={this.handleOptions}
             i18n={this.props.i18n}
@@ -173,6 +178,9 @@ class DependantSelect extends React.Component {
             soloMode={false}
             searchable={this.props.searchable}
             ajaxEnabled={false}
+            validatorGroup={this.props.validatorGroup}
+            feedback={this.props.formdata.subcategoryFeedback}
+            isRequired={this.props.isRequired}
           />
         </div>
       </div>

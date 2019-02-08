@@ -169,7 +169,9 @@ en:
           step1:
             anchor: "Type"
             title: "Basic Information"
-            type_of_offer_explanation: "Sell, rent or both"
+            type_of_offer_feedback: "Sell, rent or offer both"
+            type_of_category_feedback: "Choose a category"
+            type_of_subcategory_feedback: "Choose a subcategory"
     datatables:
       users:
         partner: "Partner"

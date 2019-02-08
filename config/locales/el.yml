@@ -171,7 +171,9 @@ el:
           step1:
             anchor: "Τύπος"
             title: "Βασικές πληροφορίες"
-            type_of_offer_explanation: "Επιλέξτε ανάμεσα σε πώληση, ενοικίαση ή και δύο μαζί"
+            type_of_offer_feedback: "Επιλέξτε ανάμεσα σε πώληση, ενοικίαση ή και δύο μαζί"
+            type_of_category_feedback: "Επιλέξτε κατηγορία"
+            type_of_subcategory_feedback: "Επιλέξτε υποκατηγορία"
     datatables:
       users:
         partner: "Συνεργάτης"

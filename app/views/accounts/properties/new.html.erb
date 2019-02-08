@@ -19,7 +19,7 @@
             <div class="steps steps-" role="tablist">
               <ul>
                 <li class="step" data-target="#test-l-1">
-                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-sign fa-fw"></i></span> <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step1.anchor') %></span></a>
+                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-sign fa-fw"> </i></span> <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step1.anchor') %></span></a>
                 </li>
                 <li class="step" data-target="#test-l-2">
                   <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="oi oi-person"></i></span> <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step2.anchor') %></span></a>
@@ -64,32 +64,53 @@
                         soloMode: true,
                         ajaxEnabled: false,
                         searchable: false,
+                        feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
                         i18n: {
                             select: t('js.components.select'),
                             validatorErrMsg: t('js.validator.required'),
                         }
                     }, prerender: false) %>
-                    <small class="form-text text-muted"><%= t('js.forms.properties.wizard.step1.type_of_offer_explanation') %></small>
-                    <div class="invalid-feedback"> Valid username is required. </div>
 <!--                    <div class="form-label-group">-->
 <!--                      <input type="text" id="userid" name="userid" class="form-control" value="bent10@mail.com" autocomplete="off" data-parsley-group="fieldset01" required=""> <label for="userid">Mobile number or email</label>-->
 <!--                    </div><small class="form-text text-muted"><strong>Type carefully!</strong> You will be sent a SMS / Email confirmation.</small>-->
 <!--                    <div class="invalid-feedback"> Valid phone number / email is required. </div>-->
                   </div><!-- /.form-group -->
                   <!-- .form-group -->
-                  <div class="form-group mb-4">
-                    <div class="form-label-group">
-                      <input type="text" id="username" name="username" class="form-control" value="bent10" autocomplete="off" data-parsley-group="fieldset01" required=""> <label for="username">Username</label>
-                    </div><small class="form-text text-muted">May contain letters, digits, underscores, and should be between 4 and 20 characters long.</small>
-                    <div class="invalid-feedback"> Valid username is required. </div>
-                  </div><!-- /.form-group -->
-                  <!-- .form-group -->
-                  <div class="form-group mb-4">
-                    <div class="form-label-group">
-                      <input type="password" id="passwd" name="passwd" class="form-control" value="secretwords" autocomplete="off" data-parsley-group="fieldset01" required=""> <label for="passwd">Password</label>
-                    </div><small class="form-text text-muted">The longer the better. Include numbers for protein.</small>
-                    <div class="invalid-feedback"> Valid password is required. </div>
-                  </div><!-- /.form-group -->
+
+
+                    <!-- DependantSelect will generate the form-group div and label tags automatically (it's nested) -->
+                    <%= react_component('DependantSelect', props: {
+                        id: 'b',
+                        className: 'simple-select',
+                        options: get_options,
+                        validatorGroup: 'fieldset01',
+                        isRequired: true,
+                        searchable: false,
+                        formdata: {
+                            formid: 'new_property',
+                            categoryid: 'property_category',
+                            categoryname: 'property[category]',
+                            categoryClassName: 'form-control',
+                            categoryFeedback: t('js.forms.properties.wizard.step1.type_of_category_feedback'),
+                            subcategoryid: 'property_subcategory',
+                            subcategoryname: 'property[subcategory]',
+                            subcategoryClassName: 'form-control',
+                            subcategoryFeedback: t('js.forms.properties.wizard.step1.type_of_subcategory_feedback'),
+                        },
+                        i18n: {
+                            select: t('js.components.select'),
+                            validatorErrMsg: t('js.validator.required'),
+                        }
+                    }, prerender: false) %>
+
+                    <input id="preventformsubmit" type="hidden">
+
+<!--                    <div class="form-label-group">-->
+<!--                      <input type="text" id="username" name="username" class="form-control" value="bent10" autocomplete="off" data-parsley-group="fieldset01" required=""> <label for="username">Username</label>-->
+<!--                    </div><small class="form-text text-muted">May contain letters, digits, underscores, and should be between 4 and 20 characters long.</small>-->
+<!--                    <div class="invalid-feedback"> Valid username is required. </div>-->
+
+
                   <hr class="mt-5">
                   <!-- .d-flex -->
                   <div class="d-flex">

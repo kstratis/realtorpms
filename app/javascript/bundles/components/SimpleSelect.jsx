@@ -106,7 +106,7 @@ class SimpleSelect extends React.Component {
     let form = $(`#${this.props.formID}`);
     this.setTextInputValue(selectedOption ? selectedOption.value : '');
     if (validate) {
-      console.log('select field changed - validating...');
+      console.log('select field changed - validating: ' +  this.props.inputID);
       // window.form_stepper.validateBy($('button.next'));
       // window.form_stepper.validateBy('', this.props.dataParsleyGroup, false);
       // window.form_stepper.form.refresh();
@@ -159,10 +159,11 @@ class SimpleSelect extends React.Component {
 
   render() {
     const opts = {
-      required: this.props.isRequired ? true : false
+      required: !!this.props.isRequired
     };
-    console.log('printing');
-    console.log(this.props.validatorErrMsg);
+    console.log(this.props.validatorGroup);
+    console.log(this.props.i18n.validatorErrMsg);
+
     return (
       <div>
         {!this.props.ajaxEnabled ? (
@@ -210,6 +211,8 @@ class SimpleSelect extends React.Component {
           }}
           {...opts}
         />
+        <small className="form-text text-muted">{this.props.feedback}</small>
+        <div className="invalid-feedback"></div>
       </div>
     );
   }
