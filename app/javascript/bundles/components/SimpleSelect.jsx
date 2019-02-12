@@ -107,36 +107,7 @@ class SimpleSelect extends React.Component {
     this.setTextInputValue(selectedOption ? selectedOption.value : '');
     if (validate) {
       console.log('select field changed - validating: ' +  this.props.inputID);
-      // window.form_stepper.validateBy($('button.next'));
-      // window.form_stepper.validateBy('', this.props.dataParsleyGroup, false);
-      // window.form_stepper.form.refresh();
       window.form_stepper.validateField(this.props.inputID);
-      // window.form_stepper.form.reset();
-
-      // $('#stepper-form')
-      //   .parsley()
-      //   .on('form:validate', function(formInstance) {
-      //     console.log('form:validate running');
-      //     const isValid = formInstance.isValid({ group: 'fieldset01' })
-      //     console.log(isValid);
-      //   });
-
-
-
-      // this.form_stepper.validateBy();
-      // element.parsley().on('field:validate', function(fieldInstance){
-        // const isValid = formInstance.isValid({
-        //   group: group
-        // });
-        // console.log('Parsley checking');
-
-      // });
-      // const validator = form.validate();
-      // this.setState({ validator }, () => {
-      //   validator.element(element);
-        // DEBUG
-        // console.log($(`#${this.props.inputID}`).val());
-      // });
     }
   };
 

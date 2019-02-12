@@ -5,6 +5,7 @@ class FormStepper {
     console.log('running');
     this.init();
     this.form = $('#stepper-form').parsley();
+    this.current_step = 1;
   }
 
   init() {
@@ -13,62 +14,22 @@ class FormStepper {
     this.handleSteps();
   }
 
-  // validateSelect(group){
-  //   const $form = $('#stepper-form');
-  //   $form.parsley().on('form:validate', function(formInstance) {
-  //     const isValid = formInstance.isValid({
-  //       group: group
-  //     });
-  //   }).validate({
-  //     group: group
-  //   });
-  //
-  //
-  //   $form.parsley().validate({group: group});
-  //   const $activeStep = $('.step.active');
-  //
-  //
-  //
-  //
-  //
-  //
-  // }
-
   validateField(field){
     if (field){
       $(`#${field}`).parsley().validate();
     }
   }
 
-  validateBy(trigger, requestedGroup='', onSuccessMove=true) {
-    let $group = '';
-    let $groupId = '';
-    let $groupStep = '';
-    if (trigger && !requestedGroup){
-      const $trigger = $(trigger);
-      console.log($trigger); // <button> element
-      $group = $trigger.data().validate;
-      $groupId = $trigger.parents('.content').attr('id');
-      $groupStep = $(`[data-target="#${$groupId}"]`);
-    } else if (!trigger && requestedGroup) {
-      $group = requestedGroup;
-      $groupStep = $('li.step.active');
-    }
-
-    // DEBUG
-
-    console.log($group); // fieldset01
-    console.log($groupId); // test-l-1
-    console.log($groupStep); // li.step.active
 
 
+  validateBy(group, groupStep, onSuccessMove=true) {
     this.form
       .on('form:validate', function(formInstance) {
         const isValid = formInstance.isValid({
-          group: $group
+          group: group
         });
         // normalize states
-        $groupStep.removeClass('success error');
+        groupStep.removeClass('success error');
 
         // formInstance.whenValid({
         //   group: group
@@ -83,18 +44,14 @@ class FormStepper {
 
         // give step item a validate state
         if (isValid) {
-          $groupStep.addClass('success');
+          console.log('it is valid');
+
+          groupStep.addClass('success');
           // go to next step or submit
           // .split('-').pop()
-          let currentStep = $groupStep.attr('data-target').split('-').pop();
+          console.log(this);
+          let currentStep = FormStepper.getStep(groupStep);
           console.log(currentStep);
-
-
-
-          // }
-
-
-
 
 
           // if ($trigger.hasClass('submit')) {
@@ -107,11 +64,12 @@ class FormStepper {
 
 
         } else {
-          $groupStep.addClass('error');
+          console.log('it is NOT valid');
+          groupStep.addClass('error');
         }
       })
       .validate({
-        group: $group
+        group: group
       });
 
     // kill listener
@@ -120,18 +78,27 @@ class FormStepper {
       .off('form:validate');
   }
 
+  static getStep(element){
+    console.log(element);
+    return element.attr('data-target').split('-').pop();
+  };
+
   handleValidations() {
     const self = this;
     // validate on next buttons
     $('.next').on('click', function() {
-      self.validateBy(this);
+      console.log(this); // button.next.btn.btn-primary.ml-auto
+      const $group = $(this).data().validate;
+      const $groupStep = $(`[data-target="#${$(this).parents('.content').attr('id')}"]`);
+      self.validateBy($group, $groupStep);
     });
 
     // prev buttons
     $('.prev').on('click', function() {
       const $trigger = $(this);
-      const groupId = $trigger.parents('.content').attr('id');
-      const $groupStep = $(`[data-target="#${groupId}"]`);
+      const groupId = $trigger.parents('.content').attr('id'); // test-l-2
+
+      const $groupStep = $(`[data-target="#${groupId}"]`);  // li.step.active
       // normalize states
       $groupStep.removeClass('success error');
       $groupStep.prev().removeClass('success error');
@@ -139,9 +106,18 @@ class FormStepper {
       stepperDemo.previous();
     });
 
-    // $('a.step-trigger').on('click', (e) => {
-    //   e.preventDefault();
-    // });
+
+    $('.step-trigger').on('leaveStep', function(){
+      const $groupStep = $(`[data-target="#test-l-${self.current_step}"]`);
+      const $group = $groupStep.data().fieldset;
+      console.log('leaving step: ' + self.current_step);
+      self.validateBy($group, $groupStep);
+    });
+
+    $('.step-trigger').on('showStep', function(){
+      self.current_step = FormStepper.getStep($(this).parent());
+      console.log('entering step: ' + self.current_step)
+    });
 
     // save creadit card
     $('#savecc').on('click', () => {
@@ -154,8 +130,9 @@ class FormStepper {
 
     // submit button
     $('.submit').on('click', function() {
-      self.validateBy(this);
-
+      const $group = $(this).data().validate;
+      const $groupStep = $(`[data-target="#${$(this).parents('.content').attr('id')}"]`);
+      self.validateBy($group, $groupStep);
       return false;
     });
   }
