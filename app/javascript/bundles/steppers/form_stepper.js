@@ -2,121 +2,142 @@ import Stepper from 'bs-stepper';
 
 class FormStepper {
   constructor() {
-    console.log('running');
     this.init();
     this.form = $('#stepper-form').parsley();
-    this.current_step = 1;
+    this.current_step = 1; // Always start at step 1
+    // Keeps track of whether a step has been validated at least once.
+    this.stepsInitialValidation = {};
+    for (let i = 1; i <= $('li.step').length; i++) {
+      this.stepsInitialValidation[i] = false;
+    }
   }
 
+  // Bootstraps the form wizard
   init() {
-    // event handlers
     this.handleValidations();
     this.handleSteps();
   }
 
-  validateField(field){
-    if (field){
-      $(`#${field}`).parsley().validate();
+  // Validates a single field. Mainly used by the react-select components
+  validateField(field) {
+    if (field) {
+      $(`#${field}`)
+        .parsley()
+        .validate();
     }
   }
 
-
-
-  validateBy(group, groupStep, onSuccessMove=true) {
+  // Main validation function. Partially validates the form.
+  validateBy(group, groupStep, stepDirection = '', onSuccessMove = true) {
     this.form
+      // On form validation stop the normal behaviour and do it in groups
       .on('form:validate', function(formInstance) {
         const isValid = formInstance.isValid({
           group: group
         });
-        // normalize states
+        // Normalize states
         groupStep.removeClass('success error');
 
-        // formInstance.whenValid({
-        //   group: group
-        // }).then(function(value){
-        //   console.log('resolved');
-
-        // }).fail(function(){
-        //   console.log('not resolved');
-        // });
-
-        console.log('checking isValid');
-
-        // give step item a validate state
+        // Give step item a validate state
         if (isValid) {
-          console.log('it is valid');
-
           groupStep.addClass('success');
           // go to next step or submit
-          // .split('-').pop()
-          console.log(this);
           let currentStep = FormStepper.getStep(groupStep);
-          console.log(currentStep);
 
-
-          // if ($trigger.hasClass('submit')) {
-        if (currentStep === $('.step').length){
+          if (currentStep === $('.step').length) {
             $('#submitfeedback').toast('show');
+            // DEBUG
             console.log($('#stepper-form').serializeArray());
           } else {
             onSuccessMove ? stepperDemo.next() : '';
           }
-
-
         } else {
-          console.log('it is NOT valid');
           groupStep.addClass('error');
         }
       })
+      // Triggers the form validation.
       .validate({
         group: group
       });
 
-    // kill listener
+    // Kills the form listener
     $('#stepper-form')
       .parsley()
       .off('form:validate');
   }
 
-  static getStep(element){
+  // Gets the current step
+  static getStep(element) {
     console.log(element);
-    return element.attr('data-target').split('-').pop();
-  };
+    return element
+      .data()
+      .target.split('-')
+      .pop();
+  }
 
+  // Gets the step direction. You can reference a static method
+  // from within another static method using `this`.
+  // Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/static#Calling_static_methods
+  static getStepDirection(newStepElement, currentStep) {
+    const newStep = this.getStep(
+      $(newStepElement)
+        .parents('li.step')
+        .first()
+    );
+    if (currentStep !== newStep) {
+      return currentStep < newStep ? 'forward' : 'backward';
+    }
+    return 'forward';
+  }
+
+  // Handles the event listeners
   handleValidations() {
+    // Store away the `this`
     const self = this;
-    // validate on next buttons
+
+    // Next button handler
     $('.next').on('click', function() {
-      console.log(this); // button.next.btn.btn-primary.ml-auto
       const $group = $(this).data().validate;
-      const $groupStep = $(`[data-target="#${$(this).parents('.content').attr('id')}"]`);
+      const $groupStep = $(
+        `[data-target="#${$(this)
+          .parents('.content')
+          .attr('id')}"]`
+      );
       self.validateBy($group, $groupStep);
     });
 
-    // prev buttons
+    // Previous button handler
     $('.prev').on('click', function() {
       const $trigger = $(this);
-      const groupId = $trigger.parents('.content').attr('id'); // test-l-2
+      const groupId = $trigger.parents('.content').attr('id'); // i.e. test-l-2
 
-      const $groupStep = $(`[data-target="#${groupId}"]`);  // li.step.active
-      // normalize states
+      const $groupStep = $(`[data-target="#${groupId}"]`); // i.e. li.step.active
+      // Normalize states
       $groupStep.removeClass('success error');
       $groupStep.prev().removeClass('success error');
-
       stepperDemo.previous();
     });
 
-
-    $('.step-trigger').on('leaveStep', function(){
+    // `leaveStep` listener
+    $('.step-trigger').on('leaveStep', function(element) {
+      const direction = FormStepper.getStepDirection(element.target, self.current_step);
+      if (direction === 'backward' && !self.stepsInitialValidation[self.current_step]) return;
+      // DEBUG
+      // console.log('the direction is: ' + direction);
+      self.stepsInitialValidation[self.current_step] = true;
       const $groupStep = $(`[data-target="#test-l-${self.current_step}"]`);
       const $group = $groupStep.data().fieldset;
-      console.log('leaving step: ' + self.current_step);
+      // DEBUG
+      // console.log('leaving step: ' + self.current_step);
       self.validateBy($group, $groupStep);
     });
 
-    $('.step-trigger').on('showStep', function(){
+    // `showStep` listener
+    $('.step-trigger').on('showStep', function(element) {
+      // Set the new step
       self.current_step = FormStepper.getStep($(this).parent());
-      console.log('entering step: ' + self.current_step)
+      // DEBUG
+      // console.log('entering step: ' + self.current_step)
     });
 
     // save creadit card
@@ -131,7 +152,11 @@ class FormStepper {
     // submit button
     $('.submit').on('click', function() {
       const $group = $(this).data().validate;
-      const $groupStep = $(`[data-target="#${$(this).parents('.content').attr('id')}"]`);
+      const $groupStep = $(
+        `[data-target="#${$(this)
+          .parents('.content')
+          .attr('id')}"]`
+      );
       self.validateBy($group, $groupStep);
       return false;
     });
