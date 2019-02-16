@@ -18,115 +18,151 @@
             <div class="steps steps-" role="tablist">
               <ul>
                 <li class="step" data-fieldset="fieldset01" data-target="#test-l-1">
-                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-sign fa-fw"> </i></span> <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step1.anchor') %></span></a>
+                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-sign fa-fw"> </i></span>
+                    <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step1.anchor') %></span></a>
                 </li>
                 <li class="step" data-fieldset="fieldset02" data-target="#test-l-2">
-                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-map-marked-alt fa-fw"> </i></span> <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step2.anchor') %></span></a>
+                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-info fa-fw"> </i></span>
+                    <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step2.anchor') %></span></a>
                 </li>
                 <li class="step" data-fieldset="fieldset03" data-target="#test-l-3">
-                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="oi oi-credit-card"></i></span> <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step3.anchor') %></span></a>
+                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="oi oi-credit-card"></i></span>
+                    <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step3.anchor') %></span></a>
                 </li>
                 <li class="step" data-fieldset="fieldset04" data-target="#test-l-4">
-                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="oi oi-check"></i></span> <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step4.anchor') %></span></a>
+                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="oi oi-check"></i></span>
+                    <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step4.anchor') %></span></a>
                 </li>
               </ul>
             </div><!-- /.steps -->
           </div><!-- /.card-header -->
           <!-- .card-body -->
           <div class="card-body">
-            <%= form_for(@property, remote: true, html: { class: "p-lg-4 p-sm-3 p-0", id: "stepper-form", name: "stepperForm" }) do |property| %>
-<!--            <form id="stepper-form" name="stepperForm" class="p-lg-4 p-sm-3 p-0">-->
+            <%= form_for(@property, remote: true, html: {class: "p-lg-4 p-sm-3 p-0", id: "stepper-form", name: "stepperForm"}) do |property| %>
+              <!--            <form id="stepper-form" name="stepperForm" class="p-lg-4 p-sm-3 p-0">-->
               <!-- .content -->
               <div id="test-l-1" class="content dstepper-none fade">
                 <!-- fieldset -->
                 <fieldset>
                   <legend><%= t('js.forms.properties.wizard.step1.title') %></legend> <!-- .form-group -->
-
                   <div class="row">
                     <div class="col-md-6 col-sm-12">
-
-                  <div class="form-group mb-4">
-                    <%= property.label :businesstype do %>
-                      <%= Property.human_attribute_name(:businesstype) %>
-                      <abbr title="<%= t('js.components.select.required') %>">*</abbr>
-                    <% end %>
-                    <%= react_component('SimpleSelect', props: {
-                        id: 'a',
-                        inputID: 'property_businesstype',
-                        inputName: 'property[businesstype]',
-                        inputClassName: 'form-control',
-                        validatorGroup: 'fieldset01',
-                        isRequired: true,
-                        formID: 'new_property',
-                        className: 'simple-select',
-                        options: Property.businesstypes.keys.collect {|businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype}},
-                        soloMode: true,
-                        ajaxEnabled: false,
-                        searchable: false,
-                        feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
-                        i18n: {
-                            select: t('js.components.select'),
-                            validatorErrMsg: t('js.validator.required'),
-                        }
-                    }, prerender: false) %>
-<!--                    <div class="form-label-group">-->
-<!--                      <input type="text" id="userid" name="userid" class="form-control" value="bent10@mail.com" autocomplete="off" data-parsley-group="fieldset01" required=""> <label for="userid">Mobile number or email</label>-->
-<!--                    </div><small class="form-text text-muted"><strong>Type carefully!</strong> You will be sent a SMS / Email confirmation.</small>-->
-<!--                    <div class="invalid-feedback"> Valid phone number / email is required. </div>-->
-                  </div><!-- /.form-group -->
-                  <!-- .form-group -->
-
-
-                    <!-- DependantSelect will generate the form-group div and label tags automatically (it's nested) -->
-                    <%= react_component('DependantSelect', props: {
-                        id: 'b',
-                        className: 'simple-select',
-                        options: get_options,
-                        validatorGroup: 'fieldset01',
-                        isRequired: true,
-                        searchable: false,
-                        formdata: {
-                            formid: 'new_property',
-                            categoryid: 'property_category',
-                            categoryname: 'property[category]',
-                            categoryClassName: 'form-control',
-                            categoryFeedback: t('js.forms.properties.wizard.step1.type_of_category_feedback'),
-                            subcategoryid: 'property_subcategory',
-                            subcategoryname: 'property[subcategory]',
-                            subcategoryClassName: 'form-control',
-                            subcategoryFeedback: t('js.forms.properties.wizard.step1.type_of_subcategory_feedback'),
-                        },
-                        i18n: {
-                            select: t('js.components.select'),
-                            validatorErrMsg: t('js.validator.required'),
-                        }
-                    }, prerender: false) %>
-
-                      <%= render "accounts/helpers/locale" %>
-                    <input id="preventformsubmit" type="hidden">
-
-
                       <div class="form-group mb-4">
-                        <div class="form-label-group">
-                          <%= property.text_field :size,
-                                                  placeholder: Property.human_attribute_name("size_placeholder"),
-                                                  class: 'form-control',
-                                                  autocomplete: "off",
-                                                  required: '',
-                                                  'data-parsley-group': "fieldset01",
-                                                  'data-parsley-type': "integer",
-                                                  'data-parsley-type-message': t("js.validator.digits"),
-                                                  'data-parsley-required-message': t("js.validator.required") %>
-                          <label for="size">
-                            <%= content_tag :span do %>
-                              <%= content_tag(:i, nil, class: 'fas fa-arrows-alt fa-fw') + ' ' + t('activerecord.attributes.property.size_title') %>
-                            <% end %>
-                          </label>
-                        </div>
-                        <small class="form-text text-muted"><%= t('activerecord.attributes.property.size_feedback_html') %>
-                        </small>
-                        <div class="invalid-feedback"></div>
-                      </div>
+                        <%= property.label :businesstype do %>
+                          <%= Property.human_attribute_name(:businesstype) %>
+                          <abbr title="<%= t('js.components.select.required') %>">*</abbr>
+                        <% end %>
+                        <%= react_component('SimpleSelect', props: {
+                            id: 'a',
+                            inputID: 'property_businesstype',
+                            inputName: 'property[businesstype]',
+                            inputClassName: 'form-control',
+                            validatorGroup: 'fieldset01',
+                            isRequired: true,
+                            formID: 'new_property',
+                            className: 'simple-select',
+                            options: Property.businesstypes.keys.collect {|businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype}},
+                            soloMode: true,
+                            ajaxEnabled: false,
+                            searchable: false,
+                            feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
+                            i18n: {
+                                select: t('js.components.select'),
+                                validatorErrMsg: t('js.validator.required'),
+                            }
+                        }, prerender: false) %>
+                      </div><!-- /.form-group -->
+                      <!-- .form-group -->
+
+                      <!-- DependantSelect will generate the form-group div and label tags automatically (it's nested) -->
+                      <%= react_component('DependantSelect', props: {
+                          id: 'b',
+                          className: 'simple-select',
+                          options: get_options,
+                          validatorGroup: 'fieldset01',
+                          isRequired: true,
+                          searchable: false,
+                          formdata: {
+                              formid: 'new_property',
+                              categoryid: 'property_category',
+                              categoryname: 'property[category]',
+                              categoryClassName: 'form-control',
+                              categoryFeedback: t('js.forms.properties.wizard.step1.type_of_category_feedback'),
+                              subcategoryid: 'property_subcategory',
+                              subcategoryname: 'property[subcategory]',
+                              subcategoryClassName: 'form-control',
+                              subcategoryFeedback: t('js.forms.properties.wizard.step1.type_of_subcategory_feedback'),
+                          },
+                          i18n: {
+                              select: t('js.components.select'),
+                              validatorErrMsg: t('js.validator.required'),
+                          }
+                      }, prerender: false) %>
+
+
+                      <input id="preventformsubmit" type="hidden">
+                      <input id="property_images" class="emitters form-control" type="hidden" name="property[images][]">
+                      <%= render "accounts/helpers/locale" %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                   <hr class="mt-5">
@@ -140,8 +176,6 @@
                       <div class="d-flex justify-content-center opaque">
                         <i class="pr-icon xl house-add"></i>
                       </div>
-
-
                     </div>
                   </div>
 
@@ -154,61 +188,215 @@
               <div id="test-l-2" class="content dstepper-none fade">
                 <!-- fieldset -->
                 <fieldset>
-                  <legend>Personal Information</legend> <!-- .row -->
+                  <legend><%= t('js.forms.properties.wizard.step2.title') %></legend> <!-- .row -->
                   <div class="row">
                     <!-- grid column -->
-                    <div class="col-md-6 mb-4">
-                      <div class="form-label-group">
-                        <input type="text" id="firstName" class="form-control" name="firstName" value="Beni" data-parsley-group="fieldset02" required=""> <label for="firstName">First name</label>
-                      </div>
-                      <div class="invalid-feedback"> Valid first name is required. </div>
-                    </div><!-- /grid column -->
-                    <!-- grid column -->
-                    <div class="col-md-6 mb-4">
-                      <div class="form-label-group">
-                        <input type="text" id="lastName" class="form-control" name="lastName" value="Arisandi" data-parsley-group="fieldset02" required=""> <label for="lastName">Last name</label>
-                      </div>
-                      <div class="invalid-feedback"> Valid last name is required. </div>
-                    </div><!-- /grid column -->
-                  </div><!-- /.row -->
-                  <!-- .form-group -->
-                  <div class="form-group mb-4">
-                    <div class="form-label-group">
-                      <input type="text" id="address" class="form-control" name="address" value="5888 Mya Causeway" data-parsley-group="fieldset02" placeholder="Address" required=""> <label for="address">Address</label>
+
+                    <!-- Floor -->
+                    <div class="col-md-6 col-sm-12">
+                    <div class="form-group mb-4">
+                      <%= property.label :floor do %>
+                        <%= Property.human_attribute_name(:floor) %>
+                      <% end %>
+                      <%= react_component('SimpleSelect', props: {
+                          id: 'a',
+                          inputID: 'property_floor',
+                          inputName: 'property[floor]',
+                          inputClassName: 'form-control',
+                          validatorGroup: 'fieldset02',
+                          isRequired: false,
+                          formID: 'new_property',
+                          className: 'simple-select',
+                          options: Property.floors.keys.collect {|floor| {label: I18n.t("activerecord.attributes.property.enums.floor.#{floor}", :default => floor.to_s), value: floor}},
+                          soloMode: true,
+                          ajaxEnabled: false,
+                          searchable: true,
+                          feedback: t('js.forms.properties.wizard.step1.floor_feedback'),
+                          i18n: {
+                              select: t('js.components.select'),
+                              validatorErrMsg: t('js.validator.required'),
+                          }
+                      }, prerender: false) %>
                     </div>
-                    <div class="invalid-feedback"> Please enter your shipping address. </div>
-                  </div><!-- /.form-group -->
-                  <!-- .form-group -->
-                  <div class="form-group mb-4">
-                    <div class="form-label-group">
-                      <input type="text" id="address2" class="form-control" name="address2" value="Apartment 185" placeholder="Apt. or suite"> <label for="address2">Apartment or suite <span class="badge badge-secondary"><em>Optional</em></span></label>
                     </div>
-                  </div><!-- /.form-group -->
-                  <!-- .row -->
-                  <div class="row">
-                    <!-- grid column -->
-                    <div class="col-md-3 mb-4">
-                      <div class="form-label-group">
-                        <input type="text" id="zip" class="form-control" name="zip" value="97729" data-parsley-group="fieldset02" required=""> <label for="zip">Zip</label>
+
+                    <!-- Construction -->
+                    <div class="col-md-6 col-sm-12">
+                    <div class="form-group mb-4">
+                      <%= property.label :construction do %>
+                        <%= Property.human_attribute_name(:construction) %>
+                      <% end %>
+                      <%= react_component('SimpleSelect', props: {
+                          id: 'a',
+                          inputID: 'property_construction',
+                          inputName: 'property[construction]',
+                          inputClassName: 'form-control',
+                          validatorGroup: 'fieldset02',
+                          isRequired: false,
+                          formID: 'new_property',
+                          className: 'simple-select',
+                          options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
+                          soloMode: true,
+                          ajaxEnabled: false,
+                          searchable: true,
+                          feedback: t('js.forms.properties.wizard.step1.construction_feedback'),
+                          i18n: {
+                              select: t('js.components.select'),
+                              validatorErrMsg: t('js.validator.required'),
+                          }
+                      }, prerender: false) %>
+                    </div>
+                    </div>
+
+
+                    <!-- Size -->
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group mb-4">
+                        <div class="form-label-group">
+                          <%= property.text_field :size,
+                                                  placeholder: Property.human_attribute_name("size_placeholder"),
+                                                  class: 'form-control',
+                                                  autocomplete: "off",
+                                                  required: '',
+                                                  'data-parsley-group': "fieldset02",
+                                                  'data-parsley-type': "integer",
+                                                  'data-parsley-type-message': t("js.validator.digits"),
+                                                  'data-parsley-required-message': t("js.validator.required") %>
+                          <label for="size">
+                            <%= content_tag :span do %>
+                              <%= content_tag(:i, nil, class: 'fas fa-arrows-alt fa-fw') + ' ' + t('activerecord.attributes.property.size_title') %>
+                            <% end %>
+                          </label>
+                        </div>
+                        <small class="form-text text-muted"><%= t('activerecord.attributes.property.size_feedback_html') %>
+                        </small>
+                        <div class="invalid-feedback"></div>
                       </div>
-                      <div class="invalid-feedback"> Zip code required. </div>
-                    </div><!-- /grid column -->
-                    <!-- grid column -->
-                    <div class="col-md-5 mb-4">
-                      <select id="country" class="custom-select custom-select-lg d-block w-100" name="country" data-parsley-group="fieldset02" required="">
-                        <option value=""> Choose... </option>
-                        <option selected> United States </option>
-                      </select>
-                      <div class="invalid-feedback"> Please select a valid country. </div>
-                    </div><!-- /grid column -->
-                    <!-- grid column -->
-                    <div class="col-md-4 mb-4">
-                      <select id="state" class="custom-select custom-select-lg d-block w-100" name="state" data-parsley-group="fieldset02" required="">
-                        <option value=""> Choose... </option>
-                        <option selected> California </option>
-                      </select>
-                      <div class="invalid-feedback"> Please provide a valid state. </div>
-                    </div><!-- /grid column -->
+                    </div>
+
+                    <!-- Bedrooms -->
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group mb-4">
+                        <div class="form-label-group">
+                          <%= property.text_field :bedrooms,
+                                                  placeholder: Property.human_attribute_name("bedrooms_placeholder"),
+                                                  class: 'form-control',
+                                                  autocomplete: "off",
+                                                  required: '',
+                                                  'data-parsley-group': "fieldset02",
+                                                  'data-parsley-type': "integer",
+                                                  'data-parsley-type-message': t("js.validator.digits"),
+                                                  'data-parsley-required-message': t("js.validator.required") %>
+                          <label for="bedrooms">
+                            <%= content_tag :span do %>
+                              <%= content_tag(:i, nil, class: 'fas fa-bed fa-fw') + ' ' + t('activerecord.attributes.property.bedrooms_title') %>
+                            <% end %>
+                          </label>
+                        </div>
+                        <small class="form-text text-muted"><%= t('activerecord.attributes.property.bedrooms_feedback_html') %>
+                        </small>
+                        <div class="invalid-feedback"></div>
+                      </div>
+                    </div>
+
+                    <!-- Bathrooms -->
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group mb-4">
+                        <div class="form-label-group">
+                          <%= property.text_field :bathrooms,
+                                                  placeholder: Property.human_attribute_name("bathrooms_placeholder"),
+                                                  class: 'form-control',
+                                                  autocomplete: "off",
+                                                  required: '',
+                                                  'data-parsley-group': "fieldset02",
+                                                  'data-parsley-type': "integer",
+                                                  'data-parsley-type-message': t("js.validator.digits"),
+                                                  'data-parsley-required-message': t("js.validator.required") %>
+                          <label for="bedrooms">
+                            <%= content_tag :span do %>
+                              <%= content_tag(:i, nil, class: 'fas fa-bath fa-fw') + ' ' + t('activerecord.attributes.property.bathrooms_title') %>
+                            <% end %>
+                          </label>
+                        </div>
+                        <small class="form-text text-muted"><%= t('activerecord.attributes.property.bathrooms_feedback_html') %>
+                        </small>
+                        <div class="invalid-feedback"></div>
+                      </div>
+                    </div>
+
+                    <!-- Price -->
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group mb-4">
+                        <div class="form-label-group">
+                          <%= property.text_field :price,
+                                                  placeholder: Property.human_attribute_name("price_placeholder"),
+                                                  class: 'form-control',
+                                                  autocomplete: "off",
+                                                  required: '',
+                                                  'data-parsley-group': "fieldset02",
+                                                  'data-parsley-type': "integer",
+                                                  'data-parsley-type-message': t("js.validator.digits"),
+                                                  'data-parsley-required-message': t("js.validator.required") %>
+                          <label for="bedrooms">
+                            <%= content_tag :span do %>
+                              <%= content_tag(:i, nil, class: 'fas fa-euro-sign fa-fw') + ' ' + t('activerecord.attributes.property.price_title') %>
+                            <% end %>
+                          </label>
+                        </div>
+                        <small class="form-text text-muted"><%= t('activerecord.attributes.property.price_feedback_html') %>
+                        </small>
+                        <div class="invalid-feedback"></div>
+                      </div>
+                    </div>
+
+
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group mb-4">
+                        <label class="control-label" for="flatpickr01">Basic</label> <input id="avail" type="text" class="form-control" data-toggle="flatpickr">
+
+<!--                      <label class="control-label" for="flatpickr11">Month Select</label> <input id="avail" type="text" class="form-control" data-toggle="flatpickr" data-monthselect="true">-->
+                    </div><!-- /.form-group -->
+                    </div>
+
+
+
+
+
+
+
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group mb-4">
+                        <%= property.label :levels do %>
+                          <%= Property.human_attribute_name(:levels) %>
+                        <% end %>
+                        <%= react_component('SimpleSelect', props: {
+                            id: 'a',
+                            inputID: 'property_levels',
+                            inputName: 'property[levels]',
+                            inputClassName: 'form-control',
+                            validatorGroup: 'fieldset01',
+                            isRequired: false,
+                            formID: 'new_property',
+                            className: 'simple-select',
+                            options: (1..10).collect {|level| {label: level, value: level}},
+                            soloMode: true,
+                            ajaxEnabled: false,
+                            searchable: false,
+                            feedback: t('js.forms.properties.wizard.step1.levels_feedback'),
+                            i18n: {
+                                select: t('js.components.select'),
+                                validatorErrMsg: t('js.validator.required'),
+                            }
+                        }, prerender: false) %>
+                      </div>
+                    </div>
+
+
+
+
+
+
+
                   </div><!-- /.row -->
                   <hr class="mt-5">
                   <div class="d-flex">
@@ -216,6 +404,32 @@
                   </div>
                 </fieldset><!-- /fieldset -->
               </div><!-- /.content -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
               <!-- .content -->
               <div id="test-l-3" class="content dstepper-none fade">
                 <!-- fieldset -->

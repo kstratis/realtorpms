@@ -8,7 +8,7 @@
     "babel-runtime": "^6.26.0",
     "bs-stepper": "https://github.com/kstratis/bs-stepper.git#events",
     "caniuse-lite": "^1.0.30000865",
-    "flatpickr": "^4.5.1",
+    "flatpickr": "^4.5.2",
     "intl": "^1.2.5",
     "js-yaml": "^3.12.0",
     "npm": "^6.2.0",

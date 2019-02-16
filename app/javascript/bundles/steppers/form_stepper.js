@@ -68,7 +68,6 @@ class FormStepper {
 
   // Gets the current step
   static getStep(element) {
-    console.log(element);
     return element
       .data()
       .target.split('-')

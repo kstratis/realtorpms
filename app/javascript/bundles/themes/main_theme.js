@@ -1,3 +1,5 @@
+import flatpickr from "flatpickr";
+
 class Theme {
   constructor() {
     // looper color scheme refer from our _variable-bs-overrides.scss
@@ -93,7 +95,7 @@ class Theme {
 
     // handle plugins initialization
     // =============================================================
-
+    console.log('theme initialiasing');
     this.perfectScrollbar();
     this.masonry();
     this.chartjs();
@@ -106,6 +108,7 @@ class Theme {
     this.select2();
     this.atwho();
     this.tribute();
+    console.log('running flatpickr');
     this.flatpickr();
     this.colorpicker();
     this.touchspin();
@@ -1214,6 +1217,7 @@ class Theme {
     if (window.flatpickr) {
       flatpickr.defaultConfig.disableMobile = true;
 
+      console.log('flatpickr orig running');
       $('[data-toggle="flatpickr"]').each(function() {
         const selector = this;
         const options = $(selector).data();
