@@ -91,8 +91,8 @@ en:
         address_placeholder: "i.e. 51 Mackintosh Place, CF24 4RL"
         floor: "Floor"
         levels: "Levels"
-        availability: "Availability"
-        availability_placeholder: "Pick a date"
+        availability_title: "Availability"
+        availability_feedback_html: "Pick a date"
         notes: "Notes"
         notes_placeholder: "i.e. Mortgage"
         enums:

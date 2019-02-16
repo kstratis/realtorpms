@@ -9,6 +9,8 @@
 
 import { start } from '../bundles/activestorageModifiedv52/index';
 import * as uploader from '../bundles/uploaders/uppy_uploader';
+import flatpickr from "flatpickr";
+import { Greek } from "flatpickr/dist/l10n/gr.js"
 
 $(document).on('turbolinks:load', function(e) {
   start();

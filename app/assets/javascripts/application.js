@@ -28,6 +28,7 @@
 //= require_tree .
 
 
+
 // After an ajax action a given button may either rewind history by 1
 // or return to a generic screen of our selection
 jQuery.fn.returnOnClick = function(location) {

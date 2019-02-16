@@ -257,7 +257,6 @@
                                                   placeholder: Property.human_attribute_name("size_placeholder"),
                                                   class: 'form-control',
                                                   autocomplete: "off",
-                                                  required: '',
                                                   'data-parsley-group': "fieldset02",
                                                   'data-parsley-type': "integer",
                                                   'data-parsley-type-message': t("js.validator.digits"),
@@ -282,7 +281,6 @@
                                                   placeholder: Property.human_attribute_name("bedrooms_placeholder"),
                                                   class: 'form-control',
                                                   autocomplete: "off",
-                                                  required: '',
                                                   'data-parsley-group': "fieldset02",
                                                   'data-parsley-type': "integer",
                                                   'data-parsley-type-message': t("js.validator.digits"),
@@ -307,7 +305,6 @@
                                                   placeholder: Property.human_attribute_name("bathrooms_placeholder"),
                                                   class: 'form-control',
                                                   autocomplete: "off",
-                                                  required: '',
                                                   'data-parsley-group': "fieldset02",
                                                   'data-parsley-type': "integer",
                                                   'data-parsley-type-message': t("js.validator.digits"),
@@ -332,7 +329,6 @@
                                                   placeholder: Property.human_attribute_name("price_placeholder"),
                                                   class: 'form-control',
                                                   autocomplete: "off",
-                                                  required: '',
                                                   'data-parsley-group': "fieldset02",
                                                   'data-parsley-type': "integer",
                                                   'data-parsley-type-message': t("js.validator.digits"),
@@ -352,7 +348,9 @@
 
                     <div class="col-md-6 col-sm-12">
                       <div class="form-group mb-4">
-                        <label class="control-label" for="flatpickr01">Basic</label> <input id="avail" type="text" class="form-control" data-toggle="flatpickr">
+                        <label class="control-label" for="flatpickr01"><%= t('activerecord.attributes.property.availability_title') %></label> <input id="avail" type="text" class="form-control" data-toggle="flatpickr">
+                        <small class="form-text text-muted"><%= t('activerecord.attributes.property.availability_feedback_html') %>
+                        </small>
 
 <!--                      <label class="control-label" for="flatpickr11">Month Select</label> <input id="avail" type="text" class="form-control" data-toggle="flatpickr" data-monthselect="true">-->
                     </div><!-- /.form-group -->
