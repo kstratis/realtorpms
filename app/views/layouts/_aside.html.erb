@@ -64,7 +64,7 @@
               </li>
               <li class="menu-item">
                 <%= link_to users_path, class: 'menu-link' do %>
-                  <%= content_tag :i, nil, class: 'fas fa-list-ul fa-fw' %>
+                  <%= content_tag :i, nil, class: 'fas fa-th-list fa-fw' %>
                   <%= content_tag :span, t('partners.list'), class: 'menu-text' %>
                 <% end %>
               </li>
@@ -92,7 +92,7 @@
               <% end %>
               <li class="menu-item <%= active_for(path: properties_path) %>">
                 <%= link_to properties_path, class: 'menu-link' do %>
-                  <%= content_tag :i, nil, class: 'fas fa-list-ul fa-fw' %>
+                  <%= content_tag :i, nil, class: 'fas fa-th-list fa-fw' %>
                   <%= content_tag :span, t('properties.list'), class: 'menu-text' %>
                 <% end %>
               </li>
@@ -129,7 +129,7 @@
               </li>
               <li class="menu-item">
                 <%= link_to '#', class: 'menu-link' do %>
-                  <%= content_tag :i, nil, class: 'fas fa-list-ul fa-fw' %>
+                  <%= content_tag :i, nil, class: 'fas fa-th-list fa-fw' %>
                   <%= content_tag :span, t('clients.list'), class: 'menu-text' %>
                 <% end %>
               </li>

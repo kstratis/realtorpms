@@ -188,6 +188,8 @@ en:
           step5:
             anchor: "Photos"
             title: "Photos"
+          next: "Next"
+          previous: "Previous"
     datatables:
       users:
         partner: "Partner"

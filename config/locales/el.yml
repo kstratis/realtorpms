@@ -190,6 +190,8 @@ el:
           step5:
             anchor: "Φωτογραφίες"
             title: "Φωτογραφίες"
+          next: "Επόμενο"
+          previous: "Προηγούμενο"
     datatables:
       users:
         partner: "Συνεργάτης"
@@ -274,13 +276,13 @@ el:
     settings: "Ρυθμίσεις"
   partners:
     title: "Συνεργάτες"
-    list: "Λίστα συνεργατών"
-    add: "Προσθήκη συνεργάτη"
-    invite: "Πρόσκληση συνεργάτη"
+    list: "Λίστα"
+    add: "Άμεση προσθήκη"
+    invite: "Πρόσκληση"
   clients:
     title: "Πελάτες"
-    add: "Προσθήκη πελάτη"
-    list: "Λίστα πελατών"
+    add: "Προσθήκη"
+    list: "Λίστα"
   main:
     title: "Κεντρική"
     heading: "Κεντρική"

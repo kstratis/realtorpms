@@ -3,6 +3,7 @@
 <%= render partial: 'shared/breadcrumb', locals: {title: 'properties.new.heading', icon: 'house-colored'} %>
 
 <div class="page-container">
+  <div class="container">
   <div class="form-container">
 
     <!-- .section-block -->
@@ -34,7 +35,7 @@
                     <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step4.anchor') %></span></a>
                 </li>
                 <li class="step" data-fieldset="fieldset05" data-target="#test-l-5">
-                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-map-marker-alt fa-fw"> </i></span>
+                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-images fa-fw"> </i></span>
                     <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step5.anchor') %></span></a>
                 </li>
               </ul>
@@ -43,8 +44,8 @@
           <!-- .card-body -->
           <div class="card-body">
             <%= form_for(@property, remote: true, html: {class: "p-lg-4 p-sm-3 p-0", id: "stepper-form", name: "stepperForm"}) do |property| %>
-              <!--            <form id="stepper-form" name="stepperForm" class="p-lg-4 p-sm-3 p-0">-->
-              <!-- .content -->
+
+              <!-- Step 1 START -->
               <div id="test-l-1" class="content dstepper-none fade">
                 <!-- fieldset -->
                 <fieldset>
@@ -78,7 +79,7 @@
                       </div><!-- /.form-group -->
                       <!-- .form-group -->
 
-                      <!-- DependantSelect will generate the form-group div and label tags automatically (it's nested) -->
+                      <!-- DependantSelect will generate the form-group div and label tags automatically (nested) -->
                       <%= react_component('DependantSelect', props: {
                           id: 'b',
                           className: 'simple-select',
@@ -103,92 +104,33 @@
                           }
                       }, prerender: false) %>
 
-
-                      <input id="preventformsubmit" type="hidden">
-                      <input id="property_images" class="emitters form-control" type="hidden" name="property[images][]">
-                      <%= render "accounts/helpers/locale" %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                  <hr class="mt-5">
-                  <!-- .d-flex -->
-                  <div class="d-flex">
-                    <p> Already have an account? Please <a href="#">Signin</a>. </p><button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset01">Next step</button>
-                  </div><!-- /.d-flex -->
-
-                  </div>
-                    <div class="col-md-6">
+                    </div>
+                    <input id="preventformsubmit" type="hidden">
+                    <input id="property_images" class="emitters form-control" type="hidden" name="property[images][]">
+                    <%= render "accounts/helpers/locale" %>
+
+                    <div class="col-md-6 col-sm-12">
                       <div class="d-flex justify-content-center opaque">
-                        <i class="pr-icon xl house-add"></i>
+                        <i class="pr-icon xl house-add"> </i>
                       </div>
                     </div>
                   </div>
 
-
-
+                  <div class="row">
+                    <div class="col-md-12">
+                      <hr class="mt-5">
+                      <!-- .d-flex -->
+                      <div class="d-flex">
+                        <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset01"><%= t('js.forms.properties.wizard.next') %></button>
+                      </div><!-- /.d-flex -->
+                    </div>
+                  </div>
 
                 </fieldset><!-- /fieldset -->
-              </div><!-- /.content -->
-              <!-- .content -->
+              </div><!-- Step 1 END -->
+
+
+              <!-- Step 2 START -->
               <div id="test-l-2" class="content dstepper-none fade">
                 <!-- fieldset -->
                 <fieldset>
@@ -198,60 +140,59 @@
 
                     <!-- Floor -->
                     <div class="col-md-6 col-sm-12">
-                    <div class="form-group mb-4">
-                      <%= property.label :floor do %>
-                        <%= Property.human_attribute_name(:floor) %>
-                      <% end %>
-                      <%= react_component('SimpleSelect', props: {
-                          id: 'a',
-                          inputID: 'property_floor',
-                          inputName: 'property[floor]',
-                          inputClassName: 'form-control',
-                          validatorGroup: 'fieldset02',
-                          isRequired: false,
-                          formID: 'new_property',
-                          className: 'simple-select',
-                          options: Property.floors.keys.collect {|floor| {label: I18n.t("activerecord.attributes.property.enums.floor.#{floor}", :default => floor.to_s), value: floor}},
-                          soloMode: true,
-                          ajaxEnabled: false,
-                          searchable: true,
-                          feedback: t('js.forms.properties.wizard.step1.floor_feedback'),
-                          i18n: {
-                              select: t('js.components.select'),
-                              validatorErrMsg: t('js.validator.required'),
-                          }
-                      }, prerender: false) %>
-                    </div>
+                      <div class="form-group mb-4">
+                        <%= property.label :floor do %>
+                          <%= Property.human_attribute_name(:floor) %>
+                        <% end %>
+                        <%= react_component('SimpleSelect', props: {
+                            id: 'a',
+                            inputID: 'property_floor',
+                            inputName: 'property[floor]',
+                            inputClassName: 'form-control',
+                            validatorGroup: 'fieldset02',
+                            isRequired: false,
+                            formID: 'new_property',
+                            className: 'simple-select',
+                            options: Property.floors.keys.collect {|floor| {label: I18n.t("activerecord.attributes.property.enums.floor.#{floor}", :default => floor.to_s), value: floor}},
+                            soloMode: true,
+                            ajaxEnabled: false,
+                            searchable: true,
+                            feedback: t('js.forms.properties.wizard.step1.floor_feedback'),
+                            i18n: {
+                                select: t('js.components.select'),
+                                validatorErrMsg: t('js.validator.required'),
+                            }
+                        }, prerender: false) %>
+                      </div>
                     </div>
 
                     <!-- Construction -->
                     <div class="col-md-6 col-sm-12">
-                    <div class="form-group mb-4">
-                      <%= property.label :construction do %>
-                        <%= Property.human_attribute_name(:construction) %>
-                      <% end %>
-                      <%= react_component('SimpleSelect', props: {
-                          id: 'a',
-                          inputID: 'property_construction',
-                          inputName: 'property[construction]',
-                          inputClassName: 'form-control',
-                          validatorGroup: 'fieldset02',
-                          isRequired: false,
-                          formID: 'new_property',
-                          className: 'simple-select',
-                          options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
-                          soloMode: true,
-                          ajaxEnabled: false,
-                          searchable: true,
-                          feedback: t('js.forms.properties.wizard.step1.construction_feedback'),
-                          i18n: {
-                              select: t('js.components.select'),
-                              validatorErrMsg: t('js.validator.required'),
-                          }
-                      }, prerender: false) %>
+                      <div class="form-group mb-4">
+                        <%= property.label :construction do %>
+                          <%= Property.human_attribute_name(:construction) %>
+                        <% end %>
+                        <%= react_component('SimpleSelect', props: {
+                            id: 'a',
+                            inputID: 'property_construction',
+                            inputName: 'property[construction]',
+                            inputClassName: 'form-control',
+                            validatorGroup: 'fieldset02',
+                            isRequired: false,
+                            formID: 'new_property',
+                            className: 'simple-select',
+                            options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
+                            soloMode: true,
+                            ajaxEnabled: false,
+                            searchable: true,
+                            feedback: t('js.forms.properties.wizard.step1.construction_feedback'),
+                            i18n: {
+                                select: t('js.components.select'),
+                                validatorErrMsg: t('js.validator.required'),
+                            }
+                        }, prerender: false) %>
+                      </div>
                     </div>
-                    </div>
-
 
                     <!-- Size -->
                     <div class="col-md-6 col-sm-12">
@@ -276,10 +217,6 @@
                         <div class="invalid-feedback"></div>
                       </div>
                     </div>
-
-
-
-<!--                    <label class="control-label" for="spinner5">Vertical buttons with custom icons</label> <input type="text" value="55" id="spinner5" data-toggle="touchspin" data-verticalbuttons="true" data-verticalup="&lt;i class='fa fa-angle-up'&gt;&lt;/i&gt;" data-verticaldown="&lt;i class='fa fa-angle-down'&gt;&lt;/i&gt;">-->
 
                     <!-- Bedrooms -->
                     <div class="col-md-6 col-sm-12">
@@ -354,6 +291,7 @@
                     </div>
 
 
+                    <!-- Availability -->
                     <div class="col-md-6 col-sm-12">
                       <div class="form-group mb-4">
                         <label class="control-label" for="avail"><%= t('activerecord.attributes.property.availability_title') %></label>
@@ -364,7 +302,7 @@
                     </div>
 
 
-
+                    <!-- Levels -->
                     <div class="col-md-6 col-sm-12">
                       <div class="form-group mb-4">
                         <%= property.label :levels do %>
@@ -391,70 +329,35 @@
                         }, prerender: false) %>
                       </div>
                     </div>
-
                   </div><!-- /.row -->
 
                   <div class="row">
                     <!-- Notes -->
                     <div class="col-md-12">
                       <div class="form-group mb-4">
-                          <label class="control-label" for="notes"><%= t('activerecord.attributes.property.notes_title') %></label>
-                          <%= property.text_area :notes,
-                                                  class: 'form-control',
-                                                  id: 'notes',
-                                                  autocomplete: 'off',
-                                                  'rows': '3' %>
+                        <label class="control-label" for="notes"><%= t('activerecord.attributes.property.notes_title') %></label>
+                        <%= property.text_area :notes,
+                                               class: 'form-control',
+                                               id: 'notes',
+                                               autocomplete: 'off',
+                                               'rows': '3' %>
                         <small class="form-text text-muted"><%= t('activerecord.attributes.property.notes_feedback_html') %>
                         </small>
                         <div class="invalid-feedback"></div>
                       </div>
                     </div>
-                  </div>
-
-
-
-
-
-
-
-
-
-
-
+                  </div><!-- /.row -->
 
                   <hr class="mt-5">
                   <div class="d-flex">
-                    <button type="button" class="prev btn btn-secondary">Previous</button> <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset02">Next step</button>
+                    <button type="button" class="prev btn btn-secondary"><%= t('js.forms.properties.wizard.previous') %></button>
+                    <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset02"><%= t('js.forms.properties.wizard.next') %></button>
                   </div>
+
                 </fieldset><!-- /fieldset -->
-              </div><!-- /.content -->
+              </div><!-- Step 2 END-->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-              <!-- .content -->
+              <!-- Step 3 START -->
               <div id="test-l-3" class="content dstepper-none fade">
                 <!-- fieldset -->
                 <fieldset>
@@ -481,9 +384,6 @@
                         </div>
                       <% end %>
 
-
-
-
                       <div class="col-md-12">
                         <div class="form-row form-group justify-content-center">
 
@@ -507,13 +407,14 @@
 
                   <hr class="mt-5">
                   <div class="d-flex">
-                    <button type="button" class="prev btn btn-secondary">Previous</button>
-                    <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset03">Next step
-                    </button>
+                    <button type="button" class="prev btn btn-secondary"><%= t('js.forms.properties.wizard.previous') %></button>
+                    <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset03"><%= t('js.forms.properties.wizard.next') %></button>
                   </div>
                 </fieldset><!-- /fieldset -->
-              </div><!-- /.content -->
-              <!-- .content -->
+              </div><!-- Step 3 END -->
+
+
+              <!-- Step 4 START -->
               <div id="test-l-4" class="content dstepper-none fade">
                 <!-- fieldset -->
                 <fieldset>
@@ -567,12 +468,17 @@
                       </div>
                     </div>
 
-
-
+                  </div>
+                  <hr class="mt-5">
+                  <div class="d-flex">
+                    <button type="button" class="prev btn btn-secondary"><%= t('js.forms.properties.wizard.previous') %></button>
+                    <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset04"><%= t('js.forms.properties.wizard.next') %></button>
                   </div>
                 </fieldset><!-- /fieldset -->
-              </div><!-- /.content -->
+              </div><!-- Step 4 END -->
 
+
+              <!-- Step 5 START -->
               <div id="test-l-5" class="content dstepper-none fade">
                 <!-- fieldset -->
                 <fieldset>
@@ -581,31 +487,14 @@
                     <!-- grid column -->
                   </div>
 
-
-
-
-
-
-
-
-
                   <hr class="mt-5">
                   <div class="d-flex">
-                    <button type="button" class="prev btn btn-secondary">Previous</button> <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset02">Next step</button>
+                    <button type="button" class="prev btn btn-secondary"><%= t('js.forms.properties.wizard.previous') %></button>
+                    <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset05"><%= t('js.forms.properties.wizard.next') %></button>
                   </div>
                 </fieldset><!-- /fieldset -->
-              </div><!-- /.content -->
+              </div><!-- Step 4 END -->
 
-
-
-
-
-
-
-
-
-
-<!--            </form>-->
             <% end %> <!-- /form -->
           </div><!-- /.card-body -->
         </div><!-- /.card -->
@@ -624,6 +513,7 @@
       </div><!-- /toasts container -->
     </div><!-- /.section-block -->
 
+  </div>
   </div>
 
 </div>

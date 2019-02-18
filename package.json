@@ -11,7 +11,6 @@
     "flatpickr": "^4.5.2",
     "intl": "^1.2.5",
     "js-yaml": "^3.12.0",
-    "npm": "^6.2.0",
     "open-iconic": "^1.1.1",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
@@ -28,7 +27,7 @@
     "url-search-params": "^0.10.0"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.7.1",
+    "@fortawesome/fontawesome-free": "^5.7.2",
     "autoprefixer": "^9.3.1",
     "cssnano": "^4.1.7",
     "node-sass": "^4.9.4",
