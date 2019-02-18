@@ -87,8 +87,8 @@ en:
         bathrooms_feedback_html: "i.e. 2"
         construction: "Construction"
         location: "Location"
-        address: "Address"
-        address_placeholder: "i.e. 51 Mackintosh Place, CF24 4RL"
+        address_title: "Address"
+        address_feedback_html: "i.e. 51 Mackintosh Place, CF24 4RL"
         floor: "Floor"
         levels: "Levels"
         availability_title: "Availability"
@@ -187,7 +187,7 @@ en:
             title: "Location information"
           step5:
             anchor: "Photos"
-            title: "Location information"
+            title: "Photos"
     datatables:
       users:
         partner: "Partner"

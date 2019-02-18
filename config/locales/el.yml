@@ -88,8 +88,8 @@ el:
         bathrooms_feedback_html: "π.χ. 2"
         construction: "Κατασκευή"
         location: "Τοποθεσία"
-        address: "Διεύθυνση"
-        address_placeholder: "π.χ. Βασιλίσσης Σοφίας 64, 115 28 "
+        address_title: "Διεύθυνση"
+        address_feedback_html: "π.χ. Βασιλίσσης Σοφίας 64, 115 28 "
         floor: "Όροφος"
         levels: "Επίπεδα"
         availability_title: "Διαθεσιμότητα"
@@ -183,13 +183,13 @@ el:
             type_of_location_feedback: "Επιλέξτε περιοχή"
           step3:
             anchor: "Παροχές"
-            title: "Έξτρα παροχές"
+            title: "Παροχές / Χαρακτηριστικά"
           step4:
             anchor: "Τοποθεσία"
             title: "Πληροφορίες τοποθεσίας"
           step5:
             anchor: "Φωτογραφίες"
-            title: "Πληροφορίες τοποθεσίας"
+            title: "Φωτογραφίες"
     datatables:
       users:
         partner: "Συνεργάτης"
