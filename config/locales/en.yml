@@ -93,8 +93,8 @@ en:
         levels: "Levels"
         availability_title: "Availability"
         availability_feedback_html: "Pick a date"
-        notes: "Notes"
-        notes_placeholder: "i.e. Mortgage"
+        notes_title: "Notes"
+        notes_feedback_html: "i.e. Mortgage"
         enums:
           businesstype:
             sell: "Sell"
@@ -179,6 +179,15 @@ en:
             anchor: "Info"
             title: "Complementary information"
             type_of_location_feedback: "Choose an area"
+          step3:
+            anchor: "Amenities"
+            title: "Amenities"
+          step4:
+            anchor: "Location"
+            title: "Location information"
+          step5:
+            anchor: "Photos"
+            title: "Location information"
     datatables:
       users:
         partner: "Partner"

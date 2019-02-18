@@ -497,12 +497,6 @@ input[type="search"]::-webkit-search-cancel-button {
   display: block;
 }
 
-.multivalue-checkboxes {
-  @media(min-width: 768px) {
-    border-left: 1px solid #eee;
-  }
-}
-
 .desc-container{
   min-height: 50px;
 }

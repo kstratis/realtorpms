@@ -26,12 +26,16 @@
                     <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step2.anchor') %></span></a>
                 </li>
                 <li class="step" data-fieldset="fieldset03" data-target="#test-l-3">
-                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="oi oi-credit-card"></i></span>
+                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-plus fa-fw"> </i></span>
                     <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step3.anchor') %></span></a>
                 </li>
                 <li class="step" data-fieldset="fieldset04" data-target="#test-l-4">
-                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="oi oi-check"></i></span>
+                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-map-marker-alt fa-fw"> </i></span>
                     <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step4.anchor') %></span></a>
+                </li>
+                <li class="step" data-fieldset="fieldset05" data-target="#test-l-5">
+                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-map-marker-alt fa-fw"> </i></span>
+                    <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step5.anchor') %></span></a>
                 </li>
               </ul>
             </div><!-- /.steps -->
@@ -348,17 +352,12 @@
 
                     <div class="col-md-6 col-sm-12">
                       <div class="form-group mb-4">
-                        <label class="control-label" for="flatpickr01"><%= t('activerecord.attributes.property.availability_title') %></label> <input id="avail" type="text" class="form-control" data-toggle="flatpickr">
+                        <label class="control-label" for="avail"><%= t('activerecord.attributes.property.availability_title') %></label>
+                        <input id="avail" type="text" class="form-control" data-toggle="flatpickr">
                         <small class="form-text text-muted"><%= t('activerecord.attributes.property.availability_feedback_html') %>
                         </small>
-
-<!--                      <label class="control-label" for="flatpickr11">Month Select</label> <input id="avail" type="text" class="form-control" data-toggle="flatpickr" data-monthselect="true">-->
-                    </div><!-- /.form-group -->
+                      </div><!-- /.form-group -->
                     </div>
-
-
-
-
 
 
 
@@ -389,13 +388,36 @@
                       </div>
                     </div>
 
-
-
-
-
-
-
                   </div><!-- /.row -->
+
+                  <div class="row">
+                    <!-- Notes -->
+                    <div class="col-md-12">
+                      <div class="form-group mb-4">
+                          <label class="control-label" for="notes"><%= t('activerecord.attributes.property.notes_title') %></label>
+                          <%= property.text_area :notes,
+                                                  class: 'form-control',
+                                                  id: 'notes',
+                                                  autocomplete: 'off',
+                                                  'rows': '3' %>
+                        <small class="form-text text-muted"><%= t('activerecord.attributes.property.notes_feedback_html') %>
+                        </small>
+                        <div class="invalid-feedback"></div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+
+
+
+
+
+
+
                   <hr class="mt-5">
                   <div class="d-flex">
                     <button type="button" class="prev btn btn-secondary">Previous</button> <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset02">Next step</button>
@@ -432,82 +454,53 @@
               <div id="test-l-3" class="content dstepper-none fade">
                 <!-- fieldset -->
                 <fieldset>
-                  <legend>Payment Information</legend> <!-- .custom-control -->
-                  <div class="custom-control custom-radio mb-4">
-                    <input type="radio" id="pmd1" class="custom-control-input" name="paymentMethod" value="creditcard" data-parsley-group="fieldset03" required=""> <label class="custom-control-label" for="pmd1">Credit card</label> <!-- .custom-control-hint -->
-                    <div class="custom-control-hint">
-                      <!-- .row -->
-                      <div class="row">
-                        <!-- form col -->
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <div class="form-label-group">
-                              <input type="text" id="pm1" name="ccholder" class="form-control" data-parsley-group="creditcard" placeholder="Name on card" required=""> <label for="pm1">Card holder</label>
+                  <legend><%= t('js.forms.properties.wizard.step3.title') %></legend> <!-- .custom-control -->
+                  <div class="multivalue-checkboxes">
+                    <div class="form-row justify-content-center">
+                      <% %w(housetype heating orientation view other).each do |category| %>
+
+                        <div class="form-group">
+                          <div class="col-md-2">
+                            <label class="control-label checkbox-header app-checkbox"><strong><%= t("activerecord.attributes.extra.#{category}.title") %></strong></label>
+                            <div class="col-md-12">
+                              <%= property.collection_check_boxes :extra_ids, Extra.where(subtype: category), :id, :name do |b| %>
+                                <div class="custom-control custom-checkbox app-checkbox">
+                                  <%= b.check_box({class: "custom-control-input", type: 'checkbox'}) %>
+                                  <%#= b.label({class: 'custom-control-label'}) %>
+                                  <%= b.label({class: 'custom-control-label'}) do %>
+                                    <%= t("activerecord.attributes.extra.#{category}.#{b.text}") %>
+                                  <% end %>
+                                </div>
+                              <% end %>
                             </div>
                           </div>
-                        </div><!-- /form col -->
-                        <!-- form col -->
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <div class="form-label-group">
-                              <input type="text" name="ccnumber" class="form-control" id="pm2" data-mask="cc" data-parsley-group="creditcard" placeholder="4242 4242 4242 4242" required=""> <label for="pm2">Card number</label>
-                            </div>
-                          </div>
-                        </div><!-- /form col -->
-                      </div><!-- /.row -->
-                      <!-- .row -->
-                      <div class="row">
-                        <!-- form col -->
-                        <div class="col-md-3">
-                          <div class="form-group">
-                            <div class="form-label-group">
-                              <input type="text" id="pm3" name="ccexpdate" class="form-control" data-mask="expdatecc" data-parsley-group="creditcard" placeholder="MM/YY" required=""> <label for="pm3">Exp. date</label>
-                            </div>
-                          </div>
-                        </div><!-- /form col -->
-                        <!-- form col -->
-                        <div class="col-md-3">
-                          <div class="form-group">
-                            <div class="form-label-group">
-                              <input type="text" id="pm4" name="cccvc" class="form-control" data-mask="cvc" data-parsley-group="creditcard" placeholder="XXX" required=""> <label for="pm4">CVC</label>
-                            </div>
-                          </div>
-                        </div><!-- /form col -->
-                        <!-- form col -->
-                        <div class="col-md-6">
-                          <!-- you can change attribute type to type="submit" on your real project -->
-                          <button type="button" id="savecc" class="btn btn-lg btn-primary btn-block">Save</button>
-                        </div><!-- /form col -->
-                      </div><!-- /.row -->
-                    </div><!-- /.custom-control-hint -->
-                  </div><!-- /.custom-control -->
-                  <!-- .custom-control -->
-                  <div class="custom-control custom-radio mb-4">
-                    <input type="radio" id="pmd2" class="custom-control-input" name="paymentMethod" value="paypal" checked> <label class="custom-control-label" for="pmd2">Paypal</label> <!-- .custom-control-hint -->
-                    <div class="custom-control-hint">
-                      <div class="row">
-                        <div class="col-md-10 col-lg-8">
-                          <div class="form-group">
-                            <div class="input-group h-auto">
-                              <div class="form-label-group">
-                                <input type="text" name="paypalid" class="form-control" value="paypal@looper.com" readonly> <label>Personal account</label>
-                              </div>
-                              <div class="input-group-append ml-auto">
-                                <span class="input-group-text text-success"><strong>Connected</strong></span>
-                              </div>
-                            </div>
-                          </div><button class="btn btn-danger" type="button">Disconnect</button>
                         </div>
-                      </div>
-                    </div><!-- /.custom-control-hint -->
-                  </div><!-- /.custom-control -->
-                  <!-- .custom-control -->
-                  <div class="custom-control custom-radio mb-4">
-                    <input type="radio" id="pmd3" class="custom-control-input" name="paymentMethod" value="stripe"> <label class="custom-control-label" for="pmd3">Stripe</label> <!-- .custom-control-hint -->
-                    <div class="custom-control-hint">
-                      <button class="btn btn-primary" type="button">Connect with <strong><em>Stripe</em></strong></button>
-                    </div><!-- /.custom-control-hint -->
-                  </div><!-- /.custom-control -->
+                      <% end %>
+
+
+
+
+                          <div class="col-md-12">
+                            <div class="form-row form-group justify-content-center">
+
+                            <%= property.collection_check_boxes :extra_ids, Extra.where(subtype: 'dependent'), :id, :name do |b| %>
+                              <div class="custom-control custom-checkbox app-checkbox m-3">
+                                <%= b.check_box({class: "custom-control-input dependent_check", type: 'checkbox'}) %>
+                                <%= b.label({class: 'custom-control-label dependent_label'}) do %>
+                                  <%= t("activerecord.attributes.extra.dependent.#{b.text}") %>
+                                <% end %>
+                                <div class="mt-1">
+                                  <input type="number" name="property[<%= b.text %>_space]" class="form-control custom-control-label dependent_input" placeholder="<%= t("activerecord.attributes.extra.dependent.#{b.text}_placeholder") %>">
+                                </div>
+                              </div>
+                            <% end %>
+
+                          </div>
+                        </div>
+
+                    </div>
+                  </div>
+
                   <hr class="mt-5">
                   <div class="d-flex">
                     <button type="button" class="prev btn btn-secondary">Previous</button> <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset03">Next step</button>
@@ -540,6 +533,39 @@
                   </div>
                 </fieldset><!-- /fieldset -->
               </div><!-- /.content -->
+
+              <div id="test-l-5" class="content dstepper-none fade">
+                <!-- fieldset -->
+                <fieldset>
+                  <legend><%= t('js.forms.properties.wizard.step5.title') %></legend> <!-- .row -->
+                  <div class="row">
+                    <!-- grid column -->
+                  </div>
+
+
+
+
+
+
+
+
+
+                  <hr class="mt-5">
+                  <div class="d-flex">
+                    <button type="button" class="prev btn btn-secondary">Previous</button> <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset02">Next step</button>
+                  </div>
+                </fieldset><!-- /fieldset -->
+              </div><!-- /.content -->
+
+
+
+
+
+
+
+
+
+
 <!--            </form>-->
             <% end %> <!-- /form -->
           </div><!-- /.card-body -->

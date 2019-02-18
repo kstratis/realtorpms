@@ -94,8 +94,8 @@ el:
         levels: "Επίπεδα"
         availability_title: "Διαθεσιμότητα"
         availability_feedback_html: "Επιλέξτε ημερομηνία"
-        notes: "Σημειώσεις"
-        notes_placeholder: "π.χ. Ημιυπαίθριοι χώροι τακτοποιημένοι"
+        notes_title: "Σημειώσεις"
+        notes_feedback_html: "π.χ. Ημιυπαίθριοι χώροι τακτοποιημένοι"
         adxe: "Κείμενο αγγελίας xe.gr"
         adxe_placeholder: "ΒΟΥΛΙΑΓΜΕΝΗ Κέντρο, studio 80 τ.μ., ισόγειο, 1 υ/δ, κατασκευή '02, αυτόνομη θέρμανση, καλή κατάσταση, αποτελείται από σαλόνι το οποίο..."
         adspitogatos: "Κείμενο αγγελίας spitogatos.gr"
@@ -181,6 +181,15 @@ el:
             anchor: "Πληροφορίες"
             title: "Συμπληρωματικές πληροφορίες"
             type_of_location_feedback: "Επιλέξτε περιοχή"
+          step3:
+            anchor: "Παροχές"
+            title: "Έξτρα παροχές"
+          step4:
+            anchor: "Τοποθεσία"
+            title: "Πληροφορίες τοποθεσίας"
+          step5:
+            anchor: "Φωτογραφίες"
+            title: "Πληροφορίες τοποθεσίας"
     datatables:
       users:
         partner: "Συνεργάτης"
