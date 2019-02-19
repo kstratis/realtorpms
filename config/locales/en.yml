@@ -190,6 +190,7 @@ en:
             title: "Photos"
           next: "Next"
           previous: "Previous"
+          submit: "Submit"
     datatables:
       users:
         partner: "Partner"

@@ -504,7 +504,8 @@
                   <hr class="mt-5">
                   <div class="d-flex">
                     <button type="button" class="prev btn btn-secondary"><%= t('js.forms.properties.wizard.previous') %></button>
-                    <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset05"><%= t('js.forms.properties.wizard.next') %></button>
+<!--                    <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset05"><%#= t('js.forms.properties.wizard.submit') %></button>-->
+                    <%= property.submit t('properties.new.add_button'), class: 'next btn btn-primary ml-auto', "data-validate": "fieldset05" %>
                   </div>
                 </fieldset><!-- /fieldset -->
               </div><!-- Step 4 END -->

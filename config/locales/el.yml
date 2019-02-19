@@ -192,6 +192,7 @@ el:
             title: "Φωτογραφίες"
           next: "Επόμενο"
           previous: "Προηγούμενο"
+          submit: "Υποβολή"
     datatables:
       users:
         partner: "Συνεργάτης"
