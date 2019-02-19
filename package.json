@@ -23,7 +23,7 @@
     "react-skylight": "^0.5.1",
     "spark-md5": "^3.0.0",
     "stacked-menu": "https://gitlab.com/bent10/stacked-menu.git#master",
-    "uppy": "^0.23.3",
+    "uppy": "^0.29.1",
     "url-search-params": "^0.10.0"
   },
   "devDependencies": {

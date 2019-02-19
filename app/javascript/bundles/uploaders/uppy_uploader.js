@@ -1,5 +1,5 @@
-const Uppy = require('uppy/lib/core');
-const Dashboard = require('uppy/lib/plugins/Dashboard');
+const Uppy = require('@uppy/core');
+const Dashboard = require('@uppy/dashboard');
 
 $(document).on('turbolinks:load', function(e) {
   const uppyDomNode = $('#uppy');
@@ -26,10 +26,15 @@ $(document).on('turbolinks:load', function(e) {
     locale: {
       strings: {
         name: translations.filename,
-        editing: translations.editing,
-        dropPaste: translations.dropPaste,
+        editing: `${translations.editing} %{file}`,
+        dropPaste: `${translations.dropPaste} %{browse}`,
         browse: translations.browse,
         done: translations.done,
+        cancel: translations.cancel,
+        xFilesSelected: {
+          0: `%{smart_count} ${translations.singleFileSelected}`,
+          1: `%{smart_count} ${translations.multipleFilesSelected}`
+        },
         uploadXFiles: {
           0: translations.uploadSingleFile,
           1: translations.uploadMultipleFiles
@@ -49,7 +54,8 @@ $(document).on('turbolinks:load', function(e) {
     },
     note: translations.notes,
     replaceTargetContent: true,
-    maxHeight: 450,
+    // width: '100%',
+    // maxHeight: 550,
 
   }).run();
   window.uppy_uploader = uppy;
