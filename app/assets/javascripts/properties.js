@@ -66,8 +66,12 @@ $(document).on('turbolinks:load', function(e) {
 
     /* This handler makes sure all files are uploaded before actually submitting the form */
     $propertyform.on('ajax:before', function(event, xhr, opts) {
+      console.log('ajax:before running');
       if ($('#preventformsubmit').length > 0) {
+        console.log('#preventformsubmit exists');
+
         if (Object.keys(window.uppy_uploader.getState().files).length) {
+          console.log('files are: ' + Object.keys(window.uppy_uploader.getState().files).length);
           event.preventDefault();
           return false;
         } else {

@@ -1,9 +1,10 @@
 import Stepper from 'bs-stepper';
 
 class FormStepper {
-  constructor() {
+  constructor($stepperForm) {
     this.init();
-    this.form = $('#stepper-form').parsley();
+    // Initialize and store away the parsley form
+    this.form = $stepperForm.parsley();
     this.current_step = 1; // Always start at step 1
     // Keeps track of whether a step has been validated at least once.
     this.stepsInitialValidation = {};
@@ -41,13 +42,13 @@ class FormStepper {
         // Give step item a validate state
         if (isValid) {
           groupStep.addClass('success');
-          // go to next step or submit
+          // Go to next step or submit
           let currentStep = FormStepper.getStep(groupStep);
-
+          // This should never fire as the form is normally handled by ujs
           if (currentStep === $('.step').length) {
-            $('#submitfeedback').toast('show');
+            console.warn('The form stepper is handling the submit button. Pleace contact support');
             // DEBUG
-            console.log($('#stepper-form').serializeArray());
+            // console.log(self.form.serializeArray());
           } else {
             onSuccessMove ? stepperDemo.next() : '';
           }
@@ -61,9 +62,7 @@ class FormStepper {
       });
 
     // Kills the form listener
-    $('#stepper-form')
-      .parsley()
-      .off('form:validate');
+    this.form.off('form:validate');
   }
 
   // Gets the current step
@@ -91,11 +90,11 @@ class FormStepper {
 
   // Handles the event listeners
   handleValidations() {
-    // Store away the `this`
-    const self = this;
+    // Store away the `this` reference
+    const self = this; // FormStepper
 
     // Next button handler
-    $('.next').on('click', function() {
+    $('.next').on('click', function(e) {
       const $group = $(this).data().validate;
       const $groupStep = $(
         `[data-target="#${$(this)
@@ -117,7 +116,7 @@ class FormStepper {
       stepperDemo.previous();
     });
 
-    // `leaveStep` listener
+    // `leaveStep` listener. This only applies to the step navigation ribbon and won't fire on next/back buttons
     $('.step-trigger').on('leaveStep', function(element) {
       const direction = FormStepper.getStepDirection(element.target, self.current_step);
       if (direction === 'backward' && !self.stepsInitialValidation[self.current_step]) return;
@@ -131,7 +130,7 @@ class FormStepper {
       self.validateBy($group, $groupStep);
     });
 
-    // `showStep` listener
+    // `showStep` listener. This only applies to the step navigation ribbon and won't fire on next/back buttons
     $('.step-trigger').on('showStep', function(element) {
       // Set the new step
       self.current_step = FormStepper.getStep($(this).parent());
@@ -139,26 +138,17 @@ class FormStepper {
       // console.log('entering step: ' + self.current_step)
     });
 
-    // save creadit card
-    $('#savecc').on('click', () => {
-      $('#stepper-form')
-        .parsley()
-        .whenValidate({
-          group: 'creditcard'
-        });
-    });
-
     // submit button
-    $('.submit').on('click', function() {
-      const $group = $(this).data().validate;
-      const $groupStep = $(
-        `[data-target="#${$(this)
-          .parents('.content')
-          .attr('id')}"]`
-      );
-      self.validateBy($group, $groupStep);
-      return false;
-    });
+    // $('.submit').on('click', function() {
+    //   const $group = $(this).data().validate;
+    //   const $groupStep = $(
+    //     `[data-target="#${$(this)
+    //       .parents('.content')
+    //       .attr('id')}"]`
+    //   );
+    //   self.validateBy($group, $groupStep);
+    //   return false;
+    // });
   }
 
   handleSteps() {
