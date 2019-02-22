@@ -29,7 +29,7 @@ class FormStepper {
   }
 
   // Main validation function. Partially validates the form.
-  validateBy(group, groupStep, stepDirection = '', onSuccessMove = true) {
+  validateBy(group, groupStep, currentStep) {
     this.form
       // On form validation stop the normal behaviour and do it in groups
       .on('form:validate', function(formInstance) {
@@ -39,19 +39,13 @@ class FormStepper {
         // Normalize states
         groupStep.removeClass('success error');
 
-        // Give step item a validate state
+        // Give step item a validation state
         if (isValid) {
           groupStep.addClass('success');
           // Go to next step or submit
-          let currentStep = FormStepper.getStep(groupStep);
+          // let currentStep = FormStepper.getStep(groupStep);
           // This should never fire as the form is normally handled by ujs
-          if (currentStep === $('.step').length) {
-            console.warn('The form stepper is handling the submit button. Pleace contact support');
-            // DEBUG
-            // console.log(self.form.serializeArray());
-          } else {
-            onSuccessMove ? stepperDemo.next() : '';
-          }
+          if (currentStep === $('.step').length) console.warn('The form stepper is handling the submit button. Please contact support');
         } else {
           groupStep.addClass('error');
         }
@@ -76,9 +70,9 @@ class FormStepper {
   // Gets the step direction. You can reference a static method
   // from within another static method using `this`.
   // Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/static#Calling_static_methods
-  static getStepDirection(newStepElement, currentStep) {
+  static getStepDirection(newStepDomEl, currentStep) {
     const newStep = this.getStep(
-      $(newStepElement)
+      $(newStepDomEl)
         .parents('li.step')
         .first()
     );
@@ -117,7 +111,7 @@ class FormStepper {
     });
 
     // `leaveStep` listener. This only applies to the step navigation ribbon and won't fire on next/back buttons
-    $('.step-trigger').on('leaveStep', function(element) {
+    $('body').on('leaveStep', function(element) {
       const direction = FormStepper.getStepDirection(element.target, self.current_step);
       if (direction === 'backward' && !self.stepsInitialValidation[self.current_step]) return;
       // DEBUG
@@ -125,30 +119,17 @@ class FormStepper {
       self.stepsInitialValidation[self.current_step] = true;
       const $groupStep = $(`[data-target="#test-l-${self.current_step}"]`);
       const $group = $groupStep.data().fieldset;
-      // DEBUG
-      // console.log('leaving step: ' + self.current_step);
-      self.validateBy($group, $groupStep);
+
+      return self.validateBy($group, $groupStep, self.current_step);
     });
 
     // `showStep` listener. This only applies to the step navigation ribbon and won't fire on next/back buttons
-    $('.step-trigger').on('showStep', function(element) {
-      // Set the new step
-      self.current_step = FormStepper.getStep($(this).parent());
+    $('body').on('showStep', function(element, params) {
       // DEBUG
-      // console.log('entering step: ' + self.current_step)
+      // console.trace();
+      // Set the new step
+      self.current_step = params;
     });
-
-    // submit button
-    // $('.submit').on('click', function() {
-    //   const $group = $(this).data().validate;
-    //   const $groupStep = $(
-    //     `[data-target="#${$(this)
-    //       .parents('.content')
-    //       .attr('id')}"]`
-    //   );
-    //   self.validateBy($group, $groupStep);
-    //   return false;
-    // });
   }
 
   handleSteps() {
