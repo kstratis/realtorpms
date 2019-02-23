@@ -484,9 +484,7 @@
                 <fieldset>
                   <legend><%= t('js.forms.properties.wizard.step5.title') %></legend> <!-- .row -->
                   <div class="row">
-                    <div class="col-md-12">
-                      <div class="d-flex justify-content-center">
-
+                      <div class="d-flex flex-column flex-grow-1 justify-content-center">
                         <%= content_tag :div, class: "", id: "uppy", data: {
                             i18n: {
                                 uppy: t('js.uppy'),
@@ -498,7 +496,7 @@
                         <%#= property.text_field :size, placeholder: Property.human_attribute_name("size_placeholder"), class: 'glowing-border' %>
                       </div>
                     <!-- grid column -->
-                    </div>
+<!--                    </div>-->
                   </div>
 
                   <hr class="mt-5">

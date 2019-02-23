@@ -54,7 +54,7 @@ $(document).on('turbolinks:load', function(e) {
     },
     note: translations.notes,
     replaceTargetContent: true,
-    // width: '100%',
+    width: '100%',
     // maxHeight: 550,
 
   }).run();

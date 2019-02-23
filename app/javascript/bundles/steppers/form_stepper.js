@@ -30,7 +30,8 @@ class FormStepper {
 
   // Main validation function. Partially validates the form.
   validateBy(group, groupStep, currentStep) {
-    this.form
+    // We always return the result of form validation. This is useful in next/back buttons.
+    const isFormValid = this.form
       // On form validation stop the normal behaviour and do it in groups
       .on('form:validate', function(formInstance) {
         const isValid = formInstance.isValid({
@@ -38,14 +39,16 @@ class FormStepper {
         });
         // Normalize states
         groupStep.removeClass('success error');
-
+        console.log('validateBy running');
         // Give step item a validation state
         if (isValid) {
+          console.log('step is valid');
           groupStep.addClass('success');
           // Go to next step or submit
           // let currentStep = FormStepper.getStep(groupStep);
           // This should never fire as the form is normally handled by ujs
-          if (currentStep === $('.step').length) console.warn('The form stepper is handling the submit button. Please contact support');
+          if (currentStep === $('.step').length)
+            console.warn('The form stepper is handling the submit button. Please contact support');
         } else {
           groupStep.addClass('error');
         }
@@ -57,6 +60,7 @@ class FormStepper {
 
     // Kills the form listener
     this.form.off('form:validate');
+    return isFormValid;
   }
 
   // Gets the current step
@@ -95,14 +99,14 @@ class FormStepper {
           .parents('.content')
           .attr('id')}"]`
       );
-      self.validateBy($group, $groupStep);
+      // We use the result of the form validation step so that we can decide whether to proceed to the next step or not.
+      self.validateBy($group, $groupStep, self.current_step) ? stepperDemo.next() : '';
     });
 
     // Previous button handler
     $('.prev').on('click', function() {
       const $trigger = $(this);
       const groupId = $trigger.parents('.content').attr('id'); // i.e. test-l-2
-
       const $groupStep = $(`[data-target="#${groupId}"]`); // i.e. li.step.active
       // Normalize states
       $groupStep.removeClass('success error');
@@ -120,7 +124,7 @@ class FormStepper {
       const $groupStep = $(`[data-target="#test-l-${self.current_step}"]`);
       const $group = $groupStep.data().fieldset;
 
-      return self.validateBy($group, $groupStep, self.current_step);
+      self.validateBy($group, $groupStep, self.current_step);
     });
 
     // `showStep` listener. This only applies to the step navigation ribbon and won't fire on next/back buttons
