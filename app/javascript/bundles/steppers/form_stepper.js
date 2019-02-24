@@ -8,15 +8,26 @@ class FormStepper {
     this.current_step = 1; // Always start at step 1
     // Keeps track of whether a step has been validated at least once.
     this.stepsInitialValidation = {};
-    for (let i = 1; i <= $('li.step').length; i++) {
+    const stepsCount = $('li.step').length;
+    for (let i = 1; i <= stepsCount; i++) {
       this.stepsInitialValidation[i] = false;
     }
+
+
   }
 
   // Bootstraps the form wizard
   init() {
     this.handleValidations();
     this.handleSteps();
+    // Parsley.addValidator('checkChildren', {
+    //   messages: { en: 'You must correctly fill all the blocks!' },
+    //   validate: function(_value, requirement, instance) {
+    //     for (var i = 1; i <= requirement; i++)
+    //       if (instance.parent.isValid({ group: 'fieldset-' + i, force: true })) return true; // One section is filled, this check is valid
+    //     return false; // No section is filled, this validation fails
+    //   }
+    // });
   }
 
   // Validates a single field. Mainly used by the react-select components
@@ -28,18 +39,26 @@ class FormStepper {
     }
   }
 
+  // validateMultiple() {
+  //   $('.demo-form').parsley({
+  //     inputs: Parsley.options.inputs + ',[data-parsley-check-children]'
+  //   });
+  //
+  // }
+
   // Main validation function. Partially validates the form.
-  validateBy(group, groupStep, currentStep) {
+  validateStep(group, groupStep, currentStep, multiple=false) {
     // We always return the result of form validation. This is useful in next/back buttons.
-    const isFormValid = this.form
+    const formInstance = this.form
       // On form validation stop the normal behaviour and do it in groups
       .on('form:validate', function(formInstance) {
+
         const isValid = formInstance.isValid({
           group: group
         });
         // Normalize states
         groupStep.removeClass('success error');
-        console.log('validateBy running');
+        console.log('validateStep running');
         // Give step item a validation state
         if (isValid) {
           console.log('step is valid');
@@ -52,11 +71,16 @@ class FormStepper {
         } else {
           groupStep.addClass('error');
         }
-      })
-      // Triggers the form validation.
-      .validate({
-        group: group
       });
+
+    // Triggers the form validation.
+    // const isFormValid = formInstance.validate({
+    //   group: group
+    // });
+
+    const isFormValid = formInstance.validate(multiple ? '' : {group: group});
+
+    console.log(isFormValid);
 
     // Kills the form listener
     this.form.off('form:validate');
@@ -100,7 +124,7 @@ class FormStepper {
           .attr('id')}"]`
       );
       // We use the result of the form validation step so that we can decide whether to proceed to the next step or not.
-      self.validateBy($group, $groupStep, self.current_step) ? stepperDemo.next() : '';
+      self.validateStep($group, $groupStep, self.current_step) ? stepperDemo.next() : '';
     });
 
     // Previous button handler
@@ -124,7 +148,7 @@ class FormStepper {
       const $groupStep = $(`[data-target="#test-l-${self.current_step}"]`);
       const $group = $groupStep.data().fieldset;
 
-      self.validateBy($group, $groupStep, self.current_step);
+      self.validateStep($group, $groupStep, self.current_step);
     });
 
     // `showStep` listener. This only applies to the step navigation ribbon and won't fire on next/back buttons

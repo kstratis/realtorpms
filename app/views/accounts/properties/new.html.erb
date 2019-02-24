@@ -18,23 +18,23 @@
             <!-- .steps -->
             <div class="steps steps-" role="tablist">
               <ul>
-                <li class="step" data-fieldset="fieldset01" data-target="#test-l-1">
+                <li class="step" data-fieldset="fieldset-1" data-target="#test-l-1">
                   <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-sign fa-fw"> </i></span>
                     <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step1.anchor') %></span></a>
                 </li>
-                <li class="step" data-fieldset="fieldset02" data-target="#test-l-2">
+                <li class="step" data-fieldset="fieldset-2" data-target="#test-l-2">
                   <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-info fa-fw"> </i></span>
                     <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step2.anchor') %></span></a>
                 </li>
-                <li class="step" data-fieldset="fieldset03" data-target="#test-l-3">
+                <li class="step" data-fieldset="fieldset-3" data-target="#test-l-3">
                   <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-plus fa-fw"> </i></span>
                     <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step3.anchor') %></span></a>
                 </li>
-                <li class="step" data-fieldset="fieldset04" data-target="#test-l-4">
+                <li class="step" data-fieldset="fieldset-4" data-target="#test-l-4">
                   <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-map-marker-alt fa-fw"> </i></span>
                     <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step4.anchor') %></span></a>
                 </li>
-                <li class="step" data-fieldset="fieldset05" data-target="#test-l-5">
+                <li class="step" data-fieldset="fieldset-5" data-target="#test-l-5">
                   <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-images fa-fw"> </i></span>
                     <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step5.anchor') %></span></a>
                 </li>
@@ -62,7 +62,7 @@
                             inputID: 'property_businesstype',
                             inputName: 'property[businesstype]',
                             inputClassName: 'form-control',
-                            validatorGroup: 'fieldset01',
+                            validatorGroup: 'fieldset-1',
                             isRequired: true,
                             formID: 'new_property',
                             className: 'simple-select',
@@ -84,7 +84,7 @@
                           id: 'b',
                           className: 'simple-select',
                           options: get_options,
-                          validatorGroup: 'fieldset01',
+                          validatorGroup: 'fieldset-1',
                           isRequired: true,
                           searchable: false,
                           formdata: {
@@ -121,7 +121,7 @@
                       <hr class="mt-5">
                       <!-- .d-flex -->
                       <div class="d-flex">
-                        <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset01"><%= t('js.forms.properties.wizard.next') %></button>
+                        <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset-1"><%= t('js.forms.properties.wizard.next') %></button>
                       </div><!-- /.d-flex -->
                     </div>
                   </div>
@@ -149,7 +149,7 @@
                             inputID: 'property_floor',
                             inputName: 'property[floor]',
                             inputClassName: 'form-control',
-                            validatorGroup: 'fieldset02',
+                            validatorGroup: 'fieldset-2',
                             isRequired: false,
                             formID: 'new_property',
                             className: 'simple-select',
@@ -177,7 +177,7 @@
                             inputID: 'property_construction',
                             inputName: 'property[construction]',
                             inputClassName: 'form-control',
-                            validatorGroup: 'fieldset02',
+                            validatorGroup: 'fieldset-2',
                             isRequired: false,
                             formID: 'new_property',
                             className: 'simple-select',
@@ -202,7 +202,7 @@
                                                   placeholder: Property.human_attribute_name("size_placeholder"),
                                                   class: 'form-control',
                                                   autocomplete: "off",
-                                                  'data-parsley-group': "fieldset02",
+                                                  'data-parsley-group': "fieldset-2",
                                                   'data-parsley-type': "integer",
                                                   'data-parsley-type-message': t("js.validator.digits"),
                                                   'data-parsley-required-message': t("js.validator.required") %>
@@ -226,7 +226,7 @@
                                                   placeholder: Property.human_attribute_name("bedrooms_placeholder"),
                                                   class: 'form-control',
                                                   autocomplete: "off",
-                                                  'data-parsley-group': "fieldset02",
+                                                  'data-parsley-group': "fieldset-2",
                                                   'data-parsley-type': "integer",
                                                   'data-parsley-type-message': t("js.validator.digits"),
                                                   'data-parsley-required-message': t("js.validator.required") %>
@@ -250,7 +250,7 @@
                                                   placeholder: Property.human_attribute_name("bathrooms_placeholder"),
                                                   class: 'form-control',
                                                   autocomplete: "off",
-                                                  'data-parsley-group': "fieldset02",
+                                                  'data-parsley-group': "fieldset-2",
                                                   'data-parsley-type': "integer",
                                                   'data-parsley-type-message': t("js.validator.digits"),
                                                   'data-parsley-required-message': t("js.validator.required") %>
@@ -274,7 +274,7 @@
                                                   placeholder: Property.human_attribute_name("price_placeholder"),
                                                   class: 'form-control',
                                                   autocomplete: "off",
-                                                  'data-parsley-group': "fieldset02",
+                                                  'data-parsley-group': "fieldset-2",
                                                   'data-parsley-type': "integer",
                                                   'data-parsley-type-message': t("js.validator.digits"),
                                                   'data-parsley-required-message': t("js.validator.required") %>
@@ -313,7 +313,7 @@
                             inputID: 'property_levels',
                             inputName: 'property[levels]',
                             inputClassName: 'form-control',
-                            validatorGroup: 'fieldset01',
+                            validatorGroup: 'fieldset-1',
                             isRequired: false,
                             formID: 'new_property',
                             className: 'simple-select',
@@ -351,7 +351,7 @@
                   <hr class="mt-5">
                   <div class="d-flex">
                     <button type="button" class="prev btn btn-secondary"><%= t('js.forms.properties.wizard.previous') %></button>
-                    <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset02"><%= t('js.forms.properties.wizard.next') %></button>
+                    <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset-2"><%= t('js.forms.properties.wizard.next') %></button>
                   </div>
 
                 </fieldset><!-- /fieldset -->
@@ -408,7 +408,7 @@
                   <hr class="mt-5">
                   <div class="d-flex">
                     <button type="button" class="prev btn btn-secondary"><%= t('js.forms.properties.wizard.previous') %></button>
-                    <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset03"><%= t('js.forms.properties.wizard.next') %></button>
+                    <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset-3"><%= t('js.forms.properties.wizard.next') %></button>
                   </div>
                 </fieldset><!-- /fieldset -->
               </div><!-- Step 3 END -->
@@ -431,7 +431,7 @@
                             inputID: 'property_locationid',
                             inputName: 'property[locationid]',
                             inputClassName: 'form-control',
-                            validatorGroup: 'fieldset04',
+                            validatorGroup: 'fieldset-4',
                             isRequired: true,
                             formID: 'new_property',
                             className: 'simple-select',
@@ -472,7 +472,7 @@
                   <hr class="mt-5">
                   <div class="d-flex">
                     <button type="button" class="prev btn btn-secondary"><%= t('js.forms.properties.wizard.previous') %></button>
-                    <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset04"><%= t('js.forms.properties.wizard.next') %></button>
+                    <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset-4"><%= t('js.forms.properties.wizard.next') %></button>
                   </div>
                 </fieldset><!-- /fieldset -->
               </div><!-- Step 4 END -->
@@ -503,7 +503,7 @@
                   <div class="d-flex">
                     <button type="button" class="prev btn btn-secondary"><%= t('js.forms.properties.wizard.previous') %></button>
 <!--                    <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset05"><%#= t('js.forms.properties.wizard.submit') %></button>-->
-                    <%= property.button t('properties.new.add_button'), class: 'next btn btn-primary ml-auto', "data-validate": "fieldset05" %>
+                    <%= property.button t('properties.new.add_button'), class: 'next btn btn-primary ml-auto', "data-validate": "fieldset-5" %>
                   </div>
                 </fieldset><!-- /fieldset -->
               </div><!-- Step 4 END -->
