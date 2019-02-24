@@ -39,34 +39,3 @@ jQuery.fn.returnOnClick = function(location) {
   return this;
 };
 
-
-$(document).on('turbolinks:load', function(e) {
-  console.log('running sdfsdf');
-
-  var placeholders = $('.placeholder');
-  var smalls = $('.img-small');
-  // var placeholder = document.querySelector('.placeholder'),
-  //   small = placeholder.querySelector('.img-small');
-
-  // console.log(placeholder);
-  // 1: load small image and show it
-  smalls.each(function(index, small){
-    var img = new Image();
-    img.src = small.src;
-    img.onload = function () {
-      small.classList.add('loaded');
-    };
-  });
-
-
-  placeholders.each(function(index, placeholder){
-    var imgLarge = new Image();
-    imgLarge.src = placeholder.dataset.large;
-    imgLarge.onload = function () {
-      imgLarge.classList.add('loaded');
-    };
-    placeholder.appendChild(imgLarge);
-  });
-  // 2: load large image
-
-});

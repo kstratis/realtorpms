@@ -4,486 +4,486 @@
 
 <div class="page-container">
   <div class="container">
-  <div class="form-container">
+    <div class="form-container">
 
-    <!-- .section-block -->
-    <div class="section-block">
-      <!-- Default Steps -->
-      <!-- .bs-stepper -->
-      <div id="stepper" class="bs-stepper">
-        <!-- .card -->
-        <div class="card">
-          <!-- .card-header -->
-          <div class="card-header">
-            <!-- .steps -->
-            <div class="steps steps-" role="tablist">
-              <ul>
-                <li class="step" data-fieldset="fieldset-1" data-target="#test-l-1">
-                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-sign fa-fw"> </i></span>
-                    <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step1.anchor') %></span></a>
-                </li>
-                <li class="step" data-fieldset="fieldset-2" data-target="#test-l-2">
-                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-info fa-fw"> </i></span>
-                    <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step2.anchor') %></span></a>
-                </li>
-                <li class="step" data-fieldset="fieldset-3" data-target="#test-l-3">
-                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-plus fa-fw"> </i></span>
-                    <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step3.anchor') %></span></a>
-                </li>
-                <li class="step" data-fieldset="fieldset-4" data-target="#test-l-4">
-                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-map-marker-alt fa-fw"> </i></span>
-                    <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step4.anchor') %></span></a>
-                </li>
-                <li class="step" data-fieldset="fieldset-5" data-target="#test-l-5">
-                  <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-images fa-fw"> </i></span>
-                    <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step5.anchor') %></span></a>
-                </li>
-              </ul>
-            </div><!-- /.steps -->
-          </div><!-- /.card-header -->
-          <!-- .card-body -->
-          <div class="card-body">
-            <%= form_for(@property, remote: true, html: {class: "p-lg-4 p-sm-3 p-0", id: "new_property", name: "stepperForm"}) do |property| %>
+      <!-- .section-block -->
+      <div class="section-block">
+        <!-- Default Steps -->
+        <!-- .bs-stepper -->
+        <div id="stepper" class="bs-stepper">
+          <!-- .card -->
+          <div class="card">
+            <!-- .card-header -->
+            <div class="card-header">
+              <!-- .steps -->
+              <div class="steps steps-" role="tablist">
+                <ul>
+                  <li class="step" data-fieldset="fieldset-1" data-target="#test-l-1">
+                    <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-sign fa-fw"> </i></span>
+                      <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step1.anchor') %></span></a>
+                  </li>
+                  <li class="step" data-fieldset="fieldset-2" data-target="#test-l-2">
+                    <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-info fa-fw"> </i></span>
+                      <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step2.anchor') %></span></a>
+                  </li>
+                  <li class="step" data-fieldset="fieldset-3" data-target="#test-l-3">
+                    <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-plus fa-fw"> </i></span>
+                      <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step3.anchor') %></span></a>
+                  </li>
+                  <li class="step" data-fieldset="fieldset-4" data-target="#test-l-4">
+                    <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-map-marker-alt fa-fw"> </i></span>
+                      <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step4.anchor') %></span></a>
+                  </li>
+                  <li class="step" data-fieldset="fieldset-5" data-target="#test-l-5">
+                    <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-images fa-fw"> </i></span>
+                      <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step5.anchor') %></span></a>
+                  </li>
+                </ul>
+              </div><!-- /.steps -->
+            </div><!-- /.card-header -->
+            <!-- .card-body -->
+            <div class="card-body">
+              <%= form_for(@property, remote: true, html: {class: "p-lg-4 p-sm-3 p-0", id: "new_property", name: "stepperForm"}) do |property| %>
 
-              <!-- Step 1 START -->
-              <div id="test-l-1" class="content dstepper-none fade">
-                <!-- fieldset -->
-                <fieldset>
-                  <legend><%= t('js.forms.properties.wizard.step1.title') %></legend> <!-- .form-group -->
-                  <div class="row">
-                    <div class="col-md-6 col-sm-12">
-                      <div class="form-group mb-4">
-                        <%= property.label :businesstype do %>
-                          <%= Property.human_attribute_name(:businesstype) %>
-                          <abbr title="<%= t('js.components.select.required') %>">*</abbr>
-                        <% end %>
-                        <%= react_component('SimpleSelect', props: {
-                            id: 'a',
-                            inputID: 'property_businesstype',
-                            inputName: 'property[businesstype]',
-                            inputClassName: 'form-control',
+                <!-- Step 1 START -->
+                <div id="test-l-1" class="content dstepper-none fade">
+                  <!-- fieldset -->
+                  <fieldset>
+                    <legend><%= t('js.forms.properties.wizard.step1.title') %></legend> <!-- .form-group -->
+                    <div class="row">
+                      <div class="col-md-6 col-sm-12">
+                        <div class="form-group mb-4">
+                          <%= property.label :businesstype do %>
+                            <%= Property.human_attribute_name(:businesstype) %>
+                            <abbr title="<%= t('js.components.select.required') %>">*</abbr>
+                          <% end %>
+                          <%= react_component('SimpleSelect', props: {
+                              id: 'a',
+                              inputID: 'property_businesstype',
+                              inputName: 'property[businesstype]',
+                              inputClassName: 'form-control',
+                              validatorGroup: 'fieldset-1',
+                              isRequired: true,
+                              formID: 'new_property',
+                              className: 'simple-select',
+                              options: Property.businesstypes.keys.collect {|businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype}},
+                              soloMode: true,
+                              ajaxEnabled: false,
+                              searchable: false,
+                              feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
+                              i18n: {
+                                  select: t('js.components.select'),
+                                  validatorErrMsg: t('js.validator.required'),
+                              }
+                          }, prerender: false) %>
+                        </div><!-- /.form-group -->
+                        <!-- .form-group -->
+
+                        <!-- DependantSelect will generate the form-group div and label tags automatically (nested) -->
+                        <%= react_component('DependantSelect', props: {
+                            id: 'b',
+                            className: 'simple-select',
+                            options: get_options,
                             validatorGroup: 'fieldset-1',
                             isRequired: true,
-                            formID: 'new_property',
-                            className: 'simple-select',
-                            options: Property.businesstypes.keys.collect {|businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype}},
-                            soloMode: true,
-                            ajaxEnabled: false,
                             searchable: false,
-                            feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
+                            formdata: {
+                                formid: 'new_property',
+                                categoryid: 'property_category',
+                                categoryname: 'property[category]',
+                                categoryClassName: 'form-control',
+                                categoryFeedback: t('js.forms.properties.wizard.step1.type_of_category_feedback'),
+                                subcategoryid: 'property_subcategory',
+                                subcategoryname: 'property[subcategory]',
+                                subcategoryClassName: 'form-control',
+                                subcategoryFeedback: t('js.forms.properties.wizard.step1.type_of_subcategory_feedback'),
+                            },
                             i18n: {
                                 select: t('js.components.select'),
                                 validatorErrMsg: t('js.validator.required'),
                             }
                         }, prerender: false) %>
-                      </div><!-- /.form-group -->
-                      <!-- .form-group -->
 
-                      <!-- DependantSelect will generate the form-group div and label tags automatically (nested) -->
-                      <%= react_component('DependantSelect', props: {
-                          id: 'b',
-                          className: 'simple-select',
-                          options: get_options,
-                          validatorGroup: 'fieldset-1',
-                          isRequired: true,
-                          searchable: false,
-                          formdata: {
-                              formid: 'new_property',
-                              categoryid: 'property_category',
-                              categoryname: 'property[category]',
-                              categoryClassName: 'form-control',
-                              categoryFeedback: t('js.forms.properties.wizard.step1.type_of_category_feedback'),
-                              subcategoryid: 'property_subcategory',
-                              subcategoryname: 'property[subcategory]',
-                              subcategoryClassName: 'form-control',
-                              subcategoryFeedback: t('js.forms.properties.wizard.step1.type_of_subcategory_feedback'),
-                          },
-                          i18n: {
-                              select: t('js.components.select'),
-                              validatorErrMsg: t('js.validator.required'),
-                          }
-                      }, prerender: false) %>
-
-                    </div>
-                    <input id="preventformsubmit" type="hidden">
-                    <input id="property_images" class="emitters form-control" type="hidden" name="property[images][]">
-                    <%= render "accounts/helpers/locale" %>
-
-                    <div class="col-md-6 col-sm-12">
-                      <div class="d-flex justify-content-center opaque">
-                        <i class="pr-icon xl house-add"> </i>
                       </div>
-                    </div>
-                  </div>
+                      <input id="preventformsubmit" type="hidden">
+                      <input id="property_images" class="emitters form-control" type="hidden" name="property[images][]">
+                      <%= render "accounts/helpers/locale" %>
 
-                  <div class="row">
-                    <div class="col-md-12">
-                      <hr class="mt-5">
-                      <!-- .d-flex -->
-                      <div class="d-flex">
-                        <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset-1"><%= t('js.forms.properties.wizard.next') %></button>
-                      </div><!-- /.d-flex -->
-                    </div>
-                  </div>
-
-                </fieldset><!-- /fieldset -->
-              </div><!-- Step 1 END -->
-
-
-              <!-- Step 2 START -->
-              <div id="test-l-2" class="content dstepper-none fade">
-                <!-- fieldset -->
-                <fieldset>
-                  <legend><%= t('js.forms.properties.wizard.step2.title') %></legend> <!-- .row -->
-                  <div class="row">
-                    <!-- grid column -->
-
-                    <!-- Floor -->
-                    <div class="col-md-6 col-sm-12">
-                      <div class="form-group mb-4">
-                        <%= property.label :floor do %>
-                          <%= Property.human_attribute_name(:floor) %>
-                        <% end %>
-                        <%= react_component('SimpleSelect', props: {
-                            id: 'a',
-                            inputID: 'property_floor',
-                            inputName: 'property[floor]',
-                            inputClassName: 'form-control',
-                            validatorGroup: 'fieldset-2',
-                            isRequired: false,
-                            formID: 'new_property',
-                            className: 'simple-select',
-                            options: Property.floors.keys.collect {|floor| {label: I18n.t("activerecord.attributes.property.enums.floor.#{floor}", :default => floor.to_s), value: floor}},
-                            soloMode: true,
-                            ajaxEnabled: false,
-                            searchable: true,
-                            feedback: t('js.forms.properties.wizard.step1.floor_feedback'),
-                            i18n: {
-                                select: t('js.components.select'),
-                                validatorErrMsg: t('js.validator.required'),
-                            }
-                        }, prerender: false) %>
-                      </div>
-                    </div>
-
-                    <!-- Construction -->
-                    <div class="col-md-6 col-sm-12">
-                      <div class="form-group mb-4">
-                        <%= property.label :construction do %>
-                          <%= Property.human_attribute_name(:construction) %>
-                        <% end %>
-                        <%= react_component('SimpleSelect', props: {
-                            id: 'a',
-                            inputID: 'property_construction',
-                            inputName: 'property[construction]',
-                            inputClassName: 'form-control',
-                            validatorGroup: 'fieldset-2',
-                            isRequired: false,
-                            formID: 'new_property',
-                            className: 'simple-select',
-                            options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
-                            soloMode: true,
-                            ajaxEnabled: false,
-                            searchable: true,
-                            feedback: t('js.forms.properties.wizard.step1.construction_feedback'),
-                            i18n: {
-                                select: t('js.components.select'),
-                                validatorErrMsg: t('js.validator.required'),
-                            }
-                        }, prerender: false) %>
-                      </div>
-                    </div>
-
-                    <!-- Size -->
-                    <div class="col-md-6 col-sm-12">
-                      <div class="form-group mb-4">
-                        <div class="form-label-group">
-                          <%= property.text_field :size,
-                                                  placeholder: Property.human_attribute_name("size_placeholder"),
-                                                  class: 'form-control',
-                                                  autocomplete: "off",
-                                                  'data-parsley-group': "fieldset-2",
-                                                  'data-parsley-type': "integer",
-                                                  'data-parsley-type-message': t("js.validator.digits"),
-                                                  'data-parsley-required-message': t("js.validator.required") %>
-                          <label for="size">
-                            <%= content_tag :span do %>
-                              <%= content_tag(:i, nil, class: 'fas fa-arrows-alt fa-fw') + ' ' + t('activerecord.attributes.property.size_title') %>
-                            <% end %>
-                          </label>
+                      <div class="col-md-6 col-sm-12">
+                        <div class="d-flex justify-content-center opaque">
+                          <i class="pr-icon xl house-add"> </i>
                         </div>
-                        <small class="form-text text-muted"><%= t('activerecord.attributes.property.size_feedback_html') %>
-                        </small>
-                        <div class="invalid-feedback"></div>
                       </div>
                     </div>
 
-                    <!-- Bedrooms -->
-                    <div class="col-md-6 col-sm-12">
-                      <div class="form-group mb-4">
-                        <div class="form-label-group">
-                          <%= property.text_field :bedrooms,
-                                                  placeholder: Property.human_attribute_name("bedrooms_placeholder"),
-                                                  class: 'form-control',
-                                                  autocomplete: "off",
-                                                  'data-parsley-group': "fieldset-2",
-                                                  'data-parsley-type': "integer",
-                                                  'data-parsley-type-message': t("js.validator.digits"),
-                                                  'data-parsley-required-message': t("js.validator.required") %>
-                          <label for="bedrooms">
-                            <%= content_tag :span do %>
-                              <%= content_tag(:i, nil, class: 'fas fa-bed fa-fw') + ' ' + t('activerecord.attributes.property.bedrooms_title') %>
-                            <% end %>
-                          </label>
-                        </div>
-                        <small class="form-text text-muted"><%= t('activerecord.attributes.property.bedrooms_feedback_html') %>
-                        </small>
-                        <div class="invalid-feedback"></div>
-                      </div>
-                    </div>
-
-                    <!-- Bathrooms -->
-                    <div class="col-md-6 col-sm-12">
-                      <div class="form-group mb-4">
-                        <div class="form-label-group">
-                          <%= property.text_field :bathrooms,
-                                                  placeholder: Property.human_attribute_name("bathrooms_placeholder"),
-                                                  class: 'form-control',
-                                                  autocomplete: "off",
-                                                  'data-parsley-group': "fieldset-2",
-                                                  'data-parsley-type': "integer",
-                                                  'data-parsley-type-message': t("js.validator.digits"),
-                                                  'data-parsley-required-message': t("js.validator.required") %>
-                          <label for="bedrooms">
-                            <%= content_tag :span do %>
-                              <%= content_tag(:i, nil, class: 'fas fa-bath fa-fw') + ' ' + t('activerecord.attributes.property.bathrooms_title') %>
-                            <% end %>
-                          </label>
-                        </div>
-                        <small class="form-text text-muted"><%= t('activerecord.attributes.property.bathrooms_feedback_html') %>
-                        </small>
-                        <div class="invalid-feedback"></div>
-                      </div>
-                    </div>
-
-                    <!-- Price -->
-                    <div class="col-md-6 col-sm-12">
-                      <div class="form-group mb-4">
-                        <div class="form-label-group">
-                          <%= property.text_field :price,
-                                                  placeholder: Property.human_attribute_name("price_placeholder"),
-                                                  class: 'form-control',
-                                                  autocomplete: "off",
-                                                  'data-parsley-group': "fieldset-2",
-                                                  'data-parsley-type': "integer",
-                                                  'data-parsley-type-message': t("js.validator.digits"),
-                                                  'data-parsley-required-message': t("js.validator.required") %>
-                          <label for="bedrooms">
-                            <%= content_tag :span do %>
-                              <%= content_tag(:i, nil, class: 'fas fa-euro-sign fa-fw') + ' ' + t('activerecord.attributes.property.price_title') %>
-                            <% end %>
-                          </label>
-                        </div>
-                        <small class="form-text text-muted"><%= t('activerecord.attributes.property.price_feedback_html') %>
-                        </small>
-                        <div class="invalid-feedback"></div>
-                      </div>
-                    </div>
-
-
-                    <!-- Availability -->
-                    <div class="col-md-6 col-sm-12">
-                      <div class="form-group mb-4">
-                        <label class="control-label" for="avail"><%= t('activerecord.attributes.property.availability_title') %></label>
-                        <input id="avail" type="text" class="form-control" data-toggle="flatpickr">
-                        <small class="form-text text-muted"><%= t('activerecord.attributes.property.availability_feedback_html') %>
-                        </small>
-                      </div><!-- /.form-group -->
-                    </div>
-
-
-                    <!-- Levels -->
-                    <div class="col-md-6 col-sm-12">
-                      <div class="form-group mb-4">
-                        <%= property.label :levels do %>
-                          <%= Property.human_attribute_name(:levels) %>
-                        <% end %>
-                        <%= react_component('SimpleSelect', props: {
-                            id: 'a',
-                            inputID: 'property_levels',
-                            inputName: 'property[levels]',
-                            inputClassName: 'form-control',
-                            validatorGroup: 'fieldset-1',
-                            isRequired: false,
-                            formID: 'new_property',
-                            className: 'simple-select',
-                            options: (1..10).collect {|level| {label: level, value: level}},
-                            soloMode: true,
-                            ajaxEnabled: false,
-                            searchable: false,
-                            feedback: t('js.forms.properties.wizard.step1.levels_feedback'),
-                            i18n: {
-                                select: t('js.components.select'),
-                                validatorErrMsg: t('js.validator.required'),
-                            }
-                        }, prerender: false) %>
-                      </div>
-                    </div>
-                  </div><!-- /.row -->
-
-                  <div class="row">
-                    <!-- Notes -->
-                    <div class="col-md-12">
-                      <div class="form-group mb-4">
-                        <label class="control-label" for="notes"><%= t('activerecord.attributes.property.notes_title') %></label>
-                        <%= property.text_area :notes,
-                                               class: 'form-control',
-                                               id: 'notes',
-                                               autocomplete: 'off',
-                                               'rows': '3' %>
-                        <small class="form-text text-muted"><%= t('activerecord.attributes.property.notes_feedback_html') %>
-                        </small>
-                        <div class="invalid-feedback"></div>
-                      </div>
-                    </div>
-                  </div><!-- /.row -->
-
-                  <hr class="mt-5">
-                  <div class="d-flex">
-                    <button type="button" class="prev btn btn-secondary"><%= t('js.forms.properties.wizard.previous') %></button>
-                    <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset-2"><%= t('js.forms.properties.wizard.next') %></button>
-                  </div>
-
-                </fieldset><!-- /fieldset -->
-              </div><!-- Step 2 END-->
-
-              <!-- Step 3 START -->
-              <div id="test-l-3" class="content dstepper-none fade">
-                <!-- fieldset -->
-                <fieldset>
-                  <legend><%= t('js.forms.properties.wizard.step3.title') %></legend> <!-- .custom-control -->
-                  <div class="multivalue-checkboxes">
-                    <div class="form-row justify-content-center">
-                      <% %w(housetype heating orientation view other).each do |category| %>
-
-                        <div class="form-group">
-                          <div class="col-md-2">
-                            <label class="control-label checkbox-header app-checkbox"><strong><%= t("activerecord.attributes.extra.#{category}.title") %></strong></label>
-                            <div class="col-md-12">
-                              <%= property.collection_check_boxes :extra_ids, Extra.where(subtype: category), :id, :name do |b| %>
-                                <div class="custom-control custom-checkbox app-checkbox">
-                                  <%= b.check_box({class: "custom-control-input", type: 'checkbox'}) %>
-                                  <%#= b.label({class: 'custom-control-label'}) %>
-                                  <%= b.label({class: 'custom-control-label'}) do %>
-                                    <%= t("activerecord.attributes.extra.#{category}.#{b.text}") %>
-                                  <% end %>
-                                </div>
-                              <% end %>
-                            </div>
-                          </div>
-                        </div>
-                      <% end %>
-
+                    <div class="row">
                       <div class="col-md-12">
-                        <div class="form-row form-group justify-content-center">
+                        <hr class="mt-5">
+                        <!-- .d-flex -->
+                        <div class="d-flex">
+                          <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset-1"><%= t('js.forms.properties.wizard.next') %></button>
+                        </div><!-- /.d-flex -->
+                      </div>
+                    </div>
 
-                          <%= property.collection_check_boxes :extra_ids, Extra.where(subtype: 'dependent'), :id, :name do |b| %>
-                            <div class="custom-control custom-checkbox app-checkbox m-2">
-                              <%= b.check_box({class: "custom-control-input dependent_check", type: 'checkbox'}) %>
-                              <%= b.label({class: 'custom-control-label dependent_label'}) do %>
-                                <%= t("activerecord.attributes.extra.dependent.#{b.text}") %>
+                  </fieldset><!-- /fieldset -->
+                </div><!-- Step 1 END -->
+
+
+                <!-- Step 2 START -->
+                <div id="test-l-2" class="content dstepper-none fade">
+                  <!-- fieldset -->
+                  <fieldset>
+                    <legend><%= t('js.forms.properties.wizard.step2.title') %></legend> <!-- .row -->
+                    <div class="row">
+                      <!-- grid column -->
+
+                      <!-- Floor -->
+                      <div class="col-md-6 col-sm-12">
+                        <div class="form-group mb-4">
+                          <%= property.label :floor do %>
+                            <%= Property.human_attribute_name(:floor) %>
+                          <% end %>
+                          <%= react_component('SimpleSelect', props: {
+                              id: 'a',
+                              inputID: 'property_floor',
+                              inputName: 'property[floor]',
+                              inputClassName: 'form-control',
+                              validatorGroup: 'fieldset-2',
+                              isRequired: false,
+                              formID: 'new_property',
+                              className: 'simple-select',
+                              options: Property.floors.keys.collect {|floor| {label: I18n.t("activerecord.attributes.property.enums.floor.#{floor}", :default => floor.to_s), value: floor}},
+                              soloMode: true,
+                              ajaxEnabled: false,
+                              searchable: true,
+                              feedback: t('js.forms.properties.wizard.step1.floor_feedback'),
+                              i18n: {
+                                  select: t('js.components.select'),
+                                  validatorErrMsg: t('js.validator.required'),
+                              }
+                          }, prerender: false) %>
+                        </div>
+                      </div>
+
+                      <!-- Construction -->
+                      <div class="col-md-6 col-sm-12">
+                        <div class="form-group mb-4">
+                          <%= property.label :construction do %>
+                            <%= Property.human_attribute_name(:construction) %>
+                          <% end %>
+                          <%= react_component('SimpleSelect', props: {
+                              id: 'a',
+                              inputID: 'property_construction',
+                              inputName: 'property[construction]',
+                              inputClassName: 'form-control',
+                              validatorGroup: 'fieldset-2',
+                              isRequired: false,
+                              formID: 'new_property',
+                              className: 'simple-select',
+                              options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
+                              soloMode: true,
+                              ajaxEnabled: false,
+                              searchable: true,
+                              feedback: t('js.forms.properties.wizard.step1.construction_feedback'),
+                              i18n: {
+                                  select: t('js.components.select'),
+                                  validatorErrMsg: t('js.validator.required'),
+                              }
+                          }, prerender: false) %>
+                        </div>
+                      </div>
+
+                      <!-- Size -->
+                      <div class="col-md-6 col-sm-12">
+                        <div class="form-group mb-4">
+                          <div class="form-label-group">
+                            <%= property.text_field :size,
+                                                    placeholder: Property.human_attribute_name("size_placeholder"),
+                                                    class: 'form-control',
+                                                    autocomplete: "off",
+                                                    'data-parsley-group': "fieldset-2",
+                                                    'data-parsley-type': "integer",
+                                                    'data-parsley-type-message': t("js.validator.digits"),
+                                                    'data-parsley-required-message': t("js.validator.required") %>
+                            <label for="size">
+                              <%= content_tag :span do %>
+                                <%= content_tag(:i, nil, class: 'fas fa-arrows-alt fa-fw') + ' ' + t('activerecord.attributes.property.size_title') %>
                               <% end %>
-                              <div class="mt-1">
-                                <input type="number" name="property[<%= b.text %>_space]" class="form-control custom-control-label dependent_input" placeholder="<%= t("activerecord.attributes.extra.dependent.#{b.text}_placeholder") %>">
+                            </label>
+                          </div>
+                          <small class="form-text text-muted"><%= t('activerecord.attributes.property.size_feedback_html') %>
+                          </small>
+                          <div class="invalid-feedback"></div>
+                        </div>
+                      </div>
+
+                      <!-- Bedrooms -->
+                      <div class="col-md-6 col-sm-12">
+                        <div class="form-group mb-4">
+                          <div class="form-label-group">
+                            <%= property.text_field :bedrooms,
+                                                    placeholder: Property.human_attribute_name("bedrooms_placeholder"),
+                                                    class: 'form-control',
+                                                    autocomplete: "off",
+                                                    'data-parsley-group': "fieldset-2",
+                                                    'data-parsley-type': "integer",
+                                                    'data-parsley-type-message': t("js.validator.digits"),
+                                                    'data-parsley-required-message': t("js.validator.required") %>
+                            <label for="bedrooms">
+                              <%= content_tag :span do %>
+                                <%= content_tag(:i, nil, class: 'fas fa-bed fa-fw') + ' ' + t('activerecord.attributes.property.bedrooms_title') %>
+                              <% end %>
+                            </label>
+                          </div>
+                          <small class="form-text text-muted"><%= t('activerecord.attributes.property.bedrooms_feedback_html') %>
+                          </small>
+                          <div class="invalid-feedback"></div>
+                        </div>
+                      </div>
+
+                      <!-- Bathrooms -->
+                      <div class="col-md-6 col-sm-12">
+                        <div class="form-group mb-4">
+                          <div class="form-label-group">
+                            <%= property.text_field :bathrooms,
+                                                    placeholder: Property.human_attribute_name("bathrooms_placeholder"),
+                                                    class: 'form-control',
+                                                    autocomplete: "off",
+                                                    'data-parsley-group': "fieldset-2",
+                                                    'data-parsley-type': "integer",
+                                                    'data-parsley-type-message': t("js.validator.digits"),
+                                                    'data-parsley-required-message': t("js.validator.required") %>
+                            <label for="bedrooms">
+                              <%= content_tag :span do %>
+                                <%= content_tag(:i, nil, class: 'fas fa-bath fa-fw') + ' ' + t('activerecord.attributes.property.bathrooms_title') %>
+                              <% end %>
+                            </label>
+                          </div>
+                          <small class="form-text text-muted"><%= t('activerecord.attributes.property.bathrooms_feedback_html') %>
+                          </small>
+                          <div class="invalid-feedback"></div>
+                        </div>
+                      </div>
+
+                      <!-- Price -->
+                      <div class="col-md-6 col-sm-12">
+                        <div class="form-group mb-4">
+                          <div class="form-label-group">
+                            <%= property.text_field :price,
+                                                    placeholder: Property.human_attribute_name("price_placeholder"),
+                                                    class: 'form-control',
+                                                    autocomplete: "off",
+                                                    'data-parsley-group': "fieldset-2",
+                                                    'data-parsley-type': "integer",
+                                                    'data-parsley-type-message': t("js.validator.digits"),
+                                                    'data-parsley-required-message': t("js.validator.required") %>
+                            <label for="bedrooms">
+                              <%= content_tag :span do %>
+                                <%= content_tag(:i, nil, class: 'fas fa-euro-sign fa-fw') + ' ' + t('activerecord.attributes.property.price_title') %>
+                              <% end %>
+                            </label>
+                          </div>
+                          <small class="form-text text-muted"><%= t('activerecord.attributes.property.price_feedback_html') %>
+                          </small>
+                          <div class="invalid-feedback"></div>
+                        </div>
+                      </div>
+
+
+                      <!-- Availability -->
+                      <div class="col-md-6 col-sm-12">
+                        <div class="form-group mb-4">
+                          <label class="control-label" for="avail"><%= t('activerecord.attributes.property.availability_title') %></label>
+                          <input id="avail" type="text" class="form-control" data-toggle="flatpickr">
+                          <small class="form-text text-muted"><%= t('activerecord.attributes.property.availability_feedback_html') %>
+                          </small>
+                        </div><!-- /.form-group -->
+                      </div>
+
+
+                      <!-- Levels -->
+                      <div class="col-md-6 col-sm-12">
+                        <div class="form-group mb-4">
+                          <%= property.label :levels do %>
+                            <%= Property.human_attribute_name(:levels) %>
+                          <% end %>
+                          <%= react_component('SimpleSelect', props: {
+                              id: 'a',
+                              inputID: 'property_levels',
+                              inputName: 'property[levels]',
+                              inputClassName: 'form-control',
+                              validatorGroup: 'fieldset-1',
+                              isRequired: false,
+                              formID: 'new_property',
+                              className: 'simple-select',
+                              options: (1..10).collect {|level| {label: level, value: level}},
+                              soloMode: true,
+                              ajaxEnabled: false,
+                              searchable: false,
+                              feedback: t('js.forms.properties.wizard.step1.levels_feedback'),
+                              i18n: {
+                                  select: t('js.components.select'),
+                                  validatorErrMsg: t('js.validator.required'),
+                              }
+                          }, prerender: false) %>
+                        </div>
+                      </div>
+                    </div><!-- /.row -->
+
+                    <div class="row">
+                      <!-- Notes -->
+                      <div class="col-md-12">
+                        <div class="form-group mb-4">
+                          <label class="control-label" for="notes"><%= t('activerecord.attributes.property.notes_title') %></label>
+                          <%= property.text_area :notes,
+                                                 class: 'form-control',
+                                                 id: 'notes',
+                                                 autocomplete: 'off',
+                                                 'rows': '3' %>
+                          <small class="form-text text-muted"><%= t('activerecord.attributes.property.notes_feedback_html') %>
+                          </small>
+                          <div class="invalid-feedback"></div>
+                        </div>
+                      </div>
+                    </div><!-- /.row -->
+
+                    <hr class="mt-5">
+                    <div class="d-flex">
+                      <button type="button" class="prev btn btn-secondary"><%= t('js.forms.properties.wizard.previous') %></button>
+                      <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset-2"><%= t('js.forms.properties.wizard.next') %></button>
+                    </div>
+
+                  </fieldset><!-- /fieldset -->
+                </div><!-- Step 2 END-->
+
+                <!-- Step 3 START -->
+                <div id="test-l-3" class="content dstepper-none fade">
+                  <!-- fieldset -->
+                  <fieldset>
+                    <legend><%= t('js.forms.properties.wizard.step3.title') %></legend> <!-- .custom-control -->
+                    <div class="multivalue-checkboxes">
+                      <div class="form-row justify-content-center">
+                        <% %w(housetype heating orientation view other).each do |category| %>
+
+                          <div class="form-group">
+                            <div class="col-md-2">
+                              <label class="control-label checkbox-header app-checkbox"><strong><%= t("activerecord.attributes.extra.#{category}.title") %></strong></label>
+                              <div class="col-md-12">
+                                <%= property.collection_check_boxes :extra_ids, Extra.where(subtype: category), :id, :name do |b| %>
+                                  <div class="custom-control custom-checkbox app-checkbox">
+                                    <%= b.check_box({class: "custom-control-input", type: 'checkbox'}) %>
+                                    <%#= b.label({class: 'custom-control-label'}) %>
+                                    <%= b.label({class: 'custom-control-label'}) do %>
+                                      <%= t("activerecord.attributes.extra.#{category}.#{b.text}") %>
+                                    <% end %>
+                                  </div>
+                                <% end %>
                               </div>
                             </div>
-                          <% end %>
-
-                        </div>
-                      </div>
-
-                    </div>
-                  </div>
-
-                  <hr class="mt-5">
-                  <div class="d-flex">
-                    <button type="button" class="prev btn btn-secondary"><%= t('js.forms.properties.wizard.previous') %></button>
-                    <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset-3"><%= t('js.forms.properties.wizard.next') %></button>
-                  </div>
-                </fieldset><!-- /fieldset -->
-              </div><!-- Step 3 END -->
-
-
-              <!-- Step 4 START -->
-              <div id="test-l-4" class="content dstepper-none fade">
-                <!-- fieldset -->
-                <fieldset>
-                  <legend><%= t('js.forms.properties.wizard.step4.title') %></legend>
-                  <div class="row">
-                    <div class="col-md-6 col-sm-12">
-                      <div class="form-group mb-4">
-                        <%= property.label :location do %>
-                          <%= content_tag(:i, nil, class: 'fas fa-map fa-fw') + ' ' + t('activerecord.attributes.property.location') %>
-                          <abbr title="<%= t('js.components.select.required') %>">*</abbr>
+                          </div>
                         <% end %>
-                        <%= react_component('SimpleSelect', props: {
-                            id: 'c',
-                            inputID: 'property_locationid',
-                            inputName: 'property[locationid]',
-                            inputClassName: 'form-control',
-                            validatorGroup: 'fieldset-4',
-                            isRequired: true,
-                            formID: 'new_property',
-                            className: 'simple-select',
-                            searchable: true,
-                            soloMode: true,
-                            ajaxEnabled: true,
-                            i18n: {
-                                select: t('js.components.select'),
-                                validatorErrMsg: t('js.validator.required'),
-                            }
-                        }, prerender: false) %>
 
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <!-- Size -->
-                    <div class="col-md-6 col-sm-12">
-                      <div class="form-group mb-4">
-                        <div class="form-label-group">
-                          <%= property.text_field :address,
-                                                  placeholder: Property.human_attribute_name("address_placeholder"),
-                                                  class: 'form-control',
-                                                  autocomplete: "off" %>
-                          <label for="size">
-                            <%= content_tag :span do %>
-                              <%= content_tag(:i, nil, class: 'fas fa-map-marked-alt fa-fw') + ' ' + t('activerecord.attributes.property.address_title') %>
+                        <div class="col-md-12">
+                          <div class="form-row form-group justify-content-center">
+
+                            <%= property.collection_check_boxes :extra_ids, Extra.where(subtype: 'dependent'), :id, :name do |b| %>
+                              <div class="custom-control custom-checkbox app-checkbox m-2">
+                                <%= b.check_box({class: "custom-control-input dependent_check", type: 'checkbox'}) %>
+                                <%= b.label({class: 'custom-control-label dependent_label'}) do %>
+                                  <%= t("activerecord.attributes.extra.dependent.#{b.text}") %>
+                                <% end %>
+                                <div class="mt-1">
+                                  <input type="number" name="property[<%= b.text %>_space]" class="form-control custom-control-label dependent_input" placeholder="<%= t("activerecord.attributes.extra.dependent.#{b.text}_placeholder") %>">
+                                </div>
+                              </div>
                             <% end %>
-                          </label>
+
+                          </div>
                         </div>
-                        <small class="form-text text-muted"><%= t('activerecord.attributes.property.address_feedback_html') %>
-                        </small>
-                        <div class="invalid-feedback"></div>
+
                       </div>
                     </div>
 
-                  </div>
-                  <hr class="mt-5">
-                  <div class="d-flex">
-                    <button type="button" class="prev btn btn-secondary"><%= t('js.forms.properties.wizard.previous') %></button>
-                    <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset-4"><%= t('js.forms.properties.wizard.next') %></button>
-                  </div>
-                </fieldset><!-- /fieldset -->
-              </div><!-- Step 4 END -->
+                    <hr class="mt-5">
+                    <div class="d-flex">
+                      <button type="button" class="prev btn btn-secondary"><%= t('js.forms.properties.wizard.previous') %></button>
+                      <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset-3"><%= t('js.forms.properties.wizard.next') %></button>
+                    </div>
+                  </fieldset><!-- /fieldset -->
+                </div><!-- Step 3 END -->
 
 
-              <!-- Step 5 START -->
-              <div id="test-l-5" class="content dstepper-none fade">
-                <!-- fieldset -->
-                <fieldset>
-                  <legend><%= t('js.forms.properties.wizard.step5.title') %></legend> <!-- .row -->
-                  <div class="row">
+                <!-- Step 4 START -->
+                <div id="test-l-4" class="content dstepper-none fade">
+                  <!-- fieldset -->
+                  <fieldset>
+                    <legend><%= t('js.forms.properties.wizard.step4.title') %></legend>
+                    <div class="row">
+                      <div class="col-md-6 col-sm-12">
+                        <div class="form-group mb-4">
+                          <%= property.label :location do %>
+                            <%= content_tag(:i, nil, class: 'fas fa-map fa-fw') + ' ' + t('activerecord.attributes.property.location') %>
+                            <abbr title="<%= t('js.components.select.required') %>">*</abbr>
+                          <% end %>
+                          <%= react_component('SimpleSelect', props: {
+                              id: 'c',
+                              inputID: 'property_locationid',
+                              inputName: 'property[locationid]',
+                              inputClassName: 'form-control',
+                              validatorGroup: 'fieldset-4',
+                              isRequired: true,
+                              formID: 'new_property',
+                              className: 'simple-select',
+                              searchable: true,
+                              soloMode: true,
+                              ajaxEnabled: true,
+                              i18n: {
+                                  select: t('js.components.select'),
+                                  validatorErrMsg: t('js.validator.required'),
+                              }
+                          }, prerender: false) %>
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <!-- Size -->
+                      <div class="col-md-6 col-sm-12">
+                        <div class="form-group mb-4">
+                          <div class="form-label-group">
+                            <%= property.text_field :address,
+                                                    placeholder: Property.human_attribute_name("address_placeholder"),
+                                                    class: 'form-control',
+                                                    autocomplete: "off" %>
+                            <label for="size">
+                              <%= content_tag :span do %>
+                                <%= content_tag(:i, nil, class: 'fas fa-map-marked-alt fa-fw') + ' ' + t('activerecord.attributes.property.address_title') %>
+                              <% end %>
+                            </label>
+                          </div>
+                          <small class="form-text text-muted"><%= t('activerecord.attributes.property.address_feedback_html') %>
+                          </small>
+                          <div class="invalid-feedback"></div>
+                        </div>
+                      </div>
+
+                    </div>
+                    <hr class="mt-5">
+                    <div class="d-flex">
+                      <button type="button" class="prev btn btn-secondary"><%= t('js.forms.properties.wizard.previous') %></button>
+                      <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset-4"><%= t('js.forms.properties.wizard.next') %></button>
+                    </div>
+                  </fieldset><!-- /fieldset -->
+                </div><!-- Step 4 END -->
+
+
+                <!-- Step 5 START -->
+                <div id="test-l-5" class="content dstepper-none fade">
+                  <!-- fieldset -->
+                  <fieldset>
+                    <legend><%= t('js.forms.properties.wizard.step5.title') %></legend> <!-- .row -->
+                    <div class="row">
                       <div class="d-flex flex-column flex-grow-1 justify-content-center">
                         <%= content_tag :div, class: "", id: "uppy", data: {
                             i18n: {
@@ -495,38 +495,39 @@
                         <%#= property.label :size %>
                         <%#= property.text_field :size, placeholder: Property.human_attribute_name("size_placeholder"), class: 'glowing-border' %>
                       </div>
-                    <!-- grid column -->
-<!--                    </div>-->
-                  </div>
+                      <!-- grid column -->
+                      <!--                    </div>-->
+                    </div>
 
-                  <hr class="mt-5">
-                  <div class="d-flex">
-                    <button type="button" class="prev btn btn-secondary"><%= t('js.forms.properties.wizard.previous') %></button>
-<!--                    <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset05"><%#= t('js.forms.properties.wizard.submit') %></button>-->
-                    <%= property.button t('properties.new.add_button'), class: 'next btn btn-primary ml-auto', "data-validate": "fieldset-5" %>
-                  </div>
-                </fieldset><!-- /fieldset -->
-              </div><!-- Step 4 END -->
+                    <hr class="mt-5">
+                    <div class="d-flex">
+                      <button type="button" class="prev btn btn-secondary"><%= t('js.forms.properties.wizard.previous') %></button>
+                      <!--                    <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset05"><%#= t('js.forms.properties.wizard.submit') %></button>-->
+                      <%= property.button t('properties.new.add_button'), class: 'btn btn-primary ml-auto submit', "data-validate": "fieldset-5" %>
+                    </div>
+                  </fieldset><!-- /fieldset -->
+                </div><!-- Step 4 END -->
 
-            <% end %> <!-- /form -->
-          </div><!-- /.card-body -->
-        </div><!-- /.card -->
-      </div><!-- /.bs-stepper -->
-      <!-- toasts container -->
-      <div aria-live="polite" aria-atomic="true">
-        <!-- Position it -->
-        <div style="position: fixed; top: 4.5rem; right: 1rem; z-index: 1050">
-          <!-- .toast -->
-          <div id="submitfeedback" class="toast bg-dark border-dark text-light fade hide" data-delay="3000" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header bg-primary text-white"> See your browser console </div>
-            <div class="toast-body">
-              <strong>Congrats!</strong> You see the submit feedback. </div>
-          </div><!-- /.toast -->
-        </div>
-      </div><!-- /toasts container -->
-    </div><!-- /.section-block -->
+              <% end %> <!-- /form -->
+            </div><!-- /.card-body -->
+          </div><!-- /.card -->
+        </div><!-- /.bs-stepper -->
+        <!-- toasts container -->
+        <div aria-live="polite" aria-atomic="true">
+          <!-- Position it -->
+          <div style="position: fixed; top: 4.5rem; right: 1rem; z-index: 1050">
+            <!-- .toast -->
+            <div id="submitfeedback" class="toast bg-dark border-dark text-light fade hide" data-delay="3000" role="alert" aria-live="assertive" aria-atomic="true">
+              <div class="toast-header bg-primary text-white"> See your browser console</div>
+              <div class="toast-body">
+                <strong>Congrats!</strong> You see the submit feedback.
+              </div>
+            </div><!-- /.toast -->
+          </div>
+        </div><!-- /toasts container -->
+      </div><!-- /.section-block -->
 
-  </div>
+    </div>
   </div>
 
 </div>
