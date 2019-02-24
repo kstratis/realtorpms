@@ -4,6 +4,7 @@ import FormStepper from '../bundles/steppers/form_stepper';
 $(document).on('turbolinks:load', function(e) {
   const $stepperForm = $('#new_property, [id^=edit_property_]');
   if ($stepperForm.length < 1) return;
+
   window.form_stepper = new FormStepper($stepperForm);
 
   // --------------------------------
@@ -48,4 +49,10 @@ $(document).on('turbolinks:load', function(e) {
     }
   });
   // --------------------------------
+});
+
+$(document).on("page:before-change turbolinks:before-visit", function() {
+  if (window.location.pathname === '/properties/new' || window.location.pathname.match(/^\/properties\/\d+\/edit$/)) {
+    return confirm("Your changes may not be saved yet. Are you sure you want to leave the page?");
+  }
 });
