@@ -250,9 +250,10 @@ en:
     validator:
       required: "The field is required"
       digits: "The field requires digits only"
-    swal:
+    alerts:
       file_upload_fail_title: "Oops..."
       file_upload_fail_body: "Something has gone wrong... Pleace check your network connection and try again."
+      leave_page: "Your new property has not been saved yet. Are you sure you want to leave this page?"
   navbar:
     profile: "Profile"
     account:

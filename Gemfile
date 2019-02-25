@@ -25,9 +25,6 @@ gem 'exifr', '~> 1.3', '>= 1.3.5'
 # image manipulation tool
 gem "mini_magick"
 
-# controllers acting like state machines for partial validations
-gem 'wicked'
-
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1.3'
 # Use Puma as the app server
@@ -56,12 +53,6 @@ gem 'will_paginate', '~> 3.1.6'
 gem 'bootstrap-will_paginate', '1.0.0'
 
 gem 'launchy', '2.4.3'
-
-gem 'rails-assets-sweetalert2', source: 'https://rails-assets.org'
-
-gem 'rails-assets-flatpickr', source: 'https://rails-assets.org'
-
-gem 'sweet-alert2-rails'
 
 gem 'rails_12factor'
 

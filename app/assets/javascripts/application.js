@@ -18,8 +18,6 @@
 //= require turbolinks_flash
 //= require popper
 //= require bootstrap
-//= require sweetalert2
-//= require sweet-alert2-rails
 //= require parsley
 //= require clamp-js-main
 //= require tooltips

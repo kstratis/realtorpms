@@ -6,6 +6,7 @@ class FormStepper {
     // Initialize and store away the parsley form
     this.form = $stepperForm.parsley();
     this.current_step = 1; // Always start at step 1
+    this.status = 0;
     // Keeps track of whether a step has been validated at least once.
     this.stepsInitialValidation = {};
     this.stepperDOMelements = $('li.step');
@@ -20,6 +21,16 @@ class FormStepper {
   init() {
     this.handleValidations();
     this.handleSteps();
+  }
+
+  // Sets the stepper status
+  setStatus(status){
+    this.status = status;
+  }
+
+  // Retrievess the stepper status
+  getStatus(){
+    return this.status;
   }
 
   // Validates a single field. Mainly used by the react-select components
@@ -82,6 +93,7 @@ class FormStepper {
 
     // Next button handler
     $('.next').on('click', function(e) {
+      self.setStatus(1);
       const $group = $(this).data().validate;
       const $groupStep = $(
         `[data-target="#${$(this)
@@ -97,6 +109,7 @@ class FormStepper {
       const $trigger = $(this);
       const groupId = $trigger.parents('.content').attr('id'); // i.e. test-l-2
       const $groupStep = $(`[data-target="#${groupId}"]`); // i.e. li.step.active
+
       // Normalize states
       $groupStep.removeClass('success error');
       $groupStep.prev().removeClass('success error');
@@ -118,6 +131,7 @@ class FormStepper {
 
     // `showStep` listener. This only applies to the step navigation ribbon and won't fire on next/back buttons
     $('body').on('showStep', function(element, params) {
+      self.setStatus(1);
       // DEBUG
       // console.trace();
       // Set the new step
@@ -129,7 +143,9 @@ class FormStepper {
         group: `fieldset-${index + 1}`,
         stepperDOMel: $(el)
       }));
-      self.validateStep(groups, self.current_step, true);
+      if (self.validateStep(groups, self.current_step, true)){
+        self.setStatus(0);
+      }
     });
   }
 

@@ -8,7 +8,7 @@ $(document).on('turbolinks:load', function(e) {
   window.form_stepper = new FormStepper($stepperForm);
 
   // --------------------------------
-  // Sets up dependent checks
+  // Sets up the checkbox-dependant input fields in step 3 (amenities)
   var elements = $('.dependent_check');
   var status;
   elements.each(function() {
@@ -51,8 +51,14 @@ $(document).on('turbolinks:load', function(e) {
   // --------------------------------
 });
 
+// This basically listens for window unload
 $(document).on("page:before-change turbolinks:before-visit", function() {
+  // Make sure it only works on the properties stepper
   if (window.location.pathname === '/properties/new' || window.location.pathname.match(/^\/properties\/\d+\/edit$/)) {
-    return confirm("Your changes may not be saved yet. Are you sure you want to leave the page?");
+    // Gets the stepper status. If untouched then don't bug the user. Otherwise, show a warning
+    if (!window.form_stepper.getStatus()) return;
+    var alertsDomNode = $('#alerts');
+    var alertsTranslations = alertsDomNode.data('i18n').alerts;
+    return confirm(alertsTranslations['leave_page']);
   }
 });

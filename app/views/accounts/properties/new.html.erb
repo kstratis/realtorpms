@@ -1,15 +1,15 @@
 <% provide(:title, t('properties.new.heading')) %>
 
 <%= render partial: 'shared/breadcrumb', locals: {title: 'properties.new.heading', icon: 'house-colored'} %>
-
+<%= content_tag :div, class: "", id: "alerts", data: {
+    i18n: {
+        alerts: t('js.alerts'),
+    }
+} do %>
+<% end %>
 <div class="page-container">
   <div class="container">
-    <%= content_tag :div, class: "", id: "swal", data: {
-        i18n: {
-            swal: t('js.swal'),
-        }
-    } do %>
-    <% end %>
+
     <div class="form-container">
 
       <!-- .section-block -->
