@@ -24,12 +24,12 @@ class FormStepper {
   }
 
   // Sets the stepper status
-  setStatus(status){
+  setStatus(status) {
     this.status = status;
   }
 
   // Retrievess the stepper status
-  getStatus(){
+  getStatus() {
     return this.status;
   }
 
@@ -91,8 +91,8 @@ class FormStepper {
     // Store away the `this` reference
     const self = this; // FormStepper
 
-    // Next button handler
-    $('.next').on('click', function(e) {
+    // Next/Previous button handler
+    $('.next, .prev').on('click', function(e) {
       self.setStatus(1);
       const $group = $(this).data().validate;
       const $groupStep = $(
@@ -100,20 +100,12 @@ class FormStepper {
           .parents('.content')
           .attr('id')}"]`
       );
-      // We use the result of the form validation step so that we can decide whether to proceed to the next step or not.
-      self.validateStep([{ group: $group, stepperDOMel: $groupStep }], self.current_step) ? stepperDemo.next() : '';
-    });
-
-    // Previous button handler
-    $('.prev').on('click', function() {
-      const $trigger = $(this);
-      const groupId = $trigger.parents('.content').attr('id'); // i.e. test-l-2
-      const $groupStep = $(`[data-target="#${groupId}"]`); // i.e. li.step.active
-
-      // Normalize states
-      $groupStep.removeClass('success error');
-      $groupStep.prev().removeClass('success error');
-      stepperDemo.previous();
+      // We use the result of the form validation step so that we can decide whether to proceed to the requested step or not.
+      self.validateStep([{ group: $group, stepperDOMel: $groupStep }], self.current_step)
+        ? $(e.target).hasClass('next')
+          ? stepperDemo.next()
+          : stepperDemo.previous()
+        : '';
     });
 
     // `leaveStep` listener. This only applies to the step navigation ribbon and won't fire on next/back buttons
@@ -129,7 +121,8 @@ class FormStepper {
       self.validateStep([{ group: $group, stepperDOMel: $groupStep }], self.current_step);
     });
 
-    // `showStep` listener. This only applies to the step navigation ribbon and won't fire on next/back buttons
+    // `showStep` listener. This only applies to the step navigation ribbon and won't fire on next/back buttons.
+    // params is the number of the current step.
     $('body').on('showStep', function(element, params) {
       self.setStatus(1);
       // DEBUG
@@ -143,7 +136,7 @@ class FormStepper {
         group: `fieldset-${index + 1}`,
         stepperDOMel: $(el)
       }));
-      if (self.validateStep(groups, self.current_step, true)){
+      if (self.validateStep(groups, self.current_step, true)) {
         self.setStatus(0);
       }
     });

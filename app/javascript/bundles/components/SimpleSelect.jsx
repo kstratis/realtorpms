@@ -99,14 +99,12 @@ class SimpleSelect extends React.Component {
   // This updates the true input field (which is hidden) according to the value selected.
   // It uses JQuery and is relatively safe to use since it's located outside of our React Component
   updateExternalDOM (selectedOption, validate = true)  {
-    console.log('externaldom');
     // JQuery form validator specifics. Requires JQuery.
     // Manipulating a form element outside of this React component should be relatively safe
-    let element = $(`#${this.props.inputID}`);
-    let form = $(`#${this.props.formID}`);
     this.setTextInputValue(selectedOption ? selectedOption.value : '');
     if (validate) {
-      console.log('select field changed - validating: ' +  this.props.inputID);
+      // DEBUG
+      // console.log('select field changed - validating: ' +  this.props.inputID);
       window.form_stepper.validateField(this.props.inputID);
     }
   };
@@ -132,8 +130,9 @@ class SimpleSelect extends React.Component {
     const opts = {
       required: !!this.props.isRequired
     };
-    console.log(this.props.validatorGroup);
-    console.log(this.props.i18n.validatorErrMsg);
+    // DEBUG
+    // console.log(this.props.validatorGroup);
+    // console.log(this.props.i18n.validatorErrMsg);
 
     return (
       <div>
