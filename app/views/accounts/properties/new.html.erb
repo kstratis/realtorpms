@@ -124,6 +124,27 @@
 
                     <div class="row">
                       <div class="col-md-12">
+                        <div class="form-group mb-4">
+
+                      <%# This is for the nested user fields %>
+                        <%= property.fields_for :owner do |owner| %>
+                            <div class="form-label-group">
+                              <%= owner.label :first_name %>
+                              <%= owner.text_field :first_name, placeholder: 'i.e. John', class: 'form-control' %>
+                            </div>
+                          <%#= owner.label :last_name %>
+                          <%#= owner.text_field :last_name, placeholder: 'i.e. Smith', class: '' %>
+                          <%#= owner.label :email %>
+                          <%#= owner.text_field :last_name, placeholder: 'i.e. jsmith@gmail.com', class: '' %>
+
+                        <% end %>
+                        </div>
+                      </div>
+                        <%#= inline_error @account.owner, :first_name, 'First name'%>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-12">
                         <hr class="mt-5">
                         <!-- .d-flex -->
                         <div class="d-flex">

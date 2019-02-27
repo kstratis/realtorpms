@@ -91,6 +91,7 @@ module Accounts
     # GET /properties/new
     def new
       @property = Property.new
+      @property.build_owner
     end
 
     # POST /properties
@@ -187,6 +188,7 @@ module Accounts
                                        :notes,
                                        :adxe,
                                        :adspitogatos,
+                                       { owner_attributes: [:first_name, :last_name, :email, :telephones] },
                                        images: [],
                                        extra_ids: [])
     end
