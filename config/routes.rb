@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     scope module: 'accounts' do
       root to: 'dashboard#index', as: :account_root
       get '/properties/locations', to: 'properties#locations'
+      get '/properties/owners', to: 'properties#owners'
 
       # resources :property_steps
 

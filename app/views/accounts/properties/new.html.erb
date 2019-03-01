@@ -41,8 +41,12 @@
                       <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step4.anchor') %></span></a>
                   </li>
                   <li class="step" data-fieldset="fieldset-5" data-target="#test-l-5">
-                    <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-images fa-fw"> </i></span>
+                    <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-user fa-fw"> </i></span>
                       <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step5.anchor') %></span></a>
+                  </li>
+                  <li class="step" data-fieldset="fieldset-6" data-target="#test-l-6">
+                    <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-images fa-fw"> </i></span>
+                      <span class="d-none d-sm-inline"><%= t('js.forms.properties.wizard.step6.anchor') %></span></a>
                   </li>
                 </ul>
               </div><!-- /.steps -->
@@ -122,26 +126,7 @@
                       </div>
                     </div>
 
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group mb-4">
 
-                      <%# This is for the nested user fields %>
-                        <%= property.fields_for :owner do |owner| %>
-                            <div class="form-label-group">
-                              <%= owner.label :first_name %>
-                              <%= owner.text_field :first_name, placeholder: 'i.e. John', class: 'form-control' %>
-                            </div>
-                          <%#= owner.label :last_name %>
-                          <%#= owner.text_field :last_name, placeholder: 'i.e. Smith', class: '' %>
-                          <%#= owner.label :email %>
-                          <%#= owner.text_field :last_name, placeholder: 'i.e. jsmith@gmail.com', class: '' %>
-
-                        <% end %>
-                        </div>
-                      </div>
-                        <%#= inline_error @account.owner, :first_name, 'First name'%>
-                    </div>
 
                     <div class="row">
                       <div class="col-md-12">
@@ -459,6 +444,7 @@
                               inputName: 'property[locationid]',
                               inputClassName: 'form-control',
                               validatorGroup: 'fieldset-4',
+                              endpoint: properties_locations_path,
                               isRequired: true,
                               formID: 'new_property',
                               className: 'simple-select',
@@ -504,9 +490,152 @@
                   </fieldset><!-- /fieldset -->
                 </div><!-- Step 4 END -->
 
-
                 <!-- Step 5 START -->
                 <div id="test-l-5" class="content dstepper-none fade">
+                  <!-- fieldset -->
+                  <fieldset>
+                    <legend><%= t('js.forms.properties.wizard.step5.title') %></legend> <!-- .row -->
+                    <div class="row">
+
+                      <div class="form-group ml-2">
+                        <div class="custom-control custom-control-inline custom-radio">
+                          <input type="radio" class="custom-control-input" name="rdGroup1" id="rd1"> <label class="custom-control-label" for="rd1">Δημιουργία νέου</label>
+                        </div>
+                        <div class="custom-control custom-control-inline custom-radio">
+                          <input type="radio" class="custom-control-input" name="rdGroup1" id="rd2"> <label class="custom-control-label" for="rd2">Επιλογή απο υφιστάμενους</label>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+
+
+
+                    <hr />
+
+
+
+
+
+
+
+
+                    <div class="row">
+<!--                      </div> /.form-group -->
+<!--                      <div class="row">-->
+<!--                        <div class="col-md-12">-->
+<!--                          <div class="form-group mb-4">-->
+
+                            <%# This is for the nested user fields %>
+                            <%= property.fields_for :owner do |owner| %>
+
+                              <div class="col-md-6 col-sm-12">
+                                <div class="form-group mt-md-4 mb-4">
+                                  <div class="form-label-group">
+                                    <%= owner.text_field :first_name,
+                                                            class: 'form-control',
+                                                            autocomplete: "off",
+                                                            'data-parsley-group': "fieldset-5",
+                                                            'data-parsley-pattern': "\w",
+                                                            'data-parsley-type-message': t("js.validator.required"),
+                                                            'data-parsley-required-message': t("js.validator.required") %>
+                                    <label for="first_name">
+                                      <%= content_tag :span do %>
+                                        <%= content_tag(:i, nil, class: '') + ' ' + t('activerecord.attributes.user.first_name') %>
+                                      <% end %>
+                                    </label>
+                                  </div>
+                                  <small class="form-text text-muted"><%= t('activerecord.attributes.user.first_name_feedback_html') %>
+                                  </small>
+                                  <div class="invalid-feedback"></div>
+                                </div>
+                              </div>
+
+                              <div class="col-md-6 col-sm-12">
+                                <div class="form-group mt-md-4 mb-4">
+                                  <div class="form-label-group">
+                                    <%= owner.text_field :last_name,
+                                                         class: 'form-control',
+                                                         autocomplete: "off",
+                                                         'data-parsley-group': "fieldset-5",
+                                                         'data-parsley-pattern': "\w",
+                                                         'data-parsley-type-message': t("js.validator.required"),
+                                                         'data-parsley-required-message': t("js.validator.required") %>
+                                    <label for="last_name">
+                                      <%= content_tag :span do %>
+                                        <%= content_tag(:i, nil, class: '') + ' ' + t('activerecord.attributes.user.last_name') %>
+                                      <% end %>
+                                    </label>
+                                  </div>
+                                  <small class="form-text text-muted"><%= t('activerecord.attributes.user.last_name_feedback_html') %>
+                                  </small>
+                                  <div class="invalid-feedback"></div>
+                                </div>
+                              </div>
+
+                              <div class="col-md-6 col-sm-12">
+                                <div class="form-group mb-4">
+                                  <div class="form-label-group">
+                                    <%= owner.text_field :email,
+                                                         class: 'form-control',
+                                                         autocomplete: "off",
+                                                         'data-parsley-group': "fieldset-5",
+                                                         'data-parsley-type': "email",
+                                                         'data-parsley-type-message': t("js.validator.required"),
+                                                         'data-parsley-required-message': t("js.validator.required") %>
+                                    <label for="last_name">
+                                      <%= content_tag :span do %>
+                                        <%= content_tag(:i, nil, class: 'fas fa-at fa-fw') + ' ' + t('activerecord.attributes.user.email') %>
+                                      <% end %>
+                                    </label>
+                                  </div>
+                                  <small class="form-text text-muted"><%= t('activerecord.attributes.user.email_feedback_html') %>
+                                  </small>
+                                  <div class="invalid-feedback"></div>
+                                </div>
+                              </div>
+
+                              <div class="col-md-6 col-sm-12">
+                                <div class="form-group mb-4">
+                                  <div class="form-label-group">
+                                    <%= owner.text_field :telephones,
+                                                         class: 'form-control',
+                                                         autocomplete: "off",
+                                                         'data-parsley-group': "fieldset-5",
+                                                         'data-parsley-type': "alphanum",
+                                                         'data-parsley-type-message': t("js.validator.required"),
+                                                         'data-parsley-required-message': t("js.validator.required") %>
+                                    <label for="last_name">
+                                      <%= content_tag :span do %>
+                                        <%= content_tag(:i, nil, class: 'fas fa-phone fa-fw') + ' ' + t('activerecord.attributes.user.phone1') %>
+                                      <% end %>
+                                    </label>
+                                  </div>
+                                  <small class="form-text text-muted"><%= t('activerecord.attributes.user.phone1_feedback_html') %>
+                                  </small>
+                                  <div class="invalid-feedback"></div>
+                                </div>
+                              </div>
+
+
+                            <% end %>
+<!--                          </div>-->
+<!--                        </div>-->
+                        <%#= inline_error @account.owner, :first_name, 'First name'%>
+                    </div>
+
+                    <hr class="mt-5">
+                    <div class="d-flex">
+                      <button type="button" class="prev btn btn-secondary" data-validate="fieldset-5"><%= t('js.forms.properties.wizard.previous') %></button>
+                      <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset-5"><%= t('js.forms.properties.wizard.next') %></button>
+                    </div>
+
+                  </fieldset> <!-- /fieldset -->
+                </div> <!-- Step 5 END -->
+
+                <!-- Step 6 START -->
+                <div id="test-l-6" class="content dstepper-none fade">
                   <!-- fieldset -->
                   <fieldset>
                     <legend><%= t('js.forms.properties.wizard.step5.title') %></legend> <!-- .row -->
@@ -519,18 +648,13 @@
                             uppy_url_listener: new_property_path
                         } do %>
                         <% end %>
-                        <%#= property.label :size %>
-                        <%#= property.text_field :size, placeholder: Property.human_attribute_name("size_placeholder"), class: 'glowing-border' %>
                       </div>
-                      <!-- grid column -->
-                      <!--                    </div>-->
                     </div>
 
                     <hr class="mt-5">
                     <div class="d-flex">
-                      <button type="button" class="prev btn btn-secondary" data-validate="fieldset-5"><%= t('js.forms.properties.wizard.previous') %></button>
-                      <!--                    <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset05"><%#= t('js.forms.properties.wizard.submit') %></button>-->
-                      <%= property.button t('properties.new.add_button'), class: 'btn btn-primary ml-auto submit', "data-validate": "fieldset-5" %>
+                      <button type="button" class="prev btn btn-secondary" data-validate="fieldset-6"><%= t('js.forms.properties.wizard.previous') %></button>
+                      <%= property.button t('properties.new.add_button'), class: 'btn btn-primary ml-auto submit', "data-validate": "fieldset-6" %>
                     </div>
                   </fieldset><!-- /fieldset -->
                 </div><!-- Step 4 END -->

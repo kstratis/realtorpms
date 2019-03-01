@@ -22,8 +22,6 @@ class Property < ApplicationRecord
   attr_accessor :locationid
   attr_searchable %w(title description notes adxe adspitogatos owner.last_name owner.telephones)
 
-  # enum propertycategory: [:apartment, :terraced, :maisonette, :building, :home]
-
   enum businesstype: [:sell, :rent, :sell_rent]
 
   enum category: [:residential, :commercial, :land, :other]
@@ -78,7 +76,7 @@ class Property < ApplicationRecord
       set_diff.each do |el|
         # DEBUG
         # puts "the property is: #{el + '_space'}"
-        # This won't do any validations or update the updated_at attribute
+        # MIND THAT THIS won't do any validations or update the updated_at attribute
         write_attribute(:"#{el + '_space'}", nil)
       end
     end

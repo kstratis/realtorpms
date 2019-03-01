@@ -13,6 +13,7 @@ class SimpleSelect extends React.Component {
     formID: PropTypes.string,
     inputID: PropTypes.string,
     inputName: PropTypes.string,
+    endpoint: PropTypes.string,
     validatorGroup: PropTypes.string,
     isMaster: PropTypes.bool,
     options: PropTypes.array,
@@ -81,11 +82,11 @@ class SimpleSelect extends React.Component {
 
   handleAjaxRequest(query, callback) {
     axios
-      .get(`/properties/locations.json?search=${query}`) // +1 because rails will_paginate starts from 1 while this starts from 0
+      .get(`${this.props.endpoint}.json?search=${query}`) // +1 because rails will_paginate starts from 1 while this starts from 0
       .then(response => {
         // DEBUG
         // console.log(response.data);
-        callback(null, { options: response.data.locations.dataset });
+        callback(null, { options: response.data.data.dataset });
       });
   }
 

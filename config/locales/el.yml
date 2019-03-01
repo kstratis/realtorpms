@@ -11,11 +11,15 @@ el:
         email_placeholder: "π.χ. nikosdimitriou@gmail.com"
       user:
         first_name: "Όνομα"
+        first_name_feedback_html: "π.χ. Δημήτρης"
         last_name: "Επώνυμο"
+        last_name_feedback_html: "π.χ. Παπαδόπουλος"
         email: "Email"
+        email_feedback_html: "π.χ. dpapadopoulos@gmail.com"
         age: "Ηλικία"
         age_placeholder: "π.χ. 30"
         phone1: "Τηλέφωνο"
+        phone1_feedback_html: "π.χ. 210 33 33 333"
         phone1_placeholder: "π.χ. 697 25 00 111"
         locale: "Γλώσσα διεπαφής"
         password: "Κωδικός"
@@ -88,6 +92,7 @@ el:
         bathrooms_feedback_html: "π.χ. 2"
         construction: "Κατασκευή"
         location: "Τοποθεσία"
+        owner: "Πελάτης"
         address_title: "Διεύθυνση"
         address_feedback_html: "π.χ. Βασιλίσσης Σοφίας 64, 115 28 "
         floor: "Όροφος"
@@ -188,6 +193,9 @@ el:
             anchor: "Τοποθεσία"
             title: "Πληροφορίες τοποθεσίας"
           step5:
+            anchor: "Ιδιοκτήτης"
+            title: "Στοιχεία ιδιοκτήτη"
+          step6:
             anchor: "Φωτογραφίες"
             title: "Φωτογραφίες"
           next: "Επόμενο"

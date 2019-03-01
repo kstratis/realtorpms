@@ -88,6 +88,15 @@ module Accounts
 
     end
 
+    def owners
+      puts 'INSIDE the owners'
+      filter_owners
+      # respond_to do |format|
+      #   format.json {render json: {message: 'Working! OK!'}, status: 200}
+      # end
+
+    end
+
     # GET /properties/new
     def new
       @property = Property.new
@@ -111,11 +120,22 @@ module Accounts
       # look at the following link for a trick to bypass this. It involves form changes (id & name)
       # and the introduction of an accessor property plus the following line
       # https://stackoverflow.com/a/43476033/178728
-      # @property.location = Location.find(@property.locationid)
+      @property.location = Location.find(@property.locationid)
       # --- SOS
       @property.account = current_account
+      # puts @property.locationid
+      # @property.location = Location.find(@property.locationid)
 
       # property_params[:]
+      #
+      puts "-------------"
+      puts @property.owner
+      puts "-------------"
+      @property.owner = nil
+      puts "*************"
+      puts @property.owner
+      puts "*************"
+
 
 
       respond_to do |format|

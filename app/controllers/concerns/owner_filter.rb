@@ -1,5 +1,5 @@
- module LocationFilter
-  def filter_locations
+module OwnerFilter
+  def filter_owners
     # @locations = Location.all
 
     if params[:search].blank?
@@ -7,7 +7,7 @@
     end
 
     puts "search term is: #{params[:search]}"
-    @locations = Location.search(params[:search])
+    @owners = Owner.search(params[:search])
     # respond_to do |format|
     #   format.json {render json: {message: 'Working! OK!'}, status: 200}
     # end
@@ -18,11 +18,11 @@
     #  *   ]
     data = {:dataset => Array.new}
 
-    @locations.each do |entry|
-      puts "#{entry.localname} - #{entry.parent_localname}"
+    @owners.each do |entry|
+      puts "#{entry.first_name} #{entry.last_name}"
       hash = {
           value: entry.id,
-          label: "#{entry.localname} - #{entry.parent_localname}"
+          label: "#{entry.first_name} #{entry.last_name}"
       }
       data[:dataset] << hash
     end

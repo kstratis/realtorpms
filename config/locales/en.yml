@@ -11,11 +11,15 @@ en:
         email_placeholder: "i.e. johnsmith@gmail.com"
       user:
         first_name: "First name"
+        first_name_feedback_html: "i.e. John"
         last_name: "Last name"
+        last_name_feedback_html: "i.e. Smith"
         email: "Email"
+        email_feedback_html: "i.e. jsmith@gmail.com"
         age: "Age"
         age_placeholder: "i.e. 30"
         phone1: "Telephone"
+        phone1_feedback_html: "i.e. 813-440-5026"
         phone1_placeholder: "i.e. 813-440-5026"
         locale: "Language"
         password: "Password"
@@ -87,6 +91,7 @@ en:
         bathrooms_feedback_html: "i.e. 2"
         construction: "Construction"
         location: "Location"
+        owner: "Client"
         address_title: "Address"
         address_feedback_html: "i.e. 51 Mackintosh Place, CF24 4RL"
         floor: "Floor"
@@ -186,6 +191,9 @@ en:
             anchor: "Location"
             title: "Location information"
           step5:
+            anchor: "Owner"
+            title: "Owner details"
+          step6:
             anchor: "Photos"
             title: "Photos"
           next: "Next"

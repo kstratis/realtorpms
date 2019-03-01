@@ -2,6 +2,8 @@ module Accounts
   class BaseController < ApplicationController
     include UserDatatable
     include LocationFilter
+    include OwnerFilter
+
     # before_action :logged_in_user, :allowed_subdomains, only: [:index, :edit, :update, :destroy]
     before_action :logged_in_user, :allowed_subdomains
     after_action :store_referer_url, only: [:index, :edit, :update, :destroy]
