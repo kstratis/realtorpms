@@ -2,7 +2,8 @@ class User < ApplicationRecord
 
   include Searchable
 
-  SEARCH_FIELDS = %w(first_name last_name email)
+  attr_searchable %w(first_name last_name email)
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i  # checks the email format
 
   self.per_page = 10 # This is for pagination

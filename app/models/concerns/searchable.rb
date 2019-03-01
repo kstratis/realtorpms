@@ -22,7 +22,7 @@ module Searchable
       # Even if one of them contains a dot that means we'll also have to search the associated model
       associated_field = fields.detect {|field| field.include?('.')}
       # Get the associated model
-      associated_model = associated_field.blank? ? '' : associated_field.split('.').first
+      associated_model = associated_field.blank? ? nil : associated_field.split('.').first
       # Once we have the associated model, normalize all fields (i.e. in +mymodel.myfield+ removes the +mymodel.part+)
       fields = fields.map do |element|
         next element unless element.include?('.')
@@ -33,7 +33,7 @@ module Searchable
         fields.each do |field|
           query << " OR unaccent(#{field}) ILIKE unaccent('%#{term}%')"
         end
-        associated_model ? joins(associated_model.to_sym).where(query) : where(query)
+        associated_model.blank? ? where(query) : joins(associated_model.to_sym).where(query)
       end
     end
   end
