@@ -21,7 +21,9 @@ class Property < ApplicationRecord
   # Collection of properties which have been favorited by a particular user
   scope :faved_by, -> (user) { joins(:favorites).where(favorites: { user: user }) }
 
+  #
   attr_accessor :locationid
+  attr_accessor :ownerid
 
   enum businesstype: [:sell, :rent, :sell_rent]
 

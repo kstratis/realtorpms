@@ -49,6 +49,24 @@ $(document).on('turbolinks:load', function(e) {
     }
   });
   // --------------------------------
+
+  $('.client-radio-selection').on('click', (e) => {
+    let selectedOption = $(e.target).attr('id');
+
+    let counterElement = $(`#${selectedOption}`).data().counteroption;
+
+    console.log(counterElement);
+    console.log(selectedOption);
+
+
+    $(`.${counterElement}`).addClass('disabledElement');
+    $(`.${counterElement}`).find(`input.${counterElement}_input`).attr('disabled', true);
+    $(`.${selectedOption}`).removeClass('disabledElement');
+    $(`.${selectedOption}`).find(`input.${selectedOption}_input`).removeClass('disabledElement');
+    $(`.${selectedOption}`).find(`input.${selectedOption}_input`).attr('disabled', false);
+
+    // console.log($(this).attr('id'));
+  })
 });
 
 // This basically listens for window unload
@@ -62,3 +80,5 @@ $(document).on("page:before-change turbolinks:before-visit", function() {
     return confirm(alertsTranslations['leave_page']);
   }
 });
+
+

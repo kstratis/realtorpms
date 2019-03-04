@@ -499,13 +499,45 @@
 
                       <div class="form-group ml-2">
                         <div class="custom-control custom-control-inline custom-radio">
-                          <input type="radio" class="custom-control-input" name="rdGroup1" id="rd1"> <label class="custom-control-label" for="rd1">Δημιουργία νέου</label>
+                          <input type="radio" class="custom-control-input client-radio-selection" name="rdGroup1" id="existing_client" data-counteroption="new_client" checked> <label class="custom-control-label" for="existing_client">Επιλογή απο υφιστάμενους</label>
                         </div>
                         <div class="custom-control custom-control-inline custom-radio">
-                          <input type="radio" class="custom-control-input" name="rdGroup1" id="rd2"> <label class="custom-control-label" for="rd2">Επιλογή απο υφιστάμενους</label>
+                          <input type="radio" class="custom-control-input client-radio-selection" name="rdGroup1" id="new_client" data-counteroption="existing_client" > <label class="custom-control-label" for="new_client">Δημιουργία νέου</label>
                         </div>
                       </div>
                     </div>
+
+
+                    <div class="row">
+                      <div class="col-md-6 col-sm-12">
+                        <div class="form-group mt-4 mb-4 existing_client">
+                          <%= property.label :owner do %>
+                            <%= content_tag(:i, nil, class: 'fas fa-user fa-fw') + ' ' + t('activerecord.attributes.property.owner') %>
+                            <abbr title="<%= t('js.components.select.required') %>">*</abbr>
+                          <% end %>
+                          <%= react_component('SimpleSelect', props: {
+                              id: 'd',
+                              inputID: 'property_ownerid',
+                              inputName: 'property[ownerid]',
+                              inputClassName: 'form-control existing_client_input',
+                              validatorGroup: 'fieldset-5',
+                              endpoint: properties_owners_path,
+                              isRequired: false,
+                              formID: 'new_property',
+                              className: 'simple-select ',
+                              disabled: false,
+                              searchable: true,
+                              soloMode: true,
+                              ajaxEnabled: true,
+                              i18n: {
+                                  select: t('js.components.select'),
+                                  validatorErrMsg: t('js.validator.required'),
+                              }
+                          }, prerender: false) %>
+                        </div><!-- /.form-group -->
+                      </div>
+                    </div>
+
 
 
 
@@ -531,13 +563,12 @@
                             <%= property.fields_for :owner do |owner| %>
 
                               <div class="col-md-6 col-sm-12">
-                                <div class="form-group mt-md-4 mb-4">
+                                <div class="form-group mt-md-4 mb-4 new_client disabledElement">
                                   <div class="form-label-group">
                                     <%= owner.text_field :first_name,
-                                                            class: 'form-control',
+                                                            class: 'form-control new_client_input',
                                                             autocomplete: "off",
                                                             'data-parsley-group': "fieldset-5",
-                                                            'data-parsley-pattern': "\w",
                                                             'data-parsley-type-message': t("js.validator.required"),
                                                             'data-parsley-required-message': t("js.validator.required") %>
                                     <label for="first_name">
@@ -553,13 +584,12 @@
                               </div>
 
                               <div class="col-md-6 col-sm-12">
-                                <div class="form-group mt-md-4 mb-4">
+                                <div class="form-group mt-md-4 mb-4 new_client disabledElement">
                                   <div class="form-label-group">
                                     <%= owner.text_field :last_name,
-                                                         class: 'form-control',
+                                                         class: 'form-control new_client_input',
                                                          autocomplete: "off",
                                                          'data-parsley-group': "fieldset-5",
-                                                         'data-parsley-pattern': "\w",
                                                          'data-parsley-type-message': t("js.validator.required"),
                                                          'data-parsley-required-message': t("js.validator.required") %>
                                     <label for="last_name">
@@ -575,10 +605,10 @@
                               </div>
 
                               <div class="col-md-6 col-sm-12">
-                                <div class="form-group mb-4">
+                                <div class="form-group mb-4 new_client disabledElement">
                                   <div class="form-label-group">
                                     <%= owner.text_field :email,
-                                                         class: 'form-control',
+                                                         class: 'form-control new_client_input',
                                                          autocomplete: "off",
                                                          'data-parsley-group': "fieldset-5",
                                                          'data-parsley-type': "email",
@@ -597,10 +627,10 @@
                               </div>
 
                               <div class="col-md-6 col-sm-12">
-                                <div class="form-group mb-4">
+                                <div class="form-group mb-4 new_client disabledElement">
                                   <div class="form-label-group">
                                     <%= owner.text_field :telephones,
-                                                         class: 'form-control',
+                                                         class: 'form-control new_client_input',
                                                          autocomplete: "off",
                                                          'data-parsley-group': "fieldset-5",
                                                          'data-parsley-type': "alphanum",

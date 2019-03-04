@@ -106,35 +106,49 @@ module Accounts
     # POST /properties
     # POST /properties.json
     def create
-      puts 'INSIDE CREATE'
-      # puts "-before-"
-      # puts property_params
-      # myhash = property_params
-      # myhash[:extra_ids] = myhash[:extra_ids].select { |element| element.present? }
-      # puts "-after-"
-      # puts myhash
       @property = Property.new(property_params)
-
-      # --- SOS left out
-      # When only having the associated object's id (location) and not the object itself,
-      # look at the following link for a trick to bypass this. It involves form changes (id & name)
-      # and the introduction of an accessor property plus the following line
+      # --- SOS ---
+      # When POSTing an associated object's id (i.e. location's id only +locationid+) and not the object itself
+      # (location instance), you are gonna get the following erro:
+      #
+      # ActiveModel::UnknownAttributeError - unknown attribute 'locationid' for Property.:
+      #
+      # This is happening because +locationid+ is not a model attribute and thus appears to be unknown. To fix this
+      # you have to declare an attribute accessor of the same name in the model i.e. +attr_accessor :locationid+ which
+      # will allow us to receive and manipulate (in that case generate a model instance) the POSTed value. Also don't
+      # forget to whitelist the attribute inside the require params and change the html of the form (id & name).
+      #
+      # Reference
       # https://stackoverflow.com/a/43476033/178728
+      # --- SOS ---
       @property.location = Location.find(@property.locationid)
-      # --- SOS
+
+      puts property_params[:ownerid].blank?
+
+      unless property_params[:ownerid].blank?
+        @property.owner = Owner.find(@property.ownerid)
+      end
+
+      # case property_params[:ownerid]
+      # when blank?
+      #   "You ran out of gas."
+      # else
+      #   "Error: capacity has an invalid value (#{capacity})"
+      # end
+
       @property.account = current_account
       # puts @property.locationid
       # @property.location = Location.find(@property.locationid)
 
       # property_params[:]
       #
-      puts "-------------"
-      puts @property.owner
-      puts "-------------"
-      @property.owner = nil
-      puts "*************"
-      puts @property.owner
-      puts "*************"
+      # puts "-------------"
+      # puts @property.owner
+      # puts "-------------"
+      # @property.owner = nil
+      # puts "*************"
+      # puts @property.owner
+      # puts "*************"
 
 
 
@@ -208,6 +222,7 @@ module Accounts
                                        :notes,
                                        :adxe,
                                        :adspitogatos,
+                                       :ownerid,
                                        { owner_attributes: [:first_name, :last_name, :email, :telephones] },
                                        images: [],
                                        extra_ids: [])

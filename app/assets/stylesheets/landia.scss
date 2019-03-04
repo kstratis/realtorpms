@@ -675,3 +675,8 @@ i.fas.fa-heart.colored{
 .uppy-Dashboard-inner{
   border: 5px dotted rgba(147, 147, 147, .2)
 }
+
+.disabledElement {
+  pointer-events: none;
+  opacity: 0.4;
+}
