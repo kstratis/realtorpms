@@ -107,50 +107,40 @@ module Accounts
     # POST /properties.json
     def create
       @property = Property.new(property_params)
+
+      # Assign the property's location no matter what.
+      @property.location = Location.find(@property.locationid)
+
       # --- SOS ---
       # When POSTing an associated object's id (i.e. location's id only +locationid+) and not the object itself
-      # (location instance), you are gonna get the following erro:
+      # (location instance), you are gonna get the following error:
       #
       # ActiveModel::UnknownAttributeError - unknown attribute 'locationid' for Property.:
       #
       # This is happening because +locationid+ is not a model attribute and thus appears to be unknown. To fix this
       # you have to declare an attribute accessor of the same name in the model i.e. +attr_accessor :locationid+ which
-      # will allow us to receive and manipulate (in that case generate a model instance) the POSTed value. Also don't
+      # will allow us to receive and manipulate (in this case generate a model instance) the POSTed value. Also don't
       # forget to whitelist the attribute inside the require params and change the html of the form (id & name).
       #
       # Reference
       # https://stackoverflow.com/a/43476033/178728
       # --- SOS ---
-      @property.location = Location.find(@property.locationid)
 
-      puts property_params[:ownerid].blank?
-
+      # If an existing client(owner) id is given then assign the property to that person
       unless property_params[:ownerid].blank?
         @property.owner = Owner.find(@property.ownerid)
       end
 
-      # case property_params[:ownerid]
-      # when blank?
-      #   "You ran out of gas."
-      # else
-      #   "Error: capacity has an invalid value (#{capacity})"
-      # end
+      # If no owner is selected set it to nil
+      unless property_params[:noowner].blank?
+        @property.owner = nil
+      end
 
+      # Otherwise automatically create and assign the owner using the "magic" properties of
+      # +accepts_nested_attributes_for :owner+ as described in the model file
+
+      # Scope the property to current account
       @property.account = current_account
-      # puts @property.locationid
-      # @property.location = Location.find(@property.locationid)
-
-      # property_params[:]
-      #
-      # puts "-------------"
-      # puts @property.owner
-      # puts "-------------"
-      # @property.owner = nil
-      # puts "*************"
-      # puts @property.owner
-      # puts "*************"
-
-
 
       respond_to do |format|
         if @property.save
@@ -223,6 +213,7 @@ module Accounts
                                        :adxe,
                                        :adspitogatos,
                                        :ownerid,
+                                       :noowner,
                                        { owner_attributes: [:first_name, :last_name, :email, :telephones] },
                                        images: [],
                                        extra_ids: [])

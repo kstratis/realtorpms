@@ -2,6 +2,22 @@ import FormStepper from '../bundles/steppers/form_stepper';
 
 // The Stepper currently only applies to property add
 $(document).on('turbolinks:load', function(e) {
+  window.ParsleyConfig = {
+    errorsWrapper: '<li class="alert-box-item"></li>',
+    errorTemplate: '<span></span>',
+    excluded:
+    // Defaults
+      'input[type=button],' +
+      'input[type=submit],' +
+      'input[type=reset],'  +
+      'input[type=hidden],' +
+      '[disabled],'         +
+      ':hidden,'            +
+      // -- Additional attributes to look --
+      '[data-parsley-disabled],' +  // Exclude specific input/select/radio/checkbox/etc
+      '[data-parsley-disabled] *'   // Exclude all nesting inputs/selects/radios/checkboxes/etc
+  };
+
   const $stepperForm = $('#new_property, [id^=edit_property_]');
   if ($stepperForm.length < 1) return;
 
@@ -50,22 +66,15 @@ $(document).on('turbolinks:load', function(e) {
   });
   // --------------------------------
 
+  // This handles the nested property owner form to either select from an existing list or create a new
   $('.client-radio-selection').on('click', (e) => {
     let selectedOption = $(e.target).attr('id');
-
-    let counterElement = $(`#${selectedOption}`).data().counteroption;
-
-    console.log(counterElement);
-    console.log(selectedOption);
-
-
-    $(`.${counterElement}`).addClass('disabledElement');
-    $(`.${counterElement}`).find(`input.${counterElement}_input`).attr('disabled', true);
+    let counterElements = $(`#${selectedOption}`).data().counteroption.split(',');
+    $(counterElements).each((index, counterElement) => $(`.${counterElement}`).addClass('disabledElement'));
+    $(counterElements).each((index, counterElement) => $(`.${counterElement}`).find(`input.${counterElement}_input`).attr('disabled', true));
     $(`.${selectedOption}`).removeClass('disabledElement');
     $(`.${selectedOption}`).find(`input.${selectedOption}_input`).removeClass('disabledElement');
     $(`.${selectedOption}`).find(`input.${selectedOption}_input`).attr('disabled', false);
-
-    // console.log($(this).attr('id'));
   })
 });
 

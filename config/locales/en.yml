@@ -100,6 +100,10 @@ en:
         availability_feedback_html: "Pick a date"
         notes_title: "Notes"
         notes_feedback_html: "i.e. Mortgage"
+        adxe: "Ad for xe.gr"
+        adxe_placeholder: "Ad for xe.gr"
+        adspitogatos: "Ad for spitogatos.gr"
+        adspitogatos_placeholder: "Ad for spitogatos.gr"
         enums:
           businesstype:
             sell: "Sell"
@@ -193,6 +197,9 @@ en:
           step5:
             anchor: "Owner"
             title: "Owner details"
+            existing_client: "Choose from existing customers"
+            new_client: "Create new customer"
+            no_client: "No customer"
           step6:
             anchor: "Photos"
             title: "Photos"
