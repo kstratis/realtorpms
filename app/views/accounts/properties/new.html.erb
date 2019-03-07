@@ -53,7 +53,7 @@
             </div><!-- /.card-header -->
             <!-- .card-body -->
             <div class="card-body">
-              <%= form_for(@property, remote: true, html: {class: "p-lg-4 p-sm-3 p-0", id: "new_property", name: "stepperForm"}) do |property| %>
+              <%= form_for(@property, remote: true, html: {class: "p-lg-4 p-sm-3 p-0", id: "new_property", name: "stepperForm", 'data-parsley-excluded': "[disabled]"}) do |property| %>
 
                 <!-- Step 1 START -->
                 <div id="test-l-1" class="content dstepper-none fade">
@@ -557,8 +557,7 @@
                                                    class: 'form-control new_client_input',
                                                    disabled: true,
                                                    autocomplete: "off",
-                                                   # 'data-parsley-required': "true",
-                                                   # 'data-parsley-excluded': "disabled",
+                                                   'data-parsley-required': "true",
                                                    'data-parsley-group': "fieldset-5",
                                                    'data-parsley-type-message': t("js.validator.required"),
                                                    'data-parsley-required-message': t("js.validator.required") %>
@@ -581,8 +580,7 @@
                                                    class: 'form-control new_client_input',
                                                    disabled: true,
                                                    autocomplete: "off",
-                                                   # 'data-parsley-required': "true",
-                                                   # 'data-parsley-excluded': "disabled",
+                                                   'data-parsley-required': "true",
                                                    'data-parsley-group': "fieldset-5",
                                                    'data-parsley-type-message': t("js.validator.required"),
                                                    'data-parsley-required-message': t("js.validator.required") %>
