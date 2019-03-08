@@ -62,7 +62,7 @@ class DependantSelect extends React.Component {
       // otherwise if 'x' is pressed on 'master', clear the slave's current selection then fire the validator and disable the field.
       // Handle the master (subcategory component
       this.slaveComponent.clearSelection();
-      this.slaveComponent.blurComponent(); // This is needed in react-select v2
+      this.slaveComponent.blurSelectComponent(); // This is needed in react-select v2
       this.slaveComponent.updateExternalDOM('', false);
       this.setState({ slaveDisabled: true, dependantMenuIsOpen: false });
     }

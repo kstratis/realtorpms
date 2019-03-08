@@ -10,27 +10,6 @@ import Select, { ClearIndicator } from 'react-select';
 
 const selectStyles = {
   container: (base, state) => {
-    // ...base,
-    // console.log(this);
-    // const size = document.getElementById('ref-width');
-    // console.log(size.offsetWidth);
-    // console.log(state.getValue()[0].label.length);
-    // const selection = state.getValue();
-    // const option = selection[0] || null;
-
-    // if (option){
-    //   if('label' in option){
-    //     // console.log(option.label.length)
-    //   }
-    //
-    // }
-    // const minWidth = 0;
-    // const maxWidth = 'auto';
-    // const width = '100%';
-    // const zIndex = 1000;
-    // const flexBasis = '33.33%';
-    // const maxWidth = '350px';
-
     return { ...base };
   },
   option: (base, state) => ({
@@ -41,10 +20,10 @@ const selectStyles = {
   }),
   dropdownIndicator: (base, state) => ({
     ...base,
-    // zIndex: 5000,
     '&:hover': {
       cursor: 'pointer'
-    }
+    },
+    'transform': `${state.selectProps.menuIsOpen && "rotate(180deg)"}`,
   }),
   clearIndicator: (base, state) => ({
     ...base,
@@ -125,8 +104,15 @@ class SimpleSelect extends React.Component {
 
   state = {
     selectedOption: this.props.storedOption || '',
-    validator: ''
+    validator: '',
+    isOpen: false
   };
+
+  onMenuOpen = () => {
+    console.log('menu opened up');
+    this.setState({ isOpen: true })
+  };
+  onMenuClose = () => this.setState({ isOpen: false });
 
   // This operates outside react and is used to store the value
   // at the true input field which is eventually used by the rails form
@@ -140,8 +126,12 @@ class SimpleSelect extends React.Component {
   }
 
   // react-select v2
-  blurComponent(){
+  blurSelectComponent(){
     this.selectRef.blur();
+  }
+
+  blurAsyncComponent(){
+    this.asyncRef.blur();
   }
 
   handleAjaxRequest(query, callback) {
@@ -195,6 +185,8 @@ class SimpleSelect extends React.Component {
     const opts = {
       required: !!this.props.isRequired
     };
+
+    const { isOpen } = this.state;
     // DEBUG
     // console.log(this.props.validatorGroup);
     // console.log(this.props.i18n.validatorErrMsg);
@@ -215,6 +207,9 @@ class SimpleSelect extends React.Component {
             isDisabled={this.props.isDisabled}
             isSearchable={this.props.isSearchable}
             isClearable={this.props.isClearable}
+            menuIsOpen={isOpen}
+            onMenuOpen={this.onMenuOpen}
+            onMenuClose={this.onMenuClose}
             ref={ ref => { this.selectRef = ref; }}
           />
         ) : (
@@ -230,8 +225,13 @@ class SimpleSelect extends React.Component {
             placeholder={this.props.i18n.select.placeholder}
             isDisabled={this.props.isDisabled}
             isSearchable={this.props.isSearchable}
+            noOptionsMessage={() => <span>{'Type to search. Use '}<i className="fas fa-backspace fa-fw"/>{' to clear.'}</span>}
             autoload={false}
             cache={false}
+            menuIsOpen={isOpen}
+            onMenuOpen={this.onMenuOpen}
+            onMenuClose={this.onMenuClose}
+            ref={ ref => { this.asyncRef = ref; }}
             // https://github.com/JedWatson/react-select#note-about-filtering-async-options
             filterOptions={(options, filter, currentValues) => {
               // Do no filtering, just return all options
