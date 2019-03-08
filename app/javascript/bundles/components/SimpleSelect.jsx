@@ -108,10 +108,7 @@ class SimpleSelect extends React.Component {
     isOpen: false
   };
 
-  onMenuOpen = () => {
-    console.log('menu opened up');
-    this.setState({ isOpen: true })
-  };
+  onMenuOpen = () => this.setState({ isOpen: true });
   onMenuClose = () => this.setState({ isOpen: false });
 
   // This operates outside react and is used to store the value
@@ -139,8 +136,11 @@ class SimpleSelect extends React.Component {
       .get(`${this.props.endpoint}.json?search=${query}`) // +1 because rails will_paginate starts from 1 while this starts from 0
       .then(response => {
         // DEBUG
-        // console.log(response.data);
-        callback(null, { options: response.data.data.dataset });
+        // console.log(response.data.data.dataset);
+
+        // +callback+ is react-select native function which is used to build the dropdown options. It is passed to
+        // our registered function (handleAjaxRequest here) so that we can manipulate it and call it whenever we see fit
+        callback(response.data.data.dataset);
       });
   }
 
@@ -186,10 +186,8 @@ class SimpleSelect extends React.Component {
       required: !!this.props.isRequired
     };
 
+    // This is needed for the menu open/close styles
     const { isOpen } = this.state;
-    // DEBUG
-    // console.log(this.props.validatorGroup);
-    // console.log(this.props.i18n.validatorErrMsg);
 
     return (
       <div>
@@ -220,23 +218,20 @@ class SimpleSelect extends React.Component {
             value={this.state.selectedOption}
             className={this.props.className}
             styles={selectStyles}
-            onChange={this.handleChange}
             loadOptions={this.getOptions}
             placeholder={this.props.i18n.select.placeholder}
             isDisabled={this.props.isDisabled}
             isSearchable={this.props.isSearchable}
+            isClearable={this.props.isClearable}
+            backspaceRemovesValue={true}
             noOptionsMessage={() => <span>{'Type to search. Use '}<i className="fas fa-backspace fa-fw"/>{' to clear.'}</span>}
             autoload={false}
             cache={false}
             menuIsOpen={isOpen}
             onMenuOpen={this.onMenuOpen}
             onMenuClose={this.onMenuClose}
+            onChange={this.handleChange}
             ref={ ref => { this.asyncRef = ref; }}
-            // https://github.com/JedWatson/react-select#note-about-filtering-async-options
-            filterOptions={(options, filter, currentValues) => {
-              // Do no filtering, just return all options
-              return options;
-            }}
           />
         )}
         <input
