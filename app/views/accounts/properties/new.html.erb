@@ -79,7 +79,9 @@
                               options: Property.businesstypes.keys.collect {|businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype}},
                               soloMode: true,
                               ajaxEnabled: false,
-                              searchable: false,
+                              isClearable: true,
+                              backspaceRemovesValue: true,
+                              isSearchable: false,
                               feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
                               i18n: {
                                   select: t('js.components.select'),
@@ -96,7 +98,8 @@
                             options: get_options,
                             validatorGroup: 'fieldset-1',
                             isRequired: true,
-                            searchable: false,
+                            isSearchable: false,
+                            isClearable: true,
                             formdata: {
                                 formid: 'new_property',
                                 categoryid: 'property_category',

@@ -19,7 +19,7 @@
     "react-highlight-words": "^0.16.0",
     "react-on-rails": "^11.0.10",
     "react-paginate": "^5.2.3",
-    "react-select": "^1.3.0",
+    "react-select": "^2.4.1",
     "react-skylight": "^0.5.1",
     "spark-md5": "^3.0.0",
     "stacked-menu": "https://gitlab.com/bent10/stacked-menu.git#master",

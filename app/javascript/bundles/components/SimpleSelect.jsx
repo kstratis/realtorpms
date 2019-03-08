@@ -1,11 +1,70 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import Select from 'react-select';
+// import Select from 'react-select';
 import { Async } from 'react-select';
 import ReactOnRails from 'react-on-rails';
 import { debounce } from '../utilities/helpers';
-import '!style-loader!css-loader!react-select/dist/react-select.css';
+import Select, { ClearIndicator } from 'react-select';
+// import '!style-loader!css-loader!react-select/dist/react-select.css';
+
+const selectStyles = {
+  container: (base, state) => {
+    // ...base,
+    // console.log(this);
+    // const size = document.getElementById('ref-width');
+    // console.log(size.offsetWidth);
+    // console.log(state.getValue()[0].label.length);
+    // const selection = state.getValue();
+    // const option = selection[0] || null;
+
+    // if (option){
+    //   if('label' in option){
+    //     // console.log(option.label.length)
+    //   }
+    //
+    // }
+    // const minWidth = 0;
+    // const maxWidth = 'auto';
+    // const width = '100%';
+    // const zIndex = 1000;
+    // const flexBasis = '33.33%';
+    // const maxWidth = '350px';
+
+    return { ...base };
+  },
+  option: (base, state) => ({
+    ...base,
+    '&:hover': {
+      cursor: 'pointer'
+    }
+  }),
+  dropdownIndicator: (base, state) => ({
+    ...base,
+    // zIndex: 5000,
+    '&:hover': {
+      cursor: 'pointer'
+    }
+  }),
+  clearIndicator: (base, state) => ({
+    ...base,
+    '&:hover': {
+      cursor: 'pointer'
+    }
+  }),
+  input: (base, state) => ({
+    ...base
+    // flexBasis: '33.33%'
+    // backgroundColor: 'red'
+  }),
+  singleValue: (base, state) => ({
+    ...base,
+    fontWeight: 700,
+    backgroundColor: '#216AB0',
+    color: '#FFFFFF',
+    padding: '10px'
+  })
+};
 
 class SimpleSelect extends React.Component {
   static propTypes = {
@@ -144,11 +203,13 @@ class SimpleSelect extends React.Component {
             name={this.props.name}
             value={this.state.selectedOption}
             className={this.props.className}
+            styles={selectStyles}
             onChange={this.handleChange}
             options={this.props.options}
             placeholder={this.props.i18n.select.placeholder}
             disabled={this.props.disabled}
-            searchable={this.props.searchable}
+            isSearchable={this.props.isSearchable}
+            isClearable={this.props.isClearable}
           />
         ) : (
           <Async
@@ -157,6 +218,7 @@ class SimpleSelect extends React.Component {
             name={this.props.name}
             value={this.state.selectedOption}
             className={this.props.className}
+            styles={selectStyles}
             onChange={this.handleChange}
             loadOptions={this.getOptions}
             placeholder={this.props.i18n.select.placeholder}
