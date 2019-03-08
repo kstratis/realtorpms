@@ -29,6 +29,7 @@ class DependantSelect extends React.Component {
   // In dependant select the first component is called the 'master' and can be thought of as the 'parent' of the two.
   // The dependent one is called the 'slave' and takes the 'slaveOptions' options.
   state = {
+    dependantMenuIsOpen: false,
     slaveDisabled: !this.props.storedSlaveOption, // This changes according to the controlling parent
     // This gets the sibling categories given the stored one.
     slaveOptions: this.props.storedSlaveOption
@@ -61,8 +62,9 @@ class DependantSelect extends React.Component {
       // otherwise if 'x' is pressed on 'master', clear the slave's current selection then fire the validator and disable the field.
       // Handle the master (subcategory component
       this.slaveComponent.clearSelection();
+      this.slaveComponent.blurComponent(); // This is needed in react-select v2
       this.slaveComponent.updateExternalDOM('', false);
-      this.setState({ slaveDisabled: true });
+      this.setState({ slaveDisabled: true, dependantMenuIsOpen: false });
     }
   };
 
@@ -146,7 +148,7 @@ class DependantSelect extends React.Component {
             options={this.buildSelectOptions(this.props.options, true)}
             handleOptions={this.handleOptions}
             i18n={this.props.i18n}
-            disabled={false}
+            isDisabled={false}
             onRef={ref => (this.masterComponent = ref)}
             soloMode={false}
             isSearchable={this.props.isSearchable}
@@ -174,7 +176,7 @@ class DependantSelect extends React.Component {
             options={this.state.slaveOptions}
             handleOptions={this.handleOptions}
             i18n={this.props.i18n}
-            disabled={this.state.slaveDisabled}
+            isDisabled={this.state.slaveDisabled}
             onRef={ref => (this.slaveComponent = ref)}
             soloMode={false}
             isSearchable={this.props.isSearchable}

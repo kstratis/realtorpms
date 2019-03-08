@@ -139,6 +139,11 @@ class SimpleSelect extends React.Component {
     this.setState({ selectedOption: '' });
   }
 
+  // react-select v2
+  blurComponent(){
+    this.selectRef.blur();
+  }
+
   handleAjaxRequest(query, callback) {
     axios
       .get(`${this.props.endpoint}.json?search=${query}`) // +1 because rails will_paginate starts from 1 while this starts from 0
@@ -207,9 +212,10 @@ class SimpleSelect extends React.Component {
             onChange={this.handleChange}
             options={this.props.options}
             placeholder={this.props.i18n.select.placeholder}
-            disabled={this.props.disabled}
+            isDisabled={this.props.isDisabled}
             isSearchable={this.props.isSearchable}
             isClearable={this.props.isClearable}
+            ref={ ref => { this.selectRef = ref; }}
           />
         ) : (
           <Async
@@ -222,8 +228,8 @@ class SimpleSelect extends React.Component {
             onChange={this.handleChange}
             loadOptions={this.getOptions}
             placeholder={this.props.i18n.select.placeholder}
-            disabled={this.props.disabled}
-            searchable={this.props.searchable}
+            isDisabled={this.props.isDisabled}
+            isSearchable={this.props.isSearchable}
             autoload={false}
             cache={false}
             // https://github.com/JedWatson/react-select#note-about-filtering-async-options
