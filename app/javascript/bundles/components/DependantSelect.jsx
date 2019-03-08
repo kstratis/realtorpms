@@ -149,7 +149,8 @@ class DependantSelect extends React.Component {
             disabled={false}
             onRef={ref => (this.masterComponent = ref)}
             soloMode={false}
-            searchable={this.props.searchable}
+            isSearchable={this.props.isSearchable}
+            isClearable={this.props.isClearable}
             ajaxEnabled={false}
             validatorGroup={this.props.validatorGroup}
             feedback={this.props.formdata.categoryFeedback}
@@ -176,7 +177,8 @@ class DependantSelect extends React.Component {
             disabled={this.state.slaveDisabled}
             onRef={ref => (this.slaveComponent = ref)}
             soloMode={false}
-            searchable={this.props.searchable}
+            isSearchable={this.props.isSearchable}
+            isClearable={this.props.isClearable}
             ajaxEnabled={false}
             validatorGroup={this.props.validatorGroup}
             feedback={this.props.formdata.subcategoryFeedback}
