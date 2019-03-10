@@ -4,9 +4,11 @@ import axios from 'axios';
 // import Select from 'react-select';
 import { Async } from 'react-select';
 import ReactOnRails from 'react-on-rails';
-import { debounce } from '../utilities/helpers';
+import { debounce, renderHTML } from '../utilities/helpers';
 import Select, { ClearIndicator } from 'react-select';
 // import '!style-loader!css-loader!react-select/dist/react-select.css';
+
+
 
 const selectStyles = {
   container: (base, state) => {
@@ -111,6 +113,7 @@ class SimpleSelect extends React.Component {
   onMenuOpen = () => this.setState({ isOpen: true });
   onMenuClose = () => this.setState({ isOpen: false });
 
+
   // This operates outside react and is used to store the value
   // at the true input field which is eventually used by the rails form
   setTextInputValue(value) {
@@ -185,6 +188,7 @@ class SimpleSelect extends React.Component {
     const opts = {
       required: !!this.props.isRequired
     };
+    console.log(this.props.i18n);
 
     // This is needed for the menu open/close styles
     const { isOpen } = this.state;
@@ -224,7 +228,8 @@ class SimpleSelect extends React.Component {
             isSearchable={this.props.isSearchable}
             isClearable={this.props.isClearable}
             backspaceRemovesValue={true}
-            noOptionsMessage={() => <span>{'Type to search. Use '}<i className="fas fa-backspace fa-fw"/>{' to clear.'}</span>}
+            noOptionsMessage={() => renderHTML(this.props.i18n.select.nooptions_html)}
+            loadingMessage={() => renderHTML(this.props.i18n.select.loading_html)}
             autoload={false}
             cache={false}
             menuIsOpen={isOpen}

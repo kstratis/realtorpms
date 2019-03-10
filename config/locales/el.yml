@@ -165,11 +165,13 @@ el:
   js:
     components:
       select:
-       placeholder: "Επιλέξτε..."
-       category: "Κατηγορία"
-       subcategory: "Υποκατηγορία"
-       required: "Υποχρεωτικό πεδίο"
-       optional: "Προεραιτικό πεδίο"
+        nooptions_html: "Αναζητήστε έναν όρο. Πληκτρολογήστε&nbsp; <i class=\"fas fa-backspace fa-fw\"/></i>&nbsp; για εκκαθάριση"
+        loading_html: "Φόρτωση αποτελεσμάτων..."
+        placeholder: "Επιλέξτε..."
+        category: "Κατηγορία"
+        subcategory: "Υποκατηγορία"
+        required: "Υποχρεωτικό πεδίο"
+        optional: "Προεραιτικό πεδίο"
     forms:
       properties:
         wizard:

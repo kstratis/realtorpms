@@ -1,3 +1,5 @@
+import React from 'react';
+
 const debounce = (func, wait, immediate) => {
   var timeout;
   return function() {
@@ -17,4 +19,8 @@ const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-export {debounce, capitalizeFirstLetter};
+const renderHTML = (htmlContent) => {
+  return <div dangerouslySetInnerHTML={{__html: htmlContent}} />;
+};
+
+export {debounce, capitalizeFirstLetter, renderHTML};
