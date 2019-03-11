@@ -188,7 +188,6 @@ class SimpleSelect extends React.Component {
     const opts = {
       required: !!this.props.isRequired
     };
-    console.log(this.props.i18n);
 
     // This is needed for the menu open/close styles
     const { isOpen } = this.state;
