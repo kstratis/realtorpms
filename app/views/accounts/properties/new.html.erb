@@ -170,6 +170,8 @@
                               options: Property.floors.keys.collect {|floor| {label: I18n.t("activerecord.attributes.property.enums.floor.#{floor}", :default => floor.to_s), value: floor}},
                               soloMode: true,
                               ajaxEnabled: false,
+                              isClearable: true,
+                              backspaceRemovesValue: true,
                               searchable: true,
                               feedback: t('js.forms.properties.wizard.step1.floor_feedback'),
                               i18n: {
@@ -198,6 +200,8 @@
                               options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
                               soloMode: true,
                               ajaxEnabled: false,
+                              isClearable: true,
+                              backspaceRemovesValue: true,
                               searchable: true,
                               feedback: t('js.forms.properties.wizard.step1.construction_feedback'),
                               i18n: {
@@ -334,6 +338,8 @@
                               options: (1..10).collect {|level| {label: level, value: level}},
                               soloMode: true,
                               ajaxEnabled: false,
+                              isClearable: true,
+                              backspaceRemovesValue: true,
                               searchable: false,
                               feedback: t('js.forms.properties.wizard.step1.levels_feedback'),
                               i18n: {

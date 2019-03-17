@@ -165,7 +165,8 @@ el:
   js:
     components:
       select:
-        nooptions_html: "Αναζητήστε έναν όρο. Πληκτρολογήστε&nbsp; <i class=\"fas fa-backspace fa-fw\"/></i>&nbsp; για εκκαθάριση"
+        nooptions_async_html: "Αναζητήστε έναν όρο. Πληκτρολογήστε&nbsp; <i class=\"fas fa-backspace fa-fw\"/></i>&nbsp; για εκκαθάριση"
+        nooptions_sync_html: "Δεν βρέθηκαν αποτελέσματα"
         loading_html: "Φόρτωση αποτελεσμάτων..."
         placeholder: "Επιλέξτε..."
         category: "Κατηγορία"

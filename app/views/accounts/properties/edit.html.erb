@@ -77,6 +77,7 @@
                               formID: 'new_property',
                               className: 'simple-select',
                               options: Property.businesstypes.keys.collect {|businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype}},
+                              storedOption: {"label": Property.human_enum_name(:businesstype, @property.businesstype), "value": @property.businesstype},
                               soloMode: true,
                               ajaxEnabled: false,
                               isClearable: true,
@@ -170,6 +171,8 @@
                               options: Property.floors.keys.collect {|floor| {label: I18n.t("activerecord.attributes.property.enums.floor.#{floor}", :default => floor.to_s), value: floor}},
                               soloMode: true,
                               ajaxEnabled: false,
+                              isClearable: true,
+                              backspaceRemovesValue: true,
                               searchable: true,
                               feedback: t('js.forms.properties.wizard.step1.floor_feedback'),
                               i18n: {
@@ -198,6 +201,8 @@
                               options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
                               soloMode: true,
                               ajaxEnabled: false,
+                              isClearable: true,
+                              backspaceRemovesValue: true,
                               searchable: true,
                               feedback: t('js.forms.properties.wizard.step1.construction_feedback'),
                               i18n: {
@@ -334,6 +339,8 @@
                               options: (1..10).collect {|level| {label: level, value: level}},
                               soloMode: true,
                               ajaxEnabled: false,
+                              isClearable: true,
+                              backspaceRemovesValue: true,
                               searchable: false,
                               feedback: t('js.forms.properties.wizard.step1.levels_feedback'),
                               i18n: {

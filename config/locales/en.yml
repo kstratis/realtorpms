@@ -167,7 +167,8 @@ en:
   js:
     components:
       select:
-        nooptions_html: "Type to search. <i class=\"fas fa-backspace fa-fw\"/></i> to clear"
+        nooptions_async_html: "Type to search. <i class=\"fas fa-backspace fa-fw\"/></i> to clear"
+        nooptions_sync_html: "No options found"
         loading_html: "Loading results..."
         placeholder: "Choose..."
         category: "Category"
