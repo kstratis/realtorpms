@@ -152,15 +152,15 @@ en:
             air: "Air"
             other_various: "Other"
           type:
-            neoclassical: "Νεοκλασικό"
-            protected_property: "Διατηρητέο"
+            neoclassical: "Neoclassical"
+            protected_property: "Protected property"
             loft: "Loft"
-            traditional: "Παραδοσιακό"
-            villa: "Βίλα"
-            stone: "Πέτρινο"
+            traditional: "Traditional"
+            villa: "Villa"
+            stone: "Stone"
             studio: "Studio"
-            prefabricated: "Λυόμενο"
-            precast: "Προκατασκευή"
+            prefabricated: "Prefabricated"
+            precast: "Precasted"
     errors:
       messages:
         record_invalid: ! 'Validation failed: %{errors}'
@@ -186,7 +186,7 @@ en:
             type_of_subcategory_feedback: "Choose a subcategory"
             floor_feedback: "Pick a floor"
             construction_feedback: "Construction year"
-            levels_feedback: "Επίπεδα"
+            levels_feedback: "Floors"
           step2:
             anchor: "Info"
             title: "Complementary information"
