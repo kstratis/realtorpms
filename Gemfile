@@ -11,12 +11,12 @@ gem 'rails', '~> 5.2.2'
 # gem 'rails', :git => 'https://github.com/rails/rails'
 # gem 'bootstrap-sass', '3.3.7'
 gem 'bcrypt', '3.1.12'
-gem 'babel-transpiler'
+# gem 'babel-transpiler'
 
 gem 'bootstrap', '~> 4.2.1'
 
 gem 'bootsnap'
-gem 'bootstrap-datepicker-rails'
+# gem 'bootstrap-datepicker-rails'
 gem 'rake', '~> 12.3.2'
 
 # image metadata info
@@ -26,7 +26,7 @@ gem 'exifr', '~> 1.3', '>= 1.3.5'
 gem "mini_magick"
 
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 1.1.3'
+gem 'pg', '~> 1.1.4'
 # Use Puma as the app server
 gem 'puma', '~> 3.12'
 # Use SCSS for stylesheets
@@ -46,7 +46,7 @@ gem 'jbuilder', '~> 2.8'
 
 gem 'jquery-rails', '~> 4.3.3'
 
-gem 'faker', '~> 1.9.1'
+gem 'faker', '~> 1.9.3'
 
 gem 'will_paginate', '~> 3.1.6'
 
@@ -58,11 +58,11 @@ gem 'rails_12factor'
 
 gem 'font-awesome-rails'
 
-gem 'react_on_rails', '11.2.1'
+gem 'react_on_rails', '11.2.2'
 
-gem 'webpacker', '~> 3.5.5'
+gem 'webpacker', '~> 4.0'
 
-gem "roo", "~> 2.7.1"
+gem "roo", "~> 2.8.2"
 
 gem "aws-sdk-s3", require: false
 
@@ -77,7 +77,7 @@ gem "parsley-rails"
 
 group :development, :test do
   gem 'factory_bot'
-  gem 'rspec-rails', '3.8.1'
+  gem 'rspec-rails', '3.8.2'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
@@ -94,17 +94,17 @@ end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console', '>= 3.5.1'
+  gem 'web-console', '>= 3.7.0'
   gem 'listen', '>= 3.1.5', '< 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring-watcher-listen', '~> 2.0.1'
 end
 
 group :test do
-  gem 'rails-controller-testing', '1.0.2'
-  gem 'minitest-reporters',       '1.1.18'
-  gem 'guard',                    '2.14.1'
+  gem 'rails-controller-testing', '1.0.4'
+  gem 'minitest-reporters',       '1.3.6'
+  gem 'guard',                    '2.15'
   gem 'guard-minitest',           '2.4.6'
 end
 

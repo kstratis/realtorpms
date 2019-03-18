@@ -26,7 +26,7 @@ class Account < ApplicationRecord
 
     def subdomain_exists?(requested_subdomain)
       subdomain = self.find_by(subdomain: requested_subdomain)
-      return true if subdomain else false
+      !!subdomain
     end
   end
 end
