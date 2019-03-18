@@ -11,15 +11,15 @@
   }
 
   @include media-breakpoint-up(md) {
-    height: $input-height-inner;
+    height: $input-height-mq;
     font-size: $font-size-sm;
 
     &.btn-sm {
-      height: $input-height-inner-sm;
+      height: $input-height-mq-sm;
       font-size: 0.8125rem;
     }
     &.btn-lg {
-      height: $input-height-inner-lg;
+      height: $input-height-mq-lg;
       font-size: 1rem;
     }
   }
@@ -265,31 +265,37 @@
 .btn-icon {
   padding: 0;
   line-height: $input-height;
-  border-radius: $input-height-inner;
-  @include size($input-height);
+  border-radius: $input-height-mq;
+  width: $input-height;
+  height: $input-height;
 
   &.btn-sm {
     line-height: $input-height-sm;
-    @include size($input-height-sm);
+    width: $input-height-sm;
+    height: $input-height-sm;
   }
 
   &.btn-lg {
     line-height: $input-height-lg;
-    @include size($input-height-lg);
+    width: $input-height-lg;
+    height: $input-height-lg;
   }
 
   @include media-breakpoint-up(md) {
     line-height: calc(#{$input-height} - 2px);
-    @include size($input-height-inner);
+    width: $input-height-mq;
+    height: $input-height-mq;
 
     &.btn-sm {
       line-height: calc(#{$input-height-sm} - 2px);
-      @include size($input-height-inner-sm);
+      width: $input-height-mq-sm;
+      height: $input-height-mq-sm;
     }
 
     &.btn-lg {
       line-height: calc(#{$input-height-lg} - 2px);
-      @include size($input-height-inner-lg);
+      width: $input-height-mq-lg;
+      height: $input-height-mq-lg;
     }
   }
 }

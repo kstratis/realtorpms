@@ -98,7 +98,9 @@
   }
 }
 
+
 // checkbox
+
 .custom-checkbox {
   .custom-control-label::after {
     background-image: $custom-checkbox-indicator-icon-checked;
@@ -111,7 +113,9 @@
   }
 }
 
+
 // radio
+
 .custom-radio {
   .custom-control-label::after {
     background-image: $custom-radio-indicator-icon-checked;
@@ -119,7 +123,95 @@
 }
 
 
+// custom number
+
+.custom-number {
+  position: relative;
+  display: flex;
+
+  > .form-control[type=number] {
+    flex: 1 1 auto;
+    padding-right: calc(#{$input-padding-x} + 1.5rem);
+    -moz-appearance: textfield;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      margin: 0;
+      -webkit-appearance: none;
+    }
+
+    &.form-control-sm {
+      padding-right: calc(#{$input-padding-x-sm} + 1.5rem);
+    }
+
+    &.form-control-lg {
+      padding-right: calc(#{$input-padding-x-lg} + 1.5rem);
+    }
+  }
+}
+
+.custom-number-controls {
+  position: absolute;
+  right: 1px;
+  width: 1.5rem;
+  height: 100%;
+}
+
+.custom-number-btn {
+  position: absolute;
+  right: 0px;
+  cursor: pointer;
+  border-left: 1px solid $input-border-color;
+  width: 100%;
+  background-color: $input-bg;
+  line-height: 1.1;
+  text-align: center;
+  user-select: none;
+
+  &:hover {
+    color: $primary;
+  }
+
+  &:focus,
+  &.focus,
+  &:active {
+    color: darken($primary, 5%);
+    background-color: rgba($primary, $subtle-level);
+  }
+
+  &.custom-number-up {
+    top: 1px;
+    height: calc(50% - 1px);
+    border-bottom: 1px solid $input-border-color;
+    border-top-right-radius: $border-radius;
+  }
+
+  &.custom-number-down {
+    bottom: 1px;
+    height: calc(50% - 1px);
+    border-bottom-right-radius: $border-radius;
+  }
+}
+
+
 // custom select
+
+@include media-breakpoint-up(md) {
+  .custom-select {
+    height: $input-height-mq;
+    font-size: $font-size-sm;
+
+    &.custom-select-sm {
+      height: $input-height-mq-sm;
+      font-size: 0.8125rem;
+    }
+
+    &.custom-select-lg {
+      height: $input-height-mq-lg;
+      font-size: 1rem;
+    }
+  }
+}
 
 .custom-select {
   background: $custom-select-indicator no-repeat right $custom-select-padding-x center, $custom-select-bg;
@@ -127,7 +219,7 @@
   @include transition(all 200ms ease-in-out);
 
   @include media-breakpoint-up(md) {
-    height: $input-height-inner;
+    height: $input-height-mq;
   }
 
   &-reflow {
@@ -153,7 +245,7 @@
   font-size: $font-size-sm;
 
   @include media-breakpoint-up(md) {
-    height: $input-height-inner-sm;
+    height: $input-height-mq-sm;
     font-size: .8125rem;
   }
 }
@@ -163,7 +255,7 @@
   font-size: $font-size-lg;
 
   @include media-breakpoint-up(md) {
-    height: $input-height-inner-lg;
+    height: $input-height-mq-lg;
     font-size: 1rem;
   }
 }
@@ -195,7 +287,7 @@
   .custom-file-label,
   .custom-file-label::after {
     @include media-breakpoint-up(md) {
-      height: $input-height-inner;
+      height: $input-height-mq;
     }
   }
 }
@@ -209,7 +301,7 @@
     font-size: $font-size-sm;
 
     @include media-breakpoint-up(md) {
-      height: $input-height-inner-sm;
+      height: $input-height-mq-sm;
       font-size: .8125rem;
     }
   }
@@ -224,7 +316,7 @@
     font-size: $font-size-lg;
 
     @include media-breakpoint-up(md) {
-      height: $input-height-inner-lg;
+      height: $input-height-mq-lg;
       font-size: 1rem;
     }
   }

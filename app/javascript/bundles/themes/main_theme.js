@@ -55,12 +55,13 @@ class Theme {
     this.popovers();
     this.inputClearable();
     this.inputGroup();
+    this.inputNumber();
     this.fileInputBehavior();
     this.togglePasswordVisibility();
     this.indeterminateCheckboxes();
     this.formValidation();
     this.cardExpansion();
-    this.modalOverflow();
+    this.modalScrollable();
     this.autofocusInputBehaviour();
 
     // handle theme skins (default, dark)
@@ -93,6 +94,7 @@ class Theme {
 
     // handle plugins initialization
     // =============================================================
+
     this.perfectScrollbar();
     this.masonry();
     this.chartjs();
@@ -271,6 +273,42 @@ class Theme {
   }
 
   /**
+   * Toggle focus class in input-group when input is focused
+   */
+  inputNumber() {
+    $('.custom-number').each(function() {
+      const spinner = $(this);
+      const input = spinner.children('.form-control[type="number"]');
+      const min = parseFloat(input.attr('min'));
+      const max = parseFloat(input.attr('max'));
+      const step = parseFloat(input.attr('step')) || 1;
+      let newVal = 0;
+
+      const controls = $('<div class="custom-number-controls"></div>');
+      const btnUp = $('<div class="custom-number-btn custom-number-up">+</div>');
+      const btnDown = $('<div class="custom-number-btn custom-number-down">-</div>');
+
+      controls.prepend(btnUp).append(btnDown);
+
+      spinner.append(controls);
+
+      btnUp.on('click', function() {
+        const oldValue = parseFloat(input.val()) || 0;
+        newVal = oldValue >= max ? oldValue : oldValue + step;
+
+        input.val(newVal).trigger('change');
+      });
+
+      btnDown.on('click', function() {
+        const oldValue = parseFloat(input.val()) || 0;
+        newVal = oldValue <= min ? oldValue : oldValue - step;
+
+        input.val(newVal).trigger('change');
+      });
+    });
+  }
+
+  /**
    * Add text value to our custom file input
    */
   fileInputBehavior() {
@@ -375,9 +413,9 @@ class Theme {
   }
 
   /**
-   * Toggle class overflow when the modal body scroll reach the top/bottom
+   * Toggle class scrollable when the modal body scroll reach the top/bottom
    */
-  modalOverflow() {
+  modalScrollable() {
     $('.modal').on('shown.bs.modal', function() {
       $(this)
         .addClass('has-shown')
@@ -385,7 +423,7 @@ class Theme {
         .trigger('scroll');
     });
 
-    $('.modal-dialog-overflow .modal-body, .modal-drawer .modal-body').on('scroll', function() {
+    $('.modal-dialog-scrollable .modal-body, .modal-drawer .modal-body').on('scroll', function() {
       const $elem = $(this);
       const elem = $elem[0];
       const isTop = $elem.scrollTop() === 0;

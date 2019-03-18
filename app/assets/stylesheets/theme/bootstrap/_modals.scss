@@ -26,27 +26,10 @@
 }
 
 
-// Modal Overflow
+// Modal Scrollable
 // ==================================================
 
-$modal-overflow-cap: $modal-dialog-margin * 2;
-$modal-overflow-cap-sm-up: $modal-dialog-margin-y-sm-up * 2;
-$modal-overflow-height: calc(100vh - #{$modal-overflow-cap});
-$modal-overflow-height-sm-up: calc(100vh - #{$modal-overflow-cap-sm-up});
-
-.modal-dialog-overflow {
-  .modal-content {
-    max-height: $modal-overflow-height;
-
-    @include media-breakpoint-up("sm") {
-      max-height: $modal-overflow-height-sm-up;
-    }
-  }
-
-  .modal-body {
-    overflow-y: auto;
-  }
-
+.modal-dialog-scrollable {
   .modal-header,
   .modal-footer {
     z-index: 2;
@@ -178,7 +161,7 @@ $modal-overflow-height-sm-up: calc(100vh - #{$modal-overflow-cap-sm-up});
 
 // modal scrollable behaviour
 
-.modal-dialog-overflow,
+.modal-dialog-scrollable,
 .modal-drawer {
   .modal-header {
     box-shadow: 0 2px 0 0 rgba($black, .125);

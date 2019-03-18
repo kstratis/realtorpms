@@ -32,7 +32,7 @@
   @include border-radius($border-radius);
 
   @include media-breakpoint-up("md") {
-    min-height: $input-height-inner;
+    min-height: $input-height-mq;
   }
 
   &:hover {

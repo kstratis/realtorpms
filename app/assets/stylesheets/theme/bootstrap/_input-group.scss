@@ -40,14 +40,14 @@
 
   // control height
   @include media-breakpoint-up(md) {
-    height: $input-height-inner;
+    height: $input-height-mq;
 
     &.input-group-sm {
-      height: $input-height-inner-sm;
+      height: $input-height-mq-sm;
     }
 
     &.input-group-lg {
-      height: $input-height-inner-lg;
+      height: $input-height-mq-lg;
     }
   }
 
@@ -62,6 +62,55 @@
         color: $component-active-color;
         background-color: $component-active-bg;
       }
+    }
+  }
+
+  &.is-valid {
+    border-color: $form-feedback-valid-color;
+
+    .form-control {
+      background-image: $form-feedback-icon-valid;
+    }
+
+    &.focus {
+      box-shadow: 0 0 0 1px $form-feedback-valid-color;
+
+      .input-group-append,
+      .input-group-prepend {
+        .badge {
+          color: color-yiq($form-feedback-valid-color);
+          background-color: $form-feedback-valid-color;
+        }
+      }
+    }
+  }
+
+  &.is-invalid {
+    border-color: $form-feedback-invalid-color;
+
+    .form-control {
+      background-image: $form-feedback-icon-invalid;
+    }
+
+    &.focus {
+      box-shadow: 0 0 0 1px $form-feedback-invalid-color;
+
+      .input-group-append,
+      .input-group-prepend {
+        .badge {
+          color: color-yiq($form-feedback-invalid-color);
+          background-color: $form-feedback-invalid-color;
+        }
+      }
+    }
+  }
+
+  &.is-valid,
+  &.is-invalid {
+    .form-control {
+      background-repeat: no-repeat;
+      background-position: calc(100% - #{$input-padding-x}) calc(.375em + .1875rem + 2px) !important;
+      background-size: calc(.75em + .375rem) calc(.75em + .375rem);
     }
   }
 
@@ -87,9 +136,13 @@
       padding-right: 1px;
     }
 
-    .badge,
-    .loader {
-      margin-left: .5rem;
+    .badge {
+      margin-left: $input-padding-x / 2;
+    }
+
+    .spinner-border,
+    .spinner-grow {
+      margin-left: $input-padding-x;
     }
   }
 
@@ -98,20 +151,25 @@
       padding-left: 1px;
     }
 
-    .badge,
-    .loader {
-      margin-right: .5rem;
+    .badge {
+      margin-right: $input-padding-x / 2;
+    }
+
+    .spinner-border,
+    .spinner-grow {
+      margin-right: $input-padding-x;
     }
   }
 
   .input-group-append,
   .input-group-prepend {
     .btn {
-      height: inherit;
+      height: calc(100% - 2px);
       border: 0;
     }
 
-    .loader {
+    .spinner-border,
+    .spinner-grow {
       align-self: center;
     }
 
@@ -189,25 +247,25 @@
     }
 
     .form-control {
-      height: $input-height-inner;
+      height: $input-height-mq;
 
       @include media-breakpoint-up(md) {
-        height: calc(#{$input-height-inner} - 2px);
+        height: calc(#{$input-height-mq} - 2px);
       }
 
       &.form-control-sm {
-        height: $input-height-inner-sm;
+        height: $input-height-mq-sm;
 
         @include media-breakpoint-up(md) {
-          height: calc(#{$input-height-inner-sm} - 2px);
+          height: calc(#{$input-height-mq-sm} - 2px);
         }
       }
 
       &.form-control-lg {
-        height: $input-height-inner-lg;
+        height: $input-height-mq-lg;
 
         @include media-breakpoint-up(md) {
-          height: calc(#{$input-height-inner-lg} - 2px);
+          height: calc(#{$input-height-mq-lg} - 2px);
         }
       }
     }
@@ -249,16 +307,62 @@
 }
 
 
+// Spinner
+
+.has-spinner {
+  position: relative;
+
+  .spinner-border,
+  .spinner-grow {
+    position: absolute;
+    top: .125rem;
+    right: $input-padding-x;
+    opacity: 0;
+
+    &.show {
+      opacity: 1;
+
+      ~ .input-group-append,
+      ~ .close {
+        display: none;
+      }
+    }
+  }
+
+  .spinner-border-sm,
+  .spinner-grow-sm {
+    top: .75rem;
+  }
+
+  &.form-label-group {
+    .spinner-border,
+    .spinner-grow {
+      top: .5rem;
+    }
+
+    .spinner-border-sm,
+    .spinner-grow-sm {
+      top: 1rem;
+    }
+  }
+}
+
+
 // clearable
 
 .has-clearable {
   position: relative;
+
+  &.input-group > .close.show ~ .input-group-append {
+    margin-right: $input-padding-x * 2.5;
+  }
 
   .form-control {
     padding-right: 30px;
   }
 
   .close {
+    display: none;
     margin: 0;
     position: absolute;
     top: 50%;
@@ -267,17 +371,34 @@
     font-size: 1rem;
     line-height: 1;
     color: $input-placeholder-color;
-    opacity: 0;
     z-index: 4;
     transform: translate3d(0, -50%, 0);
-    transition: opacity 150ms;
 
     &:hover {
       color: $gray-700;
     }
 
     &.show {
-      opacity: 1;
+      display: block;
     }
   }
+
+   &.has-spinner .close,
+   &.has-spinner .close.show {
+    display: none;
+  }
+}
+
+.has-clearable .close.show ~ .form-control.is-valid,
+.has-clearable .close.show ~ .form-control.is-invalid,
+.was-validated .has-clearable .close.show ~ .form-control:valid,
+.was-validated .has-clearable .close.show ~ .form-control:invalid {
+  background-position: calc(100% - (#{$input-padding-x} * 3)) calc(.375em + .1875rem);
+}
+
+.form-label-group.has-clearable > .close.show ~ .form-control.is-valid,
+.was-validated .form-label-group.has-clearable > .close.show ~ .form-control:valid,
+.form-label-group.has-clearable > .close.show ~ .form-control.is-invalid,
+.was-validated .form-label-group.has-clearable > .close.show ~ .form-control:invalid {
+  background-position: calc(100% - (#{$input-padding-x} * 3)) calc(.75em + .1875rem);
 }

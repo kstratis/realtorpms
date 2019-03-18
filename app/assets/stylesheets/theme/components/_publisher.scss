@@ -37,12 +37,12 @@
   }
 
   .user-avatar {
-    width: $input-height-inner;
-    height: $input-height-inner;
+    width: $input-height-mq;
+    height: $input-height-mq;
 
     @include media-breakpoint-up(md) {
-      width: $input-height-inner;
-      height: $input-height-inner;
+      width: $input-height-mq;
+      height: $input-height-mq;
     }
   }
 }
@@ -52,11 +52,11 @@
   width: 100%;
 
   .form-control {
-    height: $input-height-inner;
+    height: $input-height-mq;
     resize: none;
 
     @include media-breakpoint-up(md) {
-      height: $input-height-inner;
+      height: $input-height-mq;
     }
   }
 }

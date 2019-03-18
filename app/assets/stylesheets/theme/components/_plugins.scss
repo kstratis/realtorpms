@@ -1054,17 +1054,17 @@ $plyr-accent:       $primary !default;
   @include transition(box-shadow 200ms ease-in-out, border-color 200ms ease-in-out);
 
   @include media-breakpoint-up(md) {
-    height: $input-height-inner;
+    height: $input-height-mq;
   }
 }
 .select2-container--default .select2-selection--single .select2-selection__rendered {
   padding-left: $input-padding-x;
   padding-right: 2rem;
-  line-height: $input-height-inner;
+  line-height: $input-height-mq;
   color: $input-color;
 
   @include media-breakpoint-up(md) {
-    line-height: $input-height-inner;
+    line-height: $input-height-mq;
   }
 }
 .select2-container--default .select2-selection--single .select2-selection__placeholder {
@@ -1076,12 +1076,12 @@ $plyr-accent:       $primary !default;
 }
 .select2-container--default .select2-selection--single .select2-selection__arrow {
   right: 0px;
-  height: $input-height-inner;
+  height: $input-height-mq;
   width: 2.5rem;
   user-select: none;
 
   @include media-breakpoint-up(md) {
-    height: calc(#{$input-height-inner} - 2px);
+    height: calc(#{$input-height-mq} - 2px);
   }
 
   b {
@@ -1096,11 +1096,11 @@ $plyr-accent:       $primary !default;
 
 .select2-container .select2-selection--multiple {
   background-color: $input-bg;
-  min-height: $input-height-inner;
+  min-height: $input-height-mq;
   box-shadow: $input-box-shadow;
 
   @include media-breakpoint-up(md) {
-    min-height: $input-height-inner;
+    min-height: $input-height-mq;
   }
 }
 .select2-container--default .select2-selection--single,
@@ -2355,7 +2355,7 @@ span.flatpickr-weekday {
 
   > .CodeMirror,
   .CodeMirror-scroll {
-    min-height: $input-height-inner * 2;
+    min-height: calc(#{$input-height-mq} * 2);
   }
 }
 
@@ -3038,7 +3038,7 @@ span.flatpickr-weekday {
     text-transform: capitalize;
 
     @include media-breakpoint-up(md) {
-      height: $input-height-inner;
+      height: $input-height-mq;
     }
   }
 }
