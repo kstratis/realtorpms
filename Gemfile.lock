@@ -142,6 +142,7 @@ GEM
     http-2 (0.10.1)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
+    irb (1.0.0)
     jbuilder (2.8.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
@@ -360,6 +361,7 @@ DEPENDENCIES
   font-awesome-rails
   guard (= 2.15)
   guard-minitest (= 2.4.6)
+  irb
   jbuilder (~> 2.8)
   jquery-rails (~> 4.3.3)
   launchy (= 2.4.3)
