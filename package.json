@@ -5,7 +5,6 @@
     "@babel/runtime": "^7.3.4",
     "@rails/webpacker": "^4.0.2",
     "axios": "^0.18.0",
-    "babel-preset-react": "^6.24.1",
     "bs-stepper": "https://github.com/kstratis/bs-stepper.git#events",
     "caniuse-lite": "^1.0.30000865",
     "flatpickr": "^4.5.2",
@@ -23,7 +22,7 @@
     "react-skylight": "^0.5.1",
     "spark-md5": "^3.0.0",
     "stacked-menu": "https://gitlab.com/bent10/stacked-menu.git#master",
-    "uppy": "^0.29.1",
+    "uppy": "^0.30.3",
     "url-search-params": "^0.10.0"
   },
   "devDependencies": {
@@ -36,15 +35,15 @@
     "@babel/preset-env": "^7.3.4",
     "@babel/preset-react": "^7.0.0",
     "@fortawesome/fontawesome-free": "^5.7.2",
-    "autoprefixer": "^9.3.1",
+    "autoprefixer": "^9.5.0",
     "cssnano": "^4.1.10",
     "node-sass": "^4.11.0",
-    "postcss-cssnext": "^3.1.0",
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
-    "prettier": "^1.15.3",
+    "postcss-preset-env": "^6.6.0",
+    "prettier": "^1.16.4",
     "sass-loader": "^7.1.0",
     "sugarss": "^2.0.0",
-    "webpack-dev-server": "2.11.3"
+    "webpack-dev-server": "3.2.1"
   }
 }
