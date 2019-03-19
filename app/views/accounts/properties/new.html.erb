@@ -1,12 +1,14 @@
 <% provide(:title, t('properties.new.heading')) %>
 
-<%= render partial: 'shared/breadcrumb', locals: {title: 'properties.new.heading', icon: 'house-colored'} %>
+<%= render partial: 'shared/breadcrumb', locals: {path: [{:title => 'properties.new.heading', :href => ''}], icon: 'house-colored'} %>
+
 <%= content_tag :div, class: "", id: "alerts", data: {
     i18n: {
         alerts: t('js.alerts'),
     }
 } do %>
 <% end %>
+
 <div class="page-container">
   <div class="container">
 

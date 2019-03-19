@@ -69,7 +69,7 @@ class Property < ApplicationRecord
 
   private
 
-    # In the 'compound' extra fields for roofdeck, storage, garden and plot where each comes with its own input,
+    # In the 'compound' extra fields for roofdeck, storage, garden and plot where each one comes with its own input,
     # make sure that if unchecked on update action, the existing input value will also be cleared.
     def handle_dependent_fields
       edited_extras = extras.reject { |c| c.blank? }.collect { |extra| Extra.find(extra.id).name }

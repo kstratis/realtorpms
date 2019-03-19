@@ -3,8 +3,14 @@
     <div class="breadcrumb-container">
       <div class="breadcrumb-wrapper">
         <ul class="breadcrumb-custom align-items-center">
-          <h1><%= path %></h1>
-          <%= path_printer(path, icon) %>
+          <li><a href="/"><i class="fas fa-home"> </i></a></li>
+          <% path.each do |entry| %>
+            <% if entry == path.last %>
+              <li class="active"><span><strong> <%= t entry[:title] %></strong></span></li>
+            <% else %>
+              <li><a href="<%= entry[:href] %>"><%= t entry[:title] %></a></li>
+            <% end %>
+          <% end %>
         </ul>
       </div>
     </div>

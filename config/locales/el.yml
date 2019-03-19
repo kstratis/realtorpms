@@ -370,6 +370,7 @@ el:
       heading: "Επεξεργασία προφίλ"
       save_button: "Αποθήκευση"
   properties:
+    identifier: "ID"
     title: "Ακίνητα"
     add: "Προσθήκη"
     add_fast: "Προσθήκη ακινήτου (γρήγορη)"

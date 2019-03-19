@@ -372,6 +372,7 @@ en:
       heading: "Edit profile"
       save_button: "Save changes"
   properties:
+    identifier: "ID"
     title: "Properties"
     add: "Add property"
     add_fast: "Add property (fast)"

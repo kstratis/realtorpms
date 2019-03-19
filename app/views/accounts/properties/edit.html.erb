@@ -1,12 +1,14 @@
-<% provide(:title, t('properties.new.heading')) %>
+<% provide(:title, t('properties.edit.heading')) %>
 
-<%= render partial: 'shared/breadcrumb', locals: {path: [{:title => 'properties.edit.heading'}, {title: 'properties.new.heading'}], icon: 'house-colored'} %>
+<%= render partial: 'shared/breadcrumb', locals: {path: [{:title => 'properties.edit.heading', :href => edit_property_path}, {title: @property.id, :href => ''}], icon: 'house-colored'} %>
+
 <%= content_tag :div, class: "", id: "alerts", data: {
     i18n: {
         alerts: t('js.alerts'),
     }
 } do %>
 <% end %>
+
 <div class="page-container">
   <div class="container">
 
@@ -419,7 +421,7 @@
                                   <%= t("activerecord.attributes.extra.dependent.#{b.text}") %>
                                 <% end %>
                                 <div class="mt-1">
-                                  <input type="number" name="property[<%= b.text %>_space]" class="form-control custom-control-label dependent_input" placeholder="<%= t("activerecord.attributes.extra.dependent.#{b.text}_placeholder") %>">
+                                  <input value="<%= @property.send("#{b.text}_space") %>" type="number" name="property[<%= b.text %>_space]" class="form-control custom-control-label dependent_input" placeholder="<%= t("activerecord.attributes.extra.dependent.#{b.text}_placeholder") %>">
                                 </div>
                               </div>
                             <% end %>
@@ -463,6 +465,7 @@
                               className: 'simple-select',
                               isSearchable: true,
                               isClearable: true,
+                              storedOption: {"label": "#{@property.location.localname} - #{@property.location.parent_localname}", "value": @property.location.id},
                               soloMode: true,
                               ajaxEnabled: true,
                               i18n: {

@@ -1,6 +1,7 @@
 <% provide(:title, 'Properties Index') %>
 
-<%= render partial: 'shared/breadcrumb', locals: {title: 'properties.index.heading', icon: 'house-colored'} %>
+<%= render partial: 'shared/breadcrumb', locals: {path: [{:title => 'properties.index.heading', :href => properties_path}], icon: 'house-colored'} %>
+
 
 <div class="page-container">
   <div class="container">
