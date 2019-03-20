@@ -533,7 +533,7 @@
 
                     <div class="row">
                       <div class="col-md-6 col-sm-12">
-                        <div class="form-group mt-4 mb-4 existing_client">
+                        <div class="form-group mt-4 mb-4 existing_client <%= @property.owner.id ? '' : 'disabledElement' %>">
                           <%= property.label :owner do %>
                             <%= content_tag(:i, nil, class: 'fas fa-user fa-fw') + ' ' + t('activerecord.attributes.property.owner') %>
                             <abbr title="<%= t('js.components.select.required') %>">*</abbr>
@@ -542,6 +542,7 @@
                               id: 'f',
                               inputID: 'property_ownerid',
                               inputName: 'property[ownerid]',
+                              inputIsDisabled: @property.owner.id ? false : true,
                               inputClassName: 'form-control existing_client_input',
                               validatorGroup: 'fieldset-5',
                               endpoint: properties_owners_path,

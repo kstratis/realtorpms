@@ -53,6 +53,7 @@ class SimpleSelect extends React.Component {
     formID: PropTypes.string,
     inputID: PropTypes.string,
     inputName: PropTypes.string,
+    inputIsDisabled: PropTypes.bool,
     endpoint: PropTypes.string,
     validatorGroup: PropTypes.string,
     isMaster: PropTypes.bool,
@@ -243,6 +244,7 @@ class SimpleSelect extends React.Component {
           id={this.props.inputID}
           name={this.props.inputName}
           className={`proxy-form-input ${this.props.inputClassName}`}
+          disabled={this.props.inputIsDisabled || false}
           data-parsley-group={this.props.validatorGroup}
           data-parsley-required-message={this.props.i18n.validatorErrMsg}
           ref={input => {
