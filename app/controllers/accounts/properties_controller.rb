@@ -3,9 +3,6 @@ module Accounts
 
     before_action :set_property, only: [:show, :edit, :update, :destroy]
 
-    # before_
-    # before_action :check_page_validity, only: [:create]
-
     # GET /properties
     # GET /properties.json
     def index
@@ -20,8 +17,6 @@ module Accounts
       else
         @properties = @properties.order(created_at: 'desc')
       end
-
-      # puts @properties.to_yaml
 
       @properties = @properties.paginate(page: params[:page], :per_page => 10)
       # @users = User.paginate(page: params[:page], :per_page => 10)
@@ -80,22 +75,15 @@ module Accounts
     end
 
     def locations
-      puts 'INSIDE the locations'
+      #todo remove puts statement
+      puts '-=Locations=- filtering...'
       filter_locations
-
-      # respond_to do |format|
-      #   format.json {render json: {message: 'Working! OK!'}, status: 200}
-      # end
-
     end
 
     def owners
-      puts 'INSIDE the owners'
+      #todo remove puts statement
+      puts '-=Owners=- filtering...'
       filter_owners
-      # respond_to do |format|
-      #   format.json {render json: {message: 'Working! OK!'}, status: 200}
-      # end
-
     end
 
     # GET /properties/new
@@ -107,38 +95,12 @@ module Accounts
     # POST /properties
     # POST /properties.json
     def create
+      # +set_owner+ is called as a hook method
       @property = Property.new(property_params)
-
       # Assign the property's location no matter what.
       @property.location = Location.find(@property.locationid)
 
-      # --- SOS ---
-      # When POSTing an associated object's id (i.e. location's id only +locationid+) and not the object itself
-      # (location instance), you are gonna get the following error:
-      #
-      # ActiveModel::UnknownAttributeError - unknown attribute 'locationid' for Property.:
-      #
-      # This is happening because +locationid+ is not a model attribute and thus appears to be unknown. To fix this
-      # you have to declare an attribute accessor of the same name in the model i.e. +attr_accessor :locationid+ which
-      # will allow us to receive and manipulate (in this case generate a model instance) the POSTed value. Also don't
-      # forget to whitelist the attribute inside the require params and change the html of the form (id & name).
-      #
-      # Reference
-      # https://stackoverflow.com/a/43476033/178728
-      # --- SOS ---
-
-      # If an existing client(owner) id is given then assign the property to that person
-      unless property_params[:ownerid].blank?
-        @property.owner = Owner.find(@property.ownerid)
-      end
-
-      # If no owner is selected set it to nil
-      unless property_params[:noowner].blank?
-        @property.owner = nil
-      end
-
-      # Otherwise automatically create and assign the owner using the "magic" properties of
-      # +accepts_nested_attributes_for :owner+ as described in the model file
+      set_owner
 
       # Scope the property to current account
       @property.account = current_account
@@ -146,14 +108,15 @@ module Accounts
       respond_to do |format|
         if @property.save
           puts 'form saving successfully'
-          format.html { redirect_to @property, notice: 'Property was successfully created.' }
-          format.js { render :create_result }
+          # todo internationalize the notice message
+          format.html {redirect_to @property, notice: 'Property was successfully created.'}
+          format.js {render :create_result}
         else
           @property.errors.each do |field, error|
             puts "#{field}: #{error}"
           end
-          format.html { render :new }
-          format.js { render :create_result }
+          format.html {render :new}
+          format.js {render :create_result}
         end
       end
     end
@@ -161,30 +124,7 @@ module Accounts
     # PATCH/PUT /properties/1
     # PATCH/PUT /properties/1.json
     def update
-      puts property_params
-      puts '++++++++++++++'
-      puts @property
-      puts '++++++++++++++'
-
-      unless property_params[:ownerid].blank?
-        @property.owner = Owner.find(property_params[:ownerid])
-      end
-
-      unless property_params[:noowner].blank?
-        @property.owner = nil
-      end
-      # @property.location = Location.find(@property.locationid)
-      # unless property_params[:ownerid].blank?
-      #   @property.owner = Owner.find(@property.ownerid)
-      # end
-
-      # If no owner is selected set it to nil
-      # unless property_params[:noowner].blank?
-      #   @property.owner = nil
-      # end
-      #
-
-      # @property.build_owner(property_params.owner_attributes)
+      set_owner
       respond_to do |format|
         if @property.update(property_params)
           format.html {redirect_to @property, flash: {success: "Property was successfully updated."}}
@@ -213,6 +153,35 @@ module Accounts
       @property = Property.find(params[:id])
     end
 
+    # Sets the selected owner
+    def set_owner
+      # --- SOS ---
+      # When POSTing an associated object's id (i.e. location's id only +locationid+) and not the object itself
+      # (location instance), you are gonna get the following error:
+      #
+      # ActiveModel::UnknownAttributeError - unknown attribute 'locationid' for Property.:
+      #
+      # This is happening because +locationid+ is not a model attribute and thus appears to be unknown. To fix this
+      # you have to declare an attribute accessor of the same name in the model i.e. +attr_accessor :locationid+ which
+      # will allow us to receive and manipulate (in this case generate a model instance) the POSTed value. Also don't
+      # forget to whitelist the attribute inside the require params and change the html of the form (id & name).
+      #
+      # Reference
+      # https://stackoverflow.com/a/43476033/178728
+      # --- SOS ---
+      # If an existing client(owner) id is given then assign the property to that person
+      unless property_params[:ownerid].blank?
+        @property.owner = Owner.find(params[:action] == 'update' ? property_params[:ownerid] : @property.ownerid)
+      end
+
+      # If no owner is selected set it to nil
+      unless property_params[:noowner].blank?
+        @property.owner = nil
+      end
+      # Otherwise automatically create and assign the owner using the "magic" properties of
+      # +accepts_nested_attributes_for :owner+ as described in the model file
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def property_params
       # params.require(:property).permit(:description, :propertycategory, :propertytype, :price, :size, :construction)
@@ -239,7 +208,7 @@ module Accounts
                                        :adspitogatos,
                                        :ownerid,
                                        :noowner,
-                                       { owner_attributes: [:first_name, :last_name, :email, :telephones] },
+                                       {owner_attributes: [:first_name, :last_name, :email, :telephones]},
                                        images: [],
                                        extra_ids: [])
     end
