@@ -72,6 +72,9 @@ class Property < ApplicationRecord
     # In the 'compound' extra fields for roofdeck, storage, garden and plot where each one comes with its own input,
     # make sure that if unchecked on update action, the existing input value will also be cleared.
     def handle_dependent_fields
+      puts '==='
+      puts extras
+      puts '==='
       edited_extras = extras.reject { |c| c.blank? }.collect { |extra| Extra.find(extra.id).name }
       set_diff = %w(roofdeck storage garden plot) - edited_extras
       set_diff.each do |el|

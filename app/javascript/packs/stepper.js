@@ -75,7 +75,15 @@ $(document).on('turbolinks:load', function(e) {
     $(`.${selectedOption}`).removeClass('disabledElement');
     $(`.${selectedOption}`).find(`input.${selectedOption}_input`).removeClass('disabledElement');
     $(`.${selectedOption}`).find(`input.${selectedOption}_input`).attr('disabled', false);
-  })
+  });
+
+  // We need the focus event to reset state in the animated/themed form input fields
+  // ...and we also need to direct the user to the first input field
+  $('.client-radio-selection.edit').one('click', (e) => {
+    $('.new_client_input').val('');
+    $('.new_client_input').focus();
+    $('.new_client_input').first().focus();
+  });
 });
 
 // This basically listens for window unload

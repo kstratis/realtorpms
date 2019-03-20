@@ -516,15 +516,15 @@
 
                       <div class="form-group ml-2">
                         <div class="custom-control custom-control-inline custom-radio">
-                          <input type="radio" class="custom-control-input client-radio-selection" name="rdGroup1" id="existing_client" data-counteroption="new_client,no_client" checked>
+                          <input type="radio" class="custom-control-input client-radio-selection" name="rdGroup1" id="existing_client" data-counteroption="new_client,no_client" <%= @property.owner ? 'checked' : '' %>>
                           <label class="custom-control-label" for="existing_client"><%= t('js.forms.properties.wizard.step5.existing_client') %></label>
                         </div>
                         <div class="custom-control custom-control-inline custom-radio">
-                          <input type="radio" class="custom-control-input client-radio-selection" name="rdGroup1" id="new_client" data-counteroption="existing_client,no_client">
+                          <input type="radio" class="custom-control-input client-radio-selection edit" name="rdGroup1" id="new_client" data-counteroption="existing_client,no_client">
                           <label class="custom-control-label" for="new_client"><%= t('js.forms.properties.wizard.step5.new_client') %></label>
                         </div>
                         <div class="custom-control custom-control-inline custom-radio">
-                          <input type="radio" class="custom-control-input client-radio-selection" name="rdGroup1" id="no_client" data-counteroption="new_client,existing_client">
+                          <input type="radio" class="custom-control-input client-radio-selection" name="rdGroup1" id="no_client" data-counteroption="new_client,existing_client" <%= @property.owner ? '' : 'checked' %>>
                           <label class="custom-control-label" for="no_client"><%= t('js.forms.properties.wizard.step5.no_client') %></label>
                         </div>
                       </div>
@@ -551,6 +551,7 @@
                               disabled: false,
                               isSearchable: true,
                               isClearable: true,
+                              storedOption: @property.owner ? {"label": "#{@property.owner.first_name} #{@property.owner.last_name}", "value": @property.owner.id} : nil,
                               soloMode: true,
                               ajaxEnabled: true,
                               i18n: {
