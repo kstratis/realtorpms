@@ -161,7 +161,7 @@
                             <%= Property.human_attribute_name(:floor) %>
                           <% end %>
                           <%= react_component('SimpleSelect', props: {
-                              id: 'a',
+                              id: 'c',
                               inputID: 'property_floor',
                               inputName: 'property[floor]',
                               inputClassName: 'form-control',
@@ -191,7 +191,7 @@
                             <%= Property.human_attribute_name(:construction) %>
                           <% end %>
                           <%= react_component('SimpleSelect', props: {
-                              id: 'a',
+                              id: 'd',
                               inputID: 'property_construction',
                               inputName: 'property[construction]',
                               inputClassName: 'form-control',
@@ -329,7 +329,7 @@
                             <%= Property.human_attribute_name(:levels) %>
                           <% end %>
                           <%= react_component('SimpleSelect', props: {
-                              id: 'a',
+                              id: 'e',
                               inputID: 'property_levels',
                               inputName: 'property[levels]',
                               inputClassName: 'form-control',
@@ -449,7 +449,7 @@
                             <abbr title="<%= t('js.components.select.required') %>">*</abbr>
                           <% end %>
                           <%= react_component('SimpleSelect', props: {
-                              id: 'c',
+                              id: 'f',
                               inputID: 'property_locationid',
                               inputName: 'property[locationid]',
                               inputClassName: 'form-control',
@@ -542,7 +542,7 @@
                               isRequired: true,
                               formID: 'new_property',
                               className: 'simple-select ',
-                              disabled: false,
+                              isDisabled: false,
                               isSearchable: true,
                               isClearable: true,
                               soloMode: true,

@@ -76,6 +76,7 @@ module Accounts
     # GET /properties/1/edit
     def edit
       @property = Property.find(params[:id])
+      @property.build_owner unless @property.owner
     end
 
     def locations
@@ -160,6 +161,30 @@ module Accounts
     # PATCH/PUT /properties/1
     # PATCH/PUT /properties/1.json
     def update
+      puts property_params
+      puts '++++++++++++++'
+      puts @property
+      puts '++++++++++++++'
+
+      unless property_params[:ownerid].blank?
+        @property.owner = Owner.find(property_params[:ownerid])
+      end
+
+      unless property_params[:noowner].blank?
+        @property.owner = nil
+      end
+      # @property.location = Location.find(@property.locationid)
+      # unless property_params[:ownerid].blank?
+      #   @property.owner = Owner.find(@property.ownerid)
+      # end
+
+      # If no owner is selected set it to nil
+      # unless property_params[:noowner].blank?
+      #   @property.owner = nil
+      # end
+      #
+
+      # @property.build_owner(property_params.owner_attributes)
       respond_to do |format|
         if @property.update(property_params)
           format.html {redirect_to @property, flash: {success: "Property was successfully updated."}}

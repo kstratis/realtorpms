@@ -1,6 +1,5 @@
 import FormStepper from '../bundles/steppers/form_stepper';
 
-// The Stepper currently only applies to property add
 $(document).on('turbolinks:load', function(e) {
   window.ParsleyConfig = {
     errorsWrapper: '<li class="alert-box-item"></li>',
@@ -20,6 +19,9 @@ $(document).on('turbolinks:load', function(e) {
 
   const $stepperForm = $('#new_property, [id^=edit_property_]');
   if ($stepperForm.length < 1) return;
+
+  // make sure you never send over the owner's id
+  $("input[name='property[owner_attributes][id]']").prop('disabled', true);
 
   window.form_stepper = new FormStepper($stepperForm);
 

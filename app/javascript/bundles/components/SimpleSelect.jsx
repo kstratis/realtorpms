@@ -58,7 +58,7 @@ class SimpleSelect extends React.Component {
     isMaster: PropTypes.bool,
     options: PropTypes.array,
     handleOptions: PropTypes.func,
-    disabled: PropTypes.bool,
+    isDisabled: PropTypes.bool,
     onRef: PropTypes.func,
     searchable: PropTypes.bool,
     storedOption: PropTypes.any,

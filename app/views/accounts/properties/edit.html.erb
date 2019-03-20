@@ -164,7 +164,7 @@
                             <%= Property.human_attribute_name(:floor) %>
                           <% end %>
                           <%= react_component('SimpleSelect', props: {
-                              id: 'a',
+                              id: 'c',
                               inputID: 'property_floor',
                               inputName: 'property[floor]',
                               inputClassName: 'form-control',
@@ -195,7 +195,7 @@
                             <%= Property.human_attribute_name(:construction) %>
                           <% end %>
                           <%= react_component('SimpleSelect', props: {
-                              id: 'a',
+                              id: 'd',
                               inputID: 'property_construction',
                               inputName: 'property[construction]',
                               inputClassName: 'form-control',
@@ -334,13 +334,13 @@
                             <%= Property.human_attribute_name(:levels) %>
                           <% end %>
                           <%= react_component('SimpleSelect', props: {
-                              id: 'a',
+                              id: 'e',
                               inputID: 'property_levels',
                               inputName: 'property[levels]',
                               inputClassName: 'form-control',
                               validatorGroup: 'fieldset-1',
                               isRequired: false,
-                              formID: 'new_property',
+                              formID: "edit_property_#{@property.id}",
                               className: 'simple-select',
                               options: (1..10).collect {|level| {label: level, value: level}},
                               soloMode: true,
@@ -461,7 +461,7 @@
                               validatorGroup: 'fieldset-4',
                               endpoint: properties_locations_path,
                               isRequired: true,
-                              formID: 'new_property',
+                              formID: "edit_property_#{@property.id}",
                               className: 'simple-select',
                               isSearchable: true,
                               isClearable: true,
@@ -524,7 +524,7 @@
                           <label class="custom-control-label" for="new_client"><%= t('js.forms.properties.wizard.step5.new_client') %></label>
                         </div>
                         <div class="custom-control custom-control-inline custom-radio">
-                          <input type="radio" class="custom-control-input client-radio-selection" name="rdGroup1" id="no_client" data-counteroption="new_client,existing_client" <%= @property.owner ? '' : 'checked' %>>
+                          <input type="radio" class="custom-control-input client-radio-selection" name="rdGroup1" id="no_client" data-counteroption="new_client,existing_client" <%= @property.owner.id ? '' : 'checked' %>>
                           <label class="custom-control-label" for="no_client"><%= t('js.forms.properties.wizard.step5.no_client') %></label>
                         </div>
                       </div>
@@ -539,19 +539,19 @@
                             <abbr title="<%= t('js.components.select.required') %>">*</abbr>
                           <% end %>
                           <%= react_component('SimpleSelect', props: {
-                              id: 'd',
+                              id: 'f',
                               inputID: 'property_ownerid',
                               inputName: 'property[ownerid]',
                               inputClassName: 'form-control existing_client_input',
                               validatorGroup: 'fieldset-5',
                               endpoint: properties_owners_path,
                               isRequired: true,
-                              formID: 'new_property',
+                              formID: "edit_property_#{@property.id}",
                               className: 'simple-select ',
-                              disabled: false,
+                              isDisabled: false,
                               isSearchable: true,
                               isClearable: true,
-                              storedOption: @property.owner ? {"label": "#{@property.owner.first_name} #{@property.owner.last_name}", "value": @property.owner.id} : nil,
+                              storedOption: @property.owner.id ? {"label": "#{@property.owner.first_name} #{@property.owner.last_name}", "value": @property.owner.id} : nil,
                               soloMode: true,
                               ajaxEnabled: true,
                               i18n: {
@@ -690,7 +690,7 @@
                             i18n: {
                                 uppy: t('js.uppy'),
                             },
-                            uppy_url_listener: new_property_path
+                            uppy_url_listener: edit_property_path(@property.id)
                         } do %>
                         <% end %>
                       </div>
