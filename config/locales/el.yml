@@ -292,6 +292,8 @@ el:
     properties_view_btn: "Προβολή"
     properties_edit_btn: "Επεξεργασία"
     properties_favourites_tooltip: "Aγαπημένα"
+    properties_owner_unavailable: "Μ/Δ"
+    properties_owner_tel_unavailable: "Μ/Δ"
     uppy:
       dropPaste: "Σύρετε τα αρχεία σας εδώ ή"
       browse: "επιλέξτε"

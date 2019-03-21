@@ -23,6 +23,11 @@ class FormStepper {
     this.handleSteps();
   }
 
+  kill(){
+    console.log(this.form);
+    this.form.destroy();
+  }
+
   // Sets the stepper status
   setStatus(status) {
     this.status = status;

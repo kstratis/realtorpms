@@ -91,7 +91,11 @@ $(document).on('turbolinks:load', function(e) {
 
 function leavePage(msg) {
   if (confirm(msg)) {
-    window.form_stepper.destroy();
+    if (("form_stepper" in window) && (window.form_stepper !== null)){
+      console.log('killing it softly');
+      window.form_stepper.kill();
+      window.form_stepper = null;
+    }
     return true;
   } else {
     return false;
@@ -100,7 +104,7 @@ function leavePage(msg) {
 // This basically listens for window unload
 $(document).on("page:before-change turbolinks:before-visit", function() {
   // Make sure it only works on the properties stepper
-  if (window.location.pathname === '/properties/new') {
+  if (window.location.pathname === '/properties/new' || window.location.pathname.match(/^\/properties\/\d+\/edit$/)) {
     // Gets the stepper status. If untouched then don't bug the user. Otherwise, show a warning
     if (!window.form_stepper.getStatus()) return;
     var alertsDomNode = $('#alerts');

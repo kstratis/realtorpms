@@ -36,8 +36,8 @@ module Accounts
             # assignments: property.properties.count,
             # registration: property.created_at.to_formatted_s(:long)
             registration: property.created_at.strftime('%d %b. %y'),
-            owner_name: property.owner ? "#{property.owner.first_name[0]}. #{property.owner.last_name}" : "-",
-            owner_tel: property.owner ? "#{property.owner.telephones}" : "-",
+            owner_name: property.try(:owner).try(:first_name) && property.try(:owner).try(:last_name) ? "#{property.owner.first_name[0]}. #{property.owner.last_name}" : I18n.t('js.properties_owner_unavailable'),
+            owner_tel: property.try(:owner).try(:telephones) ? "#{property.owner.telephones}" : I18n.t('js.properties_owner_tel_unavailable'),
         }
         @propertieslist[:dataset] << hash
       end

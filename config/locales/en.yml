@@ -294,6 +294,8 @@ en:
     properties_view_btn: "View"
     properties_edit_btn: "Edit"
     properties_favourites_tooltip: "Favourites"
+    properties_owner_unavailable: "N/Α"
+    properties_owner_tel_unavailable: "Ν/Α"
     uppy:
       dropPaste: "Drop files here, paste or"
       browse: "browse"
