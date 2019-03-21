@@ -19,7 +19,7 @@ module Accounts
       end
 
       @properties = @properties.paginate(page: params[:page], :per_page => 10)
-      # @users = User.paginate(page: params[:page], :per_page => 10)
+
       @propertieslist = {:dataset => Array.new}
 
       @properties.each do |property|
