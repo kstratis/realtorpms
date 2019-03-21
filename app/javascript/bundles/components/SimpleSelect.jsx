@@ -101,8 +101,9 @@ class SimpleSelect extends React.Component {
     if (!this.props.soloMode) {
       this.props.onRef(undefined);
     }
-    console.log(this.state.validator);
-    this.state.validator.destroy();
+    // console.log(this.state.validator);
+    // window.form_stepper.destroy();
+    // this.state.validator.destroy();
   }
 
   state = {

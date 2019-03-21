@@ -88,6 +88,15 @@ $(document).on('turbolinks:load', function(e) {
   });
 });
 
+
+function leavePage(msg) {
+  if (confirm(msg)) {
+    window.form_stepper.destroy();
+    return true;
+  } else {
+    return false;
+  }
+}
 // This basically listens for window unload
 $(document).on("page:before-change turbolinks:before-visit", function() {
   // Make sure it only works on the properties stepper
@@ -96,7 +105,8 @@ $(document).on("page:before-change turbolinks:before-visit", function() {
     if (!window.form_stepper.getStatus()) return;
     var alertsDomNode = $('#alerts');
     var alertsTranslations = alertsDomNode.data('i18n').alerts;
-    return confirm(alertsTranslations['leave_page']);
+    return leavePage(alertsTranslations['leave_page']);
+    // return confirm(alertsTranslations['leave_page']);
   }
 });
 
