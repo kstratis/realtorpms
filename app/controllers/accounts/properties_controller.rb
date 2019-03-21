@@ -97,12 +97,10 @@ module Accounts
     def create
       # +set_owner+ is called as a hook method
       @property = Property.new(property_params)
-      # Assign the property's location no matter what.
-      @property.location = Location.find(@property.locationid)
-
       set_owner
+      set_location
 
-      # Scope the property to current account
+      # Scope the property to current account. This is only set once.
       @property.account = current_account
 
       respond_to do |format|
@@ -125,6 +123,7 @@ module Accounts
     # PATCH/PUT /properties/1.json
     def update
       set_owner
+      set_location
       respond_to do |format|
         if @property.update(property_params)
           format.html {redirect_to @property, flash: {success: "Property was successfully updated."}}
@@ -180,6 +179,11 @@ module Accounts
       end
       # Otherwise automatically create and assign the owner using the "magic" properties of
       # +accepts_nested_attributes_for :owner+ as described in the model file
+    end
+
+    def set_location
+      # Assign the property's location no matter what.
+      @property.location = Location.find(params[:action] == 'update' ? property_params[:locationid] : @property.locationid)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
