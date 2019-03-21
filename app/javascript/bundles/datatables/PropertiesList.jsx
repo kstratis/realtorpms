@@ -147,7 +147,7 @@ const PropertiesList = ({
                             highlightClassName="highlighted"
                             searchWords={[searchInput]}
                             autoEscape={true}
-                            textToHighlight={entry['title']}
+                            textToHighlight={entry['title'] || ''}
                           />
                         </h5>
                       </div>
@@ -165,7 +165,7 @@ const PropertiesList = ({
                             highlightClassName="highlighted"
                             searchWords={[searchInput]}
                             autoEscape={true}
-                            textToHighlight={entry['description']}
+                            textToHighlight={entry['description'] || ''}
                           />
                         </p>
                       </div>
@@ -185,7 +185,7 @@ const PropertiesList = ({
                             highlightClassName="highlighted"
                             searchWords={[searchInput]}
                             autoEscape={true}
-                            textToHighlight={entry['owner_name']}
+                            textToHighlight={entry['owner_name'] || ''}
                           />
                         </div>
                       </div>
@@ -200,7 +200,7 @@ const PropertiesList = ({
                             highlightClassName="highlighted"
                             searchWords={[searchInput]}
                             autoEscape={true}
-                            textToHighlight={entry['owner_tel']}
+                            textToHighlight={entry['owner_tel'] || ''}
                           />
                         </div>
                       </div>

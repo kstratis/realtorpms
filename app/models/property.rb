@@ -27,7 +27,7 @@ class Property < ApplicationRecord
 
   enum category: [:residential, :commercial, :land, :other]
 
-  enum subcategory: [:apartment, :studio, :maisonette, :detached_housee, :villa, :loft, :bungalow, :building, :apartment_complex,
+  enum subcategory: [:apartment, :studio, :maisonette, :detached_house, :villa, :loft, :bungalow, :building, :apartment_complex,
                      :office, :public_store, :warehouse, :industrial_space, :craft_space, :hotel, :business_building, :hall, :showroom,
                      :land_plot, :parcels, :island, :other_categories,
                      :parking, :business, :prefabricated, :detachable, :air, :other_various]

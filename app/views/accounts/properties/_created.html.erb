@@ -8,7 +8,8 @@
       </div>
       <div class="row d-flex justify-content-center mt-2">
         <div class="btn-group" role="group">
-          <%= link_to t('properties.created.edit'), edit_property_path(@property), class: 'btn btn-danger' %>
+          <%= link_to t('properties.created.show'), property_path(@property), class: 'btn btn-success' %>
+          <%= link_to t('properties.created.edit'), edit_property_path(@property), class: 'btn btn-warning' %>
           <%= link_to t('properties.created.add_another'), new_property_path, class: 'btn btn-primary' %>
         </div>
       </div>

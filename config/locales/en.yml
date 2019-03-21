@@ -390,7 +390,8 @@ en:
     created:
       message: "Property successfully added"
       return: "Return"
-      edit: "Edit property"
+      show: "Show"
+      edit: "Edit"
       add_another: "Add new"
     not_created:
       message: "Error adding new property"

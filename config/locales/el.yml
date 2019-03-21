@@ -388,6 +388,7 @@ el:
     created:
       message: "Η προσθήκη ακινήτου ολοκληρώθηκε επιτυχώς"
       return: "Επιστροφή"
+      show: "Προβολή"
       edit: "Επεξεργασία"
       add_another: "Προσθήκη νέου"
     not_created:
