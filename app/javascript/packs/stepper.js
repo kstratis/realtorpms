@@ -92,7 +92,6 @@ $(document).on('turbolinks:load', function(e) {
 function leavePage(msg) {
   if (confirm(msg)) {
     if (("form_stepper" in window) && (window.form_stepper !== null)){
-      console.log('killing it softly');
       window.form_stepper.kill();
       window.form_stepper = null;
     }
