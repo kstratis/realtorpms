@@ -1,14 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-// import Select from 'react-select';
+import Select from 'react-select';
 import { Async } from 'react-select';
 import ReactOnRails from 'react-on-rails';
 import { debounce, renderHTML } from '../utilities/helpers';
-import Select, { ClearIndicator } from 'react-select';
-// import '!style-loader!css-loader!react-select/dist/react-select.css';
-
-
 
 const selectStyles = {
   container: (base, state) => {
@@ -108,7 +104,6 @@ class SimpleSelect extends React.Component {
 
   state = {
     selectedOption: this.props.storedOption || '',
-    validator: '',
     isOpen: false
   };
 
