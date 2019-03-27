@@ -4,6 +4,7 @@
   "dependencies": {
     "@babel/runtime": "^7.3.4",
     "@rails/webpacker": "^4.0.2",
+    "activestorage": "^5.2.2-1",
     "axios": "^0.18.0",
     "bs-stepper": "https://github.com/kstratis/bs-stepper.git#events",
     "caniuse-lite": "^1.0.30000865",

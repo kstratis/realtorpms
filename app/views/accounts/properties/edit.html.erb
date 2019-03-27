@@ -124,7 +124,10 @@
 
                       </div>
                       <input id="preventformsubmit" type="hidden">
-                      <input id="property_images" class="emitters form-control" type="hidden" name="property[images][]">
+
+<!--                      <input id="property_images" class="emitters form-control" type="hidden" name="property[images][]">-->
+
+
                       <%= render "accounts/helpers/locale" %>
 
                       <div class="col-md-6 col-sm-12">
@@ -696,6 +699,8 @@
                         <% end %>
                       </div>
                     </div>
+
+                    <%= property.file_field :attachments, class: 'form-control hidden_orig', multiple: true, direct_upload: true %>
 
                     <hr class="mt-5">
                     <div class="d-flex">
