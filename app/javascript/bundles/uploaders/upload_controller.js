@@ -1,4 +1,5 @@
-import { DirectUpload } from "activestorage";
+import { DirectUpload } from 'activestorage';
+import { dispatchEvent } from 'activestorage/src/helpers';
 
 export class UploadController {
   constructor(input, file) {
@@ -27,5 +28,11 @@ export class UploadController {
       this.dispatch('end');
       callback(error);
     });
+  }
+
+  dispatch(name, detail = {}) {
+    detail.file = this.file;
+    detail.id = this.directUpload.id;
+    return dispatchEvent(this.input, `direct-upload:${name}`, { detail });
   }
 }

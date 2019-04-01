@@ -124,7 +124,11 @@
 
                       </div>
                       <input id="preventformsubmit" type="hidden">
-                      <input id="property_images" class="emitters form-control" type="hidden" name="property[images][]">
+                      <%#= property.file_field :images, class: 'form-control hidden_orig uploader', multiple: true, direct_upload: true %>
+
+                      <%= property.file_field :images, class: 'form-control emitters form-control', multiple: true, direct_upload: true%>
+
+                      <!-- <input id="property_images" class="emitters form-control" type="hidden" name="property[images][]"> -->
                       <%= render "accounts/helpers/locale" %>
 
                       <div class="col-md-6 col-sm-12">
@@ -697,7 +701,7 @@
                       </div>
                     </div>
 
-                    <%= property.file_field :images, class: 'form-control hidden_orig uploader', multiple: true, direct_upload: true %>
+                    <%#= property.file_field :images, class: 'form-control hidden_orig uploader', multiple: true, direct_upload: true %>
 
                     <% @property.images.each do |image| %>
                       <%= link_to image.filename, image %>

@@ -8,12 +8,12 @@
 // layout file, like app/views/layouts/application.html.erb
 
 // import { start } from '../bundles/activestorageModifiedv52/index';
-import * as ActiveStorage from "activestorage"
+// import * as ActiveStorage from "activestorage"
 import * as uploader from '../bundles/uploaders/uppy_controller';
 import flatpickr from "flatpickr";
 import { Greek } from "flatpickr/dist/l10n/gr.js"
+import * as CustomActiveStorage from '../bundles/uploaders/custom_active_storage';
 
 $(document).on('turbolinks:load', function(e) {
-  ActiveStorage.start()
-  // start();
+  CustomActiveStorage.start()
 });

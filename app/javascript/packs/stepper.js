@@ -51,23 +51,23 @@ $(document).on('turbolinks:load', function(e) {
    * 2. If validations pass, active storage takes care of uploading media files
    * 3. A custom ajax:before handler is fired which checks if the (available) files are uploaded and POSTs the form
    * */
-  $stepperForm.on('ajax:before', function(event, xhr, opts) {
-    console.log('ajax:before called');
-    if ($('#preventformsubmit').length > 0) {
-      console.log('#preventformsubmit exists');
-      if (Object.keys(window.uppy_uploader.getState().files).length) {
-        // DEBUG
-        console.log('files are: ' + Object.keys(window.uppy_uploader.getState().files).length);
-        event.preventDefault();
-        return false;
-      } else {
-        // Remove element from DOM before ujs serializes the form
-        $(event.target)
-          .find('#property_images')
-          .remove();
-      }
-    }
-  });
+  // $stepperForm.on('ajax:before', function(event, xhr, opts) {
+  //   console.log('ajax:before called');
+  //   if ($('#preventformsubmit').length > 0) {
+  //     console.log('#preventformsubmit exists');
+  //     if (Object.keys(window.uppy_uploader.getState().files).length) {
+  //       // DEBUG
+  //       console.log('files are: ' + Object.keys(window.uppy_uploader.getState().files).length);
+  //       event.preventDefault();
+  //       return false;
+  //     } else {
+  //       // Remove element from DOM before ujs serializes the form
+  //       $(event.target)
+  //         .find('#property_images')
+  //         .remove();
+  //     }
+  //   }
+  // });
   // --------------------------------
 
   // This handles the nested property owner form to either select from an existing list or create a new
