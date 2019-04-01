@@ -1,3 +1,5 @@
+import { DirectUploadController } from '../activestorageModifiedv52/direct_upload_controller';
+
 const Uppy = require('@uppy/core');
 const Dashboard = require('@uppy/dashboard');
 import { DirectUpload } from "activestorage";
@@ -5,7 +7,7 @@ import { DirectUpload } from "activestorage";
 
 $(document).on('turbolinks:load', function(e) {
 
-  const input = document.querySelector('input[type=file]');
+  const input = document.querySelector('input[type=file].uploader');
 
   const uppyDomNode = $('#uppy');
   // Bail out if uppy shouldn't be included in this screen
@@ -64,46 +66,6 @@ $(document).on('turbolinks:load', function(e) {
 
   }).run();
   window.uppy_uploader = uppy;
-
-  const uploadFile = (file) => {
-    console.log('uploadFile method called');
-    // your form needs the file_field direct_upload: true, which
-    //  provides data-direct-upload-url
-    const url = input.dataset.directUploadUrl;
-    const upload = new DirectUpload(file, url);
-
-    upload.create((error, blob) => {
-      if (error) {
-        console.warn(error);
-        // Handle the error
-      } else {
-        console.log('file successfully ajaxed');
-
-        // Add an appropriately-named hidden input to the form with a
-        //  value of blob.signed_id so that the blob ids will be
-        //  transmitted in the normal upload flow
-        const hiddenField = document.createElement('input');
-        hiddenField.setAttribute('type', 'hidden');
-        hiddenField.setAttribute('value', blob.signed_id);
-        hiddenField.name = input.name;
-        document.querySelector('form').appendChild(hiddenField);
-      }
-    });
-  };
-
-  uppy.on('file-added', (file) => {
-
-    console.log('Added file', file);
-
-    console.log(file);
-
-    uploadFile(file.data);
-  });
-
-  $('.submit').on('click', function(e){
-    console.log('custom handler fired');
-    e.preventDefault();
-  })
 
 });
 

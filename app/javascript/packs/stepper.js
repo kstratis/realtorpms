@@ -52,10 +52,12 @@ $(document).on('turbolinks:load', function(e) {
    * 3. A custom ajax:before handler is fired which checks if the (available) files are uploaded and POSTs the form
    * */
   $stepperForm.on('ajax:before', function(event, xhr, opts) {
+    console.log('ajax:before called');
     if ($('#preventformsubmit').length > 0) {
+      console.log('#preventformsubmit exists');
       if (Object.keys(window.uppy_uploader.getState().files).length) {
         // DEBUG
-        // console.log('files are: ' + Object.keys(window.uppy_uploader.getState().files).length);
+        console.log('files are: ' + Object.keys(window.uppy_uploader.getState().files).length);
         event.preventDefault();
         return false;
       } else {

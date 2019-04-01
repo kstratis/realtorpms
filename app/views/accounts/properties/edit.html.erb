@@ -55,7 +55,7 @@
             </div><!-- /.card-header -->
             <!-- .card-body -->
             <div class="card-body">
-              <%= form_for(@property, remote: true, html: {class: "p-lg-4 p-sm-3 p-0", id: "new_property", name: "stepperForm", 'data-parsley-excluded': "[disabled]"}) do |property| %>
+              <%= form_for(@property, remote: true, html: {class: "p-lg-4 p-sm-3 p-0", id: "edit_property_#{@property.id}", name: "stepperForm", 'data-parsley-excluded': "[disabled]"}) do |property| %>
 
                 <!-- Step 1 START -->
                 <div id="test-l-1" class="content dstepper-none fade">
@@ -124,10 +124,7 @@
 
                       </div>
                       <input id="preventformsubmit" type="hidden">
-
-<!--                      <input id="property_images" class="emitters form-control" type="hidden" name="property[images][]">-->
-
-
+                      <input id="property_images" class="emitters form-control" type="hidden" name="property[images][]">
                       <%= render "accounts/helpers/locale" %>
 
                       <div class="col-md-6 col-sm-12">
@@ -700,7 +697,11 @@
                       </div>
                     </div>
 
-                    <%= property.file_field :attachments, class: 'form-control hidden_orig', multiple: true, direct_upload: true %>
+                    <%= property.file_field :images, class: 'form-control hidden_orig uploader', multiple: true, direct_upload: true %>
+
+                    <% @property.images.each do |image| %>
+                      <%= link_to image.filename, image %>
+                    <% end %>
 
                     <hr class="mt-5">
                     <div class="d-flex">
