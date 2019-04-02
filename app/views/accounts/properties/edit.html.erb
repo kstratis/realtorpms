@@ -123,13 +123,6 @@
                         }, prerender: false) %>
 
                       </div>
-                      <input id="preventformsubmit" type="hidden">
-                      <%#= property.file_field :images, class: 'form-control hidden_orig uploader', multiple: true, direct_upload: true %>
-
-                      <%= property.file_field :images, class: 'form-control emitters form-control', multiple: true, direct_upload: true%>
-
-                      <!-- <input id="property_images" class="emitters form-control" type="hidden" name="property[images][]"> -->
-                      <%= render "accounts/helpers/locale" %>
 
                       <div class="col-md-6 col-sm-12">
                         <div class="d-flex justify-content-center opaque">
@@ -701,8 +694,6 @@
                       </div>
                     </div>
 
-                    <%#= property.file_field :images, class: 'form-control hidden_orig uploader', multiple: true, direct_upload: true %>
-
                     <% @property.images.each do |image| %>
                       <%= link_to image.filename, image %>
                     <% end %>
@@ -714,6 +705,10 @@
                     </div>
                   </fieldset><!-- /fieldset -->
                 </div><!-- Step 6 END -->
+
+                <input id="preventformsubmit" type="hidden">
+                <%= property.file_field :images, class: 'form-control emitters', multiple: true, direct_upload: true%>
+                <%= render "accounts/helpers/locale" %>
 
               <% end %> <!-- /form -->
             </div><!-- /.card-body -->

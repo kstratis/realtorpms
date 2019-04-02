@@ -1,15 +1,11 @@
 const Uppy = require('@uppy/core');
 const Dashboard = require('@uppy/dashboard');
-// import { DirectUpload } from "activestorage";
-// import { start } from '../bundles/activestorageModifiedv52/';
 
 $(document).on('turbolinks:load', function(e) {
 
   const uppyDomNode = $('#uppy');
   // Bail out if uppy shouldn't be included in this screen
-  console.log('dom node found continuing');
   if (window.location.pathname !== uppyDomNode.data('uppyUrlListener')) return;
-  console.log('all good');
   const translations = uppyDomNode.data('i18n').uppy;
   const uppy = Uppy({
     debug: false,
@@ -64,7 +60,6 @@ $(document).on('turbolinks:load', function(e) {
 
   }).run();
   window.uppy_uploader = uppy;
-
 });
 
 

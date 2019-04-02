@@ -3,13 +3,15 @@
 import { DirectUploadController } from "activestorage/src/direct_upload_controller";
 import { dispatchEvent } from 'activestorage/src/helpers';
 
+// changed line
 const inputSelector = "input[type=file][data-direct-upload-url].emitters:not([disabled])";
-console.log(window.uppy_uploader);
 
 export class CustomDirectUploadsController {
   constructor(form) {
     this.form = form;
+    // changed line
     this.$inputs = $(inputSelector);
+    // changed line
     this.files = window.uppy_uploader.state.files || []; // This is how we get the files-to-be-uploaded using uppy.js
   }
 
@@ -28,6 +30,8 @@ export class CustomDirectUploadsController {
           }
         });
       } else {
+        // added line [added]
+        document.getElementById('preventformsubmit').remove();
         callback();
         this.dispatch('end');
       }
@@ -39,7 +43,9 @@ export class CustomDirectUploadsController {
 
   createUploadControllers() {
     const controllers = [];
-    const mockEmitter = this.$inputs.first(); // Single mock element guaranteed to be on the DOM.
+    // changed line
+    const mockEmitter = this.$inputs.get(0); // Single mock element guaranteed to be on the DOM.
+    // changed block
     $.each(this.files, (uppyfilename, filewrapper) => {
       filewrapper.data['id'] = filewrapper.id;
       const controller = new DirectUploadController(mockEmitter, filewrapper.data);

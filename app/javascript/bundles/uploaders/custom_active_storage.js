@@ -1,4 +1,9 @@
-// import { DirectUploadsController } from './direct_uploads_controller';
+// This is basically a customized version of ujs.js of activestorage.
+// The main idea used here is that is changes DirectUploadsController to CustomDirectUploadsController which in turn
+// changes a few things on how uploads work in conjuction with a file uploading library. The lines that changed include
+// a comment so that they can be easily spotted.
+
+// changed line
 import { CustomDirectUploadsController } from './custom_direct_uploads_controller';
 import { findElement } from 'activestorage/src/helpers';
 
@@ -23,7 +28,6 @@ function didClick(event) {
 }
 
 function didSubmitForm(event) {
-  console.log('submit apparently pressed');
   handleFormSubmissionEvent(event);
 }
 
@@ -41,17 +45,21 @@ function handleFormSubmissionEvent(event) {
     return;
   }
 
+  // changed line
   const controller = new CustomDirectUploadsController(form);
-  const { inputs } = controller;
+  // changed line
+  const { $inputs } = controller;
 
-  if (inputs.length) {
+  // changed line
+  if ($inputs.length) {
     event.preventDefault();
     form.setAttribute(processingAttribute, '');
-    inputs.forEach(disable);
+    // changed line
+    $.each($inputs, (index, element) => disable(element));
     controller.start(error => {
       form.removeAttribute(processingAttribute);
       if (error) {
-        inputs.forEach(enable);
+        $inputs.forEach(enable);
       } else {
         submitForm(form);
       }
