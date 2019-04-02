@@ -1,19 +1,22 @@
-import { DirectUploadController } from "./direct_upload_controller";
-// This following line was changed
-import { findElements, dispatchEvent } from "./helpers"
+/* This is basically a customized version of active_uploads_controller.js of activestorage. */
+import { DirectUploadController } from "activestorage/src/direct_upload_controller";
+import { dispatchEvent } from 'activestorage/src/helpers';
 
-// This following line was changed
-const inputSelector = "input[type=hidden].emitters:not([disabled]";
+// changed line
+const inputSelector = "input[type=file][data-direct-upload-url].emitters:not([disabled])";
 
-export class DirectUploadsController {
+export class CustomDirectUploadsController {
   constructor(form) {
     this.form = form;
-    // The following line was changed
-    this.inputs = findElements(form, inputSelector);
+    // changed line
+    this.$inputs = $(inputSelector);
+    // changed line
+    this.files = window.uppy_uploader.state.files || []; // This is how we get the files-to-be-uploaded using uppy.js
   }
 
   start(callback) {
-    const controllers = this.createDirectUploadControllers();
+    const controllers = this.createUploadControllers();
+
     const startNextController = () => {
       const controller = controllers.shift();
       if (controller) {
@@ -24,9 +27,9 @@ export class DirectUploadsController {
           } else {
             startNextController();
           }
-        })
+        });
       } else {
-        // The following line was added
+        // added line [added]
         document.getElementById('preventformsubmit').remove();
         callback();
         this.dispatch('end');
@@ -37,11 +40,12 @@ export class DirectUploadsController {
     startNextController();
   }
 
-  // The following method was changed
-  createDirectUploadControllers() {
+  createUploadControllers() {
     const controllers = [];
-    const mockEmitter = this.inputs[0];
-    $.each(window.uppy_uploader.state.files, (uppyfilename, filewrapper) => {
+    // changed line
+    const mockEmitter = this.$inputs.get(0); // Single mock element guaranteed to be on the DOM.
+    // changed block
+    $.each(this.files, (uppyfilename, filewrapper) => {
       filewrapper.data['id'] = filewrapper.id;
       const controller = new DirectUploadController(mockEmitter, filewrapper.data);
       controllers.push(controller);

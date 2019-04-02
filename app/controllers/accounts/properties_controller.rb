@@ -213,6 +213,7 @@ module Accounts
                                        :ownerid,
                                        :noowner,
                                        {owner_attributes: [:first_name, :last_name, :email, :telephones]},
+                                       # attachments: [],
                                        images: [],
                                        extra_ids: [])
     end

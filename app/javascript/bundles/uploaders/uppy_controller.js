@@ -2,6 +2,7 @@ const Uppy = require('@uppy/core');
 const Dashboard = require('@uppy/dashboard');
 
 $(document).on('turbolinks:load', function(e) {
+
   const uppyDomNode = $('#uppy');
   // Bail out if uppy shouldn't be included in this screen
   if (window.location.pathname !== uppyDomNode.data('uppyUrlListener')) return;
@@ -60,3 +61,5 @@ $(document).on('turbolinks:load', function(e) {
   }).run();
   window.uppy_uploader = uppy;
 });
+
+
