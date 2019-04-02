@@ -1,0 +1,19 @@
+<% if @property.images.attached? %>
+  <hr class="mt-5">
+  <div class="row">
+    <div class="col-12">
+      <div class="thumbnails-header">
+        <legend><u><%= t('js.forms.properties.wizard.step6.existing_files') %></u></legend>
+      </div>
+      <div class="thumbnails-ribbon d-flex flex-wrap justify-content-center">
+        <% @property.images.each do |image| %>
+          <%= link_to(image, :target => "_blank") do %>
+            <div class="thumbnail-container">
+              <%= image_tag image, class: 'thumbnail' %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

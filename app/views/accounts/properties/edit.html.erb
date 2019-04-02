@@ -694,9 +694,7 @@
                       </div>
                     </div>
 
-                    <% @property.images.each do |image| %>
-                      <%= link_to image.filename, image %>
-                    <% end %>
+                    <%= render "thumbnails" %>
 
                     <hr class="mt-5">
                     <div class="d-flex">

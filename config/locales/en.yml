@@ -256,6 +256,7 @@ en:
           step6:
             anchor: "Photos"
             title: "Photos"
+            existing_files: "Existing files"
           next: "Next"
           previous: "Previous"
           submit: "Submit"

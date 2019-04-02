@@ -254,6 +254,7 @@ el:
           step6:
             anchor: "Φωτογραφίες"
             title: "Φωτογραφίες"
+            existing_files: "Υφιστάμενα αρχεία"
           next: "Επόμενο"
           previous: "Προηγούμενο"
           submit: "Υποβολή"
