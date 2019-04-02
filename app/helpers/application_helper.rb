@@ -2,7 +2,7 @@ module ApplicationHelper
 
   CLASSNAME = {
       'active': 'has-active',
-      'hasopen': 'has-open',
+      'open': 'has-open',
   }
   # ACTIVE_CLASS = 'has-active'.freeze
 
@@ -16,22 +16,25 @@ module ApplicationHelper
     end
   end
 
-  def active_for(options, name='active')
+  def active_for(options)
     name_of_controller = options.fetch(:controller) { nil }
     name_of_action     = options.fetch(:action) { nil }
     request_path       = options.fetch(:path) { nil }
+    request_class      = options.fetch(:classname) { 'active' }
 
     puts '-----------'
     puts request_path
     puts request.path
-    puts "if equal will return #{CLASSNAME[name.to_sym]}"
+    puts "if equal will return #{CLASSNAME[request_class.to_sym]}"
     puts '###########'
+    # byebug
+    puts "the root path is: #{root_path}"
 
 
-    return CLASSNAME[name.to_sym] if request_path && request_path == request.path
+    return CLASSNAME[request_class.to_sym] if request_path && request_path == request.path
 
     if name_of_controller == controller_name
-      CLASSNAME[name.to_sym] if name_of_action.nil? || (name_of_action == action_name)
+      CLASSNAME[request_class.to_sym] if name_of_action.nil? || (name_of_action == action_name)
     end
   end
 

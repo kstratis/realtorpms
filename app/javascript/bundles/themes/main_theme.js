@@ -595,6 +595,9 @@ class Theme {
     if (window.StackedMenu && this.isExists('#stacked-menu')) {
       this.asideMenu = new StackedMenu();
 
+      console.log('the aside');
+      console.log(this.asideMenu);
+
       // update perfect scrollbar
       $(this.asideMenu.selector).on('menu:open menu:close', () => {
         // wait until translation done
