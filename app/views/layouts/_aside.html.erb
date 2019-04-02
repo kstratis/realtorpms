@@ -49,34 +49,32 @@
           </li>
           <!-- /.menu-item -->
           <!-- .menu-item -->
-          <li class="menu-item has-child">
+          <%= content_tag :li, class: "menu-item has-child" do %>
             <%= link_to '#', class: 'menu-link' do %>
               <%= content_tag :i, nil, class: 'menu-icon fas fa-user-tie' %>
               <%= content_tag :span, t('partners.title'), class: 'menu-text' %>
             <% end %>
             <!-- child menu -->
             <ul class="menu">
-              <li class="menu-item">
+              <%= content_tag :li, class: "menu-item  #{active_for(path: new_user_path)}" do %>
                 <%= link_to new_user_path, class: 'menu-link' do %>
                   <%= content_tag :i, nil, class: 'fas fa-plus fa-fw' %>
                   <%= content_tag :span, t('partners.add'), class: 'menu-text' %>
                 <% end %>
-              </li>
-              <li class="menu-item">
+              <% end %>
+              <%= content_tag :li, class: "menu-item  #{active_for({path: users_path}, 'active')}" do %>
                 <%= link_to users_path, class: 'menu-link' do %>
                   <%= content_tag :i, nil, class: 'fas fa-th-list fa-fw' %>
                   <%= content_tag :span, t('partners.list'), class: 'menu-text' %>
                 <% end %>
-              </li>
+              <% end %>
             </ul>
             <!-- /child menu -->
-          </li>
+          <% end %>
           <!-- /.menu-item -->
 
           <!-- .menu-item -->
-          <%= link_to new_property_path, nil, class: 'menu-link yolare' %>
-
-          <li class="menu-item has-child has-open">
+          <%= content_tag :li, class: "menu-item has-child #{active_for({path: new_property_path}, 'hasopen')}" do %>
             <%= link_to nil, class: 'menu-link' do %>
               <%= content_tag :i, nil, class: 'menu-icon fas fa-home' %>
               <%= content_tag :span, t('properties.title'), class: 'menu-text' %>
@@ -84,19 +82,18 @@
             <!-- child menu -->
             <ul class="menu">
               <%= content_tag :li, class: "menu-item  #{active_for(path: new_property_path)}" do %>
-                <!--              <li class="menu-item <%#= active_for(path: new_property_path) %>">-->
                 <%= link_to new_property_path, class: 'menu-link' do %>
                   <%= content_tag :i, nil, class: 'fas fa-plus fa-fw' %>
                   <%= content_tag :span, t('properties.add'), class: 'menu-text' %>
                 <% end %>
               <% end %>
-              <li class="menu-item <%= active_for(path: properties_path) %>">
+              <%= content_tag :li, class: "menu-item  #{active_for(path: properties_path)}" do %>
                 <%= link_to properties_path, class: 'menu-link' do %>
                   <%= content_tag :i, nil, class: 'fas fa-th-list fa-fw' %>
                   <%= content_tag :span, t('properties.list'), class: 'menu-text' %>
                 <% end %>
-              </li>
-              <li class="menu-item <%= active_for(path: properties_path) %>">
+              <% end %>
+              <li class="menu-item disabled <%= active_for(path: properties_path) %>">
                 <%= link_to properties_path, class: 'menu-link' do %>
                   <%= content_tag :i, nil, class: 'far fa-heart fa-fw' %>
                   <%= content_tag :span, t('properties.favourites'), class: 'menu-text' %>
@@ -110,7 +107,7 @@
               </li>
             </ul>
             <!-- /child menu -->
-          </li>
+          <% end %>
           <!-- /.menu-item -->
 
           <!-- .menu-item -->

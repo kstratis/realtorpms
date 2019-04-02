@@ -1,6 +1,10 @@
 module ApplicationHelper
 
-  ACTIVE_CLASS = 'has-active'.freeze
+  CLASSNAME = {
+      'active': 'has-active',
+      'hasopen': 'has-open',
+  }
+  # ACTIVE_CLASS = 'has-active'.freeze
 
   # Returns the full title on a per-page basis.
   def full_title(page_title = '')
@@ -12,15 +16,22 @@ module ApplicationHelper
     end
   end
 
-  def active_for(options)
+  def active_for(options, name='active')
     name_of_controller = options.fetch(:controller) { nil }
     name_of_action     = options.fetch(:action) { nil }
     request_path       = options.fetch(:path) { nil }
 
-    return ACTIVE_CLASS if request_path && request_path == request.path
+    puts '-----------'
+    puts request_path
+    puts request.path
+    puts "if equal will return #{CLASSNAME[name.to_sym]}"
+    puts '###########'
+
+
+    return CLASSNAME[name.to_sym] if request_path && request_path == request.path
 
     if name_of_controller == controller_name
-      ACTIVE_CLASS if name_of_action.nil? || (name_of_action == action_name)
+      CLASSNAME[name.to_sym] if name_of_action.nil? || (name_of_action == action_name)
     end
   end
 
