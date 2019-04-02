@@ -1,7 +1,9 @@
-// This is basically a customized version of ujs.js of activestorage.
-// The main idea used here is that is changes DirectUploadsController to CustomDirectUploadsController which in turn
-// changes a few things on how uploads work in conjuction with a file uploading library. The lines that changed include
-// a comment so that they can be easily spotted.
+/**
+ * This is basically a customized version of ujs.js of activestorage.
+ * The main idea used here is that is changes DirectUploadsController to CustomDirectUploadsController which in turn
+ * changes a few things on how uploads work in conjuction with a file uploading library. The lines that changed include
+ * a comment so that they can be easily spotted.
+ */
 
 // changed line
 import { CustomDirectUploadsController } from './custom_direct_uploads_controller';

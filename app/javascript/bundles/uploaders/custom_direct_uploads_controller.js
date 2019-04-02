@@ -1,5 +1,4 @@
-// import { UploadController } from 'upload_controller';
-// import { DirectUploadController } from 'activestorage';
+/* This is basically a customized version of active_uploads_controller.js of activestorage. */
 import { DirectUploadController } from "activestorage/src/direct_upload_controller";
 import { dispatchEvent } from 'activestorage/src/helpers';
 
