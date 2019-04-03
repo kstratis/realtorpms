@@ -124,6 +124,11 @@ module Accounts
     def update
       set_owner
       set_location
+
+      params[:delete_images].try :each do |id|
+        @property.images.find(id).purge
+      end
+
       respond_to do |format|
         if @property.update(property_params)
           format.html {redirect_to @property, flash: {success: "Property was successfully updated."}}
@@ -214,6 +219,7 @@ module Accounts
                                        :noowner,
                                        {owner_attributes: [:first_name, :last_name, :email, :telephones]},
                                        # attachments: [],
+                                       delete_images: [],
                                        images: [],
                                        extra_ids: [])
     end

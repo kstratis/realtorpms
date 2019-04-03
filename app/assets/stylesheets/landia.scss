@@ -709,16 +709,82 @@ i.fas.fa-heart.colored{
   margin-top: 20px;
 }
 
-.thumbnails-ribbon{
-  //border: 1px solid #e5e5e5;
-  //border-radius: 3px;
-  //padding: 20px 0 0 0;
-  //background-color: lightcoral;
-  //background-color: $gray-200;
+li.page-item{
+  cursor: pointer;
+}
+
+// https://stackoverflow.com/a/30663705/178728
+.thumbnails-ribbon {
+  ul {
+    list-style-type: none;
+  }
+
+  li {
+    display: inline-block;
+  }
+
+  input[type="checkbox"][id^="thumb"] {
+    display: none;
+  }
+
+  label {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+  }
+
+  label:before {
+    background-color: white;
+    color: white;
+    content: " ";
+    display: block;
+    border-radius: 50%;
+    border: 1px solid #EA6759;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    line-height: 26px;
+    transition-duration: 0.4s;
+    transform: scale(0);
+    z-index: 5000;
+  }
+
+  label img {
+    height: 100%;
+    width: 100%;
+    border-radius: 3px;
+    transition-duration: 0.2s;
+    transform-origin: 50% 50%;
+  }
+
+  :checked + label:before {
+    font-family: "Font Awesome\ 5 Free";
+    content: "\f00c";
+    font-weight: 900;
+    background-color: #EA6759;
+    transform: scale(1);
+  }
+
+  :checked + label div.thumbnail-container{
+    border: none;
+  }
+
+  :checked + label img {
+    transform: scale(1.1);
+    box-shadow: 0 0 5px #333;
+    z-index: -1000;
+  }
 }
 
 .shadow {
   -webkit-box-shadow: 3px 3px 5px 6px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
   -moz-box-shadow:    3px 3px 5px 6px #ccc;  /* Firefox 3.5 - 3.6 */
   box-shadow:         3px 3px 5px 6px #ccc;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+}
+
+.feedback-text{
+  margin: 20px 0 20px 0;
 }

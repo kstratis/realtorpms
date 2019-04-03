@@ -5,14 +5,20 @@
       <div class="thumbnails-header">
         <legend><u><%= t('js.forms.properties.wizard.step6.existing_files') %></u></legend>
       </div>
+      <div class="feedback-text">
+        <div class="text-muted"><%= t('js.forms.properties.wizard.step6.existing_files_delete_html') %></div>
+      </div>
       <div class="thumbnails-ribbon d-flex flex-wrap justify-content-center">
-        <% @property.images.each do |image| %>
-          <%= link_to(image, :target => "_blank") do %>
-            <div class="thumbnail-container">
-              <%= image_tag image, class: 'thumbnail' %>
-            </div>
+        <ul>
+          <% @property.images.each do |image| %>
+            <li>
+              <%= check_box_tag 'delete_images[]', image.id, checked = false, class: "", id: "thumb" + image.id.to_s, type: 'checkbox' %>
+              <label for="thumb<%= image.id.to_s %>">
+                <div class="thumbnail-container"><%= image_tag image, class: 'thumbnail' %></div>
+              </label>
+            </li>
           <% end %>
-        <% end %>
+        </ul>
       </div>
     </div>
   </div>

@@ -22,13 +22,13 @@ module ApplicationHelper
     request_path       = options.fetch(:path) { nil }
     request_class      = options.fetch(:classname) { 'active' }
 
-    puts '-----------'
-    puts request_path
-    puts request.path
-    puts "if equal will return #{CLASSNAME[request_class.to_sym]}"
-    puts '###########'
+    # puts '-----------'
+    # puts request_path
+    # puts request.path
+    # puts "if equal will return #{CLASSNAME[request_class.to_sym]}"
+    # puts '###########'
     # byebug
-    puts "the root path is: #{root_path}"
+    # puts "the root path is: #{root_path}"
 
 
     return CLASSNAME[request_class.to_sym] if request_path && request_path == request.path
