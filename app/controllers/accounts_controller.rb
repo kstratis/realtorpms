@@ -11,8 +11,12 @@ class AccountsController < ApplicationController
     @account = Account.new(account_params)
     if @account.save
       # @account.users << @account.owner
-      log_in(@account.owner)
+      # log_in(@account.owner)
+      puts 'SIGNING IN'
+      sign_in(@account.owner)
+      puts 'SHOULD HAVE SIGNED IN BY NOW'
       flash[:success] = 'Welcome to PropertyX! Your account has been successfully created.'
+      puts 'FLASH MESSAGE SHOULD BE SET'
       # redirect_to @account.owner
       redirect_to root_url(subdomain: @account.subdomain)
     else

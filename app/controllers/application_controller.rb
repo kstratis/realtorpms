@@ -4,8 +4,9 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery prepend: true
   include SessionsHelper
   rescue_from ActiveRecord::RecordNotFound, with: -> { render_404  }
-
   before_action :set_locale
+
+  layout :layout_by_resource
 
   def set_locale
     I18n.locale = params[:locale] || current_user.try(:locale) || I18n.default_locale
@@ -41,6 +42,16 @@ class ApplicationController < ActionController::Base
       format.html { render :file => "#{Rails.root}/public/401", :layout => false, :status => :unauthorized }
       format.xml  { head :unauthorized }
       format.any  { head :unauthorized }
+    end
+  end
+
+  private
+
+  def layout_by_resource
+    if devise_controller?
+      "registration/main"
+    else
+      "application"
     end
   end
 

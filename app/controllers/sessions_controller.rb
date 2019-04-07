@@ -2,7 +2,10 @@ class SessionsController < ApplicationController
   layout 'registration/main'  # show the barebones version only when signing up/in
 
   def new
-    redirect_to root_url if logged_in?
+    puts 'lets see'
+    puts user_signed_in?
+    redirect_to root_url if user_signed_in?
+
     # This is used in case a users attempts to access a subdomain that doesn't exist
     unless request.subdomain.blank?
       redirect_to login_url(subdomain: false) unless Account.subdomain_exists?(request.subdomain)
@@ -12,11 +15,11 @@ class SessionsController < ApplicationController
   def create
 
     user = User.find_by(email: params[:session][:email].downcase)
-    if user && user.authenticate(params[:session][:password])
+    if user && user.authenticated?(params[:session][:password])
       # Special case accepting invitations
       # ----------------------------------
       if session.key?('forwarding_url') && /\/invitations\/\w+\/accept/.match(session[:forwarding_url])
-        log_in user
+        sign_in user
         # note that both 1 and 0 are true in the boolean context. if we had done
         # +params[:session][:remember_me] ? remember(user) : forget(user)+, remeber(user)
         # would always get called
@@ -33,7 +36,7 @@ class SessionsController < ApplicationController
         unless account.owner == user || account.users.exists?(user.id) || user.is_admin?
           render_401 and return
         end
-        log_in user
+        sign_in user
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
         flash[:success] = I18n.t 'sessions.flash_success'
 
@@ -42,7 +45,7 @@ class SessionsController < ApplicationController
 
       # Log in without a subdomain in URL. This can only happen in root/login path.
       # All other routes are automatically protected with a subdomain constraint.
-      log_in user
+      sign_in user
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       flash[:success] = I18n.t 'sessions.flash_success'
       # Check the account count. If accounts.count > 0 redirect to account switcher
@@ -80,8 +83,9 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    log_out if logged_in?
+    sign_out if user_signed_in?
     flash[:danger] = I18n.t 'sessions.flash_logout'
+    puts request.subdomain
     redirect_to root_url(subdomain: request.subdomain) # make the subdomain explicit
   end
 

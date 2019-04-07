@@ -2,7 +2,6 @@ require 'constraints/subdomain_required'
 
 Rails.application.routes.draw do
 
-
   get 'hello_world', to: 'hello_world#index'
   # get 'sessions/new'
 
@@ -15,6 +14,10 @@ Rails.application.routes.draw do
   # root 'users#index'
 
   # root 'main_pages#home'
+  #
+  devise_for :users
+  # devise_for :users, skip: :all
+
   constraints(SubdomainRequired) do
     scope module: 'accounts' do
       root to: 'dashboard#index', as: :account_root
@@ -66,6 +69,9 @@ Rails.application.routes.draw do
   get  '/about', to: 'main_pages#about'
   get  '/contact', to: 'main_pages#contact'
   get  '/signup',  to: 'users#new'
+
+
+  # devise_for :users, :path_prefix => 'auth', path_names: {sign_in: 'login', sign_out: 'logout', sign_up: 'register'}
 
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'

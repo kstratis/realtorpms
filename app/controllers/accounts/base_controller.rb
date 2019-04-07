@@ -4,8 +4,10 @@ module Accounts
     include LocationFilter
     include OwnerFilter
 
-    # before_action :logged_in_user, :allowed_subdomains, only: [:index, :edit, :update, :destroy]
-    before_action :logged_in_user, :allowed_subdomains
+    # before_action :authenticate_user!, :allowed_subdomains, only: [:index, :edit, :update, :destroy]
+    # before_action :authenticate_user!, :allowed_subdomains
+    # before_action :authenticate_user!
+    before_action :authenticate_user!, except: [:receive]
     after_action :store_referer_url, only: [:index, :edit, :update, :destroy]
 
     # before_action :correct_subdomain

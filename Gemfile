@@ -69,6 +69,8 @@ gem "aws-sdk-s3", require: false
 gem "parsley-rails"
 
 gem "irb"
+
+gem "devise", "~> 4.6.2"
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
