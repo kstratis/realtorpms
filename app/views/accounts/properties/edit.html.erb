@@ -174,7 +174,7 @@
                               ajaxEnabled: false,
                               isClearable: true,
                               backspaceRemovesValue: true,
-                              storedOption: {"label": Property.human_enum_name(:floor, @property.floor), "value": @property.floor},
+                              storedOption: @property.floor.blank? ? '' : {"label": Property.human_enum_name(:floor, @property.floor), "value": @property.floor},
                               searchable: true,
                               feedback: t('js.forms.properties.wizard.step1.floor_feedback'),
                               i18n: {
@@ -205,7 +205,7 @@
                               ajaxEnabled: false,
                               isClearable: true,
                               backspaceRemovesValue: true,
-                              storedOption: {"label": @property.construction, "value": @property.construction},
+                              storedOption: @property.construction.blank? ? '' : {"label": @property.construction, "value": @property.construction},
                               searchable: true,
                               feedback: t('js.forms.properties.wizard.step1.construction_feedback'),
                               i18n: {
@@ -316,10 +316,9 @@
                       <!-- Availability -->
                       <div class="col-md-6 col-sm-12">
                         <div class="form-group mb-4">
-                          <label class="control-label" for="avail"><%= t('activerecord.attributes.property.availability_title') %></label>
-                          <input id="avail" type="text" class="form-control" data-toggle="flatpickr">
-                          <small class="form-text text-muted"><%= t('activerecord.attributes.property.availability_feedback_html') %>
-                          </small>
+                          <%= property.label :availability, t('activerecord.attributes.property.availability_title'), class: 'control-label' %>
+                          <%= property.text_field :availability, class: 'form-control', :data => {:toggle => 'flatpickr'} %>
+                          <small class="form-text text-muted"><%= t('activerecord.attributes.property.availability_feedback_html') %></small>
                         </div><!-- /.form-group -->
                       </div>
 
@@ -344,6 +343,7 @@
                               ajaxEnabled: false,
                               isClearable: true,
                               backspaceRemovesValue: true,
+                              storedOption: @property.levels.blank? ? '' : {"label": @property.levels, "value": @property.levels},
                               searchable: false,
                               feedback: t('js.forms.properties.wizard.step1.levels_feedback'),
                               i18n: {
@@ -699,7 +699,7 @@
                     <hr class="mt-5">
                     <div class="d-flex">
                       <button type="button" class="prev btn btn-secondary" data-validate="fieldset-6"><%= t('js.forms.properties.wizard.previous') %></button>
-                      <%= property.button t('properties.new.add_button'), class: 'btn btn-primary ml-auto submit', "data-validate": "fieldset-6" %>
+                      <%= property.button t('properties.edit.edit_button'), class: 'btn btn-primary ml-auto submit', "data-validate": "fieldset-6" %>
                     </div>
                   </fieldset><!-- /fieldset -->
                 </div><!-- Step 6 END -->
