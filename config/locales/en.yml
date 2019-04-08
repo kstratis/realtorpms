@@ -408,6 +408,7 @@ en:
     english: "English"
     greek: "Greek"
   sessions:
+    greeting: "Welcome"
     heading: "Log in"
     login_button: "Log in"
     new_user_prompt: "New user?"

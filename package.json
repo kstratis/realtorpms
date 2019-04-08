@@ -12,6 +12,7 @@
     "intl": "^1.2.5",
     "js-yaml": "^3.12.0",
     "open-iconic": "^1.1.1",
+    "particles.js": "^2.0.0",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",

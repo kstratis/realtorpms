@@ -13,6 +13,7 @@ class SessionsController < ApplicationController
 
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
+
       # Special case accepting invitations
       # ----------------------------------
       if session.key?('forwarding_url') && /\/invitations\/\w+\/accept/.match(session[:forwarding_url])

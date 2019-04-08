@@ -7,7 +7,7 @@ el:
       user: "Χρήστης"
     attributes:
       invitation:
-        email_label: "Διεύθυνση ηλεκτρονικού ταχυδρομείου"
+        email_label: "Email"
         email_placeholder: "π.χ. nikosdimitriou@gmail.com"
       user:
         first_name: "Όνομα"
@@ -22,11 +22,11 @@ el:
         phone1_feedback_html: "π.χ. 210 33 33 333"
         phone1_placeholder: "π.χ. 697 25 00 111"
         locale: "Γλώσσα διεπαφής"
-        password: "Κωδικός"
+        password: "Κωδικός πρόσβασης"
         password_placeholder: "Απαιτούνται τουλάχιστον 6 χαρ/ρες"
         password_confirmation: "Επανάληψη νέου κωδικού"
         password_confirmation_placeholder: "Πληκτρολογήστε ξανά τον νέο σας κωδικό"
-        remember_me: "Να με θυμάσαι σε αυτήν τη συσκευή"
+        remember_me: "Να παραμείνω συνδεδεμένος"
       extra:
         housetype:
           title: "Τύπος"
@@ -406,6 +406,7 @@ el:
     english: "Αγγλικά"
     greek: "Ελληνικά"
   sessions:
+    greeting: "Καλωσήλθατε"
     heading: "Είσοδος στην εφαρμογή"
     login_button: "Είσοδος"
     new_user_prompt: "Είστε νέος χρήστης;"

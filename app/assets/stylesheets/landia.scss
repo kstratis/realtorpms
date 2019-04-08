@@ -466,9 +466,10 @@ footer {
 }
 
 .registration-special {
-  background-image: url(background/final.svg) !important;
-  background-position: center center;
-  background-repeat: no-repeat;
+  //background-color: #ffffff;
+  //background-image: url(background/hero_bg.png) !important;
+  //background-position: center center;
+  //background-repeat: no-repeat;
 }
 
 .custom-control-label {
@@ -787,4 +788,12 @@ li.page-item{
 
 .feedback-text{
   margin: 20px 0 20px 0;
+}
+
+#particles{
+  z-index: -1;
+}
+
+.auth-subheader{
+  z-index: 1000;
 }
