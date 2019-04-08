@@ -409,10 +409,12 @@ en:
     greek: "Greek"
   sessions:
     greeting: "Welcome"
+    no_account: "Don't have a account yet?"
+    rights: "All Rights Reserved."
     heading: "Log in"
     login_button: "Log in"
     new_user_prompt: "New user?"
-    sign_up_now: "Register a new account here!"
+    sign_up_now: "Register here."
     flash_error: "Invalid username/password!"
     flash_success: "You have successfully signed in."
     flash_logout: "You have successfully signed out."
