@@ -413,6 +413,7 @@ en:
     rights: "All Rights Reserved."
     heading: "Log in"
     login_button: "Log in"
+    reset_password: "I forgot my password."
     new_user_prompt: "New user?"
     sign_up_now: "Register here."
     flash_error: "Invalid username/password!"
