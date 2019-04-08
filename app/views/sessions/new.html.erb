@@ -7,7 +7,7 @@
       <%= image_tag('landia_logo.svg', class: 'navbar-brand', height: "52", title: 'Landia') %>
     </h1>
 
-    <p> <%= t('sessions.no_account')  %> <%= link_to t('sessions.sign_up_now'), new_account_path %></p>
+    <p> <%= t('sessions.no_account')  %> <%= link_to t('sessions.sign_up_now'), new_account_url(subdomain: nil) %></p>
 <!--    <p> Don't have a account? <a href="auth-signup.html">Create One</a></p>-->
   </header>
 
