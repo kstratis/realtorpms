@@ -9,14 +9,14 @@
   </header>
 
   <!-- form -->
-  <%= form_for(:password_reset, url: password_resets_path, html: {class: 'auth-form'}) do |f| %>
+  <%= form_for(:password_reset, url: password_reset_new_path, html: {class: 'auth-form'}) do |f| %>
 
     <%#= render 'shared/error_messages' %>
 
     <!-- .form-group -->
     <div class="form-group">
       <div class="form-label-group">
-        <%= f.email_field :email, class: 'form-control', placeholder: User.human_attribute_name("email") %>
+        <%= f.email_field :email, class: 'form-control', placeholder: User.human_attribute_name("email"), required: true %>
         <%= f.label "email", User.human_attribute_name("email") %>
       </div>
     </div>

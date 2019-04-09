@@ -16,7 +16,13 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # root 'application#hello'
   # root 'users#index'
-  resources :password_resets,     only: [:new, :create, :edit, :update]
+  #
+  get 'password/reset', to: 'password_resets#new', as: :password_reset_new
+  post 'password/reset', to: 'password_resets#create', as: :password_reset_create
+  get 'password/new', to: 'password_resets#edit', as: :password_new_edit
+  post 'password/new', to: 'password_resets#update', as: :password_new_update
+  # resources :password_resets, only: [:new, :create, :edit, :update]
+
 
   # root 'main_pages#home'
   constraints(SubdomainRequired) do

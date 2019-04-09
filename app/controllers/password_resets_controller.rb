@@ -5,7 +5,11 @@ class PasswordResetsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(email: params[:password_reset][:email].downcase)
+    if params[:password_reset][:email].blank?
+      flash.now[:danger] = "The Email address field cant be empty"
+      return render 'new'
+    end
+    @user = User.find_by(email: params[:password_reset][:email].try(:downcase))
     if @user
       @user.create_reset_digest
       @user.send_password_reset_email
@@ -13,7 +17,7 @@ class PasswordResetsController < ApplicationController
       redirect_to root_url
     else
       flash.now[:danger] = "Email address not found"
-      render 'new'
+      render :new
     end
   end
 
