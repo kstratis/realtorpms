@@ -17,10 +17,10 @@ Rails.application.routes.draw do
   # root 'application#hello'
   # root 'users#index'
   #
-  get 'password/reset', to: 'password_resets#new', as: :password_reset_new
-  post 'password/reset', to: 'password_resets#create', as: :password_reset_create
-  get 'password/new', to: 'password_resets#edit', as: :password_new_edit
-  post 'password/new', to: 'password_resets#update', as: :password_new_update
+  get 'password/request/new', to: 'password_resets#new', as: :password_reset_request_new
+  post 'password/request/new', to: 'password_resets#create', as: :password_reset_request_create
+  get 'password/:id/reset', to: 'password_resets#edit', as: :password_reset_edit
+  post 'password/:id/reset', to: 'password_resets#update', as: :password_reset_update
   # resources :password_resets, only: [:new, :create, :edit, :update]
 
 
