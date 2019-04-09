@@ -3,6 +3,9 @@ require 'constraints/subdomain_required'
 Rails.application.routes.draw do
 
 
+  # get 'password_resets/new'
+  # get 'password_resets/edit'
+
   get 'hello_world', to: 'hello_world#index'
   # get 'sessions/new'
 
@@ -13,6 +16,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # root 'application#hello'
   # root 'users#index'
+  resources :password_resets,     only: [:new, :create, :edit, :update]
 
   # root 'main_pages#home'
   constraints(SubdomainRequired) do
