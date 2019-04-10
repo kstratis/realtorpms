@@ -29,6 +29,7 @@ module Propertyx
 
     config.action_view.embed_authenticity_token_in_remote_forms = true
 
+    # Removes the wrapping .field_with_errors divs when a form has errors
     ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
       html_tag.html_safe
     end
