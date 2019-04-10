@@ -5,8 +5,9 @@ class UserMailer < ApplicationMailer
   #   mail to: user.email, subject: "Account activation"
   # end
 
-  def password_reset(user)
+  def password_reset(user, subdomain)
     @user = user
+    @subdomain = subdomain
     mail to: user.email, subject: "Password reset"
   end
 end

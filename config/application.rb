@@ -29,6 +29,10 @@ module Propertyx
 
     config.action_view.embed_authenticity_token_in_remote_forms = true
 
+    ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
+      html_tag.html_safe
+    end
+
 
 
     # config.logger = Logger.new("#{Rails.root}/log/app.log")

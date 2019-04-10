@@ -92,10 +92,15 @@ class User < ApplicationRecord
   end
 
   # Returns true if the given token matches the digest.
-  def authenticated?(remember_token)
-    return false if remember_digest.nil?
-    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+  def authenticated?(attribute, token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
   end
+  # def authenticated?(remember_token)
+  #   return false if remember_digest.nil?
+  #   BCrypt::Password.new(remember_digest).is_password?(remember_token)
+  # end
 
   # Forgets a user.
   def forget
@@ -131,8 +136,18 @@ class User < ApplicationRecord
   end
 
   # Sends password reset email.
-  def send_password_reset_email
-    UserMailer.password_reset(self).deliver_now
+  def send_password_reset_email(subdomain)
+    UserMailer.password_reset(self, subdomain).deliver_now
+  end
+
+  # Returns true if a password reset has expired.
+  def password_reset_expired?
+    reset_sent_at < 2.hours.ago
+  end
+
+  # Checks whether users can reset their passwords based on the given domain
+  def password_change_eligibility(subdomain)
+    all_accounts.map(&:subdomain).include?(subdomain)
   end
 
   def self.sorted_by_assignments_count(dataset)

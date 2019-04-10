@@ -1,2 +1,66 @@
-<h1>PasswordResets#edit</h1>
-<p>Find me in app/views/password_resets/edit.html.erb</p>
+<% provide(:title, t('sessions.new_password')) %>
+
+<main class="auth">
+  <header id="auth-header" class="auth-header" style="background-image: url(<%= asset_path 'background/hero_bg.png' %>);">
+    <h1>
+      <%= image_tag('landia_logo.svg', class: 'navbar-brand', height: "52", title: 'Landia') %>
+    </h1>
+    <p> <%= t('sessions.new_password') %></p>
+  </header>
+
+  <!-- form -->
+  <%= form_for(@user, url: password_reset_update_path(params[:id]), html: {class: 'auth-form'}) do |f| %>
+    <%= hidden_field_tag :email, @user.email %>
+
+
+    <%= render 'shared/error_messages', locals: {model: @user} %>
+    <%#= render 'shared/error_messages' %>
+    <%# if @user.errors.any? %>
+<!--      <div id="error_explanation">-->
+<!--        <h2><%#= pluralize(@user.errors.count, "error") %> prohibited this task from being saved:</h2>-->
+
+<!--        <ul>-->
+          <%# @user.errors.full_messages.each do |msg| %>
+<!--            <li><%#= msg %></li>-->
+          <%# end %>
+<!--        </ul>-->
+<!--      </div>-->
+    <%# end %>
+
+    <!-- .form-group -->
+    <div class="form-group">
+      <div class="form-label-group">
+        <%= f.password_field :password, class: 'form-control', placeholder: User.human_attribute_name("password_new"), required: true %>
+        <%= f.label :password, User.human_attribute_name("password_new") %>
+      </div>
+    </div>
+    <!-- .form-group -->
+
+    <!-- .form-group -->
+    <div class="form-group">
+      <div class="form-label-group">
+        <%= f.password_field :password_confirmation, class: 'form-control', placeholder: User.human_attribute_name("password_confirmation_placeholder"), required: true %>
+        <%= f.label :password_confirmation, User.human_attribute_name("password_confirmation") %>
+      </div>
+    </div>
+    <!-- .form-group -->
+
+    <!-- .form-group -->
+    <div class="form-group">
+      <%= f.submit t('sessions.forgot_password_button'), class: 'btn btn-lg btn-primary btn-block' %>
+    </div>
+    <!-- /.form-group -->
+
+    <!-- Restore link -->
+    <%# unless request.subdomain.blank? %>
+<!--    <div class="text-center pt-1 pb-2">-->
+      <%#= link_to t('sessions.remembered_password'), login_url(subdomain: request.subdomain.blank? ? nil : request.subdomain) %>
+<!--    </div>-->
+    <%# end %>
+    <!-- /restore link -->
+
+  <% end %>
+
+  <footer class="auth-footer">&copy; <%= Time.current.year %> <%= t('sessions.rights') %></footer>
+
+</main>

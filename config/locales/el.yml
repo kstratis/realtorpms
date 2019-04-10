@@ -23,8 +23,9 @@ el:
         phone1_placeholder: "π.χ. 697 25 00 111"
         locale: "Γλώσσα διεπαφής"
         password: "Κωδικός πρόσβασης"
+        password_new: "Νέος κωδικός πρόσβασης"
         password_placeholder: "Απαιτούνται τουλάχιστον 6 χαρ/ρες"
-        password_confirmation: "Επανάληψη νέου κωδικού"
+        password_confirmation: "Επανάληψη νέου κωδικού πρόσβασης"
         password_confirmation_placeholder: "Πληκτρολογήστε ξανά τον νέο σας κωδικό"
         remember_me: "Να παραμείνω συνδεδεμένος"
       extra:
@@ -410,6 +411,7 @@ el:
     forgot_title: "Αίτημα υπενθύμισης συνθηματικού | Landia"
     forgot_password_header: "Αίτημα υπενθύμισης συνθηματικού"
     remembered_password: "Επιστροφή στην οθόνη σύνδεσης"
+    new_password: "Νέος κωδικός"
     greeting: "Καλωσήλθατε"
     no_account: "Δεν έχετε λογαριασμό;"
     rights: "Με την επιφύλαξη παντός νομίμου δικαιώματος."

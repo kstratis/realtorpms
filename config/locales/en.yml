@@ -412,6 +412,7 @@ en:
     forgot_title: "Forgot password | Landia"
     forgot_password_header: "Password reset request"
     remembered_password: "Back to login screen"
+    new_password: "New password"
     greeting: "Welcome"
     no_account: "Don't have a account yet?"
     rights: "All Rights Reserved."
