@@ -1,6 +1,5 @@
 class HomeController < ApplicationController
-
-  layout 'website/skeleton'  # show the barebones version only when signing up/in
+  layout 'auth/skeleton'  # show the barebones version only when signing up/in
 
   def index
     @subdomain = nil
@@ -26,6 +25,7 @@ class HomeController < ApplicationController
   end
 
   def accounts
+    return redirect_to root_url(subdomain: nil) if current_user.nil?
     @accounts = current_user.is_admin? ? Account.all : current_user.all_accounts
   end
 

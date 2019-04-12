@@ -5,10 +5,13 @@ el:
       invitation: "Πρόσκληση"
       property: "Ακίνητο"
       user: "Χρήστης"
+      account: "Λογαριασμός"
     attributes:
       invitation:
         email_label: "Email"
         email_placeholder: "π.χ. nikosdimitriou@gmail.com"
+      account:
+        subdomain: "Όνομα λογαριασμού"
       user:
         first_name: "Όνομα"
         first_name_feedback_html: "π.χ. Δημήτρης"
@@ -406,14 +409,19 @@ el:
   languages:
     english: "Αγγλικά"
     greek: "Ελληνικά"
+  accounts:
+    signup_title: "Εγγραφή"
+    greeting: "Νέος λογαριασμός"
+    signup_button: "Δημιουργία λογαριασμού"
   sessions:
-    login_title: "Σύνδεση | Landia"
-    forgot_title: "Αίτημα υπενθύμισης συνθηματικού | Landia"
+    login_title: "Σύνδεση"
+    forgot_title: "Αίτημα υπενθύμισης συνθηματικού"
     forgot_password_header: "Αίτημα υπενθύμισης συνθηματικού"
     remembered_password: "Επιστροφή στην οθόνη σύνδεσης"
     new_password: "Νέος κωδικός"
     greeting: "Καλωσήλθατε"
     no_account: "Δεν έχετε λογαριασμό;"
+    existing_account: "Έχετε ήδη λογαριασμό;"
     rights: "Με την επιφύλαξη παντός νομίμου δικαιώματος."
     heading: "Είσοδος στην εφαρμογή"
     login_button: "Είσοδος"
@@ -421,6 +429,7 @@ el:
     reset_password: "Ξέχασα τον κωδικό μου."
     new_user_prompt: "Είστε νέος χρήστης;"
     sign_up_now: "Εγγραφείτε εδώ."
+    sign_in_now: "Συνδεθείτε"
     flash_error: "Τα στοιχεία σύνδεσης δεν είναι σωστά!"
     flash_success: "Συνδεθήκατε επιτυχώς."
     flash_logout: "Έχετε αποσυνδεθεί."

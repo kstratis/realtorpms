@@ -29,11 +29,22 @@
 <body class="registration-special">
 
 <div class="pr-body-container">
-  <% flash.each do |message_type, message| %>
-    <div class="alert alert-<%= message_type %>"><%= message %></div>
-  <% end %>
+  <%= render 'layouts/flash_messages' %>
   <div id="page-transition">
-    <%= yield %>
+
+    <main class="auth">
+      <header id="auth-header" class="auth-header" style="background-image: url(<%= asset_path 'background/hero_bg.png' %>);">
+        <h1>
+          <%= image_tag('landia_logo.svg', class: 'navbar-brand', height: "52", title: 'Landia') %>
+        </h1>
+        <%= yield(:heading) %>
+      </header>
+      <%= yield(:content) %>
+      <footer class="auth-footer">&copy; <%= Time.current.year %> <%= t('sessions.rights') %></footer>
+
+    </main>
+
+
   </div>
   <%#= debug(params) if Rails.env.development? %>
 </div>

@@ -5,10 +5,13 @@ en:
       invitation: "Invitation"
       property: "Property"
       user: "User"
+      account: "Λογαριασμός"
     attributes:
       invitation:
         email_label: "Email"
         email_placeholder: "i.e. johnsmith@gmail.com"
+      account:
+        subdomain: "Account name"
       user:
         first_name: "First name"
         first_name_feedback_html: "i.e. John"
@@ -23,6 +26,7 @@ en:
         phone1_placeholder: "i.e. 813-440-5026"
         locale: "Language"
         password: "Password"
+        password_new: "New password"
         password_placeholder: "At least 6 characters long"
         password_confirmation: "Confirm new password"
         password_confirmation_placeholder: "Type your new password again"
@@ -407,14 +411,19 @@ en:
   languages:
     english: "English"
     greek: "Greek"
+  accounts:
+    signup_title: "Signup"
+    greeting: "New account"
+    signup_button: "Create account"
   sessions:
-    login_title: "Login | Landia"
-    forgot_title: "Forgot password | Landia"
+    login_title: "Login"
+    forgot_title: "Forgot password"
     forgot_password_header: "Password reset request"
     remembered_password: "Back to login screen"
     new_password: "New password"
     greeting: "Welcome"
     no_account: "Don't have a account yet?"
+    existing_account: "Already have an account?"
     rights: "All Rights Reserved."
     heading: "Log in"
     login_button: "Log in"
@@ -422,6 +431,7 @@ en:
     reset_password: "I forgot my password."
     new_user_prompt: "New user?"
     sign_up_now: "Register here."
+    sign_in_now: "Sign in here."
     flash_error: "Invalid username/password!"
     flash_success: "You have successfully signed in."
     flash_logout: "You have successfully signed out."

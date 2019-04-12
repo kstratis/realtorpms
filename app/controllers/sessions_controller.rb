@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  layout 'registration/main'  # show the barebones version only when signing up/in
+  layout 'auth/skeleton'
 
   def new
     redirect_to root_url if logged_in?

@@ -1,8 +1,9 @@
 class AccountsController < ApplicationController
   # layout 'registration/main', except: [:show, :edit, :update, :index]  # show the barebones version only when signing up
-  layout 'registration/main'  # show the barebones version only when signing up
+  layout 'auth/skeleton', only: [:new]  # show the barebones version only when signing up
 
   def new
+    return redirect_to root_url(subdomain: nil) unless request.subdomain.blank?
     @account = Account.new
     @account.build_owner
   end

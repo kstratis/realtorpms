@@ -797,3 +797,25 @@ li.page-item{
 .auth-subheader{
   z-index: 1000;
 }
+
+.controls{
+  padding-top: 20px;
+  display: inline-block;
+  text-align: center;
+}
+
+.account-switcher{
+  margin-top: 150px;
+  border: 1px solid #f6c373;
+}
+
+.vcenter {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+}
+
+.prepended-label-fix{
+  height: 2.7rem;
+}
+

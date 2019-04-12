@@ -1,0 +1,1 @@
+BRANDNAME = 'landia'.freeze
