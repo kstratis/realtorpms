@@ -8,7 +8,7 @@
     </h1>
     <% content_for :heading do %>
       <div>
-        <p> <%= t('sessions.existing_account') %> <%= link_to t('sessions.sign_in_now'), new_account_url(subdomain: false) %></p>
+        <p> <%= t('sessions.existing_account') %> <%= link_to t('sessions.sign_in_now'), login_url(subdomain: false) %></p>
       </div>
     <% end %>
   </header>
@@ -58,7 +58,7 @@
           </div>
         </div>
         <!-- /.form-group -->
-        <%#= inline_error @account.owner, :email, 'Email'%>
+        <%= inline_error @account.owner, :email, 'Email'%>
 
         <!-- .form-group -->
         <div class="form-group">

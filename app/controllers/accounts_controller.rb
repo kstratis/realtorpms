@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
   # layout 'registration/main', except: [:show, :edit, :update, :index]  # show the barebones version only when signing up
-  layout 'auth/skeleton', only: [:new]  # show the barebones version only when signing up
+  layout 'auth/skeleton', only: [:new, :create]  # show the barebones version only when signing up
 
   def new
     return redirect_to root_url(subdomain: nil) unless request.subdomain.blank?
@@ -10,6 +10,7 @@ class AccountsController < ApplicationController
 
   def create
     @account = Account.new(account_params)
+    # @account.owner = Owner.find_or_initialize_by(account_params[:owner_attributes])
     if @account.save
       # @account.users << @account.owner
       log_in(@account.owner)
@@ -17,7 +18,7 @@ class AccountsController < ApplicationController
       # redirect_to @account.owner
       redirect_to root_url(subdomain: @account.subdomain)
     else
-      flash.now[:danger] = 'Sorry, your account could not be created.'
+      # flash.now[:danger] = 'Sorry, your account could not be created.'
       render :new
     end
   end
@@ -37,6 +38,6 @@ class AccountsController < ApplicationController
   private
 
   def account_params
-    params.require(:account).permit(:subdomain, { owner_attributes: [:first_name, :last_name, :email, :age, :phone1, :password, :password_confirmation] })
+    params.require(:account).permit(:subdomain, { owner_attributes: [:first_name, :last_name, :email, :password, :password_confirmation] })
   end
 end

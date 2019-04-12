@@ -70,7 +70,9 @@ Rails.application.routes.draw do
   get '/accounts/', to:'home#accounts', as: :account_list
 
   get '/accounts/new', to: 'accounts#new', as: :new_account
-  post '/accounts', to: 'accounts#create', as: :accounts
+
+  post '/accounts/new', to: 'accounts#create', as: :accounts
+  # post '/accounts', to: 'accounts#create', as: :accounts
 
   get  '/help', to: 'main_pages#help'
   get  '/about', to: 'main_pages#about'

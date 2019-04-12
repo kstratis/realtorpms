@@ -24,7 +24,7 @@
       <!-- .form-group -->
       <div class="form-group">
         <div class="form-label-group">
-          <%= f.email_field :email, class: 'form-control', placeholder: User.human_attribute_name("email") %>
+          <%= f.email_field :email, class: 'form-control', placeholder: User.human_attribute_name("email"), required: true %>
           <%= f.label "email", User.human_attribute_name("email") %>
         </div>
       </div>
@@ -33,7 +33,7 @@
       <!-- .form-group -->
       <div class="form-group">
         <div class="form-label-group">
-          <%= f.password_field :password, class: 'form-control', placeholder: User.human_attribute_name("password") %>
+          <%= f.password_field :password, class: 'form-control', placeholder: User.human_attribute_name("password"), required: true %>
           <%= f.label :password, User.human_attribute_name("password") %>
         </div>
       </div>
