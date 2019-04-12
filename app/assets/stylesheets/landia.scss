@@ -465,17 +465,6 @@ footer:not(.auth-footer) {
   }
 }
 
-.registration-special {
-  //background-color: #ffffff;
-  //background-image: url(background/hero_bg.png) !important;
-  //background-position: center center;
-  //background-repeat: no-repeat;
-}
-
-.custom-control-label {
-  //cursor: pointer;
-}
-
 input[type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: searchfield-cancel-button;
 }
@@ -817,5 +806,13 @@ li.page-item{
 
 .prepended-label-fix{
   height: 2.7rem;
+}
+
+.auth-form-special{
+  padding-top: 1rem;
+}
+
+.vertical-spacer{
+  padding: 10px 0 0 0;
 }
 

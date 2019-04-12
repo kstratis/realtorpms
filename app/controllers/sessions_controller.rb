@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  before_action :prompt_account, only: [:new]
   layout 'auth/skeleton'
 
   def new
@@ -48,6 +49,7 @@ class SessionsController < ApplicationController
       flash[:success] = I18n.t 'sessions.flash_success'
       # Check the account count. If accounts.count > 0 redirect to account switcher
       # otherwise simply redirect the user to his/her default subdomain
+      # byebug
       redirect_to account_list_url(subdomain: false) and return if user.admin?
       redirect_to account_list_url(subdomain: false) and return if user.get_account_count > 1
       unless user.has_owning_accounts?.zero?

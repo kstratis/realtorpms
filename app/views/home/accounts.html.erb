@@ -1,43 +1,35 @@
-<div class="account-switcher center centered-title vcenter col-4 offset-4">
-  <% if @accounts.empty? %>
-    <i class="pr-icon lg no-results"> </i>
-    <h2>Your user account doesn't seem to be associated with any active domains.</h2>
-    <h2>Please contact your LANDIA administrator.</h2>
-  <% else %>
+<% provide(:title, t('accounts.switch')) %>
 
-    <!-- Heading section -->
-    <% content_for :heading do %>
-      <% if request.subdomain.blank? %>
-        <p> <%= t('sessions.no_account') %> <%= link_to t('sessions.sign_up_now'), new_account_url(subdomain: false) %></p>
-      <% else %>
-        <p> <%= t('sessions.greeting') %></p>
+<% content_for :heading do %>
+  <p> <%= t('accounts.switch') %></p>
+<% end %>
+
+
+<!-- .Content section -->
+<% content_for :content do %>
+  <div class="auth-form auth-form-special centered-title">
+    <i class="pr-icon md account-switch"></i>
+    <div class="vertical-spacer"></div>
+    <h2><%= t('accounts.switch_heading') %></h2>
+    <div class="vertical-spacer"></div>
+
+    <ul class="accounts">
+      <% @accounts.each do |account| %>
+        <li>
+          <%#= link_to root_url(subdomain: account.subdomain) do %>
+          <%= link_to account_switch_url(subdomain: account.subdomain) do %>
+            <%= account.subdomain %>
+          <% end %>
+          <% if account.owner == current_user %>
+            <span class="label">Account Owner</span>
+          <% else %>
+            <span class="label">Regular User</span>
+          <% end %>
+        </li>
       <% end %>
-    <% end %>
-
-    <!-- .Content section -->
-    <% content_for :content do %>
-      <i class="pr-icon md account-switch"></i>
-      <h2>Account switch screen.</h2>
-      <h2>Please pick one of your organizations</h2>
-
-      <ul class="accounts">
-        <% @accounts.each do |account| %>
-          <li>
-            <%#= link_to root_url(subdomain: account.subdomain) do %>
-            <%= link_to account_switch_url(subdomain: account.subdomain) do %>
-              <%= account.subdomain %>
-            <% end %>
-            <% if account.owner == current_user %>
-              <span class="label">Account Owner</span>
-            <% else %>
-              <span class="label">Regular User</span>
-            <% end %>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
-  <% end %> <!-- /.Content section -->
-</div>
+    </ul>
+  </div>
+<% end %>
 
 
 

@@ -1,8 +1,11 @@
 class HomeController < ApplicationController
-  layout 'auth/skeleton'  # show the barebones version only when signing up/in
+  # render :action => 'accounts', :layout => 'auth/skeleton'
+  # layout 'auth/skeleton', only: [:accounts]  # show the barebones version only when signing up/in
+  # layout 'website/skeleton'
 
   def index
     @subdomain = nil
+    render :layout => 'website/skeleton'
     # if logged_in?
     #   if current_user.accounts.count == 0
         # exclude the admin case who may not have a linked account
@@ -27,6 +30,7 @@ class HomeController < ApplicationController
   def accounts
     return redirect_to root_url(subdomain: nil) if current_user.nil?
     @accounts = current_user.is_admin? ? Account.all : current_user.all_accounts
+    render :layout => 'auth/skeleton'
   end
 
 

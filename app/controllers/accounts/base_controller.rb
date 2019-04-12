@@ -34,7 +34,6 @@ module Accounts
     helper_method :owner?
 
     def logged_in_user
-      puts 'RUNNING'
       unless logged_in?
         store_location
         redirect_to login_url
