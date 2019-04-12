@@ -16,7 +16,7 @@ class AccountsController < ApplicationController
     if @account.save
       # @account.users << @account.owner
       log_in(@account.owner)
-      flash[:success] = 'Welcome to PropertyX! Your account has been successfully created.'
+      flash[:success] = I18n.t('accounts.created', brand: BRANDNAME)
       # redirect_to @account.owner
       redirect_to root_url(subdomain: @account.subdomain)
     else
@@ -29,7 +29,7 @@ class AccountsController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      flash[:success] = 'Your profile was successfully updated'
+      flash[:success] = I18n.t('accounts.updated')
       redirect_to @user
       # Handle a successful update.
     else

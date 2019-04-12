@@ -419,6 +419,8 @@ en:
     switch_heading: "Choose account"
     switch_domain: "You switched to subdomain: %{subdomain}"
     switch_info: "You have successfully signed in!"
+    created: "Welcome to %{brand}. Your account has been successfully created."
+    updated: "Profile successfully update"
   sessions:
     login_title: "Login"
     forgot_title: "Forgot password"
