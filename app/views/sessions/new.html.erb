@@ -1,72 +1,60 @@
 <% provide(:title, t('sessions.login_title')) %>
 
-<main class="auth">
-  <header id="auth-header" class="auth-header" style="background-image: url(<%= asset_path 'background/hero_bg.png' %>);">
-    <h1>
-      <%= image_tag('landia_logo.svg', class: 'navbar-brand', height: "52", title: 'Landia') %>
-    </h1>
-
-    <% content_for :heading do %>
-      <% if request.subdomain.blank? %>
-        <p> <%= t('sessions.no_account') %> <%= link_to t('sessions.sign_up_now'), new_account_url(subdomain: false) %></p>
-      <% else %>
-        <p> <%= t('sessions.greeting') %></p>
-      <% end %>
-    <% end %>
-
-  </header>
-
-  <% content_for :content do %>
-    <!-- form -->
-    <%= form_for(:session, url: login_path, html: {class: 'auth-form'}) do |f| %>
-      <%#= render 'shared/error_messages' %>
-
-      <!-- .form-group -->
-      <div class="form-group">
-        <div class="form-label-group">
-          <%= f.email_field :email, class: 'form-control', placeholder: User.human_attribute_name("email"), required: true %>
-          <%= f.label "email", User.human_attribute_name("email") %>
-        </div>
-      </div>
-      <!-- /.form-group -->
-
-      <!-- .form-group -->
-      <div class="form-group">
-        <div class="form-label-group">
-          <%= f.password_field :password, class: 'form-control', placeholder: User.human_attribute_name("password"), required: true %>
-          <%= f.label :password, User.human_attribute_name("password") %>
-        </div>
-      </div>
-      <!-- /.form-group -->
-
-      <!-- .form-group -->
-      <div class="form-group">
-        <%= f.submit t('sessions.login_button'), class: 'btn btn-lg btn-primary btn-block' %>
-      </div>
-      <!-- /.form-group -->
-
-      <!-- .form-group -->
-      <div class="form-group text-center">
-        <div class="custom-control custom-control-inline custom-checkbox">
-          <%= f.check_box(:remember_me, class: "custom-control-input", type: 'checkbox') %>
-          <%= f.label(:remember_me, class: "custom-control-label") do %>
-            <%= User.human_attribute_name("remember_me") %>
-          <% end %>
-        </div>
-      </div>
-      <!-- .form-group -->
-
-      <!-- recovery link -->
-      <% unless request.subdomain.blank? %>
-        <div class="text-center pt-1 pb-2">
-          <%= link_to t('sessions.reset_password'), password_reset_request_new_path %>
-        </div>
-      <% end %>
-      <!-- /recovery link -->
-
-    <% end %>
+<% content_for :heading do %>
+  <% if request.subdomain.blank? %>
+    <p> <%= t('sessions.no_account') %> <%= link_to t('sessions.sign_up_now'), new_account_url(subdomain: false) %></p>
+  <% else %>
+    <p> <%= t('sessions.greeting') %></p>
   <% end %>
+<% end %>
 
-  <footer class="auth-footer">&copy; <%= Time.current.year %> <%= t('sessions.rights') %></footer>
+<% content_for :content do %>
+  <!-- form -->
+  <%= form_for(:session, url: login_path, html: {class: 'auth-form'}) do |f| %>
+    <%#= render 'shared/error_messages' %>
 
-</main>
+    <!-- .form-group -->
+    <div class="form-group">
+      <div class="form-label-group">
+        <%= f.email_field :email, class: 'form-control', placeholder: User.human_attribute_name("email"), required: true %>
+        <%= f.label "email", User.human_attribute_name("email") %>
+      </div>
+    </div>
+    <!-- /.form-group -->
+
+    <!-- .form-group -->
+    <div class="form-group">
+      <div class="form-label-group">
+        <%= f.password_field :password, class: 'form-control', placeholder: User.human_attribute_name("password"), required: true %>
+        <%= f.label :password, User.human_attribute_name("password") %>
+      </div>
+    </div>
+    <!-- /.form-group -->
+
+    <!-- .form-group -->
+    <div class="form-group">
+      <%= f.submit t('sessions.login_button'), class: 'btn btn-lg btn-primary btn-block' %>
+    </div>
+    <!-- /.form-group -->
+
+    <!-- .form-group -->
+    <div class="form-group text-center">
+      <div class="custom-control custom-control-inline custom-checkbox">
+        <%= f.check_box(:remember_me, class: "custom-control-input", type: 'checkbox') %>
+        <%= f.label(:remember_me, class: "custom-control-label") do %>
+          <%= User.human_attribute_name("remember_me") %>
+        <% end %>
+      </div>
+    </div>
+    <!-- .form-group -->
+
+    <!-- recovery link -->
+    <% unless request.subdomain.blank? %>
+      <div class="text-center pt-1 pb-2">
+        <%= link_to t('sessions.reset_password'), password_reset_request_new_path %>
+      </div>
+    <% end %>
+    <!-- /recovery link -->
+
+  <% end %>
+<% end %>
