@@ -434,6 +434,7 @@ el:
     new_user_prompt: "Είστε νέος χρήστης;"
     sign_up_now: "Εγγραφείτε εδώ."
     sign_in_now: "Συνδεθείτε"
+    passw_reset: "Επανάκτηση κωδικού %{brand}"
     flash_error: "Τα στοιχεία σύνδεσης δεν είναι σωστά!"
     flash_success: "Συνδεθήκατε επιτυχώς."
     flash_logout: "Έχετε αποσυνδεθεί."

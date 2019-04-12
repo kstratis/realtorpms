@@ -8,6 +8,6 @@ class UserMailer < ApplicationMailer
   def password_reset(user, subdomain)
     @user = user
     @subdomain = subdomain
-    mail to: user.email, subject: "Password reset"
+    mail to: user.email, subject: I18n.t('sessions.passw_reset', brand: BRANDNAME)
   end
 end

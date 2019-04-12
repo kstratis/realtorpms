@@ -436,6 +436,7 @@ en:
     new_user_prompt: "New user?"
     sign_up_now: "Register here."
     sign_in_now: "Sign in here."
+    passw_reset: "%{brand} password reset"
     flash_error: "Invalid username/password!"
     flash_success: "You have successfully signed in."
     flash_logout: "You have successfully signed out."

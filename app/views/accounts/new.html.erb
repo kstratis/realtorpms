@@ -9,7 +9,7 @@
 <% content_for :content do %>
 
   <%= form_for(@account, html: {class: 'auth-form'}) do |account_builder| %>
-    <%= render 'shared/error_messages', locals: {model: @account} %>
+    <%#= render 'shared/error_messages', locals: {model: @account} %>
 
     <div class="form-group">
       <div class="input-group input-group-alt">
@@ -18,6 +18,7 @@
           <span class="input-group-text">.<%= BRANDNAME %>.com</span>
         </div>
       </div><!-- /.input-group -->
+      <%= inline_error @account, :subdomain, 'Subdomain'%>
     </div><!-- /.form-group -->
 
     <%# This is for the nested user fields %>
@@ -28,50 +29,55 @@
         <div class="form-label-group">
           <%= owner.text_field :first_name, class: 'form-control', placeholder: User.human_attribute_name("first_name") %>
           <%= owner.label :first_name, User.human_attribute_name("first_name") %>
+          <%= inline_error @account.owner, :first_name, 'First name'%>
         </div>
       </div>
       <!-- /.form-group -->
-      <%#= inline_error @account.owner, :first_name, 'First name'%>
+
 
       <!-- .form-group -->
       <div class="form-group">
         <div class="form-label-group">
           <%= owner.text_field :last_name, class: 'form-control', placeholder: User.human_attribute_name("last_name") %>
           <%= owner.label :last_name, User.human_attribute_name("last_name") %>
+          <%= inline_error @account.owner, :last_name, 'Last name'%>
         </div>
       </div>
       <!-- /.form-group -->
-      <%#= inline_error @account.owner, :last_name, 'Last name'%>
+
 
       <!-- .form-group -->
       <div class="form-group">
         <div class="form-label-group">
           <%= owner.email_field :email, class: 'form-control', placeholder: User.human_attribute_name("email") %>
           <%= owner.label "email", User.human_attribute_name("email") %>
+          <%= inline_error @account.owner, :email, 'Email' %>
         </div>
       </div>
       <!-- /.form-group -->
-      <%= inline_error @account.owner, :email, 'Email' %>
+
 
       <!-- .form-group -->
       <div class="form-group">
         <div class="form-label-group">
           <%= owner.password_field :password, class: 'form-control', placeholder: User.human_attribute_name("password") %>
           <%= owner.label :password, User.human_attribute_name("password") %>
+          <%= inline_error @account.owner, :password, 'Password' %>
         </div>
       </div>
       <!-- /.form-group -->
-      <%= inline_error @account.owner, :password, 'Password' %>
+
 
       <!-- .form-group -->
       <div class="form-group">
         <div class="form-label-group">
           <%= owner.password_field :password_confirmation, class: 'form-control', placeholder: User.human_attribute_name("password_confirmation") %>
           <%= owner.label :password_confirmation, User.human_attribute_name("password_confirmation") %>
+          <%= inline_error @account.owner, :password_confirmation, 'Password confirmation' %>
         </div>
       </div>
       <!-- /.form-group -->
-      <%= inline_error @account.owner, :password_confirmation, 'Password confirmation' %>
+
     <% end %>
 
     <%= account_builder.submit t('accounts.signup_button'), class: 'btn btn-primary' %>
