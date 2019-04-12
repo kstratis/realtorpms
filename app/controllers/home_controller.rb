@@ -22,7 +22,7 @@ class HomeController < ApplicationController
     if request.subdomain.blank?
       redirect_to root_url(subdomain: nil)
     else
-      flash[:success] = "You are now signed in to #{request.subdomain}."
+      flash[:success] = I18n.t 'accounts.switch_info'
       redirect_to account_root_url(subdomain: request.subdomain)
     end
   end

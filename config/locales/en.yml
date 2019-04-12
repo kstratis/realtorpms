@@ -417,6 +417,8 @@ en:
     signup_button: "Create account"
     switch: "Account switch"
     switch_heading: "Choose account"
+    switch_domain: "You switched to subdomain: %{subdomain}"
+    switch_info: "You have successfully signed in!"
   sessions:
     login_title: "Login"
     forgot_title: "Forgot password"

@@ -55,7 +55,7 @@ module Accounts
         unless previous_subdomain == request.subdomain
           Account.find_by!(subdomain: request.subdomain)
           if subdomain_list.include? request.subdomain
-            flash.now[:success] = "You switched to the #{request.subdomain} organization"
+            flash.now[:success] = I18n.t "accounts.switch_domain", subdomain: request.subdomain
           else
             render_401 and return
           end
