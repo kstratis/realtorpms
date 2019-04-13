@@ -61,7 +61,7 @@
     <div>
         <h1><i class="fa fa-hand-paper-o fa-fw" aria-hidden="true"></i>Unauthorized domain.</h1>
         <p>You are trying to access an organization <strong>you don't belong to.</strong></p>
-        <p>Landia administrators have been notified of the incident.</p>
+        <p><%= BRANDNAME %> administrators have been notified of the incident.</p>
         <%= link_to login_url(subdomain: nil) do %>
           <p><strong>Go back</strong> to login screen.</p>
         <% end %>
