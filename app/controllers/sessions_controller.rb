@@ -46,12 +46,16 @@ class SessionsController < ApplicationController
       # All other routes are automatically protected with a subdomain constraint.
       log_in user
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+
+      # Go to the account prompt screen but show no flash messages yet. Once will be shown once logged in the portal.
+      redirect_to account_list_url(subdomain: false) and return if user.get_account_count > 1
+
       flash[:success] = I18n.t 'sessions.flash_success'
       # Check the account count. If accounts.count > 0 redirect to account switcher
       # otherwise simply redirect the user to his/her default subdomain
       # byebug
       redirect_to account_list_url(subdomain: false) and return if user.admin?
-      redirect_to account_list_url(subdomain: false) and return if user.get_account_count > 1
+
       unless user.has_owning_accounts?.zero?
         redirect_to root_url(subdomain: Account.find_by(owner_id: user.id).subdomain) and return
       end
