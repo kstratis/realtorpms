@@ -73,18 +73,6 @@
     background-image: url( add_user_colored.svg );
   }
 
-  &.padlock1-colored{
-    background-image: url( padlock1_colored.svg );
-  }
-
-  &.padlock2-colored{
-    background-image: url( padlock2_colored.svg );
-  }
-
-  &.padlock3-colored{
-    background-image: url( padlock3_colored.svg );
-  }
-
   &.edit-user-colored{
     background-image: url( edit_colored.svg );
   }
@@ -109,14 +97,6 @@
     background-image: url( switch_accounts_colored.svg );
   }
 
-  &.search-user{
-    background-image: url( search_user.svg );
-  }
-
-  &.no-results{
-    background-image: url( no_search_results.svg );
-  }
-
   &.assignments{
     background-image: url( assignments2.svg );
   }
@@ -127,10 +107,6 @@
 
   &.user-delete{
     background-image: url( trash_2.svg );
-  }
-
-  &.user-deactivate{
-    background-image: url( pause_2.svg );
   }
 
   &.partner-info{
@@ -157,12 +133,24 @@
     background-image: url( fireplace.svg );
   }
 
-  &.integrations{
-    background-image: url( integrations.svg );
-  }
-
   &.clients{
     background-image: url( clients.svg );
+  }
+
+  &.partners{
+    background-image: url( dashboard/partners.svg);
+  }
+
+  &.integrations{
+    background-image: url( dashboard/plugin.svg);
+  }
+
+  &.mapping{
+    background-image: url( dashboard/house_mapping.svg);
+  }
+
+  &.statistics{
+    background-image: url( dashboard/stats.svg);
   }
 
 

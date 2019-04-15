@@ -5,16 +5,11 @@ module Accounts
           labels: ["January", "February", "March", "April", "May", "June", "July"],
           datasets: [
               {
-                  label: "My First dataset",
-                  backgroundColor: "rgba(220,220,220,0.2)",
-                  borderColor: "rgba(220,220,220,1)",
+                  label: I18n.t("main.chart.properties"),
+                  backgroundColor: "rgba(163, 185, 210, 0.7)",
+                  borderColor: "#4773a5",
+                  lineTension: 0.000001,
                   data: [65, 59, 80, 81, 56, 55, 40]
-              },
-              {
-                  label: "My Second dataset",
-                  backgroundColor: "rgba(151,187,205,0.2)",
-                  borderColor: "rgba(151,187,205,1)",
-                  data: [28, 48, 40, 19, 86, 27, 90]
               }
           ]
       }

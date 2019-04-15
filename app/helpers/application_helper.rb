@@ -10,9 +10,9 @@ module ApplicationHelper
   def full_title(page_title = '')
     base_title = BRANDNAME
     if page_title.empty?
-      base_title
+      base_title.capitalize
     else
-      page_title + ' | ' + base_title
+      page_title + ' | ' + base_title.capitalize
     end
   end
 

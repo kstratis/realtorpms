@@ -341,14 +341,14 @@ el:
     help: "Υποστήριξη"
     search: "Αναζήτηση"
   sidebar:
-    menu: "ΜΕΝΟΥ"
+    menu: "ΕΝΕΡΓΕΙΕΣ"
     main: "Κεντρική"
     properties: "Ακίνητα"
     partners: "Συνεργάτες"
     clients: "Πελάτες"
     assignments: "Αναθέσεις"
     mappings: "Διασταυρώσεις"
-    integrations: "Γέφυρες"
+    integrations: "Διασυνδέσεις"
     subscription: "Συνδρομή"
     settings: "Ρυθμίσεις"
   partners:
@@ -367,8 +367,13 @@ el:
     options: "Κεντρικό μενού"
     properties: "Ακίνητα"
     partners: "Συνεργάτες"
-    integrations: "Γέφυρες"
+    integrations: "Διασυνδέσεις"
     clients: "Πελάτες"
+    mapping: "Αντιστοιχίσεις"
+    statistics: "Στατιστικά"
+    chart:
+      properties: "Ακίνητα"
+      clients: "Πελάτες"
   invitations:
     new:
       heading: "Πρόσκληση νέου συνεργάτη"

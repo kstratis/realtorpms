@@ -343,7 +343,7 @@ en:
     help: "Support"
     search: "Search"
   sidebar:
-    menu: "MENU"
+    menu: "ACTION MENU"
     main: "Dashboard"
     properties: "Properties"
     partners: "Partners"
@@ -371,6 +371,11 @@ en:
     partners: "Partners"
     integrations: "Integrations"
     clients: "Πελάτες"
+    mapping: "Mapping"
+    statistics: "Statistics"
+    chart:
+      properties: "Properties"
+      clients: "Clients"
   invitations:
     new:
       heading: "Add new partner"
