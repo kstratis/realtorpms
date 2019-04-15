@@ -341,7 +341,7 @@ el:
     help: "Υποστήριξη"
     search: "Αναζήτηση"
   sidebar:
-    menu: "ΣΥΝΤΟΜΕΥΣΕΙΣ"
+    menu: "ΜΕΝΟΥ"
     main: "Κεντρική"
     properties: "Ακίνητα"
     partners: "Συνεργάτες"

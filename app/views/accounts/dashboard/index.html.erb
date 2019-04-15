@@ -1,4 +1,4 @@
-<% provide(:title, t('main.title')) %>
+<% provide(:title, t('main.title').capitalize) %>
 
 <%= render partial: 'shared/breadcrumb', locals: {path: [{:title => 'main.heading', :href => ''}], icon: 'house-colored'} %>
 
@@ -31,13 +31,13 @@
 
       <div class="row">
 
-<!--        <div class="col">-->
-<!--          <div class="placeholder" style=""-->
-<!--               data-large="https://picsum.photos/<%#= 100 + Random.rand(700) %>/<%#= 100 + Random.rand(700) %>/?random&sig=<%#= Random.rand(50) %>">-->
-<!--            <img src="https://cdn-images-1.medium.com/freeze/max/27/1*sg-uLNm73whmdOgKlrQdZA.jpeg?q=20" alt="yolo" class="img-small"/>-->
-<!--            <div style="padding-bottom: 66.6%;"></div>-->
-<!--          </div>-->
-<!--        </div>-->
+        <!--        <div class="col">-->
+        <!--          <div class="placeholder" style=""-->
+        <!--               data-large="https://picsum.photos/<%#= 100 + Random.rand(700) %>/<%#= 100 + Random.rand(700) %>/?random&sig=<%#= Random.rand(50) %>">-->
+        <!--            <img src="https://cdn-images-1.medium.com/freeze/max/27/1*sg-uLNm73whmdOgKlrQdZA.jpeg?q=20" alt="yolo" class="img-small"/>-->
+        <!--            <div style="padding-bottom: 66.6%;"></div>-->
+        <!--          </div>-->
+        <!--        </div>-->
 
         <div class="col">
           <div class="placeholder" style=""
@@ -55,66 +55,78 @@
           </div>
         </div>
 
-<!--        <div class="col">-->
-<!--          <div class="placeholder" style=""-->
-<!--               data-large="https://picsum.photos/500/100/?random&sig=<%#= Random.rand(20) %>">-->
-<!--            <img src="https://cdn-images-1.medium.com/freeze/max/27/1*sg-uLNm73whmdOgKlrQdZA.jpeg?q=20" alt="yolo" class="img-small"/>-->
-<!--            <div style="padding-bottom: 20%;"></div>-->
-<!--          </div>-->
-<!--        </div>-->
+        <!--        <div class="col">-->
+        <!--          <div class="placeholder" style=""-->
+        <!--               data-large="https://picsum.photos/500/100/?random&sig=<%#= Random.rand(20) %>">-->
+        <!--            <img src="https://cdn-images-1.medium.com/freeze/max/27/1*sg-uLNm73whmdOgKlrQdZA.jpeg?q=20" alt="yolo" class="img-small"/>-->
+        <!--            <div style="padding-bottom: 20%;"></div>-->
+        <!--          </div>-->
+        <!--        </div>-->
 
-<!--        <div class="col">-->
-<!--          <div class="img-placeholder" style="">-->
-<!--               <img class="myimages" src="https://picsum.photos/<%#= 100 + Random.rand(700) %>/<%#= 100 + Random.rand(700) %>/?random&sig=<%#= Random.rand(50) %>" alt="wdfsdf">-->
-<!--          </div>-->
-<!--        </div>-->
-
-      </div>
-<!--        <div class="col-md-auto">-->
-<!--          <div class="option-container">-->
-<!--            <div class="option">-->
-<!--              <i class="pr-icon smm houses"></i>-->
-<!--              <p><%#= t 'main.houses' %></p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-
-<!--        <div class="col-md-auto">-->
-<!--          <div class="option-container">-->
-<!--            <div class="option">-->
-<!--              <i class="pr-icon smm agent-colored"></i>-->
-<!--              <p><%#= t 'main.partners' %></p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-
-<!--        <div class="col-md-auto">-->
-<!--          <div class="option-container">-->
-<!--            <div class="option">-->
-<!--              <i class="pr-icon smm clients"></i>-->
-<!--              <p><%#= t 'main.clients' %></p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-
-<!--        <div class="col-md-auto">-->
-<!--          <div class="option-container">-->
-<!--            <div class="option">-->
-<!--              <i class="pr-icon smm integrations"></i>-->
-<!--              <p><%#= t 'main.integrations' %></p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-
-
-
+        <!--        <div class="col">-->
+        <!--          <div class="img-placeholder" style="">-->
+        <!--               <img class="myimages" src="https://picsum.photos/<%#= 100 + Random.rand(700) %>/<%#= 100 + Random.rand(700) %>/?random&sig=<%#= Random.rand(50) %>" alt="wdfsdf">-->
+        <!--          </div>-->
+        <!--        </div>-->
 
       </div>
+
+
+      <div class="row">
+
+        <div class="col-6"><div class="chart-container"><%= line_chart @data, @options %></div></div>
+        <div class="col-6"><div class="chart-container"><%= line_chart @data, @options %></div></div>
+
+      </div>
+
+
+
+
+
+      <!--        <div class="col-md-auto">-->
+      <!--          <div class="option-container">-->
+      <!--            <div class="option">-->
+      <!--              <i class="pr-icon smm houses"></i>-->
+      <!--              <p><%#= t 'main.houses' %></p>-->
+      <!--            </div>-->
+      <!--          </div>-->
+      <!--        </div>-->
+
+      <!--        <div class="col-md-auto">-->
+      <!--          <div class="option-container">-->
+      <!--            <div class="option">-->
+      <!--              <i class="pr-icon smm agent-colored"></i>-->
+      <!--              <p><%#= t 'main.partners' %></p>-->
+      <!--            </div>-->
+      <!--          </div>-->
+      <!--        </div>-->
+
+      <!--        <div class="col-md-auto">-->
+      <!--          <div class="option-container">-->
+      <!--            <div class="option">-->
+      <!--              <i class="pr-icon smm clients"></i>-->
+      <!--              <p><%#= t 'main.clients' %></p>-->
+      <!--            </div>-->
+      <!--          </div>-->
+      <!--        </div>-->
+
+      <!--        <div class="col-md-auto">-->
+      <!--          <div class="option-container">-->
+      <!--            <div class="option">-->
+      <!--              <i class="pr-icon smm integrations"></i>-->
+      <!--              <p><%#= t 'main.integrations' %></p>-->
+      <!--            </div>-->
+      <!--          </div>-->
+      <!--        </div>-->
+
 
     </div>
-  </div>
 
-  <%= link_to image_tag('rails.png', alt: 'Rails logo'), 'http://rubyonrails.org/' %>
+  </div>
 
 
 </div>
+
+<%= link_to image_tag('rails.png', alt: 'Rails logo'), 'http://rubyonrails.org/' %>
+
+
