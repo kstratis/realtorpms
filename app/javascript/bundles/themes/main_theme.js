@@ -893,6 +893,7 @@ class Theme {
       const skin = this.skin
       const isDarkSkin = skin === 'dark'
       const gray = this.getColors('gray')
+      console.log('runnungggggg');
 
       // our settings for Chart JS
       const settings = {

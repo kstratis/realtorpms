@@ -25,7 +25,8 @@
     "spark-md5": "^3.0.0",
     "stacked-menu": "https://gitlab.com/bent10/stacked-menu.git#master",
     "uppy": "^0.30.3",
-    "url-search-params": "^0.10.0"
+    "url-search-params": "^0.10.0",
+    "chart.js": "^2.8.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
