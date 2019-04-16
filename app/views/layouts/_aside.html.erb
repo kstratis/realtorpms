@@ -14,7 +14,7 @@
         </div>
         <div class="account-summary">
           <p class="account-name"><%= current_user.full_name %></p>
-          <p class="account-description"><%= t "navbar.account.type.#{current_user.role}" %></p>
+          <p class="account-description"><%= t "navbar.account.type.#{current_user.role(current_account)}" %></p>
         </div>
       </button>
       <!-- /.btn-account -->

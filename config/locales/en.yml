@@ -342,6 +342,7 @@ en:
     logout: "Logout"
     help: "Support"
     search: "Search"
+    switch: "Switch account"
   sidebar:
     menu: "ACTION MENU"
     main: "Dashboard"
@@ -423,6 +424,8 @@ en:
     signup_button: "Create account"
     switch: "Account switch"
     switch_heading: "Choose account"
+    account_owner: "Administrator"
+    account_user: "User"
     switch_domain: "You switched to subdomain: %{subdomain}"
     switch_info: "You have successfully signed in!"
     created: "Welcome to %{brand}. Your account has been successfully created."

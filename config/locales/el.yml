@@ -333,13 +333,14 @@ el:
     account:
       title: "Λογαριασμός"
       type:
-        owner: "Ιδιοκτήτης"
-        administrator: "Διαχειριστής"
+        sysadmin: "Sysadmin"
+        owner: "Διαχειριστής"
         user: "Χρήστης"
     messages: "Μηνύματα"
     logout: "Αποσύνδεση"
     help: "Υποστήριξη"
     search: "Αναζήτηση"
+    switch: "Εναλλαγή λογαριασμού"
   sidebar:
     menu: "ΕΝΕΡΓΕΙΕΣ"
     main: "Κεντρική"
@@ -421,6 +422,8 @@ el:
     signup_button: "Δημιουργία λογαριασμού"
     switch: "Εναλλαγή λογαριασμού"
     switch_heading: "Επιλέξτε λογαριασμό"
+    account_owner: "Διαχειριστής"
+    account_user: "Χρήστης"
     switch_domain: "Βρίσκεστε στο: %{subdomain}"
     switch_info: "Έχετε συνδεθεί επιτυχώς!"
     created: "Καλωσήρθατε στο %{brand}. Ο καινούργιος σας λογαριασμός είναι έτοιμος."

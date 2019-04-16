@@ -9,7 +9,7 @@ class HomeController < ApplicationController
     # if logged_in?
     #   if current_user.accounts.count == 0
         # exclude the admin case who may not have a linked account
-        # unless current_user.is_admin?
+        # unless current_user.admin?
         #   @subdomain = Account.find_by(owner_id: current_user.id).subdomain
         # end
       # end
@@ -29,7 +29,7 @@ class HomeController < ApplicationController
 
   def accounts
     return redirect_to root_url(subdomain: nil) if current_user.nil?
-    @accounts = current_user.is_admin? ? Account.all : current_user.all_accounts
+    @accounts = current_user.admin? ? Account.all : current_user.all_accounts
     render :layout => 'auth/skeleton'
   end
 

@@ -32,7 +32,7 @@ class SessionsController < ApplicationController
       # Log in with a given subdomain in URL - No ambiguity
       unless request.subdomain.blank? # if subdomain exists in url
         account = Account.find_by_subdomain!(request.subdomain) # get account or 404
-        unless account.owner == user || account.users.exists?(user.id) || user.is_admin?
+        unless account.owner == user || account.users.exists?(user.id) || user.admin?
           render_401 and return
         end
         log_in user

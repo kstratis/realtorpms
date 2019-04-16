@@ -46,7 +46,7 @@ module Accounts
 
     def allowed_subdomains
       subdomain_list = []
-      accounts = current_user.is_admin? ? Account.all : current_user.all_accounts
+      accounts = current_user.admin? ? Account.all : current_user.all_accounts
       accounts.each do |account|
         subdomain_list << account.subdomain
       end

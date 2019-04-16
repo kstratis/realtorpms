@@ -67,19 +67,19 @@ class User < ApplicationRecord
     has_owning_accounts? + get_membership_accounts
   end
 
-  def is_admin?
-    admin?
-  end
-
   def full_name
     "#{first_name} #{last_name}"
   end
 
-  def role
-    if Account.where(owner: self).length > 0
+  def is_owner?(account)
+    account.owner == self
+  end
+
+  def role(account)
+    if admin?
+      'sysadmin'
+    elsif is_owner?(account)
       'owner'
-    elsif admin?
-      'administrator'
     else
       'user'
     end

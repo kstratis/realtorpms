@@ -309,7 +309,7 @@
                   </span>
             <span class="account-summary pr-lg-4 d-none d-lg-block">
                     <span class="account-name"><%= current_user.full_name %></span>
-                    <span class="account-description"><%= t "navbar.account.type.#{current_user.role}" %></span>
+                    <span class="account-description"><%= t "navbar.account.type.#{current_user.role(current_account)}" %></span>
                   </span>
           </button>
           <div class="dropdown-arrow dropdown-arrow-left"></div>
