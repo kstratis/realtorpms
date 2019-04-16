@@ -333,7 +333,7 @@ el:
     account:
       title: "Λογαριασμός"
       type:
-        sysadmin: "Sysadmin"
+        sysadmin: "SysAdmin"
         owner: "Διαχειριστής"
         user: "Χρήστης"
     messages: "Μηνύματα"
@@ -422,12 +422,15 @@ el:
     signup_button: "Δημιουργία λογαριασμού"
     switch: "Εναλλαγή λογαριασμού"
     switch_heading: "Επιλέξτε λογαριασμό"
+    sysadmin: "SysAdmin"
     account_owner: "Διαχειριστής"
     account_user: "Χρήστης"
     switch_domain: "Βρίσκεστε στο: %{subdomain}"
     switch_info: "Έχετε συνδεθεί επιτυχώς!"
     created: "Καλωσήρθατε στο %{brand}. Ο καινούργιος σας λογαριασμός είναι έτοιμος."
     updated: "Το προφίλ ενημερώθηκε επιτυχώς"
+    domain: "Τομέας"
+    role: "Ρόλος"
   sessions:
     login_title: "Σύνδεση"
     forgot_title: "Αίτημα υπενθύμισης συνθηματικού"

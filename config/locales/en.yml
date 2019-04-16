@@ -430,6 +430,8 @@ en:
     switch_info: "You have successfully signed in!"
     created: "Welcome to %{brand}. Your account has been successfully created."
     updated: "Profile successfully update"
+    domain: "Domain"
+    role: "Role"
   sessions:
     login_title: "Login"
     forgot_title: "Forgot password"

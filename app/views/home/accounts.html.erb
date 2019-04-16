@@ -4,7 +4,6 @@
   <p> <%= t('accounts.switch') %></p>
 <% end %>
 
-
 <!-- .Content section -->
 <% content_for :content do %>
   <div class="auth-form auth-form-special centered-title">
@@ -13,21 +12,29 @@
     <h2><%= t('accounts.switch_heading') %></h2>
     <div class="vertical-spacer"></div>
 
-    <ul class="accounts">
-      <% @accounts.each do |account| %>
-        <li>
-          <%#= link_to root_url(subdomain: account.subdomain) do %>
-          <%= link_to account_switch_url(subdomain: account.subdomain) do %>
-            <%= account.subdomain %>
-          <% end %>
-          <% if account.owner == current_user %>
-            <span class="label">Account Owner</span>
-          <% else %>
-            <span class="label">Regular User</span>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
+    <div class="table-responsive">
+      <!-- .table -->
+      <table class="table table-hover">
+        <thead class="thead-">
+        <tr>
+          <th><%= t 'accounts.domain' %></th>
+          <th><%= t 'accounts.role' %></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @accounts.each do |account| %>
+          <tr>
+            <td>
+              <%= link_to account_switch_url(subdomain: account.subdomain) do %>
+                <%= account.subdomain %>
+              <% end %></td>
+            <td><span class="label"><%= t "navbar.account.type.#{current_user.role(account)}" %></span></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table><!-- /.table -->
+    </div>
+
   </div>
 <% end %>
 

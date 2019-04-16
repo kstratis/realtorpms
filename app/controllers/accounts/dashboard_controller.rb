@@ -9,7 +9,7 @@ module Accounts
                   backgroundColor: "rgba(163, 185, 210, 0.7)",
                   borderColor: "#4773a5",
                   lineTension: 0.000001,
-                  data: [Property.count, User.count]
+                  data: [current_account.properties.count, current_account.users.count]
               }
           ]
       }
