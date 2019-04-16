@@ -372,8 +372,9 @@ el:
     mapping: "Αντιστοιχίσεις"
     statistics: "Στατιστικά"
     chart:
+      title: "Επισκόπηση"
       properties: "Ακίνητα"
-      clients: "Πελάτες"
+      users: "Χρήστες"
   invitations:
     new:
       heading: "Πρόσκληση νέου συνεργάτη"

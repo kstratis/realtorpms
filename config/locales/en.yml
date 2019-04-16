@@ -374,8 +374,9 @@ en:
     mapping: "Mapping"
     statistics: "Statistics"
     chart:
+      title: "Επισκόπηση"
       properties: "Properties"
-      clients: "Clients"
+      users: "Users"
   invitations:
     new:
       heading: "Add new partner"

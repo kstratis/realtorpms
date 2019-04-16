@@ -6,6 +6,11 @@
   <div class="container">
     <div class="app-container">
 
+      <%= content_tag :div, class: "stats", id: "stats_data", data: {
+          graph: @graph
+      } do %>
+      <% end %>
+
       <div class="row ">
         <div class="col">
           <h2><%= t 'main.options' %></h2>
@@ -32,112 +37,16 @@
         </div>
 
         <div class="col-md-12 col-lg-6">
-<!--          <div class="row">-->
 
-<!--            <div class="col-6">-->
-<!--              <div class="card-metric">-->
-<!--                <div class="metric">-->
-<!--                  <p class="metric-value h3">-->
-<!--                    <sub><i class="oi oi-people"></i></sub> <span class="value">12</span>-->
-<!--                  </p>-->
-<!--                  <h2 class="metric-label"> Teams </h2>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-
-<!--            <div class="col-6">-->
-<!--              <div class="card-metric">-->
-<!--                <div class="metric">-->
-<!--                  <p class="metric-value h3">-->
-<!--                    <sub><i class="oi oi-fork"></i></sub> <span class="value">47</span>-->
-<!--                  </p>-->
-<!--                  <h2 class="metric-label"> Projects </h2>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-
-<!--          </div>-->
-
-<!--          <div class="row pt-4">-->
-
-<!--            <div class="col-6">-->
-<!--              <div class="card-metric">-->
-<!--                <div class="metric">-->
-<!--                  <p class="metric-value h3">-->
-<!--                    <sub><i class="oi oi-fork"></i></sub> <span class="value">47</span>-->
-<!--                  </p>-->
-<!--                  <h2 class="metric-label"> Projects </h2>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-
-<!--            <div class="col-6">-->
-<!--              <div class="card-metric">-->
-<!--                <div class="metric">-->
-<!--                  <p class="metric-value h3">-->
-<!--                    <sub><i class="oi oi-fork"></i></sub> <span class="value">47</span>-->
-<!--                  </p>-->
-<!--                  <h2 class="metric-label"> Projects </h2>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-
-<!--          </div>-->
-
-<!--          <div class="row pt-4">-->
-
-<!--            <div class="col-6">-->
-<!--              <div class="card-metric">-->
-<!--                <div class="metric">-->
-<!--                  <p class="metric-value h3">-->
-<!--                    <sub><i class="oi oi-fork"></i></sub> <span class="value">47</span>-->
-<!--                  </p>-->
-<!--                  <h2 class="metric-label"> Projects </h2>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-
-<!--            <div class="col-6">-->
-<!--              <div class="card-metric">-->
-<!--                <div class="metric">-->
-<!--                  <p class="metric-value h3">-->
-<!--                    <sub><i class="oi oi-fork"></i></sub> <span class="value">47</span>-->
-<!--                  </p>-->
-<!--                  <h2 class="metric-label"> Projects </h2>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-
-<!--          </div>-->
-
-
-
-<!--          </div>-->
-
-
-<!--                      <div class="chart-container"><%#= bar_chart @data, @options %></div>-->
-
-
-
-<!--          <div class="card card-fluid">-->
+          <div class="card card-fluid">
             <!-- .card-body -->
-<!--            <div class="card-body">-->
-              <h3 class="card-title mb-4"> Completion Tasks </h3>
-              <div class="chartjs chart-container" >
-                <canvas id="completion-tasks"></canvas>
-<!--              </div>-->
-<!--            </div>-->
+            <div class="card-body">
+              <h3 class="card-title mb-4"><%= t('main.chart.title') %></h3>
+              <div class="chartjs chart-container">
+                <canvas class="chart"></canvas>
+              </div>
+            </div>
           </div><!-- /.card -->
-
-
-
-
-
-
-
-
-
-
 
         </div>
 
@@ -146,7 +55,6 @@
     </div>
 
   </div>
-
 
 </div>
 
