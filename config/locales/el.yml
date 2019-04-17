@@ -390,6 +390,7 @@ el:
       pic: "Φωτογραφία προφίλ"
       heading: "Επεξεργασία προφίλ"
       save_button: "Αποθήκευση"
+      profile: "Προφίλ"
   properties:
     identifier: "ID"
     title: "Ακίνητα"

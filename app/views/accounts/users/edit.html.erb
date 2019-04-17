@@ -4,6 +4,130 @@
 
 <div class="page-container">
   <div class="container">
+    <!-- .card -->
+    <div class="card card-fluid">
+      <h2 class="card-header"> <%= t('users.edit.profile') %> </h2><!-- .card-body -->
+      <div class="card-body">
+        <!-- .media -->
+        <div class="col-lg-6 offset-lg-3 col-md-12">
+          <div class="media mb-3">
+            <!-- avatar -->
+            <div class="user-avatar user-avatar-xl fileinput-button">
+              <div class="fileinput-button-label"> Change photo</div>
+              <img src="assets/images/avatars/profile.jpg" alt="">
+              <input id="fileupload-avatar" type="file" name="avatar">
+            </div><!-- /avatar -->
+            <!-- .media-body -->
+            <div class="media-body pl-3">
+              <h3 class="card-title"> Public avatar </h3>
+              <h6 class="card-subtitle text-muted"> Click the current avatar to change your photo. </h6>
+              <p class="card-text">
+                <small>JPG, GIF or PNG 400x400, &lt; 2 MB.</small>
+              </p><!-- The avatar upload progress bar -->
+              <div id="progress-avatar" class="progress progress-xs fade">
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+              </div><!-- /avatar upload progress bar -->
+            </div><!-- /.media-body -->
+          </div><!-- /.media -->
+          <!-- form -->
+          <%= form_for(@user) do |f| %>
+
+            <!-- .form-group -->
+            <div class="form-group">
+              <div class="form-label-group">
+                <%= f.text_field :first_name, class: 'form-control', placeholder: User.human_attribute_name("first_name") %>
+                <%= f.label :first_name, User.human_attribute_name("first_name") %>
+                <%= inline_error @user, :first_name, 'First name' %>
+              </div>
+            </div>
+            <!-- /.form-group -->
+
+            <!-- .form-group -->
+            <div class="form-group">
+              <div class="form-label-group">
+                <%= f.text_field :last_name, class: 'form-control', placeholder: User.human_attribute_name("last_name") %>
+                <%= f.label :last_name, User.human_attribute_name("last_name") %>
+                <%= inline_error @user, :last_name, 'Last name' %>
+              </div>
+            </div>
+            <!-- /.form-group -->
+
+            <!-- .form-group -->
+            <div class="form-group">
+              <div class="form-label-group">
+                <%= f.email_field :email, class: 'form-control', placeholder: User.human_attribute_name("email") %>
+                <%= f.label "email", User.human_attribute_name("email") %>
+                <%= inline_error @user, :email, 'Email' %>
+              </div>
+            </div>
+            <!-- /.form-group -->
+
+            <!-- .form-group -->
+            <div class="form-group">
+              <div class="form-label-group">
+                <%= f.text_field :age, class: 'form-control', placeholder: User.human_attribute_name("age") %>
+                <%= f.label "age", User.human_attribute_name("age") %>
+                <%= inline_error @user, :age, 'age' %>
+              </div>
+            </div>
+            <!-- /.form-group -->
+
+            <!-- .form-group -->
+            <div class="form-group">
+              <div class="form-label-group">
+                <%= f.text_field :phone1, class: 'form-control', placeholder: User.human_attribute_name("phone1") %>
+                <%= f.label "phone1", User.human_attribute_name("phone1") %>
+                <%= inline_error @user, :phone1, 'Phone' %>
+              </div>
+            </div>
+            <!-- /.form-group -->
+
+            <!-- .form-group -->
+            <div class="form-group">
+              <div class="form-label-group">
+                <%= f.select :locale, options_for_select(User.lng_list, @user.locale || I18n.locale), {}, class: 'custom-select' %>
+                <%= f.label :locale %>
+              </div>
+            </div>
+            <!-- /.form-group -->
+
+            <!-- .form-group -->
+            <div class="form-group">
+              <div class="form-label-group">
+                <%= f.password_field :password, class: 'form-control', placeholder: User.human_attribute_name("password") %>
+                <%= f.label :password, User.human_attribute_name("password") %>
+                <%= inline_error @user, :password, 'Password' %>
+              </div>
+            </div>
+            <!-- /.form-group -->
+
+            <!-- .form-group -->
+            <div class="form-group">
+              <div class="form-label-group">
+                <%= f.password_field :password_confirmation, class: 'form-control', placeholder: User.human_attribute_name("password_confirmation") %>
+                <%= f.label :password_confirmation, User.human_attribute_name("password_confirmation") %>
+                <%= inline_error @user, :password_confirmation, 'Password confirmation' %>
+              </div>
+            </div>
+            <!-- /.form-group -->
+
+            <hr>
+            <!-- .form-actions -->
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary ml-auto">Update Profile</button>
+            </div><!-- /.form-actions -->
+            <% end %><!-- /form -->
+        </div>
+      </div><!-- /.card-body -->
+    </div><!-- /.card -->
+
+  </div>
+</div>
+
+
+<!-- ################################################################################################### -->
+<div class="page-container">
+  <div class="container">
     <div class="form-container">
       <div class="section-block">
         <div class="card">
@@ -19,70 +143,17 @@
               </div>
               <div class="col-md-6">
 
-                <%= form_for(@user) do |f| %>
-                  <%#= render 'shared/error_messages', locals: {model: @user} %>
 
-                  <!-- .form-group -->
-                  <div class="form-group">
-                    <div class="form-label-group">
-                      <%= f.text_field :first_name, class: 'form-control', placeholder: User.human_attribute_name("first_name") %>
-                      <%= f.label :first_name, User.human_attribute_name("first_name") %>
-                      <%= inline_error @user, :first_name, 'First name' %>
-                    </div>
-                  </div>
-                  <!-- /.form-group -->
+                <%#= f.label :password %>
+                <%#= f.password_field :password, placeholder: User.human_attribute_name("password_placeholder"), class: 'glowing-border' %>
+                <%#= inline_error @user, :password, 'Password' %>
 
-                  <!-- .form-group -->
-                  <div class="form-group">
-                    <div class="form-label-group">
-                      <%= f.text_field :last_name, class: 'form-control', placeholder: User.human_attribute_name("last_name") %>
-                      <%= f.label :last_name, User.human_attribute_name("last_name") %>
-                      <%= inline_error @user, :last_name, 'Last name' %>
-                    </div>
-                  </div>
-                  <!-- /.form-group -->
+                <%#= f.label :password_confirmation %>
+                <%#= f.password_field :password_confirmation, placeholder: User.human_attribute_name("password_confirmation_placeholder"), class: 'glowing-border' %>
+                <%#= inline_error @user, :password_confirmation, 'Password confirmation' %>
 
-                  <!-- .form-group -->
-                  <div class="form-group">
-                    <div class="form-label-group">
-                      <%= f.email_field :email, class: 'form-control', placeholder: User.human_attribute_name("email") %>
-                      <%= f.label "email", User.human_attribute_name("email") %>
-                      <%= inline_error @user, :email, 'Email' %>
-                    </div>
-                  </div>
-                  <!-- /.form-group -->
-
-                  <!-- .form-group -->
-                  <div class="form-group">
-                    <div class="form-label-group">
-                      <%= f.text_field :age, class: 'form-control', placeholder: User.human_attribute_name("age") %>
-                      <%= f.label "age", User.human_attribute_name("age") %>
-                      <%= inline_error @user, :age, 'age' %>
-                    </div>
-                  </div>
-                  <!-- /.form-group -->
-
-                  <%= f.label :age %>
-                  <%= f.text_field :age, placeholder: User.human_attribute_name("age_placeholder"), class: 'glowing-border' %>
-                  <%= inline_error @user, :age, 'Age' %>
-
-                  <%= f.label :phone1 %>
-                  <%= f.text_field :phone1, placeholder: User.human_attribute_name("phone1_placeholder"), class: 'glowing-border' %>
-                  <%= inline_error @user, :phone1, 'Phone' %>
-
-                  <%= f.label :locale %>
-                  <%= f.select :locale, options_for_select(User.lng_list, @user.locale), {}, class: 'form-control' %>
-
-                  <%= f.label :password %>
-                  <%= f.password_field :password, placeholder: User.human_attribute_name("password_placeholder"), class: 'glowing-border' %>
-                  <%= inline_error @user, :password, 'Password' %>
-
-                  <%= f.label :password_confirmation %>
-                  <%= f.password_field :password_confirmation, placeholder: User.human_attribute_name("password_confirmation_placeholder"), class: 'glowing-border' %>
-                  <%= inline_error @user, :password_confirmation, 'Password confirmation' %>
-
-                  <%= f.submit t('users.edit.save_button'), class: 'btn btn-primary' %>
-                <% end %>
+                <%#= f.submit t('users.edit.save_button'), class: 'btn btn-primary' %>
+                <%# end %>
               </div>
             </div>
           </div>

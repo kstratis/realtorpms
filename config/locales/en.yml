@@ -392,6 +392,7 @@ en:
       pic: "Profile picture"
       heading: "Edit profile"
       save_button: "Save changes"
+      profile: "Profile"
   properties:
     identifier: "ID"
     title: "Properties"
