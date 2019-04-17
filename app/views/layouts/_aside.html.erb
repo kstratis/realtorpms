@@ -49,7 +49,7 @@
           <% end %>
           <!-- /.menu-item -->
           <!-- .menu-item -->
-          <%= content_tag :li, class: "menu-item has-child #{active_for(controller: 'users', classname: 'open')}" do %>
+          <%= content_tag :li, class: "menu-item has-child #{active_for(controller: 'users', except_action: 'edit', classname: 'open')}" do %>
             <%= link_to '#', class: 'menu-link' do %>
               <%= content_tag :i, nil, class: 'menu-icon fas fa-user-tie' %>
               <%= content_tag :span, t('partners.title'), class: 'menu-text' %>

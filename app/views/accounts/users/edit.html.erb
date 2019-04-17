@@ -1,49 +1,92 @@
-<% provide(:title, 'Edit user') %>
-<div class="center pr-signup-container pr-container">
+<% provide(:title, t('users.edit.heading')) %>
 
-  <i class="pr-icon sm edit-user-colored"></i>
-  <span class="title"><%= t 'users.edit.heading' %></span>
+<%= render partial: 'shared/breadcrumb', locals: {path: [{:title => 'users.edit.heading', :href => edit_user_path}, {title: @user.full_name, :href => ''}], icon: 'house-colored'} %>
 
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <div class="pr-form-container">
-        <%= form_for(@user) do |f| %>
-            <%= render 'shared/error_messages', locals: {model: @user} %>
+<div class="page-container">
+  <div class="container">
+    <div class="form-container">
+      <div class="section-block">
+        <div class="card">
+          <div class="card-body">
 
-            <%= f.label :first_name %>
-            <%= f.text_field :first_name, placeholder: 'i.e. John', class: 'glowing-border' %>
-            <%= inline_error @user, :first_name, 'First name'%>
+            <div class="row">
+              <div class="col-md-6">
+                <h2><%= t('users.edit.pic') %></h2>
+                <div class="profile-pic centered-title pb-3 ">
+                  <img src="https://picsum.photos/150/150" alt="">
+                </div>
 
-            <%= f.label :last_name %>
-            <%= f.text_field :last_name, placeholder: 'i.e. Doe', class: 'glowing-border' %>
-            <%= inline_error @user, :last_name, 'Last name'%>
+              </div>
+              <div class="col-md-6">
 
-            <%= f.label :email %>
-            <%= f.email_field :email, placeholder: 'i.e. jdoe@example.com', class: 'glowing-border' %>
-            <%= inline_error @user, :email, 'Email'%>
+                <%= form_for(@user) do |f| %>
+                  <%#= render 'shared/error_messages', locals: {model: @user} %>
 
-            <%= f.label :age %>
-            <%= f.text_field :age, placeholder: User.human_attribute_name("age_placeholder"), class: 'glowing-border' %>
-            <%= inline_error @user, :age, 'Age'%>
+                  <!-- .form-group -->
+                  <div class="form-group">
+                    <div class="form-label-group">
+                      <%= f.text_field :first_name, class: 'form-control', placeholder: User.human_attribute_name("first_name") %>
+                      <%= f.label :first_name, User.human_attribute_name("first_name") %>
+                      <%= inline_error @user, :first_name, 'First name' %>
+                    </div>
+                  </div>
+                  <!-- /.form-group -->
 
-            <%= f.label :phone1 %>
-            <%= f.text_field :phone1, placeholder: User.human_attribute_name("phone1_placeholder"), class: 'glowing-border' %>
-            <%= inline_error @user, :phone1, 'Phone'%>
+                  <!-- .form-group -->
+                  <div class="form-group">
+                    <div class="form-label-group">
+                      <%= f.text_field :last_name, class: 'form-control', placeholder: User.human_attribute_name("last_name") %>
+                      <%= f.label :last_name, User.human_attribute_name("last_name") %>
+                      <%= inline_error @user, :last_name, 'Last name' %>
+                    </div>
+                  </div>
+                  <!-- /.form-group -->
 
-            <%= f.label :locale %>
-            <%= f.select :locale, options_for_select(User.lng_list, @user.locale), {}, class: 'form-control' %>
+                  <!-- .form-group -->
+                  <div class="form-group">
+                    <div class="form-label-group">
+                      <%= f.email_field :email, class: 'form-control', placeholder: User.human_attribute_name("email") %>
+                      <%= f.label "email", User.human_attribute_name("email") %>
+                      <%= inline_error @user, :email, 'Email' %>
+                    </div>
+                  </div>
+                  <!-- /.form-group -->
 
-            <%= f.label :password %>
-            <%= f.password_field :password, placeholder: User.human_attribute_name("password_placeholder"), class: 'glowing-border' %>
-            <%= inline_error @user, :password, 'Password'%>
+                  <!-- .form-group -->
+                  <div class="form-group">
+                    <div class="form-label-group">
+                      <%= f.text_field :age, class: 'form-control', placeholder: User.human_attribute_name("age") %>
+                      <%= f.label "age", User.human_attribute_name("age") %>
+                      <%= inline_error @user, :age, 'age' %>
+                    </div>
+                  </div>
+                  <!-- /.form-group -->
 
-            <%= f.label :password_confirmation %>
-            <%= f.password_field :password_confirmation, placeholder: User.human_attribute_name("password_confirmation_placeholder"), class: 'glowing-border' %>
-            <%= inline_error @user, :password_confirmation, 'Password confirmation'%>
+                  <%= f.label :age %>
+                  <%= f.text_field :age, placeholder: User.human_attribute_name("age_placeholder"), class: 'glowing-border' %>
+                  <%= inline_error @user, :age, 'Age' %>
 
-            <%= f.submit t('users.edit.save_button'), class: 'btn btn-primary' %>
-        <% end %>
+                  <%= f.label :phone1 %>
+                  <%= f.text_field :phone1, placeholder: User.human_attribute_name("phone1_placeholder"), class: 'glowing-border' %>
+                  <%= inline_error @user, :phone1, 'Phone' %>
 
+                  <%= f.label :locale %>
+                  <%= f.select :locale, options_for_select(User.lng_list, @user.locale), {}, class: 'form-control' %>
+
+                  <%= f.label :password %>
+                  <%= f.password_field :password, placeholder: User.human_attribute_name("password_placeholder"), class: 'glowing-border' %>
+                  <%= inline_error @user, :password, 'Password' %>
+
+                  <%= f.label :password_confirmation %>
+                  <%= f.password_field :password_confirmation, placeholder: User.human_attribute_name("password_confirmation_placeholder"), class: 'glowing-border' %>
+                  <%= inline_error @user, :password_confirmation, 'Password confirmation' %>
+
+                  <%= f.submit t('users.edit.save_button'), class: 'btn btn-primary' %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

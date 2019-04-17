@@ -8,7 +8,7 @@ module Accounts
 
     def destroy
         User.find(params[:id]).destroy
-        flash[:success] = 'User successfully deleted'
+        flash[:success] = I18n.t 'users.flash_delete'
         redirect_to users_url
     end
 
@@ -27,7 +27,7 @@ module Accounts
       @user = User.new(user_params)
       if @user.save
         log_in @user
-        flash[:success] = 'Welcome to PropertyX'
+        flash[:success] = I18n.t('users.flash_welcome', brand: BRANDNAME)
         redirect_to @user
         # Handle a successful save.
       else
@@ -46,7 +46,7 @@ module Accounts
     def update
       @user = User.find(params[:id])
       if @user.update_attributes(user_params)
-        flash[:success] = 'Your profile was successfully updated'
+        flash[:success] = I18n.t 'users.flash_profile_updated'
         redirect_to @user
         # Handle a successful update.
       else
@@ -75,7 +75,7 @@ module Accounts
       def correct_user
         @user = User.find(params[:id])
         unless current_user?(@user)
-          flash[:danger] = 'You can\'t edit another user\'s profile'
+          flash[:danger] = I18n.t 'users.flash_unauthorised_user_edit'
           redirect_to(root_url)
         end
       end
@@ -87,7 +87,7 @@ module Accounts
 
       def owner_exclusive
         unless owner?
-          flash[:danger] = 'Only the account owner may perform this action.'
+          flash[:danger] = I18n.t 'users.flash_owner_only_action'
           redirect_to users_url
         end
       end

@@ -1,4 +1,4 @@
-<%= link_to user_path(current_user), class: 'dropdown-item' do %>
+<%= link_to edit_user_path(current_user), class: 'dropdown-item' do %>
   <%= content_tag :span, nil, class: 'dropdown-icon oi oi-person' %> <%= t('navbar.profile') %>
 <% end %>
 
