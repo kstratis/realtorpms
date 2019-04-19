@@ -10,28 +10,29 @@
       <!-- .card-body -->
       <div class="card-body">
         <!-- .media -->
-        <div class="col-lg-6 offset-lg-3 col-md-12">
-          <div class="media mb-3">
-            <!-- avatar -->
-            <div class="user-avatar user-avatar-xl fileinput-button">
-              <div class="fileinput-button-label"><%= t('users.edit.change_pic') %></div>
-              <img src="https://picsum.photos/200/300" alt="">
-              <input id="fileupload-avatar" type="file" name="avatar">
-            </div><!-- /avatar -->
-            <!-- .media-body -->
-            <div class="media-body pl-3">
-              <h3 class="card-title"><%= t('users.edit.photo_header') %></h3>
-              <h6 class="card-subtitle text-muted"><%= t('users.edit.photo_subheader') %></h6>
-              <p class="card-text">
-                <small>JPG, GIF or PNG 400x400, &lt; 2 MB.</small>
-              </p><!-- The avatar upload progress bar -->
-              <div id="progress-avatar" class="progress progress-xs fade">
-                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-              </div><!-- /avatar upload progress bar -->
-            </div><!-- /.media-body -->
-          </div><!-- /.media -->
-          <!-- form -->
-          <%= form_for(@user) do |f| %>
+        <%= form_for(@user) do |f| %>
+          <div class="col-lg-6 offset-lg-3 col-md-12">
+            <div class="media mb-3">
+              <!-- avatar -->
+              <div class="user-avatar user-avatar-xl fileinput-button">
+                <div class="fileinput-button-label"><%= t('users.edit.change_pic') %></div>
+                <%= user_avatar(current_user, "alphatar-edit", "avatar_preview") %>
+                <%= f.file_field :avatar, id: "avatar_upload" %>
+              </div><!-- /avatar -->
+              <!-- .media-body -->
+              <div class="media-body pl-3">
+                <h3 class="card-title"><%= t('users.edit.photo_header') %></h3>
+                <h6 class="card-subtitle text-muted"><%= t('users.edit.photo_subheader') %></h6>
+                <p class="card-text">
+                  <small>JPG, GIF or PNG 400x400, &lt; 2 MB.</small>
+                </p><!-- The avatar upload progress bar -->
+                <div id="progress-avatar" class="progress progress-xs fade">
+                  <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                </div><!-- /avatar upload progress bar -->
+              </div><!-- /.media-body -->
+            </div><!-- /.media -->
+            <!-- form -->
+
 
             <!-- .form-group -->
             <div class="form-group">
@@ -68,12 +69,9 @@
             <div class="form-group">
               <%= f.label "dob", User.human_attribute_name("dob") %>
               <div class="row">
-
-                <%= f.date_select(:dob, {selected: {day: @user.dob.day || 1, month: @user.dob.month || 1, year: @user.dob.year || 1975}, start_year: Date.today.year - 85, end_year: Date.today.year - 18, order: [:day, :month, :year]}, class: 'custom-select date-select') %>
-                <%#= f.text_field :age, class: 'form-control', placeholder: User.human_attribute_name("age") %>
+                <%= f.date_select(:dob, {selected: {day: @user.try(:dob).try(:day) || 1, month: @user.try(:dob).try(:month) || 1, year: @user.try(:dob).try(:year) || 1975}, start_year: Date.today.year - 85, end_year: Date.today.year - 18, order: [:day, :month, :year]}, class: 'custom-select date-select') %>
                 <%= inline_error @user, :dob, 'dob' %>
               </div>
-              <!--            </div>-->
             </div>
             <!-- /.form-group -->
 
@@ -119,18 +117,18 @@
                 <%= f.label :password_confirmation, User.human_attribute_name("password_confirmation") %>
                 <%= inline_error @user, :password_confirmation, 'Password confirmation' %>
               </div>
-            </div>
-            <!-- /.form-group -->
-            </div>
+            </div> <!-- /.form-group -->
+            <hr/>
+
             <!-- .form-actions -->
             <div class="form-actions">
               <button type="submit" class="btn btn-primary ml-auto"><%= t('users.edit.edit_button') %></button>
-            </div><!-- /.form-actions -->
-            <% end %><!-- /form -->
+            </div> <!-- /.form-actions -->
+          </div>
 
+        <% end %> <!-- /form -->
 
-          </div><!-- /.card-body -->
+      </div><!-- /.card-body -->
     </div><!-- /.card -->
-
   </div>
 </div>

@@ -30,6 +30,7 @@ class User < ApplicationRecord
   # https://stackoverflow.com/a/38845388/178728
   has_many :properties, -> { distinct }, through: :assignments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_one_attached :avatar
 
   # has_many :properties, -> (account) { where('account_id = ?', account.id) }, through: :assignments
 

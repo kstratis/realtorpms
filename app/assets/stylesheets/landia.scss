@@ -830,3 +830,29 @@ li.page-item{
     border-radius: 3px;
   }
 }
+
+.alphatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 19px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: #19ada2;
+  display: inline-block;
+  text-align: center;
+  line-height: 38px;
+  font-size: 15px;
+  font-weight: 300;
+}
+.alphatar-edit{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    background-color: #19ada2;
+    display: block;
+    text-align: center;
+    line-height: 38px;
+    font-size: 32px;
+    padding-top: 20px;
+    color: #ffffff;
+}

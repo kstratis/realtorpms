@@ -60,7 +60,7 @@ module Accounts
 
     private
       def user_params
-        params.require(:user).permit(:first_name, :last_name, :email, :dob, :phone1, :locale, :password, :password_confirmation)
+        params.require(:user).permit(:avatar, :first_name, :last_name, :email, :dob, :phone1, :locale, :password, :password_confirmation)
       end
 
       # Confirms a logged-in user.

@@ -302,9 +302,11 @@
         <!-- .btn-account -->
         <div class="dropdown">
           <button class="btn-account d-none d-md-flex" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="user-avatar">
+                  <span class="user-avatar user-avatar-lg">
+
                     <!-- This needs to be properly taken care of -->
-                    <%= gravatar_for current_user, size: 64, classname: 'avatar-outline' %>
+                    <%= user_avatar(current_user) %>
+                    <%#= gravatar_for current_user, size: 64, classname: 'avatar-outline' %>
                     <!--                    <img src="assets/images/avatars/profile.jpg" alt="">-->
                   </span>
             <span class="account-summary pr-lg-4 d-none d-lg-block">
