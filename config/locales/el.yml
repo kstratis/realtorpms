@@ -21,6 +21,7 @@ el:
         email_feedback_html: "π.χ. dpapadopoulos@gmail.com"
         age: "Ηλικία"
         age_placeholder: "π.χ. 30"
+        dob: "Ημερομηνία γέννησης"
         phone1: "Τηλέφωνο"
         phone1_feedback_html: "π.χ. 210 33 33 333"
         phone1_placeholder: "π.χ. 697 25 00 111"
@@ -30,6 +31,7 @@ el:
         password_placeholder: "Απαιτούνται τουλάχιστον 6 χαρ/ρες"
         password_confirmation: "Επανάληψη νέου κωδικού πρόσβασης"
         password_confirmation_placeholder: "Πληκτρολογήστε ξανά τον νέο σας κωδικό"
+        password_leave_empty: "Αφήστε το πεδίο κενό για να παραμείνει ως έχει"
         remember_me: "Να παραμείνω συνδεδεμένος"
       extra:
         housetype:
@@ -387,10 +389,14 @@ el:
     flash_unauthorised_user_edit: "Η ενέργεια δεν μπορεί να εκτελεστεί"
     flash_owner_only_action: "Μόνο ο διαχειριστής μπορεί να εκτελέσει την επιλεγμένη ενέργεια"
     edit:
-      pic: "Φωτογραφία προφίλ"
+      edit_button: "Ενημέρωση"
+      avatar: "Φωτογραφία προφίλ"
       heading: "Επεξεργασία προφίλ"
       save_button: "Αποθήκευση"
       profile: "Προφίλ"
+      change_pic: "Αλλαγή"
+      photo_header: "Φωτογραφία προφίλ"
+      photo_subheader: "Κάντε κλικ για ν'αλλάξετε την φωτογραφία προφίλ σας"
   properties:
     identifier: "ID"
     title: "Ακίνητα"

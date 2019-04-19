@@ -21,6 +21,7 @@ en:
         email_feedback_html: "i.e. jsmith@gmail.com"
         age: "Age"
         age_placeholder: "i.e. 30"
+        dob: "Date of birth"
         phone1: "Telephone"
         phone1_feedback_html: "i.e. 813-440-5026"
         phone1_placeholder: "i.e. 813-440-5026"
@@ -30,6 +31,7 @@ en:
         password_placeholder: "At least 6 characters long"
         password_confirmation: "Confirm new password"
         password_confirmation_placeholder: "Type your new password again"
+        password_leave_empty: "Leave empty to keep unchanged"
         remember_me: "Remember me on this computer"
       extra:
         housetype:
@@ -389,10 +391,14 @@ en:
     flash_unauthorised_user_edit: "Unauthorized action"
     flash_owner_only_action: "Owner restricted action"
     edit:
-      pic: "Profile picture"
+      edit_button: "Update"
+      avatar: "Profile picture"
       heading: "Edit profile"
       save_button: "Save changes"
       profile: "Profile"
+      change_pic: "Change photo"
+      photo_header: "Profile photo"
+      photo_subheader: "Click the current avatar to change your photo."
   properties:
     identifier: "ID"
     title: "Properties"

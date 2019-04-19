@@ -154,4 +154,8 @@ class User < ApplicationRecord
     dataset.sort_by(&:get_total_properties)
   end
 
+  def age
+    ((Time.zone.now - dob.to_time) / 1.year.seconds).floor
+  end
+
 end
