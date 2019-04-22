@@ -832,27 +832,74 @@ li.page-item{
 }
 
 .alphatar {
-  width: 38px;
-  height: 38px;
-  border-radius: 19px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  background-color: #19ada2;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
   display: inline-block;
   text-align: center;
   line-height: 38px;
   font-size: 15px;
   font-weight: 300;
+  overflow: hidden;
+  padding-top: 3px;
 }
 .alphatar-edit{
     height: 100%;
     width: 100%;
     margin: 0;
-    background-color: #19ada2;
     display: block;
     text-align: center;
     line-height: 38px;
-    font-size: 32px;
+    font-size: 28px;
     padding-top: 20px;
     color: #ffffff;
+}
+
+.user-avatar{
+  border: 2px solid $gray-300;
+}
+
+.user-avatar img{
+  padding-top: 0 !important;
+}
+
+/*
+  スタイルシート: public/stylesheets/will_paginate.css
+*/
+.accounts-pagination {
+  display: inline-block;
+  text-align: center;
+  .pagination {
+    padding: 3px;
+    margin: 3px;
+  }
+
+  .pagination a {
+    padding: 2px 5px 2px 5px;
+    margin: 2px;
+    border: 1px solid #aaaadd;
+    text-decoration: none;
+    color: #000099;
+  }
+
+  .pagination a:hover, .pagination a:active {
+    border: 1px solid #000099;
+    color: #000;
+  }
+
+  .pagination span.current {
+    padding: 2px 5px 2px 5px;
+    margin: 2px;
+    border: 1px solid #000099;
+    font-weight: bold;
+    background-color: #000099;
+    color: #FFF;
+  }
+
+  .pagination span.disabled {
+    padding: 2px 5px 2px 5px;
+    margin: 2px;
+    border: 1px solid #eee;
+    color: #ddd;
+  }
 }

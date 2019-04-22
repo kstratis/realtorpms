@@ -9,6 +9,7 @@ class User < ApplicationRecord
   self.per_page = 10 # This is for pagination
   attr_accessor :remember_token, :reset_token
   before_save { self.email = email.downcase }  # makes sure everything is lower case
+  before_create { self.color = "%06x" % (rand * 0xffffff) } # This assigns a random bg color to each new user
   validates :first_name, presence: true, length: { maximum: 50 }
   validates :last_name, presence: true, length: { maximum: 50 }
   validates :email, presence: true, length: { maximum: 255 },
@@ -113,7 +114,14 @@ class User < ApplicationRecord
   end
 
   def all_accounts
-    owned_accounts + accounts
+    # Used to be: `owned_accounts + accounts`
+    # but that would return an Array instead of a ActiveRecord relation and
+    # arrays don't quite work with pagination.
+    # Turns outs we needed to use this gem: https://github.com/brianhempel/active_record_union.
+    # More on this here: https://stackoverflow.com/questions/6686920/activerecord-query-union
+    # and here: https://github.com/brianhempel/active_record_union.
+    # (see also this one: https://stackoverflow.com/questions/33683555/collectionproxy-vs-associationrelation)
+    accounts.union(owned_accounts)
   end
 
   def get_total_properties

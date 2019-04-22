@@ -388,6 +388,9 @@ el:
     flash_profile_updated: "Το προφίλ σας ενημερώθηκε επιτυχώς"
     flash_unauthorised_user_edit: "Η ενέργεια δεν μπορεί να εκτελεστεί"
     flash_owner_only_action: "Μόνο ο διαχειριστής μπορεί να εκτελέσει την επιλεγμένη ενέργεια"
+    show:
+      heading: "Πληροφορίες χρήστη"
+      users: "Χρήστες"
     edit:
       edit_button: "Ενημέρωση"
       avatar: "Φωτογραφία προφίλ"
@@ -397,6 +400,8 @@ el:
       change_pic: "Αλλαγή"
       photo_header: "Φωτογραφία προφίλ"
       photo_subheader: "Κάντε κλικ για ν'αλλάξετε την φωτογραφία προφίλ σας"
+      allowed_pic_specs: "JPG, GIF ή PNG 400x400, < 2 MB."
+      delete_avatar: "Είστε βέβαιος/βεβαία ότι θέλετε να διαγραφεί η φωτογραφία προφίλ σας;"
   properties:
     identifier: "ID"
     title: "Ακίνητα"

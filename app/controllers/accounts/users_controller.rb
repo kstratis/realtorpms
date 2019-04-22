@@ -58,6 +58,12 @@ module Accounts
       @user = User.find(params[:id]) # Automatically converts parameters from string to integer
     end
 
+    def delete_avatar
+      user = User.find(params[:id])
+      user.avatar.purge if user.avatar.attached?
+      redirect_to edit_user_path(user)
+    end
+
     private
       def user_params
         params.require(:user).permit(:avatar, :first_name, :last_name, :email, :dob, :phone1, :locale, :password, :password_confirmation)

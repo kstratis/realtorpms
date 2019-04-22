@@ -7,7 +7,7 @@ module Accounts
     # GET /properties.json
     def index
       # page number validation
-      @properties = Property.all
+      @properties = current_account.properties.all
 
       if params[:search]
         @properties = @properties.search(params[:search])

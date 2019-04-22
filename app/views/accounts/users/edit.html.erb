@@ -24,8 +24,16 @@
                 <h3 class="card-title"><%= t('users.edit.photo_header') %></h3>
                 <h6 class="card-subtitle text-muted"><%= t('users.edit.photo_subheader') %></h6>
                 <p class="card-text">
-                  <small>JPG, GIF or PNG 400x400, &lt; 2 MB.</small>
+                  <% if current_user.avatar.attached? %>
+                    <%= link_to delete_avatar_user_url, method: :delete, data: {confirm: t('users.edit.delete_avatar')} do %>
+                      <i class="fa fa-trash fa-fw"></i></a>&nbsp;|&nbsp;<small><%= t('users.edit.allowed_pic_specs') %></small>
+                    <% end %>
+                  <% else %>
+                    <small><%= t('users.edit.allowed_pic_specs') %></small>
+                  <% end %>
+
                 </p><!-- The avatar upload progress bar -->
+
                 <div id="progress-avatar" class="progress progress-xs fade">
                   <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                 </div><!-- /avatar upload progress bar -->

@@ -39,7 +39,13 @@ Rails.application.routes.draw do
         resource :favorites, only: [:create, :destroy]
       end
 
-      resources :users
+      resources :users do
+        member do
+          delete :delete_avatar
+        end
+      end
+
+
       resources :invitations, only: [:new, :create]
       # post '/properties/uploads', to: 'properties#uploads'
       # create a new assignment

@@ -1,16 +1,16 @@
 module UsersHelper
   # Adds gravatar support
   # Returns the Gravatar for the given user.
-  # def gravatar_for(user, size: 128, classname: 'gravatar', link_only: false, big_default_size: false)
-  #   gravatar_id = Digest::MD5::hexdigest(user.email.downcase)
-  #   default_image = big_default_size ? 'https://image.ibb.co/hQ96RR/anonymous_big.png' : 'https://image.ibb.co/eOvKfm/anonymous.png'
-  #   gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}&d=#{default_image}"
-  #   return URI.encode(gravatar_url) if link_only  # use this to get the url only. useful when js is in charge of view
-  #   image_tag(gravatar_url, alt: user.first_name + user.last_name, class: classname)
-  # end
+  def gravatar_for(user, size: 128, classname: 'gravatar', link_only: false, big_default_size: false)
+    gravatar_id = Digest::MD5::hexdigest(user.email.downcase)
+    default_image = big_default_size ? 'https://image.ibb.co/hQ96RR/anonymous_big.png' : 'https://image.ibb.co/eOvKfm/anonymous.png'
+    gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}&d=#{default_image}"
+    return URI.encode(gravatar_url) if link_only  # use this to get the url only. useful when js is in charge of view
+    image_tag(gravatar_url, alt: user.first_name + user.last_name, class: classname)
+  end
 
   def alphatar_for(user=nil, classnames=nil, id=nil)
-    content_tag :div, "JM", class: "alphatar #{classnames}", alt: "profile-pic", id: "#{id}"
+    content_tag :div, "#{user.first_name.upcase.first}#{user.last_name.upcase.first}", class: "alphatar #{classnames}", style: "background-color: ##{user.try(:color) || 'B76BA3'}", alt: "profile-pic", id: "#{id}"
   end
 
   # entity can be an account object model or a user (@account.owner)

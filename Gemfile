@@ -48,7 +48,9 @@ gem 'jquery-rails', '~> 4.3.3'
 
 gem 'faker', '~> 1.9.3'
 
-gem 'will_paginate', '~> 3.1.6'
+gem 'will_paginate', '~> 3.1.7'
+
+gem 'active_record_union'
 
 gem 'bootstrap-will_paginate', '1.0.0'
 
