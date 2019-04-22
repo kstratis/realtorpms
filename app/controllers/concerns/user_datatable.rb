@@ -7,7 +7,7 @@ module UserDatatable
       end
     end
 
-    @users = User.all
+    @users = current_account.users
 
     if params[:search]
       @users = @users.search(params[:search])

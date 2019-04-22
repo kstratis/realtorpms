@@ -407,6 +407,7 @@ en:
       photo_subheader: "Click the current avatar to change your photo."
       allowed_pic_specs: "JPG, GIF or PNG 400x400, < 2 MB."
       delete_avatar: "Are you sure you want to delete your avatar picture?"
+    flash_user_not_found: "User was not found"
   properties:
     identifier: "ID"
     title: "Properties"

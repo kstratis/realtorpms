@@ -10,11 +10,13 @@ class Account < ApplicationRecord
   has_many :users, through: :memberships, dependent: :destroy
   validates_associated :owner
 
-  # which I replaced with this line
-  # has_many :users
+  # Returns all account users including the owner of the account
+  def all_users(user)
+    # Used to be:
+    # users.joins(:accounts).where(accounts: {owner_id: user.id})
+    users.merge(User.where(id: user.id))
+  end
 
-
-  # These basically are class methods
   class << self
 
     # Returns the registered subdomain

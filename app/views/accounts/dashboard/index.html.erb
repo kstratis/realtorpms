@@ -23,7 +23,7 @@
 
         <div class="col-md-12 col-lg-6">
           <div class="row">
-            <% %w(properties partners clients mapping integrations statistics).each do |entry| %>
+            <% %w(properties users clients mapping integrations statistics).each do |entry| %>
               <div class="col-6">
                 <%= link_to respond_to?("#{entry}_path") ? send("#{entry}_path") : '', class: 'option-container' do %>
                   <%= content_tag :div, class: 'option' do %>

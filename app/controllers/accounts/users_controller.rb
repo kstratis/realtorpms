@@ -1,9 +1,12 @@
 module Accounts
   class UsersController < Accounts::BaseController
-    # before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
-    before_action :correct_user,   only: [:edit, :update]
+
+    # Shows all account users
+    before_action :all_account_users, only: [:show]
+    before_action :user_self, only: [:edit, :update] # Allows editing only on each user's self
     before_action :owner_exclusive, only: [:new, :create, :destroy]
     before_action :check_page_validity, only: [:index]
+
     layout 'auth/skeleton', except: [:show, :edit, :update, :index]  # show the barebones version only when signing up
 
     def destroy
@@ -18,7 +21,6 @@ module Accounts
     end
 
     def index
-      # puts 'the other one'
       filter_users
     end
 
@@ -55,7 +57,7 @@ module Accounts
     end
 
     def show
-      @user = User.find(params[:id]) # Automatically converts parameters from string to integer
+      # @user = User.find(params[:id]) # Automatically converts parameters from string to integer
     end
 
     def delete_avatar
@@ -76,9 +78,19 @@ module Accounts
       #     redirect_to login_url
       #   end
       # end
+      # def authorized
 
-      # Confirms the correct user.
-      def correct_user
+      def all_account_users
+        @user = current_account.all_users(current_user).find_by(id: params[:id])
+        if @user.nil?
+          flash[:danger] = I18n.t 'users.flash_user_not_found'
+          redirect_to users_path
+        end
+      end
+
+      # Confirms that an action concerning a particular user is initiated by that same user.
+      # Essentially prevents admins modifying others users' data.
+      def user_self
         @user = User.find(params[:id])
         unless current_user?(@user)
           flash[:danger] = I18n.t 'users.flash_unauthorised_user_edit'

@@ -370,10 +370,10 @@ el:
     subheading: "Διαβαθμισμένη πρόσβαση"
     options: "Κεντρικό μενού"
     properties: "Ακίνητα"
-    partners: "Συνεργάτες"
+    users: "Συνεργάτες"
     integrations: "Διασυνδέσεις"
     clients: "Πελάτες"
-    mapping: "Αντιστοιχίσεις"
+    mapping: "Διασταυρώσεις"
     statistics: "Στατιστικά"
     chart:
       title: "Επισκόπηση"
@@ -405,6 +405,7 @@ el:
       photo_subheader: "Κάντε κλικ για ν'αλλάξετε την φωτογραφία προφίλ σας"
       allowed_pic_specs: "JPG, GIF ή PNG 400x400, < 2 MB."
       delete_avatar: "Είστε βέβαιος/βεβαία ότι θέλετε να διαγραφεί η φωτογραφία προφίλ σας;"
+    flash_user_not_found: "Ο χρήστης δεν βρέθηκε"
   properties:
     identifier: "ID"
     title: "Ακίνητα"
