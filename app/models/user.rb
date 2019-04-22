@@ -164,7 +164,7 @@ class User < ApplicationRecord
   end
 
   def age
-    ((Time.zone.now - dob.to_time) / 1.year.seconds).floor
+    dob ? ((Time.zone.now - dob.to_time) / 1.year.seconds).floor : nil
   end
 
 end

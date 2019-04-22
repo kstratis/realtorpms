@@ -33,6 +33,7 @@ en:
         password_confirmation_placeholder: "Type your new password again"
         password_leave_empty: "Leave empty to keep unchanged"
         remember_me: "Remember me on this computer"
+        registered: "Registration date"
       extra:
         housetype:
           title: "Type"
@@ -393,6 +394,8 @@ en:
     show:
       heading: "User info"
       users: "Users"
+      assignments: "Assignments"
+      processed: "Processed"
     edit:
       edit_button: "Update"
       avatar: "Profile picture"

@@ -7,15 +7,92 @@
     <!-- .card -->
     <div class="card card-fluid">
       <h2 class="card-header"> <%= @user.full_name %> </h2>
-      <div class="col-lg-6 offset-lg-3 col-md-12">
-        <div class="media mb-3">
-        </div>
-      </div>
       <!-- .card-body -->
       <div class="card-body">
         <!-- .media -->
+        <div class="col-lg-6 offset-lg-3 col-md-12">
+          <div class="media mb-3">
+            <div class="user-avatar user-avatar-xl fileinput-button">
+              <%= user_avatar(@user, "alphatar-edit", "avatar_preview") %>
+            </div><!-- /avatar -->
+            <div class="media-body pl-3 pt-3">
+              <strong><%= @user.full_name %></strong><br>
+              <span><%= @user.age ? @user.age : '—' %></span>
+            </div>
+          </div>
+        </div> <!-- /.media -->
 
-      </div><!-- /.card-body -->
-    </div><!-- /.card -->
+        <div class="col-lg-6 offset-lg-3 col-md-12">
+          <div class="metric-row">
+
+            <div class="col-6 col-sm-6 col-lg-6">
+
+              <!-- metric column -->
+              <div class="card-metric">
+                <div class="metric">
+                  <p class="metric-value h3">
+                    <sub><i class="fa fa-tasks fa-lg fa-fw"></i></sub> <span class="value"><%= @user.assignments.count %></span>
+<!--                    <sub><i class="pr-icon cs account-switch"></i></sub> <span class="value"><%#= @user.assignments.count %></span>-->
+                  </p>
+                  <h2 class="metric-label"><%= t('users.show.assignments') %></h2>
+                </div>
+              </div><!-- /.metric -->
+            </div>
+
+            <div class="col-6 col-sm-6 col-lg-6">
+
+              <div class="card-metric">
+                <div class="metric">
+                  <p class="metric-value h3">
+                    <sub><i class="fa fa-check fa-lg fa-fw"></i></sub> <span class="value">N/A</span>
+                  </p>
+                  <h2 class="metric-label"><%= t('users.show.processed') %></h2>
+                </div>
+              </div><!-- /.metric -->
+
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-lg-6 offset-lg-3 col-md-12">
+          <div class="table-responsive">
+            <!-- .table -->
+            <table class="table table-striped">
+              <tbody>
+              <tr>
+                <td><%= t('activerecord.attributes.user.first_name') %></td>
+                <td><%= @user.first_name %></td>
+              </tr>
+              <tr>
+                <td><%= t('activerecord.attributes.user.last_name') %></td>
+                <td><%= @user.last_name %></td>
+              </tr>
+              <tr>
+                <td><%= t('activerecord.attributes.user.age') %></td>
+                <td><%= @user.age ? @user.age : '—' %></td>
+              </tr>
+              <tr>
+                <td><%= t('activerecord.attributes.user.email') %></td>
+                <td><%= @user.email %></td>
+              </tr>
+              <tr>
+                <td><%= t('activerecord.attributes.user.phone1') %></td>
+                <td><%= @user.phone1 ? @user.phone1 : '—' %></td>
+              </tr>
+              <tr>
+                <td><%= t('activerecord.attributes.user.registered') %></td>
+                <!-- +l+ function accounts for the localized timedate -->
+                <td><%= l(@user.created_at, format: :custom) %></td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+      </div> <!-- /.card-body -->
+    </div> <!-- /.card -->
   </div>
 </div>

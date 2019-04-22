@@ -193,6 +193,7 @@ el:
     am: π.μ.
     formats:
       default: ! '%d %B %Y %H:%M'
+      custom: ! '%d %b %Y'
       long: ! '%A %d %B %Y %H:%M:%S %Z'
       short: ! '%d %b %H:%M'
     pm: μ.μ.

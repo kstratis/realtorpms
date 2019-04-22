@@ -33,6 +33,7 @@ el:
         password_confirmation_placeholder: "Πληκτρολογήστε ξανά τον νέο σας κωδικό"
         password_leave_empty: "Αφήστε το πεδίο κενό για να παραμείνει ως έχει"
         remember_me: "Να παραμείνω συνδεδεμένος"
+        registered: "Ημερομηνία εγγραφής"
       extra:
         housetype:
           title: "Τύπος"
@@ -391,6 +392,8 @@ el:
     show:
       heading: "Πληροφορίες χρήστη"
       users: "Χρήστες"
+      assignments: "Ανατεθημένα"
+      processed: "Διεκπεραιώσεις"
     edit:
       edit_button: "Ενημέρωση"
       avatar: "Φωτογραφία προφίλ"
