@@ -24,7 +24,6 @@ class FormStepper {
   }
 
   kill(){
-    console.log(this.form);
     this.form.destroy();
   }
 

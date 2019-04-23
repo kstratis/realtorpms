@@ -14,6 +14,8 @@
 User.create!(first_name: 'Konstantinos',
              last_name: 'Stratis',
              email: 'konos5@gmail.com',
+             phone1: '6972500361',
+             dob: Date.new(1986, 4, 5),
              password: '989492ks',
              password_confirmation: '989492ks',
              admin: true)
@@ -21,6 +23,8 @@ User.create!(first_name: 'Konstantinos',
 User.create!(first_name: 'Tony',
              last_name: 'Stark',
              email: 'tstark@gmail.com',
+             phone1: '6945567345',
+             dob: Date.new(1976, 2, 3),
              password: 'abc123',
              password_confirmation: 'abc123',
              admin: false)
@@ -28,6 +32,8 @@ User.create!(first_name: 'Tony',
 User.create!(first_name: 'Hulk',
              last_name: 'Hogan',
              email: 'hh@gmail.com',
+             phone1: '6935567342',
+             dob: Date.new(1980, 4, 1),
              password: 'abc123',
              password_confirmation: 'abc123',
              admin: false)
@@ -35,6 +41,8 @@ User.create!(first_name: 'Hulk',
 User.create!(first_name: 'Johny',
              last_name: 'Mnemonic',
              email: 'jm@gmail.com',
+             phone1: '6901560342',
+             dob: Date.new(1969, 12, 17),
              password: 'abc123',
              password_confirmation: 'abc123',
              admin: false)
@@ -96,13 +104,15 @@ bluedomain = Account.find_by(subdomain: 'bluedomain')
 shakalaka.users << specialuser1
 shakalaka.users << specialuser2
 bluedomain.users << specialuser3
+shakalaka.users << User.fourth
 
 # 99 fake users for shakalaka account
 99.times do |n|
   first_name = Faker::Name.first_name
-
   last_name = Faker::Name.last_name
   email = "user-#{n + 1}@gmail.com"
+  dob = rand(10.years).seconds.ago
+  phone1 = "69#{rand(0..9)}76548#{rand(0..9)}#{rand(0..9)}"
   password = 'abc123'
   user = User.create!(first_name: first_name,
                       last_name: last_name,

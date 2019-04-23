@@ -19,7 +19,8 @@
        a generic title -->
   <title><%= full_title(yield(:title)) %></title>
   <%= csrf_meta_tags %>
-  <%= render 'layouts/non_app_assets' %>
+  <%= render 'layouts/shared_style_assets' %>
+  <%= render 'layouts/shared_script_assets' %>
   <%= render 'layouts/shim' %>
 </head>
 <body>

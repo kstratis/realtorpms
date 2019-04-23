@@ -14,7 +14,7 @@ class Account < ApplicationRecord
   def all_users(user)
     # Used to be:
     # users.joins(:accounts).where(accounts: {owner_id: user.id})
-    users.merge(User.where(id: user.id))
+    users.union(User.where(id: user.id))
   end
 
   class << self

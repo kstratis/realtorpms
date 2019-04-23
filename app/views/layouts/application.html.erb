@@ -27,7 +27,8 @@
        It uses postcss to load the file. Check .postcssrc.yml -->
   <%= stylesheet_pack_tag 'stylesheets/uppyjs_styles' %>
   <%= stylesheet_pack_tag 'stylesheets/flatpickr_styles' %>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= render 'layouts/shared_style_assets' %>
+  <%#= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
 <!--  <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">-->
 
@@ -42,7 +43,7 @@
   <!--  <link rel="stylesheet" href="https://i.icomoon.io/public/temp/c1f0de587f/Landia/style.css">-->
   <!--  <link rel="stylesheet" href="https://i.icomoon.io/public/temp/9db1d64f31/Landia/style.css">-->
 
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= render 'layouts/shared_script_assets' %>
   <%= javascript_pack_tag 'components-bundle' %>
   <%= javascript_pack_tag 'application' %>
   <%= javascript_pack_tag 'theme' %>
@@ -50,6 +51,8 @@
   <%= javascript_pack_tag 'date_select' %>
   <%= javascript_pack_tag 'avatar_preview' %>
   <%= javascript_pack_tag 'stepper' %>
+
+
 
   <%#= javascript_pack_tag 'hello_react' %>
   <%= render 'layouts/shim' %>
