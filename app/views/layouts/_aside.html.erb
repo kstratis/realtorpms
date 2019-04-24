@@ -50,15 +50,15 @@
           <% end %>
           <!-- /.menu-item -->
           <!-- .menu-item -->
-          <%= content_tag :li, class: "menu-item has-child #{active_for(controller: 'users', except_action: 'edit', classname: 'open')}" do %>
+          <%= content_tag :li, class: "menu-item has-child #{active_for(controller: ['users', 'invitations'], except_action: 'edit', classname: 'open')}" do %>
             <%= link_to '#', class: 'menu-link' do %>
               <%= content_tag :i, nil, class: 'menu-icon fas fa-user-tie' %>
               <%= content_tag :span, t('partners.title'), class: 'menu-text' %>
             <% end %>
             <!-- child menu -->
             <ul class="menu">
-              <%= content_tag :li, class: "menu-item  #{active_for(path: new_user_path)}" do %>
-                <%= link_to new_user_path, class: 'menu-link' do %>
+              <%= content_tag :li, class: "menu-item  #{active_for(path: new_invitation_path)}" do %>
+                <%= link_to new_invitation_path, class: 'menu-link' do %>
                   <%= content_tag :i, nil, class: 'fas fa-plus fa-fw' %>
                   <%= content_tag :span, t('partners.add'), class: 'menu-text' %>
                 <% end %>

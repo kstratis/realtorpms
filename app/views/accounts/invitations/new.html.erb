@@ -1,25 +1,43 @@
-<% provide(:title, 'Edit user') %>
-<div class="center pr-signup-container pr-container">
-  <i class="pr-icon sm invite-user-colored"></i>
-  <span class="title"><%= t 'invitations.new.heading' %></span>
+<% provide(:title, t('users.new.heading')) %>
 
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <div class="pr-form-container">
+<%= render partial: 'shared/breadcrumb', locals: {path: [{:title => 'users.new.heading', :href => new_user_path}], icon: 'house-colored'} %>
 
-        <%= form_for @invitation do |invitation| %>
+<div class="page-container">
+  <div class="container">
+    <!-- .card -->
+    <div class="card card-fluid">
+      <h2 class="card-header"><%= t('users.new.profile') %> </h2>
+      <!-- .card-body -->
+      <div class="card-body">
+        <!-- form -->
+        <%= form_for(@invitation) do |f| %>
+          <div class="col-lg-6 offset-lg-3 col-md-12">
 
-            <%= render 'shared/error_messages', locals: {model: @invitation} %>
 
-            <%= invitation.label Invitation.human_attribute_name("email_label") %>
-            <%= invitation.email_field :email, placeholder: Invitation.human_attribute_name("email_placeholder"), class: 'glowing-border' %>
-            <%= inline_error @invitation, :email, 'Email'%>
+            <!-- .form-group -->
+            <div class="form-group">
+              <div class="pb-2">
+                <span class="badge badge-secondary"><em><%= t('users.new.feedback') %></em></span>
+              </div>
+              <div class="form-label-group">
+                <%= f.email_field :email, class: 'form-control', placeholder: User.human_attribute_name("email") %>
+                <%= f.label "email", User.human_attribute_name("email") %>
+                <%= inline_error @invitation, :email, 'Email' %>
+              </div>
+            </div>
+            <!-- /.form-group -->
 
-            <%= invitation.submit t('invitations.new.inv_button'), class: 'btn btn-primary' %>
-            <%#= invitation.submit 'Invite User', data: { confirm: 'Are you sure?', 'sweet-alert-type': 'question' }, class: 'btn btn-primary' %>
-        <% end %>
-      </div>
-    </div>
+<!--            <hr />-->
+
+            <!-- .form-actions -->
+            <div class="form-actions invite-action">
+              <button type="submit" class="btn btn-primary btn-block"><%= t('invitations.new.inv_button') %></button>
+            </div> <!-- /.form-actions -->
+          </div>
+
+        <% end %> <!-- /form -->
+
+      </div><!-- /.card-body -->
+    </div><!-- /.card -->
   </div>
 </div>
-

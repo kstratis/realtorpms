@@ -33,7 +33,7 @@ class AccountsController < ApplicationController
       redirect_to @user
       # Handle a successful update.
     else
-      render 'edit'
+      render :edit
     end
   end
 

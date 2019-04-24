@@ -7,7 +7,7 @@ module Accounts
     before_action :owner_exclusive, only: [:new, :create, :destroy]
     before_action :check_page_validity, only: [:index]
 
-    layout 'auth/skeleton', except: [:show, :edit, :update, :index]  # show the barebones version only when signing up
+    # layout 'auth/skeleton', except: [:show, :edit, :update, :index, :new]  # show the barebones version only when signing up
 
     def destroy
         User.find(params[:id]).destroy
@@ -35,7 +35,7 @@ module Accounts
       else
         # this merely re-renders the new template.
         # It doesn't fully redirect (in other words it doesn't go through the +new+ method)
-        render 'new'
+        render :new
       end
     end
 

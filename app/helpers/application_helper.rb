@@ -17,7 +17,7 @@ module ApplicationHelper
   end
 
   def active_for(options)
-    name_of_controller = options.fetch(:controller) { nil }
+    names_of_controllers = Array.wrap(options.fetch(:controller) { nil })
     name_of_action     = options.fetch(:action) { nil }
     name_of_excepted_action = options.fetch(:except_action) { nil }
     request_path       = options.fetch(:path) { nil }
@@ -31,10 +31,10 @@ module ApplicationHelper
     # byebug
     # puts "the root path is: #{root_path}"
 
-
     return CLASSNAME[request_class.to_sym] if request_path && request_path == request.path
 
-    if name_of_controller == controller_name && name_of_excepted_action != action_name
+    if names_of_controllers && names_of_controllers.any? { |controller| controller == controller_name } && name_of_excepted_action != action_name
+    # if name_of_controllers == controller_name && name_of_excepted_action != action_name
       CLASSNAME[request_class.to_sym] if name_of_action.nil? || (name_of_action == action_name)
     end
   end

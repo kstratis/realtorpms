@@ -389,6 +389,12 @@ el:
     flash_profile_updated: "Το προφίλ σας ενημερώθηκε επιτυχώς"
     flash_unauthorised_user_edit: "Η ενέργεια δεν μπορεί να εκτελεστεί"
     flash_owner_only_action: "Μόνο ο διαχειριστής μπορεί να εκτελέσει την επιλεγμένη ενέργεια"
+    flash_add_user: "Ο νέος χρήστης προστέθηκε επιτυχώς"
+    new:
+      heading: "Προσθήκη"
+      profile: "Προσθήκη νέου συνεργάτη"
+      new_button: "Προσθήκη"
+      feedback: "Πληκτρολογήστε το email ενός συνεργάτη σας"
     show:
       heading: "Πληροφορίες χρήστη"
       users: "Χρήστες"
@@ -471,6 +477,7 @@ el:
     sign_up_now: "Εγγραφείτε εδώ."
     sign_in_now: "Συνδεθείτε"
     passw_reset: "Επανάκτηση κωδικού %{brand}"
+    welcome: "Καλωσήρθατε στο %{brand}"
     flash_error: "Τα στοιχεία σύνδεσης δεν είναι σωστά!"
     flash_success: "Συνδεθήκατε επιτυχώς."
     flash_logout: "Έχετε αποσυνδεθεί."
@@ -482,3 +489,8 @@ el:
     flash_new_passwd_no_match: "Τα πεδία νέου κωδικού δεν ταιριάζουν"
     flash_passwd_reset_success: "Ο κωδικός σας έχει αλλάξει επιτυχώς"
     flash_passwd_reset_expired: "Η προθεσμία επανάκτησης κωδικού έχει παρέλθει"
+  emails:
+    invites:
+      greeting: "Γειά σας %{name},"
+      heading: "Ο νέος σας λογαριασμός στο %{brand} είναι έτοιμος."
+

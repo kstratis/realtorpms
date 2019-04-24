@@ -391,6 +391,12 @@ en:
     flash_profile_updated: "Profile successfully updated"
     flash_unauthorised_user_edit: "Unauthorized action"
     flash_owner_only_action: "Owner restricted action"
+    flash_add_user: "New user created successfully"
+    new:
+      heading: "Add"
+      profile: "Add partner"
+      new_button: "Add"
+      feedback: "Type your partner's email"
     show:
       heading: "User info"
       users: "Users"
@@ -472,6 +478,7 @@ en:
     sign_up_now: "Register here."
     sign_in_now: "Sign in here."
     passw_reset: "%{brand} password reset"
+    welcome: "Welcome to %{brand}"
     flash_error: "Invalid username/password!"
     flash_success: "You have successfully signed in."
     flash_logout: "You have successfully signed out."
@@ -483,3 +490,7 @@ en:
     flash_new_passwd_no_match: "New password fields don't match"
     flash_passwd_reset_success: "You have successfully changed your password"
     flash_passwd_reset_expired: "Password reset has expired"
+  emails:
+    welcome:
+      greeting: "Hi %{name}!"
+      heading: "Welcome to %{brand}. Your new account is ready"

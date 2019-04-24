@@ -95,7 +95,6 @@ module Accounts
     # POST /properties
     # POST /properties.json
     def create
-      # +set_owner+ is called as a hook method
       @property = Property.new(property_params)
       set_owner
       set_location

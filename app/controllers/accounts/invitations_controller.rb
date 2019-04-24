@@ -10,27 +10,28 @@ module Accounts
     end
 
     def create
-      # @invitation = current_account.invitations.new(invitation_params)
-      # @invitation.save
-      # InvitationMailer.invite(@invitation).deliver_later
-      # flash[:notice] = "#{@invitation.email} has been invited."
-      # redirect_to root_path
-
       @invitation = current_account.invitations.new(invitation_params)
-      if @invitation.save
-        # This actually sends out the email
-        InvitationMailer.invite(@invitation).deliver_now
-        flash[:success] = "#{@invitation.email} has been successfully invited."
-        redirect_to users_path
-      else
-        # this merely re-renders the new template.
-        # It doesn't fully redirect (in other words it doesn't go through the +new+ method)
-        flash.now[:danger] = 'Invalid email' # Not quite right!
-        render 'new'
+      respond_to do |format|
+        if @invitation.save
+          # Send out the email
+          InvitationMailer.invite(@invitation).deliver_now
+          format.html do
+            flash[:success] = "#{@invitation.email} has been successfully invited."
+            redirect_to users_path
+          end
+          format.js {render :create_result}
+        else
+          format.html do
+            flash.now[:danger] = I18n.t "accounts.switch_domain", subdomain: request.subdomain
+            render :new
+          end
+          format.js {render :create_result}
+        end
       end
     end
 
     private
+
       def authorize_owner!
         unless owner?
           flash[:danger] = 'Only an account\'s owner can perform such action.'
@@ -42,5 +43,5 @@ module Accounts
         params.require(:invitation).permit(:email)
       end
 
-    end
   end
+end
