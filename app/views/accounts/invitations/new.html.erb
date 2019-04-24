@@ -13,7 +13,6 @@
         <%= form_for(@invitation) do |f| %>
           <div class="col-lg-6 offset-lg-3 col-md-12">
 
-
             <!-- .form-group -->
             <div class="form-group">
               <div class="pb-2">
@@ -21,13 +20,14 @@
               </div>
               <div class="form-label-group">
                 <%= f.email_field :email, class: 'form-control', placeholder: User.human_attribute_name("email") %>
-                <%= f.label "email", User.human_attribute_name("email") %>
+                <%#= f.label "email", User.human_attribute_name("email") %>
+                <%= f.label "email" do %>
+                  <span><i class="far fa-envelope fa-fw"></i>&nbsp;<%= User.human_attribute_name("email")%></span>
+                <% end %>
                 <%= inline_error @invitation, :email, 'Email' %>
               </div>
             </div>
             <!-- /.form-group -->
-
-<!--            <hr />-->
 
             <!-- .form-actions -->
             <div class="form-actions invite-action">
@@ -37,7 +37,7 @@
 
         <% end %> <!-- /form -->
 
-      </div><!-- /.card-body -->
-    </div><!-- /.card -->
-  </div>
-</div>
+      </div> <!-- /.card-body -->
+    </div> <!-- /.card -->
+  </div> <!-- /.container -->
+</div> <!-- /.page-container -->

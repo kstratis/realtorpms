@@ -4,7 +4,6 @@ module ApplicationHelper
       'active': 'has-active',
       'open': 'has-open',
   }
-  # ACTIVE_CLASS = 'has-active'.freeze
 
   # Returns the full title on a per-page basis.
   def full_title(page_title = '')
@@ -16,6 +15,7 @@ module ApplicationHelper
     end
   end
 
+  # Returns the has-active or has-open HTML class names according to navigation
   def active_for(options)
     names_of_controllers = Array.wrap(options.fetch(:controller) { nil })
     name_of_action     = options.fetch(:action) { nil }
@@ -23,18 +23,9 @@ module ApplicationHelper
     request_path       = options.fetch(:path) { nil }
     request_class      = options.fetch(:classname) { 'active' }
 
-    # puts '-----------'
-    # puts request_path
-    # puts request.path
-    # puts "if equal will return #{CLASSNAME[request_class.to_sym]}"
-    # puts '###########'
-    # byebug
-    # puts "the root path is: #{root_path}"
-
     return CLASSNAME[request_class.to_sym] if request_path && request_path == request.path
 
     if names_of_controllers && names_of_controllers.any? { |controller| controller == controller_name } && name_of_excepted_action != action_name
-    # if name_of_controllers == controller_name && name_of_excepted_action != action_name
       CLASSNAME[request_class.to_sym] if name_of_action.nil? || (name_of_action == action_name)
     end
   end
