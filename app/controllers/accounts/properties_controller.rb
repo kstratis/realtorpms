@@ -107,13 +107,15 @@ module Accounts
           puts 'form saving successfully'
           # todo internationalize the notice message
           format.html {redirect_to @property, notice: 'Property was successfully created.'}
-          format.js {render :create_result}
+          # format.js {render :create_result}
+          format.js {render 'shared/ajax/create', locals: {resource: @property}}
         else
           @property.errors.each do |field, error|
             puts "#{field}: #{error}"
           end
           format.html {render :new}
-          format.js {render :create_result}
+          # format.js {render :create_result}
+          format.js {render 'shared/ajax/create', locals: {resource: @property}}
         end
       end
     end

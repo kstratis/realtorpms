@@ -7,7 +7,7 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.2'
+gem 'rails', '~> 5.2.3'
 # gem 'rails', :git => 'https://github.com/rails/rails'
 # gem 'bootstrap-sass', '3.3.7'
 gem 'bcrypt', '3.1.12'
@@ -37,9 +37,9 @@ gem 'uglifier', '~> 4.1.20'
 # gem 'therubyracer', platforms: :ruby
 
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.2.2'
+gem 'coffee-rails', '~> 5.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5.2.0'
+gem 'turbolinks', '~> 5.2'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.8'
@@ -58,7 +58,7 @@ gem 'launchy', '2.4.3'
 
 gem 'rails_12factor'
 
-gem 'font-awesome-rails'
+# gem 'font-awesome-rails'
 
 gem 'react_on_rails', '11.2.2'
 

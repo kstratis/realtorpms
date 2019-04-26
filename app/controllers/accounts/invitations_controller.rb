@@ -9,23 +9,32 @@ module Accounts
       @invitation = Invitation.new
     end
 
+    def check_existing_user
+      puts 'YOLO'
+      puts params[:email]
+      puts '------------'
+      user = User.find_by(email: params[:email])
+      render json: {status: "OK" }, status: user.nil? ? 200 : 403
+    end
+
     def create
       @invitation = current_account.invitations.new(invitation_params)
       respond_to do |format|
         if @invitation.save
           # Send out the email
           InvitationMailer.invite(@invitation).deliver_now
+          format.js {render 'shared/ajax/create', locals: {resource: @invitation}}
           format.html do
             flash[:success] = "#{@invitation.email} has been successfully invited."
             redirect_to users_path
           end
-          format.js {render :create_result}
         else
+          format.js {render 'shared/ajax/create', locals: {resource: @invitation}}
           format.html do
             flash.now[:danger] = I18n.t "accounts.switch_domain", subdomain: request.subdomain
             render :new
           end
-          format.js {render :create_result}
+
         end
       end
     end

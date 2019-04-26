@@ -13,5 +13,5 @@ import { Greek } from "flatpickr/dist/l10n/gr.js"
 import * as CustomActiveStorage from '../bundles/uploaders/custom_active_storage';
 
 $(document).on('turbolinks:load', function(e) {
-  CustomActiveStorage.start()
+  if ($(".emitters").length > 0) CustomActiveStorage.start()
 });

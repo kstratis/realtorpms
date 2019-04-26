@@ -46,7 +46,8 @@ Rails.application.routes.draw do
       end
 
 
-      resources :invitations, only: [:new, :create]
+      resources :invitations, only: [:new, :create, :check_existing_user]
+      get '/invitations/validate_user', to:'invitations#check_existing_user', as: :invitation_validate
       # post '/properties/uploads', to: 'properties#uploads'
       # create a new assignment
       #

@@ -329,6 +329,8 @@ en:
     validator:
       required: "The field is required"
       digits: "The field requires digits only"
+      email: "Please enter a valid email address"
+      email_exists: "Email already exists"
     alerts:
       file_upload_fail_title: "Oops..."
       file_upload_fail_body: "Something has gone wrong... Pleace check your network connection and try again."
@@ -385,6 +387,17 @@ en:
     new:
       heading: "Add new partner"
       inv_button: "Send invitation"
+    created:
+      message: "Success!"
+      message_feedback: "Your partner will soon an email with instructions to connect %{brand}"
+      return: "Return"
+      show: "Show"
+      edit: "Edit"
+      add_another: "Add another partner"
+    not_created:
+      message: "Unable to invite partner"
+      add_another: "Please try again"
+      support: "Please contact support"
   users:
     flash_delete: "User was successfully deleted"
     flash_welcome: "Welcome to %{brand}! Your profile is complete."
@@ -392,6 +405,8 @@ en:
     flash_unauthorised_user_edit: "Unauthorized action"
     flash_owner_only_action: "Owner restricted action"
     flash_add_user: "New user created successfully"
+    created:
+      list: "List of current users"
     new:
       heading: "Add"
       profile: "Add partner"
@@ -437,6 +452,7 @@ en:
     not_created:
       message: "Error adding new property"
       add_another: "Try again"
+      support: "Please contact support or"
     index:
       heading: "Properties"
       new_button: "Add new property"

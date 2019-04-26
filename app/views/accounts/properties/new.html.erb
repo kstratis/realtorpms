@@ -12,7 +12,7 @@
 <div class="page-container">
   <div class="container">
 
-    <div class="form-container">
+    <div class="content-swap">
 
       <!-- .section-block -->
       <div class="section-block">
@@ -694,6 +694,7 @@
                 </div><!-- Step 6 END -->
 
                 <input id="preventformsubmit" type="hidden">
+                <!-- .emitters among other things serves as a signal to initialize ActiveStorage-->
                 <%= property.file_field :images, class: 'form-control emitters', multiple: true, direct_upload: true%>
                 <%= render "accounts/helpers/locale" %>
 

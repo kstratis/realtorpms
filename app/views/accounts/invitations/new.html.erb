@@ -4,39 +4,49 @@
 
 <div class="page-container">
   <div class="container">
+    <div class="content-swap">
     <!-- .card -->
     <div class="card card-fluid">
       <h2 class="card-header"><%= t('users.new.profile') %> </h2>
       <!-- .card-body -->
       <div class="card-body">
-        <!-- form -->
-        <%= form_for(@invitation) do |f| %>
-          <div class="col-lg-6 offset-lg-3 col-md-12">
 
-            <!-- .form-group -->
-            <div class="form-group">
-              <div class="pb-2">
-                <span class="badge badge-secondary"><em><%= t('users.new.feedback') %></em></span>
+          <!-- form -->
+          <%= form_for(@invitation, remote: true, html: {class: "js-validatable"}) do |f| %>
+            <div class="col-lg-6 offset-lg-3 col-md-12">
+
+              <!-- .form-group -->
+              <div class="form-group">
+                <div class="pb-2">
+                  <span class="badge badge-secondary"><em><%= t('users.new.feedback') %></em></span>
+                </div>
+                <div class="form-label-group">
+                  <%= f.email_field :email,
+                                    class: 'form-control',
+                                    placeholder: User.human_attribute_name("email"),
+                                    required: true,
+                                    'data-parsley-required-message': t("js.validator.required"),
+                                    'data-parsley-type-message': t("js.validator.email"),
+                                    'data-parsley-remote-message': t("js.validator.email_exists"),
+                                    # 'data-parsley-remote': invitation_validate_path + '?email=' + CGI::unescape('{value}'),
+                                    'data-parsley-remote': invitation_validate_path + '?email=' + '{value}'.html_safe,
+                                    'data-parsley-trigger-after-failure': "submit" %>
+                  <%= f.label "email" do %>
+                    <span><i class="far fa-envelope fa-fw"></i>&nbsp;<%= User.human_attribute_name("email") %></span>
+                  <% end %>
+                  <%= inline_error @invitation, :email, 'Email' %>
+                </div>
               </div>
-              <div class="form-label-group">
-                <%= f.email_field :email, class: 'form-control', placeholder: User.human_attribute_name("email") %>
-                <%#= f.label "email", User.human_attribute_name("email") %>
-                <%= f.label "email" do %>
-                  <span><i class="far fa-envelope fa-fw"></i>&nbsp;<%= User.human_attribute_name("email")%></span>
-                <% end %>
-                <%= inline_error @invitation, :email, 'Email' %>
-              </div>
+              <!-- /.form-group -->
+
+              <!-- .form-actions -->
+              <div class="form-actions invite-action">
+                <button type="submit" class="btn btn-primary btn-block"><%= t('invitations.new.inv_button') %></button>
+              </div> <!-- /.form-actions -->
             </div>
-            <!-- /.form-group -->
 
-            <!-- .form-actions -->
-            <div class="form-actions invite-action">
-              <button type="submit" class="btn btn-primary btn-block"><%= t('invitations.new.inv_button') %></button>
-            </div> <!-- /.form-actions -->
-          </div>
-
-        <% end %> <!-- /form -->
-
+          <% end %> <!-- /form -->
+        </div>
       </div> <!-- /.card-body -->
     </div> <!-- /.card -->
   </div> <!-- /.container -->
