@@ -14,7 +14,7 @@ module Accounts
       puts params[:email]
       puts '------------'
       user = User.find_by(email: params[:email])
-      render json: {status: "OK" }, status: user.nil? ? 200 : 403
+      render json: {status: "Checked" }, status: user.nil? ? 200 : 403
     end
 
     def create
