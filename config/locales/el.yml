@@ -396,6 +396,11 @@ el:
       message: "Προέκυψε σφάλμα!"
       add_another: "Δοκιμάστε πάλι"
       support: "Παρακαλείσθε να επικοινωνήσετε με το τμήμα υποστήριξης"
+    accept:
+      title: "Αποδοχή πρόσκλησης"
+      subheading: "Αποδοχή πρόσκλησης"
+      subheading_feedback_html: "Σύνδεση με τον λογαριασμό: <mark><strong>%{account}</strong></mark>"
+      accept_btn: "Αποδοχή"
   users:
     flash_delete: "Ο χρήστης διεγράφη επιτυχώς"
     flash_welcome: "Καλωσήλθατε στο %{brand}! Το προφίλ σας είναι έτοιμο"

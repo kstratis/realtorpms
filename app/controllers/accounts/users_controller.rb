@@ -81,7 +81,8 @@ module Accounts
       # def authorized
 
       def all_account_users
-        @user = current_account.all_users(current_user).find_by(id: params[:id])
+        # We use find_by instead of find because we need an association proxy and not just an object
+        @user = current_account.all_users.find_by(id: params[:id])
         if @user.nil?
           flash[:danger] = I18n.t 'users.flash_user_not_found'
           redirect_to users_path

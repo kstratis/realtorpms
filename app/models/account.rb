@@ -11,10 +11,11 @@ class Account < ApplicationRecord
   validates_associated :owner
 
   # Returns all account users including the owner of the account
-  def all_users(user)
+  # Uses the active_record_union gem
+  def all_users
     # Used to be:
     # users.joins(:accounts).where(accounts: {owner_id: user.id})
-    users.union(User.where(id: user.id))
+    users.union(User.where(id: owner.id))
   end
 
   class << self

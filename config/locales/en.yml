@@ -398,6 +398,11 @@ en:
       message: "Unable to invite partner"
       add_another: "Please try again"
       support: "Please contact support"
+    accept:
+      title: "Accept invitation"
+      subheading: "Accept invitation"
+      subheading_feedback_html: "Connecting to account: <mark><strong>%{account}</strong></mark>"
+      accept_btn: "Accept"
   users:
     flash_delete: "User was successfully deleted"
     flash_welcome: "Welcome to %{brand}! Your profile is complete."

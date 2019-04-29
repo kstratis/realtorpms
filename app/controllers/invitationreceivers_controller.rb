@@ -1,6 +1,6 @@
 class InvitationreceiversController < ApplicationController
 
-  layout 'website/skeleton'  # show the barebones version only when signing up/in
+  layout 'auth/skeleton'  # show the barebones version only when signing up/in
 
   def accept
     store_location unless logged_in?
@@ -13,9 +13,8 @@ class InvitationreceiversController < ApplicationController
     # +find_by!+ throws exception if invitation is not found
     @invitation = Invitation.find_by!(token: params[:id])
 
-
     if logged_in?
-      user = current_user
+      @user = current_user
     else
       user_params = params[:user].permit(
           :email,
@@ -24,12 +23,18 @@ class InvitationreceiversController < ApplicationController
           :password,
           :password_confirmation
       )
-      # +create!+ is an active record method not a users controller one
-      user = User.create!(user_params)
-      log_in(user)
+      # +create!+ is an active record method not a users controller one. Used to be:
+      # user = User.create!(user_params)
+      @user = User.new(user_params)
+      if @user.save
+        log_in(@user)
+      else
+        render :accept and return
+      end
+
     end
 
-    current_account.users << user
+    current_account.users << @user
 
     # puts "current_account.subdomain is #{current_account.subdomain}"
     # redirect_to root_url

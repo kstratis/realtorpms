@@ -10,10 +10,8 @@ module Accounts
     end
 
     def check_existing_user
-      puts 'YOLO'
-      puts params[:email]
-      puts '------------'
-      user = User.find_by(email: params[:email])
+      user = current_account.all_users.find_by(email: params[:email])
+      # user = current_account.users.find_by(email: params[:email])
       render json: {status: "Checked" }, status: user.nil? ? 200 : 403
     end
 
