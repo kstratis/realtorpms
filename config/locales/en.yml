@@ -404,6 +404,8 @@ en:
       subheading_html: "Accept invitation. If you already have an account, please <a href='%{login_link}'>login first</a>."
       subheading_feedback_html: "Connecting to account: <mark><strong>%{account}</strong></mark>"
       accept_btn: "Accept"
+    accepted:
+      flash_success: "You have successfully joined the %{account} organization"
   users:
     flash_delete: "User was successfully deleted"
     flash_welcome: "Welcome to %{brand}! Your profile is complete."

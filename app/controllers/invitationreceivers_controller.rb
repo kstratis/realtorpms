@@ -1,6 +1,7 @@
 class InvitationreceiversController < ApplicationController
 
   layout 'auth/skeleton'  # show the barebones version only when signing up/in
+  after_action -> { @invitation.destroy! }, only: [:accepted]
 
   def accept
     store_location unless logged_in?
@@ -36,9 +37,11 @@ class InvitationreceiversController < ApplicationController
 
     current_account.users << @user
 
+    @invitation.destroy!
+
     # puts "current_account.subdomain is #{current_account.subdomain}"
     # redirect_to root_url
-    flash[:success] = "You have successfully joined the #{current_account.subdomain} organization."
+    flash[:success] = I18n.t('invitations.accepted.flash_success', account: current_account.subdomain)
     # puts "the redirect will be on: #{root_url(subdomain: current_account.subdomain)}"
     redirect_to root_url(subdomain: current_account.subdomain)
   end

@@ -402,6 +402,8 @@ el:
       subheading_html: "<u>Αποδοχή πρόσκλησης</u>. Εάν έχετε ήδη λογαριασμό χρήστη στο σύστημα, <a href='%{login_link}'>εισέλθετε</a>."
       subheading_feedback_html: "Σύνδεση με τον λογαριασμό: <mark><strong>%{account}</strong></mark>"
       accept_btn: "Αποδοχή"
+    accepted:
+      flash_success: "Συνδεθήκατε επιτυχώς με τον λογαριασμό: %{account}"
   users:
     flash_delete: "Ο χρήστης διεγράφη επιτυχώς"
     flash_welcome: "Καλωσήλθατε στο %{brand}! Το προφίλ σας είναι έτοιμο"
