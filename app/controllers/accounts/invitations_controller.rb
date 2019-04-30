@@ -11,19 +11,20 @@ module Accounts
 
     def check_existing_user
       user = current_account.all_users.find_by(email: params[:email])
-      # user = current_account.users.find_by(email: params[:email])
       render json: {status: "Checked" }, status: user.nil? ? 200 : 403
     end
 
     def create
-      @invitation = current_account.invitations.new(invitation_params)
+      @invitation = current_account.invitations.find_or_initialize_by(invitation_params)
+      # If the invitation is sent anew, force update its updated_at timestamp. Otherwise (first-time created, do nothing)
+      @invitation.touch unless @invitation.new_record?
       respond_to do |format|
         if @invitation.save
           # Send out the email
           InvitationMailer.invite(@invitation).deliver_now
           format.js {render 'shared/ajax/create', locals: {resource: @invitation}}
           format.html do
-            flash[:success] = "#{@invitation.email} has been successfully invited."
+            flash[:success] = I18n.t "invitations.created.no_js_success", email: @invitation.email
             redirect_to users_path
           end
         else

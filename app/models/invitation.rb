@@ -4,6 +4,7 @@ class Invitation < ActiveRecord::Base
   # Otherwise we can skip this and the nested building in the spec and instead set belongs_to :account to optional
   accepts_nested_attributes_for :account
   before_create :generate_token
+  before_update :generate_token
   # If all else fails this comes from stack overflow
   # before_validation :generate_token, on: :create
   validates :email, presence: true, length: { maximum: 50 }

@@ -388,6 +388,7 @@ el:
     created:
       message: "Επιτυχία!"
       message_feedback: "Ο συνεργάτης σας θα λάβει άμεσα email με οδηγίες σύνδεσης στο %{brand}"
+      no_js_success: "Ο χρήστης %{email} έχει προσκληθεί επιτυχώς"
       return: "Επιστροφή"
       show: "Προβολή"
       edit: "Επεξεργασία"
@@ -398,7 +399,7 @@ el:
       support: "Παρακαλείσθε να επικοινωνήσετε με το τμήμα υποστήριξης"
     accept:
       title: "Αποδοχή πρόσκλησης"
-      subheading: "Αποδοχή πρόσκλησης"
+      subheading_html: "<u>Αποδοχή πρόσκλησης</u>. Εάν έχετε ήδη λογαριασμό χρήστη στο σύστημα, <a href='%{login_link}'>εισέλθετε</a>."
       subheading_feedback_html: "Σύνδεση με τον λογαριασμό: <mark><strong>%{account}</strong></mark>"
       accept_btn: "Αποδοχή"
   users:

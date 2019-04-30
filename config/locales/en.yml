@@ -390,6 +390,7 @@ en:
     created:
       message: "Success!"
       message_feedback: "Your partner will soon an email with instructions to connect %{brand}"
+      no_js_success: "User %{email} has been successfully invited"
       return: "Return"
       show: "Show"
       edit: "Edit"
@@ -400,7 +401,7 @@ en:
       support: "Please contact support"
     accept:
       title: "Accept invitation"
-      subheading: "Accept invitation"
+      subheading_html: "Accept invitation. If you already have an account, please <a href='%{login_link}'>login first</a>."
       subheading_feedback_html: "Connecting to account: <mark><strong>%{account}</strong></mark>"
       accept_btn: "Accept"
   users:
