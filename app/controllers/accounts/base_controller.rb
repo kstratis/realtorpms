@@ -1,6 +1,9 @@
 module Accounts
   class BaseController < ApplicationController
     include UserDatatable
+    include LocationFilter
+    include OwnerFilter
+
     # before_action :logged_in_user, :allowed_subdomains, only: [:index, :edit, :update, :destroy]
     before_action :logged_in_user, :allowed_subdomains
     after_action :store_referer_url, only: [:index, :edit, :update, :destroy]
@@ -31,7 +34,6 @@ module Accounts
     helper_method :owner?
 
     def logged_in_user
-      puts 'RUNNING'
       unless logged_in?
         store_location
         redirect_to login_url
@@ -44,7 +46,7 @@ module Accounts
 
     def allowed_subdomains
       subdomain_list = []
-      accounts = current_user.is_admin? ? Account.all : current_user.all_accounts
+      accounts = current_user.admin? ? Account.all : current_user.all_accounts
       accounts.each do |account|
         subdomain_list << account.subdomain
       end
@@ -53,7 +55,7 @@ module Accounts
         unless previous_subdomain == request.subdomain
           Account.find_by!(subdomain: request.subdomain)
           if subdomain_list.include? request.subdomain
-            flash.now[:success] = "You switched to the #{request.subdomain} organization"
+            flash.now[:success] = I18n.t "accounts.switch_domain", subdomain: request.subdomain
           else
             render_401 and return
           end

@@ -1,21 +1,28 @@
 <div class="center jumbotron pr-container">
 
+  <h1>This is a website screen. </h1>
+  <h1>Under construction</h1>
   <% if logged_in? %>
 
-      <p><strong>You are currently logged in as <u><%= current_user.email %></u></strong></p>
-      <% if @subdomain.blank? %>
-          <p><strong>Continue to the <%= link_to 'App', account_list_url%></strong></p>
-      <% else %>
-          <p><strong>Continue to the <%= link_to 'App', root_url(subdomain: @subdomain)%></strong></p>
-      <% end %>
+    <p><strong>You are currently logged in as <u><%= current_user.email %></u></strong></p>
+    <% if @subdomain.blank? %>
+      <p><strong>Continue to the <%= link_to 'App', account_list_url %></strong></p>
+    <% else %>
+      <p><strong>Continue to the <%= link_to 'App', root_url(subdomain: @subdomain) %></strong></p>
+    <% end %>
 
   <% else %>
 
-      <h1>Landia</h1>
-      <h2>Account action screen</h2>
-      <%= link_to 'Sign up now!', new_account_path, class: 'btn btn-lg btn-primary' %>
-      <%= link_to 'Login!', login_path, class: 'btn btn-lg btn-primary' %>
-
+    <h1><%= BRANDNAME %></h1>
+    <h2>Account action screen</h2>
+    <div class="row">
+      <div class="controls col-4 offset-4">
+        <div class="center">
+      <%= link_to 'Sign up now!', new_account_url(subdomain: nil), class: 'btn btn-lg btn-primary' %>
+      <%= link_to 'Login!', login_url(subdomain: nil), class: 'btn btn-lg btn-primary' %>
+        </div>
+      </div>
+    </div>
   <% end %>
 
 

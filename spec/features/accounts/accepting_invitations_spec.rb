@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'Accepting invitations' do
-  let(:account) { FactoryGirl.create(:account) }
+  let(:account) { FactoryBot.create(:account) }
   let(:invitation) do
     Invitation.create(account: account, email: 'test@example.com')
   end
@@ -44,7 +44,7 @@ feature 'Accepting invitations' do
     visit accept_link
     click_link 'Sign in as an existing user'
 
-    user2 = FactoryGirl.create(:user2)
+    user2 = FactoryBot.create(:user2)
     fill_in 'Email', with: user2.email
     fill_in 'Password', with: 'abc123'
     click_button 'Log in'

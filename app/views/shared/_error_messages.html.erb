@@ -1,7 +1,7 @@
 <% if locals[:model].errors.any? %>
   <div id="error_explanation">
     <div class="alert alert-danger">
-        The form contains <%= pluralize(locals[:model].errors.count, 'error') %>.
+        The form contains the following <%= pluralize(locals[:model].errors.count, 'error') %>.
     </div>
     <ul>
         <% locals[:model].errors.full_messages.each do |msg| %>

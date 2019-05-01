@@ -1,0 +1,45 @@
+<br>
+<div style="text-align:center">
+  <p style="font-family:Helvetica,Arial,sans-serif;font-size:18px;line-height:1.6;font-weight:normal;margin:0 0 20px;padding:0">
+    <strong><%= t('emails.welcome.tips') %></strong></p>
+</div>
+
+<table style="border-collapse:separate;border-spacing:0 1em">
+
+  <tbody>
+  <tr style="padding:50px 0">
+    <td style="font-family:Helvetica,Arial,sans-serif;font-size:14px;line-height:1.6;font-weight:normal;margin:0 0 10px 30px;padding:0;text-align:right">
+      <img style="display:inline-block;width:69px;height:auto">
+    </td>
+    <td style="font-family:Helvetica,Arial,sans-serif;font-size:14px;line-height:1.6;font-weight:normal;margin:0 0 10px 30px;padding:0 0 0 15px;text-align:left">
+      <span><b><%= t('emails.welcome.tip1_title') %></b> <%= t('emails.welcome.tip1_body') %></span>
+    </td>
+  </tr>
+  <tr style="padding:50px 0">
+    <td style="font-family:Helvetica,Arial,sans-serif;font-size:14px;line-height:1.6;font-weight:normal;margin:0 0 10px 30px;padding:0;text-align:right">
+      <img style="display:inline-block;width:69px;height:auto">
+    </td>
+    <td style="font-family:Helvetica,Arial,sans-serif;font-size:14px;line-height:1.6;font-weight:normal;margin:0 0 10px 30px;padding:0 0 0 15px;text-align:left">
+      <span><b><%= t('emails.welcome.tip2_title') %></b> <%= t('emails.welcome.tip2_body') %></span>
+    </td>
+  </tr>
+  <tr style="padding:50px 0">
+    <td style="font-family:Helvetica,Arial,sans-serif;font-size:14px;line-height:1.6;font-weight:normal;margin:0 0 10px 30px;padding:0;text-align:right">
+      <img style="display:inline-block;width:69px;height:auto">
+    </td>
+    <td style="font-family:Helvetica,Arial,sans-serif;font-size:14px;line-height:1.6;font-weight:normal;margin:0 0 10px 30px;padding:0 0 0 15px;text-align:left">
+      <span><b><%= t('emails.welcome.tip3_title') %></b> <%= t('emails.welcome.tip3_body') %></span>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<p style="font-family:Helvetica,Arial,sans-serif;font-size:14px;line-height:1.6;font-weight:normal;margin:0 0 30px;padding:0"><%= t('emails.welcome.support') %> <%= mail_to SUPPORT_MAIL %></p>
+
+<br>
+
+<div style="text-align:center">
+  <p style="font-family:Helvetica,Arial,sans-serif;font-size:14px;line-height:1.6;font-weight:normal;margin:50px 0 0 0;padding:0;color:#acacac">©
+    <a href="<% root_url %>" target="_blank"><%= BRANDNAME.upcase %></a>.
+    <%= t('sessions.rights') %></p>
+</div>

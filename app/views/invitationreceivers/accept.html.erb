@@ -1,18 +1,38 @@
-<div class='row'>
-  <div class='content col-md-offset-2 col-md-8'>
-    <h2>Accepting an invitation</h2>
+<% provide(:title, t('invitations.accept.title')) %>
 
-    <p>You are accepting an invitation to join the <%= @invitation.account.subdomain %> account.</p>
-
-
+<% content_for :heading do %>
+  <div>
     <% if !logged_in? %>
-        <%= render 'anonymous_accept' %>
+      <p> <%= t('invitations.accept.subheading_html', login_link: login_url) %> </p>
+      <p><%= t('invitations.accept.subheading_feedback_new_user_html', account: @invitation.account.subdomain) %></p>
     <% else %>
-        <%= render 'user_accept' %>
+      <p><%= t('invitations.accept.subheading_feedback_html', account: @invitation.account.subdomain) %></p>
     <% end %>
-
-
-
-
   </div>
-</div>
+<% end %>
+
+<% content_for :content do %>
+  <% if !logged_in? %>
+    <%= render 'anonymous_accept' %>
+  <% else %>
+    <%= render 'user_accept' %>
+  <% end %>
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,31 @@
+<div id="form-success">
+  <div class="card">
+    <!-- .card-header -->
+    <div class="card-header">
+      <div><h2><%= t "#{locals[:resource].class.to_s.downcase.pluralize}.created.message" %></h2></div>
+      <div>
+        <h3><%= t "#{locals[:resource].class.to_s.downcase.pluralize}.created.message_feedback", brand: BRANDNAME.capitalize %></h3>
+      </div>
+      <div class="d-flex justify-content-center">
+        <i class="pr-icon sm checkmark"> </i>
+      </div>
+      <div class="row d-flex justify-content-center mt-2">
+        <div class="btn-group" role="group">
+          <% if locals[:resource].class.to_s.downcase == 'invitation' %> <!-- Case 1: Invitations -->
+            <%= link_to t("#{locals[:resource].class.to_s.downcase.pluralize}.created.add_another"),
+                        Rails.application.routes.url_helpers.send("new_#{locals[:resource].class.to_s.downcase}_path"), class: 'btn btn-primary' %>
+            <%= link_to t("users.created.list"),
+                        Rails.application.routes.url_helpers.send("users_path"), class: 'btn btn-warning' %>
+          <% else %> <!-- Case 1: General case -->
+            <%= link_to t("#{locals[:resource].class.to_s.downcase.pluralize}.created.show"),
+                        Rails.application.routes.url_helpers.send("#{locals[:resource].class.to_s.downcase}_path", locals[:resource]), class: 'btn btn-success' %>
+            <%= link_to t("#{locals[:resource].class.to_s.downcase.pluralize}.created.edit"),
+                        Rails.application.routes.url_helpers.send("edit_#{locals[:resource].class.to_s.downcase}_path", locals[:resource]), class: 'btn btn-warning' %>
+            <%= link_to t("#{locals[:resource].class.to_s.downcase.pluralize}.created.add_another"),
+                        Rails.application.routes.url_helpers.send("new_#{locals[:resource].class.to_s.downcase}_path"), class: 'btn btn-primary' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

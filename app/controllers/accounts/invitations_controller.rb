@@ -1,36 +1,44 @@
 module Accounts
   class InvitationsController < Accounts::BaseController
-    # skip_before_action :logged_in_user, :correct_subdomain, only: [:accept, :accepted]
-    # skip_before_action :logged_in_user, only: [:accept, :accepted]
-    # before_action :authorize_owner!, except: [:accept, :accepted]
     before_action :authorize_owner!
 
     def new
       @invitation = Invitation.new
     end
 
-    def create
-      # @invitation = current_account.invitations.new(invitation_params)
-      # @invitation.save
-      # InvitationMailer.invite(@invitation).deliver_later
-      # flash[:notice] = "#{@invitation.email} has been invited."
-      # redirect_to root_path
+    # Make sure the user an account owner is inviting is not already a member of his domain
+    def check_existing_user
+      user = current_account.all_users.find_by(email: params[:email])
+      render json: {status: "Checked" }, status: user.nil? ? 200 : 403
+    end
 
-      @invitation = current_account.invitations.new(invitation_params)
-      if @invitation.save
-        # This actually sends out the email
-        InvitationMailer.invite(@invitation).deliver_now
-        flash[:success] = "#{@invitation.email} has been successfully invited."
-        redirect_to users_path
-      else
-        # this merely re-renders the new template.
-        # It doesn't fully redirect (in other words it doesn't go through the +new+ method)
-        flash.now[:danger] = 'Invalid email' # Not quite right!
-        render 'new'
+    def create
+      @invitation = current_account.invitations.find_or_initialize_by(invitation_params)
+      # If the invitation is sent anew, force update its updated_at timestamp. Otherwise (first-time created, do nothing)
+      @invitation.touch unless @invitation.new_record?
+      respond_to do |format|
+        if @invitation.save
+          # Send out the email
+          InvitationMailer.invite(@invitation).deliver_now
+          format.js {render 'shared/ajax/create', locals: {resource: @invitation}}
+          format.html do
+            flash[:success] = I18n.t "invitations.created.no_js_success", email: @invitation.email
+            redirect_to users_path
+          end
+        else
+          format.js {render 'shared/ajax/create', locals: {resource: @invitation}}
+          format.html do
+            flash.now[:danger] = I18n.t "accounts.switch_domain", subdomain: request.subdomain
+            render :new
+          end
+
+        end
       end
     end
 
     private
+
+      # Only account owners may invite users
       def authorize_owner!
         unless owner?
           flash[:danger] = 'Only an account\'s owner can perform such action.'
@@ -42,5 +50,5 @@ module Accounts
         params.require(:invitation).permit(:email)
       end
 
-    end
   end
+end

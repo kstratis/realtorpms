@@ -1,22 +1,19 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const Search = ({searchInput, handleSearchInput, i18n}) => {
-
+const Search = ({ searchInput, handleSearchInput, placeholder }) => {
   return (
-    <div className="col-md-6 col-md-offset-3">
-      <div className="input-group user-search">
-        <input type="text"
-               className="form-control input-lg glowing-border"
-               placeholder={i18n['search']['placeholder']}
-               aria-describedby="basic-addon1"
-               value={searchInput}
-               onChange={handleSearchInput} />
-        <span className="input-group-btn">
-          <button className="btn btn-primary btn-custom" type="button">
-            <i className="glyphicon glyphicon-search"> </i>
-          </button>
-        </span>
+    <div className="col col-md-6">
+      <div className="user-search justify-content-center flex-fill">
+        <input
+          type="search"
+          className="form-control"
+          placeholder={placeholder}
+          aria-describedby="Client search"
+          aria-label="Client search"
+          value={searchInput}
+          onChange={handleSearchInput}
+        />
       </div>
     </div>
   );
@@ -24,7 +21,8 @@ const Search = ({searchInput, handleSearchInput, i18n}) => {
 
 Search.propTypes = {
   searchInput: PropTypes.string.isRequired,
-  handleSearchInput: PropTypes.func.isRequired
+  handleSearchInput: PropTypes.func.isRequired,
+  placeholder: PropTypes.string.isRequired
 };
 
 export default Search;

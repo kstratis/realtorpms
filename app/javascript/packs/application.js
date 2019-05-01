@@ -7,9 +7,11 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
-import { start } from '../bundles/activestorageModifiedv52rc1/index';
-import * as uploader from '../bundles/uploaders/uppy_uploader';
+import * as uploader from '../bundles/uploaders/uppy_controller';
+import flatpickr from "flatpickr";
+import { Greek } from "flatpickr/dist/l10n/gr.js"
+import * as CustomActiveStorage from '../bundles/uploaders/custom_active_storage';
 
 $(document).on('turbolinks:load', function(e) {
-  start();
+  if ($(".emitters").length > 0) CustomActiveStorage.start()
 });

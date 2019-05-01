@@ -1,5 +1,5 @@
 module UserDatatable
-  def print_users
+  def filter_users
     if params[:page]
       param = Integer(params[:page]) rescue nil
       unless param.is_a? Integer
@@ -7,7 +7,7 @@ module UserDatatable
       end
     end
 
-    @users = User.all
+    @users = current_account.users
 
     if params[:search]
       @users = @users.search(params[:search])
@@ -66,6 +66,7 @@ module UserDatatable
     @total_entries = @users.total_entries
     @current_page = @users.current_page
     @results_per_page = 10
+
     @initial_search = params[:search] || ''
     @initial_sorting = params[:sorting] || 'created_at'
     @initial_ordering = params[:ordering] || 'desc'

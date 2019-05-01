@@ -1,9 +1,10 @@
 class Invitation < ActiveRecord::Base
   belongs_to :account
-  # So that in +invitation_spec.rb+ we can also create the appropriate account along with the test email invitation.
-  # Otherwise we can skip this and the nested building in the spec and instead set belongs_to :account to optional
   accepts_nested_attributes_for :account
+  # When creating an invite generate a token
   before_create :generate_token
+  # If you resend the invite, re-generate the token
+  before_update :generate_token
   # If all else fails this comes from stack overflow
   # before_validation :generate_token, on: :create
   validates :email, presence: true, length: { maximum: 50 }

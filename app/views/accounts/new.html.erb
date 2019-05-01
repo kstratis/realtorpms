@@ -1,51 +1,85 @@
-<% provide(:title, 'User Registration') %>
-<div class="center pr-signup-container pr-container">
+<% provide(:title, t('accounts.signup_title')) %>
 
-  <i class="pr-icon sm add-user-colored"></i>
-  <span class="title">Signup</span>
-
-  <div class="row">
-    <div class="col-md-12">
-      <div class="pr-form-container">
-        <%= form_for(@account) do |account| %>
-            <%= render 'shared/error_messages', locals: {model: @account} %>
-
-            <%# This is the account name %>
-            <%= account.label :subdomain %>
-            <%= account.text_field :subdomain, placeholder: 'i.e. myportal', class: 'glowing-border' %>
-            <%= inline_error @account, :subdomain, 'Subdomain'%>
-
-            <%# This is for the nested user fields %>
-            <%= account.fields_for :owner do |owner| %>
-              <%= owner.label :first_name %>
-              <%= owner.text_field :first_name, placeholder: 'i.e. John', class: 'glowing-border' %>
-              <%= inline_error @account.owner, :first_name, 'First name'%>
-
-              <%= owner.label :last_name %>
-              <%= owner.text_field :last_name, placeholder: 'i.e. Doe', class: 'glowing-border' %>
-              <%= inline_error @account.owner, :last_name, 'Last name'%>
-
-              <%= owner.label :email %>
-              <%= owner.email_field :email, placeholder: 'i.e. jdoe@example.com', class: 'glowing-border' %>
-              <%= inline_error @account.owner, :email, 'Email'%>
-
-              <%= owner.label :password %>
-              <%= owner.password_field :password, placeholder: 'Please use at least 6 characters', class: 'glowing-border' %>
-              <%= inline_error @account.owner, :password, 'Password'%>
-
-              <%= owner.label :password_confirmation, 'Password confirmation' %>
-              <%= owner.password_field :password_confirmation, placeholder: 'Retype your password', class: 'glowing-border' %>
-              <%= inline_error @account.owner, :password_confirmation, 'Password confirmation'%>
-            <% end %>
-
-            <%= account.submit 'Create account', class: 'btn btn-primary' %>
-        <% end %>
-      </div>
-    </div>
+<% content_for :heading do %>
+  <div>
+    <p> <%= t('sessions.existing_account') %> <%= link_to t('sessions.sign_in_now'), login_url(subdomain: false) %></p>
   </div>
-</div>
+<% end %>
+
+<% content_for :content do %>
+
+  <%= form_for(@account, html: {class: 'auth-form'}) do |account_builder| %>
+    <%#= render 'shared/error_messages', locals: {model: @account} %>
+
+    <div class="form-group">
+      <div class="input-group input-group-alt">
+        <%= account_builder.text_field :subdomain, class: 'form-control prepended-label-fix', placeholder: Account.human_attribute_name("subdomain") %>
+        <div class="input-group-append">
+          <span class="input-group-text">.<%= BRANDNAME %>.com</span>
+        </div>
+      </div><!-- /.input-group -->
+      <%= inline_error @account, :subdomain, 'Subdomain' %>
+    </div><!-- /.form-group -->
+
+    <%# This is for the nested user fields %>
+    <%= account_builder.fields_for :owner do |owner| %>
+
+      <!-- .form-group -->
+      <div class="form-group">
+        <div class="form-label-group">
+          <%= owner.text_field :first_name, class: 'form-control', placeholder: User.human_attribute_name("first_name") %>
+          <%= owner.label :first_name, User.human_attribute_name("first_name") %>
+          <%= inline_error @account.owner, :first_name, 'First name' %>
+        </div>
+      </div>
+      <!-- /.form-group -->
 
 
+      <!-- .form-group -->
+      <div class="form-group">
+        <div class="form-label-group">
+          <%= owner.text_field :last_name, class: 'form-control', placeholder: User.human_attribute_name("last_name") %>
+          <%= owner.label :last_name, User.human_attribute_name("last_name") %>
+          <%= inline_error @account.owner, :last_name, 'Last name' %>
+        </div>
+      </div>
+      <!-- /.form-group -->
 
 
+      <!-- .form-group -->
+      <div class="form-group">
+        <div class="form-label-group">
+          <%= owner.email_field :email, class: 'form-control', placeholder: User.human_attribute_name("email") %>
+          <%= owner.label "email", User.human_attribute_name("email") %>
+          <%= inline_error @account.owner, :email, 'Email' %>
+        </div>
+      </div>
+      <!-- /.form-group -->
 
+      <!-- .form-group -->
+      <div class="form-group">
+        <div class="form-label-group">
+          <%= owner.password_field :password, class: 'form-control', placeholder: User.human_attribute_name("password") %>
+          <%= owner.label :password, User.human_attribute_name("password") %>
+          <%= inline_error @account.owner, :password, 'Password' %>
+        </div>
+      </div>
+      <!-- /.form-group -->
+
+      <!-- .form-group -->
+      <div class="form-group">
+        <div class="form-label-group">
+          <%= owner.password_field :password_confirmation, class: 'form-control', placeholder: User.human_attribute_name("password_confirmation") %>
+          <%= owner.label :password_confirmation, User.human_attribute_name("password_confirmation") %>
+          <%= inline_error @account.owner, :password_confirmation, 'Password confirmation' %>
+        </div>
+      </div>
+      <!-- /.form-group -->
+
+    <% end %>
+
+    <%= account_builder.submit t('accounts.signup_button'), class: 'btn btn-primary' %>
+
+  <% end %>
+
+<% end %>

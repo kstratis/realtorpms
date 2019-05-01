@@ -4,14 +4,14 @@ require 'rails_helper'
 # assigned properties field
 
 feature 'Listing resources', js: true do
-  let(:account) { FactoryGirl.create(:account) }
+  let(:account) { FactoryBot.create(:account) }
   # This is 5 regular users plus the account owner
-  let(:userList) { FactoryGirl.create_list(:usersequence, 5) }
+  let(:userList) { FactoryBot.create_list(:usersequence, 5) }
   # the propertyList sequence will  continue in parallel even if not user.
   # This means that for the first +it+ 0-50 property ids will be given. In the
   # third +it+ where we actually need the property list the ids range will have reached
   # the 100-150.
-  let(:propertyList) { FactoryGirl.create_list(:propertysequence, 50) }
+  let(:propertyList) { FactoryBot.create_list(:propertysequence, 50) }
 
   # This before block runs before each and every +it+ therefore if we have say 3 +it+
   # tests the user id will reach 150 (thanks to +userList.map { |user| account.users << user}+)

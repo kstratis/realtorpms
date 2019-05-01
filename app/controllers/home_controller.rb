@@ -1,13 +1,15 @@
 class HomeController < ApplicationController
-
-  layout 'website/skeleton'  # show the barebones version only when signing up/in
+  # render :action => 'accounts', :layout => 'auth/skeleton'
+  # layout 'auth/skeleton', only: [:accounts]  # show the barebones version only when signing up/in
+  # layout 'website/skeleton'
 
   def index
     @subdomain = nil
+    render :layout => 'website/skeleton'
     # if logged_in?
     #   if current_user.accounts.count == 0
         # exclude the admin case who may not have a linked account
-        # unless current_user.is_admin?
+        # unless current_user.admin?
         #   @subdomain = Account.find_by(owner_id: current_user.id).subdomain
         # end
       # end
@@ -20,13 +22,18 @@ class HomeController < ApplicationController
     if request.subdomain.blank?
       redirect_to root_url(subdomain: nil)
     else
-      flash[:success] = "You are now signed in to #{request.subdomain}."
+      flash[:success] = I18n.t 'accounts.switch_info'
       redirect_to account_root_url(subdomain: request.subdomain)
     end
   end
 
   def accounts
-    @accounts = current_user.is_admin? ? Account.all : current_user.all_accounts
+    return redirect_to root_url(subdomain: nil) if current_user.nil?
+    # @accounts = current_user.admin? ? Account.all : current_user.all_accounts
+    # @properties = @properties.paginate(page: params[:page], :per_page => 10)
+    # byebug
+    @accounts = current_user.admin? ? Account.all.paginate(page: params[:page], :per_page => 25) : current_user.all_accounts.paginate(page: params[:page], :per_page => 25)
+    render :layout => 'auth/skeleton'
   end
 
 

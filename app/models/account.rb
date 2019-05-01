@@ -1,5 +1,5 @@
 class Account < ApplicationRecord
-  belongs_to :owner, class_name: 'User', optional: true
+  belongs_to :owner, class_name: 'User'
   accepts_nested_attributes_for :owner
   validates :subdomain, presence: true, length: { maximum: 20 }, uniqueness: true
 
@@ -8,12 +8,16 @@ class Account < ApplicationRecord
   # Originally had these 2 lines
   has_many :memberships
   has_many :users, through: :memberships, dependent: :destroy
+  validates_associated :owner
 
-  # which I replaced with this line
-  # has_many :users
+  # Returns all account users including the owner of the account
+  # Uses the active_record_union gem
+  def all_users
+    # Used to be:
+    # users.joins(:accounts).where(accounts: {owner_id: user.id})
+    users.union(User.where(id: owner.id))
+  end
 
-
-  # These basically are class methods
   class << self
 
     # Returns the registered subdomain
@@ -26,7 +30,7 @@ class Account < ApplicationRecord
 
     def subdomain_exists?(requested_subdomain)
       subdomain = self.find_by(subdomain: requested_subdomain)
-      return true if subdomain else false
+      !!subdomain
     end
   end
 end

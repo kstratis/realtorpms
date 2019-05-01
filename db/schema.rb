@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_31_200830) do
+ActiveRecord::Schema.define(version: 2019_04_30_102333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,27 @@ ActiveRecord::Schema.define(version: 2018_03_31_200830) do
     t.string "continent"
   end
 
+  create_table "extras", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "subtype"
+  end
+
+  create_table "extras_properties", id: false, force: :cascade do |t|
+    t.bigint "extra_id", null: false
+    t.bigint "property_id", null: false
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "property_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["property_id"], name: "index_favorites_on_property_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
   create_table "invitations", force: :cascade do |t|
     t.string "email"
     t.bigint "account_id"
@@ -76,6 +97,7 @@ ActiveRecord::Schema.define(version: 2018_03_31_200830) do
     t.datetime "updated_at", null: false
     t.string "token"
     t.index ["account_id"], name: "index_invitations_on_account_id"
+    t.index ["email", "account_id"], name: "index_invitations_on_email_and_account_id", unique: true
     t.index ["token"], name: "index_invitations_on_token"
   end
 
@@ -98,8 +120,18 @@ ActiveRecord::Schema.define(version: 2018_03_31_200830) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["account_id", "user_id"], name: "index_memberships_on_account_id_and_user_id", unique: true
     t.index ["account_id"], name: "index_memberships_on_account_id"
     t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
+  create_table "owners", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "telephones"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "properties", force: :cascade do |t|
@@ -112,57 +144,60 @@ ActiveRecord::Schema.define(version: 2018_03_31_200830) do
     t.integer "renovation"
     t.integer "bedrooms"
     t.integer "bathrooms"
-    t.boolean "awnings"
-    t.boolean "without_elevator"
-    t.boolean "clima"
-    t.boolean "security_door"
-    t.boolean "pool"
-    t.boolean "without_property_charges"
-    t.boolean "fit_for_professional_use"
-    t.boolean "parking"
-    t.boolean "balconies"
-    t.boolean "storage_room"
-    t.boolean "garden"
-    t.integer "orientation"
-    t.integer "view"
-    t.integer "heating"
-    t.boolean "gas"
-    t.boolean "solar_heating"
-    t.boolean "furnitures"
-    t.boolean "fit_for_students"
-    t.boolean "fireplace"
     t.integer "user_id"
     t.bigint "account_id"
-    t.integer "location_id"
     t.integer "category"
     t.integer "subcategory"
     t.integer "businesstype"
+    t.integer "floor"
+    t.integer "levels"
+    t.datetime "availability"
+    t.bigint "location_id"
+    t.string "title"
+    t.string "roofdeck_space"
+    t.string "storage_space"
+    t.string "garden_space"
+    t.string "plot_space"
+    t.string "notes"
+    t.string "adxe"
+    t.string "adspitogatos"
+    t.string "address"
+    t.integer "favorites_count"
+    t.bigint "owner_id"
     t.index ["account_id"], name: "index_properties_on_account_id"
+    t.index ["location_id"], name: "index_properties_on_location_id"
+    t.index ["owner_id"], name: "index_properties_on_owner_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email"
+    t.string "email", null: false
     t.string "first_name"
     t.string "last_name"
-    t.integer "age"
     t.string "phone1"
     t.string "phone2"
     t.string "office_branch"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "password_digest"
     t.string "remember_digest"
     t.boolean "admin", default: false
     t.string "locale"
+    t.string "password_digest"
+    t.string "reset_digest"
+    t.datetime "reset_sent_at"
+    t.date "dob"
+    t.string "color"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "assignments", "properties"
   add_foreign_key "assignments", "users"
+  add_foreign_key "favorites", "properties"
+  add_foreign_key "favorites", "users"
   add_foreign_key "invitations", "accounts"
   add_foreign_key "locations", "countries"
   add_foreign_key "memberships", "accounts"
   add_foreign_key "memberships", "users"
   add_foreign_key "properties", "accounts"
   add_foreign_key "properties", "locations"
+  add_foreign_key "properties", "owners"
 end

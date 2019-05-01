@@ -1,7 +1,7 @@
 $(document).on('turbolinks:load', function(e) {
   var randomdate = Date.now();
   var uploadErrorExists = false;
-  addEventListener("direct-upload:initialize", function(event) {
+  addEventListener('direct-upload:initialize', function(event) {
     var file = event.detail.file;
     window.uppy_uploader.emit('upload-started', window.uppy_uploader.getState().files[file.id], {
       uploader: 'activestorage',
@@ -10,11 +10,11 @@ $(document).on('turbolinks:load', function(e) {
     });
   });
 
-  addEventListener("direct-upload:start", function(event) {
+  addEventListener('direct-upload:start', function(event) {
     var id = event.detail.id;
   });
 
-  addEventListener("direct-upload:progress", function(event) {
+  addEventListener('direct-upload:progress', function(event) {
     var file = event.detail.file;
     var bytesUploaded = event.detail.bytesUploaded;
     window.uppy_uploader.emit('upload-progress', window.uppy_uploader.getState().files[file.id], {
@@ -26,7 +26,7 @@ $(document).on('turbolinks:load', function(e) {
     });
   });
 
-  addEventListener("direct-upload:error", function(event) {
+  addEventListener('direct-upload:error', function(event) {
     event.preventDefault();
     var file = event.detail.file;
     var error = event.detail.error;
@@ -45,11 +45,13 @@ $(document).on('turbolinks:load', function(e) {
     // element.setAttribute("title", error)
   });
 
-  addEventListener("direct-upload:end", function(event) {
+  addEventListener('direct-upload:end', function(event) {
     var file = event.detail.file;
     if (!uploadErrorExists) {
-      window.uppy_uploader.emit('upload-success', window.uppy_uploader.getState().files[file.id], {message: 'Completed Successfully'});
-    } else{
+      window.uppy_uploader.emit('upload-success', window.uppy_uploader.getState().files[file.id], {
+        message: 'Completed Successfully'
+      });
+    } else {
       errorExists = false;
       var swalDomNode = $('#swal');
       var swalTranslations = swalDomNode.data('i18n').swal;
@@ -57,7 +59,7 @@ $(document).on('turbolinks:load', function(e) {
         type: 'error',
         title: swalTranslations.file_upload_fail_title,
         text: swalTranslations.file_upload_fail_body
-      }).then(function(result){
+      }).then(function(result) {
         // The parameter set to 'true' reloads a fresh copy from the server.
         // Leaving it out will serve the page from cache.
         window.location.reload(true);

@@ -1,34 +1,57 @@
-<p>
-  <%= link_to 'Sign in as an existing user', login_path %>
-</p>
+<%= form_for(@invitation, as: :user, url: :accepted_invitation, html: {class: 'auth-form'}) do |inv| %>
 
-<hr>
+  <%= fields_for @user do |u| %>
+    <!-- .form-group -->
+    <div class="form-group">
+      <div class="form-label-group">
+        <%= u.email_field :email, class: 'form-control', placeholder: User.human_attribute_name("email"), value: @invitation.email, readonly: true %>
+        <%= u.label "email", User.human_attribute_name("email") %>
+        <%= inline_error @user, :email, 'Email' %>
+      </div>
+    </div>
+    <!-- /.form-group -->
 
-<p>
-  <h3>Sign up as a new user</h3>
-</p>
+    <!-- .form-group -->
+    <div class="form-group">
+      <div class="form-label-group">
+        <%= u.text_field :first_name, class: 'form-control', placeholder: User.human_attribute_name("first_name") %>
+        <%= u.label :first_name, User.human_attribute_name("first_name") %>
+        <%= inline_error @user, :first_name, 'First name' %>
+      </div>
+    </div>
+    <!-- /.form-group -->
 
-<p>Sign up as a new user</p>
+    <!-- .form-group -->
+    <div class="form-group">
+      <div class="form-label-group">
+        <%= u.text_field :last_name, class: 'form-control', placeholder: User.human_attribute_name("last_name") %>
+        <%= u.label :last_name, User.human_attribute_name("last_name") %>
+        <%= inline_error @user, :last_name, 'Last name' %>
+      </div>
+    </div>
+    <!-- /.form-group -->
 
-<%= form_for(@invitation, as: :user, url: :accepted_invitation) do |inv| %>
+    <!-- .form-group -->
+    <div class="form-group">
+      <div class="form-label-group">
+        <%= u.password_field :password, class: 'form-control', placeholder: User.human_attribute_name("password") %>
+        <%= u.label :password, User.human_attribute_name("password") %>
+        <%= inline_error @user, :password, 'Password' %>
+      </div>
+    </div>
+    <!-- /.form-group -->
 
-    <%= fields_for @user do |f| %>
-        <%= f.label :email %>
-        <%= f.email_field :email, class: 'glowing-border', value: @invitation.email %>
+    <!-- .form-group -->
+    <div class="form-group">
+      <div class="form-label-group">
+        <%= u.password_field :password_confirmation, class: 'form-control', placeholder: User.human_attribute_name("password_confirmation") %>
+        <%= u.label :password_confirmation, User.human_attribute_name("password_confirmation") %>
+        <%= inline_error @user, :password_confirmation, 'Password confirmation' %>
+      </div>
+    </div>
+    <!-- /.form-group -->
+  <% end %>
 
-        <%= f.label :first_name %>
-        <%= f.text_field :first_name, placeholder: 'i.e. John', class: 'glowing-border' %>
-
-        <%= f.label :last_name %>
-        <%= f.text_field :last_name, placeholder: 'i.e. Doe', class: 'glowing-border' %>
-
-        <%= f.label :password %>
-        <%= f.password_field :password, placeholder: 'Please use at least 6 characters', class: 'glowing-border' %>
-
-        <%= f.label :password_confirmation, 'Password confirmation' %>
-        <%= f.password_field :password_confirmation, placeholder: 'Retype your password', class: 'glowing-border' %>
-    <% end %>
-
-    <%= inv.submit 'Accept Invitation', class: 'btn btn-primary' %>
+  <%= inv.submit t('invitations.accept.accept_btn'), class: 'btn btn-primary' %>
 
 <% end %>

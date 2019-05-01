@@ -1,18 +1,10 @@
 import ReactOnRails from 'react-on-rails';
 
-// import HelloWorld from '../bundles/datatables/components/HelloWorld';
 import UsersListWithDatatable from '../bundles/datatables/UsersList';
 import UsersListAssignableWithDatatable from '../bundles/datatables/UsersListAssignable';
 import PropertiesListWithDatatable from '../bundles/datatables/PropertiesList';
 import SimpleSelect from '../bundles/components/SimpleSelect';
 import DependantSelect from '../bundles/components/DependantSelect';
-
-
-// import { addLocaleData } from 'react-intl';
-// import en from 'react-intl/locale-data/en';
-// import gr from 'react-intl/locale-data/p';
-
-// addLocaleData([...en]);
 
 // This is how react_on_rails can see the HelloWorld in the browser.
 ReactOnRails.register({
@@ -22,5 +14,4 @@ ReactOnRails.register({
   PropertiesListWithDatatable,
   SimpleSelect,
   DependantSelect
-  // PropertyType
 });

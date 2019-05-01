@@ -14,6 +14,8 @@
 User.create!(first_name: 'Konstantinos',
              last_name: 'Stratis',
              email: 'konos5@gmail.com',
+             phone1: '6972500361',
+             dob: Date.new(1986, 4, 5),
              password: '989492ks',
              password_confirmation: '989492ks',
              admin: true)
@@ -21,6 +23,8 @@ User.create!(first_name: 'Konstantinos',
 User.create!(first_name: 'Tony',
              last_name: 'Stark',
              email: 'tstark@gmail.com',
+             phone1: '6945567345',
+             dob: Date.new(1976, 2, 3),
              password: 'abc123',
              password_confirmation: 'abc123',
              admin: false)
@@ -28,6 +32,8 @@ User.create!(first_name: 'Tony',
 User.create!(first_name: 'Hulk',
              last_name: 'Hogan',
              email: 'hh@gmail.com',
+             phone1: '6935567342',
+             dob: Date.new(1980, 4, 1),
              password: 'abc123',
              password_confirmation: 'abc123',
              admin: false)
@@ -35,6 +41,8 @@ User.create!(first_name: 'Hulk',
 User.create!(first_name: 'Johny',
              last_name: 'Mnemonic',
              email: 'jm@gmail.com',
+             phone1: '6901560342',
+             dob: Date.new(1969, 12, 17),
              password: 'abc123',
              password_confirmation: 'abc123',
              admin: false)
@@ -57,11 +65,14 @@ Account.create!(
     owner: User.fourth
 )
 
-l1 = Location.find_by(area_id: 106314)
-l2 = Location.find_by(area_id: 117003)
-l3 = Location.find_by(area_id: 106289)
+l1 = Location.find_by(area_id: 106314) # Lamprini - Galatsi
+l2 = Location.find_by(area_id: 117003) # Palatiani - Ilion
+l3 = Location.find_by(area_id: 106289) # Perissos - N.Ionia
 
-# Special shakalaka users
+# ---------------------------------------------------------
+
+# 2 memorable shakalaka users
+# -------------------------
 specialuser1 = User.create!(first_name: 'Will',
                             last_name: 'Smith',
                             email: 'wm@gmail.com',
@@ -75,16 +86,17 @@ specialuser2 = User.create!(first_name: 'John',
                             password: 'abc123',
                             password_confirmation: 'abc123',
                             admin: false)
-
-# Special bluedomain user
+# -------------------------
+#
+# 1 memorable bluedomain user
 specialuser3 = User.create!(first_name: 'Lakis',
-last_name: 'Gavalas',
-    email: 'lg@gmail.com',
-    password: 'abc123',
-    password_confirmation: 'abc123',
-    admin: false)
+                            last_name: 'Gavalas',
+                            email: 'lg@gmail.com',
+                            password: 'abc123',
+                            password_confirmation: 'abc123',
+                            admin: false)
 
-# ------------------------------------------------------------
+# ----------------------------------------------------------
 
 shakalaka = Account.find_by(subdomain: 'shakalaka')
 bluedomain = Account.find_by(subdomain: 'bluedomain')
@@ -92,13 +104,15 @@ bluedomain = Account.find_by(subdomain: 'bluedomain')
 shakalaka.users << specialuser1
 shakalaka.users << specialuser2
 bluedomain.users << specialuser3
+shakalaka.users << User.fourth
 
-
+# 99 fake users for shakalaka account
 99.times do |n|
   first_name = Faker::Name.first_name
-
   last_name = Faker::Name.last_name
-  email = "user-#{n+1}@gmail.com"
+  email = "user-#{n + 1}@gmail.com"
+  dob = rand(10.years).seconds.ago
+  phone1 = "69#{rand(0..9)}76548#{rand(0..9)}#{rand(0..9)}"
   password = 'abc123'
   user = User.create!(first_name: first_name,
                       last_name: last_name,
@@ -108,41 +122,65 @@ bluedomain.users << specialuser3
   shakalaka.users << user
 end
 
+# --------------------------------------
+# Lets create some fake property owners
+# 20.times do |n|
+  # first_name = Faker::Name.first_name
+  # last_name = Faker::Name.last_name
+  # email = "owner-#{n + 1}@gmail.com"
+  # telephones = Faker::PhoneNumber.phone_number
+
+  # propery_owner = Owner.create!(first_name: Faker::Name.first_name,
+  #                               last_name: Faker::Name.last_name,
+  #                               email: "owner-#{n + 1}@gmail.com",
+  #                               telephones: Faker::PhoneNumber.phone_number)
+  # shakalaka.users << property_owner
+# end
+
+
+
 smithuser = shakalaka.users.find_by(email: 'wm@gmail.com')
 
+# 20 Fake properties belonging to specialuser1 (shakalaka account)
 20.times do |n|
-  description = Faker::HitchhikersGuideToTheGalaxy.location
-  size = Faker::Number.number(3)
-  price = Faker::Number.number(6)
   property = Property.create!(
+      title: Faker::SiliconValley.motto,
+      description: Faker::SiliconValley.quote,
       businesstype: 'sell',
       category: 'residential',
       subcategory: 'apartment',
-      size: size,
-      price: price,
+      size: Faker::Number.number(3),
+      price: Faker::Number.number(6),
       account: shakalaka,
-      location: l1
+      location: l1,
+      owner: Owner.create!(first_name: Faker::Name.first_name,
+                           last_name: Faker::Name.last_name,
+                           email: Faker::SiliconValley.email,
+                           telephones: Faker::PhoneNumber.phone_number)
   )
-
   smithuser.properties << property
 end
 
+# specialuser3 belonging to the bluedomain account
 lguser = bluedomain.users.find_by(email: 'lg@gmail.com')
 
+# 5 fake properties belonging to specialuser3 (bluedomain account)
 5.times do |n|
-  description = Faker::HitchhikersGuideToTheGalaxy.location
-  size = Faker::Number.number(3)
-  price = Faker::Number.number(6)
   property = Property.create!(
+      title: Faker::Lorem.word,
+      description: Faker::Lorem.paragraph,
       businesstype: 'rent',
       category: 'residential',
       subcategory: 'apartment',
-      size: size,
-      price: price,
+      size: Faker::Number.number(3),
+      price: Faker::Number.number(6),
       account: shakalaka,
-      location: l2
+      location: l2,
+      owner: Owner.create!(first_name: Faker::Name.first_name,
+                                  last_name: Faker::Name.last_name,
+                                  email: Faker::SiliconValley.email,
+                                  telephones: Faker::PhoneNumber.phone_number)
   )
-
   lguser.properties << property
 end
 

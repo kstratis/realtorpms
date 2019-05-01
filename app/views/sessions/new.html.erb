@@ -1,34 +1,60 @@
-<% provide(:title, 'Log in') %>
-<div class="center pr-signup-container pr-container">
+<% provide(:title, t('sessions.login_title')) %>
 
-  <i class="pr-icon sm padlock1-colored"></i>
-  <span class="title"><%= t 'sessions.heading' %></span>
+<% content_for :heading do %>
+  <% if request.subdomain.blank? %>
+    <p> <%= t('sessions.no_account') %> <%= link_to t('sessions.sign_up_now'), new_account_url(subdomain: false) %></p>
+  <% else %>
+    <p> <%= t('sessions.greeting') %></p>
+  <% end %>
+<% end %>
 
-  <div class="row">
-    <div class="col-md-12">
-      <div class="pr-form-container">
-        <%= form_for(:session, url: login_path) do |f| %>
-            <%#= render 'shared/error_messages' %>
+<% content_for :content do %>
+  <!-- form -->
+  <%= form_for(:session, url: login_path, html: {class: 'auth-form'}) do |f| %>
+    <%#= render 'shared/error_messages' %>
 
-            <%= f.label User.human_attribute_name("email") %>
-            <%= f.email_field :email, class: 'glowing-border' %>
+    <!-- .form-group -->
+    <div class="form-group">
+      <div class="form-label-group">
+        <%= f.email_field :email, class: 'form-control', placeholder: User.human_attribute_name("email"), required: true %>
+        <%= f.label "email", User.human_attribute_name("email") %>
+      </div>
+    </div>
+    <!-- /.form-group -->
 
-            <%= f.label User.human_attribute_name("password") %>
-            <%= f.password_field :password, class: 'glowing-border' %>
+    <!-- .form-group -->
+    <div class="form-group">
+      <div class="form-label-group">
+        <%= f.password_field :password, class: 'form-control', placeholder: User.human_attribute_name("password"), required: true %>
+        <%= f.label :password, User.human_attribute_name("password") %>
+      </div>
+    </div>
+    <!-- /.form-group -->
 
-            <%= f.label :remember_me, class: 'checkbox inline' do %>
-            <%= f.check_box :remember_me %>
-            <span><%= User.human_attribute_name("remember_me") %></span>
-          <% end %>
+    <!-- .form-group -->
+    <div class="form-group">
+      <%= f.submit t('sessions.login_button'), class: 'btn btn-lg btn-primary btn-block' %>
+    </div>
+    <!-- /.form-group -->
 
-          <%= f.submit t('sessions.login_button'), class: 'btn btn-primary' %>
-
-        <% end %>
-
-        <% if request.subdomain.blank? %>
-          <p class="new_user_prompt"><%= t('sessions.new_user_prompt') %> <%= link_to t('sessions.sign_up_now'), new_account_url(subdomain: false) %></p>
+    <!-- .form-group -->
+    <div class="form-group text-center">
+      <div class="custom-control custom-control-inline custom-checkbox">
+        <%= f.check_box(:remember_me, class: "custom-control-input", type: 'checkbox') %>
+        <%= f.label(:remember_me, class: "custom-control-label") do %>
+          <%= User.human_attribute_name("remember_me") %>
         <% end %>
       </div>
     </div>
-  </div>
-</div>
+    <!-- .form-group -->
+
+    <!-- recovery link -->
+    <% unless request.subdomain.blank? %>
+      <div class="text-center pt-1 pb-2">
+        <%= link_to t('sessions.reset_password'), password_reset_request_new_path %>
+      </div>
+    <% end %>
+    <!-- /recovery link -->
+
+  <% end %>
+<% end %>

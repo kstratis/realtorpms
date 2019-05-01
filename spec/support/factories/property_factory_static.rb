@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :propertysequence, :class => Property do
 
@@ -9,7 +9,7 @@ FactoryGirl.define do
     # https://stackoverflow.com/a/10847095/178728
     before(:create) do |property|
       property.account = Account.find_by_subdomain!('test1')
-      # FactoryGirl.find(:account, property: propertysequence)
+      # FactoryBot.find(:account, property: propertysequence)
     end
 
   end

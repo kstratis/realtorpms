@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible"
+        content="IE=edge">
+
+  <meta name="format-detection"
+        content="telephone=no">
+
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
+        name='viewport'/>
+
+  <meta name="apple-mobile-web-app-capable"
+        content="yes">
+
+  <meta name="turbolinks-cache-control" content="no-cache">
+  <!-- full_title is defined in app/helpers/application_helper.rb. title is provided by each view file
+       using the keyword 'provide' If the view file doesn't provide such value, 'full title' returns
+       a generic title -->
+  <title><%= full_title(yield(:title)) %></title>
+  <%= csrf_meta_tags %>
+  <%= render 'layouts/shared_style_assets' %>
+  <%= render 'layouts/shared_script_assets' %>
+  <%= render 'layouts/shim' %>
+</head>
+<body>
+
+<div class="pr-body-container">
+  <%= render 'layouts/flash_messages' %>
+  <div id="page-transition">
+
+    <main class="auth">
+      <header id="auth-header" class="auth-header" style="background-image: url(<%= asset_path 'background/hero_bg.png' %>);">
+        <h1>
+          <%= image_tag('landia_logo.svg', class: 'navbar-brand', height: "52", title: BRANDNAME) %>
+        </h1>
+        <%= yield(:heading) %>
+      </header>
+      <%= yield(:content) %>
+      <footer class="auth-footer">&copy; <%= Time.current.year %> <%= t('sessions.rights') %></footer>
+
+    </main>
+
+
+  </div>
+  <%#= debug(params) if Rails.env.development? %>
+</div>
+
+
+</body>
+
+</html>

@@ -1,113 +1,332 @@
-<div class="navbar navbar-fixed-top navbar-background-coloring">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle Navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <%= link_to 'Landia', account_root_path, id: 'logo', class: 'navbar-brand' %>
-      <div class="account-info">
-      <span title="Current subdomain" class="label navbar-tag-usertype"><%= fa_icon('database fw', text: current_account.subdomain) %></span>
-        <% if logged_in? %>
-        <% if owner?  %>
-          <span title="User type" class="label navbar-tag-usertype"><%= fa_icon('id-badge fw', text: 'ACCOUNT OWNER') %></span>
-        <% elsif current_user.admin? %>
-          <span title="User type" class="label navbar-tag-usertype"><%= fa_icon('id-badge fw', text: 'ADMINISTRATOR') %></span>
-        <% else %>
-          <span title="User type" class="label navbar-tag-usertype"><%= fa_icon('id-badge fw', text: 'USER') %></span>
-        <% end %>
-          <% end %>
+<!-- .app-header -->
+<header class="app-header app-header-dark">
+  <!-- .top-bar -->
+  <div class="top-bar">
+    <!-- .top-bar-brand -->
+    <div class="top-bar-brand">
+      <%= link_to image_tag('landia_logo.svg', height: "28", title: BRANDNAME), root_path, class: 'navbar-brand' %>
+    </div>
+    <!-- /.top-bar-brand -->
+    <!-- .top-bar-list -->
+    <div class="top-bar-list">
+      <!-- .top-bar-item -->
+      <div class="top-bar-item px-2 d-md-none d-lg-none d-xl-none">
+        <!-- toggle menu -->
+        <button class="hamburger hamburger-squeeze" type="button" data-toggle="aside" aria-label="Menu" aria-controls="navigation">
+                <span class="hamburger-box">
+                  <span class="hamburger-inner"> </span>
+                </span>
+        </button>
+        <!-- /toggle menu -->
       </div>
-    </div> <!-- end div class="navbar-header" -->
-
-    <div class="collapse navbar-collapse navbar-right">
-      <ul class="nav navbar-nav ">
-        <!-- Logged in is defined in the sessions_helper and is automatically available in all views.
-             However we have also made it available in all controllers by including in the "master"
-             controller +application_controller+ -->
-        <% if logged_in? %>
-            <%#= link_to "Signed is as #{current_user.email}", current_user, class: 'email-entry' %>
-            <!--<li><span>Signed is as <%#=current_user.email%></span></li>-->
-            <!--<li><i class="pr-icon navbar-offset css account-switch-navbar"></i></li>-->
-            <% if current_user.get_account_count > 1 %>
-            <li>
-              <%= link_to account_list_path, class: 'navbar-offset', title: 'Switch accounts' do %>
-                <%= content_tag :i, '', :class => 'pr-icon css account-switch-navbar' %>
-              <% end %>
-            </li>
-            <% end %>
-
-
-
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <!--Account <b class="caret"></b>-->
-
-                  <%= gravatar_for current_user, size: 64, classname: 'avatar-outline' %>
-                <span class="">&nbsp;<%= current_user.first_name %>&nbsp;</span><span class="caret"></span>
-
-                <!--<div class="user_info_avatar">-->
-
-                <!--</div>-->
+      <!-- /.top-bar-item -->
+      <!-- .top-bar-item -->
+      <div class="top-bar-item top-bar-item-full">
+        <!-- .top-bar-search -->
+        <div class="top-bar-search">
+          <div class="input-group input-group-search">
+            <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <span class="oi oi-magnifying-glass"></span>
+                    </span>
+            </div>
+            <input type="text" class="form-control" aria-label="Search" placeholder="<%= t 'navbar.search' %>"></div>
+        </div>
+        <!-- /.top-bar-search -->
+      </div>
+      <!-- /.top-bar-item -->
+      <!-- .top-bar-item -->
+      <div class="top-bar-item top-bar-item-right px-0 d-none d-sm-flex">
+        <!-- .nav -->
+        <ul class="header-nav nav">
+          <!-- .nav-item -->
+<!--          <li class="nav-item dropdown header-nav-dropdown has-notified">-->
+<!--            <a class="nav-link" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--              <span class="oi oi-pulse"></span>-->
+<!--            </a>-->
+<!--            <div class="dropdown-arrow"></div>-->
+            <!-- .dropdown-menu -->
+<!--            <div class="dropdown-menu dropdown-menu-rich dropdown-menu-right">-->
+<!--              <h6 class="dropdown-header stop-propagation">-->
+<!--                      <span>Activities-->
+<!--                        <span class="badge">(2)</span>-->
+<!--                      </span>-->
+<!--              </h6>-->
+              <!-- .dropdown-scroll -->
+<!--              <div class="dropdown-scroll has-scrollable">-->
+                <!-- .dropdown-item -->
+<!--                <a href="#" class="dropdown-item unread">-->
+<!--                  <div class="user-avatar">-->
+<!--                    <img src="assets/images/avatars/uifaces15.jpg" alt=""></div>-->
+<!--                  <div class="dropdown-item-body">-->
+<!--                    <p class="text"> Jeffrey Wells created a schedule </p>-->
+<!--                    <span class="date">Just now</span>-->
+<!--                  </div>-->
+<!--                </a>-->
+                <!-- /.dropdown-item -->
+                <!-- .dropdown-item -->
+<!--                <a href="#" class="dropdown-item unread">-->
+<!--                  <div class="user-avatar">-->
+<!--                    <img src="assets/images/avatars/uifaces16.jpg" alt=""></div>-->
+<!--                  <div class="dropdown-item-body">-->
+<!--                    <p class="text"> Anna Vargas logged a chat </p>-->
+<!--                    <span class="date">3 hours ago</span>-->
+<!--                  </div>-->
+<!--                </a>-->
+                <!-- /.dropdown-item -->
+                <!-- .dropdown-item -->
+<!--                <a href="#" class="dropdown-item">-->
+<!--                  <div class="user-avatar">-->
+<!--                    <img src="assets/images/avatars/uifaces17.jpg" alt=""></div>-->
+<!--                  <div class="dropdown-item-body">-->
+<!--                    <p class="text"> Sara Carr invited to Stilearn Admin </p>-->
+<!--                    <span class="date">5 hours ago</span>-->
+<!--                  </div>-->
+<!--                </a>-->
+                <!-- /.dropdown-item -->
+                <!-- .dropdown-item -->
+<!--                <a href="#" class="dropdown-item">-->
+<!--                  <div class="user-avatar">-->
+<!--                    <img src="assets/images/avatars/uifaces18.jpg" alt=""></div>-->
+<!--                  <div class="dropdown-item-body">-->
+<!--                    <p class="text"> Sara Carr updated a project </p>-->
+<!--                    <span class="date">1 day ago</span>-->
+<!--                  </div>-->
+<!--                </a>-->
+                <!-- /.dropdown-item -->
+                <!-- .dropdown-item -->
+<!--                <a href="#" class="dropdown-item">-->
+<!--                  <div class="user-avatar">-->
+<!--                    <img src="assets/images/avatars/uifaces19.jpg" alt=""></div>-->
+<!--                  <div class="dropdown-item-body">-->
+<!--                    <p class="text"> Arthur Carroll created a task </p>-->
+<!--                    <span class="date">1 day ago</span>-->
+<!--                  </div>-->
+<!--                </a>-->
+                <!-- /.dropdown-item -->
+                <!-- .dropdown-item -->
+<!--                <a href="#" class="dropdown-item">-->
+<!--                  <div class="user-avatar">-->
+<!--                    <img src="assets/images/avatars/uifaces20.jpg" alt=""></div>-->
+<!--                  <div class="dropdown-item-body">-->
+<!--                    <p class="text"> Angela Peterson assign a task to you </p>-->
+<!--                    <span class="date">2 days ago</span>-->
+<!--                  </div>-->
+<!--                </a>-->
+                <!-- /.dropdown-item -->
+                <!-- .dropdown-item -->
+<!--                <a href="#" class="dropdown-item">-->
+<!--                  <div class="user-avatar">-->
+<!--                    <img src="assets/images/avatars/uifaces21.jpg" alt=""></div>-->
+<!--                  <div class="dropdown-item-body">-->
+<!--                    <p class="text"> Willie Dixon and 3 others followed you </p>-->
+<!--                    <span class="date">2 days ago</span>-->
+<!--                  </div>-->
+<!--                </a>-->
+                <!-- /.dropdown-item -->
+<!--              </div>-->
+              <!-- /.dropdown-scroll -->
+<!--              <a href="user-activities.html" class="dropdown-footer">All activities-->
+<!--                <i class="fa fa-fw fa-long-arrow-alt-right"></i>-->
+<!--              </a>-->
+<!--            </div>-->
+            <!-- /.dropdown-menu -->
+<!--          </li>-->
+          <!-- /.nav-item -->
+          <!-- .nav-item -->
+          <li class="nav-item dropdown header-nav-dropdown has-notified">
+            <a class="nav-link" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="oi oi-envelope-open"></span>
+            </a>
+            <div class="dropdown-arrow"></div>
+            <!-- .dropdown-menu -->
+            <div class="dropdown-menu dropdown-menu-rich dropdown-menu-right">
+              <h6 class="dropdown-header stop-propagation">
+                <span>Messages</span>
+                <a href="#">Mark all as read</a>
+              </h6>
+              <!-- .dropdown-scroll -->
+              <div class="dropdown-scroll has-scrollable">
+                <!-- .dropdown-item -->
+                <a href="#" class="dropdown-item unread">
+                  <div class="user-avatar">
+                    <img src="" alt=""></div>
+                  <div class="dropdown-item-body">
+                    <p class="subject"> Stilearning </p>
+                    <p class="text text-truncate"> Invitation: Joe's Dinner @ Fri Aug 22 </p>
+                    <span class="date">2 hours ago</span>
+                  </div>
+                </a>
+                <!-- /.dropdown-item -->
+                <!-- .dropdown-item -->
+                <a href="#" class="dropdown-item">
+                  <div class="user-avatar">
+                    <img src="" alt=""></div>
+                  <div class="dropdown-item-body">
+                    <p class="subject"> Openlane </p>
+                    <p class="text text-truncate"> Final reminder: Upgrade to Pro </p>
+                    <span class="date">23 hours ago</span>
+                  </div>
+                </a>
+                <!-- /.dropdown-item -->
+                <!-- .dropdown-item -->
+                <a href="#" class="dropdown-item">
+                  <div class="tile tile-circle bg-green"> GZ</div>
+                  <div class="dropdown-item-body">
+                    <p class="subject"> Gogo Zoom </p>
+                    <p class="text text-truncate"> Live healthy with this wireless sensor. </p>
+                    <span class="date">1 day ago</span>
+                  </div>
+                </a>
+                <!-- /.dropdown-item -->
+                <!-- .dropdown-item -->
+                <a href="#" class="dropdown-item">
+                  <div class="tile tile-circle bg-teal"> GD</div>
+                  <div class="dropdown-item-body">
+                    <p class="subject"> Gold Dex </p>
+                    <p class="text text-truncate"> Invitation: Design Review @ Mon Jul 7 </p>
+                    <span class="date">1 day ago</span>
+                  </div>
+                </a>
+                <!-- /.dropdown-item -->
+                <!-- .dropdown-item -->
+                <a href="#" class="dropdown-item">
+                  <div class="user-avatar">
+                    <img src="" alt=""></div>
+                  <div class="dropdown-item-body">
+                    <p class="subject"> Creative Division </p>
+                    <p class="text text-truncate"> Need some feedback on this please </p>
+                    <span class="date">2 days ago</span>
+                  </div>
+                </a>
+                <!-- /.dropdown-item -->
+                <!-- .dropdown-item -->
+                <a href="#" class="dropdown-item">
+                  <div class="tile tile-circle bg-pink"> LD</div>
+                  <div class="dropdown-item-body">
+                    <p class="subject"> Lab Drill </p>
+                    <p class="text text-truncate"> Our UX exercise is ready </p>
+                    <span class="date">6 days ago</span>
+                  </div>
+                </a>
+                <!-- /.dropdown-item -->
+              </div>
+              <!-- /.dropdown-scroll -->
+              <a href="app-messages.html" class="dropdown-footer">All messages
+                <i class="fa fa-fw fa-long-arrow-alt-right"></i>
               </a>
-              <ul class="dropdown-menu">
+            </div>
+            <!-- /.dropdown-menu -->
+          </li>
+          <!-- /.nav-item -->
+          <!-- .nav-item -->
+          <li class="nav-item dropdown header-nav-dropdown">
+            <a class="nav-link" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="oi oi-grid-three-up"></span>
+            </a>
+            <div class="dropdown-arrow"></div>
+            <!-- .dropdown-menu -->
+            <div class="dropdown-menu dropdown-menu-rich dropdown-menu-right">
+              <!-- .dropdown-sheets -->
+              <div class="dropdown-sheets">
+                <!-- .dropdown-sheet-item -->
+                <div class="dropdown-sheet-item">
+                  <a href="#" class="tile-wrapper">
+                          <span class="tile tile-lg bg-teal">
+                            <i class="fas fa-home"> </i>
 
-                <li>
+                          </span>
+                    <span class="tile-peek"><%= t 'sidebar.properties' %></span>
+                  </a>
+                </div>
+                <!-- /.dropdown-sheet-item -->
+                <!-- .dropdown-sheet-item -->
+                <div class="dropdown-sheet-item">
+                  <a href="#" class="tile-wrapper">
+                          <span class="tile tile-lg bg-indigo">
+                            <i class="fas fa-user-tie"> </i>
+                          </span>
+                    <span class="tile-peek"><%= t 'sidebar.partners' %></span>
+                  </a>
+                </div>
+                <!-- /.dropdown-sheet-item -->
+                <!-- .dropdown-sheet-item -->
+                <div class="dropdown-sheet-item">
+                  <a href="#" class="tile-wrapper">
+                          <span class="tile tile-lg bg-pink">
+                            <i class="fas fa-users"> </i>
+                          </span>
+                    <span class="tile-peek"><%= t 'sidebar.clients' %></span>
+                  </a>
+                </div>
+                <!-- /.dropdown-sheet-item -->
+                <!-- .dropdown-sheet-item -->
+                <div class="dropdown-sheet-item">
+                  <a href="#" class="tile-wrapper">
+                          <span class="tile tile-lg bg-yellow">
+                            <i class="fas fa-tasks"> </i>
+                          </span>
+                    <span class="tile-peek"><%= t 'sidebar.assignments' %></span>
+                  </a>
+                </div>
+                <!-- /.dropdown-sheet-item -->
+                <!-- .dropdown-sheet-item -->
+                <div class="dropdown-sheet-item">
+                  <a href="#" class="tile-wrapper">
+                          <span class="tile tile-lg bg-cyan">
+                            <i class="fab fa-connectdevelop"></i>
+                          </span>
+                    <span class="tile-peek"><%= t 'sidebar.mappings' %></span>
+                  </a>
+                </div>
+                <!-- /.dropdown-sheet-item -->
+                <!-- .dropdown-sheet-item -->
+                <div class="dropdown-sheet-item">
+                  <a href="#" class="tile-wrapper">
+                          <span class="tile tile-lg bg-cyan">
+<!--                            <i class="fab fa-connectdevelop"></i>-->
+                            <span class="icon-highway"></span>
+                          </span>
+                    <span class="tile-peek"><%= t 'sidebar.integrations' %></span>
+                  </a>
+                </div>
+                <!-- /.dropdown-sheet-item -->
+              </div>
+              <!-- .dropdown-sheets -->
+            </div>
+            <!-- .dropdown-menu -->
+          </li>
+          <!-- /.nav-item -->
+        </ul>
+        <!-- /.nav -->
+        <!-- .btn-account -->
+        <div class="dropdown">
+          <button class="btn-account d-none d-md-flex" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="user-avatar user-avatar-lg">
 
-                  <%= link_to edit_user_path(current_user), class: 'entry' do %>
-                    <%= content_tag :span, fa_icon('id-card-o lg fw', text: t('navbar.profile')) %>
-                  <% end %>
-                </li>
-
-                <li>
-
-                  <%= link_to edit_user_path(current_user), class: 'entry' do %>
-                    <%= content_tag :span, fa_icon('credit-card lg fw', text: t('navbar.account')) %>
-                  <% end %>
-                </li>
-
-                <li>
-                  <%= link_to edit_user_path(current_user) do %>
-                      <%= content_tag :span, fa_icon('envelope-o lg fw', text: t('navbar.messages')) %>
-                  <% end %>
-                </li>
-
-                <li class="divider"></li>
-
-                <li>
-                  <%= link_to logout_path, method: :delete do %>
-                      <%= content_tag :span, fa_icon('sign-out lg fw', text: t('navbar.logout')) %>
-                  <% end %>
-                </li>
-              </ul>
-            </li>
-        <% else %>
-            <li><%= link_to 'Log in', login_path %></li>
-        <% end %>
-        <li><%#= link_to 'Log in', '#' %></li>
-        <!--<li id="ministyle"><a href="http://localhost:3000/mini_pages/dashboard">Special Item</a></li>-->
-      </ul>
+                    <!-- This needs to be properly taken care of -->
+                    <%= user_avatar(current_user) %>
+                    <%#= gravatar_for current_user, size: 64, classname: 'avatar-outline' %>
+                    <!--                    <img src="assets/images/avatars/profile.jpg" alt="">-->
+                  </span>
+            <span class="account-summary pr-lg-4 d-none d-lg-block">
+                    <span class="account-name"><%= current_user.full_name %></span>
+                    <span class="account-description"><%= t "navbar.account.type.#{current_user.role(current_account)}" %></span>
+                  </span>
+          </button>
+          <div class="dropdown-arrow dropdown-arrow-left"></div>
+          <!-- .dropdown-menu -->
+          <div class="dropdown-menu">
+            <h6 class="dropdown-header d-none d-md-block d-lg-none"><%= current_user.full_name %></h6>
+            <%= render 'layouts/dropdown_menu' %>
+          </div>
+          <!-- /.dropdown-menu -->
+        </div>
+        <!-- /.btn-account -->
       </div>
-
+      <!-- /.top-bar-item -->
+    </div>
+    <!-- /.top-bar-list -->
   </div>
-</div>
-<script>
-    var dropdownEl = $('.dropdown');
-    // Add slideDown animation to Bootstrap dropdown when expanding.
-    dropdownEl.on('show.bs.dropdown', function() {
-        $(this).find('.dropdown-menu').first().stop(true, true).slideDown(150);
-    });
-
-    // Add slideUp animation to Bootstrap dropdown when collapsing.
-    dropdownEl.on('hide.bs.dropdown', function() {
-        $(this).find('.dropdown-menu').first().stop(true, true).slideUp(150);
-    });
-</script>
-<!--<div>-->
-  <%#= <div id="mini_pages"> %>
-
-    <%#= content_for?(:mini_pages) ? yield(:mini_pages) : yield %>
-<%#= </div> %>
-<!--</div>-->
+  <!-- /.top-bar -->
+</header>

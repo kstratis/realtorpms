@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'Inviting users' do
-  let(:account) { FactoryGirl.create(:account) }
+  let(:account) { FactoryBot.create(:account) }
   before do
     set_subdomain(account.subdomain)
     visit 'http://lvh.me/login'
@@ -26,5 +26,5 @@ feature 'Inviting users' do
 
     email = find_email('test@example.com')
     expect(email).to be_present
-    expect(email.subject).to eq("Invitation to join the #{account.subdomain} domain on Landia")
+    expect(email.subject).to eq("Invitation to join the #{account.subdomain} domain on #{BRANDNAME}")
   end end

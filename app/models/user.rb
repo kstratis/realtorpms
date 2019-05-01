@@ -1,8 +1,15 @@
 class User < ApplicationRecord
-  self.per_page = 10 # This is for pagination
-  attr_accessor :remember_token
+
+  include Searchable
+
+  attr_searchable %w(first_name last_name email)
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i  # checks the email format
+
+  self.per_page = 10 # This is for pagination
+  attr_accessor :remember_token, :reset_token
   before_save { self.email = email.downcase }  # makes sure everything is lower case
+  before_create { self.color = "%06x" % (rand * 0xffffff) } # This assigns a random bg color to each new user
   validates :first_name, presence: true, length: { maximum: 50 }
   validates :last_name, presence: true, length: { maximum: 50 }
   validates :email, presence: true, length: { maximum: 255 },
@@ -23,9 +30,12 @@ class User < ApplicationRecord
   has_many :assignments
   # https://stackoverflow.com/a/38845388/178728
   has_many :properties, -> { distinct }, through: :assignments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_one_attached :avatar
+
   # has_many :properties, -> (account) { where('account_id = ?', account.id) }, through: :assignments
 
-  # Basically class methods defined on singleton class
+  # Basically class methods defined as instance methods in the singleton class
   class << self
     # Returns the hash digest of the given string.
     def digest(string)
@@ -59,8 +69,22 @@ class User < ApplicationRecord
     has_owning_accounts? + get_membership_accounts
   end
 
-  def is_admin?
-    admin?
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def is_owner?(account)
+    account.owner == self
+  end
+
+  def role(account)
+    if admin?
+      'sysadmin'
+    elsif is_owner?(account)
+      'owner'
+    else
+      'user'
+    end
   end
 
   # Remembers a user in the database for use in persistent sessions.
@@ -70,10 +94,15 @@ class User < ApplicationRecord
   end
 
   # Returns true if the given token matches the digest.
-  def authenticated?(remember_token)
-    return false if remember_digest.nil?
-    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+  def authenticated?(attribute, token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
   end
+  # def authenticated?(remember_token)
+  #   return false if remember_digest.nil?
+  #   BCrypt::Password.new(remember_digest).is_password?(remember_token)
+  # end
 
   # Forgets a user.
   def forget
@@ -85,23 +114,57 @@ class User < ApplicationRecord
   end
 
   def all_accounts
-    owned_accounts + accounts
+    # Used to be: `owned_accounts + accounts`
+    # but that would return an Array instead of a ActiveRecord relation and
+    # arrays don't quite work with pagination.
+    # Turns outs we needed to use this gem: https://github.com/brianhempel/active_record_union.
+    # More on this here: https://stackoverflow.com/questions/6686920/activerecord-query-union
+    # and here: https://github.com/brianhempel/active_record_union.
+    # (see also this one: https://stackoverflow.com/questions/33683555/collectionproxy-vs-associationrelation)
+    accounts.union(owned_accounts)
   end
 
   def get_total_properties
     properties.count
   end
 
+  def favorite(property)
+    favorites.find_or_create_by(property: property)
+  end
+
+  def unfavorite(property)
+    favorites.where(property: property).destroy_all
+    property.reload
+  end
+
+  # Sets the password reset attributes.
+  def create_reset_digest
+    self.reset_token = User.new_token
+    update_attribute(:reset_digest,  User.digest(reset_token))
+    update_attribute(:reset_sent_at, Time.zone.now)
+  end
+
+  # Sends password reset email.
+  def send_password_reset_email(subdomain)
+    UserMailer.password_reset(self, subdomain).deliver_now
+  end
+
+  # Returns true if a password reset has expired.
+  def password_reset_expired?
+    reset_sent_at < 2.hours.ago
+  end
+
+  # Checks whether users can reset their passwords based on the given domain
+  def password_change_eligibility(subdomain)
+    all_accounts.map(&:subdomain).include?(subdomain)
+  end
+
   def self.sorted_by_assignments_count(dataset)
     dataset.sort_by(&:get_total_properties)
   end
 
-  # We use the postgres unaccent to cater for unicode accents and ilike for case insensitive searches
-  # https://gist.github.com/jfragoulis/9914900
-  def self.search(search)
-    if search
-      where('unaccent(last_name) ILIKE unaccent(?)', "%#{search}%").or(where('unaccent(first_name) ILIKE unaccent(?)', "%#{search}%")).or(where('email LIKE ?', "%#{search}%"))
-    end
+  def age
+    dob ? ((Time.zone.now - dob.to_time) / 1.year.seconds).floor : nil
   end
 
 end

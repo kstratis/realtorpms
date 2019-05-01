@@ -1,29 +1,50 @@
-<div class="center jumbotron pr-container">
-  <% if @accounts.empty? %>
-    <i class="pr-icon lg no-results"> </i>
-    <h2>Your user account doesn't seem to be associated with any active domains.</h2>
-    <h2>Please contact your LANDIA administrator.</h2>
-  <% else %>
+<% provide(:title, t('accounts.switch')) %>
+
+<% content_for :heading do %>
+  <p> <%= t('accounts.switch') %></p>
+<% end %>
+
+<!-- .Content section -->
+<% content_for :content do %>
+  <div class="auth-form auth-form-special centered-title">
     <i class="pr-icon md account-switch"></i>
-    <h2>Account switch screen.</h2>
-    <h2>Please pick one of your organizations</h2>
-    <ul class="accounts">
-      <% @accounts.each do |account| %>
-        <li>
-          <%#= link_to root_url(subdomain: account.subdomain) do %>
-          <%= link_to account_switch_url(subdomain: account.subdomain) do %>
-            <%= account.subdomain %>
-          <% end %>
-          <% if account.owner == current_user %>
-            <span class="label">Account Owner</span>
-          <% else %>
-            <span class="label">Regular User</span>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
-</div>
+    <div class="vertical-spacer"></div>
+    <h2><%= t('accounts.switch_heading') %></h2>
+    <div class="vertical-spacer"></div>
+
+    <div class="table-responsive">
+      <!-- .table -->
+      <table class="table table-hover">
+        <thead class="thead-">
+        <tr>
+          <th><%= t 'accounts.domain' %></th>
+          <th><%= t 'accounts.role' %></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @accounts.each do |account| %>
+          <tr>
+            <td>
+              <%= link_to account_switch_url(subdomain: account.subdomain) do %>
+                <%= account.subdomain %>
+              <% end %></td>
+            <td><span class="label"><%= t "navbar.account.type.#{current_user.role(account)}" %></span></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table><!-- /.table -->
+    </div>
+    <div class="row">
+
+          <div class="col-12">
+        <div class="accounts-pagination">
+          <%= will_paginate @accounts %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+<% end %>
 
 
 

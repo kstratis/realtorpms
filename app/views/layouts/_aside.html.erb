@@ -1,0 +1,166 @@
+<!-- .app-aside -->
+<aside class="app-aside app-aside-light app-aside-expand-md">
+  <!-- .aside-content -->
+  <div class="aside-content">
+    <!-- .aside-header -->
+    <header class="aside-header d-block d-md-none">
+      <!-- .btn-account -->
+      <button class="btn-account" type="button" data-toggle="collapse" data-target="#dropdown-aside">
+        <div class="user-avatar user-avatar-lg">
+          <%= user_avatar(current_user, "avatar-outline") %>
+          <%#= alphatar_for current_user, size: 64, classname: 'avatar-outline' %>
+        </div>
+        <div class="account-icon">
+          <span class="fa fa-caret-down fa-lg"> </span>
+        </div>
+        <div class="account-summary">
+          <p class="account-name"><%= current_user.full_name %></p>
+          <p class="account-description"><%= t "navbar.account.type.#{current_user.role(current_account)}" %></p>
+        </div>
+      </button>
+      <!-- /.btn-account -->
+
+      <!-- .dropdown-aside -->
+      <div id="dropdown-aside" class="dropdown-aside collapse">
+        <!-- dropdown-items -->
+        <div class="pb-3">
+          <%= render 'layouts/dropdown_menu' %>
+        </div>
+        <!-- /dropdown-items -->
+      </div>
+      <!-- /.dropdown-aside -->
+    </header>
+    <!-- /.aside-header -->
+
+    <!-- .aside-menu -->
+    <section class="aside-menu overflow-hidden">
+      <!-- .stacked-menu -->
+      <nav id="stacked-menu" class="stacked-menu">
+        <!-- .menu -->
+        <ul class="menu">
+          <!-- .menu-header -->
+          <li class="menu-header"><%= t 'sidebar.menu' %></li>
+          <!-- /.menu-header -->
+          <!-- .menu-item -->
+          <%= content_tag :li, class: "menu-item #{active_for(path: root_path)}" do %>
+            <%= link_to root_path, class: "menu-link" do %>
+              <%= content_tag :span, nil, class: 'menu-icon oi oi-dashboard' %>
+              <%= content_tag :span, t('sidebar.main'), class: 'menu-text' %>
+            <% end %>
+          <% end %>
+          <!-- /.menu-item -->
+          <!-- .menu-item -->
+          <%= content_tag :li, class: "menu-item has-child #{active_for(controller: ['users', 'invitations'], except_action: 'edit', classname: 'open')}" do %>
+            <%= link_to '#', class: 'menu-link' do %>
+              <%= content_tag :i, nil, class: 'menu-icon fas fa-user-tie' %>
+              <%= content_tag :span, t('partners.title'), class: 'menu-text' %>
+            <% end %>
+            <!-- child menu -->
+            <ul class="menu">
+              <%= content_tag :li, class: "menu-item  #{active_for(path: new_invitation_path)}" do %>
+                <%= link_to new_invitation_path, class: 'menu-link' do %>
+                  <%= content_tag :i, nil, class: 'fas fa-plus fa-fw' %>
+                  <%= content_tag :span, t('partners.add'), class: 'menu-text' %>
+                <% end %>
+              <% end %>
+              <%= content_tag :li, class: "menu-item  #{active_for(path: users_path)}" do %>
+                <%= link_to users_path, class: 'menu-link' do %>
+                  <%= content_tag :i, nil, class: 'fas fa-th-list fa-fw' %>
+                  <%= content_tag :span, t('partners.list'), class: 'menu-text' %>
+                <% end %>
+              <% end %>
+            </ul>
+            <!-- /child menu -->
+          <% end %>
+          <!-- /.menu-item -->
+
+          <!-- .menu-item -->
+          <%= content_tag :li, class: "menu-item has-child #{active_for(controller: 'properties', classname: 'open')}" do %>
+            <%= link_to nil, class: 'menu-link' do %>
+              <%= content_tag :i, nil, class: 'menu-icon fas fa-home' %>
+              <%= content_tag :span, t('properties.title'), class: 'menu-text' %>
+            <% end %>
+            <!-- child menu -->
+            <ul class="menu">
+              <%= content_tag :li, class: "menu-item  #{active_for(path: new_property_path)}" do %>
+                <%= link_to new_property_path, class: 'menu-link' do %>
+                  <%= content_tag :i, nil, class: 'fas fa-plus fa-fw' %>
+                  <%= content_tag :span, t('properties.add'), class: 'menu-text' %>
+                <% end %>
+              <% end %>
+              <%= content_tag :li, class: "menu-item  #{active_for(path: properties_path)}" do %>
+                <%= link_to properties_path, class: 'menu-link' do %>
+                  <%= content_tag :i, nil, class: 'fas fa-th-list fa-fw' %>
+                  <%= content_tag :span, t('properties.list'), class: 'menu-text' %>
+                <% end %>
+              <% end %>
+              <li class="menu-item disabled <%= active_for(path: properties_path) %>">
+                <%= link_to properties_path, class: 'menu-link' do %>
+                  <%= content_tag :i, nil, class: 'far fa-heart fa-fw' %>
+                  <%= content_tag :span, t('properties.favourites'), class: 'menu-text' %>
+                <% end %>
+              </li>
+              <li class="menu-item">
+                <%= link_to nil, class: 'menu-link' do %>
+                  <%= content_tag :i, nil, class: 'fas fa-file-import fa-fw' %>
+                  <%= content_tag :span, t('properties.import'), class: 'menu-text' %>
+                <% end %>
+              </li>
+            </ul>
+            <!-- /child menu -->
+          <% end %>
+          <!-- /.menu-item -->
+
+          <!-- .menu-item -->
+          <li class="menu-item has-child">
+            <%= link_to '#', class: 'menu-link' do %>
+              <%= content_tag :span, nil, class: 'menu-icon fas fa-users fa-fw' %>
+              <%= content_tag :span, t('sidebar.clients'), class: 'menu-text' %>
+            <% end %>
+            <!-- child menu -->
+            <ul class="menu">
+              <li class="menu-item">
+                <%= link_to '#', class: 'menu-link' do %>
+                  <%= content_tag :i, nil, class: 'fas fa-plus fa-fw' %>
+                  <%= content_tag :span, t('clients.add'), class: 'menu-text' %>
+                <% end %>
+              </li>
+              <li class="menu-item">
+                <%= link_to '#', class: 'menu-link' do %>
+                  <%= content_tag :i, nil, class: 'fas fa-th-list fa-fw' %>
+                  <%= content_tag :span, t('clients.list'), class: 'menu-text' %>
+                <% end %>
+              </li>
+            </ul>
+            <!-- /child menu -->
+          </li>
+          <!-- /.menu-item -->
+
+          <!-- .menu-item -->
+          <li class="menu-item ">
+            <%= link_to '#', class: 'menu-link' do %>
+              <%= content_tag :span, nil, class: 'menu-icon fas icon-highway fa-fw' %>
+              <%= content_tag :span, t('sidebar.integrations'), class: 'menu-text' %>
+            <% end %>
+          </li>
+          <!-- /.menu-item -->
+
+          <!-- .menu-item -->
+          <li class="menu-item ">
+            <%= link_to '#', class: 'menu-link' do %>
+              <%= content_tag :span, nil, class: 'menu-icon fas fa-credit-card fa-fw' %>
+              <%= content_tag :span, t('sidebar.subscription'), class: 'menu-text' %>
+            <% end %>
+          </li>
+          <!-- /.menu-item -->
+
+        </ul>
+        <!-- /.menu -->
+      </nav>
+      <!-- /.stacked-menu -->
+    </section>
+    <!-- /.aside-menu -->
+  </div>
+  <!-- /.aside-content -->
+</aside>
+<!-- /.app-aside -->

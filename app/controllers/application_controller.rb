@@ -14,6 +14,10 @@ class ApplicationController < ActionController::Base
   # def default_url_options
   #   { locale: I18n.locale }
   # end
+  #
+  def prompt_account
+    redirect_to account_list_url(subdomain: nil) if logged_in?
+  end
 
   def hello
     render html: 'hello, world!'

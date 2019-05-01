@@ -1,14 +1,17 @@
 module Accounts
   class UsersController < Accounts::BaseController
-    # before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
-    before_action :correct_user,   only: [:edit, :update]
-    before_action :owner_exclusive, only: [:edit, :destroy]
+
+    # Shows all account users
+    before_action :all_account_users, only: [:show]
+    before_action :user_self, only: [:edit, :update] # Allows editing only on each user's self
+    before_action :owner_exclusive, only: [:new, :create, :destroy]
     before_action :check_page_validity, only: [:index]
-    layout 'registration/main', except: [:show, :edit, :update, :index]  # show the barebones version only when signing up
+
+    # layout 'auth/skeleton', except: [:show, :edit, :update, :index, :new]  # show the barebones version only when signing up
 
     def destroy
         User.find(params[:id]).destroy
-        flash[:success] = 'User successfully deleted'
+        flash[:success] = I18n.t 'users.flash_delete'
         redirect_to users_url
     end
 
@@ -18,8 +21,7 @@ module Accounts
     end
 
     def index
-      # puts 'the other one'
-      print_users
+      filter_users
     end
 
     # POST to the new user registration page
@@ -27,13 +29,13 @@ module Accounts
       @user = User.new(user_params)
       if @user.save
         log_in @user
-        flash[:success] = 'Welcome to PropertyX'
+        flash[:success] = I18n.t('users.flash_welcome', brand: BRANDNAME)
         redirect_to @user
         # Handle a successful save.
       else
         # this merely re-renders the new template.
         # It doesn't fully redirect (in other words it doesn't go through the +new+ method)
-        render 'new'
+        render :new
       end
     end
 
@@ -46,7 +48,7 @@ module Accounts
     def update
       @user = User.find(params[:id])
       if @user.update_attributes(user_params)
-        flash[:success] = 'Your profile was successfully updated'
+        flash[:success] = I18n.t 'users.flash_profile_updated'
         redirect_to @user
         # Handle a successful update.
       else
@@ -55,12 +57,18 @@ module Accounts
     end
 
     def show
-      @user = User.find(params[:id]) # Automatically converts parameters from string to integer
+      # @user = User.find(params[:id]) # Automatically converts parameters from string to integer
+    end
+
+    def delete_avatar
+      user = User.find(params[:id])
+      user.avatar.purge if user.avatar.attached?
+      redirect_to edit_user_path(user)
     end
 
     private
       def user_params
-        params.require(:user).permit(:first_name, :last_name, :email, :age, :phone1, :locale, :password, :password_confirmation)
+        params.require(:user).permit(:avatar, :first_name, :last_name, :email, :dob, :phone1, :locale, :password, :password_confirmation)
       end
 
       # Confirms a logged-in user.
@@ -70,12 +78,23 @@ module Accounts
       #     redirect_to login_url
       #   end
       # end
+      # def authorized
 
-      # Confirms the correct user.
-      def correct_user
+      def all_account_users
+        # We use find_by instead of find because we need an association proxy and not just an object
+        @user = current_account.all_users.find_by(id: params[:id])
+        if @user.nil?
+          flash[:danger] = I18n.t 'users.flash_user_not_found'
+          redirect_to users_path
+        end
+      end
+
+      # Confirms that an action concerning a particular user is initiated by that same user.
+      # Essentially prevents admins modifying others users' data.
+      def user_self
         @user = User.find(params[:id])
         unless current_user?(@user)
-          flash[:danger] = 'You can\'t edit another user\'s profile'
+          flash[:danger] = I18n.t 'users.flash_unauthorised_user_edit'
           redirect_to(root_url)
         end
       end
@@ -87,7 +106,7 @@ module Accounts
 
       def owner_exclusive
         unless owner?
-          flash[:danger] = 'Only the account owner may perform this action.'
+          flash[:danger] = I18n.t 'users.flash_owner_only_action'
           redirect_to users_url
         end
       end

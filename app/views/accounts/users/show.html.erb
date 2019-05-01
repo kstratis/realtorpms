@@ -1,75 +1,98 @@
-<% provide(:title, 'Profile: ' + @user.first_name + ' ' + @user.last_name) %>
-<div class="center jumbotron pr-container">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="col-md-3 col-md-offset-0 col-sm-6 col-sm-offset-3 col-xs-12">
-        <div class="pr-avatar-wrapper">
-          <section class="user_info">
-            <div class="user_info_avatar">
-              <%= link_to('https://en.gravatar.com/emails/', target: '_blank', rel: 'nofollow', title: 'Edit your avatar picture') do %>
-                <%= gravatar_for @user, size: 256, big_default_size: true %>
-              <% end %>
+<% provide(:title, t('users.show.heading')) %>
+
+<%= render partial: 'shared/breadcrumb', locals: {path: [{:title => 'users.show.users', :href => edit_user_path}, {title: @user.full_name, :href => ''}], icon: 'house-colored'} %>
+
+<div class="page-container">
+  <div class="container">
+    <!-- .card -->
+    <div class="card card-fluid">
+      <h2 class="card-header"> <%= @user.full_name %> </h2>
+      <!-- .card-body -->
+      <div class="card-body">
+        <!-- .media -->
+        <div class="col-lg-6 offset-lg-3 col-md-12">
+          <div class="media mb-3">
+            <div class="user-avatar user-avatar-xl fileinput-button">
+              <%= user_avatar(@user, "alphatar-edit", "avatar_preview") %>
+            </div><!-- /avatar -->
+            <div class="media-body pl-3 pt-3">
+              <strong><%= @user.full_name %></strong><br>
+              <span><%= @user.age ? @user.age : '—' %></span>
             </div>
-          </section>
-        </div>
-      </div>
-      <div class="col-md-9">
-        <div class="user_info_detailed_text">
-          <table class="table table-striped pr-table dataTable">
-            <tbody>
-            <tr>
-              <td class="col-md-3 title">
-                <div class="table-entry"><span><strong>Name</strong></span></div>
-              </td>
-              <td class="col-md-9">
-                <div class="table-entry"><span><%== @user.first_name + '&nbsp;' + @user.last_name %></span></div>
-              </td>
-            </tr>
-            <tr>
-              <td class="col-md-3 title">
-                <div class="table-entry"><span><strong>Email</strong></span></div>
-              </td>
-              <td class="col-md-9">
-                <div class="table-entry"><span><%= @user.email %></span></div>
-              </td>
-            </tr>
-            <tr>
-              <td class="col-md-3 title">
-                <div class="table-entry"><span><strong>Age</strong></span></div>
-              </td>
-              <td class="col-md-9">
-                <div class="table-entry"><span><%= @user.age %></span></div>
-              </td>
-            </tr>
-            <tr>
-              <td class="col-md-3 title">
-                <div class="table-entry"><span><strong>Telephone</strong></span></div>
-              </td>
-              <td class="col-md-9">
-                <div class="table-entry"><span><%= @user.phone1 %></span></div>
-              </td>
-            </tr>
-            <tr>
-              <td class="col-md-3 title">
-                <div class="table-entry"><span><strong>Registered at</strong></span></div>
-              </td>
-              <td class="col-md-9">
-                <div class="table-entry"><span><%= @user.created_at.strftime('%d %B %y') %></span></div>
-              </td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="clearfix"></div>
-      <hr/>
+          </div>
+        </div> <!-- /.media -->
 
-      <div class="row">
-        <div class="col-md-12">
-          <h3>asdasd</h3>
+        <div class="col-lg-6 offset-lg-3 col-md-12">
+          <div class="metric-row">
+
+            <div class="col-6 col-sm-6 col-lg-6">
+
+              <!-- metric column -->
+              <div class="card-metric">
+                <div class="metric">
+                  <p class="metric-value h3">
+                    <sub><i class="fa fa-tasks fa-lg fa-fw"></i></sub> <span class="value"><%= @user.assignments.count %></span>
+<!--                    <sub><i class="pr-icon cs account-switch"></i></sub> <span class="value"><%#= @user.assignments.count %></span>-->
+                  </p>
+                  <h2 class="metric-label"><%= t('users.show.assignments') %></h2>
+                </div>
+              </div><!-- /.metric -->
+            </div>
+
+            <div class="col-6 col-sm-6 col-lg-6">
+
+              <div class="card-metric">
+                <div class="metric">
+                  <p class="metric-value h3">
+                    <sub><i class="fa fa-check fa-lg fa-fw"></i></sub> <span class="value">N/A</span>
+                  </p>
+                  <h2 class="metric-label"><%= t('users.show.processed') %></h2>
+                </div>
+              </div><!-- /.metric -->
+
+            </div>
+
+          </div>
         </div>
 
-      </div>
-    </div>
+        <div class="col-lg-6 offset-lg-3 col-md-12">
+          <div class="table-responsive">
+            <!-- .table -->
+            <table class="table table-striped">
+              <tbody>
+              <tr>
+                <td><%= t('activerecord.attributes.user.first_name') %></td>
+                <td><%= @user.first_name %></td>
+              </tr>
+              <tr>
+                <td><%= t('activerecord.attributes.user.last_name') %></td>
+                <td><%= @user.last_name %></td>
+              </tr>
+              <tr>
+                <td><%= t('activerecord.attributes.user.age') %></td>
+                <td><%= @user.age ? @user.age : '—' %></td>
+              </tr>
+              <tr>
+                <td><%= t('activerecord.attributes.user.email') %></td>
+                <td><%= @user.email %></td>
+              </tr>
+              <tr>
+                <td><%= t('activerecord.attributes.user.phone1') %></td>
+                <td><%= @user.phone1 ? @user.phone1 : '—' %></td>
+              </tr>
+              <tr>
+                <td><%= t('activerecord.attributes.user.registered') %></td>
+                <!-- +l+ function accounts for the localized timedate -->
+                <td><%= l(@user.created_at, format: :custom) %></td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+      </div> <!-- /.card-body -->
+    </div> <!-- /.card -->
   </div>
 </div>

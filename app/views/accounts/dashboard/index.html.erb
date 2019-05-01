@@ -1,9 +1,61 @@
-<div class="center jumbotron pr-container">
-  <h1><%= t 'main.heading' %></h1>
+<% provide(:title, t('main.title')) %>
 
-  <h2><%= t 'main.subheading' %></h2>
+<%= render partial: 'shared/breadcrumb', locals: {path: [{:title => 'main.heading', :href => ''}], icon: 'house-colored'} %>
 
-  <%#= link_to 'Sign up now!', new_account_path, class: 'btn btn-lg btn-primary' %>
+<div class="page-container">
+  <div class="container">
+    <div class="app-container">
+
+      <%= content_tag :div, class: "stats", id: "stats_data", data: {
+          graph: @graph
+      } do %>
+      <% end %>
+
+      <div class="row ">
+        <div class="col">
+          <h2><%= t 'main.options' %></h2>
+        </div>
+      </div>
+
+      <div class="clearfix mt-3"></div>
+
+      <div class="row">
+
+        <div class="col-md-12 col-lg-6">
+          <div class="row">
+            <% %w(properties users clients mapping integrations statistics).each do |entry| %>
+              <div class="col-6">
+                <%= link_to respond_to?("#{entry}_path") ? send("#{entry}_path") : '', class: 'option-container' do %>
+                  <%= content_tag :div, class: 'option' do %>
+                    <%= content_tag :i, nil, class: "pr-icon smm #{entry}" %>
+                    <%= content_tag :p, t("main.#{entry}") %>
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="col-md-12 col-lg-6">
+
+          <div class="card card-fluid">
+            <!-- .card-body -->
+            <div class="card-body">
+              <h3 class="card-title mb-4"><%= t('main.chart.title') %></h3>
+              <div class="chartjs chart-container">
+                <canvas class="chart"></canvas>
+              </div>
+            </div>
+          </div><!-- /.card -->
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </div>
 
 <%= link_to image_tag('rails.png', alt: 'Rails logo'), 'http://rubyonrails.org/' %>

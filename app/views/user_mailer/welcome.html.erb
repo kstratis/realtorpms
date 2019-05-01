@@ -1,0 +1,16 @@
+<p style="font-family: Helvetica, Arial, sans-serif; font-size: 18px; line-height: 1.6; font-weight: normal; margin: 0 0 20px; padding: 0;">
+  <strong><%= t('emails.welcome.greeting', user: @user.first_name) %></strong></p>
+
+<p style="font-family: Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;"><%= t('emails.welcome.heading', brand: BRANDNAME.capitalize) %>&nbsp;<%= t('emails.welcome.subheading') %></p>
+
+<hr style="width: 100%; background-color: #b3bfde; color: #b3bfde; border: 0; border-top: 1px solid #b3bfde; line-height: 1px; margin-top: 25px; margin-bottom: 25px;"/>
+
+<p style="font-family: Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 30px; padding: 0;"><%= t('emails.welcome.connect_heading') %></p>
+
+<p style="font-family: Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;text-align:center">
+  <a href="<%= login_url %>" class="btn-primary" style="font-family: Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; color: #FFF; text-decoration: none; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; background: #4c6bbe; margin: 25px 10px 20px 0; padding: 0 30px; border-color: #4c6bbe; border-radius: 3px; border-style: solid; border-width:10px 20px;"><%= t('emails.welcome.connect') %></a>
+</p>
+
+<hr style="width: 100%; background-color: #b3bfde; color: #b3bfde; border: 0; border-top: 1px solid #b3bfde; line-height: 1px; margin-top: 25px; margin-bottom: 10px;"/>
+
+<%= render 'shared/mailer/footer' %>

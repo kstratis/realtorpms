@@ -1,62 +1,93 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="X-UA-Compatible"
-          content="IE=edge">
+<head>
+  <meta http-equiv="X-UA-Compatible"
+        content="IE=edge">
 
-    <meta name="format-detection"
-          content="telephone=no">
+  <meta name="format-detection"
+        content="telephone=no">
 
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
-          name='viewport' />
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
+        name='viewport'/>
 
-    <meta name="apple-mobile-web-app-capable"
-          content="yes">
+  <meta name="apple-mobile-web-app-capable"
+        content="yes">
 
-    <meta name="turbolinks-cache-control" content="no-cache">
+  <meta name="turbolinks-cache-control" content="no-cache">
+
+  <!-- full_title is defined in app/helpers/application_helper.rb. title is provided by each view file
+       using the keyword 'provide' If the view file doesn't provide such value, 'full title' returns
+       a generic title -->
+  <title><%= full_title(yield(:title)) %></title>
+  <%= csrf_meta_tags %>
 
 
-    <!-- full_title is defined in app/helpers/application_helper.rb. title is provided by each view file
-         using the keyword 'provide' If the view file doesn't provide such value, 'full title' returns
-         a generic title -->
-    <title><%= full_title(yield(:title)) %></title>
-    <%= csrf_meta_tags %>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <link href="https://transloadit.edgly.net/releases/uppy/v0.23.2/dist/uppy.min.css" rel="stylesheet">
+  <!-- This stylesheet is the uppy.scss. It needs to be placed before the main scss
+       cause it overrides something in the transitions rules which breaks the system.
+       It uses postcss to load the file. Check .postcssrc.yml -->
+  <%= stylesheet_pack_tag 'stylesheets/uppyjs_styles' %>
+  <%= stylesheet_pack_tag 'stylesheets/flatpickr_styles' %>
+  <%= render 'layouts/shared_style_assets' %>
+  <%#= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'components-bundle' %>
-    <%= javascript_pack_tag 'application' %>
+<!--  <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">-->
 
-    <%#= javascript_pack_tag 'hello_react' %>
-    <%= render 'layouts/shim' %>
-  </head>
-  <body>
 
-    <%= render 'layouts/header' %>
+  <!--    <link rel="stylesheet" href="https://i.icomoon.io/public/temp/11ed69058d/Landia/style.css">-->
+  <!--  <link rel="stylesheet" href="https://i.icomoon.io/public/temp/e42336f4f6/Landia/style.css">-->
+  <!--  <link rel="stylesheet" href="https://i.icomoon.io/public/temp/34d6b38209/Landia/style.css">-->
+  <!--  <link rel="stylesheet" href="https://i.icomoon.io/public/temp/7dea02e0bb/Landia/style.css">-->
+  <!--  <link rel="stylesheet" href="https://i.icomoon.io/public/temp/6cbd9fccbb/Landia/style.css">-->
+  <!--  <link rel="stylesheet" href="https://i.icomoon.io/public/temp/fb1d28568a/Landia/style.css">-->
+  <!--  <link rel="stylesheet" href="https://i.icomoon.io/public/temp/c1f69e9892/Landia/style.css">-->
+  <!--  <link rel="stylesheet" href="https://i.icomoon.io/public/temp/c1f0de587f/Landia/style.css">-->
+  <!--  <link rel="stylesheet" href="https://i.icomoon.io/public/temp/9db1d64f31/Landia/style.css">-->
 
-    <div class="container-fluid">
+  <%= render 'layouts/shared_script_assets' %>
+  <%= javascript_pack_tag 'components-bundle' %>
+  <%= javascript_pack_tag 'application' %>
+  <%= javascript_pack_tag 'theme' %>
+  <%= javascript_pack_tag 'datepicker_localization' %>
+  <%= javascript_pack_tag 'date_select' %>
+  <%= javascript_pack_tag 'avatar_preview' %>
+  <%= javascript_pack_tag 'stepper' %>
+  <%= javascript_pack_tag 'validator' %>
 
-      <div class="row">
-        <div class="col-sm-1 col-lg-1 hidden-xs">
-          <%= render 'layouts/sidebar' %>
-        </div>
-        <div class="col-sm-11 col-lg-11">
-          <div class="pr-body-container">
-            <% flash.each do |message_type, message| %>
-                <div class="alert alert-<%= message_type %>"><%= message %></div>
-            <% end %>
-            <div id="page-transition">
-              <%= yield %>
-            </div>
-            <%= render 'layouts/footer' %>
-            <%= debug(params) if Rails.env.development? %>
-          </div>
-        </div>
+
+
+  <%#= javascript_pack_tag 'hello_react' %>
+  <%= render 'layouts/shim' %>
+</head>
+<body>
+
+<!-- .app -->
+<div class="app">
+
+  <%= render 'layouts/flash_messages' %>
+
+  <%= render 'layouts/header' %>
+
+  <%= render 'layouts/aside' %>
+
+  <!-- .app-main -->
+  <main class="app-main">
+    <!-- .wrapper -->
+    <div class="wrapper">
+      <!-- your awesome app content goes here -->
+
+      <div id="page-transition">
+        <%= yield %>
       </div>
+      <%= render 'layouts/footer' %>
+      <%= debug(params) if Rails.env.development? %>
     </div>
+    <!-- /.wrapper -->
+  </main>
+  <!-- /.app-main -->
 
-    <!-- end of container-fluid -->
-  </body>
+</div>
+<!-- /.app -->
+
+</body>
 
 </html>
