@@ -530,6 +530,13 @@ en:
       tip3_title: "Assign properties."
       tip3_body: "Assign properties to partners using access control lists."
       support: "For help/support please drop us an email at:"
+    passwd_reset:
+      greeting: "Password reset"
+      greeting_explained: "You have requested a password reset."
+      heading: "Please click on the link below to reset your password:"
+      reset: "RESET"
+      link_expire: "The link above will expire in 2 hours."
+      wrong_passwd_reset: "If you didn't ask to reset your password, please ignore this email and your password will remain the same."
     invites:
       greeting: "Hi %{name},"
       heading: "Your new account in portal %{brand} is ready."
