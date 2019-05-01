@@ -21,7 +21,7 @@ class UserMailerPreview < ActionMailer::Preview
   # Preview this email at
   # http://lvh.me:3000/rails/mailers/user_mailer/welcome
   def welcome
-    user = User.first
+    user = User.second
     subdomain = Account.find(1).subdomain
     UserMailer.welcome(user, subdomain)
   end

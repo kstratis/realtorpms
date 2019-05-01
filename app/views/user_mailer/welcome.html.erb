@@ -1,39 +1,69 @@
-<p style="font-family: Helvetica, Arial, sans-serif; font-size: 18px; line-height: 1.6; font-weight: normal; margin: 0 0 20px; padding: 0;"><strong><%=  t('emails.welcome.greeting', name: @user.first_name) %></strong></p>
+<p style="font-family: Helvetica, Arial, sans-serif; font-size: 18px; line-height: 1.6; font-weight: normal; margin: 0 0 20px; padding: 0;">
+  <strong><%= t('emails.welcome.greeting', user: @user.first_name) %></strong></p>
 
-<p style="font-family: Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;"><%=  t('emails.welcome.heading', brand: BRANDNAME.capitalize) %>&nbsp;<%=  t('emails.welcome.subheading') %></p>
+<p style="font-family: Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;"><%= t('emails.welcome.heading', brand: BRANDNAME.capitalize) %>&nbsp;<%= t('emails.welcome.subheading') %></p>
 
-<hr style="width: 100%; background-color: #b3bfde; color: #b3bfde; border: 0; border-top: 1px solid #b3bfde; line-height: 1px; margin-top: 25px; margin-bottom: 25px;" />
+<hr style="width: 100%; background-color: #b3bfde; color: #b3bfde; border: 0; border-top: 1px solid #b3bfde; line-height: 1px; margin-top: 25px; margin-bottom: 25px;"/>
 
-<p style="font-family: Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 30px; padding: 0;">Access your portal using the following credentials:</p>
-
-
-<table style="border-collapse:separate; border-spacing: 0 0.5em;">
-  <tr>
-    <td style="font-family: Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px 30px; padding: 0; text-align: right">
-      <strong>Username:</strong>
-    </td>
-
-    <td style="font-family: Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px 30px; padding: 0; text-align: left">&nbsp;&nbsp;&nbsp; admin</td></tr>
-  <tr>
-    <td style="font-family: Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px 30px; padding: 0; text-align: right">
-    <strong>Password:</strong>
-    </td>
-    <td style="font-family: Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px 30px; padding: 0; text-align: left">&nbsp;&nbsp;&nbsp; 9d0f7175</td></tr>
-</table>
+<p style="font-family: Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 30px; padding: 0;"><%= t('emails.welcome.connect_heading') %></p>
 
 <p style="font-family: Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 10px; padding: 0;text-align:center">
-  <a href="http://epignosis-stratis.demo.efrontlearning.com/" class=3D"btn-primary" style="font-family: Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; color: #FFF; text-decoration: none; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; background: #4c6bbe; margin: 25px 10px 20px 0; padding: 0 30px; border-color: #4c6bbe; border-radius: 3px; border-style: solid; border-width:10px 20px;">SIGN IN</a>
+  <a href="<%= login_url %>" class="btn-primary" style="font-family: Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; color: #FFF; text-decoration: none; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; background: #4c6bbe; margin: 25px 10px 20px 0; padding: 0 30px; border-color: #4c6bbe; border-radius: 3px; border-style: solid; border-width:10px 20px;"><%= t('emails.welcome.connect') %></a>
 </p>
 
 <hr style="width: 100%; background-color: #b3bfde; color: #b3bfde; border: 0; border-top: 1px solid #b3bfde; line-height: 1px; margin-top: 25px; margin-bottom: 10px;"/>
 
+<br>
+<div style="text-align:center">
+  <p style="font-family:Helvetica,Arial,sans-serif;font-size:18px;line-height:1.6;font-weight:normal;margin:0 0 20px;padding:0">
+    <strong><%= t('emails.welcome.tips') %></strong></p>
+</div>
 
+<table style="border-collapse:separate;border-spacing:0 1em">
 
-<%= link_to "Welcome", login_url(subdomain: @subdomain ) %>
+  <tbody>
+  <tr style="padding:50px 0">
+    <td style="font-family:Helvetica,Arial,sans-serif;font-size:14px;line-height:1.6;font-weight:normal;margin:0 0 10px 30px;padding:0;text-align:right">
+      <img style="display:inline-block;width:69px;height:auto">
+    </td>
+    <td style="font-family:Helvetica,Arial,sans-serif;font-size:14px;line-height:1.6;font-weight:normal;margin:0 0 10px 30px;padding:0 0 0 15px;text-align:left">
+      <span><b><%= t('emails.welcome.tip1_title') %></b> <%= t('emails.welcome.tip1_body') %></span>
+    </td>
+  </tr>
+  <tr style="padding:50px 0">
+    <td style="font-family:Helvetica,Arial,sans-serif;font-size:14px;line-height:1.6;font-weight:normal;margin:0 0 10px 30px;padding:0;text-align:right">
+      <img style="display:inline-block;width:69px;height:auto">
+    </td>
+    <td style="font-family:Helvetica,Arial,sans-serif;font-size:14px;line-height:1.6;font-weight:normal;margin:0 0 10px 30px;padding:0 0 0 15px;text-align:left">
+      <span><b><%= t('emails.welcome.tip2_title') %></b> <%= t('emails.welcome.tip2_body') %></span>
+    </td>
+  </tr>
+  <tr style="padding:50px 0">
+    <td style="font-family:Helvetica,Arial,sans-serif;font-size:14px;line-height:1.6;font-weight:normal;margin:0 0 10px 30px;padding:0;text-align:right">
+      <img style="display:inline-block;width:69px;height:auto">
+    </td>
+    <td style="font-family:Helvetica,Arial,sans-serif;font-size:14px;line-height:1.6;font-weight:normal;margin:0 0 10px 30px;padding:0 0 0 15px;text-align:left">
+      <span><b><%= t('emails.welcome.tip3_title') %></b> <%= t('emails.welcome.tip3_body') %></span>
+    </td>
+  </tr>
+  </tbody>
+</table>
 
-<p>This link will expire in two hours.</p>
+<!--<p style="font-family:Helvetica,Arial,sans-serif;font-size:14px;line-height:1.6;font-weight:normal;margin:0 0 30px;padding:0"><%#= t('emails.welcome.support', support: SUPPORT) %></p>-->
+<p style="font-family:Helvetica,Arial,sans-serif;font-size:14px;line-height:1.6;font-weight:normal;margin:0 0 30px;padding:0"><%= t('emails.welcome.support') %> <%= mail_to SUPPORT_MAIL %></p>
 
-<p>
-  If you did not request your password to be reset, please ignore this email and
-  your password will stay as it is.
-</p>
+<br>
+
+<!--<p style="font-family:Helvetica,Arial,sans-serif;font-size:14px;line-height:1.6;font-weight:normal;margin:0 0 5px;padding:0">-->
+<!--  <strong>Georgia at eFront</strong></p>-->
+<!--<p style="font-family:Helvetica,Arial,sans-serif;font-size:14px;line-height:1.6;font-weight:normal;margin:0 0 5px;padding:0">Account-->
+<!--  Executive</p>-->
+<!--<p style="font-family:Helvetica,Arial,sans-serif;font-size:14px;line-height:1.6;font-weight:normal;margin:0 0 10px;padding:0">-->
+<!--  <a href="http://www.efrontlearning.com" target="_blank" data-saferedirecturl="https://www.google.com/url?q=http://www.efrontlearning.com&amp;source=gmail&amp;ust=1556746262636000&amp;usg=AFQjCNG6xlpvun7hiyeIwgn1ETIjU-DqXA">www.efrontlearning.com</a>-->
+<!--</p>-->
+
+<div style="text-align:center">
+  <p style="font-family:Helvetica,Arial,sans-serif;font-size:14px;line-height:1.6;font-weight:normal;margin:50px 0 0 0;padding:0;color:#acacac">©
+    <a href="<% root_url %>" target="_blank"><%= BRANDNAME.upcase %></a>.
+    <%= t('sessions.rights') %></p>
+</div>

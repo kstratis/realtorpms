@@ -1,8 +1,9 @@
 class InvitationreceiversController < ApplicationController
 
-  layout 'auth/skeleton'  # show the barebones version only when signing up/in
-  after_action -> { @invitation.destroy! }, only: [:accepted]
+  layout 'auth/skeleton'  # Auth template
 
+  # When clicking on an invite link, always store the url;
+  # It may come handy once an (existing?) user logs in
   def accept
     store_location unless logged_in?
     @invitation = Invitation.find_by!(token: params[:id])
@@ -10,7 +11,6 @@ class InvitationreceiversController < ApplicationController
   end
 
   def accepted
-
     # +find_by!+ throws exception if invitation is not found
     @invitation = Invitation.find_by!(token: params[:id])
 

@@ -403,6 +403,7 @@ en:
       title: "Accept invitation"
       subheading_html: "Accept invitation. If you already have an account, please <a href='%{login_link}'>login first</a>."
       subheading_feedback_html: "Connecting to account: <mark><strong>%{account}</strong></mark>"
+      subheading_feedback_new_user_html: "New user connecting to account: <mark><strong>%{account}</strong></mark>"
       accept_btn: "Accept"
     accepted:
       flash_success: "You have successfully joined the %{account} organization"
@@ -516,5 +517,19 @@ en:
     flash_passwd_reset_expired: "Password reset has expired"
   emails:
     welcome:
-      greeting: "Hi %{name}!"
-      heading: "Welcome to %{brand}. Your new account is ready"
+      greeting: "Hi %{user}!"
+      heading: "Welcome to %{brand}. Your new account is ready."
+      subheading: "Property management will never be the same again."
+      connect_heading: "Access your portal below:"
+      connect: "SIGN IN"
+      tips: "Here are a few tips to get you started:"
+      tip1_title: "Add properties."
+      tip1_body: "Build your inventory fast, easy and secure"
+      tip2_title: "Invite your business partners."
+      tip2_body: "Add new business partners or join an existing partner's portal."
+      tip3_title: "Assign properties."
+      tip3_body: "Assign properties to partners using access control lists."
+      support: "For help/support please drop us an email at:"
+    invites:
+      greeting: "Hi %{name},"
+      heading: "Your new account in portal %{brand} is ready."

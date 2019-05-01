@@ -1,14 +1,12 @@
 module Accounts
   class InvitationsController < Accounts::BaseController
-    # skip_before_action :logged_in_user, :correct_subdomain, only: [:accept, :accepted]
-    # skip_before_action :logged_in_user, only: [:accept, :accepted]
-    # before_action :authorize_owner!, except: [:accept, :accepted]
     before_action :authorize_owner!
 
     def new
       @invitation = Invitation.new
     end
 
+    # Make sure the user an account owner is inviting is not already a member of his domain
     def check_existing_user
       user = current_account.all_users.find_by(email: params[:email])
       render json: {status: "Checked" }, status: user.nil? ? 200 : 403
@@ -40,6 +38,7 @@ module Accounts
 
     private
 
+      # Only account owners may invite users
       def authorize_owner!
         unless owner?
           flash[:danger] = 'Only an account\'s owner can perform such action.'
