@@ -1,3 +1,11 @@
-Welcome to landia!
+<%= t('emails.welcome.greeting', user: @user.first_name) %>
 
-Your new account is ready!
+<%= t('emails.welcome.heading', brand: BRANDNAME.capitalize) %> <%= t('emails.welcome.subheading') %>
+
+<%= t('emails.welcome.connect_heading') %>
+
+<%= login_url %>
+
+<%= t('emails.welcome.support') %> <%= SUPPORT_MAIL %>
+
+©<%= BRANDNAME.upcase %>. <%= t('sessions.rights') %>
