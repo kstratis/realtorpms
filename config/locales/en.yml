@@ -538,5 +538,8 @@ en:
       link_expire: "The link above will expire in 2 hours."
       wrong_passwd_reset: "If you didn't ask to reset your password, please ignore this email and your password will remain the same."
     invites:
-      greeting: "Hi %{name},"
-      heading: "Your new account in portal %{brand} is ready."
+      subject: "Invitation to connect to account %{subdomain} on %{brand}"
+      greeting: "Hi,"
+      greeting_explained_html: "You have received an invite to connect to account %{subdomain} on %{brand}."
+      accept: "ACCEPT"
+      accept_text: "Use the link below to connect:"
