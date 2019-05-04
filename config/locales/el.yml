@@ -275,11 +275,14 @@ el:
         actions: "Ενέργειες"
         admin: "Διαχειριστής"
         user: "Χρήστης"
+        no_results: "Δεν βρέθηκαν συνεργάτες!"
         tooltip_view_profile: "Προβολή προφίλ"
         tooltip_edit_profile: "Επεξεργασία"
         tooltip_delete_profile: "Διαγραφή"
       properties:
         description: "Περιγραφή"
+      pagination:
+        results: "εγγραφές"
       filters:
         title: "Φίλτρα"
         date:
@@ -295,9 +298,9 @@ el:
           sell: "Πώληση"
           rent: "Ενοικίαση"
     users_search:
-      placeholder: "π.χ. Δημήτρης Στεφάνου"
+      placeholder: "Αναζήτηση συνεργάτη..."
     properties_search:
-      placeholder: "Αναζητήση ακινήτου..."
+      placeholder: "Αναζήτηση ακινήτου..."
     properties_view_btn: "Προβολή"
     properties_edit_btn: "Επεξεργασία"
     properties_favourites_tooltip: "Aγαπημένα"
@@ -406,6 +409,7 @@ el:
     accepted:
       flash_success: "Συνδεθήκατε επιτυχώς με τον λογαριασμό: %{account}"
   users:
+    title: "Συνεργάτες"
     flash_delete: "Ο χρήστης διεγράφη επιτυχώς"
     flash_welcome: "Καλωσήλθατε στο %{brand}! Το προφίλ σας είναι έτοιμο"
     flash_profile_updated: "Το προφίλ σας ενημερώθηκε επιτυχώς"
@@ -435,6 +439,8 @@ el:
       photo_subheader: "Κάντε κλικ για ν'αλλάξετε την φωτογραφία προφίλ σας"
       allowed_pic_specs: "JPG, GIF ή PNG 400x400, < 2 MB."
       delete_avatar: "Είστε βέβαιος/βεβαία ότι θέλετε να διαγραφεί η φωτογραφία προφίλ σας;"
+    index:
+      heading: "Κατάλογος συνεργατών"
     flash_user_not_found: "Ο χρήστης δεν βρέθηκε"
   properties:
     identifier: "ID"

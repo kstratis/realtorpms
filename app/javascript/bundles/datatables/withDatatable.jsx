@@ -34,6 +34,7 @@ function withDatatable(WrappedComponent) {
         resultsPerPage: this.props.initial_payload.results_per_page,
         isLoading: false,
         pageCount: Math.ceil(this.props.initial_payload.total_entries / this.props.initial_payload.results_per_page),
+        count: this.props.initial_payload.total_entries,
         /* This is required only in initial loading.
          * We want this to be reflected in our React component. That's why we subtract 1 */
         selectedPage: this.getSelectedPage(),
@@ -56,6 +57,7 @@ function withDatatable(WrappedComponent) {
       this.handleSort = this.handleSort.bind(this);
       this.handleAjaxRequest = this.handleAjaxRequest.bind(this);
       this.handleAssign = this.handleAssign.bind(this);
+      this.handleFreezeUser = this.handleFreezeUser.bind(this);
       this.handleFav = this.handleFav.bind(this);
       this.handleAjaxRequestDelayed = debounce(this.handleAjaxRequest, 300);
       this.compoundDelayedAction = debounce(this.compoundDelayedAction.bind(this), 300);
@@ -118,7 +120,7 @@ function withDatatable(WrappedComponent) {
       this.handleAjaxRequestDelayed(`?${searchParams.toString()}`);
     }
     handleSearchInput(e) {
-      this.setState({ searchInput: e.target.value, isLoading: true });
+      this.setState({ searchInput: e.target.value || '', isLoading: true });
       let searchParams = new URLSearchParams(window.location.search);
       searchParams.delete('page');
       if (e.target.value !== undefined && e.target.value.length > 0) {
@@ -161,9 +163,15 @@ function withDatatable(WrappedComponent) {
         );
     }
 
-    handleSort(field, forcedOrdering='') {
-      // e.persist();
-      // e.preventDefault();
+    handleFreezeUser(e){
+      e.preventDefault();
+      console.log('works');
+
+    }
+
+    handleSort(e, field, forcedOrdering='') {
+      e.preventDefault();
+      // DEBUG
       console.log('handleSort clicked');
       console.log(field, forcedOrdering);
       let updatedOrdering = forcedOrdering ? forcedOrdering : this.state.ordering === 'asc' ? 'desc' : 'asc';
@@ -205,6 +213,7 @@ function withDatatable(WrappedComponent) {
               dataset: newData.dataset,
               pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),
               isLoading: false,
+              count: response.data.total_entries,
               selectedPage: response.data.current_page - 1
             });
           }.bind(this)
@@ -280,6 +289,7 @@ function withDatatable(WrappedComponent) {
             handleFav={this.handleFav}
             advanceByTwo={this.advanceByTwo}
             handleSearchInput={this.handleSearchInput}
+            handleFreezeUser={this.handleFreezeUser}
             i18n={this.props.i18n}
             {...this.state}
           />

@@ -914,3 +914,48 @@ li.page-item{
 .invite-action{
   padding-top: 0;
 }
+
+.page-item-upper, .break-button-upper{
+  display: none;
+}
+
+.search-count-container{
+  padding-top: 7px;
+}
+
+.reduced-opacity {
+  opacity: 0.5;
+}
+
+.no-tasks {
+  border: 3px dotted grey;
+  text-align: center;
+  padding: 20px 0 10px 0;
+  background: #FFFFFF;
+  color: grey;
+  //margin-bottom: 15px;
+}
+
+.no-results {
+  width: 200px;
+  height: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+  background-size: auto 135%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url(dinosaurus.svg);
+}
+
+.count{
+  color: $danger;
+}
+
+.action-btns{
+  white-space: nowrap;
+}
+
+.search-container{
+  margin-bottom: 15px;
+}
