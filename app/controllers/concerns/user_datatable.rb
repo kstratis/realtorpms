@@ -50,6 +50,7 @@ module UserDatatable
           name: "#{user.first_name.first}. #{user.last_name}",
           email: user.email,
           type: user.admin,
+          active: user.active?,
           view_entity_path: user_path(user.id),
           edit_entity_path: edit_user_path(user.id),
           # assignments: user.properties.count,

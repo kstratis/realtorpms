@@ -3,7 +3,7 @@ import React from 'react';
 import axios from 'axios';
 import ReactOnRails from 'react-on-rails';
 const URLSearchParams = require('url-search-params');
-import { debounce, capitalizeFirstLetter } from '../utilities/helpers';
+import { debounce, capitalizeFirstLetter, buildUserURL } from '../utilities/helpers';
 
 // addLocaleData([...en, ...el]);
 
@@ -70,6 +70,7 @@ function withDatatable(WrappedComponent) {
 
     componentDidMount() {
       window.addEventListener('popstate', this.bound_onHistoryButton);
+      $('[data-toggle="tooltip"]').tooltip();
     }
 
     componentWillUnmount() {
@@ -163,13 +164,23 @@ function withDatatable(WrappedComponent) {
         );
     }
 
-    handleFreezeUser(e){
+    handleFreezeUser(e, freeze_url, user_id) {
       e.preventDefault();
-      console.log('works');
-
+      const url = buildUserURL(freeze_url, user_id);
+      axios.patch(url).then((response) => {
+        // DEBUG
+        // console.log(response);
+        const index = this.state.dataset.findIndex(element => element.id === user_id);
+        let element = this.state.dataset[index];
+        element['active'] = !element['active'];
+        let newDataset = [...this.state.dataset];
+        this.setState({
+          dataset: newDataset
+        });
+      });
     }
 
-    handleSort(e, field, forcedOrdering='') {
+    handleSort(e, field, forcedOrdering = '') {
       e.preventDefault();
       // DEBUG
       console.log('handleSort clicked');
@@ -291,6 +302,7 @@ function withDatatable(WrappedComponent) {
             handleSearchInput={this.handleSearchInput}
             handleFreezeUser={this.handleFreezeUser}
             i18n={this.props.i18n}
+            meta={this.props.meta}
             {...this.state}
           />
         </div>

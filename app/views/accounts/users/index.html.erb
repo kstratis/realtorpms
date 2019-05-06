@@ -62,6 +62,9 @@
                 result_count: t('js.datatables.pagination.results'),
                 no_results: t('js.datatables.users.no_results'),
                 search: t('js.users_search.placeholder')
+            },
+            meta: {
+                freeze_link:  toggle_activation_user_url('USERID')
             }
           }, prerender: false) %>
       <!--</div>-->

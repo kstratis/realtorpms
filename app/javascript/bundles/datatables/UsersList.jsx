@@ -18,6 +18,7 @@ const UsersList = ({
   ordering,
   count,
   i18n,
+  meta,
   handleSearchInput,
   handleFreezeUser,
   searchInput
@@ -191,11 +192,11 @@ const UsersList = ({
 
                       {/*<div className="btn-group" role="group" aria-label="...">*/}
                       <a
-                        onClick={e => handleFreezeUser(e)}
-                        title={i18n['datatable']['tooltip_edit_profile']}
+                        onClick={e => handleFreezeUser(e, meta['freeze_link'], entry['id'])}
+                        title={i18n['datatable']['tooltip_freeze_profile']}
                         className="btn btn-md btn-icon btn-secondary btn-action "
                         href={''}>
-                        <i className="fas fa-id-card-alt" />
+                        <i className={`fas fa-user ${entry['active'] ? 'green' : 'red' }`} />
                       </a>
                       {/*</div>*/}
 

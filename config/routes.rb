@@ -41,6 +41,7 @@ Rails.application.routes.draw do
 
       resources :users do
         member do
+          patch :toggle_activation
           delete :delete_avatar
         end
       end

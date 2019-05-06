@@ -23,4 +23,9 @@ const renderHTML = (htmlContent) => {
   return <div dangerouslySetInnerHTML={{__html: htmlContent}} />;
 };
 
-export {debounce, capitalizeFirstLetter, renderHTML};
+const buildUserURL = (freeze_url, user_id) => {
+  return freeze_url.replace(/USERID/i, user_id);
+
+};
+
+export {debounce, capitalizeFirstLetter, renderHTML, buildUserURL};

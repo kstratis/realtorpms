@@ -277,7 +277,7 @@ el:
         user: "Χρήστης"
         no_results: "Δεν βρέθηκαν συνεργάτες!"
         tooltip_view_profile: "Προβολή προφίλ"
-        tooltip_edit_profile: "Επεξεργασία"
+        tooltip_freeze_profile: "Πάγωμα χρήστη - Εάν ενεργοποιηθεί, ο χρήστης δεν θα μπορεί να εισέλθει στο σύστημα."
         tooltip_delete_profile: "Διαγραφή"
       properties:
         description: "Περιγραφή"

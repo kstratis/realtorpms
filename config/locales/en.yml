@@ -279,7 +279,7 @@ en:
         user: "User"
         no_results: "No partners found!"
         tooltip_view_profile: "View profile"
-        tooltip_edit_profile: "Edit"
+        tooltip_freeze_profile: "Freeze user"
         tooltip_delete_profile: "Delete"
       pagination:
         results: "Results"
