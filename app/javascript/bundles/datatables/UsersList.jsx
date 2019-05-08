@@ -101,7 +101,6 @@ const UsersList = ({
                       id="sort_by_email"
                       className={'sortable-header-name'}
                       href={''}
-                      // onClick={e => handleSort(e, 'email', 'asc')}>
                       onClick={e => handleSort(e, 'email')}>
                       <span>{i18n['datatable']['email']}</span>
                       {sorting === 'email' ? (
@@ -119,7 +118,6 @@ const UsersList = ({
                       )}
                     </a>
                   </th>
-                  {/*<th><span>{i18n['datatable']['usertype']}</span></th>*/}
                   <th>
                     <a
                       id="sort_by_date"
@@ -179,28 +177,13 @@ const UsersList = ({
                     </td>
 
                     <td className={'align-middle action-btns'}>
-                      {/*<div className="action-buttons-container table-entry">*/}
-                      {/*<div className="btn-group min-width" role="group" aria-label="...">*/}
-                      {/*<div className="btn-group">*/}
-
-                      {/*<div className="btn-group" role="group" aria-label="...">*/}
-                      {/*<a title={i18n['datatable']['tooltip_view_profile']} className="btn btn-default"*/}
-                      {/*href={entry['view_entity_path']}>*/}
-                      {/*<i className="pr-icon action-button-graphic xs bar-chart"> </i>*/}
-                      {/*</a>*/}
-                      {/*</div>*/}
-
-                      {/*<div className="btn-group" role="group" aria-label="...">*/}
                       <a
                         onClick={e => handleFreezeUser(e, meta['freeze_link'], entry['id'])}
                         title={i18n['datatable']['tooltip_freeze_profile']}
                         className="btn btn-md btn-icon btn-secondary btn-action "
                         href={''}>
-                        <i className={`fas fa-user ${entry['active'] ? 'green' : 'red' }`} />
+                        <i className={`fas fa-user ${entry['active'] ? 'green' : 'red'}`} />
                       </a>
-                      {/*</div>*/}
-
-                      {/*<div className="btn-group" role="group" aria-label="...">*/}
                       <a
                         title={i18n['datatable']['tooltip_delete_profile']}
                         className="btn btn-md btn-icon btn-secondary btn-action"
