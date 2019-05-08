@@ -57,6 +57,7 @@ function withDatatable(WrappedComponent) {
       this.handleSort = this.handleSort.bind(this);
       this.handleAjaxRequest = this.handleAjaxRequest.bind(this);
       this.handleAssign = this.handleAssign.bind(this);
+      this.advanceByTwo = this.advanceByTwo.bind(this);
       this.handleFreezeUser = this.handleFreezeUser.bind(this);
       this.handleFav = this.handleFav.bind(this);
       this.handleAjaxRequestDelayed = debounce(this.handleAjaxRequest, 300);
@@ -89,7 +90,7 @@ function withDatatable(WrappedComponent) {
     }
 
     determineDirection(element) {
-      let ellipsisDomElement = $(element).parent();
+      let ellipsisDomElement = $(element).parent().parent();
       let direction = '+';
       ellipsisDomElement.nextAll().each((i, element) => {
         if ($(element).hasClass('active')) {
@@ -99,7 +100,9 @@ function withDatatable(WrappedComponent) {
       });
       return direction;
     }
+
     advanceByTwo(e) {
+      e.preventDefault();
       const sign = this.determineDirection(e.target);
       if (sign === '+') {
         this.handlePageClick(this.state.selectedPage + 2, true);
@@ -118,7 +121,7 @@ function withDatatable(WrappedComponent) {
         : window.location.pathname;
       if (!browserButtonInvoked) history.pushState({ jsonpage: selected + 1 }, null, newUrlParams);
       // console.log(searchParams.toString());
-      this.handleAjaxRequestDelayed(`?${searchParams.toString()}`);
+      this.handleAjaxRequest(`?${searchParams.toString()}`);
     }
     handleSearchInput(e) {
       this.setState({ searchInput: e.target.value || '', isLoading: true });
@@ -200,6 +203,7 @@ function withDatatable(WrappedComponent) {
     }
 
     handleAjaxRequest(query = '') {
+      console.log('inside handleajaxrequest');
       const object_type = this.props.initial_payload.object_type;
       console.log(object_type);
       let resource;
@@ -222,6 +226,7 @@ function withDatatable(WrappedComponent) {
         .get(resource) // +1 because rails will_paginate starts from 1 while this starts from 0
         .then(
           function(response) {
+            console.log('response received - server page is: ', response.data.current_page);
             let newData = response.data.userslist;
             this.setState({
               dataset: newData.dataset,
