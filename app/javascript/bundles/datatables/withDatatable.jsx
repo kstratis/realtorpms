@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import axios from 'axios';
 import ReactOnRails from 'react-on-rails';
-const URLSearchParams = require('url-search-params');
+import URLSearchParams from '@ungap/url-search-params';
 import { debounce, capitalizeFirstLetter, buildUserURL } from '../utilities/helpers';
 
 // addLocaleData([...en, ...el]);
@@ -181,7 +181,10 @@ function withDatatable(WrappedComponent) {
     }
 
     handleSort(e, field, forcedOrdering = '') {
-      e.preventDefault();
+      // Sorting in property listings doesn't occur inside a click event and preventDefault is undefined.
+      if (typeof e.preventDefault === "function") {
+        e.preventDefault();
+      }
       // DEBUG
       console.log('handleSort clicked');
       console.log(field, forcedOrdering);
