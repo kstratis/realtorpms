@@ -1,4 +1,6 @@
 module UserDatatable
+  extend ActiveSupport::Concern
+
   def filter_users
     if params[:page]
       param = Integer(params[:page]) rescue nil
@@ -46,7 +48,8 @@ module UserDatatable
     @users.each do |user|
       hash = {
           id: user.id,
-          avatar_url: helpers.gravatar_for(user, size: 64, link_only: true),
+          # avatar_url: helpers.gravatar_for(user, size: 64, link_only: true),
+          avatar_url: user_avatar(user, nil, nil, true),
           name: "#{user.first_name.first}. #{user.last_name}",
           email: user.email,
           type: user.admin,

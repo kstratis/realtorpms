@@ -1,4 +1,6 @@
 module OwnerFilter
+  extend ActiveSupport::Concern
+
   def filter_owners
     # @locations = Location.all
 
@@ -29,7 +31,7 @@ module OwnerFilter
 
     respond_to do |format|
       format.html
-      format.json {render json: { data: data, status: 200} }
+      format.json {render json: {data: data, status: 200}}
     end
 
   end

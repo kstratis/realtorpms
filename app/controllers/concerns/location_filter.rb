@@ -1,4 +1,6 @@
- module LocationFilter
+module LocationFilter
+  extend ActiveSupport::Concern
+
   def filter_locations
     # @locations = Location.all
 
@@ -29,7 +31,7 @@
 
     respond_to do |format|
       format.html
-      format.json {render json: { data: data, status: 200} }
+      format.json {render json: {data: data, status: 200}}
     end
 
   end
