@@ -4,6 +4,7 @@ import ReactPaginate from 'react-paginate';
 import withDatatable from './withDatatable';
 import Search from './Search';
 import Spinner from './Spinner';
+import Avatar from '../components/Avatar';
 
 const UsersList = ({
   handlePageClick,
@@ -150,7 +151,7 @@ const UsersList = ({
                   <tr key={entry['id']}>
                     <td className={'align-middle'}>
                       <div className={'table-entry'}>
-                        <img className="avatar-table-entry" src={entry['avatar_url']} />
+                        <Avatar data={entry['avatar']} />
                         <span>
                           <a className={'user-entry-color'} href={entry['view_entity_path']}>
                             {entry['name']}

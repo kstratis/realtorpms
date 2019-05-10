@@ -3,7 +3,7 @@ module UserAvatar
 
   def alphatar_for(user = nil, classnames = nil, id = nil, js = false)
     if js
-      puts "todo"
+      "#{user.first_name.upcase.first}#{user.last_name.upcase.first}"
     else
       content_tag :div, "#{user.first_name.upcase.first}#{user.last_name.upcase.first}", class: "alphatar #{classnames}", style: "background-color: ##{user.try(:color) || 'B76BA3'}", alt: "profile-pic", id: "#{id}"
     end
