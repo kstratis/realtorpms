@@ -130,6 +130,7 @@ module Accounts
         @property.images.find(id).purge
       end
 
+      # todo internationalize the notice message
       respond_to do |format|
         if @property.update(property_params)
           format.html {redirect_to @property, flash: {success: "Property was successfully updated."}}
@@ -145,6 +146,7 @@ module Accounts
     # DELETE /properties/1.json
     def destroy
       @property.destroy
+      # todo internationalize the notice message
       respond_to do |format|
         format.html {redirect_to properties_url, notice: 'Property was successfully destroyed.'}
         format.json {head :no_content}

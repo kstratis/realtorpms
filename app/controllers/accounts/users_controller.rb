@@ -1,6 +1,5 @@
 module Accounts
   class UsersController < Accounts::BaseController
-    include UserDatatable
 
     # Shows all account users
     before_action :all_account_users, only: [:show]

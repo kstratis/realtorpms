@@ -3,6 +3,7 @@ module Accounts
     include UserAvatar
     include LocationFilter
     include OwnerFilter
+    include UserDatatable
 
     helper UserAvatar
 

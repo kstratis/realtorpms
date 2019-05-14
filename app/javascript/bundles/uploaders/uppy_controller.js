@@ -23,6 +23,7 @@ $(document).on('turbolinks:load', function(e) {
     disableInformer: true,
     disableStatusBar: true,
     showProgressDetails: false,
+    proudlyDisplayPoweredByUppy: false,
     hideProgressAfterFinish: true,
     locale: {
       strings: {
