@@ -220,6 +220,7 @@ module Accounts
                                        :adspitogatos,
                                        :ownerid,
                                        :noowner,
+                                       :avatar,
                                        {owner_attributes: [:first_name, :last_name, :email, :telephones]},
                                        # attachments: [],
                                        delete_images: [],
