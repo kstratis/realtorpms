@@ -673,7 +673,36 @@
                   <!-- fieldset -->
                   <fieldset>
                     <legend><%= t('js.forms.properties.wizard.step6.title') %></legend> <!-- .row -->
+                    <div class="row mb-3">
+
+
+                      <div class="user-avatar user-avatar-xl property-avatar-xl fileinput-button">
+                        <div class="fileinput-button-label"><%= t('properties.new.set_cover') %></div>
+
+                        <%= render_avatar(property.object, "alphatar-edit property-alphatar", "avatar_preview") %>
+                        <%= property.file_field :avatar, id: "avatar_upload" %>
+                      </div><!-- /avatar -->
+                      <!-- .media-body -->
+                      <div class="media-body pl-3">
+                        <h3 class="card-title text-left"><%= t('properties.new.photo_header') %></h3>
+                        <h6 class="card-subtitle text-muted"><%= t('properties.new.photo_subheader') %></h6>
+                        <p class="card-text">
+                          <% if current_user.avatar.attached? %>
+                            <%= link_to delete_avatar_user_url, method: :delete, data: {confirm: t('users.edit.delete_avatar')} do %>
+                              <i class="fa fa-trash fa-fw"></i></a>&nbsp;|&nbsp;<small><%= t('users.edit.allowed_pic_specs') %></small>
+                            <% end %>
+                          <% else %>
+                            <small><%= t('users.edit.allowed_pic_specs') %></small>
+                          <% end %>
+
+                        </p><!-- The avatar upload progress bar -->
+
+                      </div><!-- /.media-body -->
+
+                    </div>
                     <div class="row">
+                      <hr class="mt-5">
+
                       <div class="d-flex flex-column flex-grow-1 justify-content-center">
                         <%= content_tag :div, class: "", id: "uppy", data: {
                             i18n: {
@@ -695,7 +724,7 @@
 
                 <input id="preventformsubmit" type="hidden">
                 <!-- .emitters among other things serves as a signal to initialize ActiveStorage-->
-                <%= property.file_field :images, class: 'form-control emitters', multiple: true, direct_upload: true%>
+                <%= property.file_field :images, class: 'form-control emitters', multiple: true, direct_upload: true %>
                 <%= render "accounts/helpers/locale" %>
 
               <% end %> <!-- /form -->

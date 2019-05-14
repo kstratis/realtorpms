@@ -9,13 +9,21 @@ module UserAvatar
     end
   end
 
-  def user_avatar(user, classnames = nil, id = nil, js = false)
-    if user.avatar.attached?
-      js ? url_for(user.avatar) : image_tag(user.avatar, class: classnames, id: id)
+  def render_avatar(entity, classnames = nil, id = nil, js = false)
+    if entity.avatar.attached?
+      js ? url_for(entity.avatar) : image_tag(entity.avatar, class: classnames, id: id)
     else
-      # gravatar_for user, size: 64, classname: 'avatar-outline', link_only: false, big_default_size: true
-      # puts 'nothing'
-      alphatar_for user, classnames, id, js
+
+      if entity.class == User
+        # gravatar_for entity, size: 64, classname: 'avatar-outline', link_only: false, big_default_size: true
+        # puts 'nothing'
+        alphatar_for entity, classnames, id, js
+      else
+        content_tag :div, "", class: "alphatar #{classnames}", id: "#{id}" do
+          content_tag :i, "", class: "pr-icon md house-avatar-placeholder"
+        end
+      end
+
     end
   end
 

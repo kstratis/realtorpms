@@ -455,6 +455,9 @@ en:
     new:
       heading: "Add new property"
       add_button: "Add property"
+      set_cover: "Cover"
+      photo_header: "Cover photo"
+      photo_subheader: "Click to change the cover photo for the property"
     edit:
       heading: "Edit property"
       edit_button: "Update"

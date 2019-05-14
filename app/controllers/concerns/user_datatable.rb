@@ -49,7 +49,7 @@ module UserDatatable
       hash = {
           id: user.id,
           # avatar_url: helpers.gravatar_for(user, size: 64, link_only: true),
-          avatar: {url: user_avatar(user, nil, nil, true), usercolor: user.try(:color) || 'B76BA3'},
+          avatar: {url: render_avatar(user, nil, nil, true), usercolor: user.try(:color) || 'B76BA3'},
           name: "#{user.first_name.first}. #{user.last_name}",
           email: user.email,
           type: user.admin,

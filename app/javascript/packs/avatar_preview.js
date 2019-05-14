@@ -1,3 +1,4 @@
+// Browser upload file reader
 $(document).on('turbolinks:load', function(e) {
   const $avatar_upload = $('#avatar_upload');
   if ($avatar_upload.length < 1) return;

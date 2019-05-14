@@ -975,3 +975,17 @@ li.page-item{
 .user-avatar-js {
   margin-right: 8px;
 }
+
+.property-avatar-xl{
+  border-radius: 3px;
+  width: 16rem;
+  height: 9rem;
+  img{
+    border-radius: unset;
+  }
+}
+
+.property-alphatar{
+  padding-top: 15px;
+}
+
