@@ -68,6 +68,21 @@ module Accounts
       filter_users
     end
 
+    def delete_avatar
+      property = Property.find(params[:id])
+      property.avatar.purge if property.avatar.attached?
+      # property.reload
+      # render :json => {:status => "OK", :type => 'unfaved' }
+      respond_to do |format|
+        format.html
+        format.js {render 'accounts/properties/avatar_removed', locals: {resource: property}}
+        # format.json {render json: {}, status: :no_content}
+      end
+
+
+      # redirect_to edit_property_path(property)
+    end
+
     # GET /properties/1/edit
     def edit
       @property = Property.find(params[:id])
@@ -107,14 +122,12 @@ module Accounts
           puts 'form saving successfully'
           # todo internationalize the notice message
           format.html {redirect_to @property, notice: 'Property was successfully created.'}
-          # format.js {render :create_result}
           format.js {render 'shared/ajax/create', locals: {resource: @property}}
         else
           @property.errors.each do |field, error|
             puts "#{field}: #{error}"
           end
           format.html {render :new}
-          # format.js {render :create_result}
           format.js {render 'shared/ajax/create', locals: {resource: @property}}
         end
       end

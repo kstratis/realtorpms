@@ -686,18 +686,20 @@
 
                       <div class="user-avatar user-avatar-xl property-avatar-xl fileinput-button">
                         <div class="fileinput-button-label"><%= t('properties.new.set_cover') %></div>
-
-                        <%= render_avatar(property.object, "alphatar-edit property-alphatar", "avatar_preview") %>
-                        <%= property.file_field :avatar, id: "avatar_upload" %>
+                        <div id="avatar-wrapper">
+                          <%= render_avatar(property.object, "alphatar-edit property-alphatar", "avatar_preview") %>
+                        </div>
+                        <%= property.file_field :avatar, id: "avatar_upload", class: 'form-control', multiple: false, direct_upload: false %>
                       </div><!-- /avatar -->
                       <!-- .media-body -->
                       <div class="media-body pl-3">
-                        <h3 class="card-title text-left"><%= t('properties.new.photo_header') %></h3>
+                        <h3 class="card-title text-left"><%= t('properties.new.photo_header') %>&nbsp;<span class="property-cover-tooltip" data-toggle="tooltip" data-placement="top" title="<%= t('properties.new.tooltip') %>"><i class="fas fa-info-circle"></i></span></h3>
                         <h6 class="card-subtitle text-muted"><%= t('properties.new.photo_subheader') %></h6>
                         <p class="card-text">
                           <% if property.object.avatar.attached? %>
-                            <%= link_to delete_avatar_user_url, method: :delete, data: {confirm: t('users.edit.delete_avatar')} do %>
-                              <i class="fa fa-trash fa-fw"></i></a>&nbsp;|&nbsp;<small><%= t('users.edit.allowed_pic_specs') %></small>
+
+                            <%= link_to delete_avatar_property_url, method: :delete, class: 'delete-avatar', data: {confirm: t('properties.edit.delete_avatar')}, remote: true do %>
+                              <i class="fa fa-trash fa-fw"></i></a><span class="spacer">&nbsp;|&nbsp;</span><small><%= t('properties.edit.allowed_pic_specs') %></small>
                             <% end %>
                           <% else %>
                             <small><%= t('users.edit.allowed_pic_specs') %></small>

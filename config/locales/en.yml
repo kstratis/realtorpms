@@ -458,9 +458,12 @@ en:
       set_cover: "Cover"
       photo_header: "Cover photo"
       photo_subheader: "Click to change the cover photo for the property"
+      tooltip: "The cover picture is a unique image used to identify each property. Should you choose one, mind that you don't need to reupload it in the photos section below."
     edit:
       heading: "Edit property"
       edit_button: "Update"
+      allowed_pic_specs: "JPG, GIF or PNG 400x400, < 2 MB."
+      delete_avatar: "Are you sure you want to delete the cover photo?"
     created:
       message: "Property successfully added"
       return: "Return"

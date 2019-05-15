@@ -28,6 +28,7 @@ $(document).on('turbolinks:load', function(e) {
     locale: {
       strings: {
         name: translations.filename,
+        dropHint: translations.dropHint,
         editing: `${translations.editing} %{file}`,
         dropPaste: `${translations.dropPaste} %{browse}`,
         browse: translations.browse,

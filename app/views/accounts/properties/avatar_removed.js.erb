@@ -1,0 +1,5 @@
+//$('.delete-avatar, .spacer').hide();
+$('.delete-avatar, .spacer').fadeOut('fast', function() {
+  var response = $("<%= escape_javascript(render 'removed', locals: {resource: resource})%>").hide();
+  $("#avatar-wrapper").replaceWith(response.fadeIn('fast'));
+});

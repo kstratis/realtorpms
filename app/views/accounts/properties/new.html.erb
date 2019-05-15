@@ -684,17 +684,16 @@
                       </div><!-- /avatar -->
                       <!-- .media-body -->
                       <div class="media-body pl-3">
-                        <h3 class="card-title text-left"><%= t('properties.new.photo_header') %></h3>
+                        <h3 class="card-title text-left"><%= t('properties.new.photo_header') %>&nbsp;<span class="property-cover-tooltip" data-toggle="tooltip" data-placement="top" title="<%= t('properties.new.tooltip') %>"><i class="fas fa-info-circle"></i></span></h3>
                         <h6 class="card-subtitle text-muted"><%= t('properties.new.photo_subheader') %></h6>
                         <p class="card-text">
-                          <% if current_user.avatar.attached? %>
+                          <% if property.object.avatar.attached? %>
                             <%= link_to delete_avatar_user_url, method: :delete, data: {confirm: t('users.edit.delete_avatar')} do %>
-                              <i class="fa fa-trash fa-fw"></i></a>&nbsp;|&nbsp;<small><%= t('users.edit.allowed_pic_specs') %></small>
+                              <i class="fa fa-trash fa-fw"></i>&nbsp;|&nbsp;<small><%= t('users.edit.allowed_pic_specs') %></small>
                             <% end %>
                           <% else %>
                             <small><%= t('users.edit.allowed_pic_specs') %></small>
                           <% end %>
-
                         </p><!-- The avatar upload progress bar -->
 
                       </div><!-- /.media-body -->

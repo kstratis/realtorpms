@@ -37,6 +37,9 @@ Rails.application.routes.draw do
       resources :properties do
         # resources :build, controller: 'property_steps'
         resource :favorites, only: [:create, :destroy]
+        member do
+          delete :delete_avatar
+        end
       end
 
       resources :users do
