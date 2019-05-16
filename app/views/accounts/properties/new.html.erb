@@ -723,7 +723,7 @@
 
                 <input id="preventformsubmit" type="hidden">
                 <!-- .emitters among other things serves as a signal to initialize ActiveStorage-->
-                <%= property.file_field :images, class: 'form-control emitters', multiple: true, direct_upload: true %>
+                <%= property.file_field :images, class: 'form-control uppy-emitters', multiple: true, direct_upload: true %>
                 <%= render "accounts/helpers/locale" %>
 
               <% end %> <!-- /form -->

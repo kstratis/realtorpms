@@ -689,7 +689,7 @@
                         <div id="avatar-wrapper">
                           <%= render_avatar(property.object, "alphatar-edit property-alphatar", "avatar_preview") %>
                         </div>
-                        <%= property.file_field :avatar, id: "avatar_upload", class: 'form-control', multiple: false, direct_upload: false %>
+                        <%= property.file_field :avatar, id: "avatar_upload", class: 'form-control standard-emitters', multiple: false, direct_upload: true %>
                       </div><!-- /avatar -->
                       <!-- .media-body -->
                       <div class="media-body pl-3">
@@ -733,7 +733,7 @@
                 </div><!-- Step 6 END -->
 
                 <input id="preventformsubmit" type="hidden">
-                <%= property.file_field :images, class: 'form-control emitters', multiple: true, direct_upload: true %>
+                <%= property.file_field :images, class: 'form-control uppy-emitters', multiple: true, direct_upload: true %>
                 <%= render "accounts/helpers/locale" %>
 
               <% end %> <!-- /form -->
