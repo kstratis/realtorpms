@@ -26,7 +26,8 @@
     "stacked-menu": "https://gitlab.com/bent10/stacked-menu.git#master",
     "uppy": "^1.0.1",
     "@ungap/url-search-params": "^0.1.2",
-    "chart.js": "^2.8.0"
+    "chart.js": "^2.8.0",
+    "webpack": "^4.31.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
