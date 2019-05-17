@@ -7,6 +7,8 @@ set :repo_url, "git@gitlab.com:konos5/propertyx.git"
 # Deploy to the user's home directory
 set :deploy_to, "/home/deploy/projects/#{fetch :application}"
 
+set :rails_env, "production"
+
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
 
 # Only keep the last 2 releases to save disk space
@@ -23,6 +25,26 @@ namespace :deploy do
       end
     end
   end
+end
+
+namespace :deploy do
+  namespace :db do
+    desc "Load the database schema if needed"
+    task load: [:set_rails_env] do
+      on primary :db do
+        if not test(%Q[[ -e "#{shared_path.join(".schema_loaded")}" ]])
+          within release_path do
+            with rails_env: fetch(:rails_env) do
+              execute :rake, "db:schema:load"
+              execute :touch, shared_path.join(".schema_loaded")
+            end
+          end
+        end
+      end
+    end
+  end
+
+  before "deploy:migrate", "deploy:db:load"
 end
 
 
