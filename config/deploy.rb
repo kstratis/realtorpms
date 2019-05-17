@@ -1,7 +1,7 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.11.0"
 
-set :application, "landia"
+set :application, "propertyx"
 set :repo_url, "git@gitlab.com:konos5/propertyx.git"
 
 # Deploy to the user's home directory
