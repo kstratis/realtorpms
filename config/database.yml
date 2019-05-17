@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: propertyx_production
-  username: propertyx
+  database: landia
+  username: deploy
   password: <%= ENV['PROPERTYX_DATABASE_PASSWORD'] %>
