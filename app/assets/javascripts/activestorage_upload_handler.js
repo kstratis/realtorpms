@@ -2,7 +2,12 @@ $(document).on('turbolinks:load', function(e) {
   var randomdate = Date.now();
   var uploadErrorExists = false;
   addEventListener('direct-upload:initialize', function(event) {
+
     var file = event.detail.file;
+    if (file.source === 'formfile') {
+      $('#property-avatar-spinner').fadeIn();
+      return;
+    }
     window.uppy_uploader.emit('upload-started', window.uppy_uploader.getState().files[file.id], {
       uploader: 'activestorage',
       bytesUploaded: 0,
@@ -16,6 +21,7 @@ $(document).on('turbolinks:load', function(e) {
 
   addEventListener('direct-upload:progress', function(event) {
     var file = event.detail.file;
+    if (file.source === 'formfile') return;
     var bytesUploaded = event.detail.bytesUploaded;
     window.uppy_uploader.emit('upload-progress', window.uppy_uploader.getState().files[file.id], {
       uploader: 'activestorage',
@@ -30,6 +36,10 @@ $(document).on('turbolinks:load', function(e) {
     event.preventDefault();
     var file = event.detail.file;
     var error = event.detail.error;
+    if (file.source === 'formfile'){
+      $('#property-avatar-spinner').fadeOut();
+      return;
+    }
     // const {id, error} = event.detail;
     // uppy.on('upload-error', (file, error) => {
     //   console.log('error with file:', file.id)
@@ -47,6 +57,11 @@ $(document).on('turbolinks:load', function(e) {
 
   addEventListener('direct-upload:end', function(event) {
     var file = event.detail.file;
+    // Assuming avatar is
+    if (file.source === 'formfile') {
+      $('#property-avatar-spinner').fadeOut();
+      return;
+    }
     if (!uploadErrorExists) {
       window.uppy_uploader.emit('upload-success', window.uppy_uploader.getState().files[file.id], {
         message: 'Completed Successfully'

@@ -665,13 +665,13 @@ i.fas.fa-heart.colored{
   padding: 20px 15px 0 15px;
 }
 
-.uppy-Dashboard-poweredBy{
-  display: none;
-}
-
-.uppy-Dashboard-inner{
-  border: 5px dotted rgba(147, 147, 147, .2)
-}
+//.uppy-Dashboard-poweredBy{
+//  display: none;
+//}
+//
+//.uppy-Dashboard-inner{
+//  border: 5px dotted rgba(147, 147, 147, .2)
+//}
 
 .disabledElement {
   pointer-events: none;
@@ -682,7 +682,7 @@ i.fas.fa-heart.colored{
   background: black;
 }
 
-.emitters{
+.uppy-emitters{
   display: none;
 }
 
@@ -913,4 +913,90 @@ li.page-item{
 
 .invite-action{
   padding-top: 0;
+}
+
+.page-item-upper, .break-button-upper{
+  display: none;
+}
+
+.search-count-container{
+  padding-top: 7px;
+}
+
+.reduced-opacity {
+  opacity: 0.5;
+}
+
+.no-tasks {
+  border: 3px dotted grey;
+  text-align: center;
+  padding: 20px 0 10px 0;
+  background: #FFFFFF;
+  color: grey;
+  //margin-bottom: 15px;
+}
+
+.no-results {
+  width: 200px;
+  height: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+  background-size: auto 135%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url(dinosaurus.svg);
+}
+
+.count{
+  color: $danger;
+}
+
+.action-btns{
+  white-space: nowrap;
+}
+
+.search-container{
+  margin-bottom: 15px;
+}
+
+.green{
+  color: $teal !important;
+}
+
+.red{
+  color: $red !important;
+}
+
+.avatar-wrapper {
+  display: inline-block;
+}
+
+.user-avatar-js {
+  margin-right: 8px;
+}
+
+.property-avatar-xl{
+  border-radius: 3px;
+  width: 16rem;
+  height: 9rem;
+  img{
+    border-radius: unset;
+  }
+}
+
+.property-alphatar{
+  padding-top: 15px;
+}
+
+.property-cover-tooltip{
+  cursor: pointer;
+}
+
+.form-control:disabled.file-emitters, .form-control[readonly].file-emitters {
+  opacity: 0;
+}
+
+#property-avatar-spinner{
+  display: none;
 }

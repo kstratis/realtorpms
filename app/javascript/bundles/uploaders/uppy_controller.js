@@ -23,10 +23,12 @@ $(document).on('turbolinks:load', function(e) {
     disableInformer: true,
     disableStatusBar: true,
     showProgressDetails: false,
+    proudlyDisplayPoweredByUppy: false,
     hideProgressAfterFinish: true,
     locale: {
       strings: {
         name: translations.filename,
+        dropHint: translations.dropHint,
         editing: `${translations.editing} %{file}`,
         dropPaste: `${translations.dropPaste} %{browse}`,
         browse: translations.browse,

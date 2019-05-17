@@ -12,6 +12,7 @@ class Property < ApplicationRecord
   accepts_nested_attributes_for :owner
   has_many :assignments
   has_many_attached :images
+  has_one_attached :avatar
   has_and_belongs_to_many :extras
 
   # https://stackoverflow.com/a/38845388/178728

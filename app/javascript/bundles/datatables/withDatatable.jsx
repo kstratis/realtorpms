@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import axios from 'axios';
 import ReactOnRails from 'react-on-rails';
-const URLSearchParams = require('url-search-params');
-import { debounce, capitalizeFirstLetter } from '../utilities/helpers';
+import URLSearchParams from '@ungap/url-search-params';
+import { debounce, capitalizeFirstLetter, buildUserURL } from '../utilities/helpers';
 
 // addLocaleData([...en, ...el]);
 
@@ -34,6 +34,7 @@ function withDatatable(WrappedComponent) {
         resultsPerPage: this.props.initial_payload.results_per_page,
         isLoading: false,
         pageCount: Math.ceil(this.props.initial_payload.total_entries / this.props.initial_payload.results_per_page),
+        count: this.props.initial_payload.total_entries,
         /* This is required only in initial loading.
          * We want this to be reflected in our React component. That's why we subtract 1 */
         selectedPage: this.getSelectedPage(),
@@ -56,6 +57,8 @@ function withDatatable(WrappedComponent) {
       this.handleSort = this.handleSort.bind(this);
       this.handleAjaxRequest = this.handleAjaxRequest.bind(this);
       this.handleAssign = this.handleAssign.bind(this);
+      this.advanceByTwo = this.advanceByTwo.bind(this);
+      this.handleFreezeUser = this.handleFreezeUser.bind(this);
       this.handleFav = this.handleFav.bind(this);
       this.handleAjaxRequestDelayed = debounce(this.handleAjaxRequest, 300);
       this.compoundDelayedAction = debounce(this.compoundDelayedAction.bind(this), 300);
@@ -68,6 +71,7 @@ function withDatatable(WrappedComponent) {
 
     componentDidMount() {
       window.addEventListener('popstate', this.bound_onHistoryButton);
+      $('[data-toggle="tooltip"]').tooltip();
     }
 
     componentWillUnmount() {
@@ -86,7 +90,7 @@ function withDatatable(WrappedComponent) {
     }
 
     determineDirection(element) {
-      let ellipsisDomElement = $(element).parent();
+      let ellipsisDomElement = $(element).parent().parent();
       let direction = '+';
       ellipsisDomElement.nextAll().each((i, element) => {
         if ($(element).hasClass('active')) {
@@ -96,7 +100,10 @@ function withDatatable(WrappedComponent) {
       });
       return direction;
     }
+
     advanceByTwo(e) {
+      e.preventDefault();
+      e.stopPropagation();
       const sign = this.determineDirection(e.target);
       if (sign === '+') {
         this.handlePageClick(this.state.selectedPage + 2, true);
@@ -115,10 +122,10 @@ function withDatatable(WrappedComponent) {
         : window.location.pathname;
       if (!browserButtonInvoked) history.pushState({ jsonpage: selected + 1 }, null, newUrlParams);
       // console.log(searchParams.toString());
-      this.handleAjaxRequestDelayed(`?${searchParams.toString()}`);
+      this.handleAjaxRequest(`?${searchParams.toString()}`);
     }
     handleSearchInput(e) {
-      this.setState({ searchInput: e.target.value, isLoading: true });
+      this.setState({ searchInput: e.target.value || '', isLoading: true });
       let searchParams = new URLSearchParams(window.location.search);
       searchParams.delete('page');
       if (e.target.value !== undefined && e.target.value.length > 0) {
@@ -161,9 +168,28 @@ function withDatatable(WrappedComponent) {
         );
     }
 
-    handleSort(field, forcedOrdering='') {
-      // e.persist();
-      // e.preventDefault();
+    handleFreezeUser(e, freeze_url, user_id) {
+      e.preventDefault();
+      const url = buildUserURL(freeze_url, user_id);
+      axios.patch(url).then((response) => {
+        // DEBUG
+        // console.log(response);
+        const index = this.state.dataset.findIndex(element => element.id === user_id);
+        let element = this.state.dataset[index];
+        element['active'] = !element['active'];
+        let newDataset = [...this.state.dataset];
+        this.setState({
+          dataset: newDataset
+        });
+      });
+    }
+
+    handleSort(e, field, forcedOrdering = '') {
+      // Sorting in property listings doesn't occur inside a click event and preventDefault is undefined.
+      if (typeof e.preventDefault === "function") {
+        e.preventDefault();
+      }
+      // DEBUG
       console.log('handleSort clicked');
       console.log(field, forcedOrdering);
       let updatedOrdering = forcedOrdering ? forcedOrdering : this.state.ordering === 'asc' ? 'desc' : 'asc';
@@ -179,7 +205,8 @@ function withDatatable(WrappedComponent) {
 
     handleAjaxRequest(query = '') {
       const object_type = this.props.initial_payload.object_type;
-      console.log(object_type);
+      // DEBUG
+      // console.log(object_type);
       let resource;
       switch (object_type) {
         case 'property_users':
@@ -205,6 +232,7 @@ function withDatatable(WrappedComponent) {
               dataset: newData.dataset,
               pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),
               isLoading: false,
+              count: response.data.total_entries,
               selectedPage: response.data.current_page - 1
             });
           }.bind(this)
@@ -232,6 +260,7 @@ function withDatatable(WrappedComponent) {
       // Get the type of method from data-method
       const method = e.target.dataset['methodtype'];
       let entity = this.props.initial_payload.object_type;
+      // todo This needs refactoring
       axios[method](`/assignments/property/${pid}/user/${uid}.json`) // +1 because rails will_paginate starts from 1 while this starts from 0
         .then(
           function(response) {
@@ -280,7 +309,9 @@ function withDatatable(WrappedComponent) {
             handleFav={this.handleFav}
             advanceByTwo={this.advanceByTwo}
             handleSearchInput={this.handleSearchInput}
+            handleFreezeUser={this.handleFreezeUser}
             i18n={this.props.i18n}
+            meta={this.props.meta}
             {...this.state}
           />
         </div>

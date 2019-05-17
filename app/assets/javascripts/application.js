@@ -36,4 +36,3 @@ jQuery.fn.returnOnClick = function(location) {
   });
   return this;
 };
-

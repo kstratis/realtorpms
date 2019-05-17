@@ -1,3 +1,36 @@
+def session_data(request)
+  session_key = Rails.application.config.session_options[:key]
+  request.cookie_jar.signed_or_encrypted[session_key] || {}
+end
+
+user = lambda do |request|
+  begin
+    session_stored_userid = session_data(request)["user_id"]
+    u = User.find(session_stored_userid )
+    "#{u.first_name.first}.#{u.last_name}"
+  rescue
+    'Anonymous'
+  end
+end
+
+user_test = lambda do |request|
+  begin
+    puts 'RUNNING user TEST'
+    # puts session_data
+    # puts session
+    # session(request)
+  rescue
+    # raise # This should make everything fail. If things don't fail this part of the code is untested
+    # user = User.find_by(id: user_id)
+    # if user && user.authenticated?(:remember, cookies[:remember_token])
+    #   log_in user
+    #   @current_user = user
+    # end
+      nil
+    end
+
+end
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -44,6 +77,8 @@ Rails.application.configure do
 
   # Suppress logger output for asset requests.
   config.assets.quiet = true
+
+  config.log_tags = [ :subdomain, user ]
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true

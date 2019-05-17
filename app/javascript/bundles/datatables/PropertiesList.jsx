@@ -83,7 +83,6 @@ const PropertiesList = ({
           <div className={'card-deck'}>
             {dataset.map((entry, index) => (
               <div className={'col-sm-6 col-lg-4'} key={entry.id}>
-                {console.log(entry)}
                 <div className="card mb-4 mt-2 ">
 
                   {/*<div className="placeholder" style=""*/}
@@ -243,7 +242,7 @@ const PropertiesList = ({
                     ...
                   </span>
                 }
-                breakClassName={'break-button'}
+                breakClassName={'break-button break-button-upper'}
                 pageCount={pageCount}
                 marginPagesDisplayed={2}
                 pageRangeDisplayed={5}

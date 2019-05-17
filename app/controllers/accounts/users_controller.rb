@@ -6,6 +6,7 @@ module Accounts
     before_action :user_self, only: [:edit, :update] # Allows editing only on each user's self
     before_action :owner_exclusive, only: [:new, :create, :destroy]
     before_action :check_page_validity, only: [:index]
+    before_action :find_user!, only: [:delete_avatar, :toggle_activation]
 
     # layout 'auth/skeleton', except: [:show, :edit, :update, :index, :new]  # show the barebones version only when signing up
 
@@ -66,9 +67,18 @@ module Accounts
       redirect_to edit_user_path(user)
     end
 
+    def toggle_activation
+      @user.toggle!(:active)
+      render :json => {:status => "OK", :user_active => @user.active?}
+    end
+
     private
       def user_params
         params.require(:user).permit(:avatar, :first_name, :last_name, :email, :dob, :phone1, :locale, :password, :password_confirmation)
+      end
+
+      def find_user!
+        @user = User.find(params[:id])
       end
 
       # Confirms a logged-in user.

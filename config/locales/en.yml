@@ -277,9 +277,12 @@ en:
         actions: "Actions"
         admin: "Administrator"
         user: "User"
+        no_results: "No partners found!"
         tooltip_view_profile: "View profile"
-        tooltip_edit_profile: "Edit"
+        tooltip_freeze_profile: "Freeze user"
         tooltip_delete_profile: "Delete"
+      pagination:
+        results: "Results"
       properties:
         description: "Description"
       filters:
@@ -408,6 +411,7 @@ en:
     accepted:
       flash_success: "You have successfully joined the %{account} organization"
   users:
+    title: "Partners"
     flash_delete: "User was successfully deleted"
     flash_welcome: "Welcome to %{brand}! Your profile is complete."
     flash_profile_updated: "Profile successfully updated"
@@ -437,6 +441,8 @@ en:
       photo_subheader: "Click the current avatar to change your photo."
       allowed_pic_specs: "JPG, GIF or PNG 400x400, < 2 MB."
       delete_avatar: "Are you sure you want to delete your avatar picture?"
+    index:
+      heading: "Partner list"
     flash_user_not_found: "User was not found"
   properties:
     identifier: "ID"
@@ -449,19 +455,41 @@ en:
     new:
       heading: "Add new property"
       add_button: "Add property"
+      set_cover: "Cover"
+      photo_header: "Cover photo"
+      photo_subheader: "Click to change the cover photo for the property"
+      tooltip: "The cover picture is a unique image used to identify each property. Should you choose one, mind that you don't need to reupload it in the photos section below."
     edit:
       heading: "Edit property"
       edit_button: "Update"
+      allowed_pic_specs: "JPG, GIF or PNG 400x400, < 2 MB."
+      delete_avatar: "Are you sure you want to delete the cover photo?"
     created:
       message: "Property successfully added"
+      message_feedback: "Manage your properties in %{brand} now"
       return: "Return"
       show: "Show"
       edit: "Edit"
       add_another: "Add new"
+      flash: "Property successfully added"
     not_created:
       message: "Error adding new property"
       add_another: "Try again"
       support: "Please contact support or"
+    updated:
+      message: "Property successfully edited"
+      message_feedback: "Manage your properties in %{brand} now"
+      return: "Return"
+      show: "Show"
+      edit: "Edit"
+      add_another: "Add new"
+      flash: "Property successfully edited"
+    not_updated:
+      message: "Error editing the property"
+      add_another: "Try again"
+      support: "Please contact support or"
+    destroyed:
+      flash: "Property successfully removed"
     index:
       heading: "Properties"
       new_button: "Add new property"

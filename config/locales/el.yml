@@ -275,11 +275,14 @@ el:
         actions: "Ενέργειες"
         admin: "Διαχειριστής"
         user: "Χρήστης"
+        no_results: "Δεν βρέθηκαν συνεργάτες!"
         tooltip_view_profile: "Προβολή προφίλ"
-        tooltip_edit_profile: "Επεξεργασία"
+        tooltip_freeze_profile: "Πάγωμα χρήστη - Εάν ενεργοποιηθεί, ο χρήστης δεν θα μπορεί να εισέλθει στο σύστημα."
         tooltip_delete_profile: "Διαγραφή"
       properties:
         description: "Περιγραφή"
+      pagination:
+        results: "εγγραφές"
       filters:
         title: "Φίλτρα"
         date:
@@ -295,9 +298,9 @@ el:
           sell: "Πώληση"
           rent: "Ενοικίαση"
     users_search:
-      placeholder: "π.χ. Δημήτρης Στεφάνου"
+      placeholder: "Αναζήτηση συνεργάτη..."
     properties_search:
-      placeholder: "Αναζητήση ακινήτου..."
+      placeholder: "Αναζήτηση ακινήτου..."
     properties_view_btn: "Προβολή"
     properties_edit_btn: "Επεξεργασία"
     properties_favourites_tooltip: "Aγαπημένα"
@@ -305,8 +308,9 @@ el:
     properties_owner_tel_unavailable: "Μ/Δ"
     uppy:
       dropPaste: "Σύρετε τα αρχεία σας εδώ ή"
+      dropHint: "Σύρετε τα αρχεία σας εδώ για μεταφόρτωση"
       browse: "επιλέξτε"
-      notes: "Μόνο φωτογραφίες. Ανώτατο μέγεθος 2MB/αρχείο. Επιτρεπόμενο πλήθος < 20."
+      notes: "Μόνο φωτογραφίες. Μέχρι 2MB/αρχείο. Επιτρεπόμενο πλήθος < 20."
       filename: "Όνομα αρχείου:"
       editing: "Μετονομασία"
       done: "Κλείσιμο"
@@ -406,6 +410,7 @@ el:
     accepted:
       flash_success: "Συνδεθήκατε επιτυχώς με τον λογαριασμό: %{account}"
   users:
+    title: "Συνεργάτες"
     flash_delete: "Ο χρήστης διεγράφη επιτυχώς"
     flash_welcome: "Καλωσήλθατε στο %{brand}! Το προφίλ σας είναι έτοιμο"
     flash_profile_updated: "Το προφίλ σας ενημερώθηκε επιτυχώς"
@@ -435,6 +440,8 @@ el:
       photo_subheader: "Κάντε κλικ για ν'αλλάξετε την φωτογραφία προφίλ σας"
       allowed_pic_specs: "JPG, GIF ή PNG 400x400, < 2 MB."
       delete_avatar: "Είστε βέβαιος/βεβαία ότι θέλετε να διαγραφεί η φωτογραφία προφίλ σας;"
+    index:
+      heading: "Κατάλογος συνεργατών"
     flash_user_not_found: "Ο χρήστης δεν βρέθηκε"
   properties:
     identifier: "ID"
@@ -447,9 +454,15 @@ el:
     new:
       heading: "Προσθήκη νέου ακινήτου"
       add_button: "Προσθήκη"
+      set_cover: "Αλλαγή"
+      photo_header: "Φωτογραφία εξωφύλλου"
+      photo_subheader: "Κάντε κλικ για ν'αλλάξετε την φωτογραφία εξωφύλλου"
+      tooltip: "Η φωτογραφία εξωφύλλου είναι ξεχωριστή και αντιπροσωπεύει ένα ακίνητο. Εφόσον μια φωτογραφία χρησιμοποιηθεί ως εξώφυλλο δεν χρειάζεται να μεταφορτωθεί και στο τμήμα με τις φωτογραφίες."
     edit:
       heading: "Επεξεργασία ακινήτου"
       edit_button: "Ενημέρωση"
+      allowed_pic_specs: "JPG, GIF ή PNG 400x400, < 2 MB."
+      delete_avatar: "Είστε βέβαιος/βεβαία ότι θέλετε να διαγραφεί η φωτογραφία εξωφύλλου του ακινήτου;"
     created:
       message: "Η προσθήκη ακινήτου ολοκληρώθηκε επιτυχώς"
       message_feedback: "Διαχειριστείτε την νέα σας καταχώρηση στο %{brand} τώρα"
@@ -457,10 +470,25 @@ el:
       show: "Προβολή"
       edit: "Επεξεργασία"
       add_another: "Προσθήκη νέου"
+      flash: "Η προσθήκη ακινήτου ολοκληρώθηκε επιτυχώς"
     not_created:
       message: "Σφάλμα προσθήκης ακινήτου"
       add_another: "Δοκιμάστε πάλι"
       support: "Παρακαλώ επικοινωνήστε με την υποστήριξη"
+    updated:
+      message: "Η επεξεργασία του ακινήτου ολοκληρώθηκε επιτυχώς"
+      message_feedback: "Μπορείτε να προβείτε στις παρακάτω ενέργειες"
+      return: "Επιστροφή"
+      show: "Προβολή"
+      edit: "Επεξεργασία"
+      add_another: "Προσθήκη νέου"
+      flash: "Η επεξεργασία του ακινήτου ολοκληρώθηκε επιτυχώς"
+    not_updated:
+      message: "Σφάλμα επεξεργασίας ακινήτου"
+      add_another: "Δοκιμάστε πάλι"
+      support: "Παρακαλώ επικοινωνήστε με την υποστήριξη"
+    destroyed:
+      flash: "Το ακίνητο διαγράφηκε επιτυχώς"
     index:
       heading: "Κατάλογος ακινήτων"
       new_button: "Προσθήκη ακινήτου"

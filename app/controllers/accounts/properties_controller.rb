@@ -68,6 +68,21 @@ module Accounts
       filter_users
     end
 
+    def delete_avatar
+      property = Property.find(params[:id])
+      property.avatar.purge if property.avatar.attached?
+      # property.reload
+      # render :json => {:status => "OK", :type => 'unfaved' }
+      respond_to do |format|
+        format.html
+        format.js {render 'accounts/properties/avatar_removed', locals: {resource: property}}
+        # format.json {render json: {}, status: :no_content}
+      end
+
+
+      # redirect_to edit_property_path(property)
+    end
+
     # GET /properties/1/edit
     def edit
       @property = Property.find(params[:id])
@@ -75,14 +90,10 @@ module Accounts
     end
 
     def locations
-      #todo remove puts statement
-      puts '-=Locations=- filtering...'
       filter_locations
     end
 
     def owners
-      #todo remove puts statement
-      puts '-=Owners=- filtering...'
       filter_owners
     end
 
@@ -104,18 +115,21 @@ module Accounts
 
       respond_to do |format|
         if @property.save
-          puts 'form saving successfully'
-          # todo internationalize the notice message
-          format.html {redirect_to @property, notice: 'Property was successfully created.'}
-          # format.js {render :create_result}
-          format.js {render 'shared/ajax/create', locals: {resource: @property}}
+          format.html {redirect_to @property, notice: I18n.t('properties.created.flash') }
+          format.js {render 'shared/ajax/handler',
+                            locals: {resource: @property,
+                                     action: 'created',
+                                     partial_success: 'shared/ajax/success',
+                                     partial_failure: 'shared/ajax/failure'}}
         else
           @property.errors.each do |field, error|
             puts "#{field}: #{error}"
           end
           format.html {render :new}
-          # format.js {render :create_result}
-          format.js {render 'shared/ajax/create', locals: {resource: @property}}
+          format.js {render 'shared/ajax/handler', locals: {resource: @property,
+                                                            action: 'created',
+                                                            partial_success: 'shared/ajax/success',
+                                                            partial_failure: 'shared/ajax/failure'}}
         end
       end
     end
@@ -132,11 +146,18 @@ module Accounts
 
       respond_to do |format|
         if @property.update(property_params)
-          format.html {redirect_to @property, flash: {success: "Property was successfully updated."}}
-          format.json {render :show, status: :ok, location: @property}
+          format.html {redirect_to @property, notice: I18n.t('properties.updated.flash')}
+          format.js {render 'shared/ajax/handler',
+                            locals: {resource: @property,
+                                     action: 'updated',
+                                     partial_success: 'shared/ajax/success',
+                                     partial_failure: 'shared/ajax/failure'}}
         else
           format.html {render :edit}
-          format.json {render json: @property.errors, status: :unprocessable_entity}
+          format.js {render 'shared/ajax/handler', locals: {resource: @property,
+                                                            action: 'updated',
+                                                            partial_success: 'shared/ajax/success',
+                                                            partial_failure: 'shared/ajax/failure'}}
         end
       end
     end
@@ -145,8 +166,9 @@ module Accounts
     # DELETE /properties/1.json
     def destroy
       @property.destroy
+      # todo internationalize the notice message
       respond_to do |format|
-        format.html {redirect_to properties_url, notice: 'Property was successfully destroyed.'}
+        format.html {redirect_to properties_url, flash: I18n.t('properties.destroyed.flash')}
         format.json {head :no_content}
       end
     end
@@ -218,6 +240,7 @@ module Accounts
                                        :adspitogatos,
                                        :ownerid,
                                        :noowner,
+                                       :avatar,
                                        {owner_attributes: [:first_name, :last_name, :email, :telephones]},
                                        # attachments: [],
                                        delete_images: [],

@@ -1,14 +1,14 @@
 <div id="form-error">
   <div class="row d-flex justify-content-center">
     <div class="">
-      <div><h2><%= t "#{locals[:resource].class.to_s.downcase.pluralize}.not_created.message" %></h2></div>
-      <div><h3><%= t "#{locals[:resource].class.to_s.downcase.pluralize}.not_created.support" %></h3></div>
+      <div><h2><%= t "#{locals[:resource].class.to_s.downcase.pluralize}.not_#{locals[:action]}.message" %></h2></div>
+      <div><h3><%= t "#{locals[:resource].class.to_s.downcase.pluralize}.#{locals[:action]}.support" %></h3></div>
       <div class="d-flex justify-content-center mt-2">
         <i class="pr-icon sm cancel"> </i>
       </div>
       <div class="row d-flex justify-content-center mt-2">
         <div class="btn-group" role="group">
-          <%= link_to t("#{locals[:resource].class.to_s.downcase.pluralize}.not_created.add_another"),
+          <%= link_to t("#{locals[:resource].class.to_s.downcase.pluralize}.not_#{locals[:action]}.add_another"),
                       Rails.application.routes.url_helpers.send("new_#{locals[:resource].class.to_s.downcase}_path"), class: 'btn btn-danger' %>
           <%#= link_to t('properties.created.add_another'), new_property_path, class: 'btn btn-primary' %>
         </div>

@@ -1,8 +1,11 @@
 module Accounts
   class BaseController < ApplicationController
-    include UserDatatable
+    include UserAvatar
     include LocationFilter
     include OwnerFilter
+    include UserDatatable
+
+    helper UserAvatar
 
     # before_action :logged_in_user, :allowed_subdomains, only: [:index, :edit, :update, :destroy]
     before_action :logged_in_user, :allowed_subdomains

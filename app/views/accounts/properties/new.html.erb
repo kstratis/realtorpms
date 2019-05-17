@@ -672,8 +672,40 @@
                 <div id="test-l-6" class="content dstepper-none fade">
                   <!-- fieldset -->
                   <fieldset>
-                    <legend><%= t('js.forms.properties.wizard.step5.title') %></legend> <!-- .row -->
+                    <legend><%= t('js.forms.properties.wizard.step6.title') %></legend> <!-- .row -->
+                    <div class="row mb-3">
+
+
+                      <div class="user-avatar user-avatar-xl property-avatar-xl fileinput-button">
+                        <div class="fileinput-button-label"><%= t('properties.new.set_cover') %></div>
+                        <div id="avatar-wrapper">
+                          <%= render_avatar(property.object, "alphatar-edit property-alphatar", "avatar_preview") %>
+                        </div>
+                        <%= property.file_field :avatar, id: "avatar_upload", class: 'form-control file-emitters', multiple: false, direct_upload: true %>
+                      </div><!-- /avatar -->
+                      <!-- .media-body -->
+                      <div class="media-body pl-3">
+                        <h3 class="card-title text-left"><%= t('properties.new.photo_header') %>&nbsp;<span class="property-cover-tooltip" data-toggle="tooltip" data-placement="top" title="<%= t('properties.new.tooltip') %>"><i class="fas fa-info-circle"></i></span>
+                        </h3>
+                        <h6 class="card-subtitle text-muted"><%= t('properties.new.photo_subheader') %></h6>
+                        <p class="card-text">
+                          <% if property.object.avatar.attached? %>
+                            <%= link_to delete_avatar_user_url, method: :delete, data: {confirm: t('users.edit.delete_avatar')} do %>
+                              <i class="fa fa-trash fa-fw"></i>&nbsp;|&nbsp;<small><%= t('users.edit.allowed_pic_specs') %></small>
+                              <br/><span id="property-avatar-spinner">&nbsp;<i class="fas fa-cog fa-spin"> </i></span>
+                            <% end %>
+                          <% else %>
+                            <small><%= t('users.edit.allowed_pic_specs') %></small>
+                            <br/><span id="property-avatar-spinner">&nbsp;<i class="fas fa-cog fa-spin"> </i></span>
+                          <% end %>
+                        </p><!-- The avatar upload progress bar -->
+
+                      </div><!-- /.media-body -->
+
+                    </div>
                     <div class="row">
+                      <hr class="mt-5">
+
                       <div class="d-flex flex-column flex-grow-1 justify-content-center">
                         <%= content_tag :div, class: "", id: "uppy", data: {
                             i18n: {
@@ -688,14 +720,14 @@
                     <hr class="mt-5">
                     <div class="d-flex">
                       <button type="button" class="prev btn btn-secondary" data-validate="fieldset-6"><%= t('js.forms.properties.wizard.previous') %></button>
-                      <%= property.button t('properties.new.add_button'), class: 'btn btn-primary ml-auto submit', "data-validate": "fieldset-6" %>
+                      <%= property.submit t('properties.new.add_button'), class: 'btn btn-primary ml-auto submit', "data-validate": "fieldset-6" %>
                     </div>
                   </fieldset><!-- /fieldset -->
                 </div><!-- Step 6 END -->
 
                 <input id="preventformsubmit" type="hidden">
                 <!-- .emitters among other things serves as a signal to initialize ActiveStorage-->
-                <%= property.file_field :images, class: 'form-control emitters', multiple: true, direct_upload: true%>
+                <%= property.file_field :images, class: 'form-control uppy-emitters', multiple: true, direct_upload: true %>
                 <%= render "accounts/helpers/locale" %>
 
               <% end %> <!-- /form -->

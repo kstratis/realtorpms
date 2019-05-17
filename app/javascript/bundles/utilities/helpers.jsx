@@ -23,4 +23,14 @@ const renderHTML = (htmlContent) => {
   return <div dangerouslySetInnerHTML={{__html: htmlContent}} />;
 };
 
-export {debounce, capitalizeFirstLetter, renderHTML};
+const buildUserURL = (freeze_url, user_id) => {
+  return freeze_url.replace(/USERID/i, user_id);
+
+};
+
+const isUrl = (string) => {
+  const regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+  return regexp.test(string);
+};
+
+export {debounce, capitalizeFirstLetter, renderHTML, buildUserURL, isUrl};

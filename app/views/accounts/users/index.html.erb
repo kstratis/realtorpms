@@ -1,28 +1,23 @@
-<% provide(:title, 'Users Index') %>
+<% provide(:title, t('users.title')) %>
 
-<div class="center jumbotron pr-container">
+<%= render partial: 'shared/breadcrumb', locals: {path: [{:title => 'users.index.heading', :href => users_path}], icon: 'house-colored'} %>
+
+<div class="page-container">
+  <div class="container">
+    <div class="app-container">
+
+<!--      <div class="btn-group pull-right" role="group" aria-label="...">-->
+
+          <%#= link_to new_invitation_path, :class => 'btn btn-primary btn-sm invite-user', :id => 'invite-user-button' do %>
+          <%# end %>
 
 
-  <div class="row">
-    <div class="col-md-12">
 
-      <!--<div class="back-button-style pull-left">-->
-        <!--<i class="pr-icon cs back-button"></i>-->
-      <!--</div>-->
+          <%#= link_to new_invitation_path, :class => 'btn btn-primary btn-sm add-user', :id => 'add-user-button' do %>
 
-      <div class="btn-group pull-right" role="group" aria-label="...">
-        <!--<div class="invitation-container" >-->
-          <%= link_to new_invitation_path, :class => 'btn btn-primary btn-sm invite-user', :id => 'invite-user-button' do %>
-<!--            <span class="subtitle"><%#=fa_icon('envelope fw')%> <%#= t 'partners.invite' %></span>-->
-          <% end %>
-        <!--</div>-->
+          <%# end %>
 
-        <!--<div class="invitation-container" >-->
-          <%= link_to new_invitation_path, :class => 'btn btn-primary btn-sm add-user', :id => 'add-user-button' do %>
-<!--              <span class="subtitle"><%#=fa_icon('plus fw')%> <%#= t 'partners.add' %></span>-->
-          <% end %>
-        <!--</div>-->
-      </div>
+<!--      </div>-->
 
       <%# Here we call render not on a string with the name of a partial, but rather on a user variable of class User;
           in this context, Rails automatically looks for a partial called _user.html.erb, which we must create.
@@ -34,10 +29,10 @@
 
       <!--<div class="clearfix"></div>-->
       <%#= will_paginate %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="row">-->
+<!--    <div class="col-md-12">-->
       <!--<div class="col-md-6 col-md-offset-3">-->
         <%#= react_component('Search', prerender: false) %>
       <!--</div>-->
@@ -64,7 +59,12 @@
             },
             i18n: {
                 datatable: t('js.datatables.users'),
-                search: t('js.users_search')
+                result_count: t('js.datatables.pagination.results'),
+                no_results: t('js.datatables.users.no_results'),
+                search: t('js.users_search.placeholder')
+            },
+            meta: {
+                freeze_link:  toggle_activation_user_url('USERID')
             }
           }, prerender: false) %>
       <!--</div>-->

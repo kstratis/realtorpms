@@ -7,7 +7,7 @@
       <!-- .btn-account -->
       <button class="btn-account" type="button" data-toggle="collapse" data-target="#dropdown-aside">
         <div class="user-avatar user-avatar-lg">
-          <%= user_avatar(current_user, "avatar-outline") %>
+          <%= render_avatar(current_user, "avatar-outline") %>
           <%#= alphatar_for current_user, size: 64, classname: 'avatar-outline' %>
         </div>
         <div class="account-icon">
