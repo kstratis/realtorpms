@@ -33,7 +33,7 @@ namespace :deploy do
         if not test(%Q[[ -e "#{shared_path.join(".schema_loaded")}" ]])
           within release_path do
             with rails_env: fetch(:rails_env) do
-              execute :rake, "db:schema:load"
+              execute :rake, "db:schema:load RAILS_ENV=production"
               execute :touch, shared_path.join(".schema_loaded")
             end
           end
