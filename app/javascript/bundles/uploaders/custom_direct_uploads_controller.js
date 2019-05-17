@@ -2,18 +2,62 @@
 import { DirectUploadController } from "activestorage/src/direct_upload_controller";
 import { dispatchEvent } from 'activestorage/src/helpers';
 
-// changed line
-const inputSelector = "input[type=file][data-direct-upload-url].uppy-emitters,.standard-emitters:not([disabled])";
+// Changed line
+const uppySelector = "input[type=file][data-direct-upload-url].uppy-emitters:not([disabled])";
+// Changed line
+const fileSelector = "input[type=file][data-direct-upload-url].file-emitters:not([disabled])";
 
 export class CustomDirectUploadsController {
   constructor(form) {
     this.form = form;
-    // changed line
-    this.$mockEmitters = $(inputSelector);
+    // Changed line
+    this.$mockUppyEmitters = $(uppySelector);
+    this.$mockFileEmitters = $(fileSelector);
 
-    this.$inputs = $(this.form).find(this.$mockEmitters).filter(input => input.files.length);
-    // changed line
-    this.files = window.uppy_uploader.state.files || []; // This is how we get the files-to-be-uploaded using uppy.js
+    // Changed line
+    this.$inputs = $(uppySelector + "," + fileSelector);
+
+    // DEBUG
+    // console.log(`this.$inputs are:`);
+    // console.log(this.$inputs);
+
+    // Changed line
+    // Get file inputs with available files:
+    const activeFileInputs = $(fileSelector).filter((inputNo, input) => {return input.files.length});
+
+    // DEBUG
+    // console.log(`activeFileInputs are:`);
+    // console.log(activeFileInputs);
+
+    // Changed line
+    // Get files from uppy:
+    const uppy_files = $.map(window.uppy_uploader.state.files, (input) => {
+      input.data.source = 'uppy';
+      input.data['id'] = input.id;
+      // .data is where the actual File object resides in
+      return input.data
+    });
+
+    // Changed line
+    // Get regular files from file inputs:
+    const regular_files = $.map(activeFileInputs, (fileInput) => {
+      return $.each($(fileInput.files).toArray(), (index, file) => {
+        file.source = 'formfile';
+      });
+    });
+
+    // DEBUG
+    // console.log(`uppy_files are: `);
+    // console.log(uppy_files);
+    // console.log(`regular_files are: ${regular_files}`);
+    // console.log(regular_files);
+
+    // Changed line
+    this.all_files = $.merge(uppy_files, regular_files) || [];
+
+    // DEBUG
+    console.log(`all_files are:`);
+    console.log(this.all_files);
   }
 
   start(callback) {
@@ -45,11 +89,19 @@ export class CustomDirectUploadsController {
   createUploadControllers() {
     const controllers = [];
     // changed line
-    const mockEmitter = this.$mockEmitters.get(0); // Single mock element guaranteed to be on the DOM.
-    // changed block
-    $.each(this.files, (uppyfilename, filewrapper) => {
-      filewrapper.data['id'] = filewrapper.id;
-      const controller = new DirectUploadController(mockEmitter, filewrapper.data);
+    $.each(this.all_files, (uppyfilename, file) => {
+      // DEBUG
+      // console.log(uppyfilename);
+      // console.log(file);
+
+      // Changed line
+      // Single mock element guaranteed to be on the DOM.
+      let mockEmitter = file.source === 'uppy'
+        ? this.$mockUppyEmitters.get(0)
+        : this.$mockFileEmitters.get(0);
+
+      const controller = new DirectUploadController(mockEmitter, file);
+      // const controller = new DirectUploadController(mockEmitter, filewrapper.data);
       controllers.push(controller);
     });
     return controllers;

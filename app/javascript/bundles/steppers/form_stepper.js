@@ -135,8 +135,7 @@ class FormStepper {
       self.current_step = params;
     });
 
-    $('button.submit').on('click', function(e) {
-      console.log('submit clicked');
+    $('form').on('submit', function(e) {
       const groups = self.stepperDOMelements.map((index, el) => ({
         group: `fieldset-${index + 1}`,
         stepperDOMel: $(el)

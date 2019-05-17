@@ -682,7 +682,7 @@ i.fas.fa-heart.colored{
   background: black;
 }
 
-.emitters{
+.uppy-emitters{
   display: none;
 }
 
@@ -991,5 +991,12 @@ li.page-item{
 
 .property-cover-tooltip{
   cursor: pointer;
+}
 
+.form-control:disabled.file-emitters, .form-control[readonly].file-emitters {
+  opacity: 0;
+}
+
+#property-avatar-spinner{
+  display: none;
 }

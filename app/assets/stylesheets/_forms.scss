@@ -13,10 +13,15 @@ span.title{
 //input:not([type="checkbox"]), textarea, select, .uneditable-input {
 input, textarea, select, .uneditable-input {
   padding: 10px;
-  width: 100%;
   margin-bottom: 10px;
+  width: 100%;
   //@include box_sizing;
 }
+
+input.submit{
+  width: unset !important;
+}
+
 
 input[type="checkbox"]{
   width: unset;

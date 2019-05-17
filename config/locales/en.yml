@@ -466,14 +466,30 @@ en:
       delete_avatar: "Are you sure you want to delete the cover photo?"
     created:
       message: "Property successfully added"
+      message_feedback: "Manage your properties in %{brand} now"
       return: "Return"
       show: "Show"
       edit: "Edit"
       add_another: "Add new"
+      flash: "Property successfully added"
     not_created:
       message: "Error adding new property"
       add_another: "Try again"
       support: "Please contact support or"
+    updated:
+      message: "Property successfully edited"
+      message_feedback: "Manage your properties in %{brand} now"
+      return: "Return"
+      show: "Show"
+      edit: "Edit"
+      add_another: "Add new"
+      flash: "Property successfully edited"
+    not_updated:
+      message: "Error editing the property"
+      add_another: "Try again"
+      support: "Please contact support or"
+    destroyed:
+      flash: "Property successfully removed"
     index:
       heading: "Properties"
       new_button: "Add new property"

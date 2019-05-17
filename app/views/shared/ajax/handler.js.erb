@@ -1,7 +1,7 @@
 // DEBUG
 // console.log("<%#= resource.class %>");
 $('.content-swap').fadeOut('fast', function () {
-  var response = $("<%= escape_javascript(resource.errors.empty? ? render('shared/ajax/created', locals: {resource: resource}) : render('shared/ajax/not_created', locals: {resource: resource}))%>").hide();
+  var response = $("<%= escape_javascript(resource.errors.empty? ? render(partial_success, locals: {resource: resource, action: action}) : render(partial_failure, locals: {resource: resource, action: action}))%>").hide();
   $(this).replaceWith(response);
   $("#form-" + "<%= resource.errors.empty? ? 'success' : 'error' %>" ).fadeIn('fast');
   $('.back-button').returnOnClick("<%= Rails.application.routes.url_helpers.send("#{resource.class.to_s.downcase.pluralize}_path") %>");
