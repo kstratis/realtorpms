@@ -25,28 +25,6 @@ namespace :deploy do
   end
 end
 
-namespace :deploy do
-  namespace :db do
-    desc "Load the database schema if needed"
-    task load: [:set_rails_env] do
-      on primary :db do
-        if not test(%Q[[ -e "#{shared_path.join(".schema_loaded")}" ]])
-          within release_path do
-            with rails_env: fetch(:rails_env) do
-              execute :rake, "db:schema:load RAILS_ENV=production"
-              execute :touch, shared_path.join(".schema_loaded")
-            end
-          end
-        end
-      end
-    end
-  end
-
-  before "deploy:migrate", "deploy:db:load"
-end
-
-
-
 
 # Optionally, you can symlink your database.yml and/or secrets.yml file from the shared directory during deploy
 # This is useful if you don't want to use ENV variables
