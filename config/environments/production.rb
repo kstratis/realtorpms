@@ -1,3 +1,18 @@
+def session_data(request)
+  session_key = Rails.application.config.session_options[:key]
+  request.cookie_jar.signed_or_encrypted[session_key] || {}
+end
+
+user = lambda do |request|
+  begin
+    session_stored_userid = session_data(request)["user_id"]
+    u = User.find(session_stored_userid )
+    "#{u.first_name.first}.#{u.last_name}"
+  rescue
+    'Anonymous'
+  end
+end
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -63,7 +78,8 @@ Rails.application.configure do
   config.log_level = :debug
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  # config.log_tags = [ :request_id ]
+  config.log_tags = [ :subdomain, user ]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store

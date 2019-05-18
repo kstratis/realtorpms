@@ -38,6 +38,7 @@ module Accounts
 
     def logged_in_user
       unless logged_in?
+        puts "THIS IS IT: #{request.subdomain}"
         store_location
         redirect_to login_url
       end

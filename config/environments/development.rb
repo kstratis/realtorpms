@@ -13,24 +13,6 @@ user = lambda do |request|
   end
 end
 
-user_test = lambda do |request|
-  begin
-    puts 'RUNNING user TEST'
-    # puts session_data
-    # puts session
-    # session(request)
-  rescue
-    # raise # This should make everything fail. If things don't fail this part of the code is untested
-    # user = User.find_by(id: user_id)
-    # if user && user.authenticated?(:remember, cookies[:remember_token])
-    #   log_in user
-    #   @current_user = user
-    # end
-      nil
-    end
-
-end
-
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
