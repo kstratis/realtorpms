@@ -77,7 +77,8 @@ Rails.application.configure do
   # when problems arise.
   config.log_level = :debug
 
-  config.action_dispatch.tld_length = 2
+  # config.action_dispatch.tld_length = 2
+
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :request_id ]
   config.log_tags = [ :subdomain, user ]

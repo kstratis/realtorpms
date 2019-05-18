@@ -5,7 +5,6 @@ Rails.application.routes.draw do
 
   # get 'password_resets/new'
   # get 'password_resets/edit'
-  root to: 'home#index'
 
   get 'hello_world', to: 'hello_world#index'
   # get 'sessions/new'
@@ -23,7 +22,6 @@ Rails.application.routes.draw do
   get 'password/:id/reset', to: 'password_resets#edit', as: :password_reset_edit
   patch 'password/:id/reset', to: 'password_resets#update', as: :password_reset_update
   # resources :password_resets, only: [:new, :create, :edit, :update]
-
 
 
   # root 'main_pages#home'
@@ -77,7 +75,7 @@ Rails.application.routes.draw do
   end
 
 
-
+  root to: 'home#index'
 
   get '/switch/', to:'home#switch', as: :account_switch
   get '/accounts/', to:'home#accounts', as: :account_list
