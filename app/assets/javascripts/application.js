@@ -36,3 +36,14 @@ jQuery.fn.returnOnClick = function(location) {
   });
   return this;
 };
+
+$(document).on('turbolinks:load', function(e) {
+
+  $('.fotorama').on('fotorama:fullscreenenter',
+    function (e, fotorama, extra) {
+      console.log('clicked');
+    }
+  );
+
+
+});

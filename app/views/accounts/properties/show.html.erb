@@ -1,36 +1,94 @@
-<% provide(:title, "Property: #{@property.id}") %>
-<div class="center jumbotron pr-container">
-  <div class="row">
-    <div class="col-md-12">
+<% provide(:title, t('properties.show.heading')) %>
 
-      <div>
-        <p id="notice"><%= notice %></p>
+<%= render partial: 'shared/breadcrumb', locals: {path: [{:title => 'properties.show.properties', :href => properties_path}, {title: @property.title || @property.id, :href => ''}], icon: 'house-colored'} %>
+
+
+<div class="page-container">
+  <div class="container">
+    <!-- .card -->
+    <div class="card card-fluid">
+      <h2 class="card-header"> <%= @property.description %> </h2>
+      <!-- .card-body -->
+      <div class="card-body">
+
+        <div class="col-lg-6 col-md-12">
+          <div class="thumbnails-ribbon d-flex flex-wrap justify-content-center">
+            <div class="fotorama" data-nav="thumbs" data-allowfullscreen="true">
+              <% @property.images.each do |image| %>
+                <%= image_tag image %>
+              <% end %>
+            </div>
+          </div>
+
+
+<!--          <div class="media mb-3">-->
+<!--            <div class="user-avatar user-avatar-xl property-avatar-xl fileinput-button">-->
+<!--              <div id="avatar-wrapper">-->
+
+              <%#= render_avatar(@property, "alphatar-edit property-alphatar", "avatar_preview") %>
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="media-body pl-3 pt-3">-->
+<!--              <strong><%#= @property.title %></strong><br>-->
+<!--              <span><%#= @property.description ? @property.description : '—' %></span>-->
+<!--            </div>-->
+<!--          </div>-->
+        </div>
+
+<!--        <div class="col-lg-6 offset-lg-3 col-md-12">-->
+<!--          <div class="metric-row">-->
+
+<!--            <div class="col-6 col-sm-6 col-lg-6">-->
+
+
+<!--              <div class="card-metric">-->
+<!--                <div class="metric">-->
+<!--                  <p class="metric-value h3">-->
+<!--                    <sub><i class="fa fa-tasks fa-lg fa-fw"></i></sub> <span class="value"><%#= @property.assignments.count %></span>-->
+
+<!--                  </p>-->
+<!--                  <h2 class="metric-label"><%#= t('users.show.assignments') %></h2>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--            <div class="col-6 col-sm-6 col-lg-6">-->
+
+<!--              <div class="card-metric">-->
+<!--                <div class="metric">-->
+<!--                  <p class="metric-value h3">-->
+<!--                    <sub><i class="fa fa-check fa-lg fa-fw"></i></sub> <span class="value">N/A</span>-->
+<!--                  </p>-->
+<!--                  <h2 class="metric-label"><%#= t('users.show.processed') %></h2>-->
+<!--                </div>-->
+<!--              </div>-->
+
+<!--            </div>-->
+
+<!--          </div>-->
+<!--        </div>-->
       </div>
-
-      <div>
-        <p>
-          <strong>Description:</strong>
-          <%= @property.description %>
-        </p>
-      </div>
+    </div>
+  </div>
+</div>
 
 
-      <div>
-        <% @property.images.each do |image| %>
-          <%= image_tag(image) %>
-          <hr/>
-        <% end %>
 
-      </div>
 
-      <div>
-        <p>
-          <strong>Assigned to:</strong>
-          <% @property.users.each do |user| %>
-            <p><%= link_to "#{user.first_name} #{user.last_name}", user_path(user)%></p>
-          <% end %>
-        </p>
-      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       <%= react_component('UsersListAssignableWithDatatable', props: {
           initial_payload: {
@@ -59,23 +117,4 @@
       <%= link_to 'Back', properties_path %>
 
 
-    </div>
-  </div>
-
-  <div class="clearfix"></div>
-</div>
-
-
-
-
-
-<!--<div class="pr-avatar-wrapper">-->
-<!--<section class="user_info">-->
-<!--<div class="user_info_avatar">-->
-<%#= link_to('https://en.gravatar.com/emails/', target: '_blank', rel: 'nofollow', title: 'Edit your avatar picture') do %>
-<%#= gravatar_for @user, size: 256, big_default_size: true %>
-<%# end %>
-<!--</div>-->
-<!--</section>-->
-<!--</div>-->
 
