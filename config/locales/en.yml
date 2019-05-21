@@ -493,6 +493,9 @@ en:
     index:
       heading: "Properties"
       new_button: "Add new property"
+    show:
+      heading: "Property info"
+      properties: "Properties"
   time:
     formats:
       regular: "%d %b %y"

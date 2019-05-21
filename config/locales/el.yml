@@ -492,6 +492,9 @@ el:
     index:
       heading: "Κατάλογος ακινήτων"
       new_button: "Προσθήκη ακινήτου"
+    show:
+      heading: "Πληροφορίες ακινήτου"
+      properties: "Ακίνητα"
   time:
     formats:
       regular: "%d %b %y"

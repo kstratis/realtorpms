@@ -28,6 +28,8 @@
   <%= stylesheet_pack_tag 'stylesheets/uppyjs_styles' %>
   <%= stylesheet_pack_tag 'stylesheets/flatpickr_styles' %>
   <%= render 'layouts/shared_style_assets' %>
+
+
   <%#= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
 <!--  <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">-->
@@ -44,20 +46,28 @@
   <!--  <link rel="stylesheet" href="https://i.icomoon.io/public/temp/9db1d64f31/Landia/style.css">-->
 
   <%= render 'layouts/shared_script_assets' %>
-  <%= javascript_pack_tag 'components-bundle' %>
-  <%= javascript_pack_tag 'application' %>
-  <%= javascript_pack_tag 'theme' %>
-  <%= javascript_pack_tag 'datepicker_localization' %>
-  <%= javascript_pack_tag 'date_select' %>
-  <%= javascript_pack_tag 'avatar_preview' %>
-  <%= javascript_pack_tag 'stepper' %>
-  <%= javascript_pack_tag 'validator' %>
+
+  <%= javascript_packs_with_chunks_tag 'components-bundle',
+                                       'application',
+                                       'theme',
+                                       'datepicker_localization',
+                                       'date_select',
+                                       'avatar_preview',
+                                       'stepper',
+                                       'validator',
+                                       'data-turbolinks-track': 'reload' %>
+
+  <%#= javascript_pack_tag 'components-bundle' %>
+  <%#= javascript_pack_tag 'application' %>
+  <%#= javascript_pack_tag 'theme' %>
+  <%#= javascript_pack_tag 'datepicker_localization' %>
+  <%#= javascript_pack_tag 'date_select' %>
+  <%#= javascript_pack_tag 'avatar_preview' %>
+  <%#= javascript_pack_tag 'stepper' %>
+  <%#= javascript_pack_tag 'validator' %>
   <script src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" data-mutate-approach="sync"></script>
 
 
-
-
-  <%#= javascript_pack_tag 'hello_react' %>
   <%= render 'layouts/shim' %>
 </head>
 <body>

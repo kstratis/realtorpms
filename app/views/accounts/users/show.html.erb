@@ -1,6 +1,6 @@
 <% provide(:title, t('users.show.heading')) %>
 
-<%= render partial: 'shared/breadcrumb', locals: {path: [{:title => 'users.show.users', :href => edit_user_path}, {title: @user.full_name, :href => ''}], icon: 'house-colored'} %>
+<%= render partial: 'shared/breadcrumb', locals: {path: [{:title => 'users.show.users', :href => users_path}, {title: @user.full_name, :href => ''}], icon: 'house-colored'} %>
 
 <div class="page-container">
   <div class="container">
