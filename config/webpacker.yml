@@ -14,7 +14,7 @@ default: &default
   # Up to Rails 5.1 this used to be `resolved_paths: ['app/assets/']`
   # In Rails 5.2 this should become `resolved_paths: ['app/assets/javascripts']` as webpacker now picks up .scss by default
   # resolved_paths: ['app/assets/javascripts']
-  resolved_paths: []
+  resolved_paths: ['lib/assets/javascripts', 'lib/assets/stylesheets', 'lib/assets/images']
 #  resolved_paths: ['app/javascript/packs/stylesheets']
 
   extract_css: true

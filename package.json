@@ -4,10 +4,12 @@
   "dependencies": {
     "@babel/runtime": "^7.4.4",
     "@rails/webpacker": "^4.0.2",
+    "@ungap/url-search-params": "^0.1.2",
     "activestorage": "^5.2.3",
     "axios": "^0.18.0",
     "bs-stepper": "https://github.com/kstratis/bs-stepper.git#events",
     "caniuse-lite": "^1.0.30000967",
+    "chart.js": "^2.8.0",
     "flatpickr": "^4.5.7",
     "intl": "^1.2.5",
     "js-yaml": "^3.13.1",
@@ -25,8 +27,6 @@
     "spark-md5": "^3.0.0",
     "stacked-menu": "https://gitlab.com/bent10/stacked-menu.git#master",
     "uppy": "^1.0.1",
-    "@ungap/url-search-params": "^0.1.2",
-    "chart.js": "^2.8.0",
     "webpack-cli": "^3.3.2"
   },
   "devDependencies": {
