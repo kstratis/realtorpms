@@ -45,8 +45,8 @@
   <!--  <link rel="stylesheet" href="https://i.icomoon.io/public/temp/c1f0de587f/Landia/style.css">-->
   <!--  <link rel="stylesheet" href="https://i.icomoon.io/public/temp/9db1d64f31/Landia/style.css">-->
 
-  <%= render 'layouts/shared_script_assets' %>
-
+  <%#= render 'layouts/shared_script_assets' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <%= javascript_packs_with_chunks_tag 'components-bundle',
                                        'application',
                                        'theme',
@@ -55,6 +55,7 @@
                                        'avatar_preview',
                                        'stepper',
                                        'validator',
+                                       'script_loader',
                                        'data-turbolinks-track': 'reload' %>
 
   <%#= javascript_pack_tag 'components-bundle' %>

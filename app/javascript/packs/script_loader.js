@@ -16,6 +16,17 @@ const getFotorama = () => {
   ]);
 };
 
+// const getDatatables = () => {
+//   return import('./components-bundle.js')
+  // return Promise.all([
+  //   import(/* webpackChunkName: "particlesjs" */
+  //     'ReactOnRails' from 'react-on-rails'),
+  //   import(/* webpackChunkName: "particlesJSONData" */
+  //     './particles.json')
+  // ]);
+  // import React, { Suspense, lazy } from 'react';
+// };
+
 $(document).on('turbolinks:load', function(e) {
   console.log('running');
   if ($('.auth-header').length > 0) {
@@ -29,5 +40,14 @@ $(document).on('turbolinks:load', function(e) {
       $('.fotorama').fotorama();
     });
   }
+
+  // if ($('#properties_index').length > 0) {
+  //   getDatatables().then((loadedModule)=>{
+  //     // console.log(loadedModule);
+  //     // debugger;
+  //     loadedModule.default();
+  //     // console.log(module);
+  //   })
+  // }
 
 });
