@@ -7,12 +7,6 @@ const { environment } = require('@rails/webpacker');
 environment.splitChunks(config => {
   // console.log(config);
   let newconf = Object.assign({}, config, {
-    // resolve: {
-    //   "alias": {
-    //     "react": "preact-compat",
-    //     "react-dom": "preact-compat"
-    //   }
-    // },
     optimization: {
       runtimeChunk: 'single',
       splitChunks: {
@@ -68,5 +62,4 @@ environment.splitChunks(config => {
 // };
 
 // console.log(environment);
-
 module.exports = environment;

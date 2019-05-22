@@ -3,7 +3,6 @@ namespace :deploy do
     desc "Load the database schema if needed"
     task load: [:set_rails_env] do
       on primary :db do
-        puts "RUNNING YOOOOO"
         if not test(%Q[[ -e "#{shared_path.join(".schema_loaded")}" ]])
           within release_path do
             with rails_env: fetch(:rails_env) do
