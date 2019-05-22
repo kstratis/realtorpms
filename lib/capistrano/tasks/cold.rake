@@ -1,23 +1,19 @@
-# namespace :deploy do
-#
-#   desc "deploy app for the first time (expects pre-created but empty DB)"
-#   task :cold do
-#     before 'deploy:migrate', 'deploy:initdb'
-#     invoke 'deploy'
-#   end
-#
-#   desc "initialize a brand-new database (db:schema:load, db:seed)"
-#   task :initdb do
-#     on primary :web do |host|
-#       within release_path do
-#         if test(:psql, 'landia -c "SELECT table_name FROM information_schema.tables WHERE table_schema=\'public\' AND table_type=\'BASE TABLE\';"|grep schema_migrations')
-#           puts '*** THE PRODUCTION DATABASE IS ALREADY INITIALIZED, YOU IDIOT! ***'
-#         else
-#           execute :rake, 'db:schema:load'
-#           execute :rake, 'db:seed'
-#         end
-#       end
-#     end
-#   end
-#
-# end
+namespace :deploy do
+  namespace :db do
+    desc "Load the database schema if needed"
+    task load: [:set_rails_env] do
+      on primary :db do
+        puts "RUNNING YOOOOO"
+        if not test(%Q[[ -e "#{shared_path.join(".schema_loaded")}" ]])
+          within release_path do
+            with rails_env: fetch(:rails_env) do
+              execute :rake, "db:schema:load"
+              execute :touch, shared_path.join(".schema_loaded")
+            end
+          end
+        end
+      end
+    end
+  end
+  before "deploy:migrate", "deploy:db:load"
+end

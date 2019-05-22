@@ -14,40 +14,6 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bund
 # Only keep the last 2 releases to save disk space
 set :keep_releases, 2
 
-before "deploy:assets:precompile", "deploy:yarn_install"
-
-namespace :deploy do
-  desc 'Run rake yarn:install'
-  task :yarn_install do
-    on roles(:web) do
-      within release_path do
-        execute("cd #{release_path} && yarn install")
-      end
-    end
-  end
-end
-
-namespace :deploy do
-  namespace :db do
-    desc "Load the database schema if needed"
-    task load: [:set_rails_env] do
-      on primary :db do
-        if not test(%Q[[ -e "#{shared_path.join(".schema_loaded")}" ]])
-          within release_path do
-            with rails_env: fetch(:rails_env) do
-              execute :rake, "db:schema:load"
-              execute :touch, shared_path.join(".schema_loaded")
-            end
-          end
-        end
-      end
-    end
-  end
-
-  before "deploy:migrate", "deploy:db:load"
-end
-
-
 # Optionally, you can symlink your database.yml and/or secrets.yml file from the shared directory during deploy
 # This is useful if you don't want to use ENV variables
 # append :linked_files, 'config/database.yml', 'config/secrets.yml'
