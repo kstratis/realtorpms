@@ -11,3 +11,4 @@ case Rails.env
 end
 
 Propertyx::Application.config.session_store :cookie_store, options
+Propertyx::Application.config.secret_key_base = 'abc123'
