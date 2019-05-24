@@ -7,7 +7,7 @@ case Rails.env
     options.merge!(domain: 'lvh.me')
   when 'production'
     # TBA
-    options.merge!(domain: 'dev.landia.io')
+    options.merge!({domain: 'dev.landia.io', tld_length: 2})
 end
 
 Propertyx::Application.config.session_store :cookie_store, options
