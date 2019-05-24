@@ -9,7 +9,6 @@ module Accounts
 
     # before_action :logged_in_user, :allowed_subdomains, only: [:index, :edit, :update, :destroy]
     before_action :logged_in_user, :allowed_subdomains
-    after_action :store_referer_url, only: [:index, :edit, :update, :destroy]
 
     # before_action :correct_subdomain
 
@@ -41,10 +40,6 @@ module Accounts
         store_location
         redirect_to login_url
       end
-    end
-
-    def store_referer_url
-      session[:referer_url] = request.original_url if request.get?
     end
 
     def allowed_subdomains

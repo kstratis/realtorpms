@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
         # flash[:success] = 'You have successfully signed in.'
         # redirect_to login_url(subdomain: false)
-        redirect_to build_redirection_url(URI.parse(session[:forwarding_url]), nil) and return
+        redirect_to build_redirection_url(URI.parse(session[:forwarding_url]), session[:forwarding_domain_name], nil) and return
       end
       # ----------------------------------
 
