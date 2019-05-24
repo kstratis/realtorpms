@@ -6,7 +6,6 @@ case Rails.env
   when 'development', 'test'
     options.merge!(domain: 'lvh.me')
   when 'production'
-    # TBA
     options.merge!({domain: 'dev.landia.io', tld_length: 2})
 end
 
