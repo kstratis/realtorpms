@@ -9,6 +9,7 @@ module Accounts
 
     # before_action :logged_in_user, :allowed_subdomains, only: [:index, :edit, :update, :destroy]
     before_action :logged_in_user, :allowed_subdomains
+    after_action :store_referer_url, only: [:index, :edit, :update, :destroy]
 
     # before_action :correct_subdomain
 
@@ -42,14 +43,16 @@ module Accounts
       end
     end
 
+    def store_referer_url
+      session[:referrer_subdomain] = request.subdomain if request.get?
+      puts session[:referrer_subdomain]
+    end
+
     def allowed_subdomains
-      subdomain_list = []
       accounts = current_user.admin? ? Account.all : current_user.all_accounts
-      accounts.each do |account|
-        subdomain_list << account.subdomain
-      end
-      unless session[:referer_url].blank?
-        previous_subdomain = URI.parse(session[:referer_url]).host.split('.')[0..-3].join('.')
+      subdomain_list = accounts.map(&:subdomain)
+      unless session[:referrer_subdomain].blank?
+        previous_subdomain = session[:referrer_subdomain]
         unless previous_subdomain == request.subdomain
           Account.find_by!(subdomain: request.subdomain)
           if subdomain_list.include? request.subdomain

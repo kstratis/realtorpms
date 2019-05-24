@@ -62,6 +62,7 @@ Rails.application.configure do
 
   config.log_tags = [ :subdomain, user ]
 
+  config.action_dispatch.tld_length = 1
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 

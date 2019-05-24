@@ -4,7 +4,7 @@ options = {
 
 case Rails.env
   when 'development', 'test'
-    options.merge!(domain: 'lvh.me')
+    options.merge!(domain: 'lvh.me', tld_length: 1)
   when 'production'
     options.merge!(domain: '.dev.landia.io', tld_length: 2)
 end
