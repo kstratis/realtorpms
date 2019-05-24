@@ -2,13 +2,13 @@
   "name": "propertyx",
   "private": true,
   "dependencies": {
-    "@babel/runtime": "^7.4.4",
+    "@babel/runtime": "^7.4.5",
     "@rails/webpacker": "^4.0.2",
     "@ungap/url-search-params": "^0.1.2",
     "activestorage": "^5.2.3",
     "axios": "^0.18.0",
     "bs-stepper": "https://github.com/kstratis/bs-stepper.git#events",
-    "caniuse-lite": "^1.0.30000967",
+    "caniuse-lite": "^1.0.30000971",
     "chart.js": "^2.8.0",
     "flatpickr": "^4.5.7",
     "intl": "^1.2.5",
@@ -26,17 +26,17 @@
     "react-skylight": "^0.5.1",
     "spark-md5": "^3.0.0",
     "stacked-menu": "https://gitlab.com/bent10/stacked-menu.git#master",
-    "uppy": "^1.0.1",
+    "uppy": "^1.0.2",
     "webpack-cli": "^3.3.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.4",
-    "@babel/node": "^7.2.2",
+    "@babel/core": "^7.4.5",
+    "@babel/node": "^7.4.5",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
-    "@babel/preset-env": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "@fortawesome/fontawesome-free": "^5.8.2",
     "autoprefixer": "^9.5.1",
@@ -45,9 +45,9 @@
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
     "postcss-preset-env": "^6.6.0",
-    "prettier": "^1.17.0",
+    "prettier": "^1.17.1",
     "sass-loader": "^7.1.0",
     "sugarss": "^2.0.0",
-    "webpack-dev-server": "3.3.1"
+    "webpack-dev-server": "3.4.1"
   }
 }

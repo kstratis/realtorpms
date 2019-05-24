@@ -83,3 +83,9 @@ production:
   database: landia
   username: deploy
   password: <%= ENV['PROPERTYX_DATABASE_PASSWORD'] %>
+
+staging:
+  <<: *default
+  database: landia
+  username: deploy
+  password: <%= ENV['PROPERTYX_DATABASE_PASSWORD'] %>
