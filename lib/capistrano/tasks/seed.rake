@@ -1,7 +1,7 @@
 namespace :deploy do
   namespace :db do
     desc "Load the database schema if needed"
-    task seed: [:environment] do
+    task seed: [:set_rails_env] do
       on primary :db do
         if not test(%Q[[ -e "#{shared_path.join(".schema_loaded")}" ]])
           within release_path do
