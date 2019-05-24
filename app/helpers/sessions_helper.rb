@@ -53,8 +53,10 @@ module SessionsHelper
   def build_redirection_url(stored_url, subdomain)
     # extracted_subdomain = stored_url.host.split('.')[0..-3].join('.')
     extracted_hostname = stored_url.host.split('.').last(2).join('.')
+
     #puts "extracted subdomain is: #{extracted_subdomain}"
-    #puts "extracted hostname is: #{extracted_hostname}"
+    puts "extracted domain is: #{extracted_hostname}"
+    puts "retrieved domain is: #{request.domain}"
     port =  stored_url.port.blank? ? nil : ":#{stored_url.port}"
 
     if subdomain.blank?
