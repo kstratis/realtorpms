@@ -7,7 +7,7 @@ set :repo_url, "git@gitlab.com:konos5/propertyx.git"
 # Deploy to the user's home directory
 set :deploy_to, "/home/deploy/projects/#{fetch :application}"
 
-set :rails_env, "production"
+# set :rails_env, Rails.env
 
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
 
