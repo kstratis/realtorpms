@@ -7,6 +7,7 @@ namespace :deploy do
           within release_path do
             with rails_env: fetch(:rails_env) do
               execute :rake, "db:schema:load"
+              execute :touch, shared_path.join(".schema_loaded")
             end
           end
         end

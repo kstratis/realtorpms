@@ -8,6 +8,7 @@ namespace :deploy do
             with rails_env: fetch(:rails_env) do
               execute :rake, "db:fixtures:preload"
               execute :rake, "db:seed"
+              execute :touch, shared_path.join(".seeds_loaded")
             end
           end
         end
