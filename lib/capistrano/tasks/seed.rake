@@ -3,7 +3,7 @@ namespace :deploy do
     desc "Preloads all the seed data"
     task seed: [:set_rails_env] do
       on primary :db do
-        # if not test(%Q[[ -e "#{shared_path.join(".seed_loaded")}" ]])
+        if not test(%Q[[ -e "#{shared_path.join(".seed_loaded")}" ]])
           within release_path do
             with rails_env: fetch(:rails_env) do
               execute :rake, "./lib/scripts/areas_preloader.rb"
@@ -15,7 +15,7 @@ namespace :deploy do
               # execute :touch, shared_path.join(".schema_loaded")
             end
           end
-        # end
+        end
       end
     end
   end
