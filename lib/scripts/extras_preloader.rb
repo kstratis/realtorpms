@@ -1,3 +1,5 @@
+puts 'I AM THE SCRIPT'
+
 ActiveRecord::Base.transaction do
   %w(neoclassical protected_pr loft_pr traditional villa_pr stone studio_pr prefabricated_pr precast_pr).each do |extra|
     Extra.create!(name: extra, subtype: 'housetype')
@@ -18,6 +20,8 @@ ActiveRecord::Base.transaction do
     Extra.create!(name: extra, subtype: 'dependent')
   end
 end
+
+puts 'All good'
 
 
 
