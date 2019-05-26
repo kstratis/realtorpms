@@ -87,6 +87,8 @@ en:
       property:
         description: "Description"
         businesstype: "Entry type"
+        businesstype_plain: "Type"
+        pricepersqmeter: "Square meter price"
         description_placeholder: "i.e. Luxe 3 Story Loft Rooftop"
         price_title: "Price"
         price_feedback_html: "i.e. 120000"

@@ -11,6 +11,7 @@
       <!-- .card-body -->
       <div class="card-body">
 
+        <div class="row">
         <div class="col-lg-6 col-md-12">
           <div class="thumbnails-ribbon d-flex flex-wrap justify-content-center">
             <div class="fotorama" data-nav="thumbs" data-allowfullscreen="true">
@@ -22,7 +23,35 @@
         </div>
 
         <div class="col-lg-6 col-md-12">
+          <div class="table-responsive">
+            <!-- .table -->
+            <table class="table table-striped">
+              <tbody>
+              <tr>
+                <td><%= t('activerecord.attributes.property.location') %></td>
+                <td><%= @property.location.localname %></td>
+              </tr>
+              <tr>
+                <td><%= t('activerecord.attributes.property.price_title') %></td>
+                <td><%= @property.price ? @property.price : '—' %></td>
+              </tr>
+              <tr>
+                <td><%= t('activerecord.attributes.property.pricepersqmeter') %></td>
+                <td><%= @property.pricepersqmeter ? @property.pricepersqmeter : '—' %></td>
+              </tr>
+              <tr>
+                <td><%= t('activerecord.attributes.property.businesstype_plain') %></td>
+                <td><%= t("activerecord.attributes.property.enums.subcategory.#{@property.subcategory.to_s}") %></td>
+              </tr>
+              <tr>
+                <td><%= t('activerecord.attributes.extra.heating.title') %></td>
+                <td><%= 'Κεντρική' %></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
 
+        </div>
         </div>
 
 

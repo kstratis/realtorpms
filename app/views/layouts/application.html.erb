@@ -25,6 +25,7 @@
   <!-- This stylesheet is the uppy.scss. It needs to be placed before the main scss
        cause it overrides something in the transitions rules which breaks the system.
        It uses postcss to load the file. Check .postcssrc.yml -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
   <%= stylesheet_pack_tag 'stylesheets/uppyjs_styles' %>
   <%= stylesheet_pack_tag 'stylesheets/flatpickr_styles' %>
   <%= render 'layouts/shared_style_assets' %>
@@ -66,7 +67,6 @@
   <%#= javascript_pack_tag 'avatar_preview' %>
   <%#= javascript_pack_tag 'stepper' %>
   <%#= javascript_pack_tag 'validator' %>
-  <script src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" data-mutate-approach="sync"></script>
 
 
   <%= render 'layouts/shim' %>

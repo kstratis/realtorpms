@@ -88,6 +88,8 @@ el:
       property:
         description: "Περιγραφή"
         businesstype: "Τύπος καταχώρησης"
+        businesstype_plain: "Τύπος"
+        pricepersqmeter: "Τιμή ανά τ.μ."
         description_placeholder: "π.χ. Μεζονέτα 180τ.μ. Κηφισιά"
         price_title: "Τιμή"
         price_feedback_html: "π.χ. 120000"
