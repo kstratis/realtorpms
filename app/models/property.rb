@@ -55,7 +55,7 @@ class Property < ApplicationRecord
   validates :bathrooms, numericality: { only_integer: true }, allow_blank: true
 
   def pricepersqmeter
-    (price / size).to_s unless price.blank? || size.blank? || size == 0
+    (price / size.to_f).ceil.to_s unless price.blank? || size.blank? || size == 0
   end
 
   # If a single property is faved by anyone at all

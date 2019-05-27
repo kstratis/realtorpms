@@ -33,11 +33,11 @@
               </tr>
               <tr>
                 <td><%= t('activerecord.attributes.property.price_title') %></td>
-                <td><%= @property.price ? @property.price : '—' %></td>
+                <td><%= @property.price ? number_to_currency(@property.price) : '—' %></td>
               </tr>
               <tr>
                 <td><%= t('activerecord.attributes.property.pricepersqmeter') %></td>
-                <td><%= @property.pricepersqmeter ? @property.pricepersqmeter : '—' %></td>
+                <td><%= @property.pricepersqmeter ? number_to_currency(@property.pricepersqmeter) : '—' %></td>
               </tr>
               <tr>
                 <td><%= t('activerecord.attributes.property.businesstype_plain') %></td>
@@ -45,7 +45,7 @@
               </tr>
               <tr>
                 <td><%= t('activerecord.attributes.extra.heating.title') %></td>
-                <td><%= 'Κεντρική' %></td>
+                <td><%= @property.extras.find_by(subtype: 'heating').try(:name) ? t("activerecord.attributes.extra.heating.#{@property.extras.find_by(subtype: 'heating').try(:name)}") : '—' %></td>
               </tr>
               </tbody>
             </table>
