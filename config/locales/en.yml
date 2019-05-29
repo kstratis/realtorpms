@@ -94,6 +94,7 @@ en:
         price_feedback_html: "i.e. 120000"
         size_title: "Size"
         size_feedback_html: "i.e. 80."
+        size_meter_html: "%{size} m<sup>2</sup>"
         bedrooms_title: "Bedrooms"
         bedrooms_feedback_html: "i.e. 2"
         bathrooms_title: "Bathrooms"
@@ -453,6 +454,7 @@ en:
     add_fast: "Add property (fast)"
     list: "Property list"
     favourites: "Favourites"
+    print: "Print"
     import: "Import properties"
     new:
       heading: "Add new property"

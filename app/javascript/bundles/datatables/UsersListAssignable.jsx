@@ -2,175 +2,279 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ReactPaginate from 'react-paginate';
 import withDatatable from './withDatatable';
+import Search from './Search';
+import Spinner from './Spinner';
+import Avatar from '../components/Avatar';
 
-const UsersListAssignable = ({handlePageClick, handleSort, handleAssign, advanceByTwo, isLoading, dataset, pageCount, selectedPage, sorting, ordering}) => {
+const UsersList = ({
+                     handlePageClick,
+                     handleSort,
+                     handleAssign,
+                     advanceByTwo,
+                     isLoading,
+                     dataset,
+                     pageCount,
+                     selectedPage,
+                     sorting,
+                     ordering,
+                     count,
+                     i18n,
+                     meta,
+                     handleSearchInput,
+                     handleFreezeUser,
+                     searchInput
+                   }) => {
   return (
-    <div className="dataTablePage col-md-12">
-      {isLoading
-        ? <div className={'centered'}>
-          <div className={'spinner'} />
+    <div className="user-list">
+      <Spinner isLoading={isLoading} />
+      <div className={'container'}>
+        <div className={'row'}>
+          <Search handleSearchInput={handleSearchInput} searchInput={searchInput} placeholder={i18n['search']} />
+          <div className="col col-md-6 d-none d-md-block">
+            <div className={'d-flex flex-row justify-content-end'}>
+              <div className="search-count-container">
+                <div>
+                  <strong className={'count'}>{count}</strong> <span>{i18n['result_count']}</span>
+                </div>
+              </div>
+              <div>
+                <nav aria-label="Results navigation">
+                  <ReactPaginate
+                    previousLabel={'❮'}
+                    nextLabel={'❯'}
+                    breakLabel={
+                      <span className="break-button-content page-link" onClick={advanceByTwo}>
+                        ...
+                      </span>
+                    }
+                    breakClassName={'break-button break-button-upper'}
+                    pageCount={pageCount}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={handlePageClick}
+                    containerClassName={'pagination'}
+                    subContainerClassName={'pages pagination'}
+                    pageLinkClassName={'page-link'}
+                    activeClassName={'active'}
+                    forcePage={selectedPage}
+                    pageClassName={'page-item page-item-upper'}
+                    previousLinkClassName={'page-link'}
+                    nextLinkClassName={'page-link'}
+                    nextClassName={'next'}
+                    previousClassName={'previous'}
+                  />
+                </nav>
+              </div>
+            </div>
+          </div>
         </div>
-        : dataset.length > 0
-          ? <div className={'dataTableContainer'}>
-            <table id="usersTable" className="table table-striped pr-table dataTable">
+      </div>
+      {dataset.length > 0 ? (
+        <div>
+          <div className={'table-responsive'}>
+            <table id="usersTable" className={`table table-striped ${isLoading ? 'reduced-opacity' : ''}`}>
               <thead>
               <tr>
                 <th>
-                  <a id='sort_by_name' className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'last_name')}>
-                    <span>User</span>
-                    {sorting === 'last_name'
-                      ? ordering === 'asc'
-                        ? <span className={'sortable-icon-container'}>
-                                <i title='Ascending order' className="fa fa-chevron-up fa-lg fa-fw pull-right"
-                                   aria-hidden="true"> </i>
-                              </span>
-                        : <span className={'sortable-icon-container'}>
-                                <i title='Descending order' className="fa fa-chevron-down fa-lg fa-fw pull-right"
-                                   aria-hidden="true"> </i>
-                              </span>
-                      : ''
-                    }
+                  <a
+                    id="sort_by_name"
+                    className={'sortable-header-name'}
+                    href={''}
+                    onClick={e => handleSort(e, 'last_name')}>
+                    <span>{i18n['datatable']['partner']}</span>
+                    {sorting === 'last_name' ? (
+                      ordering === 'asc' ? (
+                        <span className={'sortable-icon-container'}>
+                            <i className={'fas fa-sort-up fa-fw'} />
+                          </span>
+                      ) : (
+                        <span className={'sortable-icon-container'}>
+                            <i className={'fas fa-sort-down fa-fw'} />
+                          </span>
+                      )
+                    ) : (
+                      <i className={'fas fa-sort fa-fw'} />
+                    )}
                   </a>
                 </th>
                 <th>
-                  <a id='sort_by_email' className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'email')}>
-                    <span>Email</span>
-                    {sorting === 'email'
-                      ? ordering === 'asc'
-                        ? <span className={'sortable-icon-container'}>
-                                <i title='Ascending order' className="fa fa-chevron-circle-up fa-lg fa-fw pull-right"
-                                   aria-hidden="true"> </i>
-                              </span>
-                        : <span className={'sortable-icon-container'}>
-                                <i title='Descending order' className="fa fa-chevron-circle-down fa-lg fa-fw pull-right"
-                                   aria-hidden="true"> </i>
-                              </span>
-                      : ''
-                    }
-                  </a>
-                </th>
-                <th><span>User Type</span></th>
-                <th>
-                  <a id='sort_by_date' className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'created_at')}>
-                    <span>Registration</span>
-                    {sorting === 'created_at'
-                      ? ordering === 'asc'
-                        ? <span className={'sortable-icon-container'}>
-                                <i title='Ascending order' className="fa fa-chevron-circle-up fa-lg fa-fw pull-right"
-                                   aria-hidden="true"> </i>
-                              </span>
-                        : <span className={'sortable-icon-container'}>
-                                <i title='Descending order' className="fa fa-chevron-circle-down fa-lg fa-fw pull-right"
-                                   aria-hidden="true"> </i>
-                              </span>
-                      : ''
-                    }
+                  <a
+                    id="sort_by_email"
+                    className={'sortable-header-name'}
+                    href={''}
+                    onClick={e => handleSort(e, 'email')}>
+                    <span>{i18n['datatable']['email']}</span>
+                    {sorting === 'email' ? (
+                      ordering === 'asc' ? (
+                        <span className={'sortable-icon-container'}>
+                            <i className={'fas fa-sort-up fa-fw'} />
+                          </span>
+                      ) : (
+                        <span className={'sortable-icon-container'}>
+                            <i className={'fas fa-sort-down fa-fw'} />
+                          </span>
+                      )
+                    ) : (
+                      <i className={'fas fa-sort fa-fw'} />
+                    )}
                   </a>
                 </th>
                 <th>
-                  <a id='sort_by_assignments' className={'sortable-header-name'} href={''} onClick={(e) => handleSort(e, 'assignments_count')}>
-                    <span>Total assignments</span>
-                    {sorting === 'assignments_count'
-                      ? ordering === 'asc'
-                        ? <span className={'sortable-icon-container'}>
-                                <i title='Ascending order' className="fa fa-chevron-circle-up fa-lg fa-fw pull-right"
-                                   aria-hidden="true"> </i>
-                              </span>
-                        : <span className={'sortable-icon-container'}>
-                                <i title='Descending order' className="fa fa-chevron-circle-down fa-lg fa-fw pull-right"
-                                   aria-hidden="true"> </i>
-                              </span>
-                      : ''
-                    }
+                  <a
+                    id="sort_by_date"
+                    className={'sortable-header-name'}
+                    href={''}
+                    onClick={e => handleSort(e, 'created_at')}>
+                    <span>{i18n['datatable']['registration']}</span>
+                    {sorting === 'created_at' ? (
+                      ordering === 'asc' ? (
+                        <span className={'sortable-icon-container'}>
+                            <i className={'fas fa-sort-up fa-fw'} />
+                          </span>
+                      ) : (
+                        <span className={'sortable-icon-container'}>
+                            <i className={'fas fa-sort-down fa-fw'} />
+                          </span>
+                      )
+                    ) : (
+                      <i className={'fas fa-sort fa-fw'} />
+                    )}
                   </a>
                 </th>
-                <th><span>Quick Actions</span></th>
+                <th>
+                  <span>{i18n['datatable']['actions']}</span>
+                </th>
               </tr>
               </thead>
               <tbody>
-              {dataset.map((entry) => (
+              {dataset.map(entry => (
                 <tr key={entry['id']}>
-                  <td>
-                    <div className={'table-entry'}><img className="avatar-table-entry" src={entry['avatar_url']}/>
-                      <span><a className={'user-entry-color'} href={entry['view_entity_path']}>{entry['name']}</a></span>
+                  <td className={'align-middle'}>
+                    <div className={'table-entry'}>
+                      <Avatar data={entry['avatar']} />
+                      <span>
+                          <a className={'user-entry-color'} href={entry['view_entity_path']}>
+                            {entry['name']}
+                          </a>
+                        </span>
                     </div>
                   </td>
-                  <td>
+                  <td className={'align-middle'}>
                     <div className={'table-entry'}>
                       <span>{entry['email']}</span>
                     </div>
                   </td>
 
-                  <td>
-                    <div className={'table-entry'}>
-                      <span>{entry['type']}</span>
-                    </div>
-                  </td>
+                  {/*<td>*/}
+                  {/*<div className={'table-entry'}>*/}
+                  {/*<span>{entry['type'] ? i18n['datatable']['admin'] : i18n['datatable']['user']}</span>*/}
+                  {/*</div>*/}
+                  {/*</td>*/}
 
-                  <td>
+                  <td className={'align-middle'}>
                     <div className={'table-entry'}>
                       <span>{entry['registration']}</span>
                     </div>
                   </td>
 
-                  <td>
-                    <div className={'table-entry'}>
-                      <span className="pr-centered-td">{entry['assignments_count']}</span>
-                    </div>
-                  </td>
-
-                  <td>
-                    <div className="action-buttons-container table-entry">
-                      <div className="btn-group min-width" role="group" aria-label="...">
-                        <a onClick={handleAssign}
-                           data-uid={entry['id']}
-                           // we use methodtype instead of method because
-                           // otherwise ujs steps in and hijacks the ajax request
-                           data-methodtype={ entry['is_assigned'] ? 'delete' : 'post' }
-                           title='Assign toggle'
-                           className='btn btn-default ef-btn assign-toggle'
-                           href={entry['view_entity_path']}>
-                          {
-                            entry['is_assigned']
-                              ? 'UNASSIGN'
-                              : 'ASSIGN'
-                          }
-                        </a>
-                      </div>
-                    </div>
+                  <td className={'align-middle action-btns'}>
+                    <a
+                      onClick={e => handleFreezeUser(e, meta['freeze_link'], entry['id'])}
+                      title={i18n['datatable']['tooltip_freeze_profile']}
+                      className="btn btn-md btn-icon btn-secondary btn-action "
+                      href={''}>
+                      <i className={`fas fa-user ${entry['active'] ? 'green' : 'red'}`} />
+                    </a>
+                    <a
+                      title={i18n['datatable']['tooltip_delete_profile']}
+                      className="btn btn-md btn-icon btn-secondary btn-action"
+                      href={entry['view_entity_path']}
+                      data-method="delete"
+                      data-confirm="Are you sure?"
+                      rel="nofollow">
+                      <i className="fas fa-trash user-delete" />
+                    </a>
                   </td>
                 </tr>
               ))}
               </tbody>
             </table>
-            <ReactPaginate previousLabel={"❮"}
-                           nextLabel={"❯"}
-                           breakLabel={
-                             <span className="break-button-content"
-                                   onClick={advanceByTwo}>...</span>}
-                           breakClassName={"break-button"}
-                           pageCount={pageCount}
-                           marginPagesDisplayed={2}
-                           pageRangeDisplayed={5}
-                           onPageChange={handlePageClick}
-                           containerClassName={"pagination"}
-                           subContainerClassName={"pages pagination"}
-                           activeClassName={"active"}
-                           forcePage={selectedPage}
-                           pageClassName={"page"}
-                           nextClassName={'next'}
-                           previousClassName={'previous'}/>
           </div>
-          : <div className={"no-users"}>
-            <i className="pr-icon lg no-results"> </i>
-            <h3>No users available.</h3>
+          <div className={'clearfix'} />
+          <div className={'d-none d-md-block'}>
+            <div className={'row d-flex justify-content-center'}>
+              <nav aria-label="Results navigation">
+                <ReactPaginate
+                  previousLabel={'❮'}
+                  nextLabel={'❯'}
+                  breakLabel={
+                    <span className="break-button-content page-link" onClick={advanceByTwo}>
+                      ...
+                    </span>
+                  }
+                  breakClassName={'break-button'}
+                  pageCount={pageCount}
+                  marginPagesDisplayed={2}
+                  pageRangeDisplayed={5}
+                  onPageChange={handlePageClick}
+                  containerClassName={'pagination'}
+                  subContainerClassName={'pages pagination'}
+                  pageLinkClassName={'page-link'}
+                  activeClassName={'active'}
+                  forcePage={selectedPage}
+                  pageClassName={'page-item'}
+                  previousLinkClassName={'page-link'}
+                  nextLinkClassName={'page-link'}
+                  nextClassName={'next'}
+                  previousClassName={'previous'}
+                />
+              </nav>
+            </div>
           </div>
-      }
+          <div>
+            <div className={'d-xs-block d-sm-block d-md-none'}>
+              <div className={'row d-flex justify-content-center'}>
+                <nav aria-label="Results navigation">
+                  <ReactPaginate
+                    previousLabel={'❮'}
+                    nextLabel={'❯'}
+                    breakLabel={
+                      <span className="break-button-content page-link" onClick={advanceByTwo}>
+                        ...
+                      </span>
+                    }
+                    breakClassName={'break-button break-button-upper'}
+                    pageCount={pageCount}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={handlePageClick}
+                    containerClassName={'pagination'}
+                    subContainerClassName={'pages pagination'}
+                    pageLinkClassName={'page-link'}
+                    activeClassName={'active'}
+                    forcePage={selectedPage}
+                    pageClassName={'page-item page-item-upper'}
+                    previousLinkClassName={'page-link'}
+                    nextLinkClassName={'page-link'}
+                    nextClassName={'next'}
+                    previousClassName={'previous'}
+                  />
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className={`no-tasks ${isLoading ? 'reduced-opacity' : ''}`}>
+          <i className="no-results"> </i>
+          <h3>{i18n['no_results']}</h3>
+        </div>
+      )}
     </div>
   );
 };
 
-UsersListAssignable.propTypes = {
+UsersList.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   dataset: PropTypes.array.isRequired,
   advanceByTwo: PropTypes.func.isRequired,
@@ -182,8 +286,6 @@ UsersListAssignable.propTypes = {
   ordering: PropTypes.string.isRequired
 };
 
-const UsersListAssignableWithDatatable = withDatatable(UsersListAssignable);
+const UsersListWithDatatable = withDatatable(UsersList);
 
-export default UsersListAssignableWithDatatable;
-
-
+export default UsersListWithDatatable;

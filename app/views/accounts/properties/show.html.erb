@@ -7,100 +7,130 @@
   <div class="container">
     <!-- .card -->
     <div class="card card-fluid">
-      <h2 class="card-header"> <%= @property.description %> </h2>
+      <h2 class="card-header"><%= heading %></h2>
       <!-- .card-body -->
       <div class="card-body">
 
         <div class="row">
-        <div class="col-lg-6 col-md-12">
-          <div class="thumbnails-ribbon d-flex flex-wrap justify-content-center">
-            <div class="fotorama" data-nav="thumbs" data-allowfullscreen="true">
-              <% @property.images.each do |image| %>
-                <%= image_tag image %>
-              <% end %>
+          <div class="col-lg-6 col-md-12 my-auto">
+
+            <% if @property.images.blank? %>
+              <div class="d-flex flex-wrap justify-content-center">
+                <%= content_tag :i, "", class: "pr-icon lg house-avatar-placeholder" %>
+              </div>
+
+            <% else %>
+              <div class="thumbnails-ribbon d-flex flex-wrap justify-content-center">
+                <div class="fotorama" data-nav="thumbs" data-allowfullscreen="true">
+                  <% @property.images.each do |image| %>
+                    <%= image_tag image %>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+
+          </div>
+
+          <div class="col-lg-6 col-md-12">
+            <div class="table-responsive">
+              <!-- .table -->
+              <table class="table table-striped">
+                <tbody>
+                <tr>
+                  <td><%= t('activerecord.attributes.property.location') %></td>
+                  <td><strong><%= @property.location.localname %></strong></td>
+                </tr>
+                <tr>
+                  <td><%= t('activerecord.attributes.property.price_title') %></td>
+                  <td><strong><%= @property.price ? number_to_currency(@property.price) : '—' %></strong></td>
+                </tr>
+                <tr>
+                  <td><%= t('activerecord.attributes.property.pricepersqmeter') %></td>
+                  <td>
+                    <strong><%= @property.pricepersqmeter ? number_to_currency(@property.pricepersqmeter) : '—' %></strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td><%= t('activerecord.attributes.property.size_title') %></td>
+                  <td>
+                    <strong><%= @property.size ? t('activerecord.attributes.property.size_meter_html', size: @property.size.to_s) : '—' %></strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td><%= t('activerecord.attributes.property.businesstype_plain') %></td>
+                  <td>
+                    <strong><%= t("activerecord.attributes.property.enums.subcategory.#{@property.subcategory.to_s}") %></strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td><%= t('activerecord.attributes.extra.heating.title') %></td>
+                  <td>
+                    <strong><%= @property.extras.find_by(subtype: 'heating').try(:name) ? t("activerecord.attributes.extra.heating.#{@property.extras.find_by(subtype: 'heating').try(:name)}") : '—' %></strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td><%= t('activerecord.attributes.user.phone1') %></td>
+                  <td>
+                    <strong><%= @property.owner.telephones.blank? ? '—' : @property.owner.telephones.split(/[\s,]+/).collect(&:strip).join(', ') %></strong>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="centered-title">
+              <button type="button" class="btn btn-danger"><i class="fas fa-heart fa-fw"></i>&nbsp;<%= t 'properties.favourites' %></button>
+              <button type="button" class="btn btn-secondary"><i class="fas fa-print fa-fw"></i>&nbsp;<%= t 'properties.print' %></button>
             </div>
           </div>
         </div>
 
-        <div class="col-lg-6 col-md-12">
-          <div class="table-responsive">
-            <!-- .table -->
-            <table class="table table-striped">
-              <tbody>
-              <tr>
-                <td><%= t('activerecord.attributes.property.location') %></td>
-                <td><%= @property.location.localname %></td>
-              </tr>
-              <tr>
-                <td><%= t('activerecord.attributes.property.price_title') %></td>
-                <td><%= @property.price ? number_to_currency(@property.price) : '—' %></td>
-              </tr>
-              <tr>
-                <td><%= t('activerecord.attributes.property.pricepersqmeter') %></td>
-                <td><%= @property.pricepersqmeter ? number_to_currency(@property.pricepersqmeter) : '—' %></td>
-              </tr>
-              <tr>
-                <td><%= t('activerecord.attributes.property.businesstype_plain') %></td>
-                <td><%= t("activerecord.attributes.property.enums.subcategory.#{@property.subcategory.to_s}") %></td>
-              </tr>
-              <tr>
-                <td><%= t('activerecord.attributes.extra.heating.title') %></td>
-                <td><%= @property.extras.find_by(subtype: 'heating').try(:name) ? t("activerecord.attributes.extra.heating.#{@property.extras.find_by(subtype: 'heating').try(:name)}") : '—' %></td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-
-        </div>
-        </div>
-
-
-<!--          <div class="media mb-3">-->
-<!--            <div class="user-avatar user-avatar-xl property-avatar-xl fileinput-button">-->
-<!--              <div id="avatar-wrapper">-->
-
-              <%#= render_avatar(@property, "alphatar-edit property-alphatar", "avatar_preview") %>
-<!--              </div>-->
+<!--        <hr />-->
+<!--        <div class="row">-->
+<!--          <div class="col-6 offset-3 ">-->
+<!--            <div class="centered-title">-->
+<!--              <button type="button" class="btn btn-danger"><i class="fas fa-heart fa-fw"></i>&nbsp;<%#= t 'properties.favourites' %></button>-->
+<!--              <button type="button" class="btn btn-secondary"><i class="fas fa-print fa-fw"></i>&nbsp;<%#= t 'properties.print' %></button>-->
 <!--            </div>-->
-<!--            <div class="media-body pl-3 pt-3">-->
-<!--              <strong><%#= @property.title %></strong><br>-->
-<!--              <span><%#= @property.description ? @property.description : '—' %></span>-->
-<!--            </div>-->
-<!--          </div>-->
-
-
-<!--        <div class="col-lg-6 offset-lg-3 col-md-12">-->
-<!--          <div class="metric-row">-->
-
-<!--            <div class="col-6 col-sm-6 col-lg-6">-->
-
-
-<!--              <div class="card-metric">-->
-<!--                <div class="metric">-->
-<!--                  <p class="metric-value h3">-->
-<!--                    <sub><i class="fa fa-tasks fa-lg fa-fw"></i></sub> <span class="value"><%#= @property.assignments.count %></span>-->
-
-<!--                  </p>-->
-<!--                  <h2 class="metric-label"><%#= t('users.show.assignments') %></h2>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-
-<!--            <div class="col-6 col-sm-6 col-lg-6">-->
-
-<!--              <div class="card-metric">-->
-<!--                <div class="metric">-->
-<!--                  <p class="metric-value h3">-->
-<!--                    <sub><i class="fa fa-check fa-lg fa-fw"></i></sub> <span class="value">N/A</span>-->
-<!--                  </p>-->
-<!--                  <h2 class="metric-label"><%#= t('users.show.processed') %></h2>-->
-<!--                </div>-->
-<!--              </div>-->
-
-<!--            </div>-->
-
 <!--          </div>-->
 <!--        </div>-->
+
+        <hr />
+
+        <div class="row">
+          <div class="col-12">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi autem consectetur consequatur cupiditate dolores, enim esse est eum eveniet ex, fuga iusto maiores maxime officiis omnis placeat repudiandae sunt!
+          </div>
+        </div>
+
+        <hr />
+
+<!--        <div class="row">-->
+          <%= react_component('UsersListAssignableWithDatatable', props: {
+              initial_payload: {
+                  dataset_wrapper: @userslist,
+                  results_per_page: @results_per_page,
+                  total_entries: @total_entries,
+                  current_page: @current_page,
+                  initial_search: @initial_search,
+                  initial_sorting: @initial_sorting,
+                  initial_ordering: @initial_ordering,
+                  # property_users means to get the users
+                  # plus the assigned status of each one
+                  # from the properties controller
+                  object_type: 'property_users',
+                  pid: @property.id
+              },
+              i18n: {
+                  datatable: t('js.datatables.properties'),
+                  search: t('js.properties_search')
+              }
+          }, prerender: false) %>
+
+
+<!--        </div>-->
+
+
+
       </div>
     </div>
   </div>
@@ -110,45 +140,8 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <%= react_component('UsersListAssignableWithDatatable', props: {
-          initial_payload: {
-              dataset_wrapper: @userslist,
-              results_per_page: @results_per_page,
-              total_entries: @total_entries,
-              current_page: @current_page,
-              initial_search: @initial_search,
-              initial_sorting: @initial_sorting,
-              initial_ordering: @initial_ordering,
-              # property_users means to get the users
-              # plus the assigned status of each one
-              # from the properties controller
-              object_type: 'property_users',
-              pid: @property.id
-          },
-          i18n: {
-              datatable: t('js.datatables.properties'),
-              search: t('js.properties_search')
-          }
-      }, prerender: false) %>
-
-
-
-      <%= link_to 'Edit', edit_property_path(@property) %> |
-      <%= link_to 'Back', properties_path %>
+<%= link_to 'Edit', edit_property_path(@property) %> |
+<%= link_to 'Back', properties_path %>
 
 
 

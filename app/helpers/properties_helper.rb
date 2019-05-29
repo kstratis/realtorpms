@@ -14,5 +14,21 @@ module PropertiesHelper
     options
     # pp options
   end
+
+  # Πώληση, Διαμέρισμα 54 τ.μ., Άνω Πατήσια, Κέντρο Αθήνας, € 64.000
+  # Πώληση, Διαμέρισμα, 85 τ.μ., Λαμπρινή, 220.000 €
+  def heading
+    businesstype = t("activerecord.attributes.property.enums.businesstype.#{@property.businesstype}")
+    category = t("activerecord.attributes.property.enums.subcategory.#{@property.subcategory}")
+    size = @property.size ? t('activerecord.attributes.property.size_meter_html', size: @property.size.to_s) : nil
+    localname = @property.location.localname
+    parent_localname = @property.location.parent_localname
+    price = @property.price ? number_to_currency(@property.price) : nil
+    [businesstype, "#{category} #{size}", localname, parent_localname, price].join(', ')
+  end
+
+  def ad
+
+  end
 end
 
