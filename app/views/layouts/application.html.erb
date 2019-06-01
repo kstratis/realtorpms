@@ -25,6 +25,13 @@
   <!-- This stylesheet is the uppy.scss. It needs to be placed before the main scss
        cause it overrides something in the transitions rules which breaks the system.
        It uses postcss to load the file. Check .postcssrc.yml -->
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
+
+
+
+
+
+
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
   <%= stylesheet_pack_tag 'stylesheets/uppyjs_styles' %>
   <%= stylesheet_pack_tag 'stylesheets/flatpickr_styles' %>
@@ -100,6 +107,7 @@
 
 </div>
 <!-- /.app -->
+<%= render 'shared/modal_container' %>
 
 </body>
 

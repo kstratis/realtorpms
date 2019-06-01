@@ -31,12 +31,16 @@ Rails.application.routes.draw do
       get '/properties/locations', to: 'properties#locations'
       get '/properties/owners', to: 'properties#owners'
 
+      get "favprompt", to: 'properties#favprompt', :as => :favprompt
       # resources :property_steps
 
 
       resources :properties do
         # resources :build, controller: 'property_steps'
         resource :favorites, only: [:create, :destroy]
+
+
+
         member do
           delete :delete_avatar
         end
@@ -96,6 +100,10 @@ Rails.application.routes.draw do
 
   get '/invitations/:id/accept', to: 'invitationreceivers#accept', as: :accept_invitation
   patch '/invitations/:id/accepted', to: 'invitationreceivers#accepted', as: :accepted_invitation
+
+
+
+
 
   # root 'application#hello'
 end

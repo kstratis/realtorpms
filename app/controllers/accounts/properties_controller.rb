@@ -162,6 +162,13 @@ module Accounts
       end
     end
 
+    def favprompt
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    end
+
     # DELETE /properties/1
     # DELETE /properties/1.json
     def destroy
