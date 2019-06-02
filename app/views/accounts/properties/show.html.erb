@@ -78,61 +78,83 @@
               </table>
             </div>
             <div class="centered-title">
-              <%= link_to favprompt_path,  {remote: true, 'data-toggle':  "modal", 'data-target': '#modal-window', class: 'btn btn-danger'} do %>
-                <%= content_tag(:i, nil, class: "fas fa-heart fa-fw") %>&nbsp;<%= t('properties.favourites') %>
-              <% end %>
-              <button type="button" class="btn btn-secondary"><i class="fas fa-print fa-fw"></i>&nbsp;<%= t 'properties.print' %></button>
+              <div class="reactstrap-modal-button">
+                <%= react_component('ModalContainer', props: {
+                    id: 'modal-window',
+                    buttonLabel: '<i class="fas fa-heart fa-fw"></i>&nbsp;' + t('properties.favourites'),
+                    soloMode: true,
+                    ajaxEnabled: false,
+                    isClearable: true,
+                    backspaceRemovesValue: true,
+                    isSearchable: false,
+                    feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
+                    i18n: {
+                        select: t('js.components.select'),
+                        validatorErrMsg: t('js.validator.required'),
+                    }
+                }, prerender: false) %>
+              </div>
+              <%#= link_to favprompt_path,  {remote: true, 'data-toggle':  "modal", 'data-target': '#modal-window', class: 'btn btn-danger'} do %>
+              <!--                <%#= content_tag(:i, nil, class: "fas fa-heart fa-fw") %>&nbsp;<%#= t('properties.favourites') %>-->
+              <%# end %>
+              <button type="button" class="btn btn-secondary">
+                <i class="fas fa-print fa-fw"></i>&nbsp;<%= t 'properties.print' %></button>
             </div>
           </div>
         </div>
 
-        <hr />
+        <hr/>
 
         <div class="row">
           <div class="col-12">
-<!--            <p><%#= @property.description %></p>-->
-            <p>Χίος ,Πόλη Χίου, Διαμέρισμα, 102 τ.μ , Καταπληκτική κατάσταση, 1 Επίπεδο/α, Όροφος: 1ος, Σε απόσταση περιπάτου απο την Πλατεία ,, 2 Υ/Δ, 1 Μπάνιο/α , 1 Κουζίνα/ες, 1 Parking, Έτος κατασκευής 2008, Ενεργειακό Πιστοποιητικό: , Δάπεδα: Πλακάκια, Κουφώματα: Αλουμινίου, Χαρακτηριστικα: Αποθήκη, Προσόψεως, Πόρτα Ασφαλείας, Νεόδμητο, Βεράντες, Εσωτερική Σκάλα, Φωτεινό, Βαμμένο, Διπλά Τζάμια, Boiler, Σίτες, Διαθετει και 65 μ γκαραζ και αποθηκη(4 μπαλκονια), ανεξαρτητο δικο του καυστηρα( Ενιαία σαλονοτραπεζαρία,Κουζίνα με πάσο,), Αυτόνομη Πετρέλαιο Θέρμανση, Προσόψεως,Φωτεινό , Θέα :Βουνό ,  κοντά σε: Κεντρικό Δρόμο,Πλατεία,Αγορά,Λιμάνι ,,  απόσταση απο: Πόλη(m): 800, Τιμή: 210.000€, Τηλ: 2106231555,, 6980502020 , www.dontasrealestate.gr ΚΩΔ(ID)--31652 , ΚΩΔ(E-AGENTS) 127727 </p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid architecto cumque, deleniti eius facilis fugiat harum ipsum itaque libero magnam nam neque nobis non odit officiis omnis quidem ullam.</p>
+            <!--            <p><%#= @property.description %></p>-->
+            <p>Χίος ,Πόλη Χίου, Διαμέρισμα, 102 τ.μ , Καταπληκτική κατάσταση, 1 Επίπεδο/α, Όροφος: 1ος, Σε απόσταση
+              περιπάτου απο την Πλατεία ,, 2 Υ/Δ, 1 Μπάνιο/α , 1 Κουζίνα/ες, 1 Parking, Έτος κατασκευής 2008, Ενεργειακό
+              Πιστοποιητικό: , Δάπεδα: Πλακάκια, Κουφώματα: Αλουμινίου, Χαρακτηριστικα: Αποθήκη, Προσόψεως, Πόρτα
+              Ασφαλείας, Νεόδμητο, Βεράντες, Εσωτερική Σκάλα, Φωτεινό, Βαμμένο, Διπλά Τζάμια, Boiler, Σίτες, Διαθετει
+              και 65 μ γκαραζ και αποθηκη(4 μπαλκονια), ανεξαρτητο δικο του καυστηρα( Ενιαία σαλονοτραπεζαρία,Κουζίνα με
+              πάσο,), Αυτόνομη Πετρέλαιο Θέρμανση, Προσόψεως,Φωτεινό , Θέα :Βουνό , κοντά σε: Κεντρικό
+              Δρόμο,Πλατεία,Αγορά,Λιμάνι ,, απόσταση απο: Πόλη(m): 800, Τιμή: 210.000€, Τηλ: 2106231555,, 6980502020 ,
+              www.dontasrealestate.gr ΚΩΔ(ID)--31652 , ΚΩΔ(E-AGENTS) 127727 </p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid architecto cumque, deleniti
+              eius facilis fugiat harum ipsum itaque libero magnam nam neque nobis non odit officiis omnis quidem
+              ullam.</p>
           </div>
         </div>
 
 
+        <!--        <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
+        <!--          <div class="modal-dialog" role="document">-->
+        <!--            <div class="modal-content"></div>-->
+        <!--          </div>-->
+        <!--        </div>-->
+
+        <hr/>
+
+        <!--        <div class="row">-->
+        <%= react_component('UsersListAssignableWithDatatable', props: {
+            initial_payload: {
+                dataset_wrapper: @userslist,
+                results_per_page: @results_per_page,
+                total_entries: @total_entries,
+                current_page: @current_page,
+                initial_search: @initial_search,
+                initial_sorting: @initial_sorting,
+                initial_ordering: @initial_ordering,
+                # property_users means to get the users
+                # plus the assigned status of each one
+                # from the properties controller
+                object_type: 'property_users',
+                pid: @property.id
+            },
+            i18n: {
+                datatable: t('js.datatables.properties'),
+                search: t('js.properties_search')
+            }
+        }, prerender: false) %>
 
 
-
-<!--        <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
-<!--          <div class="modal-dialog" role="document">-->
-<!--            <div class="modal-content"></div>-->
-<!--          </div>-->
-<!--        </div>-->
-
-        <hr />
-
-<!--        <div class="row">-->
-          <%= react_component('UsersListAssignableWithDatatable', props: {
-              initial_payload: {
-                  dataset_wrapper: @userslist,
-                  results_per_page: @results_per_page,
-                  total_entries: @total_entries,
-                  current_page: @current_page,
-                  initial_search: @initial_search,
-                  initial_sorting: @initial_sorting,
-                  initial_ordering: @initial_ordering,
-                  # property_users means to get the users
-                  # plus the assigned status of each one
-                  # from the properties controller
-                  object_type: 'property_users',
-                  pid: @property.id
-              },
-              i18n: {
-                  datatable: t('js.datatables.properties'),
-                  search: t('js.properties_search')
-              }
-          }, prerender: false) %>
-
-
-<!--        </div>-->
-
+        <!--        </div>-->
 
 
       </div>

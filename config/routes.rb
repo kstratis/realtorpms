@@ -31,10 +31,6 @@ Rails.application.routes.draw do
       get '/properties/locations', to: 'properties#locations'
       get '/properties/owners', to: 'properties#owners'
 
-      get "favprompt", to: 'properties#favprompt', :as => :favprompt
-      # resources :property_steps
-
-
       resources :properties do
         # resources :build, controller: 'property_steps'
         resource :favorites, only: [:create, :destroy]

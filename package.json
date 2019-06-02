@@ -24,6 +24,7 @@
     "react-paginate": "^6.3.0",
     "react-select": "^2.4.3",
     "react-skylight": "^0.5.1",
+    "reactstrap": "^8.0.0",
     "spark-md5": "^3.0.0",
     "stacked-menu": "https://gitlab.com/bent10/stacked-menu.git#master",
     "uppy": "^1.0.2",
