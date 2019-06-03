@@ -4,6 +4,7 @@ module Accounts
     include LocationFilter
     include OwnerFilter
     include UserDatatable
+    include Jsonifier
 
     helper UserAvatar
 

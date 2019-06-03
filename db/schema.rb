@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_04_175808) do
+ActiveRecord::Schema.define(version: 2019_06_03_090840) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,14 @@ ActiveRecord::Schema.define(version: 2019_05_04_175808) do
   create_table "extras_properties", id: false, force: :cascade do |t|
     t.bigint "extra_id", null: false
     t.bigint "property_id", null: false
+  end
+
+  create_table "favlists", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_favlists_on_user_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -192,6 +200,7 @@ ActiveRecord::Schema.define(version: 2019_05_04_175808) do
 
   add_foreign_key "assignments", "properties"
   add_foreign_key "assignments", "users"
+  add_foreign_key "favlists", "users"
   add_foreign_key "favorites", "properties"
   add_foreign_key "favorites", "users"
   add_foreign_key "invitations", "accounts"

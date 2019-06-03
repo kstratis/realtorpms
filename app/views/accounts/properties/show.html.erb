@@ -81,7 +81,11 @@
               <div class="reactstrap-modal-button">
                 <%= react_component('ModalContainer', props: {
                     id: 'modal-window',
-                    buttonLabel: '<i class="fas fa-heart fa-fw"></i>&nbsp;' + t('properties.favourites'),
+                    fireButtonLabel: '<i class="fas fa-heart fa-fw"></i>&nbsp;' + t('properties.favourites'),
+                    modalTitle: t('properties.fav_lists'),
+                    buttonOKLabel: t('properties.ok_button'),
+                    buttonCancelLabel: t('properties.cancel_button'),
+                    buttonCloseLabel: t('properties.close_button'),
                     soloMode: true,
                     ajaxEnabled: false,
                     isClearable: true,

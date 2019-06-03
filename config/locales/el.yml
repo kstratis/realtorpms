@@ -453,6 +453,10 @@ el:
     add_fast: "Προσθήκη ακινήτου (γρήγορη)"
     list: "Λίστα"
     favourites: "Αγαπημένα"
+    fav_lists: "Λίστες αγαπημένων"
+    ok_button: "Προσθήκη"
+    cancel_button: "Ακύρωση"
+    close_button: "Κλείσιμο"
     print: "Εκτύπωση"
     import: "Εισαγωγή από αρχείο"
     new:

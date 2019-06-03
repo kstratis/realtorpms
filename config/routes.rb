@@ -31,9 +31,12 @@ Rails.application.routes.draw do
       get '/properties/locations', to: 'properties#locations'
       get '/properties/owners', to: 'properties#owners'
 
+
+
       resources :properties do
         # resources :build, controller: 'property_steps'
         resource :favorites, only: [:create, :destroy]
+
 
 
 
@@ -43,6 +46,7 @@ Rails.application.routes.draw do
       end
 
       resources :users do
+        resources :favlists, only: [:create, :destroy, :index]
         member do
           patch :toggle_activation
           delete :delete_avatar

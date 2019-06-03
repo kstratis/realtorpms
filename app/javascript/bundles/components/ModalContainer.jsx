@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import Select from 'react-select'
+import AddRemoveFavLists from './AddRemoveFavLists';
 
 class ModalContainer extends React.Component {
   constructor(props) {
@@ -20,19 +20,21 @@ class ModalContainer extends React.Component {
   render() {
     return (
       <div className={''}>
-        <Button color="danger" onClick={this.toggle}><div dangerouslySetInnerHTML={{ __html: this.props.buttonLabel }}/></Button>
-        <Modal wrapClassName={'reactstrap-modal'} isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+        <Button color="danger" onClick={this.toggle}><div dangerouslySetInnerHTML={{ __html: this.props.fireButtonLabel }}/></Button>
+        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+          <ModalHeader toggle={this.toggle}>{this.props.modalTitle}</ModalHeader>
           <ModalBody>
-            <Select options={
-              [{ value: 'chocolate', label: 'Chocolate' },
-                { value: 'strawberry', label: 'Strawberry' },
-                { value: 'vanilla', label: 'Vanilla' }]
-            } />
+            <AddRemoveFavLists />
+
+            {/*<Select options={*/}
+            {/*  [{ value: 'chocolate', label: 'Chocolate' },*/}
+            {/*    { value: 'strawberry', label: 'Strawberry' },*/}
+            {/*    { value: 'vanilla', label: 'Vanilla' }]*/}
+            {/*} />*/}
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
-            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+            {/*<Button color="primary" onClick={this.toggle}>{this.props.buttonOKLabel}</Button>{' '}*/}
+            <Button color="secondary" onClick={this.toggle}>{this.props.buttonCloseLabel}</Button>
           </ModalFooter>
         </Modal>
       </div>

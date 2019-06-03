@@ -454,6 +454,10 @@ en:
     add_fast: "Add property (fast)"
     list: "Property list"
     favourites: "Favourites"
+    fav_lists: "Favourite lists"
+    ok_button: "Add"
+    cancel_button: "Cancel"
+    close_button: "Close"
     print: "Print"
     import: "Import properties"
     new:
