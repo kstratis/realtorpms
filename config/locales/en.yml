@@ -226,6 +226,10 @@ en:
         record_invalid: ! 'Validation failed: %{errors}'
   js:
     components:
+      modal:
+        favlists:
+          no_results: "You have no lists... yet."
+          property_cover_alt: "Property cover image"
       select:
         nooptions_async_html: "Type to search. <i class=\"fas fa-backspace fa-fw\"/></i> to clear"
         nooptions_sync_html: "No options found"

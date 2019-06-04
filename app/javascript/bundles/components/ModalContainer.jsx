@@ -24,7 +24,7 @@ class ModalContainer extends React.Component {
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>{this.props.modalTitle}</ModalHeader>
           <ModalBody>
-            <AddRemoveFavLists />
+            <AddRemoveFavLists avatar={this.props.avatar} favlists_url={this.props.favlists_url} i18n={this.props.i18n} />
 
             {/*<Select options={*/}
             {/*  [{ value: 'chocolate', label: 'Chocolate' },*/}

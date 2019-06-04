@@ -938,6 +938,10 @@ li.page-item{
   //margin-bottom: 15px;
 }
 
+.no-favlists{
+  text-align: center;
+}
+
 .no-results {
   width: 200px;
   height: 200px;
@@ -1009,4 +1013,13 @@ li.page-item{
 
 .reactstrap-modal-button{
   display: inline-block;
+}
+
+.user-avatar.property-avatar{
+  border: unset;
+  margin-bottom: 20px;
+}
+
+.user-avatar.property-avatar img{
+  border-radius: unset;
 }

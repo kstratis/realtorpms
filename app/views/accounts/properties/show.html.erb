@@ -82,6 +82,8 @@
                 <%= react_component('ModalContainer', props: {
                     id: 'modal-window',
                     fireButtonLabel: '<i class="fas fa-heart fa-fw"></i>&nbsp;' + t('properties.favourites'),
+                    avatar: url_for(@property.avatar),
+                    favlists_url: user_favlists_url(current_user.id),
                     modalTitle: t('properties.fav_lists'),
                     buttonOKLabel: t('properties.ok_button'),
                     buttonCancelLabel: t('properties.cancel_button'),
@@ -93,8 +95,9 @@
                     isSearchable: false,
                     feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
                     i18n: {
-                        select: t('js.components.select'),
-                        validatorErrMsg: t('js.validator.required'),
+                        no_lists_available: t('js.components.modal.favlists.no_results'),
+                        property_cover_alt: t('js.components.modal.favlists.property_cover_alt')
+
                     }
                 }, prerender: false) %>
               </div>
