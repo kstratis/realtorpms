@@ -8,7 +8,7 @@ function AddRemoveEntry({ favlist, index, completeFavlist, removeFavlist}) {
         <div className="form-group">
           <div className="custom-control custom-control-inline custom-checkbox">
             <input type="checkbox" className="custom-control-input" id={index} />
-            <label className="custom-control-label" htmlFor={index}>{favlist.text}</label>
+            <label className="custom-control-label" htmlFor={index}>{favlist.name}</label>
           </div>
         </div>
         {/*<button onClick={() => console.log('completed')}>Complete</button>*/}
@@ -35,8 +35,7 @@ function AddRemoveListForm({ addFavlist }) {
   );
 }
 
-function AddRemoveFavLists({avatar, favlists_url, i18n}) {
-  console.log(favlists_url);
+function AddRemoveFavLists({avatar, favlists_get_url, favlists_post_url, i18n}) {
   // const [lists, setLists] = useState([
   //   {
   //     text: 'Learn about React',
@@ -56,7 +55,21 @@ function AddRemoveFavLists({avatar, favlists_url, i18n}) {
 
   const fetchUserLists = () => {
     setLoading(!!loading);
-    axios.get(`${favlists_url}.json`)
+    axios.get(`${favlists_get_url}.json`)
+      .then((res) => {
+        console.log(res.data.message);
+        setLists(res.data.message);
+        setLoading(false);
+        // Set state with result
+        // this.setState({data:res.data});
+      });
+  };
+
+  const createUserLists = (text) => {
+    setLoading(!!loading);
+    return axios.post(`${favlists_post_url}`,{
+      name: text
+    })
       .then((res) => {
         console.log(res.data.message);
         setLoading(false);
@@ -75,8 +88,11 @@ function AddRemoveFavLists({avatar, favlists_url, i18n}) {
 
 
   const addFavlist = text => {
-    const newLists = [...lists, { text }];
-    setLists(newLists);
+    createUserLists(text).then(()=>{
+      const newLists = [...lists, { text }];
+      console.log(newLists);
+      setLists(newLists);
+    });
   };
 
   // const completeTodo = index => {

@@ -12,6 +12,9 @@ module Accounts
     end
 
     def create
+      puts '++++++'
+      puts params
+      puts '++++++'
       current_user.favlist_create(params[:name])
       render :json => {:status => "OK", :message => 'List created' }
     end
