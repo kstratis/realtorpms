@@ -228,6 +228,8 @@ el:
         favlists:
           no_results: "Δεν έχετε δημιουργήσει κάποια λίστα... ακόμα."
           property_cover_alt: "Φωτογραφία ακινήτου"
+          add_list_action: "Προσθήκη"
+          loading_alt: "Φορτώνει..."
       select:
         nooptions_async_html: "Αναζητήστε έναν όρο. Πληκτρολογήστε&nbsp; <i class=\"fas fa-backspace fa-fw\"/></i>&nbsp; για εκκαθάριση"
         nooptions_sync_html: "Δεν βρέθηκαν αποτελέσματα"

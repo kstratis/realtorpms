@@ -16,7 +16,7 @@ module Accounts
       puts params
       puts '++++++'
       current_user.favlist_create(params[:name])
-      render :json => {:status => "OK", :message => 'List created' }
+      render :json => {:status => "OK", :message => jsonify(User.find(user_id).favlists, [:id, :name]) }
     end
 
     def destroy

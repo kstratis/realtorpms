@@ -230,6 +230,8 @@ en:
         favlists:
           no_results: "You have no lists... yet."
           property_cover_alt: "Property cover image"
+          add_list_action: "Add"
+          loading_alt: "Loading..."
       select:
         nooptions_async_html: "Type to search. <i class=\"fas fa-backspace fa-fw\"/></i> to clear"
         nooptions_sync_html: "No options found"

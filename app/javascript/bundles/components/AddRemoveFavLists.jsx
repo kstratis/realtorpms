@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function AddRemoveEntry({ favlist, index, completeFavlist, removeFavlist}) {
+function AddRemoveEntry({ favlist, index, completeFavlist, removeFavlist, isLoading }) {
   return (
-    <div className="">
-      <div>
-        <div className="form-group">
-          <div className="custom-control custom-control-inline custom-checkbox">
-            <input type="checkbox" className="custom-control-input" id={index} />
-            <label className="custom-control-label" htmlFor={index}>{favlist.name}</label>
-          </div>
+    <div className={isLoading ? 'reduced-opacity' : ''}>
+      <div className="form-group">
+        <div className="custom-control custom-control-inline custom-checkbox">
+          <input type="checkbox" className="custom-control-input" id={index} />
+          <label className="custom-control-label" htmlFor={index}>
+            {favlist.name}
+          </label>
         </div>
-        {/*<button onClick={() => console.log('completed')}>Complete</button>*/}
-        {/*<button onClick={() => removeTodo(index)}>x</button>*/}
       </div>
+      {/*<button onClick={() => console.log('completed')}>Complete</button>*/}
+      {/*<button onClick={() => removeTodo(index)}>x</button>*/}
     </div>
   );
 }
 
-function AddRemoveListForm({ addFavlist }) {
+function AddRemoveListForm({ addFavlist, i18n }) {
   const [value, setValue] = useState('');
 
   const handleSubmit = e => {
@@ -30,69 +30,40 @@ function AddRemoveListForm({ addFavlist }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" className="input" value={value} onChange={e => setValue(e.target.value)} />
+      <div className="form-group row">
+        <div className={'col-sm-8'}>
+          <input type="text" className="input form-control" value={value} onChange={e => setValue(e.target.value)} />
+        </div>
+
+        <div className={'col-sm-4'}>
+          <input className={'btn btn-primary'} type="submit" value={i18n.add_list_action} />
+        </div>
+      </div>
     </form>
   );
 }
 
-function AddRemoveFavLists({avatar, favlists_get_url, favlists_post_url, i18n}) {
-  // const [lists, setLists] = useState([
-  //   {
-  //     text: 'Learn about React',
-  //     isCompleted: false
-  //   },
-  //   {
-  //     text: 'Meet friend for lunch',
-  //     isCompleted: false
-  //   },
-  //   {
-  //     text: 'Build really cool todo app',
-  //     isCompleted: false
-  //   }
-  // ]);
+function AddRemoveFavLists({ avatar, favlists_get_url, favlists_post_url, setLoading, isLoading, i18n }) {
   const [lists, setLists] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const fetchUserLists = () => {
-    setLoading(!!loading);
-    axios.get(`${favlists_get_url}.json`)
-      .then((res) => {
-        console.log(res.data.message);
-        setLists(res.data.message);
-        setLoading(false);
-        // Set state with result
-        // this.setState({data:res.data});
-      });
-  };
-
-  const createUserLists = (text) => {
-    setLoading(!!loading);
-    return axios.post(`${favlists_post_url}`,{
-      name: text
-    })
-      .then((res) => {
-        console.log(res.data.message);
-        setLoading(false);
-        // Set state with result
-        // this.setState({data:res.data});
-      });
-  };
-
-
+  // const [loading, setLoading] = useState(true);
+  const [request, setRequest] = useState({ url: favlists_get_url, method: 'get', payload: {} });
 
   useEffect(() => {
-    // Update the document title using the browser API
-    // document.title = `You clicked ${count} times`;
-    fetchUserLists();
-  }, []);
-
+    const fetchPostData = async () => {
+      setLoading(true);
+      const result = await axios({
+        method: request.method,
+        url: request.url,
+        data: request.payload
+      });
+      setLists(result.data.message);
+      setLoading(false);
+    };
+    fetchPostData();
+  }, [request]);
 
   const addFavlist = text => {
-    createUserLists(text).then(()=>{
-      const newLists = [...lists, { text }];
-      console.log(newLists);
-      setLists(newLists);
-    });
+    setRequest({ url: favlists_post_url, method: 'post', payload: { name: text } });
   };
 
   // const completeTodo = index => {
@@ -108,27 +79,32 @@ function AddRemoveFavLists({avatar, favlists_get_url, favlists_post_url, i18n}) 
   // };
 
   return (
-    <div className="fav-list">
+    <div className="favlist-container mt-3">
       <figure className="user-avatar property-avatar user-avatar-xxl mx-auto d-block">
         <img src={avatar} className={'rounded'} alt={'i18n.property_cover_alt'} />
       </figure>
       <hr />
-      {loading ? (
-        <div className="spinner-grow" role="status">
-          <span className="sr-only">Loading...</span>
-        </div>
-      ) : lists.length > 0 ? (
-        lists.map((favlist, index) => (
-          <AddRemoveEntry key={index} index={index} favlist={favlist} completeFavlist={null} removeFavlist={null} />
-        ))
-      ) : (
-        <div className={'no-favlists'}>
-          <i className="pr-icon md no-results"> </i>
-          <h3>{i18n.no_lists_available}</h3>
-        </div>
-      )}
+      <div className={'favlist-body'}>
+        {lists.length > 0 ? (
+          lists.map((favlist, index) => (
+            <AddRemoveEntry
+              key={index}
+              index={index}
+              favlist={favlist}
+              isLoading={isLoading}
+              completeFavlist={null}
+              removeFavlist={null}
+            />
+          ))
+        ) : (
+          <div className={'no-favlists'}>
+            <i className="pr-icon md no-results"> </i>
+            <h3>{i18n.no_lists_available}</h3>
+          </div>
+        )}
+      </div>
       <hr />
-      <AddRemoveListForm addFavlist={addFavlist} />
+      <AddRemoveListForm addFavlist={addFavlist} i18n={i18n} />
     </div>
   );
 }

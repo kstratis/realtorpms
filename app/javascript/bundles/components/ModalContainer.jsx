@@ -1,15 +1,24 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import AddRemoveFavLists from './AddRemoveFavLists';
+import Spinner from '../datatables/Spinner';
 
 class ModalContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false
+      modal: false,
+      isLoading: true
     };
 
     this.toggle = this.toggle.bind(this);
+    this.setLoading = this.setLoading.bind(this);
+  }
+
+  setLoading(status) {
+    this.setState({
+      isLoading: status
+    });
   }
 
   toggle() {
@@ -21,10 +30,11 @@ class ModalContainer extends React.Component {
     return (
       <div className={''}>
         <Button color="danger" onClick={this.toggle}><div dangerouslySetInnerHTML={{ __html: this.props.fireButtonLabel }}/></Button>
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} scrollable={true}>
+          <Spinner isLoading={this.state.isLoading} />
           <ModalHeader toggle={this.toggle}>{this.props.modalTitle}</ModalHeader>
           <ModalBody>
-            <AddRemoveFavLists avatar={this.props.avatar} favlists_get_url={this.props.favlists_get_url} favlists_post_url={this.props.favlists_post_url} i18n={this.props.i18n} />
+            <AddRemoveFavLists avatar={this.props.avatar} favlists_get_url={this.props.favlists_get_url} favlists_post_url={this.props.favlists_post_url} i18n={this.props.i18n} setLoading={this.setLoading} isLoading={this.state.isLoading}/>
 
             {/*<Select options={*/}
             {/*  [{ value: 'chocolate', label: 'Chocolate' },*/}
