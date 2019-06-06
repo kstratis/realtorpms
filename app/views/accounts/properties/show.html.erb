@@ -82,7 +82,7 @@
                 <%= react_component('ModalContainer', props: {
                     id: 'modal-window',
                     fireButtonLabel: '<i class="fas fa-heart fa-fw"></i>&nbsp;' + t('properties.favourites'),
-                    avatar: url_for(@property.try(:avatar)) || nil,
+                    avatar: url_for(@property.avatar) if @user.avatar.attached? else nil,
                     favlists_get_url: user_favlists_url(current_user.id),
                     favlists_post_url: user_favlists_url(current_user.id),
                     modalTitle: t('properties.fav_lists'),

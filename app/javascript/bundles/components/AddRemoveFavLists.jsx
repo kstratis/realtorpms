@@ -80,9 +80,7 @@ function AddRemoveFavLists({ avatar, favlists_get_url, favlists_post_url, setLoa
 
   return (
     <div className="favlist-container mt-3">
-      <figure className="user-avatar property-avatar user-avatar-xxl mx-auto d-block">
-        <img src={avatar} className={'rounded'} alt={'i18n.property_cover_alt'} />
-      </figure>
+    {avatar ? <figure className="user-avatar property-avatar user-avatar-xxl mx-auto d-block"><img src={avatar} className={'rounded'} alt={'i18n.property_cover_alt'} /></figure> : null}
       <hr />
       <div className={'favlist-body'}>
         {lists.length > 0 ? (
