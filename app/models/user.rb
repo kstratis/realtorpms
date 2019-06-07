@@ -137,14 +137,18 @@ class User < ApplicationRecord
     favlists.where(name: name).destroy!
   end
 
-  def favorite(property)
-    favorites.find_or_create_by(property: property)
-  end
+  # def favorite(property)
+  #   favorites.find_or_create_by(property: property)
+  # end
 
   def unfavorite(property)
     favorites.where(property: property).destroy_all
     property.reload
   end
+
+
+
+
 
   # Sets the password reset attributes.
   def create_reset_digest

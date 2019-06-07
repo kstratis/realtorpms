@@ -1,8 +1,5 @@
 class Favlist < ApplicationRecord
+  validates :name, uniqueness: { case_sensitive: false }
   belongs_to :user
-  has_many :properties
-
-  def faved
-
-  end
+  has_and_belongs_to_many :properties, -> { distinct }
 end

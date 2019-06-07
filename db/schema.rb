@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_03_090840) do
+ActiveRecord::Schema.define(version: 2019_06_07_101751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,10 +83,17 @@ ActiveRecord::Schema.define(version: 2019_06_03_090840) do
 
   create_table "favlists", force: :cascade do |t|
     t.string "name"
-    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_favlists_on_user_id"
+  end
+
+  create_table "favlists_properties", id: false, force: :cascade do |t|
+    t.bigint "favlist_id"
+    t.bigint "property_id"
+    t.index ["favlist_id"], name: "index_favlists_properties_on_favlist_id"
+    t.index ["property_id"], name: "index_favlists_properties_on_property_id"
   end
 
   create_table "favorites", force: :cascade do |t|

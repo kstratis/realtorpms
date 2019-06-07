@@ -83,6 +83,7 @@
                     id: 'modal-window',
                     fireButtonLabel: '<i class="fas fa-heart fa-fw"></i>&nbsp;' + t('properties.favourites'),
                     avatar: @property.avatar.attached? ? url_for(@property.avatar) : nil,
+                    favs_post_url: '',
                     favlists_get_url: user_favlists_url(current_user.id),
                     favlists_post_url: user_favlists_url(current_user.id),
                     modalTitle: t('properties.fav_lists'),

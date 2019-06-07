@@ -5,12 +5,15 @@ module Accounts
     before_action :find_property!
 
     def create
-      current_user.favorite(@property)
+      # current_user.favorite(@property)
+      current_user.favlists.find(params[:favlist_id]) << @property
+      # current_user.favlistsfavorite(@property)
       render :json => {:status => "OK", :type => 'faved' }
     end
 
     def destroy
-      current_user.unfavorite(@property)
+      current_user.favlists.find(params[:favlist_id]).
+      # current_user.unfavorite(@property)
       render :json => {:status => "OK", :type => 'unfaved' }
     end
 
@@ -19,5 +22,9 @@ module Accounts
       def find_property!
         @property = Property.find(params[:property_id])
       end
+
+      # def find_favlist!
+      #   @favlist = Favlist.find(params[:favlist_id])
+      # end
   end
 end

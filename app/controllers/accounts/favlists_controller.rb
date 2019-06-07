@@ -11,7 +11,18 @@ module Accounts
       # end
     end
 
+    def create_fav
+      puts "create_fav WORKS!!!"
+      puts params
+      # favlist =
+      # current_user.favorite(@property)
+    end
+
     def create
+      # def create
+      #   current_user.favorite(@property)
+      #   render :json => {:status => "OK", :type => 'faved' }
+      # end
       puts '++++++'
       puts params
       puts '++++++'

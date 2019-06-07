@@ -6,10 +6,16 @@ import Spinner from '../datatables/Spinner';
 function AddRemoveEntry({ favlist, index, addEntity, favs_post_url, completeFavlist, removeFavlist, isLoading }) {
   // const [checked, setChecked] = useState('');
 
+  // const toggleFav = (favlist) => {
+  // ajax call
+  // filter out shit and update UI
+  // console.log('works');
+  // setRequest(payload);
+  // };
   // const toggleFav = e => {
   //   setChecked(!checked);
   //   console.log('checked');
-  //   // this.setState({isChecked: !this.state.isChecked});
+  // this.setState({isChecked: !this.state.isChecked});
   // };
 
   return (
@@ -21,7 +27,9 @@ function AddRemoveEntry({ favlist, index, addEntity, favs_post_url, completeFavl
             className="custom-control-input"
             id={index}
             checked={!!favlist.isFaved}
-            onChange={()=>addEntity({ url: favs_post_url, method: 'post', payload: { name: text } })}
+            onChange={() =>
+              addEntity({ url: favs_post_url, method: 'post', payload: { favlist: favlist.id, property: property.id } })
+            }
           />
           <label className="custom-control-label" htmlFor={index}>
             {favlist.name}
@@ -59,7 +67,15 @@ function AddRemoveListForm({ addEntity, i18n, favlists_post_url }) {
   );
 }
 
-function AddRemoveFavLists({ avatar, favlists_get_url, favs_post_url, favlists_post_url, setLoading, isLoading, i18n }) {
+function AddRemoveFavLists({
+  avatar,
+  favlists_get_url,
+  favs_post_url,
+  favlists_post_url,
+  setLoading,
+  isLoading,
+  i18n
+}) {
   // const [lists, setLists] = useState([]);
   // const [loading, setLoading] = useState(true);
   const [request, setRequest] = useState({ url: favlists_get_url, method: 'get', payload: {} });

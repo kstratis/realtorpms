@@ -9,7 +9,7 @@ class Property < ApplicationRecord
   belongs_to :account
   belongs_to :location, optional: true
   belongs_to :owner, optional: true
-  belongs_to :favlist, optional: true
+  has_and_belongs_to_many :favlists, -> { distinct }
   accepts_nested_attributes_for :owner
   has_many :assignments
   has_many_attached :images
