@@ -8,18 +8,18 @@ class ModalContainer extends React.Component {
     super(props);
     this.state = {
       modal: false,
-      isLoading: true
+      // isLoading: true
     };
 
     this.toggle = this.toggle.bind(this);
-    this.setLoading = this.setLoading.bind(this);
+    // this.setLoading = this.setLoading.bind(this);
   }
 
-  setLoading(status) {
-    this.setState({
-      isLoading: status
-    });
-  }
+  // setLoading(status) {
+  //   this.setState({
+  //     isLoading: status
+  //   });
+  // }
 
   toggle() {
     this.setState(prevState => ({
@@ -31,10 +31,11 @@ class ModalContainer extends React.Component {
       <div className={''}>
         <Button color="danger" onClick={this.toggle}><div dangerouslySetInnerHTML={{ __html: this.props.fireButtonLabel }}/></Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} scrollable={true}>
-          <Spinner isLoading={this.state.isLoading} />
+
           <ModalHeader toggle={this.toggle}>{this.props.modalTitle}</ModalHeader>
           <ModalBody>
-            <AddRemoveFavLists avatar={this.props.avatar} favlists_get_url={this.props.favlists_get_url} favlists_post_url={this.props.favlists_post_url} i18n={this.props.i18n} setLoading={this.setLoading} isLoading={this.state.isLoading}/>
+            {/*<AddRemoveFavLists avatar={this.props.avatar} favlists_get_url={this.props.favlists_get_url} favlists_post_url={this.props.favlists_post_url} i18n={this.props.i18n} setLoading={this.setLoading} isLoading={this.state.isLoading}/>*/}
+            <AddRemoveFavLists avatar={this.props.avatar} favlists_get_url={this.props.favlists_get_url} favlists_post_url={this.props.favlists_post_url} i18n={this.props.i18n}/>
 
             {/*<Select options={*/}
             {/*  [{ value: 'chocolate', label: 'Chocolate' },*/}

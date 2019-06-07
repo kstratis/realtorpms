@@ -1,12 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import useFetch from '../hooks/useFetch';
+import Spinner from '../datatables/Spinner';
 
-function AddRemoveEntry({ favlist, index, completeFavlist, removeFavlist, isLoading }) {
+function AddRemoveEntry({ favlist, index, addEntity, favs_post_url, completeFavlist, removeFavlist, isLoading }) {
+  // const [checked, setChecked] = useState('');
+
+  // const toggleFav = e => {
+  //   setChecked(!checked);
+  //   console.log('checked');
+  //   // this.setState({isChecked: !this.state.isChecked});
+  // };
+
   return (
     <div className={isLoading ? 'reduced-opacity' : ''}>
       <div className="form-group">
         <div className="custom-control custom-control-inline custom-checkbox">
-          <input type="checkbox" className="custom-control-input" id={index} />
+          <input
+            type="checkbox"
+            className="custom-control-input"
+            id={index}
+            checked={!!favlist.isFaved}
+            onChange={()=>addEntity({ url: favs_post_url, method: 'post', payload: { name: text } })}
+          />
           <label className="custom-control-label" htmlFor={index}>
             {favlist.name}
           </label>
@@ -18,14 +34,14 @@ function AddRemoveEntry({ favlist, index, completeFavlist, removeFavlist, isLoad
   );
 }
 
-function AddRemoveListForm({ addFavlist, i18n }) {
-  const [value, setValue] = useState('');
+function AddRemoveListForm({ addEntity, i18n, favlists_post_url }) {
+  const [value, setValue] = useState({});
 
   const handleSubmit = e => {
     e.preventDefault();
     if (!value) return;
-    addFavlist(value);
-    setValue('');
+    addEntity({ url: favlists_post_url, method: 'post', payload: { name: text } });
+    setValue({});
   };
 
   return (
@@ -43,28 +59,21 @@ function AddRemoveListForm({ addFavlist, i18n }) {
   );
 }
 
-function AddRemoveFavLists({ avatar, favlists_get_url, favlists_post_url, setLoading, isLoading, i18n }) {
-  const [lists, setLists] = useState([]);
+function AddRemoveFavLists({ avatar, favlists_get_url, favs_post_url, favlists_post_url, setLoading, isLoading, i18n }) {
+  // const [lists, setLists] = useState([]);
   // const [loading, setLoading] = useState(true);
   const [request, setRequest] = useState({ url: favlists_get_url, method: 'get', payload: {} });
 
-  useEffect(() => {
-    const fetchPostData = async () => {
-      setLoading(true);
-      const result = await axios({
-        method: request.method,
-        url: request.url,
-        data: request.payload
-      });
-      setLists(result.data.message);
-      setLoading(false);
-    };
-    fetchPostData();
-  }, [request]);
+  const { data, loading } = useFetch(request);
 
-  const addFavlist = text => {
-    setRequest({ url: favlists_post_url, method: 'post', payload: { name: text } });
+  const addEntity = payload => {
+    console.log('works');
+    setRequest(payload);
   };
+
+  // const toggleFav = fav => {
+  //   setRequest({ url: favlists_post_url, method: 'post', payload: fav });
+  // };
 
   // const completeTodo = index => {
   //   const newLists = [...lists];
@@ -80,16 +89,21 @@ function AddRemoveFavLists({ avatar, favlists_get_url, favlists_post_url, setLoa
 
   return (
     <div className="favlist-container mt-3">
-    {avatar ? <figure className="user-avatar property-avatar user-avatar-xxl mx-auto d-block"><img src={avatar} className={'rounded'} alt={'i18n.property_cover_alt'} /></figure> : null}
+      {avatar ? (
+        <figure className="user-avatar property-avatar user-avatar-xxl mx-auto d-block">
+          <img src={avatar} className={'rounded'} alt={'i18n.property_cover_alt'} />
+        </figure>
+      ) : null}
       <hr />
       <div className={'favlist-body'}>
-        {lists.length > 0 ? (
-          lists.map((favlist, index) => (
+        {data.length > 0 ? (
+          data.map((favlist, index) => (
             <AddRemoveEntry
               key={index}
               index={index}
               favlist={favlist}
               isLoading={isLoading}
+              favs_post_url={favs_post_url}
               completeFavlist={null}
               removeFavlist={null}
             />
@@ -102,7 +116,8 @@ function AddRemoveFavLists({ avatar, favlists_get_url, favlists_post_url, setLoa
         )}
       </div>
       <hr />
-      <AddRemoveListForm addFavlist={addFavlist} i18n={i18n} />
+      <AddRemoveListForm addEntity={addEntity} i18n={i18n} favlists_post_url={favlists_post_url} />
+      <Spinner isLoading={loading} />
     </div>
   );
 }
