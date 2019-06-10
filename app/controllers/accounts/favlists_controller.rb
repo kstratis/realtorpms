@@ -2,7 +2,11 @@ module Accounts
   class FavlistsController < Accounts::BaseController
 
     def index
-      render :json => {:status => "OK", :message => jsonify(User.find(user_id).favlists, [:id, :name]) }
+      # puts '++++++++++++++++++++++'
+      puts property_id
+      # puts params
+      # puts '++++++++++++++++++++++'
+      render :json => {:status => "OK", :message => jsonify(current_user.favlists, [:id, :name]) }
       # render :json => {:status => "OK", :message => User.find(user_id).favlists.pluck(:id, :name) }
       # respond_to do |format|
       #   format.json {
@@ -27,7 +31,7 @@ module Accounts
       puts params
       puts '++++++'
       current_user.favlist_create(params[:name])
-      render :json => {:status => "OK", :message => jsonify(User.find(user_id).favlists, [:id, :name]) }
+      render :json => {:status => "OK", :message => jsonify(current_user.favlists, [:id, :name]) }
     end
 
     def destroy
@@ -37,9 +41,13 @@ module Accounts
 
     private
 
-      def user_id
-        params.require(:user_id)
+      def property_id
+        params.require(:property_id)
       end
+
+      # def user_id
+      #   params.require(:user_id)
+      # end
 
   end
 end

@@ -83,9 +83,9 @@
                     id: 'modal-window',
                     fireButtonLabel: '<i class="fas fa-heart fa-fw"></i>&nbsp;' + t('properties.favourites'),
                     avatar: @property.avatar.attached? ? url_for(@property.avatar) : nil,
-                    favs_post_url: '',
-                    favlists_get_url: user_favlists_url(current_user.id),
-                    favlists_post_url: user_favlists_url(current_user.id),
+                    favorites_url: property_favorites_url(@property.id),
+                    favlists_url: property_favlists_url(@property.id),
+                    property_id: @property.id,
                     modalTitle: t('properties.fav_lists'),
                     buttonOKLabel: t('properties.ok_button'),
                     buttonCancelLabel: t('properties.cancel_button'),
@@ -101,7 +101,7 @@
                         property_cover_alt: t('js.components.modal.favlists.property_cover_alt'),
                         add_list_action: t('js.components.modal.favlists.add_list_action'),
                         loading_alt: t('js.components.modal.favlists.loading_alt'),
-
+                        listname_placeholder: t('js.components.modal.favlists.listname_placeholder')
                     }
                 }, prerender: false) %>
               </div>

@@ -226,6 +226,7 @@ el:
     components:
       modal:
         favlists:
+          listname_placeholder: "Όνομα νέας λίστας"
           no_results: "Δεν έχετε δημιουργήσει κάποια λίστα... ακόμα."
           property_cover_alt: "Φωτογραφία ακινήτου"
           add_list_action: "Προσθήκη"

@@ -228,6 +228,7 @@ en:
     components:
       modal:
         favlists:
+          listname_placeholder: "New list"
           no_results: "You have no lists... yet."
           property_cover_alt: "Property cover image"
           add_list_action: "Add"

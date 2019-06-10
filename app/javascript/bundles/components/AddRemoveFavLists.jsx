@@ -3,7 +3,7 @@ import axios from 'axios';
 import useFetch from '../hooks/useFetch';
 import Spinner from '../datatables/Spinner';
 
-function AddRemoveEntry({ favlist, index, addEntity, favs_post_url, completeFavlist, removeFavlist, isLoading }) {
+function AddRemoveEntry({ addEntity, favlist, index, favorites_url, property_id, completeFavlist, removeFavlist, isLoading }) {
   // const [checked, setChecked] = useState('');
 
   // const toggleFav = (favlist) => {
@@ -28,7 +28,7 @@ function AddRemoveEntry({ favlist, index, addEntity, favs_post_url, completeFavl
             id={index}
             checked={!!favlist.isFaved}
             onChange={() =>
-              addEntity({ url: favs_post_url, method: 'post', payload: { favlist: favlist.id, property: property.id } })
+              addEntity({ url: favorites_url, method: 'post', payload: { favlist: favlist.id, property: property_id } })
             }
           />
           <label className="custom-control-label" htmlFor={index}>
@@ -42,21 +42,21 @@ function AddRemoveEntry({ favlist, index, addEntity, favs_post_url, completeFavl
   );
 }
 
-function AddRemoveListForm({ addEntity, i18n, favlists_post_url }) {
-  const [value, setValue] = useState({});
+function AddRemoveListForm({ addEntity, i18n, favlists_url }) {
+  const [value, setValue] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
     if (!value) return;
-    addEntity({ url: favlists_post_url, method: 'post', payload: { name: text } });
-    setValue({});
+    addEntity({ url: favlists_url, method: 'post', payload: { name: value } });
+    setValue('');
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group row">
         <div className={'col-sm-8'}>
-          <input type="text" className="input form-control" value={value} onChange={e => setValue(e.target.value)} />
+          <input type="text" className="input form-control" value={value} onChange={e => setValue(e.target.value)} placeholder={i18n.listname_placeholder} />
         </div>
 
         <div className={'col-sm-4'}>
@@ -69,23 +69,22 @@ function AddRemoveListForm({ addEntity, i18n, favlists_post_url }) {
 
 function AddRemoveFavLists({
   avatar,
-  favlists_get_url,
-  favs_post_url,
-  favlists_post_url,
+  favlists_url,
+  favorites_url,
+  property_id,
   setLoading,
   isLoading,
   i18n
 }) {
+  // console.log(fav_entity_url);
   // const [lists, setLists] = useState([]);
   // const [loading, setLoading] = useState(true);
-  const [request, setRequest] = useState({ url: favlists_get_url, method: 'get', payload: {} });
+  const [request, setRequest] = useState({ url: favlists_url, method: 'get', payload: {} });
+  console.log(request);
 
   const { data, loading } = useFetch(request);
 
-  const addEntity = payload => {
-    console.log('works');
-    setRequest(payload);
-  };
+  const addEntity = payload => {setRequest(payload);};
 
   // const toggleFav = fav => {
   //   setRequest({ url: favlists_post_url, method: 'post', payload: fav });
@@ -118,8 +117,11 @@ function AddRemoveFavLists({
               key={index}
               index={index}
               favlist={favlist}
+              addEntity={addEntity}
+              property_id={property_id}
               isLoading={isLoading}
-              favs_post_url={favs_post_url}
+              favlists_url={favlists_url}
+              favorites_url={favorites_url}
               completeFavlist={null}
               removeFavlist={null}
             />
@@ -132,7 +134,7 @@ function AddRemoveFavLists({
         )}
       </div>
       <hr />
-      <AddRemoveListForm addEntity={addEntity} i18n={i18n} favlists_post_url={favlists_post_url} />
+      <AddRemoveListForm addEntity={addEntity} i18n={i18n} favlists_url={favlists_url} />
       <Spinner isLoading={loading} />
     </div>
   );

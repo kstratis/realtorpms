@@ -32,12 +32,13 @@ Rails.application.routes.draw do
       get '/properties/owners', to: 'properties#owners'
 
 
-      resources :favlists, only: [:create, :create_fav, :destroy, :index]
 
 
       resources :properties do
         # resources :build, controller: 'property_steps'
         resource :favorites, only: [:create, :destroy]
+        resources :favlists, only: [:create, :create_fav, :destroy, :index]
+
         member do
           delete :delete_avatar
         end
