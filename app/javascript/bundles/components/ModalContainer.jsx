@@ -7,7 +7,7 @@ class ModalContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false,
+      modal: false
       // isLoading: true
     };
 
@@ -29,13 +29,20 @@ class ModalContainer extends React.Component {
   render() {
     return (
       <div className={''}>
-        <Button color="danger" onClick={this.toggle}><div dangerouslySetInnerHTML={{ __html: this.props.fireButtonLabel }}/></Button>
+        <Button color="danger" onClick={this.toggle}>
+          <div dangerouslySetInnerHTML={{ __html: this.props.fireButtonLabel }} />
+        </Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} scrollable={true}>
-
           <ModalHeader toggle={this.toggle}>{this.props.modalTitle}</ModalHeader>
           <ModalBody>
             {/*<AddRemoveFavLists avatar={this.props.avatar} favlists_get_url={this.props.favlists_get_url} favlists_post_url={this.props.favlists_post_url} i18n={this.props.i18n} setLoading={this.setLoading} isLoading={this.state.isLoading}/>*/}
-            <AddRemoveFavLists avatar={this.props.avatar} favorites_url={this.props.favorites_url} favlists_url={this.props.favlists_url} i18n={this.props.i18n}/>
+            <AddRemoveFavLists
+              avatar={this.props.avatar}
+              property_id={this.props.property_id}
+              favorites_url={this.props.favorites_url}
+              favlists_url={this.props.favlists_url}
+              i18n={this.props.i18n}
+            />
 
             {/*<Select options={*/}
             {/*  [{ value: 'chocolate', label: 'Chocolate' },*/}
@@ -45,7 +52,9 @@ class ModalContainer extends React.Component {
           </ModalBody>
           <ModalFooter>
             {/*<Button color="primary" onClick={this.toggle}>{this.props.buttonOKLabel}</Button>{' '}*/}
-            <Button color="secondary" onClick={this.toggle}>{this.props.buttonCloseLabel}</Button>
+            <Button color="secondary" onClick={this.toggle}>
+              {this.props.buttonCloseLabel}
+            </Button>
           </ModalFooter>
         </Modal>
       </div>

@@ -28,7 +28,7 @@ function AddRemoveEntry({ addEntity, favlist, index, favorites_url, property_id,
             id={index}
             checked={!!favlist.isFaved}
             onChange={() =>
-              addEntity({ url: favorites_url, method: 'post', payload: { favlist: favlist.id, property: property_id } })
+              addEntity({ url: favorites_url, method: 'post', payload: { favlist_id: favlist.id, property_id: property_id } })
             }
           />
           <label className="custom-control-label" htmlFor={index}>
@@ -79,7 +79,7 @@ function AddRemoveFavLists({
   // console.log(fav_entity_url);
   // const [lists, setLists] = useState([]);
   // const [loading, setLoading] = useState(true);
-  const [request, setRequest] = useState({ url: favlists_url, method: 'get', payload: {} });
+  const [request, setRequest] = useState({ url: `${favlists_url}?property_id=${property_id}`, method: 'get', payload: {} });
   console.log(request);
 
   const { data, loading } = useFetch(request);

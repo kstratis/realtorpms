@@ -6,9 +6,12 @@ module Accounts
 
     def create
       # current_user.favorite(@property)
+      puts "FavoritesController#create"
+      puts '------'
       puts params
-      # current_user.favlists.find(params[:favlist_id]).properties << @property
-      puts 'created'
+      puts '------'
+      current_user.favlists.find(params[:favlist]).properties << @property
+
       # current_user.favlistsfavorite(@property)
       render :json => {:status => "OK", :message => jsonify(current_user.favlists, [:id, :name]) }
       # render :json => {:status => "OK", :type => 'faved' }

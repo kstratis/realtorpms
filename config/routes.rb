@@ -32,12 +32,15 @@ Rails.application.routes.draw do
       get '/properties/owners', to: 'properties#owners'
 
 
+      # favlists_path (GET, POST)
+      # favlist_path (DELETE)
+      resources :favlists, only: [:create, :destroy, :index]
+      post 'favorites', to: 'favlists#create_favorite', as: :favorite
 
 
       resources :properties do
         # resources :build, controller: 'property_steps'
         resource :favorites, only: [:create, :destroy]
-        resources :favlists, only: [:create, :create_fav, :destroy, :index]
 
         member do
           delete :delete_avatar
