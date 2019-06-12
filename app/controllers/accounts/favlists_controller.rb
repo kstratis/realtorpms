@@ -38,6 +38,18 @@ module Accounts
     # current_user.favorite(@property)
     end
 
+    def destroy_favorite
+      puts "FavlistsController#destroy_favorite"
+      puts params
+      current_user.favlists.find(params['favlist_id']).properties.delete(params['property_id'])
+
+      list = Array.new
+      current_user.favlists.find_each do |favlist|
+        list << {id: favlist.id, name: favlist.name, isFaved: favlist.has_faved?(params['property_id'])}
+      end
+      render :json => {:status => "OK", :message => list}
+    end
+
     def create
       # def create
       #   current_user.favorite(@property)
@@ -48,10 +60,16 @@ module Accounts
       puts params
       puts '++++++'
       current_user.favlist_create(params[:name])
-      render :json => {:status => "OK", :message => jsonify(current_user.favlists, [:id, :name])}
+      current_user.favlists.reload
+      list = Array.new
+      current_user.favlists.find_each do |favlist|
+        list << {id: favlist.id, name: favlist.name, isFaved: favlist.has_faved?(params['property_id'])}
+      end
+      render :json => {:status => "OK", :message => list}
     end
 
     def destroy
+      # todo
       current_user.unfavorite(@property)
       render :json => {:status => "OK", :message => 'List deleted'}
     end

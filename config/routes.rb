@@ -35,7 +35,8 @@ Rails.application.routes.draw do
       # favlists_path (GET, POST)
       # favlist_path (DELETE)
       resources :favlists, only: [:create, :destroy, :index]
-      post 'favorites', to: 'favlists#create_favorite', as: :favorite
+      post 'favorites', to: 'favlists#create_favorite'
+      delete 'favorites', to: 'favlists#destroy_favorite'
 
 
       resources :properties do

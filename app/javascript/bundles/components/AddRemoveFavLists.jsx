@@ -28,7 +28,7 @@ function AddRemoveEntry({ addEntity, favlist, index, favorites_url, property_id,
             id={index}
             checked={!!favlist.isFaved}
             onChange={() =>
-              addEntity({ url: favorites_url, method: 'post', payload: { favlist_id: favlist.id, property_id: property_id } })
+              addEntity({ url: favorites_url, method: favlist.isFaved ? 'delete' : 'post', payload: { favlist_id: favlist.id, property_id: property_id } })
             }
           />
           <label className="custom-control-label" htmlFor={index}>
@@ -42,13 +42,13 @@ function AddRemoveEntry({ addEntity, favlist, index, favorites_url, property_id,
   );
 }
 
-function AddRemoveListForm({ addEntity, i18n, favlists_url }) {
+function AddRemoveListForm({ addEntity, i18n, favlists_url, property_id }) {
   const [value, setValue] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
     if (!value) return;
-    addEntity({ url: favlists_url, method: 'post', payload: { name: value } });
+    addEntity({ url: favlists_url, method: 'post', payload: { name: value, property_id: property_id } });
     setValue('');
   };
 
@@ -134,7 +134,7 @@ function AddRemoveFavLists({
         )}
       </div>
       <hr />
-      <AddRemoveListForm addEntity={addEntity} i18n={i18n} favlists_url={favlists_url} />
+      <AddRemoveListForm addEntity={addEntity} i18n={i18n} favlists_url={favlists_url} property_id={property_id} />
       <Spinner isLoading={loading} />
     </div>
   );
