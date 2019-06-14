@@ -60,18 +60,18 @@ class Property < ApplicationRecord
   end
 
   # If a single property is faved by anyone at all
-  def faved?(property, favlist)
-    current_user.favlists.find(favlist).properties.find_by(property_id: property.id).present?
-  end
+  # def faved?(property, favlist)
+  #   current_user.favlists.find(favlist).properties.find_by(property_id: property.id).present?
+  # end
 
   # def faved?(property)
   #   favorites.find_by(property_id: property.id).present?
   # end
 
   # If a single property is faved by a particular user
-  def is_faved_by?(user)
-    favorites.find_by(user_id: user.id).present?
-  end
+  # def is_faved_by?(user)
+  #   favorites.find_by(user_id: user.id).present?
+  # end
 
   private
 

@@ -1,88 +1,41 @@
 module Accounts
   class FavlistsController < Accounts::BaseController
 
-    def index
-      puts "FavlistsController#index"
-      puts '######'
-      # puts property_id
-      puts params
-      puts '######'
-
-      list = Array.new
-
-      if params['property_id']
-        current_user.favlists.find_each do |favlist|
-          list << {id: favlist.id, name: favlist.name, isFaved: favlist.has_faved?(params['property_id'])}
-        end
-      else
-        current_user.favlists.find_each do |favlist|
-          list << {id: favlist.id, name: favlist.name}
-        end
-        # Used to be
-        # render :json => {:status => "OK", :message => jsonify(current_user.favlists, [:id, :name]) }
-      end
-      render :json => {:status => "OK", :message => list}
-    end
-
+    # Creates a new favorite property and places it in a favlist of your choosing
+    # Expects a favlist_id and a property_id
     def create_favorite
-      puts "FavlistsController#create_favorite"
-      puts params
       current_user.favlists.find(params['favlist_id']).properties << Property.find(params['property_id'])
-
-      list = Array.new
-      current_user.favlists.find_each do |favlist|
-        list << {id: favlist.id, name: favlist.name, isFaved: favlist.has_faved?(params['property_id'])}
-      end
-      render :json => {:status => "OK", :message => list}
-    # favlist =
-    # current_user.favorite(@property)
+      render json: {status: "OK", message: render_favlists}
     end
 
+    # Destroys an existing favorite property and removes it from its favlist
+    # Expects a favlist_id and a property_id
     def destroy_favorite
-      puts "FavlistsController#destroy_favorite"
-      puts params
       current_user.favlists.find(params['favlist_id']).properties.delete(params['property_id'])
-
-      list = Array.new
-      current_user.favlists.find_each do |favlist|
-        list << {id: favlist.id, name: favlist.name, isFaved: favlist.has_faved?(params['property_id'])}
-      end
-      render :json => {:status => "OK", :message => list}
+      render json: {status: "OK", message: render_favlists}
     end
 
+    # List all user favlists
+    def index
+      render json: {status: "OK", message: render_favlists}
+    end
+
+    # Creates a new favlist
     def create
-      # def create
-      #   current_user.favorite(@property)
-      #   render :json => {:status => "OK", :type => 'faved' }
-      # end
-      puts "FavlistsController#create"
-      puts '++++++'
-      puts params
-      puts '++++++'
       current_user.favlist_create(params[:name])
       current_user.favlists.reload
-      list = Array.new
-      current_user.favlists.find_each do |favlist|
-        list << {id: favlist.id, name: favlist.name, isFaved: favlist.has_faved?(params['property_id'])}
-      end
-      render :json => {:status => "OK", :message => list}
+      render json: {status: "OK", message: render_favlists}
     end
 
+    # Destroys an existing favlist and all the favorites it included
     def destroy
-      # todo
-      current_user.unfavorite(@property)
-      render :json => {:status => "OK", :message => 'List deleted'}
+      current_user.favlists.find(params['favlist_id']).destroy!
+      render :json => {:status => "OK", :message => render_favlists}
     end
 
-    # private
-    #
-    #   def property_id
-    #     params.require(:property_id)
-    #   end
-
-    # def user_id
-    #   params.require(:user_id)
-    # end
-
+    private
+      def render_favlists
+        Favlist.with_param(current_user.id, params['property_id'] ? params['property_id'] : nil )
+      end
   end
 end
