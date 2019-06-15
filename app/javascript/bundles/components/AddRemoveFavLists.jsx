@@ -3,7 +3,18 @@ import axios from 'axios';
 import useFetch from '../hooks/useFetch';
 import Spinner from '../datatables/Spinner';
 
-function AddRemoveEntry({ addEntity, favlist, index, favorites_url, property_id, completeFavlist, removeFavlist, isLoading }) {
+const spinner = document.getElementById('spinner');
+
+function AddRemoveEntry({
+  addEntity,
+  favlist,
+  index,
+  favorites_url,
+  property_id,
+  completeFavlist,
+  removeFavlist,
+  // isLoading
+}) {
   // const [checked, setChecked] = useState('');
 
   // const toggleFav = (favlist) => {
@@ -19,7 +30,7 @@ function AddRemoveEntry({ addEntity, favlist, index, favorites_url, property_id,
   // };
 
   return (
-    <div className={isLoading ? 'reduced-opacity' : ''}>
+    <div className={''}>
       <div className="form-group">
         <div className="custom-control custom-control-inline custom-checkbox">
           <input
@@ -28,12 +39,18 @@ function AddRemoveEntry({ addEntity, favlist, index, favorites_url, property_id,
             id={index}
             checked={!!favlist.isFaved}
             onChange={() =>
-              addEntity({ url: favorites_url, method: favlist.isFaved ? 'delete' : 'post', payload: { favlist_id: favlist.id, property_id: property_id } })
+              addEntity({
+                id: favlist.id,
+                url: favorites_url,
+                method: favlist.isFaved ? 'delete' : 'post',
+                payload: { favlist_id: favlist.id, property_id: property_id }
+              })
             }
           />
           <label className="custom-control-label" htmlFor={index}>
             {favlist.name}
           </label>
+          {favlist.isLoading ? <span>&nbsp;<i className="fas fa-circle-notch fa-spin" /></span> : null}
         </div>
       </div>
       {/*<button onClick={() => console.log('completed')}>Complete</button>*/}
@@ -53,38 +70,44 @@ function AddRemoveListForm({ addEntity, i18n, favlists_url, property_id }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="form-group row">
-        <div className={'col-sm-8'}>
-          <input type="text" className="input form-control" value={value} onChange={e => setValue(e.target.value)} placeholder={i18n.listname_placeholder} />
-        </div>
+    <div className={'form-container'}>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group row">
+          <div className={'col-sm-8'}>
+            <input
+              type="text"
+              className="input form-control"
+              value={value}
+              onChange={e => setValue(e.target.value)}
+              placeholder={i18n.listname_placeholder}
+            />
+          </div>
 
-        <div className={'col-sm-4'}>
-          <input className={'btn btn-primary'} type="submit" value={i18n.add_list_action} />
+          <div className={'col-sm-4'}>
+            <input className={'btn btn-primary'} type="submit" value={i18n.add_list_action} />
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 }
 
-function AddRemoveFavLists({
-  avatar,
-  favlists_url,
-  favorites_url,
-  property_id,
-  setLoading,
-  isLoading,
-  i18n
-}) {
+function AddRemoveFavLists({ avatar, favlists_url, favorites_url, property_id, i18n }) {
   // console.log(fav_entity_url);
   // const [lists, setLists] = useState([]);
   // const [loading, setLoading] = useState(true);
-  const [request, setRequest] = useState({ url: `${favlists_url}?property_id=${property_id}`, method: 'get', payload: {} });
+  const [request, setRequest] = useState({
+    url: `${favlists_url}?property_id=${property_id}`,
+    method: 'get',
+    payload: {}
+  });
   console.log(request);
 
-  const { data, loading } = useFetch(request);
+  const { data } = useFetch(request);
 
-  const addEntity = payload => {setRequest(payload);};
+  const addEntity = payload => {
+    setRequest(payload);
+  };
 
   // const toggleFav = fav => {
   //   setRequest({ url: favlists_post_url, method: 'post', payload: fav });
@@ -119,7 +142,7 @@ function AddRemoveFavLists({
               favlist={favlist}
               addEntity={addEntity}
               property_id={property_id}
-              isLoading={isLoading}
+              // isLoading={loading}
               favlists_url={favlists_url}
               favorites_url={favorites_url}
               completeFavlist={null}
@@ -134,8 +157,8 @@ function AddRemoveFavLists({
         )}
       </div>
       <hr />
+      {/*<Spinner isLoading={loading} />*/}
       <AddRemoveListForm addEntity={addEntity} i18n={i18n} favlists_url={favlists_url} property_id={property_id} />
-      <Spinner isLoading={loading} />
     </div>
   );
 }

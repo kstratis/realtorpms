@@ -8,19 +8,9 @@ class ModalContainer extends React.Component {
     super(props);
     this.state = {
       modal: false
-      // isLoading: true
     };
-
     this.toggle = this.toggle.bind(this);
-    // this.setLoading = this.setLoading.bind(this);
   }
-
-  // setLoading(status) {
-  //   this.setState({
-  //     isLoading: status
-  //   });
-  // }
-
   toggle() {
     this.setState(prevState => ({
       modal: !prevState.modal
@@ -35,23 +25,9 @@ class ModalContainer extends React.Component {
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} scrollable={true}>
           <ModalHeader toggle={this.toggle}>{this.props.modalTitle}</ModalHeader>
           <ModalBody>
-            {/*<AddRemoveFavLists avatar={this.props.avatar} favlists_get_url={this.props.favlists_get_url} favlists_post_url={this.props.favlists_post_url} i18n={this.props.i18n} setLoading={this.setLoading} isLoading={this.state.isLoading}/>*/}
-            <AddRemoveFavLists
-              avatar={this.props.avatar}
-              property_id={this.props.property_id}
-              favorites_url={this.props.favorites_url}
-              favlists_url={this.props.favlists_url}
-              i18n={this.props.i18n}
-            />
-
-            {/*<Select options={*/}
-            {/*  [{ value: 'chocolate', label: 'Chocolate' },*/}
-            {/*    { value: 'strawberry', label: 'Strawberry' },*/}
-            {/*    { value: 'vanilla', label: 'Vanilla' }]*/}
-            {/*} />*/}
+            <AddRemoveFavLists {...this.props} ref={this.FavListManager} />
           </ModalBody>
           <ModalFooter>
-            {/*<Button color="primary" onClick={this.toggle}>{this.props.buttonOKLabel}</Button>{' '}*/}
             <Button color="secondary" onClick={this.toggle}>
               {this.props.buttonCloseLabel}
             </Button>
