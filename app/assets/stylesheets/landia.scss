@@ -595,18 +595,13 @@ i.fas.fa-heart.colored{
   text-align: center;
 }
 
-/* When you move the mouse over the icon, change color */
-.fa-heart:hover {
-  color: rgb(220, 72, 127);
-}
-
-.thumb-container{
-  //object-fit: contain;
-  //min-width: 100%;
-  //min-height: 100%;
-  //width: auto;
-  //height: 90px;
-  //min-height: 90px;
+button:hover{
+  .fa-heart{
+    color: rgb(220, 72, 127);
+  }
+  .fa-print{
+    color: #346CB0;
+  }
 }
 
 .placeholder {

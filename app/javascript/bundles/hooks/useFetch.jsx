@@ -7,41 +7,20 @@ function useFetch(request) {
 
   useEffect(() => {
     const executeAjax = async () => {
-      console.log('fetch executing');
-      let indexStart = data.findIndex(element => element.id === request.id );
-      console.log(indexStart);
-      if (indexStart > -1) {
-        let element = data[indexStart];
-        element['isLoading'] = true;
-        let newDataset = [...data];
-        setData(newDataset);
-      }
-
-
-
-
-
-
-
-
-      // setLoading(true);
+      setLoading(true);
       const result = await axios({
         method: request.method,
         url: request.url,
         data: request.payload
       });
       setData(result.data.message);
-      const indexEnd = data.findIndex(element => element.id === request.index);
-      if (indexEnd > -1) {
-        let element = data[indexEnd];
-        element['isLoading'] = false;
-        let newDataset = [...data];
-        setData(newDataset);
-      }
+      setLoading(false);
     };
     executeAjax();
+
   }, [request]);
-  return { data, loading };
+  // Retun setData is case the includer needs to use it.
+  return { data, loading, setData };
 }
 
 export default useFetch;

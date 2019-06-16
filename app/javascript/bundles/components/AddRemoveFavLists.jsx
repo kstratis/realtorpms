@@ -1,34 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useRef } from 'react';
 import useFetch from '../hooks/useFetch';
-import Spinner from '../datatables/Spinner';
 
-const spinner = document.getElementById('spinner');
-
-function AddRemoveEntry({
-  addEntity,
-  favlist,
-  index,
-  favorites_url,
-  property_id,
-  completeFavlist,
-  removeFavlist,
-  // isLoading
-}) {
-  // const [checked, setChecked] = useState('');
-
-  // const toggleFav = (favlist) => {
-  // ajax call
-  // filter out shit and update UI
-  // console.log('works');
-  // setRequest(payload);
-  // };
-  // const toggleFav = e => {
-  //   setChecked(!checked);
-  //   console.log('checked');
-  // this.setState({isChecked: !this.state.isChecked});
-  // };
-
+function AddRemoveEntry({ addEntity, favlist, index, favorites_url, property_id, completeFavlist, removeFavlist }) {
   return (
     <div className={''}>
       <div className="form-group">
@@ -50,10 +23,14 @@ function AddRemoveEntry({
           <label className="custom-control-label" htmlFor={index}>
             {favlist.name}
           </label>
-          {favlist.isLoading ? <span>&nbsp;<i className="fas fa-circle-notch fa-spin" /></span> : null}
+          {favlist.isLoading ? (
+            <span>
+              &nbsp;
+              <i className="fas fa-cog fa-spin" />
+            </span>
+          ) : null}
         </div>
       </div>
-      {/*<button onClick={() => console.log('completed')}>Complete</button>*/}
       {/*<button onClick={() => removeTodo(index)}>x</button>*/}
     </div>
   );
@@ -93,25 +70,49 @@ function AddRemoveListForm({ addEntity, i18n, favlists_url, property_id }) {
 }
 
 function AddRemoveFavLists({ avatar, favlists_url, favorites_url, property_id, i18n }) {
-  // console.log(fav_entity_url);
-  // const [lists, setLists] = useState([]);
-  // const [loading, setLoading] = useState(true);
   const [request, setRequest] = useState({
     url: `${favlists_url}?property_id=${property_id}`,
     method: 'get',
     payload: {}
   });
-  console.log(request);
 
-  const { data } = useFetch(request);
+  const { data, loading, setData } = useFetch(request);
+
+  // What is the best way to trigger an effect dependent on multiple parameters, only when one of the parameters change?
+  // This is the question we must answer when using multiple `useEffect` with multiple interdependancies.
+  // See this: https://stackoverflow.com/q/55724642/178728
+  const prevLoadingRef = useRef();
+
+  useEffect(() => {
+    prevLoadingRef.current = loading;
+  });
+  const prevLoading = prevLoadingRef.current;
+
+  // This useEffect uses and is thus dependant on `data`, `loading`, `setData` and `request`.
+  // Setting data however (`setData`) will trigger itself again since it also depends on `data` and this will
+  // cause an infinite loop of updates. To work around this, we make the effect run conditionally by examining its
+  // previous state using `useRef`. https://stackoverflow.com/a/55724954/178728
+  useEffect(() => {
+    if (prevLoading !== loading) {
+      const setLoader = status => {
+        let indexStart = data.findIndex(element => element.id === request.id);
+        if (indexStart > -1) {
+          let element = data[indexStart];
+          element['isLoading'] = status;
+          let newDataset = [...data];
+          setData(newDataset);
+        }
+      };
+
+      if (data.length > 0) {
+        setLoader(loading);
+      }
+    }
+  }, [data, loading, setData, request]);
 
   const addEntity = payload => {
     setRequest(payload);
   };
-
-  // const toggleFav = fav => {
-  //   setRequest({ url: favlists_post_url, method: 'post', payload: fav });
-  // };
 
   // const completeTodo = index => {
   //   const newLists = [...lists];
@@ -142,7 +143,6 @@ function AddRemoveFavLists({ avatar, favlists_url, favorites_url, property_id, i
               favlist={favlist}
               addEntity={addEntity}
               property_id={property_id}
-              // isLoading={loading}
               favlists_url={favlists_url}
               favorites_url={favorites_url}
               completeFavlist={null}
@@ -157,7 +157,6 @@ function AddRemoveFavLists({ avatar, favlists_url, favorites_url, property_id, i
         )}
       </div>
       <hr />
-      {/*<Spinner isLoading={loading} />*/}
       <AddRemoveListForm addEntity={addEntity} i18n={i18n} favlists_url={favlists_url} property_id={property_id} />
     </div>
   );
