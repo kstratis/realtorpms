@@ -59,6 +59,16 @@ class Property < ApplicationRecord
     (price / size.to_f).ceil.to_s unless price.blank? || size.blank? || size == 0
   end
 
+  class << self
+    def accessible_attributes
+      [:price, :pricepersqmeter, :size, :subcategory, :bedrooms, :bathrooms, :floor]
+    end
+  end
+
+  def has_extra(term)
+    extras.exists?(Extra.find_by(name: term.to_s).id)
+  end
+
   # If a single property is faved by anyone at all
   # def faved?(property, favlist)
   #   current_user.favlists.find(favlist).properties.find_by(property_id: property.id).present?

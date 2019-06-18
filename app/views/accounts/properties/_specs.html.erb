@@ -1,0 +1,41 @@
+<div class="table-responsive">
+  <table class="table specs-table">
+    <tbody>
+    <tr>
+      <td class="align-middle">
+        <div class="table-entry">
+          <div class="table-icon-wrapper">
+            <i class="pr-icon xs bed"></i>
+          </div>
+          <span>&nbsp;&nbsp;<%= t('activerecord.attributes.property.bedrooms_title') %></span>
+        </div>
+      </td >
+      <td class="align-middle"><strong><%= render_attribute(@property, 'bedrooms') %></strong></td>
+    </tr>
+
+    <tr>
+      <td class="align-middle">
+        <div class="table-entry">
+          <div class="table-icon-wrapper">
+            <i class="pr-icon xs bathroom"></i>
+          </div>
+          <span>&nbsp;&nbsp;<%= t('activerecord.attributes.property.bathrooms_title') %></span>
+        </div>
+      </td>
+      <td class="align-middle"><strong><%= render_attribute(@property, 'bathrooms') %></strong></td>
+    </tr>
+    <tr>
+      <td><i class="fas fa-level-up-alt fa-fw"></i>&nbsp;<%= t('activerecord.attributes.property.floor') %></td>
+      <td><strong><%= render_attribute(@property, 'floor') %></strong></td>
+    </tr>
+    <tr>
+      <td>
+        <i class="fas fa-parking fa-fw"></i>&nbsp;<%= t('activerecord.attributes.property.enums.subcategory.parking') %>
+      </td>
+      <td><strong><%= t(@property.has_extra(:parking)) %></strong></td>
+    </tr>
+
+
+    </tbody>
+  </table>
+</div>

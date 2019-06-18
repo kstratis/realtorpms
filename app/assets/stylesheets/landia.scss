@@ -1022,3 +1022,20 @@ li.page-item{
 .custom-control-label{
   cursor: pointer;
 }
+
+.table-icon-wrapper{
+  display: inline-block;
+}
+
+.specs-table{
+  margin-top: -10px;
+  tbody > tr:first-child > td {
+    border: none;
+  }
+}
+
+
+//.specs{
+//  border: 1px solid grey;
+//  border-radius: 3px;
+//}

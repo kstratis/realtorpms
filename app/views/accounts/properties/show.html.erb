@@ -21,8 +21,9 @@
 
             <% else %>
               <div class="thumbnails-ribbon d-flex flex-wrap justify-content-center">
-                <div class="fotorama" data-nav="thumbs" data-allowfullscreen="true">
+                <div class="fotorama" data-nav="thumbs" data-maxheight="300" data-allowfullscreen="true">
                   <% @property.images.each do |image| %>
+                    <%#= image_tag image.variant(resize: "736x500") %>
                     <%= image_tag image %>
                   <% end %>
                 </div>
@@ -63,9 +64,9 @@
                   </td>
                 </tr>
                 <tr>
-                  <td><%= t('activerecord.attributes.extra.heating.title') %></td>
+                  <td><%= t('activerecord.attributes.property.enums.businesstype.title') %></td>
                   <td>
-                    <strong><%= @property.extras.find_by(subtype: 'heating').try(:name) ? t("activerecord.attributes.extra.heating.#{@property.extras.find_by(subtype: 'heating').try(:name)}") : '—' %></strong>
+                    <strong><%= t("activerecord.attributes.property.enums.businesstype.#{@property.businesstype.to_s}") %></strong>
                   </td>
                 </tr>
                 <tr>
@@ -77,47 +78,59 @@
                 </tbody>
               </table>
             </div>
-            <div class="centered-title">
-              <div class="reactstrap-modal-button">
-                <%= react_component('ModalContainer', props: {
-                    id: 'modal-window',
-                    fireButtonLabel: '<i class="fas fa-heart fa-fw"></i>&nbsp;' + t('properties.favourites'),
-                    avatar: @property.avatar.attached? ? url_for(@property.avatar) : nil,
-                    favorites_url: favorites_url,
-                    favlists_url: favlists_url,
-                    property_id: @property.id,
-                    modalTitle: t('properties.fav_lists'),
-                    buttonOKLabel: t('properties.ok_button'),
-                    buttonCancelLabel: t('properties.cancel_button'),
-                    buttonCloseLabel: t('properties.close_button'),
-                    soloMode: true,
-                    ajaxEnabled: false,
-                    isClearable: true,
-                    backspaceRemovesValue: true,
-                    isSearchable: false,
-                    feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
-                    i18n: {
-                        no_lists_available: t('js.components.modal.favlists.no_results'),
-                        property_cover_alt: t('js.components.modal.favlists.property_cover_alt'),
-                        add_list_action: t('js.components.modal.favlists.add_list_action'),
-                        loading_alt: t('js.components.modal.favlists.loading_alt'),
-                        listname_placeholder: t('js.components.modal.favlists.listname_placeholder')
-                    }
-                }, prerender: false) %>
-              </div>
-              <%#= link_to favprompt_path,  {remote: true, 'data-toggle':  "modal", 'data-target': '#modal-window', class: 'btn btn-danger'} do %>
-              <!--                <%#= content_tag(:i, nil, class: "fas fa-heart fa-fw") %>&nbsp;<%#= t('properties.favourites') %>-->
-              <%# end %>
-              <button type="button" class="btn btn-secondary">
-                <i class="fas fa-print fa-fw"></i>&nbsp;<%= t 'properties.print' %></button>
-            </div>
+
           </div>
         </div>
 
         <hr/>
+        <div class="centered-title mb-3">
+          <div class="reactstrap-modal-button">
+            <%= react_component('ModalContainer', props: {
+                id: 'modal-window',
+                fireButtonLabel: '<i class="fas fa-heart fa-fw"></i>&nbsp;' + t('properties.favourites'),
+                avatar: @property.avatar.attached? ? url_for(@property.avatar) : nil,
+                favorites_url: favorites_url,
+                favlists_url: favlists_url,
+                property_id: @property.id,
+                modalTitle: t('properties.fav_lists'),
+                buttonOKLabel: t('properties.ok_button'),
+                buttonCancelLabel: t('properties.cancel_button'),
+                buttonCloseLabel: t('properties.close_button'),
+                soloMode: true,
+                ajaxEnabled: false,
+                isClearable: true,
+                backspaceRemovesValue: true,
+                isSearchable: false,
+                feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
+                i18n: {
+                    no_lists_available: t('js.components.modal.favlists.no_results'),
+                    property_cover_alt: t('js.components.modal.favlists.property_cover_alt'),
+                    add_list_action: t('js.components.modal.favlists.add_list_action'),
+                    loading_alt: t('js.components.modal.favlists.loading_alt'),
+                    listname_placeholder: t('js.components.modal.favlists.listname_placeholder')
+                }
+            }, prerender: false) %>
+          </div>
+          <%#= link_to favprompt_path,  {remote: true, 'data-toggle':  "modal", 'data-target': '#modal-window', class: 'btn btn-danger'} do %>
+          <!--                <%#= content_tag(:i, nil, class: "fas fa-heart fa-fw") %>&nbsp;<%#= t('properties.favourites') %>-->
+          <%# end %>
+          <button type="button" class="btn btn-secondary printable" data-url="<%= property_url(@property.id) + '?print=true' %>">
+            <i class="fas fa-print fa-fw"></i>&nbsp;<%= t 'properties.print' %></button>
+        </div>
+
+        <hr />
 
         <div class="row">
-          <div class="col-12">
+          <div class="col-6">
+
+          <%= render partial: 'accounts/properties/specs' %>
+
+
+
+
+
+
+
             <!--            <p><%#= @property.description %></p>-->
             <p>Χίος ,Πόλη Χίου, Διαμέρισμα, 102 τ.μ , Καταπληκτική κατάσταση, 1 Επίπεδο/α, Όροφος: 1ος, Σε απόσταση
               περιπάτου απο την Πλατεία ,, 2 Υ/Δ, 1 Μπάνιο/α , 1 Κουζίνα/ες, 1 Parking, Έτος κατασκευής 2008, Ενεργειακό

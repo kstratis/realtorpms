@@ -1,5 +1,7 @@
 ---
 en:
+  true: "Ναί"
+  false: "Όχι"
   activerecord:
     models:
       invitation: "Invitation"
@@ -116,6 +118,7 @@ en:
         adspitogatos_placeholder: "Ad for spitogatos.gr"
         enums:
           businesstype:
+            title: "Type"
             sell: "Sell"
             rent: "Rent"
             sell_rent: "Sell & Rent"
@@ -511,6 +514,7 @@ en:
     show:
       heading: "Property info"
       properties: "Properties"
+      print: "Print property"
   time:
     formats:
       regular: "%d %b %y"

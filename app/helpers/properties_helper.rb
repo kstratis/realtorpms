@@ -27,8 +27,10 @@ module PropertiesHelper
     [businesstype, "#{category} #{size}", localname, parent_localname, price].join(', ')
   end
 
-  def ad
-
+  def render_attribute(property, attribute)
+    # property.send(attribute)
+    property.send(attribute) ? property.send(attribute) : '—'
+  #
   end
 end
 

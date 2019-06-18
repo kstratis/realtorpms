@@ -23,7 +23,7 @@
 
 .pr-icon {
   //padding: 18px 18px;
-
+color: red;
   margin-left: auto;
   margin-right: auto;
   display: inline-block;
@@ -157,6 +157,13 @@
     background-image: url( houses/house_placeholder.svg);
   }
 
+  &.bed{
+    background-image: url( house_interior/bed.svg);
+  }
+
+  &.bathroom{
+    background-image: url( house_interior/shower.svg);
+  }
 
 
   & ~ .pr-icon-desc {

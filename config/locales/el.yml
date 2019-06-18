@@ -1,5 +1,7 @@
 ---
 el:
+  true: "Ναί"
+  false: "Όχι"
   activerecord:
     models:
       invitation: "Πρόσκληση"
@@ -117,6 +119,7 @@ el:
         adspitogatos_placeholder: "ΒΟΥΛΑ: Πανόραμα, Μονοκατοικία 570τ.μ σε οικόπεδο 500τ.μ, 4 επιπέδων, minimal, γωνιακή, 5 υ/δ, ενδοδαπέδια θέρμανση, wc, τζάκι, ασανσέρ..."
         enums:
           businesstype:
+            title: "Είδος"
             sell: "Πώληση"
             rent: "Ενοικίαση"
             sell_rent: "Πώληση & Ενοικίαση"
@@ -203,7 +206,7 @@ el:
             parcels: "Αγροτεμάχιο"
             island: "Νησί"
             other_categories: "Λοιπές κατηγορίες"
-            parking: "Parking"
+            parking: "Θέση στάθμευσης"
             business: "Επιχείρηση"
             prefabricated: "Προκατασκευασμένο"
             detachable: "Λυόμενο"
@@ -510,6 +513,7 @@ el:
     show:
       heading: "Πληροφορίες ακινήτου"
       properties: "Ακίνητα"
+      print: "Εκτύπωση ακινήτου"
   time:
     formats:
       regular: "%d %b %y"

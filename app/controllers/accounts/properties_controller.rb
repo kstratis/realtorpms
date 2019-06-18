@@ -66,6 +66,14 @@ module Accounts
     def show
       @property = Property.find(params[:id])
       filter_users
+      respond_to do |format|
+        if params['print']
+          format.html {render 'accounts/properties/printable', layout: 'printer/printable'}
+        else
+          format.html
+          format.json
+        end
+      end
     end
 
     def delete_avatar
@@ -115,7 +123,7 @@ module Accounts
 
       respond_to do |format|
         if @property.save
-          format.html {redirect_to @property, notice: I18n.t('properties.created.flash') }
+          format.html {redirect_to @property, notice: I18n.t('properties.created.flash')}
           format.js {render 'shared/ajax/handler',
                             locals: {resource: @property,
                                      action: 'created',
