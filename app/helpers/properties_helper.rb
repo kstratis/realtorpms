@@ -27,10 +27,14 @@ module PropertiesHelper
     [businesstype, "#{category} #{size}", localname, parent_localname, price].join(', ')
   end
 
-  def render_attribute(property, attribute)
-    # property.send(attribute)
-    property.send(attribute) ? property.send(attribute) : '—'
-  #
+  def render_attribute(property, attribute, opts=nil, renderfn=nil)
+    if property.respond_to?(attribute)
+      result = (opts ? property.send(attribute, opts) : property.send(attribute)) || '-'
+      return renderfn.call(result) if renderfn
+      result
+    else
+      raise "Internal Error"
+    end
   end
 end
 

@@ -157,12 +157,32 @@ color: red;
     background-image: url( houses/house_placeholder.svg);
   }
 
-  &.bed{
-    background-image: url( house_interior/bed.svg);
+  &.bedrooms{
+    background-image: url( house_specs/bed.svg);
   }
 
-  &.bathroom{
-    background-image: url( house_interior/shower.svg);
+  &.bathrooms{
+    background-image: url( house_specs/shower.svg);
+  }
+
+  &.floor{
+    background-image: url( house_specs/floor.svg);
+  }
+
+  &.parking{
+    background-image: url( house_specs/garage.svg);
+  }
+
+  &.construction{
+    background-image: url( house_specs/construction.svg);
+  }
+
+  &.availability{
+    background-image: url( house_specs/calendar.svg);
+  }
+
+  &.address{
+    background-image: url( house_specs/address.svg);
   }
 
 

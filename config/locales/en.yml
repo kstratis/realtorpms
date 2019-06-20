@@ -102,11 +102,14 @@ en:
         bathrooms_title: "Bathrooms"
         bathrooms_feedback_html: "i.e. 2"
         construction: "Construction"
+        construction_title: "Construction"
         location: "Location"
         owner: "Client"
         address_title: "Address"
         address_feedback_html: "i.e. 51 Mackintosh Place, CF24 4RL"
         floor: "Floor"
+        floor_title: "Floor"
+        parking_title: "Parking"
         levels: "Levels"
         availability_title: "Availability"
         availability_feedback_html: "Pick a date"
@@ -182,7 +185,7 @@ en:
             commercial: "Commercial"
             land: "Land"
             other: "Other properties"
-          residential:
+          subcategory:
             apartment: "Apartment"
             studio: "Studio"
             maisonette: "Maisonette"
@@ -192,7 +195,6 @@ en:
             bungalow: "Bungalow"
             building: "Building"
             apartment_complex: "Apartment complex"
-          commercial:
             office: "Office"
             public_store: "Store"
             warehouse: "Warehouse"
@@ -202,12 +204,10 @@ en:
             business_building: "Business building"
             hall: "Hall"
             showroom: "Showroom"
-          landsubcategory:
             land_plot: "Land Plot"
             parcels: "Parcels"
             island: "Island"
             other_categories: "Other categories"
-          othersubcategory:
             parking: "Parking"
             business: "Business"
             prefabricated: "Prefabricated"

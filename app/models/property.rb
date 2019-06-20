@@ -55,6 +55,17 @@ class Property < ApplicationRecord
   validates :bedrooms, numericality: { only_integer: true }, allow_blank: true
   validates :bathrooms, numericality: { only_integer: true }, allow_blank: true
 
+  PROPERTY_ATTRIBUTES = {
+      :bedrooms => {:label => 'bedrooms', :icon => 'bedrooms', :options => nil, :renderfn => nil},
+      :bathrooms => {:label => 'bathrooms', :icon => 'bathrooms', :options => nil, :renderfn => nil},
+      :floor => {:label => 'floor', :icon => 'floor', :options => nil, :renderfn => nil},
+      # :has_extra => {:label => 'has_extra', :icon => 'parking', :options => 'parking', :renderfn => method(:I18n.send(:t))},
+      :has_extra => {:label => 'parking', :icon => 'parking', :options => 'parking', :renderfn => Proc.new {|value| I18n.t(value)}},
+      :construction => {:label => 'construction', :icon => 'construction', :options => nil, :renderfn => nil},
+      :address => {:label => 'address', :icon => 'address', :options => nil, :renderfn => nil},
+      :availability => {:label => 'availability', :icon => 'availability', :options => nil, :renderfn => Proc.new {|value| I18n.l value, format: :custom}}
+  }.freeze
+
   def pricepersqmeter
     (price / size.to_f).ceil.to_s unless price.blank? || size.blank? || size == 0
   end
