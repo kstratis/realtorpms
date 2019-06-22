@@ -84,6 +84,10 @@ class Property < ApplicationRecord
     images.to_a.unshift(avatar)
   end
 
+  def render_extras
+
+  end
+
   # If a single property is faved by anyone at all
   # def faved?(property, favlist)
   #   current_user.favlists.find(favlist).properties.find_by(property_id: property.id).present?

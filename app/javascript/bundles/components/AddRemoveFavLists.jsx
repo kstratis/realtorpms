@@ -114,18 +114,6 @@ function AddRemoveFavLists({ avatar, favlists_url, favorites_url, property_id, i
     setRequest(payload);
   };
 
-  // const completeTodo = index => {
-  //   const newLists = [...lists];
-  //   newLists[index].isCompleted = true;
-  //   setLists(newLists);
-  // };
-
-  // const removeTodo = index => {
-  //   const newTodos = [...lists];
-  //   newTodos.splice(index, 1);
-  //   setLists(newTodos);
-  // };
-
   return (
     <div className="favlist-container mt-3">
       {avatar ? (
