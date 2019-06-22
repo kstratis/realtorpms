@@ -17,7 +17,12 @@ class Filters extends React.Component {
     return (
       <div className="">
         <div className="dropdown">
-          <button className="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <button
+            className="btn btn-secondary dropdown-toggle"
+            type="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false">
             {'Ταξινόμηση'}
           </button>
           <div className="dropdown-arrow dropdown-arrow-left" />

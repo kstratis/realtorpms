@@ -8,9 +8,7 @@ class ControlsContainer extends React.Component {
   }
 
   render() {
-    return (
-      <SortFilter key={filter['name']} handleFn={filter['fn']} i18n={filter['i18n']} options={''} />
-    )
+    return <SortFilter key={filter['name']} handleFn={filter['fn']} i18n={filter['i18n']} options={''} />;
   }
 }
 

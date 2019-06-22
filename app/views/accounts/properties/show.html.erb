@@ -22,7 +22,7 @@
             <% else %>
               <div class="thumbnails-ribbon d-flex flex-wrap justify-content-center">
                 <div class="fotorama" data-nav="thumbs" data-maxheight="300" data-allowfullscreen="true">
-                  <% @property.images.each do |image| %>
+                  <% @property.all_images.each do |image| %>
                     <%#= image_tag image.variant(resize: "736x500") %>
                     <%= image_tag image %>
                   <% end %>

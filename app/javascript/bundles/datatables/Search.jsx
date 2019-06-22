@@ -6,7 +6,13 @@ const Search = ({ searchInput, handleSearchInput, placeholder }) => {
     <div className="col col-md-6 col-xs-12 col-sm-12 search-container">
       <div className="justify-content-center flex-fill">
         <div className="input-group has-clearable">
-          <button type="button" className="close" aria-label="Close" onClick={(e)=> {handleSearchInput(e)}}>
+          <button
+            type="button"
+            className="close"
+            aria-label="Close"
+            onClick={e => {
+              handleSearchInput(e);
+            }}>
             <span aria-hidden="true">
               <i className="fas fa-times-circle" />
             </span>
