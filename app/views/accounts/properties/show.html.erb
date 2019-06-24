@@ -6,8 +6,21 @@
 <div class="page-container">
   <div class="container">
     <!-- .card -->
-    <div class="card card-fluid">
-      <h2 class="card-header"><%= heading %></h2>
+    <div class="card ">
+      <div class="card-header card-header-custom">
+        <div class="row align-items-center">
+          <div class="col-lg-2 d-none d-lg-block card-start-heading">
+            <%= link_to properties_path, class: "btn btn-primary navigation-btn" do %>
+              <i class="fas fa-chevron-left fa-fw"></i><%= t 'properties.show.catalog' %>
+            <% end %>
+          </div>
+          <div class="col-lg-8 p-3 p-lg-0 card-middle-heading "><h2 class="card-heading-custom"><%= heading %></h2>
+          </div>
+          <div class="col-lg-2 card-end-heading">
+            <a class="btn btn-primary navigation-btn" href="#"><i class="fas fa-th-large fa-fw"></i></a></div>
+        </div>
+      </div>
+
       <!-- .card-body -->
       <div class="card-body">
 
@@ -122,7 +135,7 @@
               <i class="fas fa-print fa-fw"></i>&nbsp;<%= t 'properties.print' %>
             </button>
           </div>
-          <div class="col-auto p-2">
+          <div class="col-auto pt-2">
             <%= react_component('SimpleSelect', props: {
                 id: 'a',
                 inputID: 'property_businesstype',
@@ -160,6 +173,7 @@
 
 
 
+
             <!--            <p><%#= @property.description %></p>-->
             <p>Χίος ,Πόλη Χίου, Διαμέρισμα, 102 τ.μ , Καταπληκτική κατάσταση, 1 Επίπεδο/α, Όροφος: 1ος, Σε απόσταση
               περιπάτου απο την Πλατεία ,, 2 Υ/Δ, 1 Μπάνιο/α , 1 Κουζίνα/ες, 1 Parking, Έτος κατασκευής 2008, Ενεργειακό
@@ -174,7 +188,9 @@
               ullam.</p>
           </div>
           <div class="col-6">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3142.9201571982417!2d23.74324741484946!3d38.0256408054602!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a1a28958079afd%3A0x5d54132707531cd8!2zzpHOu865zqzPgc-Ezr_PhSAxMywgzpHOuM6uzr3OsSAxMTEgNDI!5e0!3m2!1sel!2sgr!4v1560846389329!5m2!1sel!2sgr" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+            <%= render partial: 'accounts/properties/specs' %>
+
+            <!--            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3142.9201571982417!2d23.74324741484946!3d38.0256408054602!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a1a28958079afd%3A0x5d54132707531cd8!2zzpHOu865zqzPgc-Ezr_PhSAxMywgzpHOuM6uzr3OsSAxMTEgNDI!5e0!3m2!1sel!2sgr!4v1560846389329!5m2!1sel!2sgr" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>-->
           </div>
         </div>
 

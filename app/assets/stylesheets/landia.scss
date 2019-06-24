@@ -1034,8 +1034,22 @@ li.page-item{
   }
 }
 
-
-//.specs{
-//  border: 1px solid grey;
-//  border-radius: 3px;
-//}
+.card-header-custom{
+  padding: 0.5rem 1rem;
+  .card-start-heading{
+    text-align: left;
+  }
+  .card-middle-heading{
+    text-align: center;
+    h2{
+      margin: 0;
+    }
+  }
+  .card-end-heading{
+    text-align: right;
+    display: none;
+  }
+  .navigation-btn{
+    white-space: nowrap;
+  }
+}
