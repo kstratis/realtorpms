@@ -185,6 +185,10 @@ color: red;
     background-image: url( house_specs/address.svg);
   }
 
+  &.client{
+    background-image: url( owners/male_client.svg);
+  }
+
 
   & ~ .pr-icon-desc {
     display: block;

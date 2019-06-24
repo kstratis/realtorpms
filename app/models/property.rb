@@ -9,7 +9,7 @@ class Property < ApplicationRecord
   belongs_to :account
   belongs_to :location, optional: true
   belongs_to :owner, optional: true
-  has_and_belongs_to_many :favlists, -> { distinct }
+  has_and_belongs_to_many :favlists, -> {distinct}
   accepts_nested_attributes_for :owner
   has_many :assignments
   has_many_attached :images
@@ -17,11 +17,11 @@ class Property < ApplicationRecord
   has_and_belongs_to_many :extras
 
   # https://stackoverflow.com/a/38845388/178728
-  has_many :users, -> { distinct }, through: :assignments, dependent: :destroy
+  has_many :users, -> {distinct}, through: :assignments, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
   # Collection of properties which have been favorited by a particular user
-  scope :faved_by, -> (user) { joins(:favorites).where(favorites: { user: user }) }
+  scope :faved_by, -> (user) {joins(:favorites).where(favorites: {user: user})}
 
   attr_accessor :locationid, :ownerid, :noowner, :delete_images
 
@@ -50,20 +50,22 @@ class Property < ApplicationRecord
   validates :category, presence: true
   validates :subcategory, presence: true
   # validates :locationid, presence: true
-  validates :size, numericality: { only_integer: true }, allow_blank: true
-  validates :price, numericality: { only_integer: true }, allow_blank: true
-  validates :bedrooms, numericality: { only_integer: true }, allow_blank: true
-  validates :bathrooms, numericality: { only_integer: true }, allow_blank: true
+  validates :size, numericality: {only_integer: true}, allow_blank: true
+  validates :price, numericality: {only_integer: true}, allow_blank: true
+  validates :bedrooms, numericality: {only_integer: true}, allow_blank: true
+  validates :bathrooms, numericality: {only_integer: true}, allow_blank: true
+
+  DEFAULT_ATTRIBUTE_RENDER_FN = Proc.new {|value| value.blank? ? '—' : value}
 
   PROPERTY_ATTRIBUTES = {
-      :bedrooms => {:label => 'bedrooms', :icon => 'bedrooms', :options => nil, :renderfn => nil},
-      :bathrooms => {:label => 'bathrooms', :icon => 'bathrooms', :options => nil, :renderfn => nil},
-      :floor => {:label => 'floor', :icon => 'floor', :options => nil, :renderfn => nil},
-      # :has_extra => {:label => 'has_extra', :icon => 'parking', :options => 'parking', :renderfn => method(:I18n.send(:t))},
-      :has_extra => {:label => 'parking', :icon => 'parking', :options => 'parking', :renderfn => Proc.new {|value| I18n.t(value)}},
-      :construction => {:label => 'construction', :icon => 'construction', :options => nil, :renderfn => nil},
-      :address => {:label => 'address', :icon => 'address', :options => nil, :renderfn => nil},
-      :availability => {:label => 'availability', :icon => 'availability', :options => nil, :renderfn => Proc.new {|value| I18n.l value, format: :custom}}
+      :bedrooms => {:label => 'bedrooms', :icon => 'bedrooms', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
+      :bathrooms => {:label => 'bathrooms', :icon => 'bathrooms', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
+      :floor => {:label => 'floor', :icon => 'floor', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.floor.#{value}")}},
+      :render_extra => {:label => 'parking', :icon => 'parking', :options => 'parking', :renderfn => Proc.new {|value| value.blank? ? I18n.t('false') : I18n.t('true')}}, # Casting tip see here: https://stackoverflow.com/a/44322375/178728
+      :construction => {:label => 'construction', :icon => 'construction', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
+      :address => {:label => 'address', :icon => 'address', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
+      :availability => {:label => 'availability', :icon => 'availability', :options => nil, :renderfn => Proc.new {|value| value ? (I18n.l value, format: :custom) : '—' }},
+      :render_owner => {:label => 'owner', :icon => 'client', :options => 'full_name', :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN}
   }.freeze
 
   def pricepersqmeter
@@ -76,7 +78,11 @@ class Property < ApplicationRecord
     end
   end
 
-  def has_extra(term)
+  def render_owner(term)
+    owner.try(term.to_sym)
+  end
+
+  def render_extra(term)
     extras.exists?(Extra.find_by(name: term.to_s).id)
   end
 
@@ -104,17 +110,17 @@ class Property < ApplicationRecord
 
   private
 
-    # In the 'compound' extra fields for roofdeck, storage, garden and plot where each one comes with its own input,
-    # make sure that if unchecked on update action, the existing input value will also be cleared.
-    def handle_dependent_fields
-      edited_extras = extras.reject { |c| c.blank? }.collect { |extra| Extra.find(extra.id).name }
-      set_diff = %w(roofdeck storage garden plot) - edited_extras
-      set_diff.each do |el|
-        # DEBUG
-        # puts "the property is: #{el + '_space'}"
-        # MIND THAT THIS won't do any validations or update the updated_at attribute
-        write_attribute(:"#{el + '_space'}", nil)
-      end
+  # In the 'compound' extra fields for roofdeck, storage, garden and plot where each one comes with its own input,
+  # make sure that if unchecked on update action, the existing input value will also be cleared.
+  def handle_dependent_fields
+    edited_extras = extras.reject {|c| c.blank?}.collect {|extra| Extra.find(extra.id).name}
+    set_diff = %w(roofdeck storage garden plot) - edited_extras
+    set_diff.each do |el|
+      # DEBUG
+      # puts "the property is: #{el + '_space'}"
+      # MIND THAT THIS won't do any validations or update the updated_at attribute
+      write_attribute(:"#{el + '_space'}", nil)
     end
+  end
 
 end

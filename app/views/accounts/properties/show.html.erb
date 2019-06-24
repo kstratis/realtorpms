@@ -87,7 +87,7 @@
                 <tr>
                   <td><%= t('activerecord.attributes.user.phone1') %></td>
                   <td>
-                    <strong><%= @property.owner.telephones.blank? ? '—' : @property.owner.telephones.split(/[\s,]+/).collect(&:strip).join(', ') %></strong>
+                    <strong><%= @property.try(:owner).try(:telephones).blank? ? '—' : @property.owner.telephones.split(/[\s,]+/).collect(&:strip).join(', ') %></strong>
                   </td>
                 </tr>
                 </tbody>
@@ -163,7 +163,7 @@
         <hr/>
 
         <div class="row">
-          <div class="col-6">
+          <div class="col-lg-6 col-xs-12">
 
             <%= render partial: 'accounts/properties/specs' %>
 
@@ -175,19 +175,19 @@
 
 
             <!--            <p><%#= @property.description %></p>-->
-            <p>Χίος ,Πόλη Χίου, Διαμέρισμα, 102 τ.μ , Καταπληκτική κατάσταση, 1 Επίπεδο/α, Όροφος: 1ος, Σε απόσταση
-              περιπάτου απο την Πλατεία ,, 2 Υ/Δ, 1 Μπάνιο/α , 1 Κουζίνα/ες, 1 Parking, Έτος κατασκευής 2008, Ενεργειακό
-              Πιστοποιητικό: , Δάπεδα: Πλακάκια, Κουφώματα: Αλουμινίου, Χαρακτηριστικα: Αποθήκη, Προσόψεως, Πόρτα
-              Ασφαλείας, Νεόδμητο, Βεράντες, Εσωτερική Σκάλα, Φωτεινό, Βαμμένο, Διπλά Τζάμια, Boiler, Σίτες, Διαθετει
-              και 65 μ γκαραζ και αποθηκη(4 μπαλκονια), ανεξαρτητο δικο του καυστηρα( Ενιαία σαλονοτραπεζαρία,Κουζίνα με
-              πάσο,), Αυτόνομη Πετρέλαιο Θέρμανση, Προσόψεως,Φωτεινό , Θέα :Βουνό , κοντά σε: Κεντρικό
-              Δρόμο,Πλατεία,Αγορά,Λιμάνι ,, απόσταση απο: Πόλη(m): 800, Τιμή: 210.000€, Τηλ: 2106231555,, 6980502020 ,
-              www.dontasrealestate.gr ΚΩΔ(ID)--31652 , ΚΩΔ(E-AGENTS) 127727 </p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid architecto cumque, deleniti
-              eius facilis fugiat harum ipsum itaque libero magnam nam neque nobis non odit officiis omnis quidem
-              ullam.</p>
+<!--            <p>Χίος ,Πόλη Χίου, Διαμέρισμα, 102 τ.μ , Καταπληκτική κατάσταση, 1 Επίπεδο/α, Όροφος: 1ος, Σε απόσταση-->
+<!--              περιπάτου απο την Πλατεία ,, 2 Υ/Δ, 1 Μπάνιο/α , 1 Κουζίνα/ες, 1 Parking, Έτος κατασκευής 2008, Ενεργειακό-->
+<!--              Πιστοποιητικό: , Δάπεδα: Πλακάκια, Κουφώματα: Αλουμινίου, Χαρακτηριστικα: Αποθήκη, Προσόψεως, Πόρτα-->
+<!--              Ασφαλείας, Νεόδμητο, Βεράντες, Εσωτερική Σκάλα, Φωτεινό, Βαμμένο, Διπλά Τζάμια, Boiler, Σίτες, Διαθετει-->
+<!--              και 65 μ γκαραζ και αποθηκη(4 μπαλκονια), ανεξαρτητο δικο του καυστηρα( Ενιαία σαλονοτραπεζαρία,Κουζίνα με-->
+<!--              πάσο,), Αυτόνομη Πετρέλαιο Θέρμανση, Προσόψεως,Φωτεινό , Θέα :Βουνό , κοντά σε: Κεντρικό-->
+<!--              Δρόμο,Πλατεία,Αγορά,Λιμάνι ,, απόσταση απο: Πόλη(m): 800, Τιμή: 210.000€, Τηλ: 2106231555,, 6980502020 ,-->
+<!--              www.dontasrealestate.gr ΚΩΔ(ID)--31652 , ΚΩΔ(E-AGENTS) 127727 </p>-->
+<!--            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid architecto cumque, deleniti-->
+<!--              eius facilis fugiat harum ipsum itaque libero magnam nam neque nobis non odit officiis omnis quidem-->
+<!--              ullam.</p>-->
           </div>
-          <div class="col-6">
+          <div class="col-lg-6 col-xs-12">
             <%= render partial: 'accounts/properties/specs' %>
 
             <!--            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3142.9201571982417!2d23.74324741484946!3d38.0256408054602!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a1a28958079afd%3A0x5d54132707531cd8!2zzpHOu865zqzPgc-Ezr_PhSAxMywgzpHOuM6uzr3OsSAxMTEgNDI!5e0!3m2!1sel!2sgr!4v1560846389329!5m2!1sel!2sgr" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>-->

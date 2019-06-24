@@ -29,7 +29,7 @@ module PropertiesHelper
 
   def render_attribute(property, attribute, opts=nil, renderfn=nil)
     if property.respond_to?(attribute)
-      result = (opts ? property.send(attribute, opts) : property.send(attribute)) || '-'
+      result = (opts ? property.send(attribute, opts) : property.send(attribute)) || false
       return renderfn.call(result) if renderfn
       result
     else
