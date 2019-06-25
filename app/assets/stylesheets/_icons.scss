@@ -49,7 +49,7 @@
   }
 
   &.house-add{
-    background-image: url( houses/multi_houses.svg );
+    background-image: url( houses/add_house.svg );
   }
 
   &.add-property-colored{
@@ -194,6 +194,22 @@
 
   &.loft_pr{
     background-image: url( house_specs/loft.svg);
+  }
+
+  &.traditional{
+    background-image: url( house_specs/traditional.svg);
+  }
+
+  &.villa_pr{
+    background-image: url( house_specs/mansion.svg);
+  }
+
+  &.stone{
+    background-image: url( house_specs/stone_house.svg);
+  }
+
+  &.studio_pr{
+    background-image: url( house_specs/studio.svg);
   }
 
 
