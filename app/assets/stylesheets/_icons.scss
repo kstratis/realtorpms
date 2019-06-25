@@ -148,6 +148,10 @@
     background-image: url( dashboard/stats.svg);
   }
 
+  &.client{
+    background-image: url( owners/male_client.svg);
+  }
+
   &.house-avatar-placeholder{
     background-image: url( houses/house_placeholder.svg);
   }
@@ -180,9 +184,21 @@
     background-image: url( house_specs/address.svg);
   }
 
-  &.client{
-    background-image: url( owners/male_client.svg);
+  &.neoclassical{
+    background-image: url( house_specs/neoclassic.svg);
   }
+
+  &.protected_pr{
+    background-image: url( house_specs/protected_pr.svg);
+  }
+
+  &.loft_pr{
+    background-image: url( house_specs/loft.svg);
+  }
+
+
+
+
 
 
   & ~ .pr-icon-desc {

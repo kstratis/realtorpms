@@ -7,19 +7,8 @@
   <div class="container">
     <!-- .card -->
     <div class="card ">
-      <div class="card-header card-header-custom">
-        <div class="row align-items-center">
-          <div class="col-lg-2 d-none d-lg-block card-start-heading">
-            <%= link_to properties_path, class: "btn btn-primary navigation-btn" do %>
-              <i class="fas fa-chevron-left fa-fw"></i><%= t 'properties.show.catalog' %>
-            <% end %>
-          </div>
-          <div class="col-lg-8 p-3 p-lg-0 card-middle-heading "><h2 class="card-heading-custom"><%= heading %></h2>
-          </div>
-          <div class="col-lg-2 card-end-heading">
-            <a class="btn btn-primary navigation-btn" href="#"><i class="fas fa-th-large fa-fw"></i></a></div>
-        </div>
-      </div>
+
+      <%= render partial: 'shared/card_header/header', locals: {title: heading, btn_text: t('properties.show.catalog'), btn_link: properties_path} %>
 
       <!-- .card-body -->
       <div class="card-body">
