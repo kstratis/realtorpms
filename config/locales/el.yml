@@ -50,8 +50,8 @@ el:
           precast_pr: "Προκατασκευή"
         heating:
           title: "Θέρμανση"
-          central: "Κεντρική"
-          prive: "Αυτόνομη"
+          central: "Κεντρική θέρμανση"
+          prive: "Αυτόνομη θέρμανση"
         orientation:
           title: "Προσανατολισμός"
           facade: "Προσόψεως"
@@ -63,7 +63,7 @@ el:
           sea_view: "Θέα θάλασσα"
           mountain_view: "Θέα βουνό"
           forest_view: "Θέα δάσος"
-          infinite_view: "Απεριόριστη"
+          infinite_view: "Απεριόριστη θέα"
         other:
           title: "Λοιπά χαρ/κά"
           parking: "Θέση στάθμευσης"
@@ -88,6 +88,7 @@ el:
           plot: "Οικόπεδο"
           plot_placeholder: "Εμβαδόν οικοπέδου"
       property:
+        extras_title: "Έξτρα χαρ/κά"
         description: "Περιγραφή"
         businesstype: "Τύπος καταχώρησης"
         businesstype_plain: "Τύπος"

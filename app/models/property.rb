@@ -86,13 +86,15 @@ class Property < ApplicationRecord
     extras.exists?(Extra.find_by(name: term.to_s).id)
   end
 
+  # def render_extras
+  #   extras.each do ||
+  # end
+
   def all_images
     images.to_a.unshift(avatar)
   end
 
-  def render_extras
 
-  end
 
   # If a single property is faved by anyone at all
   # def faved?(property, favlist)

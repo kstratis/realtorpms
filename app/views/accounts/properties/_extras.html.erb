@@ -1,0 +1,10 @@
+<% @property.extras.map do |element| %>
+  <div class="badge-container">
+    <span class="badge badge-success badge-custom">
+      <i class="pr-icon xxs floor"></i>
+      <span class="badge-text">&nbsp;<%= t("activerecord.attributes.extra.#{element.subtype}.#{element.name}") %></span>
+    </span>
+  </div>
+<% end %>
+
+

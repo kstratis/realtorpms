@@ -1052,4 +1052,19 @@ li.page-item{
   .navigation-btn{
     white-space: nowrap;
   }
+
 }
+.badge-container{
+  display: inline-block;
+  padding: 3px 1px;
+}
+
+.badge-custom{
+  padding: 0.3rem 0.4rem;
+  .badge-text{
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+}
+

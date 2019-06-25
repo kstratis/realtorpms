@@ -23,7 +23,6 @@
 
 .pr-icon {
   //padding: 18px 18px;
-color: red;
   margin-left: auto;
   margin-right: auto;
   display: inline-block;
@@ -123,10 +122,6 @@ color: red;
 
   &.cancel{
     background-image: url( cancel.svg );
-  }
-
-  &.floor{
-    background-image: url( stairs.svg );
   }
 
   &.properties{

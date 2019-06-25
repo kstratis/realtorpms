@@ -87,6 +87,7 @@ en:
           plot: "Land plot"
           plot_placeholder: "Garden size in sq meters"
       property:
+        extras_title: "Extras"
         description: "Description"
         businesstype: "Entry type"
         businesstype_plain: "Type"
