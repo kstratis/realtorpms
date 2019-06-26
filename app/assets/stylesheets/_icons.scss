@@ -212,9 +212,97 @@
     background-image: url( house_specs/studio.svg);
   }
 
+  &.prefabricated_pr{
+    background-image: url( house_specs/prefabricated.svg);
+  }
 
+  &.precast_pr{
+    background-image: url( house_specs/precast.svg);
+  }
 
+  &.central{
+    background-image: url( house_specs/central_heating.svg);
+  }
 
+  &.prive{
+    background-image: url( house_specs/private_heating.svg);
+  }
+
+  &.facade{
+    background-image: url( house_specs/facade.svg);
+  }
+
+  &.double_frontage{
+    background-image: url( house_specs/double_frontage.svg);
+  }
+
+  &.corner{
+    background-image: url( house_specs/corner.svg);
+  }
+
+  &.internal{
+    background-image: url( house_specs/internal.svg);
+  }
+
+  &.sea_view{
+    background-image: url( house_specs/sea_view.svg);
+  }
+
+  &.mountain_view{
+    background-image: url( house_specs/mountain_view.svg);
+  }
+
+  &.forest_view{
+    background-image: url( house_specs/forest_view.svg);
+  }
+
+  &.infinite_view{
+    background-image: url( house_specs/panoramic_view.svg);
+  }
+
+  &.gas{
+    background-image: url( house_specs/gas.svg);
+  }
+
+  &.solar_water_heating{
+    background-image: url( house_specs/water_heater.svg);
+  }
+
+  &.furnished{
+    background-image: url( house_specs/furnished.svg);
+  }
+
+  &.fireplace{
+    background-image: url( house_specs/fireplace.svg);
+  }
+
+  &.awnings{
+    background-image: url( house_specs/awnings.svg);
+  }
+
+  &.clima{
+    background-image: url( house_specs/clima.svg);
+  }
+
+  &.security_door{
+    background-image: url( house_specs/security_door.svg);
+  }
+
+  &.pool{
+    background-image: url( house_specs/pool.svg);
+  }
+
+  &.no_elevator{
+    background-image: url( house_specs/no_elevator.svg);
+  }
+
+  &.no_utility_bills{
+    background-image: url( house_specs/no_utility_bills.svg);
+  }
+
+  &.fit_for_professional_use{
+    background-image: url( house_specs/briefcase.svg);
+  }
 
 
   & ~ .pr-icon-desc {

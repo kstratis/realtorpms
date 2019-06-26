@@ -381,13 +381,13 @@ el:
     settings: "Ρυθμίσεις"
   partners:
     title: "Συνεργάτες"
-    list: "Λίστα"
+    list: "Κατάλογος"
     add: "Άμεση προσθήκη"
     invite: "Πρόσκληση"
   clients:
     title: "Πελάτες"
     add: "Προσθήκη"
-    list: "Λίστα"
+    list: "Κατάλογος"
   main:
     title: "Κεντρική"
     heading: "Κεντρική"
@@ -466,7 +466,7 @@ el:
     title: "Ακίνητα"
     add: "Προσθήκη"
     add_fast: "Προσθήκη ακινήτου (γρήγορη)"
-    list: "Λίστα"
+    list: "Κατάλογος"
     favourites: "Αγαπημένα"
     fav_lists: "Λίστες αγαπημένων"
     ok_button: "Προσθήκη"
