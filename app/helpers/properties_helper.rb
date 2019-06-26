@@ -20,7 +20,7 @@ module PropertiesHelper
   def heading
     businesstype = t("activerecord.attributes.property.enums.businesstype.#{@property.businesstype}")
     category = t("activerecord.attributes.property.enums.subcategory.#{@property.subcategory}")
-    size = @property.size ? t('activerecord.attributes.property.size_meter_html', size: @property.size.to_s) : nil
+    size = @property.size ? t("activerecord.attributes.property.size_meter_html", size: @property.size.to_s) : nil
     localname = @property.location.localname
     parent_localname = @property.location.parent_localname
     price = @property.price ? number_to_currency(@property.price) : nil

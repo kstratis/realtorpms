@@ -1,7 +1,7 @@
 ---
 en:
-  true: "Ναί"
-  false: "Όχι"
+  true: "Yes"
+  false: "No"
   activerecord:
     models:
       invitation: "Invitation"
@@ -105,7 +105,8 @@ en:
         construction: "Construction"
         construction_title: "Construction"
         location: "Location"
-        owner: "Client"
+        owner: "Owner"
+        owner_title: "Owner"
         address_title: "Address"
         address_feedback_html: "i.e. 51 Mackintosh Place, CF24 4RL"
         floor: "Floor"
