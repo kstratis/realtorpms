@@ -1073,3 +1073,25 @@ li.page-item{
 
 }
 
+.app-aside .app-aside-light{
+  //background: ;
+}
+
+
+.has-active{
+  .menu-link, .menu-icon, .menu-text{
+    color: #ffffff !important;
+  }
+  border-radius: 2px;
+  background: $pink;
+
+}
+
+.menu-item{
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.stacked-menu .menu-link{
+  line-height: 2.2em;
+}
