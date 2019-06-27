@@ -2,6 +2,7 @@
 el:
   true: "Ναί"
   false: "Όχι"
+  sq_meters_html: "τ.μ."
   activerecord:
     models:
       invitation: "Πρόσκληση"
@@ -88,7 +89,8 @@ el:
           plot: "Οικόπεδο"
           plot_placeholder: "Εμβαδόν οικοπέδου"
       property:
-        extras_title: "Έξτρα χαρ/κά"
+        extras_title: "Έξτρα χαρακτηριστικά"
+        extras_not_found: "Δεν βρέθηκαν"
         description: "Περιγραφή"
         businesstype: "Τύπος καταχώρησης"
         businesstype_plain: "Τύπος"
@@ -483,6 +485,7 @@ el:
       tooltip: "Η φωτογραφία εξωφύλλου είναι ξεχωριστή και αντιπροσωπεύει ένα ακίνητο. Εφόσον μια φωτογραφία χρησιμοποιηθεί ως εξώφυλλο δεν χρειάζεται να μεταφορτωθεί και στο τμήμα με τις φωτογραφίες."
     edit:
       heading: "Επεξεργασία ακινήτου"
+      edit_button_alt: "Επεξεργασία"
       edit_button: "Ενημέρωση"
       allowed_pic_specs: "JPG, GIF ή PNG 400x400, < 2 MB."
       delete_avatar: "Είστε βέβαιος/βεβαία ότι θέλετε να διαγραφεί η φωτογραφία εξωφύλλου του ακινήτου;"

@@ -2,6 +2,7 @@
 en:
   true: "Yes"
   false: "No"
+  sq_meters_html: "m<sup>2</sup>"
   activerecord:
     models:
       invitation: "Invitation"
@@ -88,6 +89,7 @@ en:
           plot_placeholder: "Garden size in sq meters"
       property:
         extras_title: "Extras"
+        extras_not_found: "Not found"
         description: "Description"
         businesstype: "Entry type"
         businesstype_plain: "Type"
@@ -481,6 +483,7 @@ en:
       tooltip: "The cover picture is a unique image used to identify each property. Should you choose one, mind that you don't need to reupload it in the photos section below."
     edit:
       heading: "Edit property"
+      edit_button_alt: "Edit"
       edit_button: "Update"
       allowed_pic_specs: "JPG, GIF or PNG 400x400, < 2 MB."
       delete_avatar: "Are you sure you want to delete the cover photo?"

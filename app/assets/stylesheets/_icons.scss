@@ -169,7 +169,7 @@
   }
 
   &.parking{
-    background-image: url( house_specs/garage.svg);
+    background-image: url( house_specs/parking.svg);
   }
 
   &.construction{
@@ -302,6 +302,22 @@
 
   &.fit_for_professional_use{
     background-image: url( house_specs/briefcase.svg);
+  }
+
+  &.roofdeck{
+    background-image: url( house_specs/terrace.svg);
+  }
+
+  &.plot{
+    background-image: url( house_specs/plot.svg);
+  }
+
+  &.garden{
+    background-image: url( house_specs/garden.svg);
+  }
+
+  &.storage{
+    background-image: url( house_specs/warehouse.svg);
   }
 
 

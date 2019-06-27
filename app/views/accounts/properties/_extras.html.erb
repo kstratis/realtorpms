@@ -2,7 +2,7 @@
   <div class="badge-container">
     <span class="badge badge-success badge-custom">
       <i class="pr-icon xxs <%= element.name %>"></i>
-      <span class="badge-text">&nbsp;<%= t("activerecord.attributes.extra.#{element.subtype}.#{element.name}") %></span>
+      <span class="badge-text">&nbsp;<%= t("activerecord.attributes.extra.#{element.subtype}.#{element.name}") %><%= render_extra_value(@property, "#{element.name}_space").to_s.html_safe %></span>
     </span>
   </div>
 <% end %>

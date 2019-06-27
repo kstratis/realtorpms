@@ -595,12 +595,17 @@ i.fas.fa-heart.colored{
   text-align: center;
 }
 
-button:hover{
-  .fa-heart{
-    color: rgb(220, 72, 127);
-  }
-  .fa-print{
-    color: #346CB0;
+button, a {
+  &:hover {
+    .fa-heart {
+      color: rgb(220, 72, 127);
+    }
+    .fa-print {
+      color: $blue;
+    }
+    .fa-pen {
+      color: $orange;
+    }
   }
 }
 

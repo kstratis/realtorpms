@@ -36,5 +36,16 @@ module PropertiesHelper
       raise "Internal Error"
     end
   end
+
+  # Renders a +dependant+ extra field. Extra fields are stored directly on the property model.
+  # i.e. If a property is found to have a 'garden' through the extras table, we then check property.garden_space for a
+  # value on the property instance and return it. Otherwise we return nil
+  def render_extra_value(property, attribute)
+    if property.respond_to?(attribute)
+      value = property.send(attribute)
+      value.blank? ? nil : ": <span class='badge badge-light'>#{value} #{I18n.t('sq_meters_html')}</span>"
+    end
+  end
+
 end
 

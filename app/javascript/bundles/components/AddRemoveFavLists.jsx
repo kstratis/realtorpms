@@ -69,7 +69,7 @@ function AddRemoveListForm({ addEntity, i18n, favlists_url, property_id }) {
   );
 }
 
-function AddRemoveFavLists({ avatar, favlists_url, favorites_url, property_id, i18n }) {
+function AddRemoveFavLists({ modalHeader, avatar, favlists_url, favorites_url, property_id, i18n }) {
   const [request, setRequest] = useState({
     url: `${favlists_url}?property_id=${property_id}`,
     method: 'get',
@@ -121,6 +121,7 @@ function AddRemoveFavLists({ avatar, favlists_url, favorites_url, property_id, i
           <img src={avatar} className={'rounded'} alt={'i18n.property_cover_alt'} />
         </figure>
       ) : null}
+      <h2>{modalHeader}</h2>
       <hr />
       <div className={'favlist-body'}>
         {data.length > 0 ? (

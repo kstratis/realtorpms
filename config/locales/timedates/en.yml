@@ -201,6 +201,7 @@ en:
     am: am
     formats:
       default: "%a, %d %b %Y %H:%M:%S %z"
+      custom: ! '%d %b %Y'
       long: "%B %d, %Y %H:%M"
       short: "%d %b %H:%M"
     pm: pm
