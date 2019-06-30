@@ -55,13 +55,16 @@
                 initial_search: @initial_search,
                 initial_sorting: @initial_sorting,
                 initial_ordering: @initial_ordering,
+                add_user_link: new_invitation_path,
                 object_type: 'users'
             },
             i18n: {
                 datatable: t('js.datatables.users'),
                 result_count: t('js.datatables.pagination.results'),
                 no_results: t('js.datatables.users.no_results'),
-                search: t('js.users_search.placeholder')
+                search: t('js.users_search.placeholder'),
+                add: t('invitations.new.heading')
+
             },
             meta: {
                 freeze_link:  toggle_activation_user_url('USERID')

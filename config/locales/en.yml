@@ -245,6 +245,7 @@ en:
         nooptions_sync_html: "No options found"
         loading_html: "Loading results..."
         placeholder: "Choose..."
+        placeholder_users: "Start typing to select..."
         category: "Category"
         subcategory: "Subcategory"
         required: "Required field"

@@ -94,7 +94,13 @@ class Property < ApplicationRecord
     images.to_a.unshift(avatar)
   end
 
-
+  # def handlers
+  #   if users.count > 0
+  #
+  #
+  #   end
+  #
+  # end
 
   # If a single property is faved by anyone at all
   # def faved?(property, favlist)

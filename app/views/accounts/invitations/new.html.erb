@@ -1,13 +1,14 @@
 <% provide(:title, t('users.new.heading')) %>
 
-<%= render partial: 'shared/breadcrumb', locals: {path: [{:title => 'users.new.heading', :href => new_user_path}], icon: 'house-colored'} %>
+<%= render partial: 'shared/breadcrumb', locals: {path: [{:title => 'users.index.heading', :href => users_path}, {:title => 'users.new.heading', :href => new_user_path}], icon: 'house-colored'} %>
 
 <div class="page-container">
   <div class="container">
     <div class="content-swap">
     <!-- .card -->
     <div class="card card-fluid">
-      <h2 class="card-header"><%= t('users.new.profile') %> </h2>
+      <%= render partial: 'shared/card_header/header', locals: {title: t('users.new.profile'), btn_text: t('properties.show.catalog'), btn_link: users_path} %>
+<!--      <h2 class="card-header"><%#= t('users.new.profile') %> </h2>-->
       <!-- .card-body -->
       <div class="card-body">
 

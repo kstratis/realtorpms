@@ -15,6 +15,21 @@ module UserDatatable
       @users = @users.search(params[:search])
     end
 
+    ####################
+    # This is for retrieving the users list from within react-select
+    if params[:dropdown]
+      data = {:dataset => Array.new}
+      @users.each do |entry|
+        hash = {
+            label: "#{entry.first_name} #{entry.last_name}",
+            value: entry.id
+        }
+        data[:dataset] << hash
+      end
+      render :json => {:status => "OK", :data => data} and return
+    end
+    ####################
+
     if params[:sorting] && params[:ordering]
       if params['sorting'] == 'assignments_count'
         # query = 'SELECT u.*, count(a.user_id) AS total_assignments FROM users AS u JOIN assignments AS a ON a.user_id = u.id GROUP BY u.id ORDER BY total_assignments;'

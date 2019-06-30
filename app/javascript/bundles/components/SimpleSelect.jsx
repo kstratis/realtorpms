@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Select from 'react-select';
-import { Async } from 'react-select';
+import AsyncSelect from 'react-select/async';
 import ReactOnRails from 'react-on-rails';
 import { debounce, renderHTML } from '../utilities/helpers';
 
@@ -212,7 +212,7 @@ class SimpleSelect extends React.Component {
             ref={ ref => { this.selectRef = ref; }}
           />
         ) : (
-          <Async
+          <AsyncSelect
             id={this.props.identity}
             inputProps={{ 'data-name': this.props.name }}
             name={this.props.name}

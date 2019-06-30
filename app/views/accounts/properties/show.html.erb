@@ -1,6 +1,6 @@
 <% provide(:title, t('properties.show.heading')) %>
 
-<%= render partial: 'shared/breadcrumb', locals: {path: [{:title => 'properties.show.properties', :href => properties_path}, {title: @property.title || @property.id, :href => ''}], icon: 'house-colored'} %>
+<%= render partial: 'shared/breadcrumb', locals: {path: [{:title => 'properties.index.heading', :href => properties_path}, {title: @property.title || @property.id, :href => ''}], icon: 'house-colored'} %>
 
 
 <div class="page-container">
@@ -131,23 +131,17 @@
               <i class="fas fa-print fa-fw"></i>&nbsp;<%= t 'properties.print' %>
             </button>
           </div>
-          <div class="col-auto pt-2">
-            <%= react_component('SimpleSelect', props: {
-                id: 'a',
-                inputID: 'property_businesstype',
-                inputName: 'property[businesstype]',
-                inputClassName: 'form-control',
-                validatorGroup: 'fieldset-1',
-                isRequired: true,
-                formID: 'new_property',
-                className: 'simple-select',
-                options: Property.businesstypes.keys.collect {|businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype}},
-                soloMode: true,
-                ajaxEnabled: false,
+          <div class="col-4 pt-2">
+            <%= react_component('MultiAsyncSelect', props: {
+                id: 'MultiAsyncSelect',
+                endpoint: users_path,
+                className: '',
+                # storedOptions: @property.owner.id ? {"label": "#{@property.owner.first_name} #{@property.owner.last_name}", "value": @property.owner.id} : nil,
+                storedOptions: @property.users.blank? ? nil : @property.users.map { |user| {label: "#{user.first_name} #{user.last_name}", value: user.id}},
+                isSearchable: true,
                 isClearable: true,
-                backspaceRemovesValue: true,
-                isSearchable: false,
-                feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
+                soloMode: true,
+                ajaxEnabled: true,
                 i18n: {
                     select: t('js.components.select'),
                     validatorErrMsg: t('js.validator.required'),

@@ -1077,21 +1077,25 @@ li.page-item{
   //background: ;
 }
 
-
 .has-active{
   .menu-link, .menu-icon, .menu-text{
     color: #ffffff !important;
   }
-  border-radius: 2px;
+  border-radius: 0 2px 2px 0;
   background: $pink;
+  box-shadow: inset 6px 0 0 0 #0d456b;
 
 }
 
 .menu-item{
-  margin-left: 5px;
-  margin-right: 5px;
+  //margin-left: 5px;
+  //margin-right: 5px;
 }
 
 .stacked-menu .menu-link{
-  line-height: 2.2em;
+  line-height: 2em;
+}
+
+.no-wrap{
+  white-space: nowrap;
 }

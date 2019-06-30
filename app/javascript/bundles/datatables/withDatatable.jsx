@@ -300,6 +300,7 @@ function withDatatable(WrappedComponent) {
     }
 
     render() {
+      {console.log(this.props)}
       return (
         <div>
           <WrappedComponent
@@ -312,6 +313,7 @@ function withDatatable(WrappedComponent) {
             handleFreezeUser={this.handleFreezeUser}
             i18n={this.props.i18n}
             meta={this.props.meta}
+            add_user_link={this.props.initial_payload.add_user_link}
             {...this.state}
           />
         </div>

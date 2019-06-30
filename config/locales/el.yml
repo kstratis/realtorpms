@@ -246,6 +246,7 @@ el:
         nooptions_sync_html: "Δεν βρέθηκαν αποτελέσματα"
         loading_html: "Φόρτωση αποτελεσμάτων..."
         placeholder: "Επιλέξτε..."
+        placeholder_users: "Πληκτρολογήστε για αναζήτηση..."
         category: "Κατηγορία"
         subcategory: "Υποκατηγορία"
         required: "Υποχρεωτικό πεδίο"
@@ -407,7 +408,7 @@ el:
       users: "Χρήστες"
   invitations:
     new:
-      heading: "Πρόσκληση νέου συνεργάτη"
+      heading: "Προσθήκη"
       inv_button: "Αποστολή"
     created:
       message: "Επιτυχία!"

@@ -3,7 +3,7 @@ import React from 'react';
 
 const Search = ({ searchInput, handleSearchInput, placeholder }) => {
   return (
-    <div className="col col-md-6 col-xs-12 col-sm-12 search-container">
+    <div className="col col-md-6 col-xs-6 col-sm-6 search-container">
       <div className="justify-content-center flex-fill">
         <div className="input-group has-clearable">
           <button

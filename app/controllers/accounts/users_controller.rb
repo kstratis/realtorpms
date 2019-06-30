@@ -72,6 +72,8 @@ module Accounts
       render :json => {:status => "OK", :user_active => @user.active?}
     end
 
+    # def
+
     private
       def user_params
         params.require(:user).permit(:avatar, :first_name, :last_name, :email, :dob, :phone1, :locale, :password, :password_confirmation)

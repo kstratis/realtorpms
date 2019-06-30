@@ -18,7 +18,7 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
-  # belongs_to :account, optional: true
+  # belongs_to :account, optionasl: true
   # belongs_to :account
   # has_one :account
 
