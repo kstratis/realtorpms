@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
 import AsyncSelect from 'react-select/async';
 import ReactOnRails from 'react-on-rails';
 import { debounce, renderHTML } from '../utilities/helpers';
+
+
+const animatedComponents = makeAnimated();
+
 
 const selectStyles = {
   container: (base, state) => {
@@ -71,7 +75,8 @@ const promiseOptions = inputValue =>
 class MultiAsyncSelect extends React.Component {
   static propTypes = {
     identity: PropTypes.string,
-    endpoint: PropTypes.string,
+    retrieve_endpoint: PropTypes.string,
+    assign_endpoint: PropTypes.string,
     validatorGroup: PropTypes.string,
     options: PropTypes.array,
     handleOptions: PropTypes.func,
@@ -105,7 +110,7 @@ class MultiAsyncSelect extends React.Component {
 
   handleAjaxRequest(query, callback) {
     axios
-      .get(`${this.props.endpoint}.json?search=${query}&dropdown=1`) // +1 because rails will_paginate starts from 1 while this starts from 0
+      .get(`${this.props.retrieve_endpoint}.json?search=${query}&dropdown=1`) // +1 because rails will_paginate starts from 1 while this starts from 0
       .then(response => {
         // DEBUG
         // console.log(response.data.data.dataset);
@@ -132,8 +137,8 @@ class MultiAsyncSelect extends React.Component {
     console.log('changed');
     axios({
       method: 'post',
-      url: request.url,
-      data: request.payload
+      url: this.props.assign_endpoint,
+      data: {selection: selectedOptions || []}
     }).then(() => {
       console.log('OK');
     });
@@ -147,6 +152,7 @@ class MultiAsyncSelect extends React.Component {
         styles={selectStyles}
         onChange={this.handleChange}
         value={this.state.selectedOptions}
+        components={animatedComponents}
         autoload={false}
         cache={false}
         menuIsOpen={isOpen}

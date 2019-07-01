@@ -251,6 +251,7 @@ el:
         subcategory: "Υποκατηγορία"
         required: "Υποχρεωτικό πεδίο"
         optional: "Προεραιτικό πεδίο"
+        assign_completed: "Οι αναθέσεις ενημερώθηκαν επιτυχώς"
     forms:
       properties:
         wizard:

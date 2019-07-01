@@ -250,6 +250,7 @@ en:
         subcategory: "Subcategory"
         required: "Required field"
         optional: "Optional field"
+        assign_completed: "Assignment successfully updated"
     forms:
       properties:
         wizard:

@@ -65,10 +65,9 @@ Rails.application.routes.draw do
       #
 
       post '/properties/uploads', to: 'properties#uploads'
-      #
-      post '/assignments/property/:pid/user/:uid', to: 'assignments#create'
-      # delete an existing assignment
-      delete '/assignments/property/:pid/user/:uid', to: 'assignments#destroy'
+
+      post '/assignments/property/:pid/users/', to: 'assignments#assign', as: :assignments
+
 
       # resources :invitations, only: [:new, :create] do
       #   member do
