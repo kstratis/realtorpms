@@ -91,6 +91,7 @@ en:
         extras_title: "Extras"
         extras_not_found: "Not found"
         description: "Description"
+        description_feedback_html: "Property description"
         businesstype: "Entry type"
         businesstype_plain: "Type"
         pricepersqmeter: "Square meter price"
@@ -111,6 +112,9 @@ en:
         owner_title: "Owner"
         address_title: "Address"
         address_feedback_html: "i.e. 51 Mackintosh Place, CF24 4RL"
+        map_url: "Map"
+        map_url_title: "Google maps url"
+        map_url_feedback_html: "Paste the url of an embeddable iFrame"
         floor: "Floor"
         floor_title: "Floor"
         parking_title: "Parking"
@@ -475,6 +479,7 @@ en:
     cancel_button: "Cancel"
     close_button: "Close"
     print: "Print"
+    map: "Map"
     import: "Import properties"
     new:
       heading: "Add new property"
@@ -482,7 +487,8 @@ en:
       set_cover: "Cover"
       photo_header: "Cover photo"
       photo_subheader: "Click to change the cover photo for the property"
-      tooltip: "The cover picture is a unique image used to identify each property. Should you choose one, mind that you don't need to reupload it in the photos section below."
+      tooltip_avatar: "The cover picture is a unique image used to identify each property. Should you choose one, mind that you don't need to reupload it in the photos section below."
+      tooltip_map: "Navigate to Google maps and locate the property of your choosing. Click on 'Share' and select the 'Embed a map tab'. Copy and paste the given url the map field above."
     edit:
       heading: "Edit property"
       edit_button_alt: "Edit"
@@ -509,6 +515,7 @@ en:
       edit: "Edit"
       add_another: "Add new"
       flash: "Property successfully edited"
+      support: "Please contact support or"
     not_updated:
       message: "Error editing the property"
       add_another: "Try again"

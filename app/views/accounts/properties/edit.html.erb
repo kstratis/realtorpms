@@ -477,7 +477,7 @@
                         </div>
                       </div>
                       <div class="row">
-                        <!-- Size -->
+                        <!-- Address -->
                         <div class="col-md-6 col-sm-12">
                           <div class="form-group mb-4">
                             <div class="form-label-group">
@@ -485,7 +485,7 @@
                                                       placeholder: Property.human_attribute_name("address_placeholder"),
                                                       class: 'form-control',
                                                       autocomplete: "off" %>
-                              <label for="size">
+                              <label for="address">
                                 <%= content_tag :span do %>
                                   <%= content_tag(:i, nil, class: 'fas fa-map-marked-alt fa-fw') + ' ' + t('activerecord.attributes.property.address_title') %>
                                 <% end %>
@@ -498,6 +498,32 @@
                         </div>
 
                       </div>
+
+
+                      <div class="row">
+                        <!-- Map url -->
+                        <div class="col-md-6 col-sm-12">
+                          <div class="form-group mb-4">
+                            <div class="form-label-group">
+                              <%= property.text_field :map_url,
+                                                      placeholder: Property.human_attribute_name("map_url"),
+                                                      class: 'form-control',
+                                                      autocomplete: "off" %>
+                              <label for="map_url">
+                                <%= content_tag :span do %>
+                                  <%= content_tag(:i, nil, class: 'fas fa-map-marked-alt fa-fw') + ' ' + t('activerecord.attributes.property.map_url_title') %>
+                                <% end %>
+                              </label>
+                            </div>
+                            <small class="form-text text-muted"><%= t('activerecord.attributes.property.map_url_feedback_html') %> <span class="property-cover-tooltip" data-toggle="tooltip" data-placement="top" title="<%= t('properties.new.tooltip_map') %>"><i class="fas fa-info-circle"></i></span>
+                            </small>
+                            <div class="invalid-feedback"></div>
+                          </div>
+                        </div>
+
+                      </div>
+
+
                       <hr class="mt-5">
                       <div class="d-flex">
                         <button type="button" class="prev btn btn-secondary" data-validate="fieldset-4"><%= t('js.forms.properties.wizard.previous') %></button>

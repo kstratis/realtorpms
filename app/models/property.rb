@@ -5,6 +5,9 @@ class Property < ApplicationRecord
   attr_searchable %w(title description notes adxe adspitogatos owner.last_name owner.telephones)
 
   before_validation :handle_dependent_fields, on: :update
+  before_validation(on: :create) do
+    self.map_url = number.gsub(/[^0-9]/, "") if attribute_present?("map_url")
+  end
   # belongs_to :user
   belongs_to :account
   belongs_to :location, optional: true
@@ -54,6 +57,8 @@ class Property < ApplicationRecord
   validates :price, numericality: {only_integer: true}, allow_blank: true
   validates :bedrooms, numericality: {only_integer: true}, allow_blank: true
   validates :bathrooms, numericality: {only_integer: true}, allow_blank: true
+  # Look only for iframes
+  validates :map_url, format: { with: /(?:<iframe[^>]*)(?:(?:\/>)|(?:>.*?<\/iframe>))/i }, if: -> { map_url.present? }
 
   DEFAULT_ATTRIBUTE_RENDER_FN = Proc.new {|value| value.blank? ? '—' : value}
 
@@ -92,6 +97,19 @@ class Property < ApplicationRecord
 
   def all_images
     images.to_a.unshift(avatar)
+  end
+
+  def map_href
+    begin
+      # Exceptions raised by this code will
+      # be caught by the following rescue clause
+      Nokogiri::HTML(map_url).search('iframe').attribute('src').value || nil
+    rescue
+      puts "Exception while parsing the property's #{id} map url"
+      return nil
+    end
+
+
   end
 
   # def handlers

@@ -6,9 +6,7 @@ import AsyncSelect from 'react-select/async';
 import ReactOnRails from 'react-on-rails';
 import { debounce, renderHTML } from '../utilities/helpers';
 
-
 const animatedComponents = makeAnimated();
-
 
 const selectStyles = {
   container: (base, state) => {
@@ -138,7 +136,7 @@ class MultiAsyncSelect extends React.Component {
     axios({
       method: 'post',
       url: this.props.assign_endpoint,
-      data: {selection: selectedOptions || []}
+      data: { selection: selectedOptions || [] }
     }).then(() => {
       console.log('OK');
     });
@@ -148,23 +146,27 @@ class MultiAsyncSelect extends React.Component {
     // This is needed for the menu open/close styles
     const { isOpen } = this.state;
     return (
-      <AsyncSelect
-        styles={selectStyles}
-        onChange={this.handleChange}
-        value={this.state.selectedOptions}
-        components={animatedComponents}
-        autoload={false}
-        cache={false}
-        menuIsOpen={isOpen}
-        isMulti={true}
-        backspaceRemovesValue={false}
-        placeholder={this.props.i18n.select.placeholder_users}
-        noOptionsMessage={() => renderHTML(this.props.i18n.select.nooptions_async_html)}
-        loadingMessage={() => renderHTML(this.props.i18n.select.loading_html)}
-        loadOptions={this.getOptions}
-        onMenuOpen={this.onMenuOpen}
-        onMenuClose={this.onMenuClose}
-      />
+      <>
+        <AsyncSelect
+          styles={selectStyles}
+          onChange={this.handleChange}
+          value={this.state.selectedOptions}
+          components={animatedComponents}
+          autoload={false}
+          cache={false}
+          menuIsOpen={isOpen}
+          isMulti={true}
+          backspaceRemovesValue={false}
+          placeholder={this.props.i18n.select.placeholder_users}
+          noOptionsMessage={() => renderHTML(this.props.i18n.select.nooptions_async_html)}
+          loadingMessage={() => renderHTML(this.props.i18n.select.loading_html)}
+          loadOptions={this.getOptions}
+          onMenuOpen={this.onMenuOpen}
+          onMenuClose={this.onMenuClose}
+        />
+        <small className="form-text text-muted">{this.props.feedback}</small>
+        <div className="invalid-feedback" />
+      </>
     );
   }
 }

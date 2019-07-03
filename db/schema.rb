@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_12_080620) do
+ActiveRecord::Schema.define(version: 2019_07_03_103619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -181,6 +181,7 @@ ActiveRecord::Schema.define(version: 2019_06_12_080620) do
     t.string "address"
     t.integer "favorites_count"
     t.bigint "owner_id"
+    t.string "map_url"
     t.index ["account_id"], name: "index_properties_on_account_id"
     t.index ["location_id"], name: "index_properties_on_location_id"
     t.index ["owner_id"], name: "index_properties_on_owner_id"

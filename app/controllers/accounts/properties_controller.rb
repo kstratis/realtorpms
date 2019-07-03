@@ -249,6 +249,7 @@ module Accounts
                                        :ownerid,
                                        :noowner,
                                        :avatar,
+                                       :map_url,
                                        {owner_attributes: [:first_name, :last_name, :email, :telephones]},
                                        # attachments: [],
                                        delete_images: [],

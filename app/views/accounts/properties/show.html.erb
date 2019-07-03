@@ -15,7 +15,6 @@
 
         <div class="row">
           <div class="col-lg-6 col-md-12 my-auto">
-
             <% if @property.images.blank? %>
               <div class="d-flex flex-wrap justify-content-center">
                 <%= content_tag :i, "", class: "pr-icon lg house-avatar-placeholder" %>
@@ -31,7 +30,6 @@
                 </div>
               </div>
             <% end %>
-
           </div>
 
           <div class="col-lg-6 col-md-12">
@@ -88,7 +86,7 @@
 
         <hr/>
 
-        <div class="row justify-content-center ">
+        <div class="row justify-content-center">
           <div class="col-auto p-2">
 
             <div class="reactstrap-modal-button">
@@ -126,11 +124,19 @@
               <i class="fas fa-pen fa-fw"></i>&nbsp;<%= t 'properties.edit.edit_button_alt' %>
             <% end %>
           </div>
+
+          <div class="col-auto p-2 ">
+            <button type="button" class="btn btn-secondary printable" data-url="<%= @property.map_href %>" <%= @property.map_href.blank? ? 'disabled' : nil %>>
+              <i class="fas fa-map fa-fw"></i>&nbsp;<%= t 'properties.map' %>
+            </button>
+          </div>
+
           <div class="col-auto p-2 ">
             <button type="button" class="btn btn-secondary printable" data-url="<%= property_url(@property.id) + '?print=true' %>">
               <i class="fas fa-print fa-fw"></i>&nbsp;<%= t 'properties.print' %>
             </button>
           </div>
+
           <div class="col-4 pt-2">
             <%= react_component('MultiAsyncSelect', props: {
                 id: 'MultiAsyncSelect',
@@ -138,11 +144,12 @@
                 assign_endpoint: assignments_path(@property.id),
                 className: '',
                 # storedOptions: @property.owner.id ? {"label": "#{@property.owner.first_name} #{@property.owner.last_name}", "value": @property.owner.id} : nil,
-                storedOptions: @property.users.blank? ? nil : @property.users.map { |user| {label: "#{user.first_name} #{user.last_name}", value: user.id}},
+                storedOptions: @property.users.blank? ? nil : @property.users.map {|user| {label: "#{user.first_name} #{user.last_name}", value: user.id}},
                 isSearchable: true,
                 isClearable: true,
                 soloMode: true,
                 ajaxEnabled: true,
+                feedback: t('js.components.select.assignments_feedback'),
                 i18n: {
                     select: t('js.components.select'),
                     validatorErrMsg: t('js.validator.required'),
@@ -160,65 +167,68 @@
             <%= render partial: 'accounts/properties/specs' %>
 
           </div>
+
           <div class="col-lg-6 col-xs-12">
             <div class="card">
 
-              <div class="card-header"><%= t 'activerecord.attributes.property.extras_title' %></div><!-- .card-body -->
+              <div class="card-header">
+                <div class="table-entry">
+                  <div class="table-icon-wrapper">
+                    <i class="pr-icon xs list"></i>
+                  </div>
+                  <span class="align-middle">&nbsp; <%= t 'activerecord.attributes.property.extras_title' %></span>
+                </div>
+              </div><!-- .card-body -->
               <div class="card-body">
-
                 <% if @property.extras.blank? %>
                   <h3><%= t('activerecord.attributes.property.extras_not_found') %></h3>
                 <% else %>
                   <%= render partial: 'accounts/properties/extras' %>
                 <% end %>
-
-
               </div><!-- /.card-body -->
+            </div><!-- /.card -->
+            <div class="card">
 
-
+              <div class="card-header">
+                <div class="table-entry">
+                  <div class="table-icon-wrapper">
+                    <i class="pr-icon xs list"></i>
+                  </div>
+                  <span class="align-middle">&nbsp; <%= t 'activerecord.attributes.property.extras_title' %></span>
+                </div>
+              </div><!-- .card-body -->
+              <div class="card-body">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3144.0734844953054!2d23.797924314848597!3d37.99874640701563!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a1984817f23059%3A0xfb083fbf85b7778!2sJuicy+Grill+Athens!5e0!3m2!1sel!2sgr!4v1562143551495!5m2!1sel!2sgr" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+              </div><!-- /.card-body -->
             </div><!-- /.card -->
 
             <!--            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3142.9201571982417!2d23.74324741484946!3d38.0256408054602!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a1a28958079afd%3A0x5d54132707531cd8!2zzpHOu865zqzPgc-Ezr_PhSAxMywgzpHOuM6uzr3OsSAxMTEgNDI!5e0!3m2!1sel!2sgr!4v1560846389329!5m2!1sel!2sgr" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>-->
           </div>
+          <div class="col-lg-6 col-xs-12">
+            <div class="card">
+              <div class="card-header">
+                <div class="table-entry">
+                  <div class="table-icon-wrapper">
+                    <i class="pr-icon xs notes"></i>
+                  </div>
+                  <span class="align-middle">&nbsp; <%= t 'activerecord.attributes.property.notes_title' %> </span>
+                </div>
+              </div><!-- .card-body -->
+              <div class="card-body">
+                <% if @property.notes.blank? %>
+                  <h3><%= t('activerecord.attributes.property.extras_not_found') %></h3>
+                <% else %>
+                  <div><%= @property.notes %></div>
+                <% end %>
+              </div><!-- /.card-body -->
+            </div><!-- /.card -->
+          </div>
         </div>
-
-
-        <hr/>
-
-        <!--        <div class="row">-->
-        <%#= react_component('UsersListAssignableWithDatatable', props: {
-            initial_payload: {
-                dataset_wrapper: @userslist,
-                results_per_page: @results_per_page,
-                total_entries: @total_entries,
-                current_page: @current_page,
-                initial_search: @initial_search,
-                initial_sorting: @initial_sorting,
-                initial_ordering: @initial_ordering,
-                # property_users means to get the users
-                # plus the assigned status of each one
-                # from the properties controller
-                object_type: 'property_users',
-                pid: @property.id
-            },
-            i18n: {
-                datatable: t('js.datatables.properties'),
-                search: t('js.properties_search')
-            }
-        }, prerender: false) %>
-
-
-        <!--        </div>-->
-
 
       </div>
     </div>
   </div>
 </div>
-
-
-<%= link_to 'Edit', edit_property_path(@property) %> |
-<%= link_to 'Back', properties_path %>
 
 
 
