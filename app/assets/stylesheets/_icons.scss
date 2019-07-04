@@ -328,6 +328,18 @@
     background-image: url( house_specs/notes.svg);
   }
 
+  &.info{
+    background-image: url( house_specs/info.svg);
+  }
+
+  &.specs{
+    background-image: url( house_specs/specs.svg);
+  }
+
+  &.assignments{
+    background-image: url( house_specs/assignment.svg);
+  }
+
 
   & ~ .pr-icon-desc {
     display: block;

@@ -89,7 +89,10 @@ el:
           plot: "Οικόπεδο"
           plot_placeholder: "Εμβαδόν οικοπέδου"
       property:
-        extras_title: "Έξτρα χαρακτηριστικά"
+        info_title: "Πληροφορίες"
+        specs_title: "Χαρακτηριστικά"
+        extras_title: "Παροχές"
+        assignments_title: "Αναθέσεις"
         extras_not_found: "Δεν βρέθηκαν"
         description: "Περιγραφή"
         description_feedback_html: "Περιγραφή ακινήτου"
@@ -448,10 +451,12 @@ el:
       list: "Λίστα υφιστάμενων χρηστών"
     new:
       heading: "Προσθήκη"
+      heading_alt: "Νέος συνεργάτης"
       profile: "Προσθήκη νέου συνεργάτη"
       new_button: "Προσθήκη"
       feedback: "Πληκτρολογήστε το email του συνεργάτη σας προκειμένου να λάβει πρόσκληση"
     show:
+      breadcrumb: "Συνεργάτες"
       heading: "Πληροφορίες χρήστη"
       users: "Χρήστες"
       assignments: "Ανατεθημένα"
@@ -468,7 +473,8 @@ el:
       allowed_pic_specs: "JPG, GIF ή PNG 400x400, < 2 MB."
       delete_avatar: "Είστε βέβαιος/βεβαία ότι θέλετε να διαγραφεί η φωτογραφία προφίλ σας;"
     index:
-      heading: "Κατάλογος συνεργατών"
+      breadcrumb: "Συνεργάτες"
+      heading: "Συνεργάτες"
     flash_user_not_found: "Ο χρήστης δεν βρέθηκε"
   properties:
     identifier: "ID"
@@ -485,7 +491,9 @@ el:
     map: "Χάρτης"
     import: "Εισαγωγή από αρχείο"
     new:
+      breadcrumb: "Ακίνητα"
       heading: "Προσθήκη νέου ακινήτου"
+      heading_alt: "Νέο ακίνητο"
       add_button: "Προσθήκη"
       set_cover: "Αλλαγή"
       photo_header: "Φωτογραφία εξωφύλλου"
@@ -493,7 +501,8 @@ el:
       tooltip_avatar: "Η φωτογραφία εξωφύλλου είναι ξεχωριστή και αντιπροσωπεύει ένα ακίνητο. Εφόσον μια φωτογραφία χρησιμοποιηθεί ως εξώφυλλο δεν χρειάζεται να μεταφορτωθεί και στο τμήμα με τις φωτογραφίες."
       tooltip_map: "Μεταβείτε στους χάρτες της Google και αφού εντοπίσετε το εν λόγω ακίνητο, πατήστε 'Κοινοποίηση' και επιλέξτε την καρτέλα 'Ενσωμάτωση χάρτη'. Στην συνέχεια αντιγράψτε και επικολλήστε το url στο παραπάνω πεδίο."
     edit:
-      heading: "Επεξεργασία ακινήτου"
+      breadcrumb: "Ακίνητα"
+      heading: "Επεξεργασία"
       edit_button_alt: "Επεξεργασία"
       edit_button: "Ενημέρωση"
       allowed_pic_specs: "JPG, GIF ή PNG 400x400, < 2 MB."
@@ -526,9 +535,11 @@ el:
     destroyed:
       flash: "Το ακίνητο διαγράφηκε επιτυχώς"
     index:
+      breadcrumb: "Ακίνητα"
       heading: "Κατάλογος ακινήτων"
       new_button: "Προσθήκη ακινήτου"
     show:
+      breadcrumb: "Ακίνητα"
       catalog: "Κατάλογος"
       heading: "Πληροφορίες ακινήτου"
       properties: "Ακίνητα"

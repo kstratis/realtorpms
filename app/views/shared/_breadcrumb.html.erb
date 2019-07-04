@@ -6,9 +6,9 @@
           <li><a href="/"><i class="fas fa-home"> </i></a></li>
           <% path.each do |entry| %>
             <% if entry == path.last %>
-              <li class="active"><span><strong> <%= t entry[:title] %></strong></span></li>
+              <li class="active"><span><strong> <%= entry[:title] %></strong></span></li>
             <% else %>
-              <li><a href="<%= entry[:href] %>"><%= t entry[:title] %></a></li>
+              <li><a href="<%= entry[:href] %>"><%= entry[:title] %></a></li>
             <% end %>
           <% end %>
         </ul>

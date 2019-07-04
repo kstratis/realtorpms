@@ -1,6 +1,6 @@
 <% provide(:title, t('properties.edit.heading')) %>
 
-<%= render partial: 'shared/breadcrumb', locals: {path: [{:title => 'properties.edit.heading', :href => edit_property_path}, {title: @property.id, :href => ''}], icon: 'house-colored'} %>
+<%= render partial: 'shared/breadcrumb', locals: {path: [{:title => t('properties.edit.breadcrumb'), :href => properties_path}, {title: @property.id, :href => property_path(@property)},{title: t('properties.edit.heading'), :href => ''}], icon: 'house-colored'} %>
 
 <%= content_tag :div, class: "", id: "alerts", data: {
     i18n: {

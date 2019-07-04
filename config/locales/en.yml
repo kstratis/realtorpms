@@ -88,7 +88,10 @@ en:
           plot: "Land plot"
           plot_placeholder: "Garden size in sq meters"
       property:
+        info_title: "Info"
+        specs_title: "Details"
         extras_title: "Extras"
+        assignments_title: "Assignments"
         extras_not_found: "Not found"
         description: "Description"
         description_feedback_html: "Property description"
@@ -445,15 +448,18 @@ en:
       list: "List of current users"
     new:
       heading: "Add"
+      heading_alt: "New partner"
       profile: "Add partner"
       new_button: "Add"
       feedback: "Type your partner's email"
     show:
+      breadcrumb: "Partners"
       heading: "User info"
       users: "Users"
       assignments: "Assignments"
       processed: "Processed"
     edit:
+      breadcrumb: "Partners"
       edit_button: "Update"
       avatar: "Profile picture"
       heading: "Edit profile"
@@ -465,6 +471,7 @@ en:
       allowed_pic_specs: "JPG, GIF or PNG 400x400, < 2 MB."
       delete_avatar: "Are you sure you want to delete your avatar picture?"
     index:
+      breadcrumb: "Partners"
       heading: "Partner list"
     flash_user_not_found: "User was not found"
   properties:
@@ -482,7 +489,9 @@ en:
     map: "Map"
     import: "Import properties"
     new:
+      breadcrumb: "Properties"
       heading: "Add new property"
+      heading_alt: "New property"
       add_button: "Add property"
       set_cover: "Cover"
       photo_header: "Cover photo"
@@ -490,6 +499,7 @@ en:
       tooltip_avatar: "The cover picture is a unique image used to identify each property. Should you choose one, mind that you don't need to reupload it in the photos section below."
       tooltip_map: "Navigate to Google maps and locate the property of your choosing. Click on 'Share' and select the 'Embed a map tab'. Copy and paste the given url the map field above."
     edit:
+      breadcrumb: "Properties"
       heading: "Edit property"
       edit_button_alt: "Edit"
       edit_button: "Update"
@@ -523,9 +533,11 @@ en:
     destroyed:
       flash: "Property successfully removed"
     index:
+      breadcrumb: "Properties"
       heading: "Properties"
       new_button: "Add new property"
     show:
+      breadcrumb: "Properties"
       catalog: "Catalog"
       heading: "Property info"
       properties: "Properties"

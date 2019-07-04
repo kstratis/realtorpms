@@ -314,6 +314,7 @@ function withDatatable(WrappedComponent) {
             i18n={this.props.i18n}
             meta={this.props.meta}
             add_user_link={this.props.initial_payload.add_user_link}
+            add_property_link={this.props.initial_payload.add_property_link}
             {...this.state}
           />
         </div>

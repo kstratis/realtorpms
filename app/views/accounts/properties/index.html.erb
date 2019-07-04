@@ -1,6 +1,6 @@
 <% provide(:title, t('properties.title')) %>
 
-<%= render partial: 'shared/breadcrumb', locals: {path: [{:title => 'properties.index.heading', :href => properties_path}], icon: 'house-colored'} %>
+<%= render partial: 'shared/breadcrumb', locals: {path: [{:title => t('properties.index.breadcrumb'), :href => properties_path}], icon: 'house-colored'} %>
 
 
 <div class="page-container">
@@ -21,6 +21,7 @@
               initial_search: @initial_search,
               initial_sorting: @initial_sorting,
               initial_ordering: @initial_ordering,
+              add_property_link: new_property_path,
               object_type: 'properties'
           },
           i18n: {
@@ -28,6 +29,7 @@
               search: t('js.properties_search.placeholder'),
               view: t('js.properties_view_btn'),
               edit: t('js.properties_edit_btn'),
+              add_new: t('properties.new.add_button'),
               filters: {
                   sortByDate: {
                       title: t('js.datatables.filters.date.title'),

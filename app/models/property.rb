@@ -20,7 +20,9 @@ class Property < ApplicationRecord
   has_and_belongs_to_many :extras
 
   # https://stackoverflow.com/a/38845388/178728
-  has_many :users, -> {distinct}, through: :assignments, dependent: :destroy
+  # https://stackoverflow.com/a/14231213/178728
+  # This basically sorts assignments by assignment updated at column so that each change is reflected last on the list
+  has_many :users, -> {order('assignments.updated_at').select('users.*, assignments.updated_at as assignment_updated_at').distinct}, through: :assignments, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
   # Collection of properties which have been favorited by a particular user

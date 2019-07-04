@@ -30,6 +30,7 @@ const PropertiesList = ({
   ordering,
   searchInput,
   handleSearchInput,
+  add_property_link,
   i18n
 }) => {
   return (
@@ -39,6 +40,7 @@ const PropertiesList = ({
         <div className={'row'}>
 
           <Search handleSearchInput={handleSearchInput} searchInput={searchInput} placeholder={i18n['search']} />
+
           {/* Generate the needed filters according to the i18n keys of the erb template */}
           <SortFilter
             handleFn={handleSort}
@@ -63,13 +65,9 @@ const PropertiesList = ({
               }
             ]}
           />
+          <a href={add_property_link} className={'btn btn-primary'}><i className="fas fa-plus-circle fa-fw"></i>&nbsp;{i18n['add_new']}</a>
 
-          {/*<ControlsContainer*/}
-          {/*i18n={i18n}*/}
-          {/*filters={Object.keys(i18n.filters).map((filter)=> {*/}
-          {/*return {'name': i18n.filters[filter].title, 'fn': handleSort, 'i18n': i18n.filters[filter] }*/}
-          {/*})}*/}
-          {/*/>*/}
+
         </div>
       </div>
 
