@@ -5,9 +5,6 @@ class Property < ApplicationRecord
   attr_searchable %w(title description notes adxe adspitogatos owner.last_name owner.telephones)
 
   before_validation :handle_dependent_fields, on: :update
-  before_validation(on: :create) do
-    self.map_url = number.gsub(/[^0-9]/, "") if attribute_present?("map_url")
-  end
   # belongs_to :user
   belongs_to :account
   belongs_to :location, optional: true

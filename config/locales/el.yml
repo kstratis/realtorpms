@@ -359,6 +359,7 @@ el:
       error: "Σφάλμα"
       retry: "Προσπαθήστε ξανά"
     validator:
+      regex: "Επιτρέπονται μόνο τα iFrame tags. π.χ. &lt;iframe src=&quot;...&quot;&gt;&lt;/iframe&gt;"
       required: "Το πεδίο είναι υποχρεωτικό"
       digits: "Παρακαλώ εισάγετε μόνο αριθμητικά ψηφία"
       email: "Παρακαλώ εισάγετε μία έγκυρη διεύθυνση email"

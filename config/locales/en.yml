@@ -356,6 +356,7 @@ en:
       error: "Error"
       retry: "Please try again"
     validator:
+      regex: "Only iFrame tags are allowed. i.e. &lt;iframe src=&quot;...&quot;&gt;&lt;/iframe&gt;"
       required: "The field is required"
       digits: "The field requires digits only"
       email: "Please enter a valid email address"
