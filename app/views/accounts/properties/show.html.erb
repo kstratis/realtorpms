@@ -16,7 +16,7 @@
       <div class="card-body">
 
         <div class="row">
-          <div class="col-lg-6 col-md-12 my-auto">
+          <div class="col-lg-7 col-md-12 my-auto">
             <% if @property.images.blank? %>
               <div class="d-flex flex-wrap justify-content-center">
                 <%= content_tag :i, "", class: "pr-icon lg house-avatar-placeholder" %>
@@ -24,7 +24,8 @@
 
             <% else %>
               <div class="thumbnails-ribbon d-flex flex-wrap justify-content-center">
-                <div class="fotorama" data-nav="thumbs" data-maxheight="300" data-allowfullscreen="true">
+                <div class="fotorama" data-nav="thumbs" data-maxheight="500" data-allowfullscreen="true">
+<!--                <div class="fotorama" data-nav="thumbs" data-width="900" data-height="300" data-allowfullscreen="true">-->
                   <% @property.all_images.each do |image| %>
                     <%#= image_tag image.variant(resize: "736x500") %>
                     <%= image_tag image %>
@@ -34,7 +35,7 @@
             <% end %>
           </div>
 
-          <div class="col-lg-6 col-md-12">
+          <div class="col-lg-5 col-md-12">
 
 
             <div class="card">
