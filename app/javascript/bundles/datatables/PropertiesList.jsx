@@ -30,7 +30,6 @@ const PropertiesList = ({
   ordering,
   searchInput,
   handleSearchInput,
-  add_property_link,
   i18n
 }) => {
   return (
@@ -65,9 +64,6 @@ const PropertiesList = ({
               }
             ]}
           />
-          <a href={add_property_link} className={'btn btn-primary'}><i className="fas fa-plus-circle fa-fw"></i>&nbsp;{i18n['add_new']}</a>
-
-
         </div>
       </div>
 

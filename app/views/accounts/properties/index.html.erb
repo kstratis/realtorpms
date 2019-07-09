@@ -1,17 +1,16 @@
 <% provide(:title, t('properties.title')) %>
 
-<%= render partial: 'layouts/breadcrumb', locals: {path: [{:title => t('properties.index.breadcrumb'), :href => properties_path}], icon: 'house-colored'} %>
-
+<%= render layout: 'layouts/breadcrumb', locals: {path: [{:title => t('properties.index.breadcrumb'), :href => properties_path}], icon: 'house-colored'} do %>
+  <div class="action-btns">
+    <%= link_to new_property_path, class: 'btn btn-primary btn-sm' do %>
+      <i class="fas fa-plus-circle fa-fw"></i>&nbsp;<%= t('properties.new.add_button') %>
+    <% end %>
+  </div>
+<% end %>
 
 <div class="page-container">
   <div class="container">
     <div class="app-container">
-
-
-      <!--    <div class="col-sm-12">-->
-
-      <!--        <h3><%#= t 'properties.index.heading' %></h3>-->
-
       <%= react_component('PropertiesListWithDatatable', props: {
           initial_payload: {
               dataset_wrapper: @propertieslist,
@@ -21,7 +20,6 @@
               initial_search: @initial_search,
               initial_sorting: @initial_sorting,
               initial_ordering: @initial_ordering,
-              add_property_link: new_property_path,
               object_type: 'properties'
           },
           i18n: {
@@ -29,7 +27,6 @@
               search: t('js.properties_search.placeholder'),
               view: t('js.properties_view_btn'),
               edit: t('js.properties_edit_btn'),
-              add_new: t('properties.new.add_button'),
               filters: {
                   sortByDate: {
                       title: t('js.datatables.filters.date.title'),
@@ -50,46 +47,7 @@
               favourites_tooltip: t('js.properties_favourites_tooltip')
           }
       }, prerender: false) %>
-
-
-      <!--<table>-->
-      <!--<thead>-->
-      <!--<tr>-->
-      <!--<th>Description</th>-->
-      <!--<th>Price</th>-->
-      <!--<th>Size</th>-->
-
-      <!--<th>User</th>-->
-      <!--<th colspan="3"></th>-->
-      <!--</tr>-->
-      <!--</thead>-->
-
-      <!--<tbody>-->
-      <%# @properties.each do |property| %>
-      <!--          <tr>-->
-      <!--            <td><%##= property.description %></td>-->
-      <!--            <td><%##= property.price %></td>-->
-      <!--            <td><%##= property.size %></td>-->
-      <!--            <td><%##= property.user_id %></td>-->
-      <%# if owner? %>
-      <td><%#= link_to 'Show', property %></td> <%# end %>
-      <%# if owner? %>
-      <td><%#= link_to 'Edit', edit_property_path(property) %></td> <%# end %>
-      <%# if owner? %>
-      <td><%#= link_to 'Destroy', property, method: :delete, data: { confirm: 'Are you sure?' } %></td> <%# end %>
-      <!--          </tr>-->
-      <%# end %>
-      <!--</tbody>-->
-      <!--</table>-->
     </div>
-    <br>
-
-    <% if owner? %>
-      <%= link_to t('properties.index.new_button'), new_property_path %>
-    <% end %>
-
-    <!--    </div>-->
-    <div id="properties_index"></div>
   </div>
 </div>
 

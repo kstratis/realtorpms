@@ -23,7 +23,6 @@ const UsersList = ({
   handleSearchInput,
   handleFreezeUser,
   searchInput,
-  add_user_link
 }) => {
   return (
     <div className="user-list">
@@ -33,7 +32,6 @@ const UsersList = ({
           <Search handleSearchInput={handleSearchInput} searchInput={searchInput} placeholder={i18n['search']} />
           <div className="col col-md-6 ">
             <div className={'d-flex flex-row justify-content-end'}>
-              <a href={add_user_link} className={'btn btn-primary'}><span className={'no-wrap'}><i className="fas fa-plus-circle fa-fw"></i>&nbsp;{i18n['add']}</span></a>
               <div className={'d-none d-lg-block pl-2'}>
                 <div className="search-count-container ">
                     <strong className={'count'}>{count}</strong> <span>{i18n['result_count']}</span>

@@ -1,25 +1,17 @@
 <% provide(:title, t('users.title')) %>
 
 <!-- Notice the use of render partial -->
-<%= render partial: 'layouts/breadcrumb', locals: {path: [{:title => t('users.index.breadcrumb'), :href => users_path}], icon: 'house-colored'} %>
+<%= render layout: 'layouts/breadcrumb', locals: {path: [{:title => t('users.index.breadcrumb'), :href => users_path}], icon: 'house-colored'} do %>
+  <div class="action-btns">
+    <%= link_to new_invitation_path, class: 'btn btn-primary btn-sm' do %>
+      <i class="fas fa-plus-circle fa-fw"></i>&nbsp;<%= t('invitations.new.heading') %>
+    <% end %>
+  </div>
+<% end %>
 
 <div class="page-container">
   <div class="container">
     <div class="app-container">
-
-<!--      <div class="btn-group pull-right" role="group" aria-label="...">-->
-
-          <%#= link_to new_invitation_path, :class => 'btn btn-primary btn-sm invite-user', :id => 'invite-user-button' do %>
-          <%# end %>
-
-
-
-          <%#= link_to new_invitation_path, :class => 'btn btn-primary btn-sm add-user', :id => 'add-user-button' do %>
-
-          <%# end %>
-
-<!--      </div>-->
-
       <%# Here we call render not on a string with the name of a partial, but rather on a user variable of class User;
           in this context, Rails automatically looks for a partial called _user.html.erb, which we must create.
           This is a definite improvement, but we can do even better: we can call render directly on the @users variable
@@ -27,26 +19,6 @@
           Rails automatically iterates through them and renders each one with the _user.html.erb partial
           (inferring the name of the partial from the name of the class). %>
       <%#= render @users %>
-
-      <!--<div class="clearfix"></div>-->
-      <%#= will_paginate %>
-<!--    </div>-->
-<!--  </div>-->
-<!--  <div class="row">-->
-<!--    <div class="col-md-12">-->
-      <!--<div class="col-md-6 col-md-offset-3">-->
-        <%#= react_component('Search', prerender: false) %>
-      <!--</div>-->
-
-      <%# Here we call render not on a string with the name of a partial, but rather on a user variable of class User;
-          in this context, Rails automatically looks for a partial called _user.html.erb, which we must create.
-          This is a definite improvement, but we can do even better: we can call render directly on the @users variable
-          Here Rails infers that @users is a list of User objects; moreover, when called with a collection of users,
-          Rails automatically iterates through them and renders each one with the _user.html.erb partial
-          (inferring the name of the partial from the name of the class). %>
-      <%#= render @users %>
-      <!--<div class="col-md-12">-->
-        <%#= react_component('UsersList', props: @userslist, prerender: false) %>
         <%= react_component('UsersListWithDatatable', props: {
             initial_payload: {
                 dataset_wrapper: @userslist,
@@ -56,7 +28,6 @@
                 initial_search: @initial_search,
                 initial_sorting: @initial_sorting,
                 initial_ordering: @initial_ordering,
-                add_user_link: new_invitation_path,
                 object_type: 'users'
             },
             i18n: {
@@ -64,17 +35,12 @@
                 result_count: t('js.datatables.pagination.results'),
                 no_results: t('js.datatables.users.no_results'),
                 search: t('js.users_search.placeholder'),
-                add: t('invitations.new.heading')
-
             },
             meta: {
                 freeze_link:  toggle_activation_user_url('USERID')
             }
           }, prerender: false) %>
-      <!--</div>-->
-
       <div class="clearfix"></div>
-      <%#= will_paginate %>
     </div>
   </div>
 </div>

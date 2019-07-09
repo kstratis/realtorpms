@@ -1,6 +1,6 @@
 <% provide(:title, t('users.new.heading')) %>
 
-<%= render partial: 'shared/breadcrumb', locals: {path: [{:title => t('users.index.breadcrumb'), :href => users_path}, {:title => t('users.new.heading_alt'), :href => ''}], icon: 'house-colored'} %>
+<%= render partial: 'layouts/breadcrumb', locals: {path: [{:title => t('users.index.breadcrumb'), :href => users_path}, {:title => t('users.new.heading_alt'), :href => ''}], icon: 'house-colored'} %>
 
 <div class="page-container">
   <div class="container">
