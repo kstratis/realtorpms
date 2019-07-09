@@ -22,6 +22,9 @@ gem 'rake', '~> 12.3.2'
 # image metadata info
 gem 'exifr', '~> 1.3', '>= 1.3.5'
 
+# PDF generation tool
+gem 'grover'
+
 # image manipulation tool
 gem "mini_magick"
 

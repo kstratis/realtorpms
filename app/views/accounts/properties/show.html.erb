@@ -6,7 +6,6 @@
     {title: @property.title || @property.id, :href => ''}], icon: 'house-colored'} do %>
   <div class="action-btns">
     <div class="btn-group btn-group-toggle">
-      <!--    <div class="col-auto p-2">-->
 
       <div class="reactstrap-modal-button">
         <%= react_component('ModalContainer', props: {
@@ -36,25 +35,18 @@
             }
         }, prerender: false) %>
       </div>
-      <!--    </div>-->
 
-      <!--    <div class="col-auto p-2 ">-->
       <%= link_to edit_property_path(@property), class: 'btn btn-secondary btn-sm editable' do %>
         <i class="fas fa-pen fa-fw"></i>&nbsp;<%= t 'properties.edit.edit_button_alt' %>
       <% end %>
-      <!--    </div>-->
 
-      <!--    <div class="col-auto p-2 ">-->
       <button type="button" class="btn btn-secondary btn-sm printable" data-url="<%= @property.map_href %>" <%= @property.map_href.blank? ? 'disabled' : nil %>>
         <i class="fas fa-map fa-fw"></i>&nbsp;<%= t 'properties.map' %>
       </button>
-      <!--    </div>-->
 
-      <!--    <div class="col-auto p-2 ">-->
       <button type="button" class="btn btn-secondary btn-sm printable" data-url="<%= property_url(@property.id) + '?print=true' %>">
         <i class="fas fa-print fa-fw"></i>&nbsp;<%= t 'properties.print' %>
       </button>
-      <!--    </div>-->
     </div>
   </div>
 <% end %>

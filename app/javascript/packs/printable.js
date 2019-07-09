@@ -19,7 +19,7 @@ $(document).on('turbolinks:load', function(e) {
   if ($printable.length < 1) return;
   $printable.on('click', function (event) {
     event.preventDefault();
-    popupWindow($(this).data('url'), null, "900", "500");
+    popupWindow($(this).data('url'), null, "900", "600");
   });
 });
 

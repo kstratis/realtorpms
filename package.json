@@ -16,6 +16,7 @@
     "open-iconic": "^1.1.1",
     "particles.js": "^2.0.0",
     "prop-types": "^15.7.2",
+    "puppeteer": "^1.18.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-graceful-image": "^1.2.9",

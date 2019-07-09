@@ -68,7 +68,15 @@ module Accounts
       filter_users
       respond_to do |format|
         if params['print']
-          format.html {render 'accounts/properties/printable', layout: 'printer/printable'}
+          html = render_to_string({template: 'accounts/properties/printable', layout: 'printer/printable'})
+          pdf = Grover.new(html).to_pdf
+          # Demo
+          # pdf = Grover.new('https://en.wikipedia.org/wiki/Greece').to_pdf
+          format.html do
+            send_data pdf, type: "application/pdf", disposition: "inline"
+          end
+          # Used to be:
+          # format.html {render 'accounts/properties/printable', layout: 'printer/printable'}
         else
           format.html
           format.json

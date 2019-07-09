@@ -38,7 +38,6 @@ Rails.application.routes.draw do
       post 'favorites', to: 'favlists#create_favorite'
       delete 'favorites', to: 'favlists#destroy_favorite'
 
-
       resources :properties do
         # resources :build, controller: 'property_steps'
         resource :favorites, only: [:create, :destroy]
