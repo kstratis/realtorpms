@@ -1,9 +1,63 @@
 <% provide(:title, t('properties.show.heading')) %>
 
-<%= render partial: 'shared/breadcrumb', locals: {path: [
+<!-- Notice the use of render layout. We need layout instead of partial so that we can pass a block -->
+<%= render layout: 'layouts/breadcrumb', locals: {path: [
     {:title => t('properties.index.breadcrumb'), :href => properties_path},
-    {title: @property.title || @property.id, :href => ''}], icon: 'house-colored'} %>
+    {title: @property.title || @property.id, :href => ''}], icon: 'house-colored'} do %>
+  <div class="action-btns">
+    <div class="btn-group btn-group-toggle">
+      <!--    <div class="col-auto p-2">-->
 
+      <div class="reactstrap-modal-button">
+        <%= react_component('ModalContainer', props: {
+            id: 'modal-window',
+            fireButtonLabel: '<i class="fas fa-heart fa-fw"></i>&nbsp;' + t('properties.favourites'),
+            avatar: @property.avatar.attached? ? url_for(@property.avatar) : nil,
+            favorites_url: favorites_url,
+            favlists_url: favlists_url,
+            property_id: @property.id,
+            modalTitle: t('properties.fav_lists'),
+            modalHeader: heading,
+            buttonOKLabel: t('properties.ok_button'),
+            buttonCancelLabel: t('properties.cancel_button'),
+            buttonCloseLabel: t('properties.close_button'),
+            soloMode: true,
+            ajaxEnabled: false,
+            isClearable: true,
+            backspaceRemovesValue: true,
+            isSearchable: false,
+            feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
+            i18n: {
+                no_lists_available: t('js.components.modal.favlists.no_results'),
+                property_cover_alt: t('js.components.modal.favlists.property_cover_alt'),
+                add_list_action: t('js.components.modal.favlists.add_list_action'),
+                loading_alt: t('js.components.modal.favlists.loading_alt'),
+                listname_placeholder: t('js.components.modal.favlists.listname_placeholder')
+            }
+        }, prerender: false) %>
+      </div>
+      <!--    </div>-->
+
+      <!--    <div class="col-auto p-2 ">-->
+      <%= link_to edit_property_path(@property), class: 'btn btn-secondary btn-sm editable' do %>
+        <i class="fas fa-pen fa-fw"></i>&nbsp;<%= t 'properties.edit.edit_button_alt' %>
+      <% end %>
+      <!--    </div>-->
+
+      <!--    <div class="col-auto p-2 ">-->
+      <button type="button" class="btn btn-secondary btn-sm printable" data-url="<%= @property.map_href %>" <%= @property.map_href.blank? ? 'disabled' : nil %>>
+        <i class="fas fa-map fa-fw"></i>&nbsp;<%= t 'properties.map' %>
+      </button>
+      <!--    </div>-->
+
+      <!--    <div class="col-auto p-2 ">-->
+      <button type="button" class="btn btn-secondary btn-sm printable" data-url="<%= property_url(@property.id) + '?print=true' %>">
+        <i class="fas fa-print fa-fw"></i>&nbsp;<%= t 'properties.print' %>
+      </button>
+      <!--    </div>-->
+    </div>
+  </div>
+<% end %>
 
 <div class="page-container">
   <div class="container">
@@ -25,7 +79,7 @@
             <% else %>
               <div class="thumbnails-ribbon d-flex flex-wrap justify-content-center">
                 <div class="fotorama" data-nav="thumbs" data-maxheight="500" data-allowfullscreen="true">
-<!--                <div class="fotorama" data-nav="thumbs" data-width="900" data-height="300" data-allowfullscreen="true">-->
+                  <!--                <div class="fotorama" data-nav="thumbs" data-width="900" data-height="300" data-allowfullscreen="true">-->
                   <% @property.all_images.each do |image| %>
                     <%#= image_tag image.variant(resize: "736x500") %>
                     <%= image_tag image %>
@@ -99,70 +153,14 @@
             </div><!-- /.card -->
 
 
-
-
-
-
           </div>
         </div>
 
         <hr/>
 
-        <div class="row justify-content-center align-items-center">
-          <div class="col-auto p-2">
+        <% content_for :action_buttons do %>
 
-            <div class="reactstrap-modal-button">
-              <%= react_component('ModalContainer', props: {
-                  id: 'modal-window',
-                  fireButtonLabel: '<i class="fas fa-heart fa-fw"></i>&nbsp;' + t('properties.favourites'),
-                  avatar: @property.avatar.attached? ? url_for(@property.avatar) : nil,
-                  favorites_url: favorites_url,
-                  favlists_url: favlists_url,
-                  property_id: @property.id,
-                  modalTitle: t('properties.fav_lists'),
-                  modalHeader: heading,
-                  buttonOKLabel: t('properties.ok_button'),
-                  buttonCancelLabel: t('properties.cancel_button'),
-                  buttonCloseLabel: t('properties.close_button'),
-                  soloMode: true,
-                  ajaxEnabled: false,
-                  isClearable: true,
-                  backspaceRemovesValue: true,
-                  isSearchable: false,
-                  feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
-                  i18n: {
-                      no_lists_available: t('js.components.modal.favlists.no_results'),
-                      property_cover_alt: t('js.components.modal.favlists.property_cover_alt'),
-                      add_list_action: t('js.components.modal.favlists.add_list_action'),
-                      loading_alt: t('js.components.modal.favlists.loading_alt'),
-                      listname_placeholder: t('js.components.modal.favlists.listname_placeholder')
-                  }
-              }, prerender: false) %>
-            </div>
-          </div>
-
-          <div class="col-auto p-2 ">
-            <%= link_to edit_property_path(@property), class: 'btn btn-secondary editable' do %>
-              <i class="fas fa-pen fa-fw"></i>&nbsp;<%= t 'properties.edit.edit_button_alt' %>
-            <% end %>
-          </div>
-
-          <div class="col-auto p-2 ">
-            <button type="button" class="btn btn-secondary printable" data-url="<%= @property.map_href %>" <%= @property.map_href.blank? ? 'disabled' : nil %>>
-              <i class="fas fa-map fa-fw"></i>&nbsp;<%= t 'properties.map' %>
-            </button>
-          </div>
-
-          <div class="col-auto p-2 ">
-            <button type="button" class="btn btn-secondary printable" data-url="<%= property_url(@property.id) + '?print=true' %>">
-              <i class="fas fa-print fa-fw"></i>&nbsp;<%= t 'properties.print' %>
-            </button>
-          </div>
-
-
-        </div>
-
-        <hr/>
+        <% end %>
 
         <div class="row">
           <div class="col-lg-6 col-xs-12">
@@ -182,9 +180,6 @@
                   <%= render partial: 'accounts/properties/specs' %>
                 </div><!-- /.card-body -->
               </div><!-- /.card -->
-
-
-
 
 
             </div>
@@ -214,24 +209,24 @@
 
 
             <div class="col-12">
-            <div class="card">
+              <div class="card">
 
-              <div class="card-header">
-                <div class="table-entry">
-                  <div class="table-icon-wrapper">
-                    <i class="pr-icon xs list"></i>
+                <div class="card-header">
+                  <div class="table-entry">
+                    <div class="table-icon-wrapper">
+                      <i class="pr-icon xs list"></i>
+                    </div>
+                    <span class="align-middle">&nbsp; <%= t 'activerecord.attributes.property.extras_title' %></span>
                   </div>
-                  <span class="align-middle">&nbsp; <%= t 'activerecord.attributes.property.extras_title' %></span>
-                </div>
-              </div><!-- .card-body -->
-              <div class="card-body">
-                <% if @property.extras.blank? %>
-                  <h3><%= t('activerecord.attributes.property.extras_not_found') %></h3>
-                <% else %>
-                  <%= render partial: 'accounts/properties/extras' %>
-                <% end %>
-              </div><!-- /.card-body -->
-            </div><!-- /.card -->
+                </div><!-- .card-body -->
+                <div class="card-body">
+                  <% if @property.extras.blank? %>
+                    <h3><%= t('activerecord.attributes.property.extras_not_found') %></h3>
+                  <% else %>
+                    <%= render partial: 'accounts/properties/extras' %>
+                  <% end %>
+                </div><!-- /.card-body -->
+              </div><!-- /.card -->
             </div>
             <div class="col-12">
               <div class="card">

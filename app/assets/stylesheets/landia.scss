@@ -967,6 +967,7 @@ li.page-item{
 }
 
 .action-btns{
+  padding: 10px 25px 0 0;
   white-space: nowrap;
 }
 
@@ -1021,6 +1022,10 @@ li.page-item{
 
 .reactstrap-modal-button{
   display: inline-block;
+  button{
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
 }
 
 .user-avatar.property-avatar{

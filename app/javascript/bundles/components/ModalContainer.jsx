@@ -17,8 +17,8 @@ class ModalContainer extends React.Component {
   }
   render() {
     return (
-      <div className={''}>
-        <Button color="secondary" onClick={this.toggle}>
+      <>
+        <Button className={'btn-sm'} color="secondary" onClick={this.toggle}>
           <div dangerouslySetInnerHTML={{ __html: this.props.fireButtonLabel }} />
         </Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} scrollable={true}>
@@ -32,7 +32,7 @@ class ModalContainer extends React.Component {
             </Button>
           </ModalFooter>
         </Modal>
-      </div>
+      </>
     );
   }
 }

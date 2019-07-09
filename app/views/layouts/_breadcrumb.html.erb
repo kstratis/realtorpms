@@ -2,8 +2,7 @@
   <div class="bd-highlight ">
     <div class="breadcrumb-container">
       <div class="breadcrumb-wrapper">
-        <ul class="breadcrumb-custom align-items-center">
-<!--          <li><a href="/"><i class="fas fa-home"> </i></a></li>-->
+        <ul class="breadcrumb-custom ">
           <li><a href="/"><i id="breadcrumb-home" class="pr-icon xxs dashboard_alt"></i></a></li>
           <% path.each do |entry| %>
             <% if entry == path.last %>
@@ -12,6 +11,9 @@
               <li><a href="<%= entry[:href] %>"><%= entry[:title] %></a></li>
             <% end %>
           <% end %>
+          <div class="d-flex flex-row justify-content-end">
+          <%= yield if block_given? %>
+          </div>
         </ul>
       </div>
     </div>
