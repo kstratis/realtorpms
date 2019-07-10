@@ -6,7 +6,7 @@
   <div class="row justify-content-center">
 
     <% if @property.images.attached? ||  @property.avatar.attached? %>
-      <% @property.all_images[0..2].each do |image| %>
+      <% @property.all_images[0..3].each do |image| %>
         <%#= image_tag image.variant(resize: "736x500") %>
         <div class="print-img">
           <%= image_tag image.variant(resize: "500x200") %>

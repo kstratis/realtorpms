@@ -1,6 +1,6 @@
 Grover.configure do |config|
   config.options = {
-      display_url: 'http://shakalaka.lvh.me:3000/',
+      # display_url: 'http://shakalaka.lvh.me:3000/',
       format: 'A4',
       margin: {
         top: '5px',

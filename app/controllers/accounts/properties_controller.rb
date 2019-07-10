@@ -69,7 +69,8 @@ module Accounts
       respond_to do |format|
         if params['print']
           html = render_to_string({template: 'accounts/properties/printable', layout: 'printer/printable'})
-          pdf = Grover.new(html).to_pdf
+          pdf = Grover.new(html, display_url: root_url).to_pdf
+          # pdf = Grover.new(html).to_pdf
           # Demo
           # pdf = Grover.new('https://en.wikipedia.org/wiki/Greece').to_pdf
           format.html do
