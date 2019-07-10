@@ -2,9 +2,76 @@
 
 
 <div class="print">
-  <h1>Tony Stark</h1>
-  <h1><%= t 'properties.map' %></h1>
-  <h1>Χάρτης</h1>
-  <h1>Διαχειριστής</h1>
+  <%= render partial: 'shared/card_header/header', locals: {title: heading, btn_text: t('properties.show.catalog'), btn_link: properties_path} %>
+  <div class="row justify-content-center">
+
+    <% if @property.images.attached? ||  @property.avatar.attached? %>
+      <% @property.all_images[0..2].each do |image| %>
+        <%#= image_tag image.variant(resize: "736x500") %>
+        <div class="print-img">
+          <%= image_tag image.variant(resize: "500x200") %>
+        </div>
+      <% end %>
+
+    <% else %>
+      <div class="no-pic-container">
+        <%= image_tag 'no_pic.png' %>
+      </div>
+
+    <% end %>
+
+  </div>
+<!--  <div><%#= image_tag @property.avatar.variant(resize: "300x150") %></div>-->
+<!--  <div class="table-responsive">-->
+<!--    <table class="table-striped">-->
+<!--      <tbody>-->
+      <%# Property::PROPERTY_ATTRIBUTES.each do |key, value| %>
+<!--        <tr>-->
+<!--          <td class="align-middle nowrap">-->
+<!--            <div class="table-entry">-->
+<!--              <div class="table-icon-wrapper">-->
+<!--                <i class="pr-icon xs <%#= value[:icon] %>"></i>-->
+<!--              </div>-->
+<!--              <span class="align-middle">&nbsp;&nbsp;<%#= t("activerecord.attributes.property.#{value[:label].to_s}_title") %></span>-->
+<!--            </div>-->
+<!--          </td>-->
+<!--          <td class="align-middle nowrap">-->
+<!--            <span><%#= render_attribute(@property, key, value[:options], value[:renderfn]) %></span></td>-->
+<!--        </tr>-->
+      <%# end %>
+<!--      </tbody>-->
+<!--    </table>-->
+<!--  </div>-->
+
   <%#= render partial: 'accounts/properties/specs' %>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr>
+    </tbody>
+  </table>
 </div>

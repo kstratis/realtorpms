@@ -100,42 +100,42 @@
                     <tbody>
                     <tr>
                       <td><%= t('activerecord.attributes.property.location') %></td>
-                      <td><strong><%= @property.location.localname %></strong></td>
+                      <td><span><%= @property.location.localname %></span></td>
                     </tr>
                     <tr>
                       <td><%= t('activerecord.attributes.property.price_title') %></td>
-                      <td><strong><%= @property.price ? number_to_currency(@property.price) : '—' %></strong></td>
+                      <td><span><%= @property.price ? number_to_currency(@property.price) : '—' %></span></td>
                     </tr>
                     <tr>
                       <td><%= t('activerecord.attributes.property.pricepersqmeter') %></td>
                       <td>
-                        <strong><%= @property.pricepersqmeter ? number_to_currency(@property.pricepersqmeter) : '—' %></strong>
+                        <span><%= @property.pricepersqmeter ? number_to_currency(@property.pricepersqmeter) : '—' %></span>
                       </td>
                     </tr>
                     <tr>
                       <td><%= t('activerecord.attributes.property.size_title') %></td>
                       <td>
-                        <strong><%= @property.size ? t('activerecord.attributes.property.size_meter_html', size: @property.size.to_s) : '—' %></strong>
+                        <span><%= @property.size ? t('activerecord.attributes.property.size_meter_html', size: @property.size.to_s) : '—' %></span>
                       </td>
                     </tr>
                     <tr>
                       <td><%= t('activerecord.attributes.property.businesstype_plain') %></td>
                       <td>
-                        <strong><%= t("activerecord.attributes.property.enums.subcategory.#{@property.subcategory.to_s}") %></strong>
+                        <span><%= t("activerecord.attributes.property.enums.subcategory.#{@property.subcategory.to_s}") %></span>
                       </td>
                     </tr>
                     <tr>
                       <td><%= t('activerecord.attributes.property.enums.businesstype.title') %></td>
                       <td>
                         <mark class="highlighted">
-                          <strong><%= t("activerecord.attributes.property.enums.businesstype.#{@property.businesstype.to_s}") %></strong>
+                          <span><%= t("activerecord.attributes.property.enums.businesstype.#{@property.businesstype.to_s}") %></span>
                         </mark>
                       </td>
                     </tr>
                     <tr>
                       <td><%= t('activerecord.attributes.user.phone1') %></td>
                       <td>
-                        <strong><%= @property.try(:owner).try(:telephones).blank? ? '—' : @property.owner.telephones.split(/[\s,]+/).collect(&:strip).join(', ') %></strong>
+                        <span><%= @property.try(:owner).try(:telephones).blank? ? '—' : @property.owner.telephones.split(/[\s,]+/).collect(&:strip).join(', ') %></span>
                       </td>
                     </tr>
                     </tbody>

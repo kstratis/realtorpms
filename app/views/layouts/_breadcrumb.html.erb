@@ -6,7 +6,7 @@
           <li><a href="/"><i id="breadcrumb-home" class="pr-icon xxs dashboard_alt"></i></a></li>
           <% path.each do |entry| %>
             <% if entry == path.last %>
-              <li class="active"><span><strong> <%= entry[:title] %></strong></span></li>
+              <li class="active"><span> <%= entry[:title] %></span></li>
             <% else %>
               <li><a href="<%= entry[:href] %>"><%= entry[:title] %></a></li>
             <% end %>
