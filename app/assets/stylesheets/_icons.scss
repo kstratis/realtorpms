@@ -149,7 +149,7 @@
   }
 
   &.client{
-    background-image: url( owners/male_client.svg);
+    background-image: url( owners/client.svg);
   }
 
   &.house-avatar-placeholder{
@@ -157,11 +157,11 @@
   }
 
   &.bedrooms{
-    background-image: url( house_specs/bed.svg);
+    background-image: url( house_specs/bedrooms.svg);
   }
 
   &.bathrooms{
-    background-image: url( house_specs/shower.svg);
+    background-image: url( house_specs/bathrooms.svg);
   }
 
   &.floor{
@@ -177,7 +177,7 @@
   }
 
   &.availability{
-    background-image: url( house_specs/calendar.svg);
+    background-image: url( house_specs/availability.svg);
   }
 
   &.address{

@@ -3,75 +3,117 @@
 
 <div class="print">
   <%= render partial: 'shared/card_header/header', locals: {title: heading, btn_text: t('properties.show.catalog'), btn_link: properties_path} %>
-  <div class="row justify-content-center">
+  <div class="row">
 
-    <% if @property.images.attached? ||  @property.avatar.attached? %>
-      <% @property.all_images[0..3].each do |image| %>
-        <%#= image_tag image.variant(resize: "736x500") %>
-        <div class="print-img">
-          <%= image_tag image.variant(resize: "500x200") %>
-        </div>
-      <% end %>
 
-    <% else %>
+    <%# if @property.images.attached? || @property.avatar.attached? %>
+    <% if pictures.blank? %>
       <div class="no-pic-container">
         <%= image_tag 'no_pic.png' %>
       </div>
+    <% else %>
+      <div class="col-5">
+        <% pictures.each do |image| %>
+
+          <%#= image_tag image.variant(resize: "736x500") %>
+
+          <div class="print-img ">
+            <%= image_tag image, class: 'img-responsive' %>
+
+            <!--            <img src="<%#= image) %>" alt="property photos" class="img-responsive"/>-->
+            <%#= image_tag image.variant(resize: "350x200"), class: 'img-responsive' %>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-7">
+        <table class="table ">
+
+          <tbody>
+          <tr>
+            <td><%= t('activerecord.attributes.property.location') %></td>
+            <td><span><%= @property.location.localname %></span></td>
+          </tr>
+          <tr>
+            <td><%= t('activerecord.attributes.property.price_title') %></td>
+            <td><span><%= @property.price ? number_to_currency(@property.price) : '—' %></span></td>
+          </tr>
+          <tr>
+            <td><%= t('activerecord.attributes.property.pricepersqmeter') %></td>
+            <td>
+              <span><%= @property.pricepersqmeter ? number_to_currency(@property.pricepersqmeter) : '—' %></span>
+            </td>
+          </tr>
+          <tr>
+            <td><%= t('activerecord.attributes.property.size_title') %></td>
+            <td>
+              <span><%= @property.size ? t('activerecord.attributes.property.size_meter_html', size: @property.size.to_s) : '—' %></span>
+            </td>
+          </tr>
+          <tr>
+            <td><%= t('activerecord.attributes.property.businesstype_plain') %></td>
+            <td>
+              <span><%= t("activerecord.attributes.property.enums.subcategory.#{@property.subcategory.to_s}") %></span>
+            </td>
+          </tr>
+          <tr>
+            <td><%= t('activerecord.attributes.property.enums.businesstype.title') %></td>
+            <td>
+              <mark class="highlighted">
+                <span><%= t("activerecord.attributes.property.enums.businesstype.#{@property.businesstype.to_s}") %></span>
+              </mark>
+            </td>
+          </tr>
+          <% Property::PROPERTY_ATTRIBUTES.except(:address, :render_owner).each do |key, value| %>
+            <tr>
+              <td class="align-middle nowrap">
+                <div class="table-entry">
+                  <div class="table-icon-wrapper">
+                    <%= image_tag "house_specs/#{value[:icon]}.svg", style: "width:20px" %>
+                  </div>
+                  <span class="align-middle">&nbsp;&nbsp;<%= t("activerecord.attributes.property.#{value[:label].to_s}_title") %></span>
+                </div>
+              </td>
+              <td class="align-middle nowrap">
+                <span><%= render_attribute(@property, key, value[:options], value[:renderfn]) %></span></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+
 
     <% end %>
 
   </div>
-<!--  <div><%#= image_tag @property.avatar.variant(resize: "300x150") %></div>-->
-<!--  <div class="table-responsive">-->
-<!--    <table class="table-striped">-->
-<!--      <tbody>-->
-      <%# Property::PROPERTY_ATTRIBUTES.each do |key, value| %>
-<!--        <tr>-->
-<!--          <td class="align-middle nowrap">-->
-<!--            <div class="table-entry">-->
-<!--              <div class="table-icon-wrapper">-->
-<!--                <i class="pr-icon xs <%#= value[:icon] %>"></i>-->
-<!--              </div>-->
-<!--              <span class="align-middle">&nbsp;&nbsp;<%#= t("activerecord.attributes.property.#{value[:label].to_s}_title") %></span>-->
-<!--            </div>-->
-<!--          </td>-->
-<!--          <td class="align-middle nowrap">-->
-<!--            <span><%#= render_attribute(@property, key, value[:options], value[:renderfn]) %></span></td>-->
-<!--        </tr>-->
-      <%# end %>
-<!--      </tbody>-->
-<!--    </table>-->
-<!--  </div>-->
+  <div class="row mt-3">
+    <div class="col-12">
+      <div class="footer text-right">
+        <span>Powered by Landia</span>
+      </div>
+    </div>
+  </div>
+  <!--  <div><%#= image_tag @property.avatar.variant(resize: "300x150") %></div>-->
+  <!--  <div class="table-responsive">-->
+  <!--    <table class="table-striped">-->
+  <!--      <tbody>-->
+  <%# Property::PROPERTY_ATTRIBUTES.each do |key, value| %>
+  <!--        <tr>-->
+  <!--          <td class="align-middle nowrap">-->
+  <!--            <div class="table-entry">-->
+  <!--              <div class="table-icon-wrapper">-->
+  <!--                <i class="pr-icon xs <%#= value[:icon] %>"></i>-->
+  <!--              </div>-->
+  <!--              <span class="align-middle">&nbsp;&nbsp;<%#= t("activerecord.attributes.property.#{value[:label].to_s}_title") %></span>-->
+  <!--            </div>-->
+  <!--          </td>-->
+  <!--          <td class="align-middle nowrap">-->
+  <!--            <span><%#= render_attribute(@property, key, value[:options], value[:renderfn]) %></span></td>-->
+  <!--        </tr>-->
+  <%# end %>
+  <!--      </tbody>-->
+  <!--    </table>-->
+  <!--  </div>-->
 
   <%#= render partial: 'accounts/properties/specs' %>
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
-    </tbody>
-  </table>
+
 </div>

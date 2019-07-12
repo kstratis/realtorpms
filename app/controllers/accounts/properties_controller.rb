@@ -68,7 +68,14 @@ module Accounts
       filter_users
       respond_to do |format|
         if params['print']
-          html = render_to_string({template: 'accounts/properties/printable', layout: 'printer/printable'})
+          pictures = []
+          if @property.images.attached? || @property.avatar.attached?
+             @property.all_images[0..3].each do |image|
+               pictures << image.variant(resize: '400x250').processed.service_url
+             end
+          end
+          # @property.all_images[0..3]
+          html = render_to_string({template: 'accounts/properties/printable', layout: 'printer/printable', locals: { pictures: pictures}})
           pdf = Grover.new(html, display_url: root_url).to_pdf
           # pdf = Grover.new(html).to_pdf
           # Demo

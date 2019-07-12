@@ -4,7 +4,9 @@ Grover.configure do |config|
       format: 'A4',
       margin: {
         top: '5px',
-        bottom: '10cm'
+        bottom: '5px',
+        left: '5px',
+        right: '5px'
       },
       prefer_css_page_size: true,
       emulate_media: 'screen',

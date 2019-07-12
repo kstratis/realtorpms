@@ -75,7 +75,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {:address => 'localhost', :port => 1025 }
 
-  config.active_storage.service = :local
+  config.active_storage.service = :amazon
 
 
 end
