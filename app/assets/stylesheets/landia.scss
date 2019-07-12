@@ -1,3 +1,9 @@
+%table-first-row-no-border {
+  tbody > tr:first-child > td {
+    border: none;
+  }
+}
+
 body {
   //background-color: #f8faff;
   line-height: 1.5em;
@@ -1066,11 +1072,8 @@ li.page-item {
 }
 
 .specs-table {
+  @extend %table-first-row-no-border;
   margin-top: -10px;
-
-  tbody > tr:first-child > td {
-    border: none;
-  }
 }
 
 .card-header-custom {
@@ -1150,13 +1153,15 @@ li.page-item {
   white-space: nowrap;
 }
 
+.first-row-no-border{
+  @extend %table-first-row-no-border;
+}
+
 .print {
+  @extend %table-first-row-no-border;
   .footer{
     font-size: 12px;
     border-top: 1px solid #ecedf1;
-  }
-  .table > tbody > tr:first-child > td {
-    border: none;
   }
   .no-pic-container {
     opacity: 0.7;

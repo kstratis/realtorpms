@@ -94,7 +94,7 @@
                 </div>
               </div><!-- .card-body -->
               <div class="card-body">
-                <%= render partial: 'accounts/properties/features', locals: { features: Property.basic_features } %>
+                <%= render partial: 'accounts/properties/features', locals: { features: Property.basic_features, classNames: 'table-striped first-row-no-border' } %>
 
 <!--                <div class="table-responsive">-->
 <!--                   .table -->
@@ -172,7 +172,7 @@
                   </div>
                 </div><!-- .card-body -->
                 <div class="card-body">
-                  <%= render partial: 'accounts/properties/features', locals: { features: Property.extended_features } %>
+                  <%= render partial: 'accounts/properties/features', locals: { features: Property.extended_features, classNames: 'specs-table' } %>
                 </div><!-- /.card-body -->
               </div><!-- /.card -->
 
