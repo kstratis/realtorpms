@@ -30,8 +30,18 @@
 
           <tbody>
           <tr>
-            <td><%= t('activerecord.attributes.property.location') %></td>
-            <td><span><%= @property.location.localname %></span></td>
+            <td class="align-middle nowrap">
+              <div class="table-entry">
+                <div class="table-icon-wrapper">
+                  <%= image_tag "house_specs/location.svg", style: "width:20px" %>
+                </div>
+                <span class="align-middle">&nbsp;&nbsp;<%= t("activerecord.attributes.property.location") %></span>
+              </div>
+            </td>
+<!--            <td><%#= t('activerecord.attributes.property.location') %></td>-->
+            <td class="align-middle nowrap">
+            <span><%= @property.location.localname %></span>
+            </td>
           </tr>
           <tr>
             <td><%= t('activerecord.attributes.property.price_title') %></td>
@@ -84,13 +94,6 @@
 
     <% end %>
 
-  </div>
-  <div class="row mt-3">
-    <div class="col-12">
-      <div class="footer text-right">
-        <span>Powered by Landia</span>
-      </div>
-    </div>
   </div>
   <!--  <div><%#= image_tag @property.avatar.variant(resize: "300x150") %></div>-->
   <!--  <div class="table-responsive">-->

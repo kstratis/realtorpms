@@ -181,7 +181,11 @@
   }
 
   &.address{
-    background-image: url( house_specs/address.svg);
+    background-image: url( house_specs/pin.svg);
+  }
+
+  &.location{
+    background-image: url( house_specs/location.svg);
   }
 
   &.neoclassical{
@@ -342,6 +346,10 @@
 
   &.dashboard_alt{
     background-image: url( dashboard_alt.svg);
+  }
+
+  &.price{
+    background-image: url( house_specs/price.svg);
   }
 
 

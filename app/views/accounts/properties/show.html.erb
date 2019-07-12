@@ -94,53 +94,56 @@
                 </div>
               </div><!-- .card-body -->
               <div class="card-body">
-                <div class="table-responsive">
-                  <!-- .table -->
-                  <table class="table table-striped">
-                    <tbody>
-                    <tr>
-                      <td><%= t('activerecord.attributes.property.location') %></td>
-                      <td><span><%= @property.location.localname %></span></td>
-                    </tr>
-                    <tr>
-                      <td><%= t('activerecord.attributes.property.price_title') %></td>
-                      <td><span><%= @property.price ? number_to_currency(@property.price) : '—' %></span></td>
-                    </tr>
-                    <tr>
-                      <td><%= t('activerecord.attributes.property.pricepersqmeter') %></td>
-                      <td>
-                        <span><%= @property.pricepersqmeter ? number_to_currency(@property.pricepersqmeter) : '—' %></span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><%= t('activerecord.attributes.property.size_title') %></td>
-                      <td>
-                        <span><%= @property.size ? t('activerecord.attributes.property.size_meter_html', size: @property.size.to_s) : '—' %></span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><%= t('activerecord.attributes.property.businesstype_plain') %></td>
-                      <td>
-                        <span><%= t("activerecord.attributes.property.enums.subcategory.#{@property.subcategory.to_s}") %></span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><%= t('activerecord.attributes.property.enums.businesstype.title') %></td>
-                      <td>
-                        <mark class="highlighted">
-                          <span><%= t("activerecord.attributes.property.enums.businesstype.#{@property.businesstype.to_s}") %></span>
-                        </mark>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><%= t('activerecord.attributes.user.phone1') %></td>
-                      <td>
-                        <span><%= @property.try(:owner).try(:telephones).blank? ? '—' : @property.owner.telephones.split(/[\s,]+/).collect(&:strip).join(', ') %></span>
-                      </td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </div>
+                <%= render partial: 'accounts/properties/features', locals: { features: Property.basic_features } %>
+
+<!--                <div class="table-responsive">-->
+<!--                   .table -->
+<!--                  <table class="table table-striped">-->
+<!--                    <tbody>-->
+
+<!--                    <tr>-->
+<!--                      <td><%#= t('activerecord.attributes.property.location') %></td>-->
+<!--                      <td><span><%#= @property.location.localname %></span></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                      <td><%#= t('activerecord.attributes.property.price_title') %></td>-->
+<!--                      <td><span><%#= @property.price ? number_to_currency(@property.price) : '—' %></span></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                      <td><%#= t('activerecord.attributes.property.pricepersqmeter') %></td>-->
+<!--                      <td>-->
+<!--                        <span><%#= @property.pricepersqmeter ? number_to_currency(@property.pricepersqmeter) : '—' %></span>-->
+<!--                      </td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                      <td><%#= t('activerecord.attributes.property.size_title') %></td>-->
+<!--                      <td>-->
+<!--                        <span><%#= @property.size ? t('activerecord.attributes.property.size_meter_html', size: @property.size.to_s) : '—' %></span>-->
+<!--                      </td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                      <td><%#= t('activerecord.attributes.property.businesstype_plain') %></td>-->
+<!--                      <td>-->
+<!--                        <span><%#= t("activerecord.attributes.property.enums.subcategory.#{@property.subcategory.to_s}") %></span>-->
+<!--                      </td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                      <td><%#= t('activerecord.attributes.property.enums.businesstype.title') %></td>-->
+<!--                      <td>-->
+<!--                        <mark class="highlighted">-->
+<!--                          <span><%#= t("activerecord.attributes.property.enums.businesstype.#{@property.businesstype.to_s}") %></span>-->
+<!--                        </mark>-->
+<!--                      </td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                      <td><%#= t('activerecord.attributes.user.phone1') %></td>-->
+<!--                      <td>-->
+<!--                        <span><%#= @property.try(:owner).try(:telephones).blank? ? '—' : @property.owner.telephones.split(/[\s,]+/).collect(&:strip).join(', ') %></span>-->
+<!--                      </td>-->
+<!--                    </tr>-->
+<!--                    </tbody>-->
+<!--                  </table>-->
+<!--                </div>-->
               </div><!-- /.card-body -->
             </div><!-- /.card -->
 
@@ -169,7 +172,7 @@
                   </div>
                 </div><!-- .card-body -->
                 <div class="card-body">
-                  <%= render partial: 'accounts/properties/specs' %>
+                  <%= render partial: 'accounts/properties/features', locals: { features: Property.extended_features } %>
                 </div><!-- /.card-body -->
               </div><!-- /.card -->
 

@@ -112,6 +112,7 @@ el:
         construction: "Έτος κατασκευής"
         construction_title: "Έτος κατασκευής"
         location: "Τοποθεσία"
+        location_title: "Τοποθεσία"
         owner: "Ιδιοκτήτης"
         owner_title: "Ιδιοκτήτης"
         address_title: "Διεύθυνση"
