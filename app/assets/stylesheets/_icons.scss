@@ -352,6 +352,22 @@
     background-image: url( house_specs/price.svg);
   }
 
+  &.pricepersqmeter{
+    background-image: url( house_specs/pricepersqmeter.svg);
+  }
+
+  &.size{
+    background-image: url( house_specs/size.svg);
+  }
+
+  &.subcategory{
+    background-image: url( house_specs/house_category.svg);
+  }
+
+  &.businesstype{
+    background-image: url( house_specs/salerent.svg);
+  }
+
 
   & ~ .pr-icon-desc {
     display: block;
