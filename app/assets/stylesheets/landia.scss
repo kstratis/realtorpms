@@ -1191,3 +1191,13 @@ li.page-item {
   }
 
 }
+
+// Theme override. Hides the logo on screens up to `md`. Makes it visible on `lg` and up.
+.top-bar-brand{
+  @include media-breakpoint-up('lg') {
+    display: flex !important;
+  }
+  @include media-breakpoint-down('md') {
+    display: none !important;
+  }
+}

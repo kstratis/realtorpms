@@ -44,7 +44,7 @@
     }
   }
 
-  @include media-breakpoint-up($top-bar-logo-breakpoint) {
+  @include media-breakpoint-up('md') {
     display: flex;
   }
 }
