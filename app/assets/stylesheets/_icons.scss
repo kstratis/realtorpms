@@ -361,11 +361,19 @@
   }
 
   &.subcategory{
-    background-image: url( house_specs/house_category.svg);
+    background-image: url( house_specs/subcategory.svg);
   }
 
   &.businesstype{
-    background-image: url( house_specs/salerent.svg);
+    background-image: url( house_specs/businesstype.svg);
+  }
+
+  &.tel{
+    background-image: url( house_specs/tel.svg);
+  }
+
+  &.created_at{
+    background-image: url( house_specs/created_at.svg);
   }
 
 

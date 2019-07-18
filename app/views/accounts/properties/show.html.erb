@@ -148,6 +148,7 @@
             </div><!-- /.card -->
 
 
+
           </div>
         </div>
 
@@ -172,7 +173,7 @@
                   </div>
                 </div><!-- .card-body -->
                 <div class="card-body">
-                  <%= render partial: 'accounts/properties/features', locals: { features: Property.extended_features, classNames: 'specs-table' } %>
+                  <%= render partial: 'accounts/properties/features', locals: { features: Property.extended_features, classNames: 'normalize-table' } %>
                 </div><!-- /.card-body -->
               </div><!-- /.card -->
 
@@ -223,6 +224,23 @@
                 </div><!-- /.card-body -->
               </div><!-- /.card -->
             </div>
+
+            <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <div class="table-entry">
+                  <div class="table-icon-wrapper">
+                    <i class="pr-icon xs info"></i>
+                  </div>
+                  <span class="align-middle">&nbsp; <%= t 'activerecord.attributes.property.owner_title' %> </span>
+                </div>
+              </div><!-- .card-body -->
+              <div class="card-body">
+                <%= render partial: 'accounts/properties/features', locals: { features: Property.owner_features, classNames: 'normalize-table' } %>
+              </div>
+            </div>
+            </div>
+
             <div class="col-12">
               <div class="card">
 

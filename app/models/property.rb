@@ -88,8 +88,15 @@ class Property < ApplicationRecord
   end
 
   class << self
-    def accessible_attributes
-      [:price, :pricepersqmeter, :size, :subcategory, :bedrooms, :bathrooms, :floor]
+    # def accessible_attributes
+    #   [:price, :pricepersqmeter, :size, :subcategory, :bedrooms, :bathrooms, :floor]
+    # end
+
+    def owner_features
+      {
+          :owner_name => {:label => 'owner', :icon => 'client', :options => 'full_name', :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
+          :owner_tel => {:label => 'contact', :icon => 'tel', :options => 'telephones', :renderfn => Proc.new {|value| value.blank? ? '—' : value.split(/[\s,]+/).collect(&:strip).join(', ')}}
+      }.freeze
     end
 
     def basic_features
@@ -99,8 +106,8 @@ class Property < ApplicationRecord
           :price => {:label => 'price', :icon => 'price', :options => nil, :renderfn => Proc.new {|value| value ? ActionController::Base.helpers.number_to_currency(value) : '—' }},
           :pricepersqmeter => {:label => 'pricepersqmeter', :icon => 'pricepersqmeter', :options => nil, :renderfn => Proc.new {|value| value ? ActionController::Base.helpers.number_to_currency(value) : '—' }},
           :size => {:label => 'size', :icon => 'size', :options => nil, :renderfn => Proc.new {|value| value ? I18n.t('activerecord.attributes.property.size_meter_html', size: value.to_s) : '—' }},
-          :subcategory => {:label => 'subcategory', :icon => 'subcategory', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.subcategory.#{value}")} }
-
+          :subcategory => {:label => 'subcategory', :icon => 'subcategory', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.subcategory.#{value}")} },
+          :created_at => {:label => 'created_at', :icon => 'created_at', :options => nil, :renderfn => Proc.new {|value| value ? (I18n.l value, format: :custom) : '—' } }
 
       }.freeze
     end
@@ -113,8 +120,8 @@ class Property < ApplicationRecord
           # :render_extra => {:label => 'parking', :icon => 'parking', :options => 'parking', :renderfn => Proc.new {|value| value.blank? ? I18n.t('false') : I18n.t('true')}}, # Casting tip see here: https://stackoverflow.com/a/44322375/178728
           :construction => {:label => 'construction', :icon => 'construction', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
           :address => {:label => 'address', :icon => 'address', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
-          :availability => {:label => 'availability', :icon => 'availability', :options => nil, :renderfn => Proc.new {|value| value ? (I18n.l value, format: :custom) : '—' }},
-          :owner_info => {:label => 'owner', :icon => 'client', :options => 'full_name', :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN}
+          :availability => {:label => 'availability', :icon => 'availability', :options => nil, :renderfn => Proc.new {|value| value ? (I18n.l value, format: :custom) : '—' }}
+          # :owner_info => {:label => 'owner', :icon => 'client', :options => 'full_name', :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN}
       }.freeze
     end
   end
@@ -122,6 +129,9 @@ class Property < ApplicationRecord
   def owner_info(term)
     owner.try(term.to_sym)
   end
+
+  alias_method :owner_name, :owner_info
+  alias_method :owner_tel, :owner_info
 
   def location_info(term)
     location.try(term.to_sym)

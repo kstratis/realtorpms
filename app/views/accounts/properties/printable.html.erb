@@ -27,53 +27,8 @@
       </div>
       <div class="col-7">
         <table class="table ">
-
           <tbody>
-          <tr>
-            <td class="align-middle nowrap">
-              <div class="table-entry">
-                <div class="table-icon-wrapper">
-                  <%= image_tag "house_specs/location.svg", style: "width:20px" %>
-                </div>
-                <span class="align-middle">&nbsp;&nbsp;<%= t("activerecord.attributes.property.location") %></span>
-              </div>
-            </td>
-<!--            <td><%#= t('activerecord.attributes.property.location') %></td>-->
-            <td class="align-middle nowrap">
-            <span><%= @property.location.localname %></span>
-            </td>
-          </tr>
-          <tr>
-            <td><%= t('activerecord.attributes.property.price_title') %></td>
-            <td><span><%= @property.price ? number_to_currency(@property.price) : '—' %></span></td>
-          </tr>
-          <tr>
-            <td><%= t('activerecord.attributes.property.pricepersqmeter') %></td>
-            <td>
-              <span><%= @property.pricepersqmeter ? number_to_currency(@property.pricepersqmeter) : '—' %></span>
-            </td>
-          </tr>
-          <tr>
-            <td><%= t('activerecord.attributes.property.size_title') %></td>
-            <td>
-              <span><%= @property.size ? t('activerecord.attributes.property.size_meter_html', size: @property.size.to_s) : '—' %></span>
-            </td>
-          </tr>
-          <tr>
-            <td><%= t('activerecord.attributes.property.businesstype_plain') %></td>
-            <td>
-              <span><%= t("activerecord.attributes.property.enums.subcategory.#{@property.subcategory.to_s}") %></span>
-            </td>
-          </tr>
-          <tr>
-            <td><%= t('activerecord.attributes.property.enums.businesstype.title') %></td>
-            <td>
-              <mark class="highlighted">
-                <span><%= t("activerecord.attributes.property.enums.businesstype.#{@property.businesstype.to_s}") %></span>
-              </mark>
-            </td>
-          </tr>
-          <% Property::PROPERTY_ATTRIBUTES.except(:address, :render_owner).each do |key, value| %>
+          <% Property.basic_features.except(:created_at).each do |key, value| %>
             <tr>
               <td class="align-middle nowrap">
                 <div class="table-entry">
@@ -89,6 +44,32 @@
           <% end %>
           </tbody>
         </table>
+        <hr/>
+        <h2>Extras</h2>
+        <hr/>
+        <table class="table ">
+          <tbody>
+          <% Property.extended_features.except(:address).each do |key, value| %>
+            <tr>
+              <td class="align-middle nowrap">
+                <div class="table-entry">
+                  <div class="table-icon-wrapper">
+                    <%= image_tag "house_specs/#{value[:icon]}.svg", style: "width:20px" %>
+                  </div>
+                  <span class="align-middle">&nbsp;&nbsp;<%= t("activerecord.attributes.property.#{value[:label].to_s}_title") %></span>
+                </div>
+              </td>
+              <td class="align-middle nowrap">
+                <span><%= render_attribute(@property, key, value[:options], value[:renderfn]) %></span></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+        <hr/>
+        <% @property.extras.map do |element| %>
+          <span><%= element.name %>: </span>
+          <span><%= t("activerecord.attributes.extra.#{element.subtype}.#{element.name}") %><%= render_extra_value(@property, "#{element.name}_space").to_s.html_safe %></span>
+        <% end %>
       </div>
 
 
