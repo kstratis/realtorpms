@@ -1,0 +1,56 @@
+<% provide(:title, t('accounts.edit_title')) %>
+
+<%= render partial: 'layouts/breadcrumb', locals: {path: [{:title => t('accounts.edit_title'), :href => ''}], icon: 'house-colored'} %>
+
+<div class="page-container">
+  <div class="container">
+    <!-- .card -->
+    <div class="card card-fluid">
+      <h2 class="card-header"> <%= t('accounts.edit_title') %> </h2>
+      <!-- .card-body -->
+      <div class="card-body">
+        <!-- .media -->
+        <%= form_for(@account) do |f| %>
+          <div class="col-lg-6 offset-lg-3 col-md-12">
+
+            <!-- .form-group -->
+            <div class="form-group">
+              <div class="form-label-group">
+                <%= f.text_field :email, class: 'form-control', placeholder: Account.human_attribute_name("email") %>
+                <%= f.label :email, Account.human_attribute_name("email") %>
+              </div>
+            </div>
+            <!-- /.form-group -->
+
+            <!-- .form-group -->
+            <div class="form-group">
+              <div class="form-label-group">
+                <%= f.text_field :name, class: 'form-control', placeholder: Account.human_attribute_name("name") %>
+                <%= f.label :name, Account.human_attribute_name("name") %>
+              </div>
+            </div>
+            <!-- /.form-group -->
+
+            <!-- .form-group -->
+            <div class="form-group">
+              <div class="form-label-group">
+                <%= f.text_field :telephones, class: 'form-control', placeholder: Account.human_attribute_name("telephones") %>
+                <%= f.label "telephones", Account.human_attribute_name("telephones") %>
+              </div>
+            </div>
+            <!-- /.form-group -->
+
+            <hr/>
+
+            <!-- .form-actions -->
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary ml-auto"><%= t('users.edit.edit_button') %></button>
+            </div> <!-- /.form-actions -->
+          </div>
+
+        <% end %> <!-- /form -->
+
+      </div><!-- /.card-body -->
+    </div><!-- /.card -->
+  </div>
+</div>

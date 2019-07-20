@@ -25,12 +25,16 @@ class AccountsController < ApplicationController
     end
   end
 
-  # POST to the edit page
+  def edit
+    @account = Account.find_by!(subdomain: request.subdomain)
+  end
+
+  # PUT to the edit page
   def update
-    @user = User.find(params[:id])
-    if @user.update_attributes(user_params)
-      flash[:success] = I18n.t('accounts.updated')
-      redirect_to @user
+    @account = Account.find_by!(subdomain: request.subdomain)
+    if @account.update_attributes(account_params)
+      flash[:success] = I18n.t('accounts.flash.success')
+      redirect_to root_url
       # Handle a successful update.
     else
       render :edit
@@ -40,6 +44,6 @@ class AccountsController < ApplicationController
   private
 
   def account_params
-    params.require(:account).permit(:subdomain, { owner_attributes: [:first_name, :last_name, :email, :password, :password_confirmation] })
+    params.require(:account).permit(:subdomain, :email, :name, :telephones, { owner_attributes: [:first_name, :last_name, :email, :password, :password_confirmation] })
   end
 end

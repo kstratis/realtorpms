@@ -15,6 +15,9 @@ el:
         email_placeholder: "π.χ. nikosdimitriou@gmail.com"
       account:
         subdomain: "Όνομα λογαριασμού"
+        name: "Επωνυμία επιχείρησης"
+        email: "Εταιρικό email"
+        telephones: "Τηλέφωνα επικοινωνίας"
       user:
         first_name: "Όνομα"
         first_name_feedback_html: "π.χ. Δημήτρης"
@@ -496,6 +499,7 @@ el:
     cancel_button: "Ακύρωση"
     close_button: "Κλείσιμο"
     print: "Εκτύπωση"
+    info: "Λεπτομέρειες"
     map: "Χάρτης"
     import: "Εισαγωγή από αρχείο"
     new:
@@ -560,6 +564,7 @@ el:
     greek: "Ελληνικά"
   accounts:
     signup_title: "Εγγραφή"
+    edit_title: "Επεξεργασία λογαριασμού"
     greeting: "Νέος λογαριασμός"
     signup_button: "Δημιουργία λογαριασμού"
     switch: "Εναλλαγή λογαριασμού"
@@ -573,6 +578,8 @@ el:
     updated: "Το προφίλ ενημερώθηκε επιτυχώς"
     domain: "Τομέας"
     role: "Ρόλος"
+    flash:
+      success: "Οι ρυθμίσεις λογαριασμού ενημερώθηκαν επιτυχώς"
   sessions:
     login_title: "Σύνδεση"
     forgot_title: "Αίτημα υπενθύμισης συνθηματικού"

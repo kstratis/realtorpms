@@ -1176,6 +1176,19 @@ li.page-item {
 
   }
 
+  h2.decorated {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #ecedf1;
+    line-height: 0.1em;
+    margin: 10px 0 20px;
+  }
+
+  h2.decorated span {
+    background:#fff;
+    padding:0 10px;
+  }
+
   .print-img {
     //border: 1px solid red;
     padding: 0 0 0 10px;
@@ -1188,6 +1201,7 @@ li.page-item {
       //border: 1px solid #444444;
       //border-radius: 2px;
     }
+
   }
 
 }

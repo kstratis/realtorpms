@@ -44,9 +44,7 @@
           <% end %>
           </tbody>
         </table>
-        <hr/>
-        <h2>Extras</h2>
-        <hr/>
+        <h2 class="decorated"><span><%= t 'properties.info' %></span></h2>
         <table class="table ">
           <tbody>
           <% Property.extended_features.except(:address).each do |key, value| %>
@@ -66,11 +64,17 @@
           </tbody>
         </table>
         <hr/>
+
         <% @property.extras.map do |element| %>
-          <span><%= element.name %>: </span>
-          <span><%= t("activerecord.attributes.extra.#{element.subtype}.#{element.name}") %><%= render_extra_value(@property, "#{element.name}_space").to_s.html_safe %></span>
+          <span><%= t("activerecord.attributes.extra.#{element.subtype}.#{element.name}") %><%= render_extra_value(@property, "#{element.name}_space").to_s.html_safe %></span><% concat(', ') if @property.extras.last != element %>
         <% end %>
+
+        <hr />
+        <strong><i><%= t 'activerecord.attributes.property.contact' %>: </i></strong>
       </div>
+
+
+
 
 
     <% end %>

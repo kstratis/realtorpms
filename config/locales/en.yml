@@ -15,6 +15,9 @@ en:
         email_placeholder: "i.e. johnsmith@gmail.com"
       account:
         subdomain: "Account name"
+        name: "Επωνυμία επιχείρησης"
+        email: "Εταιρικό email"
+        telephones: "Τηλέφωνα επικοινωνίας"
       user:
         first_name: "First name"
         first_name_feedback_html: "i.e. John"
@@ -494,6 +497,7 @@ en:
     cancel_button: "Cancel"
     close_button: "Close"
     print: "Print"
+    info: "Details"
     map: "Map"
     import: "Import properties"
     new:
@@ -558,6 +562,7 @@ en:
     greek: "Greek"
   accounts:
     signup_title: "Signup"
+    edit_title: "Edit account"
     greeting: "New account"
     signup_button: "Create account"
     switch: "Account switch"
@@ -570,6 +575,8 @@ en:
     updated: "Profile successfully update"
     domain: "Domain"
     role: "Role"
+    flash:
+      success: "Account settings successfully updated"
   sessions:
     login_title: "Login"
     forgot_title: "Forgot password"

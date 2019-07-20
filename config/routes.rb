@@ -31,7 +31,6 @@ Rails.application.routes.draw do
       get '/properties/locations', to: 'properties#locations'
       get '/properties/owners', to: 'properties#owners'
 
-
       # favlists_path (GET, POST)
       # favlist_path (DELETE)
       resources :favlists, only: [:create, :destroy, :index]
@@ -88,6 +87,11 @@ Rails.application.routes.draw do
   get '/accounts/new', to: 'accounts#new', as: :new_account
 
   post '/accounts/new', to: 'accounts#create', as: :accounts
+
+  get '/account/edit', to: 'accounts#edit', as: :edit_account
+
+  patch '/account/edit', to: 'accounts#update', as: :account
+
   # post '/accounts', to: 'accounts#create', as: :accounts
 
   get  '/help', to: 'main_pages#help'

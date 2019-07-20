@@ -1,6 +1,6 @@
 module Accounts
   class BaseController < ApplicationController
-    include UserAvatar
+
     include LocationFilter
     include OwnerFilter
     include UserDatatable
@@ -22,14 +22,6 @@ module Accounts
         end
       end
     end
-
-    # this is only called from the template properties#index
-    def current_account
-      # this results in 404 in production
-      @current_account ||= Account.find_by!(subdomain: request.subdomain)
-    end
-
-    helper_method :current_account
 
     def owner?
       current_account.owner == current_user

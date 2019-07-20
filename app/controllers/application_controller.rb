@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery with: :exception, prepend: true
   # protect_from_forgery prepend: true
   include SessionsHelper
+  include UserAvatar
+  helper UserAvatar
   rescue_from ActiveRecord::RecordNotFound, with: -> { render_404  }
 
   before_action :set_locale
@@ -10,6 +12,13 @@ class ApplicationController < ActionController::Base
   def set_locale
     I18n.locale = params[:locale] || current_user.try(:locale) || I18n.default_locale
   end
+
+  def current_account
+    # this results in 404 in production
+    @current_account ||= Account.find_by!(subdomain: request.subdomain)
+  end
+
+  helper_method :current_account
 
   # def default_url_options
   #   { locale: I18n.locale }
