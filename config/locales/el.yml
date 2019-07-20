@@ -16,6 +16,7 @@ el:
       account:
         subdomain: "Όνομα λογαριασμού"
         name: "Επωνυμία επιχείρησης"
+        website: "Website"
         email: "Εταιρικό email"
         telephones: "Τηλέφωνα επικοινωνίας"
       user:

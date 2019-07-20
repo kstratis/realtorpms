@@ -23,9 +23,9 @@
 
     <div class="form-group">
       <div class="form-label-group">
-        <%= account_builder.text_field :name, class: 'form-control', placeholder: Account.human_attribute_name("subdomain") %>
+        <%= account_builder.text_field :name, class: 'form-control', placeholder: Account.human_attribute_name("name") %>
         <%= account_builder.label :name, Account.human_attribute_name("name") %>
-        <%#= inline_error @account.name, :name, 'Name' %>
+        <%= inline_error @account, :name, 'Name' %>
       </div><!-- /.input-group -->
 
     </div><!-- /.form-group -->

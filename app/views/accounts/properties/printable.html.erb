@@ -71,6 +71,7 @@
 
         <hr />
         <strong><i><%= t 'activerecord.attributes.property.contact' %>: </i></strong>
+        <%= render partial: 'accounts/properties/contact', locals: { features: Property.owner_features, classNames: 'normalize-table' } %>
       </div>
 
 

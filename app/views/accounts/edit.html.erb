@@ -16,8 +16,8 @@
             <!-- .form-group -->
             <div class="form-group">
               <div class="form-label-group">
-                <%= f.text_field :email, class: 'form-control', placeholder: Account.human_attribute_name("email") %>
-                <%= f.label :email, Account.human_attribute_name("email") %>
+                <%= f.text_field :name, class: 'form-control', placeholder: Account.human_attribute_name("name") %>
+                <%= f.label :name, Account.human_attribute_name("name") %>
               </div>
             </div>
             <!-- /.form-group -->
@@ -25,11 +25,21 @@
             <!-- .form-group -->
             <div class="form-group">
               <div class="form-label-group">
-                <%= f.text_field :name, class: 'form-control', placeholder: Account.human_attribute_name("name") %>
-                <%= f.label :name, Account.human_attribute_name("name") %>
+                <%= f.text_field :website, class: 'form-control', placeholder: Account.human_attribute_name("website") %>
+                <%= f.label :website, Account.human_attribute_name("website") %>
               </div>
             </div>
             <!-- /.form-group -->
+
+            <!-- .form-group -->
+            <div class="form-group">
+              <div class="form-label-group">
+                <%= f.text_field :email, class: 'form-control', placeholder: Account.human_attribute_name("email") %>
+                <%= f.label :email, Account.human_attribute_name("email") %>
+              </div>
+            </div>
+            <!-- /.form-group -->
+
 
             <!-- .form-group -->
             <div class="form-group">

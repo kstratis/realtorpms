@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_19_201418) do
+ActiveRecord::Schema.define(version: 2019_07_20_071234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2019_07_19_201418) do
     t.string "telephones"
     t.string "address"
     t.string "email"
+    t.string "website"
     t.index ["subdomain"], name: "index_accounts_on_subdomain"
   end
 
