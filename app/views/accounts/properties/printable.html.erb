@@ -5,104 +5,69 @@
   <%= render partial: 'shared/card_header/header', locals: {title: heading, btn_text: t('properties.show.catalog'), btn_link: properties_path} %>
   <div class="row">
 
-
-    <%# if @property.images.attached? || @property.avatar.attached? %>
-    <% if pictures.blank? %>
-      <div class="no-pic-container">
-        <%= image_tag 'no_pic.png' %>
-      </div>
-    <% else %>
-      <div class="col-5">
+    <div class="col-5">
+      <% if pictures.blank? %>
+        <div class="no-pic-container print-img">
+          <%= image_tag 'no_pic.png', class: 'img-responsive' %>
+        </div>
+      <% else %>
         <% pictures.each do |image| %>
-
-          <%#= image_tag image.variant(resize: "736x500") %>
-
           <div class="print-img ">
             <%= image_tag image, class: 'img-responsive' %>
-
-            <!--            <img src="<%#= image) %>" alt="property photos" class="img-responsive"/>-->
-            <%#= image_tag image.variant(resize: "350x200"), class: 'img-responsive' %>
           </div>
         <% end %>
-      </div>
-      <div class="col-7">
-        <table class="table ">
-          <tbody>
-          <% Property.basic_features.except(:created_at).each do |key, value| %>
-            <tr>
-              <td class="align-middle nowrap">
-                <div class="table-entry">
-                  <div class="table-icon-wrapper">
-                    <%= image_tag "house_specs/#{value[:icon]}.svg", style: "width:20px" %>
-                  </div>
-                  <span class="align-middle">&nbsp;&nbsp;<%= t("activerecord.attributes.property.#{value[:label].to_s}_title") %></span>
+      <% end %>
+    </div>
+    <div class="col-7">
+      <table class="table ">
+        <tbody>
+        <% Property.basic_features.except(:created_at).each do |key, value| %>
+          <tr>
+            <td class="align-middle nowrap">
+              <div class="table-entry">
+                <div class="table-icon-wrapper">
+                  <%= image_tag "house_specs/#{value[:icon]}.svg", style: "width:20px" %>
                 </div>
-              </td>
-              <td class="align-middle nowrap">
-                <span><%= render_attribute(@property, key, value[:options], value[:renderfn]) %></span></td>
-            </tr>
-          <% end %>
-          </tbody>
-        </table>
-        <h2 class="decorated"><span><%= t 'properties.info' %></span></h2>
-        <table class="table ">
-          <tbody>
-          <% Property.extended_features.except(:address).each do |key, value| %>
-            <tr>
-              <td class="align-middle nowrap">
-                <div class="table-entry">
-                  <div class="table-icon-wrapper">
-                    <%= image_tag "house_specs/#{value[:icon]}.svg", style: "width:20px" %>
-                  </div>
-                  <span class="align-middle">&nbsp;&nbsp;<%= t("activerecord.attributes.property.#{value[:label].to_s}_title") %></span>
-                </div>
-              </td>
-              <td class="align-middle nowrap">
-                <span><%= render_attribute(@property, key, value[:options], value[:renderfn]) %></span></td>
-            </tr>
-          <% end %>
-          </tbody>
-        </table>
-        <hr/>
-
-        <% @property.extras.map do |element| %>
-          <span><%= t("activerecord.attributes.extra.#{element.subtype}.#{element.name}") %><%= render_extra_value(@property, "#{element.name}_space").to_s.html_safe %></span><% concat(', ') if @property.extras.last != element %>
+                <span class="align-middle">&nbsp;&nbsp;<%= t("activerecord.attributes.property.#{value[:label].to_s}_title") %></span>
+              </div>
+            </td>
+            <td class="align-middle nowrap">
+              <span><%= render_attribute(@property, key, value[:options], value[:renderfn]) %></span></td>
+          </tr>
         <% end %>
+        </tbody>
+      </table>
+      <h2 class="decorated"><span><%= t 'properties.info' %></span></h2>
+      <table class="table ">
+        <tbody>
+        <% Property.extended_features.except(:address).each do |key, value| %>
+          <tr>
+            <td class="align-middle nowrap">
+              <div class="table-entry">
+                <div class="table-icon-wrapper">
+                  <%= image_tag "house_specs/#{value[:icon]}.svg", style: "width:20px" %>
+                </div>
+                <span class="align-middle">&nbsp;&nbsp;<%= t("activerecord.attributes.property.#{value[:label].to_s}_title") %></span>
+              </div>
+            </td>
+            <td class="align-middle nowrap">
+              <span><%= render_attribute(@property, key, value[:options], value[:renderfn]) %></span></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <hr/>
 
-        <hr />
-<!--        <strong><i><%#= t 'activerecord.attributes.property.contact' %>: </i></strong>-->
-        <%= render partial: 'accounts/properties/contact', locals: { features: Property.owner_features, classNames: 'normalize-table' } %>
-      </div>
+      <% @property.extras.map do |element| %>
+        <span><%= t("activerecord.attributes.extra.#{element.subtype}.#{element.name}") %><%= render_extra_value(@property, "#{element.name}_space").to_s.html_safe %></span>
+        <% concat(', ') if @property.extras.last != element %>
+      <% end %>
 
+      <hr/>
+      <%= render partial: 'accounts/properties/contact', locals: {features: Property.owner_features, classNames: 'normalize-table'} %>
+    </div>
 
-
-
-
-    <% end %>
 
   </div>
-  <!--  <div><%#= image_tag @property.avatar.variant(resize: "300x150") %></div>-->
-  <!--  <div class="table-responsive">-->
-  <!--    <table class="table-striped">-->
-  <!--      <tbody>-->
-  <%# Property::PROPERTY_ATTRIBUTES.each do |key, value| %>
-  <!--        <tr>-->
-  <!--          <td class="align-middle nowrap">-->
-  <!--            <div class="table-entry">-->
-  <!--              <div class="table-icon-wrapper">-->
-  <!--                <i class="pr-icon xs <%#= value[:icon] %>"></i>-->
-  <!--              </div>-->
-  <!--              <span class="align-middle">&nbsp;&nbsp;<%#= t("activerecord.attributes.property.#{value[:label].to_s}_title") %></span>-->
-  <!--            </div>-->
-  <!--          </td>-->
-  <!--          <td class="align-middle nowrap">-->
-  <!--            <span><%#= render_attribute(@property, key, value[:options], value[:renderfn]) %></span></td>-->
-  <!--        </tr>-->
-  <%# end %>
-  <!--      </tbody>-->
-  <!--    </table>-->
-  <!--  </div>-->
-
-  <%#= render partial: 'accounts/properties/specs' %>
 
 </div>
