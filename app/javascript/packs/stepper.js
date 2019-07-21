@@ -70,12 +70,14 @@ $(document).on('turbolinks:load', function(e) {
    *      normally submitted through UJS .
    */
   $stepperForm.on('ajax:before', function(event, xhr, opts) {
-    console.log('ajax:before called');
+    // DEBUG
+    // console.log('ajax:before called');
     if ($('#preventformsubmit').length > 0) {
-      console.log('#preventformsubmit exists');
+      // DEBUG
+      // console.log('#preventformsubmit exists');
       if (Object.keys(window.uppy_uploader.getState().files).length) {
         // DEBUG
-        console.log('files are: ' + Object.keys(window.uppy_uploader.getState().files).length);
+        // console.log('files are: ' + Object.keys(window.uppy_uploader.getState().files).length);
         event.preventDefault();
         return false;
       } else {
@@ -129,7 +131,6 @@ $(document).on("page:before-change turbolinks:before-visit", function() {
     var alertsDomNode = $('#alerts');
     var alertsTranslations = alertsDomNode.data('i18n').alerts;
     return leavePage(alertsTranslations['leave_page']);
-    // return confirm(alertsTranslations['leave_page']);
   }
 });
 
