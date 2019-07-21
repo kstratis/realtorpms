@@ -10,14 +10,20 @@
       <!-- .card-body -->
       <div class="card-body">
         <!-- .media -->
-        <%= form_for(@account) do |f| %>
+        <%= form_for(@account, url: account_update_path, html: {class: 'js-validatable'}) do |f| %>
           <div class="col-lg-6 offset-lg-3 col-md-12">
 
             <!-- .form-group -->
             <div class="form-group">
               <div class="form-label-group">
-                <%= f.text_field :name, class: 'form-control', placeholder: Account.human_attribute_name("name") %>
+                <%= f.text_field :name,
+                                 class: 'form-control',
+                                 placeholder: Account.human_attribute_name("name"),
+                                 required: true,
+                                 'data-parsley-trigger': 'change',
+                                 'data-parsley-required-message': t("js.validator.required") %>
                 <%= f.label :name, Account.human_attribute_name("name") %>
+                <%= inline_error @account, :name, 'Name' %>
               </div>
             </div>
             <!-- /.form-group -->
@@ -36,6 +42,15 @@
               <div class="form-label-group">
                 <%= f.text_field :email, class: 'form-control', placeholder: Account.human_attribute_name("email") %>
                 <%= f.label :email, Account.human_attribute_name("email") %>
+              </div>
+            </div>
+            <!-- /.form-group -->
+
+            <!-- .form-group -->
+            <div class="form-group">
+              <div class="form-label-group">
+                <%= f.text_field :address, class: 'form-control', placeholder: Account.human_attribute_name("address") %>
+                <%= f.label :address, Account.human_attribute_name("address") %>
               </div>
             </div>
             <!-- /.form-group -->

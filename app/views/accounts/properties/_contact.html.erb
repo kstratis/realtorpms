@@ -1,6 +1,15 @@
-<div class="contact">
-<h3><strong><u><%= current_account.name %></u></strong></h3>
-<h3><strong><u><%= current_account.website %></u></strong></h3>
-<h3><strong><u><%= current_account.email %></u></strong></h3>
-<h3><strong><u><%= current_account.telephones %></u></strong></h3>
+<div class="contact col-12">
+  <div class="container">
+    <div class="circle">
+      <div class="aligner">
+        <% %w(name website email address telephones).each do |element| %>
+          <% unless current_account.send(element).blank? %>
+            <%= current_account.send(element) %><br>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
+
+

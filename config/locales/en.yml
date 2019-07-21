@@ -19,6 +19,7 @@ en:
         website: "Website"
         email: "Εταιρικό email"
         telephones: "Τηλέφωνα επικοινωνίας"
+        address: "Address"
       user:
         first_name: "First name"
         first_name_feedback_html: "i.e. John"

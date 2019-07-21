@@ -1158,6 +1158,7 @@ li.page-item {
 }
 
 .print {
+  -webkit-print-color-adjust: exact;
   @extend %table-first-row-no-border;
   .footer{
     font-size: 12px;
@@ -1176,9 +1177,38 @@ li.page-item {
 
   }
   .contact{
-    padding-top: 5px;
-    border: 1px solid #ecedf1;
-    border-radius: 2px;
+    // https://codepen.io/MikeMitterer/pen/dPvJQw
+    div { box-sizing: border-box; }
+    .container {
+      display: flex;
+      justify-content: center;
+      align-content: flex-start;
+      -webkit-flex-flow: row wrap;
+      flex-flow: row wrap;
+    }
+    .circle {
+      background-color: #000;
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 30px;
+      width: 250px;
+      height: 250px;
+      border-radius: 1000px;
+      margin: 0.5em;
+    }
+    .aligner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      text-align: center;
+    }
+
+
+
+
+
   }
 
   h2.decorated {

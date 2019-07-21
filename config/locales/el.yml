@@ -19,6 +19,7 @@ el:
         website: "Website"
         email: "Εταιρικό email"
         telephones: "Τηλέφωνα επικοινωνίας"
+        address: "Διεύθυνση"
       user:
         first_name: "Όνομα"
         first_name_feedback_html: "π.χ. Δημήτρης"

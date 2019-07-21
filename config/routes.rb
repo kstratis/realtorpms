@@ -88,9 +88,9 @@ Rails.application.routes.draw do
 
   post '/accounts/new', to: 'accounts#create', as: :accounts
 
-  get '/account/edit', to: 'accounts#edit', as: :edit_account
+  get '/account/edit', to: 'accounts#edit', as: :account_edit
 
-  patch '/account/edit', to: 'accounts#update', as: :account
+  patch '/account/edit', to: 'accounts#update', as: :account_update
 
   # post '/accounts', to: 'accounts#create', as: :accounts
 

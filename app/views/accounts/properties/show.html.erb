@@ -63,7 +63,7 @@
 
         <div class="row">
           <div class="col-lg-7 col-md-12 my-auto">
-            <% if @property.images.blank? %>
+            <% if @property.images.blank? && !@property.avatar.attached?  %>
               <div class="d-flex flex-wrap justify-content-center">
                 <%= content_tag :i, "", class: "pr-icon lg house-avatar-placeholder" %>
               </div>

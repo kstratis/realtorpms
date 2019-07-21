@@ -146,7 +146,11 @@ class Property < ApplicationRecord
   # end
 
   def all_images
-    images.to_a.unshift(avatar)
+    if avatar.attached?
+      images.to_a.unshift(avatar)
+    else
+      images
+    end
   end
 
   def map_href

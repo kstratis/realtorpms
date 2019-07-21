@@ -10,7 +10,7 @@
 <% end %>
 
 <% if current_user.is_owner?(current_account) %>
-  <%= link_to edit_account_path, class: 'dropdown-item' do %>
+  <%= link_to account_edit_path, class: 'dropdown-item' do %>
     <%= content_tag :span, nil, class: 'dropdown-icon oi oi-cog' %> <%= t('navbar.account.title') %>
   <% end %>
 <% end %>
