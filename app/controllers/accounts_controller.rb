@@ -4,7 +4,6 @@ class AccountsController < ApplicationController
 
   # GET the new page
   def new
-    # return redirect_to(account_switch_url) if logged_in?
     return redirect_to root_url(subdomain: nil) unless request.subdomain.blank?
     @account = Account.new
     @account.build_owner
