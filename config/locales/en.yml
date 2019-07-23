@@ -337,6 +337,7 @@ en:
           title: "Type"
           sell: "Sell"
           rent: "Rent"
+          both: "Both"
     users_search:
       placeholder: "i.e. John Smith"
     properties_search:

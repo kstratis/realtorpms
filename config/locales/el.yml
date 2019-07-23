@@ -339,6 +339,7 @@ el:
           title: "Τύπος"
           sell: "Πώληση"
           rent: "Ενοικίαση"
+          both: "Και τα δύο"
     users_search:
       placeholder: "Αναζήτηση συνεργάτη..."
     properties_search:

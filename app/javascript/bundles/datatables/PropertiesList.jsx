@@ -9,6 +9,7 @@ import ClampWrapper from '../components/ClampWrapper';
 import Image from 'react-graceful-image';
 import ControlsContainer from './ControlsContainer';
 import SortFilter from './SortFilter';
+import MultiAsyncSelect from '../components/MultiAsyncSelect';
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
@@ -29,43 +30,19 @@ const PropertiesList = ({
   sorting,
   ordering,
   searchInput,
+  locations_endpoint,
   handleSearchInput,
   i18n
 }) => {
   return (
     <div className="">
 
-      <div className={'container'}>
-        <div className={'row'}>
+      {/*<div className={'container'}>*/}
+      {/*  <div className={'row'}>*/}
 
-          <Search handleSearchInput={handleSearchInput} searchInput={searchInput} placeholder={i18n['search']} />
-
-          {/* Generate the needed filters according to the i18n keys of the erb template */}
-          <SortFilter
-            handleFn={handleSort}
-            slug={'created_at'}
-            title={i18n.filters.sortByDate.title}
-            currentSorting={sorting}
-            currentOrdering={ordering}
-            options={[
-              {
-                sn: 0,
-                text: i18n.filters.sortByDate.option1,
-                sort_filter: 'created_at',
-                sort_order: 'desc',
-                icon: 'fas fa-sort-amount-up fa-fw'
-              },
-              {
-                sn: 1,
-                text: i18n.filters.sortByDate.option2,
-                sort_filter: 'created_at',
-                sort_order: 'asc',
-                icon: 'fas fa-sort-amount-down fa-fw'
-              }
-            ]}
-          />
-        </div>
-      </div>
+      {/*    */}
+      {/*  </div>*/}
+      {/*</div>*/}
 
       {/* CARD START */}
       {isLoading ? (
@@ -74,10 +51,82 @@ const PropertiesList = ({
         </div>
       ) : dataset.length > 0 ? (
         <div className={'PropertyListContainer'}>
-          <div className={'card-deck'}>
+        <div className={'row'}>
+          <div className={'filters col-4'}>
+            <div className="card">
+
+              <div className="card-header">
+                <div className="table-entry">
+                  <div className="table-icon-wrapper">
+                    <i className="pr-icon xs filters"></i>
+                  </div>
+                  <span className="align-middle">&nbsp; {i18n.filters.title}</span>
+                </div>
+              </div>
+              <div className="card-body">
+                <label className="d-block"><h5 className="card-title filter-header">{i18n.filters.type.title}:</h5></label>
+
+                <div className="form-group">
+                <div className="custom-control custom-radio">
+                  <input type="radio" className="custom-control-input" name="rdGroup1" id="optionSell" />
+                  <label className="custom-control-label" htmlFor="optionSell">{i18n.filters.type.sell}</label>
+                </div>
+                <div className="custom-control custom-radio">
+                  <input type="radio" className="custom-control-input" name="rdGroup1" id="optionRent"/>
+                  <label className="custom-control-label" htmlFor="optionRent">{i18n.filters.type.rent}</label>
+                </div>
+                <div className="custom-control custom-radio">
+                  <input type="radio" className="custom-control-input" name="rdGroup1" id="optionBoth" defaultChecked />
+                  <label className="custom-control-label" htmlFor="optionBoth">{i18n.filters.type.both}</label>
+                </div>
+                </div>
+                {/*<p className="card-text">With supporting text below as a natural lead-in to additional content.</p>*/}
+                {/*<a href="#" className="btn btn-primary">Go somewhere</a>*/}
+              </div>
+            </div>
+          </div>
+          <div className={'card-deck col-8'}>
+            {/*<MultiAsyncSelect*/}
+            {/*  id={'MultiAsyncSelect'}*/}
+            {/*  retrieve_endpoint={locations_endpoint}*/}
+            {/*  assign_endpoint={}*/}
+            {/*  className: ''*/}
+            {/*  // storedOptions: @property.users.blank? ? nil : @property.users.map {|user| {label: "#{user.first_name} #{user.last_name}", value: user.id}}*/}
+            {/*  isSearchable={true}*/}
+            {/*  isClearable={true}*/}
+            {/*  soloMode={true}*/}
+            {/*  ajaxEnabled={true}*/}
+            {/*  feedback={}*/}
+            {/*  />*/}
+            {/*<Search handleSearchInput={handleSearchInput} searchInput={searchInput} placeholder={i18n['search']} />*/}
+
+            {/* Generate the needed filters according to the i18n keys of the erb template */}
+            <SortFilter
+              handleFn={handleSort}
+              slug={'created_at'}
+              title={i18n.filters.sortByDate.title}
+              currentSorting={sorting}
+              currentOrdering={ordering}
+              options={[
+                {
+                  sn: 0,
+                  text: i18n.filters.sortByDate.option1,
+                  sort_filter: 'created_at',
+                  sort_order: 'desc',
+                  icon: 'fas fa-sort-amount-up fa-fw'
+                },
+                {
+                  sn: 1,
+                  text: i18n.filters.sortByDate.option2,
+                  sort_filter: 'created_at',
+                  sort_order: 'asc',
+                  icon: 'fas fa-sort-amount-down fa-fw'
+                }
+              ]}
+            />
             {dataset.map((entry, index) => (
               <div className={'col-sm-6 col-lg-4'} key={entry.id}>
-                <div className="card mb-4 mt-2 ">
+                <div className="card mb-4 ">
 
                   {/*<div className="placeholder" style=""*/}
                        {/*data-large={`https://picsum.photos/${getRandomInt(100,800)}/${getRandomInt(100,800)}/?random&sig=${Math.random()}`}>*/}
@@ -255,6 +304,7 @@ const PropertiesList = ({
             </nav>
           </div>
           <ClampWrapper />
+        </div>
         </div>
       ) : (
         <div className={'no-users'}>

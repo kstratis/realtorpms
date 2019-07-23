@@ -108,7 +108,7 @@ class MultiAsyncSelect extends React.Component {
 
   handleAjaxRequest(query, callback) {
     axios
-      .get(`${this.props.retrieve_endpoint}.json?search=${query}&dropdown=1`) // +1 because rails will_paginate starts from 1 while this starts from 0
+      .get(`${this.props.collection_endpoint}.json?search=${query}&dropdown=1`) // +1 because rails will_paginate starts from 1 while this starts from 0
       .then(response => {
         // DEBUG
         // console.log(response.data.data.dataset);

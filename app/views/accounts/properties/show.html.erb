@@ -186,7 +186,7 @@
                   <div class="col-12 pt-2">
                     <%= react_component('MultiAsyncSelect', props: {
                         id: 'MultiAsyncSelect',
-                        retrieve_endpoint: users_path,
+                        collection_endpoint: users_path,
                         assign_endpoint: assignments_path(@property.id),
                         className: '',
                         # storedOptions: @property.owner.id ? {"label": "#{@property.owner.first_name} #{@property.owner.last_name}", "value": @property.owner.id} : nil,

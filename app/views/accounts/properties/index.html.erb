@@ -20,6 +20,7 @@
               initial_search: @initial_search,
               initial_sorting: @initial_sorting,
               initial_ordering: @initial_ordering,
+              locations_endpoint: properties_locations_path,
               object_type: 'properties'
           },
           i18n: {
@@ -28,6 +29,13 @@
               view: t('js.properties_view_btn'),
               edit: t('js.properties_edit_btn'),
               filters: {
+                  title: t('js.datatables.filters.title'),
+                  type:{
+                      title: t('js.datatables.filters.type.title'),
+                      sell: t('js.datatables.filters.type.sell'),
+                      rent: t('js.datatables.filters.type.rent'),
+                      both: t('js.datatables.filters.type.both'),
+                  },
                   sortByDate: {
                       title: t('js.datatables.filters.date.title'),
                       option1: t('js.datatables.filters.date.descending'),
