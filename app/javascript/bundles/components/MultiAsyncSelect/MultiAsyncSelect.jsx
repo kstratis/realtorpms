@@ -4,7 +4,7 @@ import axios from 'axios';
 import makeAnimated from 'react-select/animated';
 import AsyncSelect from 'react-select/async';
 import ReactOnRails from 'react-on-rails';
-import { debounce, renderHTML } from '../utilities/helpers';
+import { debounce, renderHTML } from '../../utilities/helpers';
 
 const animatedComponents = makeAnimated();
 
@@ -73,16 +73,13 @@ const promiseOptions = inputValue =>
 class MultiAsyncSelect extends React.Component {
   static propTypes = {
     identity: PropTypes.string,
-    retrieve_endpoint: PropTypes.string,
-    assign_endpoint: PropTypes.string,
+    collection_endpoint: PropTypes.string,
+    handleChange: PropTypes.func,
     validatorGroup: PropTypes.string,
     options: PropTypes.array,
-    handleOptions: PropTypes.func,
     isDisabled: PropTypes.bool,
     searchable: PropTypes.bool,
     storedOptions: PropTypes.any,
-    // soloMode guards against dynamically setting the dropdown options
-    // and gettings a ref which is needed in DependantSelect
     i18n: PropTypes.shape({
       select: PropTypes.object,
       validatorErrMsg: PropTypes.string
@@ -126,9 +123,6 @@ class MultiAsyncSelect extends React.Component {
     this.handleAjaxRequestDelayed(input, callback);
   }
 
-  // This is called on every value change to update the current value and the "true" hidden input field.
-  // If it is the parent dropdown that is change it will also call the handleOptions from DependantSelect
-  // to update the childen's dropdown values accordingly
   handleChange(selectedOptions) {
     console.log(selectedOptions);
     this.setState({ selectedOptions });
@@ -149,7 +143,7 @@ class MultiAsyncSelect extends React.Component {
       <>
         <AsyncSelect
           styles={selectStyles}
-          onChange={this.handleChange}
+          onChange={this.props.handleChange}
           value={this.state.selectedOptions}
           components={animatedComponents}
           autoload={false}
@@ -160,7 +154,7 @@ class MultiAsyncSelect extends React.Component {
           placeholder={this.props.i18n.select.placeholder_users}
           noOptionsMessage={() => renderHTML(this.props.i18n.select.nooptions_async_html)}
           loadingMessage={() => renderHTML(this.props.i18n.select.loading_html)}
-          loadOptions={this.getOptions}
+          loadOptions={this.props.getOptions}
           onMenuOpen={this.onMenuOpen}
           onMenuClose={this.onMenuClose}
         />

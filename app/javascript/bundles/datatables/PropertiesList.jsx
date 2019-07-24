@@ -9,7 +9,7 @@ import ClampWrapper from '../components/ClampWrapper';
 import Image from 'react-graceful-image';
 import ControlsContainer from './ControlsContainer';
 import SortFilter from './SortFilter';
-import MultiAsyncSelect from '../components/MultiAsyncSelect';
+import MultiAsyncSelect from '../components/MultiAsyncSelect/MultiAsyncSelect';
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
