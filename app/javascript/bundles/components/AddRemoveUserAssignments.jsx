@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import useFetch from '../hooks/useFetch';
-import useModalStateSwitch from '../hooks/useModalStateSwitch';
+import useModalSwitch from '../hooks/useModalSwitch';
 
 import makeAnimated from 'react-select/animated';
 import { debounce, renderHTML } from '../utilities/helpers';
@@ -71,7 +71,7 @@ function AddRemoveUserAssignments({ modalHeader, avatar, favlists_url, favorites
 
 
 
-  const { isOpen, setIsOpen } = useModalStateSwitch();
+  const { isOpen, setIsOpen } = useModalSwitch();
   const { data, loading, setData } = useFetch(request);
 
  render(
