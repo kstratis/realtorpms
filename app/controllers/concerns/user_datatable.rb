@@ -18,15 +18,15 @@ module UserDatatable
     ####################
     # This is for retrieving the users list from within react-select
     if params[:dropdown]
-      data = {:dataset => Array.new}
+      data = Array.new
       @users.each do |entry|
         hash = {
             label: "#{entry.first_name} #{entry.last_name}",
             value: entry.id
         }
-        data[:dataset] << hash
+        data << hash
       end
-      render :json => {:status => "OK", :data => data} and return
+      render :json => {:status => "OK", :message => data} and return
     end
     ####################
 

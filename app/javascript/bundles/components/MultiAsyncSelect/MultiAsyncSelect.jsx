@@ -112,7 +112,7 @@ class MultiAsyncSelect extends React.Component {
 
         // +callback+ is react-select native function which is used to build the dropdown options. It is passed to
         // our registered function (handleAjaxRequest here) so that we can manipulate it and call it whenever we see fit
-        callback(response.data.data.dataset);
+        callback(response.data.message);
       });
   }
 
@@ -129,7 +129,7 @@ class MultiAsyncSelect extends React.Component {
     console.log('changed');
     axios({
       method: 'post',
-      url: this.props.assign_endpoint,
+      url: this.props.assignments_endpoint,
       data: { selection: selectedOptions || [] }
     }).then(() => {
       console.log('OK');
@@ -143,7 +143,7 @@ class MultiAsyncSelect extends React.Component {
       <>
         <AsyncSelect
           styles={selectStyles}
-          onChange={this.props.handleChange}
+          onChange={this.handleChange}
           value={this.state.selectedOptions}
           components={animatedComponents}
           autoload={false}
@@ -154,7 +154,7 @@ class MultiAsyncSelect extends React.Component {
           placeholder={this.props.i18n.select.placeholder_users}
           noOptionsMessage={() => renderHTML(this.props.i18n.select.nooptions_async_html)}
           loadingMessage={() => renderHTML(this.props.i18n.select.loading_html)}
-          loadOptions={this.props.getOptions}
+          loadOptions={this.getOptions}
           onMenuOpen={this.onMenuOpen}
           onMenuClose={this.onMenuClose}
         />

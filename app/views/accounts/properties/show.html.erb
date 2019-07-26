@@ -184,11 +184,12 @@
                 </div><!-- .card-body -->
                 <div class="card-body">
                   <div class="col-12 pt-2">
-                    <%= react_component('AddRemoveUserAssignments', props: {
-                        id: 'AddRemoveUserAssignments',
+                    <%= react_component('AssignmentsContainer', props: {
+                        id: 'AssignmentsContainer',
                         collection_endpoint: users_path,
-                        assign_endpoint: assignments_path(@property.id),
+                        assignments_endpoint: assignments_path(@property.id),
                         className: '',
+                        query: '',
                         # storedOptions: @property.owner.id ? {"label": "#{@property.owner.first_name} #{@property.owner.last_name}", "value": @property.owner.id} : nil,
                         storedOptions: @property.users.blank? ? nil : @property.users.map {|user| {label: "#{user.first_name} #{user.last_name}", value: user.id}},
                         isSearchable: true,

@@ -20,7 +20,16 @@ module Accounts
       remove_ids.each {|id| Assignment.find_by(property_id: property, user_id: id).destroy} unless remove_ids.blank?
       add_ids.each {|id| property.users << User.find(id)} unless add_ids.blank?
       # Report back to the UI
-      render json: {message: I18n.t('js.components.select.assign_completed')}, status: 200
+      property.reload  # Reload or we'll get stale entries
+      data = Array.new
+      property.users.each do |entry|
+        hash = {
+            label: "#{entry.first_name} #{entry.last_name}",
+            value: entry.id
+        }
+        data << hash
+      end
+      render :json => {:status => 200, :message => data, meta: I18n.t('js.components.select.assign_completed')} and return
     end
 
     private
