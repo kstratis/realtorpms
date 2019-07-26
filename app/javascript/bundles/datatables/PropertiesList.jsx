@@ -3,13 +3,11 @@ import React from 'react';
 import ReactPaginate from 'react-paginate';
 import Highlighter from 'react-highlight-words';
 import withDatatable from './withDatatable';
-import SkyLight from 'react-skylight';
 import Search from './Search';
 import ClampWrapper from '../components/ClampWrapper';
 import Image from 'react-graceful-image';
 import ControlsContainer from './ControlsContainer';
 import SortFilter from './SortFilter';
-import MultiAsyncSelect from '../components/MultiAsyncSelect/MultiAsyncSelect';
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);

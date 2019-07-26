@@ -3,7 +3,7 @@ import UsersListWithDatatable from '../bundles/datatables/UsersList';
 import UsersListAssignableWithDatatable from '../bundles/datatables/UsersListAssignable';
 import PropertiesListWithDatatable from '../bundles/datatables/PropertiesList';
 import SimpleSelect from '../bundles/components/SimpleSelect';
-import AssignmentsContainer from '../bundles/components/AssignmentsContainer';
+import MultiAsyncSelectContainer from '../bundles/components/MultiAsyncSelectContainer';
 import DependantSelect from '../bundles/components/DependantSelect';
 import ModalContainer from '../bundles/components/ModalContainer';
 
@@ -16,7 +16,7 @@ ReactOnRails.register({
   SimpleSelect,
   DependantSelect,
   ModalContainer,
-  AssignmentsContainer
+  MultiAsyncSelectContainer
 });
 
 

@@ -261,11 +261,10 @@ el:
           add_list_action: "Προσθήκη"
           loading_alt: "Φορτώνει..."
       select:
-        nooptions_async_html: "Αναζητήστε έναν όρο. Πληκτρολογήστε&nbsp; <i class=\"fas fa-backspace fa-fw\"/></i>&nbsp; για εκκαθάριση"
-        nooptions_sync_html: "Δεν βρέθηκαν αποτελέσματα"
+        noresults: "Δεν βρέθηκαν αποτελέσματα"
         loading_html: "Φόρτωση αποτελεσμάτων..."
         placeholder: "Επιλέξτε..."
-        placeholder_users: "Πληκτρολογήστε για αναζήτηση..."
+        placeholder_title: "Πληκτρολογήστε για αναζήτηση..."
         assignments_feedback: "Ανάθεση σε έναν ή περισσότερους συνεργάτες"
         category: "Κατηγορία"
         subcategory: "Υποκατηγορία"

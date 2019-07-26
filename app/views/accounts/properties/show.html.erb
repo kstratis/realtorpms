@@ -184,25 +184,20 @@
                 </div><!-- .card-body -->
                 <div class="card-body">
                   <div class="col-12 pt-2">
-                    <%= react_component('AssignmentsContainer', props: {
-                        id: 'AssignmentsContainer',
+                    <%= react_component('MultiAsyncSelectContainer', props: {
+                        id: 'MultiAsyncSelectContainer',
                         collection_endpoint: users_path,
-                        assignments_endpoint: assignments_path(@property.id),
-                        className: '',
-                        query: '',
-                        # storedOptions: @property.owner.id ? {"label": "#{@property.owner.first_name} #{@property.owner.last_name}", "value": @property.owner.id} : nil,
+                        action_endpoint: assignments_path(@property.id),
                         storedOptions: @property.users.blank? ? nil : @property.users.map {|user| {label: "#{user.first_name} #{user.last_name}", value: user.id}},
-                        isSearchable: true,
-                        isClearable: true,
-                        soloMode: true,
-                        ajaxEnabled: true,
-                        feedback: t('js.components.select.assignments_feedback'),
                         i18n: {
-                            select: t('js.components.select'),
-                            validatorErrMsg: t('js.validator.required'),
+                            select: {
+                                placeholder: t('js.components.select.placeholder_title'),
+                                noresults: t('js.components.select.noresults'),
+                                loading: t('js.components.select.loading_html'),
+                                feedback: t('js.components.select.assignments_feedback')
+                            }
                         }
                     }, prerender: false) %>
-
                   </div>
                 </div><!-- /.card-body -->
               </div><!-- /.card -->

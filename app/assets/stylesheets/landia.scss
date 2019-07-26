@@ -4,12 +4,27 @@
   }
 }
 
+//@font-face {
+//  font-family: 'PFDinDisplayPro-Regular';
+//  font-style: normal;
+//  font-weight: normal;
+//  src: local('PFDinDisplayPro-Regular'), url('PFDinDisplayPro-Regular.woff') format('woff');
+//}
+//
+//
+//@font-face {
+//  font-family: 'PFDinDisplayPro-Bold';
+//  font-style: normal;
+//  font-weight: normal;
+//  src: local('PFDinDisplayPro-Bold'), url('PFDinDisplayPro-Bold.woff') format('woff');
+//}
+
 body {
-  //background-color: #f8faff;
   line-height: 1.5em;
   color: #454545;
   text-align: left;
   font-family: 'Noto Sans', sans-serif;
+  //font-family: 'PFDinDisplayPro-Regular', sans-serif;
   //font-family: 'Poppins', helvetica, sans-serif;
   font-size: 14px;
   margin: 0 auto;

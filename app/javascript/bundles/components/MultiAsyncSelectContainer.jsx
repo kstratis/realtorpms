@@ -1,12 +1,12 @@
 import React from "react";
-import AddRemoveUserAssignments from './AddRemoveUserAssignments';
+import MultiAsyncSelect from './MultiAsyncSelect';
 
 // We need this "middleman" component as a workaround to enable us to directly use hooks in react on rails until
 // https://github.com/shakacode/react_on_rails/issues/1198 is resolved.
-function AssignmentsContainer(props) {
+function MultiAsyncSelectContainer(props) {
   return (
-    <AddRemoveUserAssignments {...props}/>
+    <MultiAsyncSelect {...props}/>
   );
 }
 
-export default AssignmentsContainer;
+export default MultiAsyncSelectContainer;

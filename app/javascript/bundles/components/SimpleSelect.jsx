@@ -225,7 +225,7 @@ class SimpleSelect extends React.Component {
             isSearchable={this.props.isSearchable}
             isClearable={this.props.isClearable}
             backspaceRemovesValue={true}
-            noOptionsMessage={() => renderHTML(this.props.i18n.select.nooptions_async_html)}
+            noOptionsMessage={() => renderHTML(this.props.i18n.select.noresults)}
             loadingMessage={() => renderHTML(this.props.i18n.select.loading_html)}
             autoload={false}
             cache={false}
