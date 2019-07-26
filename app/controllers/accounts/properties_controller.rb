@@ -190,7 +190,6 @@ module Accounts
     # DELETE /properties/1.json
     def destroy
       @property.destroy
-      # todo internationalize the notice message
       respond_to do |format|
         format.html {redirect_to properties_url, flash: I18n.t('properties.destroyed.flash')}
         format.json {head :no_content}

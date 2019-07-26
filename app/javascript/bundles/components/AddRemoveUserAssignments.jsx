@@ -4,46 +4,10 @@ import useModalToggle from '../hooks/useModalToggle';
 import makeAnimated from 'react-select/animated';
 import { debounce, renderHTML } from '../utilities/helpers';
 import AsyncSelect from 'react-select/async/dist/react-select.esm';
+import { reactSelectStyles } from '../styles/componentStyles';
 const animatedComponents = makeAnimated();
 
-const selectStyles = {
-  container: (base, state) => {
-    return { ...base };
-  },
-  option: (base, state) => ({
-    ...base,
-    '&:hover': {
-      cursor: 'pointer'
-    }
-  }),
-  dropdownIndicator: (base, state) => ({
-    ...base,
-    '&:hover': {
-      cursor: 'pointer'
-    },
-    transform: `${state.selectProps.menuIsOpen && 'rotate(180deg)'}`
-  }),
-  clearIndicator: (base, state) => ({
-    ...base,
-    '&:hover': {
-      cursor: 'pointer'
-    }
-  }),
-  input: (base, state) => ({
-    ...base
-    // flexBasis: '33.33%'
-    // backgroundColor: 'red'
-  }),
-  singleValue: (base, state) => ({
-    ...base,
-    fontWeight: 700,
-    backgroundColor: '#216AB0',
-    color: '#FFFFFF',
-    padding: '10px'
-  })
-};
-
-function AddRemoveUserAssignments({ collection_endpoint, assignments_endpoint, storedOptions, query, i18n }) {
+function AddRemoveUserAssignments({ collection_endpoint, assignments_endpoint, storedOptions, i18n }) {
   // custom hook to open/close modal
   const { isOpen, setIsOpen } = useModalToggle();
   // this is the request for the pool of options - won't run on moount
@@ -63,7 +27,7 @@ function AddRemoveUserAssignments({ collection_endpoint, assignments_endpoint, s
   useFetch(request, didMountForOptionsRef);
 
   // This takes care of properly setting up the assignment requests
-  const { data, loading, setData } = useFetch(assignmentRequest, didMountForAssignmentsRef);
+  const { data, setData } = useFetch(assignmentRequest, didMountForAssignmentsRef);
 
   useEffect(() => {
     setData(storedOptions);
@@ -97,14 +61,17 @@ function AddRemoveUserAssignments({ collection_endpoint, assignments_endpoint, s
   const loadAsyncOptionsDelayed = debounce(loadAsyncOptions, 300);
 
   return (
+    /**
+     * @param i18 Main translations object
+     * @param i18.select Main translations for the react-select component
+     * @param i18.select.placeholder_users translations for empty users placeholder
+     * @param i18.select.nooptions_async_html
+     * @param i18.select.loading_html
+     */
     <AsyncSelect
-      styles={selectStyles}
-      // onChange={this.props.handleChange}
+      styles={reactSelectStyles}
       onChange={handleChange}
-      // onChange={''}
-      // value={this.state.selectedOptions}
       value={data}
-      // value={''}
       components={animatedComponents}
       autoload={false}
       cache={false}
@@ -114,7 +81,6 @@ function AddRemoveUserAssignments({ collection_endpoint, assignments_endpoint, s
       placeholder={i18n.select.placeholder_users}
       noOptionsMessage={() => renderHTML(i18n.select.nooptions_async_html)}
       loadingMessage={() => renderHTML(i18n.select.loading_html)}
-      // loadOptions={this.props.getOptions}
       loadOptions={loadAsyncOptionsDelayed}
       onMenuOpen={() => setIsOpen(true)}
       onMenuClose={() => setIsOpen(false)}
