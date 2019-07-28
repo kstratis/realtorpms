@@ -323,8 +323,10 @@ en:
         results: "Results"
       properties:
         description: "Description"
+      sorting:
+        title: "Sorting"
       filters:
-        title: "Filters"
+        sorting: "Ταξινόμηση"
         date:
           title: "Entry date"
           ascending: "Ascending"

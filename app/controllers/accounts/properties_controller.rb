@@ -1,6 +1,7 @@
 module Accounts
   class PropertiesController < Accounts::BaseController
-
+    include PropertyHeader
+    helper PropertyHeader
     before_action :set_property, only: [:show, :edit, :update, :destroy]
 
     # GET /properties
@@ -27,8 +28,11 @@ module Accounts
             id: property.id,
             title: property.title,
             description: property.description,
-            size: property.size,
-            type: property.price,
+            mini_heading: mini_heading(property),
+            size: property.size ? I18n.t('activerecord.attributes.property.size_meter_html', size: property.size.to_s) : '',
+            price: property.price ? ActionController::Base.helpers.number_to_currency(property.price) : '',
+            pricepersqmeter: property.price && property.size ? "#{ActionController::Base.helpers.number_to_currency(property.pricepersqmeter)} / #{I18n.t('size.sqmeters')}" : '',
+            location: property.location.localname,
             view_entity_path: property_path(property.id),
             edit_entity_path: edit_property_path(property.id),
             fav_entity_path: property_favorites_path(property.id),

@@ -8,7 +8,8 @@ module LocationFilter
       return
     end
 
-    puts "search term is: #{params[:search]}"
+    # DEBUG
+    # puts "search term is: #{params[:search]}"
     @locations = Location.search(params[:search])
     # respond_to do |format|
     #   format.json {render json: {message: 'Working! OK!'}, status: 200}

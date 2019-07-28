@@ -1,6 +1,5 @@
 import ReactOnRails from 'react-on-rails';
 import UsersListWithDatatable from '../bundles/datatables/UsersList';
-import UsersListAssignableWithDatatable from '../bundles/datatables/UsersListAssignable';
 import PropertiesListWithDatatable from '../bundles/datatables/PropertiesList';
 import SimpleSelect from '../bundles/components/SimpleSelect';
 import MultiAsyncSelectContainer from '../bundles/components/MultiAsyncSelectContainer';
@@ -11,7 +10,6 @@ import ModalContainer from '../bundles/components/ModalContainer';
 // Unfortunately we need to register everything up-front.
 ReactOnRails.register({
   UsersListWithDatatable,
-  UsersListAssignableWithDatatable,
   PropertiesListWithDatatable,
   SimpleSelect,
   DependantSelect,

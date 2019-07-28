@@ -685,10 +685,14 @@ button, a {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  height: 220px;
+  width: 240px;
+  //object-fit: cover;
+  height: 176px;
+  //height: 220px;
 }
 
 .thumb {
+
   object-fit: cover;
   min-width: 100%;
   min-height: 100%
@@ -700,6 +704,10 @@ button, a {
 
 .tab-content {
   padding: 20px 15px 0 15px;
+}
+
+.yolo{
+  text-align: center;
 }
 
 //.uppy-Dashboard-poweredBy{
@@ -1255,4 +1263,8 @@ li.page-item {
 
 .filter-header{
   font-size: 14px;
+}
+
+.property-title{
+  display: block;
 }

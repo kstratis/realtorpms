@@ -15,7 +15,7 @@
             favlists_url: favlists_url,
             property_id: @property.id,
             modalTitle: t('properties.fav_lists'),
-            modalHeader: heading,
+            modalHeader: heading(@property),
             buttonOKLabel: t('properties.ok_button'),
             buttonCancelLabel: t('properties.cancel_button'),
             buttonCloseLabel: t('properties.close_button'),
@@ -54,7 +54,7 @@
   <div class="container">
     <!-- .card -->
     <div class="card ">
-      <%= render partial: 'shared/card_header/header', locals: {title: heading, btn_text: t('properties.show.catalog'), btn_link: properties_path} %>
+      <%= render partial: 'shared/card_header/header', locals: {title: heading(@property), btn_text: t('properties.show.catalog'), btn_link: properties_path} %>
       <!-- .card-body -->
       <div class="card-body">
         <div class="row">

@@ -34,14 +34,6 @@ const PropertiesList = ({
 }) => {
   return (
     <div className="">
-
-      {/*<div className={'container'}>*/}
-      {/*  <div className={'row'}>*/}
-
-      {/*    */}
-      {/*  </div>*/}
-      {/*</div>*/}
-
       {/* CARD START */}
       {isLoading ? (
         <div className={'centered'}>
@@ -49,260 +41,215 @@ const PropertiesList = ({
         </div>
       ) : dataset.length > 0 ? (
         <div className={'PropertyListContainer'}>
-        <div className={'row'}>
-          <div className={'filters col-4'}>
-            <div className="card">
-
-              <div className="card-header">
-                <div className="table-entry">
-                  <div className="table-icon-wrapper">
-                    <i className="pr-icon xs filters"></i>
+          <div className={'row'}>
+            <div className={'filters col-4'}>
+              <div className="card">
+                <div className="card-header">
+                  <div className="table-entry">
+                    <div className="table-icon-wrapper">
+                      <i className="pr-icon xs filters" />
+                    </div>
+                    <span className="align-middle">&nbsp; {i18n.filters.title}</span>
                   </div>
-                  <span className="align-middle">&nbsp; {i18n.filters.title}</span>
                 </div>
-              </div>
-              <div className="card-body">
-                <label className="d-block"><h5 className="card-title filter-header">{i18n.filters.type.title}:</h5></label>
+                <div className="card-body">
+                  <label className="d-block">
+                    <h5 className="card-title filter-header">{i18n.sorting.title}:</h5>
+                  </label>
+                  <SortFilter
+                    handleFn={handleSort}
+                    slug={'created_at'}
+                    title={i18n.filters.sortByDate.title}
+                    currentSorting={sorting}
+                    currentOrdering={ordering}
+                    options={[
+                      {
+                        sn: 0,
+                        text: i18n.filters.sortByDate.option1,
+                        sort_filter: 'created_at',
+                        sort_order: 'desc',
+                        icon: 'fas fa-sort-amount-up fa-fw'
+                      },
+                      {
+                        sn: 1,
+                        text: i18n.filters.sortByDate.option2,
+                        sort_filter: 'created_at',
+                        sort_order: 'asc',
+                        icon: 'fas fa-sort-amount-down fa-fw'
+                      }
+                    ]}
+                  />
+                  <hr />
+                  <label className="d-block">
+                    <h5 className="card-title filter-header">{i18n.filters.type.title}:</h5>
+                  </label>
 
-                <div className="form-group">
-                <div className="custom-control custom-radio">
-                  <input type="radio" className="custom-control-input" name="rdGroup1" id="optionSell" />
-                  <label className="custom-control-label" htmlFor="optionSell">{i18n.filters.type.sell}</label>
+                  <div className="form-group">
+                    <div className="custom-control custom-radio">
+                      <input type="radio" className="custom-control-input" name="rdGroup1" id="optionSell" />
+                      <label className="custom-control-label" htmlFor="optionSell">
+                        {i18n.filters.type.sell}
+                      </label>
+                    </div>
+                    <div className="custom-control custom-radio">
+                      <input type="radio" className="custom-control-input" name="rdGroup1" id="optionRent" />
+                      <label className="custom-control-label" htmlFor="optionRent">
+                        {i18n.filters.type.rent}
+                      </label>
+                    </div>
+                    <div className="custom-control custom-radio">
+                      <input
+                        type="radio"
+                        className="custom-control-input"
+                        name="rdGroup1"
+                        id="optionBoth"
+                        defaultChecked
+                      />
+                      <label className="custom-control-label" htmlFor="optionBoth">
+                        {i18n.filters.type.both}
+                      </label>
+                    </div>
+                  </div>
+                  {/*<p className="card-text">With supporting text below as a natural lead-in to additional content.</p>*/}
+                  {/*<a href="#" className="btn btn-primary">Go somewhere</a>*/}
                 </div>
-                <div className="custom-control custom-radio">
-                  <input type="radio" className="custom-control-input" name="rdGroup1" id="optionRent"/>
-                  <label className="custom-control-label" htmlFor="optionRent">{i18n.filters.type.rent}</label>
-                </div>
-                <div className="custom-control custom-radio">
-                  <input type="radio" className="custom-control-input" name="rdGroup1" id="optionBoth" defaultChecked />
-                  <label className="custom-control-label" htmlFor="optionBoth">{i18n.filters.type.both}</label>
-                </div>
-                </div>
-                {/*<p className="card-text">With supporting text below as a natural lead-in to additional content.</p>*/}
-                {/*<a href="#" className="btn btn-primary">Go somewhere</a>*/}
               </div>
             </div>
-          </div>
-          <div className={'card-deck col-8'}>
-            {/*<MultiAsyncSelect*/}
-            {/*  id={'MultiAsyncSelect'}*/}
-            {/*  retrieve_endpoint={locations_endpoint}*/}
-            {/*  assign_endpoint={}*/}
-            {/*  className: ''*/}
-            {/*  // storedOptions: @property.users.blank? ? nil : @property.users.map {|user| {label: "#{user.first_name} #{user.last_name}", value: user.id}}*/}
-            {/*  isSearchable={true}*/}
-            {/*  isClearable={true}*/}
-            {/*  soloMode={true}*/}
-            {/*  ajaxEnabled={true}*/}
-            {/*  feedback={}*/}
-            {/*  />*/}
-            {/*<Search handleSearchInput={handleSearchInput} searchInput={searchInput} placeholder={i18n['search']} />*/}
+            <div className={'col-8'}>
+              {/*<Search handleSearchInput={handleSearchInput} searchInput={searchInput} placeholder={i18n['search']} />*/}
 
-            {/* Generate the needed filters according to the i18n keys of the erb template */}
-            <SortFilter
-              handleFn={handleSort}
-              slug={'created_at'}
-              title={i18n.filters.sortByDate.title}
-              currentSorting={sorting}
-              currentOrdering={ordering}
-              options={[
-                {
-                  sn: 0,
-                  text: i18n.filters.sortByDate.option1,
-                  sort_filter: 'created_at',
-                  sort_order: 'desc',
-                  icon: 'fas fa-sort-amount-up fa-fw'
-                },
-                {
-                  sn: 1,
-                  text: i18n.filters.sortByDate.option2,
-                  sort_filter: 'created_at',
-                  sort_order: 'asc',
-                  icon: 'fas fa-sort-amount-down fa-fw'
-                }
-              ]}
-            />
-            {dataset.map((entry, index) => (
-              <div className={'col-sm-6 col-lg-4'} key={entry.id}>
-                <div className="card mb-4 ">
+              {/* Generate the needed filters according to the i18n keys of the erb template */}
 
-                  {/*<div className="placeholder" style=""*/}
-                       {/*data-large={`https://picsum.photos/${getRandomInt(100,800)}/${getRandomInt(100,800)}/?random&sig=${Math.random()}`}>*/}
-                    {/*<img src="https://cdn-images-1.medium.com/freeze/max/27/1*sg-uLNm73whmdOgKlrQdZA.jpeg?q=20"*/}
-                         {/*alt="yolo" className="img-small"/>*/}
-                    {/*<div style={{paddingBottom: "66.6%"}}></div>*/}
+              {dataset.map((entry, index) => (
+                <div key={entry.id}>
+                  <div className={'row'}>
+                    <div className="col-12">
+                      <div className="list-group list-group-media mb-3">
+                        <a href="#" className="list-group-item list-group-item-action">
+                          <div className="list-group-item-figure rounded-left">
+                            <div className={'thumb-container'}>
+                              <img
+                                src={`https://picsum.photos/${getRandomInt(100, 800)}/${getRandomInt(
+                                  100,
+                                  800
+                                )}/?random&sig=${Math.random()}`}
+                                alt="placeholder image"
+                                className={'thumb'}
+                              />
+                            </div>
+                          </div>
+                          <div className="list-group-item-body">
+                            <div className={'row'}>
+                              <div className={'col-9'}>
+                                <h4 className="list-group-item-title">{entry.mini_heading}</h4>
+                                <p className="">{entry.location}</p>
+                                <p className="list-group-item-text">{entry.description}</p>
+                              </div>
+                              <div className={'col-3'}>
+                                <p className="list-group-item-text">{entry.price}</p>
+                                <p className="list-group-item-text">{entry.size}</p>
+                                <p className="list-group-item-text">{entry.pricepersqmeter}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                    {/*<div className={'col-md-4 col-sm-12'}>*/}
+                    {/*  <div className={'thumb-container'}>*/}
+                    {/*    /!*<img src={`https://picsum.photos/${getRandomInt(100,800)}/${getRandomInt(100,800)}/?random&sig=${Math.random()}`} className={'card-img-top thumb'} alt={"thumbnail"}/>*!/*/}
+                    {/*    /!*<img src={`https://picsum.photos/650/440/?random&sig=${Math.random()}`} className={'card-img-top thumb'} alt={"asd"}/>*!/*/}
+                    {/*    /!*<img src={`https://picsum.photos/310/220/?random&sig=${Math.random()}`} className={'card-img-top thumb'} alt={"asd"}/>*!/*/}
+
+                    {/*    /!* SOS*!/*/}
+                    {/*    /!*<img src={`https://www.dropbox.com/s/l9pj1s6xzptfke6/korig.JPG?dl=1`} className={'card-img-top thumb'} alt={"asd"}/>*!/*/}
+
+                    {/*<Image*/}
+                    {/*  src={`https://picsum.photos/${getRandomInt(100, 800)}/${getRandomInt(*/}
+                    {/*    100,*/}
+                    {/*    800*/}
+                    {/*  )}/?random&sig=${Math.random()}`}*/}
+                    {/*      className={'card-img-top thumb'}*/}
+                    {/*      // className={'thumb'}*/}
+                    {/*      // width="300"*/}
+                    {/*      // height={`${document.getElementById('yyy').clientHeight}px`}*/}
+                    {/*      // height={`${this.clientHeight}`}*/}
+                    {/*      width={'100%'}*/}
+                    {/*      // height={'100%'}*/}
+                    {/*      alt="My awesome image"*/}
+                    {/*      placeholderColor={'#4dabf5'}*/}
+                    {/*    />*/}
+                    {/*  </div>*/}
+                    {/*</div>*/}
+                  </div>
+
+                  {/*<div className={'row'}>*/}
+                  {/*  <div className={'col-12'}>*/}
+                  {/*    <h5 className="card-title clamp-2">*/}
+                  {/*      <Highlighter*/}
+                  {/*        highlightClassName="highlighted"*/}
+                  {/*        searchWords={[searchInput]}*/}
+                  {/*        autoEscape={true}*/}
+                  {/*        textToHighlight={entry['title'] || ''}*/}
+                  {/*      />*/}
+                  {/*    </h5>*/}
+                  {/*  </div>*/}
+                  {/*<div className={'col-2'}>*/}
+                  {/*<div className={'favourites'}>*/}
+
+                  {/*</div>*/}
+                  {/*</div>*/}
                   {/*</div>*/}
 
-                  <div className={'thumb-container'}>
-                    {/*<img src={`https://picsum.photos/${getRandomInt(100,800)}/${getRandomInt(100,800)}/?random&sig=${Math.random()}`} className={'card-img-top thumb'} alt={"thumbnail"}/>*/}
-                    {/*<img src={`https://picsum.photos/650/440/?random&sig=${Math.random()}`} className={'card-img-top thumb'} alt={"asd"}/>*/}
-                    {/*<img src={`https://picsum.photos/310/220/?random&sig=${Math.random()}`} className={'card-img-top thumb'} alt={"asd"}/>*/}
-
-
-                    {/* SOS*/}
-                    {/*<img src={`https://www.dropbox.com/s/l9pj1s6xzptfke6/korig.JPG?dl=1`} className={'card-img-top thumb'} alt={"asd"}/>*/}
-
-
-                    <Image
-                      // id={'yyy'}
-                      src={`https://picsum.photos/${getRandomInt(100,800)}/${getRandomInt(100,800)}/?random&sig=${Math.random()}`}
-                      className={'card-img-top thumb'}
-                      // className={'thumb'}
-                      // width="300"
-                      // height={`${document.getElementById('yyy').clientHeight}px`}
-                      // height={`${this.clientHeight}`}
-                      height={'220px'}
-                      alt="My awesome image"
-                      placeholderColor={'#4dabf5'}
-                    />
-                  </div>
-                  {/*</picture>*/}
+                  {/*<div className={'row'}>*/}
+                  {/*  <div className={'col-12 desc-container'}>*/}
+                  {/*    <p className="card-text clamp-3">*/}
+                  {/*      <Highlighter*/}
+                  {/*        highlightClassName="highlighted"*/}
+                  {/*        searchWords={[searchInput]}*/}
+                  {/*        autoEscape={true}*/}
+                  {/*        textToHighlight={entry['description'] || ''}*/}
+                  {/*      />*/}
+                  {/*    </p>*/}
+                  {/*  </div>*/}
                   {/*</div>*/}
-                  <div className="overlay">
-                    <a
-                      title={i18n.favourites_tooltip}
-                      data-toggle="tooltip"
-                      data-placement="top"
-                      onClick={e => handleFav(e, entry.fav_entity_path, entry.isFaved, entry.id)}
-                      className={'tooltips btn-circle'}
-                      href={'#'}>
-                      {entry.isFaved ? (
-                        <i className="fas fa-heart fa-lg fa-fw colored" />
-                      ) : (
-                        <i className={'far fa-heart fa-lg fa-fw'} />
-                      )}
-                    </a>
-                  </div>
-                  {/*<img*/}
-                  {/*className="card-img-top thumb"*/}
-                  {/*src={`https://picsum.photos/640/480/?random&sig=${Math.random()}`}*/}
-                  {/*alt="Card image cap"*/}
-                  {/*/>*/}
-                  {/*<img className="card-img-top thumb" src={"https://picsum.photos/1250/800?image=1"} alt="Card image cap" />*/}
-                  <div className="card-body">
-                    <div className={'row'}>
-                      <div className={'col-12'}>
-                        <h5 className="card-title clamp-2">
-                          <Highlighter
-                            highlightClassName="highlighted"
-                            searchWords={[searchInput]}
-                            autoEscape={true}
-                            textToHighlight={entry['title'] || ''}
-                          />
-                        </h5>
-                      </div>
-                      {/*<div className={'col-2'}>*/}
-                      {/*<div className={'favourites'}>*/}
 
-                      {/*</div>*/}
-                      {/*</div>*/}
-                    </div>
-
-                    <div className={'row'}>
-                      <div className={'col-12 desc-container'}>
-                        <p className="card-text clamp-3">
-                          <Highlighter
-                            highlightClassName="highlighted"
-                            searchWords={[searchInput]}
-                            autoEscape={true}
-                            textToHighlight={entry['description'] || ''}
-                          />
-                        </p>
-                      </div>
-                    </div>
-
-                    <hr />
-
-                    <div className="row mt-2">
-                      <div className={'col-12'}>
-                        <div className={'property-owner-name'}>
-                          <a href={''} className={'client-icon'}>
-                            <i className={'fas fa-user-tie fa-fw'} />
-                          </a>
-                          &nbsp;
-                          <Highlighter
-                            className={'client-name'}
-                            highlightClassName="highlighted"
-                            searchWords={[searchInput]}
-                            autoEscape={true}
-                            textToHighlight={entry['owner_name'] || ''}
-                          />
-                        </div>
-                      </div>
-
-                      <div className={'col-12'}>
-                        <div className={'property-owner-tel'}>
-                          <a href={''} className={'client-icon'}>
-                            <i className={'fas fa-phone fa-fw'} />
-                          </a>
-                          &nbsp;
-                          <Highlighter
-                            highlightClassName="highlighted"
-                            searchWords={[searchInput]}
-                            autoEscape={true}
-                            textToHighlight={entry['owner_tel'] || ''}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="card-control-buttons btn-group d-flex" role="group" aria-label="Basic example">
-                    <a
-                      href={entry.view_entity_path}
-                      title={i18n.view}
-                      className="btn btn-primary tooltips w-100"
-                      data-toggle="tooltip"
-                      data-placement="top">
-                      <i className={'fas fa-eye fa-fw'} />
-                      &nbsp;
-                    </a>
-                    <a
-                      href={entry.edit_entity_path}
-                      title={i18n.edit}
-                      className="btn btn-warning tooltips w-100"
-                      data-toggle="tooltip"
-                      data-placement="top">
-                      <i className={'fas fa-pen fa-fw'} />
-                      &nbsp;
-                    </a>
-                  </div>
+                  {/*<hr />*/}
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+            {/* CARD END */}
+            <div className={'clearfix'} />
+            <div className={'row d-flex justify-content-center'}>
+              <nav aria-label="Results navigation">
+                <ReactPaginate
+                  previousLabel={'❮'}
+                  nextLabel={'❯'}
+                  breakLabel={
+                    <span className="break-button-content page-link" onClick={advanceByTwo}>
+                      ...
+                    </span>
+                  }
+                  breakClassName={'break-button break-button-upper'}
+                  pageCount={pageCount}
+                  marginPagesDisplayed={2}
+                  pageRangeDisplayed={5}
+                  onPageChange={handlePageClick}
+                  containerClassName={'pagination'}
+                  subContainerClassName={'pages pagination'}
+                  pageLinkClassName={'page-link'}
+                  activeClassName={'active'}
+                  forcePage={selectedPage}
+                  pageClassName={'page-item'}
+                  previousLinkClassName={'page-link'}
+                  nextLinkClassName={'page-link'}
+                  nextClassName={'next'}
+                  previousClassName={'previous'}
+                />
+              </nav>
+            </div>
+            <ClampWrapper />
           </div>
-          {/* CARD END */}
-          <div className={'clearfix'} />
-          <div className={'row d-flex justify-content-center'}>
-            <nav aria-label="Results navigation">
-              <ReactPaginate
-                previousLabel={'❮'}
-                nextLabel={'❯'}
-                breakLabel={
-                  <span className="break-button-content page-link" onClick={advanceByTwo}>
-                    ...
-                  </span>
-                }
-                breakClassName={'break-button break-button-upper'}
-                pageCount={pageCount}
-                marginPagesDisplayed={2}
-                pageRangeDisplayed={5}
-                onPageChange={handlePageClick}
-                containerClassName={'pagination'}
-                subContainerClassName={'pages pagination'}
-                pageLinkClassName={'page-link'}
-                activeClassName={'active'}
-                forcePage={selectedPage}
-                pageClassName={'page-item'}
-                previousLinkClassName={'page-link'}
-                nextLinkClassName={'page-link'}
-                nextClassName={'next'}
-                previousClassName={'previous'}
-              />
-            </nav>
-          </div>
-          <ClampWrapper />
-        </div>
         </div>
       ) : (
         <div className={'no-users'}>

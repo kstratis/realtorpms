@@ -205,3 +205,5 @@ en:
       long: "%B %d, %Y %H:%M"
       short: "%d %b %H:%M"
     pm: pm
+  size:
+    sqmeters: "m2"
