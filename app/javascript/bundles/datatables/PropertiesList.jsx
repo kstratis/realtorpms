@@ -92,10 +92,10 @@ const PropertiesList = ({
 
               {/* Generate the needed filters according to the i18n keys of the erb template */}
               <div className={'row mb-3'}>
-                <div className={'col-9'}>
+                <div className={'col-8'}>
                   <MultiAsyncSelect i18n={i18n} collection_endpoint={locations_endpoint} />
                 </div>
-                <div className={'col-3'}>
+                <div className={'col-4'}>
                   <SortFilter
                     handleFn={handleSort}
                     slug={'created_at'}
