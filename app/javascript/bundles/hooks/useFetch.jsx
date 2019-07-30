@@ -3,24 +3,20 @@ import axios from 'axios';
 import ReactOnRails from 'react-on-rails';
 axios.defaults.headers.common['X-CSRF-Token'] = ReactOnRails.authenticityToken();
 
-// react-select keeps its own internal state in which case maintaing our own and setting it on fetch kill performance
-// and the user gets input lag
-function useFetch(request, dropdown = true, didMountRef = null) {
+// didMountRef guards useEffect from running on first render
+function useFetch(request, didMountRef = null) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const executeAjax = async () => {
-      if (!dropdown) setLoading(true);
       const result = await axios({
         method: request.method,
         url: request.url,
         data: request.payload
       });
-      if (!dropdown) {
-        setData(result.data.message);
-        setLoading(false);
-      }
+      setData(result.data.message);
+      setLoading(false);
       if (request.callback && typeof request.callback === 'function') {
         request.callback(result.data.message);
       }
@@ -36,7 +32,7 @@ function useFetch(request, dropdown = true, didMountRef = null) {
     }
   }, [request]);
 
-  // Retun setData is case the includer needs to use it.
+  // Return setData is case the includer needs to use it.
   return { data, loading, setData };
 }
 

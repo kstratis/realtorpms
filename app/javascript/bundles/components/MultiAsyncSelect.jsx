@@ -1,12 +1,80 @@
-import React, { useState, useEffect, useRef } from 'react';
-import useFetch from '../hooks/useFetch';
-import useModalToggle from '../hooks/useModalToggle';
+import React from 'react';
 import makeAnimated from 'react-select/animated';
 import { debounce, renderHTML } from '../utilities/helpers';
 import AsyncSelect from 'react-select/async';
 import { reactSelectStyles } from '../styles/componentStyles';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 const animatedComponents = makeAnimated();
+
+class MultiAsyncSelect extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleAjaxRequestDelayed = debounce(this.handleAjaxRequest.bind(this), 300);
+    this.loadAsyncOptions = this.loadAsyncOptions.bind(this);
+    this.promiseOptions = this.promiseOptions.bind(this);
+    this.state = {
+      selectedOption: this.props.storedOption || '',
+      isOpen: false,
+      request: {},
+      assignmentRequest: {}
+    };
+  }
+
+  onMenuOpen = () => this.setState({ isOpen: true });
+  onMenuClose = () => this.setState({ isOpen: false });
+
+  handleAjaxRequest(request, callback) {
+    axios({
+      method: request.method,
+      url: request.url,
+      data: request.payload
+    }).then((result)=> {
+      callback(result.data.message);
+    });
+  }
+
+  loadAsyncOptions(query, callback) {
+    if (!query) {
+      return Promise.resolve({ options: [] });
+    }
+    this.handleAjaxRequestDelayed({
+      url: `${this.props.collection_endpoint}.json?search=${query}&dropdown=1`,
+      method: 'get',
+      payload: {}
+    }, callback);
+  }
+
+  promiseOptions(inputValue){
+    console.log('yolo');
+
+  }
+
+  render() {
+    {console.log('rendering')}
+    return (
+    <>
+      <AsyncSelect
+        styles={reactSelectStyles}
+        // onChange={handleChange}
+        // value={data}
+        components={animatedComponents}
+        autoload={false}
+        cache={false}
+        menuIsOpen={this.state.isOpen}
+        isMulti={true}
+        backspaceRemovesValue={false}
+        placeholder={this.props.i18n.select.placeholder}
+        noOptionsMessage={() => renderHTML(this.props.i18n.select.noresults)}
+        loadingMessage={() => renderHTML(this.props.i18n.select.loading)}
+        loadOptions={this.promiseOptions}
+        onMenuOpen={this.onMenuOpen}
+        onMenuClose={this.onMenuClose}
+      />
+      {this.props.hasFeedback ? <small className="form-text text-muted">{this.props.i18n.select.feedback}</small> : ''}
+    </>)
+  }
+}
 
 MultiAsyncSelect.propTypes = {
   collection_endpoint: PropTypes.string.isRequired,
@@ -21,93 +89,20 @@ MultiAsyncSelect.propTypes = {
   }).isRequired
 };
 
-function MultiAsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasFeedback, i18n }) {
-  // custom hook to open/close modal
-  const { isOpen, setIsOpen } = useModalToggle();
-  // this is the request for the pool of options - won't run on mount
-  const [request, setRequest] = useState({});
-  // this is the request for the assignments - won't run on mount
-  const [assignmentRequest, setAssignmentRequest] = useState({});
-
-  // We don't need to fetch or post anything upon the initial render.
-  // So we use this trick: https://stackoverflow.com/a/53180013/178728
-  // TODO: refactor as a reusable hook
-  const didMountForOptionsRef = useRef(false);
-  const didMountForAssignmentsRef = useRef(false);
-
-  // This loads the options list.
-  // We don't need the return value of this particular useFetch { data, loading, setData } due to the way
-  // react-select loads its list of options. https://react-select.com/async#loading-asynchronously.
-  // The trick is to pass over react-select's native option-loading callback instead (shim it in the request object).
-  useFetch(request, true, didMountForOptionsRef);
-
-  // This loads the selection list.
-  // This takes care of properly setting up the assignment requests
-  // In this case we do need internal state
-  const { data, setData } = useFetch(assignmentRequest, false, didMountForAssignmentsRef);
-
-  // Only on mount load the existing data
-  useEffect(() => {
-    setData(storedOptions);
-  }, []);
-
-  // selectedOptions on each render contains ALL the selected values (previous & current) concatenated.
-  const handleChange = selectedOptions => {
-    setAssignmentRequest({
-      url: action_endpoint,
-      method: 'post',
-      payload: { selection: selectedOptions || [] },
-      callback: ''
-    });
-  };
-
-  // `callback` is a react-select native function which is used to build the dropdown options. It is passed over to
-  // our useFetch custom hook so that we can manipulate it and call it whenever we see fit.
-  const loadAsyncOptions = (query, callback) => {
-    if (!query) {
-      return Promise.resolve({ options: [] });
-    }
-    setRequest({
-      url: `${collection_endpoint}.json?search=${query}&dropdown=1`,
-      method: 'get',
-      payload: {},
-      callback: callback
-    });
-  };
-
-  // On fast key presses, bounce back the multiple requests
-  const loadAsyncOptionsDelayed = debounce(loadAsyncOptions, 300);
-
-  return (
-    /**
-     * @param i18 Main translations object
-     * @param i18.select
-     * @param i18.select.placeholder
-     * @param i18.select.noresults
-     * @param i18.select.loading
-     * @param i18.select.feedback
-     */
-    <>
-      <AsyncSelect
-        styles={reactSelectStyles}
-        onChange={handleChange}
-        value={data}
-        components={animatedComponents}
-        autoload={false}
-        cache={false}
-        menuIsOpen={isOpen}
-        isMulti={true}
-        backspaceRemovesValue={false}
-        placeholder={i18n.select.placeholder}
-        noOptionsMessage={() => renderHTML(i18n.select.noresults)}
-        loadingMessage={() => renderHTML(i18n.select.loading)}
-        loadOptions={loadAsyncOptionsDelayed}
-        onMenuOpen={() => setIsOpen(true)}
-        onMenuClose={() => setIsOpen(false)}
-      />
-      {hasFeedback ? <small className="form-text text-muted">{i18n.select.feedback}</small> : ''}
-    </>
-  );
-}
-
 export default MultiAsyncSelect;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
