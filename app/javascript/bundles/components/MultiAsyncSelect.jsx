@@ -39,11 +39,12 @@ function MultiAsyncSelect({ collection_endpoint, action_endpoint, storedOptions,
   // We don't need the return value of this particular useFetch { data, loading, setData } due to the way
   // react-select loads its list of options. https://react-select.com/async#loading-asynchronously.
   // The trick is to pass over react-select's native option-loading callback instead (shim it in the request object).
-  useFetch(request, didMountForOptionsRef);
+  useFetch(request, true, didMountForOptionsRef);
 
   // This loads the selection list.
   // This takes care of properly setting up the assignment requests
-  const { data, setData } = useFetch(assignmentRequest, didMountForAssignmentsRef);
+  // In this case we do need internal state
+  const { data, setData } = useFetch(assignmentRequest, false, didMountForAssignmentsRef);
 
   // Only on mount load the existing data
   useEffect(() => {
