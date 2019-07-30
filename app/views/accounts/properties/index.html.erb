@@ -20,10 +20,17 @@
               initial_search: @initial_search,
               initial_sorting: @initial_sorting,
               initial_ordering: @initial_ordering,
-              locations_endpoint: properties_locations_path,
+              locations_endpoint: properties_locations_url,
+              hasFeedback: false,
               object_type: 'properties'
           },
           i18n: {
+              select: {
+                  placeholder: t('js.components.select.placeholder_title'),
+                  noresults: t('js.components.select.noresults'),
+                  loading: t('js.components.select.loading_html'),
+                  feedback: t('js.components.select.assignments_feedback')
+              },
               datatable: t('js.datatables.properties'),
               search: t('js.properties_search.placeholder'),
               view: t('js.properties_view_btn'),

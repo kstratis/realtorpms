@@ -134,13 +134,13 @@ class SimpleSelect extends React.Component {
   handleAjaxRequest(query, callback) {
     axios
       .get(`${this.props.endpoint}.json?search=${query}`) // +1 because rails will_paginate starts from 1 while this starts from 0
-      .then(response => {
+      .then(result => {
         // DEBUG
         // console.log(response.data.data.dataset);
 
         // +callback+ is react-select native function which is used to build the dropdown options. It is passed to
         // our registered function (handleAjaxRequest here) so that we can manipulate it and call it whenever we see fit
-        callback(response.data.data.dataset);
+        callback(result.data.message);
       });
   }
 
@@ -189,6 +189,8 @@ class SimpleSelect extends React.Component {
     // This is needed for the menu open/close styles
     const { isOpen } = this.state;
 
+
+    console.log('rendering');
     return (
       <div>
         {!this.props.ajaxEnabled ? (

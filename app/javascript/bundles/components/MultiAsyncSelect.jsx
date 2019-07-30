@@ -3,7 +3,7 @@ import useFetch from '../hooks/useFetch';
 import useModalToggle from '../hooks/useModalToggle';
 import makeAnimated from 'react-select/animated';
 import { debounce, renderHTML } from '../utilities/helpers';
-import AsyncSelect from 'react-select/async/dist/react-select.esm';
+import AsyncSelect from 'react-select/async';
 import { reactSelectStyles } from '../styles/componentStyles';
 import PropTypes from 'prop-types';
 const animatedComponents = makeAnimated();
@@ -21,7 +21,7 @@ MultiAsyncSelect.propTypes = {
   }).isRequired
 };
 
-function MultiAsyncSelect({ collection_endpoint, action_endpoint, storedOptions, i18n }) {
+function MultiAsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasFeedback, i18n }) {
   // custom hook to open/close modal
   const { isOpen, setIsOpen } = useModalToggle();
   // this is the request for the pool of options - won't run on mount
@@ -104,7 +104,7 @@ function MultiAsyncSelect({ collection_endpoint, action_endpoint, storedOptions,
         onMenuOpen={() => setIsOpen(true)}
         onMenuClose={() => setIsOpen(false)}
       />
-      <small className="form-text text-muted">{i18n.select.feedback}</small>
+      {hasFeedback ? <small className="form-text text-muted">{i18n.select.feedback}</small> : ''}
     </>
   );
 }

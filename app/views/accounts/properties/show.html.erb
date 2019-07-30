@@ -189,6 +189,7 @@
                         collection_endpoint: users_path,
                         action_endpoint: assignments_path(@property.id),
                         storedOptions: @property.users.blank? ? nil : @property.users.map {|user| {label: "#{user.first_name} #{user.last_name}", value: user.id}},
+                        hasFeedback: true,
                         i18n: {
                             select: {
                                 placeholder: t('js.components.select.placeholder_title'),

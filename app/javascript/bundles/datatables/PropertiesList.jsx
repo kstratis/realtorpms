@@ -8,6 +8,7 @@ import ClampWrapper from '../components/ClampWrapper';
 import Image from 'react-graceful-image';
 import ControlsContainer from './ControlsContainer';
 import SortFilter from './SortFilter';
+import MultiAsyncSelect from '../components/MultiAsyncSelect';
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
@@ -28,8 +29,8 @@ const PropertiesList = ({
   sorting,
   ordering,
   searchInput,
-  locations_endpoint,
   handleSearchInput,
+  locations_endpoint,
   i18n
 }) => {
   return (
@@ -53,33 +54,6 @@ const PropertiesList = ({
                   </div>
                 </div>
                 <div className="card-body">
-                  <label className="d-block">
-                    <h5 className="card-title filter-header">{i18n.sorting.title}:</h5>
-                  </label>
-                  <SortFilter
-                    handleFn={handleSort}
-                    slug={'created_at'}
-                    title={i18n.filters.sortByDate.title}
-                    currentSorting={sorting}
-                    currentOrdering={ordering}
-                    options={[
-                      {
-                        sn: 0,
-                        text: i18n.filters.sortByDate.option1,
-                        sort_filter: 'created_at',
-                        sort_order: 'desc',
-                        icon: 'fas fa-sort-amount-up fa-fw'
-                      },
-                      {
-                        sn: 1,
-                        text: i18n.filters.sortByDate.option2,
-                        sort_filter: 'created_at',
-                        sort_order: 'asc',
-                        icon: 'fas fa-sort-amount-down fa-fw'
-                      }
-                    ]}
-                  />
-                  <hr />
                   <label className="d-block">
                     <h5 className="card-title filter-header">{i18n.filters.type.title}:</h5>
                   </label>
@@ -110,8 +84,6 @@ const PropertiesList = ({
                       </label>
                     </div>
                   </div>
-                  {/*<p className="card-text">With supporting text below as a natural lead-in to additional content.</p>*/}
-                  {/*<a href="#" className="btn btn-primary">Go somewhere</a>*/}
                 </div>
               </div>
             </div>
@@ -119,6 +91,40 @@ const PropertiesList = ({
               {/*<Search handleSearchInput={handleSearchInput} searchInput={searchInput} placeholder={i18n['search']} />*/}
 
               {/* Generate the needed filters according to the i18n keys of the erb template */}
+              <div className={'row'}>
+                <div className="col-12">
+                  <div className={'d-flex mb-3'}>
+                    <div className={'flex-grow-1'}>
+                      <MultiAsyncSelect i18n={i18n} collection_endpoint={locations_endpoint} />
+                    </div>
+                    <div>
+                      <SortFilter
+                        handleFn={handleSort}
+                        slug={'created_at'}
+                        title={i18n.filters.sortByDate.title}
+                        currentSorting={sorting}
+                        currentOrdering={ordering}
+                        options={[
+                          {
+                            sn: 0,
+                            text: i18n.filters.sortByDate.option1,
+                            sort_filter: 'created_at',
+                            sort_order: 'desc',
+                            icon: 'fas fa-sort-amount-up fa-fw'
+                          },
+                          {
+                            sn: 1,
+                            text: i18n.filters.sortByDate.option2,
+                            sort_filter: 'created_at',
+                            sort_order: 'asc',
+                            icon: 'fas fa-sort-amount-down fa-fw'
+                          }
+                        ]}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
 
               {dataset.map((entry, index) => (
                 <div key={entry.id}>
@@ -155,66 +161,7 @@ const PropertiesList = ({
                         </a>
                       </div>
                     </div>
-                    {/*<div className={'col-md-4 col-sm-12'}>*/}
-                    {/*  <div className={'thumb-container'}>*/}
-                    {/*    /!*<img src={`https://picsum.photos/${getRandomInt(100,800)}/${getRandomInt(100,800)}/?random&sig=${Math.random()}`} className={'card-img-top thumb'} alt={"thumbnail"}/>*!/*/}
-                    {/*    /!*<img src={`https://picsum.photos/650/440/?random&sig=${Math.random()}`} className={'card-img-top thumb'} alt={"asd"}/>*!/*/}
-                    {/*    /!*<img src={`https://picsum.photos/310/220/?random&sig=${Math.random()}`} className={'card-img-top thumb'} alt={"asd"}/>*!/*/}
-
-                    {/*    /!* SOS*!/*/}
-                    {/*    /!*<img src={`https://www.dropbox.com/s/l9pj1s6xzptfke6/korig.JPG?dl=1`} className={'card-img-top thumb'} alt={"asd"}/>*!/*/}
-
-                    {/*<Image*/}
-                    {/*  src={`https://picsum.photos/${getRandomInt(100, 800)}/${getRandomInt(*/}
-                    {/*    100,*/}
-                    {/*    800*/}
-                    {/*  )}/?random&sig=${Math.random()}`}*/}
-                    {/*      className={'card-img-top thumb'}*/}
-                    {/*      // className={'thumb'}*/}
-                    {/*      // width="300"*/}
-                    {/*      // height={`${document.getElementById('yyy').clientHeight}px`}*/}
-                    {/*      // height={`${this.clientHeight}`}*/}
-                    {/*      width={'100%'}*/}
-                    {/*      // height={'100%'}*/}
-                    {/*      alt="My awesome image"*/}
-                    {/*      placeholderColor={'#4dabf5'}*/}
-                    {/*    />*/}
-                    {/*  </div>*/}
-                    {/*</div>*/}
                   </div>
-
-                  {/*<div className={'row'}>*/}
-                  {/*  <div className={'col-12'}>*/}
-                  {/*    <h5 className="card-title clamp-2">*/}
-                  {/*      <Highlighter*/}
-                  {/*        highlightClassName="highlighted"*/}
-                  {/*        searchWords={[searchInput]}*/}
-                  {/*        autoEscape={true}*/}
-                  {/*        textToHighlight={entry['title'] || ''}*/}
-                  {/*      />*/}
-                  {/*    </h5>*/}
-                  {/*  </div>*/}
-                  {/*<div className={'col-2'}>*/}
-                  {/*<div className={'favourites'}>*/}
-
-                  {/*</div>*/}
-                  {/*</div>*/}
-                  {/*</div>*/}
-
-                  {/*<div className={'row'}>*/}
-                  {/*  <div className={'col-12 desc-container'}>*/}
-                  {/*    <p className="card-text clamp-3">*/}
-                  {/*      <Highlighter*/}
-                  {/*        highlightClassName="highlighted"*/}
-                  {/*        searchWords={[searchInput]}*/}
-                  {/*        autoEscape={true}*/}
-                  {/*        textToHighlight={entry['description'] || ''}*/}
-                  {/*      />*/}
-                  {/*    </p>*/}
-                  {/*  </div>*/}
-                  {/*</div>*/}
-
-                  {/*<hr />*/}
                 </div>
               ))}
             </div>
@@ -248,7 +195,7 @@ const PropertiesList = ({
                 />
               </nav>
             </div>
-            <ClampWrapper />
+            {/*<ClampWrapper />*/}
           </div>
         </div>
       ) : (
