@@ -91,38 +91,34 @@ const PropertiesList = ({
               {/*<Search handleSearchInput={handleSearchInput} searchInput={searchInput} placeholder={i18n['search']} />*/}
 
               {/* Generate the needed filters according to the i18n keys of the erb template */}
-              <div className={'row'}>
-                <div className="col-12">
-                  <div className={'d-flex mb-3'}>
-                    <div className={'flex-grow-1'}>
-                      <MultiAsyncSelect i18n={i18n} collection_endpoint={locations_endpoint} />
-                    </div>
-                    <div>
-                      <SortFilter
-                        handleFn={handleSort}
-                        slug={'created_at'}
-                        title={i18n.filters.sortByDate.title}
-                        currentSorting={sorting}
-                        currentOrdering={ordering}
-                        options={[
-                          {
-                            sn: 0,
-                            text: i18n.filters.sortByDate.option1,
-                            sort_filter: 'created_at',
-                            sort_order: 'desc',
-                            icon: 'fas fa-sort-amount-up fa-fw'
-                          },
-                          {
-                            sn: 1,
-                            text: i18n.filters.sortByDate.option2,
-                            sort_filter: 'created_at',
-                            sort_order: 'asc',
-                            icon: 'fas fa-sort-amount-down fa-fw'
-                          }
-                        ]}
-                      />
-                    </div>
-                  </div>
+              <div className={'row mb-3'}>
+                <div className={'col-9'}>
+                  <MultiAsyncSelect i18n={i18n} collection_endpoint={locations_endpoint} />
+                </div>
+                <div className={'col-3'}>
+                  <SortFilter
+                    handleFn={handleSort}
+                    slug={'created_at'}
+                    title={i18n.filters.sortByDate.title}
+                    currentSorting={sorting}
+                    currentOrdering={ordering}
+                    options={[
+                      {
+                        sn: 0,
+                        text: i18n.filters.sortByDate.option1,
+                        sort_filter: 'created_at',
+                        sort_order: 'desc',
+                        icon: 'fas fa-sort-amount-up fa-fw'
+                      },
+                      {
+                        sn: 1,
+                        text: i18n.filters.sortByDate.option2,
+                        sort_filter: 'created_at',
+                        sort_order: 'asc',
+                        icon: 'fas fa-sort-amount-down fa-fw'
+                      }
+                    ]}
+                  />
                 </div>
               </div>
 
@@ -195,7 +191,7 @@ const PropertiesList = ({
                 />
               </nav>
             </div>
-            {/*<ClampWrapper />*/}
+            <ClampWrapper />
           </div>
         </div>
       ) : (
