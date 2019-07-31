@@ -300,7 +300,7 @@ function withDatatable(WrappedComponent) {
     }
 
     render() {
-      {console.log(this.props)}
+      // {console.log(this.props)}
       return (
         <div>
           <WrappedComponent
