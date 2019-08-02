@@ -17,6 +17,7 @@ const getRandomInt = (min, max) => {
 };
 
 const PropertiesList = ({
+  handleLocationInput,
   handlePageClick,
   handleSort,
   handleAssign,
@@ -93,7 +94,7 @@ const PropertiesList = ({
               {/* Generate the needed filters according to the i18n keys of the erb template */}
               <div className={'row mb-3'}>
                 <div className={'col-8'}>
-                  <MultiAsyncSelect i18n={i18n} collection_endpoint={locations_endpoint} />
+                  <MultiAsyncSelect i18n={i18n} collection_endpoint={{url: locations_endpoint, action: 'get'}} action_endpoint={{url: '', action: '', callback: handleLocationInput}}   />
                 </div>
                 <div className={'col-4'}>
                   <SortFilter

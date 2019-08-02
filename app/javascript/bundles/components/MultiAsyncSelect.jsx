@@ -9,8 +9,17 @@ import PropTypes from 'prop-types';
 const animatedComponents = makeAnimated();
 
 MultiAsyncSelect.propTypes = {
-  collection_endpoint: PropTypes.string.isRequired,
+  collection_endpoint: PropTypes.shape({
+    url: PropTypes.string.isRequired,
+    action: PropTypes.string.isRequired,
+  }).isRequired,
+  action_endpoint: PropTypes.shape({
+    url: PropTypes.string.isRequired,
+    action: PropTypes.string.isRequired,
+    callback: PropTypes.func
+  }).isRequired,
   storedOptions: PropTypes.array,
+  hasFeedback: PropTypes.bool,
   i18n: PropTypes.shape({
     select: PropTypes.shape({
       placeholder: PropTypes.string.isRequired,
@@ -27,7 +36,7 @@ function MultiAsyncSelect({ collection_endpoint, action_endpoint, storedOptions,
   // this is the request for the pool of options - won't run on mount
   const [request, setRequest] = useState({});
   // this is the request for the assignments - won't run on mount
-  const [assignmentRequest, setAssignmentRequest] = useState({});
+  const [selectionRequest, setSelectionRequest] = useState({});
 
   // We don't need to fetch or post anything upon the initial render.
   // So we use this trick: https://stackoverflow.com/a/53180013/178728
@@ -44,7 +53,7 @@ function MultiAsyncSelect({ collection_endpoint, action_endpoint, storedOptions,
   // This loads the selection list.
   // This takes care of properly setting up the assignment requests
   // In this case we do need internal state
-  const { data, setData } = useFetch(assignmentRequest, false, didMountForAssignmentsRef);
+  const { data, setData } = useFetch(selectionRequest, false, didMountForAssignmentsRef);
 
   // Only on mount load the existing data
   useEffect(() => {
@@ -53,11 +62,12 @@ function MultiAsyncSelect({ collection_endpoint, action_endpoint, storedOptions,
 
   // selectedOptions on each render contains ALL the selected values (previous & current) concatenated.
   const handleChange = selectedOptions => {
-    setAssignmentRequest({
-      url: action_endpoint,
-      method: 'post',
+    console.log(selectedOptions);
+    setSelectionRequest({
+      url: action_endpoint.url,
+      method: action_endpoint.action,
       payload: { selection: selectedOptions || [] },
-      callback: ''
+      callback: () => action_endpoint.callback(selectedOptions) || ''
     });
   };
 
@@ -68,8 +78,8 @@ function MultiAsyncSelect({ collection_endpoint, action_endpoint, storedOptions,
       return Promise.resolve({ options: [] });
     }
     setRequest({
-      url: `${collection_endpoint}.json?search=${query}&dropdown=1`,
-      method: 'get',
+      url: `${collection_endpoint.url}.json?search=${query}&dropdown=1`,
+      method: collection_endpoint.action,
       payload: {},
       callback: callback
     });

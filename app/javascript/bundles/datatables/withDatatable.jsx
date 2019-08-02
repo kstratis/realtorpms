@@ -60,6 +60,7 @@ function withDatatable(WrappedComponent) {
       this.advanceByTwo = this.advanceByTwo.bind(this);
       this.handleFreezeUser = this.handleFreezeUser.bind(this);
       this.handleFav = this.handleFav.bind(this);
+      this.handleLocationInput = this.handleLocationInput.bind(this);
       this.handleAjaxRequestDelayed = debounce(this.handleAjaxRequest, 300);
       this.compoundDelayedAction = debounce(this.compoundDelayedAction.bind(this), 300);
     }
@@ -112,6 +113,20 @@ function withDatatable(WrappedComponent) {
       }
     }
 
+    handleLocationInput(locations, browserButtonInvoked = false){
+      if (!locations.length) return;
+      let searchParams = new URLSearchParams(window.location.search);
+      const locationids = locations.map(loc => loc.value).join(',');
+      console.log(locationids);
+      searchParams.set('locationids', locationids);
+      let newUrlParams = searchParams.toString()
+        ? `${window.location.pathname}?${searchParams.toString()}`
+        : window.location.pathname;
+      if (!browserButtonInvoked) history.pushState({ jsonlocations: locationids }, null, newUrlParams);
+      console.log(`callback running with location id: ${locations[0].value}`);
+      console.log(`callback running with location name: ${locations[0].label}`);
+    }
+
     handlePageClick(pageNumber, pageNo = false, browserButtonInvoked = false) {
       this.setState({ isLoading: true });
       const selected = pageNo ? pageNumber : pageNumber.selected;
@@ -124,6 +139,7 @@ function withDatatable(WrappedComponent) {
       // console.log(searchParams.toString());
       this.handleAjaxRequest(`?${searchParams.toString()}`);
     }
+
     handleSearchInput(e) {
       this.setState({ searchInput: e.target.value || '', isLoading: true });
       let searchParams = new URLSearchParams(window.location.search);
@@ -304,6 +320,7 @@ function withDatatable(WrappedComponent) {
       return (
         <div>
           <WrappedComponent
+            handleLocationInput={this.handleLocationInput}
             handlePageClick={this.handlePageClick}
             handleSort={this.handleSort}
             handleAssign={this.handleAssign}
