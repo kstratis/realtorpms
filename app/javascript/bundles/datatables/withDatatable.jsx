@@ -91,7 +91,9 @@ function withDatatable(WrappedComponent) {
     }
 
     determineDirection(element) {
-      let ellipsisDomElement = $(element).parent().parent();
+      let ellipsisDomElement = $(element)
+        .parent()
+        .parent();
       let direction = '+';
       ellipsisDomElement.nextAll().each((i, element) => {
         if ($(element).hasClass('active')) {
@@ -113,29 +115,21 @@ function withDatatable(WrappedComponent) {
       }
     }
 
-    handleLocationInput(locations, browserButtonInvoked = false){
+    handleLocationInput(locations, browserButtonInvoked = false) {
       let searchParams = new URLSearchParams(window.location.search);
       // In this case delete the relevant params entry
-      if (locations === null || !locations.length){
-        searchParams.delete('locationids');
-        let newUrlParams = searchParams.toString()
-          ? `${window.location.pathname}?${searchParams.toString()}`
-          : window.location.pathname;
-        history.replaceState(null, '', newUrlParams);
-        return;
+      if (locations === null || !locations.length) {
+        searchParams.delete('locations');
+      } else {
+        const locationids = locations.map(loc => loc.value).join(',');
+        searchParams.set('locations', locationids);
       }
-      const locationids = locations.map(loc => loc.value).join(',');
-      console.log(locationids);
-      searchParams.set('locationids', locationids);
       let newUrlParams = searchParams.toString()
         ? `${window.location.pathname}?${searchParams.toString()}`
         : window.location.pathname;
-      if (!browserButtonInvoked) history.pushState({ jsonlocations: locationids }, null, newUrlParams);
-      console.log(`callback running with location id: ${locations[0].value}`);
-      console.log(`callback running with location name: ${locations[0].label}`);
-
-
-
+      // console.log(`callback running with location id: ${locations[0].value}`);
+      // console.log(`callback running with location name: ${locations[0].label}`);
+      this.compoundDelayedAction(searchParams, newUrlParams);
     }
 
     handlePageClick(pageNumber, pageNo = false, browserButtonInvoked = false) {
@@ -198,7 +192,7 @@ function withDatatable(WrappedComponent) {
     handleFreezeUser(e, freeze_url, user_id) {
       e.preventDefault();
       const url = buildUserURL(freeze_url, user_id);
-      axios.patch(url).then((response) => {
+      axios.patch(url).then(response => {
         // DEBUG
         // console.log(response);
         const index = this.state.dataset.findIndex(element => element.id === user_id);
@@ -213,7 +207,7 @@ function withDatatable(WrappedComponent) {
 
     handleSort(e, field, forcedOrdering = '') {
       // Sorting in property listings doesn't occur inside a click event and preventDefault is undefined.
-      if (typeof e.preventDefault === "function") {
+      if (typeof e.preventDefault === 'function') {
         e.preventDefault();
       }
       // DEBUG

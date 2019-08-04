@@ -13,9 +13,9 @@ module Searchable
 
     # Once included in a model it defines a class method which allows us to search through a collection of
     # entries. In order to properly work it requires that a model specifies the +:SEARCH_FIELDS+ constant which dictates
-    # which model fields to look into. It also provides (very) limited support for looking through to an associated
+    # which model fields to search on. It also provides (very) limited support for looking through to an associated
     # model using the dot ('.') character. However note that it's the responsibilty of the developer to ensure that
-    # any association are already established and operational.
+    # any associations are already established and operational.
     def search(term)
       # Dynamically get the fields from the model
       fields = const_get(:SEARCH_FIELDS).dup

@@ -7,12 +7,29 @@ module Accounts
     # GET /properties
     # GET /properties.json
     def index
-      # page number validation
-      @properties = current_account.properties.all
+      # preload location & owner
+      @properties = current_account.properties.includes(:location, :owner)
+      puts '============='
+      puts params[:locations]
+      puts '============='
+
+      if params[:locations]
+        level2areas = params[:locations].split(",").map(&:to_i).select { |locationid| Location.find(locationid).level == 2 }
+        puts '======2222======='
+        puts level2areas
+
+        # @properties.where(params[:locations])
+        @properties = @properties.where(location_id: params[:locations])
+
+      end
+
+
+
 
       if params[:search]
         @properties = @properties.search(params[:search])
       end
+
       if params[:sorting] && params[:ordering]
         @properties = @properties.order("#{params[:sorting]}": params[:ordering])
       else
