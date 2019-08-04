@@ -33,4 +33,11 @@ const isUrl = (string) => {
   return regexp.test(string);
 };
 
-export {debounce, capitalizeFirstLetter, renderHTML, buildUserURL, isUrl};
+const safelyExecCallback = (fnParent, params) => {
+  if (fnParent.callback && typeof fnParent.callback === 'function')
+    fnParent.callback(params);
+
+};
+
+
+export {debounce, capitalizeFirstLetter, renderHTML, buildUserURL, isUrl, safelyExecCallback};

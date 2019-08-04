@@ -114,8 +114,16 @@ function withDatatable(WrappedComponent) {
     }
 
     handleLocationInput(locations, browserButtonInvoked = false){
-      if (!locations.length) return;
       let searchParams = new URLSearchParams(window.location.search);
+      // In this case delete the relevant params entry
+      if (locations === null || !locations.length){
+        searchParams.delete('locationids');
+        let newUrlParams = searchParams.toString()
+          ? `${window.location.pathname}?${searchParams.toString()}`
+          : window.location.pathname;
+        history.replaceState(null, '', newUrlParams);
+        return;
+      }
       const locationids = locations.map(loc => loc.value).join(',');
       console.log(locationids);
       searchParams.set('locationids', locationids);
@@ -125,6 +133,9 @@ function withDatatable(WrappedComponent) {
       if (!browserButtonInvoked) history.pushState({ jsonlocations: locationids }, null, newUrlParams);
       console.log(`callback running with location id: ${locations[0].value}`);
       console.log(`callback running with location name: ${locations[0].label}`);
+
+
+
     }
 
     handlePageClick(pageNumber, pageNo = false, browserButtonInvoked = false) {

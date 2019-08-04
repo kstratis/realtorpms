@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import useFetch from '../hooks/useFetch';
 import useModalToggle from '../hooks/useModalToggle';
 import makeAnimated from 'react-select/animated';
-import { debounce, renderHTML } from '../utilities/helpers';
+import { debounce, renderHTML, safelyExecCallback } from '../utilities/helpers';
 import AsyncSelect from 'react-select/async';
 import { reactSelectStyles } from '../styles/componentStyles';
 import PropTypes from 'prop-types';
@@ -11,7 +11,7 @@ const animatedComponents = makeAnimated();
 MultiAsyncSelect.propTypes = {
   collection_endpoint: PropTypes.shape({
     url: PropTypes.string.isRequired,
-    action: PropTypes.string.isRequired,
+    action: PropTypes.string.isRequired
   }).isRequired,
   action_endpoint: PropTypes.shape({
     url: PropTypes.string.isRequired,
@@ -62,7 +62,10 @@ function MultiAsyncSelect({ collection_endpoint, action_endpoint, storedOptions,
 
   // selectedOptions on each render contains ALL the selected values (previous & current) concatenated.
   const handleChange = selectedOptions => {
-    console.log(selectedOptions);
+    if (!action_endpoint.action && !selectedOptions) {
+      safelyExecCallback(action_endpoint, selectedOptions);
+      return;
+    }
     setSelectionRequest({
       url: action_endpoint.url,
       method: action_endpoint.action,

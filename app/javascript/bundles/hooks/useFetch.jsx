@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { safelyExecCallback } from '../utilities/helpers';
 import ReactOnRails from 'react-on-rails';
 axios.defaults.headers.common['X-CSRF-Token'] = ReactOnRails.authenticityToken();
 
@@ -21,9 +22,7 @@ function useFetch(request, dropdown = true, didMountRef = null) {
         setData(result.data.message);
         setLoading(false);
       }
-      if (request.callback && typeof request.callback === 'function') {
-        request.callback(result.data.message);
-      }
+      safelyExecCallback(request, result.data.message);
     };
     if (didMountRef) {
       if (didMountRef.current) {
