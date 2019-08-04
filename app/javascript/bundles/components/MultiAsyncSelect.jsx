@@ -71,7 +71,7 @@ function MultiAsyncSelect({ collection_endpoint, action_endpoint, storedOptions,
       url: action_endpoint.url,
       method: action_endpoint.action,
       payload: { selection: selectedOptions || [] },
-      callback: () => action_endpoint.callback(selectedOptions) || ''
+      callback: action_endpoint.callback
     });
   };
 

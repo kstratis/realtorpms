@@ -4,6 +4,10 @@ sheet = xlsx.sheet('Geographies')
 domestic = Country.create!(name: 'Greece', initials: 'GR', continent: 'EU')
 international = Country.create!(name: 'International', initials: 'INT', continent: 'EU')
 
+define_method("assign_country") do |id|
+  id != 400 ? domestic : international
+end
+
 myvar = 0
 
 ActiveRecord::Base.transaction do
@@ -17,7 +21,7 @@ ActiveRecord::Base.transaction do
                        parent_id: row[4] ? row[4].to_i : nil,
                        parent_localname: row[5] ? row[5].to_s : nil,
                        parent_globalname: row[6] ? row[6].to_s : nil,
-                       country: row[4] ? lambda { row[4].to_i != 400 ? domestic : international } : nil)
+                       country: row[4] ? assign_country(row[4].to_i) : assign_country(row[0].to_i))
       pp "Level 1, Row No #{index}, Data: #{row} - OK!"
       myvar+=1
     rescue => e

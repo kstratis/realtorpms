@@ -94,7 +94,11 @@ const PropertiesList = ({
               {/* Generate the needed filters according to the i18n keys of the erb template */}
               <div className={'row mb-3'}>
                 <div className={'col-8'}>
-                  <MultiAsyncSelect i18n={i18n} collection_endpoint={{url: locations_endpoint, action: 'get'}} action_endpoint={{url: '', action: '', callback: handleLocationInput}}   />
+                  <MultiAsyncSelect
+                    i18n={i18n}
+                    collection_endpoint={{ url: locations_endpoint, action: 'get' }}
+                    action_endpoint={{ url: '', action: '', callback: handleLocationInput }}
+                  />
                 </div>
                 <div className={'col-4'}>
                   <SortFilter
@@ -128,7 +132,7 @@ const PropertiesList = ({
                   <div className={'row'}>
                     <div className="col-12">
                       <div className="list-group list-group-media mb-3">
-                        <a href="#" className="list-group-item list-group-item-action">
+                        <a href={entry['view_entity_path']} className="list-group-item list-group-item-action">
                           <div className="list-group-item-figure rounded-left">
                             <div className={'thumb-container'}>
                               <img

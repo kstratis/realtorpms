@@ -13,59 +13,62 @@
 # Owners
 # This is a +superuser+
 superuser = User.create!(first_name: 'Konstantinos',
-             last_name: 'Stratis',
-             email: 'konos5@gmail.com',
-             phone1: '6972500361',
-             dob: Date.new(1986, 4, 5),
-             password: '989492ks',
-             password_confirmation: '989492ks',
-             admin: true)
+                         last_name: 'Stratis',
+                         email: 'konos5@gmail.com',
+                         phone1: '6972500361',
+                         dob: Date.new(1986, 4, 5),
+                         password: '989492ks',
+                         password_confirmation: '989492ks',
+                         admin: true)
 
 # This is the owner I use
 tonystark = User.create!(first_name: 'Tony',
-             last_name: 'Stark',
-             email: 'tstark@gmail.com',
-             phone1: '6945567345',
-             dob: Date.new(1976, 2, 3),
-             password: 'abc123',
-             password_confirmation: 'abc123',
-             admin: false)
+                         last_name: 'Stark',
+                         email: 'tstark@gmail.com',
+                         phone1: '6945567345',
+                         dob: Date.new(1976, 2, 3),
+                         password: 'abc123',
+                         password_confirmation: 'abc123',
+                         admin: false)
 
 # Owner of +bluedomain+
 hulkhogan = User.create!(first_name: 'Hulk',
-             last_name: 'Hogan',
-             email: 'hh@gmail.com',
-             phone1: '6935567342',
-             dob: Date.new(1980, 4, 1),
-             password: 'abc123',
-             password_confirmation: 'abc123',
-             admin: false)
+                         last_name: 'Hogan',
+                         email: 'hh@gmail.com',
+                         phone1: '6935567342',
+                         dob: Date.new(1980, 4, 1),
+                         password: 'abc123',
+                         password_confirmation: 'abc123',
+                         admin: false)
 
 # Owner of +reddomain+
 johnymnemonic = User.create!(first_name: 'Johny',
-             last_name: 'Mnemonic',
-             email: 'jm@gmail.com',
-             phone1: '6901560342',
-             dob: Date.new(1969, 12, 17),
-             password: 'abc123',
-             password_confirmation: 'abc123',
-             admin: false)
+                             last_name: 'Mnemonic',
+                             email: 'jm@gmail.com',
+                             phone1: '6901560342',
+                             dob: Date.new(1969, 12, 17),
+                             password: 'abc123',
+                             password_confirmation: 'abc123',
+                             admin: false)
 
 # This account belongs to Tony Stark (tstark@gmail.com)
-Account.create!(
+shakalaka = Account.create!(
     subdomain: 'shakalaka',
+    name: 'Shakalaka',
     owner: User.second
 )
 
 # This account belongs to Hulk Hogan (hh@gmail.com)
-Account.create!(
+bluedomain = Account.create!(
     subdomain: 'bluedomain',
+    name: 'Bluedomain',
     owner: User.third
 )
 
 # This account belongs to Johny Mnemonic (jm@gmail.com)
-Account.create!(
+reddomain = Account.create!(
     subdomain: 'reddomain',
+    name: 'Reddomain',
     owner: User.fourth
 )
 
@@ -80,27 +83,27 @@ brussels = Location.find(1153) # Brussels - Belgium (level 3) - INT
 # 2 memorable shakalaka users
 # -------------------------
 regularshakalakauser1 = User.create!(first_name: 'Will',
-                            last_name: 'Smith',
-                            email: 'wm@gmail.com',
-                            password: 'abc123',
-                            password_confirmation: 'abc123',
-                            admin: false)
+                                     last_name: 'Smith',
+                                     email: 'wm@gmail.com',
+                                     password: 'abc123',
+                                     password_confirmation: 'abc123',
+                                     admin: false)
 
 regularshakalakauser2 = User.create!(first_name: 'John',
-                            last_name: 'Travolta',
-                            email: 'jt@gmail.com',
-                            password: 'abc123',
-                            password_confirmation: 'abc123',
-                            admin: false)
+                                     last_name: 'Travolta',
+                                     email: 'jt@gmail.com',
+                                     password: 'abc123',
+                                     password_confirmation: 'abc123',
+                                     admin: false)
 # -------------------------
 #
 # 1 memorable bluedomain user
 regularbluedomainuser1 = User.create!(first_name: 'Lakis',
-                            last_name: 'Gavalas',
-                            email: 'lg@gmail.com',
-                            password: 'abc123',
-                            password_confirmation: 'abc123',
-                            admin: false)
+                                      last_name: 'Gavalas',
+                                      email: 'lg@gmail.com',
+                                      password: 'abc123',
+                                      password_confirmation: 'abc123',
+                                      admin: false)
 
 # ----------------------------------------------------------
 
@@ -114,11 +117,11 @@ bluedomain.users << regularbluedomainuser1
 # At the same time he remains the owner of +reddomain+
 shakalaka.users << johnymnemonic
 
-# 99 random users for shakalaka account
+# 99 random users belonging to +shakalaka+ account
 99.times do |n|
   first_name = Faker::Name.first_name
   last_name = Faker::Name.last_name
-  email = "user-#{n + 1}@gmail.com"
+  email = "shakalakauser-#{n + 1}@gmail.com"
   dob = rand(10.years).seconds.ago
   phone1 = "69#{rand(0..9)}76548#{rand(0..9)}#{rand(0..9)}"
   password = 'abc123'
@@ -130,33 +133,32 @@ shakalaka.users << johnymnemonic
   shakalaka.users << user
 end
 
-# --------------------------------------
-# Lets create some fake property owners
-# 20.times do |n|
-  # first_name = Faker::Name.first_name
-  # last_name = Faker::Name.last_name
-  # email = "owner-#{n + 1}@gmail.com"
-  # telephones = Faker::PhoneNumber.phone_number
+# 20 random users belonging to +bluedomain+ account
+20.times do |n|
+  first_name = Faker::Name.first_name
+  last_name = Faker::Name.last_name
+  email = "bluedomainuser-#{n + 1}@gmail.com"
+  dob = rand(10.years).seconds.ago
+  phone1 = "69#{rand(0..9)}76548#{rand(0..9)}#{rand(0..9)}"
+  password = 'abc123'
+  user = User.create!(first_name: first_name,
+                      last_name: last_name,
+                      email: email,
+                      password: password,
+                      password_confirmation: password)
+  bluedomain.users << user
+end
 
-  # propery_owner = Owner.create!(first_name: Faker::Name.first_name,
-  #                               last_name: Faker::Name.last_name,
-  #                               email: "owner-#{n + 1}@gmail.com",
-  #                               telephones: Faker::PhoneNumber.phone_number)
-  # shakalaka.users << property_owner
-# end
-
-
-
-smithuser = shakalaka.users.find_by(email: 'wm@gmail.com')
-
-# 20 Fake properties belonging to regularshakalakauser1 (shakalaka account)
+categories = Property.categories.keys
+subcategories = Property.subcategories.keys
+# 20 Fake properties belonging to +regularshakalakauser1+ (shakalaka account)
 20.times do |n|
   property = Property.create!(
       title: Faker::SiliconValley.motto,
       description: Faker::SiliconValley.quote,
-      businesstype: 'sell',
-      category: 'residential',
-      subcategory: 'apartment',
+      businesstype: [:sell, :rent, :sell_rent].sample,
+      category: categories.sample,
+      subcategory: subcategories.sample,
       size: Faker::Number.number(3),
       price: Faker::Number.number(6),
       account: shakalaka,
@@ -166,29 +168,26 @@ smithuser = shakalaka.users.find_by(email: 'wm@gmail.com')
                            email: Faker::SiliconValley.email,
                            telephones: Faker::PhoneNumber.phone_number)
   )
-  smithuser.properties << property
+  regularshakalakauser1.properties << property
 end
 
-# regularbluedomainuser1 belonging to the bluedomain account
-lguser = bluedomain.users.find_by(email: 'lg@gmail.com')
-
-# 5 fake properties belonging to regularbluedomainuser1 (bluedomain account)
+# 5 fake properties belonging to +regularbluedomainuser1+ (bluedomain account)
 5.times do |n|
   property = Property.create!(
       title: Faker::Lorem.word,
       description: Faker::Lorem.paragraph,
-      businesstype: 'rent',
-      category: 'residential',
-      subcategory: 'apartment',
+      businesstype: [:sell, :rent, :sell_rent].sample,
+      category: categories.sample,
+      subcategory: subcategories.sample,
       size: Faker::Number.number(3),
       price: Faker::Number.number(6),
       account: shakalaka,
       location: palatiani,
       owner: Owner.create!(first_name: Faker::Name.first_name,
-                                  last_name: Faker::Name.last_name,
-                                  email: Faker::SiliconValley.email,
-                                  telephones: Faker::PhoneNumber.phone_number)
+                           last_name: Faker::Name.last_name,
+                           email: Faker::SiliconValley.email,
+                           telephones: Faker::PhoneNumber.phone_number)
   )
-  lguser.properties << property
+  regularbluedomainuser1.properties << property
 end
 
