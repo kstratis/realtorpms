@@ -62,7 +62,8 @@ function MultiAsyncSelect({ collection_endpoint, action_endpoint, storedOptions,
 
   // selectedOptions on each render contains ALL the selected values (previous & current) concatenated.
   const handleChange = selectedOptions => {
-    if (!action_endpoint.action && !selectedOptions) {
+    // GET requests (or non specified) are simply for searching and thus we skip XHR cause we handle it directly in the HOC
+    if (!action_endpoint.action) {
       safelyExecCallback(action_endpoint, selectedOptions);
       return;
     }
