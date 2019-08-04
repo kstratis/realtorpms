@@ -1,13 +1,15 @@
 xlsx = Roo::Spreadsheet.open("#{Rails.root.join('lib', 'scripts', 'areas_listing.xlsx')}")
 sheet = xlsx.sheet('Geographies')
 
+domestic = Country.create!(name: 'Greece', initials: 'GR', continent: 'EU')
+international = Country.create!(name: 'International', initials: 'INT', continent: 'EU')
+
 myvar = 0
-Country.create!(name: 'Greece', initials: 'GR', continent: 'EU')
+
 ActiveRecord::Base.transaction do
   sheet.each_with_index do |row, index|
     next if index == 0
     begin
-      c = Country.find_by(name: 'Greece')
       Location.create!(area_id: row[0].to_i,
                        localname: row[1].to_s,
                        globalname: row[2].to_s,
@@ -15,7 +17,7 @@ ActiveRecord::Base.transaction do
                        parent_id: row[4] ? row[4].to_i : nil,
                        parent_localname: row[5] ? row[5].to_s : nil,
                        parent_globalname: row[6] ? row[6].to_s : nil,
-                       country: c)
+                       country: row[4] ? lambda { row[4].to_i != 400 ? domestic : international } : nil)
       pp "Level 1, Row No #{index}, Data: #{row} - OK!"
       myvar+=1
     rescue => e

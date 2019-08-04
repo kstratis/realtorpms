@@ -11,7 +11,8 @@
 # for an invalid user rather than returning false
 
 # Owners
-User.create!(first_name: 'Konstantinos',
+# This is a +superuser+
+superuser = User.create!(first_name: 'Konstantinos',
              last_name: 'Stratis',
              email: 'konos5@gmail.com',
              phone1: '6972500361',
@@ -20,7 +21,8 @@ User.create!(first_name: 'Konstantinos',
              password_confirmation: '989492ks',
              admin: true)
 
-User.create!(first_name: 'Tony',
+# This is the owner I use
+tonystark = User.create!(first_name: 'Tony',
              last_name: 'Stark',
              email: 'tstark@gmail.com',
              phone1: '6945567345',
@@ -29,7 +31,8 @@ User.create!(first_name: 'Tony',
              password_confirmation: 'abc123',
              admin: false)
 
-User.create!(first_name: 'Hulk',
+# Owner of +bluedomain+
+hulkhogan = User.create!(first_name: 'Hulk',
              last_name: 'Hogan',
              email: 'hh@gmail.com',
              phone1: '6935567342',
@@ -38,7 +41,8 @@ User.create!(first_name: 'Hulk',
              password_confirmation: 'abc123',
              admin: false)
 
-User.create!(first_name: 'Johny',
+# Owner of +reddomain+
+johnymnemonic = User.create!(first_name: 'Johny',
              last_name: 'Mnemonic',
              email: 'jm@gmail.com',
              phone1: '6901560342',
@@ -47,40 +51,42 @@ User.create!(first_name: 'Johny',
              password_confirmation: 'abc123',
              admin: false)
 
-# This account belongs to tstark@gmail.com
+# This account belongs to Tony Stark (tstark@gmail.com)
 Account.create!(
     subdomain: 'shakalaka',
     owner: User.second
 )
 
-# This account belongs to hh@gmail.com
+# This account belongs to Hulk Hogan (hh@gmail.com)
 Account.create!(
     subdomain: 'bluedomain',
     owner: User.third
 )
 
-# This account belongs to jm@gmail.com
+# This account belongs to Johny Mnemonic (jm@gmail.com)
 Account.create!(
     subdomain: 'reddomain',
     owner: User.fourth
 )
 
-l1 = Location.find_by(area_id: 106314) # Lamprini - Galatsi
-l2 = Location.find_by(area_id: 117003) # Palatiani - Ilion
-l3 = Location.find_by(area_id: 106289) # Perissos - N.Ionia
+lamprini = Location.find(1610) # Lamprini - Galatsi (level 3)
+palatiani = Location.find(1622) # Palatiani - Ilion (level 3)
+perissos = Location.find(1637) # Perissos - N.Ionia (level 3)
+acton = Location.find(1202) # London - Acton (level 3) - INT
+brussels = Location.find(1153) # Brussels - Belgium (level 3) - INT
 
 # ---------------------------------------------------------
 
 # 2 memorable shakalaka users
 # -------------------------
-specialuser1 = User.create!(first_name: 'Will',
+regularshakalakauser1 = User.create!(first_name: 'Will',
                             last_name: 'Smith',
                             email: 'wm@gmail.com',
                             password: 'abc123',
                             password_confirmation: 'abc123',
                             admin: false)
 
-specialuser2 = User.create!(first_name: 'John',
+regularshakalakauser2 = User.create!(first_name: 'John',
                             last_name: 'Travolta',
                             email: 'jt@gmail.com',
                             password: 'abc123',
@@ -89,7 +95,7 @@ specialuser2 = User.create!(first_name: 'John',
 # -------------------------
 #
 # 1 memorable bluedomain user
-specialuser3 = User.create!(first_name: 'Lakis',
+regularbluedomainuser1 = User.create!(first_name: 'Lakis',
                             last_name: 'Gavalas',
                             email: 'lg@gmail.com',
                             password: 'abc123',
@@ -101,12 +107,14 @@ specialuser3 = User.create!(first_name: 'Lakis',
 shakalaka = Account.find_by(subdomain: 'shakalaka')
 bluedomain = Account.find_by(subdomain: 'bluedomain')
 
-shakalaka.users << specialuser1
-shakalaka.users << specialuser2
-bluedomain.users << specialuser3
-shakalaka.users << User.fourth
+shakalaka.users << regularshakalakauser1
+shakalaka.users << regularshakalakauser2
+bluedomain.users << regularbluedomainuser1
+# Johny Mnemonic is invited as a regular user in Tony Stark's +shakalaka+ account
+# At the same time he remains the owner of +reddomain+
+shakalaka.users << johnymnemonic
 
-# 99 fake users for shakalaka account
+# 99 random users for shakalaka account
 99.times do |n|
   first_name = Faker::Name.first_name
   last_name = Faker::Name.last_name
@@ -141,7 +149,7 @@ end
 
 smithuser = shakalaka.users.find_by(email: 'wm@gmail.com')
 
-# 20 Fake properties belonging to specialuser1 (shakalaka account)
+# 20 Fake properties belonging to regularshakalakauser1 (shakalaka account)
 20.times do |n|
   property = Property.create!(
       title: Faker::SiliconValley.motto,
@@ -152,7 +160,7 @@ smithuser = shakalaka.users.find_by(email: 'wm@gmail.com')
       size: Faker::Number.number(3),
       price: Faker::Number.number(6),
       account: shakalaka,
-      location: l1,
+      location: lamprini,
       owner: Owner.create!(first_name: Faker::Name.first_name,
                            last_name: Faker::Name.last_name,
                            email: Faker::SiliconValley.email,
@@ -161,10 +169,10 @@ smithuser = shakalaka.users.find_by(email: 'wm@gmail.com')
   smithuser.properties << property
 end
 
-# specialuser3 belonging to the bluedomain account
+# regularbluedomainuser1 belonging to the bluedomain account
 lguser = bluedomain.users.find_by(email: 'lg@gmail.com')
 
-# 5 fake properties belonging to specialuser3 (bluedomain account)
+# 5 fake properties belonging to regularbluedomainuser1 (bluedomain account)
 5.times do |n|
   property = Property.create!(
       title: Faker::Lorem.word,
@@ -175,7 +183,7 @@ lguser = bluedomain.users.find_by(email: 'lg@gmail.com')
       size: Faker::Number.number(3),
       price: Faker::Number.number(6),
       account: shakalaka,
-      location: l2,
+      location: palatiani,
       owner: Owner.create!(first_name: Faker::Name.first_name,
                                   last_name: Faker::Name.last_name,
                                   email: Faker::SiliconValley.email,

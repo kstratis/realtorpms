@@ -15,7 +15,7 @@ module Accounts
 
       if params[:locations]
         level2areas = params[:locations].split(",").map(&:to_i).select { |locationid| Location.find(locationid).level == 2 }
-        puts '======2222======='
+        @properties.
         puts level2areas
 
         # @properties.where(params[:locations])
