@@ -76,7 +76,7 @@ function AddRemoveFavLists({ modalHeader, avatar, favlists_url, favorites_url, p
     payload: {}
   });
 
-  const { data, loading, setData } = useFetch(request);
+  const { data, loading, setData } = useFetch(request, false);
 
   // What is the best way to trigger an effect dependent on multiple parameters, only when one of the parameters change?
   // This is the question we must answer when using multiple `useEffect` with multiple interdependancies.

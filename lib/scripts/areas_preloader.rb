@@ -4,8 +4,10 @@ sheet = xlsx.sheet('Geographies')
 domestic = Country.create!(name: 'Greece', initials: 'GR', continent: 'EU')
 international = Country.create!(name: 'International', initials: 'INT', continent: 'EU')
 
+foreign_countries_ids = (400..433).to_a.push(*[500, 329549, 329550, 329551])
+
 define_method("assign_country") do |id|
-  id != 400 ? domestic : international
+  foreign_countries_ids.include?(id) ? international : domestic
 end
 
 myvar = 0
