@@ -72,11 +72,11 @@ reddomain = Account.create!(
     owner: User.fourth
 )
 
-lamprini = Location.find(1610) # Lamprini - Galatsi (level 3)
-palatiani = Location.find(1622) # Palatiani - Ilion (level 3)
-perissos = Location.find(1637) # Perissos - N.Ionia (level 3)
-acton = Location.find(1202) # London - Acton (level 3) - INT
-brussels = Location.find(1153) # Brussels - Belgium (level 3) - INT
+lamprini = Location.find(106314) # Lamprini - Galatsi (level 3)
+palatiani = Location.find(117003) # Palatiani - Ilion (level 3)
+perissos = Location.find(106289) # Perissos - N.Ionia (level 3)
+acton = Location.find(5056) # London - Acton (level 3) - INT
+brussels = Location.find(5007) # Brussels - Belgium (level 3) - INT
 
 # ---------------------------------------------------------
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_20_071234) do
+ActiveRecord::Schema.define(version: 2019_08_05_161138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,7 +124,6 @@ ActiveRecord::Schema.define(version: 2019_07_20_071234) do
   end
 
   create_table "locations", force: :cascade do |t|
-    t.integer "area_id"
     t.string "localname"
     t.string "globalname"
     t.integer "level"
@@ -134,7 +133,6 @@ ActiveRecord::Schema.define(version: 2019_07_20_071234) do
     t.integer "country_id"
     t.string "parent_localname"
     t.string "parent_globalname"
-    t.index ["area_id", "country_id"], name: "index_locations_on_area_id_and_country_id", unique: true
   end
 
   create_table "memberships", force: :cascade do |t|

@@ -16,7 +16,7 @@ ActiveRecord::Base.transaction do
   sheet.each_with_index do |row, index|
     next if index == 0
     begin
-      Location.create!(area_id: row[0].to_i,
+      Location.create!(id: row[0].to_i,
                        localname: row[1].to_s,
                        globalname: row[2].to_s,
                        level: row[3].to_i,
