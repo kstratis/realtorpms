@@ -9,18 +9,23 @@ module Accounts
     def index
       # preload location & owner
       @properties = current_user.is_owner?(current_account) ? current_account.properties.includes(:location, :owner) : current_user.properties.includes(:location, :owner)
-      # @properties = current_account.properties.includes(:location, :owner)
+
+
       puts '============='
       puts params[:locations]
       puts '============='
 
       if params[:locations]
-        level2areas = params[:locations].split(",").map(&:to_i).select { |locationid| Location.find(locationid).level == 2 }
-        # @properties.
-        puts level2areas
+        locations = params[:locations].split(",").map(&:to_i)
+        @properties = @properties.where(location_id: locations)
+        # level2areas = params[:locations].split(",").map(&:to_i).select { |locationid| Location.find(locationid).level == 2 }
 
+        # @properties.
+        # puts '======2======'
+        # puts level2areas
+        # puts '======2======'
         # @properties.where(params[:locations])
-        @properties = @properties.where(location_id: params[:locations])
+        # @properties = @properties.where(location_id: params[:locations])
 
       end
 
