@@ -7,10 +7,10 @@ RSpec.describe Property, type: :model do
   end
   # Deleting a property should:
   # 1) decrement properties by 1
-  # 2) decrement Assignment by -1. Check dataset_helpers.rb
+  # 2) decrement Assignments by -1. Check dataset_helpers.rb
   it "can successfully be deleted" do
-    property = @first_user.properties.first
-    expect(Property.count).to eq(50)
+    property = @account1_first_user.properties.first
+    expect(Property.count).to eq(30)
     expect(Assignment.count).to eq(36)
     expect {
       property.destroy

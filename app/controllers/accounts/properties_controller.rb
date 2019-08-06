@@ -8,7 +8,7 @@ module Accounts
     # GET /properties.json
     def index
       # preload location & owner
-      @properties = current_user.is_owner?(current_account) ? current_account.properties.includes(:location, :owner) : current_user.properties.includes(:location, :owner)
+      @properties = current_user.is_owner?(current_account) ? current_account.properties.includes(:location, :owner) : current_user.properties.where(account: current_account).includes(:location, :owner)
 
 
       puts '============='

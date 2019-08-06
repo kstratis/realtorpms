@@ -11,14 +11,66 @@ RSpec.describe User, type: :model do
   # 2) decrement Assignment by -5. Check dataset_helpers.rb
   # 3) decrement Membership by -1. Check dataset_helpers.rb
   it "can successfully be deleted" do
-    expect(User.count).to eq(5)
-    expect(Property.count).to eq(50)
+    # 6 initial users
+    expect(User.count).to eq(6)
+    # 30 initial properties
+    expect(Property.count).to eq(30)
+    # assing the first 6 properties to +@account1_first_user+
+    @account1_properties[0..5].map { |property| @account1_first_user.properties << property }
     expect {
-      @first_user.destroy
-    }.to change { User.count }.by(-1)  # expect User count to be decremented by -1
-     .and change { Assignment.count }.by(-5) # Properties assigned to this user are deleted through the assignment table. (the actual properties still exist though)
-     .and change { Membership.count }.by(-1) # The user's membership to 'test1' account is deleted through the membership table
-     .and not_change { Property.count } # The actual properties should remain intact cause they may be already assigned to another user
+      # delete the user
+      @account1_first_user.destroy
+    }.to change { User.count }.by(-1) # expect User count to be decremented by -1
+             .and change { Assignment.count }.by(-6) # Properties assigned to this user are deleted through the assignment table. (the actual properties still exist though)
+                      .and change { Membership.count }.by(-1) # The user's membership to 'test1' account is deleted through the membership table. -1 if the user belongs to one account
+                               .and not_change { Property.count } # The actual properties should remain intact cause they may be already assigned to another user
+  end
+
+  it "can successfully be added to another account" do
+    # 2 regular users for +account2+
+    expect(@account2.users.count).to eq(2)
+    # 2 regular users for +account2+ plus the owner
+    expect(@account2.all_users.count).to eq(3)
+    expect {
+      # add a user from +account1+ to +account2+
+      @account2.users << @account1_first_user
+    }.to change { @account2.users.count }.by(1)
+             .and change { @account2.all_users.count }.by(1)
+                      .and change { Membership.count }.by(1)
+  end
+
+  it "can successfully be deleted when belonging to multiple accounts" do
+    # 2 regular users for +account2+
+    expect(@account2.users.count).to eq(2)
+    # 2 regular users for +account2+ plus the owner
+    expect(@account2.all_users.count).to eq(3)
+    expect {
+      # add a user from +account1+ to +account2+
+      @account2.users << @account1_first_user
+    }.to change { @account2.users.count }.by(1)
+             .and change { @account2.all_users.count }.by(1)
+                      .and change { Membership.count }.by(1)
+    expect { @account1_first_user.destroy }.to change { @account2.users.count }.by(-1)
+                                                   .and change { @account1.users.count }.by(-1)
+                                                            .and change { Membership.count }.by(-2)
+
+  end
+
+  it "can successfully be deleted when belonging to multiple accounts and admins are involved" do
+    # regular users
+    expect(@account1.users.count).to eq(2)
+    # regular users plus owner
+    expect(@account1.all_users.count).to eq(3)
+    # regular users
+    expect(@account2.users.count).to eq(2)
+    # regular users plus owner
+    expect(@account2.all_users.count).to eq(3)
+    expect { @account2.users << @account1.owner }.to change { @account2.users.count }.by(1)
+                                                         .and change { @account2.all_users.count }.by(1)
+                                                                  .and not_change { @account1.users.count }
+                                                                           .and not_change { @account1.all_users.count }
+                                                                                    .and change { Membership.count }.by(1)
+
   end
 
 end

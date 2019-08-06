@@ -42,7 +42,8 @@ const PropertiesList = ({
         <div className={'centered'}>
           <div className={'spinner'} />
         </div>
-      ) : dataset.length > 0 ? (
+      ) : null}
+      {dataset.length > 0 ? (
         <div className={'PropertyListContainer'}>
           <div className={'row'}>
             <div className={'filters col-4'}>
@@ -129,44 +130,44 @@ const PropertiesList = ({
               </div>
 
               <FlipMove>
-              {dataset.map((entry, index) => (
-                <div key={entry.id}>
-                  <div className={'row'}>
-                    <div className="col-12">
-                      <div className="list-group list-group-media mb-3">
-                        <a href={entry['view_entity_path']} className="list-group-item list-group-item-action">
-                          <div className="list-group-item-figure rounded-left">
-                            <div className={'thumb-container'}>
-                              <img
-                                src={`https://picsum.photos/${getRandomInt(100, 800)}/${getRandomInt(
-                                  100,
-                                  800
-                                )}/?random&sig=${Math.random()}`}
-                                alt="placeholder image"
-                                className={'thumb'}
-                              />
-                            </div>
-                          </div>
-                          <div className="list-group-item-body">
-                            <div className={'row'}>
-                              <div className={'col-9'}>
-                                <h4 className="list-group-item-title">{entry.mini_heading}</h4>
-                                <p className="">{entry.location}</p>
-                                <p className="list-group-item-text">{entry.description}</p>
-                              </div>
-                              <div className={'col-3'}>
-                                <p className="list-group-item-text">{entry.price}</p>
-                                <p className="list-group-item-text">{entry.size}</p>
-                                <p className="list-group-item-text">{entry.pricepersqmeter}</p>
+                {dataset.map((entry, index) => (
+                  <div key={entry.id}>
+                    <div className={'row'}>
+                      <div className="col-12">
+                        <div className="list-group list-group-media mb-3">
+                          <a href={entry['view_entity_path']} className="list-group-item list-group-item-action">
+                            <div className="list-group-item-figure rounded-left">
+                              <div className={'thumb-container'}>
+                                <img
+                                  src={`https://picsum.photos/${getRandomInt(100, 800)}/${getRandomInt(
+                                    100,
+                                    800
+                                  )}/?random&sig=${Math.random()}`}
+                                  alt="placeholder image"
+                                  className={'thumb'}
+                                />
                               </div>
                             </div>
-                          </div>
-                        </a>
+                            <div className="list-group-item-body">
+                              <div className={'row'}>
+                                <div className={'col-9'}>
+                                  <h4 className="list-group-item-title">{entry.mini_heading}</h4>
+                                  <p className="">{entry.location}</p>
+                                  <p className="list-group-item-text">{entry.description}</p>
+                                </div>
+                                <div className={'col-3'}>
+                                  <p className="list-group-item-text">{entry.price}</p>
+                                  <p className="list-group-item-text">{entry.size}</p>
+                                  <p className="list-group-item-text">{entry.pricepersqmeter}</p>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
               </FlipMove>
             </div>
             {/* CARD END */}
