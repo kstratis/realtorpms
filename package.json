@@ -22,6 +22,7 @@
     "puppeteer": "^1.18.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-flip-move": "^3.0.3",
     "react-graceful-image": "^1.2.9",
     "react-highlight-words": "^0.16.0",
     "react-on-rails": "^11.2.2",

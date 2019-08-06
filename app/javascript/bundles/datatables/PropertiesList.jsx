@@ -9,6 +9,7 @@ import Image from 'react-graceful-image';
 import ControlsContainer from './ControlsContainer';
 import SortFilter from './SortFilter';
 import MultiAsyncSelect from '../components/MultiAsyncSelect';
+import FlipMove from 'react-flip-move';
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
@@ -127,6 +128,7 @@ const PropertiesList = ({
                 </div>
               </div>
 
+              <FlipMove>
               {dataset.map((entry, index) => (
                 <div key={entry.id}>
                   <div className={'row'}>
@@ -165,6 +167,7 @@ const PropertiesList = ({
                   </div>
                 </div>
               ))}
+              </FlipMove>
             </div>
             {/* CARD END */}
             <div className={'clearfix'} />

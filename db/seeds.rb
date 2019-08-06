@@ -181,7 +181,7 @@ end
       subcategory: subcategories.sample,
       size: Faker::Number.number(3),
       price: Faker::Number.number(6),
-      account: shakalaka,
+      account: bluedomain,
       location: palatiani,
       owner: Owner.create!(first_name: Faker::Name.first_name,
                            last_name: Faker::Name.last_name,

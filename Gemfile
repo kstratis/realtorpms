@@ -10,14 +10,14 @@ end
 gem 'rails', '~> 5.2.3'
 # gem 'rails', :git => 'https://github.com/rails/rails'
 # gem 'bootstrap-sass', '3.3.7'
-gem 'bcrypt', '3.1.12'
+gem 'bcrypt', '3.1.13'
 # gem 'babel-transpiler'
 
 gem 'bootstrap', '~> 4.3.1'
 
 gem 'bootsnap'
 # gem 'bootstrap-datepicker-rails'
-gem 'rake', '~> 12.3.2'
+gem 'rake', '~> 12.3.3'
 
 # image metadata info
 gem 'exifr', '~> 1.3', '>= 1.3.5'
@@ -31,7 +31,7 @@ gem "mini_magick"
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1.4'
 # Use Puma as the app server
-gem 'puma', '~> 3.12'
+gem 'puma', '~> 4'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0.7'
 # Use Uglifier as compressor for JavaScript assets
@@ -45,15 +45,15 @@ gem 'coffee-rails', '~> 5.0'
 gem 'turbolinks', '~> 5.2'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.8'
+gem 'jbuilder', '~> 2.9'
 
 gem 'jquery-rails', '~> 4.3.5'
 
-gem 'faker', '~> 1.9.3'
+gem 'faker', '~> 2.1.0'
 
 gem 'will_paginate', '~> 3.1.7'
 
-gem 'active_record_union'
+gem 'active_record_union', '~> 1.3.0'
 
 gem 'bootstrap-will_paginate', '1.0.0'
 
@@ -63,7 +63,7 @@ gem 'rails_12factor'
 
 # gem 'font-awesome-rails'
 
-gem 'react_on_rails', '11.2.2'
+gem 'react_on_rails', '11.3'
 
 gem 'webpacker', '~> 4.0'
 
@@ -109,7 +109,6 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.7.0'
-  gem 'listen', '>= 3.1.5', '< 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.1'
@@ -127,4 +126,3 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'mini_racer', platforms: :ruby
 
-#ruby "2.5.3"

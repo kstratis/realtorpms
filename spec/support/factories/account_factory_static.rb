@@ -1,16 +1,19 @@
 FactoryBot.define do
   factory :account do
-    subdomain 'test1'
+    subdomain { 'test1' }
+    name { 'test1' }
     association :owner, :factory => :owner
   end
 
   factory :account2, :class => Account do
-    subdomain 'test2'
+    subdomain { 'test2' }
+    name { 'test2' }
     association :owner, :factory => :user2
   end
 
   factory :account3, :class => Account do
-    subdomain 'test3'
+    subdomain { 'test3' }
+    name { 'test3' }
     association :owner, :factory => :user3
   end
 end
