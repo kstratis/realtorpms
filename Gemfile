@@ -10,13 +10,14 @@ end
 gem 'rails', '~> 5.2.3'
 # gem 'rails', :git => 'https://github.com/rails/rails'
 # gem 'bootstrap-sass', '3.3.7'
+
+# Watch out! - Don't upgrade to 3.1.13 yet because it incurs severe performance degradation
 gem 'bcrypt', '3.1.12'
-# gem 'babel-transpiler'
 
 gem 'bootstrap', '~> 4.3.1'
 
 gem 'bootsnap'
-# gem 'bootstrap-datepicker-rails'
+
 gem 'rake', '~> 12.3.3'
 
 # image metadata info

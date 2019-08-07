@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_07_062150) do
+ActiveRecord::Schema.define(version: 2019_08_07_103528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,8 +25,7 @@ ActiveRecord::Schema.define(version: 2019_08_07_062150) do
     t.string "address"
     t.string "email"
     t.string "website"
-    t.bigint "owner_id"
-    t.index ["owner_id"], name: "index_accounts_on_owner_id"
+    t.integer "owner_id"
     t.index ["subdomain"], name: "index_accounts_on_subdomain"
   end
 
@@ -143,6 +142,7 @@ ActiveRecord::Schema.define(version: 2019_08_07_062150) do
     t.integer "country_id"
     t.string "parent_localname"
     t.string "parent_globalname"
+    t.index ["id", "country_id"], name: "index_locations_on_id_and_country_id"
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -165,7 +165,6 @@ ActiveRecord::Schema.define(version: 2019_08_07_062150) do
     t.integer "renovation"
     t.integer "bedrooms"
     t.integer "bathrooms"
-    t.integer "user_id"
     t.bigint "account_id"
     t.integer "category"
     t.integer "subcategory"
@@ -212,7 +211,6 @@ ActiveRecord::Schema.define(version: 2019_08_07_062150) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  add_foreign_key "accounts", "users", column: "owner_id"
   add_foreign_key "assignments", "properties"
   add_foreign_key "assignments", "users"
   add_foreign_key "favlists", "users"
