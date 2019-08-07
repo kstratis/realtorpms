@@ -10,7 +10,7 @@ end
 gem 'rails', '~> 5.2.3'
 # gem 'rails', :git => 'https://github.com/rails/rails'
 # gem 'bootstrap-sass', '3.3.7'
-gem 'bcrypt', '3.1.13'
+gem 'bcrypt', '3.1.12'
 # gem 'babel-transpiler'
 
 gem 'bootstrap', '~> 4.3.1'
