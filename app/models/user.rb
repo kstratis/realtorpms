@@ -18,15 +18,13 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
-  # Deleting the user -provided he is the owner of an account- cascades and deletes all related data including,
+  # Deleting a given user -provided he is the owner of an account- cascades and deletes all his related data including,
   # properties, user assignments, favorites and attachments
   has_one :account, dependent: :destroy
 
-  # Later on...
   has_many :memberships
   has_many :accounts, through: :memberships, dependent: :destroy
 
-  # Much later on...
   has_many :assignments
   # https://stackoverflow.com/a/38845388/178728
   has_many :properties, -> { distinct }, through: :assignments, dependent: :destroy
