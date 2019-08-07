@@ -75,6 +75,8 @@ gem "parsley-rails"
 
 gem "irb"
 
+gem 'activerecord-import'
+
 gem 'capistrano', '~> 3.11'
 gem 'capistrano-rails', '~> 1.4'
 gem 'capistrano-passenger', '~> 0.2.0'
