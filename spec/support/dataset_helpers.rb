@@ -35,7 +35,6 @@ module DatasetHelpers
     # Legacy
     # @properties[0..5].map { |property| @first_user.properties << property }
 
-
   end
 end
 

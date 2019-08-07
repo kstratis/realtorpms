@@ -2,15 +2,15 @@ class Property < ApplicationRecord
 
   include Searchable
 
-  attr_searchable %w(title description notes adxe adspitogatos owner.last_name owner.telephones)
+  attr_searchable %w(title description notes adxe adspitogatos landlord.last_name landlord.telephones)
 
   before_validation :handle_dependent_fields, on: :update
   # belongs_to :user
   belongs_to :account
   belongs_to :location, optional: true
-  belongs_to :owner, optional: true
+  belongs_to :landlord, optional: true
   has_and_belongs_to_many :favlists, -> {distinct}
-  accepts_nested_attributes_for :owner
+  accepts_nested_attributes_for :landlord
   has_many :assignments
   has_many_attached :images
   has_one_attached :avatar
@@ -25,7 +25,7 @@ class Property < ApplicationRecord
   # Collection of properties which have been favorited by a particular user
   scope :faved_by, -> (user) {joins(:favorites).where(favorites: {user: user})}
 
-  attr_accessor :locationid, :ownerid, :noowner, :delete_images
+  attr_accessor :locationid, :landlordid, :nolandlord, :delete_images
 
   enum businesstype: [:sell, :rent, :sell_rent]
 
@@ -92,7 +92,7 @@ class Property < ApplicationRecord
     #   [:price, :pricepersqmeter, :size, :subcategory, :bedrooms, :bathrooms, :floor]
     # end
 
-    def owner_features
+    def landlord_features
       {
           :owner_name => {:label => 'owner', :icon => 'client', :options => 'full_name', :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
           :owner_tel => {:label => 'contact', :icon => 'tel', :options => 'telephones', :renderfn => Proc.new {|value| value.blank? ? '—' : value.split(/[\s,]+/).collect(&:strip).join(', ')}}

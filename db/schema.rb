@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_05_161138) do
+ActiveRecord::Schema.define(version: 2019_08_07_055658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,12 +20,12 @@ ActiveRecord::Schema.define(version: 2019_08_05_161138) do
     t.string "subdomain"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "owner_id"
     t.string "name"
     t.string "telephones"
     t.string "address"
     t.string "email"
     t.string "website"
+    t.bigint "owner_id"
     t.index ["subdomain"], name: "index_accounts_on_subdomain"
   end
 
@@ -123,6 +123,15 @@ ActiveRecord::Schema.define(version: 2019_08_05_161138) do
     t.index ["token"], name: "index_invitations_on_token"
   end
 
+  create_table "landlords", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "telephones"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "locations", force: :cascade do |t|
     t.string "localname"
     t.string "globalname"
@@ -143,15 +152,6 @@ ActiveRecord::Schema.define(version: 2019_08_05_161138) do
     t.index ["account_id", "user_id"], name: "index_memberships_on_account_id_and_user_id", unique: true
     t.index ["account_id"], name: "index_memberships_on_account_id"
     t.index ["user_id"], name: "index_memberships_on_user_id"
-  end
-
-  create_table "owners", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "email"
-    t.string "telephones"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "properties", force: :cascade do |t|
@@ -183,11 +183,11 @@ ActiveRecord::Schema.define(version: 2019_08_05_161138) do
     t.string "adspitogatos"
     t.string "address"
     t.integer "favorites_count"
-    t.bigint "owner_id"
+    t.bigint "landlord_id"
     t.string "map_url"
     t.index ["account_id"], name: "index_properties_on_account_id"
+    t.index ["landlord_id"], name: "index_properties_on_landlord_id"
     t.index ["location_id"], name: "index_properties_on_location_id"
-    t.index ["owner_id"], name: "index_properties_on_owner_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -211,6 +211,7 @@ ActiveRecord::Schema.define(version: 2019_08_05_161138) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "accounts", "users", column: "owner_id"
   add_foreign_key "assignments", "properties"
   add_foreign_key "assignments", "users"
   add_foreign_key "favlists", "users"
@@ -221,6 +222,6 @@ ActiveRecord::Schema.define(version: 2019_08_05_161138) do
   add_foreign_key "memberships", "accounts"
   add_foreign_key "memberships", "users"
   add_foreign_key "properties", "accounts"
+  add_foreign_key "properties", "landlords"
   add_foreign_key "properties", "locations"
-  add_foreign_key "properties", "owners"
 end

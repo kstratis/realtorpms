@@ -1,4 +1,4 @@
-class Owner < ApplicationRecord
+class Landlord < ApplicationRecord
   has_many :properties
 
   def full_name

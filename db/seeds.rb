@@ -154,18 +154,18 @@ subcategories = Property.subcategories.keys
 # 20 Fake properties belonging to +regularshakalakauser1+ (shakalaka account)
 20.times do |n|
   property = Property.create!(
-      title: Faker::SiliconValley.motto,
-      description: Faker::SiliconValley.quote,
+      title: Faker::TvShows::SiliconValley.motto,
+      description: Faker::TvShows::SiliconValley.quote,
       businesstype: [:sell, :rent, :sell_rent].sample,
       category: categories.sample,
       subcategory: subcategories.sample,
-      size: Faker::Number.number(3),
-      price: Faker::Number.number(6),
+      size: Faker::Number.number(digits: 3),
+      price: Faker::Number.number(digits: 6),
       account: shakalaka,
       location: lamprini,
-      owner: Owner.create!(first_name: Faker::Name.first_name,
+      landlord: Landlord.create!(first_name: Faker::Name.first_name,
                            last_name: Faker::Name.last_name,
-                           email: Faker::SiliconValley.email,
+                           email: Faker::TvShows::SiliconValley.email,
                            telephones: Faker::PhoneNumber.phone_number)
   )
   regularshakalakauser1.properties << property
@@ -179,13 +179,13 @@ end
       businesstype: [:sell, :rent, :sell_rent].sample,
       category: categories.sample,
       subcategory: subcategories.sample,
-      size: Faker::Number.number(3),
-      price: Faker::Number.number(6),
+      size: Faker::Number.number(digits: 3),
+      price: Faker::Number.number(digits: 6),
       account: bluedomain,
       location: palatiani,
-      owner: Owner.create!(first_name: Faker::Name.first_name,
+      landlord: Landlord.create!(first_name: Faker::Name.first_name,
                            last_name: Faker::Name.last_name,
-                           email: Faker::SiliconValley.email,
+                           email: Faker::TvShows::SiliconValley.email,
                            telephones: Faker::PhoneNumber.phone_number)
   )
   regularbluedomainuser1.properties << property

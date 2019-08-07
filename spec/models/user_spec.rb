@@ -7,9 +7,9 @@ RSpec.describe User, type: :model do
     use_regular_dataset
   end
   # Deleting a user should:
-  # 1) decrement users by 1
-  # 2) decrement Assignment by -5. Check dataset_helpers.rb
-  # 3) decrement Membership by -1. Check dataset_helpers.rb
+  # 1) Decrement users by 1
+  # 2) Decrement Assignments by the number of assigned properties. Check dataset_helpers.rb
+  # 3) Decrement Membership by the number of accounts this user belongs to. Check dataset_helpers.rb
   it "can successfully be deleted" do
     # 6 initial users
     expect(User.count).to eq(6)
@@ -56,7 +56,7 @@ RSpec.describe User, type: :model do
 
   end
 
-  it "can successfully be deleted when belonging to multiple accounts and admins are involved" do
+  it "can successfully be added to another account when is already an account owner" do
     # regular users
     expect(@account1.users.count).to eq(2)
     # regular users plus owner
@@ -70,6 +70,18 @@ RSpec.describe User, type: :model do
                                                                   .and not_change { @account1.users.count }
                                                                            .and not_change { @account1.all_users.count }
                                                                                     .and change { Membership.count }.by(1)
+
+  end
+
+  it "can successfully be deleted when is an account owner " do
+    # regular users
+    expect(@account1.users.count).to eq(2)
+    # regular users plus owner
+    expect(@account1.all_users.count).to eq(3)
+
+    expect {@account1.owner.destroy}.to not_change {Account.count}
+
+    expect(@account1.owner.email).to eq('account.owner@example.com')
 
   end
 

@@ -11,6 +11,7 @@ FactoryBot.define do
     sequence(:price) { |n| "5000#{n}" }
     sequence(:size) { |n| "12#{n}" }
 
+    # This basically allows us to pass an account as a parameter
     transient do
       account { Account.first }
     end

@@ -24,6 +24,7 @@ class User < ApplicationRecord
 
   # Later on...
   has_many :memberships
+  has_one :account,  dependent: :destroy
   has_many :accounts, through: :memberships, dependent: :destroy
 
   # Much later on...
