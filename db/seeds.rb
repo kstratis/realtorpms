@@ -134,18 +134,6 @@ shakalaka.users << johnymnemonic
   shakalaka.users << user
 end
 
-users = []
-99.times do |i|
-  users << User.new(first_name: Faker::Name.first_name,
-                    last_name: Faker::Name.last_name,
-                    email: "shakalakauser-#{i + 1}@gmail.com",
-                    password: 'abc123')
-end
-User.import users    # or use import!
-shakalaka.users << users
-
-
-
 # 20 random users belonging to +bluedomain+ account
 20.times do |n|
   first_name = Faker::Name.first_name
