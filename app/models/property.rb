@@ -94,8 +94,8 @@ class Property < ApplicationRecord
 
     def landlord_features
       {
-          :owner_name => {:label => 'owner', :icon => 'client', :options => 'full_name', :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
-          :owner_tel => {:label => 'contact', :icon => 'tel', :options => 'telephones', :renderfn => Proc.new {|value| value.blank? ? '—' : value.split(/[\s,]+/).collect(&:strip).join(', ')}}
+          :landlord_name => {:label => 'owner', :icon => 'client', :options => 'full_name', :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
+          :landlord_tel => {:label => 'contact', :icon => 'tel', :options => 'telephones', :renderfn => Proc.new {|value| value.blank? ? '—' : value.split(/[\s,]+/).collect(&:strip).join(', ')}}
       }.freeze
     end
 
@@ -126,12 +126,12 @@ class Property < ApplicationRecord
     end
   end
 
-  def owner_info(term)
-    owner.try(term.to_sym)
+  def landlord_info(term)
+    landlord.try(term.to_sym)
   end
 
-  alias_method :owner_name, :owner_info
-  alias_method :owner_tel, :owner_info
+  alias_method :landlord_name, :landlord_info
+  alias_method :landlord_tel, :landlord_info
 
   def location_info(term)
     location.try(term.to_sym)
