@@ -20,7 +20,7 @@ class User < ApplicationRecord
 
   # Deleting a given user -provided he is the owner of an account- cascades and deletes all his related data including,
   # properties, user assignments, favorites and attachments
-  has_one :account, dependent: :destroy
+  has_one :account, dependent: :destroy, foreign_key: "owner_id"
 
   has_many :memberships
   has_many :accounts, through: :memberships, dependent: :destroy
