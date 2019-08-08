@@ -9,7 +9,7 @@ module Accounts
     helper UserAvatar
 
     # before_action :logged_in_user, :allowed_subdomains, only: [:index, :edit, :update, :destroy]
-    before_action :logged_in_user, :allowed_subdomains
+    before_action :logged_in_user, :allowed_subdomains, :active_user
     after_action :store_referer_url, only: [:index, :edit, :update, :destroy]
 
     # before_action :correct_subdomain
@@ -32,6 +32,12 @@ module Accounts
     def logged_in_user
       unless logged_in?
         store_location
+        redirect_to login_url
+      end
+    end
+
+    def active_user
+      unless current_user.active?
         redirect_to login_url
       end
     end
