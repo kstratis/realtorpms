@@ -578,11 +578,11 @@
                           <% end %>
                           <%= react_component('SimpleSelect', props: {
                               id: 'd',
-                              inputID: 'property_ownerid',
-                              inputName: 'property[ownerid]',
+                              inputID: 'property_landlordid',
+                              inputName: 'property[landlordid]',
                               inputClassName: 'form-control existing_client_input',
                               validatorGroup: 'fieldset-5',
-                              endpoint: properties_owners_path,
+                              endpoint: properties_landlords_path,
                               isRequired: true,
                               formID: 'new_property',
                               className: 'simple-select ',
@@ -703,7 +703,7 @@
                       <% end %>
 
                       <div class="no_client">
-                        <input id="noowner" disabled class="no_client_input form-control" type="hidden" name="property[noowner]" value="1">
+                        <input id="nolandlord" disabled class="no_client_input form-control" type="hidden" name="property[nolandlord]" value="1">
                       </div>
                     </div>
 

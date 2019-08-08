@@ -29,7 +29,7 @@ Rails.application.routes.draw do
     scope module: 'accounts' do
       root to: 'dashboard#index', as: :account_root
       get '/properties/locations', to: 'properties#locations'
-      get '/properties/owners', to: 'properties#owners'
+      get '/properties/landlords', to: 'properties#landlords'
 
       # favlists_path (GET, POST)
       # favlist_path (DELETE)

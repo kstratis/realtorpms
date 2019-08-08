@@ -22,7 +22,7 @@ $(document).on('turbolinks:load', function(e) {
   if ($stepperForm.length < 1) return;
 
   // make sure you never send over the owner's id
-  $("input[name='property[owner_attributes][id]']").prop('disabled', true);
+  $("input[name='property[landlord_attributes][id]']").prop('disabled', true);
 
   window.form_stepper = new FormStepper($stepperForm);
 

@@ -6,6 +6,7 @@ class Account < ApplicationRecord
 
   has_many :invitations, dependent: :destroy
   has_many :properties, dependent: :destroy
+  has_many :landlords, dependent: :destroy
   # Originally had these 2 lines
   has_many :memberships
   has_many :users, through: :memberships, dependent: :destroy

@@ -1,4 +1,5 @@
 class Landlord < ApplicationRecord
+  belongs_to :account
   has_many :properties
 
   def full_name

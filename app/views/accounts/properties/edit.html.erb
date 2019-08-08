@@ -546,7 +546,7 @@
 
                         <div class="form-group ml-2">
                           <div class="custom-control custom-control-inline custom-radio">
-                            <input type="radio" class="custom-control-input client-radio-selection" name="rdGroup1" id="existing_client" data-counteroption="new_client,no_client" <%= @property.owner ? 'checked' : '' %>>
+                            <input type="radio" class="custom-control-input client-radio-selection" name="rdGroup1" id="existing_client" data-counteroption="new_client,no_client" <%= @property.landlord ? 'checked' : '' %>>
                             <label class="custom-control-label" for="existing_client"><%= t('js.forms.properties.wizard.step5.existing_client') %></label>
                           </div>
                           <div class="custom-control custom-control-inline custom-radio">
@@ -554,7 +554,7 @@
                             <label class="custom-control-label" for="new_client"><%= t('js.forms.properties.wizard.step5.new_client') %></label>
                           </div>
                           <div class="custom-control custom-control-inline custom-radio">
-                            <input type="radio" class="custom-control-input client-radio-selection" name="rdGroup1" id="no_client" data-counteroption="new_client,existing_client" <%= @property.owner.id ? '' : 'checked' %>>
+                            <input type="radio" class="custom-control-input client-radio-selection" name="rdGroup1" id="no_client" data-counteroption="new_client,existing_client" <%= @property.landlord.id ? '' : 'checked' %>>
                             <label class="custom-control-label" for="no_client"><%= t('js.forms.properties.wizard.step5.no_client') %></label>
                           </div>
                         </div>
@@ -563,26 +563,26 @@
 
                       <div class="row">
                         <div class="col-md-6 col-sm-12">
-                          <div class="form-group mt-4 mb-4 existing_client <%= @property.owner.id ? '' : 'disabledElement' %>">
+                          <div class="form-group mt-4 mb-4 existing_client <%= @property.landlord.id ? '' : 'disabledElement' %>">
                             <%= property.label :owner do %>
                               <%= content_tag(:i, nil, class: 'fas fa-user fa-fw') + ' ' + t('activerecord.attributes.property.owner') %>
                               <abbr title="<%= t('js.components.select.required') %>">*</abbr>
                             <% end %>
                             <%= react_component('SimpleSelect', props: {
                                 id: 'g',
-                                inputID: 'property_ownerid',
-                                inputName: 'property[ownerid]',
-                                inputIsDisabled: @property.owner.id ? false : true,
+                                inputID: 'property_landlordid',
+                                inputName: 'property[landlordid]',
+                                inputIsDisabled: @property.landlord.id ? false : true,
                                 inputClassName: 'form-control existing_client_input',
                                 validatorGroup: 'fieldset-5',
-                                endpoint: properties_owners_path,
+                                endpoint: properties_landlords_path,
                                 isRequired: true,
                                 formID: "edit_property_#{@property.id}",
                                 className: 'simple-select ',
                                 isDisabled: false,
                                 isSearchable: true,
                                 isClearable: true,
-                                storedOption: @property.owner.id ? {"label": "#{@property.owner.first_name} #{@property.owner.last_name}", "value": @property.owner.id} : nil,
+                                storedOption: @property.landlord.id ? {"label": "#{@property.landlord.first_name} #{@property.landlord.last_name}", "value": @property.landlord.id} : nil,
                                 soloMode: true,
                                 ajaxEnabled: true,
                                 i18n: {
@@ -697,7 +697,7 @@
                         <% end %>
 
                         <div class="no_client">
-                          <input id="noowner" disabled class="no_client_input form-control" type="hidden" name="property[noowner]" value="1">
+                          <input id="nolandlord" disabled class="no_client_input form-control" type="hidden" name="property[nolandlord]" value="1">
                         </div>
                       </div>
 

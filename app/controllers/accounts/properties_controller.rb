@@ -91,7 +91,7 @@ module Accounts
     # GET /properties/1
     # GET /properties/1.json
     def show
-      @property = Property.find(params[:id])
+      @property = current_account.properties.find(params[:id])
       filter_users
       respond_to do |format|
         if params['print']
@@ -120,7 +120,7 @@ module Accounts
     end
 
     def delete_avatar
-      property = Property.find(params[:id])
+      property = current_account.properties.find(params[:id])
       property.avatar.purge if property.avatar.attached?
       # property.reload
       # render :json => {:status => "OK", :type => 'unfaved' }
@@ -136,29 +136,29 @@ module Accounts
 
     # GET /properties/1/edit
     def edit
-      @property = Property.find(params[:id])
-      @property.build_owner unless @property.owner
+      @property = current_account.properties.find(params[:id])
+      @property.build_landlord unless @property.landlord
     end
 
     def locations
       filter_locations
     end
 
-    def owners
-      filter_owners
+    def landlords
+      filter_landlords
     end
 
     # GET /properties/new
     def new
       @property = Property.new
-      @property.build_owner
+      @property.build_landlord
     end
 
     # POST /properties
     # POST /properties.json
     def create
       @property = Property.new(property_params)
-      set_owner
+      set_landlord
       set_location
 
       # Scope the property to current account. This is only set once.
@@ -188,7 +188,7 @@ module Accounts
     # PATCH/PUT /properties/1
     # PATCH/PUT /properties/1.json
     def update
-      set_owner
+      set_landlord
       set_location
 
       params[:delete_images].try :each do |id|
@@ -227,11 +227,11 @@ module Accounts
 
     # Use callbacks to share common setup or constraints between actions.
     def set_property
-      @property = Property.find(params[:id])
+      @property = current_account.properties.find(params[:id])
     end
 
-    # Sets the selected owner
-    def set_owner
+    # Sets the selected landlord
+    def set_landlord
       # --- SOS ---
       # When POSTing an associated object's id (i.e. location's id only +locationid+) and not the object itself
       # (location instance), you are gonna get the following error:
@@ -246,17 +246,17 @@ module Accounts
       # Reference
       # https://stackoverflow.com/a/43476033/178728
       # --- SOS ---
-      # If an existing client(owner) id is given then assign the property to that person
-      unless property_params[:ownerid].blank?
-        @property.owner = Owner.find(params[:action] == 'update' ? property_params[:ownerid] : @property.ownerid)
+      # If an existing landlord id is given then assign the property to that person
+      unless property_params[:landlordid].blank?
+        @property.landlord = Landlord.find(params[:action] == 'update' ? property_params[:landlordid] : @property.landlordid)
       end
 
-      # If no owner is selected set it to nil
-      unless property_params[:noowner].blank?
-        @property.owner = nil
+      # If no landlord is selected set it to nil
+      unless property_params[:nolandlord].blank?
+        @property.landlord = nil
       end
-      # Otherwise automatically create and assign the owner using the "magic" properties of
-      # +accepts_nested_attributes_for :owner+ as described in the model file
+      # Otherwise automatically create and assign the landlord using the "magic" properties of
+      # +accepts_nested_attributes_for :landlord+ as described in the model file
     end
 
     def set_location
@@ -288,11 +288,11 @@ module Accounts
                                        :notes,
                                        :adxe,
                                        :adspitogatos,
-                                       :ownerid,
-                                       :noowner,
+                                       :landlordid,
+                                       :nolandlord,
                                        :avatar,
                                        :map_url,
-                                       {owner_attributes: [:first_name, :last_name, :email, :telephones]},
+                                       {landlord_attributes: [:first_name, :last_name, :email, :telephones]},
                                        # attachments: [],
                                        delete_images: [],
                                        images: [],

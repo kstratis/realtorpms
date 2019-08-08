@@ -42,12 +42,12 @@ module Accounts
 
     # GET the edit page
     def edit
-      @user = User.find(params[:id])
+      @user = current_account.users.find(params[:id])
     end
 
     # POST to the edit page
     def update
-      @user = User.find(params[:id])
+      @user = current_account.users.find(params[:id])
       if @user.update_attributes(user_params)
         flash[:success] = I18n.t 'users.flash_profile_updated'
         redirect_to @user
@@ -58,11 +58,11 @@ module Accounts
     end
 
     def show
-      # @user = User.find(params[:id]) # Automatically converts parameters from string to integer
+      # @user = current_account.users.find(params[:id]) # Automatically converts parameters from string to integer
     end
 
     def delete_avatar
-      user = User.find(params[:id])
+      user = current_account.users.find(params[:id])
       user.avatar.purge if user.avatar.attached?
       redirect_to edit_user_path(user)
     end
@@ -80,7 +80,7 @@ module Accounts
       end
 
       def find_user!
-        @user = User.find(params[:id])
+        @user = current_account.users.find(params[:id])
       end
 
       # Confirms a logged-in user.
@@ -104,7 +104,7 @@ module Accounts
       # Confirms that an action concerning a particular user is initiated by that same user.
       # Essentially prevents admins modifying others users' data.
       def user_self
-        @user = User.find(params[:id])
+        @user = current_account.users.find(params[:id])
         unless current_user?(@user)
           flash[:danger] = I18n.t 'users.flash_unauthorised_user_edit'
           redirect_to(root_url)
