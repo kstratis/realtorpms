@@ -8,7 +8,7 @@ module Accounts
     # GET /properties.json
     def index
       # preload location & owner
-      @properties = current_user.is_owner?(current_account) ? current_account.properties.includes(:location, :owner) : current_user.properties.where(account: current_account).includes(:location, :owner)
+      @properties = current_user.is_owner?(current_account) ? current_account.properties.includes(:location, :landlord) : current_user.properties.where(account: current_account).includes(:location, :landlord)
 
 
       puts '============='
@@ -63,8 +63,8 @@ module Accounts
             # assignments: property.properties.count,
             # registration: property.created_at.to_formatted_s(:long)
             registration: property.created_at.strftime('%d %b. %y'),
-            owner_name: property.try(:owner).try(:first_name) && property.try(:owner).try(:last_name) ? "#{property.owner.first_name[0]}. #{property.owner.last_name}" : I18n.t('js.properties_owner_unavailable'),
-            owner_tel: property.try(:owner).try(:telephones) ? "#{property.owner.telephones}" : I18n.t('js.properties_owner_tel_unavailable'),
+            landlord_name: property.try(:landlord).try(:first_name) && property.try(:landlord).try(:last_name) ? "#{property.landlord.first_name[0]}. #{property.landlord.last_name}" : I18n.t('js.properties_owner_unavailable'),
+            landlord_tel: property.try(:landlord).try(:telephones) ? "#{property.landlord.telephones}" : I18n.t('js.properties_owner_tel_unavailable'),
         }
         @propertieslist[:dataset] << hash
       end

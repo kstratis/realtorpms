@@ -38,7 +38,8 @@ module Accounts
 
     def active_user
       unless current_user.active?
-        redirect_to login_url
+        log_out if logged_in?
+        redirect_to root_url(subdomain: request.subdomain)
       end
     end
 
