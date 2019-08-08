@@ -58,6 +58,9 @@
       </table>
       <hr/>
 
+      <% unless @property.extras.blank? %>
+        <span><%= image_tag "plus.svg", style: "width:15px" %></span>&nbsp;
+      <% end %>
       <% @property.extras.map do |element| %>
         <span><%= t("activerecord.attributes.extra.#{element.subtype}.#{element.name}") %><%= render_extra_value(@property, "#{element.name}_space").to_s.html_safe %></span>
         <% concat(', ') if @property.extras.last != element %>

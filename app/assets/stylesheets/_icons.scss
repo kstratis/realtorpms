@@ -380,6 +380,10 @@
     background-image: url( filters.svg);
   }
 
+  &.plus{
+    background-image: url( plus.svg);
+  }
+
 
   & ~ .pr-icon-desc {
     display: block;
