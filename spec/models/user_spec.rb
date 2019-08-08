@@ -39,6 +39,18 @@ RSpec.describe User, type: :model do
                       .and change { Membership.count }.by(1)
   end
 
+  it "can successfully be deleted when is a regular user and belongs to a single account" do
+    # regular users
+    expect(@account1.users.count).to eq(2)
+    # regular users plus owner
+    expect(@account1.all_users.count).to eq(3)
+
+    expect { @account1.users.first.destroy }.to not_change { Account.count }
+                                                    .and change { @account1.users.count }.by(-1)
+                                                             .and not_change { @account2.users.count }
+                                                                      .and change { Membership.count }.by(-1)
+  end
+
   it "can successfully be deleted when belonging to multiple accounts" do
     # 2 regular users for +account2+
     expect(@account2.users.count).to eq(2)
@@ -47,13 +59,13 @@ RSpec.describe User, type: :model do
     expect {
       # add a user from +account1+ to +account2+
       @account2.users << @account1_first_user
-    }.to change { @account2.users.count }.by(1)
-             .and change { @account2.all_users.count }.by(1)
-                      .and change { Membership.count }.by(1)
-    expect { @account1_first_user.destroy }.to change { @account2.users.count }.by(-1)
+    }.to change { @account2.users.count }.by(1) # expect account2 users count to go up by 1
+             .and change { @account2.all_users.count }.by(1) # expect account2 total users count to go up by 1
+                      .and change { Membership.count }.by(1) # expect Membership count to go up by 1
+    @user2_accounts_count = @account1_first_user.accounts.count
+    expect { @account1_first_user.destroy }.to change { @account2.users.count }.by(-1) # Deleting that user should affect the account count of both accounts
                                                    .and change { @account1.users.count }.by(-1)
-                                                            .and change { Membership.count }.by(-2)
-
+                                                            .and change { Membership.count }.by(-@user2_accounts_count) # and the membeship count by -2
   end
 
   it "can successfully be added to another account when is already an account owner" do
@@ -70,19 +82,20 @@ RSpec.describe User, type: :model do
                                                                   .and not_change { @account1.users.count }
                                                                            .and not_change { @account1.all_users.count }
                                                                                     .and change { Membership.count }.by(1)
-
   end
 
-  it "can successfully be deleted when is an account owner " do
+  # We are not testing favlists or favorites
+  it "can successfully be deleted when is an account owner" do
+    @account1_user_count = @account1.users.count
     # regular users
-    expect(@account1.users.count).to eq(2)
+    expect(@account1.users.count).to eq(@account1_user_count)
+    expect(@account1.owner.email).to eq('account.owner@example.com')
     # regular users plus owner
     expect(@account1.all_users.count).to eq(3)
 
-    expect {@account1.owner.destroy}.to not_change {Account.count}
-
-    expect(@account1.owner.email).to eq('account.owner@example.com')
-
+    expect { @account1.owner.destroy }.to change { Account.count }.by(-1)
+                                              .and change { User.count }.by(-1)
+                                                       .and change { Membership.count }.by(-@account1_user_count) # owner are not subject to membeships join table
   end
 
 end
