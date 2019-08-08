@@ -9,7 +9,7 @@ module Accounts
     helper UserAvatar
 
     # before_action :logged_in_user, :allowed_subdomains, only: [:index, :edit, :update, :destroy]
-    before_action :logged_in_user, :allowed_subdomains, :active_user
+    before_action :logged_in_user, :allowed_subdomains, :active_user # The order is guaranteed from left-to-right
     after_action :store_referer_url, only: [:index, :edit, :update, :destroy]
 
     # before_action :correct_subdomain
@@ -37,9 +37,12 @@ module Accounts
     end
 
     def active_user
-      unless current_user.active?
-        log_out if logged_in?
-        redirect_to root_url(subdomain: request.subdomain)
+      unless owner? # owners' relation to accounts is not determined by the Membership table
+        unless Membership.find_by(account: current_account, user: current_user).active
+          log_out if logged_in?
+          flash[:danger] = I18n.t "sessions.flash_suspended"
+          redirect_to root_url(subdomain: request.subdomain)
+        end
       end
     end
 

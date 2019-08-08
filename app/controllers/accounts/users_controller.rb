@@ -68,8 +68,8 @@ module Accounts
     end
 
     def toggle_activation
-      @user.toggle!(:active)
-      render :json => {:status => "OK", :user_active => @user.active?}
+      Membership.find_by(account: current_account, user: @user).toggle!(:active)
+      render :json => {:status => "OK", :user_active => Membership.find_by(account: current_account, user: @user).active}
     end
 
     # def

@@ -606,6 +606,7 @@ el:
     flash_error: "Τα στοιχεία σύνδεσης δεν είναι σωστά!"
     flash_success: "Συνδεθήκατε επιτυχώς."
     flash_logout: "Έχετε αποσυνδεθεί."
+    flash_suspended: "Ο λογαριασμός σας έχει παγώσει."
     flash_passwd_reset_email_sent: "Οδηγίες για την αλλαγή του κωδικού σας έχουν αποσταλεί στο email"
     flash_passwd_reset_email_not_found: "Η διεύθυνση δεν βρέθηκε"
     flash_passwd_reset_email_empty: "Η διεύθυνση δεν μπορεί να είναι κενή"

@@ -604,6 +604,7 @@ en:
     flash_error: "Invalid username/password!"
     flash_success: "You have successfully signed in."
     flash_logout: "You have successfully signed out."
+    flash_suspended: "Your account has been suspended."
     flash_passwd_reset_email_sent: "Email sent with password reset instructions"
     flash_passwd_reset_email_not_found: "Email address not found"
     flash_passwd_reset_email_empty: "The Email address field can't be empty"
