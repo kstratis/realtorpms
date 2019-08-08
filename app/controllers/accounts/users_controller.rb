@@ -42,7 +42,7 @@ module Accounts
 
     # GET the edit page
     def edit
-      @user = current_account.users.find(params[:id])
+      # We already get +@user+ from +user_self+. Nothing to do here... yet...
     end
 
     # POST to the edit page
@@ -71,8 +71,6 @@ module Accounts
       Membership.find_by(account: current_account, user: @user).toggle!(:active)
       render :json => {:status => "OK", :user_active => Membership.find_by(account: current_account, user: @user).active}
     end
-
-    # def
 
     private
       def user_params
@@ -104,7 +102,7 @@ module Accounts
       # Confirms that an action concerning a particular user is initiated by that same user.
       # Essentially prevents admins modifying others users' data.
       def user_self
-        @user = current_account.users.find(params[:id])
+        @user = current_account.all_users.find(params[:id])
         unless current_user?(@user)
           flash[:danger] = I18n.t 'users.flash_unauthorised_user_edit'
           redirect_to(root_url)
