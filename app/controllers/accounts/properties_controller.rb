@@ -17,6 +17,7 @@ module Accounts
 
       if params[:locations]
         locations = params[:locations].split(",").map(&:to_i)
+        # puts locations
         @properties = @properties.where(location_id: locations)
         # level2areas = params[:locations].split(",").map(&:to_i).select { |locationid| Location.find(locationid).level == 2 }
 
@@ -28,8 +29,6 @@ module Accounts
         # @properties = @properties.where(location_id: params[:locations])
 
       end
-
-
 
 
       if params[:search]
@@ -78,10 +77,10 @@ module Accounts
 
       respond_to do |format|
         format.html
-        format.json {render json: {results_per_page: @results_per_page,
-                                   userslist: @propertieslist,
-                                   total_entries: @properties.total_entries,
-                                   current_page: @properties.current_page}, status: 200}
+        format.json { render json: {results_per_page: @results_per_page,
+                                    userslist: @propertieslist,
+                                    total_entries: @properties.total_entries,
+                                    current_page: @properties.current_page}, status: 200 }
       end
 
 
@@ -97,12 +96,12 @@ module Accounts
         if params['print']
           pictures = []
           if @property.images.attached? || @property.avatar.attached?
-             @property.all_images[0..3].each do |image|
-               pictures << image.variant(resize: '400x250').processed.service_url
-             end
+            @property.all_images[0..3].each do |image|
+              pictures << image.variant(resize: '400x250').processed.service_url
+            end
           end
           # @property.all_images[0..3]
-          html = render_to_string({template: 'accounts/properties/printable', layout: 'printer/printable', locals: { pictures: pictures}})
+          html = render_to_string({template: 'accounts/properties/printable', layout: 'printer/printable', locals: {pictures: pictures}})
           pdf = Grover.new(html, display_url: root_url).to_pdf
           # pdf = Grover.new(html).to_pdf
           # Demo
@@ -126,7 +125,7 @@ module Accounts
       # render :json => {:status => "OK", :type => 'unfaved' }
       respond_to do |format|
         format.html
-        format.js {render 'accounts/properties/avatar_removed', locals: {resource: property}}
+        format.js { render 'accounts/properties/avatar_removed', locals: {resource: property} }
         # format.json {render json: {}, status: :no_content}
       end
 
@@ -166,21 +165,21 @@ module Accounts
 
       respond_to do |format|
         if @property.save
-          format.html {redirect_to @property, notice: I18n.t('properties.created.flash')}
-          format.js {render 'shared/ajax/handler',
-                            locals: {resource: @property,
-                                     action: 'created',
-                                     partial_success: 'shared/ajax/success',
-                                     partial_failure: 'shared/ajax/failure'}}
+          format.html { redirect_to @property, notice: I18n.t('properties.created.flash') }
+          format.js { render 'shared/ajax/handler',
+                             locals: {resource: @property,
+                                      action: 'created',
+                                      partial_success: 'shared/ajax/success',
+                                      partial_failure: 'shared/ajax/failure'} }
         else
           @property.errors.each do |field, error|
             puts "#{field}: #{error}"
           end
-          format.html {render :new}
-          format.js {render 'shared/ajax/handler', locals: {resource: @property,
-                                                            action: 'created',
-                                                            partial_success: 'shared/ajax/success',
-                                                            partial_failure: 'shared/ajax/failure'}}
+          format.html { render :new }
+          format.js { render 'shared/ajax/handler', locals: {resource: @property,
+                                                             action: 'created',
+                                                             partial_success: 'shared/ajax/success',
+                                                             partial_failure: 'shared/ajax/failure'} }
         end
       end
     end
@@ -197,18 +196,18 @@ module Accounts
 
       respond_to do |format|
         if @property.update(property_params)
-          format.html {redirect_to @property, notice: I18n.t('properties.updated.flash')}
-          format.js {render 'shared/ajax/handler',
-                            locals: {resource: @property,
-                                     action: 'updated',
-                                     partial_success: 'shared/ajax/success',
-                                     partial_failure: 'shared/ajax/failure'}}
+          format.html { redirect_to @property, notice: I18n.t('properties.updated.flash') }
+          format.js { render 'shared/ajax/handler',
+                             locals: {resource: @property,
+                                      action: 'updated',
+                                      partial_success: 'shared/ajax/success',
+                                      partial_failure: 'shared/ajax/failure'} }
         else
-          format.html {render :edit}
-          format.js {render 'shared/ajax/handler', locals: {resource: @property,
-                                                            action: 'updated',
-                                                            partial_success: 'shared/ajax/success',
-                                                            partial_failure: 'shared/ajax/failure'}}
+          format.html { render :edit }
+          format.js { render 'shared/ajax/handler', locals: {resource: @property,
+                                                             action: 'updated',
+                                                             partial_success: 'shared/ajax/success',
+                                                             partial_failure: 'shared/ajax/failure'} }
         end
       end
     end
@@ -218,8 +217,8 @@ module Accounts
     def destroy
       @property.destroy
       respond_to do |format|
-        format.html {redirect_to properties_url, flash: I18n.t('properties.destroyed.flash')}
-        format.json {head :no_content}
+        format.html { redirect_to properties_url, flash: I18n.t('properties.destroyed.flash') }
+        format.json { head :no_content }
       end
     end
 
