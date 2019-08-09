@@ -127,8 +127,8 @@ class User < ApplicationRecord
     properties.count
   end
 
-  def favlist_create(name)
-    favlists.create(name: name)
+  def favlist_create(name, account)
+    favlists.create(name: name, account: account)
   end
 
   def favlist_destroy(name)

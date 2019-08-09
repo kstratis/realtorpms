@@ -22,7 +22,7 @@ module Accounts
 
     # Creates a new favlist
     def create
-      current_user.favlist_create(params[:name])
+      current_user.favlist_create(params[:name], current_account)
       current_user.favlists.reload
       render json: {status: "OK", message: render_favlists}
     end
@@ -35,7 +35,7 @@ module Accounts
 
     private
       def render_favlists
-        Favlist.with_param(current_user.id, params['property_id'] ? params['property_id'] : nil )
+        Favlist.with_param(current_user.id, params['property_id'] ? params['property_id'] : nil, current_account.id )
       end
   end
 end

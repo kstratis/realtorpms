@@ -9,9 +9,9 @@ class Favlist < ApplicationRecord
 
   # Returns a list of objects containing the favlists. If a +property_id+ param is given, then is also checks if
   # that property is contained in the given favlist
-  scope :with_param, -> (user_id, property_id) do
+  scope :with_param, -> (user_id, property_id, account_id) do
     favlists = Array.new
-    User.find(user_id).favlists.find_each do |favlist|
+    User.find(user_id).favlists.where(account: account_id).find_each do |favlist|
       # Building a hash conditionally. Reference: https://stackoverflow.com/a/5751839/178728
       favlists << {id: favlist.id, name: favlist.name, isFaved: (favlist.has_faved?(property_id) if property_id)}.compact
     end
