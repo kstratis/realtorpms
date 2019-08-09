@@ -1,6 +1,7 @@
 class Favlist < ApplicationRecord
   validates :name, uniqueness: {case_sensitive: false}
   belongs_to :user
+  belongs_to :account
   has_and_belongs_to_many :properties, -> {distinct}
   # This is basically :dependant => :destroy for HABTM associations.
   # Reference: https://stackoverflow.com/a/9206730/178728

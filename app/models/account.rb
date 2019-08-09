@@ -4,10 +4,14 @@ class Account < ApplicationRecord
   validates :subdomain, presence: true, length: { maximum: 20 }, uniqueness: true
   validates :name, presence: true, length: { maximum: 20 }, uniqueness: true
 
-  has_many :invitations, dependent: :destroy
-  has_many :properties, dependent: :destroy
-  has_many :landlords, dependent: :destroy
-  # Originally had these 2 lines
+  has_many :invitations, dependent: :destroy # Only destroys invitations associated with the current account
+  has_many :properties, dependent: :destroy # Only destroys properties associated with the current account
+  has_many :landlords, dependent: :destroy # Only destroys landlords associated with the current account
+  # Favlists have 2 foreign keys: 1 to table Users and 1 to table Accounts. Deleting a User will drop all its
+  # favlists in all of his accounts. Deleting an account will delete all the favlists belonging to current account
+  # of all users.
+  has_many :favlists, dependent: :destroy # Only destroys favlists associated with the current account
+
   has_many :memberships
   has_many :users, through: :memberships, dependent: :destroy
   validates_associated :owner
