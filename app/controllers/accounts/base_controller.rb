@@ -1,8 +1,7 @@
 module Accounts
   class BaseController < ApplicationController
 
-    include LocationFilter
-    include LandlordFilter
+    include SearchFilter
     include UserDatatable
     include Jsonifier
 

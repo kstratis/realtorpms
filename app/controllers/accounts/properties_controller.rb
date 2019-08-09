@@ -141,11 +141,11 @@ module Accounts
     end
 
     def locations
-      filter_locations
+      search(Location, {value: 'id', label: %w(localname parent_localname)})
     end
 
     def landlords
-      filter_landlords
+      search(Landlord, {value: 'id', label: %w(first_name last_name)})
     end
 
     # GET /properties/new

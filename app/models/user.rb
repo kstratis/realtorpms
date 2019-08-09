@@ -127,6 +127,10 @@ class User < ApplicationRecord
     properties.count
   end
 
+  #######################
+  #      Favorites      #
+  #######################
+
   def favlist_create(name, account)
     favlists.create(name: name, account: account)
   end
@@ -135,6 +139,7 @@ class User < ApplicationRecord
     favlists.where(name: name).destroy!
   end
 
+  # TODO delete this
   # def favorite(property)
   #   favorites.find_or_create_by(property: property)
   # end
@@ -144,9 +149,7 @@ class User < ApplicationRecord
     property.reload
   end
 
-
-
-
+  #######################
 
   # Sets the password reset attributes.
   def create_reset_digest
