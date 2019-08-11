@@ -15,10 +15,10 @@ en:
         email_placeholder: "i.e. johnsmith@gmail.com"
       account:
         subdomain: "Account name"
-        name: "Επωνυμία επιχείρησης"
+        name: "Agency"
         website: "Website"
-        email: "Εταιρικό email"
-        telephones: "Τηλέφωνα επικοινωνίας"
+        email: "Corporate email"
+        telephones: "Contact number(s)"
         address: "Address"
       user:
         first_name: "First name"
@@ -326,7 +326,7 @@ en:
       sorting:
         title: "Sorting"
       filters:
-        sorting: "Ταξινόμηση"
+        title: "Filters"
         date:
           title: "Entry date"
           ascending: "Ascending"

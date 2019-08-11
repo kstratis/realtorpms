@@ -16,7 +16,6 @@ module Accounts
       puts '============='
 
       if params[:locations]
-        location_ids_level3 = []
         locations = params[:locations].split(",").map(&:to_i)
         # puts locations
         locations.each do |locationid|
@@ -25,23 +24,15 @@ module Accounts
           puts location.level, location.parent_id
           if location.level == 3
             @properties = @properties.where(location_id: location.id)
-          elsif location.level == 2
-            @properties = @properties
-                              .joins(:location)
-                              .where(locations: {parent_id: 3325})
-                              .or(@properties
-                                      .joins(:location)
-                                      .where(locations: {id: 3325}))
-          else # level 1
+          else # level 1 & 2
             s = Location
-                    .select('mainLocations.id')
+                    .select('DISTINCT mainLocations.id')
                     .from(Location.where(parent_id: locationid))
                     .joins('INNER JOIN locations AS mainLocations ON subquery.id = mainLocations.parent_id')
                     .union(Location.select('id')
                                .where(parent_id: locationid).or(Location.select('id').where(id: locationid)))
             @properties = @properties.where(location_id: s)
 
-            # location_ids_level2 << Location.where(parent_id: location.id).pluck(:id)
           end
 
         end
@@ -168,7 +159,7 @@ module Accounts
     end
 
     def locations
-      search(Location, {value: 'id', label: %w(localname parent_localname)})
+      search(Location, {value: 'id', label: %w(localname parent_localname)}, I18n.locale == :el ? {field: 'country_id', value: 1} : nil)
     end
 
     def landlords

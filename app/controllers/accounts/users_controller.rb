@@ -47,7 +47,7 @@ module Accounts
 
     # POST to the edit page
     def update
-      @user = current_account.users.find(params[:id])
+      puts 'updating'
       if @user.update_attributes(user_params)
         flash[:success] = I18n.t 'users.flash_profile_updated'
         redirect_to @user

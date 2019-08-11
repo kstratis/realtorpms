@@ -1,15 +1,17 @@
 module SearchFilter
   extend ActiveSupport::Concern
 
-  def search (object, attributes)
+  def search (object, attributes, filter={})
 
     if params[:search].blank?
       return
     end
 
+    puts 'in search looking for filter'
+    puts filter
     # DEBUG
     # puts "search term is: #{params[:search]}"
-    @results = object.search(params[:search])
+    @results = object.search(params[:search], filter)
 
     data = Array.new
     @results.each do |entry|
