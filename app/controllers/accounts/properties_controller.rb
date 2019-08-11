@@ -16,9 +16,37 @@ module Accounts
       puts '============='
 
       if params[:locations]
+        location_ids_level3 = []
         locations = params[:locations].split(",").map(&:to_i)
         # puts locations
-        @properties = @properties.where(location_id: locations)
+        locations.each do |locationid|
+          location = Location.find(locationid)
+          puts 'printing'
+          puts location.level, location.parent_id
+          if location.level == 3
+            @properties = @properties.where(location_id: location.id)
+          elsif location.level == 2
+            @properties = @properties
+                              .joins(:location)
+                              .where(locations: {parent_id: 3325})
+                              .or(@properties
+                                      .joins(:location)
+                                      .where(locations: {id: 3325}))
+          else # level 1
+            s = Location
+                    .select('mainLocations.id')
+                    .from(Location.where(parent_id: locationid))
+                    .joins('INNER JOIN locations AS mainLocations ON subquery.id = mainLocations.parent_id')
+                    .union(Location.select('id')
+                               .where(parent_id: locationid).or(Location.select('id').where(id: locationid)))
+            @properties = @properties.where(location_id: s)
+
+            # location_ids_level2 << Location.where(parent_id: location.id).pluck(:id)
+          end
+
+        end
+        # The following line works!
+        # @properties = @properties.where(location_id: locations)
         # level2areas = params[:locations].split(",").map(&:to_i).select { |locationid| Location.find(locationid).level == 2 }
 
         # @properties.
