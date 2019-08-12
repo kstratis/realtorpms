@@ -13,6 +13,8 @@
     <div class="app-container">
       <%= react_component('PropertiesListWithDatatable', props: {
           initial_payload: {
+              buysell_filter: Property.businesstypes.keys.tap(&:pop).collect {|businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype}},
+
               dataset_wrapper: @propertieslist,
               results_per_page: @results_per_page,
               total_entries: @total_entries,
@@ -20,6 +22,7 @@
               initial_search: @initial_search,
               initial_sorting: @initial_sorting,
               initial_ordering: @initial_ordering,
+              initial_purpose: @initial_purpose,
               locations_endpoint: properties_locations_url,
               hasFeedback: false,
               object_type: 'properties'

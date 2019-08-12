@@ -189,8 +189,6 @@ class SimpleSelect extends React.Component {
     // This is needed for the menu open/close styles
     const { isOpen } = this.state;
 
-
-    console.log('rendering');
     return (
       <div>
         {!this.props.ajaxEnabled ? (

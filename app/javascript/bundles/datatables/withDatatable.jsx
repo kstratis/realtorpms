@@ -30,17 +30,21 @@ function withDatatable(WrappedComponent) {
     constructor(props) {
       super(props);
       this.state = {
+        buysell_filter: this.props.initial_payload.buysell_filter,
         dataset: this.props.initial_payload.dataset_wrapper.dataset,
         resultsPerPage: this.props.initial_payload.results_per_page,
         isLoading: false,
         pageCount: Math.ceil(this.props.initial_payload.total_entries / this.props.initial_payload.results_per_page),
         count: this.props.initial_payload.total_entries,
+
         /* This is required only in initial loading.
          * We want this to be reflected in our React component. That's why we subtract 1 */
         selectedPage: this.getSelectedPage(),
+        // checkedButton:
         searchInput: this.props.initial_payload.initial_search,
         sorting: this.props.initial_payload.initial_sorting,
         ordering: this.props.initial_payload.initial_ordering,
+        selectedPurpose: this.props.initial_payload.initial_purpose,
         i18n: this.props.i18n
       };
 
@@ -61,8 +65,10 @@ function withDatatable(WrappedComponent) {
       this.handleFreezeUser = this.handleFreezeUser.bind(this);
       this.handleFav = this.handleFav.bind(this);
       this.handleLocationInput = this.handleLocationInput.bind(this);
+      this.handleChangePurpose = this.handleChangePurpose.bind(this);
       this.handleAjaxRequestDelayed = debounce(this.handleAjaxRequest, 300);
       this.compoundDelayedAction = debounce(this.compoundDelayedAction.bind(this), 300);
+
     }
 
     getSelectedPage() {
@@ -320,6 +326,26 @@ function withDatatable(WrappedComponent) {
         );
     }
 
+    handleChangePurpose(e) {
+      this.setState({
+        selectedPurpose: e.target.value
+      });
+      let searchParams = new URLSearchParams(window.location.search);
+      searchParams.delete('purpose');
+      if (e.target.value !== undefined && e.target.value.length > 0) {
+        searchParams.set('purpose', e.target.value);
+      } else {
+        searchParams.delete('purpose');
+      }
+      let newUrlParams = searchParams.toString()
+        ? `${window.location.pathname}?${searchParams.toString()}`
+        : window.location.pathname;
+      // Use this to debounce both the ajax request and the history replaceState
+      // https://github.com/ReactTraining/history/issues/291
+      this.compoundDelayedAction(searchParams, newUrlParams);
+    }
+
+
     render() {
       // {console.log(this.props)}
       return (
@@ -338,6 +364,7 @@ function withDatatable(WrappedComponent) {
             add_user_link={this.props.initial_payload.add_user_link}
             add_property_link={this.props.initial_payload.add_property_link}
             locations_endpoint={this.props.initial_payload.locations_endpoint}
+            handleChangePurpose={this.handleChangePurpose}
             {...this.state}
           />
         </div>

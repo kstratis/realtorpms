@@ -1,15 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import ReactPaginate from 'react-paginate';
-import Highlighter from 'react-highlight-words';
 import withDatatable from './withDatatable';
-import Search from './Search';
 import ClampWrapper from '../components/ClampWrapper';
-import Image from 'react-graceful-image';
-import ControlsContainer from './ControlsContainer';
 import SortFilter from './SortFilter';
 import MultiAsyncSelect from '../components/MultiAsyncSelect';
 import FlipMove from 'react-flip-move';
+import SimpleSelect from '../components/SimpleSelect';
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
@@ -19,12 +16,15 @@ const getRandomInt = (min, max) => {
 
 const PropertiesList = ({
   handleLocationInput,
+  handleChangePurpose,
   handlePageClick,
   handleSort,
+  buysell_filter,
   handleAssign,
   handleFav,
   advanceByTwo,
   isLoading,
+  selectedPurpose,
   dataset,
   pageCount,
   selectedPage,
@@ -60,33 +60,26 @@ const PropertiesList = ({
                   <label className="d-block">
                     <h5 className="card-title filter-header">{i18n.filters.type.title}:</h5>
                   </label>
-
                   <div className="form-group">
-                    <div className="custom-control custom-radio">
-                      <input type="radio" className="custom-control-input" name="rdGroup1" id="optionSell" />
-                      <label className="custom-control-label" htmlFor="optionSell">
-                        {i18n.filters.type.sell}
-                      </label>
-                    </div>
-                    <div className="custom-control custom-radio">
-                      <input type="radio" className="custom-control-input" name="rdGroup1" id="optionRent" />
-                      <label className="custom-control-label" htmlFor="optionRent">
-                        {i18n.filters.type.rent}
-                      </label>
-                    </div>
-                    <div className="custom-control custom-radio">
-                      <input
-                        type="radio"
-                        className="custom-control-input"
-                        name="rdGroup1"
-                        id="optionBoth"
-                        defaultChecked
-                      />
-                      <label className="custom-control-label" htmlFor="optionBoth">
-                        {i18n.filters.type.both}
-                      </label>
-                    </div>
+                    {buysell_filter.map(filter => (
+                      <div key={filter['value']} className="custom-control custom-radio">
+                        <input
+                          type="radio"
+                          className="custom-control-input"
+                          name="rdGroup1"
+                          id={filter['value']}
+                          value={filter['value']}
+                          onChange={e => handleChangePurpose(e)}
+                          checked={selectedPurpose === filter['value']}
+                        />
+                        <label className="custom-control-label" htmlFor={filter['value']}>
+                          {filter['label']}
+                        </label>
+                      </div>
+                    ))}
                   </div>
+                  <hr />
+                  <div className={'form-group'}>{/*<SimpleSelect/>*/}</div>
                 </div>
               </div>
             </div>
