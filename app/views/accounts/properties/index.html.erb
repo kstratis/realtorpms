@@ -14,7 +14,6 @@
       <%= react_component('PropertiesListWithDatatable', props: {
           initial_payload: {
               buysell_filter: Property.businesstypes.keys.tap(&:pop).collect {|businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype}},
-
               dataset_wrapper: @propertieslist,
               results_per_page: @results_per_page,
               total_entries: @total_entries,
@@ -32,7 +31,9 @@
                   placeholder: t('js.components.select.placeholder_title'),
                   noresults: t('js.components.select.noresults'),
                   loading: t('js.components.select.loading_html'),
-                  feedback: t('js.components.select.assignments_feedback')
+                  feedback: t('js.components.select.assignments_feedback'),
+                  category: t('js.components.select.category')
+
               },
               datatable: t('js.datatables.properties'),
               search: t('js.properties_search.placeholder'),

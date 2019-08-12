@@ -79,7 +79,8 @@ const PropertiesList = ({
                     ))}
                   </div>
                   <hr />
-                  <div className={'form-group'}>{/*<SimpleSelect/>*/}</div>
+                  <h5 className="card-title filter-header">{i18n.select.category}:</h5>
+                  <div className={'form-group'}>{''}</div>
                 </div>
               </div>
             </div>
