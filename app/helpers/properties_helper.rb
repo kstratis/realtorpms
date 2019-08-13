@@ -12,7 +12,15 @@ module PropertiesHelper
       end
     end
     options
-    # pp options
+    pp options
+  end
+
+  def property_categories
+    Property.categories.keys.collect {|businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype}}
+  end
+
+  def property_subcategories(category)
+    Property.subcategories.keys.collect {|businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype}}
   end
 
   def render_attribute(property, attribute, opts=nil, renderfn=nil)
