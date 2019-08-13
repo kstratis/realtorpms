@@ -7,12 +7,18 @@ import SortFilter from './SortFilter';
 import MultiAsyncSelect from '../components/MultiAsyncSelect';
 import FlipMove from 'react-flip-move';
 import SimpleSelect from '../components/SimpleSelect';
+import Select from 'react-select';
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 };
+const options = [
+  { value: 'chocolate', label: 'Chocolate' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'vanilla', label: 'Vanilla' }
+];
 
 const PropertiesList = ({
   handleLocationInput,
@@ -80,7 +86,9 @@ const PropertiesList = ({
                   </div>
                   <hr />
                   <h5 className="card-title filter-header">{i18n.select.category}:</h5>
-                  <div className={'form-group'}>{''}</div>
+                  <div className={'form-group'}>
+                    <Select options={options} />
+                  </div>
                 </div>
               </div>
             </div>
