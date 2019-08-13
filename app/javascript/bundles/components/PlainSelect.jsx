@@ -9,10 +9,6 @@ import PropTypes from 'prop-types';
 const animatedComponents = makeAnimated();
 
 MultiAsyncSelect.propTypes = {
-  collection_endpoint: PropTypes.shape({
-    url: PropTypes.string.isRequired,
-    action: PropTypes.string.isRequired
-  }).isRequired,
   action_endpoint: PropTypes.shape({
     url: PropTypes.string.isRequired,
     action: PropTypes.string.isRequired,
