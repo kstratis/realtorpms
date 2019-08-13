@@ -71,7 +71,7 @@
                               <%= Property.human_attribute_name(:businesstype) %>
                               <abbr title="<%= t('js.components.select.required') %>">*</abbr>
                             <% end %>
-                            <%= react_component('SimpleSelect', props: {
+                            <%= react_component('FormSelect', props: {
                                 id: 'a',
                                 inputID: 'property_businesstype',
                                 inputName: 'property[businesstype]',
@@ -96,8 +96,8 @@
                           </div><!-- /.form-group -->
                           <!-- .form-group -->
 
-                          <!-- DependantSelect will generate the form-group div and label tags automatically (nested) -->
-                          <%= react_component('DependantSelect', props: {
+                          <!-- NestedSelect will generate the form-group div and label tags automatically (nested) -->
+                          <%= react_component('NestedSelect', props: {
                               id: 'b',
                               className: 'simple-select',
                               options: get_options,
@@ -162,7 +162,7 @@
                             <%= property.label :floor do %>
                               <%= Property.human_attribute_name(:floor) %>
                             <% end %>
-                            <%= react_component('SimpleSelect', props: {
+                            <%= react_component('FormSelect', props: {
                                 id: 'c',
                                 inputID: 'property_floor',
                                 inputName: 'property[floor]',
@@ -193,7 +193,7 @@
                             <%= property.label :construction do %>
                               <%= Property.human_attribute_name(:construction) %>
                             <% end %>
-                            <%= react_component('SimpleSelect', props: {
+                            <%= react_component('FormSelect', props: {
                                 id: 'd',
                                 inputID: 'property_construction',
                                 inputName: 'property[construction]',
@@ -331,7 +331,7 @@
                             <%= property.label :levels do %>
                               <%= Property.human_attribute_name(:levels) %>
                             <% end %>
-                            <%= react_component('SimpleSelect', props: {
+                            <%= react_component('FormSelect', props: {
                                 id: 'e',
                                 inputID: 'property_levels',
                                 inputName: 'property[levels]',
@@ -452,7 +452,7 @@
                               <%= content_tag(:i, nil, class: 'fas fa-map fa-fw') + ' ' + t('activerecord.attributes.property.location') %>
                               <abbr title="<%= t('js.components.select.required') %>">*</abbr>
                             <% end %>
-                            <%= react_component('SimpleSelect', props: {
+                            <%= react_component('FormSelect', props: {
                                 id: 'f',
                                 inputID: 'property_locationid',
                                 inputName: 'property[locationid]',
@@ -568,7 +568,7 @@
                               <%= content_tag(:i, nil, class: 'fas fa-user fa-fw') + ' ' + t('activerecord.attributes.property.owner') %>
                               <abbr title="<%= t('js.components.select.required') %>">*</abbr>
                             <% end %>
-                            <%= react_component('SimpleSelect', props: {
+                            <%= react_component('FormSelect', props: {
                                 id: 'g',
                                 inputID: 'property_landlordid',
                                 inputName: 'property[landlordid]',

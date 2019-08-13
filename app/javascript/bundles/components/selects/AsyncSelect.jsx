@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import useFetch from '../hooks/useFetch';
-import useModalToggle from '../hooks/useModalToggle';
+import useFetch from '../../hooks/useFetch';
+import useModalToggle from '../../hooks/useModalToggle';
 import makeAnimated from 'react-select/animated';
-import { debounce, renderHTML, safelyExecCallback } from '../utilities/helpers';
-import AsyncSelect from 'react-select/async';
-import { reactSelectStyles } from '../styles/componentStyles';
+import { debounce, renderHTML, safelyExecCallback } from '../../utilities/helpers';
+import {default as ASelect} from 'react-select/async';
+import { reactSelectStyles } from '../../styles/componentStyles';
 import PropTypes from 'prop-types';
 const animatedComponents = makeAnimated();
 
-MultiAsyncSelect.propTypes = {
+AsyncSelect.propTypes = {
   collection_endpoint: PropTypes.shape({
     url: PropTypes.string.isRequired,
     action: PropTypes.string.isRequired
@@ -30,7 +30,7 @@ MultiAsyncSelect.propTypes = {
   }).isRequired
 };
 
-function MultiAsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasFeedback, i18n }) {
+function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasFeedback, i18n }) {
   // custom hook to open/close modal
   const { isOpen, setIsOpen } = useModalToggle();
   // this is the request for the pool of options - won't run on mount
@@ -102,7 +102,7 @@ function MultiAsyncSelect({ collection_endpoint, action_endpoint, storedOptions,
      * @param i18.select.feedback
      */
     <>
-      <AsyncSelect
+      <ASelect
         styles={reactSelectStyles}
         onChange={handleChange}
         value={data}
@@ -124,4 +124,4 @@ function MultiAsyncSelect({ collection_endpoint, action_endpoint, storedOptions,
   );
 }
 
-export default MultiAsyncSelect;
+export default AsyncSelect;

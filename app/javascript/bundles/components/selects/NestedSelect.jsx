@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SimpleSelect from './SimpleSelect';
+import FormSelect from './FormSelect';
 
-class DependantSelect extends React.Component {
+class NestedSelect extends React.Component {
   static propTypes = {
     formdata: PropTypes.shape({
       formid: PropTypes.string,
@@ -135,7 +135,7 @@ class DependantSelect extends React.Component {
           <label htmlFor="property_category">
             {this.props.i18n.select.category} <abbr title={this.props.i18n.select.required}>*</abbr>
           </label>
-          <SimpleSelect
+          <FormSelect
             id={'property_category_container'}
             identity={'property_category_component'}
             inputID={this.props.formdata.categoryid}
@@ -163,7 +163,7 @@ class DependantSelect extends React.Component {
           <label htmlFor="property_subcategory">
             {this.props.i18n.select.subcategory} <abbr title={this.props.i18n.select.required}>*</abbr>
           </label>
-          <SimpleSelect
+          <FormSelect
             id={'property_subcategory_container'}
             identity={'property_subcategory_component'}
             inputID={this.props.formdata.subcategoryid}
@@ -192,4 +192,4 @@ class DependantSelect extends React.Component {
   }
 }
 
-export default DependantSelect;
+export default NestedSelect;

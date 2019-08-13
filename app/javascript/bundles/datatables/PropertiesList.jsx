@@ -4,10 +4,9 @@ import ReactPaginate from 'react-paginate';
 import withDatatable from './withDatatable';
 import ClampWrapper from '../components/ClampWrapper';
 import SortFilter from './SortFilter';
-import MultiAsyncSelect from '../components/MultiAsyncSelect';
+import AsyncSelect from '../components/selects/AsyncSelect';
 import FlipMove from 'react-flip-move';
-import SimpleSelect from '../components/SimpleSelect';
-import Select from 'react-select';
+import PlainSelect from '../components/selects/PlainSelect';
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
@@ -87,7 +86,7 @@ const PropertiesList = ({
                   <hr />
                   <h5 className="card-title filter-header">{i18n.select.category}:</h5>
                   <div className={'form-group'}>
-                    <Select options={options} />
+                    <PlainSelect options={options} i18n={i18n} />
                   </div>
                 </div>
               </div>
@@ -98,7 +97,7 @@ const PropertiesList = ({
               {/* Generate the needed filters according to the i18n keys of the erb template */}
               <div className={'row mb-3'}>
                 <div className={'col-8'}>
-                  <MultiAsyncSelect
+                  <AsyncSelect
                     i18n={i18n}
                     collection_endpoint={{ url: locations_endpoint, action: 'get' }}
                     action_endpoint={{ url: '', action: '', callback: handleLocationInput }}

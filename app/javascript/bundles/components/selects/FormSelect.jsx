@@ -4,46 +4,10 @@ import axios from 'axios';
 import Select from 'react-select';
 import AsyncSelect from 'react-select/async';
 import ReactOnRails from 'react-on-rails';
-import { debounce, renderHTML } from '../utilities/helpers';
+import { reactSelectStyles } from '../../styles/componentStyles';
+import { debounce, renderHTML } from '../../utilities/helpers';
 
-const selectStyles = {
-  container: (base, state) => {
-    return { ...base };
-  },
-  option: (base, state) => ({
-    ...base,
-    '&:hover': {
-      cursor: 'pointer'
-    }
-  }),
-  dropdownIndicator: (base, state) => ({
-    ...base,
-    '&:hover': {
-      cursor: 'pointer'
-    },
-    'transform': `${state.selectProps.menuIsOpen && "rotate(180deg)"}`,
-  }),
-  clearIndicator: (base, state) => ({
-    ...base,
-    '&:hover': {
-      cursor: 'pointer'
-    }
-  }),
-  input: (base, state) => ({
-    ...base
-    // flexBasis: '33.33%'
-    // backgroundColor: 'red'
-  }),
-  singleValue: (base, state) => ({
-    ...base,
-    fontWeight: 700,
-    backgroundColor: '#216AB0',
-    color: '#FFFFFF',
-    padding: '10px'
-  })
-};
-
-class SimpleSelect extends React.Component {
+class FormSelect extends React.Component {
   static propTypes = {
     identity: PropTypes.string,
     formID: PropTypes.string,
@@ -198,7 +162,7 @@ class SimpleSelect extends React.Component {
             name={this.props.name}
             value={this.state.selectedOption}
             className={this.props.className}
-            styles={selectStyles}
+            styles={reactSelectStyles}
             onChange={this.handleChange}
             options={this.props.options}
             placeholder={this.props.i18n.select.placeholder}
@@ -215,10 +179,10 @@ class SimpleSelect extends React.Component {
           <AsyncSelect
             id={this.props.identity}
             inputProps={{ 'data-name': this.props.name }}
+            styles={reactSelectStyles}
             name={this.props.name}
             value={this.state.selectedOption}
             className={this.props.className}
-            styles={selectStyles}
             loadOptions={this.getOptions}
             placeholder={this.props.i18n.select.placeholder}
             isDisabled={this.props.isDisabled}
@@ -255,4 +219,4 @@ class SimpleSelect extends React.Component {
   }
 }
 
-export default SimpleSelect;
+export default FormSelect;
