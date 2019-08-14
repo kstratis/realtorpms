@@ -12,7 +12,6 @@ module PropertiesHelper
       end
     end
     options
-    pp options
   end
 
   def property_categories
