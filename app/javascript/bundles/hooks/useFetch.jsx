@@ -35,7 +35,7 @@ function useFetch(request, dropdown = true, didMountRef = null) {
     }
   }, [request]);
 
-  // Retun setData is case the includer needs to use it.
+  // Return setData is case the includer needs to use it.
   return { data, loading, setData };
 }
 
