@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_14_165858) do
+ActiveRecord::Schema.define(version: 2019_08_14_211503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(version: 2019_08_14_165858) do
     t.integer "parent_id"
     t.string "parent_localname"
     t.string "parent_globalname"
+    t.string "slug"
+    t.string "parent_slug"
   end
 
   create_table "countries", force: :cascade do |t|
@@ -175,7 +177,6 @@ ActiveRecord::Schema.define(version: 2019_08_14_165858) do
     t.integer "bathrooms"
     t.bigint "account_id"
     t.integer "category"
-    t.integer "subcategory"
     t.integer "businesstype"
     t.integer "floor"
     t.integer "levels"
@@ -193,7 +194,9 @@ ActiveRecord::Schema.define(version: 2019_08_14_165858) do
     t.integer "favorites_count"
     t.bigint "landlord_id"
     t.string "map_url"
+    t.bigint "category_id"
     t.index ["account_id"], name: "index_properties_on_account_id"
+    t.index ["category_id"], name: "index_properties_on_category_id"
     t.index ["landlord_id"], name: "index_properties_on_landlord_id"
     t.index ["location_id"], name: "index_properties_on_location_id"
   end
@@ -231,6 +234,7 @@ ActiveRecord::Schema.define(version: 2019_08_14_165858) do
   add_foreign_key "memberships", "accounts"
   add_foreign_key "memberships", "users"
   add_foreign_key "properties", "accounts"
+  add_foreign_key "properties", "categories"
   add_foreign_key "properties", "landlords"
   add_foreign_key "properties", "locations"
 end

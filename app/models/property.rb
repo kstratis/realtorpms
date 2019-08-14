@@ -7,7 +7,8 @@ class Property < ApplicationRecord
   before_validation :handle_dependent_fields, on: :update
   # belongs_to :user
   belongs_to :account
-  belongs_to :location, optional: true
+  belongs_to :category
+  belongs_to :location
   belongs_to :landlord, optional: true
   has_and_belongs_to_many :favlists, -> {distinct}
   accepts_nested_attributes_for :landlord
@@ -29,12 +30,16 @@ class Property < ApplicationRecord
 
   enum businesstype: [:sell, :rent, :sell_rent]
 
-  enum category: [:residential, :commercial, :land, :other]
+  # enum category: [:residential, :commercial, :land, :other]
+  #
+  # enum subcategory: [:apartment, :studio, :maisonette, :detached_house, :villa, :loft, :bungalow, :building, :apartment_complex,
+  #                    :office, :public_store, :warehouse, :industrial_space, :craft_space, :hotel, :business_building, :hall, :showroom,
+  #                    :land_plot, :parcels, :island, :other_categories,
+  #                    :parking, :business, :prefabricated, :detachable, :air, :other_various]
 
-  enum subcategory: [:apartment, :studio, :maisonette, :detached_house, :villa, :loft, :bungalow, :building, :apartment_complex,
-                     :office, :public_store, :warehouse, :industrial_space, :craft_space, :hotel, :business_building, :hall, :showroom,
-                     :land_plot, :parcels, :island, :other_categories,
-                     :parking, :business, :prefabricated, :detachable, :air, :other_various]
+
+
+
   # enum residentialsubcategory: [:apartment, :studio, :maisonette, :detached, :villa, :loft, :bungalow, :building, :complex]
   # enum commercialsubcategory: [:office, :commercialstore, :warehouse, :industrial, :craft, :hotel, :commercialbusiness, :hall, :showroom]
   # enum landsubcategory: [:plot, :parcels, :island, :othercategories]

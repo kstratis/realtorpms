@@ -186,6 +186,7 @@ module Accounts
       @property = Property.new(property_params)
       set_landlord
       set_location
+      set_category
 
       # Scope the property to current account. This is only set once.
       @property.account = current_account
@@ -216,6 +217,7 @@ module Accounts
     def update
       set_landlord
       set_location
+      set_category
 
       params[:delete_images].try :each do |id|
         @property.images.find(id).purge
@@ -290,14 +292,19 @@ module Accounts
       @property.location = Location.find(params[:action] == 'update' ? property_params[:locationid] : @property.locationid)
     end
 
+    def set_category
+      # Assign the property's category no matter what.
+      @property.category = params[:action] == 'update' ? Category.find_by(slug: property_params[:subcategory], parent_slug: property_params[:category]) : Category.find_by(slug: @property.subcategory, parent_slug: @property.category)
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def property_params
       # params.require(:property).permit(:description, :propertycategory, :propertytype, :price, :size, :construction)
       params.require(:property).permit(:description,
                                        :businesstype,
+                                       :locationid,
                                        :category,
                                        :subcategory,
-                                       :locationid,
                                        :bedrooms,
                                        :bathrooms,
                                        :price,

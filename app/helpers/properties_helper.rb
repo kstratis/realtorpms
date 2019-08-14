@@ -11,6 +11,7 @@ module PropertiesHelper
         }
       end
     end
+    pp options
     options
   end
 

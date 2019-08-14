@@ -1,4 +1,4 @@
-xlsx = Roo::Spreadsheet.open("#{Rails.root.join('lib', 'scripts', 'categories_listingv2.xlsx')}")
+xlsx = Roo::Spreadsheet.open("#{Rails.root.join('lib', 'scripts', 'categories_listing_v4.xlsx')}")
 sheet = xlsx.sheet('Categories')
 
 myvar = 0
@@ -12,7 +12,9 @@ ActiveRecord::Base.transaction do
                        level: row[3].to_i,
                        parent_id: row[4] ? row[4].to_i : nil,
                        parent_localname: row[5] ? row[5].to_s : nil,
-                       parent_globalname: row[6] ? row[6].to_s : nil)
+                       parent_globalname: row[6] ? row[6].to_s : nil,
+                       slug: row[7] ? row[7].to_s : nil,
+                       parent_slug: row[8] ? row[8].to_s : nil)
       pp "Categories, Row No #{index}, Data: #{row} - OK!"
       myvar+=1
     rescue => e
