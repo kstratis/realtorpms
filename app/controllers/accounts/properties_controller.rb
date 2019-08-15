@@ -59,8 +59,6 @@ module Accounts
         @properties = @properties.where('businesstype = ?', Property.businesstypes[params[:purpose].to_sym]).or(@properties.where('businesstype = ?', 2))
       end
 
-
-
       if params[:sorting] && params[:ordering]
         @properties = @properties.order("#{params[:sorting]}": params[:ordering])
       else
@@ -214,6 +212,7 @@ module Accounts
     # PATCH/PUT /properties/1
     # PATCH/PUT /properties/1.json
     def update
+      normalized_property_params = reconstruct_category(property_params)
       set_landlord
       set_location
       set_category
@@ -223,7 +222,7 @@ module Accounts
       end
 
       respond_to do |format|
-        if @property.update(property_params)
+        if @property.update(normalized_property_params)
           format.html { redirect_to @property, notice: I18n.t('properties.updated.flash') }
           format.js { render 'shared/ajax/handler',
                              locals: {resource: @property,
@@ -293,6 +292,7 @@ module Accounts
     end
 
     def reconstruct_category(parameters)
+      # @category_instance = params[:action] == 'update' ? Category.find_by(slug: parameters[:subcategory], parent_slug: parameters[:category]) : Category.find(@property.category.id)
       @category_instance = Category.find_by(slug: parameters[:subcategory], parent_slug: parameters[:category])
       if @category_instance
         parameters.to_h.except!(:category, :subcategory)

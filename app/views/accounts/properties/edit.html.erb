@@ -105,8 +105,8 @@
                               isRequired: true,
                               isSearchable: false,
                               isClearable: true,
-                              storedMasterOption: {label: Property.human_enum_name(:category, @property.category), value: @property.category},
-                              storedSlaveOption: {label: Property.human_enum_name(:subcategory, @property.subcategory), value: @property.subcategory},
+                              storedMasterOption: {label: Property.human_enum_name(:category, @property.category.parent_slug), value: @property.category.parent_slug},
+                              storedSlaveOption: {label: Property.human_enum_name(:subcategory, @property.category.slug), value: @property.category.slug},
                               formdata: {
                                   formid: "edit_property_#{@property.id}",
                                   categoryid: 'property_category',
