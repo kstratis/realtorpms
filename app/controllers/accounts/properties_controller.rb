@@ -183,14 +183,13 @@ module Accounts
     # POST /properties
     # POST /properties.json
     def create
-      @property = Property.new(property_params)
+      normalized_property_params = reconstruct_category(property_params)
+      @property = Property.new(normalized_property_params)
       set_landlord
       set_location
       set_category
-
       # Scope the property to current account. This is only set once.
       @property.account = current_account
-
       respond_to do |format|
         if @property.save
           format.html { redirect_to @property, notice: I18n.t('properties.created.flash') }
@@ -251,6 +250,7 @@ module Accounts
       end
     end
 
+
     private
 
     # Use callbacks to share common setup or constraints between actions.
@@ -292,9 +292,17 @@ module Accounts
       @property.location = Location.find(params[:action] == 'update' ? property_params[:locationid] : @property.locationid)
     end
 
+    def reconstruct_category(parameters)
+      @category_instance = Category.find_by(slug: parameters[:subcategory], parent_slug: parameters[:category])
+      if @category_instance
+        parameters.to_h.except!(:category, :subcategory)
+      else
+        raise
+      end
+    end
+
     def set_category
-      # Assign the property's category no matter what.
-      @property.category = params[:action] == 'update' ? Category.find_by(slug: property_params[:subcategory], parent_slug: property_params[:category]) : Category.find_by(slug: @property.subcategory, parent_slug: @property.category)
+      @property.category = @category_instance
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -303,6 +311,7 @@ module Accounts
       params.require(:property).permit(:description,
                                        :businesstype,
                                        :locationid,
+                                       :categoryid,
                                        :category,
                                        :subcategory,
                                        :bedrooms,

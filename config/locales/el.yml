@@ -208,7 +208,7 @@ el:
             residential: "Κατοικία"
             commercial: "Επαγγελματική στέγη"
             land: "Γη"
-            other_properties: "Λοιπά ακίνητα"
+            other: "Λοιπά ακίνητα"
           subcategory:
             apartment: "Διαμέρισμα"
             studio: "Studio / Γκαρσονιέρα"

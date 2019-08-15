@@ -26,7 +26,7 @@ class Property < ApplicationRecord
   # Collection of properties which have been favorited by a particular user
   scope :faved_by, -> (user) {joins(:favorites).where(favorites: {user: user})}
 
-  attr_accessor :locationid, :landlordid, :nolandlord, :delete_images
+  attr_accessor :categoryid, :locationid, :landlordid, :nolandlord, :delete_images
 
   enum businesstype: [:sell, :rent, :sell_rent]
 
@@ -54,8 +54,8 @@ class Property < ApplicationRecord
 
   # Validations should match their ujs_form_handler.js counterparts
   validates :businesstype, presence: true
-  validates :category, presence: true
-  validates :subcategory, presence: true
+  # validates :category, presence: true
+  # validates :subcategory, presence: true
   # validates :locationid, presence: true
   validates :size, numericality: {only_integer: true}, allow_blank: true
   validates :price, numericality: {only_integer: true}, allow_blank: true
@@ -111,7 +111,7 @@ class Property < ApplicationRecord
           :price => {:label => 'price', :icon => 'price', :options => nil, :renderfn => Proc.new {|value| value ? ActionController::Base.helpers.number_to_currency(value) : '—' }},
           :pricepersqmeter => {:label => 'pricepersqmeter', :icon => 'pricepersqmeter', :options => nil, :renderfn => Proc.new {|value| value ? ActionController::Base.helpers.number_to_currency(value) : '—' }},
           :size => {:label => 'size', :icon => 'size', :options => nil, :renderfn => Proc.new {|value| value ? I18n.t('activerecord.attributes.property.size_meter_html', size: value.to_s) : '—' }},
-          :subcategory => {:label => 'subcategory', :icon => 'subcategory', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.subcategory.#{value}")} },
+          :category_info => {:label => 'subcategory', :icon => 'subcategory', :options => 'slug', :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.subcategory.#{value}")} },
           :created_at => {:label => 'created_at', :icon => 'created_at', :options => nil, :renderfn => Proc.new {|value| value ? (I18n.l value, format: :custom) : '—' } }
 
       }.freeze
@@ -140,6 +140,10 @@ class Property < ApplicationRecord
 
   def location_info(term)
     location.try(term.to_sym)
+  end
+
+  def category_info(term)
+    category.try(term.to_sym)
   end
 
   def render_extra(term)

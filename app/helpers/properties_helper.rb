@@ -1,13 +1,13 @@
 module PropertiesHelper
   def get_options
     options = {}
-    Category.all.each do |entry|
-      if options.key?(entry[:parent_name])
-        options[entry[:parent_name]][:subcategory] << { entry[:name] => t("activerecord.attributes.property.enums.subcategory.#{entry[:name].to_s}") }
+    Category.where(id: (5..32).to_a).each do |entry|
+      if options.key?(entry[:parent_slug])
+        options[entry[:parent_slug]][:subcategory] << { entry[:slug] => t("activerecord.attributes.property.enums.subcategory.#{entry[:slug].to_s}") }
       else
-        options[entry[:parent_name]] = {
-            :category => {entry[:parent_name] => t("activerecord.attributes.property.enums.category.#{entry[:parent_name].to_s}")},
-            :subcategory => [{entry[:name] => t("activerecord.attributes.property.enums.subcategory.#{entry[:name].to_s}")}]
+        options[entry[:parent_slug]] = {
+            :category => {entry[:parent_slug] => t("activerecord.attributes.property.enums.category.#{entry[:parent_slug].to_s}")},
+            :subcategory => [{entry[:slug] => t("activerecord.attributes.property.enums.subcategory.#{entry[:slug].to_s}")}]
         }
       end
     end
@@ -24,6 +24,7 @@ module PropertiesHelper
   end
 
   def render_attribute(property, attribute, opts=nil, renderfn=nil)
+    puts "checking attribute: #{attribute} and options: #{opts}"
     if property.respond_to?(attribute)
       result = (opts ? property.send(attribute, opts) : property.send(attribute)) || false
       return renderfn.call(result).to_s.html_safe if renderfn

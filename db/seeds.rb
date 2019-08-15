@@ -150,8 +150,6 @@ end
   bluedomain.users << user
 end
 
-categories = Property.categories.keys
-subcategories = Property.subcategories.keys
 # 20 Fake properties belonging to +regularshakalakauser1+ (shakalaka account)
 20.times do |n|
   property = Property.create!(

@@ -6,10 +6,10 @@ class NestedSelect extends React.Component {
   static propTypes = {
     formdata: PropTypes.shape({
       formid: PropTypes.string,
-      categoryid: PropTypes.string.isRequired,
-      categoryname: PropTypes.string.isRequired,
-      subcategoryid: PropTypes.string.isRequired,
-      subcategoryname: PropTypes.string.isRequired
+      categoryid: PropTypes.string,
+      categoryname: PropTypes.string,
+      subcategoryid: PropTypes.string,
+      subcategoryname: PropTypes.string
     }),
     storedMasterOption: PropTypes.object,
     storedSlaveOption: PropTypes.object,

@@ -5,7 +5,7 @@ module PropertyHeader
   # Πώληση, Διαμέρισμα, 85 τ.μ., Λαμπρινή, 220.000 €
   def heading(property)
     businesstype = t("activerecord.attributes.property.enums.businesstype.#{property.businesstype}")
-    category = t("activerecord.attributes.property.enums.subcategory.#{property.subcategory}")
+    category = t("activerecord.attributes.property.enums.subcategory.#{property.category.slug}")
     size = property.size ? t("activerecord.attributes.property.size_meter_html", size: property.size.to_s) : nil
     localname = property.location.localname
     parent_localname = property.location.parent_localname
@@ -14,7 +14,7 @@ module PropertyHeader
   end
 
   def mini_heading(property)
-    category = t("activerecord.attributes.property.enums.subcategory.#{property.subcategory}")
+    category = t("activerecord.attributes.property.enums.subcategory.#{property.category.slug}")
     size = property.size ? t("activerecord.attributes.property.size_meter_html", size: property.size.to_s) : nil
     "#{category} #{size}"
   end

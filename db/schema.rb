@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_14_211503) do
+ActiveRecord::Schema.define(version: 2019_08_15_141843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -176,7 +176,6 @@ ActiveRecord::Schema.define(version: 2019_08_14_211503) do
     t.integer "bedrooms"
     t.integer "bathrooms"
     t.bigint "account_id"
-    t.integer "category"
     t.integer "businesstype"
     t.integer "floor"
     t.integer "levels"
