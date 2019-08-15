@@ -1,4 +1,3 @@
-
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -162,9 +161,10 @@ end
       account: shakalaka,
       location: lamprini,
       landlord: Landlord.create!(first_name: Faker::Name.first_name,
-                           last_name: Faker::Name.last_name,
-                           email: Faker::TvShows::SiliconValley.email,
-                           telephones: Faker::PhoneNumber.phone_number)
+                                 last_name: Faker::Name.last_name,
+                                 email: Faker::TvShows::SiliconValley.email,
+                                 telephones: Faker::PhoneNumber.phone_number,
+                                 account: shakalaka)
   )
   regularshakalakauser1.properties << property
 end
@@ -181,9 +181,10 @@ end
       account: bluedomain,
       location: palatiani,
       landlord: Landlord.create!(first_name: Faker::Name.first_name,
-                           last_name: Faker::Name.last_name,
-                           email: Faker::TvShows::SiliconValley.email,
-                           telephones: Faker::PhoneNumber.phone_number)
+                                 last_name: Faker::Name.last_name,
+                                 email: Faker::TvShows::SiliconValley.email,
+                                 telephones: Faker::PhoneNumber.phone_number,
+                                 account: bluedomain)
   )
   regularbluedomainuser1.properties << property
 end
