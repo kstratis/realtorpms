@@ -124,22 +124,24 @@ function withDatatable(WrappedComponent) {
     }
 
     handleCategoryInput(category, browserButtonInvoked = false){
-      console.log('executing');
       console.log(category);
       let searchParams = new URLSearchParams(window.location.search);
       // In this case delete the relevant params entry
-      if (category === null) {
-        console.log('if');
+      console.log(`the existing selection is: ${searchParams.get('category')}`);
+      console.log(`the new selection is: ${category.value}`);
+
+      if (!Object.keys(category).length) {
         searchParams.delete('category');
-      } else {
-        console.log('setting');
+      } else if (category.value === searchParams.get('category')){
+        console.log('same - returning');
+        return;
+      }
+      else {
         searchParams.set('category', category.value);
       }
       let newUrlParams = searchParams.toString()
         ? `${window.location.pathname}?${searchParams.toString()}`
         : window.location.pathname;
-      // console.log(`callback running with location id: ${locations[0].value}`);
-      // console.log(`callback running with location name: ${locations[0].label}`);
       this.compoundDelayedAction(searchParams, newUrlParams);
     }
 

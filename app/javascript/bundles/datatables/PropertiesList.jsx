@@ -7,7 +7,7 @@ import SortFilter from './SortFilter';
 import AsyncSelect from '../components/selects/AsyncSelect';
 import FlipMove from 'react-flip-move';
 import PlainSelect from '../components/selects/PlainSelect';
-import NestedSelect from '../components/selects/NestedSelect';
+import NestedFormSelect from '../components/selects/NestedFormSelect';
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
@@ -90,7 +90,7 @@ const PropertiesList = ({
                   <h5 className="card-title filter-header">{i18n.select.category}:</h5>
                   <div className={'form-group'}>
                     {/*handleLocationInput*/}
-                    <NestedSelect options={category_filter} i18n={i18n} renderFormFields={false} callback={handleCategoryInput} />
+                    <NestedFormSelect options={category_filter} i18n={i18n} renderFormFields={false} callback={handleCategoryInput} />
                   </div>
                 </div>
               </div>

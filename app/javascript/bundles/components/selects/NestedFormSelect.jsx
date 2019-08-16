@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FormSelect from './FormSelect';
-import { safelyExecCallback } from '../../utilities/helpers';
 
-class NestedSelect extends React.Component {
+class NestedFormSelect extends React.Component {
   static propTypes = {
     formdata: PropTypes.shape({
       formid: PropTypes.string,
@@ -176,7 +175,6 @@ class NestedSelect extends React.Component {
           <FormSelect
             id={'property_subcategory_container'}
             identity={'property_subcategory_component'}
-            // inputID={this.props.formdata.subcategoryid}
             inputID={this.props.formdata ? this.props.formdata.subcategoryid : ''}
             inputName={this.props.formdata ? this.props.formdata.subcategoryname : ''}
             inputClassName={this.props.formdata ? this.props.formdata.subcategoryClassName : ''}
@@ -205,4 +203,4 @@ class NestedSelect extends React.Component {
   }
 }
 
-export default NestedSelect;
+export default NestedFormSelect;
