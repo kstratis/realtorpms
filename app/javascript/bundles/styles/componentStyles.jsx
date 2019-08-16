@@ -31,7 +31,8 @@ const reactSelectStyles = {
     fontWeight: 700,
     backgroundColor: '#216AB0',
     color: '#FFFFFF',
-    padding: '10px'
+    padding: '5px',
+    borderRadius: '3px'
   })
 };
 

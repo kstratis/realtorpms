@@ -5,7 +5,7 @@ import Select from 'react-select';
 import AsyncSelect from 'react-select/async';
 import ReactOnRails from 'react-on-rails';
 import { reactSelectStyles } from '../../styles/componentStyles';
-import { debounce, renderHTML } from '../../utilities/helpers';
+import { debounce, renderHTML, safelyExecCallback } from '../../utilities/helpers';
 
 class FormSelect extends React.Component {
   static propTypes = {
@@ -19,9 +19,11 @@ class FormSelect extends React.Component {
     isMaster: PropTypes.bool,
     options: PropTypes.array,
     handleOptions: PropTypes.func,
+    callback: PropTypes.any,
     isDisabled: PropTypes.bool,
     onRef: PropTypes.func,
     searchable: PropTypes.bool,
+    renderFormField: PropTypes.bool,
     storedOption: PropTypes.any,
     // soloMode guards against dynamically setting the dropdown options
     // and gettings a ref which is needed in DependantSelect
@@ -53,7 +55,6 @@ class FormSelect extends React.Component {
     // loads on page load or the user clicks the form's submit button (which means that the plugin will have loaded by
     // then
     this.state.selectedOption ? this.updateExternalDOM(this.state.selectedOption, false) : '';
-
   }
 
   // Same as above but destroys the reference instead
@@ -74,7 +75,6 @@ class FormSelect extends React.Component {
   onMenuOpen = () => this.setState({ isOpen: true });
   onMenuClose = () => this.setState({ isOpen: false });
 
-
   // This operates outside react and is used to store the value
   // at the true input field which is eventually used by the rails form
   setTextInputValue(value) {
@@ -87,11 +87,11 @@ class FormSelect extends React.Component {
   }
 
   // react-select v2
-  blurSelectComponent(){
+  blurSelectComponent() {
     this.selectRef.blur();
   }
 
-  blurAsyncComponent(){
+  blurAsyncComponent() {
     this.asyncRef.blur();
   }
 
@@ -117,7 +117,7 @@ class FormSelect extends React.Component {
 
   // This updates the true input field (which is hidden) according to the value selected.
   // It uses JQuery and is relatively safe to use since it's located outside of our React Component
-  updateExternalDOM (selectedOption, validate = true)  {
+  updateExternalDOM(selectedOption, validate = true) {
     // JQuery form validator specifics. Requires JQuery.
     // Manipulating a form element outside of this React component should be relatively safe
     this.setTextInputValue(selectedOption ? selectedOption.value : '');
@@ -126,12 +126,12 @@ class FormSelect extends React.Component {
       // console.log('select field changed - validating: ' +  this.props.inputID);
       window.form_stepper.validateField(this.props.inputID);
     }
-  };
+  }
 
   // This is called on every value change to update the current value and the "true" hidden input field.
   // If it is the parent dropdown that is change it will also call the handleOptions from DependantSelect
   // to update the childen's dropdown values accordingly
-  handleChange (selectedOption) {
+  handleChange(selectedOption) {
     // selectedOption is an object of type: {label: "Πώληση", value: "sell"}
     // Whenever locations are concerned, value is the id, and not the area_id.
     // check if we are dealing with dependant or solo select
@@ -141,9 +141,11 @@ class FormSelect extends React.Component {
       }
     }
     this.setState({ selectedOption }, () => {
+      safelyExecCallback(this.props, selectedOption);
+      if (!this.props.renderFormField) return;
       this.updateExternalDOM(this.state.selectedOption);
     });
-  };
+  }
 
   render() {
     const opts = {
@@ -173,7 +175,9 @@ class FormSelect extends React.Component {
             menuIsOpen={isOpen}
             onMenuOpen={this.onMenuOpen}
             onMenuClose={this.onMenuClose}
-            ref={ ref => { this.selectRef = ref; }}
+            ref={ref => {
+              this.selectRef = ref;
+            }}
           />
         ) : (
           <AsyncSelect
@@ -197,23 +201,31 @@ class FormSelect extends React.Component {
             onMenuOpen={this.onMenuOpen}
             onMenuClose={this.onMenuClose}
             onChange={this.handleChange}
-            ref={ ref => { this.asyncRef = ref; }}
+            ref={ref => {
+              this.asyncRef = ref;
+            }}
           />
         )}
-        <input
-          id={this.props.inputID}
-          name={this.props.inputName}
-          className={`proxy-form-input ${this.props.inputClassName}`}
-          disabled={this.props.inputIsDisabled || false}
-          data-parsley-group={this.props.validatorGroup}
-          data-parsley-required-message={this.props.i18n.validatorErrMsg}
-          ref={input => {
-            this.textInput = input;
-          }}
-          {...opts}
-        />
-        <small className="form-text text-muted">{this.props.feedback}</small>
-        <div className="invalid-feedback"></div>
+        {this.props.renderFormField ? (
+          <>
+            <input
+              id={this.props.inputID}
+              name={this.props.inputName}
+              className={`proxy-form-input ${this.props.inputClassName}`}
+              disabled={this.props.inputIsDisabled || false}
+              data-parsley-group={this.props.validatorGroup}
+              data-parsley-required-message={this.props.i18n.validatorErrMsg}
+              ref={input => {
+                this.textInput = input;
+              }}
+              {...opts}
+            />
+            <small className="form-text text-muted">{this.props.feedback}</small>
+            <div className="invalid-feedback" />
+          </>
+        ) : (
+          ''
+        )}
       </div>
     );
   }

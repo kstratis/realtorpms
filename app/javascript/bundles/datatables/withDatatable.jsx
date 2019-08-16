@@ -31,6 +31,7 @@ function withDatatable(WrappedComponent) {
       super(props);
       this.state = {
         buysell_filter: this.props.initial_payload.buysell_filter,
+        category_filter: this.props.initial_payload.category_filter,
         dataset: this.props.initial_payload.dataset_wrapper.dataset,
         resultsPerPage: this.props.initial_payload.results_per_page,
         isLoading: false,
@@ -65,6 +66,7 @@ function withDatatable(WrappedComponent) {
       this.handleFreezeUser = this.handleFreezeUser.bind(this);
       this.handleFav = this.handleFav.bind(this);
       this.handleLocationInput = this.handleLocationInput.bind(this);
+      this.handleCategoryInput = this.handleCategoryInput.bind(this);
       this.handleChangePurpose = this.handleChangePurpose.bind(this);
       this.handleAjaxRequestDelayed = debounce(this.handleAjaxRequest, 300);
       this.compoundDelayedAction = debounce(this.compoundDelayedAction.bind(this), 300);
@@ -119,6 +121,26 @@ function withDatatable(WrappedComponent) {
       } else {
         this.handlePageClick(this.state.selectedPage - 2, true);
       }
+    }
+
+    handleCategoryInput(category, browserButtonInvoked = false){
+      console.log('executing');
+      console.log(category);
+      let searchParams = new URLSearchParams(window.location.search);
+      // In this case delete the relevant params entry
+      if (category === null) {
+        console.log('if');
+        searchParams.delete('category');
+      } else {
+        console.log('setting');
+        searchParams.set('category', category.value);
+      }
+      let newUrlParams = searchParams.toString()
+        ? `${window.location.pathname}?${searchParams.toString()}`
+        : window.location.pathname;
+      // console.log(`callback running with location id: ${locations[0].value}`);
+      // console.log(`callback running with location name: ${locations[0].label}`);
+      this.compoundDelayedAction(searchParams, newUrlParams);
     }
 
     handleLocationInput(locations, browserButtonInvoked = false) {
@@ -352,6 +374,7 @@ function withDatatable(WrappedComponent) {
         <div>
           <WrappedComponent
             handleLocationInput={this.handleLocationInput}
+            handleCategoryInput={this.handleCategoryInput}
             handlePageClick={this.handlePageClick}
             handleSort={this.handleSort}
             handleAssign={this.handleAssign}

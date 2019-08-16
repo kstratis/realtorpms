@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FormSelect from './FormSelect';
+import { safelyExecCallback } from '../../utilities/helpers';
 
 class NestedSelect extends React.Component {
   static propTypes = {
@@ -11,8 +12,10 @@ class NestedSelect extends React.Component {
       subcategoryid: PropTypes.string,
       subcategoryname: PropTypes.string
     }),
+    renderFormFields: PropTypes.bool,
     storedMasterOption: PropTypes.object,
     storedSlaveOption: PropTypes.object,
+    callback: PropTypes.func,
     options: PropTypes.object.isRequired,
     searchable: PropTypes.bool,
     i18n: PropTypes.shape({
@@ -54,7 +57,9 @@ class NestedSelect extends React.Component {
         // Since we imperativelly control the slave component (no onChange is fired on slave), we have also
         // call updateExternalDOM to actually update the true value
         this.slaveComponent.clearSelection();
-        this.slaveComponent.updateExternalDOM(selectedOption);
+        if (this.props.renderFormFields) {
+          this.slaveComponent.updateExternalDOM(selectedOption);
+        }
       }
       this.setState({ slaveOptions: this.buildSelectOptions(this.props.options[selectedOption.value], false) });
       this.setState({ slaveDisabled: false });
@@ -63,7 +68,9 @@ class NestedSelect extends React.Component {
       // Handle the master (subcategory component
       this.slaveComponent.clearSelection();
       this.slaveComponent.blurSelectComponent(); // This is needed in react-select v2
-      this.slaveComponent.updateExternalDOM('', false);
+      if (this.props.renderFormFields) {
+        this.slaveComponent.updateExternalDOM('', false);
+      }
       this.setState({ slaveDisabled: true, dependantMenuIsOpen: false });
     }
   };
@@ -139,15 +146,17 @@ class NestedSelect extends React.Component {
           <FormSelect
             id={'property_category_container'}
             identity={'property_category_component'}
-            inputID={this.props.formdata.categoryid}
-            inputName={this.props.formdata.categoryname}
-            inputClassName={this.props.formdata.categoryClassName}
+            inputID={this.props.formdata ? this.props.formdata.categoryid : ''}
+            inputName={this.props.formdata ? this.props.formdata.categoryname : ''}
+            inputClassName={this.props.formdata ? this.props.formdata.categoryClassName : ''}
             className={this.props.className}
-            formID={this.props.formdata.formid}
+            renderFormField={this.props.renderFormFields}
+            formID={this.props.formdata ? this.props.formdata.formid : ''}
             isMaster={true}
             storedOption={this.props.storedMasterOption}
             options={this.buildSelectOptions(this.props.options, true)}
             handleOptions={this.handleOptions}
+            callback={this.props.callback}
             i18n={this.props.i18n}
             isDisabled={false}
             onRef={ref => (this.masterComponent = ref)}
@@ -156,7 +165,7 @@ class NestedSelect extends React.Component {
             isClearable={this.props.isClearable}
             ajaxEnabled={false}
             validatorGroup={this.props.validatorGroup}
-            feedback={this.props.formdata.categoryFeedback}
+            feedback={this.props.formdata ? this.props.formdata.categoryFeedback : ''}
             isRequired={this.props.isRequired}
           />
         </div>
@@ -167,15 +176,18 @@ class NestedSelect extends React.Component {
           <FormSelect
             id={'property_subcategory_container'}
             identity={'property_subcategory_component'}
-            inputID={this.props.formdata.subcategoryid}
-            inputName={this.props.formdata.subcategoryname}
-            inputClassName={this.props.formdata.subcategoryClassName}
+            // inputID={this.props.formdata.subcategoryid}
+            inputID={this.props.formdata ? this.props.formdata.subcategoryid : ''}
+            inputName={this.props.formdata ? this.props.formdata.subcategoryname : ''}
+            inputClassName={this.props.formdata ? this.props.formdata.subcategoryClassName : ''}
             className={this.props.className}
-            formID={this.props.formdata.formid}
+            renderFormField={this.props.renderFormFields}
+            formID={this.props.formdata ? this.props.formdata.formid : ''}
             isMaster={false}
             storedOption={this.props.storedSlaveOption}
             options={this.state.slaveOptions}
             handleOptions={this.handleOptions}
+            callback={this.props.callback}
             i18n={this.props.i18n}
             isDisabled={this.state.slaveDisabled}
             onRef={ref => (this.slaveComponent = ref)}
@@ -184,7 +196,7 @@ class NestedSelect extends React.Component {
             isClearable={this.props.isClearable}
             ajaxEnabled={false}
             validatorGroup={this.props.validatorGroup}
-            feedback={this.props.formdata.subcategoryFeedback}
+            feedback={this.props.formdata ? this.props.formdata.categoryFeedback : ''}
             isRequired={this.props.isRequired}
           />
         </div>
