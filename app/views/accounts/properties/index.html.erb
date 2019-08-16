@@ -13,7 +13,7 @@
     <div class="app-container">
       <%= react_component('PropertiesListWithDatatable', props: {
           initial_payload: {
-              buysell_filter: Property.businesstypes.keys.tap(&:pop).collect {|businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype}},
+              buysell_filter: Property.businesstypes.keys.collect {|businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype}},
               category_filter: get_options,
               dataset_wrapper: @propertieslist,
               results_per_page: @results_per_page,

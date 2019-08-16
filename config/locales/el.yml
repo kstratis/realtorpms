@@ -148,7 +148,7 @@ el:
             title: "Είδος"
             sell: "Πώληση"
             rent: "Ενοικίαση"
-            sell_rent: "Πώληση & Ενοικίαση"
+            sell_rent: "Όλα"
           floor:
             basement: "Υπόγειο"
             semi_basement: "Ημιυπόγειο"

@@ -55,8 +55,11 @@ module Accounts
       end
 
       if params[:purpose]
+        unless params[:purpose] == 'sell_rent'
+        # if params[:purpose] == 'sell' || params[:purpose] == 'rent'
         # params[:purpose] can only be sell or rent cause that's what we allow in the UI
-        @properties = @properties.where('businesstype = ?', Property.businesstypes[params[:purpose].to_sym]).or(@properties.where('businesstype = ?', 2))
+          @properties = @properties.where('businesstype = ?', Property.businesstypes[params[:purpose].to_sym]).or(@properties.where('businesstype = ?', 2))
+        end
       end
 
       if params[:sorting] && params[:ordering]
@@ -98,7 +101,7 @@ module Accounts
       @initial_search = params[:search] || ''
       @initial_sorting = params[:sorting] || 'created_at'
       @initial_ordering = params[:ordering] || 'desc'
-      @initial_purpose = params[:purpose] || 'sell'
+      @initial_purpose = params[:purpose] || 'sell_rent'
 
       respond_to do |format|
         format.html
