@@ -55,6 +55,7 @@ class FormSelect extends React.Component {
     // This is why on first render we don't validate anything. We basically defer until the validation plugin fully
     // loads on page load or the user clicks the form's submit button (which means that the plugin will have loaded by
     // then
+    if (!this.props.renderFormField) return;
     this.state.selectedOption ? this.updateExternalDOM(this.state.selectedOption, false) : '';
   }
 

@@ -121,6 +121,7 @@ class NestedFormSelect extends React.Component {
   // // "transformLevel3"
   getCategoryKey() {
     const data = this.props.options;
+    console.log(data);
     const preselectedOption = this.props.storedSlaveOption;
     const interim_result = Object.keys(data).map(e => {
       // This thing below returns an array of flattened arrays. i.e.

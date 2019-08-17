@@ -91,9 +91,9 @@ const PropertiesList = ({
                   <hr />
                   <h5 className="card-title filter-header">{i18n.select.category}:</h5>
                   <div className={'form-group'}>
-                    {console.log(storedMasterOption)}
-                    {console.log(storedSlaveOption)}
-                    {console.log(category_filter)}
+                    {/*{console.log(storedMasterOption)}*/}
+                    {/*{console.log(storedSlaveOption)}*/}
+                    {/*{console.log(category_filter)}*/}
                     <NestedFormSelect options={category_filter}
                                       i18n={i18n}
                                       renderFormFields={false}
