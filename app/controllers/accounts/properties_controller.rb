@@ -108,6 +108,11 @@ module Accounts
       @initial_sorting = params[:sorting] || 'created_at'
       @initial_ordering = params[:ordering] || 'desc'
       @initial_purpose = params[:purpose] || 'sell_rent'
+      @initial_category = params[:category] || ''
+      @initial_subcategory = params[:subcategory] || ''
+
+      puts @initial_category
+      puts @initial_subcategory
 
       respond_to do |format|
         format.html

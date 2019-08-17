@@ -15,6 +15,8 @@
           initial_payload: {
               buysell_filter: Property.businesstypes.keys.collect {|businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype}},
               category_filter: category_options,
+              storedMasterOption: {label: Property.human_enum_name(:category, @initial_category), value: @initial_category},
+              storedSlaveOption: {label: Property.human_enum_name(:subcategory, @initial_subcategory), value: @initial_subcategory},
               dataset_wrapper: @propertieslist,
               results_per_page: @results_per_page,
               total_entries: @total_entries,

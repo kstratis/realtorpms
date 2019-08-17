@@ -46,6 +46,8 @@ function withDatatable(WrappedComponent) {
         sorting: this.props.initial_payload.initial_sorting,
         ordering: this.props.initial_payload.initial_ordering,
         selectedPurpose: this.props.initial_payload.initial_purpose,
+        storedMasterOption: this.props.initial_payload.storedMasterOption,
+        storedSlaveOption: this.props.initial_payload.storedSlaveOption,
         i18n: this.props.i18n
       };
 
