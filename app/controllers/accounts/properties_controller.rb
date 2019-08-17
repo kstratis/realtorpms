@@ -62,6 +62,12 @@ module Accounts
         end
       end
 
+      if params[:category] && params[:subcategory]
+        @properties = @properties.where(category: Category.find_by(slug: params[:subcategory], parent_slug: params[:category]))
+      elsif params[:category]
+        @properties = @properties.joins(:category).where(categories: {parent_slug: "residential"})
+      end
+
       if params[:sorting] && params[:ordering]
         @properties = @properties.order("#{params[:sorting]}": params[:ordering])
       else

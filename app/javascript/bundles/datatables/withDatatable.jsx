@@ -70,7 +70,6 @@ function withDatatable(WrappedComponent) {
       this.handleChangePurpose = this.handleChangePurpose.bind(this);
       this.handleAjaxRequestDelayed = debounce(this.handleAjaxRequest, 300);
       this.compoundDelayedAction = debounce(this.compoundDelayedAction.bind(this), 300);
-
     }
 
     getSelectedPage() {
@@ -123,21 +122,23 @@ function withDatatable(WrappedComponent) {
       }
     }
 
-    handleCategoryInput(category, browserButtonInvoked = false){
-      console.log(category);
+    handleCategoryInput(topLevel, selection, browserButtonInvoked = false) {
+      const getName = topLevel => {
+        return topLevel ? 'category' : 'subcategory';
+      };
       let searchParams = new URLSearchParams(window.location.search);
-      // In this case delete the relevant params entry
-      console.log(`the existing selection is: ${searchParams.get('category')}`);
-      console.log(`the new selection is: ${category.value}`);
-
-      if (!Object.keys(category).length) {
-        searchParams.delete('category');
-      } else if (category.value === searchParams.get('category')){
-        console.log('same - returning');
-        return;
-      }
-      else {
-        searchParams.set('category', category.value);
+      if (!selection) {
+        searchParams.delete(getName(topLevel));
+        if (topLevel) {
+          searchParams.delete('subcategory');
+        }
+      } else {
+        if (topLevel && selection.value !== searchParams.get(getName(topLevel))) {
+          searchParams.delete('subcategory');
+        } else if (selection.value === searchParams.get(getName(topLevel))) {
+          return;
+        }
+        searchParams.set(getName(topLevel), selection.value);
       }
       let newUrlParams = searchParams.toString()
         ? `${window.location.pathname}?${searchParams.toString()}`
@@ -368,7 +369,6 @@ function withDatatable(WrappedComponent) {
       // https://github.com/ReactTraining/history/issues/291
       this.compoundDelayedAction(searchParams, newUrlParams);
     }
-
 
     render() {
       // {console.log(this.props)}

@@ -25,6 +25,7 @@ class FormSelect extends React.Component {
     searchable: PropTypes.bool,
     renderFormField: PropTypes.bool,
     storedOption: PropTypes.any,
+    placeholderText: PropTypes.string,
     // soloMode guards against dynamically setting the dropdown options
     // and gettings a ref which is needed in DependantSelect
     soloMode: PropTypes.bool,
@@ -167,7 +168,7 @@ class FormSelect extends React.Component {
             styles={reactSelectStyles}
             onChange={this.handleChange}
             options={this.props.options}
-            placeholder={this.props.i18n.select.placeholder}
+            placeholder={this.props.placeholderText ? this.props.placeholderText : this.props.i18n.select.placeholder}
             isDisabled={this.props.isDisabled}
             isSearchable={this.props.isSearchable}
             isClearable={this.props.isClearable}
@@ -188,7 +189,7 @@ class FormSelect extends React.Component {
             value={this.state.selectedOption}
             className={this.props.className}
             loadOptions={this.getOptions}
-            placeholder={this.props.i18n.select.placeholder}
+            placeholder={this.props.placeholderText ? this.props.placeholderText : this.props.i18n.select.placeholder}
             isDisabled={this.props.isDisabled}
             isSearchable={this.props.isSearchable}
             isClearable={this.props.isClearable}

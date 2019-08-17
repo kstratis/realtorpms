@@ -1,5 +1,5 @@
 module PropertiesHelper
-  def get_options
+  def category_options
     options = {}
     Category.where(id: (5..32).to_a).each do |entry|
       if options.key?(entry[:parent_slug])

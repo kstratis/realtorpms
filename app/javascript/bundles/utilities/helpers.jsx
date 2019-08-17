@@ -33,9 +33,9 @@ const isUrl = (string) => {
   return regexp.test(string);
 };
 
-const safelyExecCallback = (fnParent, params) => {
+const safelyExecCallback = (fnParent, ...params) => {
   if (fnParent.callback && typeof fnParent.callback === 'function')
-    fnParent.callback(params);
+    fnParent.callback(...params);
 
 };
 

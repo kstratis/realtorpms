@@ -11,12 +11,14 @@ class NestedFormSelect extends React.Component {
       subcategoryid: PropTypes.string,
       subcategoryname: PropTypes.string
     }),
+    renderLabels: PropTypes.bool,
     renderFormFields: PropTypes.bool,
+    isClearable: PropTypes.bool,
+    isSearchable: PropTypes.bool,
     storedMasterOption: PropTypes.object,
     storedSlaveOption: PropTypes.object,
     callback: PropTypes.func,
     options: PropTypes.object.isRequired,
-    searchable: PropTypes.bool,
     i18n: PropTypes.shape({
       select: PropTypes.object.isRequired
     })
@@ -139,9 +141,9 @@ class NestedFormSelect extends React.Component {
     return (
       <div>
         <div className="form-group mb-4">
-          <label htmlFor="property_category">
+          {this.props.renderLabels ? <label htmlFor="property_category">
             {this.props.i18n.select.category} <abbr title={this.props.i18n.select.required}>*</abbr>
-          </label>
+          </label> : ''}
           <FormSelect
             id={'property_category_container'}
             identity={'property_category_component'}
@@ -155,8 +157,9 @@ class NestedFormSelect extends React.Component {
             storedOption={this.props.storedMasterOption}
             options={this.buildSelectOptions(this.props.options, true)}
             handleOptions={this.handleOptions}
-            callback={this.props.callback}
+            callback={this.props.callback ? this.props.callback.bind(null, true ): ''}
             i18n={this.props.i18n}
+            placeholderText={this.props.i18n.select.placeholder_plain}
             isDisabled={false}
             onRef={ref => (this.masterComponent = ref)}
             soloMode={false}
@@ -169,9 +172,9 @@ class NestedFormSelect extends React.Component {
           />
         </div>
         <div className="form-group mb-4">
-          <label htmlFor="property_subcategory">
+          {this.props.renderLabels ? <label htmlFor="property_subcategory">
             {this.props.i18n.select.subcategory} <abbr title={this.props.i18n.select.required}>*</abbr>
-          </label>
+          </label> : ''}
           <FormSelect
             id={'property_subcategory_container'}
             identity={'property_subcategory_component'}
@@ -185,8 +188,9 @@ class NestedFormSelect extends React.Component {
             storedOption={this.props.storedSlaveOption}
             options={this.state.slaveOptions}
             handleOptions={this.handleOptions}
-            callback={this.props.callback}
+            callback={this.props.callback ? this.props.callback.bind(null, false) : ''}
             i18n={this.props.i18n}
+            placeholderText={this.props.i18n.select.placeholder_plain}
             isDisabled={this.state.slaveDisabled}
             onRef={ref => (this.slaveComponent = ref)}
             soloMode={false}

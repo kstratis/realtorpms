@@ -89,8 +89,13 @@ const PropertiesList = ({
                   <hr />
                   <h5 className="card-title filter-header">{i18n.select.category}:</h5>
                   <div className={'form-group'}>
-                    {/*handleLocationInput*/}
-                    <NestedFormSelect options={category_filter} i18n={i18n} renderFormFields={false} callback={handleCategoryInput} />
+                    <NestedFormSelect options={category_filter}
+                                      i18n={i18n}
+                                      renderFormFields={false}
+                                      callback={handleCategoryInput}
+                                      isClearable={true}
+                                      isSearchable={false}
+                                      renderLabels={false} />
                   </div>
                 </div>
               </div>
