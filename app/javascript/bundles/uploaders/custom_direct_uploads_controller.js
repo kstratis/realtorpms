@@ -56,8 +56,8 @@ export class CustomDirectUploadsController {
     this.all_files = $.merge(uppy_files, regular_files) || [];
 
     // DEBUG
-    console.log(`all_files are:`);
-    console.log(this.all_files);
+    // console.log(`all_files are:`);
+    // console.log(this.all_files);
   }
 
   start(callback) {

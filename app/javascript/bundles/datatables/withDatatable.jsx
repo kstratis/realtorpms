@@ -30,15 +30,19 @@ function withDatatable(WrappedComponent) {
     constructor(props) {
       super(props);
       this.state = {
-        buysell_filter: {
-          storedOption: this.props.initial_payload.buysell_filter.storedOption,
-          options: this.props.initial_payload.buysell_filter.options
-        },
-        category_filter: {
-          options: this.props.initial_payload.category_filter.options,
-          storedMasterOption: this.props.initial_payload.category_filter.storedMasterOption,
-          storedSlaveOption: this.props.initial_payload.category_filter.storedSlaveOption
-        },
+        buysell_filter: this.props.initial_payload.buysell_filter
+          ? {
+              storedOption: this.props.initial_payload.buysell_filter.storedOption,
+              options: this.props.initial_payload.buysell_filter.options
+            }
+          : '',
+        category_filter: this.props.initial_payload.category_filter
+          ? {
+              options: this.props.initial_payload.category_filter.options,
+              storedMasterOption: this.props.initial_payload.category_filter.storedMasterOption,
+              storedSlaveOption: this.props.initial_payload.category_filter.storedSlaveOption
+            }
+          : '',
         dataset: this.props.initial_payload.dataset_wrapper.dataset,
         resultsPerPage: this.props.initial_payload.results_per_page,
         isLoading: false,
