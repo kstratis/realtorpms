@@ -15,8 +15,8 @@ class NestedFormSelect extends React.Component {
     renderFormFields: PropTypes.bool,
     isClearable: PropTypes.bool,
     isSearchable: PropTypes.bool,
-    storedMasterOption: PropTypes.object,
-    storedSlaveOption: PropTypes.object,
+    storedMasterOption: PropTypes.any,
+    storedSlaveOption: PropTypes.any,
     callback: PropTypes.func,
     options: PropTypes.object.isRequired,
     i18n: PropTypes.shape({
@@ -34,12 +34,21 @@ class NestedFormSelect extends React.Component {
   // The dependent one is called the 'slave' and takes the 'slaveOptions' options.
   state = {
     dependantMenuIsOpen: false,
-    slaveDisabled: !this.props.storedSlaveOption, // This changes according to the controlling parent
+    // This changes according to the controlling parent
+
+    // slaveDisabled: !this.props.storedSlaveOption,
+    slaveDisabled: !this.props.storedMasterOption,
+
     // This gets the sibling categories given the stored one.
-    slaveOptions: this.props.storedSlaveOption
-      ? this.buildSelectOptions(this.props.options[this.getCategoryKey()], false)
+
+    // slaveOptions: (this.props.storedSlaveOption && this.props.storedSlaveOption.value)
+    //   ? this.buildSelectOptions(this.props.options[this.getCategoryKey()], false)
+    //   : []
+    // slaveOptions: (this.props.storedMasterOption && this.props.storedMasterOption.value) ? this.buildSelectOptions(this.props.options[this.getCategoryKey()], false) : []
+    slaveOptions: (this.props.storedMasterOption && this.props.storedMasterOption.value)
+      ? this.buildSelectOptions(this.props.options[this.props.storedMasterOption.value], false)
       : []
-    // slaveOptions: []  // The subcategory component gets its options from state according to parent selection
+
   };
 
   // Set the subcategory's options according to parent selection.
@@ -80,14 +89,22 @@ class NestedFormSelect extends React.Component {
   // i.e. For the 'Master' component it would suffice to iterate over the `this.props.options` keys
   // The master's data is coming from Rails. When filtered by key the result becomes the slave's options
   // Get an overview here: https://repl.it/@kstratis/Transformationsfinal
-  buildSelectOptions(options, isController) {
+  buildSelectOptions(options, isMaster) {
     const data = options;
-    const iterable = isController ? Object.keys(data) : data['subcategory'];
+
+    console.log('%%%%%%%%');
+    console.log(data);
+    console.log('%%%%%%%%');
+
+    const iterable = isMaster ? Object.keys(data) : data['subcategory'];
+    console.log('++++');
+    console.log(iterable);
+    console.log('++++');
     // "transformLevel1" / "transformLevel2"
     return iterable.map(e => {
       return {
-        label: isController ? Object.values(data[e]['category'])[0] : Object.values(e)[0],
-        value: isController ? Object.keys(data[e]['category'])[0] : Object.keys(e)[0]
+        label: isMaster ? Object.values(data[e]['category'])[0] : Object.values(e)[0],
+        value: isMaster ? Object.keys(data[e]['category'])[0] : Object.keys(e)[0]
       };
     });
   }
@@ -103,7 +120,7 @@ class NestedFormSelect extends React.Component {
     // because of no match except one in the third array which
     // is what we are looking for. Now we pull out the nulls off
     // of each array which leaves us with 3 empty arrays. If it's
-    // empty retun null, otherwise return it's first
+    // empty return null, otherwise return it's first
     // and only element which is our match.
     const filtered_array = arr.filter(Boolean);
     return filtered_array.length > 0 ? filtered_array[0] : null;
@@ -120,9 +137,14 @@ class NestedFormSelect extends React.Component {
   // For detailed info have a look here: https://repl.it/@kstratis/Transformationsfinal
   // // "transformLevel3"
   getCategoryKey() {
+    return this.props.storedMasterOption.value;
+
     const data = this.props.options;
-    console.log(data);
+    if (!this.props.storedSlaveOption.value){
+      return this.props.storedMasterOption.value
+    }
     const preselectedOption = this.props.storedSlaveOption;
+    console.log(preselectedOption);
     const interim_result = Object.keys(data).map(e => {
       // This thing below returns an array of flattened arrays. i.e.
       // [ null, null, 'land', null ]
@@ -134,7 +156,8 @@ class NestedFormSelect extends React.Component {
     });
     // This last line filters out the nulls and picks the
     // only value left which is a string.
-    return interim_result.filter(Boolean)[0];
+    console.log(interim_result.filter(Boolean)[0] || this.props.storedMasterOption.value);
+    return interim_result.filter(Boolean)[0] || this.props.storedMasterOption;
   }
 
 
