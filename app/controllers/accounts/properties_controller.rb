@@ -10,18 +10,13 @@ module Accounts
       # preload location & owner
       @properties = current_user.is_owner?(current_account) ? current_account.properties.includes(:location, :landlord) : current_user.properties.where(account: current_account).includes(:location, :landlord)
 
-
-      puts '============='
-      puts params[:locations]
-      puts '============='
+      # DEBUG - Locations filter
+      # puts params[:locations]
 
       if params[:locations]
         locations = params[:locations].split(",").map(&:to_i)
-        # puts locations
         locations.each do |locationid|
           location = Location.find(locationid)
-          puts 'printing'
-          puts location.level, location.parent_id
           if location.level == 3
             @properties = @properties.where(location_id: location.id)
           else # level 1 & 2
@@ -34,46 +29,41 @@ module Accounts
             @properties = @properties.where(location_id: s)
 
           end
-
         end
-        # The following line works!
-        # @properties = @properties.where(location_id: locations)
-        # level2areas = params[:locations].split(",").map(&:to_i).select { |locationid| Location.find(locationid).level == 2 }
-
-        # @properties.
-        # puts '======2======'
-        # puts level2areas
-        # puts '======2======'
-        # @properties.where(params[:locations])
-        # @properties = @properties.where(location_id: params[:locations])
-
       end
 
-
+      # DEBUG - Search filter - Unused for now
+      # puts params[:search]
       if params[:search]
         @properties = @properties.search(params[:search])
       end
 
+      # DEBUG - Buy sell filter
+      # puts params[:purpose]
       if params[:purpose]
         unless params[:purpose] == 'sell_rent'
-        # if params[:purpose] == 'sell' || params[:purpose] == 'rent'
-        # params[:purpose] can only be sell or rent cause that's what we allow in the UI
           @properties = @properties.where('businesstype = ?', Property.businesstypes[params[:purpose].to_sym]).or(@properties.where('businesstype = ?', 2))
         end
       end
 
+      # DEBUG - Category filter
+      # puts params[:category], params[:subcategory]
       if params[:category] && params[:subcategory]
         @properties = @properties.where(category: Category.find_by(slug: params[:subcategory], parent_slug: params[:category]))
       elsif params[:category]
         @properties = @properties.joins(:category).where(categories: {parent_slug: "residential"})
       end
 
+      # DEBUG - Ordering filter
+      # puts params[:sorting], params[:ordering]
       if params[:sorting] && params[:ordering]
         @properties = @properties.order("#{params[:sorting]}": params[:ordering])
       else
         @properties = @properties.order(created_at: 'desc')
       end
 
+      # DEBUG - Pagination
+      # puts params[:page]
       @properties = @properties.paginate(page: params[:page], :per_page => 10)
 
       @propertieslist = {:dataset => Array.new}
@@ -101,6 +91,7 @@ module Accounts
         @propertieslist[:dataset] << hash
       end
 
+      # Initialization
       @total_entries = @properties.total_entries
       @current_page = @properties.current_page
       @results_per_page = 10
@@ -111,9 +102,6 @@ module Accounts
       @initial_category = params[:category] || ''
       @initial_subcategory = params[:subcategory] || ''
 
-      puts @initial_category
-      puts @initial_subcategory
-
       respond_to do |format|
         format.html
         format.json { render json: {results_per_page: @results_per_page,
@@ -121,8 +109,6 @@ module Accounts
                                     total_entries: @properties.total_entries,
                                     current_page: @properties.current_page}, status: 200 }
       end
-
-
     end
 
 
@@ -167,8 +153,6 @@ module Accounts
         format.js { render 'accounts/properties/avatar_removed', locals: {resource: property} }
         # format.json {render json: {}, status: :no_content}
       end
-
-
       # redirect_to edit_property_path(property)
     end
 

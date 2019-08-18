@@ -11,20 +11,17 @@
 <div class="page-container">
   <div class="container">
     <div class="app-container">
-      <h1><%= puts '%%%YEAH%%%' %></h1>
-      <h1><%= puts @initial_category %></h1>
-      <h1><%= puts @initial_subcategory %></h1>
-      <h1><%= puts Property.human_enum_name(:category, @initial_category) %></h1>
-      <h1><%= puts Property.human_enum_name(:subcategory, @initial_subcategory) %></h1>
-      <%#= byebug %>
       <%= react_component('PropertiesListWithDatatable', props: {
           initial_payload: {
-              buysell_filter: Property.businesstypes.keys.collect {|businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype}},
-              category_filter: category_options,
-              # storedMasterOption: {label: !@initial_category.blank? ? Property.human_enum_name(:category, @initial_category) : '', value: @initial_category ? @initial_category : ''},
-              storedMasterOption: @initial_category.blank? ? nil : {label: Property.human_enum_name(:category, @initial_category), value: @initial_category},
-              # storedSlaveOption: {label: !@initial_subcategory.blank? ? Property.human_enum_name(:subcategory, @initial_subcategory) : '', value: @initial_subcategory ? @initial_subcategory : ''},
-              storedSlaveOption: @initial_subcategory.blank? ? [] : {label: Property.human_enum_name(:subcategory, @initial_subcategory), value: @initial_subcategory},
+              buysell_filter: {
+                  options: Property.businesstypes.keys.collect {|businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype}},
+                  storedOption: @initial_purpose
+              },
+              category_filter: {
+                  options: category_options,
+                  storedMasterOption: @initial_category.blank? ? nil : {label: Property.human_enum_name(:category, @initial_category), value: @initial_category},
+                  storedSlaveOption: @initial_subcategory.blank? ? nil : {label: Property.human_enum_name(:subcategory, @initial_subcategory), value: @initial_subcategory}
+              },
               dataset_wrapper: @propertieslist,
               results_per_page: @results_per_page,
               total_entries: @total_entries,
@@ -32,7 +29,6 @@
               initial_search: @initial_search,
               initial_sorting: @initial_sorting,
               initial_ordering: @initial_ordering,
-              initial_purpose: @initial_purpose,
               locations_endpoint: properties_locations_url,
               hasFeedback: false,
               object_type: 'properties'

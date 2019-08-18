@@ -27,28 +27,19 @@ class NestedFormSelect extends React.Component {
   constructor(props) {
     super(props);
     this.buildSelectOptions = this.buildSelectOptions.bind(this);
-    this.getCategoryKey = this.getCategoryKey.bind(this);
   }
 
   // In dependant select the first component is called the 'master' and can be thought of as the 'parent' of the two.
   // The dependent one is called the 'slave' and takes the 'slaveOptions' options.
+  // For detailed info have a look here: https://repl.it/@kstratis/Transformationsfinal
   state = {
     dependantMenuIsOpen: false,
     // This changes according to the controlling parent
-
-    // slaveDisabled: !this.props.storedSlaveOption,
     slaveDisabled: !this.props.storedMasterOption,
-
     // This gets the sibling categories given the stored one.
-
-    // slaveOptions: (this.props.storedSlaveOption && this.props.storedSlaveOption.value)
-    //   ? this.buildSelectOptions(this.props.options[this.getCategoryKey()], false)
-    //   : []
-    // slaveOptions: (this.props.storedMasterOption && this.props.storedMasterOption.value) ? this.buildSelectOptions(this.props.options[this.getCategoryKey()], false) : []
     slaveOptions: (this.props.storedMasterOption && this.props.storedMasterOption.value)
       ? this.buildSelectOptions(this.props.options[this.props.storedMasterOption.value], false)
       : []
-
   };
 
   // Set the subcategory's options according to parent selection.
@@ -91,15 +82,7 @@ class NestedFormSelect extends React.Component {
   // Get an overview here: https://repl.it/@kstratis/Transformationsfinal
   buildSelectOptions(options, isMaster) {
     const data = options;
-
-    console.log('%%%%%%%%');
-    console.log(data);
-    console.log('%%%%%%%%');
-
     const iterable = isMaster ? Object.keys(data) : data['subcategory'];
-    console.log('++++');
-    console.log(iterable);
-    console.log('++++');
     // "transformLevel1" / "transformLevel2"
     return iterable.map(e => {
       return {
@@ -108,58 +91,6 @@ class NestedFormSelect extends React.Component {
       };
     });
   }
-
-  // Helper function to retrieve the category value of the master given the slave's one.
-  filterFn(arr) {
-    // arr at this point is exactly this:
-    // [ null, null, null, null, null, null, null, null, null ]
-    // [ null, null, null, null, null, null, null, null, null ]
-    // [ null, null, 'land', null ]
-    // [ null, null, null, null, null, null ]
-    // 4 arrays cause we have 4 categories. It is full of nulls
-    // because of no match except one in the third array which
-    // is what we are looking for. Now we pull out the nulls off
-    // of each array which leaves us with 3 empty arrays. If it's
-    // empty return null, otherwise return it's first
-    // and only element which is our match.
-    const filtered_array = arr.filter(Boolean);
-    return filtered_array.length > 0 ? filtered_array[0] : null;
-  }
-
-  // This retrieves the category key given a preselected subcategory.
-  // For example assume that the database has stored a slave's component value
-  // as "{ island: 'Νησί' }". This function allows to retrieve its category which is 'land' through which we'll manage
-  // to get its other siblings which are:
-  // { land_plot: 'Οικόπεδο' },
-  // { parcels: 'Αγροτεμάχιο' },
-  // { island: 'Νησί' },
-  // { other_categories: 'Λοιπές κατηγορίες' },
-  // For detailed info have a look here: https://repl.it/@kstratis/Transformationsfinal
-  // // "transformLevel3"
-  getCategoryKey() {
-    return this.props.storedMasterOption.value;
-
-    const data = this.props.options;
-    if (!this.props.storedSlaveOption.value){
-      return this.props.storedMasterOption.value
-    }
-    const preselectedOption = this.props.storedSlaveOption;
-    console.log(preselectedOption);
-    const interim_result = Object.keys(data).map(e => {
-      // This thing below returns an array of flattened arrays. i.e.
-      // [ null, null, 'land', null ]
-      return this.filterFn(
-        Object.values(data[e]['subcategory']).map(el => {
-          return Object.keys(el)[0] === preselectedOption.value ? e : null;
-        })
-      );
-    });
-    // This last line filters out the nulls and picks the
-    // only value left which is a string.
-    console.log(interim_result.filter(Boolean)[0] || this.props.storedMasterOption.value);
-    return interim_result.filter(Boolean)[0] || this.props.storedMasterOption;
-  }
-
 
   render() {
     return (

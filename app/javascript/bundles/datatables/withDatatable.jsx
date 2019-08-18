@@ -30,8 +30,15 @@ function withDatatable(WrappedComponent) {
     constructor(props) {
       super(props);
       this.state = {
-        buysell_filter: this.props.initial_payload.buysell_filter,
-        category_filter: this.props.initial_payload.category_filter,
+        buysell_filter: {
+          storedOption: this.props.initial_payload.buysell_filter.storedOption,
+          options: this.props.initial_payload.buysell_filter.options
+        },
+        category_filter: {
+          options: this.props.initial_payload.category_filter.options,
+          storedMasterOption: this.props.initial_payload.category_filter.storedMasterOption,
+          storedSlaveOption: this.props.initial_payload.category_filter.storedSlaveOption
+        },
         dataset: this.props.initial_payload.dataset_wrapper.dataset,
         resultsPerPage: this.props.initial_payload.results_per_page,
         isLoading: false,
@@ -45,9 +52,6 @@ function withDatatable(WrappedComponent) {
         searchInput: this.props.initial_payload.initial_search,
         sorting: this.props.initial_payload.initial_sorting,
         ordering: this.props.initial_payload.initial_ordering,
-        selectedPurpose: this.props.initial_payload.initial_purpose,
-        storedMasterOption: this.props.initial_payload.storedMasterOption,
-        storedSlaveOption: this.props.initial_payload.storedSlaveOption,
         i18n: this.props.i18n
       };
 
@@ -238,14 +242,7 @@ function withDatatable(WrappedComponent) {
       });
     }
 
-    handleSort(e, field, forcedOrdering = '') {
-      // Sorting in property listings doesn't occur inside a click event and preventDefault is undefined.
-      if (typeof e.preventDefault === 'function') {
-        e.preventDefault();
-      }
-      // DEBUG
-      console.log('handleSort clicked');
-      console.log(field, forcedOrdering);
+    handleSort(field, forcedOrdering = '') {
       let updatedOrdering = forcedOrdering ? forcedOrdering : this.state.ordering === 'asc' ? 'desc' : 'asc';
       this.setState({ isLoading: true, sorting: field, ordering: updatedOrdering });
       let searchParams = new URLSearchParams(window.location.search);
@@ -354,9 +351,13 @@ function withDatatable(WrappedComponent) {
     }
 
     handleChangePurpose(e) {
-      this.setState({
-        selectedPurpose: e.target.value
-      });
+      const newSelection = e.target.value;
+      this.setState(prevState => ({
+        buysell_filter: {
+          ...prevState.buysell_filter,
+          storedOption: newSelection
+        }
+      }));
       let searchParams = new URLSearchParams(window.location.search);
       searchParams.delete('purpose');
       if (e.target.value !== undefined && e.target.value.length > 0) {

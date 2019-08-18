@@ -71,7 +71,7 @@ const PropertiesList = ({
                     <h5 className="card-title filter-header">{i18n.filters.type.title}:</h5>
                   </label>
                   <div className="form-group">
-                    {buysell_filter.map(filter => (
+                    {buysell_filter['options'].map(filter => (
                       <div key={filter['value']} className="custom-control custom-radio">
                         <input
                           type="radio"
@@ -80,7 +80,7 @@ const PropertiesList = ({
                           id={filter['value']}
                           value={filter['value']}
                           onChange={e => handleChangePurpose(e)}
-                          checked={selectedPurpose === filter['value']}
+                          checked={buysell_filter['storedOption'] === filter['value']}
                         />
                         <label className="custom-control-label" htmlFor={filter['value']}>
                           {filter['label']}
@@ -91,18 +91,15 @@ const PropertiesList = ({
                   <hr />
                   <h5 className="card-title filter-header">{i18n.select.category}:</h5>
                   <div className={'form-group'}>
-                    {/*{console.log(storedMasterOption)}*/}
-                    {console.log(storedSlaveOption)}
-                    {/*{console.log(category_filter)}*/}
-                    <NestedFormSelect options={category_filter}
+                    <NestedFormSelect options={category_filter['options']}
                                       i18n={i18n}
                                       renderFormFields={false}
                                       callback={handleCategoryInput}
                                       isClearable={true}
                                       isSearchable={false}
                                       renderLabels={false}
-                                      storedMasterOption={storedMasterOption}
-                                      storedSlaveOption={storedSlaveOption}/>
+                                      storedMasterOption={category_filter['storedMasterOption']}
+                                      storedSlaveOption={category_filter['storedSlaveOption']} />
                   </div>
                 </div>
               </div>
