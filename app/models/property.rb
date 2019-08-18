@@ -31,14 +31,6 @@ class Property < ApplicationRecord
   enum businesstype: [:sell, :rent, :sell_rent]
   enum floor: [:basement, :semi_basement, :ground_floor, :mezzanine].concat(Array(1..50).map(&:to_s).map(&:to_sym))
 
-  enum category: [:residential, :commercial, :land, :other]
-
-  enum subcategory: [:apartment, :studio, :maisonette, :detached_house, :villa, :loft, :bungalow, :building, :apartment_complex,
-                     :office, :public_store, :warehouse, :industrial_space, :craft_space, :hotel, :business_building, :hall, :showroom,
-                     :land_plot, :parcels, :island, :other_categories,
-                     :parking, :business, :prefabricated, :detachable, :air, :other_various]
-
-
   # Validations should match their ujs_form_handler.js counterparts
   validates :businesstype, presence: true
   # validates :category, presence: true
