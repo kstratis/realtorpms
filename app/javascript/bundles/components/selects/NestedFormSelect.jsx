@@ -15,6 +15,7 @@ class NestedFormSelect extends React.Component {
     mode: PropTypes.string,
     renderLabels: PropTypes.bool,
     renderFormFields: PropTypes.bool,
+    placeholderText: PropTypes.string,
     isClearable: PropTypes.bool,
     isSearchable: PropTypes.bool,
     storedControllerOption: PropTypes.any,
@@ -29,9 +30,8 @@ class NestedFormSelect extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log(this.props.storedMasterOption);
     this.buildSelectOptions = this.buildSelectOptions.bind(this);
-    this.buildRangeAllowedSlaveOptions = this.buildRangeAllowedSlaveOptions.bind(this);
+    this.buildRangeSelectOptions = this.buildRangeSelectOptions.bind(this);
   }
 
   // In dependant select the first component is called the 'master' and can be thought of as the 'parent' of the two.
@@ -40,11 +40,14 @@ class NestedFormSelect extends React.Component {
   state = {
     dependantMenuIsOpen: false,
     // This changes according to the controlling parent
-    slaveDisabled: !this.props.storedMasterOption,
+    slaveDisabled: this.props.mode === 'range' ? false : !this.props.storedMasterOption,
     // This gets the sibling categories given the stored one.
-    slaveOptions: (this.props.storedMasterOption && this.props.storedMasterOption.value)
-      ? this.buildSelectOptions(this.props.options[this.props.storedMasterOption.value], false)
-      : []
+    slaveOptions:
+      this.props.mode !== 'range'
+        ? this.props.storedMasterOption && this.props.storedMasterOption.value
+          ? this.buildSelectOptions(this.props.options[this.props.storedMasterOption.value], false)
+          : []
+        : this.buildRangeSelectOptions(false)
   };
 
   // Set the subcategory's options according to parent selection.
@@ -60,18 +63,25 @@ class NestedFormSelect extends React.Component {
         this.masterComponent.state.selectedOption &&
         this.masterComponent.state.selectedOption.value !== selectedOption.value
       ) {
-        // Since we imperativelly control the slave component (no onChange is fired on slave), we have also
-        // call updateExternalDOM to actually update the true value
-        this.slaveComponent.clearSelection();
+        // Since we imperativelly control the slave component (no onChange is fired on slave), we also have to
+        // call updateExternalDOM to actually update the true value. If mode is range then don't clear selection on every
+        // master select onchange event but only when the contraints are violated.
+        if (
+          !(
+            this.props.mode === 'range' &&
+            parseInt(this.slaveComponent.state.selectedOption.value) >= parseInt(selectedOption.value)
+          )
+        ) {
+          this.slaveComponent.clearSelection();
+        }
         if (this.props.renderFormFields) {
           this.slaveComponent.updateExternalDOM(selectedOption);
         }
       }
-      if (this.props.mode !== 'range'){
+      if (this.props.mode !== 'range') {
         this.setState({ slaveOptions: this.buildSelectOptions(this.props.options[selectedOption.value], false) });
-      }else{
-        this.buildRangeAllowedSlaveOptions(selectedOption);
-        // this.setState({ slaveOptions: this.buildSelectOptions(this.props.options[selectedOption.value], false) });
+      } else {
+        this.setState({ slaveOptions: this.buildRangeSelectOptions(selectedOption) });
       }
       this.setState({ slaveDisabled: false });
     } else {
@@ -82,14 +92,25 @@ class NestedFormSelect extends React.Component {
       if (this.props.renderFormFields) {
         this.slaveComponent.updateExternalDOM('', false);
       }
-      this.setState({ slaveDisabled: true, dependantMenuIsOpen: false });
+      if (this.props.mode !== 'range') {
+        this.setState({ slaveDisabled: true, dependantMenuIsOpen: false });
+      }
     }
   };
 
-  buildRangeAllowedSlaveOptions(selectedOption){
-    console.log('buildRangeAllowedSlaveOptions');
-    console.log(selectedOption);
-    // console.log(this.props.options[this.props.storedMasterOption]);
+  // This builds the options of the select component based on the given parameters.
+  // Designed for the range mode it is used to contruct the price assosiative selects.
+  buildRangeSelectOptions(selectedOption) {
+    if (!selectedOption) {
+      return this.buildSelectOptions(this.props.options[this.props.storedControllerOption], false);
+    }
+    const iterable = this.props.options[this.props.storedControllerOption]['subcategory'];
+    let result = iterable.map(el => {
+      return parseInt(Object.keys(el)[0]) >= parseInt(selectedOption.value)
+        ? { label: Object.values(el)[0], value: Object.keys(el)[0] }
+        : null;
+    });
+    return result.filter(Boolean);
   }
 
   // This builds the options of the select component based on the given parameters.
@@ -98,13 +119,7 @@ class NestedFormSelect extends React.Component {
   // Get an overview here: https://repl.it/@kstratis/Transformationsfinal
   buildSelectOptions(options, isMaster) {
     const data = options;
-    console.log(options);
-    let iterable = '';
-    // if (this.props.mode === 'range') {
-    //   iterable = isMaster ? Object.keys(data) : data[this.props.storedMasterOption]['subcategory'];
-    // }else {
-      iterable = isMaster ? Object.keys(data) : data['subcategory'];
-    // }
+    const iterable = isMaster ? Object.keys(data) : data['subcategory'];
     // "transformLevel1" / "transformLevel2"
     return iterable.map(e => {
       return {
@@ -118,9 +133,13 @@ class NestedFormSelect extends React.Component {
     return (
       <div>
         <div className="form-group mb-4">
-          {this.props.renderLabels ? <label htmlFor="property_category">
-            {this.props.i18n.select.category} <abbr title={this.props.i18n.select.required}>*</abbr>
-          </label> : ''}
+          {this.props.renderLabels ? (
+            <label htmlFor="property_category">
+              {this.props.i18n.select.category} <abbr title={this.props.i18n.select.required}>*</abbr>
+            </label>
+          ) : (
+            ''
+          )}
           <FormSelect
             id={'property_category_container'}
             identity={'property_category_component'}
@@ -133,11 +152,15 @@ class NestedFormSelect extends React.Component {
             isMaster={true}
             // storedOption={this.props.mode === 'range' ? this.props.storedSlaveOption : this.props.storedMasterOption}
             storedOption={this.props.storedMasterOption}
-            options={this.props.mode === 'range' ? this.buildSelectOptions(this.props.options[this.props.storedControllerOption], false) : this.buildSelectOptions(this.props.options, true)}
+            options={
+              this.props.mode === 'range'
+                ? this.buildSelectOptions(this.props.options[this.props.storedControllerOption], false)
+                : this.buildSelectOptions(this.props.options, true)
+            }
             handleOptions={this.handleOptions}
-            callback={this.props.callback ? this.props.callback.bind(null, true ): ''}
+            callback={this.props.callback ? this.props.callback.bind(null, true) : ''}
             i18n={this.props.i18n}
-            placeholderText={this.props.i18n.select.placeholder_plain}
+            placeholderText={this.props.placeholderText}
             isDisabled={false}
             onRef={ref => (this.masterComponent = ref)}
             soloMode={false}
@@ -150,9 +173,13 @@ class NestedFormSelect extends React.Component {
           />
         </div>
         <div className="form-group mb-4">
-          {this.props.renderLabels ? <label htmlFor="property_subcategory">
-            {this.props.i18n.select.subcategory} <abbr title={this.props.i18n.select.required}>*</abbr>
-          </label> : ''}
+          {this.props.renderLabels ? (
+            <label htmlFor="property_subcategory">
+              {this.props.i18n.select.subcategory} <abbr title={this.props.i18n.select.required}>*</abbr>
+            </label>
+          ) : (
+            ''
+          )}
           <FormSelect
             id={'property_subcategory_container'}
             identity={'property_subcategory_component'}
@@ -164,12 +191,12 @@ class NestedFormSelect extends React.Component {
             formID={this.props.formdata ? this.props.formdata.formid : ''}
             isMaster={false}
             storedOption={this.props.storedSlaveOption}
-            // options={this.state.slaveOptions}
-            options={this.props.mode === 'range' ? this.buildSelectOptions(this.props.options[this.props.storedControllerOption], false) : this.state.slaveOptions}
+            options={this.state.slaveOptions}
+            // options={this.props.mode === 'range' ? this.buildRangeSelectOptions(this.props.storedMasterOption || '') : this.state.slaveOptions}
             handleOptions={this.handleOptions}
             callback={this.props.callback ? this.props.callback.bind(null, false) : ''}
             i18n={this.props.i18n}
-            placeholderText={this.props.i18n.select.placeholder_plain}
+            placeholderText={this.props.placeholderText}
             isDisabled={this.state.slaveDisabled}
             onRef={ref => (this.slaveComponent = ref)}
             soloMode={false}

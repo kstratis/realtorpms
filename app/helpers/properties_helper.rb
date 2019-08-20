@@ -20,7 +20,7 @@ module PropertiesHelper
         'sell'=> {
             category: {'sell' => 'sell'},
             subcategory: [
-                {'0': t("activerecord.attributes.property.enums.price.all")},
+                # {'0': t("activerecord.attributes.property.enums.price.all")},
                 {'50000'=> number_to_currency(50000)},
                 {'75000'=> number_to_currency(75000)},
                 {'100000'=> number_to_currency(100000)},
@@ -37,7 +37,7 @@ module PropertiesHelper
         'rent' => {
             category: {'rent' => 'rent'},
             subcategory: [
-                {'0': t("activerecord.attributes.property.enums.price.all")},
+                # {'0': t("activerecord.attributes.property.enums.price.all")},
                 {'150'=> number_to_currency(150)},
                 {'200'=> number_to_currency(200)},
                 {'300'=> number_to_currency(300)},

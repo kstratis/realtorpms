@@ -96,6 +96,7 @@ const PropertiesList = ({
                       isClearable={true}
                       isSearchable={false}
                       renderLabels={false}
+                      placeholderText={i18n.select.placeholder_plain}
                       storedMasterOption={category_filter['storedMasterOption']}
                       storedSlaveOption={category_filter['storedSlaveOption']}
                     />
@@ -112,6 +113,7 @@ const PropertiesList = ({
                     isClearable={true}
                     isSearchable={false}
                     renderLabels={false}
+                    placeholderText={i18n.select.placeholder_price}
                     storedControllerOption={buysell_filter['storedOption']}
                     storedMasterOption={price_filter['storedMasterOption']}
                     storedSlaveOption={price_filter['storedSlaveOption']}
