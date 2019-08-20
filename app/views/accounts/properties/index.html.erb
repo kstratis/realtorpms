@@ -23,7 +23,9 @@
                   storedSlaveOption: @initial_subcategory.blank? ? nil : {label: Property.human_enum_name(:subcategory, @initial_subcategory), value: @initial_subcategory}
               },
               price_filter: {
-                  options: price_options
+                  options: price_options,
+                  storedMasterOption: @initial_pricemin.blank? ? nil : {label: number_to_currency(@initial_pricemin), value: @initial_pricemin},
+                  storedSlaveOption: @initial_pricemax.blank? ? nil : {label: number_to_currency(@initial_pricemax), value: @initial_pricemax},
               },
               dataset_wrapper: @propertieslist,
               results_per_page: @results_per_page,

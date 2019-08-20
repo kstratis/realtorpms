@@ -102,6 +102,8 @@ module Accounts
       @initial_purpose = params[:purpose] || 'sell'
       @initial_category = params[:category] || ''
       @initial_subcategory = params[:subcategory] || ''
+      @initial_pricemin = params[:pricemin] || ''
+      @initial_pricemax = params[:pricemax] || ''
 
       respond_to do |format|
         format.html

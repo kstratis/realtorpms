@@ -11,11 +11,13 @@ class NestedFormSelect extends React.Component {
       subcategoryid: PropTypes.string,
       subcategoryname: PropTypes.string
     }),
+
     mode: PropTypes.string,
     renderLabels: PropTypes.bool,
     renderFormFields: PropTypes.bool,
     isClearable: PropTypes.bool,
     isSearchable: PropTypes.bool,
+    storedControllerOption: PropTypes.any,
     storedMasterOption: PropTypes.any,
     storedSlaveOption: PropTypes.any,
     callback: PropTypes.func,
@@ -129,8 +131,9 @@ class NestedFormSelect extends React.Component {
             renderFormField={this.props.renderFormFields}
             formID={this.props.formdata ? this.props.formdata.formid : ''}
             isMaster={true}
-            storedOption={this.props.mode === 'range' ? this.props.storedSlaveOption : this.props.storedMasterOption}
-            options={this.props.mode === 'range' ? this.buildSelectOptions(this.props.options[this.props.storedMasterOption], false) : this.buildSelectOptions(this.props.options, true)}
+            // storedOption={this.props.mode === 'range' ? this.props.storedSlaveOption : this.props.storedMasterOption}
+            storedOption={this.props.storedMasterOption}
+            options={this.props.mode === 'range' ? this.buildSelectOptions(this.props.options[this.props.storedControllerOption], false) : this.buildSelectOptions(this.props.options, true)}
             handleOptions={this.handleOptions}
             callback={this.props.callback ? this.props.callback.bind(null, true ): ''}
             i18n={this.props.i18n}
@@ -162,7 +165,7 @@ class NestedFormSelect extends React.Component {
             isMaster={false}
             storedOption={this.props.storedSlaveOption}
             // options={this.state.slaveOptions}
-            options={this.props.mode === 'range' ? this.buildSelectOptions(this.props.options[this.props.storedMasterOption], false) : this.state.slaveOptions}
+            options={this.props.mode === 'range' ? this.buildSelectOptions(this.props.options[this.props.storedControllerOption], false) : this.state.slaveOptions}
             handleOptions={this.handleOptions}
             callback={this.props.callback ? this.props.callback.bind(null, false) : ''}
             i18n={this.props.i18n}

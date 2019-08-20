@@ -112,8 +112,9 @@ const PropertiesList = ({
                     isClearable={true}
                     isSearchable={false}
                     renderLabels={false}
-                    storedMasterOption={buysell_filter['storedOption']}
-                    storedSlaveOption={buysell_filter['storedOption']}
+                    storedControllerOption={buysell_filter['storedOption']}
+                    storedMasterOption={price_filter['storedMasterOption']}
+                    storedSlaveOption={price_filter['storedSlaveOption']}
                   />
                 </div>
               </div>
