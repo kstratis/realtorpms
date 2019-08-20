@@ -11,6 +11,7 @@ class NestedFormSelect extends React.Component {
       subcategoryid: PropTypes.string,
       subcategoryname: PropTypes.string
     }),
+    mode: PropTypes.string,
     renderLabels: PropTypes.bool,
     renderFormFields: PropTypes.bool,
     isClearable: PropTypes.bool,
@@ -26,7 +27,9 @@ class NestedFormSelect extends React.Component {
 
   constructor(props) {
     super(props);
+    console.log(this.props.storedMasterOption);
     this.buildSelectOptions = this.buildSelectOptions.bind(this);
+    this.buildRangeAllowedSlaveOptions = this.buildRangeAllowedSlaveOptions.bind(this);
   }
 
   // In dependant select the first component is called the 'master' and can be thought of as the 'parent' of the two.
@@ -62,7 +65,12 @@ class NestedFormSelect extends React.Component {
           this.slaveComponent.updateExternalDOM(selectedOption);
         }
       }
-      this.setState({ slaveOptions: this.buildSelectOptions(this.props.options[selectedOption.value], false) });
+      if (this.props.mode !== 'range'){
+        this.setState({ slaveOptions: this.buildSelectOptions(this.props.options[selectedOption.value], false) });
+      }else{
+        this.buildRangeAllowedSlaveOptions(selectedOption);
+        // this.setState({ slaveOptions: this.buildSelectOptions(this.props.options[selectedOption.value], false) });
+      }
       this.setState({ slaveDisabled: false });
     } else {
       // otherwise if 'x' is pressed on 'master', clear the slave's current selection then fire the validator and disable the field.
@@ -76,13 +84,25 @@ class NestedFormSelect extends React.Component {
     }
   };
 
+  buildRangeAllowedSlaveOptions(selectedOption){
+    console.log('buildRangeAllowedSlaveOptions');
+    console.log(selectedOption);
+    // console.log(this.props.options[this.props.storedMasterOption]);
+  }
+
   // This builds the options of the select component based on the given parameters.
   // i.e. For the 'Master' component it would suffice to iterate over the `this.props.options` keys
   // The master's data is coming from Rails. When filtered by key the result becomes the slave's options
   // Get an overview here: https://repl.it/@kstratis/Transformationsfinal
   buildSelectOptions(options, isMaster) {
     const data = options;
-    const iterable = isMaster ? Object.keys(data) : data['subcategory'];
+    console.log(options);
+    let iterable = '';
+    // if (this.props.mode === 'range') {
+    //   iterable = isMaster ? Object.keys(data) : data[this.props.storedMasterOption]['subcategory'];
+    // }else {
+      iterable = isMaster ? Object.keys(data) : data['subcategory'];
+    // }
     // "transformLevel1" / "transformLevel2"
     return iterable.map(e => {
       return {
@@ -109,8 +129,8 @@ class NestedFormSelect extends React.Component {
             renderFormField={this.props.renderFormFields}
             formID={this.props.formdata ? this.props.formdata.formid : ''}
             isMaster={true}
-            storedOption={this.props.storedMasterOption}
-            options={this.buildSelectOptions(this.props.options, true)}
+            storedOption={this.props.mode === 'range' ? this.props.storedSlaveOption : this.props.storedMasterOption}
+            options={this.props.mode === 'range' ? this.buildSelectOptions(this.props.options[this.props.storedMasterOption], false) : this.buildSelectOptions(this.props.options, true)}
             handleOptions={this.handleOptions}
             callback={this.props.callback ? this.props.callback.bind(null, true ): ''}
             i18n={this.props.i18n}
@@ -141,7 +161,8 @@ class NestedFormSelect extends React.Component {
             formID={this.props.formdata ? this.props.formdata.formid : ''}
             isMaster={false}
             storedOption={this.props.storedSlaveOption}
-            options={this.state.slaveOptions}
+            // options={this.state.slaveOptions}
+            options={this.props.mode === 'range' ? this.buildSelectOptions(this.props.options[this.props.storedMasterOption], false) : this.state.slaveOptions}
             handleOptions={this.handleOptions}
             callback={this.props.callback ? this.props.callback.bind(null, false) : ''}
             i18n={this.props.i18n}

@@ -8,32 +8,27 @@ import AsyncSelect from '../components/selects/AsyncSelect';
 import FlipMove from 'react-flip-move';
 import PlainSelect from '../components/selects/PlainSelect';
 import NestedFormSelect from '../components/selects/NestedFormSelect';
+import RangeSelect from '../components/selects/RangeSelect';
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 };
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' }
-];
 
 const PropertiesList = ({
   handleLocationInput,
+  handlePriceInput,
   handleChangePurpose,
   handlePageClick,
   handleSort,
   buysell_filter,
   category_filter,
-  storedMasterOption,
-  storedSlaveOption,
+  price_filter,
   handleAssign,
   handleFav,
   advanceByTwo,
   isLoading,
-  selectedPurpose,
   dataset,
   pageCount,
   selectedPage,
@@ -91,16 +86,35 @@ const PropertiesList = ({
                   <hr />
                   <h5 className="card-title filter-header">{i18n.select.category}:</h5>
                   <div className={'form-group'}>
-                    <NestedFormSelect options={category_filter['options']}
-                                      i18n={i18n}
-                                      renderFormFields={false}
-                                      callback={handleCategoryInput}
-                                      isClearable={true}
-                                      isSearchable={false}
-                                      renderLabels={false}
-                                      storedMasterOption={category_filter['storedMasterOption']}
-                                      storedSlaveOption={category_filter['storedSlaveOption']} />
+                    <NestedFormSelect
+                      key={'associative'}
+                      options={category_filter['options']}
+                      i18n={i18n}
+                      mode={'associative'}
+                      renderFormFields={false}
+                      callback={handleCategoryInput}
+                      isClearable={true}
+                      isSearchable={false}
+                      renderLabels={false}
+                      storedMasterOption={category_filter['storedMasterOption']}
+                      storedSlaveOption={category_filter['storedSlaveOption']}
+                    />
                   </div>
+                  <hr />
+                  <h5 className="card-title filter-header">{i18n.price}:</h5>
+                  <NestedFormSelect
+                    key={'range'}
+                    options={price_filter['options']}
+                    i18n={i18n}
+                    mode={'range'}
+                    renderFormFields={false}
+                    callback={handlePriceInput}
+                    isClearable={true}
+                    isSearchable={false}
+                    renderLabels={false}
+                    storedMasterOption={buysell_filter['storedOption']}
+                    storedSlaveOption={buysell_filter['storedOption']}
+                  />
                 </div>
               </div>
             </div>

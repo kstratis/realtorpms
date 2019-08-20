@@ -14,13 +14,16 @@
       <%= react_component('PropertiesListWithDatatable', props: {
           initial_payload: {
               buysell_filter: {
-                  options: Property.businesstypes.keys.collect {|businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype}},
+                  options: Property.businesstypes.keys.tap(&:pop).collect {|businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype}},
                   storedOption: @initial_purpose
               },
               category_filter: {
                   options: category_options,
                   storedMasterOption: @initial_category.blank? ? nil : {label: Property.human_enum_name(:category, @initial_category), value: @initial_category},
                   storedSlaveOption: @initial_subcategory.blank? ? nil : {label: Property.human_enum_name(:subcategory, @initial_subcategory), value: @initial_subcategory}
+              },
+              price_filter: {
+                  options: price_options
               },
               dataset_wrapper: @propertieslist,
               results_per_page: @results_per_page,
@@ -49,6 +52,9 @@
               sorting: {
                   title: t('js.datatables.sorting.title')
               },
+              price: t('js.datatables.filters.price.title'),
+              priceFrom: t('js.datatables.filters.price.from'),
+              priceTo: t('js.datatables.filters.price.to'),
               filters: {
                   title: t('js.datatables.filters.title'),
                   type:{

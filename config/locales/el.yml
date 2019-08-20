@@ -248,6 +248,10 @@ el:
             studio_pr: "Studio"
             prefabricated_pr: "Λυόμενο"
             precast_pr: "Προκατασκευή"
+          price:
+            all: "Όλες"
+            minimum: "Ελάχιστη"
+            maximum: "Μέγιστη"
     errors:
       messages:
         record_invalid: ! 'Η επικύρωση απέτυχε: %{errors}'
@@ -336,6 +340,8 @@ el:
           title: "Τιμή"
           ascending: "Αύξουσα"
           descending: "Φθίνουσα"
+          from: "από "
+          to: "έως "
         type:
           title: "Τύπος"
           sell: "Πώληση"

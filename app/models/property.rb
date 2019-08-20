@@ -29,6 +29,7 @@ class Property < ApplicationRecord
   attr_accessor :categoryid, :locationid, :landlordid, :nolandlord, :delete_images
 
   enum businesstype: [:sell, :rent, :sell_rent]
+
   enum floor: [:basement, :semi_basement, :ground_floor, :mezzanine].concat(Array(1..50).map(&:to_s).map(&:to_sym))
 
   # Validations should match their ujs_form_handler.js counterparts

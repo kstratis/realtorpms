@@ -43,6 +43,13 @@ function withDatatable(WrappedComponent) {
               storedSlaveOption: this.props.initial_payload.category_filter.storedSlaveOption
             }
           : '',
+        price_filter: this.props.initial_payload.price_filter
+          ? {
+            options: this.props.initial_payload.price_filter.options,
+            // storedMasterOption: this.props.initial_payload.category_filter.storedMasterOption,
+            // storedSlaveOption: this.props.initial_payload.category_filter.storedSlaveOption
+          }
+          : '',
         dataset: this.props.initial_payload.dataset_wrapper.dataset,
         resultsPerPage: this.props.initial_payload.results_per_page,
         isLoading: false,
@@ -77,6 +84,7 @@ function withDatatable(WrappedComponent) {
       this.handleFav = this.handleFav.bind(this);
       this.handleLocationInput = this.handleLocationInput.bind(this);
       this.handleCategoryInput = this.handleCategoryInput.bind(this);
+      this.handlePriceInput = this.handlePriceInput.bind(this);
       this.handleChangePurpose = this.handleChangePurpose.bind(this);
       this.handleAjaxRequestDelayed = debounce(this.handleAjaxRequest, 300);
       this.compoundDelayedAction = debounce(this.compoundDelayedAction.bind(this), 300);
@@ -130,6 +138,10 @@ function withDatatable(WrappedComponent) {
       } else {
         this.handlePageClick(this.state.selectedPage - 2, true);
       }
+    }
+
+    handlePriceInput(){
+      console.log('price fired');
     }
 
     handleCategoryInput(topLevel, selection, browserButtonInvoked = false) {
@@ -384,6 +396,7 @@ function withDatatable(WrappedComponent) {
           <WrappedComponent
             handleLocationInput={this.handleLocationInput}
             handleCategoryInput={this.handleCategoryInput}
+            handlePriceInput={this.handlePriceInput}
             handlePageClick={this.handlePageClick}
             handleSort={this.handleSort}
             handleAssign={this.handleAssign}

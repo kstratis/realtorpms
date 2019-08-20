@@ -247,6 +247,10 @@ en:
             studio: "Studio"
             prefabricated: "Prefabricated"
             precast: "Precasted"
+          price:
+            all: "All"
+            minimum: "Minimum"
+            maximum: "Maximum"
     errors:
       messages:
         record_invalid: ! 'Validation failed: %{errors}'

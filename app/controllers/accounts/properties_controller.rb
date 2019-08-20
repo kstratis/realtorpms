@@ -41,6 +41,7 @@ module Accounts
       # DEBUG - Buy sell filter
       # puts params[:purpose]
       if params[:purpose]
+        # sell_rent is deactivated "for the sake" of the price range filter
         unless params[:purpose] == 'sell_rent'
           @properties = @properties.where('businesstype = ?', Property.businesstypes[params[:purpose].to_sym]).or(@properties.where('businesstype = ?', 2))
         end
@@ -98,7 +99,7 @@ module Accounts
       @initial_search = params[:search] || ''
       @initial_sorting = params[:sorting] || 'created_at'
       @initial_ordering = params[:ordering] || 'desc'
-      @initial_purpose = params[:purpose] || 'sell_rent'
+      @initial_purpose = params[:purpose] || 'sell'
       @initial_category = params[:category] || ''
       @initial_subcategory = params[:subcategory] || ''
 
