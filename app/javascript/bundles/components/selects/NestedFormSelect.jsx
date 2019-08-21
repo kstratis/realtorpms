@@ -34,6 +34,14 @@ class NestedFormSelect extends React.Component {
     this.buildRangeSelectOptions = this.buildRangeSelectOptions.bind(this);
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.props.mode !== 'range') return;
+    if (prevProps.storedControllerOption !== this.props.storedControllerOption){
+      this.slaveComponent.clearSelection();
+      this.masterComponent.clearSelection();
+    }
+  }
+
   // In dependant select the first component is called the 'master' and can be thought of as the 'parent' of the two.
   // The dependent one is called the 'slave' and takes the 'slaveOptions' options.
   // For detailed info have a look here: https://repl.it/@kstratis/Transformationsfinal
@@ -59,6 +67,9 @@ class NestedFormSelect extends React.Component {
     if (!isMaster) return;
     // If it fires on the parent, set subcategory's options and enable it
     if (selectedOption) {
+      if (this.props.mode === 'range' && (parseInt(this.slaveComponent.state.selectedOption.value) < parseInt(selectedOption.value))) {
+        this.slaveComponent.clearSelection();
+      }
       if (
         this.masterComponent.state.selectedOption &&
         this.masterComponent.state.selectedOption.value !== selectedOption.value
@@ -66,16 +77,11 @@ class NestedFormSelect extends React.Component {
         // Since we imperativelly control the slave component (no onChange is fired on slave), we also have to
         // call updateExternalDOM to actually update the true value. If mode is range then don't clear selection on every
         // master select onchange event but only when the contraints are violated.
-        if (
-          !(
-            this.props.mode === 'range' &&
-            parseInt(this.slaveComponent.state.selectedOption.value) >= parseInt(selectedOption.value)
-          )
-        ) {
-          this.slaveComponent.clearSelection();
-        }
         if (this.props.renderFormFields) {
           this.slaveComponent.updateExternalDOM(selectedOption);
+        }
+        if (this.props.mode !== 'range') {
+          this.slaveComponent.clearSelection();
         }
       }
       if (this.props.mode !== 'range') {
@@ -150,7 +156,6 @@ class NestedFormSelect extends React.Component {
             renderFormField={this.props.renderFormFields}
             formID={this.props.formdata ? this.props.formdata.formid : ''}
             isMaster={true}
-            // storedOption={this.props.mode === 'range' ? this.props.storedSlaveOption : this.props.storedMasterOption}
             storedOption={this.props.storedMasterOption}
             options={
               this.props.mode === 'range'
@@ -192,7 +197,6 @@ class NestedFormSelect extends React.Component {
             isMaster={false}
             storedOption={this.props.storedSlaveOption}
             options={this.state.slaveOptions}
-            // options={this.props.mode === 'range' ? this.buildRangeSelectOptions(this.props.storedMasterOption || '') : this.state.slaveOptions}
             handleOptions={this.handleOptions}
             callback={this.props.callback ? this.props.callback.bind(null, false) : ''}
             i18n={this.props.i18n}
