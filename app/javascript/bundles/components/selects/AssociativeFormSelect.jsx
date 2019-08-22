@@ -15,7 +15,8 @@ class AssociativeFormSelect extends React.Component {
     mode: PropTypes.string,
     renderLabels: PropTypes.bool,
     renderFormFields: PropTypes.bool,
-    placeholderText: PropTypes.string,
+    placeholderTextMaster: PropTypes.string,
+    placeholderTextSlave: PropTypes.string,
     isClearable: PropTypes.bool,
     isSearchable: PropTypes.bool,
     storedControllerOption: PropTypes.any,
@@ -145,7 +146,7 @@ class AssociativeFormSelect extends React.Component {
   render() {
     return (
       <div>
-        <div className="form-group mb-4">
+        <div className={this.props.renderFormFields ? "form-group mb-4" : "form-group mb-2"}>
           {this.props.renderLabels ? (
             <label htmlFor="property_category">
               {this.props.i18n.select.category} <abbr title={this.props.i18n.select.required}>*</abbr>
@@ -172,7 +173,7 @@ class AssociativeFormSelect extends React.Component {
             handleOptions={this.handleOptions}
             callback={this.props.callback ? this.props.callback.bind(null, true) : ''}
             i18n={this.props.i18n}
-            placeholderText={this.props.placeholderText}
+            placeholderText={this.props.placeholderTextMaster}
             isDisabled={false}
             onRef={ref => (this.masterComponent = ref)}
             soloMode={false}
@@ -184,7 +185,7 @@ class AssociativeFormSelect extends React.Component {
             isRequired={this.props.isRequired}
           />
         </div>
-        <div className="form-group mb-4">
+        <div className={"form-group mb-4"}>
           {this.props.renderLabels ? (
             <label htmlFor="property_subcategory">
               {this.props.i18n.select.subcategory} <abbr title={this.props.i18n.select.required}>*</abbr>
@@ -207,7 +208,7 @@ class AssociativeFormSelect extends React.Component {
             handleOptions={this.handleOptions}
             callback={this.props.callback ? this.props.callback.bind(null, false) : ''}
             i18n={this.props.i18n}
-            placeholderText={this.props.placeholderText}
+            placeholderText={this.props.placeholderTextSlave}
             isDisabled={this.state.slaveDisabled}
             onRef={ref => (this.slaveComponent = ref)}
             soloMode={false}
