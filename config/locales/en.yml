@@ -349,6 +349,8 @@ en:
           sell: "Sell"
           rent: "Rent"
           both: "Both"
+        size:
+          title: "Εμβαδό"
     users_search:
       placeholder: "i.e. John Smith"
     properties_search:

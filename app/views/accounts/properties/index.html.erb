@@ -27,6 +27,12 @@
                   storedMasterOption: @initial_pricemin.blank? ? nil : {label: number_to_currency(@initial_pricemin), value: @initial_pricemin},
                   storedSlaveOption: @initial_pricemax.blank? ? nil : {label: number_to_currency(@initial_pricemax), value: @initial_pricemax},
               },
+              size_filter: {
+                  options: size_options,
+                  propertyType: @initial_property_type,
+                  storedMasterOption: @initial_sizemin.blank? ? nil : {label: number_to_currency(@initial_sizemin), value: @initial_sizemin},
+                  storedSlaveOption: @initial_sizemax.blank? ? nil : {label: number_to_currency(@initial_sizemax), value: @initial_sizemax},
+              },
               dataset_wrapper: @propertieslist,
               results_per_page: @results_per_page,
               total_entries: @total_entries,
@@ -57,8 +63,8 @@
                   title: t('js.datatables.sorting.title')
               },
               price: t('js.datatables.filters.price.title'),
-              priceFrom: t('js.datatables.filters.price.from'),
-              priceTo: t('js.datatables.filters.price.to'),
+              size: t('js.datatables.filters.size.title'),
+
               filters: {
                   title: t('js.datatables.filters.title'),
                   type:{

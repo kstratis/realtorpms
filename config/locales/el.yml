@@ -352,6 +352,8 @@ el:
           sell: "Πώληση"
           rent: "Ενοικίαση"
           both: "Και τα δύο"
+        size:
+          title: "Εμβαδό"
     users_search:
       placeholder: "Αναζήτηση συνεργάτη..."
     properties_search:

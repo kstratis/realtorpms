@@ -53,7 +53,48 @@ module PropertiesHelper
         }
     }
     # DEBUG
-    # pp options
+    pp options
+    options
+  end
+
+  def size_options
+    options = {
+        'building'=> {
+            category: {'building' => 'building'},
+            subcategory: [
+                {'50'=> I18n.t('activerecord.attributes.property.size_meter_html', size: 50.to_s)},
+                {'60'=> I18n.t('activerecord.attributes.property.size_meter_html', size: 60.to_s)},
+                {'70'=> I18n.t('activerecord.attributes.property.size_meter_html', size: 70.to_s)},
+                {'85'=> I18n.t('activerecord.attributes.property.size_meter_html', size: 85.to_s)},
+                {'100'=> I18n.t('activerecord.attributes.property.size_meter_html', size: 100.to_s)},
+                {'120'=> I18n.t('activerecord.attributes.property.size_meter_html', size: 120.to_s)},
+                {'150'=> I18n.t('activerecord.attributes.property.size_meter_html', size: 150.to_s)},
+                {'200'=> I18n.t('activerecord.attributes.property.size_meter_html', size: 200.to_s)},
+                {'250'=> I18n.t('activerecord.attributes.property.size_meter_html', size: 250.to_s)},
+                {'300'=> I18n.t('activerecord.attributes.property.size_meter_html', size: 300.to_s)},
+                {'400'=> I18n.t('activerecord.attributes.property.size_meter_html', size: 400.to_s)},
+                {'500'=> I18n.t('activerecord.attributes.property.size_meter_html', size: 500.to_s)}
+            ]},
+        'land' => {
+            category: {'land' => 'land'},
+            subcategory: [
+                {'200'=> I18n.t('activerecord.attributes.property.size_meter_html', size: 200.to_s)},
+                {'300'=> I18n.t('activerecord.attributes.property.size_meter_html', size: 300.to_s)},
+                {'400'=> I18n.t('activerecord.attributes.property.size_meter_html', size: 400.to_s)},
+                {'500'=> I18n.t('activerecord.attributes.property.size_meter_html', size: 500.to_s)},
+                {'750'=> I18n.t('activerecord.attributes.property.size_meter_html', size: 750.to_s)},
+                {'1000'=> I18n.t('activerecord.attributes.property.size_meter_html', size: 1000.to_s)},
+                {'1500'=> I18n.t('activerecord.attributes.property.size_meter_html', size: 1500.to_s)},
+                {'2000'=> I18n.t('activerecord.attributes.property.size_meter_html', size: 2000.to_s)},
+                {'3000'=> I18n.t('activerecord.attributes.property.size_meter_html', size: 3000.to_s)},
+                {'5000'=> I18n.t('activerecord.attributes.property.size_meter_html', size: 5000.to_s)},
+                {'7500'=> I18n.t('activerecord.attributes.property.size_meter_html', size: 7500.to_s)},
+                {'10000'=> I18n.t('activerecord.attributes.property.size_meter_html', size: 10000.to_s)},
+            ]
+        }
+    }
+    # DEBUG
+    pp options
     options
   end
 

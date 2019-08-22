@@ -104,10 +104,13 @@ module Accounts
       @initial_sorting = params[:sorting] || 'created_at'
       @initial_ordering = params[:ordering] || 'desc'
       @initial_purpose = params[:purpose] || 'sell'
+      @initial_property_type = %w(residential commercial).include?(params[:category]) ? 'building' : 'land'
       @initial_category = params[:category] || ''
       @initial_subcategory = params[:subcategory] || ''
       @initial_pricemin = params[:pricemin] || ''
       @initial_pricemax = params[:pricemax] || ''
+      @initial_sizemin = params[:sizemin] || ''
+      @initial_sizemax = params[:sizemax] || ''
 
       respond_to do |format|
         format.html

@@ -25,6 +25,7 @@ const PropertiesList = ({
   buysell_filter,
   category_filter,
   price_filter,
+  size_filter,
   handleAssign,
   handleFav,
   advanceByTwo,
@@ -85,27 +86,25 @@ const PropertiesList = ({
                   </div>
                   <hr />
                   <h5 className="card-title filter-header">{i18n.select.category}:</h5>
-                  <div className={'form-group'}>
-                    <AssociativeFormSelect
-                      key={'associative'}
-                      options={category_filter['options']}
-                      i18n={i18n}
-                      mode={'associative'}
-                      renderFormFields={false}
-                      callback={handleCategoryInput}
-                      isClearable={true}
-                      isSearchable={false}
-                      renderLabels={false}
-                      placeholderTextMaster={i18n.select.placeholder_plain}
-                      placeholderTextSlave={i18n.select.placeholder_plain}
-                      storedMasterOption={category_filter['storedMasterOption']}
-                      storedSlaveOption={category_filter['storedSlaveOption']}
-                    />
-                  </div>
+                  <AssociativeFormSelect
+                    key={'associative'}
+                    options={category_filter['options']}
+                    i18n={i18n}
+                    mode={'associative'}
+                    renderFormFields={false}
+                    callback={handleCategoryInput}
+                    isClearable={true}
+                    isSearchable={false}
+                    renderLabels={false}
+                    placeholderTextMaster={i18n.select.placeholder_plain}
+                    placeholderTextSlave={i18n.select.placeholder_plain}
+                    storedMasterOption={category_filter['storedMasterOption']}
+                    storedSlaveOption={category_filter['storedSlaveOption']}
+                  />
                   <hr />
                   <h5 className="card-title filter-header">{i18n.price}:</h5>
                   <AssociativeFormSelect
-                    key={'range'}
+                    key={'range-price'}
                     options={price_filter['options']}
                     i18n={i18n}
                     mode={'range'}
@@ -119,6 +118,24 @@ const PropertiesList = ({
                     storedControllerOption={buysell_filter['storedOption']}
                     storedMasterOption={price_filter['storedMasterOption']}
                     storedSlaveOption={price_filter['storedSlaveOption']}
+                  />
+                  <hr />
+                  <h5 className="card-title filter-header">{i18n.size}:</h5>
+                  <AssociativeFormSelect
+                    key={'range-size'}
+                    options={size_filter['options']}
+                    i18n={i18n}
+                    mode={'range'}
+                    renderFormFields={false}
+                    callback={handlePriceInput}
+                    isClearable={true}
+                    isSearchable={false}
+                    renderLabels={false}
+                    placeholderTextMaster={i18n.select.placeholder_prices_min}
+                    placeholderTextSlave={i18n.select.placeholder_prices_max}
+                    storedControllerOption={size_filter['propertyType']}
+                    storedMasterOption={size_filter['storedMasterOption']}
+                    storedSlaveOption={size_filter['storedSlaveOption']}
                   />
                 </div>
               </div>
@@ -186,7 +203,7 @@ const PropertiesList = ({
                                 <div className={'col-8'}>
                                   <h4 className="list-group-item-title">{entry.mini_heading}</h4>
                                   <p className="">{entry.location}</p>
-                                  <p className="list-group-item-text">{entry.description}</p>
+                                  <p className="list-group-item-text clamp-3">{entry.description}</p>
                                 </div>
                                 <div className={'col-4'}>
                                   <p className="list-group-item-text purpose">{entry.purpose}</p>

@@ -50,6 +50,14 @@ function withDatatable(WrappedComponent) {
             // storedSlaveOption: this.props.initial_payload.category_filter.storedSlaveOption
           }
           : '',
+        size_filter: this.props.initial_payload.size_filter
+          ? {
+            propertyType: this.props.initial_payload.size_filter.propertyType,
+            options: this.props.initial_payload.size_filter.options,
+            storedMasterOption: this.props.initial_payload.size_filter.storedMasterOption,
+            storedSlaveOption: this.props.initial_payload.size_filter.storedSlaveOption
+          }
+          : '',
         dataset: this.props.initial_payload.dataset_wrapper.dataset,
         resultsPerPage: this.props.initial_payload.results_per_page,
         isLoading: false,
@@ -161,6 +169,13 @@ function withDatatable(WrappedComponent) {
           return;
         }
         searchParams.set(getName(topLevel), selection.value);
+        this.setState(prevState => ({
+          size_filter: {
+            ...prevState.size_filter,
+            propertyType: ['residential','commercial'].indexOf(selection.value) > -1 ? 'building' : 'land'
+          }
+        }));
+        // this.setState({size_filter:})
       }
       let newUrlParams = searchParams.toString()
         ? `${window.location.pathname}?${searchParams.toString()}`

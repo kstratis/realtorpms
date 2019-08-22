@@ -40,6 +40,8 @@ class AssociativeFormSelect extends React.Component {
     if (prevProps.storedControllerOption !== this.props.storedControllerOption) {
       this.slaveComponent.clearSelection();
       this.masterComponent.clearSelection();
+      // When the controlling component changes value remember to also reset the slave component options
+      this.setState({ slaveOptions: this.buildRangeSelectOptions(false) });
     }
   }
 
@@ -71,6 +73,7 @@ class AssociativeFormSelect extends React.Component {
       // Reset the value if 'to' is smaller than 'from'
       if (
         this.props.mode === 'range' &&
+        this.slaveComponent.state.selectedOption &&
         parseInt(this.slaveComponent.state.selectedOption.value) < parseInt(selectedOption.value)
       ) {
         this.slaveComponent.clearSelection();
@@ -101,7 +104,7 @@ class AssociativeFormSelect extends React.Component {
       this.slaveComponent.clearSelection();
       this.slaveComponent.blurSelectComponent(); // This is needed in react-select v2
       if (this.props.mode === 'range') {
-        this.setState({ slaveOptions: this.buildRangeSelectOptions('') }); // reset the 'to' list of options or it will remember its last position
+        this.setState({ slaveOptions: this.buildRangeSelectOptions(false) }); // reset the 'to' list of options or it will remember its last position
       }
       if (this.props.renderFormFields) {
         this.slaveComponent.updateExternalDOM('', false);
@@ -146,7 +149,7 @@ class AssociativeFormSelect extends React.Component {
   render() {
     return (
       <div>
-        <div className={this.props.renderFormFields ? "form-group mb-4" : "form-group mb-2"}>
+        <div className={this.props.renderFormFields ? 'form-group mb-4' : 'form-group mb-2'}>
           {this.props.renderLabels ? (
             <label htmlFor="property_category">
               {this.props.i18n.select.category} <abbr title={this.props.i18n.select.required}>*</abbr>
@@ -185,7 +188,7 @@ class AssociativeFormSelect extends React.Component {
             isRequired={this.props.isRequired}
           />
         </div>
-        <div className={"form-group mb-4"}>
+        <div className={'form-group mb-4'}>
           {this.props.renderLabels ? (
             <label htmlFor="property_subcategory">
               {this.props.i18n.select.subcategory} <abbr title={this.props.i18n.select.required}>*</abbr>

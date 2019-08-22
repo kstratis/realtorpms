@@ -1273,10 +1273,8 @@ li.page-item {
   text-align: center;
   font-weight: bold;
   background-color: #f3dc65;
-  color: #e0301d;
+  color: #e0301d !important;
   border-radius: 5px;
-  padding: 10px 0 10px 0;
-  &:hover {
-    color: #e0301d;
-  }
+  padding: 5px 0 5px 0;
+
 }
