@@ -7,7 +7,7 @@ import SortFilter from './SortFilter';
 import AsyncSelect from '../components/selects/AsyncSelect';
 import FlipMove from 'react-flip-move';
 import PlainSelect from '../components/selects/PlainSelect';
-import NestedFormSelect from '../components/selects/NestedFormSelect';
+import AssociativeFormSelect from '../components/selects/AssociativeFormSelect';
 import RangeSelect from '../components/selects/RangeSelect';
 
 const getRandomInt = (min, max) => {
@@ -86,7 +86,7 @@ const PropertiesList = ({
                   <hr />
                   <h5 className="card-title filter-header">{i18n.select.category}:</h5>
                   <div className={'form-group'}>
-                    <NestedFormSelect
+                    <AssociativeFormSelect
                       key={'associative'}
                       options={category_filter['options']}
                       i18n={i18n}
@@ -103,7 +103,7 @@ const PropertiesList = ({
                   </div>
                   <hr />
                   <h5 className="card-title filter-header">{i18n.price}:</h5>
-                  <NestedFormSelect
+                  <AssociativeFormSelect
                     key={'range'}
                     options={price_filter['options']}
                     i18n={i18n}
@@ -181,15 +181,16 @@ const PropertiesList = ({
                             </div>
                             <div className="list-group-item-body">
                               <div className={'row'}>
-                                <div className={'col-9'}>
+                                <div className={'col-8'}>
                                   <h4 className="list-group-item-title">{entry.mini_heading}</h4>
                                   <p className="">{entry.location}</p>
                                   <p className="list-group-item-text">{entry.description}</p>
                                 </div>
-                                <div className={'col-3'}>
-                                  <p className="list-group-item-text">{entry.price}</p>
-                                  <p className="list-group-item-text">{entry.size}</p>
-                                  <p className="list-group-item-text">{entry.pricepersqmeter}</p>
+                                <div className={'col-4'}>
+                                  <p className="list-group-item-text purpose">{entry.purpose}</p>
+                                  <p className="list-group-item-text text-right mt-2">{entry.price}</p>
+                                  <p className="list-group-item-text text-right">{entry.size}</p>
+                                  <p className="list-group-item-text text-right">{entry.pricepersqmeter}</p>
                                 </div>
                               </div>
                             </div>

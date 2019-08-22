@@ -148,6 +148,9 @@ en:
             sell: "Sell"
             rent: "Rent"
             sell_rent: "Sell & Rent"
+            sell_banner: "FOR SALE"
+            rent_banner: "FOR RENT"
+            sell_rent_banner: "SALE/RENT"
           floor:
             basement: "Basement"
             semi_basement: "Semi-basement"

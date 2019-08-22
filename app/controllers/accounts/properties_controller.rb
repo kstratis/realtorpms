@@ -45,6 +45,9 @@ module Accounts
         unless params[:purpose] == 'sell_rent'
           @properties = @properties.where('businesstype = ?', Property.businesstypes[params[:purpose].to_sym]).or(@properties.where('businesstype = ?', 2))
         end
+      else
+        # :sell is the default
+        @properties = @properties.where('businesstype = ?', Property.businesstypes[:sell]).or(@properties.where('businesstype = ?', 2))
       end
 
       # DEBUG - Category filter
@@ -52,7 +55,7 @@ module Accounts
       if params[:category] && params[:subcategory]
         @properties = @properties.where(category: Category.find_by(slug: params[:subcategory], parent_slug: params[:category]))
       elsif params[:category]
-        @properties = @properties.joins(:category).where(categories: {parent_slug: "residential"})
+        @properties = @properties.joins(:category).where(categories: {parent_slug: params[:category]})
       end
 
       # DEBUG - Ordering filter
@@ -82,6 +85,7 @@ module Accounts
             view_entity_path: property_path(property.id),
             edit_entity_path: edit_property_path(property.id),
             fav_entity_path: property_favorites_path(property.id),
+            purpose: I18n.t("activerecord.attributes.property.enums.businesstype.#{property.businesstype}_banner"),
             # isFaved: property.is_faved_by?(current_user),
             # assignments: property.properties.count,
             # registration: property.created_at.to_formatted_s(:long)

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FormSelect from './FormSelect';
 
-class NestedFormSelect extends React.Component {
+class AssociativeFormSelect extends React.Component {
   static propTypes = {
     formdata: PropTypes.shape({
       formid: PropTypes.string,
@@ -36,7 +36,7 @@ class NestedFormSelect extends React.Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.props.mode !== 'range') return;
-    if (prevProps.storedControllerOption !== this.props.storedControllerOption){
+    if (prevProps.storedControllerOption !== this.props.storedControllerOption) {
       this.slaveComponent.clearSelection();
       this.masterComponent.clearSelection();
     }
@@ -47,7 +47,7 @@ class NestedFormSelect extends React.Component {
   // For detailed info have a look here: https://repl.it/@kstratis/Transformationsfinal
   state = {
     dependantMenuIsOpen: false,
-    // This changes according to the controlling parent
+    // This changes according to the controlling parent. 'Range' mode is used for the price and size filters.
     slaveDisabled: this.props.mode === 'range' ? false : !this.props.storedMasterOption,
     // This gets the sibling categories given the stored one.
     slaveOptions:
@@ -67,7 +67,11 @@ class NestedFormSelect extends React.Component {
     if (!isMaster) return;
     // If it fires on the parent, set subcategory's options and enable it
     if (selectedOption) {
-      if (this.props.mode === 'range' && (parseInt(this.slaveComponent.state.selectedOption.value) < parseInt(selectedOption.value))) {
+      // Reset the value if 'to' is smaller than 'from'
+      if (
+        this.props.mode === 'range' &&
+        parseInt(this.slaveComponent.state.selectedOption.value) < parseInt(selectedOption.value)
+      ) {
         this.slaveComponent.clearSelection();
       }
       if (
@@ -95,6 +99,9 @@ class NestedFormSelect extends React.Component {
       // Handle the master (subcategory component
       this.slaveComponent.clearSelection();
       this.slaveComponent.blurSelectComponent(); // This is needed in react-select v2
+      if (this.props.mode === 'range') {
+        this.setState({ slaveOptions: this.buildRangeSelectOptions('') }); // reset the 'to' list of options or it will remember its last position
+      }
       if (this.props.renderFormFields) {
         this.slaveComponent.updateExternalDOM('', false);
       }
@@ -217,4 +224,4 @@ class NestedFormSelect extends React.Component {
   }
 }
 
-export default NestedFormSelect;
+export default AssociativeFormSelect;

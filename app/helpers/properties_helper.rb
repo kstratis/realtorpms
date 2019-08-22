@@ -11,7 +11,8 @@ module PropertiesHelper
         }
       end
     end
-    pp options
+    # DEBUG
+    # pp options
     options
   end
 
@@ -51,7 +52,8 @@ module PropertiesHelper
                 {'3000'=> number_to_currency(3000)}]
         }
     }
-    pp options
+    # DEBUG
+    # pp options
     options
   end
 

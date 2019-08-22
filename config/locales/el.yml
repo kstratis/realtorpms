@@ -149,6 +149,9 @@ el:
             sell: "Πώληση"
             rent: "Ενοικίαση"
             sell_rent: "Όλα"
+            sell_banner: "ΠΩΛΕΙΤΑΙ"
+            rent_banner: "ΕΝΟΙΚΙΑΖΕΤΑΙ"
+            sell_rent_banner: "ΔΙΑΤΙΘΕΤΑΙ"
           floor:
             basement: "Υπόγειο"
             semi_basement: "Ημιυπόγειο"

@@ -1268,3 +1268,15 @@ li.page-item {
 .property-title{
   display: block;
 }
+
+.purpose{
+  text-align: center;
+  font-weight: bold;
+  background-color: #f3dc65;
+  color: #e0301d;
+  border-radius: 5px;
+  padding: 10px 0 10px 0;
+  &:hover {
+    color: #e0301d;
+  }
+}
