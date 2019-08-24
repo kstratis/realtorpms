@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FormSelect from './FormSelect';
+import URLSearchParams from '@ungap/url-search-params';
 
 class AssociativeFormSelect extends React.Component {
   static propTypes = {
@@ -22,6 +23,7 @@ class AssociativeFormSelect extends React.Component {
     storedControllerOption: PropTypes.any,
     storedMasterOption: PropTypes.any,
     storedSlaveOption: PropTypes.any,
+    cleanupParams: PropTypes.any,
     callback: PropTypes.func,
     options: PropTypes.object.isRequired,
     i18n: PropTypes.shape({
@@ -70,7 +72,7 @@ class AssociativeFormSelect extends React.Component {
     if (!isMaster) return;
     // If it fires on the parent, set subcategory's options and enable it
     if (selectedOption) {
-      // Reset the value if 'to' is smaller than 'from'
+      // Reset the value if 'max' is smaller than 'min'
       if (
         this.props.mode === 'range' &&
         this.slaveComponent.state.selectedOption &&
@@ -99,12 +101,14 @@ class AssociativeFormSelect extends React.Component {
       }
       this.setState({ slaveDisabled: false });
     } else {
-      // otherwise if 'x' is pressed on 'master', clear the slave's current selection then fire the validator and disable the field.
-      // Handle the master (subcategory component
-      this.slaveComponent.clearSelection();
+      // Otherwise if 'x' is pressed on 'master', clear the slave's current selection then fire the validator and disable the field.
+      // However when on 'range' mode defer because the user may only wish to specify a max value with no min value
+      if (this.props.mode !== 'range') {
+        this.slaveComponent.clearSelection();
+      }
       this.slaveComponent.blurSelectComponent(); // This is needed in react-select v2
       if (this.props.mode === 'range') {
-        this.setState({ slaveOptions: this.buildRangeSelectOptions(false) }); // reset the 'to' list of options or it will remember its last position
+        this.setState({ slaveOptions: this.buildRangeSelectOptions(false) }); // reset the 'max' list of options or it will remember its last position
       }
       if (this.props.renderFormFields) {
         this.slaveComponent.updateExternalDOM('', false);

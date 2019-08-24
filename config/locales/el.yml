@@ -274,6 +274,8 @@ el:
         placeholder_title: "Πληκτρολογήστε για αναζήτηση..."
         placeholder_prices_min: "Από: Όλες"
         placeholder_prices_max: "Έως: Όλες"
+        placeholder_sizes_min: "Από: Όλα"
+        placeholder_sizes_max: "Έως: Όλα"
         assignments_feedback: "Ανάθεση σε έναν ή περισσότερους συνεργάτες"
         category: "Κατηγορία"
         subcategory: "Υποκατηγορία"

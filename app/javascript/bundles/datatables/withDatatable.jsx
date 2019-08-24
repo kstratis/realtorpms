@@ -46,8 +46,8 @@ function withDatatable(WrappedComponent) {
         price_filter: this.props.initial_payload.price_filter
           ? {
             options: this.props.initial_payload.price_filter.options,
-            // storedMasterOption: this.props.initial_payload.category_filter.storedMasterOption,
-            // storedSlaveOption: this.props.initial_payload.category_filter.storedSlaveOption
+            storedMasterOption: this.props.initial_payload.price_filter.storedMasterOption,
+            storedSlaveOption: this.props.initial_payload.price_filter.storedSlaveOption
           }
           : '',
         size_filter: this.props.initial_payload.size_filter
@@ -67,7 +67,6 @@ function withDatatable(WrappedComponent) {
         /* This is required only in initial loading.
          * We want this to be reflected in our React component. That's why we subtract 1 */
         selectedPage: this.getSelectedPage(),
-        // checkedButton:
         searchInput: this.props.initial_payload.initial_search,
         sorting: this.props.initial_payload.initial_sorting,
         ordering: this.props.initial_payload.initial_ordering,
@@ -84,6 +83,7 @@ function withDatatable(WrappedComponent) {
       this.handlePageClick = this.handlePageClick.bind(this);
       this.determineDirection = this.determineDirection.bind(this);
       this.handleSearchInput = this.handleSearchInput.bind(this);
+      // this.cleanupParams = this.cleanupParams.bind(this);
       this.handleSort = this.handleSort.bind(this);
       this.handleAjaxRequest = this.handleAjaxRequest.bind(this);
       this.handleAssign = this.handleAssign.bind(this);
@@ -93,6 +93,7 @@ function withDatatable(WrappedComponent) {
       this.handleLocationInput = this.handleLocationInput.bind(this);
       this.handleCategoryInput = this.handleCategoryInput.bind(this);
       this.handlePriceInput = this.handlePriceInput.bind(this);
+      this.handleSizeInput = this.handleSizeInput.bind(this);
       this.handleChangePurpose = this.handleChangePurpose.bind(this);
       this.handleAjaxRequestDelayed = debounce(this.handleAjaxRequest, 300);
       this.compoundDelayedAction = debounce(this.compoundDelayedAction.bind(this), 300);
@@ -148,10 +149,49 @@ function withDatatable(WrappedComponent) {
       }
     }
 
-    handlePriceInput(){
-      console.log('price fired');
+    handlePriceInput(topLevel, selection, browserButtonInvoked = false){
+      const getName = topLevel => {
+        return topLevel ? 'pricemin' : 'pricemax';
+      };
+      let searchParams = new URLSearchParams(window.location.search);
+      if (!selection) {
+        searchParams.delete(getName(topLevel));
+      } else {
+        if (topLevel && (parseInt(selection.value) > parseInt(searchParams.get('pricemax')))) {
+          searchParams.delete('pricemax');
+        } else if (selection.value === searchParams.get(getName(topLevel))) {
+          return;
+        }
+        searchParams.set(getName(topLevel), selection.value);
+      }
+      let newUrlParams = searchParams.toString()
+        ? `${window.location.pathname}?${searchParams.toString()}`
+        : window.location.pathname;
+      this.compoundDelayedAction(searchParams, newUrlParams);
     }
 
+    handleSizeInput(topLevel, selection, browserButtonInvoked = false){
+      const getName = topLevel => {
+        return topLevel ? 'sizemin' : 'sizemax';
+      };
+      let searchParams = new URLSearchParams(window.location.search);
+      if (!selection) {
+        searchParams.delete(getName(topLevel));
+      } else {
+        if (topLevel && (parseInt(selection.value) > parseInt(searchParams.get('sizemax')))) {
+          searchParams.delete('sizemax');
+        } else if (selection.value === searchParams.get(getName(topLevel))) {
+          return;
+        }
+        searchParams.set(getName(topLevel), selection.value);
+      }
+      let newUrlParams = searchParams.toString()
+        ? `${window.location.pathname}?${searchParams.toString()}`
+        : window.location.pathname;
+      this.compoundDelayedAction(searchParams, newUrlParams);
+    }
+
+    // topLevel comes from the AssosiativeFormSelect.jsx which uses the currying techique.
     handleCategoryInput(topLevel, selection, browserButtonInvoked = false) {
       const getName = topLevel => {
         return topLevel ? 'category' : 'subcategory';
@@ -164,18 +204,41 @@ function withDatatable(WrappedComponent) {
         }
       } else {
         if (topLevel && selection.value !== searchParams.get(getName(topLevel))) {
+
           searchParams.delete('subcategory');
+
+          // Initialized property type is building
+          const existingPropertyType = searchParams.get(getName(topLevel))
+            ? ['residential', 'commercial'].indexOf(searchParams.get(getName(topLevel))) > -1 ? 'building' : 'land'
+            : 'building';
+
+          const updatedPropertyType = ['residential', 'commercial'].indexOf(selection.value) > -1
+            ? 'building'
+            : 'land';
+
+          // DEBUG
+          // console.log(`params is: ${searchParams.get(getName(topLevel))}`);
+          // console.log(`existingPropertyType is: ${existingPropertyType}`);
+          // console.log(`updatedPropertyType is: ${updatedPropertyType}`);
+
+          if (existingPropertyType !== updatedPropertyType){
+            // DEBUG
+            // console.log('cleaning');
+            searchParams.delete('sizemin');
+            searchParams.delete('sizemax');
+          }
+
+          // Change the size options only on top level select change
+          this.setState(prevState => ({
+            size_filter: {
+              ...prevState.size_filter,
+              propertyType: ['residential', 'commercial'].indexOf(selection.value) > -1 ? 'building' : 'land'
+            }
+          }));
         } else if (selection.value === searchParams.get(getName(topLevel))) {
           return;
         }
         searchParams.set(getName(topLevel), selection.value);
-        this.setState(prevState => ({
-          size_filter: {
-            ...prevState.size_filter,
-            propertyType: ['residential','commercial'].indexOf(selection.value) > -1 ? 'building' : 'land'
-          }
-        }));
-        // this.setState({size_filter:})
       }
       let newUrlParams = searchParams.toString()
         ? `${window.location.pathname}?${searchParams.toString()}`
@@ -195,6 +258,7 @@ function withDatatable(WrappedComponent) {
       let newUrlParams = searchParams.toString()
         ? `${window.location.pathname}?${searchParams.toString()}`
         : window.location.pathname;
+      // DEBUG
       // console.log(`callback running with location id: ${locations[0].value}`);
       // console.log(`callback running with location name: ${locations[0].label}`);
       this.compoundDelayedAction(searchParams, newUrlParams);
@@ -389,10 +453,14 @@ function withDatatable(WrappedComponent) {
           storedOption: newSelection
         }
       }));
+      console.log('running handleChangePurpose');
+      console.log(e.target.value);
       let searchParams = new URLSearchParams(window.location.search);
       searchParams.delete('purpose');
       if (e.target.value !== undefined && e.target.value.length > 0) {
         searchParams.set('purpose', e.target.value);
+        searchParams.delete('pricemin');
+        searchParams.delete('pricemax');
       } else {
         searchParams.delete('purpose');
       }
@@ -412,6 +480,7 @@ function withDatatable(WrappedComponent) {
             handleLocationInput={this.handleLocationInput}
             handleCategoryInput={this.handleCategoryInput}
             handlePriceInput={this.handlePriceInput}
+            handleSizeInput={this.handleSizeInput}
             handlePageClick={this.handlePageClick}
             handleSort={this.handleSort}
             handleAssign={this.handleAssign}

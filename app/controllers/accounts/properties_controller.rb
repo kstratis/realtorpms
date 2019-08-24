@@ -58,6 +58,22 @@ module Accounts
         @properties = @properties.joins(:category).where(categories: {parent_slug: params[:category]})
       end
 
+      if params[:pricemin]
+        @properties = @properties.where("price >= ?", params[:pricemin])
+      end
+
+      if params[:pricemax]
+        @properties = @properties.where("price <= ?", params[:pricemax])
+      end
+
+      if params[:sizemin]
+        @properties = @properties.where("size >= ?", params[:sizemin])
+      end
+
+      if params[:sizemax]
+        @properties = @properties.where("size <= ?", params[:sizemax])
+      end
+
       # DEBUG - Ordering filter
       # puts params[:sorting], params[:ordering]
       if params[:sorting] && params[:ordering]
@@ -104,7 +120,8 @@ module Accounts
       @initial_sorting = params[:sorting] || 'created_at'
       @initial_ordering = params[:ordering] || 'desc'
       @initial_purpose = params[:purpose] || 'sell'
-      @initial_property_type = %w(residential commercial).include?(params[:category]) ? 'building' : 'land'
+      # Initialized property type is 'building'
+      @initial_property_type = %w(land other).include?(params[:category]) ? 'land' : 'building'
       @initial_category = params[:category] || ''
       @initial_subcategory = params[:subcategory] || ''
       @initial_pricemin = params[:pricemin] || ''

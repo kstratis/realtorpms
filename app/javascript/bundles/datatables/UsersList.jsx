@@ -25,7 +25,7 @@ const UsersList = ({
   searchInput,
 }) => {
   return (
-    <div className="user-list">
+    <div className="users-list">
       <Spinner isLoading={isLoading} />
       <div className={'container'}>
         <div className={'row'}>
@@ -265,7 +265,7 @@ const UsersList = ({
           </div>
         </div>
       ) : (
-        <div className={`no-tasks ${isLoading ? 'reduced-opacity' : ''}`}>
+        <div className={`no-entries ${isLoading ? 'reduced-opacity' : ''}`}>
           <i className="no-results"> </i>
           <h3>{i18n['no_results']}</h3>
         </div>

@@ -53,7 +53,7 @@ module PropertiesHelper
         }
     }
     # DEBUG
-    pp options
+    # pp options
     options
   end
 
@@ -94,7 +94,7 @@ module PropertiesHelper
         }
     }
     # DEBUG
-    pp options
+    # pp options
     options
   end
 
