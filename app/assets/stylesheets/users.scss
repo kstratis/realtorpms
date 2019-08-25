@@ -168,6 +168,29 @@ span.subtitle {
   }
 }
 
+.properties-spinner {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  position: fixed;
+  margin: auto;
+  //margin-left: auto;
+  //margin-right: auto;
+  border: 1px solid #FFFFFF;
+  border-radius: 10px;
+  z-index: 1501;
+  background: #563f7b;
+  text-align: center;
+  width: 110px;
+  height: 60px;
+  background-size: auto 95%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url(spinners/ellipsis_loader.svg);
+}
+
 #overlay {
   position: absolute;
   display: none;

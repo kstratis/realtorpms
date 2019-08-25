@@ -6,9 +6,7 @@ import ClampWrapper from '../components/ClampWrapper';
 import SortFilter from './SortFilter';
 import AsyncSelect from '../components/selects/AsyncSelect';
 import FlipMove from 'react-flip-move';
-import PlainSelect from '../components/selects/PlainSelect';
 import AssociativeFormSelect from '../components/selects/AssociativeFormSelect';
-import RangeSelect from '../components/selects/RangeSelect';
 import Spinner from './Spinner';
 
 const getRandomInt = (min, max) => {
@@ -46,7 +44,7 @@ const PropertiesList = ({
   return (
     <div className="properties-list">
       {/* CARD START */}
-      <Spinner isLoading={isLoading} />
+
       {/*{isLoading ? (*/}
       {/*  <div className={'centered'}>*/}
       {/*    <div className={'spinner'} />*/}
@@ -182,94 +180,95 @@ const PropertiesList = ({
                 />
               </div>
             </div>
-          {/*</div>*/}
-          {dataset.length > 0 ? (
-            <div className={''}>
-              <FlipMove>
-                {dataset.map((entry, index) => (
-                  <div key={entry.id}>
-                    <div className={'row'}>
-                      <div className="col-12">
-                        <div className="list-group list-group-media mb-3">
-                          <a href={entry['view_entity_path']} className="list-group-item list-group-item-action">
-                            <div className="list-group-item-figure rounded-left">
-                              <div className={'thumb-container'}>
-                                <img
-                                  src={`https://picsum.photos/${getRandomInt(100, 800)}/${getRandomInt(
-                                    100,
-                                    800
-                                  )}/?random&sig=${Math.random()}`}
-                                  alt="placeholder image"
-                                  className={'thumb'}
-                                />
-                              </div>
-                            </div>
-                            <div className="list-group-item-body">
-                              <div className={'row'}>
-                                <div className={'col-8'}>
-                                  <h4 className="list-group-item-title">{entry.mini_heading}</h4>
-                                  <p className="">{entry.location}</p>
-                                  <p className="list-group-item-text clamp-3">{entry.description}</p>
-                                </div>
-                                <div className={'col-4'}>
-                                  <p className="list-group-item-text purpose">{entry.purpose}</p>
-                                  <p className="list-group-item-text text-right mt-2">{entry.price}</p>
-                                  <p className="list-group-item-text text-right">{entry.size}</p>
-                                  <p className="list-group-item-text text-right">{entry.pricepersqmeter}</p>
+            <Spinner isLoading={isLoading} version={2} />
+            {dataset.length > 0 ? (
+              <div className={`${isLoading ? 'reduced-opacity' : ''}`}>
+
+                <FlipMove>
+                  {dataset.map((entry, index) => (
+                    <div key={entry.id}>
+                      <div className={'row'}>
+                        <div className="col-12">
+                          <div className="list-group list-group-media mb-3">
+                            <a href={entry['view_entity_path']} className="list-group-item list-group-item-action">
+                              <div className="list-group-item-figure rounded-left">
+                                <div className={'thumb-container'}>
+                                  <img
+                                    src={`https://picsum.photos/${getRandomInt(100, 800)}/${getRandomInt(
+                                      100,
+                                      800
+                                    )}/?random&sig=${Math.random()}`}
+                                    alt="placeholder image"
+                                    className={'thumb'}
+                                  />
                                 </div>
                               </div>
-                            </div>
-                          </a>
+                              <div className="list-group-item-body">
+                                <div className={'row'}>
+                                  <div className={'col-8'}>
+                                    <h4 className="list-group-item-title">{entry.mini_heading}</h4>
+                                    <p className="">{entry.location}</p>
+                                    <p className="list-group-item-text clamp-3">{entry.description}</p>
+                                  </div>
+                                  <div className={'col-4'}>
+                                    <p className="list-group-item-text purpose">{entry.purpose}</p>
+                                    <p className="list-group-item-text text-right mt-2">{entry.price}</p>
+                                    <p className="list-group-item-text text-right">{entry.size}</p>
+                                    <p className="list-group-item-text text-right">{entry.pricepersqmeter}</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </a>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </FlipMove>
+                  ))}
+                </FlipMove>
 
-              {/* CARD END */}
-              <div className={'clearfix'} />
+                {/* CARD END */}
+                <div className={'clearfix'} />
 
-              <ClampWrapper />
+                <ClampWrapper />
 
-              <div className={'row d-flex justify-content-center mt-4'}>
-                <nav aria-label="Results navigation">
-                  <ReactPaginate
-                    previousLabel={'❮'}
-                    nextLabel={'❯'}
-                    breakLabel={
-                      <span className="break-button-content page-link" onClick={advanceByTwo}>
-                        ...
-                      </span>
-                    }
-                    breakClassName={'break-button break-button-upper'}
-                    pageCount={pageCount}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={5}
-                    onPageChange={handlePageClick}
-                    containerClassName={'pagination'}
-                    subContainerClassName={'pages pagination'}
-                    pageLinkClassName={'page-link'}
-                    activeClassName={'active'}
-                    forcePage={selectedPage}
-                    pageClassName={'page-item'}
-                    previousLinkClassName={'page-link'}
-                    nextLinkClassName={'page-link'}
-                    nextClassName={'next'}
-                    previousClassName={'previous'}
-                  />
-                </nav>
+                <div className={'row d-flex justify-content-center mt-4'}>
+                  <nav aria-label="Results navigation">
+                    <ReactPaginate
+                      previousLabel={'❮'}
+                      nextLabel={'❯'}
+                      breakLabel={
+                        <span className="break-button-content page-link" onClick={advanceByTwo}>
+                          ...
+                        </span>
+                      }
+                      breakClassName={'break-button break-button-upper'}
+                      pageCount={pageCount}
+                      marginPagesDisplayed={2}
+                      pageRangeDisplayed={5}
+                      onPageChange={handlePageClick}
+                      containerClassName={'pagination'}
+                      subContainerClassName={'pages pagination'}
+                      pageLinkClassName={'page-link'}
+                      activeClassName={'active'}
+                      forcePage={selectedPage}
+                      pageClassName={'page-item'}
+                      previousLinkClassName={'page-link'}
+                      nextLinkClassName={'page-link'}
+                      nextClassName={'next'}
+                      previousClassName={'previous'}
+                    />
+                  </nav>
+                </div>
               </div>
-            </div>
-          ) : (
-            <div className={`no-entries ${isLoading ? 'reduced-opacity' : ''}`}>
-              <i className="no-results"> </i>
-              <h3>{i18n['no_results']}</h3>
-            </div>
-          )}
+            ) : (
+              <div className={`no-entries ${isLoading ? 'reduced-opacity' : ''}`}>
+                <i className="no-results"> </i>
+                <h3>{i18n['no_results']}</h3>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
     </div>
   );
 };

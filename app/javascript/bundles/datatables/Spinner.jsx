@@ -16,7 +16,7 @@ export default class Spinner extends React.Component {
         {this.props.isLoading === true ? (
           <div className="justify-content-center align-items-center">
             <div className="w-100 d-flex justify-content-center align-items-center">
-              <div className="spinner" />
+              <div className={`${this.props.version === 2 ? 'properties-spinner' : 'spinner'}`} />
             </div>
           </div>
         ) : (

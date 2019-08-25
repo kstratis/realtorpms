@@ -150,6 +150,7 @@ function withDatatable(WrappedComponent) {
     }
 
     handlePriceInput(topLevel, selection, browserButtonInvoked = false){
+      this.setState({ isLoading: true });
       const getName = topLevel => {
         return topLevel ? 'pricemin' : 'pricemax';
       };
@@ -171,6 +172,7 @@ function withDatatable(WrappedComponent) {
     }
 
     handleSizeInput(topLevel, selection, browserButtonInvoked = false){
+      this.setState({ isLoading: true });
       const getName = topLevel => {
         return topLevel ? 'sizemin' : 'sizemax';
       };
@@ -193,6 +195,7 @@ function withDatatable(WrappedComponent) {
 
     // topLevel comes from the AssosiativeFormSelect.jsx which uses the currying techique.
     handleCategoryInput(topLevel, selection, browserButtonInvoked = false) {
+      this.setState({ isLoading: true });
       const getName = topLevel => {
         return topLevel ? 'category' : 'subcategory';
       };
@@ -446,6 +449,7 @@ function withDatatable(WrappedComponent) {
     }
 
     handleChangePurpose(e) {
+      this.setState({ isLoading: true });
       const newSelection = e.target.value;
       this.setState(prevState => ({
         buysell_filter: {
