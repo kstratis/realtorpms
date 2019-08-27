@@ -98,6 +98,30 @@ module PropertiesHelper
     options
   end
 
+  def rooms_options
+    options = {
+        'building'=> {
+            category: {'building' => 'building'},
+            subcategory: [
+                {'1'=> "1"},
+                {'2'=> "2"},
+                {'3'=> "3"},
+                {'4'=> "4"},
+                {'5'=> "5"},
+                {'6'=> "6"},
+                {'7'=> "7"},
+                {'8'=> "8"},
+                {'9'=> "9"},
+                {'10'=> "10"}
+            ]},
+        'land' => {
+            category: {'land' => 'land'},
+            subcategory: []
+        }
+    }
+    options
+  end
+
   def property_categories
     Property.categories.keys.collect { |businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype} }
   end

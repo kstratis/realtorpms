@@ -137,6 +137,8 @@ class FormSelect extends React.Component {
     // selectedOption is an object of type: {label: "Πώληση", value: "sell"}
     // Whenever locations are concerned, value is the id, and not the area_id.
     // check if we are dealing with dependant or solo select
+    // DEBUG
+    // console.log(selectedOption);
     if (!this.props.soloMode) {
       if (typeof this.props.handleOptions === 'function') {
         this.props.handleOptions(selectedOption, this.props.isMaster);

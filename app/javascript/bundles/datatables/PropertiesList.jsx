@@ -19,6 +19,7 @@ const PropertiesList = ({
   handleLocationInput,
   handlePriceInput,
   handleSizeInput,
+  handleRoomsInput,
   handleChangePurpose,
   handlePageClick,
   handleSort,
@@ -26,6 +27,8 @@ const PropertiesList = ({
   category_filter,
   price_filter,
   size_filter,
+  rooms_filter,
+  propertyType,
   handleAssign,
   handleFav,
   advanceByTwo,
@@ -53,7 +56,7 @@ const PropertiesList = ({
 
       <div className={'PropertyListContainer'}>
         <div className={'row'}>
-          <div className={'filters col-4'}>
+          <div className={'filters col-3 col-xl-4'}>
             <div className="card">
               <div className="card-header">
                 <div className="table-entry">
@@ -88,7 +91,8 @@ const PropertiesList = ({
                 <hr />
                 <h5 className="card-title filter-header">{i18n.select.category}:</h5>
                 <AssociativeFormSelect
-                  key={'associative'}
+                  key={'associative-category'}
+                  name={'category'}
                   options={category_filter['options']}
                   i18n={i18n}
                   mode={'associative'}
@@ -107,6 +111,7 @@ const PropertiesList = ({
                 <h5 className="card-title filter-header">{i18n.price}:</h5>
                 <AssociativeFormSelect
                   key={'range-price'}
+                  name={'price'}
                   options={price_filter['options']}
                   i18n={i18n}
                   mode={'range'}
@@ -125,6 +130,7 @@ const PropertiesList = ({
                 <h5 className="card-title filter-header">{i18n.size}:</h5>
                 <AssociativeFormSelect
                   key={'range-size'}
+                  name={'size'}
                   options={size_filter['options']}
                   i18n={i18n}
                   mode={'range'}
@@ -139,12 +145,30 @@ const PropertiesList = ({
                   storedMasterOption={size_filter['storedMasterOption']}
                   storedSlaveOption={size_filter['storedSlaveOption']}
                 />
+
+              <hr />
+              <h5 className="card-title filter-header">{i18n.rooms}:</h5>
+              <AssociativeFormSelect
+                key={'range-rooms'}
+                name={'rooms'}
+                options={rooms_filter['options']}
+                i18n={i18n}
+                mode={'range'}
+                renderFormFields={false}
+                callback={handleRoomsInput}
+                isClearable={true}
+                isSearchable={false}
+                renderLabels={false}
+                placeholderTextMaster={i18n.select.placeholder_rooms_min}
+                placeholderTextSlave={i18n.select.placeholder_rooms_max}
+                storedControllerOption={rooms_filter['propertyType']}
+                storedMasterOption={rooms_filter['storedMasterOption']}
+                storedSlaveOption={rooms_filter['storedSlaveOption']}
+              />
               </div>
             </div>
           </div>
-          <div className={'col-8'}>
-            {/*<Search handleSearchInput={handleSearchInput} searchInput={searchInput} placeholder={i18n['search']} />*/}
-
+          <div className={'col-9 col-xl-8 '}>
             {/* Generate the needed filters according to the i18n keys of the erb template */}
             <div className={'row mb-3'}>
               <div className={'col-8'}>
@@ -183,7 +207,6 @@ const PropertiesList = ({
             <Spinner isLoading={isLoading} version={2} />
             {dataset.length > 0 ? (
               <div className={`${isLoading ? 'reduced-opacity' : ''}`}>
-
                 <FlipMove>
                   {dataset.map((entry, index) => (
                     <div key={entry.id}>

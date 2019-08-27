@@ -1,6 +1,7 @@
 module Accounts
   class PropertiesController < Accounts::BaseController
     include PropertyHeader
+    include CategoryFinder
     helper PropertyHeader
     before_action :set_property, only: [:show, :edit, :update, :destroy]
 
@@ -120,14 +121,15 @@ module Accounts
       @initial_sorting = params[:sorting] || 'created_at'
       @initial_ordering = params[:ordering] || 'desc'
       @initial_purpose = params[:purpose] || 'sell'
-      # Initialized property type is 'building'
-      @initial_property_type = %w(land other).include?(params[:category]) ? 'land' : 'building'
+      @initial_property_type = get_initial_category(params[:category], params[:sizeminmeta], params[:sizemaxmeta])
       @initial_category = params[:category] || ''
       @initial_subcategory = params[:subcategory] || ''
       @initial_pricemin = params[:pricemin] || ''
       @initial_pricemax = params[:pricemax] || ''
       @initial_sizemin = params[:sizemin] || ''
       @initial_sizemax = params[:sizemax] || ''
+      @initial_roomsmin = params[:roomsmin] || ''
+      @initial_roomsmax = params[:roomsmax] || ''
 
       respond_to do |format|
         format.html

@@ -276,6 +276,8 @@ el:
         placeholder_prices_max: "Έως: Όλες"
         placeholder_sizes_min: "Από: Όλα"
         placeholder_sizes_max: "Έως: Όλα"
+        placeholder_rooms_min: "Από: Όλα"
+        placeholder_rooms_max: "Έως: Όλα"
         assignments_feedback: "Ανάθεση σε έναν ή περισσότερους συνεργάτες"
         category: "Κατηγορία"
         subcategory: "Υποκατηγορία"
@@ -356,6 +358,8 @@ el:
           both: "Και τα δύο"
         size:
           title: "Εμβαδό"
+        bedrooms:
+          title: "Δωμάτια"
     users_search:
       placeholder: "Αναζήτηση συνεργάτη..."
     properties_search:

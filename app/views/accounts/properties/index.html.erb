@@ -28,11 +28,18 @@
                   storedSlaveOption: @initial_pricemax.blank? ? nil : {label: number_to_currency(@initial_pricemax), value: @initial_pricemax},
               },
               size_filter: {
-                  options: size_options,
                   propertyType: @initial_property_type,
+                  options: size_options,
                   storedMasterOption: @initial_sizemin.blank? ? nil : {label: t('activerecord.attributes.property.size_meter_html', size: @initial_sizemin.to_s), value: @initial_sizemin},
                   storedSlaveOption: @initial_sizemax.blank? ? nil : {label: t('activerecord.attributes.property.size_meter_html', size: @initial_sizemax.to_s), value: @initial_sizemax},
               },
+              rooms_filter: {
+                  propertyType: @initial_property_type,
+                  options: rooms_options,
+                  storedMasterOption: @initial_roomsmin.blank? ? nil : {label: @initial_roomsmin, value: @initial_roomsmin},
+                  storedSlaveOption: @initial_roomsmax.blank? ? nil : {label: @initial_roomsmax, value: @initial_roomsmax},
+              },
+              # propertyType: @initial_property_type,
               dataset_wrapper: @propertieslist,
               results_per_page: @results_per_page,
               total_entries: @total_entries,
@@ -52,6 +59,8 @@
                   placeholder_prices_max: t('js.components.select.placeholder_prices_max'),
                   placeholder_sizes_min: t('js.components.select.placeholder_sizes_min'),
                   placeholder_sizes_max: t('js.components.select.placeholder_sizes_max'),
+                  placeholder_rooms_min: t('js.components.select.placeholder_rooms_min'),
+                  placeholder_rooms_max: t('js.components.select.placeholder_rooms_max'),
                   noresults: t('js.components.select.noresults'),
                   loading: t('js.components.select.loading_html'),
                   feedback: t('js.components.select.assignments_feedback'),
@@ -67,7 +76,7 @@
               },
               price: t('js.datatables.filters.price.title'),
               size: t('js.datatables.filters.size.title'),
-
+              rooms: t('js.datatables.filters.bedrooms.title'),
               filters: {
                   title: t('js.datatables.filters.title'),
                   type:{

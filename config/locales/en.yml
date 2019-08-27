@@ -353,6 +353,8 @@ en:
           both: "Both"
         size:
           title: "Εμβαδό"
+        bedrooms:
+          title: "Bedrooms"
     users_search:
       placeholder: "i.e. John Smith"
     properties_search:
