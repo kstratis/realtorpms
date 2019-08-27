@@ -21,6 +21,7 @@ const PropertiesList = ({
   handleSizeInput,
   handleRoomsInput,
   handleFloorsInput,
+  handleConstructionInput,
   handleChangePurpose,
   handlePageClick,
   handleSort,
@@ -30,6 +31,7 @@ const PropertiesList = ({
   size_filter,
   rooms_filter,
   floors_filter,
+  construction_filter,
   propertyType,
   handleAssign,
   handleFav,
@@ -58,7 +60,7 @@ const PropertiesList = ({
 
       <div className={'PropertyListContainer'}>
         <div className={'row'}>
-          <div className={'filters col-3 col-xl-4'}>
+          <div className={'filters col-5'}>
             <div className="card">
               <div className="card-header">
                 <div className="table-entry">
@@ -185,10 +187,29 @@ const PropertiesList = ({
                   storedMasterOption={floors_filter['storedMasterOption']}
                   storedSlaveOption={floors_filter['storedSlaveOption']}
                 />
+                <hr />
+                <h5 className="card-title filter-header">{i18n.construction}:</h5>
+                <AssociativeFormSelect
+                  key={'range-construction'}
+                  name={'construction'}
+                  options={construction_filter['options']}
+                  i18n={i18n}
+                  mode={'range'}
+                  renderFormFields={false}
+                  callback={handleConstructionInput}
+                  isClearable={true}
+                  isSearchable={false}
+                  renderLabels={false}
+                  placeholderTextMaster={i18n.select.placeholder_construction_min}
+                  placeholderTextSlave={i18n.select.placeholder_construction_max}
+                  storedControllerOption={construction_filter['propertyType']}
+                  storedMasterOption={construction_filter['storedMasterOption']}
+                  storedSlaveOption={construction_filter['storedSlaveOption']}
+                />
               </div>
             </div>
           </div>
-          <div className={'col-9 col-xl-8 '}>
+          <div className={'col-7'}>
             {/* Generate the needed filters according to the i18n keys of the erb template */}
             <div className={'row mb-3'}>
               <div className={'col-8'}>

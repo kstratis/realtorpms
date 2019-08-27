@@ -148,6 +148,8 @@ module Accounts
       @initial_roomsmax = params[:roomsmax] || ''
       @initial_floorsmin = params[:floorsmin] || ''
       @initial_floorsmax = params[:floorsmax] || ''
+      @initial_constructionmin = params[:constructionmin] || ''
+      @initial_constructionmax = params[:constructionmax] || ''
 
       respond_to do |format|
         format.html

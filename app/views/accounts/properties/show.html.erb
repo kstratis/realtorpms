@@ -54,7 +54,7 @@
   <div class="container">
     <!-- .card -->
     <div class="card ">
-      <%= render partial: 'shared/card_header/header', locals: {title: heading(@property), btn_text: t('properties.show.catalog'), btn_link: properties_path} %>
+      <%= render partial: 'shared/card_header/header', locals: {title: heading(@property), btn_text: t('properties.show.catalog'), btn_link: :back} %>
       <!-- .card-body -->
       <div class="card-body">
         <div class="row">

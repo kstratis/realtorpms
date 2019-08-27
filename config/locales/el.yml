@@ -270,8 +270,9 @@ el:
       select:
         noresults: "Δεν βρέθηκαν αποτελέσματα"
         loading_html: "Φόρτωση αποτελεσμάτων..."
-        placeholder: "Επιλέξτε..."
+        placeholder: "Επιλέξτε"
         placeholder_title: "Πληκτρολογήστε για αναζήτηση..."
+        placeholder_area_title: "Αναζήτηση περιοχής"
         placeholder_prices_min: "Από: Όλες"
         placeholder_prices_max: "Έως: Όλες"
         placeholder_sizes_min: "Από: Όλα"
@@ -280,6 +281,8 @@ el:
         placeholder_rooms_max: "Έως: Όλα"
         placeholder_floors_min: "Από: Όλοι"
         placeholder_floors_max: "Έως: Όλοι"
+        placeholder_construction_min: "Από: Έτος"
+        placeholder_construction_max: "Έως: Έτος"
         assignments_feedback: "Ανάθεση σε έναν ή περισσότερους συνεργάτες"
         category: "Κατηγορία"
         subcategory: "Υποκατηγορία"
@@ -364,6 +367,8 @@ el:
           title: "Δωμάτια"
         floors:
           title: "Όροφος"
+        construction:
+          title: "Κατασκευή"
     users_search:
       placeholder: "Αναζήτηση συνεργάτη..."
     properties_search:

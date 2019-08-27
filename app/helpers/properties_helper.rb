@@ -190,6 +190,20 @@ module PropertiesHelper
     options
   end
 
+  def construction_options
+    options = {
+        'building'=> {
+            category: {'building' => 'building'},
+            subcategory: (1940..Time.zone.now.year + 2).collect {|year| {year.to_s => year.to_s}},
+            },
+        'land' => {
+            category: {'land' => 'land'},
+            subcategory: []
+        }
+    }
+    options
+  end
+
   def retrieve_stored_floor_option(floor)
     case floor.to_s
     when '0'

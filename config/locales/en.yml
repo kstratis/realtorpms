@@ -269,14 +269,19 @@ en:
       select:
         noresults: "Δεν βρέθηκαν αποτελέσματα"
         loading_html: "Loading results..."
-        placeholder: "Choose..."
+        placeholder: "Choose"
         placeholder_title: "Start typing to select..."
+        placeholder_area_title: "Area search"
         placeholder_prices_min: "From: All"
         placeholder_prices_max: "To: All"
         placeholder_sizes_min: "From: All"
         placeholder_sizes_max: "To: All"
+        placeholder_rooms_min: "From: All"
+        placeholder_rooms_max: "To: All"
         placeholder_floors_min: "From: All"
         placeholder_floors_max: "To: All"
+        placeholder_construction_min: "From: Year"
+        placeholder_construction_max: "To: Year"
         assignments_feedback: "Assign to one or more partners"
         category: "Category"
         subcategory: "Subcategory"
@@ -359,6 +364,8 @@ en:
           title: "Bedrooms"
         floors:
           title: "Floors"
+        construction:
+          title: "Construction"
     users_search:
       placeholder: "i.e. John Smith"
     properties_search:

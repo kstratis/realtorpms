@@ -57,7 +57,7 @@ class AssociativeFormSelect extends React.Component {
       // When the controlling component changes value remember to also reset the slave component options
       this.setState({ slaveOptions: this.buildRangeSelectOptions(false) });
       // special handling for rooms & floors
-      if ((['rooms', 'floors'].indexOf(this.props.name) > -1) && ['land', 'other'].indexOf(this.props.storedControllerOption) > -1){
+      if ((['rooms', 'floors', 'construction'].indexOf(this.props.name) > -1) && ['land', 'other'].indexOf(this.props.storedControllerOption) > -1){
         // DEBUG
         // console.log('disabling selects');
         this.setState({ masterDisabled: true });
@@ -77,11 +77,11 @@ class AssociativeFormSelect extends React.Component {
   // For detailed info have a look here: https://repl.it/@kstratis/Transformationsfinal
   state = {
     dependantMenuIsOpen: false,
-    masterDisabled: ['rooms', 'floors'].indexOf(this.props.name) > -1
+    masterDisabled: ['rooms', 'floors', 'construction'].indexOf(this.props.name) > -1
       ? this.props.storedControllerOption === 'land'
       : false,
     // This changes according to the controlling parent. 'Range' mode is used for the price and size filters.
-    slaveDisabled: ['rooms', 'floors'].indexOf(this.props.name) > -1
+    slaveDisabled: ['rooms', 'floors', 'construction'].indexOf(this.props.name) > -1
       ? this.props.storedControllerOption === 'land'
       : this.props.mode === 'range' ? false : !this.props.storedMasterOption,
 
@@ -186,8 +186,8 @@ class AssociativeFormSelect extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className={this.props.renderFormFields ? 'form-group mb-4' : 'form-group mb-2'}>
+      <div className={this.props.renderFormFields ? '' : 'row'}>
+        <div className={this.props.renderFormFields ? 'form-group mb-4' : 'form-group col-6'}>
           {this.props.renderLabels ? (
             <label htmlFor="property_category">
               {this.props.i18n.select.category} <abbr title={this.props.i18n.select.required}>*</abbr>
@@ -226,7 +226,7 @@ class AssociativeFormSelect extends React.Component {
             isRequired={this.props.isRequired}
           />
         </div>
-        <div className={'form-group mb-4'}>
+        <div className={`${this.props.renderFormFields ? '' : 'col-6'} form-group`}>
           {this.props.renderLabels ? (
             <label htmlFor="property_subcategory">
               {this.props.i18n.select.subcategory} <abbr title={this.props.i18n.select.required}>*</abbr>

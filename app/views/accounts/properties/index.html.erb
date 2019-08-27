@@ -45,6 +45,12 @@
                   storedMasterOption: @initial_floorsmin.blank? ? nil : retrieve_stored_floor_option(@initial_floorsmin),
                   storedSlaveOption: @initial_floorsmax.blank? ? nil : retrieve_stored_floor_option(@initial_floorsmax)
               },
+              construction_filter: {
+                  propertyType: @initial_property_type,
+                  options: construction_options,
+                  storedMasterOption: @initial_constructionmin.blank? ? nil : {label: @initial_constructionmin, value: @initial_constructionmin},
+                  storedSlaveOption: @initial_constructionmax.blank? ? nil : {label: @initial_constructionmax, value: @initial_constructionmax}
+              },
               # propertyType: @initial_property_type,
               dataset_wrapper: @propertieslist,
               results_per_page: @results_per_page,
@@ -59,7 +65,7 @@
           },
           i18n: {
               select: {
-                  placeholder: t('js.components.select.placeholder_title'),
+                  placeholder: t('js.components.select.placeholder_area_title'),
                   placeholder_plain: t('js.components.select.placeholder'),
                   placeholder_prices_min: t('js.components.select.placeholder_prices_min'),
                   placeholder_prices_max: t('js.components.select.placeholder_prices_max'),
@@ -69,6 +75,8 @@
                   placeholder_rooms_max: t('js.components.select.placeholder_rooms_max'),
                   placeholder_floors_min: t('js.components.select.placeholder_floors_min'),
                   placeholder_floors_max: t('js.components.select.placeholder_floors_max'),
+                  placeholder_construction_min: t('js.components.select.placeholder_construction_min'),
+                  placeholder_construction_max: t('js.components.select.placeholder_construction_max'),
                   noresults: t('js.components.select.noresults'),
                   loading: t('js.components.select.loading_html'),
                   feedback: t('js.components.select.assignments_feedback'),
@@ -86,6 +94,7 @@
               size: t('js.datatables.filters.size.title'),
               rooms: t('js.datatables.filters.bedrooms.title'),
               floors: t('js.datatables.filters.floors.title'),
+              construction: t('js.datatables.filters.construction.title'),
               filters: {
                   title: t('js.datatables.filters.title'),
                   type:{

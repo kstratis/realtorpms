@@ -7,7 +7,7 @@ import { debounce, capitalizeFirstLetter, buildUserURL } from '../utilities/help
 
 // Handles the datatable data and part of the filtering login
 function withDatatable(WrappedComponent) {
-  return class extends React.Component {
+  class withDatatable extends React.Component {
     // These are passed from the Rails view on the first render
     static propTypes = {
       initial_payload: PropTypes.shape({
@@ -70,6 +70,14 @@ function withDatatable(WrappedComponent) {
               storedSlaveOption: this.props.initial_payload.floors_filter.storedSlaveOption
             }
           : '',
+        construction_filter: this.props.initial_payload.construction_filter
+          ? {
+            propertyType: this.props.initial_payload.construction_filter.propertyType,
+            options: this.props.initial_payload.construction_filter.options,
+            storedMasterOption: this.props.initial_payload.construction_filter.storedMasterOption,
+            storedSlaveOption: this.props.initial_payload.construction_filter.storedSlaveOption
+          }
+          : '',
         dataset: this.props.initial_payload.dataset_wrapper.dataset,
         resultsPerPage: this.props.initial_payload.results_per_page,
         isLoading: false,
@@ -90,9 +98,10 @@ function withDatatable(WrappedComponent) {
       // bind always returns a new function. This new function is important because without a reference to it
       // we won't be able to remove it as a listener in componentWillUnmount leaving us with memory leaks.
       // https://gist.github.com/Restuta/e400a555ba24daa396cc
-      this.bound_onHistoryButton = this.handleHistoryButton.bind(this);
+
       this.breakButtons = [];
       this.handlePageClick = this.handlePageClick.bind(this);
+      this.bound_onHistoryButton = this.handleHistoryButton.bind(this);
       this.determineDirection = this.determineDirection.bind(this);
       this.handleSearchInput = this.handleSearchInput.bind(this);
       // this.cleanupParams = this.cleanupParams.bind(this);
@@ -108,6 +117,7 @@ function withDatatable(WrappedComponent) {
       this.handleSizeInput = this.handleSizeInput.bind(this);
       this.handleRoomsInput = this.handleRoomsInput.bind(this);
       this.handleFloorsInput = this.handleFloorsInput.bind(this);
+      this.handleConstructionInput = this.handleConstructionInput.bind(this);
       this.handleChangePurpose = this.handleChangePurpose.bind(this);
       this.handleAjaxRequestDelayed = debounce(this.handleAjaxRequest, 300);
       this.compoundDelayedAction = debounce(this.compoundDelayedAction.bind(this), 300);
@@ -121,6 +131,7 @@ function withDatatable(WrappedComponent) {
     componentDidMount() {
       window.addEventListener('popstate', this.bound_onHistoryButton);
       $('[data-toggle="tooltip"]').tooltip();
+
     }
 
     componentWillUnmount() {
@@ -132,6 +143,8 @@ function withDatatable(WrappedComponent) {
     // If the 'turbolinks' key appears anywhere in history.state that means we need to bailout and let
     // turbolinks handle the re-rendering.
     handleHistoryButton(e) {
+      // DEBUG
+      // console.log(e.state);
       const historyPage = this.getSelectedPage();
       if (!('turbolinks' in e.state)) {
         this.handlePageClick(historyPage, true, true);
@@ -253,6 +266,28 @@ function withDatatable(WrappedComponent) {
       this.compoundDelayedAction(searchParams, newUrlParams);
     }
 
+    handleConstructionInput(topLevel, selection, browserButtonInvoked = false) {
+      this.setState({ isLoading: true });
+      const getName = topLevel => {
+        return topLevel ? 'constructionmin' : 'constructionmax';
+      };
+      let searchParams = new URLSearchParams(window.location.search);
+      if (!selection) {
+        searchParams.delete(getName(topLevel));
+      } else {
+        if (topLevel && parseInt(selection.value) > parseInt(searchParams.get('constructionmax'))) {
+          searchParams.delete('constructionmax');
+        } else if (selection.value === searchParams.get(getName(topLevel))) {
+          return;
+        }
+        searchParams.set(getName(topLevel), selection.value);
+      }
+      let newUrlParams = searchParams.toString()
+        ? `${window.location.pathname}?${searchParams.toString()}`
+        : window.location.pathname;
+      this.compoundDelayedAction(searchParams, newUrlParams);
+    }
+
     // topLevel comes from the AssosiativeFormSelect.jsx which uses the currying techique.
     // SOS: The category input is the controlling value for the filters of size, rooms and floor. This means that the
     // options and the selected values of the aforementioned filters change accordingly
@@ -291,6 +326,10 @@ function withDatatable(WrappedComponent) {
             floors_filter: {
               ...prevState.floors_filter,
               propertyType: 'building'
+            },
+            construction_filter: {
+              ...prevState.construction_filter,
+              propertyType: 'building'
             }
           }));
         }
@@ -323,6 +362,14 @@ function withDatatable(WrappedComponent) {
               ? this.state.floors_filter.propertyType
               : 'building';
 
+          const existingPropertyTypeForConstruction = searchParams.get(getName(topLevel))
+            ? ['residential', 'commercial'].indexOf(searchParams.get(getName(topLevel))) > -1
+              ? 'building'
+              : 'land'
+            : this.state.construction_filter.propertyType
+              ? this.state.construction_filter.propertyType
+              : 'building';
+
           const updatedPropertyType = ['residential', 'commercial'].indexOf(selection.value) > -1 ? 'building' : 'land';
 
           // DEBUG
@@ -349,6 +396,11 @@ function withDatatable(WrappedComponent) {
             searchParams.delete('floorsmax');
           }
 
+          if (existingPropertyTypeForConstruction !== updatedPropertyType) {
+            searchParams.delete('constructionmin');
+            searchParams.delete('constructionmax');
+          }
+
           // Change the size options only on top level select change
           const newSelection = ['residential', 'commercial'].indexOf(selection.value) > -1 ? 'building' : 'land';
           this.setState(prevState => ({
@@ -362,6 +414,10 @@ function withDatatable(WrappedComponent) {
             },
             floors_filter: {
               ...prevState.floors_filter,
+              propertyType: newSelection
+            },
+            construction_filter: {
+              ...prevState.construction_filter,
               propertyType: newSelection
             }
           }));
@@ -602,7 +658,7 @@ function withDatatable(WrappedComponent) {
     }
 
     render() {
-      // {console.log(this.props)}
+      // {console.log(this.displayName)}
       return (
         <div>
           <WrappedComponent
@@ -612,6 +668,7 @@ function withDatatable(WrappedComponent) {
             handleSizeInput={this.handleSizeInput}
             handleRoomsInput={this.handleRoomsInput}
             handleFloorsInput={this.handleFloorsInput}
+            handleConstructionInput={this.handleConstructionInput}
             handlePageClick={this.handlePageClick}
             handleSort={this.handleSort}
             handleAssign={this.handleAssign}
@@ -630,7 +687,13 @@ function withDatatable(WrappedComponent) {
         </div>
       );
     }
-  };
+  }
+  withDatatable.displayName = `withDatatable(${getDisplayName(WrappedComponent)})`;
+  return withDatatable;
+}
+
+function getDisplayName(WrappedComponent) {
+  return WrappedComponent.displayName || WrappedComponent.name || 'Component';
 }
 
 export default withDatatable;
