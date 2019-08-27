@@ -56,8 +56,8 @@ class AssociativeFormSelect extends React.Component {
       this.masterComponent.clearSelection();
       // When the controlling component changes value remember to also reset the slave component options
       this.setState({ slaveOptions: this.buildRangeSelectOptions(false) });
-      // special handling for rooms
-      if (this.props.name === 'rooms' && ['land', 'other'].indexOf(this.props.storedControllerOption) > -1){
+      // special handling for rooms & floors
+      if ((['rooms', 'floors'].indexOf(this.props.name) > -1) && ['land', 'other'].indexOf(this.props.storedControllerOption) > -1){
         // DEBUG
         // console.log('disabling selects');
         this.setState({ masterDisabled: true });
@@ -77,11 +77,11 @@ class AssociativeFormSelect extends React.Component {
   // For detailed info have a look here: https://repl.it/@kstratis/Transformationsfinal
   state = {
     dependantMenuIsOpen: false,
-    masterDisabled: this.props.name === 'rooms'
+    masterDisabled: ['rooms', 'floors'].indexOf(this.props.name) > -1
       ? this.props.storedControllerOption === 'land'
       : false,
     // This changes according to the controlling parent. 'Range' mode is used for the price and size filters.
-    slaveDisabled: this.props.name === 'rooms'
+    slaveDisabled: ['rooms', 'floors'].indexOf(this.props.name) > -1
       ? this.props.storedControllerOption === 'land'
       : this.props.mode === 'range' ? false : !this.props.storedMasterOption,
 

@@ -122,6 +122,89 @@ module PropertiesHelper
     options
   end
 
+  def floors_options
+    options = {
+        'building'=> {
+            category: {'building' => 'building'},
+            subcategory: [
+                {'0' => I18n.t("activerecord.attributes.property.enums.floor.basement")},
+                {'1' => I18n.t("activerecord.attributes.property.enums.floor.semi_basement")},
+                {'2' => I18n.t("activerecord.attributes.property.enums.floor.ground_floor")},
+                {'3' => I18n.t("activerecord.attributes.property.enums.floor.mezzanine")},
+                {'4' => I18n.t("activerecord.attributes.property.enums.floor.1")},
+                {'5' => I18n.t("activerecord.attributes.property.enums.floor.2")},
+                {'6' => I18n.t("activerecord.attributes.property.enums.floor.3")},
+                {'7' => I18n.t("activerecord.attributes.property.enums.floor.4")},
+                {'8' => I18n.t("activerecord.attributes.property.enums.floor.5")},
+                {'9' => I18n.t("activerecord.attributes.property.enums.floor.6")},
+                {'10' => I18n.t("activerecord.attributes.property.enums.floor.7")},
+                {'11'=> I18n.t("activerecord.attributes.property.enums.floor.8")},
+                {'12'=> I18n.t("activerecord.attributes.property.enums.floor.9")},
+                {'13'=> I18n.t("activerecord.attributes.property.enums.floor.10")},
+                {'14'=> I18n.t("activerecord.attributes.property.enums.floor.11")},
+                {'15'=> I18n.t("activerecord.attributes.property.enums.floor.12")},
+                {'16'=> I18n.t("activerecord.attributes.property.enums.floor.13")},
+                {'17'=> I18n.t("activerecord.attributes.property.enums.floor.14")},
+                {'18'=> I18n.t("activerecord.attributes.property.enums.floor.15")},
+                {'19'=> I18n.t("activerecord.attributes.property.enums.floor.16")},
+                {'20'=> I18n.t("activerecord.attributes.property.enums.floor.17")},
+                {'21'=> I18n.t("activerecord.attributes.property.enums.floor.18")},
+                {'22'=> I18n.t("activerecord.attributes.property.enums.floor.19")},
+                {'23'=> I18n.t("activerecord.attributes.property.enums.floor.20")},
+                {'24'=> I18n.t("activerecord.attributes.property.enums.floor.21")},
+                {'25'=> I18n.t("activerecord.attributes.property.enums.floor.22")},
+                {'26'=> I18n.t("activerecord.attributes.property.enums.floor.23")},
+                {'27'=> I18n.t("activerecord.attributes.property.enums.floor.24")},
+                {'28'=> I18n.t("activerecord.attributes.property.enums.floor.25")},
+                {'29'=> I18n.t("activerecord.attributes.property.enums.floor.26")},
+                {'30'=> I18n.t("activerecord.attributes.property.enums.floor.27")},
+                {'31'=> I18n.t("activerecord.attributes.property.enums.floor.28")},
+                {'32'=> I18n.t("activerecord.attributes.property.enums.floor.29")},
+                {'33'=> I18n.t("activerecord.attributes.property.enums.floor.30")},
+                {'34'=> I18n.t("activerecord.attributes.property.enums.floor.31")},
+                {'35'=> I18n.t("activerecord.attributes.property.enums.floor.32")},
+                {'36'=> I18n.t("activerecord.attributes.property.enums.floor.33")},
+                {'37'=> I18n.t("activerecord.attributes.property.enums.floor.34")},
+                {'38'=> I18n.t("activerecord.attributes.property.enums.floor.35")},
+                {'39'=> I18n.t("activerecord.attributes.property.enums.floor.36")},
+                {'40'=> I18n.t("activerecord.attributes.property.enums.floor.37")},
+                {'41'=> I18n.t("activerecord.attributes.property.enums.floor.38")},
+                {'42'=> I18n.t("activerecord.attributes.property.enums.floor.39")},
+                {'43'=> I18n.t("activerecord.attributes.property.enums.floor.40")},
+                {'44'=> I18n.t("activerecord.attributes.property.enums.floor.41")},
+                {'45'=> I18n.t("activerecord.attributes.property.enums.floor.42")},
+                {'46'=> I18n.t("activerecord.attributes.property.enums.floor.43")},
+                {'47'=> I18n.t("activerecord.attributes.property.enums.floor.44")},
+                {'48'=> I18n.t("activerecord.attributes.property.enums.floor.45")},
+                {'49'=> I18n.t("activerecord.attributes.property.enums.floor.46")},
+                {'50'=> I18n.t("activerecord.attributes.property.enums.floor.47")},
+                {'51'=> I18n.t("activerecord.attributes.property.enums.floor.48")},
+                {'52'=> I18n.t("activerecord.attributes.property.enums.floor.49")},
+                {'53'=> I18n.t("activerecord.attributes.property.enums.floor.50")},
+            ]},
+        'land' => {
+            category: {'land' => 'land'},
+            subcategory: []
+        }
+    }
+    options
+  end
+
+  def retrieve_stored_floor_option(floor)
+    case floor.to_s
+    when '0'
+      {label: I18n.t("activerecord.attributes.property.enums.floor.basement"), value: 0.to_s}
+    when '1'
+      {label: I18n.t("activerecord.attributes.property.enums.floor.semi_basement"), value: floor.to_s}
+    when '2'
+      {label: I18n.t("activerecord.attributes.property.enums.floor.ground_floor"), value: floor.to_s}
+    when '3'
+      {label: I18n.t("activerecord.attributes.property.enums.floor.mezzanine"), value: floor.to_s}
+    else
+      {label: I18n.t("activerecord.attributes.property.enums.floor.#{(floor.to_i - 3).to_s}"), value: floor.to_s}
+    end
+  end
+
   def property_categories
     Property.categories.keys.collect { |businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype} }
   end

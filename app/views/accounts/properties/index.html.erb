@@ -39,6 +39,12 @@
                   storedMasterOption: @initial_roomsmin.blank? ? nil : {label: @initial_roomsmin, value: @initial_roomsmin},
                   storedSlaveOption: @initial_roomsmax.blank? ? nil : {label: @initial_roomsmax, value: @initial_roomsmax},
               },
+              floors_filter: {
+                  propertyType: @initial_property_type,
+                  options: floors_options,
+                  storedMasterOption: @initial_floorsmin.blank? ? nil : retrieve_stored_floor_option(@initial_floorsmin),
+                  storedSlaveOption: @initial_floorsmax.blank? ? nil : retrieve_stored_floor_option(@initial_floorsmax)
+              },
               # propertyType: @initial_property_type,
               dataset_wrapper: @propertieslist,
               results_per_page: @results_per_page,
@@ -61,6 +67,8 @@
                   placeholder_sizes_max: t('js.components.select.placeholder_sizes_max'),
                   placeholder_rooms_min: t('js.components.select.placeholder_rooms_min'),
                   placeholder_rooms_max: t('js.components.select.placeholder_rooms_max'),
+                  placeholder_floors_min: t('js.components.select.placeholder_floors_min'),
+                  placeholder_floors_max: t('js.components.select.placeholder_floors_max'),
                   noresults: t('js.components.select.noresults'),
                   loading: t('js.components.select.loading_html'),
                   feedback: t('js.components.select.assignments_feedback'),
@@ -77,6 +85,7 @@
               price: t('js.datatables.filters.price.title'),
               size: t('js.datatables.filters.size.title'),
               rooms: t('js.datatables.filters.bedrooms.title'),
+              floors: t('js.datatables.filters.floors.title'),
               filters: {
                   title: t('js.datatables.filters.title'),
                   type:{

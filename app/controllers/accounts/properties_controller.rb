@@ -75,6 +75,22 @@ module Accounts
         @properties = @properties.where("size <= ?", params[:sizemax])
       end
 
+      if params[:roomsmin]
+        @properties = @properties.where("bedrooms >= ?", params[:roomsmin])
+      end
+
+      if params[:roomsmax]
+        @properties = @properties.where("bedrooms <= ?", params[:roomsmax])
+      end
+
+      if params[:floorsmin]
+        @properties = @properties.where("floor >= ?", params[:floorsmin])
+      end
+
+      if params[:floorsmax]
+        @properties = @properties.where("floor <= ?", params[:floorsmax])
+      end
+
       # DEBUG - Ordering filter
       # puts params[:sorting], params[:ordering]
       if params[:sorting] && params[:ordering]
@@ -130,6 +146,8 @@ module Accounts
       @initial_sizemax = params[:sizemax] || ''
       @initial_roomsmin = params[:roomsmin] || ''
       @initial_roomsmax = params[:roomsmax] || ''
+      @initial_floorsmin = params[:floorsmin] || ''
+      @initial_floorsmax = params[:floorsmax] || ''
 
       respond_to do |format|
         format.html

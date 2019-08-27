@@ -20,6 +20,7 @@ const PropertiesList = ({
   handlePriceInput,
   handleSizeInput,
   handleRoomsInput,
+  handleFloorsInput,
   handleChangePurpose,
   handlePageClick,
   handleSort,
@@ -28,6 +29,7 @@ const PropertiesList = ({
   price_filter,
   size_filter,
   rooms_filter,
+  floors_filter,
   propertyType,
   handleAssign,
   handleFav,
@@ -145,26 +147,44 @@ const PropertiesList = ({
                   storedMasterOption={size_filter['storedMasterOption']}
                   storedSlaveOption={size_filter['storedSlaveOption']}
                 />
-
-              <hr />
-              <h5 className="card-title filter-header">{i18n.rooms}:</h5>
-              <AssociativeFormSelect
-                key={'range-rooms'}
-                name={'rooms'}
-                options={rooms_filter['options']}
-                i18n={i18n}
-                mode={'range'}
-                renderFormFields={false}
-                callback={handleRoomsInput}
-                isClearable={true}
-                isSearchable={false}
-                renderLabels={false}
-                placeholderTextMaster={i18n.select.placeholder_rooms_min}
-                placeholderTextSlave={i18n.select.placeholder_rooms_max}
-                storedControllerOption={rooms_filter['propertyType']}
-                storedMasterOption={rooms_filter['storedMasterOption']}
-                storedSlaveOption={rooms_filter['storedSlaveOption']}
-              />
+                <hr />
+                <h5 className="card-title filter-header">{i18n.rooms}:</h5>
+                <AssociativeFormSelect
+                  key={'range-rooms'}
+                  name={'rooms'}
+                  options={rooms_filter['options']}
+                  i18n={i18n}
+                  mode={'range'}
+                  renderFormFields={false}
+                  callback={handleRoomsInput}
+                  isClearable={true}
+                  isSearchable={false}
+                  renderLabels={false}
+                  placeholderTextMaster={i18n.select.placeholder_rooms_min}
+                  placeholderTextSlave={i18n.select.placeholder_rooms_max}
+                  storedControllerOption={rooms_filter['propertyType']}
+                  storedMasterOption={rooms_filter['storedMasterOption']}
+                  storedSlaveOption={rooms_filter['storedSlaveOption']}
+                />
+                <hr />
+                <h5 className="card-title filter-header">{i18n.floors}:</h5>
+                <AssociativeFormSelect
+                  key={'range-floors'}
+                  name={'floors'}
+                  options={floors_filter['options']}
+                  i18n={i18n}
+                  mode={'range'}
+                  renderFormFields={false}
+                  callback={handleFloorsInput}
+                  isClearable={true}
+                  isSearchable={false}
+                  renderLabels={false}
+                  placeholderTextMaster={i18n.select.placeholder_floors_min}
+                  placeholderTextSlave={i18n.select.placeholder_floors_max}
+                  storedControllerOption={floors_filter['propertyType']}
+                  storedMasterOption={floors_filter['storedMasterOption']}
+                  storedSlaveOption={floors_filter['storedSlaveOption']}
+                />
               </div>
             </div>
           </div>

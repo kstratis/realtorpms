@@ -5,11 +5,7 @@ import ReactOnRails from 'react-on-rails';
 import URLSearchParams from '@ungap/url-search-params';
 import { debounce, capitalizeFirstLetter, buildUserURL } from '../utilities/helpers';
 
-// addLocaleData([...en, ...el]);
-
-// const locale =  'el';
-// const messages = translations[locale];
-
+// Handles the datatable data and part of the filtering login
 function withDatatable(WrappedComponent) {
   return class extends React.Component {
     // These are passed from the Rails view on the first render
@@ -45,26 +41,34 @@ function withDatatable(WrappedComponent) {
           : '',
         price_filter: this.props.initial_payload.price_filter
           ? {
-            options: this.props.initial_payload.price_filter.options,
-            storedMasterOption: this.props.initial_payload.price_filter.storedMasterOption,
-            storedSlaveOption: this.props.initial_payload.price_filter.storedSlaveOption
-          }
+              options: this.props.initial_payload.price_filter.options,
+              storedMasterOption: this.props.initial_payload.price_filter.storedMasterOption,
+              storedSlaveOption: this.props.initial_payload.price_filter.storedSlaveOption
+            }
           : '',
         size_filter: this.props.initial_payload.size_filter
           ? {
-            propertyType: this.props.initial_payload.size_filter.propertyType,
-            options: this.props.initial_payload.size_filter.options,
-            storedMasterOption: this.props.initial_payload.size_filter.storedMasterOption,
-            storedSlaveOption: this.props.initial_payload.size_filter.storedSlaveOption
-          }
+              propertyType: this.props.initial_payload.size_filter.propertyType,
+              options: this.props.initial_payload.size_filter.options,
+              storedMasterOption: this.props.initial_payload.size_filter.storedMasterOption,
+              storedSlaveOption: this.props.initial_payload.size_filter.storedSlaveOption
+            }
           : '',
         rooms_filter: this.props.initial_payload.rooms_filter
           ? {
-            propertyType: this.props.initial_payload.rooms_filter.propertyType,
-            options: this.props.initial_payload.rooms_filter.options,
-            storedMasterOption: this.props.initial_payload.rooms_filter.storedMasterOption,
-            storedSlaveOption: this.props.initial_payload.rooms_filter.storedSlaveOption
-          }
+              propertyType: this.props.initial_payload.rooms_filter.propertyType,
+              options: this.props.initial_payload.rooms_filter.options,
+              storedMasterOption: this.props.initial_payload.rooms_filter.storedMasterOption,
+              storedSlaveOption: this.props.initial_payload.rooms_filter.storedSlaveOption
+            }
+          : '',
+        floors_filter: this.props.initial_payload.floors_filter
+          ? {
+              propertyType: this.props.initial_payload.rooms_filter.propertyType,
+              options: this.props.initial_payload.floors_filter.options,
+              storedMasterOption: this.props.initial_payload.floors_filter.storedMasterOption,
+              storedSlaveOption: this.props.initial_payload.floors_filter.storedSlaveOption
+            }
           : '',
         dataset: this.props.initial_payload.dataset_wrapper.dataset,
         resultsPerPage: this.props.initial_payload.results_per_page,
@@ -103,6 +107,7 @@ function withDatatable(WrappedComponent) {
       this.handlePriceInput = this.handlePriceInput.bind(this);
       this.handleSizeInput = this.handleSizeInput.bind(this);
       this.handleRoomsInput = this.handleRoomsInput.bind(this);
+      this.handleFloorsInput = this.handleFloorsInput.bind(this);
       this.handleChangePurpose = this.handleChangePurpose.bind(this);
       this.handleAjaxRequestDelayed = debounce(this.handleAjaxRequest, 300);
       this.compoundDelayedAction = debounce(this.compoundDelayedAction.bind(this), 300);
@@ -158,7 +163,7 @@ function withDatatable(WrappedComponent) {
       }
     }
 
-    handlePriceInput(topLevel, selection, browserButtonInvoked = false){
+    handlePriceInput(topLevel, selection, browserButtonInvoked = false) {
       this.setState({ isLoading: true });
       const getName = topLevel => {
         return topLevel ? 'pricemin' : 'pricemax';
@@ -167,7 +172,7 @@ function withDatatable(WrappedComponent) {
       if (!selection) {
         searchParams.delete(getName(topLevel));
       } else {
-        if (topLevel && (parseInt(selection.value) > parseInt(searchParams.get('pricemax')))) {
+        if (topLevel && parseInt(selection.value) > parseInt(searchParams.get('pricemax'))) {
           searchParams.delete('pricemax');
         } else if (selection.value === searchParams.get(getName(topLevel))) {
           return;
@@ -180,7 +185,7 @@ function withDatatable(WrappedComponent) {
       this.compoundDelayedAction(searchParams, newUrlParams);
     }
 
-    handleSizeInput(topLevel, selection, browserButtonInvoked = false){
+    handleSizeInput(topLevel, selection, browserButtonInvoked = false) {
       this.setState({ isLoading: true });
       const getName = topLevel => {
         return topLevel ? 'sizemin' : 'sizemax';
@@ -190,7 +195,7 @@ function withDatatable(WrappedComponent) {
         searchParams.delete(getName(topLevel));
         searchParams.delete(`${getName(topLevel)}meta`);
       } else {
-        if (topLevel && (parseInt(selection.value) > parseInt(searchParams.get('sizemax')))) {
+        if (topLevel && parseInt(selection.value) > parseInt(searchParams.get('sizemax'))) {
           searchParams.delete('sizemax');
         } else if (selection.value === searchParams.get(getName(topLevel))) {
           return;
@@ -204,45 +209,76 @@ function withDatatable(WrappedComponent) {
       this.compoundDelayedAction(searchParams, newUrlParams);
     }
 
-    handleRoomsInput (topLevel, selection, browserButtonInvoked = false){
-        this.setState({ isLoading: true });
-        const getName = topLevel => {
-          return topLevel ? 'roomsmin' : 'roomsmax';
-        };
-        let searchParams = new URLSearchParams(window.location.search);
-        if (!selection) {
-          searchParams.delete(getName(topLevel));
-        } else {
-          if (topLevel && (parseInt(selection.value) > parseInt(searchParams.get('roomsmax')))) {
-            searchParams.delete('roomsmax');
-          } else if (selection.value === searchParams.get(getName(topLevel))) {
-            return;
-          }
-          searchParams.set(getName(topLevel), selection.value);
+    handleRoomsInput(topLevel, selection, browserButtonInvoked = false) {
+      this.setState({ isLoading: true });
+      const getName = topLevel => {
+        return topLevel ? 'roomsmin' : 'roomsmax';
+      };
+      let searchParams = new URLSearchParams(window.location.search);
+      if (!selection) {
+        searchParams.delete(getName(topLevel));
+      } else {
+        if (topLevel && parseInt(selection.value) > parseInt(searchParams.get('roomsmax'))) {
+          searchParams.delete('roomsmax');
+        } else if (selection.value === searchParams.get(getName(topLevel))) {
+          return;
         }
-        let newUrlParams = searchParams.toString()
-          ? `${window.location.pathname}?${searchParams.toString()}`
-          : window.location.pathname;
-        this.compoundDelayedAction(searchParams, newUrlParams);
+        searchParams.set(getName(topLevel), selection.value);
       }
+      let newUrlParams = searchParams.toString()
+        ? `${window.location.pathname}?${searchParams.toString()}`
+        : window.location.pathname;
+      this.compoundDelayedAction(searchParams, newUrlParams);
+    }
 
+    handleFloorsInput(topLevel, selection, browserButtonInvoked = false) {
+      this.setState({ isLoading: true });
+      const getName = topLevel => {
+        return topLevel ? 'floorsmin' : 'floorsmax';
+      };
+      let searchParams = new URLSearchParams(window.location.search);
+      if (!selection) {
+        searchParams.delete(getName(topLevel));
+      } else {
+        if (topLevel && parseInt(selection.value) > parseInt(searchParams.get('floorsmax'))) {
+          searchParams.delete('floorsmax');
+        } else if (selection.value === searchParams.get(getName(topLevel))) {
+          return;
+        }
+        searchParams.set(getName(topLevel), selection.value);
+      }
+      let newUrlParams = searchParams.toString()
+        ? `${window.location.pathname}?${searchParams.toString()}`
+        : window.location.pathname;
+      this.compoundDelayedAction(searchParams, newUrlParams);
+    }
 
     // topLevel comes from the AssosiativeFormSelect.jsx which uses the currying techique.
+    // SOS: The category input is the controlling value for the filters of size, rooms and floor. This means that the
+    // options and the selected values of the aforementioned filters change accordingly
+    // to reflect the currently selected category.
     handleCategoryInput(topLevel, selection, browserButtonInvoked = false) {
       this.setState({ isLoading: true });
       const getName = topLevel => {
         return topLevel ? 'category' : 'subcategory';
       };
       let searchParams = new URLSearchParams(window.location.search);
-      if (!selection) { // This is basically clicking 'x' on master category
+      if (!selection) {
+        // This is basically clicking 'x' on master category
         // DEBUG
         // console.log('Cancelled selection');
+        // Clicking 'x' requires setting a different "leftover" controlling value for each filter because of the way
+        // each works. For instance: Set min and max for the size filter. Refresh your page. Pick the 'land' category.
+        // If the selected choices fall in the range of the selected category the url and the size selected values
+        // should not change. Clicking the 'x' next to the newly selected category also shouldn't change anything.
+        // However if 'land' selected (rooms unavailable) and then the 'x' is pressed they should become immediately available.
+        // The leftover controlling value for size won't work here. That's why we need separate controlling values.
         if (topLevel) {
           searchParams.delete('subcategory');
-          const s = ['residential', 'commercial'].indexOf(searchParams.get(getName(topLevel))) > -1 ? 'building' : 'land';
+          const s =
+            ['residential', 'commercial'].indexOf(searchParams.get(getName(topLevel))) > -1 ? 'building' : 'land';
           // DEBUG
           // console.log(`the new leftover state will be: ${s}`);
-          // 'building' is the default category
           this.setState(prevState => ({
             size_filter: {
               ...prevState.size_filter,
@@ -251,46 +287,68 @@ function withDatatable(WrappedComponent) {
             rooms_filter: {
               ...prevState.rooms_filter,
               propertyType: 'building'
+            },
+            floors_filter: {
+              ...prevState.floors_filter,
+              propertyType: 'building'
             }
           }));
-          // this.setState({ propertyType: 'building'});
         }
         searchParams.delete(getName(topLevel));
       } else {
         if (topLevel && selection.value !== searchParams.get(getName(topLevel))) {
-
           searchParams.delete('subcategory');
-
           // Initialized property type is building
-          const existingPropertyType = searchParams.get(getName(topLevel))
+          const existingPropertyTypeForSize = searchParams.get(getName(topLevel))
             ? ['residential', 'commercial'].indexOf(searchParams.get(getName(topLevel))) > -1
               ? 'building'
               : 'land'
-            : this.state.size_filter.propertyType ? this.state.size_filter.propertyType : 'building';
+            : this.state.size_filter.propertyType
+              ? this.state.size_filter.propertyType
+              : 'building';
 
-          const updatedPropertyType = ['residential', 'commercial'].indexOf(selection.value) > -1
-            ? 'building'
-            : 'land';
+          const existingPropertyTypeForRooms = searchParams.get(getName(topLevel))
+            ? ['residential', 'commercial'].indexOf(searchParams.get(getName(topLevel))) > -1
+              ? 'building'
+              : 'land'
+            : this.state.rooms_filter.propertyType
+              ? this.state.rooms_filter.propertyType
+              : 'building';
+
+          const existingPropertyTypeForFloors = searchParams.get(getName(topLevel))
+            ? ['residential', 'commercial'].indexOf(searchParams.get(getName(topLevel))) > -1
+              ? 'building'
+              : 'land'
+            : this.state.floors_filter.propertyType
+              ? this.state.floors_filter.propertyType
+              : 'building';
+
+          const updatedPropertyType = ['residential', 'commercial'].indexOf(selection.value) > -1 ? 'building' : 'land';
 
           // DEBUG
           // console.log(`params is: ${searchParams.get(getName(topLevel))}`);
           // console.log(`existingPropertyType is: ${existingPropertyType}`);
           // console.log(`updatedPropertyType is: ${updatedPropertyType}`);
 
-          if (existingPropertyType !== updatedPropertyType){
+          if (existingPropertyTypeForSize !== updatedPropertyType) {
             // DEBUG
-            console.log('cleaning');
+            // console.log('cleaning');
             searchParams.delete('sizemin');
             searchParams.delete('sizeminmeta');
             searchParams.delete('sizemax');
             searchParams.delete('sizemaxmeta');
+          }
+
+          if (existingPropertyTypeForRooms !== updatedPropertyType) {
             searchParams.delete('roomsmin');
             searchParams.delete('roomsmax');
           }
 
-          // this.setState({
-          //   propertyType: ['residential', 'commercial'].indexOf(selection.value) > -1 ? 'building' : 'land'
-          // });
+          if (existingPropertyTypeForFloors !== updatedPropertyType) {
+            searchParams.delete('floorsmin');
+            searchParams.delete('floorsmax');
+          }
+
           // Change the size options only on top level select change
           const newSelection = ['residential', 'commercial'].indexOf(selection.value) > -1 ? 'building' : 'land';
           this.setState(prevState => ({
@@ -300,6 +358,10 @@ function withDatatable(WrappedComponent) {
             },
             rooms_filter: {
               ...prevState.rooms_filter,
+              propertyType: newSelection
+            },
+            floors_filter: {
+              ...prevState.floors_filter,
               propertyType: newSelection
             }
           }));
@@ -549,6 +611,7 @@ function withDatatable(WrappedComponent) {
             handlePriceInput={this.handlePriceInput}
             handleSizeInput={this.handleSizeInput}
             handleRoomsInput={this.handleRoomsInput}
+            handleFloorsInput={this.handleFloorsInput}
             handlePageClick={this.handlePageClick}
             handleSort={this.handleSort}
             handleAssign={this.handleAssign}
