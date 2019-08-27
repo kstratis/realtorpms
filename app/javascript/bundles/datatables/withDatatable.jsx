@@ -72,11 +72,11 @@ function withDatatable(WrappedComponent) {
           : '',
         construction_filter: this.props.initial_payload.construction_filter
           ? {
-            propertyType: this.props.initial_payload.construction_filter.propertyType,
-            options: this.props.initial_payload.construction_filter.options,
-            storedMasterOption: this.props.initial_payload.construction_filter.storedMasterOption,
-            storedSlaveOption: this.props.initial_payload.construction_filter.storedSlaveOption
-          }
+              propertyType: this.props.initial_payload.construction_filter.propertyType,
+              options: this.props.initial_payload.construction_filter.options,
+              storedMasterOption: this.props.initial_payload.construction_filter.storedMasterOption,
+              storedSlaveOption: this.props.initial_payload.construction_filter.storedSlaveOption
+            }
           : '',
         dataset: this.props.initial_payload.dataset_wrapper.dataset,
         resultsPerPage: this.props.initial_payload.results_per_page,
@@ -131,7 +131,6 @@ function withDatatable(WrappedComponent) {
     componentDidMount() {
       window.addEventListener('popstate', this.bound_onHistoryButton);
       $('[data-toggle="tooltip"]').tooltip();
-
     }
 
     componentWillUnmount() {
@@ -191,6 +190,7 @@ function withDatatable(WrappedComponent) {
           return;
         }
         searchParams.set(getName(topLevel), selection.value);
+        searchParams.delete('page');
       }
       let newUrlParams = searchParams.toString()
         ? `${window.location.pathname}?${searchParams.toString()}`
@@ -215,6 +215,7 @@ function withDatatable(WrappedComponent) {
         }
         searchParams.set(getName(topLevel), selection.value);
         searchParams.set(`${getName(topLevel)}meta`, selection.meta);
+        searchParams.delete('page');
       }
       let newUrlParams = searchParams.toString()
         ? `${window.location.pathname}?${searchParams.toString()}`
@@ -237,6 +238,7 @@ function withDatatable(WrappedComponent) {
           return;
         }
         searchParams.set(getName(topLevel), selection.value);
+        searchParams.delete('page');
       }
       let newUrlParams = searchParams.toString()
         ? `${window.location.pathname}?${searchParams.toString()}`
@@ -259,6 +261,7 @@ function withDatatable(WrappedComponent) {
           return;
         }
         searchParams.set(getName(topLevel), selection.value);
+        searchParams.delete('page');
       }
       let newUrlParams = searchParams.toString()
         ? `${window.location.pathname}?${searchParams.toString()}`
@@ -281,6 +284,7 @@ function withDatatable(WrappedComponent) {
           return;
         }
         searchParams.set(getName(topLevel), selection.value);
+        searchParams.delete('page');
       }
       let newUrlParams = searchParams.toString()
         ? `${window.location.pathname}?${searchParams.toString()}`
@@ -343,32 +347,32 @@ function withDatatable(WrappedComponent) {
               ? 'building'
               : 'land'
             : this.state.size_filter.propertyType
-              ? this.state.size_filter.propertyType
-              : 'building';
+            ? this.state.size_filter.propertyType
+            : 'building';
 
           const existingPropertyTypeForRooms = searchParams.get(getName(topLevel))
             ? ['residential', 'commercial'].indexOf(searchParams.get(getName(topLevel))) > -1
               ? 'building'
               : 'land'
             : this.state.rooms_filter.propertyType
-              ? this.state.rooms_filter.propertyType
-              : 'building';
+            ? this.state.rooms_filter.propertyType
+            : 'building';
 
           const existingPropertyTypeForFloors = searchParams.get(getName(topLevel))
             ? ['residential', 'commercial'].indexOf(searchParams.get(getName(topLevel))) > -1
               ? 'building'
               : 'land'
             : this.state.floors_filter.propertyType
-              ? this.state.floors_filter.propertyType
-              : 'building';
+            ? this.state.floors_filter.propertyType
+            : 'building';
 
           const existingPropertyTypeForConstruction = searchParams.get(getName(topLevel))
             ? ['residential', 'commercial'].indexOf(searchParams.get(getName(topLevel))) > -1
               ? 'building'
               : 'land'
             : this.state.construction_filter.propertyType
-              ? this.state.construction_filter.propertyType
-              : 'building';
+            ? this.state.construction_filter.propertyType
+            : 'building';
 
           const updatedPropertyType = ['residential', 'commercial'].indexOf(selection.value) > -1 ? 'building' : 'land';
 
@@ -425,6 +429,7 @@ function withDatatable(WrappedComponent) {
           return;
         }
         searchParams.set(getName(topLevel), selection.value);
+        searchParams.delete('page');
       }
       let newUrlParams = searchParams.toString()
         ? `${window.location.pathname}?${searchParams.toString()}`
@@ -440,6 +445,7 @@ function withDatatable(WrappedComponent) {
       } else {
         const locationids = locations.map(loc => loc.value).join(',');
         searchParams.set('locations', locationids);
+        searchParams.delete('page');
       }
       let newUrlParams = searchParams.toString()
         ? `${window.location.pathname}?${searchParams.toString()}`
@@ -641,7 +647,6 @@ function withDatatable(WrappedComponent) {
         }
       }));
       let searchParams = new URLSearchParams(window.location.search);
-      searchParams.delete('purpose');
       if (e.target.value !== undefined && e.target.value.length > 0) {
         searchParams.set('purpose', e.target.value);
         searchParams.delete('pricemin');
@@ -649,6 +654,8 @@ function withDatatable(WrappedComponent) {
       } else {
         searchParams.delete('purpose');
       }
+      searchParams.delete('page');
+
       let newUrlParams = searchParams.toString()
         ? `${window.location.pathname}?${searchParams.toString()}`
         : window.location.pathname;
