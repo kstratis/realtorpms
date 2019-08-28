@@ -6,8 +6,9 @@ class Location < ApplicationRecord
   class << self
 
     def search(search, filter)
+      # DEBUG
+      # puts "The given filter is: #{filter}"
       if search
-        # where('unaccent(last_name) ILIKE unaccent(?)', "%#{search}%").or(where('unaccent(first_name) ILIKE unaccent(?)', "%#{search}%")).or(where('email LIKE ?', "%#{search}%"))
         if filter.blank?
           where('unaccent(localname) ILIKE unaccent(?)', "%#{search}%").limit(5)
         else

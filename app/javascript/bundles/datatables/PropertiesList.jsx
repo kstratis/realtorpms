@@ -42,10 +42,12 @@ const PropertiesList = ({
   selectedPage,
   sorting,
   ordering,
+  count,
   searchInput,
   handleSearchInput,
   handleCategoryInput,
   locations_endpoint,
+  properties_path,
   i18n
 }) => {
   return (
@@ -68,6 +70,8 @@ const PropertiesList = ({
                     <i className="pr-icon xs filters" />
                   </div>
                   <span className="align-middle">&nbsp; {i18n.filters.title}</span>
+                  <div className="float-right"><span className="badge badge-pill badge-success p-2 mr-2">{`${i18n.entry_count}: ${count}`}</span><a className={'btn btn-outline-danger btn-sm'} href={properties_path}>{i18n.clear}</a></div>
+
                 </div>
               </div>
               <div className="card-body">
@@ -212,14 +216,14 @@ const PropertiesList = ({
           <div className={'col-7'}>
             {/* Generate the needed filters according to the i18n keys of the erb template */}
             <div className={'row mb-3'}>
-              <div className={'col-8'}>
+              <div className={'col-lg-6 col-sm-12 mb-3 mb-lg-0'}>
                 <AsyncSelect
                   i18n={i18n}
                   collection_endpoint={{ url: locations_endpoint, action: 'get' }}
                   action_endpoint={{ url: '', action: '', callback: handleLocationInput }}
                 />
               </div>
-              <div className={'col-4'}>
+              <div className={'col-lg-6 col-sm-12'}>
                 <SortFilter
                   handleFn={handleSort}
                   slug={'created_at'}

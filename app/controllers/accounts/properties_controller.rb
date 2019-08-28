@@ -99,6 +99,8 @@ module Accounts
         @properties = @properties.order(created_at: 'desc')
       end
 
+      result_count = @properties.size
+
       # DEBUG - Pagination
       # puts params[:page]
       @properties = @properties.paginate(page: params[:page], :per_page => 10)

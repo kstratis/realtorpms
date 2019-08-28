@@ -7,8 +7,8 @@ module SearchFilter
       return
     end
 
-    puts 'in search looking for filter'
-    puts filter
+    # puts 'in search looking for filter'
+    # puts filter
     # DEBUG
     # puts "search term is: #{params[:search]}"
     @results = object.search(params[:search], filter)

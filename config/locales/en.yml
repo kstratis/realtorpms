@@ -343,6 +343,8 @@ en:
         description: "Description"
       sorting:
         title: "Sorting"
+      clear: "Clear"
+      entry_count: "Entries"
       filters:
         title: "Filters"
         date:

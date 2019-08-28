@@ -344,6 +344,8 @@ el:
         results: "εγγραφές"
       sorting:
         title: "Ταξινόμηση"
+      clear: "Καθάρισμα"
+      entry_count: "Εγγραφές"
       filters:
         title: "Φίλτρα"
         date:
