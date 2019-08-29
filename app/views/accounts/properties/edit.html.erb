@@ -363,6 +363,23 @@
                       </div><!-- /.row -->
 
                       <div class="row">
+                        <!-- Description -->
+                        <div class="col-md-12">
+                          <div class="form-group mb-4">
+                            <label class="control-label" for="notes"><%= t('activerecord.attributes.property.description_title') %></label>
+                            <%= property.text_area :description,
+                                                   class: 'form-control',
+                                                   id: 'description',
+                                                   autocomplete: 'off',
+                                                   'rows': '5' %>
+                            <small class="form-text text-muted"><%= t('activerecord.attributes.property.description_feedback_html') %>
+                            </small>
+                            <div class="invalid-feedback"></div>
+                          </div>
+                        </div>
+                      </div><!-- /.row -->
+
+                      <div class="row">
                         <!-- Notes -->
                         <div class="col-md-12">
                           <div class="form-group mb-4">

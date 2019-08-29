@@ -56,15 +56,22 @@
         <% end %>
         </tbody>
       </table>
-      <hr/>
 
       <% unless @property.extras.blank? %>
+        <hr/>
         <span><%= image_tag "plus.svg", style: "width:15px" %></span>&nbsp;
       <% end %>
       <% @property.extras.map do |element| %>
         <span><%= t("activerecord.attributes.extra.#{element.subtype}.#{element.name}") %><%= render_extra_value(@property, "#{element.name}_space").to_s.html_safe %></span>
         <% concat(', ') if @property.extras.last != element %>
       <% end %>
+
+      <% unless @property.description.blank? %>
+        <hr />
+        <p><%= @property.description %></p>
+      <% end %>
+
+
 
       <hr/>
       <%= render partial: 'accounts/properties/contact', locals: {features: Property.landlord_features, classNames: 'normalize-table'} %>

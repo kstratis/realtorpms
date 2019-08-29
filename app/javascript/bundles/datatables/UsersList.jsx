@@ -5,6 +5,8 @@ import withDatatable from './withDatatable';
 import Search from './Search';
 import Spinner from './Spinner';
 import Avatar from '../components/Avatar';
+import { capitalizeFirstLetter } from '../utilities/helpers';
+
 
 const UsersList = ({
   handlePageClick,
@@ -34,7 +36,8 @@ const UsersList = ({
             <div className={'d-flex flex-row justify-content-end'}>
               <div className={'d-none d-lg-block pl-2'}>
                 <div className="search-count-container ">
-                    <strong className={'count'}>{count}</strong> <span>{i18n['result_count']}</span>
+                    <span className="badge badge-pill badge-info p-2 mr-2">{`${capitalizeFirstLetter(i18n['result_count'])}: ${count}`}</span>
+                    {/*<strong className={'count'}>{count}</strong> <span>{i18n['result_count']}</span>*/}
                 </div>
               </div>
               <div>

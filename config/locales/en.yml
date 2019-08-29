@@ -99,7 +99,9 @@ en:
         assignments_title: "Assignments"
         extras_not_found: "Not found"
         description: "Description"
+        description_title: "Description"
         description_feedback_html: "Property description"
+        description_not_found: "Not found"
         businesstype: "Purpose"
         businesstype_title: "Purpose"
         subcategory_title: "Type"
@@ -587,6 +589,9 @@ en:
       heading: "Property info"
       properties: "Properties"
       print: "Print property"
+      tooltip_internal_notes: "Internal use only. Won't appear on any ad or client handout. Available to any agent handling the property."
+      tooltip_owner: "Internal use only. Won't appear on any ad or client handout. Available to any agent handling the property."
+      tooltip_assignments: "Internal use only. Available only to the account administrator."
   time:
     formats:
       regular: "%d %b %y"
