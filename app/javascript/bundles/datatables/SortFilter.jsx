@@ -21,7 +21,7 @@ class SortFilter extends React.Component {
   handleMenuItemClick = (e, index, filter, order) => {
     e.preventDefault();
     this.setState({ selectedIndex: index }, () => {
-      this.props.handleFn(e, filter, order);
+      this.props.handleFn('', filter, order);
     });
   };
 
