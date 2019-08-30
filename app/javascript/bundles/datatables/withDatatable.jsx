@@ -529,7 +529,8 @@ function withDatatable(WrappedComponent) {
       });
     }
 
-    handleSort(field, forcedOrdering = '') {
+    handleSort(e, field, forcedOrdering = '') {
+      if (e.target) e.preventDefault();
       let updatedOrdering = forcedOrdering ? forcedOrdering : this.state.ordering === 'asc' ? 'desc' : 'asc';
       this.setState({ isLoading: true, sorting: field, ordering: updatedOrdering });
       let searchParams = new URLSearchParams(window.location.search);

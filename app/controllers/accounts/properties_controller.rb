@@ -91,6 +91,14 @@ module Accounts
         @properties = @properties.where("floor <= ?", params[:floorsmax])
       end
 
+      if params[:constructionmin]
+        @properties = @properties.where("construction >= ?", params[:constructionmin])
+      end
+
+      if params[:constructionmax]
+        @properties = @properties.where("construction <= ?", params[:constructionmax])
+      end
+
       # DEBUG - Ordering filter
       # puts params[:sorting], params[:ordering]
       if params[:sorting] && params[:ordering]
@@ -98,8 +106,6 @@ module Accounts
       else
         @properties = @properties.order(created_at: 'desc')
       end
-
-      result_count = @properties.size
 
       # DEBUG - Pagination
       # puts params[:page]

@@ -51,6 +51,15 @@ module UserDatatable
       @users = @users.order(:created_at)
     end
 
+
+    # if params[:sorting] && params[:ordering]
+    #   @properties = @properties.order("#{params[:sorting]}": params[:ordering])
+    # else
+    #   @properties = @properties.order(created_at: 'desc')
+    # end
+
+
+
     # puts @users.to_yaml
 
     @users = @users.paginate(page: params[:page], :per_page => 10)
