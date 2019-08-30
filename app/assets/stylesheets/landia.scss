@@ -4,6 +4,8 @@
   }
 }
 
+
+
 //@font-face {
 //  font-family: 'PFDinDisplayPro-Regular';
 //  font-style: normal;
@@ -410,7 +412,8 @@ footer:not(.auth-footer) {
   height: 2px;
   //background-color: #77b6ff;
   //background-color: var(--yellow);
-  background-color: #f6c372;
+  //background-color: #f6c372;
+  background-color: $yellow;
   box-shadow: 0 0 10px rgba(119, 182, 255, 0.7);
 }
 
@@ -1140,30 +1143,6 @@ li.page-item {
 
 }
 
-.app-aside .app-aside-light {
-  //background: ;
-}
-
-.has-active {
-  .menu-link, .menu-icon, .menu-text {
-    color: #ffffff !important;
-  }
-
-  border-radius: 0 2px 2px 0;
-  background: $pink;
-  box-shadow: inset 6px 0 0 0 #0d456b;
-
-}
-
-.menu-item {
-  //margin-left: 5px;
-  //margin-right: 5px;
-}
-
-.stacked-menu .menu-link {
-  line-height: 2em;
-}
-
 .no-wrap {
   white-space: nowrap;
 }
@@ -1296,6 +1275,82 @@ li.page-item {
 
 i.fa-lock:hover{
     cursor: help;
-
-
 }
+
+
+// SIDEBAR STYLES
+// ==============
+.stacked-menu .menu-link {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.has-active {
+  .menu-link:before {
+    background-color: $orange;
+    display: block;
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 0;
+    bottom: 8px;
+    width: 6px;
+    color: #ffffff !important;
+    border-radius: 0 3px 3px 0;
+    transition: background-color 0.15s linear 0s;
+  }
+
+  .menu-icon, .menu-text {
+    color: #ffffff !important;
+  }
+
+  .sidebar-masked-icon {
+    background-color: rgb(255, 255, 255) !important;
+  }
+}
+
+.stacked-menu .menu-link {
+  padding: 8px 20px;
+}
+
+.stacked-menu > .menu > .menu-item > .menu-link:focus {
+  //color: rgb(149, 134, 165);
+  color: rgb(189, 180, 199);
+  .sidebar-masked-icon {
+    background-color: rgb(189, 180, 199);
+  }
+}
+
+.stacked-menu > .menu > .menu-item > .menu-link, .stacked-menu .menu-link > .menu-icon{
+  //color: rgb(149, 134, 165);
+  //color: #9da8b2;
+  color: #888c9b;
+  transition: color 0.15s linear 0s;
+  &:hover{
+    .sidebar-masked-icon {
+      background-color: rgb(189, 180, 199);
+    }
+    color: rgb(189, 180, 199);
+  }
+}
+
+.aside-menu{
+
+  //background: linear-gradient(rgb(74, 62, 86), rgb(48, 40, 57)); // sentry
+  background-color: #37474f; // material-ui
+  //background-color: #263238;
+  //background-color: #455a64;
+  //background-color: #263238;
+  //background-color: #32363c;
+}
+
+.app-header-dark .top-bar-brand {
+  background-color: #37474f;
+}
+
+.menu-text-entry{
+  padding-left: 12px;
+}
+// ==============

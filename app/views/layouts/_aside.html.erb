@@ -45,8 +45,8 @@
           <!-- .menu-item -->
           <%= content_tag :li, class: "menu-item #{active_for(path: root_path)}" do %>
             <%= link_to root_path, class: "menu-link" do %>
-              <%= content_tag :span, nil, class: 'menu-icon oi oi-dashboard' %>
-              <%= content_tag :span, t('sidebar.main'), class: 'menu-text' %>
+              <%= content_tag :i, "", class: "sidebar-masked-icon xs masked-icon-dash" %>
+              <%= content_tag :span, t('sidebar.main'), class: 'menu-text menu-text-entry align-middle' %>
             <% end %>
           <% end %>
           <!-- /.menu-item -->
@@ -54,8 +54,8 @@
           <%#= content_tag :li, class: "menu-item has-child #{active_for(controller: ['users', 'invitations'], except_action: 'edit', classname: 'open')}" do %>
           <%= content_tag :li, class: "menu-item #{active_for(controller: ['users', 'invitations'], except_action: 'edit')}" do %>
             <%= link_to users_path, class: 'menu-link' do %>
-              <%= content_tag :i, nil, class: 'menu-icon fas fa-user-tie' %>
-              <%= content_tag :span, t('partners.title'), class: 'menu-text' %>
+              <%= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-partners' %>
+              <%= content_tag :span, t('partners.title'), class: 'menu-text menu-text-entry align-middle' %>
             <% end %>
             <!-- child menu -->
 <!--            <ul class="menu">-->
@@ -79,8 +79,8 @@
           <!-- .menu-item -->
           <%= content_tag :li, class: "menu-item #{active_for(controller: ['properties'])}" do %>
             <%= link_to properties_path, class: 'menu-link' do %>
-              <%= content_tag :i, nil, class: 'menu-icon fas fa-home' %>
-              <%= content_tag :span, t('properties.title'), class: 'menu-text' %>
+              <%= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-building' %>
+              <%= content_tag :span, t('properties.title'), class: 'menu-text menu-text-entry align-middle' %>
             <% end %>
             <!-- child menu -->
 <!--            <ul class="menu">-->
