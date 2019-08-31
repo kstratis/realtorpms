@@ -150,13 +150,55 @@ end
 end
 
 # 20 Fake properties belonging to +regularshakalakauser1+ (shakalaka account)
+15.times do |n|
+  property = Property.create!(
+      title: Faker::TvShows::SiliconValley.motto,
+      description: Faker::TvShows::SiliconValley.quote,
+      businesstype: [:sell, :rent, :sell_rent].sample,
+      category: Category.find((5..13).to_a.sample),
+      size: rand(15..500),
+      price: Faker::Number.number(digits: 6),
+      bedrooms: rand(1..5),
+      account: shakalaka,
+      location: lamprini,
+      landlord: Landlord.create!(first_name: Faker::Name.first_name,
+                                 last_name: Faker::Name.last_name,
+                                 email: Faker::TvShows::SiliconValley.email,
+                                 telephones: Faker::PhoneNumber.phone_number,
+                                 account: shakalaka)
+  )
+  regularshakalakauser1.properties << property
+end
+
+15.times do |n|
+  property = Property.create!(
+      title: Faker::TvShows::SiliconValley.motto,
+      description: Faker::TvShows::SiliconValley.quote,
+      businesstype: [:sell, :rent, :sell_rent].sample,
+      category: Category.find((14..22).to_a.sample),
+      size: rand(15..500),
+      price: Faker::Number.number(digits: 6),
+      bedrooms: rand(1..5),
+      account: shakalaka,
+      location: lamprini,
+      landlord: Landlord.create!(first_name: Faker::Name.first_name,
+                                 last_name: Faker::Name.last_name,
+                                 email: Faker::TvShows::SiliconValley.email,
+                                 telephones: Faker::PhoneNumber.phone_number,
+                                 account: shakalaka)
+  )
+  regularshakalakauser1.properties << property
+end
+
+
+# 20 Fake properties belonging to +regularshakalakauser1+ (shakalaka account)
 20.times do |n|
   property = Property.create!(
       title: Faker::TvShows::SiliconValley.motto,
       description: Faker::TvShows::SiliconValley.quote,
       businesstype: [:sell, :rent, :sell_rent].sample,
       category: Category.find((5..32).to_a.sample),
-      size: Faker::Number.number(digits: 3),
+      size: rand(15..500),
       price: Faker::Number.number(digits: 6),
       bedrooms: rand(1..5),
       account: shakalaka,
