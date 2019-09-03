@@ -126,7 +126,7 @@ module Accounts
             edit_entity_path: edit_property_path(property.id),
             fav_entity_path: property_favorites_path(property.id),
             purpose: I18n.t("activerecord.attributes.property.enums.businesstype.#{property.businesstype}_banner"),
-            avatar: url_for(property.avatar),
+            avatar: property.avatar.attached? ? url_for(property.avatar) : nil,
             # isFaved: property.is_faved_by?(current_user),
             # assignments: property.properties.count,
             # registration: property.created_at.to_formatted_s(:long)
@@ -337,8 +337,13 @@ module Accounts
       unless property_params[:nolandlord].blank?
         @property.landlord = nil
       end
+
       # Otherwise automatically create and assign the landlord using the "magic" properties of
-      # +accepts_nested_attributes_for :landlord+ as described in the model file
+      # +accepts_nested_attributes_for :landlord+ as described in the model file.
+      # In this case don't forget to set the account foreign key on the landlord.
+      if property_params[:landlordid].blank? && property_params[:nolandlord].blank?
+        @property.landlord.account = current_account
+      end
     end
 
     def set_location

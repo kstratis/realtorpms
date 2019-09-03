@@ -624,11 +624,11 @@
 
                       <div class="row">
                         <%# This is for the nested user fields %>
-                        <%= property.fields_for :owner do |owner| %>
+                        <%= property.fields_for :landlord do |landlord| %>
                           <div class="col-md-6 col-sm-12">
                             <div class="form-group mt-md-4 mb-4 new_client disabledElement">
                               <div class="form-label-group">
-                                <%= owner.text_field :first_name,
+                                <%= landlord.text_field :first_name,
                                                      class: 'form-control new_client_input',
                                                      disabled: true,
                                                      autocomplete: "off",
@@ -651,7 +651,7 @@
                           <div class="col-md-6 col-sm-12">
                             <div class="form-group mt-md-4 mb-4 new_client disabledElement">
                               <div class="form-label-group">
-                                <%= owner.text_field :last_name,
+                                <%= landlord.text_field :last_name,
                                                      class: 'form-control new_client_input',
                                                      disabled: true,
                                                      autocomplete: "off",
@@ -674,7 +674,7 @@
                           <div class="col-md-6 col-sm-12">
                             <div class="form-group mb-4 new_client disabledElement">
                               <div class="form-label-group">
-                                <%= owner.text_field :email,
+                                <%= landlord.text_field :email,
                                                      class: 'form-control new_client_input',
                                                      disabled: true,
                                                      autocomplete: "off",
@@ -697,7 +697,7 @@
                           <div class="col-md-6 col-sm-12">
                             <div class="form-group mb-4 new_client disabledElement">
                               <div class="form-label-group">
-                                <%= owner.text_field :telephones,
+                                <%= landlord.text_field :telephones,
                                                      class: 'form-control new_client_input',
                                                      disabled: true,
                                                      autocomplete: "off",
