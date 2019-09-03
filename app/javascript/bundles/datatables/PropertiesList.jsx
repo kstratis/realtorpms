@@ -70,8 +70,12 @@ const PropertiesList = ({
                     <i className="pr-icon xs filters" />
                   </div>
                   <span className="align-middle">&nbsp; {i18n.filters.title}</span>
-                  <div className="float-right"><span className="badge badge-pill badge-success p-2 mr-2">{`${i18n.entry_count}: ${count}`}</span><a className={'btn btn-outline-danger btn-sm'} href={properties_path}>{i18n.clear}</a></div>
-
+                  <div className="float-right">
+                    <span className="badge badge-pill badge-success p-2 mr-2">{`${i18n.entry_count}: ${count}`}</span>
+                    <a className={'btn btn-outline-danger btn-sm'} href={properties_path}>
+                      {i18n.clear}
+                    </a>
+                  </div>
                 </div>
               </div>
               <div className="card-body">
@@ -269,11 +273,11 @@ const PropertiesList = ({
                                   {/*  alt="placeholder image"*/}
                                   {/*  className={'thumb'}*/}
                                   {/*/>*/}
-                                  <img
-                                    src={entry['avatar']}
-                                    alt="placeholder image"
-                                    className={'thumb'}
-                                  />
+                                  {entry['avatar'] ? (
+                                    <img src={entry['avatar']} alt="placeholder image" className={'thumb'} />
+                                  ) : (
+                                    <i className={'pr-icon md house-avatar-placeholder'} />
+                                  )}
                                 </div>
                               </div>
                               <div className="list-group-item-body">
