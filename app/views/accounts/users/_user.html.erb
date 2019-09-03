@@ -11,7 +11,7 @@
       </div>
       <% if current_user.admin? && !current_user?(user) %>
           | <%= link_to 'delete', user, method: :delete,
-                        data: { confirm: 'Are you certain?'} %>
+                        data: { confirm: t('prompt')} %>
       <% end %>
     </section>
   </aside>

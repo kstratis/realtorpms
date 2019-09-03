@@ -299,7 +299,7 @@ module Accounts
     def destroy
       @property.destroy
       respond_to do |format|
-        format.html { redirect_to properties_url, flash: I18n.t('properties.destroyed.flash') }
+        format.html { redirect_to properties_url, notice: I18n.t('properties.destroyed.flash') }
         format.json { head :no_content }
       end
     end

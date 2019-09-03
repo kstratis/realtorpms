@@ -3,6 +3,7 @@ en:
   true: "Yes"
   false: "No"
   sq_meters_html: "m<sup>2</sup>"
+  prompt: "Are you sure you want to proceed with this action?"
   activerecord:
     models:
       invitation: "Invitation"
@@ -552,6 +553,8 @@ en:
       edit_button: "Update"
       allowed_pic_specs: "JPG, GIF or PNG 400x400, < 2 MB."
       delete_avatar: "Are you sure you want to delete the cover photo?"
+    delete:
+      delete_button: "Delete"
     created:
       message: "Property successfully added"
       message_feedback: "Manage your properties in %{brand} now"

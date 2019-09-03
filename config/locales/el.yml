@@ -3,6 +3,7 @@ el:
   true: "Ναί"
   false: "Όχι"
   sq_meters_html: "τ.μ."
+  prompt: "Θέλετε σίγουρα να προχωρήσετε σε αυτήν την ενέργεια;"
   activerecord:
     models:
       invitation: "Πρόσκληση"
@@ -555,6 +556,8 @@ el:
       edit_button: "Ενημέρωση"
       allowed_pic_specs: "JPG, GIF ή PNG 400x400, < 2 MB."
       delete_avatar: "Είστε βέβαιος/βεβαία ότι θέλετε να διαγραφεί η φωτογραφία εξωφύλλου του ακινήτου;"
+    delete:
+      delete_button: "Διαγραφή"
     created:
       message: "Η προσθήκη ακινήτου ολοκληρώθηκε επιτυχώς"
       message_feedback: "Διαχειριστείτε την νέα σας καταχώρηση στο %{brand} τώρα"
