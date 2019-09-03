@@ -150,57 +150,44 @@ end
 end
 
 # 20 Fake properties belonging to +regularshakalakauser1+ (shakalaka account)
-15.times do |n|
-  property = Property.create!(
-      title: Faker::TvShows::SiliconValley.motto,
-      description: Faker::TvShows::SiliconValley.quote,
-      businesstype: [:sell, :rent, :sell_rent].sample,
-      category: Category.find((5..13).to_a.sample),
-      size: rand(15..500),
-      price: Faker::Number.number(digits: 6),
-      bedrooms: rand(1..5),
-      account: shakalaka,
-      location: lamprini,
-      landlord: Landlord.create!(first_name: Faker::Name.first_name,
-                                 last_name: Faker::Name.last_name,
-                                 email: Faker::TvShows::SiliconValley.email,
-                                 telephones: Faker::PhoneNumber.phone_number,
-                                 account: shakalaka)
-  )
-  regularshakalakauser1.properties << property
-end
-
-15.times do |n|
-  property = Property.create!(
-      title: Faker::TvShows::SiliconValley.motto,
-      description: Faker::TvShows::SiliconValley.quote,
-      businesstype: [:sell, :rent, :sell_rent].sample,
-      category: Category.find((14..22).to_a.sample),
-      size: rand(15..500),
-      price: Faker::Number.number(digits: 6),
-      bedrooms: rand(1..5),
-      account: shakalaka,
-      location: lamprini,
-      landlord: Landlord.create!(first_name: Faker::Name.first_name,
-                                 last_name: Faker::Name.last_name,
-                                 email: Faker::TvShows::SiliconValley.email,
-                                 telephones: Faker::PhoneNumber.phone_number,
-                                 account: shakalaka)
-  )
-  regularshakalakauser1.properties << property
-end
-
-
-# 20 Fake properties belonging to +regularshakalakauser1+ (shakalaka account)
 20.times do |n|
   property = Property.create!(
       title: Faker::TvShows::SiliconValley.motto,
       description: Faker::TvShows::SiliconValley.quote,
-      businesstype: [:sell, :rent, :sell_rent].sample,
+      businesstype: :rent,
       category: Category.find((5..32).to_a.sample),
-      size: rand(15..500),
-      price: Faker::Number.number(digits: 6),
+      size: rand(25..500),
+      price: rand(100..3000),
       bedrooms: rand(1..5),
+      floor: rand(0..10),
+      construction: rand(1970..2018),
+      account: shakalaka,
+      location: perissos,
+      landlord: Landlord.create!(first_name: Faker::Name.first_name,
+                                 last_name: Faker::Name.last_name,
+                                 email: Faker::TvShows::SiliconValley.email,
+                                 telephones: Faker::PhoneNumber.phone_number,
+                                 account: shakalaka)
+  )
+  regularshakalakauser1.properties << property
+  property.avatar.attach(
+      io: File.open(Dir["/Users/kstratis/efi_pics/#{rand(1..9)}/*"].sample),
+      filename: "file-#{Faker::Number.number(digits: 4)}.png"
+  )
+end
+
+# 20 Fake properties belonging to +regularshakalakauser1+ (shakalaka account)
+30.times do |n|
+  property = Property.create!(
+      title: Faker::TvShows::SiliconValley.motto,
+      description: Faker::TvShows::SiliconValley.quote,
+      businesstype: :sell,
+      category: Category.find((5..32).to_a.sample),
+      size: rand(25..5000),
+      price: rand(5000..5000000),
+      bedrooms: rand(1..5),
+      floor: rand(0..10),
+      construction: rand(1970..2018),
       account: shakalaka,
       location: lamprini,
       landlord: Landlord.create!(first_name: Faker::Name.first_name,
@@ -210,6 +197,38 @@ end
                                  account: shakalaka)
   )
   regularshakalakauser1.properties << property
+  regularshakalakauser2.properties << property
+  property.avatar.attach(
+      io: File.open(Dir["/Users/kstratis/efi_pics/#{rand(1..9)}/*"].sample),
+      filename: "file-#{Faker::Number.number(digits: 4)}.png"
+  )
+end
+
+# 20 Fake properties belonging to +regularshakalakauser1+ (shakalaka account)
+2.times do |n|
+  property = Property.create!(
+      title: Faker::TvShows::SiliconValley.motto,
+      description: Faker::TvShows::SiliconValley.quote,
+      businesstype: :sell_rent,
+      category: Category.find((5..32).to_a.sample),
+      size: rand(25..5000),
+      price: rand(5000..5000000),
+      bedrooms: rand(1..5),
+      floor: rand(0..10),
+      construction: rand(1970..2018),
+      account: shakalaka,
+      location: lamprini,
+      landlord: Landlord.create!(first_name: Faker::Name.first_name,
+                                 last_name: Faker::Name.last_name,
+                                 email: Faker::TvShows::SiliconValley.email,
+                                 telephones: Faker::PhoneNumber.phone_number,
+                                 account: shakalaka)
+  )
+  regularshakalakauser1.properties << property
+  property.avatar.attach(
+      io: File.open(Dir["/Users/kstratis/efi_pics/#{rand(1..9)}/*"].sample),
+      filename: "file-#{Faker::Number.number(digits: 4)}.png"
+  )
 end
 
 # 5 fake properties belonging to +regularbluedomainuser1+ (bluedomain account)
@@ -231,5 +250,9 @@ end
                                  account: bluedomain)
   )
   regularbluedomainuser1.properties << property
+  property.avatar.attach(
+      io: File.open(Dir["/Users/kstratis/efi_pics/#{rand(1..9)}/*"].sample),
+      filename: "file-#{Faker::Number.number(digits: 4)}.png"
+  )
 end
 

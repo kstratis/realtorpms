@@ -261,11 +261,16 @@ const PropertiesList = ({
                             <a href={entry['view_entity_path']} className="list-group-item list-group-item-action">
                               <div className="list-group-item-figure rounded-left">
                                 <div className={'thumb-container'}>
+                                  {/*<img*/}
+                                  {/*  src={`https://picsum.photos/${getRandomInt(100, 800)}/${getRandomInt(*/}
+                                  {/*    100,*/}
+                                  {/*    800*/}
+                                  {/*  )}/?random&sig=${Math.random()}`}*/}
+                                  {/*  alt="placeholder image"*/}
+                                  {/*  className={'thumb'}*/}
+                                  {/*/>*/}
                                   <img
-                                    src={`https://picsum.photos/${getRandomInt(100, 800)}/${getRandomInt(
-                                      100,
-                                      800
-                                    )}/?random&sig=${Math.random()}`}
+                                    src={entry['avatar']}
                                     alt="placeholder image"
                                     className={'thumb'}
                                   />

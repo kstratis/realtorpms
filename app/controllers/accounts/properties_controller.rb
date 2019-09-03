@@ -9,8 +9,7 @@ module Accounts
     # GET /properties.json
     def index
       # preload location & owner
-      @properties = current_user.is_owner?(current_account) ? current_account.properties.includes(:location, :landlord) : current_user.properties.where(account: current_account).includes(:location, :landlord)
-
+      @properties = %w(sysadmin owner).include?(current_user.role(current_account)) ? current_account.properties.includes(:location, :landlord) : current_user.properties.where(account: current_account).includes(:location, :landlord)
       # DEBUG - Locations filter
       # puts params[:locations]
 
@@ -127,6 +126,7 @@ module Accounts
             edit_entity_path: edit_property_path(property.id),
             fav_entity_path: property_favorites_path(property.id),
             purpose: I18n.t("activerecord.attributes.property.enums.businesstype.#{property.businesstype}_banner"),
+            avatar: url_for(property.avatar),
             # isFaved: property.is_faved_by?(current_user),
             # assignments: property.properties.count,
             # registration: property.created_at.to_formatted_s(:long)

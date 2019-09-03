@@ -9,6 +9,7 @@ module UserDatatable
       end
     end
 
+    # This is only accessible by account owners so no need to granulate its access
     @users = current_account.users
 
     if params[:search]

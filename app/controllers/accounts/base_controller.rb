@@ -36,7 +36,7 @@ module Accounts
     end
 
     def active_user
-      unless owner? # owners' relation to accounts is not determined by the Membership table
+      unless owner? || current_user.admin? # owners' relation to accounts is not determined by the Membership table
         unless Membership.find_by(account: current_account, user: current_user).active
           log_out if logged_in?
           flash[:danger] = I18n.t "sessions.flash_suspended"
