@@ -446,6 +446,10 @@ el:
     add: "Άμεση προσθήκη"
     invite: "Πρόσκληση"
   clients:
+    index:
+      breadcrumb: "Πελάτες"
+    new:
+      add_button: "Προσθήκη"
     title: "Πελάτες"
     add: "Προσθήκη"
     list: "Κατάλογος"

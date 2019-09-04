@@ -23,6 +23,7 @@
 //= require tooltips
 //= require stacked-menu/dist/js/stacked-menu.js
 //= require stacked-menu/dist/js/stacked-menu.jquery.js
+//= require perfect-scrollbar
 //= require_tree .
 
 

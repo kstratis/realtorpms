@@ -442,6 +442,10 @@ en:
     add: "Add partner"
     invite: "Invite partner"
   clients:
+    index:
+      breadcrumb: "Clients"
+    new:
+      add_button: "Προσθήκη"
     title: "Clients"
     add: "Add client"
     list: "Client list"

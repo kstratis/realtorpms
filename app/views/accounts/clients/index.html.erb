@@ -1,10 +1,17 @@
 <% provide(:title, t('clients.list')) %>
 
-<!--<div class="page-container">-->
-<!--  <div class="container">-->
-    <main class="app-main">
-    <!-- .wrapper -->
-    <div class="wrapper">
+<%= render layout: 'layouts/breadcrumb', locals: {path: [{:title => t('clients.index.breadcrumb'), :href => clients_path}], icon: 'house-colored'} do %>
+  <div class="action-btns">
+    <%= link_to new_client_path, class: 'btn btn-primary btn-sm' do %>
+      <i class="fas fa-plus-circle fa-fw"></i>&nbsp;<%= t('clients.new.add_button') %>
+    <% end %>
+  </div>
+<% end %>
+
+<div class="page-container">
+  <div class="container">
+    <div class="app-container">
+
       <!-- .page -->
       <div class="page has-sidebar has-sidebar-fluid has-sidebar-expand-xl">
         <!-- .page-inner -->
@@ -1337,7 +1344,7 @@
           </div>
         </form><!-- /.modal -->
       </div><!-- /.page -->
-    </div><!-- /.wrapper -->
-    </main>
-<!--  </div>-->
-<!--</div>-->
+
+  </div>
+</div>
+</div>

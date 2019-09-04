@@ -1,4 +1,5 @@
 import Looper from "../bundles/themes/main_theme";
+import PerfectScrollbar from 'perfect-scrollbar';
 import Chart from 'chart.js';
 
 function completionTasksChart (themeInstance) {
@@ -71,6 +72,8 @@ function completionTasksChart (themeInstance) {
 
 
 $(document).on('turbolinks:load', function(e) {
+  // Initialize the perfect scrollbar plugin
+  window.PerfectScrollbar = PerfectScrollbar;
   // Initialize the theme
   const themeInstance = Looper();
   // Initialize the chart
