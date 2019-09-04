@@ -20,13 +20,21 @@ module Accounts
         if @invitation.save
           # Send out the email
           InvitationMailer.invite(@invitation).deliver_now
-          format.js {render 'shared/ajax/create', locals: {resource: @invitation}}
+          format.js { render 'shared/ajax/handler',
+                             locals: {resource: @invitation,
+                                      action: 'created',
+                                      partial_success: 'shared/ajax/success',
+                                      partial_failure: 'shared/ajax/failure'} }
           format.html do
             flash[:success] = I18n.t "invitations.created.no_js_success", email: @invitation.email
             redirect_to users_path
           end
         else
-          format.js {render 'shared/ajax/create', locals: {resource: @invitation}}
+          format.js { render 'shared/ajax/handler',
+                             locals: {resource: @invitation,
+                                      action: 'created',
+                                      partial_success: 'shared/ajax/success',
+                                      partial_failure: 'shared/ajax/failure'} }
           format.html do
             flash.now[:danger] = I18n.t "accounts.switch_domain", subdomain: request.subdomain
             render :new

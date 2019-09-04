@@ -113,6 +113,13 @@
           <% end %>
           <!-- /.menu-item -->
 
+          <%= content_tag :li, class: "menu-item #{active_for(controller: ['clients'])}" do %>
+            <%= link_to clients_path, class: 'menu-link' do %>
+              <%= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-clients' %>
+              <%= content_tag :span, t('clients.title'), class: 'menu-text menu-text-entry align-middle' %>
+            <% end %>
+          <% end %>
+
           <!-- .menu-item -->
           <li class="menu-item has-child">
             <%= link_to '#', class: 'menu-link' do %>

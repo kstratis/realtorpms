@@ -32,6 +32,14 @@
   &.masked-icon-building{
     mask: url(sidebar/building.svg);
   }
+
+  &.masked-icon-clients{
+    mask: url(sidebar/clients.svg);
+  }
+
+  &.masked-icon-favorites{
+    mask: url(sidebar/favorites.svg);
+  }
 }
 
 .pr-icon {

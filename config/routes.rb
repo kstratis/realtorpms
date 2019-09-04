@@ -54,6 +54,9 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :clients
+
+
 
       resources :invitations, only: [:new, :create, :check_existing_user]
       get '/invitations/validate_user', to:'invitations#check_existing_user', as: :invitation_validate

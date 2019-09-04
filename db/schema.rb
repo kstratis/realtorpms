@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_15_141843) do
+ActiveRecord::Schema.define(version: 2019_09_03_202148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,19 @@ ActiveRecord::Schema.define(version: 2019_08_15_141843) do
     t.string "parent_globalname"
     t.string "slug"
     t.string "parent_slug"
+  end
+
+  create_table "clients", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "telephones"
+    t.string "job"
+    t.bigint "account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_clients_on_account_id"
+    t.index ["last_name"], name: "index_clients_on_last_name"
   end
 
   create_table "countries", force: :cascade do |t|
@@ -223,6 +236,7 @@ ActiveRecord::Schema.define(version: 2019_08_15_141843) do
   add_foreign_key "accounts", "users", column: "owner_id"
   add_foreign_key "assignments", "properties"
   add_foreign_key "assignments", "users"
+  add_foreign_key "clients", "accounts"
   add_foreign_key "favlists", "accounts"
   add_foreign_key "favlists", "users"
   add_foreign_key "favorites", "properties"

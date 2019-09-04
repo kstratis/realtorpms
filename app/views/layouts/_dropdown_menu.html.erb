@@ -2,7 +2,6 @@
   <%= content_tag :span, nil, class: 'dropdown-icon oi oi-person' %> <%= t('navbar.profile') %>
 <% end %>
 
-
 <% if current_user.get_account_count > 1 || current_user.admin? %>
   <%= link_to account_list_url, class: 'dropdown-item' do %>
     <%= content_tag :span, nil, class: 'dropdown-icon oi oi-loop-circular' %> <%= t('navbar.switch') %>
@@ -14,6 +13,11 @@
     <%= content_tag :span, nil, class: 'dropdown-icon oi oi-cog' %> <%= t('navbar.account.title') %>
   <% end %>
 <% end %>
+
+<div class="dropdown-divider"></div>
+  <%= link_to favorites_path, class: 'dropdown-item' do %>
+    <%= content_tag :span, nil, class: 'dropdown-icon oi oi-heart' %> <%= t('navbar.favorites') %>
+  <% end %>
 
 <div class="dropdown-divider"></div>
 

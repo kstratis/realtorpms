@@ -424,6 +424,7 @@ en:
     help: "Support"
     search: "Search"
     switch: "Switch account"
+    favorites: "Favorites"
   sidebar:
     menu: "ACTION MENU"
     main: "Dashboard"
