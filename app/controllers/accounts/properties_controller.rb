@@ -9,7 +9,8 @@ module Accounts
     # GET /properties.json
     def index
       # preload location & owner
-      @properties = %w(sysadmin owner).include?(current_user.role(current_account)) ? current_account.properties.includes(:location, :landlord) : current_user.properties.where(account: current_account).includes(:location, :landlord)
+      # @properties = %w(sysadmin owner).include?(current_user.role(current_account)) ? current_account.properties.includes(:location, :landlord) : current_user.properties.where(account: current_account).includes(:location, :landlord)
+      @properties = current_account.properties.includes(:location, :landlord)
       # DEBUG - Locations filter
       # puts params[:locations]
 
@@ -110,9 +111,16 @@ module Accounts
       # puts params[:page]
       @properties = @properties.paginate(page: params[:page], :per_page => 10)
 
+      # ---
+      forbidden_ids = @properties.where.not(id: current_user.properties.where(account: current_account).includes(:location, :landlord)).pluck(:id)
+      # ---
+
       @propertieslist = {:dataset => Array.new}
 
       @properties.each do |property|
+        if forbidden_ids.include?(property.id)
+          puts "APAGOREUETAI for id: #{property.id}"
+        end
         hash = {
             id: property.id,
             title: property.title,
