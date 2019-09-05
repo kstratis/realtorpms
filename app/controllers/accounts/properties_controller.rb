@@ -112,15 +112,21 @@ module Accounts
       @properties = @properties.paginate(page: params[:page], :per_page => 10)
 
       # ---
-      forbidden_ids = @properties.where.not(id: current_user.properties.where(account: current_account).includes(:location, :landlord)).pluck(:id)
+      if current_user.role(current_account) != 'owner'
+        forbidden_ids = @properties.where.not(id: current_user.properties.where(account: current_account).includes(:location, :landlord)).pluck(:id)
+      else
+        forbidden_ids = []
+      end
       # ---
 
       @propertieslist = {:dataset => Array.new}
 
+
       @properties.each do |property|
         if forbidden_ids.include?(property.id)
           puts "APAGOREUETAI for id: #{property.id}"
-        end
+        else
+
         hash = {
             id: property.id,
             title: property.title,
@@ -143,7 +149,9 @@ module Accounts
             landlord_tel: property.try(:landlord).try(:telephones) ? "#{property.landlord.telephones}" : I18n.t('js.properties_owner_tel_unavailable'),
         }
         @propertieslist[:dataset] << hash
-      end
+
+        end
+        end
 
       # Initialization
       @total_entries = @properties.total_entries
