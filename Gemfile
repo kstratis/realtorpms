@@ -34,7 +34,8 @@ gem 'pg', '~> 1.1.4'
 # Use Puma as the app server
 gem 'puma', '~> 4'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0.7'
+# gem 'sass-rails', '~> 5.0.7'
+gem 'sassc-rails', '~> 2.1.2'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '~> 4.1.20'
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -61,8 +62,6 @@ gem 'bootstrap-will_paginate', '1.0.0'
 gem 'launchy', '2.4.3'
 
 gem 'rails_12factor'
-
-# gem 'font-awesome-rails'
 
 gem 'react_on_rails', '11.3'
 
