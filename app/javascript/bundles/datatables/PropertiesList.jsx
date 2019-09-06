@@ -265,7 +265,7 @@ const PropertiesList = ({
                             <a href={entry['allow_view'] ? entry['view_entity_path'] : ''}
                               className="list-group-item list-group-item-action">
                               <div className="list-group-item-figure rounded-left">
-                                <div className={'thumb-container'}>
+                                <div className={`thumb-container ${entry['allow_view'] ? '' : 'frosty'}`}>
                                   {entry['avatar'] ? (
                                     <img src={entry['avatar']} alt="placeholder image" className={'thumb'} />
                                   ) : (
@@ -277,7 +277,12 @@ const PropertiesList = ({
                                 <div className={'row'}>
                                   {!entry['allow_view']
                                     ? (
-                                      <div className={'col-12'}><h1>{entry['id']}</h1></div>
+                                      <div className={'col-12'}>
+
+                                          <div><h2>{entry['id']}</h2></div>
+                                          <div><h3>{'Διαβαθμισμένο'}</h3></div>
+
+                                      </div>
                                   ) : (
                                     <>
                                       <div className={'col-8'}>

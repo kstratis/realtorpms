@@ -155,6 +155,9 @@ module Accounts
         @propertieslist[:dataset] << hash
       end
 
+      # This basically puts disallowed items at the end of the list without messing with the order of the rest
+      @propertieslist[:dataset] = @propertieslist[:dataset].partition { |el| el[:allow_view] }.inject(:+)
+
       # Initialization
       @total_entries = @properties.total_entries
       @current_page = @properties.current_page
