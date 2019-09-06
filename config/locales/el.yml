@@ -4,6 +4,7 @@ el:
   false: "Όχι"
   sq_meters_html: "τ.μ."
   prompt: "Θέλετε σίγουρα να προχωρήσετε σε αυτήν την ενέργεια;"
+  access_denied: "Διαβαθμισμένη πρόσβαση"
   activerecord:
     models:
       invitation: "Πρόσκληση"

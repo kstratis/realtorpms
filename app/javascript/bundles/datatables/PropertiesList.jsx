@@ -280,7 +280,7 @@ const PropertiesList = ({
                                       <div className={'col-12'}>
 
                                           <div><h2>{entry['id']}</h2></div>
-                                          <div><h3>{'Διαβαθμισμένο'}</h3></div>
+                                          <div><h3>{entry['access_msg']}</h3></div>
 
                                       </div>
                                   ) : (

@@ -125,7 +125,8 @@ module Accounts
           hash = {
               id: property.id,
               avatar: property.avatar.attached? ? url_for(property.avatar) : nil,
-              allow_view: false
+              allow_view: false,
+              access_msg: I18n.t('access_denied')
           }
         else
           hash = {

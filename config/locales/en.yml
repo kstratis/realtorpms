@@ -4,6 +4,7 @@ en:
   false: "No"
   sq_meters_html: "m<sup>2</sup>"
   prompt: "Are you sure you want to proceed with this action?"
+  access_denied: "Access denied"
   activerecord:
     models:
       invitation: "Invitation"
