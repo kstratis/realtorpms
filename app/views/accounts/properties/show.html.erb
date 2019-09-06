@@ -43,15 +43,14 @@
         <i class="fas fa-print fa-fw"></i>&nbsp;<%= t 'properties.print' %>
       </button>
 
-      <% if current_user.is_admin?(current_account) %>
-        <%= link_to edit_property_path(@property), class: 'btn btn-secondary btn-sm editable' do %>
-          <i class="fas fa-pen fa-fw"></i>&nbsp;<%= t 'properties.edit.edit_button_alt' %>
-        <% end %>
-
-        <%= link_to @property, method: :delete, data: { confirm: t('prompt')}, class: 'btn btn-secondary btn-sm editable' do %>
-          <i class="fas fa-trash fa-fw"></i>&nbsp;<%= t 'properties.delete.delete_button' %>
-        <% end %>
+      <%= link_to edit_property_path(@property), class: 'btn btn-secondary btn-sm editable' do %>
+        <i class="fas fa-pen fa-fw"></i>&nbsp;<%= t 'properties.edit.edit_button_alt' %>
       <% end %>
+
+      <%= link_to @property, method: :delete, data: {confirm: t('prompt')}, class: 'btn btn-secondary btn-sm editable' do %>
+        <i class="fas fa-trash fa-fw"></i>&nbsp;<%= t 'properties.delete.delete_button' %>
+      <% end %>
+
 
 
 

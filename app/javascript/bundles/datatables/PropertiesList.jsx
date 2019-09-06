@@ -330,12 +330,12 @@ const PropertiesList = ({
                       onPageChange={handlePageClick}
                       containerClassName={'pagination'}
                       subContainerClassName={'pages pagination'}
-                      pageLinkClassName={'page-link'}
+                      pageLinkClassName={`page-link ${isLoading ? 'disabled' : ''}`}
                       activeClassName={'active'}
                       forcePage={selectedPage}
                       pageClassName={'page-item'}
-                      previousLinkClassName={'page-link'}
-                      nextLinkClassName={'page-link'}
+                      previousLinkClassName={`page-link ${isLoading ? 'disabled' : ''}`}
+                      nextLinkClassName={`page-link ${isLoading ? 'disabled' : ''}`}
                       nextClassName={'next'}
                       previousClassName={'previous'}
                     />
