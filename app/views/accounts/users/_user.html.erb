@@ -9,7 +9,7 @@
         <span class="name"><%== user.first_name + '&nbsp;' + user.last_name %></span>
         <span class="email"><%= user.email %></span>
       </div>
-      <% if current_user.admin? && !current_user?(user) %>
+      <% if current_user.is_sysadmin? && !current_user?(user) %>
           | <%= link_to 'delete', user, method: :delete,
                         data: { confirm: t('prompt')} %>
       <% end %>
