@@ -112,46 +112,48 @@ module Accounts
       @properties = @properties.paginate(page: params[:page], :per_page => 10)
 
       # ---
-      if current_user.role(current_account) != 'owner'
+      forbidden_ids = []
+      unless current_user.role(current_account) == 'owner'
         forbidden_ids = @properties.where.not(id: current_user.properties.where(account: current_account).includes(:location, :landlord)).pluck(:id)
-      else
-        forbidden_ids = []
       end
       # ---
 
       @propertieslist = {:dataset => Array.new}
 
-
       @properties.each do |property|
         if forbidden_ids.include?(property.id)
-          puts "APAGOREUETAI for id: #{property.id}"
+          hash = {
+              id: property.id,
+              avatar: property.avatar.attached? ? url_for(property.avatar) : nil,
+              allow_view: false
+          }
         else
+          hash = {
+              id: property.id,
+              title: property.title,
+              description: property.description,
+              mini_heading: mini_heading(property),
+              size: property.size ? I18n.t('activerecord.attributes.property.size_meter_html', size: property.size.to_s) : '',
+              price: property.price ? ActionController::Base.helpers.number_to_currency(property.price) : '',
+              pricepersqmeter: property.price && property.size ? "#{ActionController::Base.helpers.number_to_currency(property.pricepersqmeter)} / #{I18n.t('size.sqmeters')}" : '',
+              location: property.location.localname,
+              view_entity_path: property_path(property.id),
+              edit_entity_path: edit_property_path(property.id),
+              fav_entity_path: property_favorites_path(property.id),
+              purpose: I18n.t("activerecord.attributes.property.enums.businesstype.#{property.businesstype}_banner"),
+              avatar: property.avatar.attached? ? url_for(property.avatar) : nil,
+              # isFaved: property.is_faved_by?(current_user),
+              # assignments: property.properties.count,
+              # registration: property.created_at.to_formatted_s(:long)
+              registration: property.created_at.strftime('%d %b. %y'),
+              landlord_name: property.try(:landlord).try(:first_name) && property.try(:landlord).try(:last_name) ? "#{property.landlord.first_name[0]}. #{property.landlord.last_name}" : I18n.t('js.properties_owner_unavailable'),
+              landlord_tel: property.try(:landlord).try(:telephones) ? "#{property.landlord.telephones}" : I18n.t('js.properties_owner_tel_unavailable'),
+              allow_view: true
+          }
 
-        hash = {
-            id: property.id,
-            title: property.title,
-            description: property.description,
-            mini_heading: mini_heading(property),
-            size: property.size ? I18n.t('activerecord.attributes.property.size_meter_html', size: property.size.to_s) : '',
-            price: property.price ? ActionController::Base.helpers.number_to_currency(property.price) : '',
-            pricepersqmeter: property.price && property.size ? "#{ActionController::Base.helpers.number_to_currency(property.pricepersqmeter)} / #{I18n.t('size.sqmeters')}" : '',
-            location: property.location.localname,
-            view_entity_path: property_path(property.id),
-            edit_entity_path: edit_property_path(property.id),
-            fav_entity_path: property_favorites_path(property.id),
-            purpose: I18n.t("activerecord.attributes.property.enums.businesstype.#{property.businesstype}_banner"),
-            avatar: property.avatar.attached? ? url_for(property.avatar) : nil,
-            # isFaved: property.is_faved_by?(current_user),
-            # assignments: property.properties.count,
-            # registration: property.created_at.to_formatted_s(:long)
-            registration: property.created_at.strftime('%d %b. %y'),
-            landlord_name: property.try(:landlord).try(:first_name) && property.try(:landlord).try(:last_name) ? "#{property.landlord.first_name[0]}. #{property.landlord.last_name}" : I18n.t('js.properties_owner_unavailable'),
-            landlord_tel: property.try(:landlord).try(:telephones) ? "#{property.landlord.telephones}" : I18n.t('js.properties_owner_tel_unavailable'),
-        }
+        end
         @propertieslist[:dataset] << hash
-
-        end
-        end
+      end
 
       # Initialization
       @total_entries = @properties.total_entries

@@ -262,17 +262,10 @@ const PropertiesList = ({
                       <div className={'row'}>
                         <div className="col-12">
                           <div className="list-group list-group-media mb-3">
-                            <a href={entry['view_entity_path']} className="list-group-item list-group-item-action">
+                            <a href={entry['allow_view'] ? entry['view_entity_path'] : ''}
+                              className="list-group-item list-group-item-action">
                               <div className="list-group-item-figure rounded-left">
                                 <div className={'thumb-container'}>
-                                  {/*<img*/}
-                                  {/*  src={`https://picsum.photos/${getRandomInt(100, 800)}/${getRandomInt(*/}
-                                  {/*    100,*/}
-                                  {/*    800*/}
-                                  {/*  )}/?random&sig=${Math.random()}`}*/}
-                                  {/*  alt="placeholder image"*/}
-                                  {/*  className={'thumb'}*/}
-                                  {/*/>*/}
                                   {entry['avatar'] ? (
                                     <img src={entry['avatar']} alt="placeholder image" className={'thumb'} />
                                   ) : (
@@ -282,17 +275,24 @@ const PropertiesList = ({
                               </div>
                               <div className="list-group-item-body">
                                 <div className={'row'}>
-                                  <div className={'col-8'}>
-                                    <h4 className="list-group-item-title">{entry.mini_heading}</h4>
-                                    <p className="">{entry.location}</p>
-                                    <p className="list-group-item-text clamp-3">{entry.description}</p>
-                                  </div>
-                                  <div className={'col-4'}>
-                                    <p className="list-group-item-text purpose">{entry.purpose}</p>
-                                    <p className="list-group-item-text text-right mt-2">{entry.price}</p>
-                                    <p className="list-group-item-text text-right">{entry.size}</p>
-                                    <p className="list-group-item-text text-right">{entry.pricepersqmeter}</p>
-                                  </div>
+                                  {!entry['allow_view']
+                                    ? (
+                                      <div className={'col-12'}><h1>{entry['id']}</h1></div>
+                                  ) : (
+                                    <>
+                                      <div className={'col-8'}>
+                                        <h4 className="list-group-item-title">{entry.mini_heading}</h4>
+                                        <p className="">{entry.location}</p>
+                                        <p className="list-group-item-text clamp-3">{entry.description}</p>
+                                      </div>
+                                      <div className={'col-4'}>
+                                        <p className="list-group-item-text purpose">{entry.purpose}</p>
+                                        <p className="list-group-item-text text-right mt-2">{entry.price}</p>
+                                        <p className="list-group-item-text text-right">{entry.size}</p>
+                                        <p className="list-group-item-text text-right">{entry.pricepersqmeter}</p>
+                                      </div>
+                                    </>
+                                  )}
                                 </div>
                               </div>
                             </a>
