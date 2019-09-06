@@ -36,7 +36,7 @@ module Accounts
     end
 
     def active_user
-      unless owner? || current_user.admin? # owners' relation to accounts is not determined by the Membership table
+      unless owner? || current_user.is_sysadmin? # owners' relation to accounts is not determined by the Membership table
         unless Membership.find_by(account: current_account, user: current_user).active
           log_out if logged_in?
           flash[:danger] = I18n.t "sessions.flash_suspended"
@@ -51,7 +51,7 @@ module Accounts
     end
 
     def allowed_subdomains
-      accounts = current_user.admin? ? Account.all : current_user.all_accounts
+      accounts = current_user.is_sysadmin? ? Account.all : current_user.all_accounts
       subdomain_list = accounts.map(&:subdomain)
       unless session[:referrer_subdomain].blank?
         previous_subdomain = session[:referrer_subdomain]

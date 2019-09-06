@@ -111,13 +111,6 @@ module Accounts
       # puts params[:page]
       @properties = @properties.paginate(page: params[:page], :per_page => 10)
 
-      # ---
-      forbidden_ids = []
-      unless current_user.role(current_account) == 'owner'
-        forbidden_ids = @properties.where.not(id: current_user.properties.where(account: current_account).includes(:location, :landlord)).pluck(:id)
-      end
-      # ---
-
       @propertieslist = {:dataset => Array.new}
 
       @properties.each do |property|
@@ -194,7 +187,7 @@ module Accounts
     # GET /properties/1
     # GET /properties/1.json
     def show
-      @property = current_account.properties.find(params[:id])
+      set_access and return
       filter_users
       respond_to do |format|
         if params['print']
@@ -237,7 +230,7 @@ module Accounts
 
     # GET /properties/1/edit
     def edit
-      @property = current_account.properties.find(params[:id])
+      set_access and return
       @property.build_landlord unless @property.landlord
     end
 
@@ -265,8 +258,12 @@ module Accounts
       set_category
       # Scope the property to current account. This is only set once.
       @property.account = current_account
+
       respond_to do |format|
         if @property.save
+          if current_user.role(current_account) == 'user'
+            current_user.properties <<  @property
+          end
           format.html { redirect_to @property, notice: I18n.t('properties.created.flash') }
           format.js { render 'shared/ajax/handler',
                              locals: {resource: @property,
@@ -334,6 +331,12 @@ module Accounts
       @property = current_account.properties.find(params[:id])
     end
 
+    def set_access
+      if forbidden_ids.include?(@property.id)
+        redirect_to properties_path and return true
+      end
+    end
+
     # Sets the selected landlord
     def set_landlord
       # --- SOS ---
@@ -385,6 +388,13 @@ module Accounts
 
     def set_category
       @property.category = @category_instance
+    end
+
+    def forbidden_ids
+      unless current_user.is_admin?(current_account)
+        return current_account.properties.where.not(id: current_user.properties.where(account: current_account).includes(:location, :landlord)).pluck(:id)
+      end
+      []
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

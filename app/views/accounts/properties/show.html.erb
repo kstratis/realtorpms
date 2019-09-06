@@ -43,7 +43,7 @@
         <i class="fas fa-print fa-fw"></i>&nbsp;<%= t 'properties.print' %>
       </button>
 
-      <% if %w(sysadmin owner).include?(current_user.role(current_account)) %>
+      <% if current_user.is_admin?(current_account) %>
         <%= link_to edit_property_path(@property), class: 'btn btn-secondary btn-sm editable' do %>
           <i class="fas fa-pen fa-fw"></i>&nbsp;<%= t 'properties.edit.edit_button_alt' %>
         <% end %>

@@ -2,13 +2,14 @@
   <%= content_tag :span, nil, class: 'dropdown-icon oi oi-person' %> <%= t('navbar.profile') %>
 <% end %>
 
-<% if current_user.get_account_count > 1 || current_user.admin? %>
+<%# if (current_user.get_account_count > 1) || current_user.is_admin?(current_account) %>
+<% if (current_user.get_account_count > 1) || current_user.is_sysadmin? %>
   <%= link_to account_list_url, class: 'dropdown-item' do %>
     <%= content_tag :span, nil, class: 'dropdown-icon oi oi-loop-circular' %> <%= t('navbar.switch') %>
   <% end %>
 <% end %>
 
-<% if current_user.is_owner?(current_account) %>
+<% if current_user.is_admin?(current_account) %>
   <%= link_to account_edit_path, class: 'dropdown-item' do %>
     <%= content_tag :span, nil, class: 'dropdown-icon oi oi-cog' %> <%= t('navbar.account.title') %>
   <% end %>

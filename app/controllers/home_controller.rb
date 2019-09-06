@@ -32,7 +32,7 @@ class HomeController < ApplicationController
     # @accounts = current_user.admin? ? Account.all : current_user.all_accounts
     # @properties = @properties.paginate(page: params[:page], :per_page => 10)
     # byebug
-    @accounts = current_user.admin? ? Account.all.paginate(page: params[:page], :per_page => 25) : current_user.all_accounts.paginate(page: params[:page], :per_page => 25)
+    @accounts = current_user.is_sysadmin? ? Account.all.paginate(page: params[:page], :per_page => 25) : current_user.all_accounts.paginate(page: params[:page], :per_page => 25)
     render :layout => 'auth/skeleton'
   end
 

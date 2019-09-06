@@ -44,6 +44,7 @@ class Property < ApplicationRecord
   # Look only for iframes
   validates :map_url, format: { with: /(?:<iframe[^>]*)(?:(?:\/>)|(?:>.*?<\/iframe>))/i }, if: -> { map_url.present? }
 
+
   DEFAULT_ATTRIBUTE_RENDER_FN = Proc.new {|value| value.blank? ? '—' : value}
 
   def pricepersqmeter

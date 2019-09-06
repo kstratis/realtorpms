@@ -76,14 +76,22 @@ class User < ApplicationRecord
     account.owner == self
   end
 
+  def is_sysadmin?
+    id == 1
+  end
+
   def role(account)
-    if admin?
+    if is_sysadmin?
       'sysadmin'
     elsif is_owner?(account)
       'owner'
     else
       'user'
     end
+  end
+
+  def is_admin?(account)
+    %w(sysadmin owner).include?(role(account))
   end
 
   # Remembers a user in the database for use in persistent sessions.

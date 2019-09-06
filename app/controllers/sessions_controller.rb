@@ -32,7 +32,7 @@ class SessionsController < ApplicationController
       # Log in with a given subdomain in URL - No ambiguity
       unless request.subdomain.blank? # if subdomain exists in url
         account = Account.find_by_subdomain!(request.subdomain) # get account or 404
-        unless account.owner == user || account.users.exists?(user.id) || user.admin?
+        unless account.owner == user || account.users.exists?(user.id) || user.is_sysadmin?
           render_401 and return
         end
         log_in user
@@ -54,7 +54,7 @@ class SessionsController < ApplicationController
       # Check the account count. If accounts.count > 0 redirect to account switcher
       # otherwise simply redirect the user to his/her default subdomain
       # byebug
-      redirect_to account_list_url(subdomain: false) and return if user.admin?
+      redirect_to account_list_url(subdomain: false) and return if user.is_sysadmin?
 
       unless user.has_owning_accounts?.zero?
         redirect_to root_url(subdomain: Account.find_by(owner_id: user.id).subdomain) and return

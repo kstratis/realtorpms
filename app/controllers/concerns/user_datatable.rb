@@ -77,7 +77,7 @@ module UserDatatable
           avatar: {url: render_avatar(user, nil, nil, true), usercolor: user.try(:color) || 'B76BA3'},
           name: "#{user.first_name.first}. #{user.last_name}",
           email: user.email,
-          type: user.admin,
+          type: user.role(current_account),
           # active: user.active?,
           active: Membership.find_by(account: current_account, user: user).active,
           view_entity_path: user_path(user.id),
