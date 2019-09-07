@@ -5,6 +5,7 @@ module Accounts
     helper PropertyHeader
     before_action :set_property, only: [:show, :edit, :update, :destroy]
 
+
     # GET /properties
     # GET /properties.json
     def index
@@ -116,7 +117,7 @@ module Accounts
       @properties.each do |property|
         if forbidden_ids.include?(property.id)
           hash = {
-              id: property.id,
+              slug: property.slug,
               avatar: property.avatar.attached? ? url_for(property.avatar) : nil,
               allow_view: false,
               access_msg: I18n.t('access_denied')
@@ -131,11 +132,12 @@ module Accounts
               price: property.price ? ActionController::Base.helpers.number_to_currency(property.price) : '',
               pricepersqmeter: property.price && property.size ? "#{ActionController::Base.helpers.number_to_currency(property.pricepersqmeter)} / #{I18n.t('size.sqmeters')}" : '',
               location: property.location.localname,
-              view_entity_path: property_path(property.id),
-              edit_entity_path: edit_property_path(property.id),
-              fav_entity_path: property_favorites_path(property.id),
+              view_entity_path: property_path(property),
+              edit_entity_path: edit_property_path(property),
+              fav_entity_path: property_favorites_path(property),
               purpose: I18n.t("activerecord.attributes.property.enums.businesstype.#{property.businesstype}_banner"),
               avatar: property.avatar.attached? ? url_for(property.avatar) : nil,
+              slug: property.slug,
               # isFaved: property.is_faved_by?(current_user),
               # assignments: property.properties.count,
               # registration: property.created_at.to_formatted_s(:long)
@@ -328,7 +330,15 @@ module Accounts
 
     # Use callbacks to share common setup or constraints between actions.
     def set_property
+
       @property = current_account.properties.find(params[:id])
+
+      # If an old id or a numeric id was used to find the record, then
+      # the request path will not match the post_path, and we should do
+      # a 301 redirect that uses the current friendly id.
+      if request.path != property_path(@property)
+        return redirect_to @property, :status => :moved_permanently
+      end
     end
 
     def set_access
@@ -367,7 +377,9 @@ module Accounts
       # +accepts_nested_attributes_for :landlord+ as described in the model file.
       # In this case don't forget to set the account foreign key on the landlord.
       if property_params[:landlordid].blank? && property_params[:nolandlord].blank?
-        @property.landlord.account = current_account
+        if params[:action] == 'create'
+          @property.landlord.account = current_account
+        end
       end
     end
 

@@ -279,7 +279,7 @@ const PropertiesList = ({
                                     ? (
                                       <div className={'col-12'}>
 
-                                          <div><h2>{entry['id']}</h2></div>
+                                          <div><h2>{entry['slug'].toUpperCase()}</h2></div>
                                           <div><h3>{entry['access_msg']}</h3></div>
 
                                       </div>
@@ -295,6 +295,7 @@ const PropertiesList = ({
                                         <p className="list-group-item-text text-right mt-2">{entry.price}</p>
                                         <p className="list-group-item-text text-right">{entry.size}</p>
                                         <p className="list-group-item-text text-right">{entry.pricepersqmeter}</p>
+                                        <p className="list-group-item-text text-right uid text-center"><strong>{entry['slug'].toUpperCase()}</strong></p>
                                       </div>
                                     </>
                                   )}

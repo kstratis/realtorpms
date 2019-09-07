@@ -3,7 +3,7 @@
 <!-- Notice the use of render layout. We need layout instead of partial so that we can pass a block -->
 <%= render layout: 'layouts/breadcrumb', locals: {path: [
     {:title => t('properties.index.breadcrumb'), :href => properties_path},
-    {title: @property.title || @property.id, :href => ''}], icon: 'house-colored'} do %>
+    {title: @property.slug.upcase, :href => ''}], icon: 'house-colored'} do %>
   <div class="action-btns">
     <div class="btn-group btn-group-toggle">
       <div class="reactstrap-modal-button">

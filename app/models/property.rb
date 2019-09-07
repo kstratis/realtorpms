@@ -1,6 +1,16 @@
 class Property < ApplicationRecord
-
+  extend FriendlyId
   include Searchable
+
+  # History module is used for the redirects
+  friendly_id :unique_uid, use: [:finders, :slugged, :history]
+
+  def unique_uid
+    ranged = ('1'..'9').to_a
+    prefix = 'PR'
+    prefix + PublicUid::Generators::RangeString.new(5, ranged).generate
+  end
+
 
   attr_searchable %w(title description notes adxe adspitogatos landlord.last_name landlord.telephones)
 
