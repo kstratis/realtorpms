@@ -3,14 +3,23 @@ class Property < ApplicationRecord
   include Searchable
 
   # History module is used for the redirects
-  friendly_id :unique_uid, use: [:finders, :slugged, :history]
+  friendly_id :unique_identifier, use: [:finders, :slugged, :history]
 
-  def unique_uid
-    ranged = ('1'..'9').to_a
-    prefix = 'PR'
-    prefix + PublicUid::Generators::RangeString.new(5, ranged).generate
+  # Use the identifier method to get a uid
+  # If non-unique identifier is occured, append the property id
+  def unique_identifier
+    [
+        :identifier,
+        [:identifier, :id]
+    ]
   end
 
+  def identifier
+    ranged = ('1'..'9').to_a
+    prefix = 'PR'
+    # PublicUid comes from a separate gem
+    prefix + PublicUid::Generators::RangeString.new(5, ranged).generate
+  end
 
   attr_searchable %w(title description notes adxe adspitogatos landlord.last_name landlord.telephones)
 
