@@ -278,10 +278,8 @@ const PropertiesList = ({
                                   {!entry['allow_view']
                                     ? (
                                       <div className={'col-12'}>
-
                                           <div><h2>{entry['slug'].toUpperCase()}</h2></div>
                                           <div><h3>{entry['access_msg']}</h3></div>
-
                                       </div>
                                   ) : (
                                     <>
