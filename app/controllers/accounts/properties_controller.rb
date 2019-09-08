@@ -190,6 +190,10 @@ module Accounts
     # GET /properties/1.json
     def show
       set_access and return
+      # friendly ids history slugs should not result in 404
+      unless [property_path(@property), property_path(@property) + '?print=true'].include?(request.path)
+        return redirect_to @property, :status => :moved_permanently
+      end
       filter_users
       respond_to do |format|
         if params['print']
@@ -233,6 +237,15 @@ module Accounts
     # GET /properties/1/edit
     def edit
       set_access and return
+      # If an old id or a numeric id was used to find the record, then
+      # the request path will not match the post_path, and we should do
+      # a 301 redirect that uses the current friendly id.
+      # DEBUG
+      # puts request.path
+      # puts property_path(@property)
+      if request.path != edit_property_path(@property)
+        return redirect_to @property, :status => :moved_permanently
+      end
       @property.build_landlord unless @property.landlord
     end
 
@@ -318,6 +331,9 @@ module Accounts
     # DELETE /properties/1
     # DELETE /properties/1.json
     def destroy
+      unless current_user.is_admin?(current_account)
+        redirect_to @property and return
+      end
       @property.destroy
       respond_to do |format|
         format.html { redirect_to properties_url, notice: I18n.t('properties.destroyed.flash') }
@@ -330,15 +346,7 @@ module Accounts
 
     # Use callbacks to share common setup or constraints between actions.
     def set_property
-
       @property = current_account.properties.find(params[:id])
-
-      # If an old id or a numeric id was used to find the record, then
-      # the request path will not match the post_path, and we should do
-      # a 301 redirect that uses the current friendly id.
-      if request.path != property_path(@property)
-        return redirect_to @property, :status => :moved_permanently
-      end
     end
 
     def set_access

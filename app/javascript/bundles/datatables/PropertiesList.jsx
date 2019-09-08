@@ -258,7 +258,7 @@ const PropertiesList = ({
               <div className={`${isLoading ? 'reduced-opacity' : ''}`}>
                 <FlipMove>
                   {dataset.map((entry, index) => (
-                    <div key={entry.id}>
+                    <div key={entry.slug}>
                       <div className={'row'}>
                         <div className="col-12">
                           <div className="list-group list-group-media mb-3">

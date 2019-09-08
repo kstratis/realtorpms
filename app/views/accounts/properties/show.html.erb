@@ -39,7 +39,7 @@
         <i class="fas fa-map fa-fw"></i>&nbsp;<%= t 'properties.map' %>
       </button>
 
-      <button type="button" class="btn btn-secondary btn-sm printable" data-url="<%= property_url(@property.id) + '?print=true' %>">
+      <button type="button" class="btn btn-secondary btn-sm printable" data-url="<%= property_url(@property) + '?print=true' %>">
         <i class="fas fa-print fa-fw"></i>&nbsp;<%= t 'properties.print' %>
       </button>
 
@@ -47,11 +47,11 @@
         <i class="fas fa-pen fa-fw"></i>&nbsp;<%= t 'properties.edit.edit_button_alt' %>
       <% end %>
 
-      <%= link_to @property, method: :delete, data: {confirm: t('prompt')}, class: 'btn btn-secondary btn-sm editable' do %>
-        <i class="fas fa-trash fa-fw"></i>&nbsp;<%= t 'properties.delete.delete_button' %>
+      <% if current_user.is_admin?(current_account) %>
+        <%= link_to @property, method: :delete, data: {confirm: t('prompt')}, class: 'btn btn-secondary btn-sm editable' do %>
+          <i class="fas fa-trash fa-fw"></i>&nbsp;<%= t 'properties.delete.delete_button' %>
+        <% end %>
       <% end %>
-
-
 
 
     </div>

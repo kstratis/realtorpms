@@ -3,7 +3,7 @@ class Property < ApplicationRecord
   include Searchable
 
   # History module is used for the redirects
-  friendly_id :unique_identifier, use: [:finders, :slugged, :history]
+  friendly_id :unique_identifier, use: [:slugged, :finders, :history]
 
   # Use the identifier method to get a uid
   # If non-unique identifier is occured, append the property id
