@@ -295,8 +295,8 @@ const PropertiesList = ({
                                         <p className="list-group-item-text purpose">{entry.purpose}</p>
                                         <p className="list-group-item-text text-right mt-2">{entry.price}</p>
                                         {/*<p className="list-group-item-text text-right">{entry.size}</p>*/}
-                                        <p className="list-group-item-text text-right">{renderHTML(entry.size)}</p>
-                                        <p className="list-group-item-text text-right">{renderHTML(entry.pricepersqmeter)}</p>
+                                        <div className="list-group-item-text text-right">{renderHTML(entry.size)}</div>
+                                        <div className="list-group-item-text text-right">{renderHTML(entry.pricepersqmeter)}</div>
 
                                         <p className="list-group-item-text text-right uid text-center"><strong>{entry['slug'].toUpperCase()}</strong></p>
                                       </div>

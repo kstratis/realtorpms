@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       root to: 'dashboard#index', as: :account_root
       get '/properties/locations', to: 'properties#locations'
       get '/properties/landlords', to: 'properties#landlords'
+      get '/properties/inlinesearch', to: 'properties#inlinesearch'
 
       # favlists_path (GET, POST)
       # favlist_path (DELETE)

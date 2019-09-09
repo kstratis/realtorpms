@@ -17,10 +17,11 @@ module SearchFilter
     @results.each do |entry|
       hash = {
           value: entry.send(attributes.fetch(:value)),
-          label: "#{entry.send(attributes.fetch(:label)[0])} - #{entry.send(attributes.fetch(:label)[1])}"
+          label: "#{entry.send(attributes.fetch(:label).fetch(0, nil))}#{attributes.fetch(:label).fetch(1, nil) ? ' - ' + entry.send(attributes.fetch(:label).fetch(1)) : nil}"
       }
       data << hash
     end
+    # puts data
     render :json => {:status => "OK", :message => data}
 
   end

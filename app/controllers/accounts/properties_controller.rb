@@ -257,6 +257,15 @@ module Accounts
       search(Landlord, {value: 'id', label: %w(first_name last_name)})
     end
 
+    def inlinesearch
+      if current_user.is_admin?(current_account)
+        search(current_account.properties, {value: 'slug', label: %w(slug)})
+      else
+        search(current_user.properties, {value: 'slug', label: %w(slug)})
+      end
+
+    end
+
     # GET /properties/new
     def new
       @property = Property.new

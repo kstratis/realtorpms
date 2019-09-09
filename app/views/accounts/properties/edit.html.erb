@@ -415,7 +415,7 @@
                           <% %w(housetype heating orientation view other).each do |category| %>
 
                             <div class="form-group">
-                              <div class="col-md-2">
+<!--                              <div class="col-md-2">-->
                                 <label class="control-label checkbox-header app-checkbox"><strong><%= t("activerecord.attributes.extra.#{category}.title") %></strong></label>
                                 <div class="col-md-12">
                                   <%= property.collection_check_boxes :extra_ids, Extra.where(subtype: category), :id, :name do |b| %>
@@ -428,7 +428,7 @@
                                     </div>
                                   <% end %>
                                 </div>
-                              </div>
+<!--                              </div>-->
                             </div>
                           <% end %>
 

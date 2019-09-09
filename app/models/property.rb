@@ -72,6 +72,15 @@ class Property < ApplicationRecord
 
   class << self
 
+
+    def search(search, filter)
+      # DEBUG
+      # puts "Model method running with search term: #{search}"
+      if search
+        where('slug ILIKE ?', "%#{search}%").limit(5)
+      end
+    end
+
     def landlord_features
       {
           :landlord_name => {:label => 'owner', :icon => 'client', :options => 'full_name', :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
@@ -143,7 +152,7 @@ class Property < ApplicationRecord
       # be caught by the following rescue clause
       Nokogiri::HTML(map_url).search('iframe').attribute('src').value || nil
     rescue
-      puts "Exception while parsing the property's #{id} map url"
+      puts "Exception while parsing the property's #{slug} map url"
       return nil
     end
 

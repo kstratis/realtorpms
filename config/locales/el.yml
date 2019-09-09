@@ -5,6 +5,8 @@ el:
   sq_meters_html: "τ.μ."
   prompt: "Θέλετε σίγουρα να προχωρήσετε σε αυτήν την ενέργεια;"
   access_denied: "Διαβαθμισμένη πρόσβαση"
+  header:
+    search: "Αναζήτηση κωδ. ακινήτου"
   activerecord:
     models:
       invitation: "Πρόσκληση"
