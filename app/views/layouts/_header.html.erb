@@ -28,7 +28,9 @@
           <%= react_component('InlineSearch', props: {
               path: properties_inlinesearch_path,
               i18n: {
-                  search: t('header.search')
+                  search: t('header.search'),
+                  loading: t('js.components.select.loading_html'),
+                  noresults: t('js.components.select.noresults')
               }
           }, prerender: false) %>
 

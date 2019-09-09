@@ -98,7 +98,7 @@ class InlineSearch extends React.Component {
           }}>
           <div className="tt-dataset tt-dataset-states">
             {this.state.isLoading ? (
-              <div className="tt-suggestion tt-selectable">Loading</div>
+              <div className="tt-suggestion tt-selectable">{this.props.i18n.loading}</div>
             ) : this.state.results.length > 0 ? (
               <>
                 {this.state.results.map(entry => (
@@ -108,7 +108,7 @@ class InlineSearch extends React.Component {
                 ))}
               </>
             ) : (
-              <div className="tt-suggestion tt-selectable">{'No results found'}</div>
+              <div className="tt-suggestion tt-selectable">{this.props.i18n.noresults}</div>
             )}
           </div>
         </div>
