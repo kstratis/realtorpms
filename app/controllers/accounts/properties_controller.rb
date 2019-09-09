@@ -194,7 +194,9 @@ module Accounts
       unless [property_path(@property), property_path(@property) + '?print=true'].include?(request.path)
         return redirect_to @property, :status => :moved_permanently
       end
-      filter_users
+      if current_user.is_admin?(current_account)
+        filter_users 'users'
+      end
       respond_to do |format|
         if params['print']
           pictures = []

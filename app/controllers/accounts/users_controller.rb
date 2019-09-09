@@ -22,7 +22,7 @@ module Accounts
     end
 
     def index
-      filter_users
+      filter_users 'users'
     end
 
     # POST to the new user registration page

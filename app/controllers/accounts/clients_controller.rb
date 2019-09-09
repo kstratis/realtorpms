@@ -2,7 +2,16 @@ module Accounts
   class ClientsController < Accounts::BaseController
 
     def index
-      current_account.clients.all
+      filter_users 'clients'
+    end
+
+    def new
+      @client = Client.new
+      # @client.build_landlord
+    end
+
+    def show
+
     end
 
   end

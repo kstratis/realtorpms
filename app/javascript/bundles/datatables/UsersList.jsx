@@ -151,7 +151,7 @@ const UsersList = ({
               </thead>
               <tbody>
                 {dataset.map(entry => (
-                  <tr key={entry['id']}>
+                  <tr className={'entry'} key={entry['id']}>
                     <td className={'align-middle'}>
                       <div className={'table-entry'}>
                         <Avatar data={entry['avatar']} />
@@ -202,6 +202,7 @@ const UsersList = ({
                 ))}
               </tbody>
             </table>
+
           </div>
           <div className={'clearfix'} />
           <div className={'d-none d-md-block'}>
