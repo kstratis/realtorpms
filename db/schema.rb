@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_06_191141) do
+ActiveRecord::Schema.define(version: 2019_09_09_193817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,15 @@ ActiveRecord::Schema.define(version: 2019_09_06_191141) do
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_clients_on_account_id"
     t.index ["last_name"], name: "index_clients_on_last_name"
+  end
+
+  create_table "clientships", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "client_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_clientships_on_client_id"
+    t.index ["user_id"], name: "index_clientships_on_user_id"
   end
 
   create_table "countries", force: :cascade do |t|
@@ -248,6 +257,8 @@ ActiveRecord::Schema.define(version: 2019_09_06_191141) do
   add_foreign_key "assignments", "properties"
   add_foreign_key "assignments", "users"
   add_foreign_key "clients", "accounts"
+  add_foreign_key "clientships", "clients"
+  add_foreign_key "clientships", "users"
   add_foreign_key "favlists", "accounts"
   add_foreign_key "favlists", "users"
   add_foreign_key "favorites", "properties"

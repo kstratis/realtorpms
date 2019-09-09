@@ -28,6 +28,12 @@ class User < ApplicationRecord
   has_many :assignments
   # https://stackoverflow.com/a/38845388/178728
   has_many :properties, -> { distinct }, through: :assignments, dependent: :destroy
+
+  has_many :clientships
+  # https://stackoverflow.com/a/38845388/178728
+  has_many :clients, -> { distinct }, through: :clientships, dependent: :destroy
+
+
   has_many :favorites, dependent: :destroy
   has_many :favlists, dependent: :destroy
   has_one_attached :avatar
