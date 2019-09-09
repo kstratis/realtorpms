@@ -116,6 +116,7 @@ el:
         size_title: "Εμβαδόν"
         size_feedback_html: "π.χ. 80. "
         size_meter_html: "%{size} τ.μ."
+        sm_html: "m<sup>2</sup>"
         bedrooms_title: "Υπνοδωμάτια"
         bedrooms_feedback_html: "π.χ. 2"
         bathrooms_title: "Μπάνια"

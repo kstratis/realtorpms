@@ -99,11 +99,11 @@ en:
         specs_title: "Details"
         extras_title: "Extras"
         assignments_title: "Assignments"
-        extras_not_found: "Not found"
+        extras_not_found: "None found"
         description: "Description"
         description_title: "Description"
         description_feedback_html: "Property description"
-        description_not_found: "Not found"
+        description_not_found: "None found"
         businesstype: "Purpose"
         businesstype_title: "Purpose"
         subcategory_title: "Type"
@@ -115,6 +115,7 @@ en:
         size_title: "Size"
         size_feedback_html: "i.e. 80."
         size_meter_html: "%{size} m<sup>2</sup>"
+        sm_html: "m<sup>2</sup>"
         bedrooms_title: "Bedrooms"
         bedrooms_feedback_html: "i.e. 2"
         bathrooms_title: "Bathrooms"
@@ -365,7 +366,7 @@ en:
           rent: "Rent"
           both: "Both"
         size:
-          title: "Εμβαδό"
+          title: "Size"
         bedrooms:
           title: "Bedrooms"
         floors:

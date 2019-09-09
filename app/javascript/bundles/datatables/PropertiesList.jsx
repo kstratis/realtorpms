@@ -8,6 +8,7 @@ import AsyncSelect from '../components/selects/AsyncSelect';
 import FlipMove from 'react-flip-move';
 import AssociativeFormSelect from '../components/selects/AssociativeFormSelect';
 import Spinner from './Spinner';
+import { renderHTML } from '../utilities/helpers';
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
@@ -284,15 +285,19 @@ const PropertiesList = ({
                                   ) : (
                                     <>
                                       <div className={'col-8'}>
-                                        <h4 className="list-group-item-title">{entry.mini_heading}</h4>
+                                        {/*<h4 className="list-group-item-title">{entry.mini_heading}</h4>*/}
+                                        <h4 className="list-group-item-title">{renderHTML(entry.mini_heading)}</h4>
                                         <p className="">{entry.location}</p>
                                         <p className="list-group-item-text clamp-3">{entry.description}</p>
                                       </div>
                                       <div className={'col-4'}>
+
                                         <p className="list-group-item-text purpose">{entry.purpose}</p>
                                         <p className="list-group-item-text text-right mt-2">{entry.price}</p>
-                                        <p className="list-group-item-text text-right">{entry.size}</p>
-                                        <p className="list-group-item-text text-right">{entry.pricepersqmeter}</p>
+                                        {/*<p className="list-group-item-text text-right">{entry.size}</p>*/}
+                                        <p className="list-group-item-text text-right">{renderHTML(entry.size)}</p>
+                                        <p className="list-group-item-text text-right">{renderHTML(entry.pricepersqmeter)}</p>
+
                                         <p className="list-group-item-text text-right uid text-center"><strong>{entry['slug'].toUpperCase()}</strong></p>
                                       </div>
                                     </>
