@@ -1,7 +1,7 @@
 module PersonDatatable
   extend ActiveSupport::Concern
 
-  def filter_users(relation)
+  def filter_persons(relation)
     if params[:page]
       param = Integer(params[:page]) rescue nil
       unless param.is_a? Integer

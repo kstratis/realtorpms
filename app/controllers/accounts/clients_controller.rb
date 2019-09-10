@@ -1,11 +1,27 @@
 module Accounts
   class ClientsController < Accounts::BaseController
 
+    before_action :verify_client, only: [:edit, :update]
+
     def index
       if current_user.is_admin?(current_account)
-        filter_users(current_account.clients)
+        filter_persons(current_account.clients)
       else
-        filter_users(current_user.clients)
+        filter_persons(current_user.clients)
+      end
+    end
+
+    def edit
+
+    end
+
+    def update
+      if @client.update_attributes(client_params)
+        flash[:success] = I18n.t 'clients.flash_profile_updated'
+        redirect_to @client
+        # Handle a successful update.
+      else
+        render :edit
       end
     end
 
@@ -14,14 +30,18 @@ module Accounts
       # @client.build_landlord
     end
 
-    # POST to the new user registration page
     def create
-      @client = Client.new(user_params)
+      @client = Client.new(client_params)
+      @client.account = current_account
       if @client.save
-        flash[:success] = I18n.t('users.flash_welcome', brand: BRANDNAME)
+        flash[:success] = I18n.t('clients.flash_created')
         redirect_to root_url
         # Handle a successful save.
       else
+        # DEBUG
+        # @client.errors.each do |attr, msg|
+        #   puts attr, msg
+        # end
         # this merely re-renders the new template.
         # It doesn't fully redirect (in other words it doesn't go through the +new+ method)
         render :new
@@ -32,5 +52,21 @@ module Accounts
 
     end
 
+    private
+      def client_params
+        params.require(:client).permit(:first_name, :last_name, :email, :telephones, :job, :notes)
+      end
+
+      def verify_client
+        if current_user.is_admin?(current_account)
+          @client = current_account.clients.find(params[:id])
+        else
+          @client = current_user.clients.find(params[:id])
+        end
+        unless @client
+          flash[:danger] = I18n.t 'clients.flash_not_found'
+          redirect_to(root_url)
+        end
+      end
   end
 end

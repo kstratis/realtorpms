@@ -26,7 +26,7 @@ module Accounts
 
     # This is only accessible by account owners so no need to granulate its access
     def index
-      filter_users(current_account.users)
+      filter_persons(current_account.users)
     end
 
     # POST to the new user registration page

@@ -1,6 +1,6 @@
-<% provide(:title, t('clients.new.heading')) %>
+<% provide(:title, t('clients.edit.heading')) %>
 
-<%= render partial: 'layouts/breadcrumb', locals: {path: [{:title => t('clients.index.breadcrumb'), :href => clients_path}, {:title => t('clients.new.heading_alt'), :href => ''}], icon: 'house-colored'} %>
+<%= render partial: 'layouts/breadcrumb', locals: {path: [{:title => t('clients.index.breadcrumb'), :href => clients_path}, {:title => t('clients.edit.heading_alt'), :href => ''}], icon: 'house-colored'} %>
 
 
 <div class="page-container">
@@ -20,7 +20,7 @@
                                  class: 'form-control',
                                  placeholder: Client.human_attribute_name("first_name"),
                                  required: true,
-                                 # 'data-parsley-trigger': 'change',
+                                 'data-parsley-trigger': 'change',
                                  'data-parsley-required-message': t("js.validator.required") %>
                 <%= f.label :first_name, Client.human_attribute_name("first_name") %>
                 <%#= inline_error @client, :first_name, 'First name' %>
@@ -35,7 +35,7 @@
                                  class: 'form-control',
                                  placeholder: Client.human_attribute_name("last_name"),
                                  required: true,
-                                 # 'data-parsley-trigger': 'change',
+                                 'data-parsley-trigger': 'change',
                                  'data-parsley-required-message': t("js.validator.required") %>
                 <%= f.label :last_name, Client.human_attribute_name("last_name") %>
                 <%#= inline_error @client, :last_name, 'Last name' %>
@@ -85,7 +85,7 @@
 
             <!-- .form-actions -->
             <div class="form-actions">
-              <button type="submit" class="btn btn-primary ml-auto"><%= t('clients.new.add_button') %></button>
+              <button type="submit" class="btn btn-primary ml-auto"><%= t('clients.edit.edit_button') %></button>
             </div> <!-- /.form-actions -->
           </div>
 

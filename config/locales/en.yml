@@ -36,6 +36,7 @@ en:
         telephones_placeholder: "i.e. 813-440-5026"
         notes: "i.e. Looking for detached but also willing to settle for a flat."
         notes_title: "Notes"
+        job: "Profession"
         registered: "Registration date"
       user:
         first_name: "First name"
@@ -502,11 +503,27 @@ en:
     accepted:
       flash_success: "You have successfully joined the %{account} organization"
   clients:
+    flash_created: "Client successfully created"
+    flash_delete: "Client successfully deleted"
+    flash_not_found: "Client not found"
+    flash_profile_updated: "Client profile uccessfully updated"
     new:
       heading: "Add"
       heading_alt: "New partner"
       profile: "Add partner"
-      new_button: "Add"
+      add_button: "Add"
+    edit:
+      breadcrumb: "Clients"
+      edit_button: "Update"
+      avatar: "Profile picture"
+      heading: "Edit profile"
+      save_button: "Save changes"
+      profile: "Profile"
+      change_pic: "Change photo"
+      photo_header: "Profile photo"
+      photo_subheader: "Click the current avatar to change the client's photo."
+      allowed_pic_specs: "JPG, GIF or PNG 400x400, < 2 MB."
+      delete_avatar: "Are you sure you want to delete the client's picture?"
     index:
       breadcrumb: "Clients"
     title: "Clients"

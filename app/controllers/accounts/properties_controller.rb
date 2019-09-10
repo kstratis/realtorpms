@@ -195,7 +195,7 @@ module Accounts
         return redirect_to @property, :status => :moved_permanently
       end
       if current_user.is_admin?(current_account)
-        filter_users(current_account.users)
+        filter_persons(current_account.users)
       end
       respond_to do |format|
         if params['print']

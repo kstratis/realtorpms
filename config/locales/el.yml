@@ -36,6 +36,7 @@ el:
         telephones_placeholder: "π.χ. 697 25 00 111"
         notes: "π.χ. Ενδιάφερεται για μονοκατοικία ωστόσο βλέπει και οικόπεδα."
         notes_title: "Σημειώσεις"
+        job: "Επάγγελμα"
         registered: "Ημερομηνία εγγραφής"
       user:
         first_name: "Όνομα"
@@ -506,11 +507,27 @@ el:
     accepted:
       flash_success: "Συνδεθήκατε επιτυχώς με τον λογαριασμό: %{account}"
   clients:
+    flash_created: "Ο πελάτης δημιουργήθηκε επιτυχώς"
+    flash_delete: "Ο πελάτης διεγράφη επιτυχώς"
+    flash_not_found: "Ο πελάτης δεν βρέθηκε"
+    flash_profile_updated: "Το προφίλ πελάτη ενημερώθηκε επιτυχώς"
     new:
       heading: "Προσθήκη"
       heading_alt: "Νέος συνεργάτης"
       profile: "Προσθήκη νέου πελάτη"
       add_button: "Προσθήκη"
+    edit:
+      breadcrumb: "Πελάτες"
+      edit_button: "Ενημέρωση"
+      avatar: "Φωτογραφία πελάτη"
+      heading: "Επεξεργασία πελάτη"
+      save_button: "Αποθήκευση"
+      profile: "Καρτέλα πελάτη"
+      change_pic: "Αλλαγή"
+      photo_header: "Φωτογραφία πελάτη"
+      photo_subheader: "Κάντε κλικ για ν'αλλάξετε την φωτογραφία του πελάτη"
+      allowed_pic_specs: "JPG, GIF ή PNG 400x400, < 2 MB."
+      delete_avatar: "Είστε βέβαιος/βεβαία ότι θέλετε να διαγραφεί η φωτογραφία πελάτη;"
     index:
       breadcrumb: "Πελάτες"
     title: "Πελάτες"
