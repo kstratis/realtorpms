@@ -1,4 +1,4 @@
-module UserDatatable
+module PersonDatatable
   extend ActiveSupport::Concern
 
   def filter_users(entity)
@@ -10,17 +10,17 @@ module UserDatatable
     end
 
     # This is only accessible by account owners so no need to granulate its access
-    @users = current_account.send(entity)
+    @persons = current_account.send(entity)
 
     if params[:search]
-      @users = @users.search(params[:search])
+      @persons = @persons.search(params[:search])
     end
 
     ####################
     # This is for retrieving the users list from within react-select
     if params[:dropdown]
       data = Array.new
-      @users.each do |entry|
+      @persons.each do |entry|
         hash = {
             label: "#{entry.first_name} #{entry.last_name}",
             value: entry.id
@@ -36,20 +36,20 @@ module UserDatatable
         # query = 'SELECT u.*, count(a.user_id) AS total_assignments FROM users AS u JOIN assignments AS a ON a.user_id = u.id GROUP BY u.id ORDER BY total_assignments;'
         # query = 'SELECT u.* FROM "users" AS u JOIN "assignments" AS a ON a.user_id = u.id GROUP BY u.id ORDER BY count(a.user_id);'
 
-        @users = @users.left_outer_joins(:assignments).group(:id).order("count(assignments.user_id) #{params[:ordering]}, last_name DESC")
-        # @users = @users.find_by_sql(query)
+        @persons = @persons.left_outer_joins(:assignments).group(:id).order("count(assignments.user_id) #{params[:ordering]}, last_name DESC")
+        # @persons = @persons.find_by_sql(query)
         # byebug
-        # @users = @users.order("count('assignments')")
-        # @users = @users.sort_by(&:get_total_properties)
+        # @persons = @persons.order("count('assignments')")
+        # @persons = @persons.sort_by(&:get_total_properties)
 
-        # @users = User.sorted_by_assignments_count(@users)
-        # @users = User.sorted_by_assignments_count(@users)
+        # @persons = User.sorted_by_assignments_count(@persons)
+        # @persons = User.sorted_by_assignments_count(@persons)
       else
-        @users = @users.order("#{params[:sorting]}": params[:ordering])
+        @persons = @persons.order("#{params[:sorting]}": params[:ordering])
       end
-      # @users = @users.order("#{params[:sorting]}": params[:ordering])
+      # @persons = @persons.order("#{params[:sorting]}": params[:ordering])
     else
-      @users = @users.order(:created_at)
+      @persons = @persons.order(:created_at)
     end
 
 
@@ -61,16 +61,16 @@ module UserDatatable
 
 
 
-    # puts @users.to_yaml
+    # puts @persons.to_yaml
 
-    @users = @users.paginate(page: params[:page], :per_page => 10)
-    # @users = User.paginate(page: params[:page], :per_page => 10)
-    @userslist = {:dataset => Array.new}
+    @persons = @persons.paginate(page: params[:page], :per_page => 10)
+    # @persons = User.paginate(page: params[:page], :per_page => 10)
+    @personslist = {:dataset => Array.new}
     # All the data we need - SOS
     # puts @users.total_entries # total user entries
     # puts @users.total_pages # page count
     # puts @users.current_page # current page
-    @users.each do |user|
+    @persons.each do |user|
       hash = {
           id: user.id,
           # avatar_url: helpers.gravatar_for(user, size: 64, link_only: true),
@@ -90,11 +90,11 @@ module UserDatatable
           assignments_count: @property ? user.properties.count : nil,
           # property_id: property ? property.id : nil
       }
-      @userslist[:dataset] << hash
+      @personslist[:dataset] << hash
     end
     # The following entries are only for the first render
-    @total_entries = @users.total_entries
-    @current_page = @users.current_page
+    @total_entries = @persons.total_entries
+    @current_page = @persons.current_page
     @results_per_page = 10
 
     @initial_search = params[:search] || ''
@@ -104,9 +104,9 @@ module UserDatatable
     respond_to do |format|
       format.html
       format.json {render json: {results_per_page: @results_per_page,
-                                 userslist: @userslist,
-                                 total_entries: @users.total_entries,
-                                 current_page: @users.current_page}, status: 200}
+                                 userslist: @personslist,
+                                 total_entries: @persons.total_entries,
+                                 current_page: @persons.current_page}, status: 200}
     end
   end
 

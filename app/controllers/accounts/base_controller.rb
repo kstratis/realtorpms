@@ -2,7 +2,7 @@ module Accounts
   class BaseController < ApplicationController
 
     include SearchFilter
-    include UserDatatable
+    include PersonDatatable
     include Jsonifier
 
     helper UserAvatar

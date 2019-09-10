@@ -4,7 +4,10 @@ module Accounts
     # Shows all account users
     before_action :all_account_users, only: [:show]
     before_action :user_self, only: [:edit, :update] # Allows editing only on each user's self
-    before_action :owner_exclusive, only: [:new, :create, :destroy]
+    # before_action :owner_exclusive, only: [:index] do
+    #   redirect_to properties_url
+    # end
+    before_action :owner_exclusive, only: [:new, :create, :destroy, :index]
     before_action :check_page_validity, only: [:index]
     before_action :find_user!, only: [:delete_avatar, :toggle_activation]
 
@@ -47,7 +50,6 @@ module Accounts
 
     # POST to the edit page
     def update
-      puts 'updating'
       if @user.update_attributes(user_params)
         flash[:success] = I18n.t 'users.flash_profile_updated'
         redirect_to @user
@@ -115,12 +117,11 @@ module Accounts
       end
 
       def owner_exclusive
-        unless owner?
+        unless current_user.is_admin?(current_account)
           flash[:danger] = I18n.t 'users.flash_owner_only_action'
-          redirect_to users_url
+          redirect_to root_url
         end
       end
-
   end
 end
 

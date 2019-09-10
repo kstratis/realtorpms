@@ -124,6 +124,15 @@ const UsersList = ({
                   </th>
                   <th>
                     <a
+                      id="sort_by_status"
+                      className={'sortable-header-name'}
+                      href={''}
+                      onClick={e => handleSort(e, 'status')}>
+                      <span>{i18n['datatable']['status']['title']}</span>
+                    </a>
+                  </th>
+                  <th>
+                    <a
                       id="sort_by_date"
                       className={'sortable-header-name'}
                       href={''}
@@ -168,11 +177,13 @@ const UsersList = ({
                       </div>
                     </td>
 
-                    {/*<td>*/}
-                    {/*<div className={'table-entry'}>*/}
-                    {/*<span>{entry['type'] ? i18n['datatable']['admin'] : i18n['datatable']['user']}</span>*/}
-                    {/*</div>*/}
-                    {/*</td>*/}
+                    <td className={'align-middle'}>
+                    <div className={'table-entry'}>
+                    {entry['active']
+                      ? <span className="badge badge-success">{i18n['datatable']['status']['active']}</span>
+                      : <span className="badge badge-danger">{i18n['datatable']['status']['inactive']}</span> }
+                    </div>
+                    </td>
 
                     <td className={'align-middle'}>
                       <div className={'table-entry'}>

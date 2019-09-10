@@ -334,6 +334,10 @@ en:
     datatables:
       users:
         partner: "Partner"
+        status:
+          title: "Status"
+          active: "Active"
+          inactive: "Inactive"
         email: "Email"
         usertype: "Account type"
         registration: "Registration"

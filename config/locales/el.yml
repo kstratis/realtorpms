@@ -335,6 +335,10 @@ el:
     datatables:
       users:
         partner: "Συνεργάτης"
+        status:
+          title: "Κατάσταση"
+          active: "Ενεργός"
+          inactive: "Ανενεργός"
         email: "Email"
         usertype: "Είδος λογαριασμού"
         registration: "Εγγραφή"

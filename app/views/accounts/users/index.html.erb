@@ -21,7 +21,7 @@
       <%#= render @users %>
         <%= react_component('UsersListWithDatatable', props: {
             initial_payload: {
-                dataset_wrapper: @userslist,
+                dataset_wrapper: @personslist,
                 results_per_page: @results_per_page,
                 total_entries: @total_entries,
                 current_page: @current_page,
@@ -35,6 +35,7 @@
                 result_count: t('js.datatables.pagination.results'),
                 no_results: t('js.datatables.users.no_results'),
                 search: t('js.users_search.placeholder'),
+
             },
             meta: {
                 freeze_link:  toggle_activation_user_url('USERID')
