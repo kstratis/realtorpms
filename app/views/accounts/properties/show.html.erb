@@ -227,7 +227,7 @@
                       <%= react_component('MultiAsyncSelectContainer', props: {
                           id: 'MultiAsyncSelectContainer',
                           collection_endpoint: {url: users_path, action: 'get'},
-                          action_endpoint: {url: assignments_path(@property.id), action: 'post'},
+                          action_endpoint: {url: assignments_path(@property), action: 'post'},
                           storedOptions: @property.users.blank? ? nil : @property.users.map {|user| {label: "#{user.first_name} #{user.last_name}", value: user.id}},
                           hasFeedback: true,
                           i18n: {

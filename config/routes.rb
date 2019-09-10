@@ -70,6 +70,8 @@ Rails.application.routes.draw do
 
       post '/assignments/property/:pid/users/', to: 'assignments#assign', as: :assignments
 
+      post '/clientships/client/:cid/users/', to: 'clientships#assign', as: :clientships
+
 
       # resources :invitations, only: [:new, :create] do
       #   member do

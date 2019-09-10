@@ -1376,10 +1376,21 @@ a.tt-suggestion.tt-selectable{
   cursor: pointer;
 }
 
-tr.entry{
-  background-color: #fff;
-  //background-clip: border-box;
-  //border: 1px solid rgba(20,20,31,.12);
-  //border-radius: .25rem;
-  //box-shadow: 0 0 0 1px rgba(20,20,31,.05), 0 1px 3px 0 rgba(20,20,31,.15);
+.client {
+  a:hover {
+    text-decoration: none;
+  }
+
+  h3 {
+    text-align: left;
+  }
+
+  .clientavatar {
+    padding-top: 2px;
+  }
 }
+
+.request-description{
+  padding-top: 10px;
+}
+

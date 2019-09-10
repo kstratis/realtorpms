@@ -1,7 +1,7 @@
 module Accounts
   class ClientsController < Accounts::BaseController
 
-    before_action :verify_client, only: [:edit, :update]
+    before_action :verify_client, only: [:edit, :update, :show]
 
     def index
       if current_user.is_admin?(current_account)

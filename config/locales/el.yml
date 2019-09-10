@@ -293,6 +293,7 @@ el:
         loading_html: "Φόρτωση αποτελεσμάτων..."
         placeholder: "Επιλέξτε"
         placeholder_title: "Πληκτρολογήστε για αναζήτηση..."
+        placeholder_user_assignment: "Ανάθεση σε συνεργάτη"
         placeholder_area_title: "Αναζήτηση περιοχής"
         placeholder_prices_min: "Από: Όλες"
         placeholder_prices_max: "Έως: Όλες"
@@ -531,6 +532,10 @@ el:
       photo_subheader: "Κάντε κλικ για ν'αλλάξετε την φωτογραφία του πελάτη"
       allowed_pic_specs: "JPG, GIF ή PNG 400x400, < 2 MB."
       delete_avatar: "Είστε βέβαιος/βεβαία ότι θέλετε να διαγραφεί η φωτογραφία πελάτη;"
+    show:
+      breadcrumb: "Πελάτες"
+      heading: "Πληροφορίες χρήστη"
+      clients: "Πελάτες"
     index:
       breadcrumb: "Πελάτες"
     title: "Πελάτες"

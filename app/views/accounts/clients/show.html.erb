@@ -1,2 +1,85 @@
-<% provide(:title, t('users.show.heading')) %>
+<% provide(:title, t('clients.show.heading')) %>
 <%#= render partial: 'layouts/breadcrumb', locals: {path: [{:title => t('users.show.breadcrumb'), :href => users_path}, {title: @user.full_name, :href => ''}], icon: 'house-colored'} %>
+
+<%= render partial: 'layouts/breadcrumb', locals: {path: [{:title => t('users.show.breadcrumb'), :href => clients_path}, {title: @client.full_name, :href => ''}], icon: 'house-colored'} %>
+
+<div class="page-container">
+  <div class="container">
+    <!-- .card -->
+    <div class="card card-fluid">
+
+      <%= render partial: 'shared/card_header/header', locals: {title: @client.full_name, btn_text: t('properties.show.catalog'), btn_link: :back} %>
+      <!-- .card-body -->
+      <div class="card-body client">
+        <!-- .media -->
+        <div class="card mb-2">
+          <!-- .card-body -->
+          <div class="card-body">
+            <!-- grid row -->
+            <div class="row align-items-center">
+              <!-- grid column -->
+              <div class="col-auto">
+<!--                <a href="user-profile.html" class="user-avatar user-avatar-lg"><img src="assets/images/avatars/uifaces5.jpg" alt="">-->
+<!--                  <span class="avatar-badge online" title="online"></span></a>-->
+
+                <a href="user-profile.html" class="user-avatar user-avatar-lg"><%= render_avatar(@client, "alphatar-edit clientavatar", "avatar_preview") %>
+                  <span class="avatar-badge online" title="online"></span></a>
+              </div><!-- /grid column -->
+              <!-- grid column -->
+              <div class="col">
+                <h3 class="card-title">
+                  <a href=""><%= @client.full_name %></a> <small class="text-muted"><%= @client.email ? @client.email : '' %></small>
+                </h3>
+                <h6 class="card-subtitle text-muted"><%= @client.job ? @client.job : '' %></h6>
+              </div><!-- /grid column -->
+
+              <% if current_user.is_admin?(current_account) %>
+                <div class="col">
+
+                  <%= react_component('MultiAsyncSelectContainer', props: {
+                      id: 'MultiAsyncSelectContainer',
+                      collection_endpoint: {url: users_path, action: 'get'},
+                      action_endpoint: {url: clientships_path(@client), action: 'post'},
+                      storedOptions: @client.users.blank? ? nil : @client.users.map { |user| {label: "#{user.first_name} #{user.last_name}", value: user.id} },
+                      hasFeedback: false,
+                      i18n: {
+                          select: {
+                              placeholder: t('js.components.select.placeholder_user_assignment'),
+                              noresults: t('js.components.select.noresults'),
+                              loading: t('js.components.select.loading_html'),
+                              feedback: t('js.components.select.assignments_feedback') # not used here
+                          }
+                      }
+                  }, prerender: false) %>
+                </div><!-- /grid column -->
+              <% end %>
+
+              <div class="col">
+                <h6 class="card-subtitle text-muted request-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A commodi consequuntur cumque cupiditate distinctio dolore</h6>
+              </div><!-- /grid column -->
+
+              <!-- /grid column -->
+              <div class="col-auto">
+                <button type="button" class="btn btn-icon btn-secondary mr-1" data-toggle="tooltip" title="Private message">
+                  <i class="far fa-comment-alt"></i></button> <!-- .dropdown -->
+                <div class="dropdown d-inline-block">
+                  <button class="btn btn-icon btn-secondary" data-toggle="dropdown">
+                    <i class="fa fa-fw fa-ellipsis-h"></i></button>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <div class="dropdown-arrow"></div>
+                    <button type="button" class="dropdown-item">Invite to a team</button>
+                    <button type="button" class="dropdown-item">Copy member ID</button>
+                    <div class="dropdown-divider"></div>
+                    <button type="button" class="dropdown-item">Remove</button>
+                  </div>
+                </div><!-- /.dropdown -->
+              </div><!-- /grid column -->
+            </div><!-- /grid row -->
+          </div><!-- /.card-body -->
+        </div><!-- /.card -->
+
+
+      </div> <!-- /.card-body -->
+    </div> <!-- /.card -->
+  </div>
+</div>

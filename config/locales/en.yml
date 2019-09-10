@@ -292,6 +292,7 @@ en:
         loading_html: "Loading results..."
         placeholder: "Choose"
         placeholder_title: "Start typing to select..."
+        placeholder_user_assignment: "Assign to user"
         placeholder_area_title: "Area search"
         placeholder_prices_min: "From: All"
         placeholder_prices_max: "To: All"
@@ -527,6 +528,10 @@ en:
       photo_subheader: "Click the current avatar to change the client's photo."
       allowed_pic_specs: "JPG, GIF or PNG 400x400, < 2 MB."
       delete_avatar: "Are you sure you want to delete the client's picture?"
+    show:
+      breadcrumb: "Clients"
+      heading: "Client information"
+      clients: "Clients"
     index:
       breadcrumb: "Clients"
     title: "Clients"
