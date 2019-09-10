@@ -362,6 +362,9 @@ en:
         tooltip_view_profile: "View profile"
         tooltip_freeze_profile: "Freeze user"
         tooltip_delete_profile: "Delete"
+      clients:
+        no_results: "Δεν βρέθηκαν πελάτες!"
+        search_placeholder: "Client search..."
       pagination:
         results: "Results"
       properties:
@@ -509,8 +512,8 @@ en:
     flash_profile_updated: "Client profile uccessfully updated"
     new:
       heading: "Add"
-      heading_alt: "New partner"
-      profile: "Add partner"
+      heading_alt: "New client"
+      profile: "Add client"
       add_button: "Add"
     edit:
       breadcrumb: "Clients"

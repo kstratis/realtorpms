@@ -34,8 +34,11 @@ module Accounts
       @client = Client.new(client_params)
       @client.account = current_account
       if @client.save
+        if current_user.role(current_account) == 'user'
+          current_user.clients <<  @client
+        end
         flash[:success] = I18n.t('clients.flash_created')
-        redirect_to root_url
+        redirect_to @client
         # Handle a successful save.
       else
         # DEBUG

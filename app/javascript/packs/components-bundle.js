@@ -1,5 +1,6 @@
 import ReactOnRails from 'react-on-rails';
 import UsersListWithDatatable from '../bundles/datatables/UsersList';
+import ClientsListWithDatatable from '../bundles/datatables/ClientsList';
 import PropertiesListWithDatatable from '../bundles/datatables/PropertiesList';
 import FormSelect from '../bundles/components/selects/FormSelect';
 import MultiAsyncSelectContainer from '../bundles/components/selects/AsyncSelectContainer';
@@ -11,6 +12,7 @@ import InlineSearch from '../bundles/components/InlineSearch';
 // Unfortunately we need to register everything up-front.
 ReactOnRails.register({
   UsersListWithDatatable,
+  ClientsListWithDatatable,
   PropertiesListWithDatatable,
   FormSelect,
   AssociativeFormSelect,

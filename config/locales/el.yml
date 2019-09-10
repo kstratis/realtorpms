@@ -363,6 +363,9 @@ el:
         tooltip_view_profile: "Προβολή προφίλ"
         tooltip_freeze_profile: "Πάγωμα χρήστη - Εάν ενεργοποιηθεί, ο χρήστης δεν θα μπορεί να εισέλθει στο σύστημα."
         tooltip_delete_profile: "Διαγραφή"
+      clients:
+        no_results: "Δεν βρέθηκαν πελάτες!"
+        search_placeholder: "Αναζήτηση πελάτη..."
       properties:
         description: "Περιγραφή"
       pagination:
@@ -513,7 +516,7 @@ el:
     flash_profile_updated: "Το προφίλ πελάτη ενημερώθηκε επιτυχώς"
     new:
       heading: "Προσθήκη"
-      heading_alt: "Νέος συνεργάτης"
+      heading_alt: "Νέος πελάτης"
       profile: "Προσθήκη νέου πελάτη"
       add_button: "Προσθήκη"
     edit:

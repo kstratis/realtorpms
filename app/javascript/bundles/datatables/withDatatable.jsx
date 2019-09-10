@@ -554,6 +554,9 @@ function withDatatable(WrappedComponent) {
         case 'users':
           resource = `/users.json${query}`;
           break;
+        case 'clients':
+          resource = `/clients.json${query}`;
+          break;
         case 'properties':
           resource = `/properties.json${query}`;
           break;

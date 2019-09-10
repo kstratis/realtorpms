@@ -18,7 +18,7 @@
           Rails automatically iterates through them and renders each one with the _user.html.erb partial
           (inferring the name of the partial from the name of the class). %>
       <%#= render @users %>
-      <%= react_component('UsersListWithDatatable', props: {
+      <%= react_component('ClientsListWithDatatable', props: {
           initial_payload: {
               dataset_wrapper: @personslist,
               results_per_page: @results_per_page,
@@ -27,15 +27,16 @@
               initial_search: @initial_search,
               initial_sorting: @initial_sorting,
               initial_ordering: @initial_ordering,
-              object_type: 'users'
+              object_type: 'clients'
           },
           i18n: {
               datatable: t('js.datatables.users'),
               result_count: t('js.datatables.pagination.results'),
-              no_results: t('js.datatables.users.no_results'),
-              search: t('js.users_search.placeholder'),
+              no_results: t('js.datatables.clients.no_results'),
+              search: t('js.datatables.clients.search_placeholder'),
           },
           meta: {
+              is_admin: current_user.is_admin?(current_account),
               freeze_link:  toggle_activation_user_url('USERID')
           }
       }, prerender: false) %>

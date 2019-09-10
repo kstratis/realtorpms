@@ -11,10 +11,10 @@ module UserAvatar
 
   # Returns an avatar as an image tag or a url for react components
   def render_avatar(entity, classnames = nil, id = nil, js = false)
-    if entity.avatar.attached?
+    if entity.try(:avatar).try(:attached?)
       js ? url_for(entity.avatar) : image_tag(entity.avatar, class: classnames, id: id)
     else
-      if entity.class == User
+      if [User, Client].include?(entity.class)
         alphatar_for entity, classnames, id, js
       else
         content_tag :div, "", class: "alphatar #{classnames}", id: "#{id}" do

@@ -74,24 +74,24 @@ module PersonDatatable
     # puts @users.total_entries # total user entries
     # puts @users.total_pages # page count
     # puts @users.current_page # current page
-    @persons.each do |user|
+    @persons.each do |entry|
       hash = {
-          id: user.id,
-          # avatar_url: helpers.gravatar_for(user, size: 64, link_only: true),
-          avatar: {url: render_avatar(user, nil, nil, true), usercolor: user.try(:color) || 'B76BA3'},
-          name: "#{user.first_name.first}. #{user.last_name}",
-          email: user.email,
-          type: user.role(current_account),
-          # active: user.active?,
-          active: Membership.find_by(account: current_account, user: user).active,
-          view_entity_path: user_path(user.id),
-          edit_entity_path: edit_user_path(user.id),
-          # assignments: user.properties.count,
-          # registration: user.created_at.to_formatted_s(:long)
-          # registration: user.created_at.strftime('%d %b. %y'),
-          registration: l(user.created_at, format: :regular),
-          is_assigned: @property ? @property.users.exists?(user.id) : nil,
-          assignments_count: @property ? user.properties.count : nil,
+          id: entry.id,
+          # avatar_url: helpers.gravatar_for(entry, size: 64, link_only: true),
+          avatar: {url: render_avatar(entry, nil, nil, true), usercolor: entry.try(:color) || 'B76BA3'},
+          name: "#{entry.try(:first_name).try(:first)}. #{entry.try(:last_name)}",
+          email: entry.try(:email) || '-',
+          type: entry.try(:role, current_account) || nil,
+          # active: entry.active?,
+          active: entry.class == User ? Membership.find_by(account: current_account, user: entry).active : nil,
+          view_entity_path: polymorphic_path([entry.class.to_s.downcase.to_sym], id: entry.id),
+          edit_entity_path: polymorphic_path([entry.class.to_s.downcase.to_sym], id: entry.id, action: :edit),
+          # assignments: entry.properties.count,
+          # registration: entry.created_at.to_formatted_s(:long)
+          # registration: entry.created_at.strftime('%d %b. %y'),
+          registration: l(entry.created_at, format: :regular),
+          is_assigned: @property ? @property.users.exists?(entry.id) : nil,
+          assignments_count: @property ? entry.properties.count : nil,
           # property_id: property ? property.id : nil
       }
       @personslist[:dataset] << hash
@@ -100,6 +100,7 @@ module PersonDatatable
     @total_entries = @persons.total_entries
     @current_page = @persons.current_page
     @results_per_page = 10
+    @meta = {is_admin: current_user.is_admin?(current_account)}
 
     @initial_search = params[:search] || ''
     @initial_sorting = params[:sorting] || 'created_at'

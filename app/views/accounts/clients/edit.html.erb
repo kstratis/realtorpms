@@ -1,13 +1,13 @@
 <% provide(:title, t('clients.edit.heading')) %>
 
-<%= render partial: 'layouts/breadcrumb', locals: {path: [{:title => t('clients.index.breadcrumb'), :href => clients_path}, {:title => t('clients.edit.heading_alt'), :href => ''}], icon: 'house-colored'} %>
+<%= render partial: 'layouts/breadcrumb', locals: {path: [{:title => t('clients.index.breadcrumb'), :href => clients_path}, {:title => t('clients.edit.heading'), :href => ''}], icon: 'house-colored'} %>
 
 
 <div class="page-container">
   <div class="container">
     <!-- .card -->
     <div class="card card-fluid">
-      <h2 class="card-header"> <%= t('clients.new.profile') %> </h2>
+      <h2 class="card-header"> <%= t('clients.edit.profile') %> </h2>
       <!-- .card-body -->
       <div class="card-body">
         <!-- form -->
