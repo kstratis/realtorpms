@@ -24,8 +24,9 @@ module Accounts
       @user = User.new
     end
 
+    # This is only accessible by account owners so no need to granulate its access
     def index
-      filter_users 'users'
+      filter_users(current_account.users)
     end
 
     # POST to the new user registration page

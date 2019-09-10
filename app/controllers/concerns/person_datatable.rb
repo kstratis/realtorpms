@@ -1,7 +1,7 @@
 module PersonDatatable
   extend ActiveSupport::Concern
 
-  def filter_users(entity)
+  def filter_users(relation)
     if params[:page]
       param = Integer(params[:page]) rescue nil
       unless param.is_a? Integer
@@ -9,8 +9,12 @@ module PersonDatatable
       end
     end
 
-    # This is only accessible by account owners so no need to granulate its access
-    @persons = current_account.send(entity)
+    @persons = relation
+    # if current_user.is_admin?(current_account)
+    #   @persons = current_account.send(entity)
+    # else
+    #   current_user.send(entity)
+    # end
 
     if params[:search]
       @persons = @persons.search(params[:search])

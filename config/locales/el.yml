@@ -24,6 +24,19 @@ el:
         email: "Εταιρικό email"
         telephones: "Τηλέφωνα επικοινωνίας"
         address: "Διεύθυνση"
+      client:
+        first_name: "Όνομα"
+        first_name_feedback_html: "π.χ. Δημήτρης"
+        last_name: "Επώνυμο"
+        last_name_feedback_html: "π.χ. Παπαδόπουλος"
+        email: "Email"
+        email_feedback_html: "π.χ. dpapadopoulos@gmail.com"
+        telephones: "Τηλέφωνα επικοινωνίας"
+        telephones_feedback_html: "π.χ. 210 33 33 333"
+        telephones_placeholder: "π.χ. 697 25 00 111"
+        notes: "π.χ. Ενδιάφερεται για μονοκατοικία ωστόσο βλέπει και οικόπεδα."
+        notes_title: "Σημειώσεις"
+        registered: "Ημερομηνία εγγραφής"
       user:
         first_name: "Όνομα"
         first_name_feedback_html: "π.χ. Δημήτρης"
@@ -453,14 +466,6 @@ el:
     list: "Κατάλογος"
     add: "Άμεση προσθήκη"
     invite: "Πρόσκληση"
-  clients:
-    index:
-      breadcrumb: "Πελάτες"
-    new:
-      add_button: "Προσθήκη"
-    title: "Πελάτες"
-    add: "Προσθήκη"
-    list: "Κατάλογος"
   main:
     title: "Κεντρική"
     heading: "Κεντρική"
@@ -500,6 +505,17 @@ el:
       accept_btn: "Αποδοχή"
     accepted:
       flash_success: "Συνδεθήκατε επιτυχώς με τον λογαριασμό: %{account}"
+  clients:
+    new:
+      heading: "Προσθήκη"
+      heading_alt: "Νέος συνεργάτης"
+      profile: "Προσθήκη νέου πελάτη"
+      add_button: "Προσθήκη"
+    index:
+      breadcrumb: "Πελάτες"
+    title: "Πελάτες"
+    add: "Προσθήκη"
+    list: "Κατάλογος"
   users:
     title: "Συνεργάτες"
     flash_delete: "Ο χρήστης διεγράφη επιτυχώς"

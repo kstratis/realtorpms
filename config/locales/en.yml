@@ -24,6 +24,19 @@ en:
         email: "Corporate email"
         telephones: "Contact number(s)"
         address: "Address"
+      client:
+        first_name: "First name"
+        first_name_feedback_html: "i.e. John"
+        last_name: "Last name"
+        last_name_feedback_html: "i.e. Smith"
+        email: "Email"
+        email_feedback_html: "i.e. jsmith@gmail.com"
+        telephones: "Telephones"
+        telephones_feedback_html: "i.e. 813-440-5026"
+        telephones_placeholder: "i.e. 813-440-5026"
+        notes: "i.e. Looking for detached but also willing to settle for a flat."
+        notes_title: "Notes"
+        registered: "Registration date"
       user:
         first_name: "First name"
         first_name_feedback_html: "i.e. John"
@@ -449,14 +462,6 @@ en:
     list: "Partner list"
     add: "Add partner"
     invite: "Invite partner"
-  clients:
-    index:
-      breadcrumb: "Clients"
-    new:
-      add_button: "Προσθήκη"
-    title: "Clients"
-    add: "Add client"
-    list: "Client list"
   main:
     title: "Dashboard"
     heading: "Dashboard"
@@ -496,6 +501,17 @@ en:
       accept_btn: "Accept"
     accepted:
       flash_success: "You have successfully joined the %{account} organization"
+  clients:
+    new:
+      heading: "Add"
+      heading_alt: "New partner"
+      profile: "Add partner"
+      new_button: "Add"
+    index:
+      breadcrumb: "Clients"
+    title: "Clients"
+    add: "Add client"
+    list: "Client list"
   users:
     title: "Partners"
     flash_delete: "User was successfully deleted"
