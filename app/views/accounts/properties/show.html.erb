@@ -14,6 +14,7 @@
             favorites_url: favorites_url,
             favlists_url: favlists_url,
             property_id: @property.id,
+            child: 'AddRemoveFavLists', # Due to react-on-rails restrictions we cant just ask to render children
             modalTitle: t('properties.fav_lists'),
             modalHeader: heading(@property),
             buttonOKLabel: t('properties.ok_button'),

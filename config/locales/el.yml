@@ -282,6 +282,12 @@ el:
   js:
     components:
       modal:
+        search_save:
+          title: "Αποθήκευση αναζήτησης"
+          subtitle: "Αποθήκευση κριτηρίων αναζήτησης"
+          close_btn: "Κλείσιμο"
+          criteria: "Έχετε επιλέξει τα εξής κριτήρια:"
+          feeback: "sel"
         favlists:
           listname_placeholder: "Όνομα νέας λίστας"
           no_results: "Δεν έχετε δημιουργήσει κάποια λίστα... ακόμα."

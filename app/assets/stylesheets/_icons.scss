@@ -408,6 +408,10 @@
     background-image: url( plus.svg);
   }
 
+  &.disk{
+    background-image: url( disk.svg);
+  }
+
   & ~ .pr-icon-desc {
     display: block;
     text-align: center;

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import withDatatable from './withDatatable';
 import ClampWrapper from '../components/ClampWrapper';
@@ -9,11 +9,23 @@ import FlipMove from 'react-flip-move';
 import AssociativeFormSelect from '../components/selects/AssociativeFormSelect';
 import Spinner from './Spinner';
 import { renderHTML } from '../utilities/helpers';
+import URLSearchParams from '@ungap/url-search-params';
+import ModalContainer from '../components/ModalContainer';
+
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+};
+
+const hasParams = () => {
+  let searchParams = new URLSearchParams(window.location.search);
+  let param_counter = 0;
+  for (let p of searchParams) {
+    param_counter = param_counter + 1;
+  }
+  return param_counter > 0;
 };
 
 const PropertiesList = ({
@@ -51,6 +63,16 @@ const PropertiesList = ({
   properties_path,
   i18n
 }) => {
+
+  const handleSaveParams = () => {
+    let searchParams = new URLSearchParams(window.location.search);
+    let param_counter = 0;
+    for (let p of searchParams) {
+      param_counter = param_counter + 1;
+    }
+    return param_counter > 0;
+  };
+
   return (
     <div className="properties-list">
       {/* CARD START */}
@@ -60,6 +82,19 @@ const PropertiesList = ({
       {/*    <div className={'spinner'} />*/}
       {/*  </div>*/}
       {/*) : null}*/}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       <div className={'PropertyListContainer'}>
         <div className={'row'}>
@@ -228,7 +263,7 @@ const PropertiesList = ({
                   action_endpoint={{ url: '', action: '', callback: handleLocationInput }}
                 />
               </div>
-              <div className={'col-lg-6 col-sm-12'}>
+              <div className={'col-lg-5 col-sm-12 text-center'}>
                 <SortFilter
                   handleFn={handleSort}
                   slug={'created_at'}
@@ -252,6 +287,28 @@ const PropertiesList = ({
                     }
                   ]}
                 />
+              </div>
+              <div className={`col-lg-1 col-sm-12`}>
+
+                  <ModalContainer
+                    id={'modal-window'}
+                    fireButtonLabel={`<i class='fas fa-save fa-fw' />`}
+                    fireButtonBtnSize={`md`}
+                    fireButtonBtnType={`danger`}
+                    avatar={null}
+                    modalTitle={i18n.search_save_title}
+                    modalHeader={i18n.search_save_subtitle}
+                    child={'SaveSearch'}
+                    buttonCloseLabel={i18n.search_save_buttonCloseLabel}
+                    ajaxEnabled={true}
+                    isClearable={true}
+                    backspaceRemovesValue={true}
+                    isSearchable={true}
+                    criteriaSelection={i18n.search_save_criteria}
+                    feedback={i18n.feedback}
+                    />
+
+                {/*<button className={'btn btn-danger'} disabled={!hasParams()}><i className={'fas fa-save'}></i></button>*/}
               </div>
             </div>
             <Spinner isLoading={isLoading} version={2} />

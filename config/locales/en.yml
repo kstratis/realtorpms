@@ -281,6 +281,12 @@ en:
   js:
     components:
       modal:
+        search_save:
+          title: "Save search request"
+          subtitle: "Save search criteria"
+          close_btn: "Close"
+          criteria: "Έχετε επιλέξει τα εξής κριτήρια:"
+          feedback: ""
         favlists:
           listname_placeholder: "New list"
           no_results: "You have no lists... yet."

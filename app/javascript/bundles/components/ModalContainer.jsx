@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import AddRemoveFavLists from './AddRemoveFavLists';
+import SaveSearch from './SaveSearch';
 
 class ModalContainer extends React.Component {
   constructor(props) {
@@ -18,13 +19,20 @@ class ModalContainer extends React.Component {
   render() {
     return (
       <>
-        <Button className={'btn-sm'} color="secondary" onClick={this.toggle}>
+        <Button
+          size={this.props.fireButtonBtnSize ? this.props.fireButtonBtnSize : 'sm'}
+          color={this.props.fireButtonBtnType ? this.props.fireButtonBtnType : 'secondary'}
+          onClick={this.toggle}>
           <div dangerouslySetInnerHTML={{ __html: this.props.fireButtonLabel }} />
         </Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} scrollable={true}>
           <ModalHeader toggle={this.toggle}>{this.props.modalTitle}</ModalHeader>
           <ModalBody>
-            <AddRemoveFavLists {...this.props} />
+            {this.props.child === 'AddRemoveFavLists' ? (
+              <AddRemoveFavLists {...this.props} />
+            ) : (
+              <SaveSearch {...this.props}/>
+            )}
           </ModalBody>
           <ModalFooter>
             <Button color="secondary" onClick={this.toggle}>
