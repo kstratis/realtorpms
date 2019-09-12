@@ -1,4 +1,5 @@
 import React from 'react';
+import fromEntries from '@ungap/from-entries';
 
 const debounce = (func, wait, immediate) => {
   var timeout;
@@ -40,5 +41,30 @@ const safelyExecCallback = (fnParent, ...params) => {
 
 };
 
+const arrayToObject = (array) => {
+  return array.reduce((obj, item) => {
+    obj[Object.keys(item)[0]] = Object.values(item)[0];
+    return obj
+  }, {});
+};
 
-export {debounce, capitalizeFirstLetter, renderHTML, buildUserURL, isUrl, safelyExecCallback};
+const priceFilterOptions = (data) => {
+  const datarent = data['rent']['subcategory'];
+  const datasell = data['sell']['subcategory'];
+  return arrayToObject(datarent.concat(datasell).flat());
+};
+
+const sizeFilterOptions = (data) => {
+  const datarent = data['building']['subcategory'];
+  const datasell = data['land']['subcategory'];
+  return arrayToObject(datarent.concat(datasell).flat());
+};
+
+const floorFilterOptions = (data) => {
+  const datarent = data['building']['subcategory'];
+  const datasell = data['land']['subcategory'];
+  return arrayToObject(datarent.concat(datasell).flat());
+};
+
+
+export {debounce, capitalizeFirstLetter, renderHTML, buildUserURL, isUrl, safelyExecCallback, priceFilterOptions, sizeFilterOptions, floorFilterOptions};

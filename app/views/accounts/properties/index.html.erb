@@ -7,7 +7,7 @@
     <% end %>
   </div>
 <% end %>
-
+<%# byebug %>
 <div class="page-container">
   <div class="container">
     <div class="app-container">
@@ -104,6 +104,55 @@
               search_save_feedback: t('js.components.modal.search_save.feeback'),
               search_save_buttonCloseLabel: t('properties.close_button'),
               search_save_criteria: t('js.components.modal.search_save.criteria'),
+              search_save_filters: {
+                  pricemin: t('js.components.modal.search_save.filters.pricemin'),
+                  pricemax: t('js.components.modal.search_save.filters.pricemax'),
+                  sizemin: t('js.components.modal.search_save.filters.sizemin'),
+                  sizemax: t('js.components.modal.search_save.filters.sizemax'),
+                  roomsmin: t('js.components.modal.search_save.filters.roomsmin'),
+                  roomsmax: t('js.components.modal.search_save.filters.roomsmax'),
+                  floorsmin: t('js.components.modal.search_save.filters.floorsmin'),
+                  floorsmax: t('js.components.modal.search_save.filters.floorsmax'),
+                  constructionmin: t('js.components.modal.search_save.filters.constructionmin'),
+                  constructionmax: t('js.components.modal.search_save.filters.constructionmax'),
+                  purpose: t('js.components.modal.search_save.filters.purpose'),
+                  sell: t('js.components.modal.search_save.filters.sell'),
+                  rent: t('js.components.modal.search_save.filters.rent'),
+                  category: t('js.components.modal.search_save.filters.category'),
+                  subcategory: t('js.components.modal.search_save.filters.subcategory'),
+                  residential: t('js.components.modal.search_save.filters.residential'),
+                  commercial: t('js.components.modal.search_save.filters.commercial'),
+                  land: t('js.components.modal.search_save.filters.land'),
+                  other: t('js.components.modal.search_save.filters.other'),
+                  apartment: t('js.components.modal.search_save.filters.apartment'),
+                  studio: t('js.components.modal.search_save.filters.studio'),
+                  maisonette: t('js.components.modal.search_save.filters.maisonette'),
+                  detached_house: t('js.components.modal.search_save.filters.detached_house'),
+                  villa: t('js.components.modal.search_save.filters.villa'),
+                  loft: t('js.components.modal.search_save.filters.loft'),
+                  bungalow: t('js.components.modal.search_save.filters.bungalow'),
+                  building: t('js.components.modal.search_save.filters.building'),
+                  apartment_complex: t('js.components.modal.search_save.filters.apartment_complex'),
+                  office: t('js.components.modal.search_save.filters.office'),
+                  public_store: t('js.components.modal.search_save.filters.public_store'),
+                  warehouse: t('js.components.modal.search_save.filters.warehouse'),
+                  industrial_space: t('js.components.modal.search_save.filters.industrial_space'),
+                  craft_space: t('js.components.modal.search_save.filters.craft_space'),
+                  hotel: t('js.components.modal.search_save.filters.hotel'),
+                  business_building: t('js.components.modal.search_save.filters.business_building'),
+                  hall: t('js.components.modal.search_save.filters.hall'),
+                  showroom: t('js.components.modal.search_save.filters.showroom'),
+                  land_plot: t('js.components.modal.search_save.filters.land_plot'),
+                  parcels: t('js.components.modal.search_save.filters.parcels'),
+                  island: t('js.components.modal.search_save.filters.island'),
+                  other_categories: t('js.components.modal.search_save.filters.other_categories'),
+                  parking: t('js.components.modal.search_save.filters.parking'),
+                  business: t('js.components.modal.search_save.filters.business'),
+                  prefabricated: t('js.components.modal.search_save.filters.prefabricated'),
+                  detachable: t('js.components.modal.search_save.filters.detachable'),
+                  air: t('js.components.modal.search_save.filters.air'),
+                  other_various: t('js.components.modal.search_save.filters.other_various'),
+              },
               filters: {
                   title: t('js.datatables.filters.title'),
                   type:{

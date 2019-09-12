@@ -943,6 +943,11 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
   integrity sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
 
+"@ungap/from-entries@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@ungap/from-entries/-/from-entries-0.1.2.tgz#4b855afb6ac259dbf12e66d31c6838e5067d4d04"
+  integrity sha512-gvRG3FoocZQgnR6C8kShCnlP306c6sFNgwHFTBUdc8azLyhDzjB5md3qFsLx7YNOl2BTdoFYaAabQV8lK5JnZw==
+
 "@ungap/url-search-params@^0.1.2":
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/@ungap/url-search-params/-/url-search-params-0.1.2.tgz#8ba8c0527543fe675d1c29ae0a2daca842e8ee4f"

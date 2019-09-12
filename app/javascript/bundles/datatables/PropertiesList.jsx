@@ -8,7 +8,7 @@ import AsyncSelect from '../components/selects/AsyncSelect';
 import FlipMove from 'react-flip-move';
 import AssociativeFormSelect from '../components/selects/AssociativeFormSelect';
 import Spinner from './Spinner';
-import { renderHTML } from '../utilities/helpers';
+import { renderHTML, priceFilterOptions, sizeFilterOptions, floorFilterOptions } from '../utilities/helpers';
 import URLSearchParams from '@ungap/url-search-params';
 import ModalContainer from '../components/ModalContainer';
 
@@ -289,7 +289,6 @@ const PropertiesList = ({
                 />
               </div>
               <div className={`col-lg-1 col-sm-12`}>
-
                   <ModalContainer
                     id={'modal-window'}
                     fireButtonLabel={`<i class='fas fa-save fa-fw' />`}
@@ -304,8 +303,11 @@ const PropertiesList = ({
                     isClearable={true}
                     backspaceRemovesValue={true}
                     isSearchable={true}
-                    criteriaSelection={i18n.search_save_criteria}
-                    feedback={i18n.feedback}
+                    i18n={i18n}
+                    i18nPriceOptions={priceFilterOptions(price_filter['options'])}
+                    i18nSizeOptions={sizeFilterOptions(size_filter['options'])}
+
+
                     />
 
                 {/*<button className={'btn btn-danger'} disabled={!hasParams()}><i className={'fas fa-save'}></i></button>*/}
@@ -336,8 +338,8 @@ const PropertiesList = ({
                                   {!entry['allow_view']
                                     ? (
                                       <div className={'col-12'}>
-                                          <div><h2>{entry['slug'].toUpperCase()}</h2></div>
-                                          <div><h3>{entry['access_msg']}</h3></div>
+                                        <div><h2>{entry['slug'].toUpperCase()}</h2></div>
+                                        <div><h3>{entry['access_msg']}</h3></div>
                                       </div>
                                   ) : (
                                     <>
