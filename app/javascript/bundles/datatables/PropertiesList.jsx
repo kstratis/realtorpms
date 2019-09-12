@@ -8,7 +8,7 @@ import AsyncSelect from '../components/selects/AsyncSelect';
 import FlipMove from 'react-flip-move';
 import AssociativeFormSelect from '../components/selects/AssociativeFormSelect';
 import Spinner from './Spinner';
-import { renderHTML, priceFilterOptions, sizeFilterOptions, floorFilterOptions } from '../utilities/helpers';
+import { renderHTML, priceFilterOptions, sizeFilterOptions, floorFilterOptions, categoryFilterOptions } from '../utilities/helpers';
 import URLSearchParams from '@ungap/url-search-params';
 import ModalContainer from '../components/ModalContainer';
 
@@ -307,8 +307,7 @@ const PropertiesList = ({
                     i18nPriceOptions={priceFilterOptions(price_filter['options'])}
                     i18nSizeOptions={sizeFilterOptions(size_filter['options'])}
                     i18nFloorOptions={floorFilterOptions(floors_filter['options'])}
-
-
+                    i18nCategoryOptions={categoryFilterOptions(category_filter['options'])}
                     />
 
                 {/*<button className={'btn btn-danger'} disabled={!hasParams()}><i className={'fas fa-save'}></i></button>*/}

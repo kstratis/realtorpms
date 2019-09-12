@@ -22,6 +22,8 @@ function RenderEntry({ element, index, i18n, i18nPriceOptions, i18nSizeOptions, 
       {(() => {
         const objKey = Object.keys(element)[0];
         const objValue = Object.values(element)[0];
+        // DEBUG
+        console.log(objKey, objValue);
         switch (true) {
           case ['pricemin', 'pricemax'].includes(objKey):
             return (
@@ -31,9 +33,13 @@ function RenderEntry({ element, index, i18n, i18nPriceOptions, i18nSizeOptions, 
             return (
               <RenderRow name={i18n.search_save_filters[objKey]} value={i18nSizeOptions[objValue]} index={index} />
             );
-          case ['floormin', 'floormax'].includes(objKey):
+          case ['floorsmin', 'floorsmax'].includes(objKey):
             return (
               <RenderRow name={i18n.search_save_filters[objKey]} value={i18nFloorOptions[objValue]} index={index} />
+            );
+          case ['purpose', 'category', 'subcategory'].includes(objKey):
+            return (
+              <RenderRow name={i18n.search_save_filters[objKey]} value={i18n.search_save_filters[objValue]} index={index} />
             );
           case ['roomsmin', 'roomsmax'].includes(objKey):
           case ['constructionmin', 'constructionmax'].includes(objKey):

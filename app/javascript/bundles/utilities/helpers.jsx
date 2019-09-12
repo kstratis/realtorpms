@@ -66,5 +66,12 @@ const floorFilterOptions = (data) => {
   return arrayToObject(datarent.concat(datasell).flat());
 };
 
+const categoryFilterOptions = (data) => {
+  console.log(data);
+  // const datarent = data['building']['subcategory'];
+  // const datasell = data['land']['subcategory'];
+  // return arrayToObject(datarent.concat(datasell).flat());
+};
 
-export {debounce, capitalizeFirstLetter, renderHTML, buildUserURL, isUrl, safelyExecCallback, priceFilterOptions, sizeFilterOptions, floorFilterOptions};
+
+export {debounce, capitalizeFirstLetter, renderHTML, buildUserURL, isUrl, safelyExecCallback, priceFilterOptions, sizeFilterOptions, floorFilterOptions, categoryFilterOptions};
