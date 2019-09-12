@@ -16,23 +16,30 @@ function RenderRow({ name, value, index }) {
   );
 }
 
-function RenderEntry({ element, index, i18n, i18nPriceOptions, i18nSizeOptions }) {
+function RenderEntry({ element, index, i18n, i18nPriceOptions, i18nSizeOptions, i18nFloorOptions }) {
   return (
     <>
       {(() => {
-
         const objKey = Object.keys(element)[0];
         const objValue = Object.values(element)[0];
-        console.log(objKey, objValue);
         switch (true) {
           case ['pricemin', 'pricemax'].includes(objKey):
-            console.log(`YAY found ${objKey}`);
             return (
               <RenderRow name={i18n.search_save_filters[objKey]} value={i18nPriceOptions[objValue]} index={index} />
             );
           case ['sizemin', 'sizemax'].includes(objKey):
-            console.log(`YAY found ${objKey}`);
-            return <RenderRow name={i18n.search_save_filters[objKey]} value={i18nSizeOptions[objValue]} index={index} />;
+            return (
+              <RenderRow name={i18n.search_save_filters[objKey]} value={i18nSizeOptions[objValue]} index={index} />
+            );
+          case ['floormin', 'floormax'].includes(objKey):
+            return (
+              <RenderRow name={i18n.search_save_filters[objKey]} value={i18nFloorOptions[objValue]} index={index} />
+            );
+          case ['roomsmin', 'roomsmax'].includes(objKey):
+          case ['constructionmin', 'constructionmax'].includes(objKey):
+            return (
+              <RenderRow name={i18n.search_save_filters[objKey]} value={objValue} index={index} />
+            );
           default:
             return null;
         }
@@ -50,7 +57,8 @@ function SaveSearch({
   property_id,
   i18n,
   i18nPriceOptions,
-  i18nSizeOptions
+  i18nSizeOptions,
+  i18nFloorOptions
 }) {
   const [currentParams, setCurrentParams] = useState([]);
   useEffect(() => {
@@ -88,6 +96,7 @@ function SaveSearch({
                     i18n={i18n}
                     i18nPriceOptions={i18nPriceOptions}
                     i18nSizeOptions={i18nSizeOptions}
+                    i18nFloorOptions={i18nFloorOptions}
                   />
                 );
               })}

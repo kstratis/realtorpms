@@ -306,6 +306,7 @@ const PropertiesList = ({
                     i18n={i18n}
                     i18nPriceOptions={priceFilterOptions(price_filter['options'])}
                     i18nSizeOptions={sizeFilterOptions(size_filter['options'])}
+                    i18nFloorOptions={floorFilterOptions(floors_filter['options'])}
 
 
                     />
