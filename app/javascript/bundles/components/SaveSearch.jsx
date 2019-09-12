@@ -16,7 +16,15 @@ function RenderRow({ name, value, index }) {
   );
 }
 
-function RenderEntry({ element, index, i18n, i18nPriceOptions, i18nSizeOptions, i18nFloorOptions }) {
+function RenderEntry({
+  element,
+  index,
+  i18n,
+  i18nPriceOptions,
+  i18nSizeOptions,
+  i18nFloorOptions,
+  i18nCategoryOptions
+}) {
   return (
     <>
       {(() => {
@@ -37,15 +45,21 @@ function RenderEntry({ element, index, i18n, i18nPriceOptions, i18nSizeOptions, 
             return (
               <RenderRow name={i18n.search_save_filters[objKey]} value={i18nFloorOptions[objValue]} index={index} />
             );
-          case ['purpose', 'category', 'subcategory'].includes(objKey):
+          case ['category', 'subcategory'].includes(objKey):
             return (
-              <RenderRow name={i18n.search_save_filters[objKey]} value={i18n.search_save_filters[objValue]} index={index} />
+              <RenderRow name={i18n.search_save_filters[objKey]} value={i18nCategoryOptions[objValue]} index={index} />
+            );
+          case ['purpose'].includes(objKey):
+            return (
+              <RenderRow
+                name={i18n.search_save_filters[objKey]}
+                value={i18n.search_save_filters[objValue]}
+                index={index}
+              />
             );
           case ['roomsmin', 'roomsmax'].includes(objKey):
           case ['constructionmin', 'constructionmax'].includes(objKey):
-            return (
-              <RenderRow name={i18n.search_save_filters[objKey]} value={objValue} index={index} />
-            );
+            return <RenderRow name={i18n.search_save_filters[objKey]} value={objValue} index={index} />;
           default:
             return null;
         }
@@ -64,7 +78,8 @@ function SaveSearch({
   i18n,
   i18nPriceOptions,
   i18nSizeOptions,
-  i18nFloorOptions
+  i18nFloorOptions,
+  i18nCategoryOptions
 }) {
   const [currentParams, setCurrentParams] = useState([]);
   useEffect(() => {
@@ -103,6 +118,7 @@ function SaveSearch({
                     i18nPriceOptions={i18nPriceOptions}
                     i18nSizeOptions={i18nSizeOptions}
                     i18nFloorOptions={i18nFloorOptions}
+                    i18nCategoryOptions={i18nCategoryOptions}
                   />
                 );
               })}
