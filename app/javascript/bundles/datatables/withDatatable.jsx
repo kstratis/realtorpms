@@ -78,6 +78,11 @@ function withDatatable(WrappedComponent) {
               storedSlaveOption: this.props.initial_payload.construction_filter.storedSlaveOption
             }
           : '',
+        locations_filter: this.props.initial_payload.locations_filter
+          ? {
+            storedOptions: this.props.initial_payload.locations_filter.storedOptions
+          }
+          : '',
         dataset: this.props.initial_payload.dataset_wrapper.dataset,
         resultsPerPage: this.props.initial_payload.results_per_page,
         isLoading: false,
@@ -443,7 +448,7 @@ function withDatatable(WrappedComponent) {
       if (locations === null || !locations.length) {
         searchParams.delete('locations');
       } else {
-        const locationids = locations.map(loc => loc.value).join(',');
+        const locationids = locations.map(loc => `${loc.value}:${loc.label}`).join(',');
         searchParams.set('locations', locationids);
         searchParams.delete('page');
       }

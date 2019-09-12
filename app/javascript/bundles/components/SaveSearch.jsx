@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import URLSearchParams from '@ungap/url-search-params';
 import { priceFilterOptions, renderHTML } from '../utilities/helpers';
+import AsyncSelectContainer from './selects/AsyncSelectContainer';
 
 const renderParams = () => {
   let searchParams = new URLSearchParams(window.location.search);
@@ -31,7 +32,7 @@ function RenderEntry({
         const objKey = Object.keys(element)[0];
         const objValue = Object.values(element)[0];
         // DEBUG
-        console.log(objKey, objValue);
+        // console.log(objKey, objValue);
         switch (true) {
           case ['pricemin', 'pricemax'].includes(objKey):
             return (
@@ -56,6 +57,11 @@ function RenderEntry({
                 value={i18n.search_save_filters[objValue]}
                 index={index}
               />
+            );
+          case ['locations'].includes(objKey):
+            const locationValue = objValue.split(',').map((element) => {return element.split(':')[1]}).join(', ');
+            return (
+              <RenderRow name={i18n.search_save_filters[objKey]} value={locationValue} index={index} />
             );
           case ['roomsmin', 'roomsmax'].includes(objKey):
           case ['constructionmin', 'constructionmax'].includes(objKey):
@@ -84,17 +90,14 @@ function SaveSearch({
   const [currentParams, setCurrentParams] = useState([]);
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
-    const input = [];
+    const searchParamsObjectified = [];
     for (let pair of searchParams.entries()) {
-      input.push({ [pair[0]]: pair[1] });
+      searchParamsObjectified.push({ [pair[0]]: pair[1] });
     }
     // DEBUG
-    // console.log(input);
-    setCurrentParams(input);
+    // console.log(searchParamsObjectified);
+    setCurrentParams(searchParamsObjectified);
   }, []);
-
-  // console.log(i18nOptions);
-  // renderRow(el, index, i18n, i18nPriceOptions, i18nSizeOptions)
 
   return (
     <div className="favlist-container mt-3">
@@ -102,10 +105,10 @@ function SaveSearch({
         <i className="pr-icon md disk" />
       </div>
 
-      <hr />
-      <div className={'favlist-body'}>
+      {/*<hr />*/}
+      <div className={'favlist-body mt-2'}>
         <h3>{i18n.search_save_criteria}</h3>
-        <div className={'col-10 offset-1'}>
+        <div className={'col-12'}>
           <table className="table">
             <tbody>
               {currentParams.map((element, index) => {
@@ -124,7 +127,32 @@ function SaveSearch({
               })}
             </tbody>
           </table>
+
         </div>
+        <div className={'row'}>
+          <div className={'col-lg-6 offset-lg-3 col-sm-12 mb-5'}>
+            <AsyncSelectContainer
+              id={'AsyncSelectContainer'}
+              i18n={{
+                select: {
+                  placeholder: i18n.select.placeholder_clients,
+                  noresults: i18n.select.noresults,
+                  loading: i18n.select.loading_html,
+                  feedback: i18n.select.clientship_feedback
+                }
+              }}
+              collection_endpoint={{ url: '', action: 'get' }}
+              action_endpoint={{ url: '', action: '', callback: '' }}
+              storedOptions={[]}
+              hasFeedback={false}
+
+            />
+            <div className={'text-center'}>
+              <small className={'text-muted mt-1'}>{i18n.select.clientship_feedback}</small>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   );

@@ -65,6 +65,7 @@ function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasF
     // GET requests (or non specified) are simply for searching and thus we skip XHR cause we handle it directly in the HOC
     if (!action_endpoint.action) {
       safelyExecCallback(action_endpoint, selectedOptions);
+      setData(selectedOptions);
       return;
     }
     setSelectionRequest({

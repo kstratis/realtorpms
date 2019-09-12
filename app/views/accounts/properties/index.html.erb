@@ -51,6 +51,9 @@
                   storedMasterOption: @initial_constructionmin.blank? ? nil : {label: @initial_constructionmin, value: @initial_constructionmin},
                   storedSlaveOption: @initial_constructionmax.blank? ? nil : {label: @initial_constructionmax, value: @initial_constructionmax}
               },
+              locations_filter: {
+                  storedOptions: @initial_locations
+              },
               # propertyType: @initial_property_type,
               dataset_wrapper: @propertieslist,
               results_per_page: @results_per_page,
@@ -67,6 +70,7 @@
           i18n: {
               select: {
                   placeholder: t('js.components.select.placeholder_area_title'),
+                  placeholder_clients: t('js.components.select.placeholder_clients'),
                   placeholder_plain: t('js.components.select.placeholder'),
                   placeholder_prices_min: t('js.components.select.placeholder_prices_min'),
                   placeholder_prices_max: t('js.components.select.placeholder_prices_max'),
@@ -81,6 +85,7 @@
                   noresults: t('js.components.select.noresults'),
                   loading: t('js.components.select.loading_html'),
                   feedback: t('js.components.select.assignments_feedback'),
+                  clientship_feedback: t('js.components.select.clientship_feedback'),
                   category: t('js.components.select.category')
               },
               no_results: t('js.components.select.noresults'),
@@ -119,7 +124,8 @@
                   sell: t('js.components.modal.search_save.filters.sell'),
                   rent: t('js.components.modal.search_save.filters.rent'),
                   category: t('js.components.modal.search_save.filters.category'),
-                  subcategory: t('js.components.modal.search_save.filters.subcategory')
+                  subcategory: t('js.components.modal.search_save.filters.subcategory'),
+                  locations: t('js.components.modal.search_save.filters.locations')
               },
               filters: {
                   title: t('js.datatables.filters.title'),

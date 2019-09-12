@@ -2,6 +2,7 @@ module Accounts
   class PropertiesController < Accounts::BaseController
     include PropertyHeader
     include CategoryFinder
+    include LocationFinder
     helper PropertyHeader
     before_action :set_property, only: [:show, :edit, :update, :destroy]
 
@@ -159,6 +160,7 @@ module Accounts
       @current_page = @properties.current_page
       @results_per_page = 10
       @initial_search = params[:search] || ''
+      @initial_locations = params[:locations].blank? ? [] : get_initial_locations(params[:locations].split(','))
       @initial_sorting = params[:sorting] || 'created_at'
       @initial_ordering = params[:ordering] || 'desc'
       @initial_purpose = params[:purpose] || 'sell'

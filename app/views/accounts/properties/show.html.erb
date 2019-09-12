@@ -225,8 +225,8 @@
                   </div><!-- .card-body -->
                   <div class="card-body">
                     <div class="col-12 pt-2">
-                      <%= react_component('MultiAsyncSelectContainer', props: {
-                          id: 'MultiAsyncSelectContainer',
+                      <%= react_component('AsyncSelectContainer', props: {
+                          id: 'AsyncSelectContainer',
                           collection_endpoint: {url: users_path, action: 'get'},
                           action_endpoint: {url: assignments_path(@property), action: 'post'},
                           storedOptions: @property.users.blank? ? nil : @property.users.map {|user| {label: "#{user.first_name} #{user.last_name}", value: user.id}},

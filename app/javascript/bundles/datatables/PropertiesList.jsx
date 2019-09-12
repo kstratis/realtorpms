@@ -8,10 +8,16 @@ import AsyncSelect from '../components/selects/AsyncSelect';
 import FlipMove from 'react-flip-move';
 import AssociativeFormSelect from '../components/selects/AssociativeFormSelect';
 import Spinner from './Spinner';
-import { renderHTML, priceFilterOptions, sizeFilterOptions, floorFilterOptions, categoryFilterOptions } from '../utilities/helpers';
+import {
+  renderHTML,
+  priceFilterOptions,
+  sizeFilterOptions,
+  floorFilterOptions,
+  categoryFilterOptions
+} from '../utilities/helpers';
 import URLSearchParams from '@ungap/url-search-params';
 import ModalContainer from '../components/ModalContainer';
-
+import AsyncSelectContainer from '../components/selects/AsyncSelectContainer';
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
@@ -45,6 +51,7 @@ const PropertiesList = ({
   rooms_filter,
   floors_filter,
   construction_filter,
+  locations_filter,
   propertyType,
   handleAssign,
   handleFav,
@@ -63,7 +70,6 @@ const PropertiesList = ({
   properties_path,
   i18n
 }) => {
-
   const handleSaveParams = () => {
     let searchParams = new URLSearchParams(window.location.search);
     let param_counter = 0;
@@ -236,11 +242,13 @@ const PropertiesList = ({
             {/* Generate the needed filters according to the i18n keys of the erb template */}
             <div className={'row mb-3'}>
               <div className={'col-lg-6 col-sm-12 mb-3 mb-lg-0'}>
-                <AsyncSelect
+                <AsyncSelectContainer
+                  id={'AsyncSelectContainer'}
                   i18n={i18n}
                   collection_endpoint={{ url: locations_endpoint, action: 'get' }}
                   action_endpoint={{ url: '', action: '', callback: handleLocationInput }}
-                  // storedOptions: @property.users.blank? ? nil : @property.users.map {|user| {label: "#{user.first_name} #{user.last_name}", value: user.id}}
+                  storedOptions={locations_filter['storedOptions']}
+                  hasFeedback={false}
                 />
               </div>
               <div className={'col-lg-5 col-sm-12 text-center'}>
@@ -269,26 +277,26 @@ const PropertiesList = ({
                 />
               </div>
               <div className={`col-lg-1 col-sm-12`}>
-                  <ModalContainer
-                    id={'modal-window'}
-                    fireButtonLabel={`<i class='fas fa-save fa-fw' />`}
-                    fireButtonBtnSize={`md`}
-                    fireButtonBtnType={`danger`}
-                    avatar={null}
-                    modalTitle={i18n.search_save_title}
-                    modalHeader={i18n.search_save_subtitle}
-                    child={'SaveSearch'}
-                    buttonCloseLabel={i18n.search_save_buttonCloseLabel}
-                    ajaxEnabled={true}
-                    isClearable={true}
-                    backspaceRemovesValue={true}
-                    isSearchable={true}
-                    i18n={i18n}
-                    i18nPriceOptions={priceFilterOptions(price_filter['options'])}
-                    i18nSizeOptions={sizeFilterOptions(size_filter['options'])}
-                    i18nFloorOptions={floorFilterOptions(floors_filter['options'])}
-                    i18nCategoryOptions={categoryFilterOptions(category_filter['options'])}
-                    />
+                <ModalContainer
+                  id={'modal-window'}
+                  fireButtonLabel={`<i class='fas fa-save fa-fw' />`}
+                  fireButtonBtnSize={`md`}
+                  fireButtonBtnType={`danger`}
+                  avatar={null}
+                  modalTitle={i18n.search_save_title}
+                  modalHeader={i18n.search_save_subtitle}
+                  child={'SaveSearch'}
+                  buttonCloseLabel={i18n.search_save_buttonCloseLabel}
+                  ajaxEnabled={true}
+                  isClearable={true}
+                  backspaceRemovesValue={true}
+                  isSearchable={true}
+                  i18n={i18n}
+                  i18nPriceOptions={priceFilterOptions(price_filter['options'])}
+                  i18nSizeOptions={sizeFilterOptions(size_filter['options'])}
+                  i18nFloorOptions={floorFilterOptions(floors_filter['options'])}
+                  i18nCategoryOptions={categoryFilterOptions(category_filter['options'])}
+                />
 
                 {/*<button className={'btn btn-danger'} disabled={!hasParams()}><i className={'fas fa-save'}></i></button>*/}
               </div>
@@ -302,7 +310,8 @@ const PropertiesList = ({
                       <div className={'row'}>
                         <div className="col-12">
                           <div className="list-group list-group-media mb-3">
-                            <a href={entry['allow_view'] ? entry['view_entity_path'] : ''}
+                            <a
+                              href={entry['allow_view'] ? entry['view_entity_path'] : ''}
                               className="list-group-item list-group-item-action">
                               <div className="list-group-item-figure rounded-left">
                                 <div className={`thumb-container ${entry['allow_view'] ? '' : 'frosty'}`}>
@@ -315,12 +324,15 @@ const PropertiesList = ({
                               </div>
                               <div className="list-group-item-body">
                                 <div className={'row'}>
-                                  {!entry['allow_view']
-                                    ? (
-                                      <div className={'col-12'}>
-                                        <div><h2>{entry['slug'].toUpperCase()}</h2></div>
-                                        <div><h3>{entry['access_msg']}</h3></div>
+                                  {!entry['allow_view'] ? (
+                                    <div className={'col-12'}>
+                                      <div>
+                                        <h2>{entry['slug'].toUpperCase()}</h2>
                                       </div>
+                                      <div>
+                                        <h3>{entry['access_msg']}</h3>
+                                      </div>
+                                    </div>
                                   ) : (
                                     <>
                                       <div className={'col-8'}>
@@ -330,14 +342,17 @@ const PropertiesList = ({
                                         <p className="list-group-item-text clamp-3">{entry.description}</p>
                                       </div>
                                       <div className={'col-4'}>
-
                                         <p className="list-group-item-text purpose">{entry.purpose}</p>
                                         <p className="list-group-item-text text-right mt-2">{entry.price}</p>
                                         {/*<p className="list-group-item-text text-right">{entry.size}</p>*/}
                                         <div className="list-group-item-text text-right">{renderHTML(entry.size)}</div>
-                                        <div className="list-group-item-text text-right">{renderHTML(entry.pricepersqmeter)}</div>
+                                        <div className="list-group-item-text text-right">
+                                          {renderHTML(entry.pricepersqmeter)}
+                                        </div>
 
-                                        <p className="list-group-item-text text-right uid text-center"><strong>{entry['slug'].toUpperCase()}</strong></p>
+                                        <p className="list-group-item-text text-right uid text-center">
+                                          <strong>{entry['slug'].toUpperCase()}</strong>
+                                        </p>
                                       </div>
                                     </>
                                   )}
