@@ -12,7 +12,7 @@ module PropertiesHelper
       end
     end
     # DEBUG
-    pp options
+    # pp options
     options
   end
 

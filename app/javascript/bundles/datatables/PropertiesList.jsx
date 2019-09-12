@@ -75,27 +75,6 @@ const PropertiesList = ({
 
   return (
     <div className="properties-list">
-      {/* CARD START */}
-
-      {/*{isLoading ? (*/}
-      {/*  <div className={'centered'}>*/}
-      {/*    <div className={'spinner'} />*/}
-      {/*  </div>*/}
-      {/*) : null}*/}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       <div className={'PropertyListContainer'}>
         <div className={'row'}>
           <div className={'filters col-5'}>
@@ -261,6 +240,7 @@ const PropertiesList = ({
                   i18n={i18n}
                   collection_endpoint={{ url: locations_endpoint, action: 'get' }}
                   action_endpoint={{ url: '', action: '', callback: handleLocationInput }}
+                  // storedOptions: @property.users.blank? ? nil : @property.users.map {|user| {label: "#{user.first_name} #{user.last_name}", value: user.id}}
                 />
               </div>
               <div className={'col-lg-5 col-sm-12 text-center'}>

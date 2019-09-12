@@ -1,7 +1,7 @@
 module SearchFilter
   extend ActiveSupport::Concern
 
-  def search (object, attributes, filter={})
+  def search (object, attributes, filter = {})
 
     if params[:search].blank?
       return
@@ -10,14 +10,14 @@ module SearchFilter
     # puts 'in search looking for filter'
     # puts filter
     # DEBUG
-    # puts "search term is: #{params[:search]}"
+    puts "search term is: #{params[:search]}"
     @results = object.search(params[:search], filter)
 
     data = Array.new
     @results.each do |entry|
       hash = {
           value: entry.send(attributes.fetch(:value)),
-          label: "#{entry.send(attributes.fetch(:label).fetch(0, nil))}#{attributes.fetch(:label).fetch(1, nil) ? ' - ' + entry.send(attributes.fetch(:label).fetch(1)) : nil}"
+          label: "#{entry.send(attributes.fetch(:label).fetch(0, ''))}#{attributes.fetch(:label).fetch(1, nil) ? ' - ' + entry.send(attributes.fetch(:label).fetch(1)).to_s : ''}"
       }
       data << hash
     end
