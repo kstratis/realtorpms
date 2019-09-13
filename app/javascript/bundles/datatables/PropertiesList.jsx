@@ -295,6 +295,7 @@ const PropertiesList = ({
                   backspaceRemovesValue={true}
                   isSearchable={true}
                   i18n={i18n}
+                  buttonDisabled={!hasParams()}
                   clientsEndpoint={clients_endpoint}
                   assignmentshipsEndpoint={assignmentships_endpoint}
                   i18nPriceOptions={priceFilterOptions(price_filter['options'])}

@@ -20,6 +20,7 @@ class ModalContainer extends React.Component {
     return (
       <>
         <Button
+          disabled={this.props.buttonDisabled || false}
           size={this.props.fireButtonBtnSize ? this.props.fireButtonBtnSize : 'sm'}
           color={this.props.fireButtonBtnType ? this.props.fireButtonBtnType : 'secondary'}
           onClick={this.toggle}>
