@@ -25,11 +25,15 @@ const getRandomInt = (min, max) => {
   return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 };
 
+// Disable the save search button when no params are available
 const hasParams = () => {
   let searchParams = new URLSearchParams(window.location.search);
   let param_counter = 0;
   for (let p of searchParams) {
-    param_counter = param_counter + 1;
+    // count these out
+    if (['page', 'sizeminmeta', 'sizemaxmeta'].indexOf(p[0]) === -1) {
+      param_counter = param_counter + 1;
+    }
   }
   return param_counter > 0;
 };

@@ -122,7 +122,7 @@ function SaveSearch({
     setSelectionRequest({
       url: assignmentshipsEndpoint,
       method: 'post',
-      payload: { selection: selectedOption || [] },
+      payload: { selection: selectedOption || [], searchstring: window.location.search },
       callback: msg => {
         setIsFinished(true);
       }
