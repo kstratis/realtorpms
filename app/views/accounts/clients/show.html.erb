@@ -36,7 +36,7 @@
               <% if current_user.is_admin?(current_account) %>
                 <div class="col">
 
-                  <%= react_component('MultiAsyncSelectContainer', props: {
+                  <%= react_component('AsyncSelectContainer', props: {
                       id: 'MultiAsyncSelectContainer',
                       collection_endpoint: {url: users_path, action: 'get'},
                       action_endpoint: {url: clientships_path(@client), action: 'post'},

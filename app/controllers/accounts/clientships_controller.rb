@@ -36,7 +36,7 @@ module Accounts
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def clientship_params
-        params.permit(:cid, selection: [:label, :value], assignment: {})
+        params.permit(:cid, selection: [:label, :value], clientship: {})
       end
 
       def authorize_owner_rest!

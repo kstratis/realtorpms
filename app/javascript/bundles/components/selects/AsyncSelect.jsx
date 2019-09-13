@@ -3,7 +3,8 @@ import useFetch from '../../hooks/useFetch';
 import useModalToggle from '../../hooks/useModalToggle';
 import makeAnimated from 'react-select/animated';
 import { debounce, renderHTML, safelyExecCallback } from '../../utilities/helpers';
-import {default as ASelect} from 'react-select/async';
+import { default as ASelect } from 'react-select/async';
+import { default as ACSelect } from 'react-select/async-creatable';
 import { reactSelectStyles } from '../../styles/componentStyles';
 import PropTypes from 'prop-types';
 const animatedComponents = makeAnimated();
@@ -20,6 +21,7 @@ AsyncSelect.propTypes = {
   }).isRequired,
   storedOptions: PropTypes.array,
   hasFeedback: PropTypes.bool,
+  isCreatable: PropTypes.bool,
   i18n: PropTypes.shape({
     select: PropTypes.shape({
       placeholder: PropTypes.string.isRequired,
@@ -30,7 +32,7 @@ AsyncSelect.propTypes = {
   }).isRequired
 };
 
-function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasFeedback, i18n }) {
+function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasFeedback, isCreatable, i18n }) {
   // custom hook to open/close modal
   const { isOpen, setIsOpen } = useModalToggle();
   // this is the request for the pool of options - won't run on mount
@@ -76,6 +78,12 @@ function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasF
     });
   };
 
+  const handleCreateOption = (selectedOptions) => {
+    // GET requests (or non specified) are simply for searching and thus we skip XHR cause we handle it directly in the HOC
+    console.log('option created');
+    console.log(selectedOptions);
+  };
+
   // `callback` is a react-select native function which is used to build the dropdown options. It is passed over to
   // our useFetch custom hook so that we can manipulate it and call it whenever we see fit.
   const loadAsyncOptions = (query, callback) => {
@@ -103,23 +111,44 @@ function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasF
      * @param i18.select.feedback
      */
     <>
-      <ASelect
-        styles={reactSelectStyles}
-        onChange={handleChange}
-        value={data}
-        components={animatedComponents}
-        autoload={false}
-        cache={false}
-        menuIsOpen={isOpen}
-        isMulti={true}
-        backspaceRemovesValue={false}
-        placeholder={i18n.select.placeholder}
-        noOptionsMessage={() => renderHTML(i18n.select.noresults)}
-        loadingMessage={() => renderHTML(i18n.select.loading)}
-        loadOptions={loadAsyncOptionsDelayed}
-        onMenuOpen={() => setIsOpen(true)}
-        onMenuClose={() => setIsOpen(false)}
-      />
+      {isCreatable ? (
+        <ACSelect
+          styles={reactSelectStyles}
+          onChange={handleChange}
+          onCreateOption={handleCreateOption}
+          value={data}
+          components={animatedComponents}
+          autoload={false}
+          cache={false}
+          menuIsOpen={isOpen}
+          isMulti={false}
+          backspaceRemovesValue={false}
+          placeholder={i18n.select.placeholder}
+          noOptionsMessage={() => renderHTML(i18n.select.noresults)}
+          loadingMessage={() => renderHTML(i18n.select.loading)}
+          loadOptions={loadAsyncOptionsDelayed}
+          onMenuOpen={() => setIsOpen(true)}
+          onMenuClose={() => setIsOpen(false)}
+        />
+      ) : (
+        <ASelect
+          styles={reactSelectStyles}
+          onChange={handleChange}
+          value={data}
+          components={animatedComponents}
+          autoload={false}
+          cache={false}
+          menuIsOpen={isOpen}
+          isMulti={true}
+          backspaceRemovesValue={false}
+          placeholder={i18n.select.placeholder}
+          noOptionsMessage={() => renderHTML(i18n.select.noresults)}
+          loadingMessage={() => renderHTML(i18n.select.loading)}
+          loadOptions={loadAsyncOptionsDelayed}
+          onMenuOpen={() => setIsOpen(true)}
+          onMenuClose={() => setIsOpen(false)}
+        />
+      )}
       {hasFeedback ? <small className="form-text text-muted">{i18n.select.feedback}</small> : ''}
     </>
   );

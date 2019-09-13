@@ -59,10 +59,13 @@ function RenderEntry({
               />
             );
           case ['locations'].includes(objKey):
-            const locationValue = objValue.split(',').map((element) => {return element.split(':')[1]}).join(', ');
-            return (
-              <RenderRow name={i18n.search_save_filters[objKey]} value={locationValue} index={index} />
-            );
+            const locationValue = objValue
+              .split(',')
+              .map(element => {
+                return element.split(':')[1];
+              })
+              .join(', ');
+            return <RenderRow name={i18n.search_save_filters[objKey]} value={locationValue} index={index} />;
           case ['roomsmin', 'roomsmax'].includes(objKey):
           case ['constructionmin', 'constructionmax'].includes(objKey):
             return <RenderRow name={i18n.search_save_filters[objKey]} value={objValue} index={index} />;
@@ -78,14 +81,15 @@ function SaveSearch({
   modalHeader,
   criteriaSelection,
   avatar,
-  favlists_url,
   favorites_url,
   property_id,
+  clientsEndpoint,
+  matchmakingsEndpoint,
   i18n,
   i18nPriceOptions,
   i18nSizeOptions,
   i18nFloorOptions,
-  i18nCategoryOptions
+  i18nCategoryOptions,
 }) {
   const [currentParams, setCurrentParams] = useState([]);
   useEffect(() => {
@@ -104,8 +108,6 @@ function SaveSearch({
       <div className="d-flex justify-content-center mt-2">
         <i className="pr-icon md disk" />
       </div>
-
-      {/*<hr />*/}
       <div className={'favlist-body mt-2'}>
         <h3>{i18n.search_save_criteria}</h3>
         <div className={'col-12'}>
@@ -127,32 +129,30 @@ function SaveSearch({
               })}
             </tbody>
           </table>
-
         </div>
         <div className={'row'}>
-          <div className={'col-lg-6 offset-lg-3 col-sm-12 mb-5'}>
+          <div className={'col-lg-8 offset-lg-2 col-sm-12 mb-5'}>
             <AsyncSelectContainer
               id={'AsyncSelectContainer'}
               i18n={{
                 select: {
                   placeholder: i18n.select.placeholder_clients,
                   noresults: i18n.select.noresults,
-                  loading: i18n.select.loading_html,
+                  loading: i18n.select.loading,
                   feedback: i18n.select.clientship_feedback
                 }
               }}
-              collection_endpoint={{ url: '', action: 'get' }}
-              action_endpoint={{ url: '', action: '', callback: '' }}
+              isCreatable={true}
+              collection_endpoint={{ url: clientsEndpoint, action: 'get' }}
+              action_endpoint={{ url: matchmakingsEndpoint, action: 'post' }}
               storedOptions={[]}
               hasFeedback={false}
-
             />
             <div className={'text-center'}>
               <small className={'text-muted mt-1'}>{i18n.select.clientship_feedback}</small>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );

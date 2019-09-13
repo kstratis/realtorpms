@@ -68,9 +68,14 @@ Rails.application.routes.draw do
 
       post '/properties/uploads', to: 'properties#uploads'
 
+      # i.e. /properties/21 - assign property to partner
       post '/assignments/property/:pid/users/', to: 'assignments#assign', as: :assignments
 
+      # i.e. /clients/25 - assign client to partner
       post '/clientships/client/:cid/users/', to: 'clientships#assign', as: :clientships
+
+      # i.e. /properties - assign search/state to client
+      post '/matches/', to: 'matches#assign', as: :matches
 
 
       # resources :invitations, only: [:new, :create] do

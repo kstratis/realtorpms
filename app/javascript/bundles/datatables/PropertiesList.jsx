@@ -67,6 +67,8 @@ const PropertiesList = ({
   handleSearchInput,
   handleCategoryInput,
   locations_endpoint,
+  clients_endpoint,
+  matchmakings_endpoint,
   properties_path,
   i18n
 }) => {
@@ -249,6 +251,7 @@ const PropertiesList = ({
                   action_endpoint={{ url: '', action: '', callback: handleLocationInput }}
                   storedOptions={locations_filter['storedOptions']}
                   hasFeedback={false}
+                  isCreatable={false}
                 />
               </div>
               <div className={'col-lg-5 col-sm-12 text-center'}>
@@ -292,6 +295,8 @@ const PropertiesList = ({
                   backspaceRemovesValue={true}
                   isSearchable={true}
                   i18n={i18n}
+                  clientsEndpoint={clients_endpoint}
+                  matchmakingsEndpoint={matchmakings_endpoint}
                   i18nPriceOptions={priceFilterOptions(price_filter['options'])}
                   i18nSizeOptions={sizeFilterOptions(size_filter['options'])}
                   i18nFloorOptions={floorFilterOptions(floors_filter['options'])}
