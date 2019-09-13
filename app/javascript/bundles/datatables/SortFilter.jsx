@@ -27,7 +27,7 @@ class SortFilter extends React.Component {
 
   render() {
     return (
-      <div className="flex-fill pl-2 pr-0">
+      <div className="flex-nowrap flex-fill px-2 sort-filter">
         <div className="dropdown">
           <button
             className="btn btn-secondary"

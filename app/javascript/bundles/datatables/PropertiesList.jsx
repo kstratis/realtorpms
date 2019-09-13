@@ -242,8 +242,8 @@ const PropertiesList = ({
           </div>
           <div className={'col-7'}>
             {/* Generate the needed filters according to the i18n keys of the erb template */}
-            <div className={'row mb-3'}>
-              <div className={'col-lg-6 col-sm-12 mb-3 mb-lg-0'}>
+            <div className={'row mb-3 px-2 d-flex flex-nowrap'}>
+              <div className={'flex-grow-1'}>
                 <AsyncSelectContainer
                   id={'AsyncSelectContainer'}
                   i18n={i18n}
@@ -254,7 +254,7 @@ const PropertiesList = ({
                   isCreatable={false}
                 />
               </div>
-              <div className={'col-lg-5 col-sm-12 text-center'}>
+              <div className={'text-center'}>
                 <SortFilter
                   handleFn={handleSort}
                   slug={'created_at'}
@@ -279,12 +279,12 @@ const PropertiesList = ({
                   ]}
                 />
               </div>
-              <div className={`col-lg-1 col-sm-12`}>
+              <div className={``}>
                 <ModalContainer
                   id={'modal-window'}
-                  fireButtonLabel={`<i class='fas fa-save fa-fw' />`}
+                  fireButtonLabel={`<i class='fas fa-save fa-lg fa-fw' />`}
                   fireButtonBtnSize={`md`}
-                  fireButtonBtnType={`danger`}
+                  fireButtonBtnType={`success`}
                   avatar={null}
                   modalTitle={i18n.search_save_title}
                   modalHeader={i18n.search_save_subtitle}
@@ -304,7 +304,8 @@ const PropertiesList = ({
                 />
 
                 {/*<button className={'btn btn-danger'} disabled={!hasParams()}><i className={'fas fa-save'}></i></button>*/}
-              </div>
+
+            </div>
             </div>
             <Spinner isLoading={isLoading} version={2} />
             {dataset.length > 0 ? (

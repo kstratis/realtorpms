@@ -6,7 +6,7 @@ en:
   prompt: "Are you sure you want to proceed with this action?"
   access_denied: "Access denied"
   header:
-    search: "Search using code"
+    search: "Search using property code"
   activerecord:
     models:
       invitation: "Invitation"
