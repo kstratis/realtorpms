@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import URLSearchParams from '@ungap/url-search-params';
 import { priceFilterOptions, renderHTML } from '../utilities/helpers';
 import AsyncSelectContainer from './selects/AsyncSelectContainer';
+import useFetch from '../hooks/useFetch';
+import useModalToggle from '../hooks/useModalToggle';
 
 const renderParams = () => {
   let searchParams = new URLSearchParams(window.location.search);
@@ -40,7 +42,7 @@ function RenderEntry({
             );
           case ['sizemin', 'sizemax'].includes(objKey):
             return (
-              <RenderRow name={i18n.search_save_filters[objKey]} value={i18nSizeOptions[objValue]} index={index} />
+              <RenderRow name={i18n.search_save_filters[objKey]} value={renderHTML(i18nSizeOptions[objValue])} index={index} />
             );
           case ['floorsmin', 'floorsmax'].includes(objKey):
             return (
@@ -84,14 +86,25 @@ function SaveSearch({
   favorites_url,
   property_id,
   clientsEndpoint,
-  matchmakingsEndpoint,
+  assignmentshipsEndpoint,
   i18n,
   i18nPriceOptions,
   i18nSizeOptions,
   i18nFloorOptions,
-  i18nCategoryOptions,
+  i18nCategoryOptions
 }) {
   const [currentParams, setCurrentParams] = useState([]);
+
+  const [selectedOption, setSelectedOption] = useState('');
+
+  const [selectionRequest, setSelectionRequest] = useState({});
+
+  const [isFinished, setIsFinished] = useState(false);
+
+  const didMountForSaveSearchRef = useRef(false);
+
+  const { data, loading } = useFetch(selectionRequest, false, didMountForSaveSearchRef);
+
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const searchParamsObjectified = [];
@@ -102,6 +115,29 @@ function SaveSearch({
     // console.log(searchParamsObjectified);
     setCurrentParams(searchParamsObjectified);
   }, []);
+
+  const savePreferencesHandler = () => {
+    if (!selectedOption) return;
+    console.log('setting ajax call');
+    setSelectionRequest({
+      url: assignmentshipsEndpoint,
+      method: 'post',
+      payload: { selection: selectedOption || [] },
+      callback: msg => {
+        setIsFinished(true);
+      }
+    });
+  };
+
+  // This is executed as the action callback handler in AsyncSelect and passes over the selection in this component.
+  const asyncSelectCallback = selection => {
+    // DEBUG
+    // console.log(selection);
+    if (!selection) {
+      console.log('no selection');
+    }
+    setSelectedOption(selection);
+  };
 
   return (
     <div className="favlist-container mt-3">
@@ -130,8 +166,9 @@ function SaveSearch({
             </tbody>
           </table>
         </div>
-        <div className={'row'}>
-          <div className={'col-lg-8 offset-lg-2 col-sm-12 mb-5'}>
+
+        <div className={'row justify-content-center mb-4'}>
+          <div className={'col-lg-8 col-sm-12'}>
             <AsyncSelectContainer
               id={'AsyncSelectContainer'}
               i18n={{
@@ -143,8 +180,10 @@ function SaveSearch({
                 }
               }}
               isCreatable={true}
+              isDisabled={isFinished}
+              isClearable={true}
               collection_endpoint={{ url: clientsEndpoint, action: 'get' }}
-              action_endpoint={{ url: matchmakingsEndpoint, action: 'post' }}
+              action_endpoint={{ url: '', action: '', callback: asyncSelectCallback }}
               storedOptions={[]}
               hasFeedback={false}
             />
@@ -152,7 +191,28 @@ function SaveSearch({
               <small className={'text-muted mt-1'}>{i18n.select.clientship_feedback}</small>
             </div>
           </div>
+          <div className={'col-lg-4 col-sm-12 text-center'}>
+            <button
+              className={'btn btn-primary'}
+              onClick={savePreferencesHandler}
+              disabled={selectedOption && !isFinished ? '' : 'disabled'}>
+              {`${isFinished && !loading ? i18n.select.saved_btn : i18n.select.save_btn}`}
+            </button>
+          </div>
         </div>
+        {isFinished ? (
+          <div className={'row justify-content-center text-center'}>
+            <div className="col-lg-12">
+              <div className="alert alert-success has-icon" role="alert">
+                <div className="alert-icon">
+                  <span className="oi oi-check"></span>
+                </div>
+                <span>{i18n.select.search_saved_success}</span>
+              </div>
+            </div>
+          </div>
+        ) : null}
+        <div className={'row my-2'} />
       </div>
     </div>
   );

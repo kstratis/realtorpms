@@ -68,7 +68,7 @@ const PropertiesList = ({
   handleCategoryInput,
   locations_endpoint,
   clients_endpoint,
-  matchmakings_endpoint,
+  assignmentships_endpoint,
   properties_path,
   i18n
 }) => {
@@ -296,7 +296,7 @@ const PropertiesList = ({
                   isSearchable={true}
                   i18n={i18n}
                   clientsEndpoint={clients_endpoint}
-                  matchmakingsEndpoint={matchmakings_endpoint}
+                  assignmentshipsEndpoint={assignmentships_endpoint}
                   i18nPriceOptions={priceFilterOptions(price_filter['options'])}
                   i18nSizeOptions={sizeFilterOptions(size_filter['options'])}
                   i18nFloorOptions={floorFilterOptions(floors_filter['options'])}

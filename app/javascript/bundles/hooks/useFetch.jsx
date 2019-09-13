@@ -8,14 +8,11 @@ axios.defaults.headers.common['X-CSRF-Token'] = ReactOnRails.authenticityToken()
 // and the user gets input lag
 function useFetch(request, dropdown = true, didMountRef = null) {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const executeAjax = async () => {
       if (!dropdown) setLoading(true);
-      console.log(request.method);
-      console.log(request.url);
-      console.log(request.payload);
       const result = await axios({
         method: request.method,
         url: request.url,

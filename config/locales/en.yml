@@ -285,7 +285,7 @@ en:
           title: "Save search request"
           subtitle: "Save search criteria"
           close_btn: "Close"
-          criteria: "Έχετε επιλέξει τα εξής κριτήρια:"
+          criteria: "You've chosen the following search criteria:"
           feedback: ""
           filters:
             pricemin: "Price from:"
@@ -311,7 +311,7 @@ en:
           add_list_action: "Add"
           loading_alt: "Loading..."
       select:
-        noresults: "Δεν βρέθηκαν αποτελέσματα"
+        noresults: "No results were found"
         loading_html: "Loading results..."
         placeholder: "Choose"
         placeholder_title: "Start typing to select..."
@@ -330,6 +330,9 @@ en:
         placeholder_construction_max: "To: Year"
         assignments_feedback: "Assign to one or more partners"
         clientship_feedback: "Client search preferences"
+        save_btn: "Save"
+        saved_btn: "Saved"
+        search_saved_success: "Search criterias successfully saved. You can now close the dialog window."
         category: "Category"
         subcategory: "Subcategory"
         required: "Required field"

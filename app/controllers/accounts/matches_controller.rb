@@ -48,7 +48,7 @@ module Accounts
         }
         data << hash
       end
-      render :json => {:status => 200, :message => data, meta: I18n.t('js.components.select.assign_completed')} and return
+      render :json => {:status => 200, :message => 'καλισπερα', meta: I18n.t('js.components.select.assign_completed')} and return
     end
 
     private
