@@ -680,6 +680,7 @@ en:
     show:
       breadcrumb: "Properties"
       catalog: "Catalog"
+      back: "Back"
       heading: "Property info"
       properties: "Properties"
       print: "Print property"

@@ -684,6 +684,7 @@ el:
     show:
       breadcrumb: "Ακίνητα"
       catalog: "Κατάλογος"
+      back: "Επιστροφή"
       heading: "Πληροφορίες ακινήτου"
       properties: "Ακίνητα"
       print: "Εκτύπωση ακινήτου"

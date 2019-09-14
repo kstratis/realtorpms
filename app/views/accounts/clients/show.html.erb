@@ -8,7 +8,7 @@
     <!-- .card -->
     <div class="card card-fluid">
 
-      <%= render partial: 'shared/card_header/header', locals: {title: @client.full_name, btn_text: t('properties.show.catalog'), btn_link: :back} %>
+      <%= render partial: 'shared/card_header/header', locals: {title: @client.full_name, btn_text: t('properties.show.back'), btn_link: :back} %>
       <!-- .card-body -->
       <div class="card-body client">
         <!-- .media -->
@@ -76,6 +76,7 @@
                     searchprefs: @client.searchprefs,
                     ajaxEnabled: true,
                     isClearable: true,
+                    buttonDisabled: @client.searchprefs.blank?,
                     backspaceRemovesValue: true,
                     isSearchable: true,
                     i18nPriceOptions: price_options,
