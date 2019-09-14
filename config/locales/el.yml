@@ -382,6 +382,7 @@ el:
           title: "Κατάσταση"
           active: "Ενεργός"
           inactive: "Ανενεργός"
+
         email: "Email"
         usertype: "Είδος λογαριασμού"
         registration: "Εγγραφή"
@@ -395,6 +396,12 @@ el:
       clients:
         no_results: "Δεν βρέθηκαν πελάτες!"
         search_placeholder: "Αναζήτηση πελάτη..."
+        name: "Όνομα"
+        email: "Email"
+        telephones:
+          title: "Τηλέφωνο/α"
+        registration: "Εγγραφή"
+        actions: "Ενέργειες"
       properties:
         description: "Περιγραφή"
       pagination:

@@ -85,7 +85,7 @@ const ClientsList = ({
                       className={'sortable-header-name'}
                       href={''}
                       onClick={e => handleSort(e, 'last_name')}>
-                      <span>{i18n['datatable']['partner']}</span>
+                      <span>{i18n['datatable']['name']}</span>
                       {sorting === 'last_name' ? (
                         ordering === 'asc' ? (
                           <span className={'sortable-icon-container'}>
@@ -124,13 +124,9 @@ const ClientsList = ({
                     </a>
                   </th>
                   <th>
-                    <a
-                      id="sort_by_status"
-                      className={'sortable-header-name'}
-                      href={''}
-                      onClick={e => handleSort(e, 'status')}>
-                      <span>{i18n['datatable']['status']['title']}</span>
-                    </a>
+
+                      <span>{i18n['datatable']['telephones']['title']}</span>
+
                   </th>
                   <th>
                     <a
@@ -180,11 +176,7 @@ const ClientsList = ({
 
                     <td className={'align-middle'}>
                       <div className={'table-entry'}>
-                        {entry['active'] ? (
-                          <span className="badge badge-success">{i18n['datatable']['status']['active']}</span>
-                        ) : (
-                          <span className="badge badge-danger">{i18n['datatable']['status']['inactive']}</span>
-                        )}
+                        <span className={`${entry['telephones'] === '—' ? '' : 'badge badge-success'}`}>{entry['telephones']}</span>
                       </div>
                     </td>
 

@@ -394,6 +394,12 @@ en:
       clients:
         no_results: "Δεν βρέθηκαν πελάτες!"
         search_placeholder: "Client search..."
+        name: "Name"
+        email: "Email"
+        telephones:
+          title: "Telephone/s"
+        registration: "Registration"
+        actions: "Actions"
       pagination:
         results: "Results"
       properties:
