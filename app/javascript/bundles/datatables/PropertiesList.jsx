@@ -31,7 +31,7 @@ const hasParams = () => {
   let param_counter = 0;
   for (let p of searchParams) {
     // count these out
-    if (['page', 'sizeminmeta', 'sizemaxmeta'].indexOf(p[0]) === -1) {
+    if (['page', 'sizeminmeta', 'sizemaxmeta', 'ordering', 'sorting'].indexOf(p[0]) === -1) {
       param_counter = param_counter + 1;
     }
   }
@@ -292,7 +292,7 @@ const PropertiesList = ({
                   avatar={null}
                   modalTitle={i18n.search_save_title}
                   modalHeader={i18n.search_save_subtitle}
-                  child={'SaveSearch'}
+                  child={'StoreClientSearch'}
                   buttonCloseLabel={i18n.search_save_buttonCloseLabel}
                   ajaxEnabled={true}
                   isClearable={true}
@@ -302,10 +302,10 @@ const PropertiesList = ({
                   buttonDisabled={!hasParams()}
                   clientsEndpoint={clients_endpoint}
                   assignmentshipsEndpoint={assignmentships_endpoint}
-                  i18nPriceOptions={priceFilterOptions(price_filter['options'])}
-                  i18nSizeOptions={sizeFilterOptions(size_filter['options'])}
-                  i18nFloorOptions={floorFilterOptions(floors_filter['options'])}
-                  i18nCategoryOptions={categoryFilterOptions(category_filter['options'])}
+                  i18nPriceOptions={price_filter['options']}
+                  i18nSizeOptions={size_filter['options']}
+                  i18nFloorOptions={floors_filter['options']}
+                  i18nCategoryOptions={category_filter['options']}
                 />
 
                 {/*<button className={'btn btn-danger'} disabled={!hasParams()}><i className={'fas fa-save'}></i></button>*/}

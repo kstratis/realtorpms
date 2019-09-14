@@ -16,7 +16,8 @@ module Accounts
           current_user.clients << @client
         end
         if @client.save
-          render json: {status: 200, message: client_url(@client)} and return
+          # render json: {status: 200, message: client_path(@client)} and return
+          render json: {status: 200, message: I18n.t('js.components.select.search_saved_success_client_html', client_link: client_url(@client))} and return
         end
       end
 
@@ -29,7 +30,8 @@ module Accounts
       # requested_search = match_params[:searchstring]
       @requested_client.searchprefs = requested_search
       if @requested_client.save
-        render json: {status: 200, message: client_url(@requested_client)}
+        # render json: {status: 200, message: client_url(@requested_client)}
+        render json: {status: 200, message: I18n.t('js.components.select.search_saved_success_client_html', client_link: client_url(@requested_client))}
       end
     end
 

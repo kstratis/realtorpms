@@ -283,9 +283,11 @@ en:
       modal:
         search_save:
           title: "Save search request"
+          title_alt: "Search info"
           subtitle: "Save search criteria"
           close_btn: "Close"
           criteria: "You've chosen the following search criteria:"
+          header: "%{client_name} is looking for:"
           feedback: ""
           filters:
             pricemin: "Price from:"
@@ -332,7 +334,7 @@ en:
         clientship_feedback: "Client search preferences"
         save_btn: "Save"
         saved_btn: "Saved"
-        search_saved_success: "Search criterias successfully saved. You can now close the dialog window."
+        search_saved_success_client_html: "Search saved. Go to <a href='%{client_link}'>client</a> or close the dialog window and continue."
         category: "Category"
         subcategory: "Subcategory"
         required: "Required field"
@@ -566,6 +568,7 @@ en:
       breadcrumb: "Clients"
       heading: "Client information"
       clients: "Clients"
+      search_prefs: "Search preferences"
     index:
       breadcrumb: "Clients"
     title: "Clients"

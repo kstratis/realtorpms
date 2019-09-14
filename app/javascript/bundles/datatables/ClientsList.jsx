@@ -171,7 +171,7 @@ const ClientsList = ({
 
                     <td className={'align-middle'}>
                       <div className={'table-entry'}>
-                        <span className={`${entry['telephones'] === '—' ? '' : 'badge badge-success'}`}>
+                        <span style={{letterSpacing: '0.1em', fontSize: '90%'}} className={`${entry['telephones'] === '—' ? '' : 'badge badge-success'}`}>
                           {entry['telephones']}
                         </span>
                       </div>

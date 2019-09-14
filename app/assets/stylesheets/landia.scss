@@ -21,6 +21,7 @@
 //  src: local('PFDinDisplayPro-Bold'), url('PFDinDisplayPro-Bold.woff') format('woff');
 //}
 
+
 body {
   line-height: 1.5em;
   color: #454545;
@@ -40,6 +41,10 @@ body {
 
   background-color: $bg-color-1;
   transition: all 1s ease;
+}
+
+.app{
+  background: $bg-color-1; //hack
 }
 
 textarea {

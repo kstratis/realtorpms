@@ -55,24 +55,46 @@
               <% end %>
 
               <div class="col">
-                <h6 class="card-subtitle text-muted request-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A commodi consequuntur cumque cupiditate distinctio dolore</h6>
+                <span style="letter-spacing: 0.1em;font-size: 90%" class="badge badge-success"><%= @client.telephones %></span>
+<!--                <h6 class="card-subtitle text-muted request-description"></h6>-->
               </div><!-- /grid column -->
 
               <!-- /grid column -->
               <div class="col-auto">
-                <button type="button" class="btn btn-icon btn-secondary mr-1" data-toggle="tooltip" title="Private message">
-                  <i class="far fa-comment-alt"></i></button> <!-- .dropdown -->
-                <div class="dropdown d-inline-block">
-                  <button class="btn btn-icon btn-secondary" data-toggle="dropdown">
-                    <i class="fa fa-fw fa-ellipsis-h"></i></button>
-                  <div class="dropdown-menu dropdown-menu-right">
-                    <div class="dropdown-arrow"></div>
-                    <button type="button" class="dropdown-item">Invite to a team</button>
-                    <button type="button" class="dropdown-item">Copy member ID</button>
-                    <div class="dropdown-divider"></div>
-                    <button type="button" class="dropdown-item">Remove</button>
-                  </div>
-                </div><!-- /.dropdown -->
+                <%= react_component('ModalContainer', props: {
+                    id: 'modal-window-saved-prefs',
+                    fireButtonLabel: '<i class="fas fa-info fa-fw"></i>&nbsp;' + t('clients.show.search_prefs'),
+                    fireButtonBtnType: 'danger',
+                    avatar: nil,
+                    child: 'RetrieveClientSearch',
+                    modalTitle: t('js.components.modal.search_save.title_alt'),
+                    modalHeader: t('js.components.modal.search_save.subtitle'),
+                    buttonOKLabel: t('properties.ok_button'),
+                    buttonCancelLabel: t('properties.cancel_button'),
+                    buttonCloseLabel: t('properties.close_button'),
+                    soloMode: true,
+                    searchprefs: @client.searchprefs,
+                    ajaxEnabled: true,
+                    isClearable: true,
+                    backspaceRemovesValue: true,
+                    isSearchable: true,
+                    i18nPriceOptions: price_options,
+                    i18nSizeOptions: size_options,
+                    i18nFloorOptions: floors_options,
+                    i18nCategoryOptions: category_options,
+                    feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
+                    i18n: {
+                        search_save_filters: t('js.components.modal.search_save.filters'),
+                        search_save_subtitle: t('js.components.modal.search_save.header', client_name: @client.full_name),
+                        no_lists_available: t('js.components.modal.favlists.no_results'),
+                        search_save_criteria: t('js.components.modal.search_save.criteria'),
+                        property_cover_alt: t('js.components.modal.favlists.property_cover_alt'),
+                        add_list_action: t('js.components.modal.favlists.add_list_action'),
+                        loading_alt: t('js.components.modal.favlists.loading_alt'),
+                        listname_placeholder: t('js.components.modal.favlists.listname_placeholder')
+                    }
+                }, prerender: false) %>
+
               </div><!-- /grid column -->
             </div><!-- /grid row -->
           </div><!-- /.card-body -->

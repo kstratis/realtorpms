@@ -412,6 +412,10 @@
     background-image: url( disk.svg);
   }
 
+  &.search{
+    background-image: url( search.svg);
+  }
+
   & ~ .pr-icon-desc {
     display: block;
     text-align: center;

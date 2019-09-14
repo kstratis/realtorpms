@@ -284,10 +284,12 @@ el:
       modal:
         search_save:
           title: "Αποθήκευση αναζήτησης"
+          title_alt: "Πληροφορίες αναζήτησης"
           subtitle: "Αποθήκευση κριτηρίων αναζήτησης"
           close_btn: "Κλείσιμο"
           criteria: "Έχετε επιλέξει τα εξής κριτήρια:"
-          feeback: "sel"
+          header: "Ο/Η %{client_name} ψάχνει για:"
+          feedback: ""
           filters:
             pricemin: "Τιμή από:"
             pricemax: "Τιμή έως:"
@@ -333,7 +335,7 @@ el:
         clientship_feedback: "Αποθήκευση προτιμήσεων πελάτη"
         save_btn: "Αποθήκευση"
         saved_btn: "Αποθηκεύτηκε"
-        search_saved_success: "Η αναζήτηση αποθηκεύτηκε επιτυχώς. Μπορείτε να κλείσετε το παράθυρο διαλόγου."
+        search_saved_success_client_html: "Η αναζήτηση αποθηκεύτηκε επιτυχώς. Μετάβαση στην <a href='%{client_link}'>καρτέλα πελάτη</a>. Μπορείτε να κλείσετε το παράθυρο διαλόγου."
         category: "Κατηγορία"
         subcategory: "Υποκατηγορία"
         required: "Υποχρεωτικό πεδίο"
@@ -571,6 +573,7 @@ el:
       breadcrumb: "Πελάτες"
       heading: "Πληροφορίες χρήστη"
       clients: "Πελάτες"
+      search_prefs: "Προτιμήσεις αναζήτησης"
     index:
       breadcrumb: "Πελάτες"
     title: "Πελάτες"

@@ -1,7 +1,14 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import AddRemoveFavLists from './AddRemoveFavLists';
-import SaveSearch from './SaveSearch';
+import StoreClientSearch from './StoreClientSearch';
+import RetrieveClientSearch from './RetrieveClientSearch';
+
+const components = {
+  StoreClientSearch: StoreClientSearch,
+  RetrieveClientSearch: RetrieveClientSearch,
+  AddRemoveFavLists: AddRemoveFavLists
+};
 
 class ModalContainer extends React.Component {
   constructor(props) {
@@ -17,6 +24,7 @@ class ModalContainer extends React.Component {
     }));
   }
   render() {
+    const SpecificSearch = components[this.props.child];
     return (
       <>
         <Button
@@ -29,11 +37,7 @@ class ModalContainer extends React.Component {
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} scrollable={true}>
           <ModalHeader toggle={this.toggle}>{this.props.modalTitle}</ModalHeader>
           <ModalBody>
-            {this.props.child === 'AddRemoveFavLists' ? (
-              <AddRemoveFavLists {...this.props} />
-            ) : (
-              <SaveSearch {...this.props}/>
-            )}
+            <SpecificSearch {...this.props}/>
           </ModalBody>
           <ModalFooter>
             <Button color="secondary" onClick={this.toggle}>
