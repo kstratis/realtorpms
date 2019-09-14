@@ -118,14 +118,14 @@ function SaveSearch({
 
   const savePreferencesHandler = () => {
     if (!selectedOption) return;
-    console.log('setting ajax call');
+    // DEBUG
+    // console.log('setting ajax call - the option sent is:');
+    // console.log(selectedOption);
     setSelectionRequest({
       url: assignmentshipsEndpoint,
       method: 'post',
       payload: { selection: selectedOption || [], searchstring: window.location.search },
-      callback: msg => {
-        setIsFinished(true);
-      }
+      callback: () => setIsFinished(true)
     });
   };
 

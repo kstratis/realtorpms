@@ -80,12 +80,6 @@ function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasF
     });
   };
 
-  const handleCreateOption = (selectedOptions) => {
-    // GET requests (or non specified) are simply for searching and thus we skip XHR cause we handle it directly in the HOC
-    console.log('option created');
-    console.log(selectedOptions);
-  };
-
   // `callback` is a react-select native function which is used to build the dropdown options. It is passed over to
   // our useFetch custom hook so that we can manipulate it and call it whenever we see fit.
   const loadAsyncOptions = (query, callback) => {
@@ -117,7 +111,6 @@ function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasF
         <ACSelect
           styles={reactSelectStyles}
           onChange={handleChange}
-          onCreateOption={handleCreateOption}
           value={data}
           components={animatedComponents}
           autoload={false}
