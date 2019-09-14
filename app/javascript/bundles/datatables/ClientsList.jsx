@@ -10,7 +10,6 @@ import { capitalizeFirstLetter } from '../utilities/helpers';
 const ClientsList = ({
   handlePageClick,
   handleSort,
-  handleAssign,
   advanceByTwo,
   isLoading,
   dataset,
@@ -22,7 +21,6 @@ const ClientsList = ({
   i18n,
   meta,
   handleSearchInput,
-  handleFreezeUser,
   searchInput
 }) => {
   return (
@@ -38,7 +36,6 @@ const ClientsList = ({
                   <span className="badge badge-pill badge-info p-2 mr-2">{`${capitalizeFirstLetter(
                     i18n['result_count']
                   )}: ${count}`}</span>
-                  {/*<strong className={'count'}>{count}</strong> <span>{i18n['result_count']}</span>*/}
                 </div>
               </div>
               <div>
@@ -124,9 +121,7 @@ const ClientsList = ({
                     </a>
                   </th>
                   <th>
-
-                      <span>{i18n['datatable']['telephones']['title']}</span>
-
+                    <span>{i18n['datatable']['telephones']['title']}</span>
                   </th>
                   <th>
                     <a
@@ -176,7 +171,9 @@ const ClientsList = ({
 
                     <td className={'align-middle'}>
                       <div className={'table-entry'}>
-                        <span className={`${entry['telephones'] === '—' ? '' : 'badge badge-success'}`}>{entry['telephones']}</span>
+                        <span className={`${entry['telephones'] === '—' ? '' : 'badge badge-success'}`}>
+                          {entry['telephones']}
+                        </span>
                       </div>
                     </td>
 
