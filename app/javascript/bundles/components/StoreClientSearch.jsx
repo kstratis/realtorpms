@@ -29,10 +29,11 @@ function StoreClientSearch({
   const { data, loading } = useFetch(selectionRequest, false, didMountForSaveSearchRef);
   const params = useSearchParams(window.location.search);
 
+  // Sets the users preferences/search and renders the server reponse
   const savePreferencesHandler = () => {
     if (!selectedOption) return;
     // DEBUG
-    // console.log('setting ajax call - the option sent is:');
+    // console.log('executing AJAX call - the requested option is:');
     // console.log(selectedOption);
     setSelectionRequest({
       url: assignmentshipsEndpoint,
@@ -47,13 +48,11 @@ function StoreClientSearch({
     });
   };
 
-  // This is executed as the action callback handler in AsyncSelect and passes over the selection in this component.
+  // This is executed as the action callback handler in AsyncSelect. Its purpose is to pass over the AsyncSelect
+  // component's selection in to this component.
   const asyncSelectCallback = selection => {
     // DEBUG
     // console.log(selection);
-    if (!selection) {
-      console.log('no selection');
-    }
     setSelectedOption(selection);
   };
 

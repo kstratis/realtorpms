@@ -52,20 +52,14 @@ module Accounts
     end
 
     def show
-
       if @client.searchprefs.blank?
         return
       end
       searchprefs = @client.searchprefs
-
-
       searchprefs.slice!(0)
       searchprefs = Rack::Utils.parse_query(searchprefs).deep_symbolize_keys
       searchprefs.except!(:sizeminmeta, :sizemaxmeta, :page)
       searchprefs[:page] = params[:page]
-      puts '----------'
-      puts searchprefs
-      puts '----------'
       filter_properties(current_account.properties.includes(:location, :landlord), searchprefs)
     end
 
