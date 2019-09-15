@@ -50,28 +50,31 @@
             <% end %>
           <% end %>
           <!-- /.menu-item -->
-          <!-- .menu-item -->
-          <%#= content_tag :li, class: "menu-item has-child #{active_for(controller: ['users', 'invitations'], except_action: 'edit', classname: 'open')}" do %>
-          <%= content_tag :li, class: "menu-item #{active_for(controller: ['users', 'invitations'], except_action: 'edit')}" do %>
-            <%= link_to users_path, class: 'menu-link' do %>
-              <%= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-partners' %>
-              <%= content_tag :span, t('partners.title'), class: 'menu-text menu-text-entry align-middle' %>
+
+          <% if current_user.is_admin? current_account %>
+            <!-- .menu-item -->
+            <%#= content_tag :li, class: "menu-item has-child #{active_for(controller: ['users', 'invitations'], except_action: 'edit', classname: 'open')}" do %>
+            <%= content_tag :li, class: "menu-item #{active_for(controller: ['users', 'invitations'], except_action: 'edit')}" do %>
+              <%= link_to users_path, class: 'menu-link' do %>
+                <%= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-partners' %>
+                <%= content_tag :span, t('partners.title'), class: 'menu-text menu-text-entry align-middle' %>
+              <% end %>
             <% end %>
             <!-- child menu -->
-<!--            <ul class="menu">-->
-              <%#= content_tag :li, class: "menu-item  #{active_for(path: new_invitation_path)}" do %>
-                <%#= link_to new_invitation_path, class: 'menu-link' do %>
-                  <%#= content_tag :i, nil, class: 'fas fa-plus fa-fw' %>
-                  <%#= content_tag :span, t('partners.add'), class: 'menu-text' %>
-                <%# end %>
-              <%# end %>
-              <%#= content_tag :li, class: "menu-item  #{active_for(path: users_path)}" do %>
-                <%#= link_to users_path, class: 'menu-link' do %>
-                  <%#= content_tag :i, nil, class: 'fas fa-address-book fa-fw' %>
-                  <%#= content_tag :span, t('partners.list'), class: 'menu-text' %>
-                <%# end %>
-              <%# end %>
-<!--            </ul>-->
+            <!--            <ul class="menu">-->
+            <%#= content_tag :li, class: "menu-item  #{active_for(path: new_invitation_path)}" do %>
+            <%#= link_to new_invitation_path, class: 'menu-link' do %>
+            <%#= content_tag :i, nil, class: 'fas fa-plus fa-fw' %>
+            <%#= content_tag :span, t('partners.add'), class: 'menu-text' %>
+            <%# end %>
+            <%# end %>
+            <%#= content_tag :li, class: "menu-item  #{active_for(path: users_path)}" do %>
+            <%#= link_to users_path, class: 'menu-link' do %>
+            <%#= content_tag :i, nil, class: 'fas fa-address-book fa-fw' %>
+            <%#= content_tag :span, t('partners.list'), class: 'menu-text' %>
+            <%# end %>
+            <%# end %>
+            <!--            </ul>-->
             <!-- /child menu -->
           <% end %>
           <!-- /.menu-item -->
@@ -83,32 +86,32 @@
               <%= content_tag :span, t('properties.title'), class: 'menu-text menu-text-entry align-middle' %>
             <% end %>
             <!-- child menu -->
-<!--            <ul class="menu">-->
-              <%#= content_tag :li, class: "menu-item  #{active_for(path: new_property_path)}" do %>
-                <%#= link_to new_property_path, class: 'menu-link' do %>
-                  <%#= content_tag :i, nil, class: 'fas fa-plus fa-fw' %>
-                  <%#= content_tag :span, t('properties.add'), class: 'menu-text' %>
-                <%# end %>
-              <%# end %>
-              <%#= content_tag :li, class: "menu-item  #{active_for(path: properties_path)}" do %>
-                <%#= link_to properties_path, class: 'menu-link' do %>
-                  <%#= content_tag :i, nil, class: 'fas fa-book fa-fw' %>
-                  <%#= content_tag :span, t('properties.list'), class: 'menu-text' %>
-                <%# end %>
-              <%# end %>
-<!--              <li class="menu-item disabled <%#= active_for(path: properties_path) %>">-->
-                <%#= link_to properties_path, class: 'menu-link' do %>
-                  <%#= content_tag :i, nil, class: 'far fa-heart fa-fw' %>
-                  <%#= content_tag :span, t('properties.favourites'), class: 'menu-text' %>
-                <%# end %>
-<!--              </li>-->
-<!--              <li class="menu-item">-->
-                <%#= link_to nil, class: 'menu-link' do %>
-                  <%#= content_tag :i, nil, class: 'fas fa-file-import fa-fw' %>
-                  <%#= content_tag :span, t('properties.import'), class: 'menu-text' %>
-                <%# end %>
-<!--              </li>-->
-<!--            </ul>-->
+            <!--            <ul class="menu">-->
+            <%#= content_tag :li, class: "menu-item  #{active_for(path: new_property_path)}" do %>
+            <%#= link_to new_property_path, class: 'menu-link' do %>
+            <%#= content_tag :i, nil, class: 'fas fa-plus fa-fw' %>
+            <%#= content_tag :span, t('properties.add'), class: 'menu-text' %>
+            <%# end %>
+            <%# end %>
+            <%#= content_tag :li, class: "menu-item  #{active_for(path: properties_path)}" do %>
+            <%#= link_to properties_path, class: 'menu-link' do %>
+            <%#= content_tag :i, nil, class: 'fas fa-book fa-fw' %>
+            <%#= content_tag :span, t('properties.list'), class: 'menu-text' %>
+            <%# end %>
+            <%# end %>
+            <!--              <li class="menu-item disabled <%#= active_for(path: properties_path) %>">-->
+            <%#= link_to properties_path, class: 'menu-link' do %>
+            <%#= content_tag :i, nil, class: 'far fa-heart fa-fw' %>
+            <%#= content_tag :span, t('properties.favourites'), class: 'menu-text' %>
+            <%# end %>
+            <!--              </li>-->
+            <!--              <li class="menu-item">-->
+            <%#= link_to nil, class: 'menu-link' do %>
+            <%#= content_tag :i, nil, class: 'fas fa-file-import fa-fw' %>
+            <%#= content_tag :span, t('properties.import'), class: 'menu-text' %>
+            <%# end %>
+            <!--              </li>-->
+            <!--            </ul>-->
             <!-- /child menu -->
           <% end %>
           <!-- /.menu-item -->
@@ -120,48 +123,52 @@
             <% end %>
           <% end %>
 
-          <!-- .menu-item -->
-<!--          <li class="menu-item has-child">-->
-            <%#= link_to '#', class: 'menu-link' do %>
-              <%#= content_tag :span, nil, class: 'menu-icon fas fa-users fa-fw' %>
-              <%#= content_tag :span, t('sidebar.clients'), class: 'menu-text' %>
-            <%# end %>
-            <!-- child menu -->
-<!--            <ul class="menu">-->
-<!--              <li class="menu-item">-->
-                <%#= link_to '#', class: 'menu-link' do %>
-                  <%#= content_tag :i, nil, class: 'fas fa-plus fa-fw' %>
-                  <%#= content_tag :span, t('clients.add'), class: 'menu-text' %>
-                <%# end %>
-<!--              </li>-->
-<!--              <li class="menu-item">-->
-                <%#= link_to '#', class: 'menu-link' do %>
-                  <%#= content_tag :i, nil, class: 'fas fa-address-book fa-fw' %>
-                  <%#= content_tag :span, t('clients.list'), class: 'menu-text' %>
-                <%# end %>
-<!--              </li>-->
-<!--            </ul>-->
-            <!-- /child menu -->
-<!--          </li>-->
-          <!-- /.menu-item -->
 
           <!-- .menu-item -->
-          <li class="menu-item ">
-            <%= link_to '#', class: 'menu-link disabled', disabled: true do %>
-              <%= content_tag :span, nil, class: 'menu-icon fas icon-highway fa-fw' %>
-              <%= content_tag :span, t('sidebar.integrations'), class: 'menu-text' %>
-            <% end %>
-          </li>
+          <!--          <li class="menu-item has-child">-->
+          <%#= link_to '#', class: 'menu-link' do %>
+          <%#= content_tag :span, nil, class: 'menu-icon fas fa-users fa-fw' %>
+          <%#= content_tag :span, t('sidebar.clients'), class: 'menu-text' %>
+          <%# end %>
+          <!-- child menu -->
+          <!--            <ul class="menu">-->
+          <!--              <li class="menu-item">-->
+          <%#= link_to '#', class: 'menu-link' do %>
+          <%#= content_tag :i, nil, class: 'fas fa-plus fa-fw' %>
+          <%#= content_tag :span, t('clients.add'), class: 'menu-text' %>
+          <%# end %>
+          <!--              </li>-->
+          <!--              <li class="menu-item">-->
+          <%#= link_to '#', class: 'menu-link' do %>
+          <%#= content_tag :i, nil, class: 'fas fa-address-book fa-fw' %>
+          <%#= content_tag :span, t('clients.list'), class: 'menu-text' %>
+          <%# end %>
+          <!--              </li>-->
+          <!--            </ul>-->
+          <!-- /child menu -->
+          <!--          </li>-->
           <!-- /.menu-item -->
 
-          <!-- .menu-item -->
-          <li class="menu-item ">
-            <%= link_to '#', class: 'menu-link disabled', disabled: true do %>
-              <%= content_tag :span, nil, class: 'menu-icon fas fa-credit-card fa-fw' %>
-              <%= content_tag :span, t('sidebar.subscription'), class: 'menu-text' %>
-            <% end %>
-          </li>
+          <% if current_user.is_admin? current_account %>
+            <!-- .menu-item -->
+            <li class="menu-item ">
+              <%= link_to '#', class: 'menu-link disabled', disabled: true do %>
+                <%= content_tag :span, nil, class: 'menu-icon fas icon-highway fa-fw' %>
+                <%= content_tag :span, t('sidebar.integrations'), class: 'menu-text' %>
+              <% end %>
+            </li>
+            <!-- /.menu-item -->
+
+            <!-- .menu-item -->
+            <li class="menu-item ">
+              <%= link_to '#', class: 'menu-link disabled', disabled: true do %>
+                <%= content_tag :span, nil, class: 'menu-icon fas fa-credit-card fa-fw' %>
+                <%= content_tag :span, t('sidebar.subscription'), class: 'menu-text' %>
+              <% end %>
+            </li>
+          <% end %>
           <!-- /.menu-item -->
+
 
         </ul>
         <!-- /.menu -->
