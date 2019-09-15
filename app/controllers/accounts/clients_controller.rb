@@ -54,6 +54,8 @@ module Accounts
     def show
       searchprefs = @client.searchprefs
       searchprefs.slice!(0)
+      searchprefs.except!(:sizeminmeta, :sizemaxmeta)
+      # searchprefs[:page]
       filter_properties(current_account.properties.includes(:location, :landlord), Rack::Utils.parse_query(searchprefs))
     end
 
