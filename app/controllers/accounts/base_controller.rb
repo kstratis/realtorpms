@@ -3,6 +3,7 @@ module Accounts
 
     include SearchFilter
     include PersonDatatable
+    include PropertyDatatable
     include Jsonifier
 
     helper UserAvatar
