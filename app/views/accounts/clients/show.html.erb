@@ -19,15 +19,16 @@
             <div class="row align-items-center">
               <!-- grid column -->
               <div class="col-auto">
-<!--                <a href="user-profile.html" class="user-avatar user-avatar-lg"><img src="assets/images/avatars/uifaces5.jpg" alt="">-->
-<!--                  <span class="avatar-badge online" title="online"></span></a>-->
+                <!--                <a href="user-profile.html" class="user-avatar user-avatar-lg"><img src="assets/images/avatars/uifaces5.jpg" alt="">-->
+                <!--                  <span class="avatar-badge online" title="online"></span></a>-->
                 <a href="user-profile.html" class="user-avatar user-avatar-lg"><%= render_avatar(@client, "alphatar-edit clientavatar", "avatar_preview") %>
                   <span class="avatar-badge online" title="online"></span></a>
               </div><!-- /grid column -->
               <!-- grid column -->
               <div class="col">
                 <h3 class="card-title">
-                  <a href=""><%= @client.full_name %></a> <small class="text-muted"><%= @client.email ? @client.email : '' %></small>
+                  <a href=""><%= @client.full_name %></a>
+                  <small class="text-muted"><%= @client.email ? @client.email : '' %></small>
                 </h3>
                 <h6 class="card-subtitle text-muted"><%= @client.job ? @client.job : '' %></h6>
               </div><!-- /grid column -->
@@ -55,7 +56,7 @@
 
               <div class="col">
                 <span style="letter-spacing: 0.1em;font-size: 90%" class="badge badge-success"><%= @client.telephones %></span>
-<!--                <h6 class="card-subtitle text-muted request-description"></h6>-->
+                <!--                <h6 class="card-subtitle text-muted request-description"></h6>-->
               </div><!-- /grid column -->
 
               <!-- /grid column -->
@@ -103,5 +104,25 @@
 
       </div> <!-- /.card-body -->
     </div> <!-- /.card -->
+    <hr/>
+
+      <%= react_component('ClientPrefsListWithDatatable', props: {
+          initial_payload: {
+              dataset_wrapper: @propertieslist,
+              results_per_page: @results_per_page,
+              total_entries: @total_entries,
+              current_page: @current_page,
+              initial_search: @initial_search,
+              initial_sorting: @initial_sorting,
+              initial_ordering: @initial_ordering,
+              locations_endpoint: properties_locations_url,
+              clients_endpoint: clients_url,
+              assignmentships_endpoint: matches_url,
+              properties_path: properties_path,
+              hasFeedback: false,
+              object_type: 'properties'
+          }
+      }, prerender: false) %>
+
   </div>
 </div>

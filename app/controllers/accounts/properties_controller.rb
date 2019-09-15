@@ -1,8 +1,6 @@
 module Accounts
   class PropertiesController < Accounts::BaseController
     include PropertyHeader
-    include CategoryFinder
-    include LocationFinder
     helper PropertyHeader
     before_action :set_property, only: [:show, :edit, :update, :destroy]
 
@@ -12,7 +10,7 @@ module Accounts
     def index
       # preload location & owner
       # @properties = %w(sysadmin owner).include?(current_user.role(current_account)) ? current_account.properties.includes(:location, :landlord) : current_user.properties.where(account: current_account).includes(:location, :landlord)
-      filter_properties(current_account.properties.includes(:location, :landlord))
+      filter_properties(current_account.properties.includes(:location, :landlord), params)
     end
 
 
@@ -249,13 +247,6 @@ module Accounts
 
     def set_category
       @property.category = @category_instance
-    end
-
-    def forbidden_ids
-      unless current_user.is_admin?(current_account)
-        return current_account.properties.where.not(id: current_user.properties.where(account: current_account).includes(:location, :landlord)).pluck(:id)
-      end
-      []
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

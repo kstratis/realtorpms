@@ -52,7 +52,9 @@ module Accounts
     end
 
     def show
-
+      searchprefs = @client.searchprefs
+      searchprefs.slice!(0)
+      filter_properties(current_account.properties.includes(:location, :landlord), Rack::Utils.parse_query(searchprefs))
     end
 
     private

@@ -2,6 +2,7 @@ module Accounts
   class BaseController < ApplicationController
 
     include SearchFilter
+    include ForbiddenIds
     include PersonDatatable
     include PropertyDatatable
     include Jsonifier

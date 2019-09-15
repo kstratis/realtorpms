@@ -1,12 +1,15 @@
 module PropertyDatatable
   extend ActiveSupport::Concern
+  include PropertyHeader
+  include CategoryFinder
+  include LocationFinder
 
-  def filter_properties(relation)
+  def filter_properties(relation, filters)
 
     @properties = relation
 
-    if params[:locations]
-      locations = params[:locations].split(",").map(&:to_i)
+    if filters[:locations]
+      locations = filters[:locations].split(",").map(&:to_i)
       locations.each do |locationid|
         location = Location.find(locationid)
         if location.level == 3
@@ -25,17 +28,17 @@ module PropertyDatatable
     end
 
     # DEBUG - Search filter - Unused for now
-    # puts params[:search]
-    if params[:search]
-      @properties = @properties.search(params[:search])
+    # puts filters[:search]
+    if filters[:search]
+      @properties = @properties.search(filters[:search])
     end
 
     # DEBUG - Buy sell filter
-    # puts params[:purpose]
-    if params[:purpose]
+    # puts filters[:purpose]
+    if filters[:purpose]
       # sell_rent is deactivated "for the sake" of the price range filter
-      unless params[:purpose] == 'sell_rent'
-        @properties = @properties.where('businesstype = ?', Property.businesstypes[params[:purpose].to_sym]).or(@properties.where('businesstype = ?', 2))
+      unless filters[:purpose] == 'sell_rent'
+        @properties = @properties.where('businesstype = ?', Property.businesstypes[filters[:purpose].to_sym]).or(@properties.where('businesstype = ?', 2))
       end
     else
       # :sell is the default
@@ -43,64 +46,64 @@ module PropertyDatatable
     end
 
     # DEBUG - Category filter
-    # puts params[:category], params[:subcategory]
-    if params[:category] && params[:subcategory]
-      @properties = @properties.where(category: Category.find_by(slug: params[:subcategory], parent_slug: params[:category]))
-    elsif params[:category]
-      @properties = @properties.joins(:category).where(categories: {parent_slug: params[:category]})
+    # puts filters[:category], filters[:subcategory]
+    if filters[:category] && filters[:subcategory]
+      @properties = @properties.where(category: Category.find_by(slug: filters[:subcategory], parent_slug: filters[:category]))
+    elsif filters[:category]
+      @properties = @properties.joins(:category).where(categories: {parent_slug: filters[:category]})
     end
 
-    if params[:pricemin]
-      @properties = @properties.where("price >= ?", params[:pricemin])
+    if filters[:pricemin]
+      @properties = @properties.where("price >= ?", filters[:pricemin])
     end
 
-    if params[:pricemax]
-      @properties = @properties.where("price <= ?", params[:pricemax])
+    if filters[:pricemax]
+      @properties = @properties.where("price <= ?", filters[:pricemax])
     end
 
-    if params[:sizemin]
-      @properties = @properties.where("size >= ?", params[:sizemin])
+    if filters[:sizemin]
+      @properties = @properties.where("size >= ?", filters[:sizemin])
     end
 
-    if params[:sizemax]
-      @properties = @properties.where("size <= ?", params[:sizemax])
+    if filters[:sizemax]
+      @properties = @properties.where("size <= ?", filters[:sizemax])
     end
 
-    if params[:roomsmin]
-      @properties = @properties.where("bedrooms >= ?", params[:roomsmin])
+    if filters[:roomsmin]
+      @properties = @properties.where("bedrooms >= ?", filters[:roomsmin])
     end
 
-    if params[:roomsmax]
-      @properties = @properties.where("bedrooms <= ?", params[:roomsmax])
+    if filters[:roomsmax]
+      @properties = @properties.where("bedrooms <= ?", filters[:roomsmax])
     end
 
-    if params[:floorsmin]
-      @properties = @properties.where("floor >= ?", params[:floorsmin])
+    if filters[:floorsmin]
+      @properties = @properties.where("floor >= ?", filters[:floorsmin])
     end
 
-    if params[:floorsmax]
-      @properties = @properties.where("floor <= ?", params[:floorsmax])
+    if filters[:floorsmax]
+      @properties = @properties.where("floor <= ?", filters[:floorsmax])
     end
 
-    if params[:constructionmin]
-      @properties = @properties.where("construction >= ?", params[:constructionmin])
+    if filters[:constructionmin]
+      @properties = @properties.where("construction >= ?", filters[:constructionmin])
     end
 
-    if params[:constructionmax]
-      @properties = @properties.where("construction <= ?", params[:constructionmax])
+    if filters[:constructionmax]
+      @properties = @properties.where("construction <= ?", filters[:constructionmax])
     end
 
     # DEBUG - Ordering filter
-    # puts params[:sorting], params[:ordering]
-    if params[:sorting] && params[:ordering]
-      @properties = @properties.order("#{params[:sorting]}": params[:ordering])
+    # puts filters[:sorting], filters[:ordering]
+    if filters[:sorting] && filters[:ordering]
+      @properties = @properties.order("#{filters[:sorting]}": filters[:ordering])
     else
       @properties = @properties.order(created_at: 'desc')
     end
 
     # DEBUG - Pagination
-    # puts params[:page]
-    @properties = @properties.paginate(page: params[:page], :per_page => 10)
+    # puts filters[:page]
+    @properties = @properties.paginate(page: filters[:page], :per_page => 10)
 
     @propertieslist = {:dataset => Array.new}
 
@@ -148,24 +151,24 @@ module PropertyDatatable
     @total_entries = @properties.total_entries
     @current_page = @properties.current_page
     @results_per_page = 10
-    @initial_search = params[:search] || ''
-    @initial_locations = params[:locations].blank? ? [] : get_initial_locations(params[:locations].split(','))
-    @initial_sorting = params[:sorting] || 'created_at'
-    @initial_ordering = params[:ordering] || 'desc'
-    @initial_purpose = params[:purpose] || 'sell'
-    @initial_property_type = get_initial_category(params[:category], params[:sizeminmeta], params[:sizemaxmeta])
-    @initial_category = params[:category] || ''
-    @initial_subcategory = params[:subcategory] || ''
-    @initial_pricemin = params[:pricemin] || ''
-    @initial_pricemax = params[:pricemax] || ''
-    @initial_sizemin = params[:sizemin] || ''
-    @initial_sizemax = params[:sizemax] || ''
-    @initial_roomsmin = params[:roomsmin] || ''
-    @initial_roomsmax = params[:roomsmax] || ''
-    @initial_floorsmin = params[:floorsmin] || ''
-    @initial_floorsmax = params[:floorsmax] || ''
-    @initial_constructionmin = params[:constructionmin] || ''
-    @initial_constructionmax = params[:constructionmax] || ''
+    @initial_search = filters[:search] || ''
+    @initial_locations = filters[:locations].blank? ? [] : get_initial_locations(filters[:locations].split(','))
+    @initial_sorting = filters[:sorting] || 'created_at'
+    @initial_ordering = filters[:ordering] || 'desc'
+    @initial_purpose = filters[:purpose] || 'sell'
+    @initial_property_type = get_initial_category(filters[:category], filters[:sizeminmeta], filters[:sizemaxmeta])
+    @initial_category = filters[:category] || ''
+    @initial_subcategory = filters[:subcategory] || ''
+    @initial_pricemin = filters[:pricemin] || ''
+    @initial_pricemax = filters[:pricemax] || ''
+    @initial_sizemin = filters[:sizemin] || ''
+    @initial_sizemax = filters[:sizemax] || ''
+    @initial_roomsmin = filters[:roomsmin] || ''
+    @initial_roomsmax = filters[:roomsmax] || ''
+    @initial_floorsmin = filters[:floorsmin] || ''
+    @initial_floorsmax = filters[:floorsmax] || ''
+    @initial_constructionmin = filters[:constructionmin] || ''
+    @initial_constructionmax = filters[:constructionmax] || ''
 
     respond_to do |format|
       format.html
