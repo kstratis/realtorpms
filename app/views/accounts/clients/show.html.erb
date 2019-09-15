@@ -104,8 +104,8 @@
 
       </div> <!-- /.card-body -->
     </div> <!-- /.card -->
-    <hr/>
-
+    <% unless @client.searchprefs.blank? %>
+      <hr class="hr-text" data-content="&#9672;&nbsp; <%= t('clients.show.matches') %> &nbsp;&#9672;">
       <%= react_component('ClientPrefsListWithDatatable', props: {
           initial_payload: {
               dataset_wrapper: @propertieslist,
@@ -117,12 +117,14 @@
               initial_ordering: @initial_ordering,
               locations_endpoint: properties_locations_url,
               clients_endpoint: clients_url,
+              client_endpoint: client_path(@client),
               assignmentships_endpoint: matches_url,
               properties_path: properties_path,
               hasFeedback: false,
-              object_type: 'properties'
+              object_type: 'clientprefslist'
           }
       }, prerender: false) %>
+    <% end %>
 
   </div>
 </div>

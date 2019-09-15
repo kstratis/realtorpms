@@ -12,11 +12,6 @@ import {
 } from '../utilities/helpers';
 
 function StoreClientSearch({
-  modalHeader,
-  criteriaSelection,
-  avatar,
-  favorites_url,
-  property_id,
   child,
   clientsEndpoint,
   assignmentshipsEndpoint,
@@ -27,17 +22,11 @@ function StoreClientSearch({
   i18nCategoryOptions
 }) {
   const [selectedOption, setSelectedOption] = useState('');
-
   const [selectionRequest, setSelectionRequest] = useState({});
-
   const [remoteResponse, setRemoteResponse] = useState('');
-
   const [isFinished, setIsFinished] = useState(false);
-
   const didMountForSaveSearchRef = useRef(false);
-
   const { data, loading } = useFetch(selectionRequest, false, didMountForSaveSearchRef);
-
   const params = useSearchParams(window.location.search);
 
   const savePreferencesHandler = () => {
@@ -50,7 +39,8 @@ function StoreClientSearch({
       method: 'post',
       payload: { selection: selectedOption || [], searchstring: window.location.search },
       callback: response => {
-        console.log(response);
+        // DEBUG
+        // console.log(response);
         setRemoteResponse(response);
         setIsFinished(true);
       }

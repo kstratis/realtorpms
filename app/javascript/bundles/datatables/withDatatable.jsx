@@ -562,6 +562,9 @@ function withDatatable(WrappedComponent) {
         case 'clients':
           resource = `/clients.json${query}`;
           break;
+        case 'clientprefslist':
+          resource = `${this.props.initial_payload.client_endpoint}.json${query}`;
+          break;
         case 'properties':
           resource = `/properties.json${query}`;
           break;
@@ -698,6 +701,7 @@ function withDatatable(WrappedComponent) {
             add_property_link={this.props.initial_payload.add_property_link}
             locations_endpoint={this.props.initial_payload.locations_endpoint}
             clients_endpoint={this.props.initial_payload.clients_endpoint || ''}
+            client_endpoint={this.props.initial_payload.client_endpoint || ''}
             assignmentships_endpoint={this.props.initial_payload.assignmentships_endpoint || ''}
             properties_path={this.props.initial_payload.properties_path}
             handleChangePurpose={this.handleChangePurpose}

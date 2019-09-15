@@ -1,4 +1,3 @@
-import SortFilter from './SortFilter';
 import Spinner from './Spinner';
 import FlipMove from 'react-flip-move';
 import { renderHTML } from '../utilities/helpers';
@@ -9,24 +8,12 @@ import withDatatable from './withDatatable';
 import React from 'react';
 
 const ClientPrefsList = ({
-  handleLocationInput,
-  handlePriceInput,
-  handleSizeInput,
-  handleRoomsInput,
-  handleFloorsInput,
-  handleConstructionInput,
-  handleChangePurpose,
   handlePageClick,
-  handleSort,
   advanceByTwo,
   isLoading,
   dataset,
   pageCount,
   selectedPage,
-  sorting,
-  ordering,
-  count,
-  properties_path,
   i18n
 }) => {
   return (
@@ -34,34 +21,6 @@ const ClientPrefsList = ({
       <div className={'PropertyListContainer'}>
         <div className={'row'}>
           <div className={'col-12'}>
-            {/* Generate the needed filters according to the i18n keys of the erb template */}
-            {/*<div className={'row mb-3 px-2 d-flex flex-nowrap'}>*/}
-            {/*  <div className={'text-center'}>*/}
-                {/*<SortFilter*/}
-                {/*  handleFn={handleSort}*/}
-                {/*  slug={'created_at'}*/}
-                {/*  title={i18n.filters.sortByDate.title}*/}
-                {/*  currentSorting={sorting}*/}
-                {/*  currentOrdering={ordering}*/}
-                {/*  options={[*/}
-                {/*    {*/}
-                {/*      sn: 0,*/}
-                {/*      text: i18n.filters.sortByDate.option1,*/}
-                {/*      sort_filter: 'created_at',*/}
-                {/*      sort_order: 'desc',*/}
-                {/*      icon: 'fas fa-sort-amount-up fa-fw'*/}
-                {/*    },*/}
-                {/*    {*/}
-                {/*      sn: 1,*/}
-                {/*      text: i18n.filters.sortByDate.option2,*/}
-                {/*      sort_filter: 'created_at',*/}
-                {/*      sort_order: 'asc',*/}
-                {/*      icon: 'fas fa-sort-amount-down fa-fw'*/}
-                {/*    }*/}
-                {/*  ]}*/}
-                {/*/>*/}
-              {/*</div>*/}
-            {/*</div>*/}
             <Spinner isLoading={isLoading} version={2} />
             {dataset.length > 0 ? (
               <div className={`${isLoading ? 'reduced-opacity' : ''}`}>
@@ -97,7 +56,6 @@ const ClientPrefsList = ({
                                   ) : (
                                     <>
                                       <div className={'col-8'}>
-                                        {/*<h4 className="list-group-item-title">{entry.mini_heading}</h4>*/}
                                         <h4 className="list-group-item-title">{renderHTML(entry.mini_heading)}</h4>
                                         <p className="">{entry.location}</p>
                                         <p className="list-group-item-text clamp-3">{entry.description}</p>
@@ -105,12 +63,10 @@ const ClientPrefsList = ({
                                       <div className={'col-4'}>
                                         <p className="list-group-item-text purpose">{entry.purpose}</p>
                                         <p className="list-group-item-text text-right mt-2">{entry.price}</p>
-                                        {/*<p className="list-group-item-text text-right">{entry.size}</p>*/}
                                         <div className="list-group-item-text text-right">{renderHTML(entry.size)}</div>
                                         <div className="list-group-item-text text-right">
                                           {renderHTML(entry.pricepersqmeter)}
                                         </div>
-
                                         <p className="list-group-item-text text-right uid text-center">
                                           <strong>{entry['slug'].toUpperCase()}</strong>
                                         </p>

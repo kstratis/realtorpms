@@ -574,6 +574,7 @@ el:
       heading: "Πληροφορίες χρήστη"
       clients: "Πελάτες"
       search_prefs: "Προτιμήσεις αναζήτησης"
+      matches: "Διασταυρώσεις"
     index:
       breadcrumb: "Πελάτες"
     title: "Πελάτες"

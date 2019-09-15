@@ -569,6 +569,7 @@ en:
       heading: "Client information"
       clients: "Clients"
       search_prefs: "Search preferences"
+      matches: "Matches"
     index:
       breadcrumb: "Clients"
     title: "Clients"
