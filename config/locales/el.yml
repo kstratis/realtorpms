@@ -308,8 +308,10 @@ el:
             subcategory: "Υποκατηγορία:"
             locations: "Περιοχή:"
         favlists:
+          breadcrumb: "Λίστες αγαπημένων"
           listname_placeholder: "Όνομα νέας λίστας"
           no_results: "Δεν έχετε δημιουργήσει κάποια λίστα... ακόμα."
+          pick_list_prompt: "Επιλέξτε μία λίστα"
           property_cover_alt: "Φωτογραφία ακινήτου"
           add_list_action: "Προσθήκη"
           loading_alt: "Φορτώνει..."
@@ -503,6 +505,7 @@ el:
     integrations: "Διασυνδέσεις"
     subscription: "Συνδρομή"
     settings: "Ρυθμίσεις"
+    widget: "Widget"
   partners:
     title: "Συνεργάτες"
     list: "Κατάλογος"

@@ -171,9 +171,12 @@ const ClientsList = ({
 
                     <td className={'align-middle'}>
                       <div className={'table-entry'}>
-                        <span style={{letterSpacing: '0.1em', fontSize: '90%'}} className={`${entry['telephones'] === '—' ? '' : 'badge badge-success'}`}>
+
+                        {/*<span style={{letterSpacing: '0.1em', fontSize: '90%'}} className={`${entry['telephones'] === '—' ? '' : 'badge badge-success'}`}>*/}
+                        <span style={{fontSize: '90%'}} className={`${entry['telephones'] === '—' ? '' : 'badge badge-success'}`}>
                           {entry['telephones']}
                         </span>
+                        {/*<i className={'fas fa-phone-alt fa-fw'} />*/}
                       </div>
                     </td>
 

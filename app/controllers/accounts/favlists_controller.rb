@@ -4,7 +4,7 @@ module Accounts
     # Creates a new favorite property and places it in a favlist of your choosing
     # Expects a favlist_id and a property_id
     def create_favorite
-      current_user.favlists.find(params['favlist_id']).properties << Property.find(params['property_id'])
+      current_user.favlists.find(params['favlist_id']).properties << current_account.properties.find(params['property_id'])
       render json: {status: "OK", message: render_favlists}
     end
 
@@ -17,7 +17,18 @@ module Accounts
 
     # List all user favlists
     def index
-      render json: {status: "OK", message: render_favlists}
+      @favlists = render_favlists
+      respond_to do |format|
+        format.html # We also need to respond to normal requests for this one
+        format.json { render json: {status: "OK", message: @favlists} }
+      end
+    end
+
+    # List all properties of a particular favlist
+    def show
+      @favlist = current_user.favlists.find(params[:id])
+      puts @favlist.inspect
+      filter_properties(@favlist.properties.includes(:location, :landlord), {})
     end
 
     # Creates a new favlist

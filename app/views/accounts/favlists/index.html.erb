@@ -1,0 +1,30 @@
+<% provide(:title, t('js.components.modal.favlists.breadcrumb')) %>
+
+<!-- Notice the use of render partial -->
+<%= render layout: 'layouts/breadcrumb', locals: {path: [{:title => t('js.components.modal.favlists.breadcrumb'), :href => ''}], icon: 'house-colored'} do %>
+  <div class="action-btns">
+  </div>
+<% end %>
+
+<div class="page-container">
+  <div class="container">
+    <div class="app-container">
+      <%# Here we call render not on a string with the name of a partial, but rather on a user variable of class User;
+          in this context, Rails automatically looks for a partial called _user.html.erb, which we must create.
+          This is a definite improvement, but we can do even better: we can call render directly on the @users variable
+          Here Rails infers that @users is a list of User objects; moreover, when called with a collection of users,
+          Rails automatically iterates through them and renders each one with the _user.html.erb partial
+          (inferring the name of the partial from the name of the class). %>
+      <%#= render @users %>
+      <%= react_component('Favlists', props: {
+          favlists: @favlists,
+
+          i18n: {
+              no_results: t('js.components.modal.favlists.no_results'),
+              pick_list_prompt: t('js.components.modal.favlists.pick_list_prompt'),
+          }
+      }, prerender: false) %>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div>

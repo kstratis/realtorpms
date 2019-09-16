@@ -550,7 +550,8 @@ function withDatatable(WrappedComponent) {
     handleAjaxRequest(query = '') {
       const object_type = this.props.initial_payload.object_type;
       // DEBUG
-      // console.log(object_type);
+      console.log('handling ajax');
+      console.log(object_type);
       let resource;
       switch (object_type) {
         case 'property_users':
@@ -564,6 +565,10 @@ function withDatatable(WrappedComponent) {
           break;
         case 'clientprefslist':
           resource = `${this.props.initial_payload.client_endpoint}.json${query}`;
+          break;
+        case 'favlists':
+          console.log(query);
+          // resource = `/favlists/${}.json`;
           break;
         case 'properties':
           resource = `/properties.json${query}`;

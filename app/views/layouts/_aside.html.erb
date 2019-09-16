@@ -149,16 +149,25 @@
           <!--          </li>-->
           <!-- /.menu-item -->
 
-          <% if current_user.is_admin? current_account %>
+
             <!-- .menu-item -->
             <li class="menu-item ">
               <%= link_to '#', class: 'menu-link disabled', disabled: true do %>
-                <%= content_tag :span, nil, class: 'menu-icon fas icon-highway fa-fw' %>
-                <%= content_tag :span, t('sidebar.integrations'), class: 'menu-text' %>
+                <%= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-plug' %>
+                <%= content_tag :span, t('sidebar.integrations'), class: 'menu-text menu-text-entry align-middle' %>
               <% end %>
             </li>
+
+          <!-- .menu-item -->
+          <li class="menu-item ">
+            <%= link_to '#', class: 'menu-link disabled', disabled: true do %>
+              <%= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-code' %>
+              <%= content_tag :span, t('sidebar.widget'), class: 'menu-text menu-text-entry align-middle' %>
+            <% end %>
+          </li>
             <!-- /.menu-item -->
 
+          <% if current_user.is_admin? current_account %>
             <!-- .menu-item -->
             <li class="menu-item ">
               <%= link_to '#', class: 'menu-link disabled', disabled: true do %>

@@ -307,8 +307,10 @@ en:
             subcategory: "Subcategory:"
             locations: "Location:"
         favlists:
+          breadcrumb: "Favorites lists"
           listname_placeholder: "New list"
           no_results: "You have no lists... yet."
+          pick_list_prompt: "Nothing to show yet. Please pick a list on your left"
           property_cover_alt: "Property cover image"
           add_list_action: "Add"
           loading_alt: "Loading..."
@@ -498,6 +500,7 @@ en:
     integrations: "Integrations"
     subscription: "Subscription"
     settings: "Settings"
+    widget: "Widget"
   partners:
     title: "Partners"
     list: "Partner list"

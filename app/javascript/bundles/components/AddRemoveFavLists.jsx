@@ -71,7 +71,7 @@ function AddRemoveListForm({ addEntity, i18n, favlists_url, property_id }) {
 
 function AddRemoveFavLists({ modalHeader, avatar, favlists_url, favorites_url, property_id, i18n }) {
   const [request, setRequest] = useState({
-    url: `${favlists_url}?property_id=${property_id}`,
+    url: `${favlists_url}.json?property_id=${property_id}`,
     method: 'get',
     payload: {}
   });

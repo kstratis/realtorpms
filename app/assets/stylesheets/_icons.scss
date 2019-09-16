@@ -41,6 +41,14 @@
     mask: url(sidebar/favorites.svg);
   }
 
+  &.masked-icon-plug{
+    mask: url(sidebar/plug.svg);
+  }
+
+  &.masked-icon-code{
+    mask: url(sidebar/code.svg);
+  }
+
   //&.masked-icon-favorites{
   //  mask: url(sidebar/favorites.svg);
   //}
