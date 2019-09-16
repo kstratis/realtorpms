@@ -26,9 +26,15 @@ module Accounts
 
     # List all properties of a particular favlist
     def show
+      puts '^^^^^^^^^'
+      puts params
       @favlist = current_user.favlists.find(params[:id])
+      searchprefs = {}
+      if params[:page]
+        searchprefs[:page] = params[:page]
+      end
       puts @favlist.inspect
-      filter_properties(@favlist.properties.includes(:location, :landlord), {})
+      filter_properties(@favlist.properties.includes(:location, :landlord), searchprefs)
     end
 
     # Creates a new favlist

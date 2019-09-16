@@ -4,19 +4,32 @@ import Spinner from './Spinner';
 import SortFilter from './SortFilter';
 import ShowUserFavListWithDatatable from './ShowUserFavList';
 import axios from 'axios';
+import URLSearchParams from '@ungap/url-search-params';
 
 class Favlists extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       selectedIndex: -1,
-      initial_payload: {},
+      resultsPerPage: 10,
+      initial_payload: {
+        dataset_wrapper: {
+          dataset: '',
+          pageCount: '',
+          isLoading: false,
+          count: '',
+          selectedPage: '',
+
+        }
+      }
+
+
       // dataset: this.props.initial_payload.dataset_wrapper.dataset,
       // resultsPerPage: this.props.initial_payload.results_per_page,
       // isLoading: false,
       // pageCount: Math.ceil(this.props.initial_payload.total_entries / this.props.initial_payload.results_per_page),
       // count: this.props.initial_payload.total_entries,
-      isLoading: false
+
     };
     this.handleFavlist = this.handleFavlist.bind(this);
   }
@@ -25,35 +38,74 @@ class Favlists extends React.Component {
     e.preventDefault();
     this.setState({
       selectedIndex: index,
-      isLoading: true,
     });
-    axios.get(`/favlists/${favlist_id}.json`)
-      .then(
-        function(response) {
-          console.log(response);
-          this.setState({
-            initial_payload: {
-              dataset_wrapper: {
-                dataset: response.data.userslist.dataset
-              },
-              results_per_page: response.data.results_per_page,
-              total_entries: response.data.total_entries,
-              current_page: response.data.current_page,
-              object_type: 'favlists'
-            },
-            isLoading: false
+    const newUrl = this.props.favlist_endpoint_placeholder.replace(/::/g, favlist_id);
+    // console.log(this.props.favlist_endpoint_placeholder);
+    console.log(newUrl);
+    axios.get(`${newUrl}.json`).then(
+      function(response) {
+        console.log(response);
+        this.setState({
+          initial_payload: {
+            dataset_wrapper: {
+              dataset: response.data.userslist.dataset,
+              pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),
+              isLoading: false,
+              count: response.data.total_entries,
+              selectedPage: response.data.current_page - 1
+            }
+          }
+        });
+      }.bind(this)
+    );
 
 
-              // dataset: newData.dataset,
-              // pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),
-              // isLoading: false,
-              // count: response.data.total_entries,
-              // selectedPage: response.data.current_page - 1
 
 
-          });
 
-        }.bind(this));
+
+
+
+
+
+    // let searchParams = new URLSearchParams(window.location.search);
+    // searchParams.set('sorting', field);
+    // searchParams.set('ordering', updatedOrdering);
+    // let newUrlParams = searchParams.toString()
+    //   ? `${window.location.pathname}?${searchParams.toString()}`
+    //   : window.location.pathname;
+    // history.replaceState(null, '', newUrlParams);
+    // console.log(searchParams.toString());
+    // this.handleAjaxRequest(`?${searchParams.toString()}`)
+
+
+    // axios.get(`/favlists/${favlist_id}.json`)
+    //   .then(
+    //     function(response) {
+    //       console.log(response);
+    //       this.setState({
+    //         initial_payload: {
+    //           dataset_wrapper: {
+    //             dataset: response.data.userslist.dataset
+    //           },
+    //           results_per_page: response.data.results_per_page,
+    //           total_entries: response.data.total_entries,
+    //           current_page: response.data.current_page,
+    //           object_type: 'favlists'
+    //         },
+    //         isLoading: false
+    //
+    //
+    //           // dataset: newData.dataset,
+    //           // pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),
+    //           // isLoading: false,
+    //           // count: response.data.total_entries,
+    //           // selectedPage: response.data.current_page - 1
+    //
+    //
+    //       });
+    //
+    //     }.bind(this));
   }
 
   // this.setState(prevState => ({
@@ -86,7 +138,13 @@ class Favlists extends React.Component {
               {this.state.selectedIndex > -1 ? (
                 this.state.isLoading
                   ? <div>{'loading'}</div>
-                  : <div><ShowUserFavListWithDatatable initial_payload={this.state.initial_payload} i18n={this.props.i18n} /></div>
+                  : <div>
+                    <ShowUserFavListWithDatatable
+                      initial_payload={this.state.initial_payload}
+                      results_per_page={this.state.resultsPerPage}
+
+                      i18n={this.props.i18n}/>
+                  </div>
               ) : (
                 <div className="col-lg-8">
                   <div className={'no-entries'}>
