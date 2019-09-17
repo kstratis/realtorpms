@@ -25,15 +25,14 @@ module Accounts
     end
 
     # List all properties of a particular favlist
+    # Note that the +Show+ and +index+ actions render the same screen
     def show
-      puts '^^^^^^^^^'
-      puts params
       @favlist = current_user.favlists.find(params[:id])
+      @favlists = render_favlists
       searchprefs = {}
       if params[:page]
         searchprefs[:page] = params[:page]
       end
-      puts @favlist.inspect
       filter_properties(@favlist.properties.includes(:location, :landlord), searchprefs)
     end
 
@@ -46,8 +45,16 @@ module Accounts
 
     # Destroys an existing favlist and all the favorites it included
     def destroy
-      current_user.favlists.find(params['favlist_id']).destroy!
-      render :json => {:status => "OK", :message => render_favlists}
+      current_user.favlists.find(params[:id]).destroy!
+      respond_to do |format|
+        format.html {
+          flash[:success] = I18n.t 'js.components.modal.favlists.deleted'
+          redirect_to favlists_url
+        }
+        format.json { render :json => {:status => "OK", :message => render_favlists} }
+      end
+
+
     end
 
     private

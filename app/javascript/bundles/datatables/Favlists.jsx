@@ -1,118 +1,58 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Spinner from './Spinner';
-import SortFilter from './SortFilter';
 import ShowUserFavListWithDatatable from './ShowUserFavList';
 import axios from 'axios';
-import URLSearchParams from '@ungap/url-search-params';
+import { ifExists } from '../utilities/helpers';
 
 class Favlists extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedIndex: -1,
+      selectedIndex: this.props.initial_favlist_id ? this.props.initial_favlist_id : -1,
       resultsPerPage: 10,
-      initial_payload: {
-        dataset_wrapper: {
-          dataset: '',
-          pageCount: '',
-          isLoading: false,
-          count: '',
-          selectedPage: '',
-
-        }
-      }
-
-
-      // dataset: this.props.initial_payload.dataset_wrapper.dataset,
-      // resultsPerPage: this.props.initial_payload.results_per_page,
-      // isLoading: false,
-      // pageCount: Math.ceil(this.props.initial_payload.total_entries / this.props.initial_payload.results_per_page),
-      // count: this.props.initial_payload.total_entries,
-
+      isLoadingFavlist: false,
+      dataset: ifExists(this.props.initial_payload, 'dataset_wrapper'),
+      isLoading: false,
+      pageCount:
+        ifExists(this.props.initial_payload, 'total_entries') &&
+        ifExists(this.props.initial_payload, 'results_per_page')
+          ? Math.ceil(this.props.initial_payload.total_entries / this.props.initial_payload.results_per_page)
+          : '',
+      count: ifExists(this.props.initial_payload, 'total_entries'),
+      current_page: ifExists(this.props.initial_payload, 'current_page'),
+      total_entries: ifExists(this.props.initial_payload, 'total_entries'),
+      object_type: 'favlists',
+      favlists_endpoint: ifExists(this.props.initial_payload, 'favlists_endpoint')
     };
     this.handleFavlist = this.handleFavlist.bind(this);
   }
 
-  handleFavlist(e, index, favlist_id) {
+  handleFavlist(e, favlist_id) {
     e.preventDefault();
     this.setState({
-      selectedIndex: index,
+      selectedIndex: favlist_id,
+      isLoadingFavlist: true
     });
-    const newUrl = this.props.favlist_endpoint_placeholder.replace(/::/g, favlist_id);
-    // console.log(this.props.favlist_endpoint_placeholder);
-    console.log(newUrl);
+    // Dynamically construct the next favlist's url.
+    const newUrl = `/favlists/${favlist_id}`;
+    history.replaceState(null, '', newUrl);
     axios.get(`${newUrl}.json`).then(
       function(response) {
-        console.log(response);
         this.setState({
-          initial_payload: {
-            dataset_wrapper: {
-              dataset: response.data.userslist.dataset,
-              pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),
-              isLoading: false,
-              count: response.data.total_entries,
-              selectedPage: response.data.current_page - 1
-            }
-          }
+          dataset: response.data.datalist,
+          pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),
+          isLoading: false,
+          count: response.data.total_entries,
+          selectedPage: response.data.current_page - 1,
+          current_page: response.data.current_page,
+          total_entries: response.data.total_entries,
+          isLoadingFavlist: false,
+          favlists_endpoint: newUrl
         });
       }.bind(this)
     );
-
-
-
-
-
-
-
-
-
-
-    // let searchParams = new URLSearchParams(window.location.search);
-    // searchParams.set('sorting', field);
-    // searchParams.set('ordering', updatedOrdering);
-    // let newUrlParams = searchParams.toString()
-    //   ? `${window.location.pathname}?${searchParams.toString()}`
-    //   : window.location.pathname;
-    // history.replaceState(null, '', newUrlParams);
-    // console.log(searchParams.toString());
-    // this.handleAjaxRequest(`?${searchParams.toString()}`)
-
-
-    // axios.get(`/favlists/${favlist_id}.json`)
-    //   .then(
-    //     function(response) {
-    //       console.log(response);
-    //       this.setState({
-    //         initial_payload: {
-    //           dataset_wrapper: {
-    //             dataset: response.data.userslist.dataset
-    //           },
-    //           results_per_page: response.data.results_per_page,
-    //           total_entries: response.data.total_entries,
-    //           current_page: response.data.current_page,
-    //           object_type: 'favlists'
-    //         },
-    //         isLoading: false
-    //
-    //
-    //           // dataset: newData.dataset,
-    //           // pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),
-    //           // isLoading: false,
-    //           // count: response.data.total_entries,
-    //           // selectedPage: response.data.current_page - 1
-    //
-    //
-    //       });
-    //
-    //     }.bind(this));
   }
-
-  // this.setState(prevState => ({
-  // size_filter: {
-  //   ...prevState.size_filter,
-  //   propertyType: newSelection
-  // },
 
   render() {
     return (
@@ -122,29 +62,48 @@ class Favlists extends React.Component {
             <div className={'row'}>
               <div className="col-lg-4">
                 <div className="list-group list-group-bordered mb-3">
-                  {this.props.favlists.map((entry, index) => (
-                    <a
-                      key={entry['id']}
-                      href=""
-                      className={`list-group-item list-group-item-action list-group-item-${
-                        this.state.selectedIndex === index ? 'success' : 'primary'
-                      }`}
-                      onClick={e => this.handleFavlist(e, index, entry['id'])}>
-                      {entry['name']}
-                    </a>
+                  {this.props.favlists.map(entry => (
+                    <div className={'d-flex'}>
+                      <a
+                        className={`flex-fill custom-list-group-item list-group-item list-group-item-action list-group-item-${
+                          this.state.selectedIndex === entry['id'] ? 'success' : 'danger'
+                        }`}
+                        key={entry['id']}
+                        href=""
+                        onClick={e => this.handleFavlist(e, entry['id'])}>
+                        {entry['name']}
+                      </a>
+                      <div className={'custom-list-button'}>
+                        <a
+                          className={'btn btn-icon btn-light list-group-item-action text-center'}
+                          href={`/favlists/${entry['id']}`}
+                          data-method="delete"
+                          data-confirm={this.props.i18n['prompt']}>
+                          <i className="fas fa-trash" />
+                        </a>
+                      </div>
+                    </div>
                   ))}
                 </div>
               </div>
               {this.state.selectedIndex > -1 ? (
-                this.state.isLoading
-                  ? <div>{'loading'}</div>
-                  : <div>
+                this.state.isLoadingFavlist ? (
+                  <Spinner isLoading={this.state.isLoadingFavlist} version={1} />
+                ) : (
+                  <div className={'col-8'}>
                     <ShowUserFavListWithDatatable
-                      initial_payload={this.state.initial_payload}
-                      results_per_page={this.state.resultsPerPage}
-
-                      i18n={this.props.i18n}/>
+                      initial_payload={{
+                        dataset_wrapper: this.state.dataset,
+                        results_per_page: this.state.resultsPerPage,
+                        total_entries: this.state.total_entries,
+                        current_page: this.state.current_page,
+                        object_type: this.state.object_type,
+                        favlists_endpoint: this.state.favlists_endpoint
+                      }}
+                      i18n={this.props.i18n}
+                    />
                   </div>
+                )
               ) : (
                 <div className="col-lg-8">
                   <div className={'no-entries'}>

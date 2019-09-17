@@ -25,7 +25,7 @@
                   <span class="avatar-badge online" title="online"></span></a>
               </div><!-- /grid column -->
               <!-- grid column -->
-              <div class="col">
+              <div class="col-auto">
                 <h3 class="card-title">
                   <a href=""><%= @client.full_name %></a>
                   <small class="text-muted"><%= @client.email ? @client.email : '' %></small>
@@ -54,10 +54,12 @@
                 </div><!-- /grid column -->
               <% end %>
 
-              <div class="col">
-                <span style="letter-spacing: 0.1em;font-size: 90%" class="badge badge-success"><%= @client.telephones %></span>
-                <!--                <h6 class="card-subtitle text-muted request-description"></h6>-->
-              </div><!-- /grid column -->
+              <% unless @client.telephones.blank? %>
+                <div class="col-auto">
+                  <span style="letter-spacing: 0.1em;font-size: 90%" class="badge badge-success"><%= @client.telephones %></span>
+                  <!--                <h6 class="card-subtitle text-muted request-description"></h6>-->
+                </div><!-- /grid column -->
+              <% end %>
 
               <!-- /grid column -->
               <div class="col-auto">
@@ -97,6 +99,11 @@
                 }, prerender: false) %>
 
               </div><!-- /grid column -->
+              <div class="col-auto">
+                <a title="asdasd" class="btn btn-sm  btn-secondary btn-action" href="<%= "#{properties_path}?#{@client.searchprefs}" %>">
+                  <i class="fas fa-pen fa-fw"></i>
+                </a>
+              </div>
             </div><!-- /grid row -->
           </div><!-- /.card-body -->
         </div><!-- /.card -->

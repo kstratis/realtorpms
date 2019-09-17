@@ -110,7 +110,7 @@ module PersonDatatable
     respond_to do |format|
       format.html
       format.json {render json: {results_per_page: @results_per_page,
-                                 userslist: @personslist,
+                                 datalist: @personslist,
                                  total_entries: @persons.total_entries,
                                  current_page: @persons.current_page}, status: 200}
     end

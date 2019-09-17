@@ -7,14 +7,13 @@ import PropTypes from 'prop-types';
 import withDatatable from './withDatatable';
 import React from 'react';
 
-const ShowUserFavList = ({ handlePageClick, advanceByTwo, isLoading, dataset, pageCount, selectedPage, i18n, favlists }) => {
+const ShowUserFavList = ({ handlePageClick, advanceByTwo, isLoading, dataset, pageCount, selectedPage, i18n }) => {
   return (
+
     <div className="show-user-favlist">
       <div className={'ShowUserFavListContainer'}>
         <div className={'row'}>
           <div className={'col-12'}>
-            <h1>{favlists}</h1>
-
             <Spinner isLoading={isLoading} version={2} />
             {dataset.length > 0 ? (
               <div className={`${isLoading ? 'reduced-opacity' : ''}`}>
@@ -124,17 +123,15 @@ const ShowUserFavList = ({ handlePageClick, advanceByTwo, isLoading, dataset, pa
   );
 };
 
-// ShowUserFavList.propTypes = {
-//   isLoading: PropTypes.bool.isRequired,
-//   dataset: PropTypes.array.isRequired,
-//   advanceByTwo: PropTypes.func.isRequired,
-//   handleSort: PropTypes.func.isRequired,
-//   pageCount: PropTypes.number.isRequired,
-//   handlePageClick: PropTypes.func.isRequired,
-//   selectedPage: PropTypes.number.isRequired,
-//   sorting: PropTypes.string.isRequired,
-//   ordering: PropTypes.string.isRequired
-// };
+ShowUserFavList.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  dataset: PropTypes.array.isRequired,
+  advanceByTwo: PropTypes.func.isRequired,
+  handleSort: PropTypes.func.isRequired,
+  pageCount: PropTypes.number.isRequired,
+  handlePageClick: PropTypes.func.isRequired,
+  selectedPage: PropTypes.number.isRequired,
+};
 
 const ShowUserFavListWithDatatable = withDatatable(ShowUserFavList);
 

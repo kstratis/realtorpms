@@ -173,7 +173,7 @@ module PropertyDatatable
     respond_to do |format|
       format.html
       format.json { render json: {results_per_page: @results_per_page,
-                                  userslist: @propertieslist,
+                                  datalist: @propertieslist,
                                   total_entries: @properties.total_entries,
                                   current_page: @properties.current_page}, status: 200 }
     end

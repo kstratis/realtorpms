@@ -309,11 +309,12 @@ en:
         favlists:
           breadcrumb: "Favorites lists"
           listname_placeholder: "New list"
-          no_results: "You have no lists... yet."
+          no_results: "There's nothing here... yet."
           pick_list_prompt: "Nothing to show yet. Please pick a list on your left"
           property_cover_alt: "Property cover image"
           add_list_action: "Add"
           loading_alt: "Loading..."
+          deleted: "Η λίστα διεγράφη επιτυχώς"
       select:
         noresults: "No results were found"
         loading_html: "Loading results..."

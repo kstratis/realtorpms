@@ -310,11 +310,12 @@ el:
         favlists:
           breadcrumb: "Λίστες αγαπημένων"
           listname_placeholder: "Όνομα νέας λίστας"
-          no_results: "Δεν έχετε δημιουργήσει κάποια λίστα... ακόμα."
+          no_results: "Δεν υπάρχει κάτι εδώ... ακόμα."
           pick_list_prompt: "Επιλέξτε μία λίστα"
           property_cover_alt: "Φωτογραφία ακινήτου"
           add_list_action: "Προσθήκη"
           loading_alt: "Φορτώνει..."
+          deleted: "Η λίστα διεγράφη επιτυχώς"
       select:
         noresults: "Δεν βρέθηκαν αποτελέσματα"
         loading_html: "Φόρτωση αποτελεσμάτων..."

@@ -567,8 +567,7 @@ function withDatatable(WrappedComponent) {
           resource = `${this.props.initial_payload.client_endpoint}.json${query}`;
           break;
         case 'favlists':
-          console.log(query);
-          resource = `/favlists/${query}.json`;
+          resource = `${this.props.initial_payload.favlists_endpoint}.json${query}`;
           break;
         case 'properties':
           resource = `/properties.json${query}`;
@@ -582,7 +581,7 @@ function withDatatable(WrappedComponent) {
         .get(resource) // +1 because rails will_paginate starts from 1 while this starts from 0
         .then(
           function(response) {
-            let newData = response.data.userslist;
+            let newData = response.data.datalist;
             this.setState({
               dataset: newData.dataset,
               pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),

@@ -87,6 +87,10 @@ const categoryFilterOptions = data => {
   );
 };
 
+const ifExists = (collection, item) => {
+  return collection ? collection[item] : '';
+};
+
 export {
   debounce,
   capitalizeFirstLetter,
@@ -97,5 +101,6 @@ export {
   priceFilterOptions,
   sizeFilterOptions,
   floorFilterOptions,
-  categoryFilterOptions
+  categoryFilterOptions,
+  ifExists
 };
