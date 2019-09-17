@@ -53,8 +53,6 @@ module Accounts
         }
         format.json { render :json => {:status => "OK", :message => render_favlists} }
       end
-
-
     end
 
     private
