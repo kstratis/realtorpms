@@ -18,8 +18,7 @@ superuser = User.create!(first_name: 'Konstantinos',
                          phone1: '6972500361',
                          dob: Date.new(1986, 4, 5),
                          password: '989492ks',
-                         password_confirmation: '989492ks',
-                         admin: true)
+                         password_confirmation: '989492ks')
 
 # This is the owner I use
 tonystark = User.create!(first_name: 'Tony',
@@ -28,8 +27,7 @@ tonystark = User.create!(first_name: 'Tony',
                          phone1: '6945567345',
                          dob: Date.new(1976, 2, 3),
                          password: 'abc123',
-                         password_confirmation: 'abc123',
-                         admin: false)
+                         password_confirmation: 'abc123')
 
 # Owner of +bluedomain+
 hulkhogan = User.create!(first_name: 'Hulk',
@@ -38,8 +36,7 @@ hulkhogan = User.create!(first_name: 'Hulk',
                          phone1: '6935567342',
                          dob: Date.new(1980, 4, 1),
                          password: 'abc123',
-                         password_confirmation: 'abc123',
-                         admin: false)
+                         password_confirmation: 'abc123')
 
 # Owner of +reddomain+
 johnymnemonic = User.create!(first_name: 'Johny',
@@ -48,8 +45,7 @@ johnymnemonic = User.create!(first_name: 'Johny',
                              phone1: '6901560342',
                              dob: Date.new(1969, 12, 17),
                              password: 'abc123',
-                             password_confirmation: 'abc123',
-                             admin: false)
+                             password_confirmation: 'abc123')
 
 # This account belongs to Tony Stark (tstark@gmail.com)
 shakalaka = Account.create!(
@@ -86,15 +82,13 @@ regularshakalakauser1 = User.create!(first_name: 'Will',
                                      last_name: 'Smith',
                                      email: 'wm@gmail.com',
                                      password: 'abc123',
-                                     password_confirmation: 'abc123',
-                                     admin: false)
+                                     password_confirmation: 'abc123')
 
 regularshakalakauser2 = User.create!(first_name: 'John',
                                      last_name: 'Travolta',
                                      email: 'jt@gmail.com',
                                      password: 'abc123',
-                                     password_confirmation: 'abc123',
-                                     admin: false)
+                                     password_confirmation: 'abc123')
 # -------------------------
 #
 # 1 memorable bluedomain user
@@ -102,8 +96,7 @@ regularbluedomainuser1 = User.create!(first_name: 'Lakis',
                                       last_name: 'Gavalas',
                                       email: 'lg@gmail.com',
                                       password: 'abc123',
-                                      password_confirmation: 'abc123',
-                                      admin: false)
+                                      password_confirmation: 'abc123')
 
 # ----------------------------------------------------------
 
