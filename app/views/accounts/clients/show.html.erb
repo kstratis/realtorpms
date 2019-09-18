@@ -100,7 +100,7 @@
 
               </div><!-- /grid column -->
               <div class="col-auto">
-                <a title="asdasd" class="btn btn-sm  btn-secondary btn-action" href="<%= "#{properties_path}?#{@client.searchprefs}" %>">
+                <a title="test" class="btn btn-sm btn-secondary btn-action <%= @client.searchprefs.blank? ? 'disabled' : '' %>" href="<%= "#{properties_path}?#{@client.searchprefs}" %>">
                   <i class="fas fa-pen fa-fw"></i>
                 </a>
               </div>
