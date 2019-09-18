@@ -77,5 +77,7 @@ Rails.application.configure do
 
   config.active_storage.service = :amazon
 
+  config.seeds_media_dir = "/Users/kstratis/efi_pics/"
+
 
 end
