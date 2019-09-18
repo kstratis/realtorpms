@@ -915,7 +915,7 @@ li.page-item {
   font-size: 15px;
   font-weight: 300;
   overflow: hidden;
-  padding-top: 3px;
+  //padding-top: 3px;
 }
 
 .alphatar-edit {
@@ -1466,4 +1466,8 @@ a.tt-suggestion.tt-selectable{
 
 .custom-list-button{
   padding: 0.75rem 1rem;
+}
+
+.pr-tile{
+  vertical-align: unset;
 }
