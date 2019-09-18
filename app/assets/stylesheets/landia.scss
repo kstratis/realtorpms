@@ -95,7 +95,6 @@ h2 {
 
 h3 {
   font-size: 1.1em;
-  text-align: center;
   font-weight: normal;
   color: #777;
 }
@@ -934,9 +933,9 @@ li.page-item {
   border: 2px solid $gray-300;
 }
 
-.user-avatar img {
-  padding-top: 0 !important;
-}
+//.user-avatar img {
+//  padding-top: 0 !important;
+//}
 
 /*
   スタイルシート: public/stylesheets/will_paginate.css
@@ -1058,9 +1057,9 @@ li.page-item {
   display: inline-block;
 }
 
-.user-avatar-js {
-  margin-right: 8px;
-}
+//.user-avatar-js {
+//  margin-right: 8px;
+//}
 
 .property-avatar-xl {
   border-radius: 3px;

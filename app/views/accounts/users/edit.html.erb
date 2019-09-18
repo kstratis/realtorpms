@@ -17,12 +17,12 @@
               <div class="user-avatar user-avatar-xl fileinput-button">
                 <div class="fileinput-button-label"><%= t('users.edit.change_pic') %></div>
 
-                <%= render_avatar(current_user, "alphatar-edit", "avatar_preview") %>
+                <%= render_avatar(current_user, nil, "avatar_preview") %>
                 <%= f.file_field :avatar, id: "avatar_upload" %>
               </div><!-- /avatar -->
               <!-- .media-body -->
               <div class="media-body pl-3">
-                <h3 class="card-title"><%= t('users.edit.photo_header') %></h3>
+                <h3 class="card-title profile-photo"><%= t('users.edit.photo_header') %></h3>
                 <h6 class="card-subtitle text-muted"><%= t('users.edit.photo_subheader') %></h6>
                 <p class="card-text">
                   <% if current_user.avatar.attached? %>
