@@ -7,6 +7,8 @@ class Client < ApplicationRecord
   has_many :clientships
   has_many :users, -> {order('clientships.updated_at').select('users.*, clientships.updated_at as clientship_updated_at').distinct}, through: :clientships, dependent: :destroy
 
+  before_create { self.color = COLOR_PALETTE.sample } # This assigns a random bg color to each new user
+
   validates :first_name, presence: true, length: { maximum: 50 }
   validates :last_name, presence: true, length: { maximum: 50 }
 

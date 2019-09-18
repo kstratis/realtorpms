@@ -8,8 +8,10 @@ class User < ApplicationRecord
 
   self.per_page = 10 # This is for pagination
   attr_accessor :remember_token, :reset_token
+
   before_save { self.email = email.downcase }  # makes sure everything is lower case
-  before_create { self.color = "%06x" % (rand * 0xffffff) } # This assigns a random bg color to each new user
+  before_create { self.color = COLOR_PALETTE.sample } # This assigns a random bg color to each new user
+
   validates :first_name, presence: true, length: { maximum: 50 }
   validates :last_name, presence: true, length: { maximum: 50 }
   validates :email, presence: true, length: { maximum: 255 },

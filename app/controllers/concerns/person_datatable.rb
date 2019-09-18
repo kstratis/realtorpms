@@ -78,7 +78,7 @@ module PersonDatatable
       hash = {
           id: entry.id,
           # avatar_url: helpers.gravatar_for(entry, size: 64, link_only: true),
-          avatar: {url: render_avatar(entry, nil, nil, true), usercolor: entry.try(:color) || 'B76BA3'},
+          avatar: {url: render_avatar(entry, nil, nil, true), usercolor: entry.try(:color) || '#404E5C'},
           name: "#{entry.try(:first_name).try(:first)}. #{entry.try(:last_name)}",
           email: entry.try(:email) || '—',
           type: entry.try(:role, current_account) || nil,
