@@ -164,7 +164,7 @@ end
   )
   regularshakalakauser1.properties << property
   property.avatar.attach(
-      io: File.open(Dir["#{Rails.configuration.seeds_media_dir}#{rand(1..9)}/*"].sample),
+      io: File.open(Dir["#{ENV['SEEDS_MEDIA_DIR']}#{rand(1..9)}/*"].sample),
       filename: "file-#{Faker::Number.number(digits: 4)}.png"
   )
 end
@@ -192,7 +192,7 @@ end
   regularshakalakauser1.properties << property
   regularshakalakauser2.properties << property
   property.avatar.attach(
-      io: File.open(Dir["#{Rails.configuration.seeds_media_dir}#{rand(1..9)}/*"].sample),
+      io: File.open(Dir["#{ENV['SEEDS_MEDIA_DIR']}#{rand(1..9)}/*"].sample),
       filename: "file-#{Faker::Number.number(digits: 4)}.png"
   )
 end
@@ -219,7 +219,7 @@ end
   )
   regularshakalakauser1.properties << property
   property.avatar.attach(
-      io: File.open(Dir["#{Rails.configuration.seeds_media_dir}#{rand(1..9)}/*"].sample),
+      io: File.open(Dir["#{ENV['SEEDS_MEDIA_DIR']}#{rand(1..9)}/*"].sample),
       filename: "file-#{Faker::Number.number(digits: 4)}.png"
   )
 end
@@ -244,7 +244,7 @@ end
   )
   regularbluedomainuser1.properties << property
   property.avatar.attach(
-      io: File.open(Dir["#{Rails.configuration.seeds_media_dir}#{rand(1..9)}/*"].sample),
+      io: File.open(Dir["#{ENV['SEEDS_MEDIA_DIR']}#{rand(1..9)}/*"].sample),
       filename: "file-#{Faker::Number.number(digits: 4)}.png"
   )
 end
