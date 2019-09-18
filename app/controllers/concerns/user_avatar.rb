@@ -5,7 +5,8 @@ module UserAvatar
     if js
       "#{user.first_name.upcase.first}#{user.last_name.upcase.first}"
     else
-      content_tag :div, "#{user.first_name.upcase.first}#{user.last_name.upcase.first}", class: "tile pr-tile tile-circle tile-md mr-2 #{classnames}", style: "background-color: #{user.try(:color) || '#404E5C'}; color: #ffffff", alt: "profile-pic", id: "#{id}"
+      # tile-md
+      content_tag :div, "#{user.first_name.upcase.first}#{user.last_name.upcase.first}", class: "tile pr-tile tile-circle mr-2 #{classnames ? classnames : 'tile-md'}", style: "background-color: #{user.try(:color) || '#404E5C'}; color: #ffffff", alt: "profile-pic", id: "#{id}"
     end
   end
 

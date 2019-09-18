@@ -10,7 +10,7 @@ $(document).on('turbolinks:load', function(e) {
         $('#avatar_preview').is('img')
           ? $('#avatar_preview').attr('src', e.target.result)
           : $('#avatar_preview').replaceWith(
-              `<img class="alphatar-edit" id="avatar_preview" src="${e.target.result}">`
+              `<img id="avatar_preview" src="${e.target.result}">`
             );
       };
       reader.readAsDataURL(input.files[0]);

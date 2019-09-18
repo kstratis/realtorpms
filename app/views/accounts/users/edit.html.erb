@@ -17,7 +17,7 @@
               <div class="user-avatar user-avatar-xl fileinput-button">
                 <div class="fileinput-button-label"><%= t('users.edit.change_pic') %></div>
 
-                <%= render_avatar(current_user, nil, "avatar_preview") %>
+                <%= render_avatar(current_user, 'tile-xl', "avatar_preview") %>
                 <%= f.file_field :avatar, id: "avatar_upload" %>
               </div><!-- /avatar -->
               <!-- .media-body -->
