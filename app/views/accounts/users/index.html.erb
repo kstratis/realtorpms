@@ -1,7 +1,7 @@
 <% provide(:title, t('users.title')) %>
 
 <!-- Notice the use of render partial -->
-<%= render layout: 'layouts/breadcrumb', locals: {path: [{:title => t('users.index.breadcrumb'), :href => users_path}], icon: 'house-colored'} do %>
+<%= render layout: 'layouts/breadcrumb', locals: {path: [{:title => t('users.index.breadcrumb'), :href => users_path}], icon: 'house-colored', index: true} do %>
   <div class="action-btns">
     <%= link_to new_invitation_path, class: 'btn btn-primary btn-sm' do %>
       <i class="fas fa-plus-circle fa-fw"></i><span class="d-none d-md-inline">&nbsp;<%= t('invitations.new.heading') %></span>

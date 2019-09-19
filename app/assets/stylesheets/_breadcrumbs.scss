@@ -96,7 +96,11 @@
   position: absolute;
   top: 50%;
   margin-top: -50px;
-  left: 100%
+  left: 100%;
+}
+
+.breadcrumb-custom li.back:after,.breadcrumb-custom li.back:before {
+  content: unset;
 }
 
 .breadcrumb-custom li:before {

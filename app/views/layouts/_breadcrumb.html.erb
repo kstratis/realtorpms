@@ -2,21 +2,29 @@
   <div class="bd-highlight ">
     <div class="breadcrumb-container">
       <div class="breadcrumb-wrapper">
-        <ul class="breadcrumb-custom ">
-          <li><a href="/"><i id="breadcrumb-home" class="pr-icon xxs dashboard_alt"></i></a></li>
-          <% path.each do |entry| %>
-            <% if entry == path.last %>
-              <li class="active"><span> <%= entry[:title] %></span></li>
-            <% else %>
-              <li><a href="<%= entry[:href] %>"><%= entry[:title] %></a></li>
+        <ul class="breadcrumb-custom">
+          <li class="d-block d-md-none back">
+            <% unless defined?(index) && index %>
+              <%= link_to :back, class: "btn btn-sm btn-outline-danger menu-link d-inline" do %>
+                <i class="fas fa-chevron-left"></i>&nbsp;<span><%= t('back') %></span>
+              <% end %>
             <% end %>
-          <% end %>
+          </li>
+          <div class="d-none d-md-block">
+            <li><a href="/"><i id="breadcrumb-home" class="pr-icon xxs dashboard_alt"></i></a></li>
+            <% path.each do |entry| %>
+              <% if entry == path.last %>
+                <li class="active"><span> <%= entry[:title] %></span></li>
+              <% else %>
+                <li><a href="<%= entry[:href] %>"><%= entry[:title] %></a></li>
+              <% end %>
+            <% end %>
+          </div>
           <div class="d-flex flex-row justify-content-end">
-          <%= yield if block_given? %>
+            <%= yield if block_given? %>
           </div>
         </ul>
       </div>
     </div>
   </div>
 </div>
-

@@ -50,7 +50,7 @@ function AddRemoveListForm({ addEntity, i18n, favlists_url, property_id }) {
     <div className={'form-container'}>
       <form onSubmit={handleSubmit}>
         <div className="form-group row">
-          <div className={'col-sm-8'}>
+          <div className={'col-sm-8 mb-2 mb-sm-0'}>
             <input
               type="text"
               className="input form-control"

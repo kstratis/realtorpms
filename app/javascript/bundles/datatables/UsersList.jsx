@@ -7,7 +7,6 @@ import Spinner from './Spinner';
 import Avatar from '../components/Avatar';
 import { capitalizeFirstLetter } from '../utilities/helpers';
 
-
 const UsersList = ({
   handlePageClick,
   handleSort,
@@ -24,7 +23,7 @@ const UsersList = ({
   meta,
   handleSearchInput,
   handleFreezeUser,
-  searchInput,
+  searchInput
 }) => {
   return (
     <div className="users-list">
@@ -32,15 +31,16 @@ const UsersList = ({
       <div className={'container'}>
         <div className={'row'}>
           <Search handleSearchInput={handleSearchInput} searchInput={searchInput} placeholder={i18n['search']} />
-          <div className="col col-md-6 ">
-            <div className={'d-flex flex-row justify-content-end'}>
-              <div className={'d-none d-lg-block pl-2'}>
-                <div className="search-count-container ">
-                    <span className="badge badge-pill badge-info p-2 mr-2">{`${capitalizeFirstLetter(i18n['result_count'])}: ${count}`}</span>
-                    {/*<strong className={'count'}>{count}</strong> <span>{i18n['result_count']}</span>*/}
-                </div>
+          <div className={'d-flex flex-shrink-1'}>
+            <div className={'d-none d-md-block pl-2'}>
+              <div className="search-count-container ">
+                <span className="badge badge-pill badge-info p-2 mr-2">{`${capitalizeFirstLetter(
+                  i18n['result_count']
+                )}: ${count}`}</span>
               </div>
-              <div>
+            </div>
+            <div>
+              <div className={'d-none d-sm-block'}>
                 <nav aria-label="Results navigation">
                   <ReactPaginate
                     previousLabel={'❮'}
@@ -178,11 +178,13 @@ const UsersList = ({
                     </td>
 
                     <td className={'align-middle text-nowrap'}>
-                    <div className={'table-entry'}>
-                    {entry['active']
-                      ? <span className="badge badge-success">{i18n['datatable']['status']['active']}</span>
-                      : <span className="badge badge-danger">{i18n['datatable']['status']['inactive']}</span> }
-                    </div>
+                      <div className={'table-entry'}>
+                        {entry['active'] ? (
+                          <span className="badge badge-success">{i18n['datatable']['status']['active']}</span>
+                        ) : (
+                          <span className="badge badge-danger">{i18n['datatable']['status']['inactive']}</span>
+                        )}
+                      </div>
                     </td>
 
                     <td className={'align-middle text-nowrap'}>
@@ -213,7 +215,6 @@ const UsersList = ({
                 ))}
               </tbody>
             </table>
-
           </div>
           <div className={'clearfix'} />
           <div className={'d-none d-md-block'}>

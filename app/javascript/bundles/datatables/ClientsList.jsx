@@ -29,9 +29,8 @@ const ClientsList = ({
       <div className={'container'}>
         <div className={'row'}>
           <Search handleSearchInput={handleSearchInput} searchInput={searchInput} placeholder={i18n['search']} />
-          {/*<div className="">*/}
             <div className={'d-flex flex-shrink-1'}>
-              <div className={'d-none d-lg-block pl-2'}>
+              <div className={'d-none d-md-block pl-2'}>
                 <div className="search-count-container ">
                   <span className="badge badge-pill badge-info p-2 mr-2">{`${capitalizeFirstLetter(
                     i18n['result_count']
@@ -67,7 +66,6 @@ const ClientsList = ({
                 </nav>
               </div>
             </div>
-          {/*</div>*/}
         </div>
       </div>
       {dataset.length > 0 ? (
