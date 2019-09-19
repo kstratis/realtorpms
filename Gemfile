@@ -92,6 +92,7 @@ gem 'public_uid' # Need this for pseudorandom ids
 gem 'listen', '>= 3.1.5', '< 3.2'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'capistrano-rails-console', require: false
 
 group :development, :test do
   gem 'factory_bot'
