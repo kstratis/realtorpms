@@ -89,7 +89,7 @@ gem 'public_uid' # Need this for pseudorandom ids
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+gem 'listen', '>= 3.1.5', '< 3.2'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -108,7 +108,7 @@ group :development, :test do
   gem 'spring-commands-rspec'
   gem "better_errors"
   gem "binding_of_caller"
-  gem 'listen', '>= 3.1.5', '< 3.2'
+
 end
 
 group :development do
