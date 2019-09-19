@@ -131,7 +131,7 @@ const UsersList = ({
                       <span>{i18n['datatable']['status']['title']}</span>
                     </a>
                   </th>
-                  <th>
+                  <th className={'text-nowrap'}>
                     <a
                       id="sort_by_date"
                       className={'sortable-header-name'}
@@ -161,7 +161,7 @@ const UsersList = ({
               <tbody>
                 {dataset.map(entry => (
                   <tr className={'entry'} key={entry['id']}>
-                    <td className={'align-middle'}>
+                    <td className={'align-middle text-nowrap'}>
                       <div className={'table-entry'}>
                         <Avatar data={entry['avatar']} />
                         <span>
@@ -171,13 +171,13 @@ const UsersList = ({
                         </span>
                       </div>
                     </td>
-                    <td className={'align-middle'}>
+                    <td className={'align-middle text-nowrap'}>
                       <div className={'table-entry'}>
                         <span>{entry['email']}</span>
                       </div>
                     </td>
 
-                    <td className={'align-middle'}>
+                    <td className={'align-middle text-nowrap'}>
                     <div className={'table-entry'}>
                     {entry['active']
                       ? <span className="badge badge-success">{i18n['datatable']['status']['active']}</span>
@@ -185,7 +185,7 @@ const UsersList = ({
                     </div>
                     </td>
 
-                    <td className={'align-middle'}>
+                    <td className={'align-middle text-nowrap'}>
                       <div className={'table-entry'}>
                         <span>{entry['registration']}</span>
                       </div>

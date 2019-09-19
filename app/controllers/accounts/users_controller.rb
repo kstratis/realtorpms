@@ -65,9 +65,8 @@ module Accounts
     end
 
     def delete_avatar
-      user = current_account.users.find(params[:id])
-      user.avatar.purge if user.avatar.attached?
-      redirect_to edit_user_path(user)
+      @user.avatar.purge if @user.avatar.attached?
+      redirect_to edit_user_path(@user)
     end
 
     def toggle_activation
@@ -81,7 +80,7 @@ module Accounts
       end
 
       def find_user!
-        @user = current_account.users.find(params[:id])
+        @user = current_account.all_users.find(params[:id])
       end
 
       # Confirms a logged-in user.

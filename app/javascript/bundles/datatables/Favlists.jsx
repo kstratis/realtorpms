@@ -60,7 +60,7 @@ class Favlists extends React.Component {
         {this.props.favlists.length > 0 ? (
           <>
             <div className={'row'}>
-              <div className="col-lg-4">
+              <div className="col-sm-12 col-lg-4">
                 <div className="list-group list-group-bordered mb-3">
                   {this.props.favlists.map(entry => (
                     <div className={'d-flex'}>
@@ -90,7 +90,7 @@ class Favlists extends React.Component {
                 this.state.isLoadingFavlist ? (
                   <Spinner isLoading={this.state.isLoadingFavlist} version={1} />
                 ) : (
-                  <div className={'col-8'}>
+                  <div className={'col-sm-12 col-lg-8'}>
                     <ShowUserFavListWithDatatable
                       initial_payload={{
                         dataset_wrapper: this.state.dataset,

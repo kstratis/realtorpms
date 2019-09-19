@@ -76,7 +76,7 @@ const ClientsList = ({
             <table id="usersTable" className={`table table-striped ${isLoading ? 'reduced-opacity' : ''}`}>
               <thead>
                 <tr>
-                  <th>
+                  <th className={'text-nowrap'}>
                     <a
                       id="sort_by_name"
                       className={'sortable-header-name'}
@@ -98,7 +98,7 @@ const ClientsList = ({
                       )}
                     </a>
                   </th>
-                  <th>
+                  <th className={'text-nowrap'}>
                     <a
                       id="sort_by_email"
                       className={'sortable-header-name'}
@@ -120,10 +120,10 @@ const ClientsList = ({
                       )}
                     </a>
                   </th>
-                  <th>
+                  <th className={'text-nowrap'}>
                     <span>{i18n['datatable']['telephones']['title']}</span>
                   </th>
-                  <th>
+                  <th className={'text-nowrap'}>
                     <a
                       id="sort_by_date"
                       className={'sortable-header-name'}
@@ -145,7 +145,7 @@ const ClientsList = ({
                       )}
                     </a>
                   </th>
-                  <th>
+                  <th className={'text-nowrap'}>
                     <span>{i18n['datatable']['actions']}</span>
                   </th>
                 </tr>
@@ -153,7 +153,7 @@ const ClientsList = ({
               <tbody>
                 {dataset.map(entry => (
                   <tr className={'entry'} key={entry['id']}>
-                    <td className={'align-middle'}>
+                    <td className={'align-middle text-nowrap'}>
                       <div className={'table-entry'}>
                         <Avatar data={entry['avatar']} />
                         <span>
@@ -163,13 +163,13 @@ const ClientsList = ({
                         </span>
                       </div>
                     </td>
-                    <td className={'align-middle'}>
+                    <td className={'align-middle text-nowrap'}>
                       <div className={'table-entry'}>
                         <span>{entry['email']}</span>
                       </div>
                     </td>
 
-                    <td className={'align-middle'}>
+                    <td className={'align-middle text-nowrap'}>
                       <div className={'table-entry'}>
 
                         {/*<span style={{letterSpacing: '0.1em', fontSize: '90%'}} className={`${entry['telephones'] === '—' ? '' : 'badge badge-success'}`}>*/}
