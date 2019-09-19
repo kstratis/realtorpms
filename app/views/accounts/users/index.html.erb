@@ -4,7 +4,7 @@
 <%= render layout: 'layouts/breadcrumb', locals: {path: [{:title => t('users.index.breadcrumb'), :href => users_path}], icon: 'house-colored'} do %>
   <div class="action-btns">
     <%= link_to new_invitation_path, class: 'btn btn-primary btn-sm' do %>
-      <i class="fas fa-plus-circle fa-fw"></i>&nbsp;<%= t('invitations.new.heading') %>
+      <i class="fas fa-plus-circle fa-fw"></i><span class="d-none d-md-inline">&nbsp;<%= t('invitations.new.heading') %></span>
     <% end %>
   </div>
 <% end %>

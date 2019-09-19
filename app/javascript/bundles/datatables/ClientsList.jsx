@@ -29,8 +29,8 @@ const ClientsList = ({
       <div className={'container'}>
         <div className={'row'}>
           <Search handleSearchInput={handleSearchInput} searchInput={searchInput} placeholder={i18n['search']} />
-          <div className="col col-md-6 ">
-            <div className={'d-flex flex-row justify-content-end'}>
+          {/*<div className="">*/}
+            <div className={'d-flex flex-shrink-1'}>
               <div className={'d-none d-lg-block pl-2'}>
                 <div className="search-count-container ">
                   <span className="badge badge-pill badge-info p-2 mr-2">{`${capitalizeFirstLetter(
@@ -38,7 +38,7 @@ const ClientsList = ({
                   )}: ${count}`}</span>
                 </div>
               </div>
-              <div>
+              <div className={'d-none d-sm-block'}>
                 <nav aria-label="Results navigation">
                   <ReactPaginate
                     previousLabel={'❮'}
@@ -67,7 +67,7 @@ const ClientsList = ({
                 </nav>
               </div>
             </div>
-          </div>
+          {/*</div>*/}
         </div>
       </div>
       {dataset.length > 0 ? (
