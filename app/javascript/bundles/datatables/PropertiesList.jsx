@@ -320,7 +320,21 @@ const PropertiesList = ({
                     <div key={entry.slug}>
                       <div className={'row'}>
                         <div className="col-12">
-                          <div className="list-group list-group-media mb-3">
+
+                          <div className="card card-figure d-block d-sm-none">
+
+                            <figure className="figure">
+                              <img className="img-fluid" src={entry['avatar']}
+                                   alt="Card image cap" />
+                                <figcaption className="figure-caption">
+                                  <h6 className="figure-title"> Simple figure </h6>
+                                  <p className="text-muted mb-0"> Give some text description </p>
+                                </figcaption>
+                            </figure>
+
+                          </div>
+
+                          <div className="list-group list-group-media mb-3 d-none d-sm-block">
                             <a
                               href={entry['allow_view'] ? entry['view_entity_path'] : ''}
                               className="list-group-item list-group-item-action property-index-avatar">
