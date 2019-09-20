@@ -22,8 +22,8 @@ const capitalizeFirstLetter = string => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-const renderHTML = htmlContent => {
-  return <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;
+const renderHTML = (htmlContent, mode='block') => {
+  return mode === 'block' ? <div dangerouslySetInnerHTML={{ __html: htmlContent }} /> : <span dangerouslySetInnerHTML={{ __html: htmlContent }} />
 };
 
 const buildUserURL = (freeze_url, user_id) => {

@@ -89,7 +89,7 @@ const PropertiesList = ({
     <div className="properties-list">
       <div className={'PropertyListContainer'}>
         <div className={'row'}>
-          <div className={'filters col-5 d-none d-lg-block'}>
+          <div className={'filters col-4 d-none d-lg-block'}>
             <div className="card">
               <div className="card-header">
                 <div className="table-entry">
@@ -244,7 +244,7 @@ const PropertiesList = ({
               </div>
             </div>
           </div>
-          <div className={'col-12 col-lg-7'}>
+          <div className={'col-12 col-lg-8'}>
             {/* Generate the needed filters according to the i18n keys of the erb template */}
             <div className={'row mb-3 px-2 d-flex flex-nowrap'}>
               <div className={'flex-grow-1'}>
@@ -258,7 +258,7 @@ const PropertiesList = ({
                   isCreatable={false}
                 />
               </div>
-              <div className={'text-center'}>
+              <div className={'flex-shrink-1 text-center'}>
                 <SortFilter
                   handleFn={handleSort}
                   slug={'created_at'}
@@ -323,8 +323,8 @@ const PropertiesList = ({
                           <div className="list-group list-group-media mb-3">
                             <a
                               href={entry['allow_view'] ? entry['view_entity_path'] : ''}
-                              className="list-group-item list-group-item-action">
-                              <div className="list-group-item-figure rounded-left">
+                              className="list-group-item list-group-item-action property-index-avatar">
+                              <div className="list-group-item-figure rounded-left ">
                                 <div className={`thumb-container ${entry['allow_view'] ? '' : 'frosty'}`}>
                                   {entry['avatar'] ? (
                                     <img src={entry['avatar']} alt="placeholder image" className={'thumb'} />
@@ -346,17 +346,18 @@ const PropertiesList = ({
                                     </div>
                                   ) : (
                                     <>
-                                      <div className={'col-lg-8 col-sm-12 col-md-8'}>
+                                      <div className={'col-sm-12 col-md-8 d-none d-sm-block main-info'}>
                                         {/*<h4 className="list-group-item-title">{entry.mini_heading}</h4>*/}
                                         <h4 className="list-group-item-title">{renderHTML(entry.mini_heading)}</h4>
                                         <p className="">{entry.location}</p>
-                                        <p className="list-group-item-text clamp-3"><strong>{entry.registration}</strong> - {entry.description}</p>
+                                        <p className="list-group-item-text clamp-3"><strong>{entry.registration}</strong>{entry.description ? ` - ${entry.description}` : ''}</p>
+                                        <strong><small className="list-group-item-text extra-index-info-alt">{entry.purpose} &middot; {entry.price} &middot; {renderHTML(entry.size, 'inline')}</small></strong>
                                       </div>
-                                      <div className={'col-lg-4 col-md-4 d-none d-md-block'}>
-                                        <div className={''}><span className="d-inline-block list-group-item-text p-2 purpose">{entry.purpose}</span></div>
-                                        <div className={'text-right pt-3'}><span className="list-group-item-text py-3">{entry.price}</span></div>
-                                        <div className={'text-right'}><span className="list-group-item-text py-3">{renderHTML(entry.size)}</span></div>
-                                        <div className={'text-right pb-3'}><span className="list-group-item-text py-3">{renderHTML(entry.pricepersqmeter)}</span></div>
+                                      <div className={'col-lg-4 col-md-4 d-none d-md-block extra-index-info'}>
+                                        <div className={'text-right'}><span className="d-inline-block list-group-item-text p-2 purpose">{entry.purpose}</span></div>
+                                        <div className={'text-right'}><span className="d-inline-block list-group-item-text pt-1">{entry.price}</span></div>
+                                        <div className={'text-right'}><span className="list-group-item-text">{renderHTML(entry.size)}</span></div>
+                                        <div className={'text-right pb-3'}><span className="list-group-item-text">{renderHTML(entry.pricepersqmeter)}</span></div>
                                         <div className={'text-right'}><span className="list-group-item-text uid p-2">
                                           <strong>{entry['slug'].toUpperCase()}</strong>
                                         </span></div>
