@@ -353,17 +353,13 @@ const PropertiesList = ({
                                         <p className="list-group-item-text clamp-3"><strong>{entry.registration}</strong> - {entry.description}</p>
                                       </div>
                                       <div className={'col-lg-4 col-md-4 d-none d-md-block'}>
-                                        <p className="list-group-item-text purpose">{entry.purpose}</p>
-                                        <p className="list-group-item-text text-right mt-2">{entry.price}</p>
-                                        {/*<p className="list-group-item-text text-right">{entry.size}</p>*/}
-                                        <div className="list-group-item-text text-right">{renderHTML(entry.size)}</div>
-                                        <div className="list-group-item-text text-right">
-                                          {renderHTML(entry.pricepersqmeter)}
-                                        </div>
-
-                                        <p className="list-group-item-text text-right uid text-center">
+                                        <div className={''}><span className="d-inline-block list-group-item-text p-2 purpose">{entry.purpose}</span></div>
+                                        <div className={'text-right pt-3'}><span className="list-group-item-text py-3">{entry.price}</span></div>
+                                        <div className={'text-right'}><span className="list-group-item-text py-3">{renderHTML(entry.size)}</span></div>
+                                        <div className={'text-right pb-3'}><span className="list-group-item-text py-3">{renderHTML(entry.pricepersqmeter)}</span></div>
+                                        <div className={'text-right'}><span className="list-group-item-text uid p-2">
                                           <strong>{entry['slug'].toUpperCase()}</strong>
-                                        </p>
+                                        </span></div>
                                       </div>
                                     </>
                                   )}
