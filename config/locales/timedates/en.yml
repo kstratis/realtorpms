@@ -204,6 +204,7 @@ en:
       custom: ! '%d %b %Y'
       long: "%B %d, %Y %H:%M"
       short: "%d %b %H:%M"
+      property: ! '%-d/%b/%y'
     pm: pm
   size:
     sqmeters: "m2"

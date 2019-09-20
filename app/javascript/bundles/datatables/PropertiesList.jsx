@@ -89,7 +89,7 @@ const PropertiesList = ({
     <div className="properties-list">
       <div className={'PropertyListContainer'}>
         <div className={'row'}>
-          <div className={'filters col-5'}>
+          <div className={'filters col-5 d-none d-lg-block'}>
             <div className="card">
               <div className="card-header">
                 <div className="table-entry">
@@ -244,7 +244,7 @@ const PropertiesList = ({
               </div>
             </div>
           </div>
-          <div className={'col-7'}>
+          <div className={'col-12 col-lg-7'}>
             {/* Generate the needed filters according to the i18n keys of the erb template */}
             <div className={'row mb-3 px-2 d-flex flex-nowrap'}>
               <div className={'flex-grow-1'}>
@@ -346,13 +346,13 @@ const PropertiesList = ({
                                     </div>
                                   ) : (
                                     <>
-                                      <div className={'col-8'}>
+                                      <div className={'col-lg-8 col-sm-12 col-md-8'}>
                                         {/*<h4 className="list-group-item-title">{entry.mini_heading}</h4>*/}
                                         <h4 className="list-group-item-title">{renderHTML(entry.mini_heading)}</h4>
                                         <p className="">{entry.location}</p>
-                                        <p className="list-group-item-text clamp-3">{entry.description}</p>
+                                        <p className="list-group-item-text clamp-3"><strong>{entry.registration}</strong> - {entry.description}</p>
                                       </div>
-                                      <div className={'col-4'}>
+                                      <div className={'col-lg-4 col-md-4 d-none d-md-block'}>
                                         <p className="list-group-item-text purpose">{entry.purpose}</p>
                                         <p className="list-group-item-text text-right mt-2">{entry.price}</p>
                                         {/*<p className="list-group-item-text text-right">{entry.size}</p>*/}

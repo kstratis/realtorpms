@@ -35,7 +35,7 @@ class SortFilter extends React.Component {
             data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false">
-            {this.props.title}&nbsp; <i className="fas fa-sort" />
+            <span className={'d-none d-sm-inline'}>{this.props.title}&nbsp;</span><i className="fas fa-sort" />
           </button>
           <div className="dropdown-arrow dropdown-arrow-left" />
           <div className="dropdown-menu">

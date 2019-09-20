@@ -196,6 +196,7 @@ el:
       custom: ! '%d %b %Y'
       long: ! '%A %d %B %Y %H:%M:%S %Z'
       short: ! '%d %b %H:%M'
+      property: ! '%-d/%b/%y'
     pm: μ.μ.
   size:
     sqmeters: τ.μ.

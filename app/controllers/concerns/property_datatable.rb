@@ -134,7 +134,8 @@ module PropertyDatatable
             # isFaved: property.is_faved_by?(current_user),
             # assignments: property.properties.count,
             # registration: property.created_at.to_formatted_s(:long)
-            registration: property.created_at.strftime('%d %b. %y'),
+            # registration: property.created_at.strftime('%d %b. %y'),
+            registration: l(property.created_at, format: :property),
             landlord_name: property.try(:landlord).try(:first_name) && property.try(:landlord).try(:last_name) ? "#{property.landlord.first_name[0]}. #{property.landlord.last_name}" : I18n.t('js.properties_owner_unavailable'),
             landlord_tel: property.try(:landlord).try(:telephones) ? "#{property.landlord.telephones}" : I18n.t('js.properties_owner_tel_unavailable'),
             allow_view: true
