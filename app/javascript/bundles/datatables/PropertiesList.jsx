@@ -322,7 +322,7 @@ const PropertiesList = ({
                         <div className="col-12">
 
 
-                          <div className="card card-figure d-block d-sm-none">
+                          <div className="card card-figure card-figure-custom d-block d-sm-none">
                             <a
                               href={entry['allow_view'] ? entry['view_entity_path'] : ''}>
                             <figure className="figure">
