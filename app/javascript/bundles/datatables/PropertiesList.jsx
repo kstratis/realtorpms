@@ -319,21 +319,24 @@ const PropertiesList = ({
                   {dataset.map((entry, index) => (
                     <div key={entry.slug}>
                       <div className={'row'}>
-                        <div className="col-12">
-
+                        <div className="col-12 text-center text-md-left">
 
                           <div className="card card-figure card-figure-custom d-block d-sm-none">
-                            <a
-                              href={entry['allow_view'] ? entry['view_entity_path'] : ''}>
-                            <figure className="figure">
-                              <img className="img-fluid" src={entry['avatar']}
-                                   alt="Card image cap" />
-                                <figcaption className="figure-caption">
-                                  <h6 className="figure-title figure-title-custom">{renderHTML(entry.mini_heading)}</h6>
-                                  <p className="text-muted mb-0 pb-1">{entry.location}</p>
-                                  <p className="text-muted mb-0 pt-1"><span className={'highlighted-bg highlighted-fg p-1 '}>{entry.purpose}{entry.price ? renderHTML(` &middot; ${entry.price}`, 'inline') : '' }</span></p>
-                                </figcaption>
-                            </figure>
+                            <a href={entry['allow_view'] ? entry['view_entity_path'] : ''}>
+                              <figure className="figure">
+                                <div className={`${entry['allow_view'] ? '' : 'frosty'}`}>
+                                  {entry['avatar'] ? (
+                                    <img src={entry['avatar']} alt="placeholder image" className={'img-fluid'} />
+                                  ) : (
+                                    <i className={'pr-icon md house-avatar-placeholder'} />
+                                  )}
+                                </div>
+                                  <figcaption className="figure-caption">
+                                    <h6 className="figure-title figure-title-custom">{renderHTML(entry.mini_heading)}</h6>
+                                    <p className="text-muted mb-0 pb-1">{entry.location}</p>
+                                    <p className="text-muted mb-0 pt-1"><span className={'highlighted-bg highlighted-fg p-1 '}>{entry.purpose}{entry.price ? renderHTML(` &middot; ${entry.price}`, 'inline') : '' }</span></p>
+                                  </figcaption>
+                              </figure>
                             </a>
                           </div>
 
