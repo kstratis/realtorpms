@@ -321,18 +321,22 @@ const PropertiesList = ({
                       <div className={'row'}>
                         <div className="col-12">
 
-                          <div className="card card-figure d-block d-sm-none">
 
+                          <div className="card card-figure d-block d-sm-none">
+                            <a
+                              href={entry['allow_view'] ? entry['view_entity_path'] : ''}>
                             <figure className="figure">
                               <img className="img-fluid" src={entry['avatar']}
                                    alt="Card image cap" />
                                 <figcaption className="figure-caption">
-                                  <h6 className="figure-title"> Simple figure </h6>
-                                  <p className="text-muted mb-0"> Give some text description </p>
+                                  <h6 className="figure-title figure-title-custom">{renderHTML(entry.mini_heading)}</h6>
+                                  <p className="text-muted mb-0 pb-1">{entry.location}</p>
+                                  <p className="text-muted mb-0 pt-1"><span className={'highlighted-bg highlighted-fg p-1 '}>{entry.purpose}{entry.price ? renderHTML(` &middot; ${entry.price}`, 'inline') : '' }</span></p>
                                 </figcaption>
                             </figure>
-
+                            </a>
                           </div>
+
 
                           <div className="list-group list-group-media mb-3 d-none d-sm-block">
                             <a
@@ -365,7 +369,7 @@ const PropertiesList = ({
                                         <h4 className="list-group-item-title">{renderHTML(entry.mini_heading)}</h4>
                                         <p className="">{entry.location}</p>
                                         <p className="list-group-item-text clamp-3"><strong>{entry.registration}</strong>{entry.description ? ` - ${entry.description}` : ''}</p>
-                                        <strong><small className="list-group-item-text extra-index-info-alt">{entry.purpose} &middot; {entry.price} &middot; {renderHTML(entry.size, 'inline')}</small></strong>
+                                        <strong><small className="list-group-item-text extra-index-info-alt highlighted-bg highlighted-fg px-1">{entry.purpose} {entry.price ? renderHTML(`&middot; ${entry.price}`, 'inline') : '' }</small></strong>
                                       </div>
                                       <div className={'col-lg-4 col-md-4 d-none d-md-block extra-index-info'}>
                                         <div className={'text-right'}><span className="d-inline-block list-group-item-text p-2 purpose">{entry.purpose}</span></div>

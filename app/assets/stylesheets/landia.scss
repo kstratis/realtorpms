@@ -594,6 +594,15 @@ i.fas.fa-heart.colored {
   background-color: #ffd54f;
 }
 
+.highlighted-bg {
+  background: #f3dc65;
+  font-weight: bold;
+}
+
+.highlighted-fg {
+  color: #e0301d !important;
+}
+
 
 //.image {
 //  width: 100%;
@@ -1494,9 +1503,13 @@ a.tt-suggestion.tt-selectable{
 
 
 .list-group-media .list-group-item.property-index-avatar .list-group-item-figure {
-    @media (max-width: 767px) {
-      max-width: 100% !important;
-      width: unset !important;
-    }
+  @media (max-width: 767px) {
+    max-width: 100% !important;
+    width: unset !important;
   }
+}
+
+.figure-title-custom{
+  text-transform: unset;
+}
 
