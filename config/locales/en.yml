@@ -417,7 +417,7 @@ en:
       filters:
         title: "Filters"
         date:
-          title: "Entry date"
+          title: "Sorting"
           ascending: "Ascending"
           descending: "Descending"
         price:

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
 import withDatatable from './withDatatable';
 import ClampWrapper from '../components/ClampWrapper';
@@ -18,6 +18,7 @@ import {
 import URLSearchParams from '@ungap/url-search-params';
 import ModalContainer from '../components/ModalContainer';
 import AsyncSelectContainer from '../components/selects/AsyncSelectContainer';
+import useModalToggle from '../hooks/useModalToggle';
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
@@ -76,6 +77,16 @@ const PropertiesList = ({
   properties_path,
   i18n
 }) => {
+  const [filtersOpen, setFiltersOpen] = useState(() => JSON.parse(localStorage.getItem("filtersOpen")));
+
+  useEffect(() => {
+    localStorage.setItem("filtersOpen", filtersOpen);
+  }, [filtersOpen]);
+
+  console.log(filtersOpen);
+  console.log(typeof(filtersOpen));
+  const handleChange = (event) => setFiltersOpen(filtersOpen => !filtersOpen);
+
   const handleSaveParams = () => {
     let searchParams = new URLSearchParams(window.location.search);
     let param_counter = 0;
@@ -89,7 +100,9 @@ const PropertiesList = ({
     <div className="properties-list">
       <div className={'PropertyListContainer'}>
         <div className={'row'}>
-          <div className={'filters col-4 d-none d-lg-block'}>
+
+
+          <div className={`filters col-12 col-lg-4 ${filtersOpen ? 'd-block' : 'd-none'} animated fadeIn`}>
             <div className="card">
               <div className="card-header">
                 <div className="table-entry">
@@ -244,7 +257,11 @@ const PropertiesList = ({
               </div>
             </div>
           </div>
-          <div className={'col-12 col-lg-8'}>
+
+
+          {/* ------------ */}
+
+          <div className={`${filtersOpen ? 'col-lg-8' : 'col-lg-12' }`}>
             {/* Generate the needed filters according to the i18n keys of the erb template */}
             <div className={'row mb-3 px-2 d-flex flex-nowrap'}>
               <div className={'flex-grow-1'}>
@@ -257,6 +274,11 @@ const PropertiesList = ({
                   hasFeedback={false}
                   isCreatable={false}
                 />
+              </div>
+              <div className={'btn-group btn-group-toggle pl-2'} data-toggle="">
+                <label className={`btn btn-secondary toggle-button ${filtersOpen ? 'active' : ''}`}>
+                  <input name={'filter-toggle'} type="checkbox" checked={{filtersOpen}} onChange={handleChange} />
+                <i className={'fas fa-filter fa-fw'}/><span className="d-none d-md-inline">&nbsp;{i18n.filters.title}</span></label>
               </div>
               <div className={'flex-shrink-1 text-center'}>
                 <SortFilter
@@ -312,14 +334,18 @@ const PropertiesList = ({
 
             </div>
             </div>
+
+
+
+
             <Spinner isLoading={isLoading} version={2} />
             {dataset.length > 0 ? (
               <div className={`${isLoading ? 'reduced-opacity' : ''}`}>
                 <FlipMove>
                   {dataset.map((entry, index) => (
                     <div key={entry.slug}>
-                      <div className={'row'}>
-                        <div className="col-12 text-center text-md-left">
+                      <div className={'row yolo'}>
+                        <div className={`${filtersOpen ? 'col-lg-12' : 'col-lg-6'} text-center text-md-left`}>
 
                           <div className="card card-figure card-figure-custom d-block d-sm-none">
                             <a href={entry['allow_view'] ? entry['view_entity_path'] : ''}>

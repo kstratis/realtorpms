@@ -419,7 +419,7 @@ el:
       filters:
         title: "Φίλτρα"
         date:
-          title: "Ημ/νία καταχώρησης"
+          title: "Ταξινόμηση"
           descending: "Νεότερα πρώτα"
           ascending: "Παλαιότερα πρώτα"
         price:
