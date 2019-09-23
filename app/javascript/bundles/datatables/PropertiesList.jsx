@@ -385,15 +385,13 @@ const PropertiesList = ({
                                           {entry.description ? ` - ${entry.description}` : ''}
                                         </p>
                                         <strong className={'d-inline-block pt-1'}>
-                                          <small className="list-group-item-text extra-index-info-alt highlighted-bg highlighted-fg px-1 rounded">
+                                          <small className="list-group-item-text text-center extra-index-info-alt highlighted-bg highlighted-fg px-1 w-80 rounded">
                                             {entry.purpose}{' '}
                                             {entry.price ? renderHTML(`&middot; ${entry.price}`, 'inline') : ''}
                                           </small>
                                           <small
-                                            className={
-                                              'list-group-item-text extra-index-info-alt pt-2 rounded index-slug'
-                                            }>
-                                            <strong className={'d-inline p-1 rounded'}>
+                                            className={'list-group-item-text extra-index-info-alt pt-2 text-left index-slug'}>
+                                            <strong className={'d-inline-block w-80 rounded text-center'}>
                                               {entry['slug'].toUpperCase()}
                                             </strong>
                                           </small>
