@@ -370,6 +370,8 @@ en:
             anchor: "Owner"
             title: "Owner details"
             existing_client: "Choose from existing customers"
+            new_owner: "Create new owner"
+            no_owner: "No owner"
             new_client: "Create new customer"
             no_client: "No customer"
           step6:
