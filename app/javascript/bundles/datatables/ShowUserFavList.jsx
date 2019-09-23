@@ -6,10 +6,10 @@ import ReactPaginate from 'react-paginate';
 import PropTypes from 'prop-types';
 import withDatatable from './withDatatable';
 import React from 'react';
+import PropertyEntry from './PropertyEntry';
 
 const ShowUserFavList = ({ handlePageClick, advanceByTwo, isLoading, dataset, pageCount, selectedPage, i18n }) => {
   return (
-
     <div className="show-user-favlist">
       <div className={'ShowUserFavListContainer'}>
         <div className={'row'}>
@@ -17,63 +17,10 @@ const ShowUserFavList = ({ handlePageClick, advanceByTwo, isLoading, dataset, pa
             <Spinner isLoading={isLoading} version={2} />
             {dataset.length > 0 ? (
               <div className={`${isLoading ? 'reduced-opacity' : ''}`}>
-                <FlipMove>
-                  {dataset.map((entry, index) => (
-                    <div key={entry.slug}>
-                      <div className={'row'}>
-                        <div className="col-12">
-                          <div className="list-group list-group-media mb-3">
-                            <a
-                              href={entry['allow_view'] ? entry['view_entity_path'] : ''}
-                              className="list-group-item list-group-item-action">
-                              <div className="list-group-item-figure rounded-left">
-                                <div className={`thumb-container ${entry['allow_view'] ? '' : 'frosty'}`}>
-                                  {entry['avatar'] ? (
-                                    <img src={entry['avatar']} alt="placeholder image" className={'thumb'} />
-                                  ) : (
-                                    <i className={'pr-icon md house-avatar-placeholder'} />
-                                  )}
-                                </div>
-                              </div>
-                              <div className="list-group-item-body">
-                                <div className={'row'}>
-                                  {!entry['allow_view'] ? (
-                                    <div className={'col-12'}>
-                                      <div>
-                                        <h2>{entry['slug'].toUpperCase()}</h2>
-                                      </div>
-                                      <div>
-                                        <h3>{entry['access_msg']}</h3>
-                                      </div>
-                                    </div>
-                                  ) : (
-                                    <>
-                                      <div className={'col-8'}>
-                                        <h4 className="list-group-item-title">{renderHTML(entry.mini_heading)}</h4>
-                                        <p className="">{entry.location}</p>
-                                        <p className="list-group-item-text clamp-3">{entry.description}</p>
-                                      </div>
-                                      <div className={'col-4'}>
-                                        <p className="list-group-item-text purpose">{entry.purpose}</p>
-                                        <p className="list-group-item-text text-right mt-2">{entry.price}</p>
-                                        <div className="list-group-item-text text-right">{renderHTML(entry.size)}</div>
-                                        <div className="list-group-item-text text-right">
-                                          {renderHTML(entry.pricepersqmeter)}
-                                        </div>
-                                        <p className="list-group-item-text text-right uid text-center">
-                                          <strong>{entry['slug'].toUpperCase()}</strong>
-                                        </p>
-                                      </div>
-                                    </>
-                                  )}
-                                </div>
-                              </div>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+                <FlipMove typeName={null}>
+                {dataset.map((entry, index) => (
+                  <PropertyEntry key={entry.slug} entry={entry} filtersOpen={true} />
+                ))}
                 </FlipMove>
 
                 {/* CARD END */}
@@ -130,7 +77,7 @@ ShowUserFavList.propTypes = {
   handleSort: PropTypes.func.isRequired,
   pageCount: PropTypes.number.isRequired,
   handlePageClick: PropTypes.func.isRequired,
-  selectedPage: PropTypes.number.isRequired,
+  selectedPage: PropTypes.number.isRequired
 };
 
 const ShowUserFavListWithDatatable = withDatatable(ShowUserFavList);

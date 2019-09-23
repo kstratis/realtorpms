@@ -1,21 +1,13 @@
 import Spinner from './Spinner';
 import FlipMove from 'react-flip-move';
-import { renderHTML } from '../utilities/helpers';
 import ClampWrapper from '../components/ClampWrapper';
 import ReactPaginate from 'react-paginate';
 import PropTypes from 'prop-types';
 import withDatatable from './withDatatable';
 import React from 'react';
+import PropertyEntry from './PropertyEntry';
 
-const ClientPrefsList = ({
-  handlePageClick,
-  advanceByTwo,
-  isLoading,
-  dataset,
-  pageCount,
-  selectedPage,
-  i18n
-}) => {
+const ClientPrefsList = ({ handlePageClick, advanceByTwo, isLoading, dataset, pageCount, selectedPage, i18n }) => {
   return (
     <div className="client-prefs-list">
       <div className={'ClientPrefsListContainer'}>
@@ -23,66 +15,14 @@ const ClientPrefsList = ({
           <div className={'col-12'}>
             <Spinner isLoading={isLoading} version={2} />
             {dataset.length > 0 ? (
-              <div className={`${isLoading ? 'reduced-opacity' : ''}`}>
-                <FlipMove>
-                  {dataset.map((entry, index) => (
-                    <div key={entry.slug}>
-                      <div className={'row'}>
-                        <div className="col-12">
-                          <div className="list-group list-group-media mb-3">
-                            <a
-                              href={entry['allow_view'] ? entry['view_entity_path'] : ''}
-                              className="list-group-item list-group-item-action">
-                              <div className="list-group-item-figure rounded-left">
-                                <div className={`thumb-container ${entry['allow_view'] ? '' : 'frosty'}`}>
-                                  {entry['avatar'] ? (
-                                    <img src={entry['avatar']} alt="placeholder image" className={'thumb'} />
-                                  ) : (
-                                    <i className={'pr-icon md house-avatar-placeholder'} />
-                                  )}
-                                </div>
-                              </div>
-                              <div className="list-group-item-body">
-                                <div className={'row'}>
-                                  {!entry['allow_view'] ? (
-                                    <div className={'col-12'}>
-                                      <div>
-                                        <h2>{entry['slug'].toUpperCase()}</h2>
-                                      </div>
-                                      <div>
-                                        <h3>{entry['access_msg']}</h3>
-                                      </div>
-                                    </div>
-                                  ) : (
-                                    <>
-                                      <div className={'col-8'}>
-                                        <h4 className="list-group-item-title">{renderHTML(entry.mini_heading)}</h4>
-                                        <p className="">{entry.location}</p>
-                                        <p className="list-group-item-text clamp-3">{entry.description}</p>
-                                      </div>
-                                      <div className={'col-4'}>
-                                        <p className="list-group-item-text purpose">{entry.purpose}</p>
-                                        <p className="list-group-item-text text-right mt-2">{entry.price}</p>
-                                        <div className="list-group-item-text text-right">{renderHTML(entry.size)}</div>
-                                        <div className="list-group-item-text text-right">
-                                          {renderHTML(entry.pricepersqmeter)}
-                                        </div>
-                                        <p className="list-group-item-text text-right uid text-center">
-                                          <strong>{entry['slug'].toUpperCase()}</strong>
-                                        </p>
-                                      </div>
-                                    </>
-                                  )}
-                                </div>
-                              </div>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </FlipMove>
-
+              <>
+                <div className={`row relativeposition ${isLoading ? 'reduced-opacity' : ''}`}>
+                  <FlipMove typeName={null}>
+                    {dataset.map((entry, index) => (
+                      <PropertyEntry key={entry.slug} entry={entry} filtersOpen={false} />
+                    ))}
+                  </FlipMove>
+                </div>
                 {/* CARD END */}
                 <div className={'clearfix'} />
 
@@ -116,7 +56,7 @@ const ClientPrefsList = ({
                     />
                   </nav>
                 </div>
-              </div>
+              </>
             ) : (
               <div className={`no-entries ${isLoading ? 'reduced-opacity' : ''}`}>
                 <i className="no-results"> </i>

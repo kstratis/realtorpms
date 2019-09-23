@@ -1,5 +1,6 @@
 import { renderHTML } from '../utilities/helpers';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class PropertyEntry extends React.Component {
   constructor(props) {
@@ -121,5 +122,10 @@ class PropertyEntry extends React.Component {
     );
   }
 }
+
+PropertyEntry.propTypes = {
+  entry: PropTypes.object,
+  filtersOpen: PropTypes.bool
+};
 
 export default PropertyEntry;
