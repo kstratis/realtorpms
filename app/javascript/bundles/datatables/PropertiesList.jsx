@@ -7,7 +7,7 @@ import SortFilter from './SortFilter';
 import FlipMove from 'react-flip-move';
 import AssociativeFormSelect from '../components/selects/AssociativeFormSelect';
 import Spinner from './Spinner';
-import { renderHTML } from '../utilities/helpers';
+import PropertyEntry from './PropertyEntry';
 import URLSearchParams from '@ungap/url-search-params';
 import ModalContainer from '../components/ModalContainer';
 import AsyncSelectContainer from '../components/selects/AsyncSelectContainer';
@@ -307,129 +307,10 @@ const PropertiesList = ({
             <Spinner isLoading={isLoading} version={2} />
             {dataset.length > 0 ? (
               <>
-                <div className={`row ${isLoading ? 'reduced-opacity' : ''}`}>
+                <div className={`row relativeposition ${isLoading ? 'reduced-opacity' : ''}`}>
                   <FlipMove typeName={null}>
                     {dataset.map((entry, index) => (
-                      <div key={entry['slug']} className={`${filtersOpen ? 'col-lg-12' : 'col-lg-6'}`}>
-                        <div className={`text-center text-md-left`}>
-                          <div className="card card-figure card-figure-custom d-block d-sm-none">
-                            <a href={entry['allow_view'] ? entry['view_entity_path'] : ''}>
-                              <figure className="figure">
-                                <div className={`${entry['allow_view'] ? '' : 'frosty'}`}>
-                                  {entry['avatar'] ? (
-                                    <img src={entry['avatar']} alt="placeholder image" className={'img-fluid'} />
-                                  ) : (
-                                    <i className={'pr-icon md house-avatar-placeholder'} />
-                                  )}
-                                </div>
-                                {entry['allow_view'] ? (
-                                  <figcaption className="figure-caption">
-                                    <h6 className="figure-title figure-title-custom">
-                                      {renderHTML(entry.mini_heading)}
-                                    </h6>
-                                    <p className="text-muted mb-0 pb-1">{entry.location}</p>
-                                    <p className="text-muted mb-0 pt-1">
-                                      <span className={'highlighted-bg highlighted-fg p-1 '}>
-                                        {entry.purpose}
-                                        {entry.price ? renderHTML(` &middot; ${entry.price}`, 'inline') : ''}
-                                      </span>
-                                    </p>
-                                  </figcaption>
-                                ) : (
-                                  <div className={'col-12'}>
-                                    <div>
-                                      <h2>{entry['slug'].toUpperCase()}</h2>
-                                    </div>
-                                    <div className={'text-center'}>
-                                      <h3>{entry['access_msg']}</h3>
-                                    </div>
-                                  </div>
-                                )}
-                              </figure>
-                            </a>
-                          </div>
-
-                          <div className="list-group list-group-media mb-3 d-none d-sm-block">
-                            <a
-                              href={entry['allow_view'] ? entry['view_entity_path'] : ''}
-                              className="list-group-item list-group-item-action property-index-avatar">
-                              <div className="list-group-item-figure rounded-left ">
-                                <div className={`thumb-container ${entry['allow_view'] ? '' : 'frosty'}`}>
-                                  {entry['avatar'] ? (
-                                    <img src={entry['avatar']} alt="placeholder image" className={'thumb'} />
-                                  ) : (
-                                    <i className={'pr-icon md house-avatar-placeholder'} />
-                                  )}
-                                </div>
-                              </div>
-                              <div className="list-group-item-body custom-list-group-item-body-padding">
-                                <div className={'row'}>
-                                  {!entry['allow_view'] ? (
-                                    <div className={'col-12'}>
-                                      <div>
-                                        <h2>{entry['slug'].toUpperCase()}</h2>
-                                      </div>
-                                      <div className={'text-center'}>
-                                        <h3>{entry['access_msg']}</h3>
-                                      </div>
-                                    </div>
-                                  ) : (
-                                    <>
-                                      <div className={'col-sm-12 col-md-8 d-none d-sm-block main-info'}>
-                                        <h4 className="list-group-item-title clamp-1">
-                                          {renderHTML(entry.mini_heading)}
-                                        </h4>
-                                        <p className="">{entry.location}</p>
-                                        <p className="list-group-item-text clamp-2">
-                                          <strong>{entry.registration}</strong>
-                                          {entry.description ? ` - ${entry.description}` : ''}
-                                        </p>
-                                        <strong className={'d-inline-block pt-1'}>
-                                          <small className="list-group-item-text text-center extra-index-info-alt highlighted-bg highlighted-fg px-1 w-80 rounded">
-                                            {entry.purpose}{' '}
-                                            {entry.price ? renderHTML(`&middot; ${entry.price}`, 'inline') : ''}
-                                          </small>
-                                          <small
-                                            className={'list-group-item-text extra-index-info-alt pt-2 text-left index-slug'}>
-                                            <strong className={'d-inline-block w-80 rounded text-center'}>
-                                              {entry['slug'].toUpperCase()}
-                                            </strong>
-                                          </small>
-                                        </strong>
-                                      </div>
-                                      <div className={'col-lg-4 col-md-4 d-none d-md-block extra-index-info'}>
-                                        <div className={'text-right'}>
-                                          <span className="d-inline-block list-group-item-text p-2 purpose">
-                                            {entry.purpose}
-                                          </span>
-                                        </div>
-                                        <div className={'text-right'}>
-                                          <span className="d-inline-block list-group-item-text pt-1">
-                                            {entry.price}
-                                          </span>
-                                        </div>
-                                        <div className={'text-right'}>
-                                          <span className="list-group-item-text">{renderHTML(entry.size)}</span>
-                                        </div>
-                                        <div className={'text-right pb-3'}>
-                                          <span className="list-group-item-text">
-                                            {renderHTML(entry.pricepersqmeter)}
-                                          </span>
-                                        </div>
-                                        <div className={'text-right'}>
-                                          <span className="list-group-item-text uid p-2">
-                                            <strong>{entry['slug'].toUpperCase()}</strong>
-                                          </span>
-                                        </div>
-                                      </div>
-                                    </>
-                                  )}
-                                </div>
-                              </div>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
+                      <PropertyEntry key={entry.slug} entry={entry} filtersOpen={filtersOpen}/>
                     ))}
                   </FlipMove>
                 </div>
