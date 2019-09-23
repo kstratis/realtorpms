@@ -77,15 +77,13 @@ const PropertiesList = ({
   properties_path,
   i18n
 }) => {
-  const [filtersOpen, setFiltersOpen] = useState(() => JSON.parse(localStorage.getItem("filtersOpen")));
+  const [filtersOpen, setFiltersOpen] = useState(() => JSON.parse(localStorage.getItem('filtersOpen')));
 
   useEffect(() => {
-    localStorage.setItem("filtersOpen", filtersOpen);
+    localStorage.setItem('filtersOpen', filtersOpen);
   }, [filtersOpen]);
 
-  console.log(filtersOpen);
-  console.log(typeof(filtersOpen));
-  const handleChange = (event) => setFiltersOpen(filtersOpen => !filtersOpen);
+  const handleChange = event => setFiltersOpen(filtersOpen => !filtersOpen);
 
   const handleSaveParams = () => {
     let searchParams = new URLSearchParams(window.location.search);
@@ -100,9 +98,7 @@ const PropertiesList = ({
     <div className="properties-list">
       <div className={'PropertyListContainer'}>
         <div className={'row'}>
-
-
-          <div className={`filters col-12 col-lg-4 ${filtersOpen ? 'd-block' : 'd-none'} animated fadeIn`}>
+          <div className={`filters col-12 col-xl-4 ${filtersOpen ? 'd-block' : 'd-none'} animated fadeIn`}>
             <div className="card">
               <div className="card-header">
                 <div className="table-entry">
@@ -258,12 +254,12 @@ const PropertiesList = ({
             </div>
           </div>
 
-
           {/* ------------ */}
 
-          <div className={`${filtersOpen ? 'col-lg-8' : 'col-lg-12' }`}>
+          <div className={`${filtersOpen ? 'col-xl-8' : 'col-xl-12' }`}>
+          <div className={'row'}>
             {/* Generate the needed filters according to the i18n keys of the erb template */}
-            <div className={'row mb-3 px-2 d-flex flex-nowrap'}>
+            <div className={'mb-3 custom-px d-flex flex-fill flex-nowrap'}>
               <div className={'flex-grow-1'}>
                 <AsyncSelectContainer
                   id={'AsyncSelectContainer'}
@@ -277,8 +273,10 @@ const PropertiesList = ({
               </div>
               <div className={'btn-group btn-group-toggle pl-2'} data-toggle="">
                 <label className={`btn btn-secondary toggle-button ${filtersOpen ? 'active' : ''}`}>
-                  <input name={'filter-toggle'} type="checkbox" checked={{filtersOpen}} onChange={handleChange} />
-                <i className={'fas fa-filter fa-fw'}/><span className="d-none d-md-inline">&nbsp;{i18n.filters.title}</span></label>
+                  <input name={'filter-toggle'} type="checkbox" checked={{ filtersOpen }} onChange={handleChange} />
+                  <i className={'fas fa-filter fa-fw'} />
+                  <span className="d-none d-md-inline">&nbsp;{i18n.filters.title}</span>
+                </label>
               </div>
               <div className={'flex-shrink-1 text-center'}>
                 <SortFilter
@@ -331,95 +329,120 @@ const PropertiesList = ({
                 />
 
                 {/*<button className={'btn btn-danger'} disabled={!hasParams()}><i className={'fas fa-save'}></i></button>*/}
-
+              </div>
             </div>
-            </div>
-
-
-
+          </div>
 
             <Spinner isLoading={isLoading} version={2} />
             {dataset.length > 0 ? (
-              <div className={`${isLoading ? 'reduced-opacity' : ''}`}>
-                <FlipMove>
+              <>
+                <div className={'row'}>
                   {dataset.map((entry, index) => (
-                    <div key={entry.slug}>
-                      <div className={'row yolo'}>
-                        <div className={`${filtersOpen ? 'col-lg-12' : 'col-lg-6'} text-center text-md-left`}>
-
-                          <div className="card card-figure card-figure-custom d-block d-sm-none">
-                            <a href={entry['allow_view'] ? entry['view_entity_path'] : ''}>
-                              <figure className="figure">
-                                <div className={`${entry['allow_view'] ? '' : 'frosty'}`}>
-                                  {entry['avatar'] ? (
-                                    <img src={entry['avatar']} alt="placeholder image" className={'img-fluid'} />
-                                  ) : (
-                                    <i className={'pr-icon md house-avatar-placeholder'} />
-                                  )}
-                                </div>
-                                  <figcaption className="figure-caption">
-                                    <h6 className="figure-title figure-title-custom">{renderHTML(entry.mini_heading)}</h6>
-                                    <p className="text-muted mb-0 pb-1">{entry.location}</p>
-                                    <p className="text-muted mb-0 pt-1"><span className={'highlighted-bg highlighted-fg p-1 '}>{entry.purpose}{entry.price ? renderHTML(` &middot; ${entry.price}`, 'inline') : '' }</span></p>
-                                  </figcaption>
-                              </figure>
-                            </a>
-                          </div>
-
-
-                          <div className="list-group list-group-media mb-3 d-none d-sm-block">
-                            <a
-                              href={entry['allow_view'] ? entry['view_entity_path'] : ''}
-                              className="list-group-item list-group-item-action property-index-avatar">
-                              <div className="list-group-item-figure rounded-left ">
-                                <div className={`thumb-container ${entry['allow_view'] ? '' : 'frosty'}`}>
-                                  {entry['avatar'] ? (
-                                    <img src={entry['avatar']} alt="placeholder image" className={'thumb'} />
-                                  ) : (
-                                    <i className={'pr-icon md house-avatar-placeholder'} />
-                                  )}
-                                </div>
+                    <div key={entry['slug']} className={`${filtersOpen ? 'col-lg-12' : 'col-lg-6'}`}>
+                      {/*<div className={'row yolo'}>*/}
+                      <div className={`text-center text-md-left`}>
+                        <div className="card card-figure card-figure-custom d-block d-sm-none">
+                          <a href={entry['allow_view'] ? entry['view_entity_path'] : ''}>
+                            <figure className="figure">
+                              <div className={`${entry['allow_view'] ? '' : 'frosty'}`}>
+                                {entry['avatar'] ? (
+                                  <img src={entry['avatar']} alt="placeholder image" className={'img-fluid'} />
+                                ) : (
+                                  <i className={'pr-icon md house-avatar-placeholder'} />
+                                )}
                               </div>
-                              <div className="list-group-item-body">
-                                <div className={'row'}>
-                                  {!entry['allow_view'] ? (
-                                    <div className={'col-12'}>
-                                      <div>
-                                        <h2>{entry['slug'].toUpperCase()}</h2>
+                              <figcaption className="figure-caption">
+                                <h6 className="figure-title figure-title-custom">{renderHTML(entry.mini_heading)}</h6>
+                                <p className="text-muted mb-0 pb-1">{entry.location}</p>
+                                <p className="text-muted mb-0 pt-1">
+                                  <span className={'highlighted-bg highlighted-fg p-1 '}>
+                                    {entry.purpose}
+                                    {entry.price ? renderHTML(` &middot; ${entry.price}`, 'inline') : ''}
+                                  </span>
+                                </p>
+                              </figcaption>
+                            </figure>
+                          </a>
+                        </div>
+
+                        <div className="list-group list-group-media mb-3 d-none d-sm-block">
+                          <a
+                            href={entry['allow_view'] ? entry['view_entity_path'] : ''}
+                            className="list-group-item list-group-item-action property-index-avatar">
+                            <div className="list-group-item-figure rounded-left ">
+                              <div className={`thumb-container ${entry['allow_view'] ? '' : 'frosty'}`}>
+                                {entry['avatar'] ? (
+                                  <img src={entry['avatar']} alt="placeholder image" className={'thumb'} />
+                                ) : (
+                                  <i className={'pr-icon md house-avatar-placeholder'} />
+                                )}
+                              </div>
+                            </div>
+                            <div className="list-group-item-body custom-list-group-item-body-padding">
+                              <div className={'row'}>
+                                {!entry['allow_view'] ? (
+                                  <div className={'col-12'}>
+                                    <div>
+                                      <h2>{entry['slug'].toUpperCase()}</h2>
+                                    </div>
+                                    <div>
+                                      <h3>{entry['access_msg']}</h3>
+                                    </div>
+                                  </div>
+                                ) : (
+                                  <>
+                                    <div className={'col-sm-12 col-md-8 d-none d-sm-block main-info'}>
+                                      {/*<h4 className="list-group-item-title">{entry.mini_heading}</h4>*/}
+                                      <h4 className="list-group-item-title clamp-1">{renderHTML(entry.mini_heading)}</h4>
+                                      <p className="">{entry.location}</p>
+                                      <p className="list-group-item-text clamp-2">
+                                        <strong>{entry.registration}</strong>
+                                        {entry.description ? ` - ${entry.description}` : ''}
+                                      </p>
+                                      <strong className={'d-inline-block pt-1'}>
+                                        <small className="list-group-item-text extra-index-info-alt highlighted-bg highlighted-fg px-1 rounded">
+                                          {entry.purpose}{' '}
+                                          {entry.price ? renderHTML(`&middot; ${entry.price}`, 'inline') : ''}
+
+                                        </small>
+                                        <small className={'list-group-item-text extra-index-info-alt pt-2 rounded index-slug'}><strong className={'d-inline p-1 rounded'}>{entry['slug'].toUpperCase()}</strong></small>
+                                      </strong>
+                                    </div>
+                                    <div className={'col-lg-4 col-md-4 d-none d-md-block extra-index-info'}>
+                                      <div className={'text-right'}>
+                                        <span className="d-inline-block list-group-item-text p-2 purpose">
+                                          {entry.purpose}
+                                        </span>
                                       </div>
-                                      <div>
-                                        <h3>{entry['access_msg']}</h3>
+                                      <div className={'text-right'}>
+                                        <span className="d-inline-block list-group-item-text pt-1">{entry.price}</span>
+                                      </div>
+                                      <div className={'text-right'}>
+                                        <span className="list-group-item-text">{renderHTML(entry.size)}</span>
+                                      </div>
+                                      <div className={'text-right pb-3'}>
+                                        <span className="list-group-item-text">
+                                          {renderHTML(entry.pricepersqmeter)}
+                                        </span>
+                                      </div>
+                                      <div className={'text-right'}>
+                                        <span className="list-group-item-text uid p-2">
+                                          <strong>{entry['slug'].toUpperCase()}</strong>
+                                        </span>
                                       </div>
                                     </div>
-                                  ) : (
-                                    <>
-                                      <div className={'col-sm-12 col-md-8 d-none d-sm-block main-info'}>
-                                        {/*<h4 className="list-group-item-title">{entry.mini_heading}</h4>*/}
-                                        <h4 className="list-group-item-title">{renderHTML(entry.mini_heading)}</h4>
-                                        <p className="">{entry.location}</p>
-                                        <p className="list-group-item-text clamp-3"><strong>{entry.registration}</strong>{entry.description ? ` - ${entry.description}` : ''}</p>
-                                        <strong><small className="list-group-item-text extra-index-info-alt highlighted-bg highlighted-fg px-1">{entry.purpose} {entry.price ? renderHTML(`&middot; ${entry.price}`, 'inline') : '' }</small></strong>
-                                      </div>
-                                      <div className={'col-lg-4 col-md-4 d-none d-md-block extra-index-info'}>
-                                        <div className={'text-right'}><span className="d-inline-block list-group-item-text p-2 purpose">{entry.purpose}</span></div>
-                                        <div className={'text-right'}><span className="d-inline-block list-group-item-text pt-1">{entry.price}</span></div>
-                                        <div className={'text-right'}><span className="list-group-item-text">{renderHTML(entry.size)}</span></div>
-                                        <div className={'text-right pb-3'}><span className="list-group-item-text">{renderHTML(entry.pricepersqmeter)}</span></div>
-                                        <div className={'text-right'}><span className="list-group-item-text uid p-2">
-                                          <strong>{entry['slug'].toUpperCase()}</strong>
-                                        </span></div>
-                                      </div>
-                                    </>
-                                  )}
-                                </div>
+                                  </>
+                                )}
                               </div>
-                            </a>
-                          </div>
+                            </div>
+                          </a>
                         </div>
                       </div>
+                      {/*</div>*/}
                     </div>
                   ))}
-                </FlipMove>
+                </div>
+
 
                 {/* CARD END */}
                 <div className={'clearfix'} />
@@ -454,14 +477,25 @@ const PropertiesList = ({
                     />
                   </nav>
                 </div>
-              </div>
+              </>
             ) : (
               <div className={`no-entries ${isLoading ? 'reduced-opacity' : ''}`}>
                 <i className="no-results"> </i>
                 <h3>{i18n['no_results']}</h3>
               </div>
             )}
+
+
+
+
+
+
+
           </div>
+          {/*<div className={'row'}>*/}
+
+          {/*</div>*/}
+          {/*</div>*/}
         </div>
       </div>
     </div>

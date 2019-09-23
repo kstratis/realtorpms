@@ -1285,7 +1285,6 @@ li.page-item {
   color: #e0301d !important;
   border-radius: 5px;
   padding: 5px 0 5px 0;
-
 }
 
 .front{
@@ -1478,29 +1477,32 @@ a.tt-suggestion.tt-selectable{
 }
 
 .extra-index-info{
-  @media (min-width: 992px) and (max-width: 1227px) {
+  //@media (min-width: 992px) and (max-width: 1227px) {
+  @media (min-width: 992px) and (max-width: 1549px) {
     display: none !important;
   }
 }
 
+//1549
 .extra-index-info-alt{
   display: none;
   @media (max-width: 767px){
     display: inline-block;
   }
-  @media (min-width: 992px) and (max-width: 1227px) {
+  //@media (min-width: 992px) and (max-width: 1227px) {
+  @media (min-width: 992px) and (max-width: 1549px) {
     display: inline-block;
   }
 }
 
+// ALT DATA
 .main-info {
-  @media (min-width: 992px) and (max-width: 1227px) {
+  @media (min-width: 992px) and (max-width: 1549px) {
     flex: 0 0 100%;
     max-width: 100%;
   }
 
 }
-
 
 .list-group-media .list-group-item.property-index-avatar .list-group-item-figure {
   @media (max-width: 767px) {
@@ -1520,4 +1522,25 @@ a.tt-suggestion.tt-selectable{
 
 .toggle-button{
   cursor: pointer;
+}
+
+.custom-px{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.custom-list-group-item-body-padding{
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.index-slug{
+  display: none;
+  @media (min-width: 992px) and (max-width: 1549px) {
+    display: block;
+  }
+  strong {
+    background: #37474f;
+    color: #ffffff;
+  }
 }
