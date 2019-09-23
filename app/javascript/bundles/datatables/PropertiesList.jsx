@@ -4,27 +4,13 @@ import ReactPaginate from 'react-paginate';
 import withDatatable from './withDatatable';
 import ClampWrapper from '../components/ClampWrapper';
 import SortFilter from './SortFilter';
-import AsyncSelect from '../components/selects/AsyncSelect';
 import FlipMove from 'react-flip-move';
 import AssociativeFormSelect from '../components/selects/AssociativeFormSelect';
 import Spinner from './Spinner';
-import {
-  renderHTML,
-  priceFilterOptions,
-  sizeFilterOptions,
-  floorFilterOptions,
-  categoryFilterOptions
-} from '../utilities/helpers';
+import { renderHTML } from '../utilities/helpers';
 import URLSearchParams from '@ungap/url-search-params';
 import ModalContainer from '../components/ModalContainer';
 import AsyncSelectContainer from '../components/selects/AsyncSelectContainer';
-import useModalToggle from '../hooks/useModalToggle';
-
-const getRandomInt = (min, max) => {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-};
 
 // Disable the save search button when no params are available
 const hasParams = () => {
@@ -57,9 +43,6 @@ const PropertiesList = ({
   floors_filter,
   construction_filter,
   locations_filter,
-  propertyType,
-  handleAssign,
-  handleFav,
   advanceByTwo,
   isLoading,
   dataset,
@@ -68,8 +51,6 @@ const PropertiesList = ({
   sorting,
   ordering,
   count,
-  searchInput,
-  handleSearchInput,
   handleCategoryInput,
   locations_endpoint,
   clients_endpoint,
@@ -84,15 +65,6 @@ const PropertiesList = ({
   }, [filtersOpen]);
 
   const handleChange = event => setFiltersOpen(filtersOpen => !filtersOpen);
-
-  const handleSaveParams = () => {
-    let searchParams = new URLSearchParams(window.location.search);
-    let param_counter = 0;
-    for (let p of searchParams) {
-      param_counter = param_counter + 1;
-    }
-    return param_counter > 0;
-  };
 
   return (
     <div className="properties-list">
@@ -254,195 +226,215 @@ const PropertiesList = ({
             </div>
           </div>
 
-          {/* ------------ */}
-
-          <div className={`${filtersOpen ? 'col-xl-8' : 'col-xl-12' }`}>
-          <div className={'row'}>
-            {/* Generate the needed filters according to the i18n keys of the erb template */}
-            <div className={'mb-3 custom-px d-flex flex-fill flex-nowrap'}>
-              <div className={'flex-grow-1'}>
-                <AsyncSelectContainer
-                  id={'AsyncSelectContainer'}
-                  i18n={i18n}
-                  collection_endpoint={{ url: locations_endpoint, action: 'get' }}
-                  action_endpoint={{ url: '', action: '', callback: handleLocationInput }}
-                  storedOptions={locations_filter['storedOptions']}
-                  hasFeedback={false}
-                  isCreatable={false}
-                />
-              </div>
-              <div className={'btn-group btn-group-toggle pl-2'} data-toggle="">
-                <label className={`btn btn-secondary toggle-button ${filtersOpen ? 'active' : ''}`}>
-                  <input name={'filter-toggle'} type="checkbox" checked={{ filtersOpen }} onChange={handleChange} />
-                  <i className={'fas fa-filter fa-fw'} />
-                  <span className="d-none d-md-inline">&nbsp;{i18n.filters.title}</span>
-                </label>
-              </div>
-              <div className={'flex-shrink-1 text-center'}>
-                <SortFilter
-                  handleFn={handleSort}
-                  slug={'created_at'}
-                  title={i18n.filters.sortByDate.title}
-                  currentSorting={sorting}
-                  currentOrdering={ordering}
-                  options={[
-                    {
-                      sn: 0,
-                      text: i18n.filters.sortByDate.option1,
-                      sort_filter: 'created_at',
-                      sort_order: 'desc',
-                      icon: 'fas fa-sort-amount-up fa-fw'
-                    },
-                    {
-                      sn: 1,
-                      text: i18n.filters.sortByDate.option2,
-                      sort_filter: 'created_at',
-                      sort_order: 'asc',
-                      icon: 'fas fa-sort-amount-down fa-fw'
-                    }
-                  ]}
-                />
-              </div>
-              <div className={``}>
-                <ModalContainer
-                  id={'modal-window'}
-                  fireButtonLabel={`<i class='fas fa-save fa-lg fa-fw' />`}
-                  fireButtonBtnSize={`md`}
-                  fireButtonBtnType={`success`}
-                  avatar={null}
-                  modalTitle={i18n.search_save_title}
-                  modalHeader={i18n.search_save_subtitle}
-                  child={'StoreClientSearch'}
-                  buttonCloseLabel={i18n.search_save_buttonCloseLabel}
-                  ajaxEnabled={true}
-                  isClearable={true}
-                  backspaceRemovesValue={true}
-                  isSearchable={true}
-                  i18n={i18n}
-                  buttonDisabled={!hasParams()}
-                  clientsEndpoint={clients_endpoint}
-                  assignmentshipsEndpoint={assignmentships_endpoint}
-                  i18nPriceOptions={price_filter['options']}
-                  i18nSizeOptions={size_filter['options']}
-                  i18nFloorOptions={floors_filter['options']}
-                  i18nCategoryOptions={category_filter['options']}
-                />
-
-                {/*<button className={'btn btn-danger'} disabled={!hasParams()}><i className={'fas fa-save'}></i></button>*/}
+          <div className={`${filtersOpen ? 'col-xl-8' : 'col-xl-12'}`}>
+            <div className={'row'}>
+              {/* Generate the needed filters according to the i18n keys of the erb template */}
+              <div className={'mb-3 custom-px d-flex flex-fill flex-nowrap'}>
+                <div className={'flex-grow-1'}>
+                  <AsyncSelectContainer
+                    id={'AsyncSelectContainer'}
+                    i18n={i18n}
+                    collection_endpoint={{ url: locations_endpoint, action: 'get' }}
+                    action_endpoint={{ url: '', action: '', callback: handleLocationInput }}
+                    storedOptions={locations_filter['storedOptions']}
+                    hasFeedback={false}
+                    isCreatable={false}
+                  />
+                </div>
+                <div className={'btn-group btn-group-toggle pl-2'}>
+                  <label
+                    className={`btn ${hasParams() ? 'btn-danger' : 'btn-secondary'} toggle-button ${
+                      filtersOpen ? 'active' : ''
+                    }`}>
+                    <input name={'filter-toggle'} type="checkbox" checked={{ filtersOpen }} onChange={handleChange} />
+                    <i className={'fas fa-filter fa-fw'} />
+                    <span className="d-none d-md-inline">&nbsp;{i18n.filters.title}</span>
+                  </label>
+                </div>
+                <div className={'flex-shrink-1 text-center'}>
+                  <SortFilter
+                    handleFn={handleSort}
+                    slug={'created_at'}
+                    title={i18n.filters.sortByDate.title}
+                    currentSorting={sorting}
+                    currentOrdering={ordering}
+                    options={[
+                      {
+                        sn: 0,
+                        text: i18n.filters.sortByDate.option1,
+                        sort_filter: 'created_at',
+                        sort_order: 'desc',
+                        icon: 'fas fa-sort-amount-up fa-fw'
+                      },
+                      {
+                        sn: 1,
+                        text: i18n.filters.sortByDate.option2,
+                        sort_filter: 'created_at',
+                        sort_order: 'asc',
+                        icon: 'fas fa-sort-amount-down fa-fw'
+                      }
+                    ]}
+                  />
+                </div>
+                <div className={``}>
+                  <ModalContainer
+                    id={'modal-window'}
+                    fireButtonLabel={`<i class='fas fa-save fa-lg fa-fw' />`}
+                    fireButtonBtnSize={`md`}
+                    fireButtonBtnType={`success`}
+                    avatar={null}
+                    modalTitle={i18n.search_save_title}
+                    modalHeader={i18n.search_save_subtitle}
+                    child={'StoreClientSearch'}
+                    buttonCloseLabel={i18n.search_save_buttonCloseLabel}
+                    ajaxEnabled={true}
+                    isClearable={true}
+                    backspaceRemovesValue={true}
+                    isSearchable={true}
+                    i18n={i18n}
+                    buttonDisabled={!hasParams()}
+                    clientsEndpoint={clients_endpoint}
+                    assignmentshipsEndpoint={assignmentships_endpoint}
+                    i18nPriceOptions={price_filter['options']}
+                    i18nSizeOptions={size_filter['options']}
+                    i18nFloorOptions={floors_filter['options']}
+                    i18nCategoryOptions={category_filter['options']}
+                  />
+                </div>
               </div>
             </div>
-          </div>
 
             <Spinner isLoading={isLoading} version={2} />
             {dataset.length > 0 ? (
               <>
                 <div className={'row'}>
-                  {dataset.map((entry, index) => (
-                    <div key={entry['slug']} className={`${filtersOpen ? 'col-lg-12' : 'col-lg-6'}`}>
-                      {/*<div className={'row yolo'}>*/}
-                      <div className={`text-center text-md-left`}>
-                        <div className="card card-figure card-figure-custom d-block d-sm-none">
-                          <a href={entry['allow_view'] ? entry['view_entity_path'] : ''}>
-                            <figure className="figure">
-                              <div className={`${entry['allow_view'] ? '' : 'frosty'}`}>
-                                {entry['avatar'] ? (
-                                  <img src={entry['avatar']} alt="placeholder image" className={'img-fluid'} />
+                  <FlipMove typeName={null}>
+                    {dataset.map((entry, index) => (
+                      <div key={entry['slug']} className={`${filtersOpen ? 'col-lg-12' : 'col-lg-6'}`}>
+                        <div className={`text-center text-md-left`}>
+                          <div className="card card-figure card-figure-custom d-block d-sm-none">
+                            <a href={entry['allow_view'] ? entry['view_entity_path'] : ''}>
+                              <figure className="figure">
+                                <div className={`${entry['allow_view'] ? '' : 'frosty'}`}>
+                                  {entry['avatar'] ? (
+                                    <img src={entry['avatar']} alt="placeholder image" className={'img-fluid'} />
+                                  ) : (
+                                    <i className={'pr-icon md house-avatar-placeholder'} />
+                                  )}
+                                </div>
+                                {entry['allow_view'] ? (
+                                  <figcaption className="figure-caption">
+                                    <h6 className="figure-title figure-title-custom">
+                                      {renderHTML(entry.mini_heading)}
+                                    </h6>
+                                    <p className="text-muted mb-0 pb-1">{entry.location}</p>
+                                    <p className="text-muted mb-0 pt-1">
+                                      <span className={'highlighted-bg highlighted-fg p-1 '}>
+                                        {entry.purpose}
+                                        {entry.price ? renderHTML(` &middot; ${entry.price}`, 'inline') : ''}
+                                      </span>
+                                    </p>
+                                  </figcaption>
                                 ) : (
-                                  <i className={'pr-icon md house-avatar-placeholder'} />
-                                )}
-                              </div>
-                              <figcaption className="figure-caption">
-                                <h6 className="figure-title figure-title-custom">{renderHTML(entry.mini_heading)}</h6>
-                                <p className="text-muted mb-0 pb-1">{entry.location}</p>
-                                <p className="text-muted mb-0 pt-1">
-                                  <span className={'highlighted-bg highlighted-fg p-1 '}>
-                                    {entry.purpose}
-                                    {entry.price ? renderHTML(` &middot; ${entry.price}`, 'inline') : ''}
-                                  </span>
-                                </p>
-                              </figcaption>
-                            </figure>
-                          </a>
-                        </div>
-
-                        <div className="list-group list-group-media mb-3 d-none d-sm-block">
-                          <a
-                            href={entry['allow_view'] ? entry['view_entity_path'] : ''}
-                            className="list-group-item list-group-item-action property-index-avatar">
-                            <div className="list-group-item-figure rounded-left ">
-                              <div className={`thumb-container ${entry['allow_view'] ? '' : 'frosty'}`}>
-                                {entry['avatar'] ? (
-                                  <img src={entry['avatar']} alt="placeholder image" className={'thumb'} />
-                                ) : (
-                                  <i className={'pr-icon md house-avatar-placeholder'} />
-                                )}
-                              </div>
-                            </div>
-                            <div className="list-group-item-body custom-list-group-item-body-padding">
-                              <div className={'row'}>
-                                {!entry['allow_view'] ? (
                                   <div className={'col-12'}>
                                     <div>
                                       <h2>{entry['slug'].toUpperCase()}</h2>
                                     </div>
-                                    <div>
+                                    <div className={'text-center'}>
                                       <h3>{entry['access_msg']}</h3>
                                     </div>
                                   </div>
-                                ) : (
-                                  <>
-                                    <div className={'col-sm-12 col-md-8 d-none d-sm-block main-info'}>
-                                      {/*<h4 className="list-group-item-title">{entry.mini_heading}</h4>*/}
-                                      <h4 className="list-group-item-title clamp-1">{renderHTML(entry.mini_heading)}</h4>
-                                      <p className="">{entry.location}</p>
-                                      <p className="list-group-item-text clamp-2">
-                                        <strong>{entry.registration}</strong>
-                                        {entry.description ? ` - ${entry.description}` : ''}
-                                      </p>
-                                      <strong className={'d-inline-block pt-1'}>
-                                        <small className="list-group-item-text extra-index-info-alt highlighted-bg highlighted-fg px-1 rounded">
-                                          {entry.purpose}{' '}
-                                          {entry.price ? renderHTML(`&middot; ${entry.price}`, 'inline') : ''}
-
-                                        </small>
-                                        <small className={'list-group-item-text extra-index-info-alt pt-2 rounded index-slug'}><strong className={'d-inline p-1 rounded'}>{entry['slug'].toUpperCase()}</strong></small>
-                                      </strong>
-                                    </div>
-                                    <div className={'col-lg-4 col-md-4 d-none d-md-block extra-index-info'}>
-                                      <div className={'text-right'}>
-                                        <span className="d-inline-block list-group-item-text p-2 purpose">
-                                          {entry.purpose}
-                                        </span>
-                                      </div>
-                                      <div className={'text-right'}>
-                                        <span className="d-inline-block list-group-item-text pt-1">{entry.price}</span>
-                                      </div>
-                                      <div className={'text-right'}>
-                                        <span className="list-group-item-text">{renderHTML(entry.size)}</span>
-                                      </div>
-                                      <div className={'text-right pb-3'}>
-                                        <span className="list-group-item-text">
-                                          {renderHTML(entry.pricepersqmeter)}
-                                        </span>
-                                      </div>
-                                      <div className={'text-right'}>
-                                        <span className="list-group-item-text uid p-2">
-                                          <strong>{entry['slug'].toUpperCase()}</strong>
-                                        </span>
-                                      </div>
-                                    </div>
-                                  </>
                                 )}
+                              </figure>
+                            </a>
+                          </div>
+
+                          <div className="list-group list-group-media mb-3 d-none d-sm-block">
+                            <a
+                              href={entry['allow_view'] ? entry['view_entity_path'] : ''}
+                              className="list-group-item list-group-item-action property-index-avatar">
+                              <div className="list-group-item-figure rounded-left ">
+                                <div className={`thumb-container ${entry['allow_view'] ? '' : 'frosty'}`}>
+                                  {entry['avatar'] ? (
+                                    <img src={entry['avatar']} alt="placeholder image" className={'thumb'} />
+                                  ) : (
+                                    <i className={'pr-icon md house-avatar-placeholder'} />
+                                  )}
+                                </div>
                               </div>
-                            </div>
-                          </a>
+                              <div className="list-group-item-body custom-list-group-item-body-padding">
+                                <div className={'row'}>
+                                  {!entry['allow_view'] ? (
+                                    <div className={'col-12'}>
+                                      <div>
+                                        <h2>{entry['slug'].toUpperCase()}</h2>
+                                      </div>
+                                      <div className={'text-center'}>
+                                        <h3>{entry['access_msg']}</h3>
+                                      </div>
+                                    </div>
+                                  ) : (
+                                    <>
+                                      <div className={'col-sm-12 col-md-8 d-none d-sm-block main-info'}>
+                                        <h4 className="list-group-item-title clamp-1">
+                                          {renderHTML(entry.mini_heading)}
+                                        </h4>
+                                        <p className="">{entry.location}</p>
+                                        <p className="list-group-item-text clamp-2">
+                                          <strong>{entry.registration}</strong>
+                                          {entry.description ? ` - ${entry.description}` : ''}
+                                        </p>
+                                        <strong className={'d-inline-block pt-1'}>
+                                          <small className="list-group-item-text extra-index-info-alt highlighted-bg highlighted-fg px-1 rounded">
+                                            {entry.purpose}{' '}
+                                            {entry.price ? renderHTML(`&middot; ${entry.price}`, 'inline') : ''}
+                                          </small>
+                                          <small
+                                            className={
+                                              'list-group-item-text extra-index-info-alt pt-2 rounded index-slug'
+                                            }>
+                                            <strong className={'d-inline p-1 rounded'}>
+                                              {entry['slug'].toUpperCase()}
+                                            </strong>
+                                          </small>
+                                        </strong>
+                                      </div>
+                                      <div className={'col-lg-4 col-md-4 d-none d-md-block extra-index-info'}>
+                                        <div className={'text-right'}>
+                                          <span className="d-inline-block list-group-item-text p-2 purpose">
+                                            {entry.purpose}
+                                          </span>
+                                        </div>
+                                        <div className={'text-right'}>
+                                          <span className="d-inline-block list-group-item-text pt-1">
+                                            {entry.price}
+                                          </span>
+                                        </div>
+                                        <div className={'text-right'}>
+                                          <span className="list-group-item-text">{renderHTML(entry.size)}</span>
+                                        </div>
+                                        <div className={'text-right pb-3'}>
+                                          <span className="list-group-item-text">
+                                            {renderHTML(entry.pricepersqmeter)}
+                                          </span>
+                                        </div>
+                                        <div className={'text-right'}>
+                                          <span className="list-group-item-text uid p-2">
+                                            <strong>{entry['slug'].toUpperCase()}</strong>
+                                          </span>
+                                        </div>
+                                      </div>
+                                    </>
+                                  )}
+                                </div>
+                              </div>
+                            </a>
+                          </div>
                         </div>
                       </div>
-                      {/*</div>*/}
-                    </div>
-                  ))}
+                    ))}
+                  </FlipMove>
                 </div>
-
 
                 {/* CARD END */}
                 <div className={'clearfix'} />
@@ -484,18 +476,7 @@ const PropertiesList = ({
                 <h3>{i18n['no_results']}</h3>
               </div>
             )}
-
-
-
-
-
-
-
           </div>
-          {/*<div className={'row'}>*/}
-
-          {/*</div>*/}
-          {/*</div>*/}
         </div>
       </div>
     </div>
