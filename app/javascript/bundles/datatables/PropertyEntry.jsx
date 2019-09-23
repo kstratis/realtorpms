@@ -11,7 +11,7 @@ class PropertyEntry extends React.Component {
       <div className={`${this.props.filtersOpen ? 'col-lg-12' : 'col-lg-6'}`}>
         <div className={`text-center text-md-left`}>
           <div className="card card-figure card-figure-custom d-block d-sm-none">
-            <a href={this.props.entry['allow_view'] ? this.props.entry['view_entity_path'] : ''}>
+            <a className={'property-entry'} href={this.props.entry['allow_view'] ? this.props.entry['view_entity_path'] : ''}>
               <figure className="figure">
                 <div className={`${this.props.entry['allow_view'] ? '' : 'frosty'}`}>
                   {this.props.entry['avatar'] ? (

@@ -1552,3 +1552,27 @@ a.tt-suggestion.tt-selectable{
 .relativeposition{
   position: relative;
 }
+
+
+.steps a {
+  @media (max-width: 576px) {
+    padding: 2.5px 0.150rem 3px 1.2rem !important;
+  }
+}
+
+.steps li:last-child a {
+  @media (max-width: 576px) {
+    padding-right: 0.975rem !important;
+  }
+}
+
+.hide-xs{
+  display: none;
+  @media (min-width: 375px) {
+    display: block;
+  }
+}
+
+.property-entry:hover{
+  text-decoration: none;
+}
