@@ -1,6 +1,6 @@
 <% provide(:title, t('properties.edit.heading')) %>
 
-<%= render partial: 'layouts/breadcrumb', locals: {path: [{:title => t('properties.edit.breadcrumb'), :href => properties_path}, {title: @property.id, :href => property_path(@property)},{title: t('properties.edit.heading'), :href => ''}], icon: 'house-colored'} %>
+<%= render partial: 'layouts/breadcrumb', locals: {path: [{:title => t('properties.edit.breadcrumb'), :href => properties_path}, {title: @property.slug.upcase, :href => property_path(@property)},{title: t('properties.edit.heading'), :href => ''}], icon: 'house-colored'} %>
 
 <%= content_tag :div, class: "", id: "alerts", data: {
     i18n: {
@@ -772,6 +772,7 @@
 
                       </div>
                       <div class="row">
+                        <hr class="mt-5" />
                         <div class="d-flex flex-column flex-grow-1 justify-content-center">
                           <%= content_tag :div, class: "", id: "uppy", data: {
                               i18n: {
