@@ -67,9 +67,7 @@
       <!-- .card-body -->
       <div class="card-body">
         <div class="row">
-<!--          <div class="col-lg-7 col-md-12 my-auto">-->
-          <div class="col-lg-7 col-md-12">
-            <div class="col-12">
+          <div class="col-lg-7 col-md-12 align-self-center">
             <% if @property.images.blank? && !@property.avatar.attached? %>
               <div class="d-flex flex-wrap justify-content-center">
                 <%= content_tag :i, "", class: "pr-icon lg house-avatar-placeholder" %>
@@ -86,7 +84,6 @@
                 </div>
               </div>
             <% end %>
-            </div>
           </div>
 
           <div class="col-lg-5 col-md-12 mt-3 mt-lg-0">

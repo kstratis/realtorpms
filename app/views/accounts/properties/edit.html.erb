@@ -741,10 +741,10 @@
                       <legend><%= t('js.forms.properties.wizard.step6.title') %></legend>
                       <div class="row mb-3">
 
-                        <div class="user-avatar user-avatar-xl property-avatar-xl fileinput-button">
+                        <div class="user-avatar property-avatar-xl fileinput-button">
                           <div class="fileinput-button-label"><%= t('properties.new.set_cover') %></div>
                           <div id="avatar-wrapper">
-                            <%= render_avatar(property.object, "alphatar-edit property-alphatar", "avatar_preview") %>
+                            <%= render_avatar(property.object, "tile-xl img-fit-contain", "avatar_preview") %>
                           </div>
                           <%= property.file_field :avatar, id: "avatar_upload", class: 'form-control file-emitters', multiple: false, direct_upload: true %>
                         </div><!-- /avatar -->

@@ -170,7 +170,7 @@ el:
             title: "Είδος"
             sell: "Πώληση"
             rent: "Ενοικίαση"
-            sell_rent: "Όλα"
+            sell_rent: "Πώληση/Ενοικίαση"
             sell_banner: "ΠΩΛΕΙΤΑΙ"
             rent_banner: "ΕΝΟΙΚΙΑΖΕΤΑΙ"
             sell_rent_banner: "ΔΙΑΤΙΘΕΤΑΙ"

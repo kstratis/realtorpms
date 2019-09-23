@@ -1074,8 +1074,10 @@ li.page-item {
   border-radius: 3px;
   width: 16rem;
   height: 9rem;
+  border: 1px solid rgba(20, 20, 31, 0.12);
 
   img {
+    object-fit: contain;
     border-radius: unset;
   }
 }
@@ -1107,15 +1109,6 @@ li.page-item {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
-}
-
-.user-avatar.property-avatar {
-  border: unset;
-  margin-bottom: 20px;
-}
-
-.user-avatar.property-avatar img {
-  border-radius: unset;
 }
 
 .custom-control-label {
@@ -1575,4 +1568,15 @@ a.tt-suggestion.tt-selectable{
 
 .property-entry:hover{
   text-decoration: none;
+}
+
+.tile-square{
+  object-fit: contain !important;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+}
+
+.img-fit-contain{
+  object-fit: contain;
 }
