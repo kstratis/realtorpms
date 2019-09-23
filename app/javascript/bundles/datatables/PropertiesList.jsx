@@ -307,7 +307,7 @@ const PropertiesList = ({
             <Spinner isLoading={isLoading} version={2} />
             {dataset.length > 0 ? (
               <>
-                <div className={'row'}>
+                <div className={`row ${isLoading ? 'reduced-opacity' : ''}`}>
                   <FlipMove typeName={null}>
                     {dataset.map((entry, index) => (
                       <div key={entry['slug']} className={`${filtersOpen ? 'col-lg-12' : 'col-lg-6'}`}>
