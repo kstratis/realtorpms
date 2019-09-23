@@ -1,6 +1,5 @@
 import React from 'react';
 import { renderHTML } from '../utilities/helpers';
-import RetrieveClientSearch from './RetrieveClientSearch';
 
 function RenderRow({ name, value, index }) {
   return (
@@ -11,7 +10,7 @@ function RenderRow({ name, value, index }) {
   );
 }
 
-function RenderEntry({
+function ClientEntry({
   element,
   index,
   i18n,
@@ -75,4 +74,4 @@ function RenderEntry({
   );
 }
 
-export default RenderEntry;
+export default ClientEntry;

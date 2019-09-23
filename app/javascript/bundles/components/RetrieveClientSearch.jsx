@@ -1,6 +1,6 @@
 import React from 'react';
 import { priceFilterOptions, sizeFilterOptions, floorFilterOptions, categoryFilterOptions } from '../utilities/helpers';
-import RenderEntry from './RenderEntry';
+import ClientEntry from './ClientEntry';
 import useSearchParams from '../hooks/useSearchParams';
 
 function RetrieveClientSearch({
@@ -21,12 +21,12 @@ function RetrieveClientSearch({
       </div>
       <div className={'favlist-body mt-2'}>
         <h3>{i18n.search_save_subtitle}</h3>
-        <div className={'col-12'}>
+        <div>
           <table className="table table-striped">
             <tbody>
               {params.map((element, index) => {
                 return (
-                  <RenderEntry
+                  <ClientEntry
                     key={index}
                     element={element}
                     index={index}

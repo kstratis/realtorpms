@@ -574,6 +574,7 @@ en:
       heading: "Client information"
       clients: "Clients"
       search_prefs: "Search preferences"
+      edit_search_tooltip: "Edit search preferences"
       matches: "Matches"
     index:
       breadcrumb: "Clients"

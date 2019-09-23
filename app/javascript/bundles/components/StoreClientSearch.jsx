@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import AsyncSelectContainer from './selects/AsyncSelectContainer';
 import useFetch from '../hooks/useFetch';
 import useSearchParams from '../hooks/useSearchParams';
-import RenderEntry from './RenderEntry';
+import ClientEntry from './ClientEntry';
 import {
   categoryFilterOptions,
   floorFilterOptions,
@@ -63,12 +63,12 @@ function StoreClientSearch({
       </div>
       <div className={'favlist-body mt-2'}>
         <h3>{i18n.search_save_subtitle}</h3>
-        <div className={'col-12'}>
+        <div>
           <table className="table table-striped">
             <tbody>
               {params.map((element, index) => {
                 return (
-                  <RenderEntry
+                  <ClientEntry
                     key={index}
                     element={element}
                     index={index}
