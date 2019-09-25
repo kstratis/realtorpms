@@ -44,7 +44,7 @@ function completionTasksChart (themeInstance) {
   // init chart bar
   const canvas1 = $('canvas.chart')[0].getContext('2d');
   let chart1 = new Chart(canvas1, {
-    type: 'doughnut',
+    type: 'pie',
     data: data,
     options: {
       responsive: true,

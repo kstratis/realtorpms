@@ -529,6 +529,11 @@ en:
     timeline:
       today: "Today"
       yesterday: "Yesterday"
+    welcome:
+      no_content: "No Content, Yet."
+      prompt: "Use the button below to view all properties assigned to you."
+      button_prompt: "Properties"
+      button_prompt_add: "Add"
   invitations:
     new:
       heading: "Add new partner"

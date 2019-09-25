@@ -576,6 +576,32 @@ i.fas.fa-heart.colored {
 
 }
 
+.options-section{
+  background: #f3f4f8;
+}
+
+.option-container-alt {
+  //display: block;
+  text-align: center;
+  border-radius: 5px;
+  color: #454545;
+
+  &:hover {
+    text-decoration: none;
+    background-color: rgba(0, 143, 213, 0.25);
+    cursor: pointer;
+
+    p {
+      color: #454545;
+    }
+  }
+
+}
+
+.max-300{
+  max-width: 300px;
+}
+
 .option {
   padding: 20px 40px 2px 40px;
 }

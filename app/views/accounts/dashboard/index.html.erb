@@ -18,49 +18,62 @@
       </div>
 
       <div class="clearfix mt-3"></div>
-
-      <div class="row">
-
-        <div class="col-md-12 col-lg-6">
-
-
-          <div class="row">
-            <% %w(properties users clients mapping integrations statistics).each do |entry| %>
-              <div class="col-6">
-                <%= link_to respond_to?("#{entry}_path") ? send("#{entry}_path") : '', class: 'option-container' do %>
-                  <%= content_tag :div, class: 'option' do %>
-                    <%= content_tag :i, nil, class: "pr-icon smm #{entry}" %>
-                    <%= content_tag :p, t("main.#{entry}") %>
-                  <% end %>
+      <% unless current_user.is_admin?(current_account) %>
+        <div class="row">
+          <div class="col-12">
+            <div id="notfound-state" class="empty-state">
+              <div class="empty-state-container">
+                <div class="state-figure">
+                  <%= image_tag 'no_content.svg', class: 'img-fluid max-300' %>
+                </div>
+                <h3 class="state-header"><%= t('main.welcome.no_content') %></h3>
+                <p class="state-description lead text-muted"><%= t('main.welcome.prompt') %></p>
+                <div class="state-action">
+                  <%= link_to t('main.welcome.button_prompt'), properties_path, class: 'btn btn-primary' %>
+                </div>
+                <%= link_to new_property_path, class: 'btn btn-light' do %>
+                  <i class="far fa-plus-square mr-1"></i>&nbsp;<span><%= t('main.welcome.button_prompt_add') %></span>
                 <% end %>
               </div>
-            <% end %>
+            </div>
+          </div>
+        </div>
+
+      <% else %>
+        <div class="row">
+
+          <div class="col-md-12 col-lg-6">
+            <div class="row">
+              <% %w(properties users clients mapping integrations statistics).each do |entry| %>
+                <div class="col-6">
+                  <%= link_to respond_to?("#{entry}_path") ? send("#{entry}_path") : '', class: 'option-container' do %>
+                    <%= content_tag :div, class: 'option' do %>
+                      <%= content_tag :i, nil, class: "pr-icon smm #{entry}" %>
+                      <%= content_tag :p, t("main.#{entry}") %>
+                    <% end %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="col-md-12 col-lg-6">
+            <div class="card card-fluid">
+              <div class="card-body">
+                <h3 class="card-title mb-4"><%= t('main.chart.title') %></h3>
+                <div class="chartjs chart-container">
+                  <canvas class="chart"></canvas>
+                </div>
+              </div>
+            </div>
           </div>
 
         </div>
+      <% end %>
 
-
-        <div class="col-md-12 col-lg-6">
-
-
-          <div class="card card-fluid">
-            <!-- .card-body -->
-            <div class="card-body">
-              <h3 class="card-title mb-4"><%= t('main.chart.title') %></h3>
-              <div class="chartjs chart-container">
-                <canvas class="chart"></canvas>
-              </div>
-            </div>
-          </div><!-- /.card -->
-
-        </div>
-
-      </div>
 
     </div>
-
   </div>
-
 </div>
 
 <%#= link_to image_tag('rails.png', alt: 'Rails logo'), 'http://rubyonrails.org/' %>

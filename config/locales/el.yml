@@ -534,6 +534,11 @@ el:
     timeline:
       today: "Σήμερα"
       yesterday: "Χθες"
+    welcome:
+      no_content: "Δεν υπάρχει περιεχόμενο... ακόμα."
+      prompt: "Χρησιμοποιείστε το παρακάτω κουμπί προκειμένου να δείτε τα ακίνητα που σας έχουν ανατεθεί."
+      button_prompt: "Ακίνητα"
+      button_prompt_add: "Προσθήκη"
   invitations:
     new:
       heading: "Προσθήκη"
