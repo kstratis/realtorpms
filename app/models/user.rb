@@ -12,6 +12,10 @@ class User < ApplicationRecord
   before_save { self.email = email.downcase }  # makes sure everything is lower case
   before_create { self.color = COLOR_PALETTE.sample } # This assigns a random bg color to each new user
 
+  # This is for existing log records
+  # https://stackoverflow.com/a/9326882/178728
+  # before_destroy { |record| Log.where(user: record).update_all(user_name: record.full_name) }
+
   validates :first_name, presence: true, length: { maximum: 50 }
   validates :last_name, presence: true, length: { maximum: 50 }
   validates :email, presence: true, length: { maximum: 255 },
@@ -38,6 +42,7 @@ class User < ApplicationRecord
 
   has_many :favorites, dependent: :destroy
   has_many :favlists, dependent: :destroy
+  has_many :logs, dependent: :nullify
   has_one_attached :avatar
 
   # has_many :properties, -> (account) { where('account_id = ?', account.id) }, through: :assignments
@@ -195,6 +200,10 @@ class User < ApplicationRecord
 
   def age
     dob ? ((Time.zone.now - dob.to_time) / 1.year.seconds).floor : nil
+  end
+
+  def rewrite_log
+    da
   end
 
 end

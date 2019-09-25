@@ -10,6 +10,7 @@ module Accounts
     before_action :owner_exclusive, only: [:new, :create, :destroy, :index]
     before_action :check_page_validity, only: [:index]
     before_action :find_user!, only: [:delete_avatar, :toggle_activation]
+    after_action :log_action, only: [:create, :update, :destroy]
 
     # layout 'auth/skeleton', except: [:show, :edit, :update, :index, :new]  # show the barebones version only when signing up
 
@@ -81,6 +82,14 @@ module Accounts
 
       def find_user!
         @user = current_account.all_users.find(params[:id])
+      end
+
+      def log_action
+        if action_name == 'destroy'
+          Log.create(user: current_user, property_name: @property_slug, action: action_name, account: current_account)
+        else
+          Log.create(user_name: current_user.full_name, user: current_user, property: @property, action: action_name, account: current_account, )
+        end
       end
 
       # Confirms a logged-in user.

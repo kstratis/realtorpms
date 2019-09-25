@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_18_081149) do
+ActiveRecord::Schema.define(version: 2019_09_25_100925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -190,6 +190,26 @@ ActiveRecord::Schema.define(version: 2019_09_18_081149) do
     t.index ["id", "country_id"], name: "index_locations_on_id_and_country_id"
   end
 
+  create_table "logs", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "property_id"
+    t.bigint "client_id"
+    t.string "action"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "property_name"
+    t.string "user_name"
+    t.string "client_name"
+    t.bigint "account_id"
+    t.bigint "author_id"
+    t.string "author_name"
+    t.index ["account_id"], name: "index_logs_on_account_id"
+    t.index ["author_id"], name: "index_logs_on_author_id"
+    t.index ["client_id"], name: "index_logs_on_client_id"
+    t.index ["property_id"], name: "index_logs_on_property_id"
+    t.index ["user_id"], name: "index_logs_on_user_id"
+  end
+
   create_table "memberships", force: :cascade do |t|
     t.bigint "account_id"
     t.bigint "user_id"
@@ -269,6 +289,11 @@ ActiveRecord::Schema.define(version: 2019_09_18_081149) do
   add_foreign_key "invitations", "accounts"
   add_foreign_key "landlords", "accounts"
   add_foreign_key "locations", "countries"
+  add_foreign_key "logs", "accounts"
+  add_foreign_key "logs", "clients"
+  add_foreign_key "logs", "properties"
+  add_foreign_key "logs", "users"
+  add_foreign_key "logs", "users", column: "author_id"
   add_foreign_key "memberships", "accounts"
   add_foreign_key "memberships", "users"
   add_foreign_key "properties", "accounts"

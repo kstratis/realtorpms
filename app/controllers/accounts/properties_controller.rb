@@ -3,7 +3,7 @@ module Accounts
     include PropertyHeader
     helper PropertyHeader
     before_action :set_property, only: [:show, :edit, :update, :destroy]
-
+    after_action :log_action, only: [:create, :update, :destroy]
 
     # GET /properties
     # GET /properties.json
@@ -115,6 +115,7 @@ module Accounts
 
       respond_to do |format|
         if @property.save
+          @property_slug = @property.slug # This is used for the Log model
           if current_user.role(current_account) == 'user'
             current_user.properties <<  @property
           end
@@ -173,6 +174,7 @@ module Accounts
       unless current_user.is_admin?(current_account)
         redirect_to @property and return
       end
+      @property_slug = @property.slug
       @property.destroy
       respond_to do |format|
         format.html { redirect_to properties_url, notice: I18n.t('properties.destroyed.flash') }
@@ -186,6 +188,14 @@ module Accounts
     # Use callbacks to share common setup or constraints between actions.
     def set_property
       @property = current_account.properties.find(params[:id])
+    end
+
+    def log_action
+      if action_name == 'destroy'
+        Log.create(author: current_user, author_name: current_user.full_name, property_name: @property_slug, action: action_name, account: current_account)
+      else
+        Log.create(property_name: @property_slug, author_name: current_user.full_name, author: current_user, property: @property, action: action_name, account: current_account, )
+      end
     end
 
     def set_access
@@ -288,3 +298,4 @@ module Accounts
 
   end
 end
+

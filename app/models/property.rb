@@ -24,6 +24,12 @@ class Property < ApplicationRecord
   attr_searchable %w(title description notes adxe adspitogatos landlord.last_name landlord.telephones)
 
   before_validation :handle_dependent_fields, on: :update
+
+  # This is for existing log records
+  # https://stackoverflow.com/a/9326882/178728
+  # before_destroy { |record| Log.where(property: record).update_all(property_name: record.slug) }
+
+
   # belongs_to :user
   belongs_to :account
   belongs_to :category
@@ -36,11 +42,13 @@ class Property < ApplicationRecord
   has_one_attached :avatar
   has_and_belongs_to_many :extras
 
+
   # https://stackoverflow.com/a/38845388/178728
   # https://stackoverflow.com/a/14231213/178728
   # This basically sorts assignments by assignment updated at column so that each change is reflected last on the list
   has_many :users, -> {order('assignments.updated_at').select('users.*, assignments.updated_at as assignment_updated_at').distinct}, through: :assignments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :logs, dependent: :nullify
 
   # Collection of properties which have been favorited by a particular user
   scope :faved_by, -> (user) {joins(:favorites).where(favorites: {user: user})}
