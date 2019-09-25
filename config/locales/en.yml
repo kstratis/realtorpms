@@ -514,17 +514,21 @@ en:
     title: "Dashboard"
     heading: "Dashboard"
     subheading: "This is the dashboard for logged in users"
-    options: "Main menu"
+    overview: "Overview"
     houses: "Properties"
     partners: "Partners"
     integrations: "Integrations"
-    clients: "Πελάτες"
+    clients: "Clients"
     mapping: "Mapping"
     statistics: "Statistics"
     chart:
-      title: "Επισκόπηση"
+      title: "Quick look"
       properties: "Properties"
       users: "Users"
+      clients: "Clients"
+    timeline:
+      today: "Today"
+      yesterday: "Yesterday"
   invitations:
     new:
       heading: "Add new partner"

@@ -519,7 +519,7 @@ el:
     title: "Κεντρική"
     heading: "Κεντρική"
     subheading: "Διαβαθμισμένη πρόσβαση"
-    options: "Κεντρικό μενού"
+    overview: "Επισκόπηση"
     properties: "Ακίνητα"
     users: "Συνεργάτες"
     integrations: "Διασυνδέσεις"
@@ -527,9 +527,13 @@ el:
     mapping: "Διασταυρώσεις"
     statistics: "Στατιστικά"
     chart:
-      title: "Επισκόπηση"
+      title: "Με μια ματιά"
       properties: "Ακίνητα"
       users: "Χρήστες"
+      clients: "Πελάτες"
+    timeline:
+      today: "Σήμερα"
+      yesterday: "Χθες"
   invitations:
     new:
       heading: "Προσθήκη"
