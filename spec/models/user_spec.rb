@@ -85,7 +85,7 @@ RSpec.describe User, type: :model do
   end
 
   # We are not testing favlists or favorites
-  it "can successfully be deleted when is an account owner" do
+   it "can successfully be deleted when is an account owner" do
     @account1_user_count = @account1.users.count
     # regular users
     expect(@account1.users.count).to eq(@account1_user_count)
