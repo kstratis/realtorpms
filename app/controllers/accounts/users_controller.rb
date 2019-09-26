@@ -18,11 +18,9 @@ module Accounts
     def destroy
         @user = User.find(params[:id])
         @user_full_name = @user.full_name
-
+        # Membership.find_by(account: current_account, user: @user).destroy
         if @user.has_owning_accounts?.zero?
           @user.destroy
-        else
-          Membership.find_by(account: current_account, user: @user).destroy
         end
         flash[:success] = I18n.t 'users.flash_delete'
         redirect_to users_url
