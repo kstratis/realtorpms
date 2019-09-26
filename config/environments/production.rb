@@ -113,8 +113,16 @@ Rails.application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
   #
   config.action_mailer.default_url_options = { :host => "#{BRANDNAME}.io" }
-
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      address: 'smtp.sendgrid.net',
+      port: 587,
+      domain: "#{BRANDNAME}.io",
+      user_name: Rails.application.credentials.dig(:sendgrid, :username),
+      password: Rails.application.credentials.dig(:sendgrid, :password),
+      authentication: :plain,
+      enable_starttls_auto: true
+  }
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger           = ActiveSupport::Logger.new(STDOUT)

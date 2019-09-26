@@ -71,8 +71,16 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.action_mailer.default_url_options = { :host => "lvh.me:3000" }
-
   config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #     address: 'smtp.sendgrid.net',
+  #     port: 587,
+  #     domain: "dev.#{BRANDNAME}.io",
+  #     user_name: Rails.application.credentials.dig(:sendgrid, :username),
+  #     password: Rails.application.credentials.dig(:sendgrid, :password),
+  #     authentication: :plain,
+  #     enable_starttls_auto: true
+  # }
   config.action_mailer.smtp_settings = {:address => 'localhost', :port => 1025 }
 
   config.active_storage.service = :amazon
