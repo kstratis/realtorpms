@@ -1,7 +1,7 @@
 module Accounts
   class ClientsController < Accounts::BaseController
 
-    before_action :verify_client, only: [:edit, :update, :show]
+    before_action :verify_client, only: [:edit, :update, :show, :destroy]
 
     def index
       if current_user.is_admin?(current_account)
@@ -23,6 +23,12 @@ module Accounts
       else
         render :edit
       end
+    end
+
+    def destroy
+      @client.destroy
+      flash[:success] = I18n.t 'clients.flash_delete'
+      redirect_to clients_url
     end
 
     def new
