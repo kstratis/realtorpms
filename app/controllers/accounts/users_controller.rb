@@ -23,8 +23,8 @@ module Accounts
           @user.destroy
         else
           Membership.find_by(account: current_account, user: @user).destroy # this is unique
-          Assignment.find_by(user: @user).destroy
-          Clientship.find_by(user: @user).destroy
+          Assignment.where(user: @user).try(:destroy_all)
+          Clientship.where(user: @user).try(:destroy_all)
         end
         flash[:success] = I18n.t 'users.flash_delete'
         redirect_to users_url
