@@ -26,6 +26,7 @@ module Accounts
     end
 
     def destroy
+      @client_full_name = @client.full_name
       @client.destroy
       flash[:success] = I18n.t 'clients.flash_delete'
       redirect_to clients_url
@@ -72,6 +73,14 @@ module Accounts
     private
       def client_params
         params.require(:client).permit(:first_name, :last_name, :email, :telephones, :job, :notes)
+      end
+
+      def log_action
+        if action_name == 'destroy'
+          Log.create(author: current_user, author_name: current_user.full_name, client_name: @client_full_name, action: action_name, account: current_account)
+        else
+          Log.create(author: current_user, author_name: current_user.full_name, client_name: @client.full_name, client: @client, action: action_name, account: current_account)
+        end
       end
 
       def verify_client

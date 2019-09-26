@@ -194,7 +194,7 @@ module Accounts
       if action_name == 'destroy'
         Log.create(author: current_user, author_name: current_user.full_name, property_name: @property_slug, action: action_name, account: current_account)
       else
-        Log.create(author: current_user, author_name: current_user.full_name, property_name: @property.slug, property: @property, action: action_name, account: current_account, )
+        Log.create(author: current_user, author_name: current_user.full_name, property_name: @property.slug, property: @property, action: action_name, account: current_account)
       end
     end
 

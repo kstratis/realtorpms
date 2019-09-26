@@ -16,6 +16,8 @@ module Accounts
     # layout 'auth/skeleton', except: [:show, :edit, :update, :index, :new]  # show the barebones version only when signing up
 
     def destroy
+        @user = User.find(params[:id])
+        @user_full_name = @user.full_name
         User.find(params[:id]).destroy
         flash[:success] = I18n.t 'users.flash_delete'
         redirect_to users_url
@@ -85,11 +87,12 @@ module Accounts
         @user = current_account.all_users.find(params[:id])
       end
 
+
       def log_action
         if action_name == 'destroy'
-          Log.create(user: current_user, property_name: @property_slug, action: action_name, account: current_account)
+          Log.create(author: current_user, author_name: current_user.full_name, user_name: @user_full_name, action: action_name, account: current_account)
         else
-          Log.create(user_name: current_user.full_name, user: current_user, property: @property, action: action_name, account: current_account, )
+          Log.create(author: current_user, author_name: current_user.full_name, user_name: @user.full_name, user: @user, action: action_name, account: current_account)
         end
       end
 
