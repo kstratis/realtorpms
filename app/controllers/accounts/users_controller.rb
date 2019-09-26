@@ -21,6 +21,10 @@ module Accounts
         # Membership.find_by(account: current_account, user: @user).destroy
         if @user.has_owning_accounts?.zero?
           @user.destroy
+        else
+          Membership.find_by(account: current_account, user: @user).destroy # this is unique
+          Assignment.find_by(user: @user).destroy
+          Clientship.find_by(user: @user).destroy
         end
         flash[:success] = I18n.t 'users.flash_delete'
         redirect_to users_url
