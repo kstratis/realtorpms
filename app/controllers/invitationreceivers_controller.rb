@@ -1,5 +1,7 @@
 class InvitationreceiversController < ApplicationController
 
+  after_action :log_action, only: [:accepted]
+
   layout 'auth/skeleton'  # Auth template
 
   # When clicking on an invite link, always store the url;
@@ -57,6 +59,10 @@ class InvitationreceiversController < ApplicationController
       # puts "inside the method invitations is #{@invitation}"
       # this results in 404 in production
       Account.find_by!(subdomain: @invitation.account.subdomain)
+    end
+
+    def log_action
+      Log.create(author: current_account.owner, author_name: current_account.owner.full_name, user_name: @user.full_name, user: @user, action: action_name, account: current_account)
     end
 
 end
