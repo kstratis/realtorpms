@@ -6,18 +6,8 @@ RSpec.describe Account, type: :model do
   before do
     use_regular_dataset
   end
-  it "can successfully be deleted" do
-    expect(Account.count).to eq(1)
-    expect(User.count).to eq(5)
-    expect {
-      @account.destroy
-    }.to not_change { User.count }
-             .and change { Account.count }.by(-1)
-                      .and change { Property.count }.by(-50)
-                               .and change { Assignment.count }.by(-36) # This is because we only assign 36 properties out of 50. See dataset_helpers.rb
-  end
 
-  it "can successfully be deleted - enhanced" do
+  it "can successfully be deleted" do
     @account1_user_count = @account1.users.count
     # regular users
     expect(@account1.users.count).to eq(@account1_user_count)
@@ -25,8 +15,11 @@ RSpec.describe Account, type: :model do
     # regular users plus owner
     expect(@account1.all_users.count).to eq(3)
 
+    # No users are deleted on account destruction. Only membership entries are removed.
+    # If the account owner is also a member of another account then we would have a problem.
+    # This way we just have an orphan user.
     expect { @account1.destroy }.to change { Account.count }.by(-1)
-                                        .and change { User.count }.by(-1) # n users plus the account owner are deleted
+                                        .and change { User.count }.by(0)
                                                  .and change { Membership.count }.by(-@account1_user_count) # owner are not subject to membeships join table
   end
 end

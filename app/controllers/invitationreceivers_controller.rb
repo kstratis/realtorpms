@@ -16,6 +16,11 @@ class InvitationreceiversController < ApplicationController
 
     if logged_in?
       @user = current_user
+      if @user.is_owner?(current_account)
+        @invitation.destroy!
+        flash[:danger] = I18n.t('invitations.accepted.flash_existing', account: current_account.subdomain)
+        redirect_to root_url(subdomain: current_account.subdomain) and return
+      end
     else
       user_params = params[:user].permit(
           :email,

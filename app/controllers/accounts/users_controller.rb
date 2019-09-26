@@ -10,7 +10,8 @@ module Accounts
     before_action :owner_exclusive, only: [:new, :create, :destroy, :index]
     before_action :check_page_validity, only: [:index]
     before_action :find_user!, only: [:delete_avatar, :toggle_activation]
-    after_action :log_action, only: [:create, :update, :destroy]
+
+    # after_action :log_action, only: [:create, :update, :destroy]
 
     # layout 'auth/skeleton', except: [:show, :edit, :update, :index, :new]  # show the barebones version only when signing up
 

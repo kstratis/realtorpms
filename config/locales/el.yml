@@ -563,6 +563,7 @@ el:
       accept_btn: "Αποδοχή"
     accepted:
       flash_success: "Συνδεθήκατε επιτυχώς με τον λογαριασμό: %{account}"
+      flash_existing: "Έχετε ήδη λογαριασμό στο: %{account}"
   clients:
     flash_created: "Ο πελάτης δημιουργήθηκε επιτυχώς"
     flash_delete: "Ο πελάτης διεγράφη επιτυχώς"

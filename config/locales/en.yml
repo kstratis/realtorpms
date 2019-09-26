@@ -558,6 +558,7 @@ en:
       accept_btn: "Accept"
     accepted:
       flash_success: "You have successfully joined the %{account} organization"
+      flash_existing: "You are already the owner of: %{account}"
   clients:
     flash_created: "Client successfully created"
     flash_delete: "Client successfully deleted"

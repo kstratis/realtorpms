@@ -48,9 +48,9 @@ johnymnemonic = User.create!(first_name: 'Johny',
                              password_confirmation: 'abc123')
 
 # This account belongs to Tony Stark (tstark@gmail.com)
-shakalaka = Account.create!(
-    subdomain: 'shakalaka',
-    name: 'Shakalaka',
+demo = Account.create!(
+    subdomain: 'demo',
+    name: 'Demo',
     owner: User.second
 )
 
@@ -76,15 +76,15 @@ brussels = Location.find(5007) # Brussels - Belgium (level 3) - INT
 
 # ---------------------------------------------------------
 
-# 2 memorable shakalaka users
+# 2 memorable +demo+ users
 # -------------------------
-regularshakalakauser1 = User.create!(first_name: 'Will',
+regulardemouser1 = User.create!(first_name: 'Will',
                                      last_name: 'Smith',
                                      email: 'wm@gmail.com',
                                      password: 'abc123',
                                      password_confirmation: 'abc123')
 
-regularshakalakauser2 = User.create!(first_name: 'John',
+regulardemouser2 = User.create!(first_name: 'John',
                                      last_name: 'Travolta',
                                      email: 'jt@gmail.com',
                                      password: 'abc123',
@@ -100,21 +100,21 @@ regularbluedomainuser1 = User.create!(first_name: 'Lakis',
 
 # ----------------------------------------------------------
 
-shakalaka = Account.find_by(subdomain: 'shakalaka')
+demo = Account.find_by(subdomain: 'demo')
 bluedomain = Account.find_by(subdomain: 'bluedomain')
 
-shakalaka.users << regularshakalakauser1
-shakalaka.users << regularshakalakauser2
+demo.users << regulardemouser1
+demo.users << regulardemouser2
 bluedomain.users << regularbluedomainuser1
-# Johny Mnemonic is invited as a regular user in Tony Stark's +shakalaka+ account
+# Johny Mnemonic is invited as a regular user in Tony Stark's +demo+ account
 # At the same time he remains the owner of +reddomain+
-shakalaka.users << johnymnemonic
+demo.users << johnymnemonic
 
-# 99 random users belonging to +shakalaka+ account
+# 99 random users belonging to +demo+ account
 99.times do |n|
   first_name = Faker::Name.first_name
   last_name = Faker::Name.last_name
-  email = "shakalakauser-#{n + 1}@gmail.com"
+  email = "demouser-#{n + 1}@gmail.com"
   dob = rand(10.years).seconds.ago
   phone1 = "69#{rand(0..9)}76548#{rand(0..9)}#{rand(0..9)}"
   password = 'abc123'
@@ -123,7 +123,7 @@ shakalaka.users << johnymnemonic
                       email: email,
                       password: password,
                       password_confirmation: password)
-  shakalaka.users << user
+  demo.users << user
 end
 
 # 20 random users belonging to +bluedomain+ account
@@ -142,7 +142,7 @@ end
   bluedomain.users << user
 end
 
-# 20 Fake properties belonging to +regularshakalakauser1+ (shakalaka account)
+# 20 Fake properties belonging to +regulardemouser1+ (demo account)
 20.times do |n|
   property = Property.create!(
       title: Faker::TvShows::SiliconValley.motto,
@@ -154,22 +154,22 @@ end
       bedrooms: rand(1..5),
       floor: rand(0..10),
       construction: rand(1970..2018),
-      account: shakalaka,
+      account: demo,
       location: perissos,
       landlord: Landlord.create!(first_name: Faker::Name.first_name,
                                  last_name: Faker::Name.last_name,
                                  email: Faker::TvShows::SiliconValley.email,
                                  telephones: Faker::PhoneNumber.phone_number,
-                                 account: shakalaka)
+                                 account: demo)
   )
-  regularshakalakauser1.properties << property
+  regulardemouser1.properties << property
   property.avatar.attach(
       io: File.open(Dir["#{ENV['SEEDS_MEDIA_DIR']}#{rand(1..9)}/*"].sample),
       filename: "file-#{Faker::Number.number(digits: 4)}.png"
   )
 end
 
-# 20 Fake properties belonging to +regularshakalakauser1+ (shakalaka account)
+# 20 Fake properties belonging to +regulardemouser1+ (demo account)
 30.times do |n|
   property = Property.create!(
       title: Faker::TvShows::SiliconValley.motto,
@@ -181,23 +181,23 @@ end
       bedrooms: rand(1..5),
       floor: rand(0..10),
       construction: rand(1970..2018),
-      account: shakalaka,
+      account: demo,
       location: lamprini,
       landlord: Landlord.create!(first_name: Faker::Name.first_name,
                                  last_name: Faker::Name.last_name,
                                  email: Faker::TvShows::SiliconValley.email,
                                  telephones: Faker::PhoneNumber.phone_number,
-                                 account: shakalaka)
+                                 account: demo)
   )
-  regularshakalakauser1.properties << property
-  regularshakalakauser2.properties << property
+  regulardemouser1.properties << property
+  regulardemouser2.properties << property
   property.avatar.attach(
       io: File.open(Dir["#{ENV['SEEDS_MEDIA_DIR']}#{rand(1..9)}/*"].sample),
       filename: "file-#{Faker::Number.number(digits: 4)}.png"
   )
 end
 
-# 20 Fake properties belonging to +regularshakalakauser1+ (shakalaka account)
+# 20 Fake properties belonging to +regulardemouser1+ (demo account)
 2.times do |n|
   property = Property.create!(
       title: Faker::TvShows::SiliconValley.motto,
@@ -209,15 +209,15 @@ end
       bedrooms: rand(1..5),
       floor: rand(0..10),
       construction: rand(1970..2018),
-      account: shakalaka,
+      account: demo,
       location: lamprini,
       landlord: Landlord.create!(first_name: Faker::Name.first_name,
                                  last_name: Faker::Name.last_name,
                                  email: Faker::TvShows::SiliconValley.email,
                                  telephones: Faker::PhoneNumber.phone_number,
-                                 account: shakalaka)
+                                 account: demo)
   )
-  regularshakalakauser1.properties << property
+  regulardemouser1.properties << property
   property.avatar.attach(
       io: File.open(Dir["#{ENV['SEEDS_MEDIA_DIR']}#{rand(1..9)}/*"].sample),
       filename: "file-#{Faker::Number.number(digits: 4)}.png"
