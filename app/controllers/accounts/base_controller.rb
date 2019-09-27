@@ -39,7 +39,7 @@ module Accounts
 
     def active_user
       unless owner? || current_user.is_sysadmin? # owners' relation to accounts is not determined by the Membership table
-        unless Membership.find_by(account: current_account, user: current_user).active
+        unless Membership.find_by(account: current_account, user: current_user).try(:active) # use try here cause the membership entry may not exist
           log_out if logged_in?
           flash[:danger] = I18n.t "sessions.flash_suspended"
           redirect_to root_url(subdomain: request.subdomain)

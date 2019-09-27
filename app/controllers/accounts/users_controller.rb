@@ -1,35 +1,31 @@
 module Accounts
   class UsersController < Accounts::BaseController
-
     # Shows all account users
     before_action :all_account_users, only: [:show]
     before_action :user_self, only: [:edit, :update] # Allows editing only on each user's self
-    # before_action :owner_exclusive, only: [:index] do
-    #   redirect_to properties_url
-    # end
     before_action :owner_exclusive, only: [:new, :create, :destroy, :index]
     before_action :check_page_validity, only: [:index]
     before_action :find_user!, only: [:delete_avatar, :toggle_activation]
-
     after_action :log_action, only: [:create, :update, :destroy]
 
-    # layout 'auth/skeleton', except: [:show, :edit, :update, :index, :new]  # show the barebones version only when signing up
-
+    # A model's +destroy+ method is different than the controller's +destroy+ action.
+    # - Using the model's destroy method on a user object should delete all its dependancies (memberships, assignments,
+    # clientships and favlists), its owning account and the user itself.
+    # - Using the model's destroy method on an account object should delete all the account's assets
+    # (memberships, assignments, clientships and favlists) except the actual users (and the account's owner) because
+    # they may belong to multiple other accounts.
+    # - Using the controller's destroy method on a user object only deletes its assets on the given account.
     def destroy
-        @user = User.find(params[:id])
-        @user_full_name = @user.full_name
-        # Membership.find_by(account: current_account, user: @user).destroy
-        if @user.has_owning_accounts?.zero?
-          @user.destroy
-        else
-          # We need to delete all user assets but the user itself
-          Membership.find_by(account: current_account, user: @user).destroy # This one is unique
-          Assignment.where(user: @user).joins(:property).where(properties: {account: current_account}).try(:destroy_all)
-          Clientship.where(user: @user).joins(:client).where(clients: {account: current_account}).try(:destroy_all)
-          Favlist.where(account: current_account, user: @user).try(:destroy_all)
-        end
-        flash[:success] = I18n.t 'users.flash_delete'
-        redirect_to users_url
+      @user = User.find(params[:id])
+      @user_full_name = @user.full_name
+      if @user.has_owning_accounts?.zero?
+        @user.destroy
+      else
+        # We need to delete all user assets but the user itself
+        delete_user_assets(@user, current_account)
+      end
+      flash[:success] = I18n.t 'users.flash_delete'
+      redirect_to users_url
     end
 
     # GET the new user registration page
@@ -92,11 +88,22 @@ module Accounts
         params.require(:user).permit(:avatar, :first_name, :last_name, :email, :dob, :phone1, :locale, :password, :password_confirmation)
       end
 
+      # Finds the given or throws
       def find_user!
         @user = current_account.all_users.find(params[:id])
       end
 
+      # Deletes all user assets but the user himself
+      def delete_user_assets(user, account)
+        Membership.find_by(account: account, user: user).destroy # This one is unique
+        Assignment.where(user: user).joins(:property).where(properties: {account: account}).try(:destroy_all)
+        Clientship.where(user: user).joins(:client).where(clients: {account: account}).try(:destroy_all)
+        Favlist.where(account: account, user: user).try(:destroy_all)
+      end
 
+      # Logs the creation, update and destruction of user objects.
+      # The creation of user object is only happening through invitation thus the creation part
+      # remains unused here and is only utilized by the invitationreceivers_controller.rb
       def log_action
         if action_name == 'destroy'
           Log.create(author: current_user, author_name: current_user.full_name, user_name: @user_full_name, action: action_name, account: current_account)
@@ -104,15 +111,6 @@ module Accounts
           Log.create(author: current_user, author_name: current_user.full_name, user_name: @user.full_name, user: @user, action: action_name, account: current_account)
         end
       end
-
-      # Confirms a logged-in user.
-      # def logged_in_user
-      #   unless logged_in?
-      #     store_location
-      #     redirect_to login_url
-      #   end
-      # end
-      # def authorized
 
       def all_account_users
         # We use find_by instead of find because we need an association proxy and not just an object
