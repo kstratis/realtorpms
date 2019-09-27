@@ -22,9 +22,11 @@ module Accounts
         if @user.has_owning_accounts?.zero?
           @user.destroy
         else
-          Membership.find_by(account: current_account, user: @user).destroy # this is unique
-          Assignment.where(user: @user).try(:destroy_all)
-          Clientship.where(user: @user).try(:destroy_all)
+          # We need to delete all user assets but the user itself
+          Membership.find_by(account: current_account, user: @user).destroy # This one is unique
+          Assignment.where(user: @user).joins(:property).where(properties: {account: current_account}).try(:destroy_all)
+          Clientship.where(user: @user).joins(:client).where(clients: {account: current_account}).try(:destroy_all)
+          Favlist.where(account: current_account, user: @user).try(:destroy_all)
         end
         flash[:success] = I18n.t 'users.flash_delete'
         redirect_to users_url
