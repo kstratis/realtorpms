@@ -15,7 +15,12 @@ class Account < ApplicationRecord
 
   has_many :memberships
   has_many :users, through: :memberships, dependent: :destroy
+  has_many :logs, dependent: :nullify
   validates_associated :owner
+
+  # This is for existing log records
+  # https://stackoverflow.com/a/9326882/178728
+  before_destroy { |record| Log.where(account: record).update_all(account_name: record.subdomain) }
 
   # Returns all account users including the owner of the account
   # Uses the active_record_union gem
