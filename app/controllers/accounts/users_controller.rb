@@ -105,9 +105,9 @@ module Accounts
       # remains unused here and is only utilized by the invitationreceivers_controller.rb
       def log_action
         if action_name == 'destroy'
-          Log.create(author: current_user, author_name: current_user.full_name, user_name: @user_full_name, action: action_name, account: current_account)
+          Log.create(author: current_user, author_name: current_user.full_name, user_name: @user_full_name, action: action_name, account: current_account, account_name: current_account.subdomain)
         else
-          Log.create(author: current_user, author_name: current_user.full_name, user_name: @user.full_name, user: @user, action: action_name, account: current_account)
+          Log.create(author: current_user, author_name: current_user.full_name, user_name: @user.full_name, user: @user, action: action_name, account: current_account, account_name: current_account.subdomain)
         end
       end
 

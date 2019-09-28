@@ -12,9 +12,10 @@ class User < ApplicationRecord
   before_save { self.email = email.downcase }  # makes sure everything is lower case
   before_create { self.color = COLOR_PALETTE.sample } # This assigns a random bg color to each new user
 
-  # This is for existing log records
+  # This is for existing log records. A user may also be an action author (user object again) thus we need to handle
+  # that as well.
   # https://stackoverflow.com/a/9326882/178728
-  # before_destroy { |record| Log.where(user: record).update_all(user_name: record.full_name) }
+  before_destroy { |record| Log.where(author_id: record).update_all(author_id: nil) }
 
   validates :first_name, presence: true, length: { maximum: 50 }
   validates :last_name, presence: true, length: { maximum: 50 }

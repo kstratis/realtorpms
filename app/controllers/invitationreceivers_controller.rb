@@ -62,7 +62,7 @@ class InvitationreceiversController < ApplicationController
     end
 
     def log_action
-      Log.create(author: current_account.owner, author_name: current_account.owner.full_name, user_name: @user.full_name, user: @user, action: action_name, account: current_account)
+      Log.create(author: current_account.owner, author_name: current_account.owner.full_name, user_name: @user.full_name, user: @user, action: action_name, account: current_account, account_name: current_account.subdomain)
     end
 
 end
