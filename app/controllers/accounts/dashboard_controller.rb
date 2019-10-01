@@ -1,7 +1,7 @@
 module Accounts
   class DashboardController < Accounts::BaseController
     def index
-      @log = Log.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day, account: current_account).order(created_at: 'desc')
+      @log = Log.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day, account: current_account).order(created_at: 'desc').limit(9)
       @graph = {
           labels: [I18n.t('main.chart.properties'), I18n.t('main.chart.users'), I18n.t('main.chart.clients')],
           datasets: [

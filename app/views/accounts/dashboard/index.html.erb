@@ -18,7 +18,94 @@
       </div>
 
       <div class="clearfix mt-3"></div>
-      <% unless current_user.is_admin?(current_account) %>
+      <% if current_user.is_admin?(current_account) %>
+        <div class="row">
+
+          <!--          <div class="col-md-12 col-lg-6">-->
+          <!--            <div class="row">-->
+          <%# %w(properties users clients mapping integrations statistics).each do |entry| %>
+          <!--                <div class="col-6">-->
+          <%#= link_to respond_to?("#{entry}_path") ? send("#{entry}_path") : '', class: 'option-container' do %>
+          <%#= content_tag :div, class: 'option' do %>
+          <%#= content_tag :i, nil, class: "pr-icon smm #{entry}" %>
+          <%#= content_tag :p, t("main.#{entry}") %>
+          <%# end %>
+          <%# end %>
+          <!--                </div>-->
+          <%# end %>
+          <!--            </div>-->
+          <!--          </div>-->
+
+          <div class="col-md-12 col-lg-6">
+            <h2 class="section-title"> <%= t('main.timeline.today') %> </h2><!-- .timeline -->
+            <% if @log.blank? %>
+              <div class="state-figure text-center">
+                <%= image_tag 'no_content.svg', class: 'img-fluid max-300' %>
+              </div>
+              <h3 class="state-header text-center"><%= t('main.welcome.no_activities') %></h3>
+            <% else %>
+              <% @log.each do |entry| %>
+                <ul class="timeline">
+                  <li class="timeline-item">
+                    <!-- .timeline-figure -->
+                    <div class="timeline-figure">
+                      <span class="tile tile-circle tile-sm"><i class="fa fa-cube fa-lg"></i></span>
+                    </div><!-- /.timeline-figure -->
+                    <!-- .timeline-body -->
+                    <div class="timeline-body">
+                      <!-- .media -->
+                      <div class="media">
+                        <!-- .media-body -->
+                        <div class="media-body">
+                          <h6 class="timeline-heading">
+                            <%= link_to render_timeline_header(entry), entry.try(:entity) ? polymorphic_path(entry.try(:entity).try(:to_sym)) : '', class: 'text-link' %>
+                          </h6>
+                          <p class="mb-0">
+                            <span><%= t('user') %></span>
+                            <% if entry.try(:author).blank? %>
+                              <span><%= entry.try(:author_name) %></span>
+                            <% else %>
+                              <%= link_to entry.try(:author_name), polymorphic_path([entry.try(:author).class.try(:to_s).try(:downcase).try(:to_sym)], id: entry.try(:author)) %>
+                            <% end %>
+
+<!--                            <a href="#"><%#= entry.try(:author) %></a>-->
+                            <strong><i><%= render_action(entry).html_safe %></i></strong>
+<!--                            <strong>Online Store App</strong> to <a href="#">Online Store</a>-->
+                          </p>
+                          <p class="timeline-date d-sm-none"><%= l(entry.created_at, format: :timeline) %></p>
+                        </div><!-- /.media-body -->
+                        <!-- .media-right -->
+                        <div class="d-none d-sm-block">
+                          <span class="timeline-date"><%= l(entry.created_at, format: :timeline) %></span>
+                        </div><!-- /.media-right -->
+                      </div><!-- /.media -->
+                    </div><!-- /.timeline-body -->
+                  </li>
+                  <!-- /.timeline-item -->
+                </ul>
+
+              <% end %>
+            <% end %>
+            <%# %w(properties users clients mapping integrations statistics).each do |entry| %>
+            <!-- .timeline-item -->
+
+
+          </div>
+
+
+          <div class="col-md-12 col-lg-6">
+            <div class="card card-fluid">
+              <div class="card-body">
+                <h3 class="card-title mb-4"><%= t('main.chart.title') %></h3>
+                <div class="chartjs chart-container">
+                  <canvas class="chart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      <% else %>
         <div class="row">
           <div class="col-12">
             <div id="notfound-state" class="empty-state">
@@ -39,98 +126,6 @@
           </div>
         </div>
 
-      <% else %>
-        <div class="row">
-
-<!--          <div class="col-md-12 col-lg-6">-->
-<!--            <div class="row">-->
-              <%# %w(properties users clients mapping integrations statistics).each do |entry| %>
-<!--                <div class="col-6">-->
-                  <%#= link_to respond_to?("#{entry}_path") ? send("#{entry}_path") : '', class: 'option-container' do %>
-                    <%#= content_tag :div, class: 'option' do %>
-                      <%#= content_tag :i, nil, class: "pr-icon smm #{entry}" %>
-                      <%#= content_tag :p, t("main.#{entry}") %>
-                    <%# end %>
-                  <%# end %>
-<!--                </div>-->
-              <%# end %>
-<!--            </div>-->
-<!--          </div>-->
-
-          <div class="col-md-12 col-lg-6">
-          <h2 class="section-title"> <%= t('main.timeline.today') %> </h2><!-- .timeline -->
-
-            <% @log.each do |entry| %>
-              <ul class="timeline">
-                <li class="timeline-item">
-                  <!-- .timeline-figure -->
-                  <div class="timeline-figure">
-                    <span class="tile tile-circle tile-sm"><i class="fa fa-cube fa-lg"></i></span>
-                  </div><!-- /.timeline-figure -->
-                  <!-- .timeline-body -->
-                  <div class="timeline-body">
-                    <!-- .media -->
-                    <div class="media">
-                      <!-- .media-body -->
-                      <div class="media-body">
-                        <h6 class="timeline-heading">
-                          <a href="#" class="text-link">Project updated by Sara Carr</a>
-                        </h6>
-                        <p class="mb-0">
-                          <a href="#"><%= entry.try(:author_name) %></a> <%= entry.try(:action) %> <strong>Online Store App</strong> to <a href="#">Online Store</a>
-                        </p>
-                        <p class="timeline-date d-sm-none"> at 3:21 AM </p>
-                      </div><!-- /.media-body -->
-                      <!-- .media-right -->
-                      <div class="d-none d-sm-block">
-                        <span class="timeline-date">3:21 AM</span>
-                      </div><!-- /.media-right -->
-                    </div><!-- /.media -->
-                  </div><!-- /.timeline-body -->
-                </li><!-- /.timeline-item -->
-              </ul>
-
-            <% end %>
-            <%# %w(properties users clients mapping integrations statistics).each do |entry| %>
-            <!-- .timeline-item -->
-
-
-          </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          <div class="col-md-12 col-lg-6">
-            <div class="card card-fluid">
-              <div class="card-body">
-                <h3 class="card-title mb-4"><%= t('main.chart.title') %></h3>
-                <div class="chartjs chart-container">
-                  <canvas class="chart"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
       <% end %>
 
 

@@ -84,7 +84,7 @@ module Accounts
 
     private
       def user_params
-        params.require(:user).permit(:avatar, :first_name, :last_name, :email, :dob, :phone1, :locale, :password, :password_confirmation)
+        params.require(:user).permit(:avatar, :first_name, :last_name, :email, :dob, :phone1, :locale, :time_zone, :password, :password_confirmation)
       end
 
       # Finds the given or throws
@@ -105,9 +105,9 @@ module Accounts
       # remains unused here and is only utilized by the invitationreceivers_controller.rb
       def log_action
         if action_name == 'destroy'
-          Log.create(author: current_user, author_name: current_user.full_name, user_name: @user_full_name, action: action_name, account: current_account, account_name: current_account.subdomain)
+          Log.create(author: current_user, author_name: current_user.full_name, user_name: @user_full_name, action: action_name, account: current_account, account_name: current_account.subdomain, entity: 'users')
         else
-          Log.create(author: current_user, author_name: current_user.full_name, user_name: @user.full_name, user: @user, action: action_name, account: current_account, account_name: current_account.subdomain)
+          Log.create(author: current_user, author_name: current_user.full_name, user_name: @user.full_name, user: @user, action: action_name, account: current_account, account_name: current_account.subdomain, entity: 'users')
         end
       end
 

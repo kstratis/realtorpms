@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_27_160328) do
+ActiveRecord::Schema.define(version: 2019_10_01_075655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -204,6 +204,7 @@ ActiveRecord::Schema.define(version: 2019_09_27_160328) do
     t.bigint "author_id"
     t.string "author_name"
     t.string "account_name"
+    t.string "entity"
     t.index ["account_id"], name: "index_logs_on_account_id"
     t.index ["author_id"], name: "index_logs_on_author_id"
     t.index ["client_id"], name: "index_logs_on_client_id"
@@ -274,6 +275,7 @@ ActiveRecord::Schema.define(version: 2019_09_27_160328) do
     t.datetime "reset_sent_at"
     t.date "dob"
     t.string "color"
+    t.string "time_zone", default: "UTC"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

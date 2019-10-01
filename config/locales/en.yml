@@ -6,6 +6,7 @@ en:
   prompt: "Are you sure you want to proceed with this action?"
   access_denied: "Access denied"
   back: "Back"
+  user: "User"
   header:
     search: "Search using property code"
   activerecord:
@@ -529,8 +530,20 @@ en:
     timeline:
       today: "Today"
       yesterday: "Yesterday"
+      user: 'user'
+      client: 'client'
+      property: 'property'
+      users: 'User list updated by %{author}'
+      properties: 'Property listings were updated by %{author}'
+      clients: 'Client list updated by %{author}'
+      create_html: 'created a new <a href="%{entity_url}">%{entity_label}</a>'
+      accepted_html: 'created a new <a href="%{entity_url}">%{entity_label}</a>'
+      update_existing_html: 'updated the details of <a href="%{entity_url}">%{entity_label}</a>'
+      update_deleted_html: 'updated the details of %{entity_label}'
+      destroy_html: 'deleted %{entity_label}'
     welcome:
-      no_content: "No Content, Yet."
+      no_content: "No content... yet."
+      no_activities: "No activity record... yet."
       prompt: "Use the button below to view all properties assigned to you."
       button_prompt: "Properties"
       button_prompt_add: "Add"

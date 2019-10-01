@@ -5,9 +5,12 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   include UserAvatar
   helper UserAvatar
+  include TimelineHelper
+
   rescue_from ActiveRecord::RecordNotFound, with: -> { render_404  }
 
   before_action :set_locale
+  around_action :set_time_zone, if: :current_user
 
   def set_locale
     I18n.locale = params[:locale] || current_user.try(:locale) || I18n.default_locale
@@ -56,5 +59,10 @@ class ApplicationController < ActionController::Base
       format.any  { head :unauthorized }
     end
   end
+
+  private
+    def set_time_zone(&block)
+      Time.use_zone(current_user.time_zone, &block)
+    end
 
 end

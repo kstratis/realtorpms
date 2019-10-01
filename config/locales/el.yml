@@ -6,6 +6,7 @@ el:
   prompt: "Θέλετε σίγουρα να προχωρήσετε σε αυτήν την ενέργεια;"
   access_denied: "Διαβαθμισμένη πρόσβαση"
   back: "Πίσω"
+  user: "Ο χρήστης"
   header:
     search: "Αναζήτηση κωδ. ακινήτου"
   activerecord:
@@ -534,8 +535,20 @@ el:
     timeline:
       today: "Σήμερα"
       yesterday: "Χθες"
+      user: 'συνεργάτη'
+      client: 'πελάτη'
+      property: 'ακίνητο'
+      users: 'Ο κατάλογος συνεργατών ενημερώθηκε από τον χρήστη %{author}'
+      properties: 'Το χαρτοφυλάκιο ακινήτων ενημερώθηκε από τον χρήστη %{author}'
+      clients: 'Το πελατολόγιο ενημερώθηκε από τον χρήστη %{author}'
+      create_html: 'δημιούργησε νέο <a href="%{entity_url}">%{entity_label}</a>'
+      accepted_html: 'δημιούργησε νέο <a href="%{entity_url}">%{entity_label}</a>'
+      update_existing_html: 'ενημέρωσε την καρτέλα του <a href="%{entity_url}">%{entity_label}</a>'
+      update_deleted_html: 'ενημέρωσε την καρτέλα του %{entity_label}'
+      destroy_html: 'διέγραψε το %{entity_label}'
     welcome:
       no_content: "Δεν υπάρχει περιεχόμενο... ακόμα."
+      no_activities: "Δεν υπάρχει δραστηριότητα... ακόμα."
       prompt: "Χρησιμοποιείστε το παρακάτω κουμπί προκειμένου να δείτε τα ακίνητα που σας έχουν ανατεθεί."
       button_prompt: "Ακίνητα"
       button_prompt_add: "Προσθήκη"

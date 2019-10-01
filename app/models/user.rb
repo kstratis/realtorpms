@@ -203,8 +203,5 @@ class User < ApplicationRecord
     dob ? ((Time.zone.now - dob.to_time) / 1.year.seconds).floor : nil
   end
 
-  def rewrite_log
-    da
-  end
 
 end
