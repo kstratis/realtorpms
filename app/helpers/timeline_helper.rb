@@ -15,7 +15,7 @@ module TimelineHelper
         create: I18n.t('main.timeline.create_html', entity_url: render_entity_url(entry), entity_label: I18n.t("main.timeline.#{entry.try(:entity).try(:singularize)}")),
         update: entry.try("#{entry.try(:entity).try(:to_s).try(:singularize)}_id".try(:to_sym)) ? I18n.t('main.timeline.update_existing_html', entity_url: render_entity_url(entry), entity_label: render_entity_label(entry, 'update')) : I18n.t('main.timeline.update_deleted_html', entity_url: render_entity_url(entry), entity_label: render_entity_label(entry, 'update')),
         destroy: I18n.t('main.timeline.destroy_html', entity_url: render_entity_url(entry), entity_label: render_entity_label(entry, 'destroy')),
-        accepted: I18n.t('main.timeline.create_html', entity_url: render_entity_url(entry), entity_label: entry.try("#{entry.try(:entity).try(:singularize)}_name".try(:to_sym))),
+        accepted: I18n.t('main.timeline.create_html', entity_url: render_entity_url(entry), entity_label: I18n.t("main.timeline.#{entry.try(:entity).try(:singularize)}")),
     }
     actions[entry.try(:action).try(:to_sym)]
   end

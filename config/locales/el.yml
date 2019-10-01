@@ -54,6 +54,7 @@ el:
         phone1_feedback_html: "π.χ. 210 33 33 333"
         phone1_placeholder: "π.χ. 697 25 00 111"
         locale: "Γλώσσα διεπαφής"
+        time_zone: "Ζώνη ώρας"
         password: "Κωδικός πρόσβασης"
         password_new: "Νέος κωδικός πρόσβασης"
         password_placeholder: "Απαιτούνται τουλάχιστον 6 χαρ/ρες"
@@ -541,11 +542,11 @@ el:
       users: 'Ο κατάλογος συνεργατών ενημερώθηκε από τον χρήστη %{author}'
       properties: 'Το χαρτοφυλάκιο ακινήτων ενημερώθηκε από τον χρήστη %{author}'
       clients: 'Το πελατολόγιο ενημερώθηκε από τον χρήστη %{author}'
-      create_html: 'δημιούργησε νέο <a href="%{entity_url}">%{entity_label}</a>'
-      accepted_html: 'δημιούργησε νέο <a href="%{entity_url}">%{entity_label}</a>'
-      update_existing_html: 'ενημέρωσε την καρτέλα του <a href="%{entity_url}">%{entity_label}</a>'
-      update_deleted_html: 'ενημέρωσε την καρτέλα του %{entity_label}'
-      destroy_html: 'διέγραψε το %{entity_label}'
+      create_html: '<i>δημιούργησε νέο</i> <a href="%{entity_url}">%{entity_label}</a>'
+      accepted_html: '<i>δημιούργησε νέο</i> <a href="%{entity_url}">%{entity_label}</a>'
+      update_existing_html: '<i>ενημέρωσε την καρτέλα του</i> <a href="%{entity_url}">%{entity_label}</a>'
+      update_deleted_html: '<i>ενημέρωσε την καρτέλα του</i> %{entity_label}'
+      destroy_html: '<i>διέγραψε την καρτέλα του</i> %{entity_label}'
     welcome:
       no_content: "Δεν υπάρχει περιεχόμενο... ακόμα."
       no_activities: "Δεν υπάρχει δραστηριότητα... ακόμα."

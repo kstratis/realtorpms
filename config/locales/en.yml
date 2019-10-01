@@ -54,6 +54,7 @@ en:
         phone1_feedback_html: "i.e. 813-440-5026"
         phone1_placeholder: "i.e. 813-440-5026"
         locale: "Language"
+        time_zone: "Time zone"
         password: "Password"
         password_new: "New password"
         password_placeholder: "At least 6 characters long"

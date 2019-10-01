@@ -67,10 +67,7 @@
                             <% else %>
                               <%= link_to entry.try(:author_name), polymorphic_path([entry.try(:author).class.try(:to_s).try(:downcase).try(:to_sym)], id: entry.try(:author)) %>
                             <% end %>
-
-<!--                            <a href="#"><%#= entry.try(:author) %></a>-->
-                            <strong><i><%= render_action(entry).html_safe %></i></strong>
-<!--                            <strong>Online Store App</strong> to <a href="#">Online Store</a>-->
+                            <strong><%= render_action(entry).html_safe %></strong>
                           </p>
                           <p class="timeline-date d-sm-none"><%= l(entry.created_at, format: :timeline) %></p>
                         </div><!-- /.media-body -->
