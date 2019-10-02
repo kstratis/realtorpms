@@ -531,19 +531,20 @@ el:
     chart:
       title: "Με μια ματιά"
       properties: "Ακίνητα"
-      users: "Χρήστες"
+      users: "Συνεργάτες"
       clients: "Πελάτες"
     timeline:
       today: "Σήμερα"
       yesterday: "Χθες"
-      user: 'συνεργάτη'
-      client: 'πελάτη'
-      property: 'ακίνητο'
-      users: 'Ο κατάλογος συνεργατών ενημερώθηκε από τον χρήστη %{author}'
-      properties: 'Το χαρτοφυλάκιο ακινήτων ενημερώθηκε από τον χρήστη %{author}'
-      clients: 'Το πελατολόγιο ενημερώθηκε από τον χρήστη %{author}'
-      create_html: '<i>δημιούργησε νέο</i> <a href="%{entity_url}">%{entity_label}</a>'
-      accepted_html: '<i>δημιούργησε νέο</i> <a href="%{entity_url}">%{entity_label}</a>'
+      entry: "νέα καταχώρηση"
+      user: 'νέο συνεργάτη'
+      client: 'νέο πελάτη'
+      property: 'νέο ακίνητο'
+      users: 'Κατάλογος συνεργατών'
+      properties: 'Χαρτοφυλάκιο'
+      clients: 'Πελατολόγιο'
+      create_html: '<i>δημιούργησε </i> <a href="%{entity_url}">%{entity_label}</a>'
+      accepted_html: '<i>δημιούργησε </i> <a href="%{entity_url}">%{entity_label}</a>'
       update_existing_html: '<i>ενημέρωσε την καρτέλα του</i> <a href="%{entity_url}">%{entity_label}</a>'
       update_deleted_html: '<i>ενημέρωσε την καρτέλα του</i> %{entity_label}'
       destroy_html: '<i>διέγραψε την καρτέλα του</i> %{entity_label}'

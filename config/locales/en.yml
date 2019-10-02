@@ -531,14 +531,15 @@ en:
     timeline:
       today: "Today"
       yesterday: "Yesterday"
-      user: 'user'
-      client: 'client'
-      property: 'property'
-      users: 'User list updated by %{author}'
-      properties: 'Property listings were updated by %{author}'
-      clients: 'Client list updated by %{author}'
-      create_html: 'created a new <a href="%{entity_url}">%{entity_label}</a>'
-      accepted_html: 'created a new <a href="%{entity_url}">%{entity_label}</a>'
+      entry: "a new entry"
+      user: 'a new user'
+      client: 'a new client'
+      property: 'a new property'
+      users: 'User list'
+      properties: 'Property listings'
+      clients: 'Client list'
+      create_html: '<i>created </i> <a href="%{entity_url}">%{entity_label}</a>'
+      accepted_html: '<i>created </i> <a href="%{entity_url}">%{entity_label}</a>'
       update_existing_html: 'updated the details of <a href="%{entity_url}">%{entity_label}</a>'
       update_deleted_html: 'updated the details of %{entity_label}'
       destroy_html: 'deleted %{entity_label}'

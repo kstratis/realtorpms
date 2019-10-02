@@ -1606,3 +1606,31 @@ a.tt-suggestion.tt-selectable{
 .img-fit-contain{
   object-fit: contain;
 }
+
+a.text-link {
+  border-radius: 3px;
+}
+
+.clients-timeline-header {
+  background: #F7C46C;
+  color: #000000;
+  &:hover{
+    color: #000000;
+  }
+}
+
+.users-timeline-header {
+  background: #00A28A;
+  color: #ffffff;
+  &:hover{
+    color: #ffffff;
+  }
+}
+
+.properties-timeline-header {
+  background: #5F4B8B;
+  color: #ffffff;
+  &:hover{
+    color: #ffffff;
+  }
+}

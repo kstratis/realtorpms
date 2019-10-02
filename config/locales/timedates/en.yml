@@ -205,6 +205,8 @@ en:
       long: "%B %d, %Y %H:%M"
       short: "%d %b %H:%M"
       property: ! '%-d/%b/%y'
+      timelinehead: ! '%A, %-d %b %y'
+      timelinebody: ! '%H:%M'
     pm: pm
   size:
     sqmeters: "m2"
