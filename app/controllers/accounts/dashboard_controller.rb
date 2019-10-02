@@ -22,7 +22,8 @@ module Accounts
         WHERE
 	        subquery.row_number <= 3
 	        AND group_number <=3
-	        LIMIT 9;
+        ORDER BY created_at DESC
+	      LIMIT 9;
       }.gsub(/\s+/, " ").strip
       @events = Log.find_by_sql(sql).group_by{ |t| t.created_at.beginning_of_day }
       @graph = {
