@@ -2,19 +2,45 @@
 
 <%= render layout: 'layouts/breadcrumb', locals: {path: [{:title => t('properties.index.breadcrumb'), :href => properties_path}], icon: 'house-colored', index: true} do %>
   <div class="action-btns">
+    <div class="btn-group btn-group-toggle">
     <%= link_to new_property_path, class: 'btn btn-primary btn-sm' do %>
       <i class="fas fa-plus-circle fa-fw"></i><span class="d-none d-md-inline">&nbsp;<%= t('properties.new.add_button') %></span>
     <% end %>
+    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#customFieldModal">
+      <i class="fas fa-plus-circle fa-fw"></i><span class="d-none d-md-inline">&nbsp;<%= t('properties.add_field') %></span>
+
+    </button>
+    </div>
+    <div class="modal fade" id="customFieldModal" tabindex="-1" role="dialog" aria-labelledby="customFieldModal" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"><%= t('properties.custom_fields.modal.title') %></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div>content</div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t('properties.custom_fields.modal.close_btn') %></button>
+            <button type="button" class="btn btn-primary"><%= t('properties.custom_fields.modal.save_btn') %></button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 <% end %>
 <%# byebug %>
 <div class="page-container">
   <div class="container">
     <div class="app-container">
+
       <%= react_component('PropertiesListWithDatatable', props: {
           initial_payload: {
               buysell_filter: {
-                  options: Property.businesstypes.keys.tap(&:pop).collect {|businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype}},
+                  options: Property.businesstypes.keys.tap(&:pop).collect { |businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype} },
                   storedOption: @initial_purpose
               },
               category_filter: {
@@ -134,7 +160,7 @@
               },
               filters: {
                   title: t('js.datatables.filters.title'),
-                  type:{
+                  type: {
                       title: t('js.datatables.filters.type.title'),
                       sell: t('js.datatables.filters.type.sell'),
                       rent: t('js.datatables.filters.type.rent'),
@@ -162,5 +188,6 @@
     </div>
   </div>
 </div>
+
 
 

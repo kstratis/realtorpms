@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_01_075655) do
+ActiveRecord::Schema.define(version: 2019_10_02_190519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,6 +102,16 @@ ActiveRecord::Schema.define(version: 2019_10_01_075655) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "continent"
+  end
+
+  create_table "entity_fields", force: :cascade do |t|
+    t.string "name"
+    t.string "field_type"
+    t.boolean "required"
+    t.bigint "property_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["property_id"], name: "index_entity_fields_on_property_id"
   end
 
   create_table "extras", force: :cascade do |t|
@@ -285,6 +295,7 @@ ActiveRecord::Schema.define(version: 2019_10_01_075655) do
   add_foreign_key "clients", "accounts"
   add_foreign_key "clientships", "clients"
   add_foreign_key "clientships", "users"
+  add_foreign_key "entity_fields", "properties"
   add_foreign_key "favlists", "accounts"
   add_foreign_key "favlists", "users"
   add_foreign_key "favorites", "properties"
