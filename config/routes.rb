@@ -31,6 +31,7 @@ Rails.application.routes.draw do
       get '/properties/locations', to: 'properties#locations'
       get '/properties/landlords', to: 'properties#landlords'
       get '/properties/inlinesearch', to: 'properties#inlinesearch'
+      resources :entityfields
 
       # favlists_path (GET, POST)
       # favlist_path (DELETE)

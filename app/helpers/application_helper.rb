@@ -30,6 +30,20 @@ module ApplicationHelper
     end
   end
 
+  def link_to_add_fields(name, f, association)
+    new_object = f.object.class.new
+    id = new_object.object_id
+    puts '-------'
+    puts new_object.inspect
+    puts id
+    # puts id
+    # time = Time.now.to_i
+    fields = f.fields_for(:entity_field, EntityField.new, child_index: 123333333333) do |builder|
+      render("accounts/entityfields/field_fields", f: builder)
+    end
+    link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
+  end
+
   # +human_enum_name+ is defined in application_record from which all models inherit from as of Rails 5.
   # Here lies an alternative implementation just in case.
   # def human_enum_name(model, enum_name, enum_value )

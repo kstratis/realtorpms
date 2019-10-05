@@ -6,27 +6,30 @@
     <%= link_to new_property_path, class: 'btn btn-primary btn-sm' do %>
       <i class="fas fa-plus-circle fa-fw"></i><span class="d-none d-md-inline">&nbsp;<%= t('properties.new.add_button') %></span>
     <% end %>
-    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#customFieldModal">
-      <i class="fas fa-plus-circle fa-fw"></i><span class="d-none d-md-inline">&nbsp;<%= t('properties.add_field') %></span>
+      <%= link_to "Open modal", new_entityfield_path, :class => "btn btn-warning btn-sm", :remote => true, "data-toggle" => "modal", "data-target" => "#customFieldModal" %>
 
-    </button>
+<!--      <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#customFieldModal">-->
+<!--        <i class="fas fa-plus-circle fa-fw"></i><span class="d-none d-md-inline">&nbsp;<%#= t('properties.add_field') %></span>-->
+
+<!--      </button>-->
     </div>
-    <div class="modal fade" id="customFieldModal" tabindex="-1" role="dialog" aria-labelledby="customFieldModal" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"><%= t('properties.custom_fields.modal.title') %></h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div>content</div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t('properties.custom_fields.modal.close_btn') %></button>
-            <button type="button" class="btn btn-primary"><%= t('properties.custom_fields.modal.save_btn') %></button>
-          </div>
+
+  </div>
+  <div class="modal fade" id="customFieldModal" tabindex="-1" role="dialog" aria-labelledby="customFieldModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"><%= t('properties.custom_fields.modal.title') %></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body a-unique-class">
+          <div>content</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t('properties.custom_fields.modal.close_btn') %></button>
+          <button type="button" class="btn btn-primary"><%= t('properties.custom_fields.modal.save_btn') %></button>
         </div>
       </div>
     </div>
