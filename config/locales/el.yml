@@ -114,6 +114,11 @@ el:
           garden_placeholder: "Επιφάνεια κήπου"
           plot: "Οικόπεδο"
           plot_placeholder: "Εμβαδόν οικοπέδου"
+      model_type:
+        name: 'Κατηγορία'
+      entity_field:
+        name: "Όνομα πεδίου"
+        field_type: "Τύπος πεδίου"
       property:
         info_title: "Πληροφορίες"
         specs_title: "Χαρακτηριστικά"
@@ -579,6 +584,14 @@ el:
     accepted:
       flash_success: "Συνδεθήκατε επιτυχώς με τον λογαριασμό: %{account}"
       flash_existing: "Έχετε ήδη λογαριασμό στο: %{account}"
+  cfields:
+    categories:
+      properties: "Ακίνητα"
+      users: "Χρήστες"
+      clients: "Πελάτες"
+    title: "Extra πεδία"
+    category_feedback: "Επιλέξτε την κατηγορία στην οποία θα 'επικολλήσουν' τα πεδία που ορίζετε."
+    required: "Υποχρεωτικό"
   clients:
     flash_created: "Ο πελάτης δημιουργήθηκε επιτυχώς"
     flash_delete: "Ο πελάτης διεγράφη επιτυχώς"

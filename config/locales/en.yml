@@ -113,6 +113,11 @@ en:
           garden_placeholder: "Garden size in sq meters"
           plot: "Land plot"
           plot_placeholder: "Garden size in sq meters"
+      model_type:
+        name: "Category"
+      entity_field:
+        name: "Field name"
+        field_type: "Field type"
       property:
         info_title: "Info"
         specs_title: "Details"
@@ -574,6 +579,14 @@ en:
     accepted:
       flash_success: "You have successfully joined the %{account} organization"
       flash_existing: "You are already the owner of: %{account}"
+  cfields:
+    categories:
+      properties: "Properties"
+      users: "Users"
+      clients: "Clients"
+    title: "Custom fields"
+    category_feedback: "Pick the desired category for your custom fields"
+    required: "Required"
   clients:
     flash_created: "Client successfully created"
     flash_delete: "Client successfully deleted"

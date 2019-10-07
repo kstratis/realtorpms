@@ -31,15 +31,11 @@ module ApplicationHelper
   end
 
   def link_to_add_fields(name, f, association)
-    new_object = f.object.class.new
+    new_object = f.object.send(association).klass.new
     id = new_object.object_id
-    puts '-------'
-    puts new_object.inspect
-    puts id
-    # puts id
-    # time = Time.now.to_i
-    fields = f.fields_for(:entity_field, EntityField.new, child_index: 123333333333) do |builder|
-      render("accounts/entityfields/field_fields", f: builder)
+    # byebug
+    fields = f.fields_for(association, new_object, child_index: id) do |builder|
+      render(association.to_s.singularize + "_fields", f: builder)
     end
     link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
   end

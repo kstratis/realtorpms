@@ -3,6 +3,7 @@ require 'constraints/subdomain_required'
 Rails.application.routes.draw do
 
 
+
   # get 'password_resets/new'
   # get 'password_resets/edit'
 
@@ -31,7 +32,9 @@ Rails.application.routes.draw do
       get '/properties/locations', to: 'properties#locations'
       get '/properties/landlords', to: 'properties#landlords'
       get '/properties/inlinesearch', to: 'properties#inlinesearch'
-      resources :entityfields
+      # resources :entityfields
+      # resources :model_types, only: [:show, :index, :edit, :update]
+      resources :model_types
 
       # favlists_path (GET, POST)
       # favlist_path (DELETE)

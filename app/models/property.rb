@@ -35,6 +35,7 @@ class Property < ApplicationRecord
   belongs_to :category
   belongs_to :location
   belongs_to :landlord, optional: true
+  belongs_to :model_type
   has_and_belongs_to_many :favlists, -> {distinct}
   accepts_nested_attributes_for :landlord
   has_many :assignments

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_04_181154) do
+ActiveRecord::Schema.define(version: 2019_10_05_194718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,6 +110,8 @@ ActiveRecord::Schema.define(version: 2019_10_04_181154) do
     t.boolean "required"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "model_type_id"
+    t.index ["model_type_id"], name: "index_entity_fields_on_model_type_id"
   end
 
   create_table "extras", force: :cascade do |t|
@@ -231,6 +233,14 @@ ActiveRecord::Schema.define(version: 2019_10_04_181154) do
     t.index ["user_id"], name: "index_memberships_on_user_id"
   end
 
+  create_table "model_types", force: :cascade do |t|
+    t.string "name"
+    t.bigint "account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_model_types_on_account_id"
+  end
+
   create_table "properties", force: :cascade do |t|
     t.text "description"
     t.datetime "created_at", null: false
@@ -261,6 +271,8 @@ ActiveRecord::Schema.define(version: 2019_10_04_181154) do
     t.string "map_url"
     t.bigint "category_id"
     t.string "slug"
+    t.integer "model_type_id"
+    t.jsonb "preferences", default: "{}", null: false
     t.index ["account_id"], name: "index_properties_on_account_id"
     t.index ["category_id"], name: "index_properties_on_category_id"
     t.index ["landlord_id"], name: "index_properties_on_landlord_id"
@@ -307,6 +319,7 @@ ActiveRecord::Schema.define(version: 2019_10_04_181154) do
   add_foreign_key "logs", "users", column: "author_id"
   add_foreign_key "memberships", "accounts"
   add_foreign_key "memberships", "users"
+  add_foreign_key "model_types", "accounts"
   add_foreign_key "properties", "accounts"
   add_foreign_key "properties", "categories"
   add_foreign_key "properties", "landlords"

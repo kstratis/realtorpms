@@ -1,0 +1,22 @@
+<div class="col-md-4 mb-3">
+  <div class="form-label-group">
+    <%= f.label :field_type %>
+    <%= f.select :field_type, %w{text_field check_box dropdown}, {}, class: 'form-control custom-select' %>
+  </div>
+</div>
+<div class="col-md-4 mb-3">
+  <%= f.text_field :name, class: 'form-control form-control-lg', placeholder: EntityField.human_attribute_name("name") %>
+</div>
+<div class="col-md-4 mb-3 d-flex align-items-center">
+  <div class="custom-control custom-checkbox app-checkbox">
+    <%= f.check_box(:required, {class: "custom-control-input", type: 'checkbox'}) %>
+    <%= f.label(:required, {class: 'custom-control-label'}) do %>
+      <%= t("cfields.required") %>
+    <% end %>
+  </div>
+</div>
+
+<%= f.hidden_field :_destroy %>
+<%= link_to '[remove]', '#', class: 'remove_fields' %>
+
+
