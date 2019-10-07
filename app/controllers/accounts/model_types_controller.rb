@@ -54,7 +54,8 @@ module Accounts
     def update
       respond_to do |format|
         if @model_type.update(model_type_params)
-          format.html { redirect_to @model_type, notice: 'Model type was successfully updated.' }
+          format.html { redirect_to edit_model_type_path(@model_type), notice: 'Model type was successfully updated.' }
+          # format.html { redirect_to @model_type, notice: 'Model type was successfully updated.' }
           format.json { render :show, status: :ok, location: @model_type }
         else
           format.html { render :edit }
