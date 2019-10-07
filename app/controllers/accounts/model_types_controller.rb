@@ -22,10 +22,10 @@ module Accounts
     # GET /model_types/1/edit
     def edit
       # @fields = @model_type.fields
-      @model_type.fields.build
+      # @model_type.fields.build
       # @model_type = ModelType.find(params[:id])
       # @model_type.fields = @model_type.fields.build
-
+      # @model_type.fields.order(created_at: :asc)
       respond_to do |format|
         format.html # show.html.erb
         format.json { render json: @model_type }
@@ -83,7 +83,7 @@ module Accounts
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def model_type_params
-      params.require(:model_type).permit(:name, {fields_attributes: [:id, :field_type, :name, :required, :_destroy]})
+      params.require(:model_type).permit(:id, :name, {fields_attributes: [:id, :field_type, :name, :required, :_destroy]})
     end
   end
 end

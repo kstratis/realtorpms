@@ -14,10 +14,9 @@ $(document).on('turbolinks:load', function(e) {
   // });
   // $(document).on('click', 'form .remove_fields', function(event) {
   $('form .remove_fields').on('click', function(event) {
-
     console.log('remove running');
     $(this).prev('input[type=hidden]').val('1');
-    $(this).closest('fieldset').hide();
+    $(this).closest('.form-row').hide();
     event.preventDefault();
   });
 

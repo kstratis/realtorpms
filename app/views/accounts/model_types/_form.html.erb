@@ -21,8 +21,9 @@
     <hr />
 
     <div class="form-group">
-      <div class="form-row">
 
+
+        <%#= f.fields_for :fields, @model_type.fields.order(created_at: :asc) do |builder| %>
         <%= f.fields_for :fields do |builder| %>
           <%= render 'accounts/model_types/field_fields', f: builder %>
         <% end %>
@@ -32,6 +33,6 @@
         <%= f.submit %>
       </div>
     </div>
-  </div>
+
 
 <% end %>
