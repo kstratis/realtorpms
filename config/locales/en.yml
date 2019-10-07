@@ -587,6 +587,8 @@ en:
     title: "Custom fields"
     category_feedback: "Pick the desired category for your custom fields"
     required: "Required"
+    submit: "Submit"
+    add_field: "+ Αdd field"
   clients:
     flash_created: "Client successfully created"
     flash_delete: "Client successfully deleted"

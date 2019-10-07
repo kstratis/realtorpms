@@ -1,31 +1,31 @@
 <div class="form-row">
-<div class="col-md-4 mb-3">
-  <div class="form-label-group">
-    <%= f.label :field_type %>
-    <%= f.select :field_type, %w{text_field check_box dropdown}, {}, class: 'form-control custom-select' %>
+  <div class="col-md-4 mb-3">
+    <div class="form-label-group">
+      <%= f.label :field_type %>
+      <%= f.select :field_type, %w{text_field check_box dropdown}, {}, class: 'form-control custom-select' %>
+    </div>
   </div>
-</div>
-<div class="col-md-4 mb-3">
-  <%= f.text_field :name, class: 'form-control form-control-lg', placeholder: EntityField.human_attribute_name("name"),
-                   required: true,
-              'data-parsley-required-message': t("js.validator.required") %>
-</div>
-<div class="col-md-3 mb-3 d-flex align-items-center">
-  <div class="custom-control custom-checkbox app-checkbox">
-    <%= f.check_box(:required, {class: "custom-control-input", type: 'checkbox'}) %>
-    <%= f.label(:required, {class: 'custom-control-label'}) do %>
-      <%= t("cfields.required") %>
+  <div class="col-md-4 mb-3">
+    <%= f.text_field :name,
+                     class: 'form-control form-control-lg', placeholder: EntityField.human_attribute_name("name"),
+                     required: true,
+                     'data-parsley-required-message': t("js.validator.required") %>
+  </div>
+  <div class="col-md-3 mb-3 d-flex align-items-center">
+    <div class="custom-control custom-checkbox app-checkbox">
+      <%= f.check_box(:required, {class: "custom-control-input", type: 'checkbox'}) %>
+      <%= f.label(:required, {class: 'custom-control-label'}) do %>
+        <%= t("cfields.required") %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="col-md-1 mb-3 d-flex align-items-center">
+    <%= f.hidden_field :_destroy %>
+    <%= link_to '#', class: 'remove_fields' do %>
+      <i class="fas fa-trash fa-fw"></i>
     <% end %>
   </div>
-</div>
 
-<%= f.hidden_field :_destroy %>
-<%= link_to '[remove]', '#', class: 'remove_fields' %>
-<!--<div class="col-md-1 mb-3 d-flex align-items-center">-->
-<%#= f.hidden_field :_destroy %>
-<%#= link_to '#', class: 'btn btn-danger remove_fields' do %>
-<!--  <i class="fas fa-trash fa-fw"></i>-->
-<%# end %>
-<!--</div>-->
 
 </div>

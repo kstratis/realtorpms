@@ -27,10 +27,11 @@
         <%= f.fields_for :fields do |builder| %>
           <%= render 'accounts/model_types/field_fields', f: builder %>
         <% end %>
-        <%= link_to_add_fields "Add Field", f, :fields %>
+        <%= link_to_add_fields t('cfields.add_field'), f, :fields %>
       </div>
       <div class="actions">
-        <%= f.submit %>
+        <%= f.submit t('cfields.submit'), class: 'btn btn-primary ml-auto'%>
+
       </div>
     </div>
 
