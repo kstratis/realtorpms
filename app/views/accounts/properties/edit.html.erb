@@ -453,6 +453,7 @@
                         </div>
                       </div>
 
+                      <hr />
                       <%= property.hidden_field :model_type_id %>
 
                       <%= property.fields_for :preferences, OpenStruct.new(@property.preferences) do |builder| %>
