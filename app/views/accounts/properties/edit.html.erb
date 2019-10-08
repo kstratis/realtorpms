@@ -809,7 +809,9 @@
                     </fieldset><!-- /fieldset -->
                   </div><!-- Step 6 END -->
 
+                  <!-- Step 7 START -->
                   <% if @property.model_type.fields.length > 0 %>
+
                     <!-- Custom fields -->
                     <div id="test-l-7" class="content dstepper-none fade">
                       <fieldset>
@@ -831,6 +833,7 @@
                     </div>
 
                   <% end %>
+                  <!-- Step 7 END -->
 
                   <input id="preventformsubmit" type="hidden">
                   <%= property.file_field :images, class: 'form-control uppy-emitters', multiple: true, direct_upload: true %>

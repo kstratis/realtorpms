@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_05_194718) do
+ActiveRecord::Schema.define(version: 2019_10_08_195710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -272,7 +272,7 @@ ActiveRecord::Schema.define(version: 2019_10_05_194718) do
     t.bigint "category_id"
     t.string "slug"
     t.integer "model_type_id"
-    t.jsonb "preferences", default: "{}", null: false
+    t.jsonb "preferences", default: {}, null: false
     t.index ["account_id"], name: "index_properties_on_account_id"
     t.index ["category_id"], name: "index_properties_on_category_id"
     t.index ["landlord_id"], name: "index_properties_on_landlord_id"
