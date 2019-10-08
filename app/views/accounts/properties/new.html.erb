@@ -446,6 +446,14 @@
                       </div>
                     </div>
 
+                    <%= property.hidden_field :model_type_id %>
+
+                    <%= property.fields_for :preferences do |builder| %>
+                      <% @property.model_type.fields.each do |field| %>
+                        <%= render "accounts/properties/fields/#{field.field_type}", field: field, f: builder %>
+                      <% end %>
+                    <% end %>
+
                     <hr class="mt-5">
                     <div class="d-flex">
                       <button type="button" class="prev btn btn-secondary" data-validate="fieldset-3"><%= t('js.forms.properties.wizard.previous') %></button>

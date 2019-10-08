@@ -16,6 +16,8 @@ class Account < ApplicationRecord
   has_many :memberships
   has_many :users, through: :memberships, dependent: :destroy
   has_many :logs, dependent: :nullify
+  has_many :model_types, dependent: :destroy
+
   validates_associated :owner
 
   # This is for existing log records

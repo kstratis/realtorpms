@@ -685,7 +685,7 @@ el:
       breadcrumb: "Ακίνητα"
       heading: "Προσθήκη νέου ακινήτου"
       heading_alt: "Νέο ακίνητο"
-      add_button: "Ακίνητο"
+      add_button: "Προσθήκη"
       set_cover: "Αλλαγή"
       photo_header: "Φωτογραφία εξωφύλλου"
       photo_subheader: "Κάντε κλικ για ν'αλλάξετε την φωτογραφία εξωφύλλου"

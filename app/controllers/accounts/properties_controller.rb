@@ -98,7 +98,9 @@ module Accounts
 
     # GET /properties/new
     def new
-      @property = Property.new
+      # @product = Product.new(product_type_id: params[:product_type_id])
+      # @property = Property.new(model_type: ModelType.find(20))
+      @property = Property.new(model_type: current_account.model_types.find_by(name: 'properties'))
       @property.build_landlord
     end
 
@@ -288,6 +290,8 @@ module Accounts
                                        :nolandlord,
                                        :avatar,
                                        :map_url,
+                                       :model_type_id,
+                                       {preferences: {}},
                                        {landlord_attributes: [:first_name, :last_name, :email, :telephones]},
                                        # attachments: [],
                                        delete_images: [],
