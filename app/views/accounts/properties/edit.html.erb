@@ -453,7 +453,11 @@
                         </div>
                       </div>
 
-                      <hr />
+                      <% if @property.model_type.fields.length %>
+                        <hr class="mb-4" />
+                        <h2 class="mb-4"> <%= t('cfields.title') %> </h2>
+                      <% end %>
+
                       <%= property.hidden_field :model_type_id %>
 
                       <%= property.fields_for :preferences, OpenStruct.new(@property.preferences) do |builder| %>
