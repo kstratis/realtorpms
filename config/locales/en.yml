@@ -388,7 +388,7 @@ en:
             existing_files_delete_html: "Choose which <strong>files to delete</strong> (if any). The files will be deleted upon submitting your changes."
           step7:
             anchor: "Custom fields"
-            title: "Extra πεδία"
+            title: "Custom fields"
           next: "Next"
           previous: "Previous"
           submit: "Submit"
@@ -593,6 +593,7 @@ en:
     submit: "Submit"
     add_field: "+ Αdd field"
     tooltip: "Allows you to define custom fields based on which you'll be able to filter and sort your collection."
+    flash_updated: "Extra fields updated successfully"
   clients:
     flash_created: "Client successfully created"
     flash_delete: "Client successfully deleted"
