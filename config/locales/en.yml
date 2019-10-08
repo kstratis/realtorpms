@@ -386,6 +386,9 @@ en:
             title: "Photos"
             existing_files: "Existing files"
             existing_files_delete_html: "Choose which <strong>files to delete</strong> (if any). The files will be deleted upon submitting your changes."
+          step7:
+            anchor: "Custom fields"
+            title: "Extra πεδία"
           next: "Next"
           previous: "Previous"
           submit: "Submit"

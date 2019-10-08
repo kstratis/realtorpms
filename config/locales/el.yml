@@ -387,6 +387,9 @@ el:
             title: "Φωτογραφίες"
             existing_files: "Υφιστάμενα αρχεία"
             existing_files_delete_html: "Επιλέξτε τυχόν <strong>αρχεία προς διαγραφή</strong>. Τα αρχεία θα διαγραφούν αμέσως μόλις υποβάλετε τις αλλαγές."
+          step7:
+            anchor: "Extra πεδία"
+            title: "Extra πεδία"
           next: "Επόμενο"
           previous: "Προηγούμενο"
           submit: "Υποβολή"

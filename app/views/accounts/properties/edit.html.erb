@@ -52,6 +52,12 @@
                       <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-images fa-fw"> </i></span>
                         <span class="d-none d-lg-inline"><%= t('js.forms.properties.wizard.step6.anchor') %></span></a>
                     </li>
+                    <% if @property.model_type.fields.length > 0 %>
+                      <li class="step" data-fieldset="fieldset-7" data-target="#test-l-7">
+                        <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-align-justify fa-fw"> </i></span>
+                          <span class="d-none d-lg-inline"><%= t('js.forms.properties.wizard.step7.anchor') %></span></a>
+                      </li>
+                    <% end %>
                   </ul>
                 </div><!-- /.steps -->
               </div><!-- /.card-header -->
@@ -453,18 +459,8 @@
                         </div>
                       </div>
 
-                      <% if @property.model_type.fields.length %>
-                        <hr class="mb-4" />
-                        <h2 class="mb-4"> <%= t('cfields.title') %> </h2>
-                      <% end %>
 
-                      <%= property.hidden_field :model_type_id %>
 
-                      <%= property.fields_for :preferences, OpenStruct.new(@property.preferences) do |builder| %>
-                        <% @property.model_type.fields.each do |field| %>
-                          <%= render "accounts/properties/fields/#{field.field_type}", field: field, f: builder %>
-                        <% end %>
-                      <% end %>
 
                       <hr class="mt-5">
                       <div class="d-flex">
@@ -801,11 +797,40 @@
 
                       <hr class="mt-5">
                       <div class="d-flex">
-                        <button type="button" class="prev btn btn-secondary" data-validate="fieldset-6"><%= t('js.forms.properties.wizard.previous') %></button>
-                        <%= property.submit t('properties.edit.edit_button'), class: 'btn btn-primary ml-auto submit', "data-validate": "fieldset-6" %>
+                        <% if @property.model_type.fields.length == 0 %>
+                          <button type="button" class="prev btn btn-secondary" data-validate="fieldset-6"><%= t('js.forms.properties.wizard.previous') %></button>
+                          <%= property.submit t('properties.edit.edit_button'), class: 'btn btn-primary ml-auto submit', "data-validate": "fieldset-6" %>
+                        <% else %>
+                          <button type="button" class="prev btn btn-secondary" data-validate="fieldset-6"><%= t('js.forms.properties.wizard.previous') %></button>
+                          <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset-6"><%= t('js.forms.properties.wizard.next') %></button>
+                        <% end %>
                       </div>
+
                     </fieldset><!-- /fieldset -->
                   </div><!-- Step 6 END -->
+
+                  <% if @property.model_type.fields.length > 0 %>
+                    <!-- Custom fields -->
+                    <div id="test-l-7" class="content dstepper-none fade">
+                      <fieldset>
+                        <legend><%= t('js.forms.properties.wizard.step7.title') %></legend>
+                        <div class="row mb-3">
+                          <%= property.hidden_field :model_type_id %>
+                          <%= property.fields_for :preferences, OpenStruct.new(@property.preferences) do |builder| %>
+                            <% @property.model_type.fields.each do |field| %>
+                              <%= render "accounts/properties/fields/#{field.field_type}", field: field, f: builder %>
+                            <% end %>
+                          <% end %>
+                        </div>
+                        <hr class="mt-5">
+                        <div class="d-flex">
+                          <button type="button" class="prev btn btn-secondary" data-validate="fieldset-7"><%= t('js.forms.properties.wizard.previous') %></button>
+                          <%= property.submit t('properties.edit.edit_button'), class: 'btn btn-primary ml-auto submit', "data-validate": "fieldset-7" %>
+                        </div>
+                      </fieldset>
+                    </div>
+
+                  <% end %>
 
                   <input id="preventformsubmit" type="hidden">
                   <%= property.file_field :images, class: 'form-control uppy-emitters', multiple: true, direct_upload: true %>
