@@ -84,7 +84,7 @@ module Accounts
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def model_type_params
-      params.require(:model_type).permit(:id, :name, {fields_attributes: [:id, :field_type, :name, :required, :_destroy]})
+      params.require(:model_type).permit(:id, :name, {fields_attributes: [:id, :field_type, :name, :options, :required, :_destroy]})
     end
   end
 end

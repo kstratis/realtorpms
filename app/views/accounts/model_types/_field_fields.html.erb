@@ -3,14 +3,18 @@
   <div class="col-md-4 mb-3">
     <div class="form-label-group">
       <%= f.label :field_type %>
-      <%= f.select :field_type, %w{text_field check_box dropdown}, {}, class: 'form-control custom-select' %>
+      <%= f.select :field_type, %w{text_field check_box dropdown}, {}, class: 'form-control custom-select field-type-select' %>
     </div>
   </div>
+
   <div class="col-md-4 mb-3">
     <%= f.text_field :name,
                      class: 'form-control form-control-lg', placeholder: EntityField.human_attribute_name("name"),
                      required: true %>
   </div>
+
+
+
   <div class="col-md-3 mb-3 d-flex align-items-center">
     <div class="custom-control custom-checkbox app-checkbox">
       <%= f.check_box(:required, {class: "custom-control-input", type: 'checkbox'}) %>
@@ -25,6 +29,12 @@
     <%= link_to '#', class: 'remove_fields' do %>
       <i class="fas fa-trash fa-fw"></i>
     <% end %>
+  </div>
+
+  <div class="col-md-8 mb-3 d-none">
+    <%= f.text_field :options,
+                     class: 'form-control form-control-lg field-options '%>
+    <small class="form-text text-muted"><%= t('cfields.dropdown_feedback') %></small>
   </div>
 
 </div>
