@@ -72,6 +72,7 @@ class InlineSearch extends React.Component {
   render() {
     return (
       <div ref={this.setWrapperRef} className="input-group">
+      {/*<div ref={this.setWrapperRef} className="input-group input-group-search">*/}
         <label className="input-group-prepend" htmlFor="search">
             <span className="input-group-text">
               <span className="oi oi-magnifying-glass" />

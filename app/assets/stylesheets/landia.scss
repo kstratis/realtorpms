@@ -1636,9 +1636,12 @@ a.text-link {
 }
 
 .top-bar-list{
-  background: #ffffff;
+  box-shadow: 0 1px 0 0 #ea9363, 0 0 1px 0 rgba(20, 20, 31, 0.15);
+  //background: #ffffff;
+  //background: #32629d;
+  //background: #376dae;
 }
-
+//
 .top-bar-brand{
   background: #37474f;
 }
@@ -1646,11 +1649,11 @@ a.text-link {
 .app-aside-light {
   border-right: unset;
 }
-
+//
 .app-header{
   box-shadow: 0 0 0 1px rgba(20, 20, 31, 0.05), 0 0 1px 0 rgba(20, 20, 31, 0.15);
 }
-
+//
 .top-bar-brand{
   box-shadow: 0 1px 0 0 #ea9363, 0 0 1px 0 rgba(20, 20, 31, 0.15);
   //transition: background-color 0.2s linear;

@@ -1,0 +1,20 @@
+<div class="col-8 offset-2">
+  <div class="form-group mb-4">
+    <div class="form-label-group">
+      <%= f.label field.name %>
+
+      <%= f.select :name, options_from_collection_for_select(ModelType.all, :name, :localized_name), {}, class: 'form-control custom-select' %>
+
+
+      <%#= f.select field.name,
+                       class: 'form-control',
+                       autocomplete: "off",
+                       'data-parsley-group': "fieldset-7",
+                       'data-parsley-required': field.required ? "true" : "false",
+                       'data-parsley-required-message': t("js.validator.required") %>
+
+      <%= f.select field.name, options_from_collection_for_select(ModelType.all, :name, :localized_name), class: 'form-control', autocomplete: "off" %>
+
+    </div>
+  </div>
+</div>
