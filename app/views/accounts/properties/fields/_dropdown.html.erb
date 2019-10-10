@@ -13,8 +13,8 @@
                        'data-parsley-required': field.required ? "true" : "false",
                        'data-parsley-required-message': t("js.validator.required") %>
 
-      <%= f.select field.name, options_for_select(field.options.split(';').map {|option| [option, option]}), {}, class: 'form-control custom-select' %>
-
+      <%= f.select field.name, options_for_select(field.options.split(';').map {|option| [option, option]}, f.object[field.name]), {}, class: 'form-control custom-select' %>
+<%# byebug %>
     </div>
   </div>
 </div>
