@@ -7,10 +7,9 @@
     </div>
   </div>
 
-  <div class="col-md-4 mb-3">
+  <div class="col-md-4 mb-3 d-block">
     <%= f.text_field :name,
-                     class: 'form-control form-control-lg', placeholder: EntityField.human_attribute_name("name"),
-                     required: true %>
+                     class: 'form-control form-control-lg cfield-validatable', placeholder: EntityField.human_attribute_name("name"), 'data-parsley-required': true, 'data-parsley-required-message': t("js.validator.required") %>
   </div>
 
 
@@ -33,7 +32,7 @@
 
   <div class="col-md-8 mb-3 d-none">
     <%= f.text_field :options,
-                     class: 'form-control form-control-lg field-options '%>
+                     class: 'form-control form-control-lg field-options cfield-validatable', 'data-parsley-required': true, 'data-parsley-required-message': t("js.validator.required") %>
     <small class="form-text text-muted"><%= t('cfields.dropdown_feedback') %></small>
   </div>
 

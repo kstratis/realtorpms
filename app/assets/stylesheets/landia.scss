@@ -1338,6 +1338,7 @@ i.fa-lock:hover{
 .has-active {
   .menu-link:before {
     background-color: $orange;
+    //background-color: #ea5f4a;
     display: block;
     content: "";
     position: absolute;
@@ -1372,9 +1373,9 @@ i.fa-lock:hover{
 }
 
 .stacked-menu > .menu > .menu-item > .menu-link, .stacked-menu .menu-link > .menu-icon{
-  //color: rgb(149, 134, 165);
+  color: rgb(149, 134, 165);
   //color: #9da8b2;
-  color: #888c9b;
+  //color: #888c9b;
   transition: color 0.15s linear 0s;
   &:hover{
     .sidebar-masked-icon {
@@ -1386,8 +1387,8 @@ i.fa-lock:hover{
 
 .aside-menu{
 
-  //background: linear-gradient(rgb(74, 62, 86), rgb(48, 40, 57)); // sentry
-  background-color: #37474f; // material-ui
+  background: linear-gradient(rgb(74, 62, 86), rgb(48, 40, 57)); // sentry
+  //background-color: #37474f; // material-ui
   //background-color: #263238;
   //background-color: #455a64;
   //background-color: #263238;
@@ -1395,7 +1396,8 @@ i.fa-lock:hover{
 }
 
 .app-header-dark .top-bar-brand {
-  background-color: #37474f;
+  //background-color: #37474f;
+  background: linear-gradient(rgb(74, 62, 86), rgb(48, 40, 57));
 }
 
 .menu-text-entry{
@@ -1637,13 +1639,14 @@ a.text-link {
 
 .top-bar-list{
   box-shadow: 0 1px 0 0 #ea9363, 0 0 1px 0 rgba(20, 20, 31, 0.15);
-  //background: #ffffff;
+  background: #ffffff;
   //background: #32629d;
   //background: #376dae;
 }
 //
 .top-bar-brand{
-  background: #37474f;
+  //background: #37474f;
+  background: rgb(74, 62, 86);
 }
 
 .app-aside-light {
@@ -1653,9 +1656,13 @@ a.text-link {
 .app-header{
   box-shadow: 0 0 0 1px rgba(20, 20, 31, 0.05), 0 0 1px 0 rgba(20, 20, 31, 0.15);
 }
+
+.menu-header{
+  color: rgb(149, 134, 165);
+}
 //
 .top-bar-brand{
-  box-shadow: 0 1px 0 0 #ea9363, 0 0 1px 0 rgba(20, 20, 31, 0.15);
+  box-shadow: 0 2px 0 0 #ea9363, 0 0 1px 0 rgba(20, 20, 31, 0.15);
   //transition: background-color 0.2s linear;
   transition: box-shadow 0.2s linear;
 
