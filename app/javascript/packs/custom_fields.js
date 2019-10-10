@@ -1,5 +1,8 @@
 $(document).on('turbolinks:load', function(e) {
 
+  const cfields_form = $('form.validatable');
+  if (cfields_form.length < 1) return;
+
   $(document).on('click', 'form .remove_fields', function(event) {
     $(this).prev('input[type=hidden]').val('1');
     $(this).closest('.form-row').addClass('d-none');
@@ -14,7 +17,7 @@ $(document).on('turbolinks:load', function(e) {
   });
 
   // Make sure that parsley validation is disabled when we remove a particalar custom field from the UI
-  $('form').parsley().on('form:validate', function (formInstance) {
+  cfields_form.parsley().on('form:validate', function (formInstance) {
     $('.cfield-validatable').each((function(index, element) {
       if ($(element).parent().closest('div.form-row').hasClass('d-none') || !$(element).closest('div').hasClass('d-block')){
         $(element).removeAttr('data-parsley-required');
@@ -29,7 +32,7 @@ $(document).on('turbolinks:load', function(e) {
   }));
 
   // When changing a custom field type, listen to select changes so that the options text field is rendered when appropriate.
-  $('form').on('change', '.field-type-select', function(selection) {
+  cfields_form.on('change', '.field-type-select', function(selection) {
     $(this).closest('div.form-row').children('.d-none').toggleClass('d-block', this.value === 'dropdown');
   });
 
