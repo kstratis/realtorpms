@@ -1,12 +1,12 @@
 <div class="col-8 offset-2">
   <div class="form-group mb-4">
     <div class="form-label-group">
-  <div class="custom-control custom-checkbox app-checkbox">
-    <%= f.check_box(field.name, {class: "custom-control-input", type: 'checkbox'}) %>
-    <%= f.label(field.name, {class: 'custom-control-label'}) do %>
-      <%= field.name %>
-    <% end %>
-  </div>
+      <div class="custom-control custom-checkbox app-checkbox">
+        <%= f.check_box(field.slug, {class: "custom-control-input", type: 'checkbox'}) %>
+        <%= f.label(field.slug, {class: 'custom-control-label'}) do %>
+          <%= field.name %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

@@ -1,13 +1,13 @@
 <div class="col-8 offset-2">
   <div class="form-group mb-4">
     <div class="form-label-group">
-      <%= f.text_field field.name,
+      <%= f.text_field field.slug,
                        class: 'form-control',
                        autocomplete: "off",
                        'data-parsley-group': "fieldset-7",
                        'data-parsley-required': field.required ? "true" : "false",
                        'data-parsley-required-message': t("js.validator.required") %>
-      <%= f.label field.name %>
+      <%= f.label field.slug, field.name %>
     </div>
   </div>
 </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_09_122512) do
+ActiveRecord::Schema.define(version: 2019_10_10_180602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,6 +112,7 @@ ActiveRecord::Schema.define(version: 2019_10_09_122512) do
     t.datetime "updated_at", null: false
     t.bigint "model_type_id"
     t.string "options"
+    t.string "slug"
     t.index ["model_type_id"], name: "index_entity_fields_on_model_type_id"
   end
 

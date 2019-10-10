@@ -3,11 +3,11 @@
     <div class="form-label-group">
       <!-- Splits the options list string on empty space, comma, dot, semi-colon, single quote and double quote.
            Removes empty elements from the resulting array and finally iterates with map -->
-      <%= f.select field.name,
-                   options_for_select(field.options.split(/[\s,.;"']/).reject!(&:empty?).map {|option| [option, option]}, f.object[field.name]),
+      <%= f.select field.slug,
+                   options_for_select(field.options.split(/[\s,.;:"']/).reject(&:empty?).map {|option| [option, option]}, f.object[field.slug]),
                    {},
                    class: 'form-control custom-select' %>
-      <%= f.label field.name %>
+      <%= f.label field.slug, field.name %>
     </div>
   </div>
 </div>
