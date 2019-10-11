@@ -123,6 +123,13 @@
             <% end %>
           <% end %>
 
+          <%= content_tag :li, class: "menu-item #{active_for(controller: ['settings'])}" do %>
+            <%= link_to settings_path, class: 'menu-link' do %>
+              <%= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-settings' %>
+              <%= content_tag :span, t('sidebar.settings'), class: 'menu-text menu-text-entry align-middle' %>
+            <% end %>
+          <% end %>
+
 
           <!-- .menu-item -->
           <!--          <li class="menu-item has-child">-->

@@ -1,0 +1,82 @@
+<% provide(:title, t('clients.show.heading')) %>
+
+<%= render partial: 'layouts/breadcrumb', locals: {path: [{:title => t('clients.show.breadcrumb'), :href => clients_path}, {title: '', :href => ''}], icon: 'house-colored'} %>
+
+<div class="page-container">
+  <div class="container">
+<div class="page-section">
+  <!-- grid row -->
+  <div class="row">
+    <!-- grid column -->
+    <div class="col-lg-4">
+      <!-- .card -->
+      <div class="card card-fluid">
+        <h6 class="card-header"> Your Details </h6><!-- .nav -->
+        <nav class="nav nav-tabs flex-column border-0">
+          <a href="#profile" class="nav-link active" data-toggle="tab" role="tab" aria-selected="true">Profile</a>
+          <a href="#account" class="nav-link" data-toggle="tab" role="tab" aria-selected="false">Account</a>
+          <a href="#billing" class="nav-link" data-toggle="tab" role="tab" aria-selected="false">Billing</a>
+          <a href="#notifications" class="nav-link" data-toggle="tab" role="tab" aria-selected="false">Notifications</a>
+        </nav><!-- /.nav -->
+
+      </div><!-- /.card -->
+    </div><!-- /grid column -->
+    <!-- grid column -->
+    <div class="col-lg-8">
+
+      <div class="card card-fluid">
+        <h6 class="card-header"> Account </h6><!-- .card-body -->
+        <div class="card-body">
+
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+              <div class="section-block text-center text-sm-left">
+                <h3 class="section-title pt-0"> Visual links </h3><!-- .visual-picker -->
+                <div class="d-flex justify-content-center">
+                <a href="#" class="visual-picker visual-picker-md has-peek px-3">
+                  <!-- .visual-picker-figure -->
+                  <div class="visual-picker-figure">
+                    <!-- .visual-picker-content -->
+                    <span class="visual-picker-content"><span class="tile tile-md bg-info"><i class="oi oi-person"></i></span></span> <!-- /.visual-picker-content -->
+                  </div><!-- /.visual-picker-figure -->
+                  <!-- .visual-picker-peek -->
+                  <span class="visual-picker-peek">Accounts</span>
+                </a> <!-- /.visual-picker -->
+                <!-- .visual-picker -->
+                <a href="#" class="visual-picker visual-picker-md has-peek px-3">
+                  <!-- .visual-picker-figure -->
+                  <div class="visual-picker-figure">
+                    <!-- .visual-picker-content -->
+                    <span class="visual-picker-content"><span class="tile tile-md bg-danger"><i class="fa fa-money-bill-alt"></i></span></span> <!-- /.visual-picker-content -->
+                  </div><!-- /.visual-picker-figure -->
+                  <!-- .visual-picker-peek -->
+                  <span class="visual-picker-peek">My Wallet</span>
+                </a> <!-- /.visual-picker -->
+                <!-- .visual-picker -->
+                <a href="#" class="visual-picker visual-picker-md has-peek px-3">
+                  <!-- .visual-picker-figure -->
+                  <div class="visual-picker-figure">
+                    <!-- .visual-picker-content -->
+                    <span class="visual-picker-content"><span class="tile tile-md bg-success"><i class="oi oi-people"></i></span></span> <!-- /.visual-picker-content -->
+                  </div><!-- /.visual-picker-figure -->
+                  <!-- .visual-picker-peek -->
+                  <span class="visual-picker-peek">Teams</span>
+                </a> <!-- /.visual-picker -->
+                <!-- .visual-picker -->
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="account" role="tabpanel" aria-labelledby="account-tab">World</div>
+            <div class="tab-pane fade" id="billing" role="tabpanel" aria-labelledby="billing-tab">new</div>
+            <div class="tab-pane fade" id="notifications" role="tabpanel" aria-labelledby="notifications-tab">tab</div>
+          </div>
+
+        </div><!-- /.card-body -->
+      </div><!-- /.card -->
+    </div><!-- /grid column -->
+
+    </div>
+  </div>
+</div>
+  </div>
+</div>

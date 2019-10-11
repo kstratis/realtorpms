@@ -22,11 +22,16 @@
 //}
 
 
+
+
+
 body {
   line-height: 1.5em;
   color: #454545;
   text-align: left;
-  font-family: 'Noto Sans', sans-serif;
+  //font-family: 'Roboto', Arial, sans-serif;
+  font-family: 'Noto Sans', Arial, sans-serif;
+  //font-family: 'Clear Sans Regular', Arial, sans-serif;
   //font-family: 'PFDinDisplayPro-Regular', sans-serif;
   //font-family: 'Poppins', helvetica, sans-serif;
   font-size: 14px;
@@ -1367,21 +1372,23 @@ i.fa-lock:hover{
 .stacked-menu > .menu > .menu-item > .menu-link:focus {
   //color: rgb(149, 134, 165);
   color: rgb(189, 180, 199);
+  //color: rgb(170, 182, 199);
   .sidebar-masked-icon {
     background-color: rgb(189, 180, 199);
+    //background-color: rgb(170, 182, 199);;
   }
 }
 
 .stacked-menu > .menu > .menu-item > .menu-link, .stacked-menu .menu-link > .menu-icon{
-  color: rgb(149, 134, 165);
+  //color: rgb(149, 134, 165);
   //color: #9da8b2;
-  //color: #888c9b;
+  color: #888c9b;
   transition: color 0.15s linear 0s;
   &:hover{
     .sidebar-masked-icon {
-      background-color: rgb(189, 180, 199);
+      background-color: rgb(170, 182, 199);
     }
-    color: rgb(189, 180, 199);
+    color: rgb(170, 182, 199);
   }
 }
 
@@ -1638,31 +1645,31 @@ a.text-link {
 }
 
 .top-bar-list{
-  box-shadow: 0 1px 0 0 #ea9363, 0 0 1px 0 rgba(20, 20, 31, 0.15);
+  //box-shadow: 0 1px 0 0 #ea9363, 0 0 1px 0 rgba(20, 20, 31, 0.15);
   background: #ffffff;
   //background: #32629d;
   //background: #376dae;
 }
 //
 .top-bar-brand{
-  //background: #37474f;
-  background: rgb(74, 62, 86);
+  background: #37474f;
+  //background: rgb(74, 62, 86);
 }
 
 .app-aside-light {
   border-right: unset;
 }
 //
-.app-header{
-  box-shadow: 0 0 0 1px rgba(20, 20, 31, 0.05), 0 0 1px 0 rgba(20, 20, 31, 0.15);
-}
+//.app-header{
+//  box-shadow: 0 0 0 1px rgba(20, 20, 31, 0.05), 0 0 1px 0 rgba(20, 20, 31, 0.15);
+//}
 
 .menu-header{
   color: rgb(149, 134, 165);
 }
 //
 .top-bar-brand{
-  box-shadow: 0 2px 0 0 #ea9363, 0 0 1px 0 rgba(20, 20, 31, 0.15);
+  //box-shadow: 0 2px 0 0 #ea9363, 0 0 1px 0 rgba(20, 20, 31, 0.15);
   //transition: background-color 0.2s linear;
   transition: box-shadow 0.2s linear;
 
