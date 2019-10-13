@@ -590,7 +590,7 @@ el:
   cfields:
     categories:
       properties: "Ακίνητα"
-      users: "Χρήστες"
+      users: "Συνεργάτες"
       clients: "Πελάτες"
     title: "Extra πεδία"
     category_feedback: "Η επιλεγμένη κατηγορία στην οποία θα 'επικολλήσουν' τα πεδία που ορίζετε."
