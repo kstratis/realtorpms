@@ -37,3 +37,13 @@ $(document).on('turbolinks:load', function(e) {
   });
 
 });
+
+// Unbind handlers
+$(document).on("page:before-change turbolinks:before-visit", function() {
+  const cfields_form = $('form.validatable');
+  if (cfields_form.length < 1) return;
+  $(document).off('click', 'form .add_fields');
+  $(document).off('click', 'form .remove_fields');
+  cfields_form.parsley().off('form:validate');
+  cfields_form.off('change', '.field-type-select');
+});

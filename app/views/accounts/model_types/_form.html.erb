@@ -15,7 +15,7 @@
     <div class="form-group">
       <div class="form-label-group">
         <%= f.label :name %>
-        <%= f.select :name, options_from_collection_for_select(ModelType.all, :name, :localized_name), {}, class: 'form-control custom-select' %>
+        <%= f.select :id, options_from_collection_for_select(ModelType.all, :id, :localized_name, @model_type.id), {}, class: 'form-control custom-select', disabled: true %>
         <small class="form-text text-muted"><%= t('cfields.category_feedback') %></small>
       </div>
     </div>

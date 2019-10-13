@@ -6,6 +6,9 @@ module Accounts
     # GET /accounts/settings.json
     def index
       # @accounts_settings = Accounts::Setting.all
+      @properties_id = current_account.model_types.find_by(name: 'properties').id
+      @users_id = current_account.model_types.find_by(name: 'users').id
+      @clients_id = current_account.model_types.find_by(name: 'clients').id
     end
 
     # GET /accounts/settings/1

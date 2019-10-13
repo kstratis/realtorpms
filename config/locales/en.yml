@@ -588,7 +588,7 @@ en:
       users: "Users"
       clients: "Clients"
     title: "Custom fields"
-    category_feedback: "Pick the desired category for your custom fields"
+    category_feedback: "The selected category for your custom fields"
     required: "Required"
     submit: "Submit"
     add_field: "+ Αdd field"
@@ -743,11 +743,6 @@ en:
       tooltip_internal_notes: "Internal use only. Won't appear on any ad or client handout. Available to any agent handling the property."
       tooltip_owner: "Internal use only. Won't appear on any ad or client handout. Available to any agent handling the property."
       tooltip_assignments: "Internal use only. Available only to the account administrator."
-    custom_fields:
-      modal:
-        title: "Create a new custom field"
-        close_btn: "Κλείσιμο"
-        save_btn: "Αποθήκευση"
   time:
     formats:
       regular: "%d %b %y"

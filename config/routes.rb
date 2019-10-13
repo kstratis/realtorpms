@@ -33,7 +33,7 @@ Rails.application.routes.draw do
       get '/properties/landlords', to: 'properties#landlords'
       get '/properties/inlinesearch', to: 'properties#inlinesearch'
       # resources :entityfields
-      # resources :model_types, only: [:show, :index, :edit, :update]
+      resources :model_types, only: [:show, :index, :edit, :update]
       resources :settings
       # resources :model_types
 
