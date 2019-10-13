@@ -834,7 +834,7 @@ en:
       integrations: "Integrations"
       under_construction: "Under construction..."
       info: "Details"
-      cfields_subheader: "This feature allows the creation of custom fields of information on each of the main entitites: Partners, properties and clients. Collections of these entities can then be searched and filtered accordingly."
+      cfields_subheader: "This feature allows the creation of custom fields of information on each of the system's entitites: Partners, properties and clients. Collections of these entities can then be searched and filtered accordingly."
       partners: "Partners"
       properties: "Properties"
       clients: "Clients"
