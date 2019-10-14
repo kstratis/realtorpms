@@ -1,6 +1,6 @@
 class ModelType < ApplicationRecord
   belongs_to :account
-  has_many :fields, class_name: 'EntityField'
+  has_many :fields, class_name: 'EntityField', dependent: :destroy
   accepts_nested_attributes_for :fields, allow_destroy: true
 
   def localized_name

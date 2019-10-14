@@ -20,6 +20,8 @@ class Account < ApplicationRecord
 
   validates_associated :owner
 
+  after_create :build_custom_fields
+
   # This is for existing log records
   # https://stackoverflow.com/a/9326882/178728
   # before_destroy { |record| Log.where(account: record).update_all(account_name: record.subdomain) }
@@ -45,6 +47,13 @@ class Account < ApplicationRecord
     def subdomain_exists?(requested_subdomain)
       subdomain = self.find_by(subdomain: requested_subdomain)
       !!subdomain
+    end
+  end
+
+  # self is explicitly used here to indicate the newly created object
+  def build_custom_fields
+    %w(users properties clients).each do |el|
+      self.model_types.create(name: el.to_s)
     end
   end
 end
