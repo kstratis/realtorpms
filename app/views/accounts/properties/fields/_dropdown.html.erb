@@ -4,8 +4,9 @@
       <!-- Splits the options list string on empty space, comma, dot, semi-colon, single quote and double quote.
            Removes empty elements from the resulting array and finally iterates with map -->
       <%= f.select field.slug,
+                   # options_for_select(field.options.split(/[\s,.;:"']/).reject(&:empty?).map {|option| [option, option]}, f.object[field.slug]),
                    options_for_select(field.options.split(/[\s,.;:"']/).reject(&:empty?).map {|option| [option, option]}, f.object[field.slug]),
-                   {},
+                   {prompt: t('cfields.choose')},
                    class: 'form-control custom-select' %>
       <%= f.label field.slug, field.name %>
     </div>

@@ -595,6 +595,7 @@ en:
     tooltip: "Allows you to define custom fields based on which you'll be able to filter and sort your collection."
     flash_updated: "Extra fields updated successfully"
     dropdown_feedback: "Split your options using ;"
+    choose: "Choose..."
   clients:
     flash_created: "Client successfully created"
     flash_delete: "Client successfully deleted"
