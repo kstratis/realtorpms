@@ -222,6 +222,9 @@ const PropertiesList = ({
                   storedMasterOption={construction_filter['storedMasterOption']}
                   storedSlaveOption={construction_filter['storedSlaveOption']}
                 />
+                {this.props.initial_payload.cfields.map((field) => {
+
+                })}
               </div>
             </div>
           </div>

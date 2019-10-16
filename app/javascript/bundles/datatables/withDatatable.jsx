@@ -25,6 +25,7 @@ function withDatatable(WrappedComponent) {
      */
     constructor(props) {
       super(props);
+      console.log(this.props.initial_payload.cfields);
       this.state = {
         buysell_filter: this.props.initial_payload.buysell_filter
           ? {
@@ -83,6 +84,8 @@ function withDatatable(WrappedComponent) {
             storedOptions: this.props.initial_payload.locations_filter.storedOptions
           }
           : '',
+
+        cfields: this.props.initial_payload.cfields,
         dataset: this.props.initial_payload.dataset_wrapper.dataset,
         resultsPerPage: this.props.initial_payload.results_per_page,
         isLoading: false,
@@ -709,6 +712,7 @@ function withDatatable(WrappedComponent) {
             assignmentships_endpoint={this.props.initial_payload.assignmentships_endpoint || ''}
             properties_path={this.props.initial_payload.properties_path}
             handleChangePurpose={this.handleChangePurpose}
+            cfields={this.props.initial_payload.cfields}
             {...this.state}
           />
         </div>

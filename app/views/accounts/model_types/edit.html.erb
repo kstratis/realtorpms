@@ -1,11 +1,6 @@
 <div class="page-container">
   <div class="container">
     <div class="card card-fluid">
-<!--      <h2 class="card-header"> <%#= t('cfields.title') %>-->
-<!--        <span class="property-cover-tooltip" data-toggle="tooltip" data-placement="top" title="<%#= t('cfields.tooltip') %>">-->
-<!--          <i class="fas fa-info-circle"></i>-->
-<!--        </span>-->
-<!--      </h2>-->
       <%= render partial: 'shared/card_header/header', locals: {title: t('cfields.title'), btn_text: t('properties.show.back'), btn_link: settings_path} %>
       <div class="card-body">
         <%= render 'form' %>

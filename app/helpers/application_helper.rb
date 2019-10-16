@@ -31,7 +31,6 @@ module ApplicationHelper
   end
 
   def link_to_add_fields(name, f, association)
-    puts 'RUUUUUUUUNING'
     new_object = f.object.send(association).klass.new
     id = new_object.object_id
     # byebug
@@ -39,6 +38,10 @@ module ApplicationHelper
       render(association.to_s.singularize + "_fields", f: builder)
     end
     link_to(name, '#', class: "btn btn-outline-danger add_fields", data: {id: id, fields: fields.gsub("\n", "")})
+  end
+
+  def get_cfields(name)
+    current_account.model_types.find_by(name: name).fields.map { |field| {:"#{field.slug}" => field} }
   end
 
   # +human_enum_name+ is defined in application_record from which all models inherit from as of Rails 5.
