@@ -130,6 +130,7 @@ function withDatatable(WrappedComponent) {
       this.handleCfieldTextfield = this.handleCfieldTextfield.bind(this);
       this.handleCfieldCheckbox = this.handleCfieldCheckbox.bind(this);
       this.handleAjaxRequestDelayed = debounce(this.handleAjaxRequest, 300);
+      this.handleCfieldTextfieldDelayed = debounce(this.handleCfieldTextfield, 150);
       this.compoundDelayedAction = debounce(this.compoundDelayedAction.bind(this), 300);
     }
 
@@ -700,10 +701,19 @@ function withDatatable(WrappedComponent) {
       this.compoundDelayedAction(searchParams, newUrlParams);
     }
 
-    handleCfieldTextfield(e){
-      console.log('running cfield textfield');
-      // this.setState({ isLoading: true });
-
+    handleCfieldTextfield(selection, slug){
+      this.setState({ isLoading: true });
+      let searchParams = new URLSearchParams(window.location.search);
+      if (!selection) {
+        searchParams.delete(`cfield_${slug}`);
+      } else {
+        searchParams.set(`cfield_${slug}`, selection);
+        searchParams.delete('page');
+      }
+      let newUrlParams = searchParams.toString()
+        ? `${window.location.pathname}?${searchParams.toString()}`
+        : window.location.pathname;
+      this.compoundDelayedAction(searchParams, newUrlParams);
     }
 
     handleCfieldCheckbox(e){
@@ -742,7 +752,7 @@ function withDatatable(WrappedComponent) {
             properties_path={this.props.initial_payload.properties_path}
             handleChangePurpose={this.handleChangePurpose}
             handleCfieldDropdown={this.handleCfieldDropdown}
-            handleCfieldTextfield={this.handleCfieldTextfield}
+            handleCfieldTextfield={this.handleCfieldTextfieldDelayed}
             handleCfieldCheckbox={this.handleCfieldCheckbox}
             cfields={this.props.initial_payload.cfields}
             {...this.state}

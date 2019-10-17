@@ -7,7 +7,8 @@ const Textfield = (props) => {
   );
 
   const handleChange = (e) => {
-    setSelection(e.target.value)
+    setSelection(e.target.value);
+    props.handleCfieldTextfield(e.target.value, slug);
   };
 
   return (

@@ -39,10 +39,6 @@ module ApplicationHelper
     link_to(name, '#', class: "btn btn-outline-danger add_fields", data: {id: id, fields: fields.gsub("\n", "")})
   end
 
-  def get_cfields(name)
-    current_account.model_types.find_by(name: name).fields.map { |field| {:"#{field.slug}" => field} }
-  end
-
   # +human_enum_name+ is defined in application_record from which all models inherit from as of Rails 5.
   # Here lies an alternative implementation just in case.
   # def human_enum_name(model, enum_name, enum_value )

@@ -2,6 +2,7 @@ module Accounts
   class PropertiesController < Accounts::BaseController
     include PropertyHeader
     helper PropertyHeader
+    helper Cfields
     before_action :set_property, only: [:show, :edit, :update, :destroy]
     after_action :log_action, only: [:create, :update, :destroy]
 
