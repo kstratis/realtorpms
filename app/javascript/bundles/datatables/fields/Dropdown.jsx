@@ -25,7 +25,8 @@ const Dropdown = props => {
   };
 
   return (
-    <div className={'col-12 mb-3'}>
+    <div className={'mb-3'}>
+      <label htmlFor={name}><strong>{name}:</strong></label>
       <Select
         id={slug}
         name={name}

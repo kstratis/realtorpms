@@ -596,6 +596,7 @@ en:
     flash_updated: "Extra fields updated successfully"
     dropdown_feedback: "Split your options using ;"
     choose: "Choose..."
+    text_placeholder: "Search..."
   clients:
     flash_created: "Client successfully created"
     flash_delete: "Client successfully deleted"

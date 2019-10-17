@@ -103,7 +103,7 @@ module PropertyDatatable
     cfields_dump = get_cfields('properties')
     cfields_raw = filters.keys.grep(/^cfield_/)
     if cfields_raw.any?
-      cfields = cfields_raw.map { |cfield| cfield.split('_')[1..].join('_') }
+      cfields = cfields_raw.map { |cfield| cfield.to_s.split('_')[1..].join('_') }
       cfields.each do |cfield|
         entry = Hash[cfield, filters["cfield_#{cfield}"]]
         initial_cfields[cfield] = entry

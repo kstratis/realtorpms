@@ -601,6 +601,7 @@ el:
     flash_updated: "Η μεταβολή ήταν επιτυχής"
     dropdown_feedback: "Διαχωρίστε τις επιλογές σας με ;"
     choose: "Επιλέξτε..."
+    text_placeholder: "Αναζήτηση..."
   clients:
     flash_created: "Ο πελάτης δημιουργήθηκε επιτυχώς"
     flash_delete: "Ο πελάτης διεγράφη επιτυχώς"
