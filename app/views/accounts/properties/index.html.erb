@@ -57,7 +57,10 @@
               locations_filter: {
                   storedOptions: @initial_locations
               },
-              cfields: get_cfields('properties'),
+              cfields: {
+                  fields: get_cfields('properties'),
+                  storedSelections: @initial_cfields
+              },
               dataset_wrapper: @propertieslist,
               results_per_page: @results_per_page,
               total_entries: @total_entries,
@@ -73,6 +76,9 @@
               object_type: 'properties'
           },
           i18n: {
+              cfields: {
+                  select_prompt: t('cfields.choose')
+              },
               select: {
                   placeholder: t('js.components.select.placeholder_area_title'),
                   placeholder_clients: t('js.components.select.placeholder_clients'),

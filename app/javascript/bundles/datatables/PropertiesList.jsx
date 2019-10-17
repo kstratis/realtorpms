@@ -11,6 +11,7 @@ import PropertyEntry from './PropertyEntry';
 import URLSearchParams from '@ungap/url-search-params';
 import ModalContainer from '../components/ModalContainer';
 import AsyncSelectContainer from '../components/selects/AsyncSelectContainer';
+import FormComponents from './fields/FormComponents';
 
 // Disable the save search button when no params are available
 const hasParams = () => {
@@ -35,6 +36,9 @@ const PropertiesList = ({
   handleChangePurpose,
   handlePageClick,
   handleSort,
+  handleCfieldDropdown,
+  handleCfieldTextfield,
+  handleCfieldCheckbox,
   buysell_filter,
   category_filter,
   price_filter,
@@ -51,6 +55,7 @@ const PropertiesList = ({
   sorting,
   ordering,
   count,
+  cfields,
   handleCategoryInput,
   locations_endpoint,
   clients_endpoint,
@@ -222,8 +227,16 @@ const PropertiesList = ({
                   storedMasterOption={construction_filter['storedMasterOption']}
                   storedSlaveOption={construction_filter['storedSlaveOption']}
                 />
-                {this.props.initial_payload.cfields.map((field) => {
-
+                <hr />
+                {cfields.fields.map((cfield, index) => {
+                  return <FormComponents
+                    key={index}
+                    cfield={cfield}
+                    storedSelection={cfields.storedSelections[Object.values(cfield)[0].slug] || null}
+                    i18n={i18n.cfields}
+                    handleCfieldDropdown={handleCfieldDropdown}
+                    handleCfieldTextfield={handleCfieldTextfield}
+                    handleCfieldCheckbox={handleCfieldCheckbox} />
                 })}
               </div>
             </div>

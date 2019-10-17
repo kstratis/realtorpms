@@ -25,7 +25,6 @@ function withDatatable(WrappedComponent) {
      */
     constructor(props) {
       super(props);
-      console.log(this.props.initial_payload.cfields);
       this.state = {
         buysell_filter: this.props.initial_payload.buysell_filter
           ? {
@@ -127,6 +126,9 @@ function withDatatable(WrappedComponent) {
       this.handleFloorsInput = this.handleFloorsInput.bind(this);
       this.handleConstructionInput = this.handleConstructionInput.bind(this);
       this.handleChangePurpose = this.handleChangePurpose.bind(this);
+      this.handleCfieldDropdown = this.handleCfieldDropdown.bind(this);
+      this.handleCfieldTextfield = this.handleCfieldTextfield.bind(this);
+      this.handleCfieldCheckbox = this.handleCfieldCheckbox.bind(this);
       this.handleAjaxRequestDelayed = debounce(this.handleAjaxRequest, 300);
       this.compoundDelayedAction = debounce(this.compoundDelayedAction.bind(this), 300);
     }
@@ -683,6 +685,33 @@ function withDatatable(WrappedComponent) {
       this.compoundDelayedAction(searchParams, newUrlParams);
     }
 
+    handleCfieldDropdown(selection, slug){
+      this.setState({ isLoading: true });
+      let searchParams = new URLSearchParams(window.location.search);
+      if (!selection) {
+        searchParams.delete(`cfield_${slug}`);
+      } else {
+        searchParams.set(`cfield_${slug}`, selection.value);
+        searchParams.delete('page');
+      }
+      let newUrlParams = searchParams.toString()
+        ? `${window.location.pathname}?${searchParams.toString()}`
+        : window.location.pathname;
+      this.compoundDelayedAction(searchParams, newUrlParams);
+    }
+
+    handleCfieldTextfield(e){
+      console.log('running cfield textfield');
+      // this.setState({ isLoading: true });
+
+    }
+
+    handleCfieldCheckbox(e){
+      console.log('running cfield checkbox');
+      // this.setState({ isLoading: true });
+
+    }
+
     render() {
       // {console.log(this.displayName)}
       return (
@@ -712,6 +741,9 @@ function withDatatable(WrappedComponent) {
             assignmentships_endpoint={this.props.initial_payload.assignmentships_endpoint || ''}
             properties_path={this.props.initial_payload.properties_path}
             handleChangePurpose={this.handleChangePurpose}
+            handleCfieldDropdown={this.handleCfieldDropdown}
+            handleCfieldTextfield={this.handleCfieldTextfield}
+            handleCfieldCheckbox={this.handleCfieldCheckbox}
             cfields={this.props.initial_payload.cfields}
             {...this.state}
           />

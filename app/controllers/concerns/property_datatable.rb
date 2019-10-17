@@ -93,6 +93,21 @@ module PropertyDatatable
       @properties = @properties.where("construction <= ?", filters[:constructionmax])
     end
 
+    # --- Custom fields filtering ---
+    initial_cfields = Hash.new
+    cfields_raw = filters.keys.grep(/^cfield_/)
+    if cfields_raw.any?
+      cfields = cfields_raw.map { |cfield| cfield.split('_')[1..].join('_') }
+      cfields.each do |cfield|
+        entry = Hash[cfield, filters["cfield_#{cfield}"]]
+        initial_cfields[cfield] = entry
+        @properties = @properties.where('preferences @> ?', entry.to_json)
+      end
+    end
+    puts 'PPPPRININININING'
+    puts initial_cfields
+    # -----------------------------
+
     # DEBUG - Ordering filter
     # puts filters[:sorting], filters[:ordering]
     if filters[:sorting] && filters[:ordering]
@@ -140,7 +155,6 @@ module PropertyDatatable
             landlord_tel: property.try(:landlord).try(:telephones) ? "#{property.landlord.telephones}" : I18n.t('js.properties_owner_tel_unavailable'),
             allow_view: true
         }
-
       end
       @propertieslist[:dataset] << hash
     end
@@ -170,6 +184,7 @@ module PropertyDatatable
     @initial_floorsmax = filters[:floorsmax] || ''
     @initial_constructionmin = filters[:constructionmin] || ''
     @initial_constructionmax = filters[:constructionmax] || ''
+    @initial_cfields = initial_cfields
 
     respond_to do |format|
       format.html
