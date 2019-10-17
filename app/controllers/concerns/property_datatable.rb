@@ -101,7 +101,6 @@ module PropertyDatatable
     # --- Custom fields filtering ---
     initial_cfields = Hash.new
     cfields_dump = get_cfields('properties')
-    pp cfields_dump
     cfields_raw = filters.keys.grep(/^cfield_/)
     if cfields_raw.any?
       cfields = cfields_raw.map { |cfield| cfield.split('_')[1..].join('_') }
