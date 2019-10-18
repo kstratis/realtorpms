@@ -219,6 +219,12 @@ module PropertiesHelper
     end
   end
 
+  def cfields_options
+    result = current_account.model_types.find_by(name: 'properties').fields.map { |field| {:"#{field.slug}" => field.name} }
+    # Merge the array of hashes into a single hash
+    result.reduce Hash.new, :merge
+  end
+
   def property_categories
     Property.categories.keys.collect { |businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype} }
   end

@@ -83,7 +83,6 @@ function withDatatable(WrappedComponent) {
             storedOptions: this.props.initial_payload.locations_filter.storedOptions
           }
           : '',
-
         cfields: this.props.initial_payload.cfields,
         dataset: this.props.initial_payload.dataset_wrapper.dataset,
         resultsPerPage: this.props.initial_payload.results_per_page,

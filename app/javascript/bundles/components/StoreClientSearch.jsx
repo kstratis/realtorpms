@@ -16,6 +16,7 @@ function StoreClientSearch({
   clientsEndpoint,
   assignmentshipsEndpoint,
   i18n,
+  i18nCfieldOptions,
   i18nPriceOptions,
   i18nSizeOptions,
   i18nFloorOptions,
@@ -77,6 +78,7 @@ function StoreClientSearch({
                     i18nSizeOptions={sizeFilterOptions(i18nSizeOptions)}
                     i18nFloorOptions={floorFilterOptions(i18nFloorOptions)}
                     i18nCategoryOptions={categoryFilterOptions(i18nCategoryOptions)}
+                    i18nCfieldOptions={i18nCfieldOptions}
                   />
                 );
               })}

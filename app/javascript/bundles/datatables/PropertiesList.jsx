@@ -315,6 +315,7 @@ const PropertiesList = ({
                     i18nSizeOptions={size_filter['options']}
                     i18nFloorOptions={floors_filter['options']}
                     i18nCategoryOptions={category_filter['options']}
+                    i18nCfieldOptions={cfields['options']}
                   />
                 </div>
               </div>
