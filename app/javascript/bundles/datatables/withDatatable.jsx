@@ -716,9 +716,20 @@ function withDatatable(WrappedComponent) {
       this.compoundDelayedAction(searchParams, newUrlParams);
     }
 
-    handleCfieldCheckbox(e){
-      console.log('running cfield checkbox');
-      // this.setState({ isLoading: true });
+    handleCfieldCheckbox(selection, slug){
+      this.setState({ isLoading: true });
+      console.log(selection);
+      let searchParams = new URLSearchParams(window.location.search);
+      if (!selection) {
+        searchParams.delete(`cfield_${slug}`);
+      } else {
+        searchParams.set(`cfield_${slug}`, selection ? '1' : '0');
+        searchParams.delete('page');
+      }
+      let newUrlParams = searchParams.toString()
+        ? `${window.location.pathname}?${searchParams.toString()}`
+        : window.location.pathname;
+      this.compoundDelayedAction(searchParams, newUrlParams);
 
     }
 

@@ -110,11 +110,10 @@ module PropertyDatatable
         cfield_type = cfields_dump.select { |cf| cf[cfield.to_sym] ? cf[cfield.to_sym] : nil}.first[cfield.to_sym].field_type
         case cfield_type
         when 'dropdown'
+        when 'check_box'
           @properties = @properties.where('preferences @> ?', entry.to_json)
         when 'text_field'
           @properties = @properties.where("preferences ->> ? ilike '%#{filters["cfield_#{cfield}"]}%'", cfield)
-        when 'check_box'
-          'not yet implemented'
         else
           'Unknown - contact support'
         end
