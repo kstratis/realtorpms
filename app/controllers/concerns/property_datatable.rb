@@ -109,13 +109,12 @@ module PropertyDatatable
         initial_cfields[cfield] = entry
         cfield_type = cfields_dump.select { |cf| cf[cfield.to_sym] ? cf[cfield.to_sym] : nil}.first[cfield.to_sym].field_type
         case cfield_type
-        when 'dropdown'
-        when 'check_box'
+        when 'dropdown', 'check_box'
           @properties = @properties.where('preferences @> ?', entry.to_json)
         when 'text_field'
           @properties = @properties.where("preferences ->> ? ilike '%#{filters["cfield_#{cfield}"]}%'", cfield)
         else
-          'Unknown - contact support'
+          'Error filter - contact support'
         end
       end
     end
