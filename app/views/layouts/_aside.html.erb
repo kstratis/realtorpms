@@ -54,7 +54,8 @@
           <% if current_user.is_admin? current_account %>
             <!-- .menu-item -->
             <%#= content_tag :li, class: "menu-item has-child #{active_for(controller: ['users', 'invitations'], except_action: 'edit', classname: 'open')}" do %>
-            <%= content_tag :li, class: "menu-item #{active_for(controller: ['users', 'invitations'], except_action: 'edit')}" do %>
+            <%#= content_tag :li, class: "menu-item #{active_for(controller: ['users', 'invitations'], except_action: 'edit')}" do %>
+            <%= content_tag :li, class: "menu-item #{active_for(controller: ['users', 'invitations'])}" do %>
               <%= link_to users_path, class: 'menu-link' do %>
                 <%= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-partners' %>
                 <%= content_tag :span, t('partners.title'), class: 'menu-text menu-text-entry align-middle' %>

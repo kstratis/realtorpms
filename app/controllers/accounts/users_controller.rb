@@ -29,7 +29,7 @@ module Accounts
 
     # GET the new user registration page
     def new  # This is basically the registration page in GET
-      @user = User.new
+      @user = User.new(model_type: current_account.model_types.find_by(name: 'users'))
     end
 
     # This is only accessible by account owners so no need to granulate its access
@@ -120,11 +120,11 @@ module Accounts
         end
       end
 
-      # Confirms that an action concerning a particular user is initiated by that same user.
+      # Confirms that an action concerning a particular user is initiated by that same user or an admin.
       # Essentially prevents admins modifying others users' data.
       def user_self
         @user = current_account.all_users.find(params[:id])
-        unless current_user?(@user)
+        unless current_user?(@user) || current_user.is_admin?(current_account)
           flash[:danger] = I18n.t 'users.flash_unauthorised_user_edit'
           redirect_to(root_url)
         end

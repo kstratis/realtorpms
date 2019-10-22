@@ -5,7 +5,8 @@
            Removes empty elements from the resulting array and finally iterates with map -->
       <%= f.select field.slug,
                    # options_for_select(field.options.split(/[\s,.;:"']/).reject(&:empty?).map {|option| [option, option]}, f.object[field.slug]),
-                   options_for_select(field.options.split(/[\s,.;:"']/).reject(&:empty?).map {|option| [option, option]}, f.object[field.slug]),
+                   options_for_select(field.options.to_s.split(/[\s,.;:"']/).reject(&:empty?).map {|option| [option, option]},
+                                      (f.object[field.slug] unless f.object.blank?)),
                    {prompt: t('cfields.choose')},
                    class: 'form-control custom-select' %>
       <%= f.label field.slug, field.name %>

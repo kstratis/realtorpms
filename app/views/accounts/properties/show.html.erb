@@ -234,7 +234,7 @@
                         <table class="table normalize-table">
                           <tbody>
                           <% @property.model_type.fields.each do |field| %>
-                            <%= render "accounts/properties/fields/#{field.field_type}_read", cfield_label: field.name, cfield_data: @property.preferences[field.name] %>
+                            <%= render "accounts/cfields/#{field.field_type}_read", cfield_label: field.name, cfield_data: @property.preferences[field.slug] %>
                           <% end %>
                           </tbody>
                         </table>
