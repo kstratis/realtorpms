@@ -105,7 +105,7 @@
 
               <%# @user.model_type.fields.each do |field| %>
               <% @user.model_types.find_by(account: current_account).fields.each do |field| %>
-                <%= render "accounts/cfields/#{field.field_type}_read", cfield_label: field.name, cfield_data: @user.preferences[field.name] %>
+                <%= render "accounts/cfields/#{field.field_type}_read", cfield_label: field.name, cfield_data: @user.preferences[field.slug] %>
               <% end %>
 
               </tbody>

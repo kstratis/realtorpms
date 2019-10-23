@@ -88,7 +88,7 @@ module Accounts
 
     private
       def user_params
-        params.require(:user).permit(:avatar, :first_name, :last_name, :email, :dob, :phone1, :locale, :time_zone, :password, :password_confirmation)
+        params.require(:user).permit(:avatar, :first_name, :last_name, :email, :dob, :phone1, :locale, :time_zone, :password, :password_confirmation, {preferences: {}})
       end
 
       # Finds the given or throws

@@ -5,7 +5,7 @@
     </div>
   </td>
   <td class="align-middle nowrap">
-    <span><%= cfield_data ? cfield_data : '—' %></span>
+    <span><%= cfield_data.blank? ? '—' : cfield_data %></span>
   </td>
 </tr>
 

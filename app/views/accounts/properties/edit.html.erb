@@ -817,7 +817,7 @@
                       <fieldset>
                         <legend><%= t('js.forms.properties.wizard.step7.title') %></legend>
                         <div class="row mb-3">
-                          <%= property.hidden_field :model_type_id %>
+                          <%#= property.hidden_field :model_type_id %>
                           <%= property.fields_for :preferences, OpenStruct.new(@property.preferences) do |builder| %>
                             <% @property.model_type.fields.each do |field| %>
                               <%= render "accounts/cfields/#{field.field_type}", field: field, f: builder, validation_group: 'fieldset-7' %>

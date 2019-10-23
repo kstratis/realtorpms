@@ -291,7 +291,7 @@ module Accounts
                                        :nolandlord,
                                        :avatar,
                                        :map_url,
-                                       :model_type_id,
+                                       # :model_type_id,
                                        {preferences: {}},
                                        {landlord_attributes: [:first_name, :last_name, :email, :telephones]},
                                        # attachments: [],
