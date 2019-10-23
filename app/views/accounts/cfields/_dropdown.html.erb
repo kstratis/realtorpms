@@ -4,11 +4,13 @@
       <!-- Splits the options list string on empty space, comma, dot, semi-colon, single quote and double quote.
            Removes empty elements from the resulting array and finally iterates with map -->
       <%= f.select field.slug,
-                   # options_for_select(field.options.split(/[\s,.;:"']/).reject(&:empty?).map {|option| [option, option]}, f.object[field.slug]),
-                   options_for_select(field.options.to_s.split(/[\s,.;:"']/).reject(&:empty?).map {|option| [option, option]},
+                   options_for_select(field.options.to_s.split(/[,.;:"']/).reject(&:empty?).map {|option| [option, option]},
                                       (f.object[field.slug] unless f.object.blank?)),
                    {prompt: t('cfields.choose')},
-                   class: 'form-control custom-select' %>
+                   class: 'form-control custom-select',
+                   'data-parsley-group': validation_group ? validation_group : nil,
+                   'data-parsley-required': field.required ? "true" : "false",
+                   'data-parsley-required-message': t("js.validator.required") %>
       <%= f.label field.slug, field.name %>
     </div>
   </div>
