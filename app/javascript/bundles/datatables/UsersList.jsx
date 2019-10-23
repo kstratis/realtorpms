@@ -202,6 +202,12 @@ const UsersList = ({
                         <i className={`fas fa-user ${entry['active'] ? 'green' : 'red'}`} />
                       </a>
                       <a
+                        title={i18n['datatable']['tooltip_edit_profile']}
+                        className="btn btn-md btn-icon btn-secondary btn-action"
+                        href={entry['edit_entity_path']}>
+                        <i className="fas fa-pen" />
+                      </a>
+                      <a
                         title={i18n['datatable']['tooltip_delete_profile']}
                         className="btn btn-md btn-icon btn-secondary btn-action"
                         href={entry['view_entity_path']}

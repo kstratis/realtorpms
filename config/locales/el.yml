@@ -410,6 +410,7 @@ el:
         no_results: "Δεν βρέθηκαν συνεργάτες!"
         tooltip_view_profile: "Προβολή προφίλ"
         tooltip_freeze_profile: "Πάγωμα χρήστη - Εάν ενεργοποιηθεί, ο χρήστης δεν θα μπορεί να εισέλθει στο σύστημα."
+        tooltip_edit_profile: "Επεξεργασία χρήστη"
         tooltip_delete_profile: "Διαγραφή"
       clients:
         no_results: "Δεν βρέθηκαν πελάτες!"
@@ -640,7 +641,8 @@ el:
     title: "Συνεργάτες"
     flash_delete: "Ο χρήστης διεγράφη επιτυχώς"
     flash_welcome: "Καλωσήλθατε στο %{brand}! Το προφίλ σας είναι έτοιμο"
-    flash_profile_updated: "Το προφίλ σας ενημερώθηκε επιτυχώς"
+    flash_user_added: "Ο νέος χρήστης προστέθηκε επιτυχώς"
+    flash_profile_updated: "Το προφίλ ενημερώθηκε επιτυχώς"
     flash_unauthorised_user_edit: "Η ενέργεια δεν μπορεί να εκτελεστεί"
     flash_owner_only_action: "Μόνο ο διαχειριστής μπορεί να εκτελέσει την επιλεγμένη ενέργεια"
     flash_add_user: "Ο νέος χρήστης προστέθηκε επιτυχώς"
@@ -659,6 +661,7 @@ el:
       assignments: "Ανατεθημένα"
       processed: "Διεκπεραιώσεις"
     edit:
+      breadcrumb: "Συνεργάτες"
       edit_button: "Ενημέρωση"
       avatar: "Φωτογραφία προφίλ"
       heading: "Επεξεργασία προφίλ"

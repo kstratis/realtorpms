@@ -29,7 +29,7 @@ module Accounts
 
     # GET the new user registration page
     def new  # This is basically the registration page in GET
-      @user = User.new(model_type: current_account.model_types.find_by(name: 'users'))
+      @user = User.new
     end
 
     # This is only accessible by account owners so no need to granulate its access
@@ -40,9 +40,11 @@ module Accounts
     # POST to the new user registration page
     def create
       @user = User.new(user_params)
+      @user.model_type = current_account.model_types.find_by(name: 'users')
       if @user.save
-        log_in @user
-        flash[:success] = I18n.t('users.flash_welcome', brand: BRANDNAME)
+        # log_in @user
+        current_account.users << @user
+        flash[:success] = I18n.t('users.flash_user_added')
         redirect_to @user
         # Handle a successful save.
       else

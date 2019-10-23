@@ -1,7 +1,22 @@
 <% provide(:title, t('users.show.heading')) %>
 
 <!-- Notice the use of render partial -->
-<%= render partial: 'layouts/breadcrumb', locals: {path: [{:title => t('users.show.breadcrumb'), :href => users_path}, {title: @user.full_name, :href => ''}], icon: 'house-colored'} %>
+<%= render layout: 'layouts/breadcrumb', locals: {path: [{:title => t('users.show.breadcrumb'), :href => users_path}, {title: @user.full_name, :href => ''}], icon: 'house-colored'} do %>
+  <div class="action-btns">
+    <div class="btn-group btn-group-toggle">
+      <% if current_user.is_admin?(current_account) %>
+        <%= link_to edit_user_path(@user), class: 'btn btn-secondary btn-sm editable' do %>
+          <i class="fas fa-pen fa-fw"></i>
+          <span class="d-none d-lg-inline">&nbsp;<%= t 'properties.edit.edit_button_alt' %></span>
+        <% end %>
+        <%= link_to @user, method: :delete, data: {confirm: t('prompt')}, class: 'btn btn-secondary btn-sm editable' do %>
+          <i class="fas fa-trash fa-fw"></i>
+          <span class="d-none d-lg-inline">&nbsp;<%= t 'properties.delete.delete_button' %></span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
 
 <div class="page-container">
   <div class="container">

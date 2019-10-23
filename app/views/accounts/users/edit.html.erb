@@ -1,12 +1,12 @@
 <% provide(:title, t('users.edit.heading')) %>
 
-<%= render partial: 'layouts/breadcrumb', locals: {path: [{:title => t('users.edit.heading'), :href => edit_user_path}, {title: @user.full_name, :href => ''}], icon: 'house-colored'} %>
+<%= render partial: 'layouts/breadcrumb', locals: {path: [{:title => t('users.edit.breadcrumb'), :href => users_path}, {:title => @user.full_name, :href => user_path(@user)}, {title: t('users.edit.heading'), :href => ''}], icon: 'house-colored'} %>
 
 <div class="page-container">
   <div class="container">
     <!-- .card -->
     <div class="card card-fluid">
-      <h2 class="card-header"> <%= t('users.edit.profile') %> </h2>
+      <%= render partial: 'shared/card_header/header', locals: {title: @user.full_name, btn_text: t('properties.show.back'), btn_link: :back}  %>
       <!-- .card-body -->
       <div class="card-body">
         <!-- .media -->
