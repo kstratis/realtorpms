@@ -44,6 +44,8 @@ module Accounts
       if @user.save
         # log_in @user
         current_account.users << @user
+        current_account.model_types.find_by(name: 'users').users << @user
+
         flash[:success] = I18n.t('users.flash_user_added')
         redirect_to @user
         # Handle a successful save.

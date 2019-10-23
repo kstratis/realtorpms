@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_22_115334) do
+ActiveRecord::Schema.define(version: 2019_10_23_135331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -243,6 +243,13 @@ ActiveRecord::Schema.define(version: 2019_10_22_115334) do
     t.index ["account_id"], name: "index_model_types_on_account_id"
   end
 
+  create_table "model_types_users", force: :cascade do |t|
+    t.bigint "model_type_id"
+    t.bigint "user_id"
+    t.index ["model_type_id"], name: "index_model_types_users_on_model_type_id"
+    t.index ["user_id"], name: "index_model_types_users_on_user_id"
+  end
+
   create_table "properties", force: :cascade do |t|
     t.text "description"
     t.datetime "created_at", null: false
@@ -299,9 +306,7 @@ ActiveRecord::Schema.define(version: 2019_10_22_115334) do
     t.string "color"
     t.string "time_zone", default: "UTC"
     t.jsonb "preferences", default: {}, null: false
-    t.bigint "model_type_id"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["model_type_id"], name: "index_users_on_model_type_id"
   end
 
   add_foreign_key "accounts", "users", column: "owner_id"
@@ -329,5 +334,4 @@ ActiveRecord::Schema.define(version: 2019_10_22_115334) do
   add_foreign_key "properties", "categories"
   add_foreign_key "properties", "landlords"
   add_foreign_key "properties", "locations"
-  add_foreign_key "users", "model_types"
 end

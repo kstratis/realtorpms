@@ -16,6 +16,10 @@ class Account < ApplicationRecord
   has_many :memberships
   has_many :users, through: :memberships, dependent: :destroy
   has_many :logs, dependent: :nullify
+  # Each account auto generates 3 model types one for each of users, properties & clients
+  # Properties and clients are scoped to account and linked to each model through a regular foreign key.
+  # However users may belong to multiple accounts and each account can have its own model fields. Thus for
+  # users we use a HABTM association.
   has_many :model_types, dependent: :destroy
 
   validates_associated :owner

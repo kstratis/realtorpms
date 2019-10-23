@@ -40,13 +40,12 @@ class User < ApplicationRecord
   # https://stackoverflow.com/a/38845388/178728
   has_many :clients, -> { distinct }, through: :clientships, dependent: :destroy
 
-
   has_many :favorites, dependent: :destroy
   has_many :favlists, dependent: :destroy
   has_many :logs, dependent: :nullify
   has_many :fields, class_name: 'EntityField'
   has_one_attached :avatar
-  belongs_to :model_type, optional: true
+  has_and_belongs_to_many :model_types, -> {distinct}
 
   # has_many :properties, -> (account) { where('account_id = ?', account.id) }, through: :assignments
 

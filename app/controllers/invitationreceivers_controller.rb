@@ -34,7 +34,6 @@ class InvitationreceiversController < ApplicationController
       # +create!+ is an active record method not a users controller one. Used to be:
       # user = User.create!(user_params)
       @user = User.new(user_params)
-      @user.model_type = current_account.model_types.find_by(name: 'users')
       if @user.save
         log_in(@user)
       else
@@ -44,6 +43,7 @@ class InvitationreceiversController < ApplicationController
     end
 
     current_account.users << @user
+    current_account.model_types.find_by(name: 'users').users << @user
 
     @invitation.destroy!
 
