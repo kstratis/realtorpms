@@ -40,7 +40,6 @@ module Accounts
     # POST to the new user registration page
     def create
       @user = User.new(user_params)
-      @user.model_type = current_account.model_types.find_by(name: 'users')
       if @user.save
         # log_in @user
         current_account.users << @user

@@ -99,6 +99,17 @@
             </div> <!-- /.form-group -->
             <hr/>
 
+            <!-- Extended fields -->
+            <%= f.fields_for :preferences, OpenStruct.new(@user.preferences) do |builder| %>
+              <!-- That's a workaround to render an account's custom fields without actually creating an entry in model_types_users
+                   since we don't yet know if the user will be created or not. -->
+              <% current_account.model_types.find_by(name: 'users').fields.each do |field| %>
+                <%= render "accounts/cfields/#{field.field_type}", field: field, f: builder, validation_group: nil, classes: 'dummy' %>
+              <% end %>
+            <% end %>
+
+            <hr/>
+
             <!-- .form-actions -->
             <div class="form-actions">
               <button type="submit" class="btn btn-primary ml-auto"><%= t('users.new.new_button') %></button>
