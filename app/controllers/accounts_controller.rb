@@ -13,6 +13,7 @@ class AccountsController < ApplicationController
   def create
     @account = Account.new(account_params)
     if @account.save
+      @account.model_types.find_by(name: 'users').users << @account.owner
       log_in(@account.owner)
       flash[:success] = I18n.t('accounts.created', brand: BRANDNAME)
       redirect_to root_url(subdomain: @account.subdomain)

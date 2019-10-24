@@ -134,8 +134,6 @@
               </div>
             </div> <!-- /.form-group -->
 
-            <hr/>
-
             <!-- Extended fields -->
             <%= f.fields_for :preferences, OpenStruct.new(@user.preferences) do |builder| %>
               <% @user.model_types.find_by(account: current_account).fields.each do |field| %>

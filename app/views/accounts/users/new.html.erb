@@ -97,7 +97,6 @@
                 <%= inline_error @user, :password_confirmation, 'Password confirmation' %>
               </div>
             </div> <!-- /.form-group -->
-            <hr/>
 
             <!-- Extended fields -->
             <%= f.fields_for :preferences, OpenStruct.new(@user.preferences) do |builder| %>
