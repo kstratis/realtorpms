@@ -139,7 +139,7 @@
             <!-- Extended fields -->
             <%= f.fields_for :preferences, OpenStruct.new(@user.preferences) do |builder| %>
               <% @user.model_types.find_by(account: current_account).fields.each do |field| %>
-                <%= render "accounts/cfields/#{field.field_type}", field: field, f: builder, validation_group: nil %>
+                <%= render "accounts/cfields/#{field.field_type}", field: field, f: builder, validation_group: nil, classes: 'dummy' %>
               <% end %>
             <% end %>
 

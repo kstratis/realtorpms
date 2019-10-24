@@ -2,7 +2,7 @@ module Accounts
   class UsersController < Accounts::BaseController
     # Shows all account users
     before_action :all_account_users, only: [:show]
-    before_action :user_self, only: [:edit, :update] # Allows editing only on each user's self
+    before_action :user_self, only: [:edit, :update, :show] # Allows editing only on each user's self
     before_action :owner_exclusive, only: [:new, :create, :destroy, :index]
     before_action :check_page_validity, only: [:index]
     before_action :find_user!, only: [:delete_avatar, :toggle_activation]
