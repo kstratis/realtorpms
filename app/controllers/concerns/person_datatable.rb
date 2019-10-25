@@ -1,9 +1,10 @@
 module PersonDatatable
   extend ActiveSupport::Concern
+  include Cfields
 
-  def filter_persons(relation)
-    if params[:page]
-      param = Integer(params[:page]) rescue nil
+  def filter_persons(relation, filters = {})
+    if filters[:page]
+      param = Integer(filters[:page]) rescue nil
       unless param.is_a? Integer
         render_404 and return
       end
@@ -16,13 +17,13 @@ module PersonDatatable
     #   current_user.send(entity)
     # end
 
-    if params[:search]
-      @persons = @persons.search(params[:search])
+    if filters[:search]
+      @persons = @persons.search(filters[:search])
     end
 
     ####################
     # This is for retrieving the users list from within react-select
-    if params[:dropdown]
+    if filters[:dropdown]
       data = Array.new
       @persons.each do |entry|
         hash = {
@@ -35,12 +36,15 @@ module PersonDatatable
     end
     ####################
 
-    if params[:sorting] && params[:ordering]
-      if params['sorting'] == 'assignments_count'
+    # Custom fields filtering
+    @persons, initial_cfields = cfields_filtering('users', @persons)
+
+    if filters[:sorting] && filters[:ordering]
+      if filters['sorting'] == 'assignments_count'
         # query = 'SELECT u.*, count(a.user_id) AS total_assignments FROM users AS u JOIN assignments AS a ON a.user_id = u.id GROUP BY u.id ORDER BY total_assignments;'
         # query = 'SELECT u.* FROM "users" AS u JOIN "assignments" AS a ON a.user_id = u.id GROUP BY u.id ORDER BY count(a.user_id);'
 
-        @persons = @persons.left_outer_joins(:assignments).group(:id).order("count(assignments.user_id) #{params[:ordering]}, last_name DESC")
+        @persons = @persons.left_outer_joins(:assignments).group(:id).order("count(assignments.user_id) #{filters[:ordering]}, last_name DESC")
         # @persons = @persons.find_by_sql(query)
         # byebug
         # @persons = @persons.order("count('assignments')")
@@ -49,16 +53,16 @@ module PersonDatatable
         # @persons = User.sorted_by_assignments_count(@persons)
         # @persons = User.sorted_by_assignments_count(@persons)
       else
-        @persons = @persons.order("#{params[:sorting]}": params[:ordering])
+        @persons = @persons.order("#{filters[:sorting]}": filters[:ordering])
       end
-      # @persons = @persons.order("#{params[:sorting]}": params[:ordering])
+      # @persons = @persons.order("#{filters[:sorting]}": filters[:ordering])
     else
       @persons = @persons.order(:created_at)
     end
 
 
-    # if params[:sorting] && params[:ordering]
-    #   @properties = @properties.order("#{params[:sorting]}": params[:ordering])
+    # if filters[:sorting] && filters[:ordering]
+    #   @properties = @properties.order("#{filters[:sorting]}": filters[:ordering])
     # else
     #   @properties = @properties.order(created_at: 'desc')
     # end
@@ -67,8 +71,8 @@ module PersonDatatable
 
     # puts @persons.to_yaml
 
-    @persons = @persons.paginate(page: params[:page], :per_page => 10)
-    # @persons = User.paginate(page: params[:page], :per_page => 10)
+    @persons = @persons.paginate(page: filters[:page], :per_page => 10)
+    # @persons = User.paginate(page: filters[:page], :per_page => 10)
     @personslist = {:dataset => Array.new}
     # All the data we need - SOS
     # puts @users.total_entries # total user entries
@@ -103,9 +107,10 @@ module PersonDatatable
     @results_per_page = 10
     @meta = {is_admin: current_user.is_admin?(current_account)}
 
-    @initial_search = params[:search] || ''
-    @initial_sorting = params[:sorting] || 'created_at'
-    @initial_ordering = params[:ordering] || 'desc'
+    @initial_search = filters[:search] || ''
+    @initial_sorting = filters[:sorting] || 'created_at'
+    @initial_ordering = filters[:ordering] || 'desc'
+    @initial_cfields = initial_cfields
 
     respond_to do |format|
       format.html

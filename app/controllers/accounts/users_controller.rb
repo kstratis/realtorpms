@@ -1,5 +1,6 @@
 module Accounts
   class UsersController < Accounts::BaseController
+    helper Cfields
     # Shows all account users
     before_action :all_account_users, only: [:show]
     before_action :user_self, only: [:edit, :update, :show] # Allows editing only on each user's self
@@ -7,6 +8,7 @@ module Accounts
     before_action :check_page_validity, only: [:index]
     before_action :find_user!, only: [:delete_avatar, :toggle_activation]
     after_action :log_action, only: [:create, :update, :destroy]
+
 
     # A model's +destroy+ method is different than the controller's +destroy+ action.
     # - Using the model's destroy method on a user object should delete all its dependancies (memberships, assignments,
@@ -34,7 +36,7 @@ module Accounts
 
     # This is only accessible by account owners so no need to granulate its access
     def index
-      filter_persons(current_account.users)
+      filter_persons(current_account.users, params)
     end
 
     # POST to the new user registration page

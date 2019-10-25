@@ -6,6 +6,8 @@ import Search from './Search';
 import Spinner from './Spinner';
 import Avatar from '../components/Avatar';
 import { capitalizeFirstLetter } from '../utilities/helpers';
+import { useState, useEffect } from 'react';
+import FormComponents from './fields/FormComponents';
 
 const UsersList = ({
   handlePageClick,
@@ -23,13 +25,64 @@ const UsersList = ({
   meta,
   handleSearchInput,
   handleFreezeUser,
-  searchInput
+  handleCfieldDropdown,
+  handleCfieldTextfield,
+  handleCfieldCheckbox,
+  searchInput,
+  users_path,
+  cfields
 }) => {
+  const [filtersOpen, setFiltersOpen] = useState(() => JSON.parse(localStorage.getItem('filtersOpen')));
+
+  useEffect(() => {
+    localStorage.setItem('filtersOpen', filtersOpen);
+  }, [filtersOpen]);
+
+  const handleChange = event => setFiltersOpen(filtersOpen => !filtersOpen);
+
   return (
     <div className="users-list">
       <Spinner isLoading={isLoading} />
       <div className={'container'}>
         <div className={'row'}>
+          <div className={`filters col-12 col-xl-4 ${filtersOpen ? 'd-block' : 'd-none'} animated fadeIn`}>
+            <div className="card">
+              <div className="card-header">
+                <div className="table-entry">
+                  <div className="table-icon-wrapper">
+                    <i className="pr-icon xs filters" />
+                  </div>
+                  <span className="align-middle">&nbsp; {i18n.filters.title}</span>
+                  <div className="float-right">
+                    <span className="badge badge-pill badge-success p-2 mr-2">{`${i18n.entry_count}: ${count}`}</span>
+                    <a className={'btn btn-outline-danger btn-sm'} href={users_path}>
+                      {i18n.clear}
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div className="card-body">
+                <label className="d-block">
+                  <h5 className="card-title filter-header">{i18n.filters.status.title}:</h5>
+                </label>
+                <hr />
+                {cfields.fields.map((cfield, index) => {
+                  return (
+                    <FormComponents
+                      key={index}
+                      cfield={cfield}
+                      storedSelection={cfields.storedSelections[Object.values(cfield)[0].slug] || null}
+                      i18n={i18n.cfields}
+                      handleCfieldDropdown={handleCfieldDropdown}
+                      handleCfieldTextfield={handleCfieldTextfield}
+                      handleCfieldCheckbox={handleCfieldCheckbox}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
           <Search handleSearchInput={handleSearchInput} searchInput={searchInput} placeholder={i18n['search']} />
           <div className={'d-flex flex-shrink-1'}>
             <div className={'d-none d-md-block pl-2'}>

@@ -5,11 +5,7 @@ module PropertyDatatable
   include LocationFinder
   include Cfields
 
-  def get_cfields(name)
-    current_account.model_types.find_by(name: name).fields.map { |field| {:"#{field.slug}" => field} }
-  end
-
-  def filter_properties(relation, filters)
+  def filter_properties(relation, filters = {})
 
     @properties = relation
 
@@ -98,27 +94,8 @@ module PropertyDatatable
       @properties = @properties.where("construction <= ?", filters[:constructionmax])
     end
 
-    # --- Custom fields filtering ---
-    initial_cfields = Hash.new
-    cfields_dump = get_cfields('properties')
-    cfields_raw = filters.keys.grep(/^cfield_/)
-    if cfields_raw.any?
-      cfields = cfields_raw.map { |cfield| cfield.to_s.split('_')[1..].join('_') }
-      cfields.each do |cfield|
-        entry = Hash[cfield, filters["cfield_#{cfield}"]]
-        initial_cfields[cfield] = entry
-        cfield_type = cfields_dump.select { |cf| cf[cfield.to_sym] ? cf[cfield.to_sym] : nil}.first[cfield.to_sym].field_type
-        case cfield_type
-        when 'dropdown', 'check_box'
-          @properties = @properties.where('preferences @> ?', entry.to_json)
-        when 'text_field'
-          @properties = @properties.where("preferences ->> ? ilike '%#{filters["cfield_#{cfield}"]}%'", cfield)
-        else
-          'Error filter - contact support'
-        end
-      end
-    end
-    # -----------------------------
+    # Custom fields filtering
+    @properties, initial_cfields = cfields_filtering('properties', @properties, filters)
 
     # DEBUG - Ordering filter
     # puts filters[:sorting], filters[:ordering]

@@ -454,6 +454,10 @@ el:
           title: "Όροφος"
         construction:
           title: "Κατασκευή"
+        status:
+          title: "Κατάσταση"
+          active: "Ενεργός"
+          inactive: "Ανενεργός"
     users_search:
       placeholder: "Αναζήτηση συνεργάτη..."
     properties_search:

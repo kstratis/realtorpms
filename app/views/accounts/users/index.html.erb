@@ -33,14 +33,31 @@
                 initial_search: @initial_search,
                 initial_sorting: @initial_sorting,
                 initial_ordering: @initial_ordering,
-                object_type: 'users'
+                object_type: 'users',
+                users_path: users_path,
+                cfields: {
+                    fields: get_cfields('users'),
+                    storedSelections: @initial_cfields,
+                    options: cfields_options
+                },
             },
             i18n: {
                 datatable: t('js.datatables.users'),
                 result_count: t('js.datatables.pagination.results'),
                 no_results: t('js.datatables.users.no_results'),
                 search: t('js.users_search.placeholder'),
-
+                filters: {
+                    title: t('js.datatables.filters.title'),
+                    status: {
+                        title: t('js.datatables.filters.status.title'),
+                        active: t('js.datatables.filters.status.active'),
+                        inactive: t('js.datatables.filters.status.inactive')
+                    }
+                },
+                cfields: {
+                    select_prompt: t('cfields.choose'),
+                    text_prompt: t('cfields.text_placeholder')
+                }
             },
             meta: {
                 freeze_link:  toggle_activation_user_url('USERID')

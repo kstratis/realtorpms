@@ -450,6 +450,10 @@ en:
           title: "Floors"
         construction:
           title: "Construction"
+        status:
+          title: "Status"
+          active: "Active"
+          inactive: "Inactive"
     users_search:
       placeholder: "i.e. John Smith"
     properties_search:
