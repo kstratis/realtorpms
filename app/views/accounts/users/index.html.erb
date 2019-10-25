@@ -3,9 +3,14 @@
 <!-- Notice the use of render partial -->
 <%= render layout: 'layouts/breadcrumb', locals: {path: [{:title => t('users.index.breadcrumb'), :href => users_path}], icon: 'house-colored', index: true} do %>
   <div class="action-btns">
+    <div class="btn-group btn-group-toggle">
     <%= link_to new_invitation_path, class: 'btn btn-primary btn-sm' do %>
-      <i class="fas fa-plus-circle fa-fw"></i><span class="d-none d-md-inline">&nbsp;<%= t('invitations.new.heading') %></span>
+      <i class="fas fa-envelope fa-fw"></i><span class="d-none d-md-inline">&nbsp;<%= t('partners.invite') %></span>
     <% end %>
+    <%= link_to new_user_path, class: 'btn btn-danger btn-sm' do %>
+      <i class="fas fa-plus-circle fa-fw"></i><span class="d-none d-md-inline">&nbsp;<%= t('partners.add') %></span>
+    <% end %>
+    </div>
   </div>
 <% end %>
 
