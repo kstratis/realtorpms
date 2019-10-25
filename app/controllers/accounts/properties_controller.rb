@@ -10,7 +10,7 @@ module Accounts
     # GET /properties.json
     def index
       # preload location & owner
-      # @properties = %w(sysadmin owner).include?(current_user.role(current_account)) ? current_account.properties.includes(:location, :landlord) : current_user.properties.where(account: current_account).includes(:location, :landlord)
+      # params because the required :property key of the filtered +property_params+ is only available in POST requests
       filter_properties(current_account.properties.includes(:location, :landlord), params)
     end
 
