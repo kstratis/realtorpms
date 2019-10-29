@@ -27,7 +27,7 @@
         <%= react_component('UsersListWithDatatable', props: {
             initial_payload: {
                 status_filter: {
-                    options: [{label: t('js.datatables.users.status.active'), value: 1}, {label: t('js.datatables.users.status.inactive'), value: 0}],
+                    options: [{label: t('js.datatables.users.status.active'), value: 'true'}, {label: t('js.datatables.users.status.inactive'), value: 'false'}],
                     storedOption: @initial_purpose
                 },
                 dataset_wrapper: @personslist,

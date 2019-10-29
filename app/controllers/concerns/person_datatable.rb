@@ -1,6 +1,7 @@
 module PersonDatatable
   extend ActiveSupport::Concern
   include Cfields
+  include Utilities
 
   def filter_persons(relation, filters = {})
     if filters[:page]
@@ -35,6 +36,11 @@ module PersonDatatable
       render :json => {:status => "OK", :message => data} and return
     end
     ####################
+
+    if filters[:status]
+      @persons = @persons.joins(:memberships).where(memberships: {active: true?(filters[:status])})
+      # Membership.where(active: false)
+    end
 
     # Custom fields filtering
     @persons, initial_cfields = cfields_filtering('users', @persons, filters)
@@ -110,6 +116,7 @@ module PersonDatatable
     @initial_search = filters[:search] || ''
     @initial_sorting = filters[:sorting] || 'created_at'
     @initial_ordering = filters[:ordering] || 'desc'
+    @initial_purpose = filters[:status] || 'true'
     @initial_cfields = initial_cfields
 
     respond_to do |format|
