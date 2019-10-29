@@ -32,6 +32,12 @@ function withDatatable(WrappedComponent) {
               options: this.props.initial_payload.buysell_filter.options
             }
           : '',
+        status_filter: this.props.initial_payload.status_filter
+          ? {
+            storedOption: this.props.initial_payload.status_filter.storedOption,
+            options: this.props.initial_payload.status_filter.options
+          }
+          : '',
         category_filter: this.props.initial_payload.category_filter
           ? {
               options: this.props.initial_payload.category_filter.options,
@@ -125,6 +131,7 @@ function withDatatable(WrappedComponent) {
       this.handleFloorsInput = this.handleFloorsInput.bind(this);
       this.handleConstructionInput = this.handleConstructionInput.bind(this);
       this.handleChangePurpose = this.handleChangePurpose.bind(this);
+      this.handleChangeStatus = this.handleChangeStatus.bind(this);
       this.handleCfieldDropdown = this.handleCfieldDropdown.bind(this);
       this.handleCfieldTextfield = this.handleCfieldTextfield.bind(this);
       this.handleCfieldCheckbox = this.handleCfieldCheckbox.bind(this);
@@ -685,6 +692,32 @@ function withDatatable(WrappedComponent) {
       this.compoundDelayedAction(searchParams, newUrlParams);
     }
 
+    handleChangeStatus(e) {
+      console.log('running');
+      this.setState({ isLoading: true });
+      const newSelection = e.target.value;
+      this.setState(prevState => ({
+        status_filter: {
+          ...prevState.status_filter,
+          storedOption: newSelection
+        }
+      }));
+      let searchParams = new URLSearchParams(window.location.search);
+      if (e.target.value !== undefined && e.target.value.length > 0) {
+        searchParams.set('status', e.target.value);
+      } else {
+        searchParams.delete('status');
+      }
+      searchParams.delete('page');
+
+      let newUrlParams = searchParams.toString()
+        ? `${window.location.pathname}?${searchParams.toString()}`
+        : window.location.pathname;
+      // Use this to debounce both the ajax request and the history replaceState
+      // https://github.com/ReactTraining/history/issues/291
+      this.compoundDelayedAction(searchParams, newUrlParams);
+    }
+
     handleCfieldDropdown(selection, slug){
       this.setState({ isLoading: true });
       let searchParams = new URLSearchParams(window.location.search);
@@ -760,7 +793,9 @@ function withDatatable(WrappedComponent) {
             client_endpoint={this.props.initial_payload.client_endpoint || ''}
             assignmentships_endpoint={this.props.initial_payload.assignmentships_endpoint || ''}
             properties_path={this.props.initial_payload.properties_path}
+            users_path={this.props.initial_payload.users_path}
             handleChangePurpose={this.handleChangePurpose}
+            handleChangeStatus={this.handleChangeStatus}
             handleCfieldDropdown={this.handleCfieldDropdown}
             handleCfieldTextfield={this.handleCfieldTextfieldDelayed}
             handleCfieldCheckbox={this.handleCfieldCheckbox}

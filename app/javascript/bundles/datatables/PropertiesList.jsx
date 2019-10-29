@@ -12,19 +12,8 @@ import URLSearchParams from '@ungap/url-search-params';
 import ModalContainer from '../components/ModalContainer';
 import AsyncSelectContainer from '../components/selects/AsyncSelectContainer';
 import FormComponents from './fields/FormComponents';
-
-// Disable the save search button when no params are available
-const hasParams = () => {
-  let searchParams = new URLSearchParams(window.location.search);
-  let param_counter = 0;
-  for (let p of searchParams) {
-    // count these out
-    if (['page', 'sizeminmeta', 'sizemaxmeta', 'ordering', 'sorting'].indexOf(p[0]) === -1) {
-      param_counter = param_counter + 1;
-    }
-  }
-  return param_counter > 0;
-};
+import useFilterToggle from '../hooks/useFilterToggle';
+import {hasParams} from '../utilities/helpers';
 
 const PropertiesList = ({
   handleLocationInput,
@@ -63,12 +52,7 @@ const PropertiesList = ({
   properties_path,
   i18n
 }) => {
-  const [filtersOpen, setFiltersOpen] = useState(() => JSON.parse(localStorage.getItem('filtersOpen')));
-
-  useEffect(() => {
-    localStorage.setItem('filtersOpen', filtersOpen);
-  }, [filtersOpen]);
-
+  const {filtersOpen, setFiltersOpen} = useFilterToggle('propertyFiltersOpen');
   const handleChange = event => setFiltersOpen(filtersOpen => !filtersOpen);
 
   return (

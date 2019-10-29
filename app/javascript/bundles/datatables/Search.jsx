@@ -3,8 +3,8 @@ import React from 'react';
 
 const Search = ({ searchInput, handleSearchInput, placeholder }) => {
   return (
-    <div className="d-flex flex-grow-1 pr-md-5 search-container">
-      <div className="justify-content-center flex-fill">
+    <div className="search-container">
+      <div className="justify-content-center flex-fill search-height">
         <div className="input-group has-clearable">
           <button
             type="button"

@@ -26,6 +26,10 @@
       <%#= render @users %>
         <%= react_component('UsersListWithDatatable', props: {
             initial_payload: {
+                status_filter: {
+                    options: [{label: t('js.datatables.users.status.active'), value: 1}, {label: t('js.datatables.users.status.inactive'), value: 0}],
+                    storedOption: @initial_purpose
+                },
                 dataset_wrapper: @personslist,
                 results_per_page: @results_per_page,
                 total_entries: @total_entries,
@@ -46,6 +50,7 @@
                 result_count: t('js.datatables.pagination.results'),
                 no_results: t('js.datatables.users.no_results'),
                 search: t('js.users_search.placeholder'),
+                clear: t('js.datatables.clear'),
                 filters: {
                     title: t('js.datatables.filters.title'),
                     status: {

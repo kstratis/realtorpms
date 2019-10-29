@@ -95,7 +95,7 @@ module PropertyDatatable
     end
 
     # Custom fields filtering
-    @properties, initial_cfields = cfields_filtering('properties', @properties, filters)
+    initial_cfields = cfields_filtering('properties', @properties, filters)
 
     # DEBUG - Ordering filter
     # puts filters[:sorting], filters[:ordering]

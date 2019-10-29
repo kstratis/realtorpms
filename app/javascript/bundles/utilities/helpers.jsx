@@ -1,5 +1,6 @@
 import React from 'react';
 import fromEntries from '@ungap/from-entries';
+import URLSearchParams from '@ungap/url-search-params';
 
 const debounce = (func, wait, immediate) => {
   var timeout;
@@ -91,6 +92,19 @@ const ifExists = (collection, item) => {
   return collection ? collection[item] : '';
 };
 
+// Disable the save search button when no params are available
+const hasParams = () => {
+  let searchParams = new URLSearchParams(window.location.search);
+  let param_counter = 0;
+  for (let p of searchParams) {
+    // count these out
+    if (['page', 'sizeminmeta', 'sizemaxmeta', 'ordering', 'sorting'].indexOf(p[0]) === -1) {
+      param_counter = param_counter + 1;
+    }
+  }
+  return param_counter > 0;
+};
+
 export {
   debounce,
   capitalizeFirstLetter,
@@ -102,5 +116,6 @@ export {
   sizeFilterOptions,
   floorFilterOptions,
   categoryFilterOptions,
-  ifExists
+  ifExists,
+  hasParams
 };
