@@ -10,7 +10,7 @@
       <!-- .card-body -->
       <div class="card-body">
         <!-- .media -->
-        <%= form_for(@user) do |f| %>
+        <%= form_for(@user, html: {class: "js-validatable"}) do |f| %>
           <div class="col-lg-6 offset-lg-3 col-md-12">
             <div class="media mb-3">
               <!-- avatar -->
@@ -27,7 +27,7 @@
                 <p class="card-text">
                   <% if current_user.avatar.attached? %>
                     <%= link_to delete_avatar_user_url, method: :delete, data: {confirm: t('users.edit.delete_avatar')} do %>
-                      <i class="fa fa-trash fa-fw"></i></a>&nbsp;|&nbsp;<small><%= t('users.edit.allowed_pic_specs') %></small>
+                      <i class="fa fa-trash fa-fw"></i>&nbsp;|&nbsp;<small><%= t('users.edit.allowed_pic_specs') %></small>
                     <% end %>
                   <% else %>
                     <small><%= t('users.edit.allowed_pic_specs') %></small>

@@ -29,11 +29,13 @@ class InvitationreceiversController < ApplicationController
           :first_name,
           :last_name,
           :password,
-          :password_confirmation
+          :password_confirmation,
+          {preferences: {}}
       )
       # +create!+ is an active record method not a users controller one. Used to be:
       # user = User.create!(user_params)
       @user = User.new(user_params)
+
       if @user.save
         log_in(@user)
       else

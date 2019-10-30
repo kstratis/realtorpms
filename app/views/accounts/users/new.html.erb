@@ -11,7 +11,7 @@
       <!-- .card-body -->
       <div class="card-body">
         <!-- form -->
-        <%= form_for(@user) do |f| %>
+        <%= form_for(@user, html: {class: "js-validatable"}) do |f| %>
           <div class="col-lg-6 offset-lg-3 col-md-12">
             <!-- .form-group -->
             <div class="form-group">

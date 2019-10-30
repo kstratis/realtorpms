@@ -4,6 +4,7 @@
       <%= f.text_field field.slug,
                        class: 'form-control',
                        autocomplete: "off",
+                       # placeholder: 'asdasd',
                        'data-parsley-group': validation_group ? validation_group : nil,
                        'data-parsley-required': field.required ? "true" : "false",
                        'data-parsley-required-message': t("js.validator.required") %>

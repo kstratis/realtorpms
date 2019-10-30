@@ -1,11 +1,11 @@
-<%= form_for(@invitation, as: :user, url: :accepted_invitation, html: {class: 'auth-form'}) do |inv| %>
+<%= form_for(@invitation, as: :user, url: :accepted_invitation, html: {class: 'auth-form js-validatable'}) do |inv| %>
 
-  <%= fields_for @user do |u| %>
+  <%= fields_for(@user) do |f| %>
     <!-- .form-group -->
     <div class="form-group">
       <div class="form-label-group">
-        <%= u.email_field :email, class: 'form-control', placeholder: User.human_attribute_name("email"), value: @invitation.email, readonly: true %>
-        <%= u.label "email", User.human_attribute_name("email") %>
+        <%= f.email_field :email, class: 'form-control', placeholder: User.human_attribute_name("email"), value: @invitation.email, readonly: true %>
+        <%= f.label "email", User.human_attribute_name("email") %>
         <%= inline_error @user, :email, 'Email' %>
       </div>
     </div>
@@ -14,8 +14,8 @@
     <!-- .form-group -->
     <div class="form-group">
       <div class="form-label-group">
-        <%= u.text_field :first_name, class: 'form-control', placeholder: User.human_attribute_name("first_name") %>
-        <%= u.label :first_name, User.human_attribute_name("first_name") %>
+        <%= f.text_field :first_name, class: 'form-control', placeholder: User.human_attribute_name("first_name") %>
+        <%= f.label :first_name, User.human_attribute_name("first_name") %>
         <%= inline_error @user, :first_name, 'First name' %>
       </div>
     </div>
@@ -24,8 +24,8 @@
     <!-- .form-group -->
     <div class="form-group">
       <div class="form-label-group">
-        <%= u.text_field :last_name, class: 'form-control', placeholder: User.human_attribute_name("last_name") %>
-        <%= u.label :last_name, User.human_attribute_name("last_name") %>
+        <%= f.text_field :last_name, class: 'form-control', placeholder: User.human_attribute_name("last_name") %>
+        <%= f.label :last_name, User.human_attribute_name("last_name") %>
         <%= inline_error @user, :last_name, 'Last name' %>
       </div>
     </div>
@@ -34,8 +34,8 @@
     <!-- .form-group -->
     <div class="form-group">
       <div class="form-label-group">
-        <%= u.password_field :password, class: 'form-control', placeholder: User.human_attribute_name("password") %>
-        <%= u.label :password, User.human_attribute_name("password") %>
+        <%= f.password_field :password, class: 'form-control', placeholder: User.human_attribute_name("password") %>
+        <%= f.label :password, User.human_attribute_name("password") %>
         <%= inline_error @user, :password, 'Password' %>
       </div>
     </div>
@@ -44,12 +44,23 @@
     <!-- .form-group -->
     <div class="form-group">
       <div class="form-label-group">
-        <%= u.password_field :password_confirmation, class: 'form-control', placeholder: User.human_attribute_name("password_confirmation") %>
-        <%= u.label :password_confirmation, User.human_attribute_name("password_confirmation") %>
+        <%= f.password_field :password_confirmation, class: 'form-control', placeholder: User.human_attribute_name("password_confirmation") %>
+        <%= f.label :password_confirmation, User.human_attribute_name("password_confirmation") %>
         <%= inline_error @user, :password_confirmation, 'Password confirmation' %>
       </div>
     </div>
     <!-- /.form-group -->
+
+    <!-- Extended fields -->
+    <%= f.fields_for :preferences, OpenStruct.new(@user.preferences) do |builder| %>
+      <!-- That's a workaround to render an account's custom fields without actually creating an entry in model_types_users
+           since we don't yet know if the user will be created or not. -->
+      <% current_account.model_types.find_by(name: 'users').fields.each do |field| %>
+        <%= render "accounts/cfields/#{field.field_type}", field: field, f: builder, validation_group: nil, classes: 'dummy' %>
+      <% end %>
+    <% end %>
+
+
   <% end %>
 
   <%= inv.submit t('invitations.accept.accept_btn'), class: 'btn btn-primary' %>
