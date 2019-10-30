@@ -39,7 +39,8 @@ module PersonDatatable
 
     if filters[:status]
       @persons = @persons.joins(:memberships).where(memberships: {active: true?(filters[:status])})
-      # Membership.where(active: false)
+    else
+      @persons = @persons.joins(:memberships).where(memberships: {active: true})
     end
 
     # Custom fields filtering
