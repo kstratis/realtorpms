@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_23_135331) do
+ActiveRecord::Schema.define(version: 2019_11_04_093040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -185,8 +185,6 @@ ActiveRecord::Schema.define(version: 2019_10_23_135331) do
     t.string "telephones"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "account_id"
-    t.index ["account_id"], name: "index_landlords_on_account_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -276,7 +274,6 @@ ActiveRecord::Schema.define(version: 2019_10_23_135331) do
     t.string "adspitogatos"
     t.string "address"
     t.integer "favorites_count"
-    t.bigint "landlord_id"
     t.string "map_url"
     t.bigint "category_id"
     t.string "slug"
@@ -284,7 +281,6 @@ ActiveRecord::Schema.define(version: 2019_10_23_135331) do
     t.jsonb "preferences", default: {}, null: false
     t.index ["account_id"], name: "index_properties_on_account_id"
     t.index ["category_id"], name: "index_properties_on_category_id"
-    t.index ["landlord_id"], name: "index_properties_on_landlord_id"
     t.index ["location_id"], name: "index_properties_on_location_id"
   end
 
@@ -320,7 +316,6 @@ ActiveRecord::Schema.define(version: 2019_10_23_135331) do
   add_foreign_key "favorites", "properties"
   add_foreign_key "favorites", "users"
   add_foreign_key "invitations", "accounts"
-  add_foreign_key "landlords", "accounts"
   add_foreign_key "locations", "countries"
   add_foreign_key "logs", "accounts"
   add_foreign_key "logs", "clients"
@@ -332,6 +327,5 @@ ActiveRecord::Schema.define(version: 2019_10_23_135331) do
   add_foreign_key "model_types", "accounts"
   add_foreign_key "properties", "accounts"
   add_foreign_key "properties", "categories"
-  add_foreign_key "properties", "landlords"
   add_foreign_key "properties", "locations"
 end
