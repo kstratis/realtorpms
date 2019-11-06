@@ -7,6 +7,9 @@ class Client < ApplicationRecord
   has_many :clientships
   has_many :users, -> {order('clientships.updated_at').select('users.*, clientships.updated_at as clientship_updated_at').distinct}, through: :clientships, dependent: :destroy
   has_many :logs, dependent: :nullify
+  # CPA stands for Client-Property-Association (many-to-many join table)
+  has_many :cpas
+  has_many :properties, -> { distinct }, through: :cpas
 
   before_create { self.color = COLOR_PALETTE.sample } # This assigns a random bg color to each new user
 

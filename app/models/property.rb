@@ -29,24 +29,24 @@ class Property < ApplicationRecord
   # https://stackoverflow.com/a/9326882/178728
   # before_destroy { |record| Log.where(property: record).update_all(property_name: record.slug) }
 
-
-  # belongs_to :user
   belongs_to :account
   belongs_to :category
   belongs_to :location
-  belongs_to :landlord, optional: true
+  # belongs_to :landlord, optional: true
   belongs_to :model_type
   has_and_belongs_to_many :favlists, -> {distinct}
-  accepts_nested_attributes_for :landlord
+  # accepts_nested_attributes_for :landlord
   has_many :assignments
   has_many_attached :images
   has_one_attached :avatar
   has_and_belongs_to_many :extras
-
+  # CPA stands for Client-Property-Association (many-to-many join table)
+  has_many :cpas
+  has_many :clients, -> { distinct }, through: :cpas
 
   # https://stackoverflow.com/a/38845388/178728
   # https://stackoverflow.com/a/14231213/178728
-  # This basically sorts assignments by assignment updated at column so that each change is reflected last on the list
+  # This basically sorts assignments by assignment updated_at column so that each change is reflected last on the list
   has_many :users, -> {order('assignments.updated_at').select('users.*, assignments.updated_at as assignment_updated_at').distinct}, through: :assignments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :logs, dependent: :nullify

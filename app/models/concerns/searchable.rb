@@ -16,7 +16,7 @@ module Searchable
     # which model fields to search on. It also provides (very) limited support for looking through to an associated
     # model using the dot ('.') character. However note that it's the responsibilty of the developer to ensure that
     # any associations are already established and operational.
-    def search(term)
+    def search(term, filter=nil)
       # Dynamically get the fields from the model
       fields = const_get(:SEARCH_FIELDS).dup
       # Even if one of them contains a dot that means we'll also have to search the associated model
@@ -32,6 +32,9 @@ module Searchable
         query = "unaccent(#{fields.shift}) ILIKE unaccent('%#{term}%')"
         fields.each do |field|
           query << " OR unaccent(#{field}) ILIKE unaccent('%#{term}%')"
+        end
+        unless filter.blank?
+          query << " AND #{filter.fetch(:field)} = #{filter.fetch(:value)}"
         end
         associated_model.blank? ? where(query) : joins(associated_model.to_sym).where(query)
       end

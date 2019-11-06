@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_04_093040) do
+ActiveRecord::Schema.define(version: 2019_11_06_112411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,6 +102,16 @@ ActiveRecord::Schema.define(version: 2019_11_04_093040) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "continent"
+  end
+
+  create_table "cpas", force: :cascade do |t|
+    t.bigint "client_id"
+    t.bigint "property_id"
+    t.boolean "ownership", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_cpas_on_client_id"
+    t.index ["property_id"], name: "index_cpas_on_property_id"
   end
 
   create_table "entity_fields", force: :cascade do |t|

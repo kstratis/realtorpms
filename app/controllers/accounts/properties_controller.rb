@@ -11,7 +11,7 @@ module Accounts
     def index
       # preload location & owner
       # params because the required :property key of the filtered +property_params+ is only available in POST requests
-      filter_properties(current_account.properties.includes(:location, :landlord), params)
+      filter_properties(current_account.properties.includes(:location), params)
     end
 
 
@@ -85,7 +85,8 @@ module Accounts
     end
 
     def landlords
-      search(Landlord, {value: 'id', label: %w(first_name last_name)})
+      # search(current_account.clients, {value: 'id', label: %w(first_name last_name)})
+      search(current_account.clients, {value: 'id', label: %w(first_name last_name)}, nil)
     end
 
     def inlinesearch
@@ -102,7 +103,7 @@ module Accounts
       # @product = Product.new(product_type_id: params[:product_type_id])
       # @property = Property.new(model_type: ModelType.find(20))
       @property = Property.new(model_type: current_account.model_types.find_by(name: 'properties'))
-      @property.build_landlord
+      # @property.build_landlord
     end
 
     # POST /properties
