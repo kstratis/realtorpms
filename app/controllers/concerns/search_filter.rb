@@ -1,7 +1,7 @@
 module SearchFilter
   extend ActiveSupport::Concern
 
-  def search (object, attributes, filter = {})
+  def search (object, attributes, filter = {}, limit=nil)
 
     if params[:search].blank?
       return
@@ -10,8 +10,8 @@ module SearchFilter
     # puts 'in search looking for filter'
     # puts filter
     # DEBUG
-    puts "search term is: #{params[:search]}"
-    @results = object.search(params[:search], filter)
+    puts "DEBUG: search term for #{object.name} is: #{params[:search]}"
+    @results = object.search(params[:search], filter, limit)
 
     data = Array.new
     @results.each do |entry|

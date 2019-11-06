@@ -81,19 +81,18 @@ module Accounts
     end
 
     def locations
-      search(Location, {value: 'id', label: %w(localname parent_localname)}, I18n.locale == :el ? {field: 'country_id', value: 1} : nil)
+      search(Location, {value: 'id', label: %w(localname parent_localname)}, I18n.locale == :el ? {field: 'country_id', value: 1} : nil, 5)
     end
 
     def landlords
-      # search(current_account.clients, {value: 'id', label: %w(first_name last_name)})
-      search(current_account.clients, {value: 'id', label: %w(first_name last_name)}, nil)
+      search(current_account.clients, {value: 'id', label: %w(first_name last_name)}, nil, 5)
     end
 
     def inlinesearch
       if current_user.is_admin?(current_account)
-        search(current_account.properties, {value: 'slug', label: %w(slug)})
+        search(current_account.properties, {value: 'slug', label: %w(slug)}, nil, 5)
       else
-        search(current_user.properties, {value: 'slug', label: %w(slug)})
+        search(current_user.properties, {value: 'slug', label: %w(slug)}, nil, 5)
       end
 
     end

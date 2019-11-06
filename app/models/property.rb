@@ -21,7 +21,7 @@ class Property < ApplicationRecord
     prefix + PublicUid::Generators::RangeString.new(5, ranged).generate
   end
 
-  attr_searchable %w(title description notes adxe adspitogatos landlord.last_name landlord.telephones)
+  attr_searchable %w(slug title description notes adxe adspitogatos)
 
   before_validation :handle_dependent_fields, on: :update
 
@@ -84,13 +84,13 @@ class Property < ApplicationRecord
   class << self
 
 
-    def search(search, filter)
+    # def search(search, filter)
       # DEBUG
       # puts "Model method running with search term: #{search}"
-      if search
-        where('slug ILIKE ?', "%#{search}%").limit(5)
-      end
-    end
+      # if search
+      #   where('slug ILIKE ?', "%#{search}%").limit(5)
+      # end
+    # end
 
     def landlord_features
       {

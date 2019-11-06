@@ -16,7 +16,7 @@ module Searchable
     # which model fields to search on. It also provides (very) limited support for looking through to an associated
     # model using the dot ('.') character. However note that it's the responsibilty of the developer to ensure that
     # any associations are already established and operational.
-    def search(term, filter=nil)
+    def search(term, filter=nil, limit=nil)
       # Dynamically get the fields from the model
       fields = const_get(:SEARCH_FIELDS).dup
       # Even if one of them contains a dot that means we'll also have to search the associated model
@@ -36,7 +36,12 @@ module Searchable
         unless filter.blank?
           query << " AND #{filter.fetch(:field)} = #{filter.fetch(:value)}"
         end
-        associated_model.blank? ? where(query) : joins(associated_model.to_sym).where(query)
+        # This is the limit parameter. Used mainly in dropwdowns
+        if limit.blank?
+          associated_model.blank? ? where(query) : joins(associated_model.to_sym).where(query)
+        else
+          associated_model.blank? ? where(query).limit(limit) : joins(associated_model.to_sym).where(query).limit(limit)
+        end
       end
     end
   end
