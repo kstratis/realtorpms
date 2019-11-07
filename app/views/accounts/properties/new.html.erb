@@ -590,11 +590,11 @@
                           <% end %>
                           <%= react_component('FormSelect', props: {
                               id: 'd',
-                              inputID: 'property_landlordid',
-                              inputName: 'property[landlordid]',
+                              inputID: 'property_clientid',
+                              inputName: 'property[clientid]',
                               inputClassName: 'form-control existing_client_input',
                               validatorGroup: 'fieldset-5',
-                              endpoint: properties_landlords_path,
+                              endpoint: properties_clients_path,
                               isRequired: true,
                               renderFormField: true,
                               formID: 'new_property',
@@ -619,11 +619,11 @@
 
                     <div class="row">
                       <%# This is for the nested user fields %>
-                      <%= property.fields_for :landlord do |landlord| %>
+                      <%= property.fields_for :clients do |client| %>
                         <div class="col-md-6 col-sm-12">
                           <div class="form-group mt-md-4 mb-4 new_client disabledElement">
                             <div class="form-label-group">
-                              <%= landlord.text_field :first_name,
+                              <%= client.text_field :first_name,
                                                    class: 'form-control new_client_input',
                                                    disabled: true,
                                                    autocomplete: "off",
@@ -646,7 +646,7 @@
                         <div class="col-md-6 col-sm-12">
                           <div class="form-group mt-md-4 mb-4 new_client disabledElement">
                             <div class="form-label-group">
-                              <%= landlord.text_field :last_name,
+                              <%= client.text_field :last_name,
                                                    class: 'form-control new_client_input',
                                                    disabled: true,
                                                    autocomplete: "off",
@@ -669,7 +669,7 @@
                         <div class="col-md-6 col-sm-12">
                           <div class="form-group mb-4 new_client disabledElement">
                             <div class="form-label-group">
-                              <%= landlord.text_field :email,
+                              <%= client.text_field :email,
                                                    class: 'form-control new_client_input',
                                                    disabled: true,
                                                    autocomplete: "off",
@@ -692,7 +692,7 @@
                         <div class="col-md-6 col-sm-12">
                           <div class="form-group mb-4 new_client disabledElement">
                             <div class="form-label-group">
-                              <%= landlord.text_field :telephones,
+                              <%= client.text_field :telephones,
                                                    class: 'form-control new_client_input',
                                                    disabled: true,
                                                    autocomplete: "off",
@@ -715,7 +715,7 @@
                         <div class="col-md-6 col-sm-12">
                           <div class="form-group mb-4 new_client disabledElement">
                             <div class="form-label-group">
-                              <%= landlord.text_field :job,
+                              <%= client.text_field :job,
                                                       class: 'form-control new_client_input',
                                                       disabled: true,
                                                       autocomplete: "off",
@@ -738,7 +738,7 @@
                         <div class="col-md-6 col-sm-12">
                           <div class="form-group mb-4 new_client disabledElement">
                             <div class="form-label-group">
-                              <%= landlord.text_field :notes,
+                              <%= client.text_field :notes,
                                                       class: 'form-control new_client_input',
                                                       disabled: true,
                                                       autocomplete: "off",
@@ -762,7 +762,7 @@
                       <% end %>
 
                       <div class="no_client">
-                        <input id="nolandlord" disabled class="no_client_input form-control" type="hidden" name="property[nolandlord]" value="1">
+                        <input id="noclient" disabled class="no_client_input form-control" type="hidden" name="property[noclient]" value="1">
                       </div>
                     </div>
 

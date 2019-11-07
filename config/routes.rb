@@ -30,7 +30,7 @@ Rails.application.routes.draw do
     scope module: 'accounts' do
       root to: 'dashboard#index', as: :account_root
       get '/properties/locations', to: 'properties#locations'
-      get '/properties/landlords', to: 'properties#landlords'
+      get '/properties/clients', to: 'properties#clients'
       get '/properties/inlinesearch', to: 'properties#inlinesearch'
       # resources :entityfields
       resources :model_types, only: [:show, :index, :edit, :update], :path => "extended-fields"

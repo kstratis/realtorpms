@@ -35,6 +35,9 @@ class Property < ApplicationRecord
   # belongs_to :landlord, optional: true
   belongs_to :model_type
   has_and_belongs_to_many :favlists, -> {distinct}
+
+
+
   # accepts_nested_attributes_for :landlord
   has_many :assignments
   has_many_attached :images
@@ -44,6 +47,7 @@ class Property < ApplicationRecord
   has_many :cpas
   has_many :clients, -> { distinct }, through: :cpas
 
+  accepts_nested_attributes_for :clients, :reject_if => proc {|attributes| attributes.all? {|k,v| v.blank?} }
   # https://stackoverflow.com/a/38845388/178728
   # https://stackoverflow.com/a/14231213/178728
   # This basically sorts assignments by assignment updated_at column so that each change is reflected last on the list
@@ -57,7 +61,7 @@ class Property < ApplicationRecord
   # Collection of properties which have been favorited by a particular user
   scope :faved_by, -> (user) {joins(:favorites).where(favorites: {user: user})}
 
-  attr_accessor :categoryid, :locationid, :landlordid, :nolandlord, :delete_images
+  attr_accessor :categoryid, :locationid, :clientid, :noclient, :delete_images
 
   enum businesstype: [:sell, :rent, :sell_rent]
 
