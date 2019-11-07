@@ -121,6 +121,7 @@ function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasF
           isMulti={false}
           backspaceRemovesValue={false}
           placeholder={i18n.select.placeholder}
+          formatCreateLabel={(inputValue) => renderHTML(`${i18n.select.add} "${inputValue}"`)}
           noOptionsMessage={() => renderHTML(i18n.select.noresults)}
           loadingMessage={() => renderHTML(i18n.select.loading)}
           loadOptions={loadAsyncOptionsDelayed}

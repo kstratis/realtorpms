@@ -10,6 +10,7 @@ import {
   renderHTML,
   sizeFilterOptions
 } from '../utilities/helpers';
+import AsyncSelect from './selects/AsyncSelect';
 
 function StoreClientSearch({
   child,
@@ -94,6 +95,7 @@ function StoreClientSearch({
                 id={'AsyncSelectContainer'}
                 i18n={{
                   select: {
+                    add: i18n.select.add,
                     placeholder: i18n.select.placeholder_clients,
                     noresults: i18n.select.noresults,
                     loading: i18n.select.loading,

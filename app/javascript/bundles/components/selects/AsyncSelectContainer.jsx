@@ -5,7 +5,7 @@ import AsyncSelect from './AsyncSelect';
 // https://github.com/shakacode/react_on_rails/issues/1198 is resolved.
 function AsyncSelectContainer(props) {
   return (
-    <AsyncSelect {...props}/>
+    <AsyncSelect {...props} />
   );
 }
 
