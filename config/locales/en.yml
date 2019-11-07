@@ -39,6 +39,7 @@ en:
         notes: "i.e. Looking for detached but also willing to settle for a flat."
         notes_title: "Notes"
         job: "Profession"
+        job_feedback_html: "i.e. School teacher"
         registered: "Registration date"
       user:
         first_name: "First name"

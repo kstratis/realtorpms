@@ -84,6 +84,7 @@ module Accounts
       search(Location, {value: 'id', label: %w(localname parent_localname)}, I18n.locale == :el ? {field: 'country_id', value: 1} : nil, 5)
     end
 
+    # Landlords are effectively the system's clients.
     def landlords
       search(current_account.clients, {value: 'id', label: %w(first_name last_name)}, nil, 5)
     end
@@ -99,9 +100,8 @@ module Accounts
 
     # GET /properties/new
     def new
-      # @product = Product.new(product_type_id: params[:product_type_id])
-      # @property = Property.new(model_type: ModelType.find(20))
-      @property = Property.new(model_type: current_account.model_types.find_by(name: 'properties'))
+      @property = current_account.properties.new(model_type: current_account.model_types.find_by(name: 'properties'))
+      # @property.clients.build(model_type: current_account.model_types.find_by(name: 'properties'))
       # @property.build_landlord
     end
 
@@ -109,12 +109,13 @@ module Accounts
     # POST /properties.json
     def create
       normalized_property_params = reconstruct_category(property_params)
-      @property = Property.new(normalized_property_params)
-      set_landlord
+      @property = current_account.properties.new(normalized_property_params)
+
       set_location
       set_category
       # Scope the property to current account. This is only set once.
       @property.account = current_account
+      @property.model_type = current_account.model_types.find_by(name: 'properties')
 
       respond_to do |format|
         if @property.save
@@ -122,6 +123,7 @@ module Accounts
           if current_user.role(current_account) == 'user'
             current_user.properties <<  @property
           end
+          set_landlord
           format.html { redirect_to @property, notice: I18n.t('properties.created.flash') }
           format.js { render 'shared/ajax/handler',
                              locals: {resource: @property,
@@ -132,6 +134,8 @@ module Accounts
           @property.errors.each do |field, error|
             puts "#{field}: #{error}"
           end
+          # puts 'did not save successfully'
+          pp @property.errors
           format.html { render :new }
           format.js { render 'shared/ajax/handler', locals: {resource: @property,
                                                              action: 'created',
@@ -225,19 +229,26 @@ module Accounts
       # --- SOS ---
       # If an existing landlord id is given then assign the property to that person
       unless property_params[:landlordid].blank?
-        @property.landlord = Landlord.find(params[:action] == 'update' ? property_params[:landlordid] : @property.landlordid)
+        puts "the landlord id is: #{property_params[:landlordid]}"
+        landlord = current_account.clients.find(property_params[:landlordid])
+        landlord.properties << @property
+        # @property.landlord = Landlord.find(params[:action] == 'update' ? property_params[:landlordid] : @property.landlordid)
       end
 
-      # If no landlord is selected set it to nil
-      unless property_params[:nolandlord].blank?
-        @property.landlord = nil
-      end
+      # If no landlord is selected, set it to nil
+      # unless property_params[:nolandlord].blank?
+      #   @property.landlord = nil
+      # end
 
       # Otherwise automatically create and assign the landlord using the "magic" properties of
       # +accepts_nested_attributes_for :landlord+ as described in the model file.
       # In this case don't forget to set the account foreign key on the landlord.
       if property_params[:landlordid].blank? && property_params[:nolandlord].blank?
         if params[:action] == 'create'
+          # current_account.build()
+          #
+          # byebug
+# Client.create()
           @property.landlord.account = current_account
         end
       end
@@ -293,7 +304,7 @@ module Accounts
                                        :map_url,
                                        # :model_type_id,
                                        {preferences: {}},
-                                       {landlord_attributes: [:first_name, :last_name, :email, :telephones]},
+                                       {landlord_attributes: [:first_name, :last_name, :email, :telephones, :job, :notes, {preferences: {}}]},
                                        # attachments: [],
                                        delete_images: [],
                                        images: [],

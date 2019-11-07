@@ -1,6 +1,12 @@
 module SearchFilter
   extend ActiveSupport::Concern
-
+  # Invoke the model's search method and return a json response with the results (if any)
+  #
+  # @param object [Object] The class of the collection to search through
+  # @param attributes [Hash] The data we want to retrieve
+  # @param filter [Hash] A preset filter for any results
+  # @param limit [Integer] Result count cap
+  # @return [Hash] The search json response.
   def search (object, attributes, filter = {}, limit=nil)
 
     if params[:search].blank?
@@ -21,7 +27,6 @@ module SearchFilter
       }
       data << hash
     end
-    # puts data
     render :json => {:status => "OK", :message => data}
 
   end

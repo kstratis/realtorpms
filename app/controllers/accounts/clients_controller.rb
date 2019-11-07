@@ -73,7 +73,7 @@ module Accounts
 
     private
       def client_params
-        params.require(:client).permit(:first_name, :last_name, :email, :telephones, :job, :notes)
+        params.require(:client).permit(:first_name, :last_name, :email, :telephones, :job, :notes, {preferences: {}})
       end
 
       def log_action

@@ -677,7 +677,7 @@
                                                    'data-parsley-type': "email",
                                                    'data-parsley-type-message': t("js.validator.required"),
                                                    'data-parsley-required-message': t("js.validator.required") %>
-                              <label for="last_name">
+                              <label for="email">
                                 <%= content_tag :span do %>
                                   <%= content_tag(:i, nil, class: 'fas fa-at fa-fw') + ' ' + t('activerecord.attributes.user.email') %>
                                 <% end %>
@@ -700,13 +700,59 @@
                                                    'data-parsley-type': "alphanum",
                                                    'data-parsley-type-message': t("js.validator.required"),
                                                    'data-parsley-required-message': t("js.validator.required") %>
-                              <label for="last_name">
+                              <label for="telephones">
                                 <%= content_tag :span do %>
                                   <%= content_tag(:i, nil, class: 'fas fa-phone fa-fw') + ' ' + t('activerecord.attributes.user.phone1') %>
                                 <% end %>
                               </label>
                             </div>
                             <small class="form-text text-muted"><%= t('activerecord.attributes.user.phone1_feedback_html') %>
+                            </small>
+                            <div class="invalid-feedback"></div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12">
+                          <div class="form-group mb-4 new_client disabledElement">
+                            <div class="form-label-group">
+                              <%= landlord.text_field :job,
+                                                      class: 'form-control new_client_input',
+                                                      disabled: true,
+                                                      autocomplete: "off",
+                                                      'data-parsley-group': "fieldset-5",
+                                                      'data-parsley-type': "alphanum",
+                                                      'data-parsley-type-message': t("js.validator.required"),
+                                                      'data-parsley-required-message': t("js.validator.required") %>
+                              <label for="job">
+                                <%= content_tag :span do %>
+                                  <%= content_tag(:i, nil, class: 'fas fa-user-tie fa-fw') + ' ' + t('activerecord.attributes.client.job') %>
+                                <% end %>
+                              </label>
+                            </div>
+                            <small class="form-text text-muted"><%= t('activerecord.attributes.client.job_feedback_html') %>
+                            </small>
+                            <div class="invalid-feedback"></div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12">
+                          <div class="form-group mb-4 new_client disabledElement">
+                            <div class="form-label-group">
+                              <%= landlord.text_field :notes,
+                                                      class: 'form-control new_client_input',
+                                                      disabled: true,
+                                                      autocomplete: "off",
+                                                      'data-parsley-group': "fieldset-5",
+                                                      'data-parsley-type': "alphanum",
+                                                      'data-parsley-type-message': t("js.validator.required"),
+                                                      'data-parsley-required-message': t("js.validator.required") %>
+                              <label for="notes">
+                                <%= content_tag :span do %>
+                                  <%= content_tag(:i, nil, class: 'fas fa-sticky-note fa-fw') + ' ' + t('activerecord.attributes.client.notes_title') %>
+                                <% end %>
+                              </label>
+                            </div>
+                            <small class="form-text text-muted"><%= t('activerecord.attributes.client.notes') %>
                             </small>
                             <div class="invalid-feedback"></div>
                           </div>
