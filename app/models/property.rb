@@ -44,10 +44,28 @@ class Property < ApplicationRecord
   has_one_attached :avatar
   has_and_belongs_to_many :extras
   # CPA stands for Client-Property-Association (many-to-many join table)
-  has_many :cpas
+  has_many :cpas, inverse_of: :property, dependent: :destroy
   has_many :clients, -> { distinct }, through: :cpas
 
-  accepts_nested_attributes_for :clients, :reject_if => proc {|attributes| attributes.all? {|k,v| v.blank?} }
+  # accepts_nested_attributes_for :clients, allow_destroy: true
+  # accepts_nested_attributes_for :clients, :reject_if => proc {|attributes| attributes.all? {|k,v| v.blank?} }
+  accepts_nested_attributes_for :clients, reject_if: :all_blank, allow_destroy: true
+
+
+  def cpas_attributes=(cpa_attributes)
+    cpa_attributes.values.each do |client_attribute|
+      client = Client.find_or_create_by(name:client_attribute["client_attributes"]["email"])
+      self.clients << client
+    end
+end
+
+
+
+
+
+
+
+
   # https://stackoverflow.com/a/38845388/178728
   # https://stackoverflow.com/a/14231213/178728
   # This basically sorts assignments by assignment updated_at column so that each change is reflected last on the list
@@ -55,7 +73,7 @@ class Property < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :logs, dependent: :nullify
 
-  has_many :fields, class_name: 'EntityField'
+  # has_many :fields, class_name: 'EntityField' # TODO: This line is redundant and should be removed
 
 
   # Collection of properties which have been favorited by a particular user

@@ -35,7 +35,7 @@ module TimelineHelper
   def render_entity_label(entry, action)
     label = entry.try("#{entry.try(:entity).try(:singularize)}_name".try(:to_sym))
     if entry.try(:entity).try(:singularize) == 'property' && %w(update destroy).include?(action)
-      return label.upcase
+      return label.try(:upcase)
     end
     label
   end

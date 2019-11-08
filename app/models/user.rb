@@ -43,7 +43,7 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favlists, dependent: :destroy
   has_many :logs, dependent: :nullify
-  has_many :fields, class_name: 'EntityField'
+  has_many :fields, class_name: 'EntityField'  # TODO: This line is redundant and should be removed
   has_one_attached :avatar
   has_and_belongs_to_many :model_types, -> {distinct}
 

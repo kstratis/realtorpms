@@ -10,10 +10,12 @@ $(document).on('turbolinks:load', function(e) {
   });
 
   $(document).on('click', 'form .add_fields', function(event) {
+    event.preventDefault();
+    console.log('clicked');
     const time = new Date().getTime();
     const regexp = new RegExp($(this).data('id'), 'g');
     $(this).before($(this).data('fields').replace(regexp, time));
-    event.preventDefault();
+
   });
 
   // Make sure that parsley validation is disabled when we remove a particalar custom field from the UI

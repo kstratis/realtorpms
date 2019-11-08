@@ -13,76 +13,8 @@
         <!-- form -->
         <%= form_for(@client, html: {class: 'js-validatable'}) do |f| %>
           <div class="col-lg-6 offset-lg-3 col-md-12">
-            <!-- .form-group -->
-            <div class="form-group">
-              <div class="form-label-group">
-                <%= f.text_field :first_name,
-                                 class: 'form-control',
-                                 placeholder: Client.human_attribute_name("first_name"),
-                                 required: true,
-                                 'data-parsley-trigger': 'change',
-                                 'data-parsley-required-message': t("js.validator.required") %>
-                <%= f.label :first_name, Client.human_attribute_name("first_name") %>
-                <%#= inline_error @client, :first_name, 'First name' %>
-              </div>
-            </div>
-            <!-- /.form-group -->
-
-            <!-- .form-group -->
-            <div class="form-group">
-              <div class="form-label-group">
-                <%= f.text_field :last_name,
-                                 class: 'form-control',
-                                 placeholder: Client.human_attribute_name("last_name"),
-                                 required: true,
-                                 'data-parsley-trigger': 'change',
-                                 'data-parsley-required-message': t("js.validator.required") %>
-                <%= f.label :last_name, Client.human_attribute_name("last_name") %>
-                <%#= inline_error @client, :last_name, 'Last name' %>
-              </div>
-            </div>
-            <!-- /.form-group -->
-
-            <!-- .form-group -->
-            <div class="form-group">
-              <div class="form-label-group">
-                <%= f.email_field :email, class: 'form-control', placeholder: Client.human_attribute_name("email") %>
-                <%= f.label "email", Client.human_attribute_name("email") %>
-                <%#= inline_error @client, :email, 'Email' %>
-              </div>
-            </div>
-            <!-- /.form-group -->
-
-            <!-- .form-group -->
-            <div class="form-group">
-              <div class="form-label-group">
-                <%= f.text_field :telephones, class: 'form-control', placeholder: Client.human_attribute_name("telephones") %>
-                <%= f.label "telephones", Client.human_attribute_name("telephones") %>
-                <%#= inline_error @client, :telephones, 'Telephones' %>
-              </div>
-            </div>
-            <!-- /.form-group -->
-
-            <!-- .form-group -->
-            <div class="form-group">
-              <div class="form-label-group">
-                <%= f.text_field :job, class: 'form-control', placeholder: Client.human_attribute_name("job") %>
-                <%= f.label "job", Client.human_attribute_name("job") %>
-                <%#= inline_error @client, :job, 'Job' %>
-              </div>
-            </div>
-            <!-- /.form-group -->
-
-            <!-- .form-group -->
-            <div class="form-group">
-              <%= f.text_area :notes, class: 'form-control', placeholder: t('activerecord.attributes.client.notes_title'), autocomplete: 'off', 'rows': '3' %>
-              <small class="form-text text-muted"><%= Client.human_attribute_name("notes") %>
-              </small>
-            </div>
-            <!-- /.form-group -->
-
+            <%= render 'accounts/clients/client_fields', f: f %>
             <hr/>
-
             <!-- .form-actions -->
             <div class="form-actions">
               <button type="submit" class="btn btn-primary ml-auto"><%= t('clients.edit.edit_button') %></button>
