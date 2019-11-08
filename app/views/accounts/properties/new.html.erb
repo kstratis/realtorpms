@@ -619,13 +619,15 @@
 
 
                     <div class="row">
-                      <%# This is for the nested user fields %>
 
+                      <%# This is for the nested user fields %>
+                      <div class="col-md-6 col-sm-12">
                       <div class="form-group">
                         <%= property.fields_for :clients do |clients_builder| %>
                           <%= render 'accounts/clients/client_fields', f: clients_builder, vgroup: "fieldset-5" %>
                         <% end %>
                         <%= link_to_add_fields t('cfields.add_field'), property, :clients, 'accounts/clients/', "fieldset-5" %>
+                      </div>
                       </div>
 
 
@@ -714,7 +716,7 @@
                         <%#= property.hidden_field :model_type_id %>
                         <%= property.fields_for :preferences do |builder| %>
                           <% @property.model_type.fields.each do |field| %>
-                            <%= render "accounts/cfields/#{field.field_type}", field: field, f: builder, validation_group: 'fieldset-7'  %>
+                            <%= render "accounts/cfields/#{field.field_type}", field: field, f: builder, vgroup: 'fieldset-7'  %>
                           <% end %>
                         <% end %>
                       </div>

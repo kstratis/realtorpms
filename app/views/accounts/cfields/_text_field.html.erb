@@ -4,7 +4,7 @@
       <%= f.text_field field.slug,
                        class: 'form-control',
                        autocomplete: "off",
-                       'data-parsley-group': local_assigns[:validation_group].nil? ? nil: validation_group,
+                       'data-parsley-group': local_assigns[:vgroup].nil? ? nil: vgroup,
                        'data-parsley-required': field.required ? "true" : "false",
                        'data-parsley-required-message': t("js.validator.required") %>
       <%= f.label field.slug, field.name %>

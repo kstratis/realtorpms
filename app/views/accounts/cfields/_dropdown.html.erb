@@ -8,7 +8,7 @@
                                       (f.object[field.slug] unless f.object.blank?)),
                    {prompt: t('cfields.choose')},
                    class: 'form-control custom-select',
-                   'data-parsley-group': validation_group ? validation_group : nil,
+                   'data-parsley-group': vgroup ? vgroup : nil,
                    'data-parsley-required': field.required ? "true" : "false",
                    'data-parsley-required-message': t("js.validator.required") %>
       <%= f.label field.slug, field.name %>
