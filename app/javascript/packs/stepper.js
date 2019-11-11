@@ -111,14 +111,14 @@ $(document).on('turbolinks:load', function(e) {
   });
 
 
-
+  // Removes the dynamically inserted field
   $(document).on('click', 'form .remove_client_entry', function(event) {
     $(this).prev('input[type=hidden]').val('1');
     $(this).closest('.client-fields').addClass('d-none');
     clearValidatableFields('.field-validatable');
     event.preventDefault();
   });
-
+  
 });
 
 

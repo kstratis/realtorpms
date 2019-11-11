@@ -294,7 +294,7 @@ module Accounts
                                        :avatar,
                                        :map_url,
                                        {preferences: {}},
-                                       {clients_attributes: [:first_name, :last_name, :email, :telephones, :job, :notes, {preferences: {}}]},
+                                       {clients_attributes: [:first_name, :last_name, :email, :telephones, :job, :notes, {preferences: {}}, :_destroy]},
                                        delete_images: [],
                                        images: [],
                                        extra_ids: [])
