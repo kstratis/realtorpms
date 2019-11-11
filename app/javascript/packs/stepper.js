@@ -95,10 +95,10 @@ $(document).on('turbolinks:load', function(e) {
     let selectedOption = $(e.target).attr('id');
     let counterElements = $(`#${selectedOption}`).data().counteroption.split(',');
     $(counterElements).each((index, counterElement) => $(`.${counterElement}`).addClass('disabledElement'));
-    $(counterElements).each((index, counterElement) => $(`.${counterElement}`).find(`input.${counterElement}_input`).attr('disabled', true));
+    $(counterElements).each((index, counterElement) => $(`.${counterElement}`).find(`input.${counterElement}_input, textarea.${counterElement}_input`).attr('disabled', true));
     $(`.${selectedOption}`).removeClass('disabledElement');
-    $(`.${selectedOption}`).find(`input.${selectedOption}_input`).removeClass('disabledElement');
-    $(`.${selectedOption}`).find(`input.${selectedOption}_input`).attr('disabled', false);
+    $(`.${selectedOption}`).find(`input.${selectedOption}_input, textarea.${selectedOption}_input`).removeClass('disabledElement');
+    $(`.${selectedOption}`).find(`input.${selectedOption}_input, textarea.${selectedOption}_input`).attr('disabled', false);
   });
 
   // We need the focus event to reset state in the animated/themed form input fields
