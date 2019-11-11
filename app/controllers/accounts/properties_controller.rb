@@ -125,6 +125,8 @@ module Accounts
           if current_user.role(current_account) == 'user'
             current_user.properties <<  @property
           end
+          Cpa.where(property: @property).update_all(ownership: true)
+
           format.html { redirect_to @property, notice: I18n.t('properties.created.flash') }
           format.js { render 'shared/ajax/handler',
                              locals: {resource: @property,
@@ -238,7 +240,7 @@ module Accounts
       # In this case don't forget to set the account foreign key on the client/s.
       if property_params[:clientid].blank? && property_params[:noclient].blank?
         if params[:action] == 'create'
-          @property.clients.first.account = current_account
+          @property.clients.each { |c| c.account = current_account}
         end
       end
     end

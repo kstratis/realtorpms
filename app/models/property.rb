@@ -54,17 +54,10 @@ class Property < ApplicationRecord
 
   def cpas_attributes=(cpa_attributes)
     cpa_attributes.values.each do |client_attribute|
-      client = Client.find_or_create_by(name:client_attribute["client_attributes"]["email"])
+      client = Client.find_or_create_by(name: client_attribute["client_attributes"]["email"])
       self.clients << client
     end
-end
-
-
-
-
-
-
-
+  end
 
   # https://stackoverflow.com/a/38845388/178728
   # https://stackoverflow.com/a/14231213/178728

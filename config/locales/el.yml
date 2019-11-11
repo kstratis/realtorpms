@@ -619,6 +619,7 @@ el:
       heading_alt: "Νέος πελάτης"
       profile: "Προσθήκη νέου πελάτη"
       add_button: "Προσθήκη"
+      add_owner: "Προσθήκη συνιδιοκτήτη"
     edit:
       breadcrumb: "Πελάτες"
       edit_button: "Ενημέρωση"
@@ -631,6 +632,7 @@ el:
       photo_subheader: "Κάντε κλικ για ν'αλλάξετε την φωτογραφία του πελάτη"
       allowed_pic_specs: "JPG, GIF ή PNG 400x400, < 2 MB."
       delete_avatar: "Είστε βέβαιος/βεβαία ότι θέλετε να διαγραφεί η φωτογραφία πελάτη;"
+      add_owner: "Προσθήκη συνιδιοκτήτη"
     show:
       breadcrumb: "Πελάτες"
       heading: "Πληροφορίες χρήστη"

@@ -614,6 +614,7 @@ en:
       heading_alt: "New client"
       profile: "Add client"
       add_button: "Add"
+      add_owner: "Add co-owner"
     edit:
       breadcrumb: "Clients"
       edit_button: "Update"
@@ -626,6 +627,7 @@ en:
       photo_subheader: "Click the current avatar to change the client's photo."
       allowed_pic_specs: "JPG, GIF or PNG 400x400, < 2 MB."
       delete_avatar: "Are you sure you want to delete the client's picture?"
+      add_owner: "Add co-owner"
     show:
       breadcrumb: "Clients"
       heading: "Client information"

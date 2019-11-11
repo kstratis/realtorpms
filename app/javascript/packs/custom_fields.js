@@ -9,6 +9,12 @@ $(document).on('turbolinks:load', function(e) {
     event.preventDefault();
   });
 
+  $(document).on('click', 'form .remove_client_entry', function(event) {
+    $(this).prev('input[type=hidden]').val('1');
+    $(this).closest('.form-row').addClass('d-none');
+    event.preventDefault();
+  });
+
   $(document).on('click', 'form .add_fields', function(event) {
     event.preventDefault();
     console.log('clicked');
