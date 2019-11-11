@@ -589,20 +589,15 @@
                       <!-- new_client disabledElement-->
                       <%# This is for the nested user fields %>
                       <div class="col-md-6 col-sm-12">
-                        <div class="client-fields">
+
                           <%= property.fields_for :clients do |clients_builder| %>
                             <%= render 'accounts/clients/client_fields', f: clients_builder, vgroup: "fieldset-5" %>
                           <% end %>
                           <%= link_to_add_fields t('clients.new.add_owner'), property, :clients, 'accounts/clients/', "fieldset-5" %>
 
-<!--                          <div class="col-md-1 mb-3 d-flex align-items-center">-->
-                            <%#= property.hidden_field :_destroy %>
-                            <%#= link_to '#', class: 'remove_client_entry' do %>
-<!--                              <i class="fas fa-trash fa-fw"></i>-->
-                            <%# end %>
-<!--                          </div>-->
 
-                        </div>
+
+
                       </div>
 
 
@@ -625,13 +620,14 @@
                               inputID: 'property_clientid',
                               inputName: 'property[clientid]',
                               inputClassName: 'form-control existing_client_input',
+                              inputIsDisabled: true,
                               validatorGroup: 'fieldset-5',
                               endpoint: properties_clients_path,
                               isRequired: true,
                               renderFormField: true,
                               formID: 'new_property',
                               className: 'simple-select ',
-                              isDisabled: true,
+                              isDisabled: false,
                               isSearchable: true,
                               isClearable: true,
                               soloMode: true,

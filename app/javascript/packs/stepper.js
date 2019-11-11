@@ -1,4 +1,5 @@
 import FormStepper from '../bundles/steppers/form_stepper';
+import { clearValidatableFields } from './utilities';
 
 // Handles the property form validators (new, edit)
 $(document).on('turbolinks:load', function(e) {
@@ -108,6 +109,16 @@ $(document).on('turbolinks:load', function(e) {
     $('.new_client_input').focus();
     $('.new_client_input').first().focus();
   });
+
+
+
+  $(document).on('click', 'form .remove_client_entry', function(event) {
+    $(this).prev('input[type=hidden]').val('1');
+    $(this).closest('.client-fields').addClass('d-none');
+    clearValidatableFields('.field-validatable');
+    event.preventDefault();
+  });
+
 });
 
 

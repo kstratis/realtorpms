@@ -1,8 +1,9 @@
+<div class="client-fields">
 <!-- .form-group -->
 <div class="form-group new_client">
   <div class="form-label-group">
     <%= f.text_field :first_name,
-                     class: 'form-control new_client_input',
+                     class: 'form-control new_client_input field-validatable',
                      placeholder: Client.human_attribute_name("first_name"),
                      'data-parsley-required': "true",
                      # Rails ignores attributes with nil
@@ -18,7 +19,7 @@
 <div class="form-group new_client">
   <div class="form-label-group">
     <%= f.text_field :last_name,
-                     class: 'form-control new_client_input',
+                     class: 'form-control new_client_input field-validatable',
                      placeholder: Client.human_attribute_name("last_name"),
                      'data-parsley-required': "true",
                      # Rails ignores attributes with nil
@@ -72,6 +73,13 @@
   </small>
 </div>
 
+  <div class="col-md-1 mb-3 d-flex align-items-center">
+    <%= f.hidden_field :_destroy %>
+    <%= link_to '#', class: 'remove_client_entry' do %>
+      <i class="fas fa-trash fa-fw"></i>
+    <% end %>
+  </div>
 
 <hr />
+</div>
 <!-- /.form-group -->

@@ -1,7 +1,9 @@
+import { clearValidatableFields } from './utilities';
+
 $(document).on('turbolinks:load', function(e) {
 
-  const cfields_form = $('form.validatable');
-  if (cfields_form.length < 1) return;
+  const form = $('form.validatable');
+  if (form.length < 1) return;
 
   $(document).on('click', 'form .remove_fields', function(event) {
     $(this).prev('input[type=hidden]').val('1');
@@ -9,15 +11,8 @@ $(document).on('turbolinks:load', function(e) {
     event.preventDefault();
   });
 
-  $(document).on('click', 'form .remove_client_entry', function(event) {
-    $(this).prev('input[type=hidden]').val('1');
-    $(this).closest('.form-row').addClass('d-none');
-    event.preventDefault();
-  });
-
   $(document).on('click', 'form .add_fields', function(event) {
     event.preventDefault();
-    console.log('clicked');
     const time = new Date().getTime();
     const regexp = new RegExp($(this).data('id'), 'g');
     $(this).before($(this).data('fields').replace(regexp, time));
@@ -25,13 +20,8 @@ $(document).on('turbolinks:load', function(e) {
   });
 
   // Make sure that parsley validation is disabled when we remove a particalar custom field from the UI
-  cfields_form.parsley().on('form:validate', function (formInstance) {
-    $('.cfield-validatable').each((function(index, element) {
-      if ($(element).parent().closest('div.form-row').hasClass('d-none') || !$(element).closest('div').hasClass('d-block')){
-        $(element).removeAttr('data-parsley-required');
-        $(element).removeAttr('data-parsley-required-message');
-      }
-    }));
+  form.parsley().on('form:validate', function (formInstance) {
+    clearValidatableFields('.cfield-validatable');
   });
 
   // On mounting, detect any dropdown field and render its sibling options text field accordingly
@@ -40,7 +30,7 @@ $(document).on('turbolinks:load', function(e) {
   }));
 
   // When changing a custom field type, listen to select changes so that the options text field is rendered when appropriate.
-  cfields_form.on('change', '.field-type-select', function(selection) {
+  form.on('change', '.field-type-select', function(selection) {
     $(this).closest('div.form-row').children('.d-none').toggleClass('d-block', this.value === 'dropdown');
   });
 
