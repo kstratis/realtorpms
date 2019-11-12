@@ -151,7 +151,7 @@ el:
         location: "Τοποθεσία"
         location_title: "Τοποθεσία"
         owner: "Ιδιοκτήτης"
-        owner_title: "Ιδιοκτήτης"
+        owner_title: "Ιδιοκτήτης/ες"
         contact: "Επικοινωνία"
         contact_title: "Επικοινωνία"
         created_at: "Καταχώρηση"
@@ -751,6 +751,7 @@ el:
       heading: "Κατάλογος ακινήτων"
       new_button: "Προσθήκη ακινήτου"
     show:
+      client_tooltip: "Προβολή καρτέλας %{user}"
       breadcrumb: "Ακίνητα"
       catalog: "Κατάλογος"
       back: "Επιστροφή"

@@ -209,7 +209,26 @@
                   </div>
                 </div><!-- .card-body -->
                 <div class="card-body">
-                  <%= render partial: 'accounts/properties/features', locals: {features: Property.landlord_features, classNames: 'normalize-table'} %>
+                  <table class="table normalize-table">
+                    <tbody>
+                    <div class="table-responsive">
+                      <% @property.clients.each do |client| %>
+                        <tr>
+                          <td class="align-middle nowrap">
+                            <div class="table-entry">
+                              <%= link_to client_path(client), data: {toggle: "tooltip", placement: "top", title: t('properties.show.client_tooltip', user: client.full_name)} do %>
+                                <span class="align-middle"><%= client.full_name %></span>
+                              <% end  %>
+                            </div>
+                          </td>
+                          <td class="align-middle nowrap">
+                            <span><%= client.telephones.blank? ? '—' : client.telephones.split(/[\s,]+/).collect(&:strip).join(', ') %></span>
+                          </td>
+                        </tr>
+                      <% end %>
+                    </div>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>

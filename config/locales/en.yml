@@ -150,7 +150,7 @@ en:
         location: "Location"
         location_title: "Location"
         owner: "Owner"
-        owner_title: "Owner"
+        owner_title: "Owner/s"
         contact: "Contact"
         contact_title: "Contact"
         created_at: "Entry date"
@@ -746,6 +746,7 @@ en:
       heading: "Properties"
       new_button: "Add new property"
     show:
+      client_tooltip: "User info %{user}"
       breadcrumb: "Properties"
       catalog: "Catalog"
       back: "Back"

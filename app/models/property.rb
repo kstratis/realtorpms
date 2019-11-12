@@ -107,12 +107,13 @@ class Property < ApplicationRecord
       # end
     # end
 
-    def landlord_features
-      {
-          :landlord_name => {:label => 'owner', :icon => 'client', :options => 'full_name', :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
-          :landlord_tel => {:label => 'contact', :icon => 'tel', :options => 'telephones', :renderfn => Proc.new {|value| value.blank? ? '—' : value.split(/[\s,]+/).collect(&:strip).join(', ')}}
-      }.freeze
-    end
+    # def landlord_features
+    #   {
+    #       :landlord_name => {:label => 'owner', :icon => 'client', :options => 'full_name', :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
+    #       # :landlord_tel => {:label => 'contact', :icon => 'tel', :options => 'telephones', :renderfn => Proc.new {|value| value.blank? ? '—' : value.split(/[\s,]+/).collect(&:strip).join(', ')}}
+    #       :landlord_tel => {:label => 'contact', :icon => 'tel', :options => 'telephones', :renderfn => Proc.new {|value| value.blank? ? '—' : value}}
+    #   }.freeze
+    # end
 
     def basic_features
       {
@@ -141,12 +142,12 @@ class Property < ApplicationRecord
     end
   end
 
-  def landlord_info(term)
-    landlord.try(term.to_sym)
-  end
-
-  alias_method :landlord_name, :landlord_info
-  alias_method :landlord_tel, :landlord_info
+  # def landlord_info(term)
+  #   clients.each { |c| c.try(term.to_sym)}
+  # end
+  #
+  # alias_method :landlord_name, :landlord_info
+  # alias_method :landlord_tel, :landlord_info
 
   def location_info(term)
     location.try(term.to_sym)
