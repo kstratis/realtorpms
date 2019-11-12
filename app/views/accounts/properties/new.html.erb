@@ -593,7 +593,8 @@
                           <%= property.fields_for :clients do |clients_builder| %>
                             <%= render 'accounts/clients/client_fields', f: clients_builder, vgroup: "fieldset-5" %>
                           <% end %>
-                          <%= link_to_add_fields t('clients.new.add_owner'), property, :clients, 'accounts/clients/', "fieldset-5" %>
+                          <%= link_to_add_fields t('clients.new.add_owner'), property, :clients, 'accounts/clients/', "fieldset-5", 'mt-3' %>
+
 
 
 

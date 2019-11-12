@@ -30,13 +30,13 @@ module ApplicationHelper
     end
   end
 
-  def link_to_add_fields(name, f, association, prefix='', vgroup=nil)
+  def link_to_add_fields(name, f, association, prefix='', vgroup=nil, classnames='')
     new_object = f.object.send(association).klass.new
     id = new_object.object_id
     fields = f.fields_for(association, new_object, child_index: id) do |builder|
       render(prefix + association.to_s.singularize + "_fields", f: builder, vgroup: vgroup.blank? ? nil : vgroup)
     end
-    link_to(name, '#', class: "btn btn-outline-danger add_fields", data: {id: id, fields: fields.gsub("\n", "")})
+    link_to(name, '#', class: "btn btn-outline-danger add_fields #{classnames}", data: {id: id, fields: fields.gsub("\n", "")})
   end
 
   # +human_enum_name+ is defined in application_record from which all models inherit from as of Rails 5.

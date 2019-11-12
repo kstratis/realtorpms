@@ -1,4 +1,4 @@
-<div class="client-fields">
+<div class="client-fields mt-3">
 <!-- .form-group -->
 <div class="form-group new_client">
   <div class="form-label-group">
@@ -73,9 +73,9 @@
   </small>
 </div>
 
-  <div class="col-md-1 mb-3 d-flex align-items-center">
+  <div class="text-right">
     <%= f.hidden_field :_destroy %>
-    <%= link_to '#', class: 'remove_client_entry' do %>
+    <%= link_to '#', class: 'remove_client_entry btn btn-sm btn-secondary' do %>
       <i class="fas fa-trash fa-fw"></i>
     <% end %>
   </div>

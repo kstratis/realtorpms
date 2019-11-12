@@ -113,12 +113,15 @@ $(document).on('turbolinks:load', function(e) {
 
   // Removes the dynamically inserted field
   $(document).on('click', 'form .remove_client_entry', function(event) {
-    $(this).prev('input[type=hidden]').val('1');
-    $(this).closest('.client-fields').addClass('d-none');
-    clearValidatableFields('.field-validatable');
     event.preventDefault();
+    if ($('.client-fields').length === 1 || $('.client-fields:not(.d-none)').length < 2) return;
+    $(this).prev('input[type=hidden]').val('1');
+    $(this).closest('.client-fields').fadeOut("normal", function() {
+      $(this).closest('.client-fields').addClass('d-none').css("display", "");
+    });
+    clearValidatableFields('.field-validatable');
   });
-  
+
 });
 
 
@@ -133,10 +136,14 @@ function leavePage(msg) {
     return false;
   }
 }
+
 // This basically listens for window unload
 $(document).on("page:before-change turbolinks:before-visit", function() {
   // Make sure it only works on the properties stepper
   if (window.location.pathname === '/properties/new' || window.location.pathname.match(/^\/properties\/\d+\/edit$/)) {
+    // Unbind the following 2 listeners of they'll fire multiple times
+    $(document).off('click', 'form .add_fields');
+    $(document).off('click', 'form .remove_fields');
     // Gets the stepper status. If untouched then don't bug the user. Otherwise, show a warning
     if (!window.form_stepper.getStatus()) return;
     var alertsDomNode = $('#alerts');
