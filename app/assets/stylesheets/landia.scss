@@ -1689,3 +1689,41 @@ a.text-link {
   border-radius: 5px;
   padding: 15px;
 }
+
+// LOGO ANIMATION
+.top-nav__logo {
+  display: block;
+  width: 8.25em;
+  //height: 2em;
+  height: 40px;
+  margin: 0;
+  padding: 0.1rem;
+}
+
+.top-nav__logo .icon {
+  stroke: #1d2d35;
+}
+
+.top-nav__logo .name {
+  fill: #1d2d35;
+}
+
+.top-nav__logo .card {
+  opacity: 0;
+  transform: translateX(1.25rem) rotate(10deg);
+  transition: all 0.15s ease-out;
+  fill: #ffe000;
+}
+
+.top-nav__logo:hover .card {
+  opacity: 1;
+  transform: translateX(0) rotate(0deg);
+}
+
+.top-nav__logo:hover .card--front {
+  opacity: 0.6;
+}
+
+.top-nav__logo .card--back {
+  transition-delay: 0.1s;
+}
