@@ -16,6 +16,7 @@ class FormSelect extends React.Component {
     inputIsDisabled: PropTypes.bool,
     endpoint: PropTypes.string,
     validatorGroup: PropTypes.string,
+    isMulti: PropTypes.bool,
     isMaster: PropTypes.bool,
     options: PropTypes.array,
     handleOptions: PropTypes.func,
@@ -175,6 +176,7 @@ class FormSelect extends React.Component {
             isDisabled={this.props.isDisabled}
             isSearchable={this.props.isSearchable}
             isClearable={this.props.isClearable}
+            isMulti={this.props.isMulti}
             noOptionsMessage={() => renderHTML(this.props.i18n.select.nooptions_sync_html)}
             menuIsOpen={isOpen}
             onMenuOpen={this.onMenuOpen}
@@ -196,6 +198,7 @@ class FormSelect extends React.Component {
             isDisabled={this.props.isDisabled}
             isSearchable={this.props.isSearchable}
             isClearable={this.props.isClearable}
+            isMulti={this.props.isMulti}
             backspaceRemovesValue={true}
             noOptionsMessage={() => renderHTML(this.props.i18n.select.noresults)}
             loadingMessage={() => renderHTML(this.props.i18n.select.loading_html)}

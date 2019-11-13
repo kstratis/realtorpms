@@ -589,18 +589,11 @@
                       <!-- new_client disabledElement-->
                       <%# This is for the nested user fields %>
                       <div class="col-md-6 col-sm-12">
-
                           <%= property.fields_for :clients do |clients_builder| %>
                             <%= render 'accounts/clients/client_fields', f: clients_builder, vgroup: "fieldset-5" %>
                           <% end %>
                           <%= link_to_add_fields t('clients.new.add_owner'), property, :clients, 'accounts/clients/', "fieldset-5", 'mt-3' %>
-
-
-
-
-
                       </div>
-
 
                       <div class="no_client">
                         <input id="noclient" disabled class="no_client_input form-control" type="hidden" name="property[noclient]" value="1">

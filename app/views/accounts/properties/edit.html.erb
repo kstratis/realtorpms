@@ -575,47 +575,35 @@
                     <fieldset>
                       <legend><%= t('js.forms.properties.wizard.step5.title') %></legend>
                       <div class="row">
-
-                        <div class="form-group ml-2">
-                          <div class="custom-control custom-control-inline custom-radio">
-                            <input type="radio" class="custom-control-input client-radio-selection" name="rdGroup1" id="existing_client" data-counteroption="new_client,no_client" <%= @property.landlord ? 'checked' : '' %>>
-                            <label class="custom-control-label" for="existing_client"><%= t('js.forms.properties.wizard.step5.existing_client') %></label>
-                          </div>
-                          <div class="custom-control custom-control-inline custom-radio">
-                            <input type="radio" class="custom-control-input client-radio-selection edit" name="rdGroup1" id="new_client" data-counteroption="existing_client,no_client">
-                            <label class="custom-control-label" for="new_client"><%= t('js.forms.properties.wizard.step5.new_owner') %></label>
-                          </div>
-                          <div class="custom-control custom-control-inline custom-radio">
-                            <input type="radio" class="custom-control-input client-radio-selection" name="rdGroup1" id="no_client" data-counteroption="new_client,existing_client" <%= @property.landlord.id ? '' : 'checked' %>>
-                            <label class="custom-control-label" for="no_client"><%= t('js.forms.properties.wizard.step5.no_owner') %></label>
-                          </div>
+                        <div class="col-12">
+                          <i><%= t('js.forms.properties.wizard.step5.subtitle') %></i>
                         </div>
                       </div>
 
-
+                      <hr/>
                       <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                          <div class="form-group mt-4 mb-4 existing_client <%= @property.landlord.id ? '' : 'disabledElement' %>">
+                        <div class="col-md-8 offset-md-2 col-sm-12">
+                          <div class="form-group mt-4 mb-4 existing_client">
                             <%= property.label :owner do %>
                               <%= content_tag(:i, nil, class: 'fas fa-user fa-fw') + ' ' + t('activerecord.attributes.property.owner') %>
-                              <abbr title="<%= t('js.components.select.required') %>">*</abbr>
                             <% end %>
                             <%= react_component('FormSelect', props: {
                                 id: 'g',
-                                inputID: 'property_landlordid',
-                                inputName: 'property[landlordid]',
-                                inputIsDisabled: @property.landlord.id ? false : true,
+                                inputID: 'property_clientid',
+                                inputName: 'property[clientid]',
+                                inputIsDisabled: false,
                                 inputClassName: 'form-control existing_client_input',
                                 validatorGroup: 'fieldset-5',
-                                endpoint: properties_landlords_path,
-                                isRequired: true,
+                                endpoint: properties_clients_path,
+                                isRequired: false,
                                 renderFormField: true,
                                 formID: "edit_property_#{@property.id}",
                                 className: 'simple-select ',
                                 isDisabled: false,
                                 isSearchable: true,
                                 isClearable: true,
-                                storedOption: @property.landlord.id ? {"label": "#{@property.landlord.first_name} #{@property.landlord.last_name}", "value": @property.landlord.id} : nil,
+                                isMulti: true,
+                                storedOption: @property.clients.blank? ? nil : @property.clients.map { |c| {"label": c.full_name, "value": c.id}},
                                 soloMode: true,
                                 ajaxEnabled: true,
                                 i18n: {
@@ -624,113 +612,6 @@
                                 }
                             }, prerender: false) %>
                           </div><!-- /.form-group -->
-                        </div>
-                      </div>
-
-
-                      <hr/>
-
-
-                      <div class="row">
-                        <%# This is for the nested user fields %>
-                        <%= property.fields_for :landlord do |landlord| %>
-                          <div class="col-md-6 col-sm-12">
-                            <div class="form-group mt-md-4 mb-4 new_client disabledElement">
-                              <div class="form-label-group">
-                                <%= landlord.text_field :first_name,
-                                                     class: 'form-control new_client_input',
-                                                     disabled: true,
-                                                     autocomplete: "off",
-                                                     'data-parsley-required': "true",
-                                                     'data-parsley-group': "fieldset-5",
-                                                     'data-parsley-type-message': t("js.validator.required"),
-                                                     'data-parsley-required-message': t("js.validator.required") %>
-                                <label for="first_name">
-                                  <%= content_tag :span do %>
-                                    <%= content_tag(:i, nil, class: '') + ' ' + t('activerecord.attributes.user.first_name') %>
-                                  <% end %>
-                                </label>
-                              </div>
-                              <small class="form-text text-muted"><%= t('activerecord.attributes.user.first_name_feedback_html') %>
-                              </small>
-                              <div class="invalid-feedback"></div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-12">
-                            <div class="form-group mt-md-4 mb-4 new_client disabledElement">
-                              <div class="form-label-group">
-                                <%= landlord.text_field :last_name,
-                                                     class: 'form-control new_client_input',
-                                                     disabled: true,
-                                                     autocomplete: "off",
-                                                     'data-parsley-required': "true",
-                                                     'data-parsley-group': "fieldset-5",
-                                                     'data-parsley-type-message': t("js.validator.required"),
-                                                     'data-parsley-required-message': t("js.validator.required") %>
-                                <label for="last_name">
-                                  <%= content_tag :span do %>
-                                    <%= content_tag(:i, nil, class: '') + ' ' + t('activerecord.attributes.user.last_name') %>
-                                  <% end %>
-                                </label>
-                              </div>
-                              <small class="form-text text-muted"><%= t('activerecord.attributes.user.last_name_feedback_html') %>
-                              </small>
-                              <div class="invalid-feedback"></div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-12">
-                            <div class="form-group mb-4 new_client disabledElement">
-                              <div class="form-label-group">
-                                <%= landlord.text_field :email,
-                                                     class: 'form-control new_client_input',
-                                                     disabled: true,
-                                                     autocomplete: "off",
-                                                     'data-parsley-group': "fieldset-5",
-                                                     'data-parsley-type': "email",
-                                                     'data-parsley-type-message': t("js.validator.required"),
-                                                     'data-parsley-required-message': t("js.validator.required") %>
-                                <label for="last_name">
-                                  <%= content_tag :span do %>
-                                    <%= content_tag(:i, nil, class: 'fas fa-at fa-fw') + ' ' + t('activerecord.attributes.user.email') %>
-                                  <% end %>
-                                </label>
-                              </div>
-                              <small class="form-text text-muted"><%= t('activerecord.attributes.user.email_feedback_html') %>
-                              </small>
-                              <div class="invalid-feedback"></div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-12">
-                            <div class="form-group mb-4 new_client disabledElement">
-                              <div class="form-label-group">
-                                <%= landlord.text_field :telephones,
-                                                     class: 'form-control new_client_input',
-                                                     disabled: true,
-                                                     autocomplete: "off",
-                                                     'data-parsley-group': "fieldset-5",
-                                                     'data-parsley-type': "alphanum",
-                                                     'data-parsley-type-message': t("js.validator.required"),
-                                                     'data-parsley-required-message': t("js.validator.required") %>
-                                <label for="last_name">
-                                  <%= content_tag :span do %>
-                                    <%= content_tag(:i, nil, class: 'fas fa-phone fa-fw') + ' ' + t('activerecord.attributes.user.phone1') %>
-                                  <% end %>
-                                </label>
-                              </div>
-                              <small class="form-text text-muted"><%= t('activerecord.attributes.user.phone1_feedback_html') %>
-                              </small>
-                              <div class="invalid-feedback"></div>
-                            </div>
-                          </div>
-
-
-                        <% end %>
-
-                        <div class="no_client">
-                          <input id="nolandlord" disabled class="no_client_input form-control" type="hidden" name="property[nolandlord]" value="1">
                         </div>
                       </div>
 

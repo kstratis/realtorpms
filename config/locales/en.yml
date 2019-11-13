@@ -378,6 +378,7 @@ en:
           step5:
             anchor: "Owner"
             title: "Owner details"
+            subtitle: "Choose from an existing client or create new one/s."
             existing_client: "Choose from existing customers"
             new_owner: "Create new owner"
             no_owner: "No owner"

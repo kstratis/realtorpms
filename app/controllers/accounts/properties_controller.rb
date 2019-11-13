@@ -78,7 +78,7 @@ module Accounts
         return redirect_to @property, :status => :moved_permanently
       end
       # TODO FIX THIS
-      @property.build_landlord unless @property.landlord
+      # @property.build_landlord unless @property.landlord
     end
 
     def locations
