@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Select from 'react-select';
-import AsyncSelect from 'react-select/async';
+import AsyncSelect from 'react-select/async-creatable';
 import ReactOnRails from 'react-on-rails';
 import { reactSelectStyles } from '../../styles/componentStyles';
 import { debounce, renderHTML, safelyExecCallback } from '../../utilities/helpers';
@@ -17,6 +17,7 @@ class FormSelect extends React.Component {
     endpoint: PropTypes.string,
     validatorGroup: PropTypes.string,
     isMulti: PropTypes.bool,
+    isCreatable: PropTypes.bool,
     isMaster: PropTypes.bool,
     options: PropTypes.array,
     handleOptions: PropTypes.func,
@@ -81,6 +82,7 @@ class FormSelect extends React.Component {
   // This operates outside react and is used to store the value
   // at the true input field which is eventually used by the rails form
   setTextInputValue(value) {
+    console.log(`setting value: ${value}`);
     this.textInput.value = value;
   }
 
@@ -121,9 +123,19 @@ class FormSelect extends React.Component {
   // This updates the true input field (which is hidden) according to the value selected.
   // It uses JQuery and is relatively safe to use since it's located outside of our React Component
   updateExternalDOM(selectedOption, validate = true) {
+    console.log(`updating the selectedOption to:`);
+    console.log(selectedOption);
+    console.log(typeof selectedOption);
+    console.log(Array.isArray(selectedOption));
+    let payload = '';
+    if (selectedOption){
+      payload = Array.isArray(selectedOption) ? JSON.stringify(selectedOption) : selectedOption.value;
+    }
+
     // JQuery form validator specifics. Requires JQuery.
     // Manipulating a form element outside of this React component should be relatively safe
-    this.setTextInputValue(selectedOption ? selectedOption.value : '');
+    // this.setTextInputValue(selectedOption ? selectedOption.value : '');
+    this.setTextInputValue(payload);
     if (validate) {
       // DEBUG
       // console.log('select field changed - validating: ' +  this.props.inputID);
@@ -177,6 +189,8 @@ class FormSelect extends React.Component {
             isSearchable={this.props.isSearchable}
             isClearable={this.props.isClearable}
             isMulti={this.props.isMulti}
+            // isCreatable={this.props.isCreatable}
+            isCreatable={true}
             noOptionsMessage={() => renderHTML(this.props.i18n.select.nooptions_sync_html)}
             menuIsOpen={isOpen}
             onMenuOpen={this.onMenuOpen}
@@ -199,6 +213,7 @@ class FormSelect extends React.Component {
             isSearchable={this.props.isSearchable}
             isClearable={this.props.isClearable}
             isMulti={this.props.isMulti}
+            isCreatable={true}
             backspaceRemovesValue={true}
             noOptionsMessage={() => renderHTML(this.props.i18n.select.noresults)}
             loadingMessage={() => renderHTML(this.props.i18n.select.loading_html)}

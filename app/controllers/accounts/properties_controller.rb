@@ -1,6 +1,7 @@
 module Accounts
   class PropertiesController < Accounts::BaseController
     include PropertyHeader
+    include AddRemoveAssociationsHandler
     helper PropertyHeader
     helper Cfields
     before_action :set_property, only: [:show, :edit, :update, :destroy]
@@ -229,20 +230,21 @@ module Accounts
       # https://stackoverflow.com/a/43476033/178728
       # --- SOS ---
       # If an existing client id is given then assign the property to that person
-      unless property_params[:clientid].blank?
-        client = current_account.clients.find(property_params[:clientid])
-        client.properties << @property
+      # unless property_params[:clientid].blank?
+      #   puts 'INSIDE unless'
+      #   client = current_account.clients.find(property_params[:clientid])
+      #   client.properties << @property
         # @property.landlord = Landlord.find(params[:action] == 'update' ? property_params[:landlordid] : @property.landlordid)
-      end
-
+      # end
+      associations_handler(@property, 'clients', JSON.parse(property_params[:clients]))
       # Otherwise automatically create and assign the client using the "magic" properties of
       # +accepts_nested_attributes_for :clients+ as described in the model file.
       # In this case don't forget to set the account foreign key on the client/s.
-      if property_params[:clientid].blank? && property_params[:noclient].blank?
-        if params[:action] == 'create'
-          @property.clients.each { |c| c.account = current_account}
-        end
-      end
+      # if property_params[:clientid].blank? && property_params[:noclient].blank?
+      #   if params[:action] == 'create'
+      #     @property.clients.each { |c| c.account = current_account}
+      #   end
+      # end
     end
 
     def set_location
@@ -289,12 +291,12 @@ module Accounts
                                        :notes,
                                        :adxe,
                                        :adspitogatos,
-                                       :clientid,
-                                       :noclient,
+                                       :clients,
+                                       # :noclient,
                                        :avatar,
                                        :map_url,
                                        {preferences: {}},
-                                       {clients_attributes: [:first_name, :last_name, :email, :telephones, :job, :notes, {preferences: {}}, :_destroy]},
+                                       # {clients_attributes: [:first_name, :last_name, :email, :telephones, :job, :notes, {preferences: {}}, :_destroy]},
                                        delete_images: [],
                                        images: [],
                                        extra_ids: [])

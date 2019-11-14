@@ -581,6 +581,7 @@
                       </div>
 
                       <hr/>
+
                       <div class="row">
                         <div class="col-md-8 offset-md-2 col-sm-12">
                           <div class="form-group mt-4 mb-4 existing_client">
@@ -603,6 +604,7 @@
                                 isSearchable: true,
                                 isClearable: true,
                                 isMulti: true,
+                                isCreatable: true,
                                 storedOption: @property.clients.blank? ? nil : @property.clients.map { |c| {"label": c.full_name, "value": c.id}},
                                 soloMode: true,
                                 ajaxEnabled: true,

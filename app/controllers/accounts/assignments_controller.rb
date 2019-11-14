@@ -1,15 +1,19 @@
 module Accounts
   class AssignmentsController < Accounts::BaseController
+    include AddRemoveAssociationsHandler
+
     before_action :authorize_owner_rest!
 
     # Calculates the diff between the existing and the requested assignments of a given property and applies it.
     def assign
+
       # Get the requested property
       property = current_account.properties.find(assignment_params[:pid])
+      associations_handler(property, 'users', assignment_params[:selection])
       # Fetch its existing assignments
-      existing_user_assignments = property.users.map(&:id)
+      # existing_user_assignments = property.users.map(&:id)
       # Fetch the requested assignment from the user dropdown
-      ru = assignment_params[:selection]
+      # ru = assignment_params[:selection]
       # Normalize the data to an array
       requested_user_assignments = ru.map(&:to_h).map { |hash| hash['value'] }
       # The calculated user ids to be remove from the property
