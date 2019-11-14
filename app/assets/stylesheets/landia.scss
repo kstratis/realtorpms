@@ -1338,6 +1338,7 @@ i.fa-lock:hover{
   position: relative;
   align-items: center;
   justify-content: flex-start;
+  padding: 8px 20px;
 }
 
 .has-active {
@@ -1363,10 +1364,6 @@ i.fa-lock:hover{
   .sidebar-masked-icon {
     background-color: rgb(255, 255, 255) !important;
   }
-}
-
-.stacked-menu .menu-link {
-  padding: 10px 20px;
 }
 
 .stacked-menu > .menu > .menu-item > .menu-link:focus {

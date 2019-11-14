@@ -13,8 +13,16 @@ module AddRemoveAssociationsHandler
     puts "object is: #{object.inspect}"
     # Fetch all existing associations
     existing_associations = object.send(association).map(&:id)
-    # Fetch the requested assignment from the user dropdown
-    # ru = assignment_params[:selection]
+
+    # ----
+
+    # Normalize the data to an array
+    requested_user_assignments = ru.map(&:to_h).map { |hash| hash['value'] }
+
+    # The calculated user ids to be remove from the property
+    remove_ids = existing_associations - requested_user_assignments
+    # The calculated user ids to be added to the property
+    add_ids = requested_user_assignments - existing_user_assignments
 
 
   end
