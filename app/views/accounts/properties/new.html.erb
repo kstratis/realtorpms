@@ -564,57 +564,25 @@
                   <fieldset>
                     <legend><%= t('js.forms.properties.wizard.step5.title') %></legend>
                     <div class="row">
-
-                      <div class="form-group ml-2">
-                        <div class="custom-control custom-control-inline custom-radio">
-                          <input type="radio" class="custom-control-input client-radio-selection" name="rdGroup1" id="new_client" data-counteroption="existing_client,no_client" checked>
-                          <label class="custom-control-label" for="new_client"><%= t('js.forms.properties.wizard.step5.new_owner') %></label>
-                        </div>
-                        <div class="custom-control custom-control-inline custom-radio">
-                          <input type="radio" class="custom-control-input client-radio-selection" name="rdGroup1" id="existing_client" data-counteroption="new_client,no_client">
-                          <label class="custom-control-label" for="existing_client"><%= t('js.forms.properties.wizard.step5.existing_client') %></label>
-                        </div>
-                        <div class="custom-control custom-control-inline custom-radio">
-                          <input type="radio" class="custom-control-input client-radio-selection" name="rdGroup1" id="no_client" data-counteroption="new_client,existing_client">
-                          <label class="custom-control-label" for="no_client"><%= t('js.forms.properties.wizard.step5.no_owner') %></label>
-                        </div>
-                      </div>
-                    </div>
-
-
-
-
-
-                    <div class="row">
-                      <!-- new_client disabledElement-->
-                      <%# This is for the nested user fields %>
-                      <div class="col-md-6 col-sm-12">
-                          <%= property.fields_for :clients do |clients_builder| %>
-                            <%= render 'accounts/clients/client_fields', f: clients_builder, vgroup: "fieldset-5" %>
-                          <% end %>
-                          <%= link_to_add_fields t('clients.new.add_owner'), property, :clients, 'accounts/clients/', "fieldset-5", 'mt-3' %>
-                      </div>
-
-                      <div class="no_client">
-                        <input id="noclient" disabled class="no_client_input form-control" type="hidden" name="property[noclient]" value="1">
+                      <div class="col-12">
+                        <i><%= t('js.forms.properties.wizard.step5.subtitle') %></i>
                       </div>
                     </div>
 
                     <hr/>
 
                     <div class="row">
-                      <div class="col-md-6 col-sm-12">
-                        <div class="form-group mt-4 mb-4 existing_client disabledElement">
+                      <div class="col-md-8 offset-md-2 col-sm-12">
+                        <div class="form-group mt-4 mb-4 existing_client">
                           <%= property.label :owner do %>
                             <%= content_tag(:i, nil, class: 'fas fa-user fa-fw') + ' ' + t('activerecord.attributes.property.owner') %>
-                            <abbr title="<%= t('js.components.select.required') %>">*</abbr>
                           <% end %>
                           <%= react_component('FormSelect', props: {
                               id: 'd',
-                              inputID: 'property_clientid',
-                              inputName: 'property[clientid]',
+                              inputID: 'property_clients',
+                              inputName: 'property[clients]',
+                              inputIsDisabled: false,
                               inputClassName: 'form-control existing_client_input',
-                              inputIsDisabled: true,
                               validatorGroup: 'fieldset-5',
                               endpoint: properties_clients_path,
                               isRequired: true,
@@ -624,6 +592,8 @@
                               isDisabled: false,
                               isSearchable: true,
                               isClearable: true,
+                              isMulti: true,
+                              isCreatable: true,
                               soloMode: true,
                               ajaxEnabled: true,
                               i18n: {

@@ -9,8 +9,6 @@ module AddRemoveAssociationsHandler
   #   i.e. [{"label"=>"John Smith", "value"=>36}, {"label"=>"Jane Stevens", "value"=>"Jane Stevens", "__isNew__"=>true}],
   # @return [Array] The new merged and sorted collection of objects.
   def associations_handler(object, association, selections)
-    puts 'handler working'
-    puts "object is: #{object.inspect}"
     # Fetch all existing associations. We can't use pluck here since it will alter the query which is something we can't
     # do since we are already using a custom scope.
     old_association_ids = object.send(association).map(&:id)
@@ -36,6 +34,8 @@ module AddRemoveAssociationsHandler
 
     # Apply the modifications
     # Ref: https://apidock.com/rails/ActiveRecord/Associations/CollectionProxy/delete
+    # current_account.send(association).find(id)) could also be written as: association.singularize.capitalize.constantize
+    # but I believe it's safer this way even if it ever throws.
     remove_ids.each {|id| object.send(association).delete(current_account.send(association).find(id))} unless remove_ids.blank?
     add_ids.each { |id| object.send(association) << association.singularize.capitalize.constantize.find(id) } unless add_ids.blank?
 

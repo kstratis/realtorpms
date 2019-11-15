@@ -112,8 +112,8 @@ module Accounts
     # POST /properties.json
     def create
       normalized_property_params = reconstruct_category(property_params)
+      clients_hash = normalized_property_params.extract!(:clients)
       @property = current_account.properties.new(normalized_property_params)
-      set_client
       set_location
       set_category
       # Scope the property to current account. This is only set once.
@@ -126,7 +126,7 @@ module Accounts
           if current_user.role(current_account) == 'user'
             current_user.properties <<  @property
           end
-          Cpa.where(property: @property).update_all(ownership: true)
+          set_client(clients_hash)
 
           format.html { redirect_to @property, notice: I18n.t('properties.created.flash') }
           format.js { render 'shared/ajax/handler',
@@ -151,7 +151,9 @@ module Accounts
     # PATCH/PUT /properties/1.json
     def update
       normalized_property_params = reconstruct_category(property_params)
-      normalized_property_params = set_client(normalized_property_params)
+      clients_hash = normalized_property_params.extract!(:clients)
+      set_client(clients_hash)
+      # normalized_property_params = set_client(normalized_property_params)
 
       set_location
       set_category
@@ -216,7 +218,7 @@ module Accounts
     end
 
     # Sets the selected client
-    def set_client(parameters)
+    def set_client(clients_hash)
       # --- SOS ---
       # When POSTing an associated object's id (i.e. location's id only +locationid+) and not the object itself
       # (location instance), you are gonna get the following error:
@@ -230,8 +232,7 @@ module Accounts
       #
       # Reference
       # https://stackoverflow.com/a/43476033/178728
-      associations_handler(@property, 'clients', property_params[:clients].blank? ? [] : JSON.parse(property_params[:clients]))
-      parameters.except!(:clients)
+      associations_handler(@property, 'clients', clients_hash[:clients].blank? ? [] : JSON.parse(clients_hash[:clients]))
     end
 
     def set_location

@@ -1,34 +1,13 @@
 module Accounts
   class ClientshipsController < Accounts::BaseController
+    include AddRemoveAssociationsHandler
     before_action :authorize_owner_rest!
 
     # Calculates the diff between the existing and the requested assignments of a given property and applies it.
     def assign
       # Get the requested client
       client = current_account.clients.find(clientship_params[:cid])
-      # Fetch its existing assignments
-      existing_user_clientships = client.users.map(&:id)
-      # Fetch the requested assignment from the user dropdown
-      ru = clientship_params[:selection]
-      # Normalize the data to an array
-      requested_user_clientships = ru.map(&:to_h).map { |hash| hash['value'] }
-      # The calculated user ids to be remove from the property
-      remove_ids = existing_user_clientships - requested_user_clientships
-      # The calculated user ids to be added to the property
-      add_ids = requested_user_clientships - existing_user_clientships
-      # Apply the modifications
-      remove_ids.each { |id| Clientship.find_by(client_id: client, user_id: id).destroy } unless remove_ids.blank?
-      add_ids.each { |id| client.users << current_account.users.find(id) } unless add_ids.blank?
-      # Report back to the UI
-      client.reload # Reload or we'll get stale entries
-      data = Array.new
-      client.users.each do |entry|
-        hash = {
-            label: "#{entry.first_name} #{entry.last_name}",
-            value: entry.id
-        }
-        data << hash
-      end
+      data = associations_handler(client, 'users', clientship_params[:selection])
       render :json => {:status => 200, :message => data, meta: I18n.t('js.components.select.assign_completed')} and return
     end
 
