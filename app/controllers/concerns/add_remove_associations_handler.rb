@@ -35,13 +35,8 @@ module AddRemoveAssociationsHandler
     end
 
     # Apply the modifications
-    unless remove_ids.blank?
-      # This is effectively asserting the join table (Model if exists) from an association.
-      # i.e. For +property.clients+ the join table is Cpa.
-      join_table = object.class.send('reflections')[association].options[:through].to_s.singularize.capitalize.constantize
-      puts join_table
-      join_table.where(id: remove_ids).destroy_all
-    end
+    # Ref: https://apidock.com/rails/ActiveRecord/Associations/CollectionProxy/delete
+    remove_ids.each {|id| object.send(association).delete(current_account.send(association).find(id))} unless remove_ids.blank?
     add_ids.each { |id| object.send(association) << association.singularize.capitalize.constantize.find(id) } unless add_ids.blank?
 
     object.reload
