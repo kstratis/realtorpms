@@ -590,8 +590,8 @@
                             <% end %>
                             <%= react_component('FormSelect', props: {
                                 id: 'g',
-                                inputID: 'property_clientid',
-                                inputName: 'property[clientid]',
+                                inputID: 'property_clients',
+                                inputName: 'property[clients]',
                                 inputIsDisabled: false,
                                 inputClassName: 'form-control existing_client_input',
                                 validatorGroup: 'fieldset-5',
@@ -605,7 +605,7 @@
                                 isClearable: true,
                                 isMulti: true,
                                 isCreatable: true,
-                                storedOption: @property.clients.blank? ? nil : @property.clients.map { |c| {"label": c.full_name, "value": c.id}},
+                                storedOption: @property.clients.blank? ? nil : @property.clients.map {|c| { "label": c.full_name, "value": c.id }},
                                 soloMode: true,
                                 ajaxEnabled: true,
                                 i18n: {

@@ -151,11 +151,12 @@ module Accounts
     # PATCH/PUT /properties/1.json
     def update
       normalized_property_params = reconstruct_category(property_params)
-      set_client
+      normalized_property_params = set_client(normalized_property_params)
+
       set_location
       set_category
 
-      params[:delete_images].try :each do |id|
+      normalized_property_params[:delete_images].try(:each) do |id|
         @property.images.find(id).purge
       end
 
@@ -168,6 +169,7 @@ module Accounts
                                       partial_success: 'shared/ajax/success',
                                       partial_failure: 'shared/ajax/failure'} }
         else
+
           format.html { render :edit }
           format.js { render 'shared/ajax/handler', locals: {resource: @property,
                                                              action: 'updated',
@@ -214,7 +216,7 @@ module Accounts
     end
 
     # Sets the selected client
-    def set_client
+    def set_client(parameters)
       # --- SOS ---
       # When POSTing an associated object's id (i.e. location's id only +locationid+) and not the object itself
       # (location instance), you are gonna get the following error:
@@ -228,23 +230,8 @@ module Accounts
       #
       # Reference
       # https://stackoverflow.com/a/43476033/178728
-      # --- SOS ---
-      # If an existing client id is given then assign the property to that person
-      # unless property_params[:clientid].blank?
-      #   puts 'INSIDE unless'
-      #   client = current_account.clients.find(property_params[:clientid])
-      #   client.properties << @property
-        # @property.landlord = Landlord.find(params[:action] == 'update' ? property_params[:landlordid] : @property.landlordid)
-      # end
-      associations_handler(@property, 'clients', JSON.parse(property_params[:clients]))
-      # Otherwise automatically create and assign the client using the "magic" properties of
-      # +accepts_nested_attributes_for :clients+ as described in the model file.
-      # In this case don't forget to set the account foreign key on the client/s.
-      # if property_params[:clientid].blank? && property_params[:noclient].blank?
-      #   if params[:action] == 'create'
-      #     @property.clients.each { |c| c.account = current_account}
-      #   end
-      # end
+      associations_handler(@property, 'clients', property_params[:clients].blank? ? [] : JSON.parse(property_params[:clients]))
+      parameters.except!(:clients)
     end
 
     def set_location

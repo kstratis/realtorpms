@@ -45,7 +45,7 @@ class Property < ApplicationRecord
   has_and_belongs_to_many :extras
   # CPA stands for Client-Property-Association (many-to-many join table)
   has_many :cpas, inverse_of: :property, dependent: :destroy
-  has_many :clients, -> { distinct }, through: :cpas
+  has_many :clients, -> {order('cpas.updated_at').select('clients.*, cpas.updated_at').distinct}, through: :cpas
 
   # accepts_nested_attributes_for :clients, allow_destroy: true
   # accepts_nested_attributes_for :clients, :reject_if => proc {|attributes| attributes.all? {|k,v| v.blank?} }

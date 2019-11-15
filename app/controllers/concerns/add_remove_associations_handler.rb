@@ -5,28 +5,56 @@ module AddRemoveAssociationsHandler
   #
   # @param object [Object] The object in question. i.e. property or user
   # @param association [String] The association object. i.e For 'clients' that would be property.send('clients')
-  # @param selection [Array] That's an array of objects.
+  # @param selections [Array] That's an array of objects.
   #   i.e. [{"label"=>"John Smith", "value"=>36}, {"label"=>"Jane Stevens", "value"=>"Jane Stevens", "__isNew__"=>true}],
   # @return [Array] The new merged and sorted collection of objects.
-  def associations_handler(object, association, selection)
+  def associations_handler(object, association, selections)
     puts 'handler working'
     puts "object is: #{object.inspect}"
-    # Fetch all existing associations
-    existing_association_ids = object.send(association).pluck(:id)
+    # Fetch all existing associations. We can't use pluck here since it will alter the query which is something we can't
+    # do since we are already using a custom scope.
+    old_association_ids = object.send(association).map(&:id)
+
+    new_entries, new_creatable_entries = [], []
+    selections.each do |selection|
+      new_entries << selection unless selection.has_key?('__isNew__')
+      new_creatable_entries << selection if selection.has_key?('__isNew__')
+    end
 
     # ----
+    # The calculated ids to be removed from the object's association
+    remove_ids = old_association_ids - (new_entries.map { |entry| entry['value'] })
+    # The calculated ids to be added to the object association
+    add_ids = (new_entries.map { |entry| entry['value'] }) - old_association_ids
 
-    # Normalize the data to an array
-    requested_user_assignments = ru.map(&:to_h).map { |hash| hash['value'] }
+    new_creatable_entries.each do |entry|
+      # This takes 'clients' and turns it to Client.create. It then gets its newly created id and appends it to +add_ids+
+      add_ids << association.singularize.capitalize.constantize.create(first_name: entry['value'].split(' ').try(:first),
+                                                                       last_name: entry['value'].split(' ').try(:second),
+                                                                       account: current_account).id
+    end
 
+    # Apply the modifications
+    unless remove_ids.blank?
+      # This is effectively asserting the join table (Model if exists) from an association.
+      # i.e. For +property.clients+ the join table is Cpa.
+      join_table = object.class.send('reflections')[association].options[:through].to_s.singularize.capitalize.constantize
+      puts join_table
+      join_table.where(id: remove_ids).destroy_all
+    end
+    add_ids.each { |id| object.send(association) << association.singularize.capitalize.constantize.find(id) } unless add_ids.blank?
 
+    object.reload
 
-
-    # The calculated user ids to be remove from the property
-    remove_ids = existing_association_ids - requested_user_assignments
-    # The calculated user ids to be added to the property
-    add_ids = requested_user_assignments - existing_user_assignments
-
+    data = Array.new
+    object.send(association).each do |entry|
+      hash = {
+          label: "#{entry.first_name} #{entry.last_name}",
+          value: entry.id
+      }
+      data << hash
+    end
+    data
 
   end
 end
