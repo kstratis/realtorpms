@@ -34,13 +34,13 @@ module Accounts
     end
 
     def new
-      @client = Client.new
-      # @client.build_landlord
+      @client = current_account.clients.new(model_type: current_account.model_types.find_by(name: 'clients'))
     end
 
     def create
       @client = Client.new(client_params)
       @client.account = current_account
+      @client.model_type = current_account.model_types.find_by(name: 'clients')
       if @client.save
         if current_user.role(current_account) == 'user'
           current_user.clients <<  @client

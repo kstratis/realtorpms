@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_06_112411) do
+ActiveRecord::Schema.define(version: 2019_11_15_182614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,8 @@ ActiveRecord::Schema.define(version: 2019_11_06_112411) do
     t.text "notes"
     t.text "searchprefs"
     t.text "color"
+    t.jsonb "preferences", default: {}, null: false
+    t.integer "model_type_id"
     t.index ["account_id"], name: "index_clients_on_account_id"
     t.index ["last_name"], name: "index_clients_on_last_name"
   end

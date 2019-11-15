@@ -104,8 +104,7 @@ module Accounts
     def new
       @property = current_account.properties.new(model_type: current_account.model_types.find_by(name: 'properties'))
       # Build a single new client
-      @property.clients.new
-      # @property.cpas.build.build_client
+      # @property.clients.new
     end
 
     # POST /properties
