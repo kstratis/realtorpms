@@ -1,5 +1,4 @@
 import FormStepper from '../bundles/steppers/form_stepper';
-import { clearValidatableFields } from './utilities';
 
 // Handles the property form validators (new, edit)
 $(document).on('turbolinks:load', function(e) {
@@ -96,7 +95,7 @@ $(document).on('turbolinks:load', function(e) {
     let selectedOption = $(e.target).attr('id');
     let counterElements = $(`#${selectedOption}`).data().counteroption.split(',');
     $(counterElements).each((index, counterElement) => $(`.${counterElement}`).addClass('disabledElement'));
-    $(counterElements).each((index, counterElement) => $(`.${counterElement}`).find(`input.${counterElement}_input, textarea.${counterElement}_input`).attr('disabled', true));
+    $(counterElements).each((index, counterElement) => $(`.${counterElement}`).find(`input.${counterElement}_input`).attr('disabled', true));
     $(`.${selectedOption}`).removeClass('disabledElement');
     $(`.${selectedOption}`).find(`input.${selectedOption}_input, textarea.${selectedOption}_input`).removeClass('disabledElement');
     $(`.${selectedOption}`).find(`input.${selectedOption}_input, textarea.${selectedOption}_input`).attr('disabled', false);
@@ -108,18 +107,6 @@ $(document).on('turbolinks:load', function(e) {
     $('.new_client_input').val('');
     $('.new_client_input').focus();
     $('.new_client_input').first().focus();
-  });
-
-
-  // Removes the dynamically inserted field
-  $(document).on('click', 'form .remove_client_entry', function(event) {
-    event.preventDefault();
-    if ($('.client-fields').length === 1 || $('.client-fields:not(.d-none)').length < 2) return;
-    $(this).prev('input[type=hidden]').val('1');
-    $(this).closest('.client-fields').fadeOut("normal", function() {
-      $(this).closest('.client-fields').addClass('d-none').css("display", "");
-    });
-    clearValidatableFields('.field-validatable');
   });
 
 });
@@ -141,9 +128,6 @@ function leavePage(msg) {
 $(document).on("page:before-change turbolinks:before-visit", function() {
   // Make sure it only works on the properties stepper
   if (window.location.pathname === '/properties/new' || window.location.pathname.match(/^\/properties\/\d+\/edit$/)) {
-    // Unbind the following 2 listeners of they'll fire multiple times
-    $(document).off('click', 'form .add_fields');
-    $(document).off('click', 'form .remove_fields');
     // Gets the stepper status. If untouched then don't bug the user. Otherwise, show a warning
     if (!window.form_stepper.getStatus()) return;
     var alertsDomNode = $('#alerts');
