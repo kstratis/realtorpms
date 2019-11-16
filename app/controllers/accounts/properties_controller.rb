@@ -233,8 +233,8 @@ module Accounts
       # https://stackoverflow.com/a/43476033/178728
       # ---
       #
-      # The block basically sets attributes on the join model +Cpa+.
-      # It basically says: Cpa.where(property: @property, clients: get clients from the generated ids).update_all(ownership: true)
+      # The block parameter is used to set additional attributes on the join model +Cpa+.
+      # It basically says: Cpa.where(property: @property, clients: [ids]).update_all(ownership: true)
       associations_handler(@property, 'clients', clients_hash[:clients].blank? ? [] : JSON.parse(clients_hash[:clients])) do |add_ids|
         @property.class.reflections['clients'].options[:through].to_s.singularize.capitalize.constantize.where(property: @property,
                                                                                                               client: current_account.clients.where(id: add_ids)).update_all(ownership: true)
@@ -286,11 +286,9 @@ module Accounts
                                        :adxe,
                                        :adspitogatos,
                                        :clients,
-                                       # :noclient,
                                        :avatar,
                                        :map_url,
                                        {preferences: {}},
-                                       # {clients_attributes: [:first_name, :last_name, :email, :telephones, :job, :notes, {preferences: {}}, :_destroy]},
                                        delete_images: [],
                                        images: [],
                                        extra_ids: [])
