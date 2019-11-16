@@ -233,7 +233,7 @@ module Accounts
       # https://stackoverflow.com/a/43476033/178728
       # ---
       #
-      # The block basically sets attributes on the join table cpas.
+      # The block basically sets attributes on the join model +Cpa+.
       # It basically says: Cpa.where(property: @property, clients: get clients from the generated ids).update_all(ownership: true)
       associations_handler(@property, 'clients', clients_hash[:clients].blank? ? [] : JSON.parse(clients_hash[:clients])) do |add_ids|
         @property.class.reflections['clients'].options[:through].to_s.singularize.capitalize.constantize.where(property: @property,
