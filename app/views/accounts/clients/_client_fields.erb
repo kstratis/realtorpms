@@ -73,13 +73,12 @@
   </small>
 </div>
 
-<hr />
-
-  <!-- Extended fields -->
-  <%= f.fields_for :preferences, OpenStruct.new(@client.preferences) do |builder| %>
-    <% @client.model_type.fields.each do |field| %>
-      <%= render "accounts/cfields/#{field.field_type}", field: field, f: builder, vgroup: nil, classes: 'dummy' %>
-    <% end %>
+<!-- Extended fields -->
+<%= f.fields_for :preferences, OpenStruct.new(@client.preferences) do |builder| %>
+  <% @client.model_type.fields.each do |field| %>
+    <%= render "accounts/cfields/#{field.field_type}", field: field, f: builder, vgroup: nil, classes: 'dummy' %>
   <% end %>
+<% end %>
+
 </div>
 <!-- /.form-group -->
