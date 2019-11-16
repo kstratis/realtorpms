@@ -231,7 +231,14 @@ module Accounts
       #
       # Reference
       # https://stackoverflow.com/a/43476033/178728
-      associations_handler(@property, 'clients', clients_hash[:clients].blank? ? [] : JSON.parse(clients_hash[:clients]))
+      # ---
+      #
+      # The block basically sets attributes on the join table cpas.
+      # It basically says: Cpa.where(property: @property, clients: get clients from the generated ids).update_all(ownership: true)
+      associations_handler(@property, 'clients', clients_hash[:clients].blank? ? [] : JSON.parse(clients_hash[:clients])) do |add_ids|
+        @property.class.reflections['clients'].options[:through].to_s.singularize.capitalize.constantize.where(property: @property,
+                                                                                                              client: current_account.clients.where(id: add_ids)).update_all(ownership: true)
+      end
     end
 
     def set_location

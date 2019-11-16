@@ -8,7 +8,7 @@ module AddRemoveAssociationsHandler
   # @param selections [Array] That's an array of objects.
   #   i.e. [{"label"=>"John Smith", "value"=>36}, {"label"=>"Jane Stevens", "value"=>"Jane Stevens", "__isNew__"=>true}],
   # @return [Array] The new merged and sorted collection of objects.
-  def associations_handler(object, association, selections)
+  def associations_handler(object, association, selections, &block)
     # Fetch all existing associations. We can't use pluck here since it will alter the query which is something we can't
     # do since we are already using a custom scope.
     old_association_ids = object.send(association).map(&:id)
@@ -37,7 +37,10 @@ module AddRemoveAssociationsHandler
     # current_account.send(association).find(id)) could also be written as: association.singularize.capitalize.constantize
     # but I believe it's safer this way even if it ever throws.
     remove_ids.each {|id| object.send(association).delete(current_account.send(association).find(id))} unless remove_ids.blank?
-    add_ids.each { |id| object.send(association) << association.singularize.capitalize.constantize.find(id) } unless add_ids.blank?
+    add_ids.each { |id| object.send(association) << current_account.send(association).find(id) } unless add_ids.blank?
+
+    # This is mainly used to set attributes on the join table (if any).
+    block.call(add_ids) if block_given?
 
     object.reload
 
