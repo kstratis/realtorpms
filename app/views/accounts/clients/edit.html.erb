@@ -15,13 +15,6 @@
           <div class="col-lg-6 offset-lg-3 col-md-12">
             <%= render 'accounts/clients/client_fields', f: f %>
 
-            <!-- Extended fields -->
-            <%= f.fields_for :preferences, OpenStruct.new(@client.preferences) do |builder| %>
-              <% @client.model_type.fields.each do |field| %>
-                <%= render "accounts/cfields/#{field.field_type}", field: field, f: builder, vgroup: nil, classes: 'dummy' %>
-              <% end %>
-            <% end %>
-
             <hr/>
             <!-- .form-actions -->
             <div class="form-actions">

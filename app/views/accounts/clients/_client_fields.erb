@@ -73,13 +73,13 @@
   </small>
 </div>
 
-  <div class="text-right">
-    <%= f.hidden_field :_destroy %>
-    <%= link_to '#', class: 'remove_client_entry btn btn-sm btn-secondary' do %>
-      <i class="fas fa-trash fa-fw"></i>
-    <% end %>
-  </div>
-
 <hr />
+
+  <!-- Extended fields -->
+  <%= f.fields_for :preferences, OpenStruct.new(@client.preferences) do |builder| %>
+    <% @client.model_type.fields.each do |field| %>
+      <%= render "accounts/cfields/#{field.field_type}", field: field, f: builder, vgroup: nil, classes: 'dummy' %>
+    <% end %>
+  <% end %>
 </div>
 <!-- /.form-group -->

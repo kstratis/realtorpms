@@ -210,7 +210,24 @@
                 </div><!-- .card-body -->
                 <div class="card-body">
                   <table class="table normalize-table">
+                    <% if @property.clients.blank?  %>
+                      <h2><%= t 'activerecord.attributes.property.owner_header_missing' %></h2>
+                      <div class="no-entries">
+                        <i class="no-results"> </i>
+                      </div>
+                    <% else %>
+                    <thead>
+                    <tr>
+                      <th scope="col"><%= t 'activerecord.attributes.property.owner_header_name' %></th>
+                      <th scope="col"><%= t 'activerecord.attributes.property.owner_header_tel' %></th>
+                    </tr>
+                    </thead>
                     <tbody>
+
+
+
+
+
                     <div class="table-responsive">
                       <% @property.clients.each do |client| %>
                         <tr>
@@ -228,6 +245,7 @@
                       <% end %>
                     </div>
                     </tbody>
+                    <% end %>
                   </table>
                 </div>
               </div>
