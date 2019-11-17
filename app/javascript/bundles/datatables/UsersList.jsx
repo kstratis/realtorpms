@@ -98,7 +98,9 @@ const UsersList = ({
             </div>
           </div>
 
-          <div className={`${filtersOpen ? 'col-xl-8' : 'col-xl-12'}`}>
+          <div className={`d-block ${filtersOpen ? 'col-xl-8' : 'col-xl-12'}`}>
+            <div className={'card'}>
+              <div className={'card-body'}>
             <div className={'row'}>
               <div className={'mb-3 custom-px d-flex flex-fill flex-nowrap'}>
                 <div className={'flex-grow-1'}>
@@ -151,6 +153,7 @@ const UsersList = ({
                 </div>
               </div>
             </div>
+              </div>
             {/*  </div>*/}
             {dataset.length > 0 ? (
               <div>
@@ -374,6 +377,7 @@ const UsersList = ({
             )}
           </div>
         </div>
+          </div>
       </div>
     </div>
   );
