@@ -13,7 +13,7 @@ import ModalContainer from '../components/ModalContainer';
 import AsyncSelectContainer from '../components/selects/AsyncSelectContainer';
 import FormComponents from './fields/FormComponents';
 import useFilterToggle from '../hooks/useFilterToggle';
-import {hasParams} from '../utilities/helpers';
+import { hasParams } from '../utilities/helpers';
 
 const PropertiesList = ({
   handleLocationInput,
@@ -52,7 +52,7 @@ const PropertiesList = ({
   properties_path,
   i18n
 }) => {
-  const {filtersOpen, setFiltersOpen} = useFilterToggle('propertyFiltersOpen');
+  const { filtersOpen, setFiltersOpen } = useFilterToggle('propertyFiltersOpen');
   const handleChange = event => setFiltersOpen(filtersOpen => !filtersOpen);
 
   return (
@@ -213,94 +213,106 @@ const PropertiesList = ({
                 />
                 <hr />
                 {cfields.fields.map((cfield, index) => {
-                  return <FormComponents
-                    key={index}
-                    cfield={cfield}
-                    storedSelection={cfields.storedSelections[Object.values(cfield)[0].slug] || null}
-                    i18n={i18n.cfields}
-                    handleCfieldDropdown={handleCfieldDropdown}
-                    handleCfieldTextfield={handleCfieldTextfield}
-                    handleCfieldCheckbox={handleCfieldCheckbox} />
+                  return (
+                    <FormComponents
+                      key={index}
+                      cfield={cfield}
+                      storedSelection={cfields.storedSelections[Object.values(cfield)[0].slug] || null}
+                      i18n={i18n.cfields}
+                      handleCfieldDropdown={handleCfieldDropdown}
+                      handleCfieldTextfield={handleCfieldTextfield}
+                      handleCfieldCheckbox={handleCfieldCheckbox}
+                    />
+                  );
                 })}
               </div>
             </div>
           </div>
 
           <div className={`${filtersOpen ? 'col-xl-8' : 'col-xl-12'}`}>
-            <div className={'row'}>
-              {/* Generate the needed filters according to the i18n keys of the erb template */}
-              <div className={'mb-3 custom-px d-flex flex-fill flex-nowrap'}>
-                <div className={'flex-grow-1'}>
-                  <AsyncSelectContainer
-                    id={'AsyncSelectContainer'}
-                    i18n={i18n}
-                    collection_endpoint={{ url: locations_endpoint, action: 'get' }}
-                    action_endpoint={{ url: '', action: '', callback: handleLocationInput }}
-                    storedOptions={locations_filter['storedOptions']}
-                    hasFeedback={false}
-                    isCreatable={false}
-                  />
-                </div>
-                <div className={'btn-group btn-group-toggle pl-2'}>
-                  <label
-                    className={`btn ${hasParams() ? 'btn-danger' : 'btn-secondary'} toggle-button ${
-                      filtersOpen ? 'active' : ''
-                    }`}>
-                    <input name={'filter-toggle'} type="checkbox" checked={{ filtersOpen }} onChange={handleChange} />
-                    <i className={'fas fa-filter fa-fw'} />
-                    <span className="d-none d-md-inline">&nbsp;{i18n.filters.title}</span>
-                  </label>
-                </div>
-                <div className={'flex-shrink-1 text-center'}>
-                  <SortFilter
-                    handleFn={handleSort}
-                    slug={'created_at'}
-                    title={i18n.filters.sortByDate.title}
-                    currentSorting={sorting}
-                    currentOrdering={ordering}
-                    options={[
-                      {
-                        sn: 0,
-                        text: i18n.filters.sortByDate.option1,
-                        sort_filter: 'created_at',
-                        sort_order: 'desc',
-                        icon: 'fas fa-sort-amount-up fa-fw'
-                      },
-                      {
-                        sn: 1,
-                        text: i18n.filters.sortByDate.option2,
-                        sort_filter: 'created_at',
-                        sort_order: 'asc',
-                        icon: 'fas fa-sort-amount-down fa-fw'
-                      }
-                    ]}
-                  />
-                </div>
-                <div className={``}>
-                  <ModalContainer
-                    id={'modal-window'}
-                    fireButtonLabel={`<i class='fas fa-save fa-lg fa-fw' />`}
-                    fireButtonBtnSize={`md`}
-                    fireButtonBtnType={`success`}
-                    avatar={null}
-                    modalTitle={i18n.search_save_title}
-                    modalHeader={i18n.search_save_subtitle}
-                    child={'StoreClientSearch'}
-                    buttonCloseLabel={i18n.search_save_buttonCloseLabel}
-                    ajaxEnabled={true}
-                    isClearable={true}
-                    backspaceRemovesValue={true}
-                    isSearchable={true}
-                    i18n={i18n}
-                    buttonDisabled={!hasParams()}
-                    clientsEndpoint={clients_endpoint}
-                    assignmentshipsEndpoint={assignmentships_endpoint}
-                    i18nPriceOptions={price_filter['options']}
-                    i18nSizeOptions={size_filter['options']}
-                    i18nFloorOptions={floors_filter['options']}
-                    i18nCategoryOptions={category_filter['options']}
-                    i18nCfieldOptions={cfields['options']}
-                  />
+            <div className={'card'}>
+              <div className={'card-body'}>
+                <div className={'row'}>
+                  {/* Generate the needed filters according to the i18n keys of the erb template */}
+                  <div className={'custom-px d-flex flex-fill flex-nowrap'}>
+                    <div className={'flex-grow-1'}>
+                      <AsyncSelectContainer
+                        id={'AsyncSelectContainer'}
+                        i18n={i18n}
+                        collection_endpoint={{ url: locations_endpoint, action: 'get' }}
+                        action_endpoint={{ url: '', action: '', callback: handleLocationInput }}
+                        storedOptions={locations_filter['storedOptions']}
+                        hasFeedback={false}
+                        isCreatable={false}
+                      />
+                    </div>
+                    <div className={'btn-group btn-group-toggle pl-2'}>
+                      <label
+                        className={`btn ${hasParams() ? 'btn-danger' : 'btn-secondary'} toggle-button ${
+                          filtersOpen ? 'active' : ''
+                        }`}>
+                        <input
+                          name={'filter-toggle'}
+                          type="checkbox"
+                          checked={{ filtersOpen }}
+                          onChange={handleChange}
+                        />
+                        <i className={'fas fa-filter fa-fw'} />
+                        <span className="d-none d-md-inline">&nbsp;{i18n.filters.title}</span>
+                      </label>
+                    </div>
+                    <div className={'flex-shrink-1 text-center'}>
+                      <SortFilter
+                        handleFn={handleSort}
+                        slug={'created_at'}
+                        title={i18n.filters.sortByDate.title}
+                        currentSorting={sorting}
+                        currentOrdering={ordering}
+                        options={[
+                          {
+                            sn: 0,
+                            text: i18n.filters.sortByDate.option1,
+                            sort_filter: 'created_at',
+                            sort_order: 'desc',
+                            icon: 'fas fa-sort-amount-up fa-fw'
+                          },
+                          {
+                            sn: 1,
+                            text: i18n.filters.sortByDate.option2,
+                            sort_filter: 'created_at',
+                            sort_order: 'asc',
+                            icon: 'fas fa-sort-amount-down fa-fw'
+                          }
+                        ]}
+                      />
+                    </div>
+                    <div className={``}>
+                      <ModalContainer
+                        id={'modal-window'}
+                        fireButtonLabel={`<i class='fas fa-save fa-lg fa-fw' />`}
+                        fireButtonBtnSize={`md`}
+                        fireButtonBtnType={`success`}
+                        avatar={null}
+                        modalTitle={i18n.search_save_title}
+                        modalHeader={i18n.search_save_subtitle}
+                        child={'StoreClientSearch'}
+                        buttonCloseLabel={i18n.search_save_buttonCloseLabel}
+                        ajaxEnabled={true}
+                        isClearable={true}
+                        backspaceRemovesValue={true}
+                        isSearchable={true}
+                        i18n={i18n}
+                        buttonDisabled={!hasParams()}
+                        clientsEndpoint={clients_endpoint}
+                        assignmentshipsEndpoint={assignmentships_endpoint}
+                        i18nPriceOptions={price_filter['options']}
+                        i18nSizeOptions={size_filter['options']}
+                        i18nFloorOptions={floors_filter['options']}
+                        i18nCategoryOptions={category_filter['options']}
+                        i18nCfieldOptions={cfields['options']}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -311,7 +323,7 @@ const PropertiesList = ({
                 <div className={`row relativeposition ${isLoading ? 'reduced-opacity' : ''}`}>
                   <FlipMove typeName={null}>
                     {dataset.map((entry, index) => (
-                      <PropertyEntry key={entry.slug} entry={entry} filtersOpen={filtersOpen}/>
+                      <PropertyEntry key={entry.slug} entry={entry} filtersOpen={filtersOpen} />
                     ))}
                   </FlipMove>
                 </div>
