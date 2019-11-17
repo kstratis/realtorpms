@@ -7,6 +7,11 @@ module Cfields
 
   # Filters any custom fields
   def cfields_filtering(name, entity, filters = {})
+    puts '---'
+    puts name
+    puts entity
+    puts filters
+    puts '---'
     initial_cfields = Hash.new
     cfields_dump = get_cfields(name)
     cfields_raw = filters.keys.grep(/^cfield_/)

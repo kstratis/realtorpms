@@ -46,7 +46,7 @@ module PersonDatatable
     end
 
     # Custom fields filtering
-    @persons, initial_cfields = cfields_filtering('users', @persons, filters)
+    @persons, initial_cfields = cfields_filtering(@persons.klass.to_s.pluralize.downcase, @persons, filters)
 
     if filters[:sorting] && filters[:ordering]
       if filters['sorting'] == 'assignments_count'

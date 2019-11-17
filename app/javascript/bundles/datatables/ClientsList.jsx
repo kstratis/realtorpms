@@ -30,7 +30,7 @@ const ClientsList = ({
   clients_path,
   cfields
 }) => {
-  const { filtersOpen, setFiltersOpen } = useFilterToggle('userFiltersOpen');
+  const { filtersOpen, setFiltersOpen } = useFilterToggle('clientFiltersOpen');
   const handleChange = event => setFiltersOpen(filtersOpen => !filtersOpen);
 
   return (

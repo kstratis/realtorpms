@@ -7,9 +7,9 @@ module Accounts
 
     def index
       if current_user.is_admin?(current_account)
-        filter_persons(current_account.clients)
+        filter_persons(current_account.clients, params)
       else
-        filter_persons(current_user.clients)
+        filter_persons(current_user.clients, params)
       end
     end
 
