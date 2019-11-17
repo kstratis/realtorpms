@@ -4,6 +4,7 @@
 
 <div class="page-container">
   <div class="container">
+    <div class="app-container">
     <!-- .card -->
     <div class="card card-fluid">
       <%= render partial: 'shared/card_header/header', locals: {title: @user.full_name, btn_text: t('properties.show.back'), btn_link: :back}  %>
@@ -153,5 +154,6 @@
 
       </div><!-- /.card-body -->
     </div><!-- /.card -->
+  </div>
   </div>
 </div>

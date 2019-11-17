@@ -16,176 +16,178 @@
       <% end %>
     </div>
   </div>
-<% end  %>
+<% end %>
 
 <div class="page-container">
   <div class="container">
-    <!-- .card -->
-    <div class="card card-fluid">
+    <div class="app-container">
+      <!-- .card -->
+      <div class="card card-fluid">
 
-      <%= render partial: 'shared/card_header/header', locals: {title: @client.full_name, btn_text: t('properties.show.back'), btn_link: :back} %>
-      <!-- .card-body -->
-      <div class="card-body">
-
-
-        <div class="col-lg-6 offset-lg-3 col-md-12">
-          <div class="media mb-3">
-            <div class="user-avatar user-avatar-xl fileinput-button">
-              <%= render_avatar(@client, 'tile-xl', "avatar_preview") %>
-            </div><!-- /avatar -->
-            <div class="media-body pl-3 pt-3">
-              <strong><%= @client.full_name %></strong><br>
-              <span><%= @client.job.blank? ? '-' : @client.job %></span>
-            </div>
-          </div>
-        </div> <!-- /.media -->
-
-        <div class="row">
-          <div class="col-lg-6 offset-lg-3 col-md-12">
-            <div class="table-responsive">
-              <!-- .table -->
-              <table class="table table-striped">
-                <tbody>
-                <tr>
-                  <td><%= t('activerecord.attributes.client.first_name') %></td>
-                  <td><%= @client.first_name %></td>
-                </tr>
-                <tr>
-                  <td><%= t('activerecord.attributes.client.last_name') %></td>
-                  <td><%= @client.last_name %></td>
-                </tr>
-                <tr>
-                  <td><%= t('activerecord.attributes.client.job') %></td>
-                  <td><%= @client.job.blank? ? '-' : @client.job %></td>
-                </tr>
-                <tr>
-                  <td><%= t('activerecord.attributes.client.email') %></td>
-                  <td><%= @client.email.blank? ? '-' : @client.email %></td>
-                </tr>
-                <tr>
-                  <td><%= t('activerecord.attributes.client.telephones') %></td>
-                  <td><%= @client.telephones.blank? ? '-' : @client.telephones %></td>
-                </tr>
-                <tr>
-                  <td><%= t('activerecord.attributes.client.registered') %></td>
-                  <!-- +l+ function accounts for the localized timedate -->
-                  <td><%= l(@client.created_at, format: :custom) %></td>
-                </tr>
-
-                <% @client.model_type.fields.each do |field| %>
-                  <%= render "accounts/cfields/#{field.field_type}_read",
-                             cfield_label: field.name,
-                             cfield_data: @client.preferences[field.slug] %>
-                <% end %>
-
-                </tbody>
-              </table>
-            </div>
-          </div>
+        <%= render partial: 'shared/card_header/header', locals: {title: @client.full_name, btn_text: t('properties.show.back'), btn_link: :back} %>
+        <!-- .card-body -->
+        <div class="card-body">
 
 
           <div class="col-lg-6 offset-lg-3 col-md-12">
-
-            <hr />
-            <div class="row">
-            <div class="col-6">
-            <%= react_component('ModalContainer', props: {
-                id: 'modal-window-saved-prefs',
-                fireButtonLabel: '<i class="fas fa-info fa-fw"></i>&nbsp;' + t('clients.show.search_prefs'),
-                fireButtonBtnType: 'danger',
-                avatar: nil,
-                child: 'RetrieveClientSearch',
-                modalTitle: t('js.components.modal.search_save.title_alt'),
-                modalHeader: t('js.components.modal.search_save.subtitle'),
-                buttonOKLabel: t('properties.ok_button'),
-                buttonCancelLabel: t('properties.cancel_button'),
-                buttonCloseLabel: t('properties.close_button'),
-                soloMode: true,
-                searchprefs: @client.searchprefs,
-                ajaxEnabled: true,
-                isClearable: true,
-                buttonDisabled: @client.searchprefs.blank?,
-                backspaceRemovesValue: true,
-                isSearchable: true,
-                i18nPriceOptions: price_options,
-                i18nSizeOptions: size_options,
-                i18nFloorOptions: floors_options,
-                i18nCategoryOptions: category_options,
-                i18nCfieldOptions: cfields_options,
-                feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
-                i18n: {
-                    search_save_filters: t('js.components.modal.search_save.filters'),
-                    search_save_subtitle: t('js.components.modal.search_save.header', client_name: @client.full_name),
-                    no_lists_available: t('js.components.modal.favlists.no_results'),
-                    search_save_criteria: t('js.components.modal.search_save.criteria'),
-                    property_cover_alt: t('js.components.modal.favlists.property_cover_alt'),
-                    add_list_action: t('js.components.modal.favlists.add_list_action'),
-                    loading_alt: t('js.components.modal.favlists.loading_alt'),
-                    listname_placeholder: t('js.components.modal.favlists.listname_placeholder')
-                }
-            }, prerender: false) %>
-            </div>
-            <div class="col-6">
-              <a class="btn btn-sm btn-secondary btn-action <%= @client.searchprefs.blank? ? 'disabled' : '' %>" href="<%= "#{properties_path}?#{@client.searchprefs}" %>">
-                <i class="fas fa-pen fa-fw"></i> &nbsp;<span><%= t('clients.show.edit_search_tooltip') %></span>
-              </a>
-            </div>
-            </div>
-
-          </div>
-
-          <% if current_user.is_admin?(current_account) %>
-
-            <div class="col-lg-6 offset-lg-3 col-md-12">
-              <hr />
-              <span class="d-inline-block mb-2 badge badge-success"><%= t('activerecord.attributes.client.availability') %></span>
-              <div class="mb-2">
-                <%= react_component('AsyncSelectContainer', props: {
-                    id: 'MultiAsyncSelectContainer',
-                    collection_endpoint: {url: users_path, action: 'get'},
-                    action_endpoint: {url: clientships_path(@client), action: 'post'},
-                    storedOptions: @client.users.blank? ? nil : @client.users.map { |user| {label: "#{user.first_name} #{user.last_name}", value: user.id} },
-                    hasFeedback: false,
-                    i18n: {
-                        select: {
-                            placeholder: t('js.components.select.placeholder_user_assignment'),
-                            noresults: t('js.components.select.noresults'),
-                            loading: t('js.components.select.loading_html'),
-                            feedback: t('js.components.select.assignments_feedback') # not used here
-                        }
-                    }
-                }, prerender: false) %>
+            <div class="media mb-3">
+              <div class="user-avatar user-avatar-xl fileinput-button">
+                <%= render_avatar(@client, 'tile-xl', "avatar_preview") %>
+              </div><!-- /avatar -->
+              <div class="media-body pl-3 pt-3">
+                <strong><%= @client.full_name %></strong><br>
+                <span><%= @client.job.blank? ? '-' : @client.job %></span>
               </div>
             </div>
-          <% end %>
-      </div>
+          </div> <!-- /.media -->
 
-      </div> <!-- /.card-body -->
-    </div> <!-- /.card -->
-    <% unless @client.searchprefs.blank? %>
-      <hr class="hr-text" data-content="&#9672;&nbsp; <%= t('clients.show.matches') %> &nbsp;&#9672;">
-      <%= react_component('ClientPrefsListWithDatatable', props: {
-          initial_payload: {
-              dataset_wrapper: @propertieslist,
-              results_per_page: @results_per_page,
-              total_entries: @total_entries,
-              current_page: @current_page,
-              initial_search: @initial_search,
-              initial_sorting: @initial_sorting,
-              initial_ordering: @initial_ordering,
-              locations_endpoint: properties_locations_url,
-              clients_endpoint: clients_url,
-              client_endpoint: client_path(@client),
-              assignmentships_endpoint: matches_url,
-              properties_path: properties_path,
-              hasFeedback: false,
-              object_type: 'clientprefslist'
-          },
-          i18n: {
-              no_results: t('js.components.select.noresults'),
-          }
-      }, prerender: false) %>
-    <% end %>
+          <div class="row">
+            <div class="col-lg-6 offset-lg-3 col-md-12">
+              <div class="table-responsive">
+                <!-- .table -->
+                <table class="table table-striped">
+                  <tbody>
+                  <tr>
+                    <td><%= t('activerecord.attributes.client.first_name') %></td>
+                    <td><%= @client.first_name %></td>
+                  </tr>
+                  <tr>
+                    <td><%= t('activerecord.attributes.client.last_name') %></td>
+                    <td><%= @client.last_name %></td>
+                  </tr>
+                  <tr>
+                    <td><%= t('activerecord.attributes.client.job') %></td>
+                    <td><%= @client.job.blank? ? '-' : @client.job %></td>
+                  </tr>
+                  <tr>
+                    <td><%= t('activerecord.attributes.client.email') %></td>
+                    <td><%= @client.email.blank? ? '-' : @client.email %></td>
+                  </tr>
+                  <tr>
+                    <td><%= t('activerecord.attributes.client.telephones') %></td>
+                    <td><%= @client.telephones.blank? ? '-' : @client.telephones %></td>
+                  </tr>
+                  <tr>
+                    <td><%= t('activerecord.attributes.client.registered') %></td>
+                    <!-- +l+ function accounts for the localized timedate -->
+                    <td><%= l(@client.created_at, format: :custom) %></td>
+                  </tr>
 
+                  <% @client.model_type.fields.each do |field| %>
+                    <%= render "accounts/cfields/#{field.field_type}_read",
+                               cfield_label: field.name,
+                               cfield_data: @client.preferences[field.slug] %>
+                  <% end %>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+
+            <div class="col-lg-6 offset-lg-3 col-md-12">
+
+              <hr/>
+              <div class="row">
+                <div class="col-6">
+                  <%= react_component('ModalContainer', props: {
+                      id: 'modal-window-saved-prefs',
+                      fireButtonLabel: '<i class="fas fa-info fa-fw"></i>&nbsp;' + t('clients.show.search_prefs'),
+                      fireButtonBtnType: 'danger',
+                      avatar: nil,
+                      child: 'RetrieveClientSearch',
+                      modalTitle: t('js.components.modal.search_save.title_alt'),
+                      modalHeader: t('js.components.modal.search_save.subtitle'),
+                      buttonOKLabel: t('properties.ok_button'),
+                      buttonCancelLabel: t('properties.cancel_button'),
+                      buttonCloseLabel: t('properties.close_button'),
+                      soloMode: true,
+                      searchprefs: @client.searchprefs,
+                      ajaxEnabled: true,
+                      isClearable: true,
+                      buttonDisabled: @client.searchprefs.blank?,
+                      backspaceRemovesValue: true,
+                      isSearchable: true,
+                      i18nPriceOptions: price_options,
+                      i18nSizeOptions: size_options,
+                      i18nFloorOptions: floors_options,
+                      i18nCategoryOptions: category_options,
+                      i18nCfieldOptions: cfields_options,
+                      feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
+                      i18n: {
+                          search_save_filters: t('js.components.modal.search_save.filters'),
+                          search_save_subtitle: t('js.components.modal.search_save.header', client_name: @client.full_name),
+                          no_lists_available: t('js.components.modal.favlists.no_results'),
+                          search_save_criteria: t('js.components.modal.search_save.criteria'),
+                          property_cover_alt: t('js.components.modal.favlists.property_cover_alt'),
+                          add_list_action: t('js.components.modal.favlists.add_list_action'),
+                          loading_alt: t('js.components.modal.favlists.loading_alt'),
+                          listname_placeholder: t('js.components.modal.favlists.listname_placeholder')
+                      }
+                  }, prerender: false) %>
+                </div>
+                <div class="col-6">
+                  <a class="btn btn-sm btn-secondary btn-action <%= @client.searchprefs.blank? ? 'disabled' : '' %>" href="<%= "#{properties_path}?#{@client.searchprefs}" %>">
+                    <i class="fas fa-pen fa-fw"></i> &nbsp;<span><%= t('clients.show.edit_search_tooltip') %></span>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+            <% if current_user.is_admin?(current_account) %>
+
+              <div class="col-lg-6 offset-lg-3 col-md-12">
+                <hr/>
+                <span class="d-inline-block mb-2 badge badge-success"><%= t('activerecord.attributes.client.availability') %></span>
+                <div class="mb-2">
+                  <%= react_component('AsyncSelectContainer', props: {
+                      id: 'MultiAsyncSelectContainer',
+                      collection_endpoint: {url: users_path, action: 'get'},
+                      action_endpoint: {url: clientships_path(@client), action: 'post'},
+                      storedOptions: @client.users.blank? ? nil : @client.users.map { |user| {label: "#{user.first_name} #{user.last_name}", value: user.id} },
+                      hasFeedback: false,
+                      i18n: {
+                          select: {
+                              placeholder: t('js.components.select.placeholder_user_assignment'),
+                              noresults: t('js.components.select.noresults'),
+                              loading: t('js.components.select.loading_html'),
+                              feedback: t('js.components.select.assignments_feedback') # not used here
+                          }
+                      }
+                  }, prerender: false) %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+
+        </div> <!-- /.card-body -->
+      </div> <!-- /.card -->
+      <% unless @client.searchprefs.blank? %>
+        <hr class="hr-text" data-content="&#9672;&nbsp; <%= t('clients.show.matches') %> &nbsp;&#9672;">
+        <%= react_component('ClientPrefsListWithDatatable', props: {
+            initial_payload: {
+                dataset_wrapper: @propertieslist,
+                results_per_page: @results_per_page,
+                total_entries: @total_entries,
+                current_page: @current_page,
+                initial_search: @initial_search,
+                initial_sorting: @initial_sorting,
+                initial_ordering: @initial_ordering,
+                locations_endpoint: properties_locations_url,
+                clients_endpoint: clients_url,
+                client_endpoint: client_path(@client),
+                assignmentships_endpoint: matches_url,
+                properties_path: properties_path,
+                hasFeedback: false,
+                object_type: 'clientprefslist'
+            },
+            i18n: {
+                no_results: t('js.components.select.noresults'),
+            }
+        }, prerender: false) %>
+      <% end %>
+
+    </div>
   </div>
 </div>

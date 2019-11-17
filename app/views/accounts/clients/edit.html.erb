@@ -5,26 +5,28 @@
 
 <div class="page-container">
   <div class="container">
-    <!-- .card -->
-    <div class="card card-fluid">
-      <%= render partial: 'shared/card_header/header', locals: {title: @client.full_name, btn_text: t('properties.show.back'), btn_link: :back}  %>
-      <!-- .card-body -->
-      <div class="card-body">
-        <!-- form -->
-        <%= form_for(@client, html: {class: 'js-validatable'}) do |f| %>
-          <div class="col-lg-6 offset-lg-3 col-md-12">
-            <%= render 'accounts/clients/client_fields', f: f %>
+    <div class="app-container">
+      <!-- .card -->
+      <div class="card card-fluid">
+        <%= render partial: 'shared/card_header/header', locals: {title: @client.full_name, btn_text: t('properties.show.back'), btn_link: :back} %>
+        <!-- .card-body -->
+        <div class="card-body">
+          <!-- form -->
+          <%= form_for(@client, html: {class: 'js-validatable'}) do |f| %>
+            <div class="col-lg-6 offset-lg-3 col-md-12">
+              <%= render 'accounts/clients/client_fields', f: f %>
 
-            <hr/>
-            <!-- .form-actions -->
-            <div class="form-actions">
-              <button type="submit" class="btn btn-primary ml-auto"><%= t('clients.edit.edit_button') %></button>
-            </div> <!-- /.form-actions -->
-          </div>
+              <hr/>
+              <!-- .form-actions -->
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary ml-auto"><%= t('clients.edit.edit_button') %></button>
+              </div> <!-- /.form-actions -->
+            </div>
 
-        <% end %> <!-- /form -->
+          <% end %> <!-- /form -->
 
-      </div><!-- /.card-body -->
-    </div><!-- /.card -->
+        </div><!-- /.card-body -->
+      </div><!-- /.card -->
+    </div>
   </div>
 </div>
