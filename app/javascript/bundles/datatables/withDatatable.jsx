@@ -794,6 +794,7 @@ function withDatatable(WrappedComponent) {
             assignmentships_endpoint={this.props.initial_payload.assignmentships_endpoint || ''}
             properties_path={this.props.initial_payload.properties_path}
             users_path={this.props.initial_payload.users_path}
+            clients_path={this.props.initial_payload.clients_path}
             handleChangePurpose={this.handleChangePurpose}
             handleChangeStatus={this.handleChangeStatus}
             handleCfieldDropdown={this.handleCfieldDropdown}
