@@ -39,7 +39,7 @@ body {
 }
 
 .page-container {
-  padding: 15px;
+  //padding: 15px;
   margin-bottom: 10px;
   border: 0 none;
   border-radius: 3px;
@@ -1724,3 +1724,12 @@ a.text-link {
 .top-nav__logo .card--back {
   transition-delay: 0.1s;
 }
+
+.page-container.datatable .app-container{
+  background: #f8faff;
+  box-shadow: unset;
+}
+
+//.datatable-container{
+//  background: #ffffff
+//}
