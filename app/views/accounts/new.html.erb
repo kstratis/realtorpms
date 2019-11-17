@@ -15,7 +15,7 @@
       <div class="input-group input-group-alt">
         <%= account_builder.text_field :subdomain, class: 'form-control prepended-label-fix', placeholder: Account.human_attribute_name("subdomain") %>
         <div class="input-group-append">
-          <span class="input-group-text">.<%= BRANDNAME %>.com</span>
+          <span class="input-group-text">.<%= BRANDNAME %>.io</span>
         </div>
       </div><!-- /.input-group -->
       <%= inline_error @account, :subdomain, 'Subdomain' %>

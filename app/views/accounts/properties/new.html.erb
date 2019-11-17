@@ -12,6 +12,7 @@
 <div class="page-container">
   <div class="container">
     <div class="app-container">
+      <div class="content-swap">
         <!-- Default Steps -->
         <!-- .bs-stepper -->
         <div id="stepper" class="bs-stepper">
@@ -82,7 +83,7 @@
                               renderFormField: true,
                               formID: 'new_property',
                               className: 'simple-select',
-                              options: Property.businesstypes.keys.collect {|businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype}},
+                              options: Property.businesstypes.keys.collect { |businesstype| {label: Property.human_enum_name(:businesstype, businesstype), value: businesstype} },
                               soloMode: true,
                               ajaxEnabled: false,
                               isClearable: true,
@@ -172,7 +173,7 @@
                               renderFormField: true,
                               formID: 'new_property',
                               className: 'simple-select',
-                              options: Property.floors.keys.collect {|floor| {label: I18n.t("activerecord.attributes.property.enums.floor.#{floor}", :default => floor.to_s), value: floor}},
+                              options: Property.floors.keys.collect { |floor| {label: I18n.t("activerecord.attributes.property.enums.floor.#{floor}", :default => floor.to_s), value: floor} },
                               soloMode: true,
                               ajaxEnabled: false,
                               isClearable: true,
@@ -203,7 +204,7 @@
                               renderFormField: true,
                               formID: 'new_property',
                               className: 'simple-select',
-                              options: (1940..Time.zone.now.year + 2).collect {|year| {label: year, value: year}},
+                              options: (1940..Time.zone.now.year + 2).collect { |year| {label: year, value: year} },
                               soloMode: true,
                               ajaxEnabled: false,
                               isClearable: true,
@@ -341,7 +342,7 @@
                               renderFormField: true,
                               formID: 'new_property',
                               className: 'simple-select',
-                              options: (1..10).collect {|level| {label: level, value: level}},
+                              options: (1..10).collect { |level| {label: level, value: level} },
                               soloMode: true,
                               ajaxEnabled: false,
                               isClearable: true,
@@ -411,20 +412,20 @@
                         <% %w(housetype heating orientation view other).each do |category| %>
 
                           <div class="form-group">
-<!--                            <div class="col-md-2">-->
-                              <label class="control-label checkbox-header app-checkbox"><strong><%= t("activerecord.attributes.extra.#{category}.title") %></strong></label>
-                              <div class="col-md-12">
-                                <%= property.collection_check_boxes :extra_ids, Extra.where(subtype: category), :id, :name do |b| %>
-                                  <div class="custom-control custom-checkbox app-checkbox">
-                                    <%= b.check_box({class: "custom-control-input", type: 'checkbox'}) %>
-                                    <%#= b.label({class: 'custom-control-label'}) %>
-                                    <%= b.label({class: 'custom-control-label'}) do %>
-                                      <%= t("activerecord.attributes.extra.#{category}.#{b.text}") %>
-                                    <% end %>
-                                  </div>
-                                <% end %>
-                              </div>
-<!--                            </div>-->
+                            <!--                            <div class="col-md-2">-->
+                            <label class="control-label checkbox-header app-checkbox"><strong><%= t("activerecord.attributes.extra.#{category}.title") %></strong></label>
+                            <div class="col-md-12">
+                              <%= property.collection_check_boxes :extra_ids, Extra.where(subtype: category), :id, :name do |b| %>
+                                <div class="custom-control custom-checkbox app-checkbox">
+                                  <%= b.check_box({class: "custom-control-input", type: 'checkbox'}) %>
+                                  <%#= b.label({class: 'custom-control-label'}) %>
+                                  <%= b.label({class: 'custom-control-label'}) do %>
+                                    <%= t("activerecord.attributes.extra.#{category}.#{b.text}") %>
+                                  <% end %>
+                                </div>
+                              <% end %>
+                            </div>
+                            <!--                            </div>-->
                           </div>
                         <% end %>
 
@@ -538,7 +539,8 @@
                               <% end %>
                             </label>
                           </div>
-                          <small class="form-text text-muted"><%= t('activerecord.attributes.property.map_url_feedback_html') %> <span class="property-cover-tooltip" data-toggle="tooltip" data-placement="top" title="<%= t('properties.new.tooltip_map') %>"><i class="fas fa-info-circle"></i></span>
+                          <small class="form-text text-muted"><%= t('activerecord.attributes.property.map_url_feedback_html') %>
+                            <span class="property-cover-tooltip" data-toggle="tooltip" data-placement="top" title="<%= t('properties.new.tooltip_map') %>"><i class="fas fa-info-circle"></i></span>
                           </small>
                           <div class="invalid-feedback"></div>
                         </div>
@@ -602,8 +604,6 @@
                     </div>
 
 
-
-
                     <hr class="mt-5">
                     <div class="d-flex">
                       <button type="button" class="prev btn btn-secondary" data-validate="fieldset-5"><%= t('js.forms.properties.wizard.previous') %></button>
@@ -648,7 +648,7 @@
 
                     </div>
                     <div class="row">
-                      <hr class="mt-5" />
+                      <hr class="mt-5"/>
 
                       <div class="d-flex flex-column flex-grow-1 justify-content-center">
                         <%= content_tag :div, class: "", id: "uppy", data: {
@@ -684,7 +684,7 @@
                         <%#= property.hidden_field :model_type_id %>
                         <%= property.fields_for :preferences do |builder| %>
                           <% @property.model_type.fields.each do |field| %>
-                            <%= render "accounts/cfields/#{field.field_type}", field: field, f: builder, vgroup: 'fieldset-7'  %>
+                            <%= render "accounts/cfields/#{field.field_type}", field: field, f: builder, vgroup: 'fieldset-7' %>
                           <% end %>
                         <% end %>
                       </div>
@@ -721,8 +721,8 @@
           </div>
         </div><!-- /toasts container -->
 
-
-  </div>
+      </div>
+    </div>
   </div>
 
 </div>

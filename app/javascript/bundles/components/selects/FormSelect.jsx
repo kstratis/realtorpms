@@ -82,7 +82,8 @@ class FormSelect extends React.Component {
   // This operates outside react and is used to store the value
   // at the true input field which is eventually used by the rails form
   setTextInputValue(value) {
-    console.log(`setting value: ${value}`);
+    // DEBUG
+    // console.log(`setting value: ${value}`);
     this.textInput.value = value;
   }
 
@@ -123,10 +124,6 @@ class FormSelect extends React.Component {
   // This updates the true input field (which is hidden) according to the value selected.
   // It uses JQuery and is relatively safe to use since it's located outside of our React Component
   updateExternalDOM(selectedOption, validate = true) {
-    console.log(`updating the selectedOption to:`);
-    console.log(selectedOption);
-    console.log(typeof selectedOption);
-    console.log(Array.isArray(selectedOption));
     let payload = '';
     if (selectedOption){
       payload = Array.isArray(selectedOption) ? JSON.stringify(selectedOption) : selectedOption.value;
