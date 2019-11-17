@@ -108,8 +108,6 @@ const UsersList = ({
                     placeholder={i18n['search']}
                   />
                 </div>
-                {/*<div className={'d-flex flex-shrink-1'}>*/}
-                {/*  <div className={'d-none d-md-block'}>*/}
                 <div className={'btn-group btn-group-toggle pl-2'}>
                   <label
                     className={`btn ${hasParams() ? 'btn-danger' : 'btn-secondary'} toggle-button ${
@@ -121,13 +119,6 @@ const UsersList = ({
                   </label>
                 </div>
 
-                {/*<div className={'d-none d-md-block pl-2'}>*/}
-                {/*  <div className="search-count-container ">*/}
-                {/*    <span className="badge badge-info badge-pill">{`${capitalizeFirstLetter(*/}
-                {/*      i18n['result_count']*/}
-                {/*    )}: ${count}`}</span>*/}
-                {/*  </div>*/}
-                {/*</div>*/}
                 <div>
                   <div className={'d-none d-sm-block'}>
                     <nav aria-label="Results navigation">

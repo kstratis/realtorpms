@@ -41,6 +41,7 @@ el:
         job: "Επάγγελμα"
         job_feedback_html: "π.χ. Δάσκαλος"
         registered: "Ημερομηνία εγγραφής"
+        availability: "Διαθέσιμος στους εξής συνεργάτες:"
       user:
         first_name: "Όνομα"
         first_name_feedback_html: "π.χ. Δημήτρης"
@@ -628,7 +629,7 @@ el:
       breadcrumb: "Πελάτες"
       edit_button: "Ενημέρωση"
       avatar: "Φωτογραφία πελάτη"
-      heading: "Επεξεργασία πελάτη"
+      heading: "Επεξεργασία"
       save_button: "Αποθήκευση"
       profile: "Καρτέλα πελάτη"
       change_pic: "Αλλαγή"
@@ -641,7 +642,7 @@ el:
       breadcrumb: "Πελάτες"
       heading: "Πληροφορίες χρήστη"
       clients: "Πελάτες"
-      search_prefs: "Προτιμήσεις αναζήτησης"
+      search_prefs: "Κριτήρια αναζήτησης"
       edit_search_tooltip: "Επεξεργασία αναζήτησης"
       matches: "Διασταυρώσεις"
     index:

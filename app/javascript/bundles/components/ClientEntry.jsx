@@ -26,8 +26,8 @@ function ClientEntry({
         const objKey = Object.keys(element)[0];
         const objValue = Object.values(element)[0];
         // DEBUG
-        console.log(objKey, objValue);
-        console.log(i18nCfieldOptions);
+        // console.log(objKey, objValue);
+        // console.log(i18nCfieldOptions);
         switch (true) {
           case ['pricemin', 'pricemax'].includes(objKey):
             return (

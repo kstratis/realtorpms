@@ -1,5 +1,6 @@
 module Accounts
   class ClientsController < Accounts::BaseController
+    helper Cfields
 
     before_action :verify_client, only: [:edit, :update, :show, :destroy]
     after_action :log_action, only: [:create, :update, :destroy]
@@ -68,7 +69,7 @@ module Accounts
       searchprefs = Rack::Utils.parse_query(searchprefs).deep_symbolize_keys
       searchprefs.except!(:sizeminmeta, :sizemaxmeta, :page)
       searchprefs[:page] = params[:page]
-      filter_properties(current_account.properties.includes(:location, :landlord), searchprefs)
+      filter_properties(current_account.properties.includes(:location), searchprefs)
     end
 
     private

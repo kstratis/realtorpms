@@ -41,6 +41,7 @@ en:
         job: "Profession"
         job_feedback_html: "i.e. School teacher"
         registered: "Registration date"
+        availability: "Visible by:"
       user:
         first_name: "First name"
         first_name_feedback_html: "i.e. John"
@@ -623,7 +624,7 @@ en:
       breadcrumb: "Clients"
       edit_button: "Update"
       avatar: "Profile picture"
-      heading: "Edit profile"
+      heading: "Edit"
       save_button: "Save changes"
       profile: "Profile"
       change_pic: "Change photo"

@@ -87,7 +87,7 @@
               </tr>
               <tr>
                 <td><%= t('activerecord.attributes.user.age') %></td>
-                <td><%= @user.age ? @user.age : '—' %></td>
+                <td><%= @user.age.blank? ? '—' : @user.age %></td>
               </tr>
               <tr>
                 <td><%= t('activerecord.attributes.user.email') %></td>
