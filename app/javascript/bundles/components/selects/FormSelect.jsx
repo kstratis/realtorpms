@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Select from 'react-select';
-import AsyncSelect from 'react-select/async-creatable';
+import { default as ASelect } from 'react-select/async';
+import { default as ACSelect } from 'react-select/async-creatable';
 import ReactOnRails from 'react-on-rails';
 import { reactSelectStyles } from '../../styles/componentStyles';
 import { debounce, renderHTML, safelyExecCallback } from '../../utilities/helpers';
@@ -125,7 +126,7 @@ class FormSelect extends React.Component {
   // It uses JQuery and is relatively safe to use since it's located outside of our React Component
   updateExternalDOM(selectedOption, validate = true) {
     let payload = '';
-    if (selectedOption){
+    if (selectedOption) {
       payload = Array.isArray(selectedOption) ? JSON.stringify(selectedOption) : selectedOption.value;
     }
 
@@ -186,8 +187,6 @@ class FormSelect extends React.Component {
             isSearchable={this.props.isSearchable}
             isClearable={this.props.isClearable}
             isMulti={this.props.isMulti}
-            // isCreatable={this.props.isCreatable}
-            isCreatable={true}
             noOptionsMessage={() => renderHTML(this.props.i18n.select.nooptions_sync_html)}
             menuIsOpen={isOpen}
             onMenuOpen={this.onMenuOpen}
@@ -197,33 +196,70 @@ class FormSelect extends React.Component {
             }}
           />
         ) : (
-          <AsyncSelect
-            id={this.props.identity}
-            inputProps={{ 'data-name': this.props.name }}
-            styles={reactSelectStyles}
-            name={this.props.name}
-            value={this.state.selectedOption}
-            className={this.props.className}
-            loadOptions={this.getOptions}
-            placeholder={this.props.placeholderText ? this.props.placeholderText : this.props.i18n.select.placeholder}
-            isDisabled={this.props.isDisabled}
-            isSearchable={this.props.isSearchable}
-            isClearable={this.props.isClearable}
-            isMulti={this.props.isMulti}
-            isCreatable={true}
-            backspaceRemovesValue={true}
-            noOptionsMessage={() => renderHTML(this.props.i18n.select.noresults)}
-            loadingMessage={() => renderHTML(this.props.i18n.select.loading_html)}
-            autoload={false}
-            cache={false}
-            menuIsOpen={isOpen}
-            onMenuOpen={this.onMenuOpen}
-            onMenuClose={this.onMenuClose}
-            onChange={this.handleChange}
-            ref={ref => {
-              this.asyncRef = ref;
-            }}
-          />
+          <>
+            {this.props.isCreatable ? (
+              <ACSelect
+                id={this.props.identity}
+                inputProps={{ 'data-name': this.props.name }}
+                styles={reactSelectStyles}
+                name={this.props.name}
+                value={this.state.selectedOption}
+                className={this.props.className}
+                loadOptions={this.getOptions}
+                placeholder={
+                  this.props.placeholderText ? this.props.placeholderText : this.props.i18n.select.placeholder
+                }
+                formatCreateLabel={(inputValue) => renderHTML(`${this.props.i18n.select.add} "${inputValue}"`)}
+                isDisabled={this.props.isDisabled}
+                isSearchable={this.props.isSearchable}
+                isClearable={this.props.isClearable}
+                isMulti={this.props.isMulti}
+                isCreatable={this.props.isCreatable}
+                backspaceRemovesValue={true}
+                noOptionsMessage={() => renderHTML(this.props.i18n.select.noresults)}
+                loadingMessage={() => renderHTML(this.props.i18n.select.loading_html)}
+                autoload={false}
+                cache={false}
+                menuIsOpen={isOpen}
+                onMenuOpen={this.onMenuOpen}
+                onMenuClose={this.onMenuClose}
+                onChange={this.handleChange}
+                ref={ref => {
+                  this.asyncRef = ref;
+                }}
+              />
+            ) : (
+              <ASelect
+                id={this.props.identity}
+                inputProps={{ 'data-name': this.props.name }}
+                styles={reactSelectStyles}
+                name={this.props.name}
+                value={this.state.selectedOption}
+                className={this.props.className}
+                loadOptions={this.getOptions}
+                placeholder={
+                  this.props.placeholderText ? this.props.placeholderText : this.props.i18n.select.placeholder
+                }
+                isDisabled={this.props.isDisabled}
+                isSearchable={this.props.isSearchable}
+                isClearable={this.props.isClearable}
+                isMulti={this.props.isMulti}
+                isCreatable={this.props.isCreatable}
+                backspaceRemovesValue={true}
+                noOptionsMessage={() => renderHTML(this.props.i18n.select.noresults)}
+                loadingMessage={() => renderHTML(this.props.i18n.select.loading_html)}
+                autoload={false}
+                cache={false}
+                menuIsOpen={isOpen}
+                onMenuOpen={this.onMenuOpen}
+                onMenuClose={this.onMenuClose}
+                onChange={this.handleChange}
+                ref={ref => {
+                  this.asyncRef = ref;
+                }}
+              />
+            )}
+          </>
         )}
         {this.props.renderFormField ? (
           <>

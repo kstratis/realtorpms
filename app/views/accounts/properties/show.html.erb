@@ -63,7 +63,7 @@
   <div class="container">
     <div class="app-container">
     <!-- .card -->
-    <div class="card ">
+    <div class="card">
       <%= render partial: 'shared/card_header/header', locals: {title: heading(@property), btn_text: t('properties.show.back'), btn_link: :back} %>
       <!-- .card-body -->
       <div class="card-body">
@@ -89,8 +89,8 @@
 
           <div class="col-lg-5 col-md-12 mt-3 mt-lg-0">
             <div class="col-12">
-            <div class="card">
-              <div class="card-header header-public">
+            <div class="card borderlesss-card">
+              <div class="card-header header-public simplified-header">
                 <div class="table-entry">
                   <div class="table-icon-wrapper">
                     <i class="pr-icon xs info"></i>
@@ -116,8 +116,8 @@
         <div class="row">
           <div class="col-lg-6 col-xs-12">
             <div class="col-12">
-              <div class="card">
-                <div class="card-header header-public">
+              <div class="card borderlesss-card">
+                <div class="card-header header-public simplified-header">
                   <div class="table-entry">
                     <div class="table-icon-wrapper">
                       <i class="pr-icon xs specs"></i>
@@ -126,14 +126,14 @@
                   </div>
                 </div><!-- .card-body -->
                 <div class="card-body">
-                  <%= render partial: 'accounts/properties/features', locals: {features: Property.extended_features, classNames: 'normalize-table'} %>
+                  <%= render partial: 'accounts/properties/features', locals: {features: Property.extended_features, classNames: 'table-borderless normalize-table'} %>
                 </div><!-- /.card-body -->
               </div><!-- /.card -->
             </div>
 
             <div class="col-12">
-              <div class="card">
-                <div class="card-header header-public">
+              <div class="card borderlesss-card">
+                <div class="card-header header-public simplified-header">
                   <div class="table-entry">
                     <div class="table-icon-wrapper">
                       <i class="pr-icon xs list"></i>
@@ -153,8 +153,8 @@
 
 
             <div class="col-12">
-              <div class="card">
-                <div class="card-header header-public">
+              <div class="card borderlesss-card">
+                <div class="card-header header-public simplified-header">
                   <div class="table-entry">
                     <div class="table-icon-wrapper">
                       <i class="pr-icon xs description"></i>
@@ -178,14 +178,14 @@
           <div class="col-lg-6 col-xs-12">
 
             <div class="col-12">
-              <div class="card">
-                <div class="card-header header-internal">
+              <div class="card borderlesss-card">
+                <div class="card-header header-internal simplified-header">
                   <div class="table-entry">
                     <div class="table-icon-wrapper">
                       <i class="pr-icon xs notes"></i>
                     </div>
 
-                    <span class="align-middle" >&nbsp; <%= t 'activerecord.attributes.property.notes_title' %> </span>&nbsp;<div class="float-right"><i class="fas fa-lock fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_internal_notes' %>"></i></div>
+                    <span class="align-middle" ><i class="fas fa-user-secret fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_internal_notes' %>"></i>&nbsp; <%= t 'activerecord.attributes.property.notes_title' %> </span>
                   </div>
                 </div><!-- .card-body -->
                 <div class="card-body">
@@ -200,13 +200,13 @@
 
 
             <div class="col-12">
-              <div class="card">
-                <div class="card-header header-internal">
+              <div class="card borderlesss-card">
+                <div class="card-header header-internal simplified-header">
                   <div class="table-entry">
                     <div class="table-icon-wrapper">
                       <i class="pr-icon xs info"></i>
                     </div>
-                    <span class="align-middle">&nbsp; <%= t 'activerecord.attributes.property.owner_title' %> </span>&nbsp;<div class="float-right"><i class="fas fa-lock fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_owner' %>"></i></div>
+                    <span class="align-middle"><i class="fas fa-user-secret fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_owner' %>"></i>&nbsp;<i class="fas fa-key fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_owner_security' %>"></i>&nbsp <%= t 'activerecord.attributes.property.owner_title' %> </span>
                   </div>
                 </div><!-- .card-body -->
                 <div class="card-body">
@@ -250,21 +250,20 @@
             <!-- Custom fields-->
             <% if @property.model_type.fields.length > 0 %>
               <div class="col-12">
-                <div class="card">
-                  <div class="card-header header-internal">
+                <div class="card borderlesss-card">
+                  <div class="card-header header-internal simplified-header">
                     <div class="table-entry">
                       <div class="table-icon-wrapper">
                         <i class="pr-icon xs info"></i>
                       </div>
-                      <span class="align-middle">&nbsp; <%= t 'cfields.title' %> </span>&nbsp;<div class="float-right">
-                      <i class="fas fa-lock fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_owner' %>"></i>
-                    </div>
+                      <span class="align-middle"><i class="fas fa-user-secret fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_owner' %>"></i>&nbsp <%= t 'cfields.title' %> </span>&nbsp
+
                     </div>
                   </div><!-- .card-body -->
                   <div class="card-body">
                     <div class="row mb-3">
                       <div class="table-responsive">
-                        <table class="table normalize-table">
+                        <table class="table table-borderless normalize-table">
                           <tbody>
                           <% @property.model_type.fields.each do |field| %>
                             <%= render "accounts/cfields/#{field.field_type}_read", cfield_label: field.name, cfield_data: @property.preferences[field.slug] %>
@@ -280,13 +279,13 @@
 
             <% if current_user.role(current_account) != 'user' %>
               <div class="col-12">
-                <div class="card">
-                  <div class="card-header header-internal">
+                <div class="card borderlesss-card">
+                  <div class="card-header header-internal simplified-header">
                     <div class="table-entry">
                       <div class="table-icon-wrapper">
                         <i class="pr-icon xs assignments"></i>
                       </div>
-                      <span class="align-middle">&nbsp; <%= t 'activerecord.attributes.property.assignments_title' %></span>&nbsp;<div class="float-right"><i class="fas fa-lock fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_assignments' %>"></i></div>
+                      <span class="align-middle"><i class="fas fa-user-secret fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_assignments' %>"></i>&nbsp<i class="fas fa-key fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_security' %>"></i>&nbsp; <%= t 'activerecord.attributes.property.assignments_title' %></span>
                     </div>
                   </div><!-- .card-body -->
                   <div class="card-body">

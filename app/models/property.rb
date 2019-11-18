@@ -120,7 +120,7 @@ class Property < ApplicationRecord
           :businesstype => {:label => 'businesstype', :icon => 'businesstype', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : '<mark class="highlighted">'+ I18n.t("activerecord.attributes.property.enums.businesstype.#{value}") + '</mark>'} },
           :location_info => {:label => 'location', :icon => 'location', :options => 'localname', :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
           :price => {:label => 'price', :icon => 'price', :options => nil, :renderfn => Proc.new {|value| value ? ActionController::Base.helpers.number_to_currency(value) : '—' }},
-          :pricepersqmeter => {:label => 'pricepersqmeter', :icon => 'pricepersqmeter', :options => nil, :renderfn => Proc.new {|value| value ? ActionController::Base.helpers.number_to_currency(value) : '—' }},
+          # :pricepersqmeter => {:label => 'pricepersqmeter', :icon => 'pricepersqmeter', :options => nil, :renderfn => Proc.new {|value| value ? ActionController::Base.helpers.number_to_currency(value) : '—' }},
           :size => {:label => 'size', :icon => 'size', :options => nil, :renderfn => Proc.new {|value| value ? I18n.t('activerecord.attributes.property.size_meter_html', size: value.to_s) : '—' }},
           :category_info => {:label => 'subcategory', :icon => 'subcategory', :options => 'slug', :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.subcategory.#{value}")} },
           :created_at => {:label => 'created_at', :icon => 'created_at', :options => nil, :renderfn => Proc.new {|value| value ? (I18n.l value, format: :custom) : '—' } }

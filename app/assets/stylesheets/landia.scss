@@ -1730,6 +1730,24 @@ a.text-link {
   box-shadow: unset;
 }
 
+.borderlesss-card{
+  box-shadow: unset;
+  //border: 1px solid;
+
+}
+
+.simplified-header{
+  background: unset;
+  padding-left: unset;
+  color: unset;
+  border-bottom: unset;
+  &:first-child span{
+    border-bottom: 0.2em solid #ffe000;
+  }
+
+  //box-shadow: 0 0 0 1px rgba(20, 20, 31, 0.05), 0 1px 3px 0 rgba(20, 20, 31, 0.15);
+}
+
 //.datatable-container{
 //  background: #ffffff
 //}

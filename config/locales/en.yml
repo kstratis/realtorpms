@@ -760,7 +760,9 @@ en:
       print: "Print property"
       tooltip_internal_notes: "Internal use only. Won't appear on any ad or client handout. Available to any agent handling the property."
       tooltip_owner: "Internal use only. Won't appear on any ad or client handout. Available to any agent handling the property."
-      tooltip_assignments: "Internal use only. Available only to the account administrator."
+      tooltip_assignments: "Internal use only. Available only to admins."
+      tooltip_owner_security: "Information available only to admins or users with explicit permissions"
+      tooltip_security: "Information only available to admins"
   time:
     formats:
       regular: "%d %b %y"
