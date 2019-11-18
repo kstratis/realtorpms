@@ -4,6 +4,7 @@ module Accounts
     include AddRemoveAssociationsHandler
     helper PropertyHeader
     helper Cfields
+    helper ForbiddenIds
     before_action :set_property, only: [:show, :edit, :update, :destroy]
     after_action :log_action, only: [:create, :update, :destroy]
 

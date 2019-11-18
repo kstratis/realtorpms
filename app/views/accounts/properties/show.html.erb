@@ -225,21 +225,23 @@
                     </thead>
                     <tbody>
                     <div class="table-responsive">
+                      <% forbidden = nil %>
                       <% @property.clients.each do |client| %>
+                        <% forbidden = forbidden_entity_ids('clients').include?(client.id) %>
                         <tr>
                           <td class="align-middle nowrap">
                             <div class="table-entry">
-                              <% if forbidden_entity_ids('clients').include?(client.id) %>
-                                <span class="align-middle frosty"><%= client.full_name %></span>
-                              <% else %>
+                              <% if forbidden.blank? %>
                                 <%= link_to client_path(client), data: {toggle: "tooltip", placement: "top", title: t('properties.show.client_tooltip', user: client.full_name)} do %>
                                   <span class="align-middle"><%= client.full_name %></span>
                                 <% end  %>
+                              <% else %>
+                                <span class="align-middle frosty"><%= client.full_name %></span>
                               <% end %>
                             </div>
                           </td>
                           <td class="align-middle nowrap">
-                            <span><%= client.telephones.blank? ? '—' : client.telephones.split(/[\s,]+/).collect(&:strip).join(', ') %></span>
+                            <span class="<%= forbidden.blank? ? '' : 'frosty' %>"><%= client.telephones.blank? ? '—' : client.telephones.split(/[\s,]+/).collect(&:strip).join(', ') %></span>
                           </td>
                         </tr>
                       <% end %>
