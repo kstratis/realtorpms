@@ -236,12 +236,16 @@
                                   <span class="align-middle"><%= client.full_name %></span>
                                 <% end  %>
                               <% else %>
-                                <span class="align-middle frosty"><%= client.full_name %></span>
+                                <span class="align-middle frosty forbidden-cursor"><%= t('access_denied') %></span>
                               <% end %>
                             </div>
                           </td>
                           <td class="align-middle nowrap">
-                            <span class="<%= forbidden.blank? ? '' : 'frosty' %>"><%= client.telephones.blank? ? '—' : client.telephones.split(/[\s,]+/).collect(&:strip).join(', ') %></span>
+                            <% if forbidden.blank? %>
+                                <span><%= client.telephones.blank? ? '—' : client.telephones.split(/[\s,]+/).collect(&:strip).join(', ') %></span>
+                            <% else %>
+                              <span class="frosty forbidden-cursor"><%= t('access_denied') %></span>
+                            <% end %>
                           </td>
                         </tr>
                       <% end %>
