@@ -1,9 +1,9 @@
 module ForbiddenIds
   extend ActiveSupport::Concern
 
-  def forbidden_ids
+  def forbidden_entity_ids(entities)
     unless current_user.is_admin?(current_account)
-      return current_account.properties.where.not(id: current_user.properties.where(account: current_account).includes(:location, :landlord)).pluck(:id)
+      return current_account.send(entities).where.not(id: current_user.send(entities).where(account: current_account)).pluck(:id)
     end
     []
   end

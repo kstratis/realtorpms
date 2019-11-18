@@ -211,7 +211,7 @@ module Accounts
     end
 
     def set_access
-      if forbidden_ids.include?(@property.id)
+      if forbidden_entity_ids('properties').include?(@property.id)
         redirect_to properties_path and return true
       end
     end

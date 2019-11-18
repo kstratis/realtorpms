@@ -7,6 +7,7 @@ module Accounts
     include PropertyDatatable
     include Jsonifier
 
+    helper ForbiddenIds
     helper UserAvatar
 
     # before_action :logged_in_user, :allowed_subdomains, only: [:index, :edit, :update, :destroy]

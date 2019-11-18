@@ -112,7 +112,7 @@ module PropertyDatatable
     @propertieslist = {:dataset => Array.new}
 
     @properties.each do |property|
-      if forbidden_ids.include?(property.id)
+      if forbidden_entity_ids('properties').include?(property.id)
         hash = {
             slug: property.slug,
             avatar: property.avatar.attached? ? url_for(property.avatar) : nil,

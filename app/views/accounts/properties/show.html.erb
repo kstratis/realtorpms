@@ -229,9 +229,13 @@
                         <tr>
                           <td class="align-middle nowrap">
                             <div class="table-entry">
-                              <%= link_to client_path(client), data: {toggle: "tooltip", placement: "top", title: t('properties.show.client_tooltip', user: client.full_name)} do %>
-                                <span class="align-middle"><%= client.full_name %></span>
-                              <% end  %>
+                              <% if forbidden_entity_ids('clients').include?(client.id) %>
+                                <span class="align-middle frosty"><%= client.full_name %></span>
+                              <% else %>
+                                <%= link_to client_path(client), data: {toggle: "tooltip", placement: "top", title: t('properties.show.client_tooltip', user: client.full_name)} do %>
+                                  <span class="align-middle"><%= client.full_name %></span>
+                                <% end  %>
+                              <% end %>
                             </div>
                           </td>
                           <td class="align-middle nowrap">
