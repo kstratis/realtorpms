@@ -642,8 +642,8 @@ el:
       breadcrumb: "Πελάτες"
       heading: "Πληροφορίες χρήστη"
       clients: "Πελάτες"
-      search_prefs: "Κριτήρια αναζήτησης"
-      edit_search_tooltip: "Επεξεργασία αναζήτησης"
+      search_prefs: "Προβολή κριτηρίων αναζήτησης πελάτη"
+      edit_search_tooltip: "Επεξεργασία κριτηρίων αναζήτησης πελάτη"
       matches: "Διασταυρώσεις"
     index:
       breadcrumb: "Πελάτες"

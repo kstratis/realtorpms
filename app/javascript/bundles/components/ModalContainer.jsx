@@ -28,6 +28,11 @@ class ModalContainer extends React.Component {
     return (
       <>
         <Button
+          outline={this.props.outline}
+          data-Toggle={this.props.title ? 'tooltip' : ''}
+          data-Placement={this.props.title ? 'top' : ''}
+          title={this.props.title ? this.props.title : ''}
+          className={this.props.fireButtonClassnames ? this.props.fireButtonClassnames : ''}
           disabled={this.props.buttonDisabled || false}
           size={this.props.fireButtonBtnSize ? this.props.fireButtonBtnSize : 'sm'}
           color={this.props.fireButtonBtnType ? this.props.fireButtonBtnType : 'secondary'}

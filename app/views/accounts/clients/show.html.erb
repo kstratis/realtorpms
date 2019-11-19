@@ -35,8 +35,54 @@
                 <%= render_avatar(@client, 'tile-xl', "avatar_preview") %>
               </div><!-- /avatar -->
               <div class="media-body pl-3 pt-3">
-                <strong><%= @client.full_name %></strong><br>
-                <span><%= @client.job.blank? ? '-' : @client.job %></span>
+                <strong><%= @client.full_name %></strong><%= raw " — #{content_tag(:i, @client.job).html_safe}" unless @client.job.blank? %>
+                <div class="row pt-1 pl-2">
+                  <div class="btn-group btn-group-toggle">
+                    <div class="reactstrap-modal-button">
+                  <%= react_component('ModalContainer', props: {
+                      id: 'modal-window-saved-prefs',
+                      title: t('clients.show.search_prefs'),
+                      outline: true,
+                      # fireButtonLabel: '<i class="fas fa-info fa-fw"></i>&nbsp;' + t('clients.show.search_prefs'),
+                      fireButtonLabel: '<i class="fas fa-search fa-fw"></i>',
+                      fireButtonBtnType: 'primary',
+                      avatar: nil,
+                      child: 'RetrieveClientSearch',
+                      modalTitle: t('js.components.modal.search_save.title_alt'),
+                      modalHeader: t('js.components.modal.search_save.subtitle'),
+                      buttonOKLabel: t('properties.ok_button'),
+                      buttonCancelLabel: t('properties.cancel_button'),
+                      buttonCloseLabel: t('properties.close_button'),
+                      soloMode: true,
+                      searchprefs: @client.searchprefs,
+                      ajaxEnabled: true,
+                      isClearable: true,
+                      buttonDisabled: @client.searchprefs.blank?,
+                      backspaceRemovesValue: true,
+                      isSearchable: true,
+                      i18nPriceOptions: price_options,
+                      i18nSizeOptions: size_options,
+                      i18nFloorOptions: floors_options,
+                      i18nCategoryOptions: category_options,
+                      i18nCfieldOptions: cfields_options,
+                      feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
+                      i18n: {
+                          search_save_filters: t('js.components.modal.search_save.filters'),
+                          search_save_subtitle: t('js.components.modal.search_save.header', client_name: @client.full_name),
+                          no_lists_available: t('js.components.modal.favlists.no_results'),
+                          search_save_criteria: t('js.components.modal.search_save.criteria'),
+                          property_cover_alt: t('js.components.modal.favlists.property_cover_alt'),
+                          add_list_action: t('js.components.modal.favlists.add_list_action'),
+                          loading_alt: t('js.components.modal.favlists.loading_alt'),
+                          listname_placeholder: t('js.components.modal.favlists.listname_placeholder')
+                      }
+                  }, prerender: false) %>
+                    </div>
+                    <a data-toggle="tooltip" data-position="top" title="<%= t('clients.show.edit_search_tooltip') %>" class="btn btn-sm btn-outline-primary btn-action <%= @client.searchprefs.blank? ? 'disabled' : '' %>" href="<%= "#{properties_path}?#{@client.searchprefs}" %>">
+                      <i class="fas fa-pen fa-fw"></i>
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div> <!-- /.media -->
@@ -84,62 +130,10 @@
               </div>
             </div>
 
-
-            <div class="col-lg-6 offset-lg-3 col-md-12">
-
-              <hr/>
-              <div class="row">
-                <div class="col-6">
-                  <%= react_component('ModalContainer', props: {
-                      id: 'modal-window-saved-prefs',
-                      fireButtonLabel: '<i class="fas fa-info fa-fw"></i>&nbsp;' + t('clients.show.search_prefs'),
-                      fireButtonBtnType: 'danger',
-                      avatar: nil,
-                      child: 'RetrieveClientSearch',
-                      modalTitle: t('js.components.modal.search_save.title_alt'),
-                      modalHeader: t('js.components.modal.search_save.subtitle'),
-                      buttonOKLabel: t('properties.ok_button'),
-                      buttonCancelLabel: t('properties.cancel_button'),
-                      buttonCloseLabel: t('properties.close_button'),
-                      soloMode: true,
-                      searchprefs: @client.searchprefs,
-                      ajaxEnabled: true,
-                      isClearable: true,
-                      buttonDisabled: @client.searchprefs.blank?,
-                      backspaceRemovesValue: true,
-                      isSearchable: true,
-                      i18nPriceOptions: price_options,
-                      i18nSizeOptions: size_options,
-                      i18nFloorOptions: floors_options,
-                      i18nCategoryOptions: category_options,
-                      i18nCfieldOptions: cfields_options,
-                      feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
-                      i18n: {
-                          search_save_filters: t('js.components.modal.search_save.filters'),
-                          search_save_subtitle: t('js.components.modal.search_save.header', client_name: @client.full_name),
-                          no_lists_available: t('js.components.modal.favlists.no_results'),
-                          search_save_criteria: t('js.components.modal.search_save.criteria'),
-                          property_cover_alt: t('js.components.modal.favlists.property_cover_alt'),
-                          add_list_action: t('js.components.modal.favlists.add_list_action'),
-                          loading_alt: t('js.components.modal.favlists.loading_alt'),
-                          listname_placeholder: t('js.components.modal.favlists.listname_placeholder')
-                      }
-                  }, prerender: false) %>
-                </div>
-                <div class="col-6">
-                  <a class="btn btn-sm btn-secondary btn-action <%= @client.searchprefs.blank? ? 'disabled' : '' %>" href="<%= "#{properties_path}?#{@client.searchprefs}" %>">
-                    <i class="fas fa-pen fa-fw"></i> &nbsp;<span><%= t('clients.show.edit_search_tooltip') %></span>
-                  </a>
-                </div>
-              </div>
-
-            </div>
-
             <% if current_user.is_admin?(current_account) %>
 
               <div class="col-lg-6 offset-lg-3 col-md-12">
-                <hr/>
-                <span class="d-inline-block mb-2 badge badge-success"><%= t('activerecord.attributes.client.availability') %></span>
+                <span class="d-inline-block mb-2 badge badge-success badge-squared"><%= t('activerecord.attributes.client.availability') %></span>
                 <div class="mb-2">
                   <%= react_component('AsyncSelectContainer', props: {
                       id: 'MultiAsyncSelectContainer',
