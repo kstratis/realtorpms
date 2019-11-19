@@ -516,6 +516,7 @@ en:
     switch: "Switch account"
     favorites: "Favorites"
   sidebar:
+    subdomain_tooltip: "The subdomain you are currently at."
     menu: "ACTION MENU"
     main: "Dashboard"
     properties: "Properties"

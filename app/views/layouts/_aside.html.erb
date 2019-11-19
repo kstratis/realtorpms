@@ -40,7 +40,7 @@
         <!-- .menu -->
         <ul class="menu">
           <!-- .menu-header -->
-          <li class="menu-header"><%= t 'sidebar.menu' %></li>
+          <li class="menu-header" data-toggle="tooltip" data-placement="right" title="<%= t('sidebar.subdomain_tooltip') %>"><%= current_account.subdomain.to_s.downcase %></li>
           <!-- /.menu-header -->
           <!-- .menu-item -->
           <%= content_tag :li, class: "menu-item #{active_for(path: root_path)}" do %>

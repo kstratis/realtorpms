@@ -521,6 +521,7 @@ el:
     switch: "Εναλλαγή λογαριασμού"
     favorites: "Αγαπημένα"
   sidebar:
+    subdomain_tooltip: "Το subdomain στο οποίο βρίσκεστε."
     menu: "ΕΝΕΡΓΕΙΕΣ"
     main: "Κεντρική"
     properties: "Ακίνητα"

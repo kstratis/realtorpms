@@ -28,6 +28,8 @@
 body {
   line-height: 1.5em;
   color: #454545;
+  //color: #1d2d35;
+
   text-align: left;
   //font-family: 'Roboto', Arial, sans-serif;
   font-family: 'Noto Sans', Arial, sans-serif;
@@ -1343,7 +1345,7 @@ i.fa-lock:hover{
 
 .has-active {
   .menu-link:before {
-    background-color: $orange;
+    background-color: $yellowbg;
     //background-color: #ea5f4a;
     display: block;
     content: "";
@@ -1662,7 +1664,16 @@ a.text-link {
 //}
 
 .menu-header{
-  color: rgb(149, 134, 165);
+  cursor: default;
+  padding: 10px 10px 10px 20px !important;
+  color: $yellowbg !important;
+  transition: all 0.2s ease;
+  transition-property: color, background-color, border-color;
+  &:hover{
+    background: $yellowbg;
+    border-color: $yellowbg;
+    color: $blackfg !important;
+  }
 }
 //
 .top-bar-brand{
