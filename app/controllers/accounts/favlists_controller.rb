@@ -33,7 +33,7 @@ module Accounts
       if params[:page]
         searchprefs[:page] = params[:page]
       end
-      filter_properties(@favlist.properties.includes(:location, :landlord), searchprefs)
+      filter_properties(@favlist.properties.includes(:location), searchprefs)
     end
 
     # Creates a new favlist
