@@ -24,6 +24,7 @@ AsyncSelect.propTypes = {
   isCreatable: PropTypes.bool,
   isClearable: PropTypes.bool,
   isDisabled: PropTypes.bool,
+  isNotAnimated: PropTypes.bool,
   i18n: PropTypes.shape({
     select: PropTypes.shape({
       placeholder: PropTypes.string.isRequired,
@@ -34,7 +35,7 @@ AsyncSelect.propTypes = {
   }).isRequired
 };
 
-function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasFeedback, isCreatable, isClearable, isDisabled, i18n }) {
+function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasFeedback, isCreatable, isClearable, isDisabled, isNotAnimated, i18n }) {
   // custom hook to open/close modal
   const { isOpen, setIsOpen } = useModalToggle();
   // this is the request for the pool of options - won't run on mount
@@ -112,7 +113,7 @@ function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasF
           styles={reactSelectStyles}
           onChange={handleChange}
           value={data}
-          components={animatedComponents}
+          components={isNotAnimated === true ? '' : animatedComponents}
           autoload={false}
           cache={false}
           menuIsOpen={isOpen}
@@ -133,7 +134,7 @@ function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasF
           styles={reactSelectStyles}
           onChange={handleChange}
           value={data}
-          components={animatedComponents}
+          components={isNotAnimated === true ? '' : animatedComponents}
           autoload={false}
           cache={false}
           menuIsOpen={isOpen}
