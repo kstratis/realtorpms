@@ -34,7 +34,7 @@ Rails.application.routes.draw do
       get '/properties/inlinesearch', to: 'properties#inlinesearch'
       # resources :entityfields
       resources :model_types, only: [:show, :index, :edit, :update], :path => "extended-fields"
-      resources :settings
+      resources :settings, only: [:index]
       # resources :model_types
 
       # favlists_path (GET, POST)

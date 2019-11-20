@@ -435,6 +435,7 @@ en:
       clear: "Clear"
       entry_count: "Entries"
       filters:
+        nocfields_html: "Advanced client search filters are only useful if you first define extra fields in the <a href='%{cfields_link}'>settings screen</a>. For basic search on first name, last name & email fields, please use the search bar."
         title: "Filters"
         date:
           title: "Sorting"
@@ -516,7 +517,7 @@ en:
     switch: "Switch account"
     favorites: "Favorites"
   sidebar:
-    subdomain_tooltip: "The subdomain you are currently at."
+    subdomain_tooltip: "The subdomain you are currently logged in at."
     menu: "ACTION MENU"
     main: "Dashboard"
     properties: "Properties"
@@ -641,6 +642,13 @@ en:
       search_prefs: "Search preferences"
       edit_search_tooltip: "Edit search preferences"
       matches: "Matches"
+      no_stored_searches_html: "The client has no stored search preferences. Navigate to the <a href='%{properties_path}'>properties screen</a>, set the client's filters and save its preferences."
+      no_ownership: "The client doesn't seem to poccess any properties."
+      tabs:
+        info: "User info"
+        searching: "Searching"
+        offering: "Offering"
+        handling: "Availability"
     index:
       breadcrumb: "Clients"
     title: "Clients"

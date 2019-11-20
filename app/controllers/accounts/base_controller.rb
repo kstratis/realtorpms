@@ -1,6 +1,7 @@
 module Accounts
   class BaseController < ApplicationController
 
+    include RolesAccess
     include SearchFilter
     include ForbiddenIds
     include PersonDatatable

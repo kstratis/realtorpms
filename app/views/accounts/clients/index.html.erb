@@ -32,7 +32,9 @@
               cfields: {
                 fields: get_cfields('clients'),
                 storedSelections: @initial_cfields,
-                options: cfields_options
+                options: cfields_options,
+                nocfieldsimg: image_url('no_content.svg'),
+
       },
           },
           i18n: {
@@ -43,6 +45,8 @@
               clear: t('js.datatables.clear'),
               filters: {
                   title: t('js.datatables.filters.title'),
+                  nocfields_html: t('js.datatables.filters.nocfields_html',
+                               cfields_link: edit_model_type_path(current_account.model_types.find_by(name: 'clients').id)),
                   status: {
                       title: t('js.datatables.filters.status.title'),
                       active: t('js.datatables.filters.status.active'),

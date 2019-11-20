@@ -1,7 +1,7 @@
 $(document).on('turbolinks:load', function(e) {
 
     // Activate only if tabs are are available
-    const tabs = $('.nav-tabs');
+    const tabs = $('.nav-tabs.anchor-support');
     if (tabs.length < 1) return;
 
     // Restore active tab from url anchor (if available)

@@ -692,8 +692,12 @@ button, a {
       color: $orange;
     }
 
+    .fa-pen.orig {
+      color: unset;
+    }
+
     .fa-trash {
-      color: $red;
+      color: $pinterest_color;
     }
   }
 }
@@ -1766,3 +1770,23 @@ a.text-link {
 .badge-squared{
   border-radius: 0;
 }
+
+.nocfields-feedback{
+  justify-content: center;
+
+}
+
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link.custom {
+  border-color: $yellowbg;
+}
+
+.nav-tabs .nav-link.custom {
+  padding: 1rem 1rem 10px 1rem !important;
+}
+
+.list-group.custom {
+  box-shadow: unset;
+}
+//.nav-tabs .nav-link .custom {
+
+//}

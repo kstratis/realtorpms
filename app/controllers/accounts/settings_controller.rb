@@ -1,6 +1,7 @@
 module Accounts
   class SettingsController < Accounts::BaseController
-    before_action :set_accounts_setting, only: [:show, :edit, :update, :destroy]
+    before_action :admin_access
+    # before_action :set_accounts_setting, only: [:show, :edit, :update, :destroy]
 
     # GET /accounts/settings
     # GET /accounts/settings.json
@@ -18,7 +19,6 @@ module Accounts
 
     # GET /accounts/settings/new
     def new
-      @accounts_setting = Accounts::Setting.new
     end
 
     # GET /accounts/settings/1/edit
@@ -70,6 +70,10 @@ module Accounts
     # Use callbacks to share common setup or constraints between actions.
     def set_accounts_setting
       @accounts_setting = Accounts::Setting.find(params[:id])
+      # puts '========================='
+      # puts @accounts_setting
+      # debug
+      # puts '========================='
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -432,6 +432,10 @@
     background-image: url( search.svg);
   }
 
+  &.no_stored_searches{
+    background-image: url( no_stored_searches.svg);
+  }
+
   & ~ .pr-icon-desc {
     display: block;
     text-align: center;

@@ -57,21 +57,29 @@ const ClientsList = ({
                 </div>
               </div>
               <div className="card-body">
-                <span>standard fields</span>
-                <hr />
-                {cfields.fields.map((cfield, index) => {
-                  return (
-                    <FormComponents
-                      key={index}
-                      cfield={cfield}
-                      storedSelection={cfields.storedSelections[Object.values(cfield)[0].slug] || null}
-                      i18n={i18n.cfields}
-                      handleCfieldDropdown={handleCfieldDropdown}
-                      handleCfieldTextfield={handleCfieldTextfield}
-                      handleCfieldCheckbox={handleCfieldCheckbox}
-                    />
-                  );
-                })}
+
+                {cfields.fields.length > 0
+                  ? (cfields.fields.map((cfield, index) => {
+                      return (
+                        <FormComponents
+                          key={index}
+                          cfield={cfield}
+                          storedSelection={cfields.storedSelections[Object.values(cfield)[0].slug] || null}
+                          i18n={i18n.cfields}
+                          handleCfieldDropdown={handleCfieldDropdown}
+                          handleCfieldTextfield={handleCfieldTextfield}
+                          handleCfieldCheckbox={handleCfieldCheckbox}
+                        />
+                      );
+                    }))
+                  : (<div>
+                    {/*<p className={'text-justify font-italic mb-4'}>{i18n.filters.nocfields_html}</p>*/}
+                    <p className={'text-justify font-italic mb-4'}><span dangerouslySetInnerHTML={{ __html: i18n.filters.nocfields_html }} /></p>
+                    <div className={'text-center'}>
+                      <img alt={'no-cfields'} src={cfields.nocfieldsimg} className={'img-fluid max-300 text-center'}/>
+                    </div>
+
+                  </div>)}
               </div>
             </div>
           </div>

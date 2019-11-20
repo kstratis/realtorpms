@@ -1,6 +1,8 @@
 module Accounts
   class ModelTypesController < Accounts::BaseController
+    before_action :admin_access
     before_action :set_model_type, only: [:show, :edit, :update, :destroy]
+
 
     # GET /model_types
     # GET /model_types.json
