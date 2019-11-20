@@ -10,8 +10,8 @@
 # The create! method is just like the create method, except it raises an exception
 # for an invalid user rather than returning false
 
-# Owners
-# This is a +superuser+
+# Users
+# This is a +superuser+ - sysadmin
 superuser = User.create!(first_name: 'Konstantinos',
                          last_name: 'Stratis',
                          email: 'konos5@gmail.com',
@@ -20,7 +20,7 @@ superuser = User.create!(first_name: 'Konstantinos',
                          password: '989492ks',
                          password_confirmation: '989492ks')
 
-# This is the owner I use
+# This is the owner I use for the first account
 tonystark = User.create!(first_name: 'Tony',
                          last_name: 'Stark',
                          email: 'tstark@gmail.com',
@@ -47,7 +47,7 @@ johnymnemonic = User.create!(first_name: 'Johny',
                              password: 'abc123',
                              password_confirmation: 'abc123')
 
-# This account belongs to Tony Stark (tstark@gmail.com)
+# This the first account and belongs to Tony Stark (tstark@gmail.com) - regular admin
 demo = Account.create!(
     subdomain: 'demo',
     name: 'Demo',
@@ -79,16 +79,16 @@ brussels = Location.find(5007) # Brussels - Belgium (level 3) - INT
 # 2 memorable +demo+ users
 # -------------------------
 regulardemouser1 = User.create!(first_name: 'Will',
-                                     last_name: 'Smith',
-                                     email: 'wm@gmail.com',
-                                     password: 'abc123',
-                                     password_confirmation: 'abc123')
+                                last_name: 'Smith',
+                                email: 'wm@gmail.com',
+                                password: 'abc123',
+                                password_confirmation: 'abc123')
 
 regulardemouser2 = User.create!(first_name: 'John',
-                                     last_name: 'Travolta',
-                                     email: 'jt@gmail.com',
-                                     password: 'abc123',
-                                     password_confirmation: 'abc123')
+                                last_name: 'Travolta',
+                                email: 'jt@gmail.com',
+                                password: 'abc123',
+                                password_confirmation: 'abc123')
 # -------------------------
 #
 # 1 memorable bluedomain user
@@ -106,9 +106,18 @@ bluedomain = Account.find_by(subdomain: 'bluedomain')
 demo.users << regulardemouser1
 demo.users << regulardemouser2
 bluedomain.users << regularbluedomainuser1
+
 # Johny Mnemonic is invited as a regular user in Tony Stark's +demo+ account
 # At the same time he remains the owner of +reddomain+
 demo.users << johnymnemonic
+
+50.times do |n|
+  client = User.create!(first_name: Faker::Name.first_name,
+                      last_name: Faker::Name.last_name,
+                      email: "demouser-#{n + 1}@gmail.com",
+                      telephones: "69#{rand(0..9)}76548#{rand(0..9)}#{rand(0..9)}")
+  demo.clients << client
+end
 
 # 99 random users belonging to +demo+ account
 99.times do |n|
@@ -155,21 +164,17 @@ end
       floor: rand(0..10),
       construction: rand(1970..2018),
       account: demo,
-      location: perissos,
-      landlord: Landlord.create!(first_name: Faker::Name.first_name,
-                                 last_name: Faker::Name.last_name,
-                                 email: Faker::TvShows::SiliconValley.email,
-                                 telephones: Faker::PhoneNumber.phone_number,
-                                 account: demo)
+      location: perissos
   )
-  regulardemouser1.properties << property
   property.avatar.attach(
       io: File.open(Dir["#{ENV['SEEDS_MEDIA_DIR']}#{rand(1..9)}/*"].sample),
       filename: "file-#{Faker::Number.number(digits: 4)}.png"
   )
+  regulardemouser1.properties << property
+  Client.first.properties << property
 end
 
-# 20 Fake properties belonging to +regulardemouser1+ (demo account)
+# 20 Fake properties belonging to +regulardemouser1+ & +regulardemouser2+(demo account)
 30.times do |n|
   property = Property.create!(
       title: Faker::TvShows::SiliconValley.motto,
@@ -182,19 +187,15 @@ end
       floor: rand(0..10),
       construction: rand(1970..2018),
       account: demo,
-      location: lamprini,
-      landlord: Landlord.create!(first_name: Faker::Name.first_name,
-                                 last_name: Faker::Name.last_name,
-                                 email: Faker::TvShows::SiliconValley.email,
-                                 telephones: Faker::PhoneNumber.phone_number,
-                                 account: demo)
+      location: lamprini
   )
-  regulardemouser1.properties << property
-  regulardemouser2.properties << property
   property.avatar.attach(
       io: File.open(Dir["#{ENV['SEEDS_MEDIA_DIR']}#{rand(1..9)}/*"].sample),
       filename: "file-#{Faker::Number.number(digits: 4)}.png"
   )
+  regulardemouser1.properties << property
+  regulardemouser2.properties << property
+  Client.second.properties << property
 end
 
 # 20 Fake properties belonging to +regulardemouser1+ (demo account)
@@ -210,18 +211,15 @@ end
       floor: rand(0..10),
       construction: rand(1970..2018),
       account: demo,
-      location: lamprini,
-      landlord: Landlord.create!(first_name: Faker::Name.first_name,
-                                 last_name: Faker::Name.last_name,
-                                 email: Faker::TvShows::SiliconValley.email,
-                                 telephones: Faker::PhoneNumber.phone_number,
-                                 account: demo)
+      location: lamprini
   )
-  regulardemouser1.properties << property
+
   property.avatar.attach(
       io: File.open(Dir["#{ENV['SEEDS_MEDIA_DIR']}#{rand(1..9)}/*"].sample),
       filename: "file-#{Faker::Number.number(digits: 4)}.png"
   )
+  regulardemouser1.properties << property
+  Client.third.properties << property
 end
 
 # 5 fake properties belonging to +regularbluedomainuser1+ (bluedomain account)
@@ -235,17 +233,13 @@ end
       price: Faker::Number.number(digits: 6),
       bedrooms: rand(1..5),
       account: bluedomain,
-      location: palatiani,
-      landlord: Landlord.create!(first_name: Faker::Name.first_name,
-                                 last_name: Faker::Name.last_name,
-                                 email: Faker::TvShows::SiliconValley.email,
-                                 telephones: Faker::PhoneNumber.phone_number,
-                                 account: bluedomain)
+      location: palatiani
   )
-  regularbluedomainuser1.properties << property
   property.avatar.attach(
       io: File.open(Dir["#{ENV['SEEDS_MEDIA_DIR']}#{rand(1..9)}/*"].sample),
       filename: "file-#{Faker::Number.number(digits: 4)}.png"
   )
+  regularbluedomainuser1.properties << property
+  Client.fourth.properties << property
 end
 
