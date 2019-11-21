@@ -126,6 +126,7 @@ module Accounts
           if current_user.role(current_account) == 'user'
             current_user.properties <<  @property
           end
+          # Sets the client and its required ownership attribute on the CPA many-to-many table
           set_client(clients_hash)
 
           format.html { redirect_to @property, notice: I18n.t('properties.created.flash') }
