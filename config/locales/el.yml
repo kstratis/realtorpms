@@ -653,7 +653,7 @@ el:
         info: "Πληροφορίες"
         searching: "Αναζητά"
         offering: "Προσφέρει"
-        handling: "Διαθεσιμότητα"
+        handling: "Δικαιώματα"
     index:
       breadcrumb: "Πελάτες"
     title: "Πελάτες"

@@ -63,8 +63,6 @@ class Property < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :logs, dependent: :nullify
 
-  # has_many :fields, class_name: 'EntityField' # TODO: This line is redundant and should be removed
-
 
   # Collection of properties which have been favorited by a particular user
   scope :faved_by, -> (user) {joins(:favorites).where(favorites: {user: user})}

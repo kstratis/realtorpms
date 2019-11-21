@@ -648,7 +648,7 @@ en:
         info: "User info"
         searching: "Searching"
         offering: "Offering"
-        handling: "Availability"
+        handling: "Permissions"
     index:
       breadcrumb: "Clients"
     title: "Clients"
