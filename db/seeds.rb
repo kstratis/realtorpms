@@ -114,7 +114,7 @@ demo.users << johnymnemonic
 50.times do |n|
   Client.create!(first_name: Faker::Name.first_name,
                  last_name: Faker::Name.last_name,
-                 email: "demouser-#{n + 1}@gmail.com",
+                 email: "democlient-#{n + 1}@gmail.com",
                  telephones: "69#{rand(0..9)}76548#{rand(0..9)}#{rand(0..9)}",
                  account: demo,
                  model_type: demo.model_types.find_by(name: 'clients'))
@@ -124,7 +124,7 @@ end
 10.times do |n|
   Client.create!(first_name: Faker::Name.first_name,
                  last_name: Faker::Name.last_name,
-                 email: "demouser-#{n + 1}@gmail.com",
+                 email: "democlient-#{n + 1}@gmail.com",
                  telephones: "69#{rand(0..9)}76548#{rand(0..9)}#{rand(0..9)}",
                  account: bluedomain,
                  model_type: bluedomain.model_types.find_by(name: 'clients'))
