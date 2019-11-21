@@ -33,7 +33,7 @@ Rails.application.routes.draw do
       get '/properties/clients', to: 'properties#clients'
       get '/properties/inlinesearch', to: 'properties#inlinesearch'
       # resources :entityfields
-      resources :model_types, only: [:show, :index, :edit, :update], :path => "extended-fields"
+      resources :model_types, only: [:edit, :update], :path => "extended-fields"
       resources :settings, only: [:index]
       # resources :model_types
 
