@@ -112,11 +112,23 @@ bluedomain.users << regularbluedomainuser1
 demo.users << johnymnemonic
 
 50.times do |n|
-  client = Client.create!(first_name: Faker::Name.first_name,
-                      last_name: Faker::Name.last_name,
-                      email: "demouser-#{n + 1}@gmail.com",
-                      telephones: "69#{rand(0..9)}76548#{rand(0..9)}#{rand(0..9)}")
-  demo.clients << client
+  Client.create!(first_name: Faker::Name.first_name,
+                 last_name: Faker::Name.last_name,
+                 email: "demouser-#{n + 1}@gmail.com",
+                 telephones: "69#{rand(0..9)}76548#{rand(0..9)}#{rand(0..9)}",
+                 account: demo,
+                 model_type: demo.model_types.find_by(name: 'clients'))
+
+end
+
+10.times do |n|
+  Client.create!(first_name: Faker::Name.first_name,
+                 last_name: Faker::Name.last_name,
+                 email: "demouser-#{n + 1}@gmail.com",
+                 telephones: "69#{rand(0..9)}76548#{rand(0..9)}#{rand(0..9)}",
+                 account: bluedomain,
+                 model_type: bluedomain.model_types.find_by(name: 'clients'))
+
 end
 
 # 99 random users belonging to +demo+ account
@@ -133,6 +145,7 @@ end
                       password: password,
                       password_confirmation: password)
   demo.users << user
+  demo.model_types.find_by(name: 'users').users << user
 end
 
 # 20 random users belonging to +bluedomain+ account
@@ -149,6 +162,7 @@ end
                       password: password,
                       password_confirmation: password)
   bluedomain.users << user
+  bluedomain.model_types.find_by(name: 'users').users << user
 end
 
 # 20 Fake properties belonging to +regulardemouser1+ (demo account)
@@ -164,10 +178,11 @@ end
       floor: rand(0..10),
       construction: rand(1970..2018),
       account: demo,
-      location: perissos
+      location: perissos,
+      model_type: demo.model_types.find_by(name: 'properties')
   )
   property.avatar.attach(
-      io: File.open(Dir["#{ENV['SEEDS_MEDIA_DIR']}#{rand(1..9)}/*"].sample),
+      io: File.open(Dir["#{ENV['MEDIA_DIR']}#{rand(1..9)}/*"].sample),
       filename: "file-#{Faker::Number.number(digits: 4)}.png"
   )
   regulardemouser1.properties << property
@@ -187,15 +202,17 @@ end
       floor: rand(0..10),
       construction: rand(1970..2018),
       account: demo,
-      location: lamprini
+      location: lamprini,
+      model_type: demo.model_types.find_by(name: 'properties')
   )
   property.avatar.attach(
-      io: File.open(Dir["#{ENV['SEEDS_MEDIA_DIR']}#{rand(1..9)}/*"].sample),
+      io: File.open(Dir["#{ENV['MEDIA_DIR']}#{rand(1..9)}/*"].sample),
       filename: "file-#{Faker::Number.number(digits: 4)}.png"
   )
   regulardemouser1.properties << property
   regulardemouser2.properties << property
   demo.clients.second.properties << property
+  Cpa.where(property: property, client: [demo.clients.second.id]).update_all(ownership: true)
 end
 
 # 20 Fake properties belonging to +regulardemouser1+ (demo account)
@@ -211,15 +228,17 @@ end
       floor: rand(0..10),
       construction: rand(1970..2018),
       account: demo,
-      location: lamprini
+      location: lamprini,
+      model_type: demo.model_types.find_by(name: 'properties')
   )
 
   property.avatar.attach(
-      io: File.open(Dir["#{ENV['SEEDS_MEDIA_DIR']}#{rand(1..9)}/*"].sample),
+      io: File.open(Dir["#{ENV['MEDIA_DIR']}#{rand(1..9)}/*"].sample),
       filename: "file-#{Faker::Number.number(digits: 4)}.png"
   )
   regulardemouser1.properties << property
   demo.clients.third.properties << property
+  Cpa.where(property: property, client: [demo.clients.third.id]).update_all(ownership: true)
 end
 
 # 5 fake properties belonging to +regularbluedomainuser1+ (bluedomain account)
@@ -233,13 +252,16 @@ end
       price: Faker::Number.number(digits: 6),
       bedrooms: rand(1..5),
       account: bluedomain,
-      location: palatiani
+      location: palatiani,
+      model_type: bluedomain.model_types.find_by(name: 'properties')
+
   )
   property.avatar.attach(
-      io: File.open(Dir["#{ENV['SEEDS_MEDIA_DIR']}#{rand(1..9)}/*"].sample),
+      io: File.open(Dir["#{ENV['MEDIA_DIR']}#{rand(1..9)}/*"].sample),
       filename: "file-#{Faker::Number.number(digits: 4)}.png"
   )
   regularbluedomainuser1.properties << property
-  demo.clients.fourth.properties << property
+  bluedomain.clients.first.properties << property
+  Cpa.where(property: property, client: [bluedomain.clients.first.id]).update_all(ownership: true)
 end
 
