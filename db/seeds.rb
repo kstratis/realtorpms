@@ -112,7 +112,7 @@ bluedomain.users << regularbluedomainuser1
 demo.users << johnymnemonic
 
 50.times do |n|
-  client = User.create!(first_name: Faker::Name.first_name,
+  client = Client.create!(first_name: Faker::Name.first_name,
                       last_name: Faker::Name.last_name,
                       email: "demouser-#{n + 1}@gmail.com",
                       telephones: "69#{rand(0..9)}76548#{rand(0..9)}#{rand(0..9)}")
@@ -171,7 +171,7 @@ end
       filename: "file-#{Faker::Number.number(digits: 4)}.png"
   )
   regulardemouser1.properties << property
-  Client.first.properties << property
+  demo.clients.first.properties << property
 end
 
 # 20 Fake properties belonging to +regulardemouser1+ & +regulardemouser2+(demo account)
@@ -195,7 +195,7 @@ end
   )
   regulardemouser1.properties << property
   regulardemouser2.properties << property
-  Client.second.properties << property
+  demo.clients.second.properties << property
 end
 
 # 20 Fake properties belonging to +regulardemouser1+ (demo account)
@@ -219,7 +219,7 @@ end
       filename: "file-#{Faker::Number.number(digits: 4)}.png"
   )
   regulardemouser1.properties << property
-  Client.third.properties << property
+  demo.clients.third.properties << property
 end
 
 # 5 fake properties belonging to +regularbluedomainuser1+ (bluedomain account)
@@ -240,6 +240,6 @@ end
       filename: "file-#{Faker::Number.number(digits: 4)}.png"
   )
   regularbluedomainuser1.properties << property
-  Client.fourth.properties << property
+  demo.clients.fourth.properties << property
 end
 
