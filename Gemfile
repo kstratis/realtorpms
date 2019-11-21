@@ -22,7 +22,7 @@ gem 'bootsnap'
 
 gem 'rake', '~> 13'
 
-gem 'sprockets-rails', '2.3.3'
+gem 'sprockets-rails', '3.2.1'
 
 # image metadata info
 gem 'exifr', '~> 1.3', '>= 1.3.5'
@@ -41,7 +41,7 @@ gem 'puma', '~> 4'
 # gem 'sass-rails', '~> 5.0.7'
 gem 'sassc-rails', '~> 2.1.2'
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '~> 4.1.20'
+gem 'uglifier', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -57,7 +57,7 @@ gem 'jquery-rails', '~> 4.3.5'
 
 gem 'faker', '~> 2.1.0'
 
-gem 'will_paginate', '~> 3.1.7'
+gem 'will_paginate', '~> 3.2.1'
 
 gem 'active_record_union', '~> 1.3.0'
 
@@ -88,21 +88,21 @@ gem 'capistrano-rails', '~> 1.4'
 gem 'capistrano-passenger', '~> 0.2.0'
 gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
 
-gem 'friendly_id', '~> 5.2'
+gem 'friendly_id', '~> 5.3'
 gem 'public_uid' # Need this for pseudorandom ids
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-gem 'listen', '>= 3.1.5', '< 3.2'
+gem 'listen', '~> 3.2'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'capistrano-rails-console', require: false
 
 group :development, :test do
   gem 'factory_bot'
-  gem 'rspec-rails', '3.8.2'
+  gem 'rspec-rails', '3.9'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
