@@ -18,7 +18,11 @@ gem 'bootstrap', '~> 4.3.1'
 
 gem 'bootsnap'
 
-gem 'rake', '~> 12.3.3'
+# -----------
+
+gem 'rake', '~> 13'
+
+gem 'sprockets-rails', '2.3.3'
 
 # image metadata info
 gem 'exifr', '~> 1.3', '>= 1.3.5'
@@ -65,7 +69,7 @@ gem 'rails_12factor'
 
 gem 'react_on_rails', '11.3'
 
-gem 'webpacker', '~> 4.0'
+gem 'webpacker', '~> 4.2'
 
 gem "roo", "~> 2.8.2"
 
