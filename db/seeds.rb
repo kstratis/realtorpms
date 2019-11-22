@@ -53,6 +53,7 @@ demo = Account.create!(
     name: 'Demo',
     owner: User.second
 )
+demo.model_types.find_by(name: 'users').users << tonystark
 
 # This account belongs to Hulk Hogan (hh@gmail.com)
 bluedomain = Account.create!(
@@ -60,6 +61,7 @@ bluedomain = Account.create!(
     name: 'Bluedomain',
     owner: User.third
 )
+bluedomain.model_types.find_by(name: 'users').users << hulkhogan
 
 # This account belongs to Johny Mnemonic (jm@gmail.com)
 reddomain = Account.create!(
@@ -67,6 +69,8 @@ reddomain = Account.create!(
     name: 'Reddomain',
     owner: User.fourth
 )
+reddomain.model_types.find_by(name: 'users').users << johnymnemonic
+
 
 lamprini = Location.find(106314) # Lamprini - Galatsi (level 3)
 palatiani = Location.find(117003) # Palatiani - Ilion (level 3)
@@ -100,16 +104,19 @@ regularbluedomainuser1 = User.create!(first_name: 'Lakis',
 
 # ----------------------------------------------------------
 
-demo = Account.find_by(subdomain: 'demo')
-bluedomain = Account.find_by(subdomain: 'bluedomain')
-
 demo.users << regulardemouser1
+demo.model_types.find_by(name: 'users').users << regulardemouser1
+
 demo.users << regulardemouser2
+demo.model_types.find_by(name: 'users').users << regulardemouser2
+
 bluedomain.users << regularbluedomainuser1
+bluedomain.model_types.find_by(name: 'users').users << regularbluedomainuser1
 
 # Johny Mnemonic is invited as a regular user in Tony Stark's +demo+ account
 # At the same time he remains the owner of +reddomain+
 demo.users << johnymnemonic
+demo.model_types.find_by(name: 'users').users << johnymnemonic
 
 50.times do |n|
   Client.create!(first_name: Faker::Name.first_name,
