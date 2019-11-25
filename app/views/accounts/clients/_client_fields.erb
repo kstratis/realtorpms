@@ -1,84 +1,98 @@
 <div class="client-fields mt-3">
-<!-- .form-group -->
-<div class="form-group new_client">
-  <div class="form-label-group">
-    <%= f.text_field :first_name,
-                     class: 'form-control new_client_input field-validatable',
-                     placeholder: Client.human_attribute_name("first_name"),
-                     'data-parsley-required': "true",
-                     # Rails ignores attributes with nil
-                     'data-parsley-group': local_assigns[:vgroup].nil? ? nil : vgroup,
-                     'data-parsley-required-message': t("js.validator.required") %>
-    <%= f.label :first_name, Client.human_attribute_name("first_name") %>
-    <%#= inline_error @client, :first_name, 'First name' %>
+  <!-- .form-group -->
+  <div class="form-group new_client">
+    <div class="form-label-group">
+      <%= f.text_field :first_name,
+                       class: 'form-control new_client_input field-validatable',
+                       placeholder: Client.human_attribute_name("first_name"),
+                       'data-parsley-required': "true",
+                       # Rails ignores attributes with nil
+                       'data-parsley-group': local_assigns[:vgroup].nil? ? nil : vgroup,
+                       'data-parsley-required-message': t("js.validator.required") %>
+      <%= f.label :first_name, Client.human_attribute_name("first_name") %>
+      <%#= inline_error @client, :first_name, 'First name' %>
+    </div>
   </div>
-</div>
-<!-- /.form-group -->
+  <!-- /.form-group -->
 
-<!-- .form-group -->
-<div class="form-group new_client">
-  <div class="form-label-group">
-    <%= f.text_field :last_name,
-                     class: 'form-control new_client_input field-validatable',
-                     placeholder: Client.human_attribute_name("last_name"),
-                     'data-parsley-required': "true",
-                     # Rails ignores attributes with nil
-                     'data-parsley-group': local_assigns[:vgroup].nil? ? nil : vgroup,
-                     'data-parsley-required-message': t("js.validator.required") %>
-    <%= f.label :last_name, Client.human_attribute_name("last_name") %>
-    <%#= inline_error @client, :last_name, 'Last name' %>
+  <!-- .form-group -->
+  <div class="form-group new_client">
+    <div class="form-label-group">
+      <%= f.text_field :last_name,
+                       class: 'form-control new_client_input field-validatable',
+                       placeholder: Client.human_attribute_name("last_name"),
+                       'data-parsley-required': "true",
+                       # Rails ignores attributes with nil
+                       'data-parsley-group': local_assigns[:vgroup].nil? ? nil : vgroup,
+                       'data-parsley-required-message': t("js.validator.required") %>
+      <%= f.label :last_name, Client.human_attribute_name("last_name") %>
+      <%#= inline_error @client, :last_name, 'Last name' %>
+    </div>
   </div>
-</div>
-<!-- /.form-group -->
+  <!-- /.form-group -->
 
-<!-- .form-group -->
-<div class="form-group new_client">
-  <div class="form-label-group">
-    <%= f.email_field :email,
-                      class: 'form-control new_client_input',
-                      placeholder: Client.human_attribute_name("email"),
-                      # Rails ignores attributes with nil
-                      'data-parsley-group': local_assigns[:vgroup].nil? ? nil : vgroup,
-                      'data-parsley-required-message': t("js.validator.required") %>
-    <%= f.label "email", Client.human_attribute_name("email") %>
-    <%#= inline_error @client, :email, 'Email' %>
+  <!-- .form-group -->
+  <div class="form-group new_client">
+    <div class="form-label-group">
+      <%= f.email_field :email,
+                        class: 'form-control new_client_input',
+                        placeholder: Client.human_attribute_name("email"),
+                        # Rails ignores attributes with nil
+                        'data-parsley-group': local_assigns[:vgroup].nil? ? nil : vgroup,
+                        'data-parsley-required-message': t("js.validator.required") %>
+      <%= f.label "email", Client.human_attribute_name("email") %>
+      <%#= inline_error @client, :email, 'Email' %>
+    </div>
   </div>
-</div>
-<!-- /.form-group -->
+  <!-- /.form-group -->
 
-<!-- .form-group -->
-<div class="form-group new_client">
-  <div class="form-label-group">
-    <%= f.text_field :telephones, class: 'form-control new_client_input', placeholder: Client.human_attribute_name("telephones") %>
-    <%= f.label "telephones", Client.human_attribute_name("telephones") %>
-    <%#= inline_error @client, :telephones, 'Telephones' %>
+  <!-- .form-group -->
+  <div class="form-group new_client">
+    <div class="form-label-group">
+      <%= f.text_field :telephones, class: 'form-control new_client_input', placeholder: Client.human_attribute_name("telephones") %>
+      <%= f.label "telephones", Client.human_attribute_name("telephones") %>
+      <%#= inline_error @client, :telephones, 'Telephones' %>
+    </div>
   </div>
-</div>
-<!-- /.form-group -->
+  <!-- /.form-group -->
 
-<!-- .form-group -->
-<div class="form-group new_client">
-  <div class="form-label-group">
-    <%= f.text_field :job, class: 'form-control new_client_input', placeholder: Client.human_attribute_name("job") %>
-    <%= f.label "job", Client.human_attribute_name("job") %>
-    <%#= inline_error @client, :job, 'Job' %>
+  <!-- .form-group -->
+  <div class="form-group new_client">
+    <div class="form-label-group">
+      <%= f.text_field :job, class: 'form-control new_client_input', placeholder: Client.human_attribute_name("job") %>
+      <%= f.label "job", Client.human_attribute_name("job") %>
+      <%#= inline_error @client, :job, 'Job' %>
+    </div>
   </div>
-</div>
-<!-- /.form-group -->
+  <!-- /.form-group -->
 
-<!-- .form-group -->
-<div class="form-group new_client">
-  <%= f.text_area :notes, class: 'form-control new_client_input', placeholder: t('activerecord.attributes.client.notes_title'), autocomplete: 'off', 'rows': '3' %>
-  <small class="form-text text-muted"><%= Client.human_attribute_name("notes") %>
-  </small>
-</div>
+  <!-- .form-group -->
+  <div class="form-group new_client">
+    <%= f.text_area :notes, class: 'form-control new_client_input', placeholder: t('activerecord.attributes.client.notes_title'), autocomplete: 'off', 'rows': '3' %>
+    <small class="form-text text-muted"><%= Client.human_attribute_name("notes") %>
+    </small>
+  </div>
 
-<!-- Extended fields -->
-<%= f.fields_for :preferences, OpenStruct.new(@client.preferences) do |builder| %>
-  <% @client.model_type.fields.each do |field| %>
-    <%= render "accounts/cfields/#{field.field_type}", field: field, f: builder, vgroup: nil, classes: 'dummy' %>
+  <div class="custom-control custom-checkbox app-checkbox m-2">
+    <%= f.check_box(:buyerbrokeragreement, {class: "custom-control-input", type: 'checkbox'}) %>
+    <%= f.label(:buyerbrokeragreement, {class: 'custom-control-label'}) do %>
+      <%= t('clients.show.buyerbrokeragreement') %>
+    <% end %>
+  </div>
+
+  <div class="custom-control custom-checkbox app-checkbox m-2">
+    <%= f.check_box(:brokerlistingagreement, {class: "custom-control-input", type: 'checkbox'}) %>
+    <%= f.label(:brokerlistingagreement, {class: 'custom-control-label'}) do %>
+      <%= t('clients.show.brokerlistingagreement') %>
+    <% end %>
+  </div>
+
+  <!-- Extended fields -->
+  <%= f.fields_for :preferences, OpenStruct.new(@client.preferences) do |builder| %>
+    <% @client.model_type.fields.each do |field| %>
+      <%= render "accounts/cfields/#{field.field_type}", field: field, f: builder, vgroup: nil, classes: 'dummy' %>
+    <% end %>
   <% end %>
-<% end %>
 
 </div>
 <!-- /.form-group -->

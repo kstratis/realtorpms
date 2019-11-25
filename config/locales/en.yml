@@ -644,6 +644,8 @@ en:
       matches: "Matches"
       no_stored_searches_html: "The client has no stored search preferences. Navigate to the <a href='%{properties_path}'>properties screen</a>, set the client's filters and save its preferences."
       no_ownership: "The client doesn't seem to poccess any properties."
+      brokerlistingagreement: "Broker listing agreement"
+      buyerbrokeragreement: "Buyer broker agreement"
       tabs:
         info: "User info"
         searching: "Searching"

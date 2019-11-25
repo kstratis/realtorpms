@@ -1781,12 +1781,16 @@ a.text-link {
 }
 
 .nav-tabs .nav-link.custom {
-  padding: 1rem 1rem 10px 1rem !important;
+  //padding: 1rem 1rem 10px 1rem !important;
+  padding: 0.5rem 1rem 0rem 1rem !important;
 }
 
 .list-group.custom {
   box-shadow: unset;
 }
-//.nav-tabs .nav-link .custom {
 
-//}
+.tab-text{
+  @media (min-width: 992px) and (max-width: 1080px) {
+    display: none !important;
+  }
+}

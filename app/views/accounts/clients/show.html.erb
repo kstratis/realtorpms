@@ -25,21 +25,42 @@
       <!-- .card -->
       <div class="card card-fluid">
 
-        <%= render partial: 'shared/card_header/header', locals: {title: @client.full_name, btn_text: t('properties.show.back'), btn_link: clients_path} %>
-        <div class="d-flex justify-content-center">
-          <nav class="nav nav-tabs nav-justified border-0">
-            <a href="#info" class="nav-link custom active" data-toggle="tab" role="tab" aria-selected="true"><i class="menu-icon fas fa-user fa-fw"></i>&nbsp; <%= t('clients.show.tabs.info') %>
-            </a>
-            <a href="#searching" class="nav-link custom " data-toggle="tab" role="tab" aria-selected="false"><i class="menu-icon fas fa-search fa-fw"></i>&nbsp; <%= t('clients.show.tabs.searching') %>
-            </a>
-            <a href="#offering" class="nav-link custom " data-toggle="tab" role="tab" aria-selected="false"><i class="menu-icon fas fa-home fa-fw"></i>&nbsp; <%= t('clients.show.tabs.offering') %>
-            </a>
-            <% if current_user.is_admin?(current_account) %>
-              <a href="#handling" class="nav-link custom " data-toggle="tab" role="tab" aria-selected="false"><i class="menu-icon fas fa-bars fa-fw"></i>&nbsp; <%= t('clients.show.tabs.handling') %>
-              </a>
-            <% end %>
-          </nav><!-- /.nav -->
+        <div class="card-header card-header-custom">
+          <div class="row align-items-center">
+            <div class="col-lg-2 d-none d-lg-block card-start-heading">
+              <%= link_to clients_path, class: "btn btn-primary btn-warning navigation-btn" do %>
+                <i class="fas fa-chevron-left fa-fw"></i><%= t('properties.show.back') %>
+              <% end %>
+            </div>
+            <div class="col-lg-8 text-center flex-nowrap">
+              <nav class="nav nav-tabs nav-justified border-0 d-flex justify-content-center text-nowrap ">
+                <a href="#info" class="nav-link custom active text-nowrap" data-toggle="tab" role="tab" aria-selected="true"><i class="menu-icon fas fa-user fa-fw"></i><span class="d-none d-md-inline tab-text">&nbsp; <%= t('clients.show.tabs.info') %></span></a>
+                <a href="#searching" class="nav-link custom " data-toggle="tab" role="tab" aria-selected="false"><i class="menu-icon fas fa-search fa-fw"></i><span class="d-none d-md-inline tab-text">&nbsp; <%= t('clients.show.tabs.searching') %></span>
+                </a>
+                <a href="#offering" class="nav-link custom " data-toggle="tab" role="tab" aria-selected="false"><i class="menu-icon fas fa-home fa-fw"></i><span class="d-none d-md-inline tab-text">&nbsp; <%= t('clients.show.tabs.offering') %></span>
+                </a>
+                <% if current_user.is_admin?(current_account) %>
+                  <a href="#handling" class="nav-link custom " data-toggle="tab" role="tab" aria-selected="false"><i class="menu-icon fas fa-bars fa-fw"></i><span class="d-none d-md-inline tab-text">&nbsp; <%= t('clients.show.tabs.handling') %></span>
+                  </a>
+                <% end %>
+              </nav><!-- /.nav -->
+            </div>
+
+
+            <div class="col-lg-2 card-end-heading">
+              <a class="btn btn-primary navigation-btn" href="#"><i class="fas fa-th-large fa-fw"></i></a></div>
+          </div>
         </div>
+
+
+
+
+
+
+
+
+
+
         <!-- .card-body -->
         <div class="card-body">
 
@@ -87,6 +108,16 @@
                         <td><%= t('activerecord.attributes.client.registered') %></td>
                         <!-- +l+ function accounts for the localized timedate -->
                         <td><%= l(@client.created_at, format: :custom) %></td>
+                      </tr>
+                      <tr>
+                        <td><%= t('clients.show.buyerbrokeragreement') %></td>
+                        <!-- +l+ function accounts for the localized timedate -->
+                        <td><%= t(@client.buyerbrokeragreement.to_s.downcase)  %></td>
+                      </tr>
+                      <tr>
+                        <td><%= t('clients.show.brokerlistingagreement') %></td>
+                        <!-- +l+ function accounts for the localized timedate -->
+                        <td><%= t(@client.brokerlistingagreement.to_s.downcase)  %></td>
                       </tr>
 
                       <% @client.model_type.fields.each do |field| %>
