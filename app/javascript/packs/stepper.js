@@ -1,4 +1,5 @@
 import FormStepper from '../bundles/steppers/form_stepper';
+import { setup_dependent_checkboxes } from '../bundles/utilities/helpers';
 
 // Handles the property form validators (new, edit)
 $(document).on('turbolinks:load', function(e) {
@@ -25,21 +26,7 @@ $(document).on('turbolinks:load', function(e) {
 
   // --------------------------------
   // Sets up the checkbox-dependant input fields in step 3 (amenities)
-  var elements = $('.dependent_check');
-  var status;
-  elements.each(function() {
-    status = $(this).prop('checked');
-    $(this)
-      .siblings()
-      .find('input.dependent_input')
-      .prop('disabled', !status);
-  });
-  elements.change(function() {
-    $(this)
-      .siblings()
-      .find('input.dependent_input')
-      .prop('disabled', !this.checked);
-  });
+
   // --------------------------------
 
   // --------------------------------

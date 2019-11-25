@@ -74,7 +74,7 @@ module Accounts
 
     private
       def client_params
-        params.require(:client).permit(:first_name, :last_name, :email, :telephones, :job, :notes, :brokerlistingagreement, :buyerbrokeragreement, {preferences: {}})
+        params.require(:client).permit(:first_name, :last_name, :email, :telephones, :job, :notes, :ordertoview, :ordertosell, :ordertoviewfile, :ordertosellfile, {preferences: {}})
       end
 
       def log_action

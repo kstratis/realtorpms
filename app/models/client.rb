@@ -11,6 +11,8 @@ class Client < ApplicationRecord
   # CPA stands for Client-Property-Association (many-to-many join table)
   has_many :cpas
   has_many :properties, -> { distinct }, through: :cpas
+  has_one_attached :ordertoviewfile
+  has_one_attached :ordertosellfile
 
   before_create { self.color = COLOR_PALETTE.sample } # This assigns a random bg color to each new user
 

@@ -105,6 +105,27 @@ const hasParams = () => {
   return param_counter > 0;
 };
 
+// Sets up the
+const setup_dependent_checkboxes = () => {
+  var elements = $('.dependent_check');
+  var status;
+  elements.each(function() {
+    status = $(this).prop('checked');
+    $(this)
+      .parent()
+      .siblings()
+      .find('.dependent_input')
+      .prop('disabled', !status);
+  });
+  elements.change(function() {
+    $(this)
+      .parent()
+      .siblings()
+      .find('.dependent_input')
+      .prop('disabled', !this.checked);
+  });
+};
+
 export {
   debounce,
   capitalizeFirstLetter,
@@ -117,5 +138,6 @@ export {
   floorFilterOptions,
   categoryFilterOptions,
   ifExists,
-  hasParams
+  hasParams,
+  setup_dependent_checkboxes
 };

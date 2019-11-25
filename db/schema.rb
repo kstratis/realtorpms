@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_24_234731) do
+ActiveRecord::Schema.define(version: 2019_11_25_091506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,8 +85,8 @@ ActiveRecord::Schema.define(version: 2019_11_24_234731) do
     t.text "color"
     t.jsonb "preferences", default: {}, null: false
     t.integer "model_type_id"
-    t.boolean "brokerlistingagreement", default: false
-    t.boolean "buyerbrokeragreement", default: false
+    t.boolean "ordertosell", default: false
+    t.boolean "ordertoview", default: false
     t.index ["account_id"], name: "index_clients_on_account_id"
     t.index ["last_name"], name: "index_clients_on_last_name"
   end

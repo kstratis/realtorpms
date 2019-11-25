@@ -10,8 +10,10 @@
 import * as uploader from '../bundles/uploaders/uppy_controller';
 import flatpickr from "flatpickr";
 import { Greek } from "flatpickr/dist/l10n/gr.js"
+import { setup_dependent_checkboxes } from '../bundles/utilities/helpers';
 import * as CustomActiveStorage from '../bundles/uploaders/custom_active_storage';
 
 $(document).on('turbolinks:load', function(e) {
   if ($(".uppy-emitters, .file-emitters").length > 0){ CustomActiveStorage.start()}
+  if ($('.dependent_input').length) setup_dependent_checkboxes();
 });

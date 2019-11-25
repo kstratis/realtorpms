@@ -73,18 +73,34 @@
     </small>
   </div>
 
-  <div class="custom-control custom-checkbox app-checkbox m-2">
-    <%= f.check_box(:buyerbrokeragreement, {class: "custom-control-input", type: 'checkbox'}) %>
-    <%= f.label(:buyerbrokeragreement, {class: 'custom-control-label'}) do %>
-      <%= t('clients.show.buyerbrokeragreement') %>
+  <div class="custom-control custom-checkbox app-checkbox align-items-center d-flex pl-3">
+    <div class="col-lg-5 col-sm-3 pr-3">
+    <%= f.check_box(:ordertoview, {class: "custom-control-input dependent_check", type: 'checkbox'}) %>
+    <%= f.label(:ordertoview, {class: 'custom-control-label dependent_label'}) do %>
+      <%= t('clients.show.ordertoview') %>
     <% end %>
+    </div>
+    <div class="col-1 pr-1">
+    <%= @client.try(:ordertoviewfile).try(:attached?) ? link_to('&#10515'.html_safe, rails_blob_path(@client.ordertoviewfile, disposition: "attachment")) : '' %>
+    </div>
+    <div class="custom-file col-lg-6 col-sm-8">
+      <%= f.file_field :ordertoviewfile, id: "ordertoviewfile", class: 'form-control custom-file-input dependent_input', multiple: false %><label class="custom-file-label" for="tf3">Choose file</label>
+    </div>
   </div>
 
-  <div class="custom-control custom-checkbox app-checkbox m-2">
-    <%= f.check_box(:brokerlistingagreement, {class: "custom-control-input", type: 'checkbox'}) %>
-    <%= f.label(:brokerlistingagreement, {class: 'custom-control-label'}) do %>
-      <%= t('clients.show.brokerlistingagreement') %>
+  <div class="custom-control custom-checkbox app-checkbox align-items-center d-flex py-2 pl-3">
+    <div class="col-lg-5 col-sm-3 pr-3">
+    <%= f.check_box(:ordertosell, {class: "custom-control-input dependent_check", type: 'checkbox'}) %>
+    <%= f.label(:ordertosell, {class: 'custom-control-label dependent_label'}) do %>
+      <%= t('clients.show.ordertosell') %>
     <% end %>
+    </div>
+    <div class="col-1 pr-1">
+    <%= @client.try(:ordertosellfile).try(:attached?) ? link_to('&#10515'.html_safe, rails_blob_path(@client.ordertosellfile, disposition: "attachment")) : '' %>
+    </div>
+    <div class="custom-file col-lg-6 col-sm-8">
+      <%= f.file_field :ordertosellfile, id: "ordertosellfile", class: 'form-control custom-file-input dependent_input', multiple: false %><label class="custom-file-label" for="tf3">Choose file</label>
+    </div>
   </div>
 
   <!-- Extended fields -->
