@@ -1794,3 +1794,16 @@ a.text-link {
     display: none !important;
   }
 }
+
+.no-underline:hover{
+  text-decoration: none;
+}
+
+.file-container {
+  label {
+    cursor: pointer;
+  }
+  input {
+    display: none;
+  }
+}

@@ -8,6 +8,7 @@ en:
   back: "Back"
   user: "User"
   download: "Download"
+  choose_file: "Choose file"
   header:
     search: "Search using property code"
   activerecord:

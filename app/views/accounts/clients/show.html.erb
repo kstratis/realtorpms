@@ -111,11 +111,11 @@
                       </tr>
                       <tr>
                         <td><%= t('clients.show.ordertoview') %></td>
-                        <td><%= t(@client.ordertoview.to_s.downcase) %>&nbsp;<%= @client.try(:ordertoviewfile).try(:attached?) ? link_to('&#10515'.html_safe, rails_blob_path(@client.ordertoviewfile, disposition: "attachment")) : '' %></td>
+                        <td><%= t(@client.ordertoview.to_s.downcase) %>&nbsp;<%= (@client.try(:ordertoviewfile).try(:attached?) && @client.ordertoview) ? link_to('&#10515'.html_safe, rails_blob_path(@client.ordertoviewfile, disposition: "attachment"), class: 'no-underline') : '' %></td>
                       </tr>
                       <tr>
                         <td><%= t('clients.show.ordertosell') %></td>
-                        <td><%= t(@client.ordertosell.to_s.downcase) %>&nbsp;<%= @client.try(:ordertosellfile).try(:attached?) ? link_to('&#10515'.html_safe, rails_blob_path(@client.ordertosellfile, disposition: "attachment")) : '' %></td>
+                        <td><%= t(@client.ordertosell.to_s.downcase) %>&nbsp;<%= (@client.try(:ordertosellfile).try(:attached?) && @client.ordertosell) ? link_to('&#10515'.html_safe, rails_blob_path(@client.ordertosellfile, disposition: "attachment"), class: 'no-underline') : '' %></td>
                       </tr>
 
                       <% @client.model_type.fields.each do |field| %>

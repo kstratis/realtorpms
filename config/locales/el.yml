@@ -8,6 +8,7 @@ el:
   back: "Πίσω"
   user: "Ο χρήστης"
   download: "Μεταφόρτωση"
+  choose_file: "Επιλέξτε αρχείο"
   header:
     search: "Αναζήτηση κωδ. ακινήτου"
   activerecord:

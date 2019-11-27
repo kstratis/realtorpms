@@ -116,13 +116,23 @@ const setup_dependent_checkboxes = () => {
       .siblings()
       .find('.dependent_input')
       .prop('disabled', !status);
+    $(this)
+      .parent()
+      .siblings()
+      .find('.dependent_label.plain')
+      .toggleClass('disabled', !status);
   });
   elements.change(function() {
     $(this)
       .parent()
       .siblings()
       .find('.dependent_input')
-      .prop('disabled', !this.checked);
+      .prop('disabled', !this.checked).find('.dependent_label.plain').toggleClass('disabled', !this.checked);
+    $(this)
+      .parent()
+      .siblings()
+      .find('.dependent_label.plain')
+      .toggleClass('disabled', !this.checked);
   });
 };
 
