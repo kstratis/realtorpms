@@ -133,7 +133,7 @@ module PropertyDatatable
             edit_entity_path: edit_property_path(property),
             fav_entity_path: property_favorites_path(property),
             purpose: I18n.t("activerecord.attributes.property.enums.businesstype.#{property.businesstype}_banner"),
-            avatar: property.avatar.attached? ? url_for(property.avatar) : nil,
+            avatar: property.avatar.attached? ? url_for(property.avatar.variant(resize: "30%")) : nil,
             slug: property.slug,
             # isFaved: property.is_faved_by?(current_user),
             # assignments: property.properties.count,

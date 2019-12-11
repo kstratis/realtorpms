@@ -655,8 +655,8 @@ el:
       ordertosell: "Εντολή υπόδειξης"
       tabs:
         info: "Πληροφορίες"
-        searching: "Αναζητά"
-        offering: "Προσφέρει"
+        searching: "Αναζήτηση"
+        offering: "Προσφορά"
         handling: "Δικαιώματα"
     index:
       breadcrumb: "Πελάτες"
