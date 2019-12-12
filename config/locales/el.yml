@@ -128,6 +128,7 @@ el:
         specs_title: "Χαρακτηριστικά"
         extras_title: "Παροχές"
         assignments_title: "Αναθέσεις"
+        viewings_title: "Επιδείξεις"
         extras_not_found: "Δεν βρέθηκαν"
         description: "Περιγραφή"
         description_title: "Περιγραφή"

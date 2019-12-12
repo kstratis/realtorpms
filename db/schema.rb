@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_25_091506) do
+ActiveRecord::Schema.define(version: 2019_12_11_203639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 2019_11_25_091506) do
     t.boolean "ownership", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "viewership", default: false
     t.index ["client_id"], name: "index_cpas_on_client_id"
     t.index ["property_id"], name: "index_cpas_on_property_id"
   end
