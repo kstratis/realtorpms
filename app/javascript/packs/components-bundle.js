@@ -10,6 +10,7 @@ import AsyncSelectContainer from '../bundles/components/selects/AsyncSelectConta
 import AssociativeFormSelect from '../bundles/components/selects/AssociativeFormSelect';
 import ModalContainer from '../bundles/components/ModalContainer';
 import InlineSearch from '../bundles/components/InlineSearch';
+import SimpleTableView from '../bundles/components/SimpleTableView';
 
 // That's how react_on_rails "sees" our components in erb views.
 // Unfortunately we need to register everything up-front.
@@ -24,7 +25,7 @@ ReactOnRails.register({
   AssociativeFormSelect,
   ModalContainer,
   AsyncSelectContainer,
-  InlineSearch
+  InlineSearch,
 });
 
 

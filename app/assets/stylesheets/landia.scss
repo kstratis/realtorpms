@@ -1139,12 +1139,30 @@ li.page-item {
   margin-top: 12%;
 }
 
-.reactstrap-modal-button {
+.reactstrap-modal-button-right {
   display: inline-block;
 
   button {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+  }
+}
+
+.reactstrap-modal-button-left {
+  display: inline-block;
+
+  button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
+.reactstrap-modal-button-x {
+  display: inline-block;
+
+  button {
+    border-left: none;
+    border-radius: 0;
   }
 }
 
@@ -1806,4 +1824,9 @@ a.text-link {
   input {
     display: none;
   }
+}
+
+.activeTab{
+  font-weight: 700;
+  color: red;
 }

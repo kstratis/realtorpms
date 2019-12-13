@@ -35,7 +35,8 @@
     "spark-md5": "^3.0.0",
     "stacked-menu": "https://gitlab.com/bent10/stacked-menu.git#master",
     "uppy": "^1.0.2",
-    "webpack-cli": "^3.3.2"
+    "webpack-cli": "^3.3.2",
+    "wouter": "^2.4.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",

@@ -60,7 +60,11 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :clients
+      resources :clients do
+        member do
+          get '*tabs', to: 'clients#show', format: false
+        end
+      end
 
 
 

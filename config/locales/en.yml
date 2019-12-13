@@ -706,6 +706,7 @@ en:
     add_fast: "Add property (fast)"
     list: "Property list"
     favourites: "Favourites"
+    viewings: "Viewings"
     fav_lists: "Favourite lists"
     ok_button: "Add"
     cancel_button: "Cancel"

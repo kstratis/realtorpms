@@ -80,6 +80,10 @@
 
               <div class="row">
                 <div class="col-lg-6 offset-lg-3 col-md-12">
+
+                  <!-- If case things get too slow... -->
+                  <%#= react_component('TabWrapper', props: {base_path: client_path(@client)}) %>
+
                   <div class="table-responsive">
                     <!-- .table -->
                     <table class="table table-striped">

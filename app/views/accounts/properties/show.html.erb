@@ -6,7 +6,7 @@
     {title: @property.slug.upcase, :href => ''}], icon: 'house-colored'} do %>
   <div class="action-btns">
     <div class="btn-group btn-group-toggle">
-      <div class="reactstrap-modal-button">
+      <div class="reactstrap-modal-button-right">
         <%= react_component('ModalContainer', props: {
             id: 'modal-window',
             fireButtonLabel: '<i class="fas fa-heart fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.favourites') + '</span>',
@@ -16,6 +16,35 @@
             property_id: @property.id,
             child: 'AddRemoveFavLists', # Due to react-on-rails restrictions we cant just ask to render children
             modalTitle: t('properties.fav_lists'),
+            modalHeader: heading(@property),
+            buttonOKLabel: t('properties.ok_button'),
+            buttonCancelLabel: t('properties.cancel_button'),
+            buttonCloseLabel: t('properties.close_button'),
+            soloMode: true,
+            ajaxEnabled: false,
+            isClearable: true,
+            backspaceRemovesValue: true,
+            isSearchable: false,
+            feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
+            i18n: {
+                no_lists_available: t('js.components.modal.favlists.no_results'),
+                property_cover_alt: t('js.components.modal.favlists.property_cover_alt'),
+                add_list_action: t('js.components.modal.favlists.add_list_action'),
+                loading_alt: t('js.components.modal.favlists.loading_alt'),
+                listname_placeholder: t('js.components.modal.favlists.listname_placeholder')
+            }
+        }, prerender: false) %>
+      </div>
+      <div class="reactstrap-modal-button-x">
+        <%= react_component('ModalContainer', props: {
+            id: 'modal-window-2',
+            fireButtonLabel: '<i class="fas fa-eye fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.viewings') + '</span>',
+            avatar: @property.avatar.attached? ? url_for(@property.avatar) : nil,
+            favorites_url: favorites_url,
+            favlists_url: favlists_url,
+            property_id: @property.id,
+            child: 'SimpleTableView', # Due to react-on-rails restrictions we cant just ask to render children
+            modalTitle: t('properties.viewings'),
             modalHeader: heading(@property),
             buttonOKLabel: t('properties.ok_button'),
             buttonCancelLabel: t('properties.cancel_button'),
@@ -320,37 +349,6 @@
                 </div><!-- /.card -->
               </div>
 
-              <div class="col-12">
-                <div class="card borderlesss-card">
-                  <div class="card-header header-internal simplified-header">
-                    <div class="table-entry">
-                      <div class="table-icon-wrapper">
-                        <i class="pr-icon xs assignments"></i>
-                      </div>
-                      <span class="align-middle"><i class="fas fa-user-secret fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_assignments' %>"></i>&nbsp<i class="fas fa-key fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_security' %>"></i>&nbsp; <%= t 'activerecord.attributes.property.assignments_title' %></span>
-                    </div>
-                  </div><!-- .card-body -->
-                  <div class="card-body">
-                    <div class="col-12 pt-2">
-                      <%= react_component('AsyncSelectContainer', props: {
-                          id: 'AsyncSelectContainer',
-                          collection_endpoint: {url: users_path, action: 'get'},
-                          action_endpoint: {url: assignments_path(@property), action: 'post'},
-                          storedOptions: @property.users.blank? ? nil : @property.users.map {|user| {label: "#{user.first_name} #{user.last_name}", value: user.id}},
-                          hasFeedback: true,
-                          i18n: {
-                              select: {
-                                  placeholder: t('js.components.select.placeholder_title'),
-                                  noresults: t('js.components.select.noresults'),
-                                  loading: t('js.components.select.loading_html'),
-                                  feedback: t('js.components.select.assignments_feedback')
-                              }
-                          }
-                      }, prerender: false) %>
-                    </div>
-                  </div><!-- /.card-body -->
-                </div><!-- /.card -->
-              </div>
             <% end %>
           </div>
         </div>
