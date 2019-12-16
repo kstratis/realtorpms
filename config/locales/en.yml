@@ -9,6 +9,7 @@ en:
   user: "User"
   download: "Download"
   choose_file: "Choose file"
+  date_title: "Date"
   header:
     search: "Search using property code"
   activerecord:
@@ -707,6 +708,7 @@ en:
     list: "Property list"
     favourites: "Favourites"
     viewings: "Viewings"
+    viewings_history: "Viewings log"
     fav_lists: "Favourite lists"
     ok_button: "Add"
     cancel_button: "Cancel"
@@ -874,3 +876,6 @@ en:
       partners: "Partners"
       properties: "Properties"
       clients: "Clients"
+  viewings:
+    client: "To client"
+    user: "By partner"

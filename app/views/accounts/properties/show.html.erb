@@ -40,11 +40,10 @@
             id: 'modal-window-2',
             fireButtonLabel: '<i class="fas fa-eye fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.viewings') + '</span>',
             avatar: @property.avatar.attached? ? url_for(@property.avatar) : nil,
-            favorites_url: favorites_url,
-            favlists_url: favlists_url,
+            viewings_url: viewings_url,
             property_id: @property.id,
             child: 'SimpleTableView', # Due to react-on-rails restrictions we cant just ask to render children
-            modalTitle: t('properties.viewings'),
+            modalTitle: t('properties.viewings_history'),
             modalHeader: heading(@property),
             buttonOKLabel: t('properties.ok_button'),
             buttonCancelLabel: t('properties.cancel_button'),
@@ -56,6 +55,11 @@
             isSearchable: false,
             feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
             i18n: {
+                table: {
+                    client: t('viewings.client'),
+                    user: t('viewings.user'),
+                    date_title: t('date_title')
+                },
                 no_lists_available: t('js.components.modal.favlists.no_results'),
                 property_cover_alt: t('js.components.modal.favlists.property_cover_alt'),
                 add_list_action: t('js.components.modal.favlists.add_list_action'),
@@ -265,7 +269,7 @@
                                   <span class="align-middle"><%= client.full_name %></span>
                                 <% end  %>
                               <% else %>
-                                <span class="align-middle frosty forbidden-cursor"><%= t('access_denied') %></span>
+                                <%= content_tag(:span, '*****', class: "align-middle forbidden-cursor", data: {toggle: "tooltip", placement: "top", title: t('access_denied')}) %>
                               <% end %>
                             </div>
                           </td>
@@ -273,7 +277,7 @@
                             <% if forbidden.blank? %>
                                 <span><%= client.telephones.blank? ? '—' : client.telephones.split(/[\s,]+/).collect(&:strip).join(', ') %></span>
                             <% else %>
-                              <span class="frosty forbidden-cursor"><%= t('access_denied') %></span>
+                              <%= content_tag(:span, '*****', class: "forbidden-cursor", data: {toggle: "tooltip", placement: "top", title: t('access_denied')}) %>
                             <% end %>
                           </td>
                         </tr>

@@ -9,6 +9,7 @@ el:
   user: "Ο χρήστης"
   download: "Μεταφόρτωση"
   choose_file: "Επιλέξτε αρχείο"
+  date_title: "Ημ/νία"
   header:
     search: "Αναζήτηση κωδ. ακινήτου"
   activerecord:
@@ -712,6 +713,7 @@ el:
     list: "Κατάλογος"
     favourites: "Αγαπημένα"
     viewings: "Επιδείξεις"
+    viewings_history: "Ιστορικό επιδείξεων"
     fav_lists: "Λίστες αγαπημένων"
     ok_button: "Προσθήκη"
     cancel_button: "Ακύρωση"
@@ -880,5 +882,6 @@ el:
       partners: "Συνεργάτες"
       properties: "Ακίνητα"
       clients: "Πελάτες"
-
-
+  viewings:
+    client: "Σε πελάτη"
+    user: "Από συνεργάτη"

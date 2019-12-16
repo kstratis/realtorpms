@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_13_122728) do
+ActiveRecord::Schema.define(version: 2019_12_14_133650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,13 +109,13 @@ ActiveRecord::Schema.define(version: 2019_12_13_122728) do
   end
 
   create_table "cpas", force: :cascade do |t|
-    t.bigint "client_id"
-    t.bigint "property_id"
     t.boolean "ownership", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "viewership", default: false
     t.bigint "user_id"
+    t.bigint "client_id"
+    t.bigint "property_id"
     t.index ["client_id"], name: "index_cpas_on_client_id"
     t.index ["property_id"], name: "index_cpas_on_property_id"
     t.index ["user_id"], name: "index_cpas_on_user_id"
@@ -328,6 +328,8 @@ ActiveRecord::Schema.define(version: 2019_12_13_122728) do
   add_foreign_key "clients", "accounts"
   add_foreign_key "clientships", "clients"
   add_foreign_key "clientships", "users"
+  add_foreign_key "cpas", "clients"
+  add_foreign_key "cpas", "properties"
   add_foreign_key "cpas", "users"
   add_foreign_key "favlists", "accounts"
   add_foreign_key "favlists", "users"

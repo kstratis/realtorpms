@@ -32,6 +32,7 @@ Rails.application.routes.draw do
       get '/properties/locations', to: 'properties#locations'
       get '/properties/clients', to: 'properties#clients'
       get '/properties/inlinesearch', to: 'properties#inlinesearch'
+      get '/viewings', to: 'properties#viewings_list'
       # resources :entityfields
       resources :model_types, only: [:edit, :update], :path => "extended-fields"
       resources :settings, only: [:index]
@@ -60,11 +61,13 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :clients do
-        member do
-          get '*tabs', to: 'clients#show', format: false
-        end
-      end
+      resources :clients
+
+      #resources :clients do
+      #  member do
+      #    get '*tabs', to: 'clients#show', format: false
+      #  end
+      #end
 
 
 
