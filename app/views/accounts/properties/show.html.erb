@@ -54,13 +54,26 @@
             backspaceRemovesValue: true,
             isSearchable: false,
             feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
+            clients_url: clients_url,
+            partners_url: users_url,
             i18n: {
                 table: {
                     client: t('viewings.client'),
                     user: t('viewings.user'),
                     date_title: t('date_title')
                 },
-                add_viewing: t('viewings.add'),
+                form: {
+                    title: t('viewings.add'),
+                    client: t('clients.client'),
+                    partner: t('users.user'),
+                    date: t('viewings.date')
+                },
+                select: {
+                    placeholder: t('js.components.select.placeholder_title'),
+                    noresults: t('js.components.select.noresults'),
+                    loading: t('js.components.select.loading_html'),
+                    feedback: t('js.components.select.assignments_feedback')
+                },
                 no_lists_available: t('js.components.modal.favlists.no_results'),
                 property_cover_alt: t('js.components.modal.favlists.property_cover_alt'),
                 add_list_action: t('js.components.modal.favlists.add_list_action'),

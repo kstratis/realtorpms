@@ -32,7 +32,7 @@ Rails.application.routes.draw do
       get '/properties/locations', to: 'properties#locations'
       get '/properties/clients', to: 'properties#clients'
       get '/properties/inlinesearch', to: 'properties#inlinesearch'
-      get '/viewings', to: 'properties#viewings_list'
+      get '/viewings', to: 'showings#index'
       # resources :entityfields
       resources :model_types, only: [:edit, :update], :path => "extended-fields"
       resources :settings, only: [:index]

@@ -4,33 +4,37 @@ import AddRemoveFavLists from './AddRemoveFavLists';
 import Spinner from '../datatables/Spinner';
 import AsyncSelectContainer from './selects/AsyncSelectContainer';
 
-function AddViewing() {
+function AddViewing({i18n, clients_url, partners_url}) {
   return (
-    <div>
-      <h1>{'Add viewing screen'}</h1>
-      <input className={'btn btn-primary'} type="submit" value={'edw'} />
-      {/*<AsyncSelectContainer*/}
-      {/*  id={'AsyncSelectContainer'}*/}
-      {/*  i18n={{*/}
-      {/*    select: {*/}
-      {/*      hello: 'world'*/}
-      // // add: i18n.select.add, // placeholder: i18n.select.placeholder_clients, // noresults: i18n.select.noresults,
-      // loading: i18n.select.loading, // feedback: i18n.select.clientship_feedback
-      {/*}*/}
-      {/*}}*/}
-      {/*isCreatable={false}*/}
-      {/*isDisabled={false}*/}
-      {/*isClearable={true}*/}
-      {/*collection_endpoint={{ url: '', action: 'get' }}*/}
-      {/*action_endpoint={{ url: '', action: '', callback: void(0)}}*/}
-      {/*storedOptions={[]}*/}
-      {/*hasFeedback={false}*/}
-      {/*/>*/}
+    <div className="favlist-container mt-3">
+      <h2>{i18n.form.title}</h2>
+      <hr/>
+      <div className={'favlist-body'}>
+        <span className={'d-inline-block mb-1'}><strong>{i18n.form.client}</strong></span>
+        <AsyncSelectContainer
+          id={'AsyncSelectContainerClient'}
+          i18n={i18n}
+          collection_endpoint={{ url: clients_url, action: 'get' }}
+          action_endpoint={{ url: '', action: '', callback: void(0) }}
+          hasFeedback={false}
+          isCreatable={false}
+        />
+        <span className={'d-inline-block mt-2 mb-1'}><strong>{i18n.form.partner}</strong></span>
+        <AsyncSelectContainer
+          id={'AsyncSelectContainerClient'}
+          i18n={i18n}
+          collection_endpoint={{ url: partners_url, action: 'get' }}
+          action_endpoint={{ url: '', action: '', callback: void(0) }}
+          hasFeedback={false}
+          isCreatable={false}
+        />
+        <input className={'btn btn-primary'} type="submit" value={'edw'} />
+      </div>
     </div>
   );
 }
 
-function SimpleTableView({ property_id, viewings_url, i18n }) {
+function SimpleTableView({ clients_url, partners_url, property_id, viewings_url, i18n }) {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [request, setRequest] = useState({
     url: `${viewings_url}.json?property_id=${property_id}`,
@@ -44,7 +48,7 @@ function SimpleTableView({ property_id, viewings_url, i18n }) {
   return (
     <div>
       {isFormVisible ? (
-        <AddViewing />
+        <AddViewing i18n={i18n} clients_url={clients_url} partners_url={partners_url}/>
       ) : (
         <>
           <Spinner isLoading={loading} />

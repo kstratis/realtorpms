@@ -620,6 +620,7 @@ en:
     flash_delete: "Client successfully deleted"
     flash_not_found: "Client not found"
     flash_profile_updated: "Client profile uccessfully updated"
+    client: "Client"
     new:
       heading: "Add"
       heading_alt: "New client"
@@ -669,6 +670,7 @@ en:
     flash_unauthorised_user_edit: "Unauthorized action"
     flash_owner_only_action: "Owner restricted action"
     flash_add_user: "New user created successfully"
+    user: "Partner"
     created:
       list: "List of current users"
     new:
@@ -880,3 +882,4 @@ en:
     client: "To client"
     user: "By partner"
     add: "Add viewing"
+    date: "Showing date"
