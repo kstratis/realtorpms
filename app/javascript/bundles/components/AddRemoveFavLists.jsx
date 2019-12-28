@@ -61,7 +61,7 @@ function AddRemoveListForm({ addEntity, i18n, favlists_url, property_id }) {
           </div>
 
           <div className={'col-sm-4'}>
-            <input className={'btn btn-primary'} type="submit" value={i18n.add_list_action} />
+            <input className={'btn btn-primary'} type="submit" value={i18n.add_viewing} />
           </div>
         </div>
       </form>

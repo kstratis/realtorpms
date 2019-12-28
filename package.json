@@ -13,7 +13,7 @@
     "bs-stepper": "https://github.com/kstratis/bs-stepper.git#events",
     "caniuse-lite": "^1.0.30000971",
     "chart.js": "^2.8.0",
-    "flatpickr": "^4.5.7",
+    "flatpickr": "^4.6.3",
     "install": "^0.13.0",
     "intl": "^1.2.5",
     "js-yaml": "^3.13.1",
