@@ -56,17 +56,20 @@
             feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
             clients_url: clients_url,
             partners_url: users_url,
+            isAdmin: current_user.is_admin?(current_account),
             i18n: {
                 table: {
                     client: t('viewings.client'),
                     user: t('viewings.user'),
-                    date_title: t('date_title')
+                    date_title: t('date_title'),
+                    add: t("viewings.add_btn")
                 },
                 form: {
                     title: t('viewings.add'),
                     client: t('clients.client'),
                     partner: t('users.user'),
-                    date: t('viewings.date')
+                    date: t('viewings.date'),
+                    submit: t('viewings.submit')
                 },
                 select: {
                     placeholder: t('js.components.select.placeholder_title'),
@@ -109,203 +112,143 @@
 <div class="page-container">
   <div class="container">
     <div class="app-container">
-    <!-- .card -->
-    <div class="card">
-      <%= render partial: 'shared/card_header/header', locals: {title: heading(@property), btn_text: t('properties.show.back'), btn_link: :back} %>
-      <!-- .card-body -->
-      <div class="card-body">
-        <div class="row">
-          <div class="col-lg-7 col-md-12 align-self-center">
-            <% if @property.images.blank? && !@property.avatar.attached? %>
-              <div class="d-flex flex-wrap justify-content-center">
-                <%= content_tag :i, "", class: "pr-icon lg house-avatar-placeholder" %>
-              </div>
-
-            <% else %>
-              <div class="thumbnails-ribbon d-flex flex-wrap justify-content-center">
-                <div class="fotorama" data-nav="thumbs" data-maxheight="400" data-allowfullscreen="true">
-                  <!-- <div class="fotorama" data-nav="thumbs" data-width="900" data-height="300" data-allowfullscreen="true"> -->
-                  <% @property.all_images.each do |image| %>
-                    <%#= image_tag image.variant(resize: "736x500") %>
-                    <%= image_tag image %>
-                  <% end %>
+      <!-- .card -->
+      <div class="card">
+        <%= render partial: 'shared/card_header/header', locals: {title: heading(@property), btn_text: t('properties.show.back'), btn_link: :back} %>
+        <!-- .card-body -->
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-7 col-md-12 align-self-center">
+              <% if @property.images.blank? && !@property.avatar.attached? %>
+                <div class="d-flex flex-wrap justify-content-center">
+                  <%= content_tag :i, "", class: "pr-icon lg house-avatar-placeholder" %>
                 </div>
-              </div>
-            <% end %>
-          </div>
 
-          <div class="col-lg-5 col-md-12 mt-3 mt-lg-0">
-            <div class="col-12">
-            <div class="card borderlesss-card">
-              <div class="card-header header-public simplified-header">
-                <div class="table-entry">
-                  <div class="table-icon-wrapper">
-                    <i class="pr-icon xs info"></i>
-                  </div>
-                  <span class="align-middle">&nbsp; <%= t 'activerecord.attributes.property.info_title' %> </span>
-                </div>
-              </div><!-- .card-body -->
-              <div class="card-body">
-                <%= render partial: 'accounts/properties/features', locals: {features: Property.basic_features, classNames: 'table-striped first-row-no-border'} %>
-              </div><!-- /.card-body -->
-            </div><!-- /.card -->
-            </div>
-          </div>
-
-        </div>
-
-        <div class="d-none d-lg-block">
-          <div class="col-12">
-            <hr/>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-6 col-xs-12">
-            <div class="col-12">
-              <div class="card borderlesss-card">
-                <div class="card-header header-public simplified-header">
-                  <div class="table-entry">
-                    <div class="table-icon-wrapper">
-                      <i class="pr-icon xs specs"></i>
-                    </div>
-                    <span class="align-middle">&nbsp; <%= t 'activerecord.attributes.property.specs_title' %> </span>
-                  </div>
-                </div><!-- .card-body -->
-                <div class="card-body">
-                  <%= render partial: 'accounts/properties/features', locals: {features: Property.extended_features, classNames: 'table-borderless normalize-table'} %>
-                </div><!-- /.card-body -->
-              </div><!-- /.card -->
-            </div>
-
-            <div class="col-12">
-              <div class="card borderlesss-card">
-                <div class="card-header header-public simplified-header">
-                  <div class="table-entry">
-                    <div class="table-icon-wrapper">
-                      <i class="pr-icon xs list"></i>
-                    </div>
-                    <span class="align-middle">&nbsp; <%= t 'activerecord.attributes.property.extras_title' %></span>
-                  </div>
-                </div><!-- .card-body -->
-                <div class="card-body">
-                  <% if @property.extras.blank? %>
-                    <h3><%= t('activerecord.attributes.property.extras_not_found') %></h3>
-                  <% else %>
-                    <%= render partial: 'accounts/properties/extras' %>
-                  <% end %>
-                </div><!-- /.card-body -->
-              </div><!-- /.card -->
-            </div>
-
-
-            <div class="col-12">
-              <div class="card borderlesss-card">
-                <div class="card-header header-public simplified-header">
-                  <div class="table-entry">
-                    <div class="table-icon-wrapper">
-                      <i class="pr-icon xs description"></i>
-                    </div>
-                    <span class="align-middle">&nbsp; <%= t 'activerecord.attributes.property.description_title' %></span>
-                  </div>
-                </div><!-- .card-body -->
-                <div class="card-body">
-                  <% if @property.description.blank? %>
-                    <h3><%= t('activerecord.attributes.property.description_not_found') %></h3>
-                  <% else %>
-                    <div><%= @property.description %></div>
-                  <% end %>
-                </div><!-- /.card-body -->
-              </div><!-- /.card -->
-            </div>
-
-          </div>
-
-
-          <div class="col-lg-6 col-xs-12">
-
-            <div class="col-12">
-              <div class="card borderlesss-card">
-                <div class="card-header header-internal simplified-header">
-                  <div class="table-entry">
-                    <div class="table-icon-wrapper">
-                      <i class="pr-icon xs notes"></i>
-                    </div>
-
-                    <span class="align-middle" ><i class="fas fa-user-secret fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_internal_notes' %>"></i>&nbsp; <%= t 'activerecord.attributes.property.notes_title' %> </span>
-                  </div>
-                </div><!-- .card-body -->
-                <div class="card-body">
-                  <% if @property.notes.blank? %>
-                    <h3><%= t('activerecord.attributes.property.extras_not_found') %></h3>
-                  <% else %>
-                    <div><%= @property.notes %></div>
-                  <% end %>
-                </div><!-- /.card-body -->
-              </div><!-- /.card -->
-            </div>
-
-
-            <div class="col-12">
-              <div class="card borderlesss-card">
-                <div class="card-header header-internal simplified-header">
-                  <div class="table-entry">
-                    <div class="table-icon-wrapper">
-                      <i class="pr-icon xs info"></i>
-                    </div>
-                    <span class="align-middle"><i class="fas fa-user-secret fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_owner' %>"></i>&nbsp;<i class="fas fa-key fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_owner_security' %>"></i>&nbsp <%= t 'activerecord.attributes.property.owner_title' %> </span>
-                  </div>
-                </div><!-- .card-body -->
-                <div class="card-body">
-                  <table class="table normalize-table">
-                    <% if @property.clients.blank?  %>
-                      <h2><%= t 'activerecord.attributes.property.owner_header_missing' %></h2>
-                      <div class="no-entries">
-                        <i class="no-results"> </i>
-                      </div>
-                    <% else %>
-                    <thead>
-                    <tr>
-                      <th scope="col"><%= t 'activerecord.attributes.property.owner_header_name' %></th>
-                      <th scope="col"><%= t 'activerecord.attributes.property.owner_header_tel' %></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <div class="table-responsive">
-                      <% forbidden = nil %>
-                      <% @property.clients.each do |client| %>
-                        <% forbidden = forbidden_entity_ids('clients').include?(client.id) %>
-                        <tr>
-                          <td class="align-middle nowrap">
-                            <div class="table-entry">
-                              <% if forbidden.blank? %>
-                                <%= link_to client_path(client), data: {toggle: "tooltip", placement: "top", title: t('properties.show.client_tooltip', user: client.full_name)} do %>
-                                  <span class="align-middle"><%= client.full_name %></span>
-                                <% end  %>
-                              <% else %>
-                                <%= content_tag(:span, '*****', class: "align-middle forbidden-cursor", data: {toggle: "tooltip", placement: "top", title: t('access_denied')}) %>
-                              <% end %>
-                            </div>
-                          </td>
-                          <td class="align-middle nowrap">
-                            <% if forbidden.blank? %>
-                                <span><%= client.telephones.blank? ? '—' : client.telephones.split(/[\s,]+/).collect(&:strip).join(', ') %></span>
-                            <% else %>
-                              <%= content_tag(:span, '*****', class: "forbidden-cursor", data: {toggle: "tooltip", placement: "top", title: t('access_denied')}) %>
-                            <% end %>
-                          </td>
-                        </tr>
-                      <% end %>
-                    </div>
-                    </tbody>
+              <% else %>
+                <div class="thumbnails-ribbon d-flex flex-wrap justify-content-center">
+                  <div class="fotorama" data-nav="thumbs" data-maxheight="400" data-allowfullscreen="true">
+                    <!-- <div class="fotorama" data-nav="thumbs" data-width="900" data-height="300" data-allowfullscreen="true"> -->
+                    <% @property.all_images.each do |image| %>
+                      <%#= image_tag image.variant(resize: "736x500") %>
+                      <%= image_tag image %>
                     <% end %>
-                  </table>
+                  </div>
                 </div>
+              <% end %>
+            </div>
+
+            <div class="col-lg-5 col-md-12 mt-3 mt-lg-0">
+              <div class="col-12">
+                <div class="card borderlesss-card">
+                  <div class="card-header header-public simplified-header">
+                    <div class="table-entry">
+                      <div class="table-icon-wrapper">
+                        <i class="pr-icon xs info"></i>
+                      </div>
+                      <span class="align-middle">&nbsp; <%= t 'activerecord.attributes.property.info_title' %> </span>
+                    </div>
+                  </div><!-- .card-body -->
+                  <div class="card-body">
+                    <%= render partial: 'accounts/properties/features', locals: {features: Property.basic_features, classNames: 'table-striped first-row-no-border'} %>
+                  </div><!-- /.card-body -->
+                </div><!-- /.card -->
               </div>
             </div>
 
-            <!-- Custom fields-->
-            <% if @property.model_type.fields.length > 0 %>
+          </div>
+
+          <div class="d-none d-lg-block">
+            <div class="col-12">
+              <hr/>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-6 col-xs-12">
+              <div class="col-12">
+                <div class="card borderlesss-card">
+                  <div class="card-header header-public simplified-header">
+                    <div class="table-entry">
+                      <div class="table-icon-wrapper">
+                        <i class="pr-icon xs specs"></i>
+                      </div>
+                      <span class="align-middle">&nbsp; <%= t 'activerecord.attributes.property.specs_title' %> </span>
+                    </div>
+                  </div><!-- .card-body -->
+                  <div class="card-body">
+                    <%= render partial: 'accounts/properties/features', locals: {features: Property.extended_features, classNames: 'table-borderless normalize-table'} %>
+                  </div><!-- /.card-body -->
+                </div><!-- /.card -->
+              </div>
+
+              <div class="col-12">
+                <div class="card borderlesss-card">
+                  <div class="card-header header-public simplified-header">
+                    <div class="table-entry">
+                      <div class="table-icon-wrapper">
+                        <i class="pr-icon xs list"></i>
+                      </div>
+                      <span class="align-middle">&nbsp; <%= t 'activerecord.attributes.property.extras_title' %></span>
+                    </div>
+                  </div><!-- .card-body -->
+                  <div class="card-body">
+                    <% if @property.extras.blank? %>
+                      <h3><%= t('activerecord.attributes.property.extras_not_found') %></h3>
+                    <% else %>
+                      <%= render partial: 'accounts/properties/extras' %>
+                    <% end %>
+                  </div><!-- /.card-body -->
+                </div><!-- /.card -->
+              </div>
+
+
+              <div class="col-12">
+                <div class="card borderlesss-card">
+                  <div class="card-header header-public simplified-header">
+                    <div class="table-entry">
+                      <div class="table-icon-wrapper">
+                        <i class="pr-icon xs description"></i>
+                      </div>
+                      <span class="align-middle">&nbsp; <%= t 'activerecord.attributes.property.description_title' %></span>
+                    </div>
+                  </div><!-- .card-body -->
+                  <div class="card-body">
+                    <% if @property.description.blank? %>
+                      <h3><%= t('activerecord.attributes.property.description_not_found') %></h3>
+                    <% else %>
+                      <div><%= @property.description %></div>
+                    <% end %>
+                  </div><!-- /.card-body -->
+                </div><!-- /.card -->
+              </div>
+
+            </div>
+
+
+            <div class="col-lg-6 col-xs-12">
+
+              <div class="col-12">
+                <div class="card borderlesss-card">
+                  <div class="card-header header-internal simplified-header">
+                    <div class="table-entry">
+                      <div class="table-icon-wrapper">
+                        <i class="pr-icon xs notes"></i>
+                      </div>
+
+                      <span class="align-middle"><i class="fas fa-user-secret fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_internal_notes' %>"></i>&nbsp; <%= t 'activerecord.attributes.property.notes_title' %> </span>
+                    </div>
+                  </div><!-- .card-body -->
+                  <div class="card-body">
+                    <% if @property.notes.blank? %>
+                      <h3><%= t('activerecord.attributes.property.extras_not_found') %></h3>
+                    <% else %>
+                      <div><%= @property.notes %></div>
+                    <% end %>
+                  </div><!-- /.card-body -->
+                </div><!-- /.card -->
+              </div>
+
+
               <div class="col-12">
                 <div class="card borderlesss-card">
                   <div class="card-header header-internal simplified-header">
@@ -313,66 +256,128 @@
                       <div class="table-icon-wrapper">
                         <i class="pr-icon xs info"></i>
                       </div>
-                      <span class="align-middle"><i class="fas fa-user-secret fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_owner' %>"></i>&nbsp <%= t 'cfields.title' %> </span>&nbsp
-
+                      <span class="align-middle"><i class="fas fa-user-secret fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_owner' %>"></i>&nbsp;<i class="fas fa-key fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_owner_security' %>"></i>&nbsp <%= t 'activerecord.attributes.property.owner_title' %> </span>
                     </div>
                   </div><!-- .card-body -->
                   <div class="card-body">
-                    <div class="row mb-3">
-                      <div class="table-responsive">
-                        <table class="table table-borderless normalize-table">
-                          <tbody>
-                          <% @property.model_type.fields.each do |field| %>
-                            <%= render "accounts/cfields/#{field.field_type}_read", cfield_label: field.name, cfield_data: @property.preferences[field.slug] %>
+                    <table class="table normalize-table">
+                      <% if @property.clients.blank? %>
+                        <h2><%= t 'activerecord.attributes.property.owner_header_missing' %></h2>
+                        <div class="no-entries">
+                          <i class="no-results"> </i>
+                        </div>
+                      <% else %>
+                        <thead>
+                        <tr>
+                          <th scope="col"><%= t 'activerecord.attributes.property.owner_header_name' %></th>
+                          <th scope="col"><%= t 'activerecord.attributes.property.owner_header_tel' %></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <div class="table-responsive">
+                          <% forbidden = nil %>
+                          <% @property.clients.each do |client| %>
+                            <% forbidden = forbidden_entity_ids('clients').include?(client.id) %>
+                            <tr>
+                              <td class="align-middle nowrap">
+                                <div class="table-entry">
+                                  <% if forbidden.blank? %>
+                                    <%= link_to client_path(client), data: {toggle: "tooltip", placement: "top", title: t('properties.show.client_tooltip', user: client.full_name)} do %>
+                                      <span class="align-middle"><%= client.full_name %></span>
+                                    <% end %>
+                                  <% else %>
+                                    <%= content_tag(:span, '*****', class: "align-middle forbidden-cursor", data: {toggle: "tooltip", placement: "top", title: t('access_denied')}) %>
+                                  <% end %>
+                                </div>
+                              </td>
+                              <td class="align-middle nowrap">
+                                <% if forbidden.blank? %>
+                                  <span><%= client.telephones.blank? ? '—' : client.telephones.split(/[\s,]+/).collect(&:strip).join(', ') %></span>
+                                <% else %>
+                                  <%= content_tag(:span, '*****', class: "forbidden-cursor", data: {toggle: "tooltip", placement: "top", title: t('access_denied')}) %>
+                                <% end %>
+                              </td>
+                            </tr>
                           <% end %>
-                          </tbody>
-                        </table>
+                        </div>
+                        </tbody>
+                      <% end %>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Custom fields-->
+              <% if @property.model_type.fields.length > 0 %>
+                <div class="col-12">
+                  <div class="card borderlesss-card">
+                    <div class="card-header header-internal simplified-header">
+                      <div class="table-entry">
+                        <div class="table-icon-wrapper">
+                          <i class="pr-icon xs info"></i>
+                        </div>
+                        <span class="align-middle"><i class="fas fa-user-secret fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_owner' %>"></i>&nbsp <%= t 'cfields.title' %> </span>&nbsp
+
+                      </div>
+                    </div><!-- .card-body -->
+                    <div class="card-body">
+                      <div class="row mb-3">
+                        <div class="table-responsive">
+                          <table class="table table-borderless normalize-table">
+                            <tbody>
+                            <% @property.model_type.fields.each do |field| %>
+                              <%= render "accounts/cfields/#{field.field_type}_read", cfield_label: field.name, cfield_data: @property.preferences[field.slug] %>
+                            <% end %>
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            <% end %>
+              <% end %>
 
-            <% if current_user.role(current_account) != 'user' %>
-              <div class="col-12">
-                <div class="card borderlesss-card">
-                  <div class="card-header header-internal simplified-header">
-                    <div class="table-entry">
-                      <div class="table-icon-wrapper">
-                        <i class="pr-icon xs assignments"></i>
+              <% if current_user.role(current_account) != 'user' %>
+                <div class="col-12">
+                  <div class="card borderlesss-card">
+                    <div class="card-header header-internal simplified-header">
+                      <div class="table-entry">
+                        <div class="table-icon-wrapper">
+                          <i class="pr-icon xs assignments"></i>
+                        </div>
+                        <span class="align-middle"><i class="fas fa-user-secret fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_assignments' %>"></i>&nbsp<i class="fas fa-key fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_security' %>"></i>&nbsp; <%= t 'activerecord.attributes.property.assignments_title' %></span>
                       </div>
-                      <span class="align-middle"><i class="fas fa-user-secret fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_assignments' %>"></i>&nbsp<i class="fas fa-key fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_security' %>"></i>&nbsp; <%= t 'activerecord.attributes.property.assignments_title' %></span>
-                    </div>
-                  </div><!-- .card-body -->
-                  <div class="card-body">
-                    <div class="col-12 pt-2">
-                      <%= react_component('AsyncSelectContainer', props: {
-                          id: 'AsyncSelectContainer',
-                          collection_endpoint: {url: users_path, action: 'get'},
-                          action_endpoint: {url: assignments_path(@property), action: 'post'},
-                          storedOptions: @property.users.blank? ? nil : @property.users.map {|user| {label: "#{user.first_name} #{user.last_name}", value: user.id}},
-                          hasFeedback: true,
-                          i18n: {
-                              select: {
-                                  placeholder: t('js.components.select.placeholder_title'),
-                                  noresults: t('js.components.select.noresults'),
-                                  loading: t('js.components.select.loading_html'),
-                                  feedback: t('js.components.select.assignments_feedback')
-                              }
-                          }
-                      }, prerender: false) %>
-                    </div>
-                  </div><!-- /.card-body -->
-                </div><!-- /.card -->
-              </div>
+                    </div><!-- .card-body -->
+                    <div class="card-body">
+                      <div class="col-12 pt-2">
+                        <%= react_component('AsyncSelectContainer', props: {
+                            id: 'AsyncSelectContainer',
+                            collection_endpoint: {url: users_path, action: 'get'},
+                            action_endpoint: {url: assignments_path(@property), action: 'post'},
+                            storedOptions: @property.users.blank? ? nil : @property.users.map { |user| {label: "#{user.first_name} #{user.last_name}", value: user.id} },
+                            hasFeedback: true,
+                            i18n: {
+                                select: {
+                                    placeholder: t('js.components.select.placeholder_title'),
+                                    noresults: t('js.components.select.noresults'),
+                                    loading: t('js.components.select.loading_html'),
+                                    feedback: t('js.components.select.assignments_feedback')
+                                }
+                            }
+                        }, prerender: false) %>
+                      </div>
+                    </div><!-- /.card-body -->
+                  </div><!-- /.card -->
+                </div>
 
-            <% end %>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
+      <%= render "accounts/helpers/locale" %>
     </div>
-  </div>
+
   </div>
 </div>
 
