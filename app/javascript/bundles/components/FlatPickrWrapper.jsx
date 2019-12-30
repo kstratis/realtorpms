@@ -1,6 +1,6 @@
 import React from "react"
 import flatpickr from "flatpickr";
-
+import PropTypes from 'prop-types';
 
 class FlatPickrWrapper extends React.Component {
 
@@ -8,13 +8,13 @@ class FlatPickrWrapper extends React.Component {
     this.renderFlatPickr();
   }
 
-  componentDidUpdate() {
+  // componentDidUpdate() {
     // this.renderFlatPickr();
-    console.log('didupdate fired');
-  }
+    // console.log('didupdate fired');
+  // }
 
   renderFlatPickr(){
-    console.log('render fired');
+    const handleChange = this.props.handleChange.bind(this);
     let active_locale = $('#current_locale').data().i18n.locale || 'en';
     if (active_locale !== 'en') {
       if (active_locale === 'el') {
@@ -29,28 +29,23 @@ class FlatPickrWrapper extends React.Component {
         // flatpickr.defaultConfig.locale = active_locale
       }
     }
-    flatpickr(".datetime");
-    // const nodelist = $("[class*='clamp-']");
-    // if (nodelist.length < 1) return;
-    // const regex = /clamp-(\d+)/;
-    // let lineno = 2;
-    // nodelist.each(function (index, element) {
-    //   try {
-    //     lineno = parseInt(regex.exec(element.className)[1]);
-    //   } catch (e) {
-    //     console.warn('Unable to determine the clamp line value. Make sure classes that clamp text obey the clamp-* rule');
-    //   }
-    //   $clamp(element,
-    //     {
-    //       'clamp': lineno,
-    //       'useNativeClamp': true,
-    //     });
-    // });
+    flatpickr(".datetime", {
+      onChange: function(dateObj, dateStr) {
+        handleChange({dateObj, dateStr})
+        // DEBUG
+        // console.info(dateObj);
+        // console.info(dateStr);
+      }
+    });
   }
 
   render() {
     return null
   }
 }
+
+FlatPickrWrapper.propTypes = {
+  handleChange: PropTypes.func.isRequired
+};
 
 export default FlatPickrWrapper;

@@ -6,6 +6,25 @@ import Spinner from '../datatables/Spinner';
 import AsyncSelectContainer from './selects/AsyncSelectContainer';
 
 function AddViewing({ i18n, clients_url, partners_url, isAdmin, handleFormVisibility }) {
+  const [client, setClient] = useState('');
+  const [partner, setPartner] = useState('');
+  const [date, setDate] = useState({});
+
+  const asyncSetClient = selection => {
+    // DEBUG
+    // console.log(selection);
+    setClient(selection);
+  };
+  const asyncSetPartner = selection => {
+    // DEBUG
+    // console.log(selection);
+    setPartner(selection);
+  };
+  const asyncSetDate = selection => {
+    // DEBUG
+    console.log(selection);
+    setDate(selection);
+  };
   return (
     <div className="favlist-container mt-3">
       <h2>{i18n.form.title}</h2>
@@ -19,7 +38,7 @@ function AddViewing({ i18n, clients_url, partners_url, isAdmin, handleFormVisibi
             id={'AsyncSelectContainerClient'}
             i18n={i18n}
             collection_endpoint={{ url: clients_url, action: 'get' }}
-            action_endpoint={{ url: '', action: '', callback: void 0 }}
+            action_endpoint={{ url: '', action: '', callback: asyncSetClient }}
             hasFeedback={false}
             isCreatable={false}
             isMultiple={false}
@@ -34,7 +53,7 @@ function AddViewing({ i18n, clients_url, partners_url, isAdmin, handleFormVisibi
               id={'AsyncSelectContainerClient'}
               i18n={i18n}
               collection_endpoint={{ url: partners_url, action: 'get' }}
-              action_endpoint={{ url: '', action: '', callback: void 0 }}
+              action_endpoint={{ url: '', action: '', callback: asyncSetPartner }}
               hasFeedback={false}
               isCreatable={false}
               isMultiple={false}
@@ -48,7 +67,7 @@ function AddViewing({ i18n, clients_url, partners_url, isAdmin, handleFormVisibi
           <span className={'d-inline-block mt-2 mb-1'}>
             <strong>{i18n.form.date}</strong>
           </span>
-          <FlatPickrWrapper />
+          <FlatPickrWrapper handleChange={asyncSetDate} />
           <input className={'datetime'} />
         </div>
         <div className={'float-left mt-4 mb-3'}>
