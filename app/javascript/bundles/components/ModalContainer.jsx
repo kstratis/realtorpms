@@ -3,13 +3,13 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import AddRemoveFavLists from './AddRemoveFavLists';
 import StoreClientSearch from './StoreClientSearch';
 import RetrieveClientSearch from './RetrieveClientSearch';
-import SimpleTableView from './SimpleTableView';
+import AddRemoveShowings from './AddRemoveShowings';
 
 const components = {
   StoreClientSearch: StoreClientSearch,
   RetrieveClientSearch: RetrieveClientSearch,
   AddRemoveFavLists: AddRemoveFavLists,
-  SimpleTableView: SimpleTableView
+  AddRemoveShowings: AddRemoveShowings
 };
 
 class ModalContainer extends React.Component {

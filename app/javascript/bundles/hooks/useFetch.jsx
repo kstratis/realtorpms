@@ -4,8 +4,11 @@ import { safelyExecCallback } from '../utilities/helpers';
 import ReactOnRails from 'react-on-rails';
 axios.defaults.headers.common['X-CSRF-Token'] = ReactOnRails.authenticityToken();
 
-// react-select keeps its own internal state in which case maintaing our own and setting it on fetch kill performance
-// and the user gets input lag
+// react-select keeps its own internal state in which case maintaing our own and setting it on fetch kills performance
+// and the user gets input lag.
+
+// didMountRef is used to control whether useFetch will fire upon first mount. If set to true or is omitted altogether,
+// useFetch will fire on first mount. Otherwise, if set to false, the ajax operation won't run on first mount.
 function useFetch(request, dropdown = true, didMountRef = null) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);

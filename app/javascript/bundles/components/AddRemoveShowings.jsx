@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import useFetch from '../hooks/useFetch';
-import AddRemoveFavLists from './AddRemoveFavLists';
 import FlatPickrWrapper from './FlatPickrWrapper';
 import Spinner from '../datatables/Spinner';
 import AsyncSelectContainer from './selects/AsyncSelectContainer';
 
-function AddViewing({ i18n, clients_url, partners_url, isAdmin, handleFormVisibility }) {
+function AddShowing({ i18n, clients_url, partners_url, showings_url, isAdmin, property_id, handleSetRequest, handleFormVisibility }) {
   const [client, setClient] = useState('');
   const [partner, setPartner] = useState('');
   const [date, setDate] = useState({});
@@ -25,6 +24,32 @@ function AddViewing({ i18n, clients_url, partners_url, isAdmin, handleFormVisibi
     console.log(selection);
     setDate(selection);
   };
+
+  const handleAddShowing = () => {
+    if ([client, partner, date.dateStr].includes(undefined)) {
+      console.log('something is empty');
+      return;
+    }
+
+    // DEBUG
+    // console.log('executing AJAX call - the requested option is:');
+    // console.log(selectedOption);
+    handleSetRequest({
+      url: showings_url,
+      method: 'post',
+      payload: { selection: [client, partner, date.dateStr] || [] },
+      // callback: response => {
+        // DEBUG
+        // console.log(response);
+        // setRemoteResponse(response);
+        // setIsFinished(true);
+      // }
+    });
+  };
+
+
+
+
   return (
     <div className="favlist-container mt-3">
       <h2>{i18n.form.title}</h2>
@@ -76,33 +101,43 @@ function AddViewing({ i18n, clients_url, partners_url, isAdmin, handleFormVisibi
           </button>
         </div>
         <div className={'float-right mt-4 mb-3'}>
-          <button className={'btn btn-primary'}>{i18n.form.submit}</button>
+          <button onClick={handleAddShowing} className={'btn btn-primary'}>{i18n.form.submit}</button>
         </div>
       </div>
     </div>
   );
 }
 
-function SimpleTableView({ clients_url, partners_url, property_id, viewings_url, isAdmin, i18n }) {
+function AddRemoveShowings({ clients_url, partners_url, property_id, showings_url, isAdmin, i18n }) {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const handleFormVisibility = () => setIsFormVisible(isFormVisible => !isFormVisible);
+
   const [request, setRequest] = useState({
-    url: `${viewings_url}.json?property_id=${property_id}`,
-    method: 'get',
-    payload: {}
+      url: `${showings_url}.json?property_id=${property_id}`,
+      method: 'get',
+      payload: {}
   });
+  const didMountForSaveSearchRef = useRef(false);
+  const { data, loading, setData } = useFetch(request, false, didMountForSaveSearchRef);
 
-  const { data, loading, setData } = useFetch(request, false);
+  const handleSetRequest = request => {
+    // DEBUG
+    // console.log(selection);
+    setRequest(request);
+  };
 
-  console.log(data);
+
   return (
     <div>
       {isFormVisible ? (
-        <AddViewing
+        <AddShowing
           i18n={i18n}
           clients_url={clients_url}
           partners_url={partners_url}
+          showings_url={showings_url}
+          property_id={property_id}
           isAdmin={isAdmin}
+          handleSetRequest={handleSetRequest}
           handleFormVisibility={handleFormVisibility}
         />
       ) : (
@@ -146,4 +181,4 @@ function SimpleTableView({ clients_url, partners_url, property_id, viewings_url,
   );
 }
 
-export default SimpleTableView;
+export default AddRemoveShowings;

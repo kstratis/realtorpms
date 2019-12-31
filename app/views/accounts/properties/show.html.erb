@@ -40,9 +40,9 @@
             id: 'modal-window-2',
             fireButtonLabel: '<i class="fas fa-eye fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.viewings') + '</span>',
             avatar: @property.avatar.attached? ? url_for(@property.avatar) : nil,
-            viewings_url: viewings_url,
+            showings_url: showings_url,
             property_id: @property.id,
-            child: 'SimpleTableView', # Due to react-on-rails restrictions we cant just ask to render children
+            child: 'AddRemoveShowings', # Due to react-on-rails restrictions we cant just ask to render children
             modalTitle: t('properties.viewings_history'),
             modalHeader: heading(@property),
             buttonOKLabel: t('properties.ok_button'),

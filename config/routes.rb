@@ -32,7 +32,7 @@ Rails.application.routes.draw do
       get '/properties/locations', to: 'properties#locations'
       get '/properties/clients', to: 'properties#clients'
       get '/properties/inlinesearch', to: 'properties#inlinesearch'
-      get '/viewings', to: 'showings#index'
+      get '/showings', to: 'showings#index'
       # resources :entityfields
       resources :model_types, only: [:edit, :update], :path => "extended-fields"
       resources :settings, only: [:index]
@@ -88,6 +88,10 @@ Rails.application.routes.draw do
 
       # i.e. /properties - assign search/state to client
       post '/matches/', to: 'matches#assign', as: :matches
+
+      post '/showings/', to: 'showings#create'
+      #
+      #post '/matches/', to: 'matches#assign', as: :matches
 
 
       # resources :invitations, only: [:new, :create] do

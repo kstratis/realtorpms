@@ -14,5 +14,9 @@ module Accounts
       end
       render json: {status: "OK", message: viewings}
     end
+
+    def create
+      puts params
+    end
   end
 end
