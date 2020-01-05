@@ -37,7 +37,7 @@ module Accounts
     # This is only accessible by account owners so no need to granulate its access
     def index
       # params because the required :user key of the filtered +user_params+ is only available in POST requests
-      filter_persons(current_account.users, params)
+      filter_persons(current_account.send("#{params['backend_option'] || ''}users"), params)
     end
 
     # POST to the new user registration page

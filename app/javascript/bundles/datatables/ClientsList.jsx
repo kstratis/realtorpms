@@ -8,6 +8,7 @@ import Avatar from '../components/Avatar';
 import { capitalizeFirstLetter, hasParams } from '../utilities/helpers';
 import useFilterToggle from '../hooks/useFilterToggle';
 import FormComponents from './fields/FormComponents';
+import useTooltips from '../hooks/useTooltips';
 
 const ClientsList = ({
   handlePageClick,
@@ -32,6 +33,7 @@ const ClientsList = ({
 }) => {
   const { filtersOpen, setFiltersOpen } = useFilterToggle('clientFiltersOpen');
   const handleChange = event => setFiltersOpen(filtersOpen => !filtersOpen);
+  useTooltips();
 
   return (
     <div className="clients-list">
@@ -265,12 +267,15 @@ const ClientsList = ({
 
                             <td className={'align-middle action-btns'}>
                               <a
-                                title={i18n['datatable']['tooltip_freeze_profile']}
+                                data-toggle="tooltip"
+                                data-position="top"
+                                title={i18n['datatable']['tooltip_edit_profile']}
                                 className="btn btn-md btn-icon btn-secondary btn-action "
                                 href={entry['edit_entity_path']}>
                                 <i className={`fas fa-pen`} />
                               </a>
                               <a
+                                data-toggle="tooltip" data-position="top"
                                 title={i18n['datatable']['tooltip_delete_profile']}
                                 className={`btn btn-md btn-icon btn-secondary btn-action ${
                                   meta['is_admin'] ? '' : 'disabled'

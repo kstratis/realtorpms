@@ -8,6 +8,7 @@ import Avatar from '../components/Avatar';
 import { hasParams, capitalizeFirstLetter } from '../utilities/helpers';
 import FormComponents from './fields/FormComponents';
 import useFilterToggle from '../hooks/useFilterToggle';
+import useTooltips from '../hooks/useTooltips';
 
 const UsersList = ({
   handlePageClick,
@@ -36,6 +37,7 @@ const UsersList = ({
 }) => {
   const { filtersOpen, setFiltersOpen } = useFilterToggle('userFiltersOpen');
   const handleChange = event => setFiltersOpen(filtersOpen => !filtersOpen);
+  useTooltips();
 
   return (
     <div className="users-list">
@@ -278,6 +280,8 @@ const UsersList = ({
 
                           <td className={'align-middle action-btns'}>
                             <a
+                              data-toggle="tooltip"
+                              data-position="top"
                               onClick={e => handleFreezeUser(e, meta['freeze_link'], entry['id'])}
                               title={i18n['datatable']['tooltip_freeze_profile']}
                               className="btn btn-md btn-icon btn-secondary btn-action "
@@ -285,12 +289,16 @@ const UsersList = ({
                               <i className={`fas fa-user ${entry['active'] ? 'green' : 'red'}`} />
                             </a>
                             <a
+                              data-toggle="tooltip"
+                              data-position="top"
                               title={i18n['datatable']['tooltip_edit_profile']}
                               className="btn btn-md btn-icon btn-secondary btn-action"
                               href={entry['edit_entity_path']}>
                               <i className="fas fa-pen" />
                             </a>
                             <a
+                              data-toggle="tooltip"
+                              data-position="top"
                               title={i18n['datatable']['tooltip_delete_profile']}
                               className="btn btn-md btn-icon btn-secondary btn-action"
                               href={entry['view_entity_path']}

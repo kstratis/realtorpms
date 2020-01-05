@@ -7,6 +7,7 @@ import { default as ASelect } from 'react-select/async';
 import { default as ACSelect } from 'react-select/async-creatable';
 import { reactSelectStyles } from '../../styles/componentStyles';
 import PropTypes from 'prop-types';
+import URLSearchParams from '@ungap/url-search-params';
 const animatedComponents = makeAnimated();
 
 AsyncSelect.propTypes = {
@@ -34,6 +35,16 @@ AsyncSelect.propTypes = {
       feedback: PropTypes.string.isRequired
     })
   }).isRequired
+};
+
+// Normalizes and merges url GET params coming both from javascript and/or backend
+const constructURL = (origUrl, query) => {
+  const url = new URL(origUrl);
+  let searchParams = new URLSearchParams(url.search || '');
+  url.search = '';
+  searchParams.set('search', query);
+  searchParams.set('dropdown', '1');
+  return `${url.toString()}.json?${searchParams.toString()}`;
 };
 
 function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasFeedback, isCreatable, isClearable, isDisabled, isNotAnimated, isMultiple, i18n }) {
@@ -89,7 +100,7 @@ function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasF
       return Promise.resolve({ options: [] });
     }
     setRequest({
-      url: `${collection_endpoint.url}.json?search=${query}&dropdown=1`,
+      url: constructURL(collection_endpoint.url, query),
       method: collection_endpoint.action,
       payload: {},
       callback: callback

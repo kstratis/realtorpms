@@ -38,6 +38,7 @@
       <div class="reactstrap-modal-button-x">
         <%= react_component('ModalContainer', props: {
             id: 'modal-window-2',
+            modalSize: 'lg',
             fireButtonLabel: '<i class="fas fa-eye fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.viewings') + '</span>',
             avatar: @property.avatar.attached? ? url_for(@property.avatar) : nil,
             showings_url: showings_url,
@@ -55,21 +56,23 @@
             isSearchable: false,
             feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
             clients_url: clients_url,
-            partners_url: users_url,
+            partners_url: "#{users_url}?backend_option=all_",
             isAdmin: current_user.is_admin?(current_account),
             i18n: {
                 table: {
                     client: t('viewings.client'),
                     user: t('viewings.user'),
                     date_title: t('date_title'),
-                    add: t("viewings.add_btn")
+                    add: t("viewings.add_btn"),
+                    tooltip_delete: t('tooltips.delete')
                 },
                 form: {
                     title: t('viewings.add'),
                     client: t('clients.client'),
                     partner: t('users.user'),
                     date: t('viewings.date'),
-                    submit: t('viewings.submit')
+                    submit: t('viewings.submit'),
+                    warning: t('viewings.empty_fields_msg')
                 },
                 select: {
                     placeholder: t('js.components.select.placeholder_title'),

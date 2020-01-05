@@ -10,6 +10,9 @@ el:
   download: "Μεταφόρτωση"
   choose_file: "Επιλέξτε αρχείο"
   date_title: "Ημ/νία"
+  tooltips:
+    edit: "Επεξεργασία"
+    delete: "Διαγραφή"
   header:
     search: "Αναζήτηση κωδ. ακινήτου"
   activerecord:
@@ -411,7 +414,6 @@ el:
           title: "Κατάσταση"
           active: "Ενεργός"
           inactive: "Ανενεργός"
-
         email: "Email"
         usertype: "Είδος λογαριασμού"
         registration: "Εγγραφή"
@@ -422,7 +424,7 @@ el:
         tooltip_view_profile: "Προβολή προφίλ"
         tooltip_freeze_profile: "Πάγωμα χρήστη - Εάν ενεργοποιηθεί, ο χρήστης δεν θα μπορεί να εισέλθει στο σύστημα."
         tooltip_edit_profile: "Επεξεργασία χρήστη"
-        tooltip_delete_profile: "Διαγραφή"
+        tooltip_delete_profile: "Διαγραφή χρήστη"
       clients:
         no_results: "Δεν βρέθηκαν πελάτες!"
         search_placeholder: "Αναζήτηση πελάτη..."
@@ -432,6 +434,8 @@ el:
           title: "Τηλέφωνο/α"
         registration: "Εγγραφή"
         actions: "Ενέργειες"
+        tooltip_edit_profile: "Επεξεργασία πελάτη"
+        tooltip_delete_profile: "Διαγραφή πελάτη"
       properties:
         description: "Περιγραφή"
       pagination:
@@ -891,3 +895,6 @@ el:
     add_btn: "Προσθήκη"
     date: "Ημερομηνία επίδειξης"
     submit: "Υποβολή"
+    empty_fields_msg: "Συμπληρώστε όλα τα πεδία"
+    flash_error: "Σφάλμα προσθήκης επίδειξης"
+
