@@ -10,7 +10,7 @@
         <%= react_component('ModalContainer', props: {
             id: 'modal-window',
             fireButtonLabel: '<i class="fas fa-heart fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.favourites') + '</span>',
-            avatar: @property.avatar.attached? ? url_for(@property.avatar) : nil,
+            avatar: @property.avatar.attached? ? url_for(@property.avatar.variant(resize: "30%")) : nil,
             favorites_url: favorites_url,
             favlists_url: favlists_url,
             property_id: @property.id,
@@ -40,11 +40,11 @@
             id: 'modal-window-2',
             modalSize: 'lg',
             fireButtonLabel: '<i class="fas fa-eye fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.viewings') + '</span>',
-            avatar: @property.avatar.attached? ? url_for(@property.avatar) : nil,
+            avatar: @property.avatar.attached? ? url_for(@property.avatar.variant(resize: "30%")) : nil,
             showings_url: showings_url,
             property_id: @property.id,
             child: 'AddRemoveShowings', # Due to react-on-rails restrictions we cant just ask to render children
-            modalTitle: t('properties.viewings_history'),
+            modalTitle: t('properties.viewings_history', property_id: @property.slug.upcase),
             modalHeader: heading(@property),
             buttonOKLabel: t('properties.ok_button'),
             buttonCancelLabel: t('properties.cancel_button'),
@@ -64,7 +64,9 @@
                     user: t('viewings.user'),
                     date_title: t('date_title'),
                     add: t("viewings.add_btn"),
-                    tooltip_delete: t('tooltips.delete')
+                    actions: t("viewings.actions"),
+                    tooltip_delete: t('tooltips.delete'),
+                    delete_prompt: t('viewings.delete_prompt')
                 },
                 form: {
                     title: t('viewings.add'),
@@ -85,6 +87,42 @@
                 add_list_action: t('js.components.modal.favlists.add_list_action'),
                 loading_alt: t('js.components.modal.favlists.loading_alt'),
                 listname_placeholder: t('js.components.modal.favlists.listname_placeholder')
+            }
+        }, prerender: false) %>
+      </div>
+
+      <div class="reactstrap-modal-button-x">
+        <%= react_component('ModalContainer', props: {
+            id: 'modal-window-3',
+            modalSize: 'md',
+            fireButtonLabel: '<i class="fas fa-user fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('partners.title') + '</span>',
+            avatar: @property.avatar.attached? ? url_for(@property.avatar.variant(resize: "30%")) : nil,
+            collection_endpoint: {url: users_path, action: 'get'},
+            action_endpoint: {url: assignments_path(@property), action: 'post'},
+            storedOptions: @property.users.blank? ? nil : @property.users.map { |user| {label: "#{user.first_name} #{user.last_name}", value: user.id} },
+            hasFeedback: true,
+            property_id: @property.id,
+            child: 'AddRemovePartners', # Due to react-on-rails restrictions we cant just ask to render children
+            modalTitle: t('properties.viewings_history', property_id: @property.slug.upcase),
+            modalHeader: heading(@property),
+            buttonOKLabel: t('properties.ok_button'),
+            buttonCancelLabel: t('properties.cancel_button'),
+            buttonCloseLabel: t('properties.close_button'),
+            soloMode: true,
+            ajaxEnabled: false,
+            isClearable: true,
+            backspaceRemovesValue: true,
+            isSearchable: false,
+            isMultiple: true,
+            partners_url: users_url,
+            partners_action_endpoint: assignments_path(@property),
+            i18n: {
+                select: {
+                    placeholder: t('js.components.select.placeholder_title'),
+                    noresults: t('js.components.select.noresults'),
+                    loading: t('js.components.select.loading_html'),
+                    feedback: t('js.components.select.assignments_feedback')
+                }
             }
         }, prerender: false) %>
       </div>

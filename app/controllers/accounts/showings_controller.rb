@@ -16,7 +16,7 @@ module Accounts
       end
 
       dateStr = DateTime.parse(showing_params[:dateStr])
-      @cpa = Cpa.new(property: @property, client: @client, user: @user, created_at: dateStr, updated_at: dateStr, viewership: true, ownership: false)
+      @cpa = current_account.cpas.new(property: @property, client: @client, user: @user, showing_date: dateStr, viewership: true, ownership: false)
       if @cpa.save
         render json: {status: "OK", message: showings}
       else
@@ -26,9 +26,7 @@ module Accounts
     end
 
     def delete
-      puts 'DELETE WORKING'
-      puts showing_params
-      Cpa.find(showing_params['showing_id']).destroy
+      current_account.cpas.find(showing_params['showing_id']).destroy
       render json: {status: "OK", message: showings}
     end
 
@@ -36,7 +34,7 @@ module Accounts
 
       def showings
         showings = Array.new
-        dbdata = Cpa.where(property: @property, viewership: true).includes(:client, :user)
+        dbdata = current_account.cpas.where(property: @property, viewership: true).includes(:client, :user).order(:showing_date)
         dbdata.each do |entry|
           showings << {
               id: entry.id,
@@ -44,7 +42,7 @@ module Accounts
               client_url: (current_user.is_admin?(current_account) || current_user.clients.include?(entry.try(:client))) ? client_path(entry.try(:client)) : '',
               user: entry.try(:user).try(:full_name) || '—',
               user_url: entry.try(:user) ? user_path(entry.try(:user)) : '',
-              date_string: I18n.l(entry.created_at, format: :custom),
+              date_string: I18n.l(entry.showing_date, format: :custom),
               canBeDeleted: (current_user.is_admin?(current_account) || current_user == entry.try(:user)) ? true : false
           }
         end

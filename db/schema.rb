@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_14_133650) do
+ActiveRecord::Schema.define(version: 2020_01_05_210129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,6 +116,9 @@ ActiveRecord::Schema.define(version: 2019_12_14_133650) do
     t.bigint "user_id"
     t.bigint "client_id"
     t.bigint "property_id"
+    t.bigint "account_id"
+    t.datetime "showing_date"
+    t.index ["account_id"], name: "index_cpas_on_account_id"
     t.index ["client_id"], name: "index_cpas_on_client_id"
     t.index ["property_id"], name: "index_cpas_on_property_id"
     t.index ["user_id"], name: "index_cpas_on_user_id"
@@ -328,6 +331,7 @@ ActiveRecord::Schema.define(version: 2019_12_14_133650) do
   add_foreign_key "clients", "accounts"
   add_foreign_key "clientships", "clients"
   add_foreign_key "clientships", "users"
+  add_foreign_key "cpas", "accounts"
   add_foreign_key "cpas", "clients"
   add_foreign_key "cpas", "properties"
   add_foreign_key "cpas", "users"

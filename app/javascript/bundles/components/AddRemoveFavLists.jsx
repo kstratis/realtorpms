@@ -61,7 +61,7 @@ function AddRemoveListForm({ addEntity, i18n, favlists_url, property_id }) {
           </div>
 
           <div className={'col-sm-4'}>
-            <input className={'btn btn-primary'} type="submit" value={i18n.add_viewing} />
+            <input className={'btn btn-primary'} type="submit" value={i18n.add_list_action} />
           </div>
         </div>
       </form>
@@ -116,12 +116,14 @@ function AddRemoveFavLists({ modalHeader, avatar, favlists_url, favorites_url, p
 
   return (
     <div className="favlist-container mt-3">
-      {avatar ? (
-        <figure className="user-avatar property-avatar user-avatar-xxl mx-auto d-block">
-          <img src={avatar} className={'rounded'} alt={'i18n.property_cover_alt'} />
-        </figure>
-      ) : null}
-      <h2>{modalHeader}</h2>
+      <div className={'mt-3'}>
+        {avatar ? (
+          <figure className="user-avatar property-avatar user-avatar-xxl mx-auto d-block mb-3">
+            <img src={avatar} className={'rounded'} alt={'i18n.property_cover_alt'} />
+          </figure>
+        ) : null}
+        <h2>{modalHeader}</h2>
+      </div>
       <hr />
       <div className={'favlist-body'}>
         {data.length > 0 ? (

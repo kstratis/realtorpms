@@ -4,12 +4,14 @@ import AddRemoveFavLists from './AddRemoveFavLists';
 import StoreClientSearch from './StoreClientSearch';
 import RetrieveClientSearch from './RetrieveClientSearch';
 import AddRemoveShowings from './AddRemoveShowings';
+import AddRemovePartners from './AddRemovePartners';
 
 const components = {
   StoreClientSearch: StoreClientSearch,
   RetrieveClientSearch: RetrieveClientSearch,
   AddRemoveFavLists: AddRemoveFavLists,
-  AddRemoveShowings: AddRemoveShowings
+  AddRemoveShowings: AddRemoveShowings,
+  AddRemovePartners: AddRemovePartners
 };
 
 class ModalContainer extends React.Component {

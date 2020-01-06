@@ -48,8 +48,8 @@ function AddShowing({
       <h2>{i18n.form.title}</h2>
       <hr />
       <div className={'favlist-body'}>
-        <div>
-          <span className={'d-inline-block mb-1'}>
+        <div className={'col-12 col-lg-6 offset-lg-3 my-2'}>
+          <span className={'d-inline-block mt-2 mb-2'}>
             <strong>{i18n.form.client}</strong>
           </span>
           <AsyncSelectContainer
@@ -63,12 +63,12 @@ function AddShowing({
           />
         </div>
         {isAdmin ? (
-          <div>
-            <span className={'d-inline-block mt-2 mb-1'}>
+          <div className={'col-12 col-lg-6 offset-lg-3 my-2'}>
+            <span className={'d-inline-block mt-2 mb-2'}>
               <strong>{i18n.form.partner}</strong>
             </span>
             <AsyncSelectContainer
-              id={'AsyncSelectContainerClient'}
+              id={'AsyncSelectContainerPartner'}
               i18n={i18n}
               collection_endpoint={{ url: partners_url, action: 'get' }}
               action_endpoint={{ url: '', action: '', callback: asyncSetPartner }}
@@ -78,34 +78,47 @@ function AddShowing({
             />
           </div>
         ) : null}
-        <div>
-          <span className={'d-inline-block mt-2 mb-1'}>
+        <div className={'col-12 col-lg-6 offset-lg-3 my-2'}>
+          <span className={'d-inline-block mt-2 mb-2'}>
             <strong>{i18n.form.date}</strong>
           </span>
           <FlatPickrWrapper handleChange={asyncSetDate} />
           <input className={'datetime'} />
         </div>
-        <div>
+        <div className={'col-12 col-lg-6 offset-lg-3 my-2'}>
           <small className={'error-msg'}>{errormsg}</small>
         </div>
-        <div className={'float-left mt-4 mb-3'}>
-          <button onClick={() => handleFormVisibility()} className={'btn btn-danger'}>
-            <i className={'fas fa-arrow-left fa-fw'}></i>&nbsp;{'Λίστα'}
-          </button>
-        </div>
-        <div className={'float-right mt-4 mb-3'}>
-          <button onClick={handleAddShowing} className={'btn btn-primary'}>
-            {i18n.form.submit}
-          </button>
+        <div className={'col-6 offset-3'}>
+          <div className={'float-left my-3'}>
+            <button onClick={() => handleFormVisibility()} className={'btn btn-danger'}>
+              <i className={'fas fa-arrow-left fa-fw'}></i>&nbsp;{'Λίστα'}
+            </button>
+          </div>
+          <div className={'float-right my-3'}>
+            <button onClick={handleAddShowing} className={'btn btn-primary'}>
+              {i18n.form.submit}
+            </button>
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-function AddRemoveShowings({ clients_url, partners_url, property_id, showings_url, isAdmin, i18n }) {
+function AddRemoveShowings({
+  avatar,
+  modalHeader,
+  clients_url,
+  partners_url,
+  property_id,
+  showings_url,
+  isAdmin,
+  i18n
+}) {
   const [isFormVisible, setIsFormVisible] = useState(false);
-  const handleFormVisibility = () => setIsFormVisible(isFormVisible => !isFormVisible);
+  const handleFormVisibility = () => {
+    setIsFormVisible(isFormVisible => !isFormVisible);
+  };
 
   const [request, setRequest] = useState({
     url: `${showings_url}.json?property_id=${property_id}`,
@@ -119,9 +132,7 @@ function AddRemoveShowings({ clients_url, partners_url, property_id, showings_ur
 
   const handleSetRequest = request => setRequest(request);
 
-  const handleDeleteShowing = (id) => {
-    console.log('delete handler working');
-    console.log(id);
+  const handleDeleteShowing = id => {
     handleSetRequest({
       url: showings_url,
       method: 'delete',
@@ -146,6 +157,15 @@ function AddRemoveShowings({ clients_url, partners_url, property_id, showings_ur
       ) : (
         <>
           {status === 'Error' ? window.location.reload() : null}
+          <div className={'mt-3'}>
+            {avatar ? (
+              <figure className="user-avatar property-avatar user-avatar-xxl mx-auto d-block mb-3">
+                <img src={avatar} className={'rounded'} alt={'i18n.property_cover_alt'} />
+              </figure>
+            ) : null}
+            <h2>{modalHeader}</h2>
+          </div>
+          <hr />
           {data.length > 0 ? (
             <div className={'table-responsive'}>
               <table id="usersTable" className={`table table-striped ${loading ? 'reduced-opacity' : ''}`}>
@@ -160,8 +180,8 @@ function AddRemoveShowings({ clients_url, partners_url, property_id, showings_ur
                     <th className={'text-nowrap'} scope="col">
                       {i18n.table.date_title}
                     </th>
-                    <th className={'text-nowrap'} scope="col">
-                      {'Eνέργειες'}
+                    <th className={'text-nowrap text-center'} scope="col">
+                      {i18n.table.actions}
                     </th>
                   </tr>
                 </thead>
@@ -183,9 +203,11 @@ function AddRemoveShowings({ clients_url, partners_url, property_id, showings_ur
                           <span>{entry.date_string}</span>
                         </div>
                       </td>
-                      <td className={'align-middle action-btns'}>
+                      <td className={'align-middle action-btns text-center'}>
                         <button
-                          onClick={() => handleDeleteShowing(entry['id'])}
+                          onClick={() => {
+                            if (window.confirm(i18n.table.delete_prompt)) handleDeleteShowing(entry['id']);
+                          }}
                           data-toggle="tooltip"
                           data-position="top"
                           title={i18n.table.tooltip_delete}
@@ -207,9 +229,14 @@ function AddRemoveShowings({ clients_url, partners_url, property_id, showings_ur
               <h3>{i18n.no_lists_available}</h3>
             </div>
           )}
-          <div className={'float-right my-2'}>
-            <button className={'btn btn-primary'} onClick={() => handleFormVisibility()}>
-              {i18n.table.add}
+          <div className={'float-right mt-1 mb-3'}>
+            <button
+              className={'btn btn-outline-danger'}
+              onClick={() => handleFormVisibility()}
+              data-toggle="tooltip"
+              data-position="top"
+              title={i18n.table.add}>
+              <i className="fas fa-plus" />
             </button>
           </div>
         </>

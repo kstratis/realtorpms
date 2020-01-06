@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 function useTooltips() {
-
+  const tooltipElements = useRef(null);
   // Activate any Bootstrap tooltips
   useEffect(() => {
-    $('[data-toggle="tooltip"]').tooltip();
+    tooltipElements.current = $('[data-toggle="tooltip"]');
+    tooltipElements.current.tooltip();
     return () => {
-      $('[data-toggle="tooltip"]').tooltip('dispose');
+      tooltipElements.current.tooltip('dispose');
     };
   });
-
 }
 
 export default useTooltips;
