@@ -49,7 +49,7 @@ class ModalContainer extends React.Component {
           toggle={this.toggle}
           className={this.props.className}
           contentClassName={this.props.modalContentClassNames ? this.props.modalContentClassNames : ''}
-          scrollable={true}>
+          scrollable={this.props.scrollable}>
           <ModalHeader className={this.props.modalHeaderClassNames ? this.props.modalHeaderClassNames : ''} toggle={this.toggle}>{this.props.modalTitle}</ModalHeader>
           <ModalBody className={this.props.modalBodyClassNames ? this.props.modalBodyClassNames : ''}>
             <SpecificSearch {...this.props} />

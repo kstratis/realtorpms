@@ -19,7 +19,7 @@ module PersonDatatable
     # end
 
     if filters[:search]
-      @persons = @persons.search(filters[:search])
+      @persons = @persons.search(filters[:search], nil, filters[:dropdown].blank? ? nil: 5)
     end
 
     ####################

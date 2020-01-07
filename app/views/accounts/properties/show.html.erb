@@ -9,6 +9,7 @@
       <div class="reactstrap-modal-button-right">
         <%= react_component('ModalContainer', props: {
             id: 'modal-window',
+            scrollable: true,
             fireButtonLabel: '<i class="fas fa-heart fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.favourites') + '</span>',
             avatar: @property.avatar.attached? ? url_for(@property.avatar.variant(resize: "30%")) : nil,
             favorites_url: favorites_url,
@@ -38,6 +39,7 @@
       <div class="reactstrap-modal-button-x">
         <%= react_component('ModalContainer', props: {
             id: 'modal-window-2',
+            scrollable: true,
             modalSize: 'lg',
             fireButtonLabel: '<i class="fas fa-eye fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.viewings') + '</span>',
             avatar: @property.avatar.attached? ? url_for(@property.avatar.variant(resize: "30%")) : nil,
@@ -99,7 +101,9 @@
             avatar: @property.avatar.attached? ? url_for(@property.avatar.variant(resize: "30%")) : nil,
             hasFeedback: true,
             modalBodyClassNames: 'overflown',
+            modalFooterClassNames: 'overflown',
             modalContentClassNames: 'overflown',
+            scrollable: false,
             property_id: @property.id,
             child: 'AddRemovePartners', # Due to react-on-rails restrictions we cant just ask to render children
             modalTitle: t('properties.viewings_history', property_id: @property.slug.upcase),
