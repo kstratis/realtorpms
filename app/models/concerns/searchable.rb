@@ -17,7 +17,6 @@ module Searchable
     # model using the dot ('.') character. However note that it's the responsibilty of the developer to ensure that
     # any associations are already established and operational.
     def search(term, filter=nil, limit=nil)
-      puts '************SEARCHABLE************'
       # Dynamically get the fields from the model
       fields = const_get(:SEARCH_FIELDS).dup
       # Even if one of them contains a dot that means we'll also have to search the associated model
