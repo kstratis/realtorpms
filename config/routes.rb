@@ -81,6 +81,7 @@ Rails.application.routes.draw do
 
       # i.e. /properties/21 - assign property to partner
       post '/assignments/property/:pid/users/', to: 'assignments#assign', as: :assignments
+      get '/assignments/property/:pid/users/', to: 'assignments#assigned', as: :existing_assignments
 
       # i.e. /clients/25 - assign client to partner
       post '/clientships/client/:cid/users/', to: 'clientships#assign', as: :clientships

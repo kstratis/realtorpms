@@ -9,7 +9,7 @@ axios.defaults.headers.common['X-CSRF-Token'] = ReactOnRails.authenticityToken()
 
 // didMountRef is used to control whether useFetch will fire upon first mount. If set to true or is omitted altogether,
 // useFetch will fire on first mount. Otherwise, if set to false, the ajax operation won't run on first mount.
-function useFetch(request, dropdown = true, didMountRef = null) {
+function useFetch(request, dropdown = true, fireAjaxOnMount = null) {
   const [status, setStatus] = useState('');
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -29,11 +29,11 @@ function useFetch(request, dropdown = true, didMountRef = null) {
       }
       safelyExecCallback(request, result.data.message);
     };
-    if (didMountRef) {
-      if (didMountRef.current) {
+    if (fireAjaxOnMount) {
+      if (fireAjaxOnMount.current) {
         executeAjax();
       } else {
-        didMountRef.current = true;
+        fireAjaxOnMount.current = true;
       }
     } else {
       executeAjax();

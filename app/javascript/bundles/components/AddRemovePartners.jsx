@@ -1,26 +1,28 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import AsyncSelectContainer from './selects/AsyncSelectContainer';
 import useFetch from '../hooks/useFetch';
+import Spinner from '../datatables/Spinner';
 
 function AddRemovePartners({
   partners_url,
   partners_action_endpoint,
-  storedOptions,
+  initial_data_url,
   hasFeedback,
   isMultiple,
   modalHeader,
   avatar,
   i18n
 }) {
-
-
   const [request, setRequest] = useState({
-    url: `${favlists_url}.json?property_id=${property_id}`,
+    url: initial_data_url,
     method: 'get',
     payload: {}
   });
 
-  const { data, loading, setData } = useFetch(request, false);
+  // i.e. const refContainer = useRef(initialValue);
+  // FROM THE DOCS: useRef returns a **mutable ref object** whose .current property is initialized to the passed argument (initialValue).
+  const fireAjaxOnMount = useRef(true); // Here the .current property of the mutable object is set to true
+  const { data, loading } = useFetch(request, false, fireAjaxOnMount);
 
   return (
     <>
@@ -33,15 +35,22 @@ function AddRemovePartners({
         <h2>{modalHeader}</h2>
       </div>
       <hr />
-      <AsyncSelectContainer
-        id={'AsyncSelectContainerPartner'}
-        i18n={i18n}
-        collection_endpoint={{ url: partners_url, action: 'get' }}
-        action_endpoint={{ url: partners_action_endpoint, action: 'post' }}
-        storedOptions={storedOptions}
-        hasFeedback={hasFeedback}
-        isMultiple={isMultiple}
-      />
+      <div className={'mb-3'}>
+      {loading ? (
+        <Spinner isLoading={loading} />
+      ) : (
+        <AsyncSelectContainer
+          id={'AsyncSelectContainerPartner'}
+          i18n={i18n}
+          collection_endpoint={{ url: partners_url, action: 'get' }}
+          action_endpoint={{ url: partners_action_endpoint, action: 'post' }}
+          storedOptions={data}
+          hasFeedback={hasFeedback}
+          isMultiple={isMultiple}
+        />
+
+      )}
+      </div>
     </>
   );
 }

@@ -48,12 +48,13 @@ class ModalContainer extends React.Component {
           size={this.props.modalSize ? this.props.modalSize : 'md'}
           toggle={this.toggle}
           className={this.props.className}
+          contentClassName={this.props.modalContentClassNames ? this.props.modalContentClassNames : ''}
           scrollable={true}>
-          <ModalHeader toggle={this.toggle}>{this.props.modalTitle}</ModalHeader>
-          <ModalBody>
+          <ModalHeader className={this.props.modalHeaderClassNames ? this.props.modalHeaderClassNames : ''} toggle={this.toggle}>{this.props.modalTitle}</ModalHeader>
+          <ModalBody className={this.props.modalBodyClassNames ? this.props.modalBodyClassNames : ''}>
             <SpecificSearch {...this.props} />
           </ModalBody>
-          <ModalFooter>
+          <ModalFooter className={this.props.modalFooterClassNames ? this.props.modalFooterClassNames : ''}>
             <Button color="secondary" onClick={this.toggle}>
               {this.props.buttonCloseLabel}
             </Button>

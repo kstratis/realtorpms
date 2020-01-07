@@ -1834,3 +1834,11 @@ a.text-link {
 .error-msg{
   color: red;
 }
+
+.modal-dialog-scrollable .modal-content.overflown{
+  overflow: unset;
+}
+
+.modal-dialog-scrollable .modal-body.overflown{
+  overflow-y: unset;
+}

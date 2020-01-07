@@ -1,7 +1,8 @@
 const reactSelectStyles = {
-  container: (base, state) => {
-    return { ...base };
-  },
+  container: (base, state) => ({
+    ...base,
+    zIndex: 9999
+  }),
   option: (base, state) => ({
     ...base,
     '&:hover': {

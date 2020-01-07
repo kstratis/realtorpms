@@ -97,15 +97,13 @@
             modalSize: 'md',
             fireButtonLabel: '<i class="fas fa-user fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('partners.title') + '</span>',
             avatar: @property.avatar.attached? ? url_for(@property.avatar.variant(resize: "30%")) : nil,
-            collection_endpoint: {url: users_path, action: 'get'},
-            action_endpoint: {url: assignments_path(@property), action: 'post'},
-            storedOptions: @property.users.blank? ? nil : @property.users.map { |user| {label: "#{user.first_name} #{user.last_name}", value: user.id} },
             hasFeedback: true,
+            modalBodyClassNames: 'overflown',
+            modalContentClassNames: 'overflown',
             property_id: @property.id,
             child: 'AddRemovePartners', # Due to react-on-rails restrictions we cant just ask to render children
             modalTitle: t('properties.viewings_history', property_id: @property.slug.upcase),
             modalHeader: heading(@property),
-            buttonOKLabel: t('properties.ok_button'),
             buttonCancelLabel: t('properties.cancel_button'),
             buttonCloseLabel: t('properties.close_button'),
             soloMode: true,
@@ -116,6 +114,7 @@
             isMultiple: true,
             partners_url: users_url,
             partners_action_endpoint: assignments_path(@property),
+            initial_data_url: existing_assignments_path(@property),
             i18n: {
                 select: {
                     placeholder: t('js.components.select.placeholder_title'),
