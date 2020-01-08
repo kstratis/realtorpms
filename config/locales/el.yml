@@ -355,7 +355,7 @@ el:
         placeholder_floors_max: "Έως: Όλοι"
         placeholder_construction_min: "Από: Έτος"
         placeholder_construction_max: "Έως: Έτος"
-        assignments_feedback: "Ανάθεση σε έναν ή περισσότερους συνεργάτες"
+        assignments_feedback: "Το ακίνητο με κωδικό %{property_id} θα είναι διαθέσιμο στους παραπάνω συνεργάτες."
         clientship_feedback: "Αποθήκευση προτιμήσεων πελάτη"
         save_btn: "Αποθήκευση"
         saved_btn: "Αποθηκεύτηκε"
@@ -710,6 +710,8 @@ el:
       breadcrumb: "Συνεργάτες"
       heading: "Συνεργάτες"
     flash_user_not_found: "Ο χρήστης δεν βρέθηκε"
+  assignments:
+    title: "Ανάθεση του %{property_id}"
   properties:
     identifier: "ID"
     title: "Ακίνητα"

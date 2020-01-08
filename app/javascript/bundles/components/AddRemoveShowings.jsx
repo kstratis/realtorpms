@@ -59,6 +59,7 @@ function AddShowing({
             action_endpoint={{ url: '', action: '', callback: asyncSetClient }}
             hasFeedback={false}
             isCreatable={false}
+            isClearable={true}
             isMultiple={false}
           />
         </div>
@@ -74,6 +75,7 @@ function AddShowing({
               action_endpoint={{ url: '', action: '', callback: asyncSetPartner }}
               hasFeedback={false}
               isCreatable={false}
+              isClearable={true}
               isMultiple={false}
             />
           </div>

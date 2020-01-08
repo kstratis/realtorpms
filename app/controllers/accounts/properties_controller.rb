@@ -238,8 +238,13 @@ module Accounts
       # The block parameter is used to set additional attributes on the join model +Cpa+.
       # It basically says: Cpa.where(property: @property, clients: [ids]).update_all(ownership: true)
       associations_handler(@property, 'clients', clients_hash[:clients].blank? ? [] : JSON.parse(clients_hash[:clients])) do |add_ids|
-        @property.class.reflections['clients'].options[:through].to_s.singularize.capitalize.constantize.where(property: @property,
-                                                                                                              client: current_account.clients.where(id: add_ids)).update_all(ownership: true)
+        puts 'block exeCUTING'
+        # Orig
+        # @property.class.reflections['clients'].options[:through].to_s.singularize.capitalize.constantize.where(property: @property,
+        #                                                                                                        client: current_account.clients.where(id: add_ids)).update_all(ownership: true)
+        # Updated
+         current_account.send(@property.class.reflections['clients'].options[:through].to_s).where(property: @property,
+                                                                                                  client: current_account.clients.where(id: add_ids)).update_all(ownership: true)
       end
     end
 

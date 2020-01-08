@@ -82,7 +82,7 @@
                     placeholder: t('js.components.select.placeholder_title'),
                     noresults: t('js.components.select.noresults'),
                     loading: t('js.components.select.loading_html'),
-                    feedback: t('js.components.select.assignments_feedback')
+                    feedback: t('js.components.select.assignments_feedback', property_id: @property.slug.upcase)
                 },
                 no_lists_available: t('js.components.modal.favlists.no_results'),
                 property_cover_alt: t('js.components.modal.favlists.property_cover_alt'),
@@ -106,13 +106,13 @@
             scrollable: false,
             property_id: @property.id,
             child: 'AddRemovePartners', # Due to react-on-rails restrictions we cant just ask to render children
-            modalTitle: t('properties.viewings_history', property_id: @property.slug.upcase),
+            modalTitle: t('assignments.title', property_id: @property.slug.upcase),
             modalHeader: heading(@property),
             buttonCancelLabel: t('properties.cancel_button'),
             buttonCloseLabel: t('properties.close_button'),
             soloMode: true,
             ajaxEnabled: false,
-            isClearable: true,
+            isClearable: false,
             backspaceRemovesValue: true,
             isSearchable: false,
             isMultiple: true,
@@ -124,7 +124,7 @@
                     placeholder: t('js.components.select.placeholder_title'),
                     noresults: t('js.components.select.noresults'),
                     loading: t('js.components.select.loading_html'),
-                    feedback: t('js.components.select.assignments_feedback')
+                    feedback: t('js.components.select.assignments_feedback', property_id: @property.slug.upcase)
                 }
             }
         }, prerender: false) %>

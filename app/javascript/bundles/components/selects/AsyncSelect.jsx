@@ -150,6 +150,7 @@ function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasF
           autoload={false}
           cache={false}
           menuIsOpen={isOpen}
+          isClearable={isClearable}
           isMulti={isMultiple == null ? true : isMultiple}
           backspaceRemovesValue={false}
           placeholder={i18n.select.placeholder}

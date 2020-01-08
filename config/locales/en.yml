@@ -354,7 +354,7 @@ en:
         placeholder_floors_max: "To: All"
         placeholder_construction_min: "From: Year"
         placeholder_construction_max: "To: Year"
-        assignments_feedback: "Assign to one or more partners"
+        assignments_feedback: "Property %{property_id} is only visible to the partners specified above."
         clientship_feedback: "Client search preferences"
         save_btn: "Save"
         saved_btn: "Saved"
@@ -706,6 +706,8 @@ en:
       breadcrumb: "Partners"
       heading: "Partner list"
     flash_user_not_found: "User was not found"
+  assignments:
+    title: "Assigment of %{property_id}"
   properties:
     identifier: "ID"
     title: "Properties"
