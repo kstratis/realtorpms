@@ -41,8 +41,8 @@ module AddRemoveAssociationsHandler
     # but I believe it's safer this way even if it ever throws.
     remove_ids.each {|id| object.send(association).delete(current_account.send(association).find(id))} unless remove_ids.blank?
     unless add_ids.blank?
-      #add_ids.each { |id| object.send(association) << current_account.send(association).find(id) }
-      add_ids.each { |id| current_account.cpas.create(property_id: object.id, client_id: current_account.send(association).find(id).id, account_id: current_account) }
+      add_ids.each { |id| object.send(association) << current_account.send(association).find(id) }
+      #add_ids.each { |id| current_account.cpas.create(property_id: object.id, client_id: current_account.send(association).find(id).id, account_id: current_account) }
 
       # This is mainly used to set attributes on the join table (if any).
       block.call(add_ids) if block_given?

@@ -9,7 +9,6 @@ function AddRemovePartners({
   initial_data_url,
   hasFeedback,
   isMultiple,
-  isClearable,
   modalHeader,
   avatar,
   i18n
@@ -48,7 +47,6 @@ function AddRemovePartners({
           storedOptions={data}
           hasFeedback={hasFeedback}
           isMultiple={isMultiple}
-          isClearable={isClearable}
         />
 
       )}
