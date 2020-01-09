@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import AsyncSelectContainer from './selects/AsyncSelectContainer';
 import useFetch from '../hooks/useFetch';
 import Spinner from '../datatables/Spinner';
+import { renderHTML } from '../utilities/helpers';
 
 function AddRemovePartners({
   partners_url,
@@ -32,7 +33,7 @@ function AddRemovePartners({
             <img src={avatar} className={'rounded'} alt={'i18n.property_cover_alt'} />
           </figure>
         ) : null}
-        <h2>{modalHeader}</h2>
+        <h2>{renderHTML(modalHeader)}</h2>
       </div>
       <hr />
       <div className={'mb-3'}>

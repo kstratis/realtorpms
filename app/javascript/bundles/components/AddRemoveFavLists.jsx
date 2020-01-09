@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import useFetch from '../hooks/useFetch';
+import { renderHTML } from '../utilities/helpers';
 
 function AddRemoveEntry({ addEntity, favlist, index, favorites_url, property_id, completeFavlist, removeFavlist }) {
   return (
@@ -122,7 +123,7 @@ function AddRemoveFavLists({ modalHeader, avatar, favlists_url, favorites_url, p
             <img src={avatar} className={'rounded'} alt={'i18n.property_cover_alt'} />
           </figure>
         ) : null}
-        <h2>{modalHeader}</h2>
+        <h2>{renderHTML(modalHeader)}</h2>
       </div>
       <hr />
       <div className={'favlist-body'}>

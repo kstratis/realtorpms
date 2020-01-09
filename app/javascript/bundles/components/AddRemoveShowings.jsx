@@ -4,6 +4,7 @@ import useTooltips from '../hooks/useTooltips';
 import FlatPickrWrapper from './FlatPickrWrapper';
 import Spinner from '../datatables/Spinner';
 import AsyncSelectContainer from './selects/AsyncSelectContainer';
+import { renderHTML } from '../utilities/helpers';
 
 function AddShowing({
   i18n,
@@ -93,7 +94,7 @@ function AddShowing({
         <div className={'col-6 offset-3'}>
           <div className={'float-left my-3'}>
             <button onClick={() => handleFormVisibility()} className={'btn btn-danger'}>
-              <i className={'fas fa-arrow-left fa-fw'}></i>&nbsp;{'Λίστα'}
+              <i className={'fas fa-arrow-left fa-fw'}></i>&nbsp;{i18n.form.list}
             </button>
           </div>
           <div className={'float-right my-3'}>
@@ -165,7 +166,7 @@ function AddRemoveShowings({
                 <img src={avatar} className={'rounded'} alt={'i18n.property_cover_alt'} />
               </figure>
             ) : null}
-            <h2>{modalHeader}</h2>
+            <h2>{renderHTML(modalHeader)}</h2>
           </div>
           <hr />
           {data.length > 0 ? (

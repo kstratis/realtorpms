@@ -895,6 +895,7 @@ en:
     add_btn: "Add"
     date: "Showing date"
     submit: "Submit"
+    list: "List"
     empty_fields_msg: "Fill out all form fields"
     flash_error: "Error while adding new showing"
     actions: "Actions"

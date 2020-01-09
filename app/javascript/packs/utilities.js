@@ -21,4 +21,12 @@ const clearValidatableFields = className => {
   });
 };
 
-export { clearValidatableFields };
+const setFlatPickrSettings = (locale) => {
+    window.flatpickr.defaultConfig.locale = locale;
+    // flatpickr.defaultConfig.dateFormat = "l, d M Y";
+    window.flatpickr.defaultConfig.dateFormat = 'Z';
+    window.flatpickr.defaultConfig.altInput = true;
+    window.flatpickr.defaultConfig.altFormat = locale === 'el' ? 'l, d M Y' : 'M d, Y';
+};
+
+export { clearValidatableFields, setFlatPickrSettings };

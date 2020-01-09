@@ -76,7 +76,8 @@
                     partner: t('users.user'),
                     date: t('viewings.date'),
                     submit: t('viewings.submit'),
-                    warning: t('viewings.empty_fields_msg')
+                    warning: t('viewings.empty_fields_msg'),
+                    list: t('viewings.list')
                 },
                 select: {
                     placeholder: t('js.components.select.placeholder_title'),
@@ -93,7 +94,7 @@
         }, prerender: false) %>
       </div>
 
-      <% if current_user.is_admin?(current_account) %>
+      <%# if current_user.is_admin?(current_account) %>
         <div class="reactstrap-modal-button-x">
           <%= react_component('ModalContainer', props: {
               id: 'modal-window-3',
@@ -108,7 +109,7 @@
               property_id: @property.id,
               child: 'AddRemovePartners', # Due to react-on-rails restrictions we cant just ask to render children
               modalTitle: t('assignments.title', property_id: @property.slug.upcase),
-              modalHeader: heading(@property),
+              modalHeader: heading(@property).html_safe,
               buttonCancelLabel: t('properties.cancel_button'),
               buttonCloseLabel: t('properties.close_button'),
               soloMode: true,
@@ -130,7 +131,7 @@
               }
           }, prerender: false) %>
         </div>
-      <% end %>
+      <%# end %>
 
       <button type="button" class="btn btn-secondary btn-sm printable" data-url="<%= property_url(@property) + '?print=true' %>">
         <i class="fas fa-print colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp<%= t 'properties.print' %></span>
