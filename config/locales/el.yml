@@ -10,6 +10,8 @@ el:
   download: "Μεταφόρτωση"
   choose_file: "Επιλέξτε αρχείο"
   date_title: "Ημ/νία"
+  error: "Σφάλμα"
+  action_not_permitted_error: "Η ενέργεια δεν επιτρέπεται"
   tooltips:
     edit: "Επεξεργασία"
     delete: "Διαγραφή"

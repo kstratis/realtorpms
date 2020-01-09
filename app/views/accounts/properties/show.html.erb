@@ -93,42 +93,44 @@
         }, prerender: false) %>
       </div>
 
-      <div class="reactstrap-modal-button-x">
-        <%= react_component('ModalContainer', props: {
-            id: 'modal-window-3',
-            modalSize: 'md',
-            fireButtonLabel: '<i class="fas fa-user colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('partners.title') + '</span>',
-            avatar: @property.avatar.attached? ? url_for(@property.avatar.variant(resize: "30%")) : nil,
-            hasFeedback: true,
-            modalBodyClassNames: 'overflown',
-            modalFooterClassNames: 'overflown',
-            modalContentClassNames: 'overflown',
-            scrollable: false,
-            property_id: @property.id,
-            child: 'AddRemovePartners', # Due to react-on-rails restrictions we cant just ask to render children
-            modalTitle: t('assignments.title', property_id: @property.slug.upcase),
-            modalHeader: heading(@property),
-            buttonCancelLabel: t('properties.cancel_button'),
-            buttonCloseLabel: t('properties.close_button'),
-            soloMode: true,
-            ajaxEnabled: false,
-            isClearable: false,
-            backspaceRemovesValue: true,
-            isSearchable: false,
-            isMultiple: true,
-            partners_url: users_url,
-            partners_action_endpoint: assignments_path(@property),
-            initial_data_url: existing_assignments_path(@property),
-            i18n: {
-                select: {
-                    placeholder: t('js.components.select.placeholder_title'),
-                    noresults: t('js.components.select.noresults'),
-                    loading: t('js.components.select.loading_html'),
-                    feedback: t('js.components.select.assignments_feedback', property_id: @property.slug.upcase)
-                }
-            }
-        }, prerender: false) %>
-      </div>
+      <% if current_user.is_admin?(current_account) %>
+        <div class="reactstrap-modal-button-x">
+          <%= react_component('ModalContainer', props: {
+              id: 'modal-window-3',
+              modalSize: 'md',
+              fireButtonLabel: '<i class="fas fa-user colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('partners.title') + '</span>',
+              avatar: @property.avatar.attached? ? url_for(@property.avatar.variant(resize: "30%")) : nil,
+              hasFeedback: true,
+              modalBodyClassNames: 'overflown',
+              modalFooterClassNames: 'overflown',
+              modalContentClassNames: 'overflown',
+              scrollable: false,
+              property_id: @property.id,
+              child: 'AddRemovePartners', # Due to react-on-rails restrictions we cant just ask to render children
+              modalTitle: t('assignments.title', property_id: @property.slug.upcase),
+              modalHeader: heading(@property),
+              buttonCancelLabel: t('properties.cancel_button'),
+              buttonCloseLabel: t('properties.close_button'),
+              soloMode: true,
+              ajaxEnabled: false,
+              isClearable: false,
+              backspaceRemovesValue: true,
+              isSearchable: false,
+              isMultiple: true,
+              partners_url: users_url,
+              partners_action_endpoint: assignments_path(@property),
+              initial_data_url: existing_assignments_path(@property),
+              i18n: {
+                  select: {
+                      placeholder: t('js.components.select.placeholder_title'),
+                      noresults: t('js.components.select.noresults'),
+                      loading: t('js.components.select.loading_html'),
+                      feedback: t('js.components.select.assignments_feedback', property_id: @property.slug.upcase)
+                  }
+              }
+          }, prerender: false) %>
+        </div>
+      <% end %>
 
       <button type="button" class="btn btn-secondary btn-sm printable" data-url="<%= property_url(@property) + '?print=true' %>">
         <i class="fas fa-print colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp<%= t 'properties.print' %></span>
@@ -377,40 +379,6 @@
                 </div>
               <% end %>
 
-              <% if current_user.role(current_account) != 'user' %>
-                <div class="col-12">
-                  <div class="card borderlesss-card">
-                    <div class="card-header header-internal simplified-header">
-                      <div class="table-entry">
-                        <div class="table-icon-wrapper">
-                          <i class="pr-icon xs assignments"></i>
-                        </div>
-                        <span class="align-middle"><i class="fas fa-user-secret fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_assignments' %>"></i>&nbsp<i class="fas fa-key fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_security' %>"></i>&nbsp; <%= t 'activerecord.attributes.property.assignments_title' %></span>
-                      </div>
-                    </div><!-- .card-body -->
-                    <div class="card-body">
-                      <div class="col-12 pt-2">
-                        <%= react_component('AsyncSelectContainer', props: {
-                            id: 'AsyncSelectContainer',
-                            collection_endpoint: {url: users_path, action: 'get'},
-                            action_endpoint: {url: assignments_path(@property), action: 'post'},
-                            storedOptions: @property.users.blank? ? nil : @property.users.map { |user| {label: "#{user.first_name} #{user.last_name}", value: user.id} },
-                            hasFeedback: true,
-                            i18n: {
-                                select: {
-                                    placeholder: t('js.components.select.placeholder_title'),
-                                    noresults: t('js.components.select.noresults'),
-                                    loading: t('js.components.select.loading_html'),
-                                    feedback: t('js.components.select.assignments_feedback')
-                                }
-                            }
-                        }, prerender: false) %>
-                      </div>
-                    </div><!-- /.card-body -->
-                  </div><!-- /.card -->
-                </div>
-
-              <% end %>
             </div>
           </div>
         </div>
