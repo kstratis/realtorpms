@@ -725,6 +725,7 @@ en:
     print: "Print"
     info: "Details"
     map: "Map"
+    map_feedback: "Update the property information with its map location. Click on edit and fill in the information under that location tab."
     import: "Import properties"
     new:
       breadcrumb: "Properties"

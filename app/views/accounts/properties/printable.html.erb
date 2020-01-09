@@ -21,7 +21,7 @@
     <div class="col-7">
       <table class="table ">
         <tbody>
-        <% Property.basic_features.except(:created_at).each do |key, value| %>
+        <% Property.basic_features.except(:created_at, :map_url, :pricepersqmeter).each do |key, value| %>
           <tr>
             <td class="align-middle nowrap">
               <div class="table-entry">
@@ -32,6 +32,7 @@
               </div>
             </td>
             <td class="align-middle nowrap">
+
               <span><%= render_attribute(@property, key, value[:options], value[:renderfn]) %></span></td>
           </tr>
         <% end %>

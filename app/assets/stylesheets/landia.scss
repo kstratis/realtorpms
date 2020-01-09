@@ -561,10 +561,6 @@ input[type="search"]::-webkit-search-cancel-button {
   border-top-right-radius: 0;
 }
 
-i.fas.fa-heart.colored {
-  color: rgb(220, 72, 127);
-}
-
 .option-container {
   display: block;
   text-align: center;
@@ -678,17 +674,22 @@ i.fas.fa-heart.colored {
   text-align: center;
 }
 
+
+//i.fas.fa-heart.colored {
+//  color: rgb(220, 72, 127);
+//}
+
 button, a {
   &:hover {
-    .fa-heart {
+    .fa-heart.colored{
       color: rgb(220, 72, 127);
     }
 
-    .fa-print {
+    .fa-print.colored {
       color: $blue;
     }
 
-    .fa-pen {
+    .fa-pen.colored {
       color: $orange;
     }
 
@@ -696,12 +697,16 @@ button, a {
       color: unset;
     }
 
-    .fa-trash {
+    .fa-trash.colored {
       color: $pinterest_color;
     }
 
-    .fa-user {
+    .fa-user.colored {
       color: $pink;
+    }
+
+    .fa-eye.colored {
+      color: $teal;
     }
 
   }

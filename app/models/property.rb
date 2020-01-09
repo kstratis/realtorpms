@@ -113,13 +113,13 @@ class Property < ApplicationRecord
     def basic_features
       {
           :businesstype => {:label => 'businesstype', :icon => 'businesstype', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : '<mark class="highlighted">'+ I18n.t("activerecord.attributes.property.enums.businesstype.#{value}") + '</mark>'} },
-          :location_info => {:label => 'location', :icon => 'location', :options => 'localname', :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
-          :price => {:label => 'price', :icon => 'price', :options => nil, :renderfn => Proc.new {|value| value ? ActionController::Base.helpers.number_to_currency(value) : '—' }},
-          # :pricepersqmeter => {:label => 'pricepersqmeter', :icon => 'pricepersqmeter', :options => nil, :renderfn => Proc.new {|value| value ? ActionController::Base.helpers.number_to_currency(value) : '—' }},
-          :size => {:label => 'size', :icon => 'size', :options => nil, :renderfn => Proc.new {|value| value ? I18n.t('activerecord.attributes.property.size_meter_html', size: value.to_s) : '—' }},
           :category_info => {:label => 'subcategory', :icon => 'subcategory', :options => 'slug', :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.subcategory.#{value}")} },
-          :created_at => {:label => 'created_at', :icon => 'created_at', :options => nil, :renderfn => Proc.new {|value| value ? (I18n.l value, format: :custom) : '—' } }
-
+          #:location_info => {:label => 'location', :icon => 'location', :options => 'localname', :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
+          :size => {:label => 'size', :icon => 'size', :options => nil, :renderfn => Proc.new {|value| value ? I18n.t('activerecord.attributes.property.size_meter_html', size: value.to_s) : '—' }},
+          :price => {:label => 'price', :icon => 'price', :options => nil, :renderfn => Proc.new {|value| value ? ActionController::Base.helpers.number_to_currency(value) : '—' }},
+          :pricepersqmeter => {:label => 'pricepersqmeter', :icon => 'pricepersqmeter', :options => nil, :renderfn => Proc.new {|value| value ? ActionController::Base.helpers.number_to_currency(value) : '—' }},
+          :created_at => {:label => 'created_at', :icon => 'created_at', :options => nil, :renderfn => Proc.new {|value| value ? (I18n.l value, format: :custom) : '—' } },
+          :map_url => {:label => 'location', :icon => 'location', :options => nil, :renderfn => Proc.new {|value| "<button type='button' class='btn btn-secondary btn-sm printable' data-url='#{value.blank? ? '' : Property.iframe_parse(value) }' #{value.blank? ? 'disabled' : nil }><i class='fas fa-map fa-fw'></i></button>&nbsp;&nbsp;&nbsp;#{value.blank? ? "<span class='property-cover-tooltip' data-toggle='tooltip' title='#{I18n.t('properties.map_feedback')}'><i class='fas fa-info-circle'></i></span>" : nil}"}}
       }.freeze
     end
 
@@ -168,13 +168,13 @@ class Property < ApplicationRecord
     end
   end
 
-  def map_href
+  def self.iframe_parse(iframe_tag)
     begin
       # Exceptions raised by this code will
       # be caught by the following rescue clause
-      Nokogiri::HTML(map_url).search('iframe').attribute('src').value || nil
+      Nokogiri::HTML(iframe_tag).search('iframe').attribute('src').value || nil
     rescue
-      puts "Exception while parsing the property's #{slug} map url"
+      puts "Nokogiri exception occured while parsing the following iframe tag (map_url attribute): #{iframe_tag}"
       return nil
     end
 

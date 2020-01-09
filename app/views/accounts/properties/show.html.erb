@@ -10,7 +10,7 @@
         <%= react_component('ModalContainer', props: {
             id: 'modal-window',
             scrollable: true,
-            fireButtonLabel: '<i class="fas fa-heart fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.favourites') + '</span>',
+            fireButtonLabel: '<i class="fas fa-heart colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.favourites') + '</span>',
             avatar: @property.avatar.attached? ? url_for(@property.avatar.variant(resize: "30%")) : nil,
             favorites_url: favorites_url,
             favlists_url: favlists_url,
@@ -41,7 +41,7 @@
             id: 'modal-window-2',
             scrollable: true,
             modalSize: 'lg',
-            fireButtonLabel: '<i class="fas fa-eye fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.viewings') + '</span>',
+            fireButtonLabel: '<i class="fas fa-eye colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.viewings') + '</span>',
             avatar: @property.avatar.attached? ? url_for(@property.avatar.variant(resize: "30%")) : nil,
             showings_url: showings_url,
             property_id: @property.id,
@@ -97,7 +97,7 @@
         <%= react_component('ModalContainer', props: {
             id: 'modal-window-3',
             modalSize: 'md',
-            fireButtonLabel: '<i class="fas fa-user fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('partners.title') + '</span>',
+            fireButtonLabel: '<i class="fas fa-user colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('partners.title') + '</span>',
             avatar: @property.avatar.attached? ? url_for(@property.avatar.variant(resize: "30%")) : nil,
             hasFeedback: true,
             modalBodyClassNames: 'overflown',
@@ -130,21 +130,17 @@
         }, prerender: false) %>
       </div>
 
-      <button type="button" class="btn btn-secondary btn-sm printable" data-url="<%= @property.map_href %>" <%= @property.map_href.blank? ? 'disabled' : nil %>>
-        <i class="fas fa-map fa-fw"></i><span class="d-none d-lg-inline">&nbsp;<%= t 'properties.map' %></span>
-      </button>
-
       <button type="button" class="btn btn-secondary btn-sm printable" data-url="<%= property_url(@property) + '?print=true' %>">
-        <i class="fas fa-print fa-fw"></i><span class="d-none d-lg-inline">&nbsp<%= t 'properties.print' %></span>
+        <i class="fas fa-print colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp<%= t 'properties.print' %></span>
       </button>
 
       <%= link_to edit_property_path(@property), class: 'btn btn-secondary btn-sm editable' do %>
-        <i class="fas fa-pen fa-fw"></i><span class="d-none d-lg-inline">&nbsp;<%= t 'properties.edit.edit_button_alt' %></span>
+        <i class="fas fa-pen colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp;<%= t 'properties.edit.edit_button_alt' %></span>
       <% end %>
 
       <% if current_user.is_admin?(current_account) %>
         <%= link_to @property, method: :delete, data: {confirm: t('prompt')}, class: 'btn btn-secondary btn-sm editable' do %>
-          <i class="fas fa-trash fa-fw"></i><span class="d-none d-lg-inline">&nbsp;<%= t 'properties.delete.delete_button' %></span>
+          <i class="fas fa-trash colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp;<%= t 'properties.delete.delete_button' %></span>
         <% end %>
       <% end %>
 
