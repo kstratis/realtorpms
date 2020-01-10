@@ -4,17 +4,59 @@
 <%= render layout: 'layouts/breadcrumb', locals: {path: [{:title => t('clients.show.breadcrumb'), :href => clients_path}, {title: @client.full_name, :href => ''}], icon: 'house-colored'} do %>
   <div class="action-btns">
     <div class="btn-group btn-group-toggle">
-      <% if current_user.is_admin?(current_account) %>
+      <% if current_user.is_admin?(current_account) || current_user.clients.pluck(:id).include?(@client.id) %>
+        <div class="reactstrap-modal-button-right">
+        <%= react_component('ModalContainer', props: {
+            id: 'modal-window-client-showings',
+            scrollable: true,
+            modalSize: 'lg',
+            fireButtonLabel: '<i class="fas fa-eye colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.viewings') + '</span>',
+            #avatar: @property.avatar.attached? ? url_for(@property.avatar.variant(resize: "30%")) : nil,
+            avatar: nil,
+            showings_url: showings_url,
+            client_id: @client.id,
+            child: 'ViewShowings', # Due to react-on-rails restrictions we cant just ask to render children
+            modalTitle: t('properties.viewings_history', entity: "#{@client.first_name.capitalize} #{@client.last_name.capitalize}"),
+            #modalHeader: heading(@property),
+            buttonOKLabel: t('properties.ok_button'),
+            buttonCancelLabel: t('properties.cancel_button'),
+            buttonCloseLabel: t('properties.close_button'),
+            soloMode: true,
+            ajaxEnabled: false,
+            isClearable: true,
+            backspaceRemovesValue: true,
+            isSearchable: false,
+            feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
+            clients_url: clients_url,
+            partners_url: "#{users_url}?backend_option=all_",
+            isAdmin: current_user.is_admin?(current_account),
+            i18n: {
+                table: {
+                    client: t('viewings.client'),
+                    user: t('viewings.user'),
+                    date_title: t('date_title'),
+                    add: t("viewings.add_btn"),
+                    actions: t("viewings.actions"),
+                    tooltip_delete: t('tooltips.delete'),
+                    delete_prompt: t('viewings.delete_prompt')
+                },
+            }}) %>
+        </div>
         <%= link_to edit_client_path(@client), class: 'btn btn-secondary btn-sm editable' do %>
-          <i class="fas fa-pen fa-fw"></i>
+          <i class="fas fa-pen colored fa-fw"></i>
           <span class="d-none d-lg-inline">&nbsp;<%= t 'properties.edit.edit_button_alt' %></span>
         <% end %>
+      <% end %>
+      <% if current_user.is_admin?(current_account) %>
         <%= link_to @client, method: :delete, data: {confirm: t('prompt')}, class: 'btn btn-secondary btn-sm editable' do %>
-          <i class="fas fa-trash fa-fw"></i>
+          <i class="fas fa-trash colored fa-fw"></i>
           <span class="d-none d-lg-inline">&nbsp;<%= t 'properties.delete.delete_button' %></span>
         <% end %>
       <% end %>
+
+
     </div>
+
   </div>
 <% end %>
 
@@ -51,14 +93,6 @@
               <a class="btn btn-primary navigation-btn" href="#"><i class="fas fa-th-large fa-fw"></i></a></div>
           </div>
         </div>
-
-
-
-
-
-
-
-
 
 
         <!-- .card-body -->

@@ -46,7 +46,7 @@
             showings_url: showings_url,
             property_id: @property.id,
             child: 'AddRemoveShowings', # Due to react-on-rails restrictions we cant just ask to render children
-            modalTitle: t('properties.viewings_history', property_id: @property.slug.upcase),
+            modalTitle: t('properties.viewings_history', entity: @property.slug.upcase),
             modalHeader: heading(@property),
             buttonOKLabel: t('properties.ok_button'),
             buttonCancelLabel: t('properties.cancel_button'),
@@ -94,7 +94,7 @@
         }, prerender: false) %>
       </div>
 
-      <%# if current_user.is_admin?(current_account) %>
+      <% if current_user.is_admin?(current_account) %>
         <div class="reactstrap-modal-button-x">
           <%= react_component('ModalContainer', props: {
               id: 'modal-window-3',
@@ -108,7 +108,7 @@
               scrollable: false,
               property_id: @property.id,
               child: 'AddRemovePartners', # Due to react-on-rails restrictions we cant just ask to render children
-              modalTitle: t('assignments.title', property_id: @property.slug.upcase),
+              modalTitle: t('assignments.title', entity: @property.slug.upcase),
               modalHeader: heading(@property).html_safe,
               buttonCancelLabel: t('properties.cancel_button'),
               buttonCloseLabel: t('properties.close_button'),
@@ -131,7 +131,7 @@
               }
           }, prerender: false) %>
         </div>
-      <%# end %>
+      <% end %>
 
       <button type="button" class="btn btn-secondary btn-sm printable" data-url="<%= property_url(@property) + '?print=true' %>">
         <i class="fas fa-print colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp<%= t 'properties.print' %></span>

@@ -713,7 +713,7 @@ el:
       heading: "Συνεργάτες"
     flash_user_not_found: "Ο χρήστης δεν βρέθηκε"
   assignments:
-    title: "Ανάθεση του %{property_id}"
+    title: "Ανάθεση του %{entity}"
   properties:
     identifier: "ID"
     title: "Ακίνητα"
@@ -723,7 +723,7 @@ el:
     list: "Κατάλογος"
     favourites: "Αγαπημένα"
     viewings: "Επιδείξεις"
-    viewings_history: "Ιστορικό επιδείξεων %{property_id}"
+    viewings_history: "Ιστορικό επιδείξεων για %{entity}"
     fav_lists: "Λίστες αγαπημένων"
     ok_button: "Προσθήκη"
     cancel_button: "Ακύρωση"

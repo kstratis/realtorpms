@@ -709,7 +709,7 @@ en:
       heading: "Partner list"
     flash_user_not_found: "User was not found"
   assignments:
-    title: "Assigment of %{property_id}"
+    title: "Assigment of %{entity}"
   properties:
     identifier: "ID"
     title: "Properties"
@@ -719,7 +719,7 @@ en:
     list: "Property list"
     favourites: "Favourites"
     viewings: "Showings"
-    viewings_history: "Showings log for %{property_id}"
+    viewings_history: "Showings log for %{entity}"
     fav_lists: "Favourite lists"
     ok_button: "Add"
     cancel_button: "Cancel"

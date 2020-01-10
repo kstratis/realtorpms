@@ -17,7 +17,7 @@ class FlatPickrWrapper extends React.Component {
   renderFlatPickr(){
     const handleChange = this.props.handleChange.bind(this);
     const active_locale = $('#current_locale').data().i18n.locale || 'en';
-    setFlatPickrSettings(active_locale);
+    setFlatPickrSettings(active_locale === 'el' ? 'gr' : active_locale);
 
     window.flatpickr(".datetime", {
       onChange: function(dateObj, dateStr) {

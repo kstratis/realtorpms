@@ -26,7 +26,7 @@ const setFlatPickrSettings = (locale) => {
     // flatpickr.defaultConfig.dateFormat = "l, d M Y";
     window.flatpickr.defaultConfig.dateFormat = 'Z';
     window.flatpickr.defaultConfig.altInput = true;
-    window.flatpickr.defaultConfig.altFormat = locale === 'el' ? 'l, d M Y' : 'M d, Y';
+    window.flatpickr.defaultConfig.altFormat = locale === 'gr' ? 'd M Y' : 'M d, Y';
 };
 
 export { clearValidatableFields, setFlatPickrSettings };

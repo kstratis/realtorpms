@@ -218,7 +218,7 @@ function AddRemoveShowings({
                             entry.canBeDeleted ? null : 'disabled'
                           }`}
                           disabled={!entry.canBeDeleted}>
-                          <i className="fas fa-trash user-delete" />
+                          <i className="fas fa-trash colored" />
                         </button>
                       </td>
                     </tr>
