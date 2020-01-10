@@ -89,7 +89,12 @@ module Accounts
 
     # These are effectively the property landlords.
     def clients
-      search(current_account.clients, {value: 'id', label: %w(first_name last_name)}, nil, 5)
+      if current_user.is_admin?(current_account)
+        search(current_account.clients, {value: 'id', label: %w(first_name last_name)}, nil, 5)
+      else
+        search(current_user.clients, {value: 'id', label: %w(first_name last_name)}, nil, 5)
+      end
+
     end
 
     def inlinesearch
