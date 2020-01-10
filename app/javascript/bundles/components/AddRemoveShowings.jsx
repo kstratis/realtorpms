@@ -5,6 +5,7 @@ import FlatPickrWrapper from './FlatPickrWrapper';
 import Spinner from '../datatables/Spinner';
 import AsyncSelectContainer from './selects/AsyncSelectContainer';
 import { renderHTML } from '../utilities/helpers';
+import usePopovers from '../hooks/usePopovers';
 
 function AddShowing({
   i18n,
@@ -19,11 +20,13 @@ function AddShowing({
   const [client, setClient] = useState({});
   const [partner, setPartner] = useState({});
   const [date, setDate] = useState({});
+  const [comments, setComments] = useState('');
   const [errormsg, setErrormsg] = useState('');
 
   const asyncSetClient = selection => setClient(selection);
   const asyncSetPartner = selection => setPartner(selection);
   const asyncSetDate = selection => setDate(selection);
+  const asyncSetComments = e => setComments(e.target.value);
 
   const handleAddShowing = () => {
     const fieldsValidationArray = isAdmin ? [client, partner, date] : [client, date];
@@ -39,7 +42,7 @@ function AddShowing({
     handleSetRequest({
       url: showings_url,
       method: 'post',
-      payload: { client: client, partner: partner, dateStr: date.dateStr, property_id: property_id },
+      payload: { client: client, partner: partner, dateStr: date.dateStr, comments: comments, property_id: property_id },
       callback: response => handleFormVisibility()
     });
   };
@@ -51,7 +54,9 @@ function AddShowing({
       <div className={'favlist-body'}>
         <div className={'col-12 col-lg-6 offset-lg-3 my-2'}>
           <span className={'d-inline-block mt-2 mb-2'}>
-            <strong>{i18n.form.client}</strong>
+            <label htmlFor={'AsyncSelectContainerClient'}>
+              <strong>{i18n.form.client}</strong>&nbsp;<abbr title={i18n.form.required}>*</abbr>
+            </label>
           </span>
           <AsyncSelectContainer
             id={'AsyncSelectContainerClient'}
@@ -67,7 +72,9 @@ function AddShowing({
         {isAdmin ? (
           <div className={'col-12 col-lg-6 offset-lg-3 my-2'}>
             <span className={'d-inline-block mt-2 mb-2'}>
-              <strong>{i18n.form.partner}</strong>
+              <label htmlFor={'AsyncSelectContainerPartner'}>
+                <strong>{i18n.form.partner}</strong>&nbsp;<abbr title={i18n.form.required}>*</abbr>
+              </label>
             </span>
             <AsyncSelectContainer
               id={'AsyncSelectContainerPartner'}
@@ -83,10 +90,18 @@ function AddShowing({
         ) : null}
         <div className={'col-12 col-lg-6 offset-lg-3 my-2'}>
           <span className={'d-inline-block mt-2 mb-2'}>
-            <strong>{i18n.form.date}</strong>
+            <label htmlFor={'showing-date'}>
+              <strong>{i18n.form.date}</strong>&nbsp;<abbr title={i18n.form.required}>*</abbr>
+            </label>
           </span>
           <FlatPickrWrapper handleChange={asyncSetDate} />
-          <input className={'datetime'} />
+          <input id={'showing-date'} className={'datetime'} />
+        </div>
+        <div className={'col-12 col-lg-6 offset-lg-3 my-2'}>
+          <span className={'d-inline-block mt-2 mb-2'}>
+            <strong>{i18n.form.comments}</strong>
+          </span>
+          <textarea className={'form-control rows-5'} rows="2" placeholder={i18n.form.comments_placeholder} onChange={e => asyncSetComments(e)}/>
         </div>
         <div className={'col-12 col-lg-6 offset-lg-3 my-2'}>
           <small className={'error-msg'}>{errormsg}</small>
@@ -132,6 +147,7 @@ function AddRemoveShowings({
   const { status, data, loading, setData } = useFetch(request, false, didMountForSaveSearchRef);
 
   useTooltips();
+  usePopovers();
 
   const handleSetRequest = request => setRequest(request);
 
@@ -207,6 +223,17 @@ function AddRemoveShowings({
                         </div>
                       </td>
                       <td className={'align-middle action-btns text-center'}>
+                        <button
+                          disabled={!entry.comments}
+                          data-toggle="popover"
+                          data-placement="auto"
+                          data-trigger="hover"
+                          data-container="body"
+                          title={i18n.form.comments}
+                          data-content={entry.comments}
+                          className="btn btn-md btn-icon btn-secondary btn-action">
+                          <i className="fas fa-comment-alt colored" />
+                        </button>
                         <button
                           onClick={() => {
                             if (window.confirm(i18n.table.delete_prompt)) handleDeleteShowing(entry['id']);

@@ -16,7 +16,7 @@ module Accounts
       end
 
       dateStr = DateTime.parse(showing_params[:dateStr])
-      @cpa = current_account.cpas.new(property: @property, client: @client, user: @user, showing_date: dateStr, viewership: true, ownership: false)
+      @cpa = current_account.cpas.new(property: @property, client: @client, user: @user, showing_date: dateStr, viewership: true, ownership: false, comments: showing_params[:comments])
       if @cpa.save
         render json: {status: "OK", message: showings}
       else
@@ -43,6 +43,7 @@ module Accounts
               user: entry.try(:user).try(:full_name) || '—',
               user_url: entry.try(:user) ? user_path(entry.try(:user)) : '',
               date_string: I18n.l(entry.showing_date, format: :custom),
+              comments: entry.comments,
               canBeDeleted: (current_user.is_admin?(current_account) || current_user == entry.try(:user)) ? true : false
           }
         end
@@ -54,7 +55,7 @@ module Accounts
       end
 
       def showing_params
-        params.require(:showing).permit({client: [:label, :value, :__isNew__]}, {partner: [:label, :value]}, :dateStr, :property_id, :showing_id)
+        params.require(:showing).permit({client: [:label, :value, :__isNew__]}, {partner: [:label, :value]}, :dateStr, :comments, :property_id, :showing_id)
       end
 
   end

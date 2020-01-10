@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_05_210129) do
+ActiveRecord::Schema.define(version: 2020_01_10_135444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,6 +118,7 @@ ActiveRecord::Schema.define(version: 2020_01_05_210129) do
     t.bigint "property_id"
     t.bigint "account_id"
     t.datetime "showing_date"
+    t.text "comments"
     t.index ["account_id"], name: "index_cpas_on_account_id"
     t.index ["client_id"], name: "index_cpas_on_client_id"
     t.index ["property_id"], name: "index_cpas_on_property_id"
