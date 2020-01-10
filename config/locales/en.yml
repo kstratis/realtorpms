@@ -902,3 +902,4 @@ en:
     delete_prompt: "Are you sure you want to delete this entry?"
     comments: "Comments"
     comments_placeholder: "i.e. Loved it but thinks it's too expensive"
+    comments_feedback: "Max comments length: 512 characters"

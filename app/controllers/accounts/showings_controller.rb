@@ -36,6 +36,7 @@ module Accounts
         showings = Array.new
         dbdata = current_account.cpas.where(property: @property, viewership: true).includes(:client, :user).order(:showing_date)
         dbdata.each do |entry|
+          acions_permitted = (current_user.is_admin?(current_account) || current_user == entry.try(:user)) ? true : false
           showings << {
               id: entry.id,
               client: (current_user.is_admin?(current_account) || current_user.clients.include?(entry.try(:client))) ? (entry.try(:client).try(:full_name) || '—') : '*****',
@@ -44,7 +45,8 @@ module Accounts
               user_url: entry.try(:user) ? user_path(entry.try(:user)) : '',
               date_string: I18n.l(entry.showing_date, format: :custom),
               comments: entry.comments,
-              canBeDeleted: (current_user.is_admin?(current_account) || current_user == entry.try(:user)) ? true : false
+              canBeDeleted: acions_permitted,
+              canViewComments: acions_permitted
           }
         end
         showings

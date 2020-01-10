@@ -52,8 +52,8 @@ function AddShowing({
       <h2>{i18n.form.title}</h2>
       <hr />
       <div className={'favlist-body'}>
-        <div className={'col-12 col-lg-6 offset-lg-3 my-2'}>
-          <span className={'d-inline-block mt-2 mb-2'}>
+        <div className={'col-12 col-lg-6 offset-lg-3'}>
+          <span className={'d-inline-block mt-2'}>
             <label htmlFor={'AsyncSelectContainerClient'}>
               <strong>{i18n.form.client}</strong>&nbsp;<abbr title={i18n.form.required}>*</abbr>
             </label>
@@ -70,8 +70,8 @@ function AddShowing({
           />
         </div>
         {isAdmin ? (
-          <div className={'col-12 col-lg-6 offset-lg-3 my-2'}>
-            <span className={'d-inline-block mt-2 mb-2'}>
+          <div className={'col-12 col-lg-6 offset-lg-3 my-1'}>
+            <span className={'d-inline-block mt-2'}>
               <label htmlFor={'AsyncSelectContainerPartner'}>
                 <strong>{i18n.form.partner}</strong>&nbsp;<abbr title={i18n.form.required}>*</abbr>
               </label>
@@ -88,8 +88,8 @@ function AddShowing({
             />
           </div>
         ) : null}
-        <div className={'col-12 col-lg-6 offset-lg-3 my-2'}>
-          <span className={'d-inline-block mt-2 mb-2'}>
+        <div className={'col-12 col-lg-6 offset-lg-3 my-1'}>
+          <span className={'d-inline-block mt-2'}>
             <label htmlFor={'showing-date'}>
               <strong>{i18n.form.date}</strong>&nbsp;<abbr title={i18n.form.required}>*</abbr>
             </label>
@@ -97,22 +97,25 @@ function AddShowing({
           <FlatPickrWrapper handleChange={asyncSetDate} />
           <input id={'showing-date'} className={'datetime'} />
         </div>
-        <div className={'col-12 col-lg-6 offset-lg-3 my-2'}>
-          <span className={'d-inline-block mt-2 mb-2'}>
-            <strong>{i18n.form.comments}</strong>
+        <div className={'col-12 col-lg-6 offset-lg-3 my-1'}>
+          <span className={'d-inline-block mt-2'}>
+            <label htmlFor={'comments'}>
+              <strong>{i18n.form.comments}</strong>
+            </label>
           </span>
-          <textarea className={'form-control rows-5'} rows="2" placeholder={i18n.form.comments_placeholder} onChange={e => asyncSetComments(e)}/>
+          <textarea id={'comments'} className={'form-control rows-5'} rows="2" maxLength={"512"} placeholder={i18n.form.comments_placeholder} onChange={e => asyncSetComments(e)}/>
+          <small className="form-text text-muted">{i18n.form.comments_feedback}</small>
         </div>
         <div className={'col-12 col-lg-6 offset-lg-3 my-2'}>
           <small className={'error-msg'}>{errormsg}</small>
         </div>
-        <div className={'col-6 offset-3'}>
-          <div className={'float-left my-3'}>
+        <div className={'col-6 offset-3 mb-1'}>
+          <div className={'float-left mt-1 mb-3'}>
             <button onClick={() => handleFormVisibility()} className={'btn btn-danger'}>
               <i className={'fas fa-arrow-left fa-fw'}></i>&nbsp;{i18n.form.list}
             </button>
           </div>
-          <div className={'float-right my-3'}>
+          <div className={'float-right mt-1 mb-3'}>
             <button onClick={handleAddShowing} className={'btn btn-primary'}>
               {i18n.form.submit}
             </button>
@@ -223,15 +226,15 @@ function AddRemoveShowings({
                         </div>
                       </td>
                       <td className={'align-middle action-btns text-center'}>
+
                         <button
                           disabled={!entry.comments}
                           data-toggle="popover"
                           data-placement="auto"
                           data-trigger="hover"
-                          data-container="body"
                           title={i18n.form.comments}
                           data-content={entry.comments}
-                          className="btn btn-md btn-icon btn-secondary btn-action">
+                          className={`btn btn-md btn-icon btn-secondary btn-action ${!entry.comments ? 'disabled' : ''} ${!entry.canViewComments ? 'invisible' : '' }`}>
                           <i className="fas fa-comment-alt colored" />
                         </button>
                         <button
