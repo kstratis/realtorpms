@@ -701,7 +701,7 @@ button, a {
       color: $pinterest_color;
     }
 
-    .fa-user.colored {
+    .fa-user.colored, .fa-user-check.colored {
       color: $pink;
     }
 
@@ -1133,8 +1133,8 @@ li.page-item {
   padding-top: 15px;
 }
 
-.property-cover-tooltip {
-  cursor: pointer;
+.property-cover-tooltip, .property-cover-popover{
+  cursor: help;
 }
 
 .form-control:disabled.file-emitters, .form-control[readonly].file-emitters {

@@ -25,11 +25,13 @@ class ModalContainer extends React.Component {
     };
     this.toggle = this.toggle.bind(this);
   }
+
   toggle() {
     this.setState(prevState => ({
       modal: !prevState.modal
     }));
   }
+
   render() {
     const SpecificSearch = components[this.props.child];
     return (

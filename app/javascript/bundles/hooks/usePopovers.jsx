@@ -7,9 +7,10 @@ function usePopovers() {
     popoverElements.current = $('[data-toggle="popover"]');
     popoverElements.current.popover();
 
-    return () => {
-      popoverElements.current.popover('dispose');
-    };
+    // In contrast to tooltips, this one seems to have no effects. Maybe popper.js is immune to multiple instantiations
+    // return () => {
+    //   popoverElements.current.popover('dispose');
+    // };
   });
 }
 

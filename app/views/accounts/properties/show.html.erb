@@ -103,7 +103,7 @@
           <%= react_component('ModalContainer', props: {
               id: 'modal-window-3',
               modalSize: 'md',
-              fireButtonLabel: '<i class="fas fa-user colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('partners.title') + '</span>',
+              fireButtonLabel: '<i class="fas fa-user-check colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('activerecord.attributes.property.assignments_title') + '</span>',
               avatar: @property.avatar.attached? ? url_for(@property.avatar.variant(resize: "30%")) : nil,
               hasFeedback: true,
               modalBodyClassNames: 'overflown',
@@ -282,7 +282,7 @@
                         <i class="pr-icon xs notes"></i>
                       </div>
 
-                      <span class="align-middle"><i class="fas fa-user-secret fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_internal_notes' %>"></i>&nbsp; <%= t 'activerecord.attributes.property.notes_title' %> </span>
+                      <span class="align-middle"><span class="property-cover-popover" data-trigger="hover" data-toggle="popover" data-placement="auto" data-content="<%= t 'properties.show.tooltip_internal_notes' %>"><i class="fas fa-lock fa-fw"></i>&nbsp; <%= t 'activerecord.attributes.property.notes_title' %></span> </span>
                     </div>
                   </div><!-- .card-body -->
                   <div class="card-body">
@@ -303,7 +303,7 @@
                       <div class="table-icon-wrapper">
                         <i class="pr-icon xs info"></i>
                       </div>
-                      <span class="align-middle"><i class="fas fa-user-secret fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_owner' %>"></i>&nbsp;<i class="fas fa-key fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_owner_security' %>"></i>&nbsp <%= t 'activerecord.attributes.property.owner_title' %> </span>
+                      <span class="align-middle"><span class="property-cover-popover" data-trigger="hover" data-toggle="popover" data-placement="auto" data-content="<%= t "properties.show.tooltip_owner_#{current_user.role(current_account)}" %>"><i class="fas fa-lock fa-fw"></i>&nbsp; <%= t 'activerecord.attributes.property.owner_title' %></span> </span>
                     </div>
                   </div><!-- .card-body -->
                   <div class="card-body">
@@ -363,7 +363,7 @@
                         <div class="table-icon-wrapper">
                           <i class="pr-icon xs info"></i>
                         </div>
-                        <span class="align-middle"><i class="fas fa-user-secret fa-fw" data-toggle="tooltip" data-placement="top" title="<%= t 'properties.show.tooltip_owner' %>"></i>&nbsp <%= t 'cfields.title' %> </span>&nbsp
+                        <span class="align-middle"><i class="fas fa-lock fa-fw" data-trigger="hover" data-toggle="popover" data-placement="top" data-content='<%= t "properties.show.tooltip_extras" %>'></i>&nbsp <%= t 'cfields.title' %> </span>&nbsp
 
                       </div>
                     </div><!-- .card-body -->
