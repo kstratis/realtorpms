@@ -363,7 +363,7 @@
                         <div class="table-icon-wrapper">
                           <i class="pr-icon xs info"></i>
                         </div>
-                        <span class="align-middle"><i class="fas fa-lock fa-fw" data-trigger="hover" data-toggle="popover" data-placement="top" data-content='<%= t "properties.show.tooltip_extras" %>'></i>&nbsp <%= t 'cfields.title' %> </span>&nbsp
+                        <span class="align-middle"><i class="fas fa-lock fa-fw" data-trigger="hover" data-toggle="popover" data-placement="top" data-content='<%= t "properties.show.tooltip_owner_#{current_user.role(current_account)}" %>'></i>&nbsp <%= t 'cfields.title' %> </span>&nbsp
 
                       </div>
                     </div><!-- .card-body -->
