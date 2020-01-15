@@ -518,8 +518,8 @@ en:
     account:
       title: "Account"
       type:
-        owner: "Owner"
-        administrator: "Administrator"
+        sysadmin: "SysAdmin"
+        admin: "Administrator"
         user: "User"
     messages: "Messages"
     logout: "Logout"
@@ -734,7 +734,7 @@ en:
     popover_map_title: "Map usage"
     popover_map: "Navigate to Google maps and locate the property of your choosing. Click on 'Share' and select the 'Embed a map' tab. Copy and paste the given url the map field above."
     popover_houseowner_title: "Owner management"
-    popover_houseowner_owner: "Pick the property's owner from your account's pool of clients or alternatively start typing the first and last name of a new client to automatically create and bind him/her to the property in one go. You can later edit the client's profile from the clients section."
+    popover_houseowner_admin: "Pick the property's owner from your account's pool of clients or alternatively start typing the first and last name of a new client to automatically create and bind him/her to the property in one go. You can later edit the client's profile from the clients section."
     popover_houseowner_user: "Pick the property's owner from the pool of your assigned clients or alternatively start typing the first and last name of a new client to automatically create and bind him/her to the property in one go. You can later edit the client's profile from the clients section."
     new:
       breadcrumb: "Properties"
@@ -792,8 +792,10 @@ en:
       heading: "Property info"
       properties: "Properties"
       print: "Print property"
-      tooltip_internal_notes: "Internal use only. Won't appear on any ad or client handout. Available to any agent handling the property."
-      tooltip_owner: "Internal use only. Won't appear on any ad or client handout. Available to any agent handling the property."
+      tooltip_internal_notes: "Internal information. Available to any agent handling the property."
+      tooltip_owner_admin: "Internal information. Available to any agent handling the property."
+      tooltip_owner_user: "Internal information. Shows the property owner/s provided that the user has the appropriate permissions."
+      tooltip_extras: "Internal information."
       tooltip_assignments: "Internal use only. Available only to admins."
       tooltip_owner_security: "Information available only to admins or users with explicit permissions"
       tooltip_security: "Information only available to admins"
@@ -908,3 +910,5 @@ en:
     comments: "Comments"
     comments_placeholder: "i.e. Loved it but thinks it's too expensive"
     comments_feedback: "Max comments length: 512 characters"
+    help_popover_admin: "This is the list of showings for the property. You can view and delete any entry."
+    help_popover_user: "This is the list of showings for the property. You can only view and delete entries you have created yourself."

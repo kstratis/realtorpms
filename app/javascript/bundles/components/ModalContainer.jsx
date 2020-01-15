@@ -6,6 +6,7 @@ import RetrieveClientSearch from './RetrieveClientSearch';
 import AddRemoveShowings from './AddRemoveShowings';
 import ViewShowings from './ViewShowings';
 import AddRemovePartners from './AddRemovePartners';
+import { renderHTML } from '../utilities/helpers';
 
 const components = {
   StoreClientSearch: StoreClientSearch,
@@ -13,8 +14,7 @@ const components = {
   AddRemoveFavLists: AddRemoveFavLists,
   AddRemoveShowings: AddRemoveShowings,
   ViewShowings: ViewShowings,
-  AddRemovePartners: AddRemovePartners,
-
+  AddRemovePartners: AddRemovePartners
 };
 
 class ModalContainer extends React.Component {
@@ -55,7 +55,21 @@ class ModalContainer extends React.Component {
           className={this.props.className}
           contentClassName={this.props.modalContentClassNames ? this.props.modalContentClassNames : ''}
           scrollable={this.props.scrollable}>
-          <ModalHeader className={this.props.modalHeaderClassNames ? this.props.modalHeaderClassNames : ''} toggle={this.toggle}>{this.props.modalTitle}</ModalHeader>
+          <ModalHeader
+            className={`${this.props.modalHeaderClassNames ? this.props.modalHeaderClassNames : ''}`}
+            toggle={this.toggle}>
+            <span className={'d-inline-block align-middle'}>{this.props.modalTitle}</span>
+            {console.log(this.props.modalHelpPopover)}
+            {this.props.modalHelpPopover ?
+            <button
+              data-toggle="popover"
+              data-placement="right"
+              data-trigger="hover"
+              data-content={this.props.modalHelpPopover}
+              className={`btn btn-sm btn-icon ml-2 btn-outline-info`}>
+              <i className={`fas fa-info colored`} />
+            </button> : null }
+          </ModalHeader>
           <ModalBody className={this.props.modalBodyClassNames ? this.props.modalBodyClassNames : ''}>
             <SpecificSearch {...this.props} />
           </ModalBody>

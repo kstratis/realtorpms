@@ -8,7 +8,7 @@
     <div class="btn-group btn-group-toggle">
       <div class="reactstrap-modal-button-right">
         <%= react_component('ModalContainer', props: {
-            id: 'modal-window',
+            id: 'favourites',
             scrollable: true,
             fireButtonLabel: '<i class="fas fa-heart colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.favourites') + '</span>',
             avatar: @property.avatar.attached? ? url_for(@property.avatar.variant(resize: "30%")) : nil,
@@ -38,7 +38,7 @@
       </div>
       <div class="reactstrap-modal-button-x">
         <%= react_component('ModalContainer', props: {
-            id: 'modal-window-2',
+            id: 'showings',
             scrollable: true,
             modalSize: 'lg',
             fireButtonLabel: '<i class="fas fa-eye colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.viewings') + '</span>',
@@ -48,6 +48,7 @@
             child: 'AddRemoveShowings', # Due to react-on-rails restrictions we cant just ask to render children
             modalTitle: t('properties.viewings_history', entity: @property.slug.upcase),
             modalHeader: heading(@property),
+            modalHelpPopover: t("viewings.help_popover_#{current_user.role(current_account)}"),
             buttonOKLabel: t('properties.ok_button'),
             buttonCancelLabel: t('properties.cancel_button'),
             buttonCloseLabel: t('properties.close_button'),
@@ -101,7 +102,7 @@
       <% if current_user.is_admin?(current_account) %>
         <div class="reactstrap-modal-button-x">
           <%= react_component('ModalContainer', props: {
-              id: 'modal-window-3',
+              id: 'assignment',
               modalSize: 'md',
               fireButtonLabel: '<i class="fas fa-user-check colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('activerecord.attributes.property.assignments_title') + '</span>',
               avatar: @property.avatar.attached? ? url_for(@property.avatar.variant(resize: "30%")) : nil,
@@ -363,7 +364,8 @@
                         <div class="table-icon-wrapper">
                           <i class="pr-icon xs info"></i>
                         </div>
-                        <span class="align-middle"><i class="fas fa-lock fa-fw" data-trigger="hover" data-toggle="popover" data-placement="top" data-content='<%= t "properties.show.tooltip_owner_#{current_user.role(current_account)}" %>'></i>&nbsp <%= t 'cfields.title' %> </span>&nbsp
+
+                        <span class="align-middle"><span class="property-cover-popover" data-trigger="hover" data-toggle="popover" data-placement="auto" data-content="<%= t 'properties.show.tooltip_extras' %>"><i class="fas fa-lock fa-fw"></i>  <%= t 'cfields.title' %> </span></span>
 
                       </div>
                     </div><!-- .card-body -->

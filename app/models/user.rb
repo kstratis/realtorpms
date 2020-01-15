@@ -98,14 +98,14 @@ class User < ApplicationRecord
     if is_sysadmin?
       'sysadmin'
     elsif is_owner?(account)
-      'owner'
+      'admin'
     else
       'user'
     end
   end
 
   def is_admin?(account)
-    %w(sysadmin owner).include?(role(account))
+    %w(sysadmin admin).include?(role(account))
   end
 
   # Remembers a user in the database for use in persistent sessions.

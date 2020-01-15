@@ -217,7 +217,7 @@ function AddRemoveShowings({
                       </td>
                       <td className={'align-middle text-nowrap'}>
                         <div className={'table-entry'}>
-                          {entry.user_url ? <a href={entry.user_url}>{entry.user}</a> : entry.user}
+                          {entry.user_url &&  entry.isAdmin ? <a href={entry.user_url}>{entry.user}</a> : entry.user}
                         </div>
                       </td>
                       <td className={'align-middle text-nowrap'}>
@@ -234,8 +234,9 @@ function AddRemoveShowings({
                           data-trigger="hover"
                           title={i18n.form.comments}
                           data-content={entry.comments}
+                          // className={`btn btn-md btn-icon btn-secondary btn-action ${!entry.comments ? 'disabled' : ''} ${!entry.canViewComments ? 'invisible' : '' }`}>
                           className={`btn btn-md btn-icon btn-secondary btn-action ${!entry.comments ? 'disabled' : ''} ${!entry.canViewComments ? 'invisible' : '' }`}>
-                          <i className="fas fa-comment-alt colored" />
+                          <i className={`fas ${entry.comments ? 'fa-comment-alt' : 'fa-comment-slash' } colored`} />
                         </button>
                         <button
                           onClick={() => {

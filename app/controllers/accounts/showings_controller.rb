@@ -35,16 +35,19 @@ module Accounts
       def showings
         showings = Array.new
         dbdata = current_account.cpas.where(property: @property, viewership: true).includes(:client, :user).order(:showing_date)
+        is_admin = current_user.is_admin?(current_account)
+        user_clients = current_user.clients
         dbdata.each do |entry|
-          acions_permitted = (current_user.is_admin?(current_account) || current_user == entry.try(:user)) ? true : false
+          acions_permitted = (is_admin || current_user == entry.try(:user)) ? true : false
           showings << {
               id: entry.id,
-              client: (current_user.is_admin?(current_account) || current_user.clients.include?(entry.try(:client))) ? (entry.try(:client).try(:full_name) || '—') : '*****',
-              client_url: (current_user.is_admin?(current_account) || current_user.clients.include?(entry.try(:client))) ? client_path(entry.try(:client)) : '',
+              client: (is_admin || user_clients.include?(entry.try(:client))) ? (entry.try(:client).try(:full_name) || '—') : '*****',
+              client_url: (is_admin || user_clients.include?(entry.try(:client))) ? client_path(entry.try(:client)) : '',
               user: entry.try(:user).try(:full_name) || '—',
               user_url: entry.try(:user) ? user_path(entry.try(:user)) : '',
               date_string: I18n.l(entry.showing_date, format: :custom),
               comments: entry.comments,
+              isAdmin: is_admin,
               canBeDeleted: acions_permitted,
               canViewComments: acions_permitted
           }
