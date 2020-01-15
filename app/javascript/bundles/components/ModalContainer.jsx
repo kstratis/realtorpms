@@ -63,7 +63,7 @@ class ModalContainer extends React.Component {
             {this.props.modalHelpPopover ?
             <button
               data-toggle="popover"
-              data-placement="right"
+              data-placement="auto"
               data-trigger="hover"
               data-content={this.props.modalHelpPopover}
               className={`btn btn-sm btn-icon ml-2 btn-outline-info`}>
