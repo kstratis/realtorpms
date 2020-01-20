@@ -202,6 +202,9 @@ class Property < ApplicationRecord
   # def is_faved_by?(user)
   #   favorites.find_by(user_id: user.id).present?
   # end
+  def dropdown_description
+    "#{slug.upcase} - #{self.category.localname} #{price ? ' - ' + ActionController::Base.helpers.number_to_currency(price).to_s : ''}"
+  end
 
   private
 

@@ -97,11 +97,15 @@ class User < ApplicationRecord
   def role(account)
     if is_sysadmin?
       'sysadmin'
-    elsif is_owner?(account)
+    elsif is_owner?(account) || is_privileged?(account) # or is privileged
       'admin'
     else
       'user'
     end
+  end
+
+  def is_privileged?(account)
+    Membership.find_by(account: account, user: self).privileged
   end
 
   def is_admin?(account)

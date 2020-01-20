@@ -2,12 +2,31 @@ const reactSelectStyles = {
   container: (base, state) => {
     return { ...base };
   },
+  control: (base, state) => ({
+    ...base,
+    '&:hover': {
+      cursor: 'text'
+    }
+  }),
   option: (base, state) => ({
     ...base,
     '&:hover': {
       cursor: 'pointer'
     }
   }),
+  multiValueRemove: (base, state) => ({
+    ...base,
+    '&:hover': {
+      cursor: 'pointer'
+    }
+  }),
+  // menu: (base, state) => ({
+  //   ...base,
+  //   border: '1px solid #37474f',
+  //   '&:hover': {
+  //     cursor: 'pointer'
+  //   }
+  // }),
   dropdownIndicator: (base, state) => ({
     ...base,
     '&:hover': {

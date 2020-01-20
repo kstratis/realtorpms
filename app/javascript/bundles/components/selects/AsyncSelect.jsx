@@ -39,6 +39,8 @@ AsyncSelect.propTypes = {
 
 // Normalizes and merges url GET params coming both from javascript and/or backend
 const constructURL = (origUrl, query) => {
+  console.log(origUrl);
+  console.log(query);
   const url = new URL(origUrl);
   let searchParams = new URLSearchParams(url.search || '');
   url.search = '';
@@ -128,6 +130,7 @@ function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasF
           components={isNotAnimated === true ? '' : animatedComponents}
           autoload={false}
           cache={false}
+          openMenuOnClick={false}
           menuIsOpen={isOpen}
           isClearable={isClearable}
           isDisabled={isDisabled}
@@ -149,6 +152,7 @@ function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasF
           components={isNotAnimated === true ? '' : animatedComponents}
           autoload={false}
           cache={false}
+          openMenuOnClick={false}
           menuIsOpen={isOpen}
           isClearable={isClearable}
           isMulti={isMultiple == null ? true : isMultiple}

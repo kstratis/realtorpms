@@ -132,7 +132,7 @@ en:
         info_title: "Info"
         specs_title: "Details"
         extras_title: "Extras"
-        assignments_title: "Assignments"
+        assignments_title: "Assignment"
         viewings_title: "Viewings"
         extras_not_found: "None found"
         description: "Description"
@@ -628,6 +628,8 @@ en:
     flash_not_found: "Client not found"
     flash_profile_updated: "Client profile uccessfully updated"
     client: "Client"
+    help_popover_admin: "This is the list of properties which have already been shown to the client."
+    help_popover_user: "This is the list of properties which have already been shown to the client. You can only view showings whose units you already have access to."
     new:
       heading: "Add"
       heading_alt: "New client"
@@ -711,6 +713,7 @@ en:
   assignments:
     title: "Assigment of %{entity}"
   properties:
+    property: "Property"
     identifier: "ID"
     title: "Properties"
     add: "Add property"
@@ -903,6 +906,7 @@ en:
     date: "Showing date"
     submit: "Submit"
     list: "List"
+    Property: "Property"
     empty_fields_msg: "All fields with an asterisk (*) are mandatory."
     flash_error: "Error while adding new showing"
     actions: "Actions"

@@ -104,7 +104,7 @@ class InlineSearch extends React.Component {
               <>
                 {this.state.results.map(entry => (
                   <a key={entry.value} href={`/properties/${entry.value}`} className="tt-suggestion tt-selectable">
-                    <strong>{entry.label.toUpperCase()}</strong>
+                    <strong>{entry.label}</strong>
                   </a>
                 ))}
               </>

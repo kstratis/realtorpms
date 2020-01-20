@@ -38,7 +38,8 @@
       </div>
       <div class="reactstrap-modal-button-x">
         <%= react_component('ModalContainer', props: {
-            id: 'showings',
+            id: 'property-showings',
+            originator: 'property',
             scrollable: true,
             modalSize: 'lg',
             fireButtonLabel: '<i class="fas fa-eye colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.viewings') + '</span>',

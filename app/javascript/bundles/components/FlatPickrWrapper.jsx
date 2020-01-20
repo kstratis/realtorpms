@@ -9,11 +9,6 @@ class FlatPickrWrapper extends React.Component {
     this.renderFlatPickr();
   }
 
-  // componentDidUpdate() {
-    // this.renderFlatPickr();
-    // console.log('didupdate fired');
-  // }
-
   renderFlatPickr(){
     const handleChange = this.props.handleChange.bind(this);
     const active_locale = $('#current_locale').data().i18n.locale || 'en';

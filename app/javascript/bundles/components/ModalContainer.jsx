@@ -59,7 +59,6 @@ class ModalContainer extends React.Component {
             className={`${this.props.modalHeaderClassNames ? this.props.modalHeaderClassNames : ''}`}
             toggle={this.toggle}>
             <span className={'d-inline-block align-middle'}>{this.props.modalTitle}</span>
-            {console.log(this.props.modalHelpPopover)}
             {this.props.modalHelpPopover ?
             <button
               data-toggle="popover"

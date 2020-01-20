@@ -7,7 +7,8 @@
       <% if current_user.is_admin?(current_account) || current_user.clients.pluck(:id).include?(@client.id) %>
         <div class="reactstrap-modal-button-right">
         <%= react_component('ModalContainer', props: {
-            id: 'modal-window-client-showings',
+            id: 'client-showings',
+            originator: 'client',
             scrollable: true,
             modalSize: 'lg',
             fireButtonLabel: '<i class="fas fa-eye colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.viewings') + '</span>',
@@ -15,8 +16,9 @@
             avatar: nil,
             showings_url: showings_url,
             client_id: @client.id,
-            child: 'ViewShowings', # Due to react-on-rails restrictions we cant just ask to render children
+            child: 'AddRemoveShowings', # Due to react-on-rails restrictions we can't just ask to render children
             modalTitle: t('properties.viewings_history', entity: "#{@client.first_name.capitalize} #{@client.last_name.capitalize}"),
+            modalHelpPopover: t("clients.help_popover_#{current_user.role(current_account)}"),
             #modalHeader: heading(@property),
             buttonOKLabel: t('properties.ok_button'),
             buttonCancelLabel: t('properties.cancel_button'),
@@ -28,11 +30,13 @@
             isSearchable: false,
             feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
             clients_url: clients_url,
+            properties_url: properties_inlinesearch_url,
             partners_url: "#{users_url}?backend_option=all_",
             isAdmin: current_user.is_admin?(current_account),
             i18n: {
                 table: {
                     client: t('viewings.client'),
+                    property: t('viewings.property'),
                     user: t('viewings.user'),
                     date_title: t('date_title'),
                     add: t("viewings.add_btn"),
@@ -40,6 +44,30 @@
                     tooltip_delete: t('tooltips.delete'),
                     delete_prompt: t('viewings.delete_prompt')
                 },
+                form: {
+                    title: t('viewings.add'),
+                    property: t('properties.property'),
+                    partner: t('users.user'),
+                    date: t('viewings.date'),
+                    submit: t('viewings.submit'),
+                    warning: t('viewings.empty_fields_msg'),
+                    list: t('viewings.list'),
+                    required: t('js.components.select.required'),
+                    comments: t('viewings.comments'),
+                    comments_placeholder: t('viewings.comments_placeholder'),
+                    comments_feedback: t('viewings.comments_feedback')
+                },
+                select: {
+                    placeholder: t('js.components.select.placeholder_title'),
+                    noresults: t('js.components.select.noresults'),
+                    loading: t('js.components.select.loading_html'),
+                    feedback: 'yolo'
+                },
+                no_lists_available: t('js.components.modal.favlists.no_results'),
+                property_cover_alt: t('js.components.modal.favlists.property_cover_alt'),
+                add_list_action: t('js.components.modal.favlists.add_list_action'),
+                loading_alt: t('js.components.modal.favlists.loading_alt'),
+                listname_placeholder: t('js.components.modal.favlists.listname_placeholder')
             }}) %>
         </div>
         <%= link_to edit_client_path(@client), class: 'btn btn-secondary btn-sm editable' do %>
@@ -324,6 +352,7 @@
 
 
       </div>
+      <%= render "accounts/helpers/locale" %>
     </div>
   </div>
 </div>

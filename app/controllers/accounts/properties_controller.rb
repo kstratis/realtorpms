@@ -99,11 +99,10 @@ module Accounts
 
     def inlinesearch
       if current_user.is_admin?(current_account)
-        search(current_account.properties, {value: 'slug', label: %w(slug)}, nil, 5)
+        search(current_account.properties, {value: 'slug', label: %w(dropdown_description)}, nil, 5)
       else
-        search(current_user.properties, {value: 'slug', label: %w(slug)}, nil, 5)
+        search(current_user.properties.where(account: current_account), {value: 'slug', label: %w(dropdown_description)}, nil, 5)
       end
-
     end
 
     # GET /properties/new

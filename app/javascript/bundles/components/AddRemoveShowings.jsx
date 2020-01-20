@@ -12,24 +12,34 @@ function AddShowing({
   clients_url,
   partners_url,
   showings_url,
+  properties_url,
   isAdmin,
   property_id,
+  client_id,
   handleSetRequest,
-  handleFormVisibility
+  handleFormVisibility,
+  originator
 }) {
   const [client, setClient] = useState({});
+  const [property, setProperty] = useState({});
   const [partner, setPartner] = useState({});
   const [date, setDate] = useState({});
   const [comments, setComments] = useState('');
   const [errormsg, setErrormsg] = useState('');
 
   const asyncSetClient = selection => setClient(selection);
+  const asyncSetProperty = selection => setProperty(selection);
   const asyncSetPartner = selection => setPartner(selection);
   const asyncSetDate = selection => setDate(selection);
   const asyncSetComments = e => setComments(e.target.value);
 
-  const handleAddShowing = () => {
-    const fieldsValidationArray = isAdmin ? [client, partner, date] : [client, date];
+  const handleAddShowing = originator => {
+    let fieldsValidationArray;
+    if (originator === 'property') {
+      fieldsValidationArray = isAdmin ? [client, partner, date] : [client, date];
+    } else {
+      fieldsValidationArray = isAdmin ? [property, partner, date] : [property, date];
+    }
     if (
       fieldsValidationArray.some(
         (element, index, array) => Object.keys(element).length === 0 && element.constructor === Object
@@ -42,7 +52,16 @@ function AddShowing({
     handleSetRequest({
       url: showings_url,
       method: 'post',
-      payload: { client: client, partner: partner, dateStr: date.dateStr, comments: comments, property_id: property_id },
+      payload: {
+        client: client,
+        partner: partner,
+        dateStr: date.dateStr,
+        comments: comments,
+        property_id: property_id,
+        property: property,
+        client_id: client_id,
+        originator: originator
+      },
       callback: response => handleFormVisibility()
     });
   };
@@ -55,19 +74,33 @@ function AddShowing({
         <div className={'col-12 col-lg-6 offset-lg-3'}>
           <span className={'d-inline-block mt-2'}>
             <label htmlFor={'AsyncSelectContainerClient'}>
-              <strong>{i18n.form.client}</strong>&nbsp;<abbr title={i18n.form.required}>*</abbr>
+              <strong>{originator === 'property' ? i18n.form.client : i18n.form.property} </strong>&nbsp;
+              <abbr title={i18n.form.required}>*</abbr>
             </label>
           </span>
-          <AsyncSelectContainer
-            id={'AsyncSelectContainerClient'}
-            i18n={i18n}
-            collection_endpoint={{ url: clients_url, action: 'get' }}
-            action_endpoint={{ url: '', action: '', callback: asyncSetClient }}
-            hasFeedback={false}
-            isCreatable={false}
-            isClearable={true}
-            isMultiple={false}
-          />
+          {originator === 'property' ? (
+            <AsyncSelectContainer
+              id={'AsyncSelectContainerClient'}
+              i18n={i18n}
+              collection_endpoint={{ url: clients_url, action: 'get' }}
+              action_endpoint={{ url: '', action: '', callback: asyncSetClient }}
+              hasFeedback={false}
+              isCreatable={false}
+              isClearable={true}
+              isMultiple={false}
+            />
+          ) : (
+            <AsyncSelectContainer
+              id={'AsyncSelectContainerProperty'}
+              i18n={i18n}
+              collection_endpoint={{ url: properties_url, action: 'get' }}
+              action_endpoint={{ url: '', action: '', callback: asyncSetProperty }}
+              hasFeedback={false}
+              isCreatable={false}
+              isClearable={true}
+              isMultiple={false}
+            />
+          )}
         </div>
         {isAdmin ? (
           <div className={'col-12 col-lg-6 offset-lg-3 my-1'}>
@@ -103,7 +136,14 @@ function AddShowing({
               <strong>{i18n.form.comments}</strong>
             </label>
           </span>
-          <textarea id={'comments'} className={'form-control rows-5'} rows="2" maxLength={"512"} placeholder={i18n.form.comments_placeholder} onChange={e => asyncSetComments(e)}/>
+          <textarea
+            id={'comments'}
+            className={'form-control rows-5'}
+            rows="2"
+            maxLength={'512'}
+            placeholder={i18n.form.comments_placeholder}
+            onChange={e => asyncSetComments(e)}
+          />
           <small className="form-text text-muted">{i18n.form.comments_feedback}</small>
         </div>
         <div className={'col-12 col-lg-6 offset-lg-3 my-2'}>
@@ -116,7 +156,7 @@ function AddShowing({
             </button>
           </div>
           <div className={'float-right mt-1 mb-3'}>
-            <button onClick={handleAddShowing} className={'btn btn-primary'}>
+            <button onClick={()=>handleAddShowing(originator)} className={'btn btn-primary'}>
               {i18n.form.submit}
             </button>
           </div>
@@ -131,9 +171,12 @@ function AddRemoveShowings({
   modalHeader,
   clients_url,
   partners_url,
+  properties_url,
   property_id,
+  client_id,
   showings_url,
   isAdmin,
+  originator,
   i18n
 }) {
   const [isFormVisible, setIsFormVisible] = useState(false);
@@ -142,7 +185,7 @@ function AddRemoveShowings({
   };
 
   const [request, setRequest] = useState({
-    url: `${showings_url}.json?property_id=${property_id}`,
+    url: `${showings_url}.json?${originator}_id=${originator === 'property' ? property_id : client_id}&originator=${originator}`,
     method: 'get',
     payload: {}
   });
@@ -171,7 +214,10 @@ function AddRemoveShowings({
           clients_url={clients_url}
           partners_url={partners_url}
           showings_url={showings_url}
+          properties_url={properties_url}
           property_id={property_id}
+          client_id={client_id}
+          originator={originator}
           isAdmin={isAdmin}
           handleSetRequest={handleSetRequest}
           handleFormVisibility={handleFormVisibility}
@@ -187,14 +233,15 @@ function AddRemoveShowings({
             ) : null}
             <h2>{renderHTML(modalHeader)}</h2>
           </div>
-          <hr />
+          {originator === 'property' ? <hr /> : null}
+
           {data.length > 0 ? (
             <div className={'table-responsive'}>
               <table id="usersTable" className={`table table-striped ${loading ? 'reduced-opacity' : ''}`}>
                 <thead>
                   <tr>
                     <th className={'text-nowrap'} scope="col">
-                      {i18n.table.client}
+                      {originator === 'client' ? i18n.table.property : i18n.table.client}
                     </th>
                     <th className={'text-nowrap'} scope="col">
                       {i18n.table.user}
@@ -212,12 +259,12 @@ function AddRemoveShowings({
                     <tr key={entry['id']}>
                       <td className={'align-middle text-nowrap'}>
                         <div className={'table-entry'}>
-                          {entry.client_url ? <a href={entry.client_url}>{entry.client}</a> : entry.client}
+                          {entry.entity_url ? <a href={entry.entity_url}>{entry.entity}</a> : entry.entity}
                         </div>
                       </td>
                       <td className={'align-middle text-nowrap'}>
                         <div className={'table-entry'}>
-                          {entry.user_url &&  entry.isAdmin ? <a href={entry.user_url}>{entry.user}</a> : entry.user}
+                          {entry.user_url && entry.isAdmin ? <a href={entry.user_url}>{entry.user}</a> : entry.user}
                         </div>
                       </td>
                       <td className={'align-middle text-nowrap'}>
@@ -226,7 +273,6 @@ function AddRemoveShowings({
                         </div>
                       </td>
                       <td className={'align-middle action-btns text-center'}>
-
                         <button
                           disabled={!entry.comments}
                           data-toggle="popover"
@@ -235,8 +281,10 @@ function AddRemoveShowings({
                           title={i18n.form.comments}
                           data-content={entry.comments}
                           // className={`btn btn-md btn-icon btn-secondary btn-action ${!entry.comments ? 'disabled' : ''} ${!entry.canViewComments ? 'invisible' : '' }`}>
-                          className={`btn btn-md btn-icon btn-secondary btn-action ${!entry.comments ? 'disabled' : ''} ${!entry.canViewComments ? 'invisible' : '' }`}>
-                          <i className={`fas ${entry.comments ? 'fa-comment-alt' : 'fa-comment-slash' } colored`} />
+                          className={`btn btn-md btn-icon btn-secondary btn-action ${
+                            !entry.comments ? 'disabled' : ''
+                          } ${!entry.canViewComments ? 'invisible' : ''}`}>
+                          <i className={`fas ${entry.comments ? 'fa-comment-alt' : 'fa-comment-slash'} colored`} />
                         </button>
                         <button
                           onClick={() => {
