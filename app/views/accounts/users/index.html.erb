@@ -65,7 +65,9 @@
                 }
             },
             meta: {
-                freeze_link:  toggle_activation_user_url('USERID')
+                freeze_link:  toggle_activation_user_url('USERID'),
+                adminify_link: toggle_adminify_user_url('USERID'),
+                is_account_owner: current_user.is_owner?(current_account) || current_user.is_sysadmin?
             }
           }, prerender: false) %>
       <div class="clearfix"></div>

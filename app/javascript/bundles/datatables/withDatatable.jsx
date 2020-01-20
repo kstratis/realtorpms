@@ -122,6 +122,7 @@ function withDatatable(WrappedComponent) {
       this.handleAssign = this.handleAssign.bind(this);
       this.advanceByTwo = this.advanceByTwo.bind(this);
       this.handleFreezeUser = this.handleFreezeUser.bind(this);
+      this.handleAdminifyUser = this.handleAdminifyUser.bind(this);
       this.handleFav = this.handleFav.bind(this);
       this.handleLocationInput = this.handleLocationInput.bind(this);
       this.handleCategoryInput = this.handleCategoryInput.bind(this);
@@ -530,6 +531,24 @@ function withDatatable(WrappedComponent) {
         );
     }
 
+    handleAdminifyUser(e, adminify_url, user_id) {
+      e.preventDefault();
+      const url = buildUserURL(adminify_url, user_id);
+      axios.patch(url).then(response => {
+        // DEBUG
+        // console.log(response);
+        const index = this.state.dataset.findIndex(element => element.id === user_id);
+        let element = this.state.dataset[index];
+        element['privileged'] = !element['privileged'];
+        let newDataset = [...this.state.dataset];
+        this.setState({
+          dataset: newDataset
+        });
+      });
+
+
+    }
+
     handleFreezeUser(e, freeze_url, user_id) {
       e.preventDefault();
       const url = buildUserURL(freeze_url, user_id);
@@ -784,6 +803,7 @@ function withDatatable(WrappedComponent) {
             advanceByTwo={this.advanceByTwo}
             handleSearchInput={this.handleSearchInput}
             handleFreezeUser={this.handleFreezeUser}
+            handleAdminifyUser={this.handleAdminifyUser}
             i18n={this.props.i18n}
             meta={this.props.meta}
             add_user_link={this.props.initial_payload.add_user_link}

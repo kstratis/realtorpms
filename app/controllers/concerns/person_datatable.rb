@@ -97,6 +97,7 @@ module PersonDatatable
           type: entry.try(:role, current_account) || nil,
           # active: entry.active?,
           active: entry.class == User ? Membership.find_by(account: current_account, user: entry).active : nil,
+          privileged: entry.class == User ? Membership.find_by(account: current_account, user: entry).privileged : nil,
           view_entity_path: polymorphic_path([entry.class.to_s.downcase.to_sym], id: entry.id),
           edit_entity_path: polymorphic_path([entry.class.to_s.downcase.to_sym], id: entry.id, action: :edit),
           telephones: entry.try(:telephones) || '—',

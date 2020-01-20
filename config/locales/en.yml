@@ -423,7 +423,8 @@ en:
         user: "User"
         no_results: "No partners found!"
         tooltip_view_profile: "View profile"
-        tooltip_freeze_profile: "Freeze user"
+        tooltip_freeze_profile: "Freeze user. Once activated, user access is revoked."
+        tooltip_adminify_profile: "Promote user. Once activated, user is granted administrator access."
         tooltip_edit_profile: "Edit user"
         tooltip_delete_profile: "Delete user"
       clients:

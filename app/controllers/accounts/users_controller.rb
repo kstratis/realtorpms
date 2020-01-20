@@ -6,7 +6,7 @@ module Accounts
     before_action :user_self, only: [:edit, :update, :show] # Allows editing only on each user's self
     before_action :owner_exclusive, only: [:new, :create, :destroy, :index]
     before_action :check_page_validity, only: [:index]
-    before_action :find_user!, only: [:delete_avatar, :toggle_activation]
+    before_action :find_user!, only: [:delete_avatar, :toggle_activation, :toggle_adminify]
     after_action :log_action, only: [:create, :update, :destroy]
 
 
@@ -87,6 +87,11 @@ module Accounts
     def toggle_activation
       Membership.find_by(account: current_account, user: @user).toggle!(:active)
       render :json => {:status => "OK", :user_active => Membership.find_by(account: current_account, user: @user).active}
+    end
+
+    def toggle_adminify
+      Membership.find_by(account: current_account, user: @user).toggle!(:privileged)
+      render :json => {:status => "OK", :user_privileged => Membership.find_by(account: current_account, user: @user).privileged}
     end
 
     private

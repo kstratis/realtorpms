@@ -299,7 +299,7 @@
                           </div>
                           <div class="list-group-item-body"><strong><%= property.slug.upcase %></strong>
                             - <%= property.category.localname %>
-                            - <%= Property.human_enum_name(:businesstype, property.businesstype) %></div>
+                            - <%= number_to_currency(property.price) %></div>
                         </a>
                       <% end %>
                     </div>
