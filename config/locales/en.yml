@@ -356,7 +356,8 @@ en:
         placeholder_floors_max: "To: All"
         placeholder_construction_min: "From: Year"
         placeholder_construction_max: "To: Year"
-        assignments_feedback: "Property %{property_id} is only visible to the partners specified above."
+        assignments_feedback: "Property %{property_id} is available to all admins and any partners specified above."
+        assignments_client_feedback: "Client %{client_name} is available to all admins and any partners specified above."
         clientship_feedback: "Client search preferences"
         save_btn: "Save"
         saved_btn: "Saved"
@@ -713,6 +714,7 @@ en:
     flash_user_not_found: "User was not found"
   assignments:
     title: "Assigment of %{entity}"
+    client_title: "Assigment of client %{entity}"
   properties:
     property: "Property"
     identifier: "ID"

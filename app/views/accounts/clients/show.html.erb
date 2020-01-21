@@ -70,6 +70,44 @@
                 listname_placeholder: t('js.components.modal.favlists.listname_placeholder')
             }}) %>
         </div>
+        <% if current_user.is_admin?(current_account) %>
+          <div class="reactstrap-modal-button-x">
+            <%= react_component('ModalContainer', props: {
+              id: 'assignment',
+              modalSize: 'md',
+              fireButtonLabel: '<i class="fas fa-user-check colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('activerecord.attributes.property.assignments_title') + '</span>',
+              avatar: nil,
+              hasFeedback: true,
+              modalBodyClassNames: 'overflown',
+              modalFooterClassNames: 'overflown',
+              modalContentClassNames: 'overflown',
+              scrollable: false,
+              property_id: @client.id,
+              child: 'AddRemovePartners', # Due to react-on-rails restrictions we cant just ask to render children
+              modalTitle: t('assignments.client_title', entity: @client.full_name),
+              modalHeader: nil,
+              buttonCancelLabel: t('properties.cancel_button'),
+              buttonCloseLabel: t('properties.close_button'),
+              soloMode: true,
+              ajaxEnabled: false,
+              isClearable: false,
+              backspaceRemovesValue: true,
+              isSearchable: false,
+              isMultiple: true,
+              partners_url: users_url,
+              partners_action_endpoint: clientships_path(@client),
+              initial_data_url: existing_clientships_path(@client),
+              i18n: {
+                select: {
+                  placeholder: t('js.components.select.placeholder_title'),
+                  noresults: t('js.components.select.noresults'),
+                  loading: t('js.components.select.loading_html'),
+                  feedback: t('js.components.select.assignments_client_feedback', client_name: @client.full_name)
+                }
+              }
+            }, prerender: false) %>
+          </div>
+        <% end %>
         <%= link_to edit_client_path(@client), class: 'btn btn-secondary btn-sm editable' do %>
           <i class="fas fa-pen colored fa-fw"></i>
           <span class="d-none d-lg-inline">&nbsp;<%= t 'properties.edit.edit_button_alt' %></span>
@@ -109,10 +147,6 @@
                 </a>
                 <a href="#offering" class="nav-link custom " data-toggle="tab" role="tab" aria-selected="false"><i class="menu-icon fas fa-home fa-fw"></i><span class="d-none d-md-inline tab-text">&nbsp; <%= t('clients.show.tabs.offering') %></span>
                 </a>
-                <% if current_user.is_admin?(current_account) %>
-                  <a href="#handling" class="nav-link custom " data-toggle="tab" role="tab" aria-selected="false"><i class="menu-icon fas fa-bars fa-fw"></i><span class="d-none d-md-inline tab-text">&nbsp; <%= t('clients.show.tabs.handling') %></span>
-                  </a>
-                <% end %>
               </nav><!-- /.nav -->
             </div>
 
@@ -316,36 +350,6 @@
                 </div>
               </div>
             </div>
-            <% if current_user.is_admin?(current_account) %>
-              <div class="tab-pane fade" id="handling" role="tabpanel" aria-labelledby="subscription-tab">
-
-
-                <div class="col-lg-6 offset-lg-3 col-md-12">
-                  <span class="d-inline-block mb-2 badge badge-success badge-squared"><%= t('activerecord.attributes.client.availability') %></span>
-                  <div class="mb-2">
-                    <!-- The following component can't be animated due to this bug in react-select: https://github.com/JedWatson/react-select/issues/3029 -->
-                    <%= react_component('AsyncSelectContainer', props: {
-                        id: 'MultiAsyncSelectContainer',
-                        collection_endpoint: {url: users_path, action: 'get'},
-                        action_endpoint: {url: clientships_path(@client), action: 'post'},
-                        storedOptions: @client.users.blank? ? nil : @client.users.map { |user| {label: "#{user.first_name} #{user.last_name}", value: user.id} },
-                        hasFeedback: false,
-                        isNotAnimated: true,
-                        i18n: {
-                            select: {
-                                placeholder: t('js.components.select.placeholder_user_assignment'),
-                                noresults: t('js.components.select.noresults'),
-                                loading: t('js.components.select.loading_html'),
-                                feedback: t('js.components.select.assignments_feedback') # not used here
-                            }
-                        }
-                    }, prerender: false) %>
-                  </div>
-                </div>
-
-              </div>
-            <% end %>
-
 
           </div> <!-- /.card-body -->
         </div> <!-- /.card -->

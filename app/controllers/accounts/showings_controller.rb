@@ -51,7 +51,7 @@ module Accounts
           showings << {
               id: entry.id,
               entity: entity == 'client' ? d.fetch(:name).upcase : d.fetch(:name),
-              entity_url: d.fetch(:url),
+              entity_url: d.fetch(:url, nil),
               user: entry.try(:user).try(:full_name) || '—',
               user_url: entry.try(:user) ? user_path(entry.try(:user)) : '',
               date_string: I18n.l(entry.showing_date, format: :custom),
@@ -67,10 +67,10 @@ module Accounts
       def get_entity_data(entry, entity, is_admin)
         if entity == 'property'
           user_clients = current_user.clients.where(account: current_account)
-          (is_admin || user_clients.include?(entry.try(:client))) ? {name: entry.try(:client).try(:full_name) || '—', url: client_path(entry.try(:client))} : '*****'
+          (is_admin || user_clients.include?(entry.try(:client))) ? {name: entry.try(:client).try(:full_name) || '—', url: client_path(entry.try(:client))} : {name: '*****'}
         else
           user_properties = current_user.properties.where(account: current_account)
-          (is_admin || user_properties.include?(entry.try(:property))) ? {name: entry.try(:property).try(:slug) || '—', url: property_path(entry.try(:property))} : '*****'
+          (is_admin || user_properties.include?(entry.try(:property))) ? {name: entry.try(:property).try(:slug) || '—', url: property_path(entry.try(:property))} : {name: '*****'}
         end
       end
 

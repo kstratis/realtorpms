@@ -86,6 +86,7 @@ Rails.application.routes.draw do
 
       # i.e. /clients/25 - assign client to partner
       post '/clientships/client/:cid/users/', to: 'clientships#assign', as: :clientships
+      get '/clientships/client/:cid/users/', to: 'clientships#assigned', as: :existing_clientships
 
       # i.e. /properties - assign search/state to client
       post '/matches/', to: 'matches#assign', as: :matches
