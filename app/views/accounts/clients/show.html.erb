@@ -171,8 +171,8 @@
                   <div class="media-body pl-3 pt-3">
                     <strong><%= @client.full_name %></strong><br/><%= raw content_tag(:i, @client.job).html_safe unless @client.job.blank? %>
                   </div>
-                </div>
-              </div> <!-- /.media -->
+                </div> <!-- /.media -->
+              </div>
 
               <div class="row">
                 <div class="col-lg-6 offset-lg-3 col-md-12">
@@ -234,7 +234,6 @@
 
             </div>
             <div class="tab-pane fade" id="searching" role="tabpanel" aria-labelledby="subscription-tab">
-              <!--              <i class="pr-icon lg no_stored_searches"></i>-->
               <% unless @client.searchprefs.blank? %>
                 <div class="row pt-1 pl-2 d-flex justify-content-center">
                   <div class="btn-group btn-group-toggle">
@@ -317,6 +316,7 @@
                 </div>
               <% end %>
             </div>
+
             <div class="tab-pane fade" id="offering" role="tabpanel" aria-labelledby="integrations-tab">
               <div class="row">
                 <div class="col-lg-6 col-12 offset-lg-3">

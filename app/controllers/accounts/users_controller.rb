@@ -6,7 +6,7 @@ module Accounts
     before_action :user_self, only: [:edit, :update, :show] # Allows editing only on each user's self
     before_action :owner_exclusive, only: [:new, :create, :destroy, :index]
     before_action :check_page_validity, only: [:index]
-    before_action :find_user!, only: [:delete_avatar, :toggle_activation, :toggle_adminify]
+    before_action :find_user!, only: [:delete_avatar, :toggle_activation, :toggle_adminify, :show]
     after_action :log_action, only: [:create, :update, :destroy]
 
 
@@ -76,7 +76,11 @@ module Accounts
     end
 
     def show
-      # @user = current_account.users.find(params[:id]) # Automatically converts parameters from string to integer
+      if @user.is_admin?(current_account)
+        filter_properties(current_account.properties.includes(:location), {page: params[:page]})
+      else
+        filter_properties(@user.properties.includes(:location), {page: params[:page]})
+      end
     end
 
     def delete_avatar

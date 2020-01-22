@@ -715,6 +715,7 @@ en:
   assignments:
     title: "Assigment of %{entity}"
     client_title: "Assigment of client %{entity}"
+    assigned: "Assigned"
   properties:
     property: "Property"
     identifier: "ID"

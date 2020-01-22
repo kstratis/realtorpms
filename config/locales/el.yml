@@ -719,6 +719,7 @@ el:
   assignments:
     title: "Ανάθεση του %{entity}"
     client_title: "Ανάθεση του πελάτη %{entity}"
+    assigned: "Ανατεθειμένα"
   properties:
     property: "Ακίνητο"
     identifier: "ID"

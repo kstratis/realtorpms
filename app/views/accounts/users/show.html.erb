@@ -21,103 +21,174 @@
 <div class="page-container">
   <div class="container">
     <div class="app-container">
-    <!-- .card -->
-    <div class="card card-fluid">
+      <!-- .card -->
+      <div class="card card-fluid">
 
-      <%= render partial: 'shared/card_header/header', locals: {title: @user.full_name, btn_text: t('properties.show.back'), btn_link: :back}  %>
-      <!-- .card-body -->
-      <div class="card-body">
-        <!-- .media -->
-        <div class="col-lg-6 offset-lg-3 col-md-12">
-          <div class="media mb-3">
-            <div class="user-avatar user-avatar-xl fileinput-button">
-              <%= render_avatar(@user, 'tile-xl', "avatar_preview") %>
-            </div><!-- /avatar -->
-            <div class="media-body pl-3 pt-3">
-              <strong><%= @user.full_name %></strong><br>
-              <span><%= @user.age ? @user.age : '—' %></span>
-            </div>
-          </div>
-        </div> <!-- /.media -->
+        <%#= render partial: 'shared/card_header/header', locals: {title: @user.full_name, btn_text: t('properties.show.back'), btn_link: :back}  %>
 
-        <div class="col-lg-6 offset-lg-3 col-md-12">
-          <div class="metric-row">
 
-            <div class="col-6 col-sm-6 col-lg-6">
-
-              <!-- metric column -->
-              <div class="card-metric">
-                <div class="metric">
-                  <p class="metric-value h3">
-                    <sub><i class="fa fa-tasks fa-lg fa-fw"></i></sub> <span class="value"><%= @user.assignments.count %></span>
-<!--                    <sub><i class="pr-icon cs account-switch"></i></sub> <span class="value"><%#= @user.assignments.count %></span>-->
-                  </p>
-                  <h2 class="metric-label"><%= t('users.show.assignments') %></h2>
-                </div>
-              </div><!-- /.metric -->
-            </div>
-
-            <div class="col-6 col-sm-6 col-lg-6">
-
-              <div class="card-metric">
-                <div class="metric">
-                  <p class="metric-value h3">
-                    <sub><i class="fa fa-check fa-lg fa-fw"></i></sub> <span class="value">N/A</span>
-                  </p>
-                  <h2 class="metric-label"><%= t('users.show.processed') %></h2>
-                </div>
-              </div><!-- /.metric -->
-
-            </div>
-
-          </div>
-        </div>
-
-        <div class="col-lg-6 offset-lg-3 col-md-12">
-          <div class="table-responsive">
-            <!-- .table -->
-            <table class="table table-striped">
-              <tbody>
-              <tr>
-                <td><%= t('activerecord.attributes.user.first_name') %></td>
-                <td><%= @user.first_name %></td>
-              </tr>
-              <tr>
-                <td><%= t('activerecord.attributes.user.last_name') %></td>
-                <td><%= @user.last_name %></td>
-              </tr>
-              <tr>
-                <td><%= t('activerecord.attributes.user.age') %></td>
-                <td><%= @user.age.blank? ? '—' : @user.age %></td>
-              </tr>
-              <tr>
-                <td><%= t('activerecord.attributes.user.email') %></td>
-                <td><%= @user.email %></td>
-              </tr>
-              <tr>
-                <td><%= t('activerecord.attributes.user.phone1') %></td>
-                <td><%= @user.phone1 ? @user.phone1 : '—' %></td>
-              </tr>
-              <tr>
-                <td><%= t('activerecord.attributes.user.registered') %></td>
-                <!-- +l+ function accounts for the localized timedate -->
-                <td><%= l(@user.created_at, format: :custom) %></td>
-              </tr>
-
-              <%# @user.model_type.fields.each do |field| %>
-              <% @user.model_types.find_by(account: current_account).fields.each do |field| %>
-                <%= render "accounts/cfields/#{field.field_type}_read", cfield_label: field.name, cfield_data: @user.preferences[field.slug] %>
+        <div class="card-header card-header-custom">
+          <div class="row align-items-center">
+            <div class="col-lg-2 d-none d-lg-block card-start-heading">
+              <%= link_to users_path, class: "btn btn-primary btn-warning navigation-btn" do %>
+                <i class="fas fa-chevron-left fa-fw"></i><%= t('properties.show.back') %>
               <% end %>
+            </div>
+            <div class="col-lg-8 text-center flex-nowrap">
+              <nav class="nav nav-tabs nav-justified border-0 d-flex justify-content-center text-nowrap ">
+                <a href="#info" class="nav-link custom active text-nowrap" data-toggle="tab" role="tab" aria-selected="true"><i class="menu-icon fas fa-user fa-fw"></i><span class="d-none d-md-inline tab-text">&nbsp; <%= t('clients.show.tabs.info') %></span></a>
+                <a href="#assignments" class="nav-link custom " data-toggle="tab" role="tab" aria-selected="false"><i class="menu-icon fas fa-search fa-fw"></i><span class="d-none d-md-inline tab-text">&nbsp; <%= t('assignments.assigned') %></span>
+                </a>
+                <!--              <a href="#offering" class="nav-link custom " data-toggle="tab" role="tab" aria-selected="false"><i class="menu-icon fas fa-home fa-fw"></i><span class="d-none d-md-inline tab-text">&nbsp; <%#= t('clients.show.tabs.offering') %></span>-->
+                <!--              </a>-->
+              </nav><!-- /.nav -->
+            </div>
 
-              </tbody>
-            </table>
+
+            <div class="col-lg-2 card-end-heading">
+              <a class="btn btn-primary navigation-btn" href="#"><i class="fas fa-th-large fa-fw"></i></a></div>
           </div>
         </div>
 
 
+        <!-- .card-body -->
+        <div class="card-body">
+          <div class="tab-content p-0" id="ClientContent">
+            <!-- Tab 1 - Client info-->
+            <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
 
-      </div> <!-- /.card-body -->
-    </div> <!-- /.card -->
-  </div>
+
+              <!-- .media -->
+              <div class="col-lg-6 offset-lg-3 col-md-12">
+                <div class="media mb-3">
+                  <div class="user-avatar user-avatar-xl fileinput-button">
+                    <%= render_avatar(@user, 'tile-xl', "avatar_preview") %>
+                  </div><!-- /avatar -->
+                  <div class="media-body pl-3 pt-3">
+                    <strong><%= @user.full_name %></strong>
+                    <% if @user.is_admin?(current_account) %> &nbsp;&nbsp;<span data-toggle="tooltip" data-position="auto" title="<%= t('accounts.account_owner') %>"><i class="fas fa-angle-double-up blue"></i></span><% end %><br>
+                    <span><%= @user.age ? @user.age : '—' %></span>
+
+                  </div>
+                </div>
+              </div> <!-- /.media -->
+
+              <div class="row">
+                <div class="col-lg-6 offset-lg-3 col-md-12">
+                  <div class="metric-row">
+
+                    <div class="col-6 col-sm-6 col-lg-6">
+
+                      <!-- metric column -->
+                      <div class="card-metric">
+                        <div class="metric">
+                          <p class="metric-value h3">
+<!--                            ∞-->
+                            <sub><i class="fa fa-tasks fa-lg fa-fw"></i></sub>
+                            <% if @user.is_admin?(current_account) %>
+                              <span class="value"><i class="fas fa-infinity"></i></span>
+                              <% else %>
+                              <span class="value"><%= @user.assignments.count %></span>
+                              <% end %>
+
+                            <!--                    <sub><i class="pr-icon cs account-switch"></i></sub> <span class="value"><%#= @user.assignments.count %></span>-->
+                          </p>
+                          <h2 class="metric-label"><%= t('users.show.assignments') %></h2>
+                        </div>
+                      </div><!-- /.metric -->
+                    </div>
+
+                    <div class="col-6 col-sm-6 col-lg-6">
+
+                      <div class="card-metric">
+                        <div class="metric">
+                          <p class="metric-value h3">
+                            <sub><i class="fa fa-check fa-lg fa-fw"></i></sub> <span class="value">N/A</span>
+                          </p>
+                          <h2 class="metric-label"><%= t('users.show.processed') %></h2>
+                        </div>
+                      </div><!-- /.metric -->
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 offset-lg-3 col-md-12">
+                <div class="table-responsive">
+                  <!-- .table -->
+                  <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                      <td><%= t('activerecord.attributes.user.first_name') %></td>
+                      <td><%= @user.first_name %></td>
+                    </tr>
+                    <tr>
+                      <td><%= t('activerecord.attributes.user.last_name') %></td>
+                      <td><%= @user.last_name %></td>
+                    </tr>
+                    <tr>
+                      <td><%= t('activerecord.attributes.user.age') %></td>
+                      <td><%= @user.age.blank? ? '—' : @user.age %></td>
+                    </tr>
+                    <tr>
+                      <td><%= t('activerecord.attributes.user.email') %></td>
+                      <td><%= @user.email %></td>
+                    </tr>
+                    <tr>
+                      <td><%= t('activerecord.attributes.user.phone1') %></td>
+                      <td><%= @user.phone1 ? @user.phone1 : '—' %></td>
+                    </tr>
+                    <tr>
+                      <td><%= t('activerecord.attributes.user.registered') %></td>
+                      <!-- +l+ function accounts for the localized timedate -->
+                      <td><%= l(@user.created_at, format: :custom) %></td>
+                    </tr>
+
+                    <%# @user.model_type.fields.each do |field| %>
+                    <% @user.model_types.find_by(account: current_account).fields.each do |field| %>
+                      <%= render "accounts/cfields/#{field.field_type}_read", cfield_label: field.name, cfield_data: @user.preferences[field.slug] %>
+                    <% end %>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="assignments" role="tabpanel" aria-labelledby="subscription-tab">
+              <%= react_component('ClientPrefsListWithDatatable', props: {
+                  initial_payload: {
+                      dataset_wrapper: @propertieslist,
+                      results_per_page: @results_per_page,
+                      total_entries: @total_entries,
+                      current_page: @current_page,
+                      initial_search: @initial_search,
+                      initial_sorting: @initial_sorting,
+                      initial_ordering: @initial_ordering,
+                      locations_endpoint: properties_locations_url,
+                      clients_endpoint: users_url,
+                      client_endpoint: user_path(@user),
+                      assignmentships_endpoint: matches_url,
+                      properties_path: properties_path,
+                      hasFeedback: false,
+                      object_type: 'clientprefslist'
+                  },
+                  i18n: {
+                      no_results: t('js.components.select.noresults'),
+                  }
+              }, prerender: false) %>
+
+
+            </div>
+
+
+
+
+
+          </div>
+        </div> <!-- /.card-body -->
+      </div> <!-- /.card -->
+    </div>
   </div>
 </div>
