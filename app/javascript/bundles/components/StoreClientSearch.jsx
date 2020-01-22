@@ -11,6 +11,8 @@ import {
   sizeFilterOptions
 } from '../utilities/helpers';
 import AsyncSelect from './selects/AsyncSelect';
+import useTooltips from '../hooks/useTooltips';
+import usePopovers from '../hooks/usePopovers';
 
 function StoreClientSearch({
   child,
@@ -57,6 +59,9 @@ function StoreClientSearch({
     // console.log(selection);
     setSelectedOption(selection);
   };
+
+  useTooltips();
+  usePopovers();
 
   return (
     <div className="favlist-container mt-3">
@@ -111,9 +116,12 @@ function StoreClientSearch({
                 hasFeedback={false}
               />
               <div className={'text-center'}>
-                <small className={'text-muted mt-1'}>{i18n.select.clientship_feedback}</small>
+                <small className={'text-muted mt-1'}>{i18n.select.clientship_feedback}</small>&nbsp;&nbsp;<span
+                className="property-cover-popover" data-toggle="popover" data-placement="auto" data-trigger="hover"
+                data-content={i18n.popover_body} title={i18n.popover_title}><i className="fas fa-info-circle"></i></span>
               </div>
             </div>
+
             <div className={'col-lg-4 col-sm-12 text-center'}>
               <button
                 className={'btn btn-primary'}

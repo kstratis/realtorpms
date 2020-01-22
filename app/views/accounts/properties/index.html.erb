@@ -167,7 +167,9 @@
                       option2: t('js.datatables.filters.type.rent'),
                   }
               },
-              favourites_tooltip: t('js.properties_favourites_tooltip')
+              favourites_tooltip: t('js.properties_favourites_tooltip'),
+              popover_title: t('properties.popover_client_title'),
+              popover_body: t('properties.popover_client_' + current_user.role(current_account)),
           }
       }, prerender: false) %>
     </div>

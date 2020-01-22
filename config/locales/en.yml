@@ -740,8 +740,11 @@ en:
     popover_map_title: "Map usage"
     popover_map: "Navigate to Google maps and locate the property of your choosing. Click on 'Share' and select the 'Embed a map' tab. Copy and paste the given url the map field above."
     popover_houseowner_title: "Owner management"
+    popover_client_title: "Client management"
     popover_houseowner_admin: "Pick the property's owner from your account's pool of clients or alternatively start typing the first and last name of a new client to automatically create and bind him/her to the property in one go. You can later edit the client's profile from the clients section."
     popover_houseowner_user: "Pick the property's owner from the pool of your assigned clients or alternatively start typing the first and last name of a new client to automatically create and bind him/her to the property in one go. You can later edit the client's profile from the clients section."
+    popover_client_admin: "Choose a client from your account's pool of clients or alternatively start typing the first and last name of a new client to automatically create one. You can edit the client's full profile from the clients section after saving this search."
+    popover_client_user: "Choose a client from the pool of your assigned clients or alternatively start typing the first and last name of a new client to automatically create one. You can edit the client's full profile from the clients section after saving this search."
     new:
       breadcrumb: "Properties"
       heading: "Add new property"

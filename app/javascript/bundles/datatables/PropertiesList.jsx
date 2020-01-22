@@ -301,6 +301,7 @@ const PropertiesList = ({
                         isClearable={true}
                         backspaceRemovesValue={true}
                         isSearchable={true}
+                        title={i18n.search_save_title}
                         i18n={i18n}
                         buttonDisabled={!hasParams()}
                         clientsEndpoint={clients_endpoint}
