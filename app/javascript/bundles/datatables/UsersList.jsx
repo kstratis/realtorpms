@@ -290,17 +290,17 @@ const UsersList = ({
                               {meta['is_account_owner'] ? (
                                 <a
                                   data-toggle="tooltip"
-                                  data-position="top"
+                                  data-placement="auto"
                                   onClick={e => handleAdminifyUser(e, meta['adminify_link'], entry['id'])}
                                   title={i18n['datatable']['tooltip_adminify_profile']}
                                   className={`btn btn-md btn-icon btn-secondary btn-action ${entry['privileged'] ? 'active' : ''}`}
                                   href={''}>
                                   <i className={`fas fa-angle-double-up ${entry['privileged'] ? 'blue' : ''}`} />
                                 </a>
-                              ) : null}
+                              ) : ''}
                               <a
                                 data-toggle="tooltip"
-                                data-position="top"
+                                data-placement="auto"
                                 onClick={e => handleFreezeUser(e, meta['freeze_link'], entry['id'])}
                                 title={i18n['datatable']['tooltip_freeze_profile']}
                                 className={`btn btn-md btn-icon btn-secondary btn-action ${
@@ -311,7 +311,7 @@ const UsersList = ({
                               </a>
                               <a
                                 data-toggle="tooltip"
-                                data-position="top"
+                                data-position="auto"
                                 title={i18n['datatable']['tooltip_edit_profile']}
                                 className="btn btn-md btn-icon btn-secondary btn-action"
                                 href={entry['edit_entity_path']}>
@@ -319,7 +319,7 @@ const UsersList = ({
                               </a>
                               <a
                                 data-toggle="tooltip"
-                                data-position="top"
+                                data-position="auto"
                                 title={i18n['datatable']['tooltip_delete_profile']}
                                 className="btn btn-md btn-icon btn-secondary btn-action"
                                 href={entry['view_entity_path']}

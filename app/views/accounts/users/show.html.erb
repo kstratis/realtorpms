@@ -36,8 +36,8 @@
             </div>
             <div class="col-lg-8 text-center flex-nowrap">
               <nav class="nav nav-tabs nav-justified border-0 d-flex justify-content-center text-nowrap ">
-                <a href="#info" class="nav-link custom active text-nowrap" data-toggle="tab" role="tab" aria-selected="true"><i class="menu-icon fas fa-user fa-fw"></i><span class="d-none d-md-inline tab-text">&nbsp; <%= t('clients.show.tabs.info') %></span></a>
-                <a href="#assignments" class="nav-link custom " data-toggle="tab" role="tab" aria-selected="false"><i class="menu-icon fas fa-search fa-fw"></i><span class="d-none d-md-inline tab-text">&nbsp; <%= t('assignments.assigned') %></span>
+                <a href="#info" class="nav-link custom active text-nowrap" data-toggle="tab" role="tab" aria-selected="true"><i class="menu-icon far fa-address-card fa-fw"></i><span class="d-none d-md-inline tab-text">&nbsp; <%= t('clients.show.tabs.info') %></span></a>
+                <a href="#assignments" class="nav-link custom " data-toggle="tab" role="tab" aria-selected="false"><i class="menu-icon fas fa-home fa-fw"></i><span class="d-none d-md-inline tab-text">&nbsp; <%= t('assignments.assigned') %></span>
                 </a>
                 <!--              <a href="#offering" class="nav-link custom " data-toggle="tab" role="tab" aria-selected="false"><i class="menu-icon fas fa-home fa-fw"></i><span class="d-none d-md-inline tab-text">&nbsp; <%#= t('clients.show.tabs.offering') %></span>-->
                 <!--              </a>-->
@@ -66,7 +66,7 @@
                   </div><!-- /avatar -->
                   <div class="media-body pl-3 pt-3">
                     <strong><%= @user.full_name %></strong>
-                    <% if @user.is_admin?(current_account) %> &nbsp;&nbsp;<span data-toggle="tooltip" data-position="auto" title="<%= t('accounts.account_owner') %>"><i class="fas fa-angle-double-up blue"></i></span><% end %><br>
+                    <% if @is_admin %> &nbsp;&nbsp;<span data-toggle="tooltip" data-position="auto" title="<%= t('accounts.account_owner') %>"><i class="fas fa-angle-double-up blue"></i></span><% end %><br>
                     <span><%= @user.age ? @user.age : '—' %></span>
 
                   </div>
@@ -85,7 +85,7 @@
                           <p class="metric-value h3">
 <!--                            ∞-->
                             <sub><i class="fa fa-tasks fa-lg fa-fw"></i></sub>
-                            <% if @user.is_admin?(current_account) %>
+                            <% if @is_admin %>
                               <span class="value"><i class="fas fa-infinity"></i></span>
                               <% else %>
                               <span class="value"><%= @user.assignments.count %></span>
