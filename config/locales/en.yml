@@ -687,6 +687,7 @@ en:
     new:
       heading: "Add"
       heading_alt: "New partner"
+      heading_alt_short: "New partner"
       profile: "Add partner"
       new_button: "Add"
       feedback: "Type your partner's email"

@@ -166,65 +166,67 @@
               <div class="dropdown-sheets">
                 <!-- .dropdown-sheet-item -->
                 <div class="dropdown-sheet-item">
-                  <a href="#" class="tile-wrapper">
+                  <a href="<%= new_property_path %>" class="tile-wrapper">
                           <span class="tile tile-lg bg-teal">
                             <i class="fas fa-home"> </i>
 
                           </span>
-                    <span class="tile-peek"><%= t 'sidebar.properties' %></span>
+                    <span class="tile-peek"><%= t 'properties.new.heading_alt' %></span>
                   </a>
                 </div>
                 <!-- /.dropdown-sheet-item -->
                 <!-- .dropdown-sheet-item -->
+                <% if current_user.is_admin?(current_account) %>
                 <div class="dropdown-sheet-item">
-                  <a href="#" class="tile-wrapper">
+                  <a href="<%= new_user_path %>" class="tile-wrapper">
                           <span class="tile tile-lg bg-indigo">
                             <i class="fas fa-user-tie"> </i>
                           </span>
-                    <span class="tile-peek"><%= t 'sidebar.partners' %></span>
+                    <span class="tile-peek"><%= t 'users.new.heading_alt_short' %></span>
                   </a>
                 </div>
+                  <% end %>
                 <!-- /.dropdown-sheet-item -->
                 <!-- .dropdown-sheet-item -->
                 <div class="dropdown-sheet-item">
-                  <a href="#" class="tile-wrapper">
+                  <a href="<%= new_client_path %>" class="tile-wrapper">
                           <span class="tile tile-lg bg-pink">
                             <i class="fas fa-users"> </i>
                           </span>
-                    <span class="tile-peek"><%= t 'sidebar.clients' %></span>
+                    <span class="tile-peek"><%= t 'clients.new.heading_alt' %></span>
                   </a>
                 </div>
                 <!-- /.dropdown-sheet-item -->
                 <!-- .dropdown-sheet-item -->
-                <div class="dropdown-sheet-item">
-                  <a href="#" class="tile-wrapper">
-                          <span class="tile tile-lg bg-yellow">
-                            <i class="fas fa-tasks"> </i>
-                          </span>
-                    <span class="tile-peek"><%= t 'sidebar.assignments' %></span>
-                  </a>
-                </div>
+<!--                <div class="dropdown-sheet-item">-->
+<!--                  <a href="#" class="tile-wrapper">-->
+<!--                          <span class="tile tile-lg bg-yellow">-->
+<!--                            <i class="fas fa-tasks"> </i>-->
+<!--                          </span>-->
+<!--                    <span class="tile-peek"><%#= t 'sidebar.assignments' %></span>-->
+<!--                  </a>-->
+<!--                </div>-->
                 <!-- /.dropdown-sheet-item -->
                 <!-- .dropdown-sheet-item -->
-                <div class="dropdown-sheet-item">
-                  <a href="#" class="tile-wrapper">
-                          <span class="tile tile-lg bg-cyan">
-                            <i class="fab fa-connectdevelop"></i>
-                          </span>
-                    <span class="tile-peek"><%= t 'sidebar.mappings' %></span>
-                  </a>
-                </div>
-                <!-- /.dropdown-sheet-item -->
-                <!-- .dropdown-sheet-item -->
-                <div class="dropdown-sheet-item">
-                  <a href="#" class="tile-wrapper">
-                          <span class="tile tile-lg bg-cyan">
+<!--                <div class="dropdown-sheet-item">-->
+<!--                  <a href="#" class="tile-wrapper">-->
+<!--                          <span class="tile tile-lg bg-cyan">-->
 <!--                            <i class="fab fa-connectdevelop"></i>-->
-                            <span class="icon-highway"></span>
-                          </span>
-                    <span class="tile-peek"><%= t 'sidebar.integrations' %></span>
-                  </a>
-                </div>
+<!--                          </span>-->
+<!--                    <span class="tile-peek"><%#= t 'sidebar.mappings' %></span>-->
+<!--                  </a>-->
+<!--                </div>-->
+                <!-- /.dropdown-sheet-item -->
+                <!-- .dropdown-sheet-item -->
+<!--                <div class="dropdown-sheet-item">-->
+<!--                  <a href="#" class="tile-wrapper">-->
+<!--                          <span class="tile tile-lg bg-cyan">-->
+<!--                            <i class="fab fa-connectdevelop"></i>-->
+<!--                            <span class="icon-highway"></span>-->
+<!--                          </span>-->
+<!--                    <span class="tile-peek"><%#= t 'sidebar.integrations' %></span>-->
+<!--                  </a>-->
+<!--                </div>-->
                 <!-- /.dropdown-sheet-item -->
               </div>
               <!-- .dropdown-sheets -->
