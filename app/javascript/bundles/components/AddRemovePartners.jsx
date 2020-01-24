@@ -10,6 +10,7 @@ function AddRemovePartners({
   initial_data_url,
   hasFeedback,
   isMultiple,
+                             openMenuOnClick,
   modalHeader,
   avatar,
   i18n
@@ -46,6 +47,7 @@ function AddRemovePartners({
           collection_endpoint={{ url: partners_url, action: 'get' }}
           action_endpoint={{ url: partners_action_endpoint, action: 'post' }}
           storedOptions={data}
+          openMenuOnClick={openMenuOnClick}
           hasFeedback={hasFeedback}
           isMultiple={isMultiple}
         />

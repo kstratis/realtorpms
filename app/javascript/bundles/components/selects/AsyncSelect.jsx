@@ -5,6 +5,7 @@ import makeAnimated from 'react-select/animated';
 import { debounce, renderHTML, safelyExecCallback } from '../../utilities/helpers';
 import { default as ASelect } from 'react-select/async';
 import { default as ACSelect } from 'react-select/async-creatable';
+import AsyncPaginate from 'react-select-async-paginate';
 import { reactSelectStyles } from '../../styles/componentStyles';
 import PropTypes from 'prop-types';
 import URLSearchParams from '@ungap/url-search-params';
@@ -49,7 +50,7 @@ const constructURL = (origUrl, query) => {
   return `${url.toString()}.json?${searchParams.toString()}`;
 };
 
-function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasFeedback, isCreatable, isClearable, isDisabled, isNotAnimated, isMultiple, i18n }) {
+function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasFeedback, isCreatable, isClearable, isDisabled, openMenuOnClick, isNotAnimated, isMultiple, i18n }) {
   // custom hook to open/close modal
   const { isOpen, setIsOpen } = useModalToggle();
   // this is the request for the pool of options - won't run on mount
@@ -74,6 +75,8 @@ function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasF
   // In this case we do need internal state
   const { data, setData } = useFetch(selectionRequest, false, didMountForAssignmentsRef);
 
+  const [inputValue, setInputValue] = useState('');
+
   // Only on mount load the existing data
   useEffect(() => {
     setData(storedOptions);
@@ -95,7 +98,22 @@ function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasF
     });
   };
 
-  // `callback` is a react-select native function which is used to build the dropdown options. It is passed over to
+  const onInputChange = (query, {action}) => {
+    console.log(action);
+    // if (query) {
+    //   setInputValue(query);
+    // }
+    // return inputValue;
+    if (action !== "set-value") {
+    // if (action.action !== "input-blur" && action.action !== "menu-close") {
+        setInputValue(query);
+        return query;
+
+    }
+    return inputValue;
+  };
+
+  // `callback` is a react-select native function which is used to  build the dropdown options. It is passed over to
   // our useFetch custom hook so that we can manipulate it and call it whenever we see fit.
   const loadAsyncOptions = (query, callback) => {
     if (!query) {
@@ -130,7 +148,7 @@ function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasF
           components={isNotAnimated === true ? '' : animatedComponents}
           autoload={false}
           cache={false}
-          openMenuOnClick={false}
+          openMenuOnClick={!!openMenuOnClick}
           menuIsOpen={isOpen}
           isClearable={isClearable}
           isDisabled={isDisabled}
@@ -152,7 +170,8 @@ function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasF
           components={isNotAnimated === true ? '' : animatedComponents}
           autoload={false}
           cache={false}
-          openMenuOnClick={false}
+          cacheOptions={false}
+          openMenuOnClick={!!openMenuOnClick}
           menuIsOpen={isOpen}
           isClearable={isClearable}
           isMulti={isMultiple == null ? true : isMultiple}
@@ -163,6 +182,10 @@ function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasF
           loadOptions={loadAsyncOptionsDelayed}
           onMenuOpen={() => setIsOpen(true)}
           onMenuClose={() => setIsOpen(false)}
+          onInputChange={onInputChange}
+          inputValue={inputValue}
+          // defaultOptions={[{label: 'Hello', value: 1}, {label: 'world', value: 2}]}
+          closeMenuOnSelect={false}
         />
       )}
       {hasFeedback ? <small className="form-text text-muted">{i18n.select.feedback}</small> : ''}
