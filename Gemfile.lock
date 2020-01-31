@@ -235,6 +235,8 @@ GEM
     puma (4.3.0)
       nio4r (~> 2.0)
     rack (2.0.7)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
@@ -410,6 +412,7 @@ DEPENDENCIES
   poltergeist
   public_uid
   puma (~> 4)
+  rack-cors
   rails (~> 5.2.3)
   rails-controller-testing (= 1.0.4)
   rails_12factor

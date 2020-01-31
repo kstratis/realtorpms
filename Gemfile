@@ -18,6 +18,8 @@ gem 'bootstrap', '~> 4.3.1'
 
 gem 'bootsnap'
 
+gem 'rack-cors'
+
 # -----------
 
 gem 'rake', '~> 13'
