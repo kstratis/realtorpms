@@ -9,7 +9,7 @@ set :deploy_to, "/home/deploy/projects/#{fetch :application}"
 
 # set :rails_env, Rails.env
 
-append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
+append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/packs', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
 
 # Only keep the last 2 releases to save disk space
 set :keep_releases, 2
