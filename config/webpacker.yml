@@ -93,6 +93,9 @@ staging:
   # Cache manifest.json for performance
   cache_manifest: true
 
+  # workaround to work with CDN
+  public_output_path: assets/packs
+
 production:
   <<: *default
 
@@ -104,3 +107,6 @@ production:
 
   # Cache manifest.json for performance
   cache_manifest: true
+
+  # workaround to work with CDN
+  public_output_path: assets/packs
