@@ -6,6 +6,7 @@ const { environment } = require('@rails/webpacker');
 // environment.splitChunks();
 environment.splitChunks(config => {
   // console.log(config);
+  config.externals = {moment: 'moment'};
   let newconf = Object.assign({}, config, {
     optimization: {
       runtimeChunk: 'single',
