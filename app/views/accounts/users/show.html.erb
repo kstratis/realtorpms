@@ -10,9 +10,47 @@
           <span class="d-none d-lg-inline">&nbsp;<%= t 'properties.edit.edit_button_alt' %></span>
         <% end %>
         <%= link_to @user, method: :delete, data: {confirm: t('prompt')}, class: 'btn btn-secondary btn-sm editable' do %>
-          <i class="fas fa-trash fa-fw"></i>a
+          <i class="fas fa-trash fa-fw"></i>
           <span class="d-none d-lg-inline">&nbsp;<%= t 'properties.delete.delete_button' %></span>
         <% end %>
+          <div class="reactstrap-modal-button-x">
+            <%#= react_component('ModalContainer', props: {
+                id: 'assignment',
+                modalSize: 'md',
+                fireButtonLabel: '<i class="fas fa-user-check colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('activerecord.attributes.property.assignments_title') + '</span>',
+                avatar: @property.avatar.attached? ? url_for(@property.avatar.variant(resize: "30%")) : nil,
+                hasFeedback: true,
+                modalBodyClassNames: 'overflown',
+                modalFooterClassNames: 'overflown',
+                modalContentClassNames: 'overflown',
+                scrollable: false,
+                property_id: @property.id,
+                child: 'AddRemovePartners', # Due to react-on-rails restrictions we cant just ask to render children
+                modalTitle: t('assignments.title', entity: @property.slug.upcase),
+                modalHeader: heading(@property).html_safe,
+                buttonCancelLabel: t('properties.cancel_button'),
+                buttonCloseLabel: t('properties.close_button'),
+                soloMode: true,
+                ajaxEnabled: false,
+                isClearable: false,
+                openMenuOnClick: true,
+                backspaceRemovesValue: true,
+                isSearchable: false,
+                isMultiple: true,
+                partners_url: users_url,
+                partners_action_endpoint: assignments_path(@property),
+                initial_data_url: existing_assignments_path(@property),
+                i18n: {
+                    select: {
+                        placeholder: t('js.components.select.placeholder_title'),
+                        noresults: t('js.components.select.noresults'),
+                        loading: t('js.components.select.loading_html'),
+                        feedback: t('js.components.select.assignments_feedback', property_id: @property.slug.upcase)
+                    }
+                }
+            }, prerender: false) %>
+          </div>
+
       <% end %>
     </div>
   </div>

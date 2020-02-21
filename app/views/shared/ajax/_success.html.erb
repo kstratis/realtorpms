@@ -19,10 +19,16 @@
           <% else %> <!-- Case 1: General case -->
             <%= link_to t("#{locals[:resource].class.to_s.downcase.pluralize}.#{locals[:action]}.show"),
                         Rails.application.routes.url_helpers.send("#{locals[:resource].class.to_s.downcase}_path", locals[:resource]), class: 'btn btn-success' %>
+            <% if current_user.is_admin?(current_account) %>
+              <%= link_to t("#{locals[:resource].class.to_s.downcase.pluralize}.#{locals[:action]}.show_and_assign"),
+                          Rails.application.routes.url_helpers.send("#{locals[:resource].class.to_s.downcase}_path", locals[:resource], {:autoclick => 'assignments'}), class: 'btn btn-danger' %>
+            <% end %>
             <%= link_to t("#{locals[:resource].class.to_s.downcase.pluralize}.#{locals[:action]}.edit"),
                         Rails.application.routes.url_helpers.send("edit_#{locals[:resource].class.to_s.downcase}_path", locals[:resource]), class: 'btn btn-warning' %>
             <%= link_to t("#{locals[:resource].class.to_s.downcase.pluralize}.#{locals[:action]}.add_another"),
                         Rails.application.routes.url_helpers.send("new_#{locals[:resource].class.to_s.downcase}_path"), class: 'btn btn-primary' %>
+
+
           <% end %>
         </div>
       </div>

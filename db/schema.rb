@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_20_084330) do
+ActiveRecord::Schema.define(version: 2020_02_11_153256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -197,15 +197,6 @@ ActiveRecord::Schema.define(version: 2020_01_20_084330) do
     t.index ["account_id"], name: "index_invitations_on_account_id"
     t.index ["email", "account_id"], name: "index_invitations_on_email_and_account_id", unique: true
     t.index ["token"], name: "index_invitations_on_token"
-  end
-
-  create_table "landlords", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "email"
-    t.string "telephones"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "locations", force: :cascade do |t|

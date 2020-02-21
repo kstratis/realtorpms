@@ -513,6 +513,7 @@ el:
       regex: "Επιτρέπονται μόνο τα iFrame tags. π.χ. &lt;iframe src=&quot;...&quot;&gt;&lt;/iframe&gt;"
       required: "Το πεδίο είναι υποχρεωτικό"
       digits: "Παρακαλώ εισάγετε μόνο αριθμητικά ψηφία"
+      tels: "Παρακαλώ εισάγετε μόνο τηλεφωνικούς αριθμούς"
       email: "Παρακαλώ εισάγετε μία έγκυρη διεύθυνση email"
       email_exists: "Υπάρχει ήδη καταχωρημένος χρήστης με αυτό το email"
     alerts:
@@ -721,6 +722,7 @@ el:
     title: "Ανάθεση του %{entity}"
     client_title: "Ανάθεση του πελάτη %{entity}"
     assigned: "Ανατεθειμένα"
+    assign_client: "Ανάθεση σε συνεργάτη"
   properties:
     property: "Ακίνητο"
     identifier: "ID"
@@ -773,6 +775,7 @@ el:
       message_feedback: "Διαχειριστείτε την νέα σας καταχώρηση στο %{brand} τώρα"
       return: "Επιστροφή"
       show: "Προβολή"
+      show_and_assign: "Ανάθεση"
       edit: "Επεξεργασία"
       add_another: "Προσθήκη νέου"
       flash: "Η προσθήκη ακινήτου ολοκληρώθηκε επιτυχώς"

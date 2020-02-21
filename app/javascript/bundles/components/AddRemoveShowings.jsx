@@ -18,6 +18,8 @@ function AddShowing({
   client_id,
   handleSetRequest,
   handleFormVisibility,
+  closeMenuOnSelect,
+  openMenuOnClick,
   originator
 }) {
   const [client, setClient] = useState({});
@@ -40,6 +42,8 @@ function AddShowing({
     } else {
       fieldsValidationArray = isAdmin ? [property, partner, date] : [property, date];
     }
+    // DEBUG
+    // console.log(client, partner, date);
     if (
       fieldsValidationArray.some(
         (element, index, array) => Object.keys(element).length === 0 && element.constructor === Object
@@ -88,6 +92,7 @@ function AddShowing({
               isCreatable={false}
               isClearable={true}
               isMultiple={false}
+              openMenuOnClick={openMenuOnClick}
             />
           ) : (
             <AsyncSelectContainer
@@ -99,6 +104,7 @@ function AddShowing({
               isCreatable={false}
               isClearable={true}
               isMultiple={false}
+              openMenuOnClick={openMenuOnClick}
             />
           )}
         </div>
@@ -118,6 +124,8 @@ function AddShowing({
               isCreatable={false}
               isClearable={true}
               isMultiple={false}
+              openMenuOnClick={openMenuOnClick}
+              closeMenuOnSelect={closeMenuOnSelect}
             />
           </div>
         ) : null}
@@ -177,7 +185,9 @@ function AddRemoveShowings({
   showings_url,
   isAdmin,
   originator,
-  i18n
+  i18n,
+  closeMenuOnSelect,
+  openMenuOnClick
 }) {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const handleFormVisibility = () => {
@@ -221,6 +231,8 @@ function AddRemoveShowings({
           isAdmin={isAdmin}
           handleSetRequest={handleSetRequest}
           handleFormVisibility={handleFormVisibility}
+          closeMenuOnSelect={closeMenuOnSelect}
+          openMenuOnClick={openMenuOnClick}
         />
       ) : (
         <>

@@ -508,7 +508,8 @@ en:
     validator:
       regex: "Only iFrame tags are allowed. i.e. &lt;iframe src=&quot;...&quot;&gt;&lt;/iframe&gt;"
       required: "The field is required"
-      digits: "The field requires digits only"
+      digits: "The field only accepts digits"
+      tels: "The field only accepts telephone numbers"
       email: "Please enter a valid email address"
       email_exists: "Email already exists"
     alerts:
@@ -717,6 +718,7 @@ en:
     title: "Assigment of %{entity}"
     client_title: "Assigment of client %{entity}"
     assigned: "Assigned"
+    assign_client: "Assign to partner"
   properties:
     property: "Property"
     identifier: "ID"
@@ -769,6 +771,7 @@ en:
       message_feedback: "Manage your properties in %{brand} now"
       return: "Return"
       show: "Show"
+      show_and_assign: "Assign"
       edit: "Edit"
       add_another: "Add new"
       flash: "Property successfully added"

@@ -10,10 +10,12 @@ function AddRemovePartners({
   initial_data_url,
   hasFeedback,
   isMultiple,
-                             openMenuOnClick,
+  openMenuOnClick,
+  closeMenuOnSelect,
   modalHeader,
   avatar,
-  i18n
+  i18n,
+  defaultOptions
 }) {
   const [request, setRequest] = useState({
     url: initial_data_url,
@@ -38,21 +40,22 @@ function AddRemovePartners({
       </div>
       <hr />
       <div className={'mb-3'}>
-      {loading ? (
-        <Spinner isLoading={loading} />
-      ) : (
-        <AsyncSelectContainer
-          id={'AsyncSelectContainerPartner'}
-          i18n={i18n}
-          collection_endpoint={{ url: partners_url, action: 'get' }}
-          action_endpoint={{ url: partners_action_endpoint, action: 'post' }}
-          storedOptions={data}
-          openMenuOnClick={openMenuOnClick}
-          hasFeedback={hasFeedback}
-          isMultiple={isMultiple}
-        />
-
-      )}
+        {loading ? (
+          <Spinner isLoading={loading} />
+        ) : (
+          <AsyncSelectContainer
+            id={'AsyncSelectContainerPartner'}
+            i18n={i18n}
+            collection_endpoint={{ url: partners_url, action: 'get' }}
+            action_endpoint={{ url: partners_action_endpoint, action: 'post' }}
+            storedOptions={data}
+            openMenuOnClick={openMenuOnClick}
+            closeMenuOnSelect={closeMenuOnSelect}
+            hasFeedback={hasFeedback}
+            isMultiple={isMultiple}
+            defaultOptions={defaultOptions}
+          />
+        )}
       </div>
     </>
   );
