@@ -12,8 +12,23 @@ import flatpickr from "flatpickr";
 import { Greek } from "flatpickr/dist/l10n/gr.js"
 import { setup_dependent_checkboxes } from '../bundles/utilities/helpers';
 import * as CustomActiveStorage from '../bundles/uploaders/custom_active_storage';
+import React, { useEffect, useRef, useState } from 'react';
+import ReactDOM from 'react-dom';
+
+// const getExample = () => {
+//   return Promise.all([
+//     import(/* webpackChunkName: "Example" */
+//       '../bundles/Example.jsx'),
+//   ]);
+// };
 
 $(document).on('turbolinks:load', function(e) {
   if ($(".uppy-emitters, .file-emitters").length > 0){ CustomActiveStorage.start()}
   if ($('.dependent_input').length) setup_dependent_checkboxes();
+  if (window.location.pathname === '/demo'){
+    import(/* webpackChunkName: "ExampleWOOT", webpackPrefetch: true */ '../bundles/Example.jsx').then(({default: Example}) => {
+      ReactDOM.render(<Example />, document.getElementById('lazy'))
+    });
+  }
 });
+

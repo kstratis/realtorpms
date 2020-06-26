@@ -16,6 +16,15 @@ module Accounts
       filter_properties(current_account.properties.includes(:location), params)
     end
 
+    # This is just a proof of concept
+    def demo
+      puts 'works'
+      respond_to do |format|
+        format.html
+        format.json
+      end
+    end
+
 
     # GET /properties/1
     # GET /properties/1.json

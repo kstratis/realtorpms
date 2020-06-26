@@ -77,6 +77,8 @@ Rails.application.routes.draw do
       # create a new assignment
       #
       #
+      #
+      get '/demo', to: 'properties#demo'
 
       post '/properties/uploads', to: 'properties#uploads'
 
