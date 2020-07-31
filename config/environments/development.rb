@@ -93,8 +93,7 @@ Rails.application.configure do
 
   config.active_storage.service = :amazon
 
-  config.hosts << "lvh.me"
-
+  config.hosts << /(?:[a-zA-Z]+\.+)*lvh\.me/
 
 
 end
