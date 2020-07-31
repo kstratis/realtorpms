@@ -69,8 +69,6 @@ gem 'bootstrap-will_paginate', '1.0.0'
 
 gem 'launchy', '2.5.0'
 
-gem 'rails_12factor'
-
 gem 'react_on_rails', '12.0.1'
 
 gem 'webpacker', '~> 5.1.1'

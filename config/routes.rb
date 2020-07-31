@@ -3,7 +3,6 @@ require 'constraints/subdomain_required'
 Rails.application.routes.draw do
 
 
-
   # get 'password_resets/new'
   # get 'password_resets/edit'
 
@@ -14,7 +13,7 @@ Rails.application.routes.draw do
 
   # resources :properties
   # resources :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   # root 'application#hello'
   # root 'users#index'
   #

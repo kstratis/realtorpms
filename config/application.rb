@@ -9,15 +9,10 @@ Bundler.require(*Rails.groups)
 module Propertyx
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.2
+    config.load_defaults '6.0'
     config.i18n.default_locale = :el
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
-    # This loads the Robot font family
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
-    # config.assets.paths << Rails.root.join('lib', 'assets')
-    # config.assets.paths << Rails.root.join('lib', 'assets', '**', '*.{js}')
-    # config.assets.paths << Rails.root.join('node_modules')
-    # puts config.assets.paths
 
     config.generators do |g|
       g.test_framework :rspec,
@@ -42,7 +37,8 @@ module Propertyx
     # config.log_level = :warn
 
     # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration should go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded.
+    # Application configuration can go into files in config/initializers
+    # -- all .rb files in that directory are automatically loaded after loading
+    # the framework and any gems in your application.
   end
 end
