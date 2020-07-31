@@ -7,7 +7,7 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.3'
+gem 'rails', '~> 5.2.4.3'
 # gem 'rails', :git => 'https://github.com/rails/rails'
 # gem 'bootstrap-sass', '3.3.7'
 
@@ -16,7 +16,9 @@ gem 'bcrypt', '3.1.12'
 
 gem 'bootstrap', '~> 4.3.1'
 
-gem 'bootsnap'
+gem 'bootsnap', '~> 1.4.7'
+
+gem 'e2mmap'
 
 gem 'rack-cors'
 
@@ -36,7 +38,7 @@ gem 'grover'
 gem "mini_magick"
 
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 1.1.4'
+gem 'pg', '~> 1.2.3'
 # Use Puma as the app server
 gem 'puma', '~> 4'
 # Use SCSS for stylesheets
@@ -108,14 +110,14 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara'
+  gem 'capybara', '~> 3.33.0'
   gem 'selenium-webdriver'
   gem 'email_spec', '2.2.0'
   gem 'phantomjs'
   gem 'poltergeist'
   gem 'database_cleaner'
   gem 'spring-commands-rspec'
-  gem "better_errors"
+  gem "better_errors", '~> 2.7.1'
   gem "binding_of_caller"
 
 end
