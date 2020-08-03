@@ -65,7 +65,7 @@ GEM
     airbrussh (1.4.0)
       sshkit (>= 1.6.1, != 1.7.0)
     ansi (1.5.0)
-    autoprefixer-rails (9.8.6)
+    autoprefixer-rails (9.8.6.1)
       execjs
     aws-eventstream (1.1.0)
     aws-partitions (1.348.0)
@@ -93,7 +93,7 @@ GEM
       debug_inspector (>= 0.0.1)
     bootsnap (1.4.7)
       msgpack (~> 1.0)
-    bootstrap (4.3.1)
+    bootstrap (4.4.1)
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 1.14.3, < 2)
       sassc-rails (>= 2.0.0)
@@ -392,7 +392,7 @@ DEPENDENCIES
   better_errors (~> 2.7.1)
   binding_of_caller
   bootsnap (~> 1.4.7)
-  bootstrap (~> 4.3.1)
+  bootstrap (~> 4.4.1)
   bootstrap-will_paginate (= 1.0.0)
   byebug
   capistrano (~> 3.14.1)

@@ -1,13 +1,27 @@
 // Layout
 // ==================================================
 
-$app-header-height:         3.5rem !default;
-$app-header-light-bg:       $light !default;
-$app-header-dark-bg:        $primary !default;
-$app-header-accent-color:   rgba($black, .12) !default; // only for dark header
-$app-header-shadow:         0 0 0 1px rgba($black, .05), 0 1px 3px 0 rgba($black, .15) !default;
+$app-header-height:                        3.5rem !default;
 
-$app-aside-width:         15rem !default;
+$app-header-light-bg:                          $light !default;
+$app-header-light-color:                       rgba($black, .4) !default;
+$app-header-light-hover-color:                 $body-color !default;
+$app-header-light-active-color:                $primary !default;
+$app-header-light-disabled-color:              $gray-500 !default;
+$app-header-light-toggler-border-color:        $body-color !default;
+
+$app-header-dark-bg:                       $primary !default;
+$app-header-dark-color:                    rgba($white, .8) !default;
+$app-header-dark-hover-color:              $white !default;
+$app-header-dark-active-color:             $white !default;
+$app-header-dark-disabled-color:           rgba($white, .6) !default;
+$app-header-dark-toggler-border-color:     $white !default;
+
+$app-header-accent-color:                  rgba($black, .12) !default; // only for dark header
+$app-header-shadow:                         0 0 0 1px rgba($black, .05), 0 1px 3px 0 rgba($black, .15) !default;
+
+$app-aside-width:               15rem !default;
+$app-aside-compact-width:       4rem !default;
 
 $app-aside-light-bg:            $body-bg !default;
 $app-aside-light-color:         inherit !default;

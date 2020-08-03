@@ -14,7 +14,7 @@ gem 'rails', '~> 6.0'
 # Watch out! - Don't upgrade to 3.1.13 yet because it incurs severe performance degradation
 gem 'bcrypt', '3.1.12'
 
-gem 'bootstrap', '~> 4.3.1'
+gem 'bootstrap', '~> 4.4.1'
 
 gem 'bootsnap', '~> 1.4.7'
 

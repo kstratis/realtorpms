@@ -95,6 +95,44 @@ $yiq-text-dark:             $gray-700;
 $yiq-text-light:            $white;
 
 
+// Spacing
+// ==================================================
+
+$spacer: 1rem;
+$spacers: ();
+// stylelint-disable-next-line scss/dollar-variable-default
+$spacers: map-merge(
+  (
+    0: 0,
+    1: ($spacer * .25),
+    2: ($spacer * .5),
+    3: $spacer,
+    4: ($spacer * 1.5),
+    5: ($spacer * 3),
+    6: ($spacer * 6)
+  ),
+  $spacers
+);
+
+// This variable affects the `.h-*` and `.w-*` classes.
+$sizes: ();
+// stylelint-disable-next-line scss/dollar-variable-default
+$sizes: map-merge(
+  (
+    25: 25%,
+    50: 50%,
+    75: 75%,
+    100: 100%,
+    125: 125%,
+    150: 150%,
+    175: 175%,
+    200: 200%,
+    auto: auto
+  ),
+  $sizes
+);
+
+
 // Text
 // ==================================================
 
@@ -133,6 +171,11 @@ $font-size-base:              1rem;
 $font-size-lg:                $font-size-base * 1.25;
 $font-size-sm:                $font-size-base * .875;
 $font-size-xs:                .75rem;
+
+$display1-size:               4.35rem;
+$display2-size:               3.806rem;
+$display3-size:               3.33rem;
+$display4-size:               2.913rem;
 
 $font-weight-lighter:         lighter;
 $font-weight-light:           300;
@@ -174,8 +217,8 @@ $input-btn-line-height-sm:    $line-height-sm;
 
 $input-btn-padding-y-lg:      .5rem;
 $input-btn-padding-x-lg:      1rem;
-$input-btn-font-size-lg:      $font-size-lg;
-$input-btn-line-height-lg:    $line-height-lg;
+$input-btn-font-size-lg:      $font-size-base;
+$input-btn-line-height-lg:    1.75;
 
 
 // Forms
@@ -211,7 +254,7 @@ $custom-radio-indicator-icon-checked:           url("data:image/svg+xml;charset=
 
 $custom-select-bg:                      linear-gradient(to bottom, $white, $secondary);
 $custom-select-focus-box-shadow:        $input-btn-focus-box-shadow;
-$custom-select-indicator:               url("data:image/svg+xml,%3Csvg width='14' height='14' fill='#{$text-muted}' viewBox='0 0 1792 1792' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1408 704q0 26-19 45l-448 448q-19 19-45 19t-45-19l-448-448q-19-19-19-45t19-45 45-19h896q26 0 45 19t19 45z'/%3E%3C/svg%3E");
+$custom-select-indicator:               url("data:image/svg+xml;charset=UTF-8,%3Csvg width='14' height='14' fill='%23888c9b' viewBox='0 0 1792 1792' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1408 704q0 26-19 45l-448 448q-19 19-45 19t-45-19l-448-448q-19-19-19-45t19-45 45-19h896q26 0 45 19t19 45z'/%3E%3C/svg%3E");
 
 
 // Cards
@@ -365,6 +408,8 @@ $nav-tabs-link-active-color:          $gray-800;
 // Navbar
 // ==================================================
 
+$navbar-brand-padding-y:            0;
+
 $navbar-light-color:                rgba($black, .4);
 $navbar-light-hover-color:          $body-color;
 $navbar-light-active-color:         $primary;
@@ -376,6 +421,11 @@ $navbar-dark-hover-color:          $white;
 $navbar-dark-active-color:         $white;
 $navbar-dark-disabled-color:       rgba($white, .6);
 $navbar-dark-toggler-border-color: $white;
+
+$navbar-light-brand-color:                $dark;
+$navbar-light-brand-hover-color:          $dark;
+$navbar-dark-brand-color:                 $light;
+$navbar-dark-brand-hover-color:           $light;
 
 // Tables
 // ==================================================
