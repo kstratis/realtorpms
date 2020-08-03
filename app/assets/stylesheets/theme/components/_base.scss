@@ -22,10 +22,6 @@ body {
   @include media-breakpoint-up(md) {
     font-size: $font-size-sm;
   }
-
-  &.is-loaded {
-    display: block !important;
-  }
 }
 
 iframe {
@@ -36,6 +32,15 @@ iframe {
   width: 100%;
   min-height: 100%;
   background-color: $body-bg;
+  overflow-x: hidden;
+
+  &-site {
+    background-color: $white;
+
+    .app-header {
+      height: auto;
+    }
+  }
 
   &.has-clipped-header {
     .app-header {

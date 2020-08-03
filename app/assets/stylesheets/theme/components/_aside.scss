@@ -152,7 +152,7 @@
       @include media-breakpoint-up($next) {
         top: $app-header-height;
         width: $app-aside-width;
-        z-index: 5;
+        z-index: 6;
       }
 
       + .app-main {

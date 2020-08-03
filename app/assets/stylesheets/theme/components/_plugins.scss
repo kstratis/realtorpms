@@ -64,16 +64,18 @@
   color: $stacked-menu-color;
 }
 
-.stacked-menu > .menu > .menu-item > .menu .menu-link {
-  padding-left: 3.25rem;
-}
+.stacked-menu:not(.stacked-menu-has-compact) {
+  > .menu > .menu-item > .menu .menu-link {
+    padding-left: 3.25rem;
+  }
 
-.stacked-menu > .menu > .menu-item > .menu .menu .menu-link {
-  padding-left: 4.25rem;
-}
+  > .menu > .menu-item > .menu .menu .menu-link {
+    padding-left: 4.25rem;
+  }
 
-.stacked-menu > .menu > .menu-item > .menu .menu .menu .menu-link {
-  padding-left: 5.25rem;
+  > .menu > .menu-item > .menu .menu .menu .menu-link {
+    padding-left: 5.25rem;
+  }
 }
 
 .stacked-menu-has-collapsible .has-child {
@@ -1041,6 +1043,73 @@ $plyr-accent:       $primary !default;
 }
 
 
+// Bootstrap Select
+// ==================================================
+
+:not(.input-group) > .bootstrap-select.custom-select:not([class*=col-]) {
+  width: 100%;
+}
+
+.bootstrap-select {
+  a:not([href]) {
+    color: $dropdown-link-color;
+
+    &.active,
+    &:active,
+    &.selected {
+      color: $dropdown-link-active-color;
+      background-color: $dropdown-link-active-bg;
+    }
+
+    &:hover,
+    &:focus {
+      color: $dropdown-link-hover-color;
+      background-color: $dropdown-link-hover-bg;
+    }
+  }
+
+  .dropdown-toggle {
+    &.custom-select {
+      &:after { display: none; }
+
+      &:focus {
+        outline: 0 !important;
+        outline-offset: 0;
+      }
+    }
+
+    &.bs-placeholder,
+    &.bs-placeholder:active,
+    &.bs-placeholder:focus,
+    &.bs-placeholder:hover {
+      color: $input-placeholder-color;
+    }
+  }
+
+  > select.mobile-device:focus + .dropdown-toggle.custom-select {
+    outline: 0 !important;
+    outline-offset: 0;
+  }
+
+  .dropdown-menu {
+    overflow: visible !important;
+
+    li {
+      a { outline: 0; }
+
+      &.disabled {
+        a { color: $text-muted; }
+      }
+    }
+
+    .dropdown-item .text {
+      font-size: inherit;
+      color: inherit;
+    }
+  }
+}
+
+
 // Select2
 // ==================================================
 
@@ -1248,6 +1317,50 @@ $plyr-accent:       $primary !default;
   @include hover-focus {
     color: $white;
     background-color: $text-muted;
+  }
+}
+
+.custom-select.is-invalid,
+.form-control.is-invalid,
+.was-validated .custom-select:invalid,
+.was-validated .form-control:invalid {
+  + .select2-container--default .select2-selection--single,
+  + .select2-container--default .select2-selection--multiple {
+    border-color: $form-feedback-invalid-color;
+  }
+
+  + .select2-container--focus .select2-selection--single,
+  + .select2-container--default.select2-container--focus .select2-selection--multiple {
+    outline: 0;
+    border-color: $form-feedback-invalid-color;
+    box-shadow: 0 0 0 1px $form-feedback-invalid-color;
+  }
+
+  + .select2-container--default.select2-container--open .select2-selection--multiple,
+  + .select2-container--open .select2-selection--single {
+    border-color: $input-focus-border-color;
+  }
+}
+
+.custom-select.is-valid,
+.form-control.is-valid,
+.was-validated .custom-select:valid,
+.was-validated .form-control:valid {
+  + .select2-container--default .select2-selection--single,
+  + .select2-container--default .select2-selection--multiple {
+    border-color: $form-feedback-valid-color;
+  }
+
+  + .select2-container--focus .select2-selection--single,
+  + .select2-container--default.select2-container--focus .select2-selection--multiple {
+    outline: 0;
+    border-color: $form-feedback-valid-color;
+    box-shadow: 0 0 0 1px $form-feedback-valid-color;
+  }
+
+  + .select2-container--default.select2-container--open .select2-selection--multiple,
+  + .select2-container--open .select2-selection--single {
+    border-color: $input-focus-border-color;
   }
 }
 
@@ -1643,13 +1756,65 @@ span.flatpickr-weekday {
 }
 
 // monthSelect plugin
-.flatpickr-day.month.selected {
-  border-radius: 0;
-  box-shadow: none;
+.flatpickr-monthSelect-months {
+  margin: 10px 1px 3px 1px;
+  flex-wrap: wrap;
 }
-.flatpickr-day.month.selected.startRange,
-.flatpickr-day.month.selected.endRange {
-  border-radius: 0;
+
+.flatpickr-monthSelect-month {
+  background: none;
+  border: 0;
+  border-radius: 2px;
+  color: $body-color;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 400;
+  margin: 0.5px;
+  justify-content: center;
+  padding: 10px;
+  position: relative;
+  text-align: center;
+  width: 33%;
+}
+
+.flatpickr-monthSelect-theme-dark {
+  background: $dark;
+}
+
+.flatpickr-monthSelect-theme-dark .flatpickr-current-month input.cur-year {
+  color: $light;
+}
+
+.flatpickr-monthSelect-theme-dark .flatpickr-months .flatpickr-prev-month,
+.flatpickr-monthSelect-theme-dark .flatpickr-months .flatpickr-next-month {
+  color: $light;
+  fill: $light;
+}
+
+.flatpickr-monthSelect-theme-dark .flatpickr-monthSelect-month {
+  color: rgba($light, 0.95);
+}
+
+.flatpickr-monthSelect-month:hover,
+.flatpickr-monthSelect-month:focus,
+.flatpickr-monthSelect-theme-dark .flatpickr-monthSelect-month:hover,
+.flatpickr-monthSelect-theme-dark .flatpickr-monthSelect-month:focus {
+  color: darken($component-active-bg, 5%);
+  background: rgba($component-active-bg, $subtle-level-hover);
+  border-color: rgba($component-active-bg, $subtle-level-hover);
+}
+
+.flatpickr-monthSelect-month.selected {
+  color: $component-active-color;
+  background: $component-active-bg;
+  border-color: $component-active-bg;
+}
+
+.flatpickr-monthSelect-theme-dark .flatpickr-monthSelect-month.selected {
+  color: $component-active-color;
+  background: $component-active-bg;
+  border-color: $component-active-bg;
+  box-shadow: none;
 }
 
 // confirmDate Plugin
@@ -1860,15 +2025,14 @@ span.flatpickr-weekday {
   }
 }
 
-
-
 .noUi-vertical {
   width: 4px;
 }
+
 .noUi-vertical .noUi-handle {
   width: 1.25rem;
   height: 1.25rem;
-  left: -8px;
+  left: -12px;
   top: -12px;
 }
 
@@ -1877,10 +2041,16 @@ span.flatpickr-weekday {
   border: 0;
   box-shadow: none;
 }
+
 .noUi-connect {
   background-color: $primary;
   box-shadow: none;
 }
+
+.noUi-origin {
+  left: 100%;
+}
+
 .noUi-handle,
 .noUi-active {
   box-shadow: none;
@@ -1890,24 +2060,30 @@ span.flatpickr-weekday {
   color: $text-muted;
   font-size: $font-size-sm;
 }
+
 .noUi-pips-horizontal {
   padding: 6px 0;
   height: 55px;
 }
+
 .noUi-pips-vertical {
   padding: 0 6px;
   width: 55px;
 }
+
 .noUi-marker {
   background-color: $progress-bg;
 }
+
 .noUi-marker-sub,
 .noUi-marker-large {
   background-color: $progress-bg;
 }
+
 .noUi-value-horizontal {
   margin-top: 4px;
 }
+
 .noUi-value-vertical {
   margin-left: 4px;
 }
@@ -1920,9 +2096,11 @@ span.flatpickr-weekday {
   opacity: .9;
   border-radius: $border-radius;
 }
+
 .noUi-horizontal .noUi-tooltip {
   bottom: 200%;
 }
+
 .noUi-vertical .noUi-tooltip {
   right: 200%;
 }
@@ -1941,11 +2119,13 @@ span.flatpickr-weekday {
   .noUi-connect {
     background-color: $progress-bg;
   }
+
   .noUi-handle {
     border-color: $progress-bg;
     background-color: $secondary;
   }
 }
+
 .noUi-origin[disabled] {
   .noUi-handle {
     border-color: $progress-bg;
@@ -1953,29 +2133,6 @@ span.flatpickr-weekday {
   }
 }
 
-
-// Quill
-// ==================================================
-
-.ql-container {
-  font-size: inherit;
-  font-family: inherit;
-}
-
-// snow
-.ql-toolbar.ql-snow,
-.ql-container.ql-snow {
-  border-color: $border-color;
-}
-.card > .ql-toolbar.ql-snow {
-  border-width: 0 0 1px 0;
-}
-.card > .ql-container.ql-snow {
-  border-width: 0;
-}
-.ql-snow .ql-tooltip {
-  z-index: $zindex-tooltip;
-}
 
 
 // Summernote
@@ -2020,6 +2177,29 @@ span.flatpickr-weekday {
   }
 }
 
+.note-editor.note-airframe {
+  .note-editing-area .note-editable {
+    color: inherit;
+    background-color: inherit;
+  }
+
+  &.fullscreen {
+    padding: $spacer;
+    height: 100%;
+    background-color: $input-bg;
+    overflow: auto;
+
+    .note-editing-area {
+      overflow: visible;
+
+      .note-editable {
+        color: $input-color;
+        background-color: $input-bg;
+      }
+    }
+  }
+}
+
 .note-placeholder {
   color: $input-placeholder-color;
 }
@@ -2050,12 +2230,37 @@ span.flatpickr-weekday {
       }
     }
   }
-}card-bg
+}
+
+.note-toolbar {
+  padding: 0 .5rem .5rem;
+
+  .note-btn {
+    background-color: transparent;
+    border-color: transparent;
+  }
+}
 
 
 
-// Quill JS
+// Quill
 // ==================================================
+
+.ql-container {
+  font-size: inherit;
+  font-family: inherit;
+}
+
+.ql-toolbar.ql-snow,
+.ql-container.ql-snow {
+  border-color: $border-color;
+}
+.card > .ql-toolbar.ql-snow {
+  border-width: 0 0 1px 0;
+}
+.card > .ql-container.ql-snow {
+  border-width: 0;
+}
 
 .ql-editor {
   &.ql-blank::before {
@@ -2114,6 +2319,17 @@ span.flatpickr-weekday {
         stroke: $primary;
       }
     }
+  }
+
+  .ql-editor {
+    pre.ql-syntax {
+      color: $pre-color;
+      background-color: $gray-100;
+    }
+  }
+
+  .ql-tooltip {
+    z-index: $zindex-tooltip;
   }
 
   .ql-stroke,
@@ -3112,3 +3328,31 @@ canvas.particles-js-canvas-el {
     display: block;
   }
 }
+
+
+// Headroom
+// ==================================================
+
+.headroom {
+  will-change: transform;
+  transition: transform 200ms linear;
+}
+
+.headroom--pinned {
+  transform: translateY(0%);
+}
+
+.headroom--unpinned {
+  transform: translateY(-100%);
+}
+
+// positioning
+.headroom--pinned,
+.position-relative.headroom--not-top.headroom--unpinned {
+  position: fixed !important;
+}
+
+.position-relative.headroom--top {
+  position: relative !important;
+}
+

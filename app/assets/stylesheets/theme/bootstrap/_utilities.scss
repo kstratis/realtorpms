@@ -1,12 +1,23 @@
+// Font size helper
+// ==================================================
+
+.font-size-lg {
+  font-size: 1.143em;
+}
+
+.font-size-sm {
+  font-size: 0.875em;
+}
+
 // Text colors
 // ==================================================
 
 @each $color, $value in $colors {
-  @include text-emphasis-variant(".text-#{$color}", $value);
+  @include text-color(".text-#{$color}", $value);
 }
 
-@include text-emphasis-variant(".text-white", #e6e8ed);
-@include text-emphasis-variant(".text-black", #363642);
+@include text-color(".text-white", #e6e8ed);
+@include text-color(".text-black", #363642);
 
 .text-muted-light {
   color: rgba($white, .6) !important;
@@ -33,11 +44,28 @@ a.text-muted-dark {
 // ==================================================
 
 @each $color, $value in $colors {
-  @include bg-variant(".bg-#{$color}", $value);
+  @include bg-color(".bg-#{$color}", $value);
 }
 
-@include bg-variant(".bg-black", $black);
-@include bg-variant(".bg-muted", $gray-200);
+@include bg-color(".bg-white", $white);
+@include bg-color(".bg-muted", $gray-200);
+@include bg-color(".bg-black", $black);
+
+
+// Fill color
+// ==================================================
+
+@each $color, $value in $colors {
+  .fill-#{$color} { fill: $value !important; }
+}
+
+@each $color, $value in $theme-colors {
+  .fill-#{$color} { fill: $value !important; }
+}
+
+.fill-white { fill: $white !important; }
+.fill-muted { fill: $gray-200 !important; }
+.fill-black { fill: $black !important; }
 
 
 // Socials colors
@@ -45,13 +73,13 @@ a.text-muted-dark {
 
 @each $color, $value in $socials {
   // background color
-  @include bg-variant(".bg-#{$color}", $value);
+  @include bg-color(".bg-#{$color}", $value);
   .bg-#{$color} {
     color: color-yiq($value) !important;
   }
 
   // text colors
-  @include text-emphasis-variant(".text-#{$color}", $value);
+  @include text-color(".text-#{$color}", $value);
 }
 
 
@@ -71,10 +99,85 @@ a.text-muted-dark {
 // overflow
 // ==================================================
 
-.overflow { overflow: auto !important }
-.overflow-y { overflow-y: auto !important }
-.overflow-x { overflow-x: auto !important }
-.overflow-hidden { overflow: hidden !important }
+.overflow-y-auto { overflow-y: auto !important }
+.overflow-y-hidden { overflow-y: hidden !important }
+.overflow-x-auto { overflow-x: auto !important }
+.overflow-x-hidden { overflow-x: hidden !important }
+
+
+// scale from original size
+// ==================================================
+
+.scale-25 { transform: scale(.25) !important; }
+.scale-50 { transform: scale(.5) !important; }
+.scale-75 { transform: scale(.75) !important; }
+.scale-100 { transform: scale(1) !important; }
+.scale-125 { transform: scale(1.25) !important; }
+.scale-150 { transform: scale(1.5) !important; }
+.scale-175 { transform: scale(1.75) !important; }
+.scale-200 { transform: scale(2) !important; }
+
+
+// translate from original position
+// ==================================================
+
+.translate-x-25 { transform: translate3d(25%, 0, 0) !important; }
+.translate-x-50 { transform: translate3d(50%, 0, 0) !important; }
+.translate-x-75 { transform: translate3d(75%, 0, 0) !important; }
+.translate-x-100 { transform: translate3d(100%, 0, 0) !important; }
+.translate-x-n25 { transform: translate3d(-25%, 0, 0) !important; }
+.translate-x-n50 { transform: translate3d(-50%, 0, 0) !important; }
+.translate-x-n75 { transform: translate3d(-75%, 0, 0) !important; }
+.translate-x-n100 { transform: translate3d(-100%, 0, 0) !important; }
+
+.translate-y-25 { transform: translate3d(0, 25%, 0) !important; }
+.translate-y-50 { transform: translate3d(0, 50%, 0) !important; }
+.translate-y-75 { transform: translate3d(0, 75%, 0) !important; }
+.translate-y-100 { transform: translate3d(0, 100%, 0) !important; }
+.translate-y-n25 { transform: translate3d(0, -25%, 0) !important; }
+.translate-y-n50 { transform: translate3d(0, -50%, 0) !important; }
+.translate-y-n75 { transform: translate3d(0, -75%, 0) !important; }
+.translate-y-n100 { transform: translate3d(0, -100%, 0) !important; }
+
+.translate-both-25 { transform: translate3d(25%, -25%, 0) !important; }
+.translate-both-50 { transform: translate3d(50%, -50%, 0) !important; }
+.translate-both-75 { transform: translate3d(75%, -75%, 0) !important; }
+.translate-both-100 { transform: translate3d(100%, -100%, 0) !important; }
+.translate-both-n25 { transform: translate3d(-25%, 25%, 0) !important; }
+.translate-both-n50 { transform: translate3d(-50%, 50%, 0) !important; }
+.translate-both-n75 { transform: translate3d(-75%, 75%, 0) !important; }
+.translate-both-n100 { transform: translate3d(-100%, 100%, 0) !important; }
+
+
+// Rotated & Flipped Icons
+// ==================================================
+
+.rotate-90  {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
+  transform: rotate(90deg) !important;
+}
+.rotate-180  {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
+  transform: rotate(180deg) !important;
+}
+.rotate-270  {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
+  transform: rotate(270deg) !important;
+}
+
+.flip-x {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
+  transform: scale(-1, 1) !important;
+}
+.flip-y {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
+  transform: scale(1, -1) !important;
+}
+.flip-both,
+.flip-x.flip-y {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
+  transform: scale(-1, -1) !important;
+}
 
 
 // Image Filter
@@ -166,8 +269,8 @@ a.text-muted-dark {
 }
 
 .drag-handle {
-  cursor: move; /* fallback if grab cursor is unsupported */
-  cursor: grab;
+  cursor: move !important; /* fallback if grab cursor is unsupported */
+  cursor: grab !important;
 }
 
 .drag-indicator {

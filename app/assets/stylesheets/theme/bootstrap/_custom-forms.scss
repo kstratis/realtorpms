@@ -238,6 +238,11 @@
       color: $input-color;
     }
   }
+
+  &.disabled {
+    color: $custom-select-disabled-color;
+    background-color: $custom-select-disabled-bg;
+  }
 }
 
 .custom-select-sm {

@@ -7,6 +7,11 @@
   z-index: $zindex-fixed;
   box-shadow: $app-header-shadow;
 
+  .navbar {
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+  }
+
   .btn-account {
     padding: 0 $spacer;
     min-width: $app-header-height;
@@ -14,6 +19,14 @@
 
     .account-summary {
       max-width: 10rem;
+    }
+  }
+
+  body.ie & {
+    .btn-account {
+      @include media-breakpoint-up("lg") {
+        min-width: ($app-header-height * 4);
+      }
     }
   }
 }
@@ -44,7 +57,7 @@
     }
   }
 
-  @include media-breakpoint-up('md') {
+  @include media-breakpoint-up("md") {
     display: flex;
   }
 }
@@ -158,7 +171,7 @@
 // Dark links against a light background
 .app-header-light {
   background-color: $app-header-light-bg;
-  color: $navbar-light-color;
+  color: $app-header-light-color;
 
   .btn-account {
     color: $body-color;
@@ -180,10 +193,10 @@
 
   .top-bar-brand {
     > a {
-      color: $navbar-light-active-color;
+      color: $app-header-light-active-color;
 
       @include hover-focus {
-        color: $navbar-light-active-color;
+        color: $app-header-light-active-color;
       }
     }
   }
@@ -200,14 +213,14 @@
 
   .header-nav {
     .nav-link {
-      color: $navbar-light-color;
+      color: $app-header-light-color;
 
       @include hover-focus {
-        color: $navbar-light-hover-color;
+        color: $app-header-light-hover-color;
       }
 
       &.disabled {
-        color: $navbar-light-disabled-color;
+        color: $app-header-light-disabled-color;
       }
     }
 
@@ -215,7 +228,7 @@
     .active > .nav-link,
     .nav-link.show,
     .nav-link.active {
-      color: $navbar-light-active-color;
+      color: $app-header-light-active-color;
     }
   }
 
@@ -224,7 +237,7 @@
       &,
       &:after,
       &:before {
-        background-color: $navbar-light-toggler-border-color;
+        background-color: $app-header-light-toggler-border-color;
       }
     }
   }
@@ -233,10 +246,10 @@
 // White links against a dark background
 .app-header-dark {
   background-color: $app-header-dark-bg;
-  color: $navbar-dark-color;
+  color: $app-header-dark-color;
 
   .btn-account {
-    color: $navbar-dark-active-color;
+    color: $app-header-dark-active-color;
     border-left: 1px solid rgba($dark, .12);
 
     @include hover {
@@ -255,10 +268,10 @@
     background-color: $app-header-accent-color;
 
     > a {
-      color: $navbar-dark-active-color;
+      color: $app-header-dark-active-color;
 
       @include hover-focus {
-        color: $navbar-dark-active-color;
+        color: $app-header-dark-active-color;
       }
     }
   }
@@ -280,7 +293,7 @@
         .input-group-text,
         .form-control,
         .form-control::placeholder {
-          color: $navbar-dark-disabled-color;
+          color: $app-header-dark-disabled-color;
         }
       }
     }
@@ -288,15 +301,15 @@
 
   .header-nav {
     .nav-link {
-      color: $navbar-dark-color;
+      color: $app-header-dark-color;
 
       @include hover-focus {
-        color: $navbar-dark-hover-color;
+        color: $app-header-dark-hover-color;
         background-color: rgba($white, .12);
       }
 
       &.disabled {
-        color: $navbar-dark-disabled-color;
+        color: $app-header-dark-disabled-color;
       }
     }
 
@@ -304,7 +317,7 @@
     .active > .nav-link,
     .nav-link.show,
     .nav-link.active {
-      color: $navbar-dark-active-color;
+      color: $app-header-dark-active-color;
       background-color: rgba($black, .12);
     }
   }

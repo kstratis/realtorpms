@@ -112,6 +112,13 @@
       background-position: calc(100% - #{$input-padding-x}) calc(.375em + .1875rem + 2px) !important;
       background-size: calc(.75em + .375rem) calc(.75em + .375rem);
     }
+
+    + .valid-feedback,
+    + .invalid-feedback,
+    + .valid-tooltip,
+    + .invalid-tooltip {
+      display: block;
+    }
   }
 
   .form-control,
@@ -207,7 +214,7 @@
   }
 }
 
-.input-group-reflow {
+.input-group-plaintext {
   &,
   &.focus,
   .form-control,
@@ -219,10 +226,9 @@
     box-shadow: none !important;
   }
 
-  .input-group-prepend > .input-group-text {
-    padding-right: 0;
-  }
+  .input-group-prepend > .input-group-text,
   .input-group-append > .input-group-text {
+    padding-right: 0;
     padding-left: 0;
   }
 }
@@ -331,7 +337,7 @@
 
   .spinner-border-sm,
   .spinner-grow-sm {
-    top: .75rem;
+    top: .6875rem;
   }
 
   &.form-label-group {

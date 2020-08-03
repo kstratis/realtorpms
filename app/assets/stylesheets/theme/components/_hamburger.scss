@@ -89,7 +89,8 @@
 /*
  * Arrow
  */
-.hamburger-arrow.active {
+.hamburger-arrow.active,
+.hamburger-arrow[aria-expanded="true"] {
   .hamburger-inner {
     &::before {
       transform: translate3d($hamburger-layer-width * -0.2, 1px, 0) rotate(-45deg) scale(0.7, 1);
@@ -118,7 +119,8 @@
     }
   }
 
-  &.active {
+  &.active,
+  &[aria-expanded="true"] {
     .hamburger-inner {
       transform: rotate(45deg);
       transition-delay: 0.12s;

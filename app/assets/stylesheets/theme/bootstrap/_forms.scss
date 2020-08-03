@@ -67,6 +67,10 @@ label {
   }
 }
 
+.form-control-plaintext {
+  font-size: inherit;
+}
+
 .form-control {
   box-shadow: $input-box-shadow;
   backface-visibility: hidden; // avoid webkit bug render
@@ -155,7 +159,7 @@ $input-floating-padding-y: .75rem !default;
     color: transparent;
   }
 
-  input:placeholder-shown {
+  input:placeholder-shown:not(:-webkit-autofill) {
     padding-top: $input-floating-padding-y;
     padding-bottom: $input-floating-padding-y;
 
@@ -168,7 +172,7 @@ $input-floating-padding-y: .75rem !default;
   }
 
   // separate this style to avoid :placeholder-shown bug in IE
-  input.placeholder-shown {
+  input.placeholder-shown:not(:-webkit-autofill) {
     padding-top: $input-floating-padding-y;
     padding-bottom: $input-floating-padding-y;
 

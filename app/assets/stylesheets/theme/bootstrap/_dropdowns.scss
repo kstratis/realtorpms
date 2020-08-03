@@ -6,6 +6,24 @@
   animation-duration: 200ms;
   animation-fill-mode: both;
 
+  &[x-placement="top-start"],
+  &[x-placement="top-end"] {
+    margin-top: auto;
+    margin-bottom: 10px;
+  }
+
+  &[x-placement="right-start"],
+  &[x-placement="right-end"] {
+    margin-top: auto;
+    margin-left: 10px;
+  }
+
+  &[x-placement="left-start"],
+  &[x-placement="left-end"] {
+    margin-top: auto;
+    margin-right: 10px;
+  }
+
   @include media-breakpoint-up(md) {
     font-size: $font-size-sm;
   }
@@ -14,16 +32,25 @@
     animation-name: showDropdown;
   }
 
+  &-rich {
+    width: 20rem;
+  }
+
   &-md {
-    min-width: 18rem;
+    width: 18rem;
   }
 
   &-lg {
-    min-width: 24rem;
+    width: 24rem;
   }
 
   &-xl {
-    min-width: 30rem;
+    width: 30rem;
+  }
+
+  // nested dropdown
+  .dropdown-toggle:after {
+    margin-left: auto;
   }
 }
 
@@ -53,6 +80,7 @@
   &.focus,
   &:active,
   &.active {
+    .text-muted,
     .dropdown-icon,
     .subject,
     &.unread .subject,
@@ -60,6 +88,10 @@
     &.unread .text,
     .date {
       color: inherit;
+    }
+
+    .text-muted {
+      opacity: .87;
     }
   }
 
@@ -92,49 +124,84 @@
   }
 }
 
-.dropdown,
-.btn-group {
-  .dropdown-arrow {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    overflow: hidden;
-    height: 1.25rem;
-    width: 1.25rem;
-    margin-top: -10px;
-    margin-left: -10px;
-    pointer-events: none;
-    z-index: ($zindex-dropdown + 1);
+.dropdown-arrow {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: .5rem;
+  overflow: hidden;
+  height: 1.25rem;
+  width: 1.25rem;
+  pointer-events: none;
+  z-index: ($zindex-dropdown + 1);
+  transform: translate3d(0, -100%, 0);
 
-    &-right {
-      left: auto;
-      right: 1rem;
-    }
-    &-left {
-      left: 2rem;
-    }
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: -.375rem;
+    left: .5rem;
+    transform: rotate(45deg);
+    display: block;
+    height: .75rem;
+    width: .75rem;
+    margin-left: -5px;
+    background-color: $dropdown-bg;
+    box-shadow: $dropdown-box-shadow;
+    pointer-events: none;
+  }
+
+  [x-placement="top-start"] > &,
+  [x-placement="top-end"] > & {
+    top: auto;
+    bottom: 0;
+    transform: translate3d(0, 100%, 0);
 
     &::before {
-      content: '';
-      position: absolute;
-      bottom: -.375rem;
-      left: 50%;
-      transform: rotate(45deg);
-      display: block;
-      height: .75rem;
-      width: .75rem;
-      margin-left: -5px;
-      background-color: $dropdown-bg;
-      box-shadow: $dropdown-box-shadow;
-      pointer-events: none;
+      top: -.375rem;
+      bottom: auto;
     }
   }
 
-  &.show > .dropdown-arrow {
-    display: block;
-    transform-origin: bottom;
-    animation: showArrow 300ms ease-in-out;
+  [x-placement="right-start"] > & {
+    top: .5rem;
+    left: 0;
+    transform: translate3d(-100%, 0, 0);
+
+    &::before {
+      bottom: .375rem;
+      right: 0;
+      left: auto;
+      margin-right: -.375rem;
+      margin-left: auto;
+    }
+  }
+
+  [x-placement="left-start"] > & {
+    top: .5rem;
+    right: 0;
+    left: auto;
+    transform: translate3d(100%, 0, 0);
+
+    &::before {
+      bottom: .375rem;
+      left: 0;
+      margin-left: -.375rem;
+    }
+  }
+
+  .dropdown-menu-right > & {
+    left: auto;
+    right: .5rem;
+  }
+
+  &-right {
+    left: auto;
+    right: .5rem;
+  }
+
+  &-left {
+    left: .5rem;
   }
 }
 
@@ -157,7 +224,6 @@
 
 .dropdown-menu-rich {
   padding: 0;
-  width: 20rem;
 
   .dropdown-header {
     padding-top: .75rem;
@@ -217,22 +283,8 @@
 
 @keyframes showDropdown {
   from {
-    top: 100%;
     opacity: 0;
     transform: scale(.8);
-  }
-
-  100% {
-    top: 100%;
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes showArrow {
-  from {
-    opacity: 0;
-    transform: scale(0);
   }
 
   100% {

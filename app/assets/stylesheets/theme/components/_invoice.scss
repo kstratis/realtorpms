@@ -65,13 +65,6 @@ $invoice-brand-size:      6rem !default;
   margin-bottom: $invoice-padding-x;
 }
 
-.invoice-brand {
-  > img {
-    width: $invoice-brand-size;
-    height: auto;
-  }
-}
-
 .invoice-body {
   > .table {
     margin-top: $invoice-padding-x;
