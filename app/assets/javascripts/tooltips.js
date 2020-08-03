@@ -1,3 +1,3 @@
-$(document).on('turbolinks:load', function(e) {
-  $('.tooltips').tooltip();
-});
+// $(document).on('turbolinks:load', function(e) {
+//   $('.tooltips').tooltip();
+// });

@@ -15,6 +15,9 @@ import * as CustomActiveStorage from '../bundles/uploaders/custom_active_storage
 import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 
+import 'bootstrap'
+import "stylesheets/application"
+
 // const getExample = () => {
 //   return Promise.all([
 //     import(/* webpackChunkName: "Example" */
@@ -30,5 +33,7 @@ $(document).on('turbolinks:load', function(e) {
       ReactDOM.render(<Example />, document.getElementById('lazy'))
     });
   }
+  $('[data-toggle="tooltip"]').tooltip();
+  $('[data-toggle="popover"]').popover();
 });
 

@@ -16,8 +16,6 @@
 //= require turbolinks
 //= require turbolinks_transitions
 //= require turbolinks_flash
-//= require popper
-//= require bootstrap
 //= require parsley
 //= require clamp-js-main
 //= require tooltips
