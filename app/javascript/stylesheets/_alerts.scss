@@ -1,0 +1,22 @@
+// Overrides
+
+.alert-container{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5000;
+}
+
+.alert{
+  min-height: 55px;
+  padding-top: 1rem;
+}
+
+.alert-dismissible .close{
+  padding-top: 1rem;
+}
+
+.alert-notice{
+  background: $pink;
+  color: #ffffff;
+}

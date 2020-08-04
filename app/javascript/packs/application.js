@@ -14,10 +14,7 @@ import { setup_dependent_checkboxes } from '../bundles/utilities/helpers';
 import * as CustomActiveStorage from '../bundles/uploaders/custom_active_storage';
 import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
-
-import 'bootstrap'
-// import './lib_styles'
-import "../stylesheets/application"
+import 'bootstrap'  // bootstrap js files
 
 // const getExample = () => {
 //   return Promise.all([

@@ -1,0 +1,110 @@
+.breadcrumb-custom a {
+  display: block;
+  overflow: hidden;
+  max-width: 49px;
+  text-overflow: ellipsis;
+  white-space: nowrap
+}
+
+@media (min-width: 500px) {
+  .breadcrumb-custom a {
+    max-width:100px
+  }
+}
+
+@media (min-width: 768px) {
+  .breadcrumb-custom a {
+    max-width:160px
+  }
+}
+
+@media (min-width: 992px) {
+  .breadcrumb-custom a {
+    max-width:220px
+  }
+}
+
+@media (min-width: 1200px) {
+  .breadcrumb-custom a {
+    max-width:280px
+  }
+}
+
+.breadcrumb-custom a:hover i {
+  text-decoration: none;
+  //color: #333335
+}
+
+.breadcrumb-custom li {
+  display: block;
+  float: left;
+  position: relative;
+  background: #fff;
+  padding-left: 45px;
+  height: 50px;
+  line-height: 50px;
+  color: #555
+}
+
+.breadcrumb-custom li.active {
+  overflow: hidden;
+  max-width: 105px;
+  text-overflow: ellipsis;
+  white-space: nowrap
+}
+
+@media (min-width: 500px) {
+  .breadcrumb-custom li.active {
+    max-width:145px
+  }
+}
+
+@media (min-width: 768px) {
+  .breadcrumb-custom li.active {
+    max-width:205px
+  }
+}
+
+@media (min-width: 992px) {
+  .breadcrumb-custom li.active {
+    max-width:265px
+  }
+}
+
+@media (min-width: 1200px) {
+  .breadcrumb-custom li.active {
+    max-width:325px
+  }
+}
+
+.breadcrumb-custom li:first-child {
+  padding-left: 30px
+}
+
+.breadcrumb-custom li:after {
+  border-left: 30px solid #fff;
+  z-index: 2
+}
+
+.breadcrumb-custom li:after,.breadcrumb-custom li:before {
+  content: " ";
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: 50px solid transparent;
+  border-bottom: 50px solid transparent;
+  position: absolute;
+  top: 50%;
+  margin-top: -50px;
+  left: 100%;
+}
+
+.breadcrumb-custom li.back:after,.breadcrumb-custom li.back:before {
+  content: unset;
+}
+
+.breadcrumb-custom li:before {
+  border-left: 30px solid #dddfe1;
+  margin-left: 1px;
+  z-index: 1
+}
