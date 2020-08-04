@@ -22,39 +22,39 @@
   &.xxs { width:  20px; height:  20px; vertical-align: middle;}
 
   &.masked-icon-dash{
-    mask: image-path('sidebar/dashboard_n.svg');
+    mask: url('../images/sidebar/dashboard_n.svg');
   }
 
   &.masked-icon-partners{
-    mask: image-path('sidebar/businessman.svg');
+    mask: url('../images/sidebar/businessman.svg');
   }
 
   &.masked-icon-building{
-    mask: image-path('sidebar/building.svg');
+    mask: url('../images/sidebar/building.svg');
   }
 
   &.masked-icon-clients{
-    mask: image-path('sidebar/partners.svg');
+    mask: url('../images/sidebar/partners.svg');
   }
 
   &.masked-icon-favorites{
-    mask: image-path('sidebar/favorites.svg');
+    mask: url('../images/sidebar/favorites.svg');
   }
 
   &.masked-icon-plug{
-    mask: image-path('sidebar/plug.svg');
+    mask: url('../images/sidebar/plug.svg');
   }
 
   &.masked-icon-code{
-    mask: image-path('sidebar/code.svg');
+    mask: url('../images/sidebar/code.svg');
   }
 
   &.masked-icon-settings{
-    mask: image-path('sidebar/gear.svg');
+    mask: url('../images/sidebar/gear.svg');
   }
 
   //&.masked-icon-favorites{
-  //  mask: image-path(sidebar/favorites.svg);
+  //  mask: url(sidebar/favorites.svg);
   //}
 }
 
@@ -81,359 +81,359 @@
   &.xl { width: 300px; height: 300px; }
 
   &.house-colored{
-    background-image: image-path( 'house_colored.svg' );
+    background-image: url('../images/house_colored.svg');
   }
 
   &.house-add{
-    background-image: image-path( 'houses/add_house.svg' );
+    background-image: url('../images/houses/add_house.svg');
   }
 
   &.add-property-colored{
-    background-image: image-path( 'add_property_colored.svg ');
+    background-image: url('../images/add_property_colored.svg');
   }
 
   &.agent-colored{
-    background-image: image-path('agent_colored.svg' );
+    background-image: url('../images/agent_colored.svg');
   }
 
   &.stats-colored{
-    background-image: image-path( 'stats_colored.svg' );
+    background-image: url('../images/stats_colored.svg');
   }
 
   &.settings-colored{
-    background-image: image-path( 'settings_colored.svg' );
+    background-image: url('../images/settings_colored.svg');
   }
 
   &.add-user-colored{
-    background-image: image-path( 'add_user_colored.svg' );
+    background-image: url('../images/add_user_colored.svg');
   }
 
   &.edit-user-colored{
-    background-image: image-path( 'edit_colored.svg ');
+    background-image: url('../images/edit_colored.svg');
   }
 
   &.invite-user-colored{
-    background-image: image-path('invite_user_colored.svg');
+    background-image: url('../images/invite_user_colored.svg');
   }
 
   &.invite-user-colored2{
-    background-image: image-path('invite_user_colored2.svg');
+    background-image: url('../images/invite_user_colored2.svg');
   }
 
   &.back-button{
-    background-image: image-path('back_button.svg');
+    background-image: url('../images/back_button.svg');
   }
 
   &.account-switch{
-    background-image: image-path( 'account_switch.svg' );
+    background-image: url('../images/account_switch.svg');
   }
 
   &.account-switch-navbar{
-    background-image: image-path( 'switch_accounts_colored.svg' );
+    background-image: url('../images/switch_accounts_colored.svg');
   }
 
   &.assignments{
-    background-image: image-path( 'assignments2.svg' );
+    background-image: url('../images/assignments2.svg');
   }
 
   &.pencil{
-    background-image: image-path( 'pencil_2.svg' );
+    background-image: url('../images/pencil_2.svg');
   }
 
   &.user-delete{
-    background-image: image-path('trash_2.svg');
+    background-image: url('../images/trash_2.svg');
   }
 
   &.partner-info{
-    background-image: image-path('business_card.svg ');
+    background-image: url('../images/business_card.svg');
   }
 
   &.bar-chart{
-    background-image: image-path( 'bar_chart.svg ');
+    background-image: url('../images/bar_chart.svg');
   }
 
   &.checkmark{
-    background-image: image-path( 'checkmark.svg' );
+    background-image: url('../images/checkmark.svg');
   }
 
   &.cancel{
-    background-image: image-path('cancel.svg');
+    background-image: url('../images/cancel.svg');
   }
 
   &.properties{
-    background-image: image-path('fireplace.svg');
+    background-image: url('../images/fireplace.svg');
   }
 
   &.clients{
-    background-image: image-path('clients.svg');
+    background-image: url('../images/clients.svg');
   }
 
   &.users{
-    background-image: image-path('dashboard/users.svg');
+    background-image: url('../images/dashboard/users.svg');
   }
 
   &.integrations{
-    background-image: image-path( 'dashboard/plugin.svg');
+    background-image: url('../images/dashboard/plugin.svg');
   }
 
   &.mapping{
-    background-image: image-path( 'dashboard/house_mapping.svg');
+    background-image: url('../images/dashboard/house_mapping.svg');
   }
 
   &.statistics{
-    background-image: image-path( 'dashboard/stats.svg');
+    background-image: url('../images/dashboard/stats.svg');
   }
 
   &.client{
-    background-image: image-path( 'owners/client.svg');
+    background-image: url('../images/owners/client.svg');
   }
 
   &.house-avatar-placeholder{
-    background-image: image-path( 'houses/house_placeholder.svg');
+    background-image: url('../images/houses/house_placeholder.svg');
   }
 
   &.bedrooms{
-    background-image: image-path( 'house_specs/bedrooms.svg');
+    background-image: url('../images/house_specs/bedrooms.svg');
   }
 
   &.bathrooms{
-    background-image: image-path( 'house_specs/bathrooms.svg');
+    background-image: url('../images/house_specs/bathrooms.svg');
   }
 
   &.floor{
-    background-image: image-path( 'house_specs/floor.svg');
+    background-image: url('../images/house_specs/floor.svg');
   }
 
   &.parking{
-    background-image: image-path( 'house_specs/parking.svg');
+    background-image: url('../images/house_specs/parking.svg');
   }
 
   &.construction{
-    background-image: image-path( 'house_specs/construction.svg');
+    background-image: url('../images/house_specs/construction.svg');
   }
 
   &.availability{
-    background-image: image-path( 'house_specs/availability.svg');
+    background-image: url('../images/house_specs/availability.svg');
   }
 
   &.address{
-    background-image: image-path( 'house_specs/pin.svg');
+    background-image: url('../images/house_specs/pin.svg');
   }
 
   &.location{
-    background-image: image-path(' house_specs/location.svg');
+    background-image: url('../images/house_specs/location.svg');
   }
 
   &.neoclassical{
-    background-image: image-path(' house_specs/neoclassic.svg');
+    background-image: url('../images/house_specs/neoclassic.svg');
   }
 
   &.protected_pr{
-    background-image: image-path(' house_specs/protected_pr.svg');
+    background-image: url('../images/house_specs/protected_pr.svg');
   }
 
   &.loft_pr{
-    background-image: image-path(' house_specs/loft.svg');
+    background-image: url('../images/house_specs/loft.svg');
   }
 
   &.traditional{
-    background-image: image-path(' house_specs/traditional.svg');
+    background-image: url('../images/house_specs/traditional.svg');
   }
 
   &.villa_pr{
-    background-image: image-path(' house_specs/mansion.svg');
+    background-image: url('../images/house_specs/mansion.svg');
   }
 
   &.stone{
-    background-image: image-path(' house_specs/stone_house.svg');
+    background-image: url('../images/house_specs/stone_house.svg');
   }
 
   &.studio_pr{
-    background-image: image-path(' house_specs/studio.svg');
+    background-image: url('../images/house_specs/studio.svg');
   }
 
   &.prefabricated_pr{
-    background-image: image-path(' house_specs/prefabricated.svg');
+    background-image: url('../images/house_specs/prefabricated.svg');
   }
 
   &.precast_pr{
-    background-image: image-path(' house_specs/precast.svg');
+    background-image: url('../images/house_specs/precast.svg');
   }
 
   &.central{
-    background-image: image-path(' house_specs/central_heating.svg');
+    background-image: url('../images/house_specs/central_heating.svg');
   }
 
   &.prive{
-    background-image: image-path(' house_specs/private_heating.svg');
+    background-image: url('../images/house_specs/private_heating.svg');
   }
 
   &.facade{
-    background-image: image-path(' house_specs/facade.svg');
+    background-image: url('../images/house_specs/facade.svg');
   }
 
   &.double_frontage{
-    background-image: image-path(' house_specs/double_frontage.svg');
+    background-image: url('../images/house_specs/double_frontage.svg');
   }
 
   &.corner{
-    background-image: image-path(' house_specs/corner.svg');
+    background-image: url('../images/house_specs/corner.svg');
   }
 
   &.internal{
-    background-image: image-path(' house_specs/internal.svg');
+    background-image: url('../images/house_specs/internal.svg');
   }
 
   &.sea_view{
-    background-image: image-path(' house_specs/sea_view.svg');
+    background-image: url('../images/house_specs/sea_view.svg');
   }
 
   &.mountain_view{
-    background-image: image-path(' house_specs/mountain_view.svg');
+    background-image: url('../images/house_specs/mountain_view.svg');
   }
 
   &.forest_view{
-    background-image: image-path(' house_specs/forest_view.svg');
+    background-image: url('../images/house_specs/forest_view.svg');
   }
 
   &.infinite_view{
-    background-image: image-path(' house_specs/panoramic_view.svg');
+    background-image: url('../images/house_specs/panoramic_view.svg');
   }
 
   &.gas{
-    background-image: image-path(' house_specs/gas.svg');
+    background-image: url('../images/house_specs/gas.svg');
   }
 
   &.solar_water_heating{
-    background-image: image-path(' house_specs/water_heater.svg');
+    background-image: url('../images/house_specs/water_heater.svg');
   }
 
   &.furnished{
-    background-image: image-path(' house_specs/furnished.svg');
+    background-image: url('../images/house_specs/furnished.svg');
   }
 
   &.fireplace{
-    background-image: image-path(' house_specs/fireplace.svg');
+    background-image: url('../images/house_specs/fireplace.svg');
   }
 
   &.awnings{
-    background-image: image-path(' house_specs/awnings.svg');
+    background-image: url('../images/house_specs/awnings.svg');
   }
 
   &.clima{
-    background-image: image-path(' house_specs/clima.svg');
+    background-image: url('../images/house_specs/clima.svg');
   }
 
   &.security_door{
-    background-image: image-path(' house_specs/security_door.svg');
+    background-image: url('../images/house_specs/security_door.svg');
   }
 
   &.pool{
-    background-image: image-path(' house_specs/pool.svg');
+    background-image: url('../images/house_specs/pool.svg');
   }
 
   &.no_elevator{
-    background-image: image-path(' house_specs/no_elevator.svg');
+    background-image: url('../images/house_specs/no_elevator.svg');
   }
 
   &.no_utility_bills{
-    background-image: image-path(' house_specs/no_utility_bills.svg');
+    background-image: url('../images/house_specs/no_utility_bills.svg');
   }
 
   &.fit_for_professional_use{
-    background-image: image-path(' house_specs/briefcase.svg');
+    background-image: url('../images/house_specs/briefcase.svg');
   }
 
   &.roofdeck{
-    background-image: image-path(' house_specs/terrace.svg');
+    background-image: url('../images/house_specs/terrace.svg');
   }
 
   &.plot{
-    background-image: image-path(' house_specs/plot.svg');
+    background-image: url('../images/house_specs/plot.svg');
   }
 
   &.garden{
-    background-image: image-path(' house_specs/garden.svg');
+    background-image: url('../images/house_specs/garden.svg');
   }
 
   &.storage{
-    background-image: image-path(' house_specs/warehouse.svg');
+    background-image: url('../images/house_specs/warehouse.svg');
   }
 
   &.list{
-    background-image: image-path(' house_specs/list.svg');
+    background-image: url('../images/house_specs/list.svg');
   }
 
   &.notes{
-    background-image: image-path(' house_specs/notes.svg');
+    background-image: url('../images/house_specs/notes.svg');
   }
 
   &.info{
-    background-image: image-path(' house_specs/info.svg');
+    background-image: url('../images/house_specs/info.svg');
   }
 
   &.specs{
-    background-image: image-path(' house_specs/specs.svg');
+    background-image: url('../images/house_specs/specs.svg');
   }
 
   &.assignments{
-    background-image: image-path(' house_specs/assignment.svg');
+    background-image: url('../images/house_specs/assignment.svg');
   }
 
   &.description{
-    background-image: image-path(' house_specs/description.svg');
+    background-image: url('../images/house_specs/description.svg');
   }
 
   &.dashboard_alt{
-    background-image: image-path(' dashboard_alt.svg');
+    background-image: url('../images/dashboard_alt.svg');
   }
 
   &.price{
-    background-image: image-path(' house_specs/price.svg');
+    background-image: url('../images/house_specs/price.svg');
   }
 
   &.pricepersqmeter{
-    background-image: image-path(' house_specs/pricepersqmeter.svg');
+    background-image: url('../images/house_specs/pricepersqmeter.svg');
   }
 
   &.size{
-    background-image: image-path(' house_specs/size.svg');
+    background-image: url('../images/house_specs/size.svg');
   }
 
   &.subcategory{
-    background-image: image-path(' house_specs/subcategory.svg');
+    background-image: url('../images/house_specs/subcategory.svg');
   }
 
   &.businesstype{
-    background-image: image-path(' house_specs/businesstype.svg');
+    background-image: url('../images/house_specs/businesstype.svg');
   }
 
   &.tel{
-    background-image: image-path(' house_specs/tel.svg');
+    background-image: url('../images/house_specs/tel.svg');
   }
 
   &.created_at{
-    background-image: image-path(' house_specs/created_at.svg');
+    background-image: url('../images/house_specs/created_at.svg');
   }
 
   &.filters{
-    background-image: image-path(' filters.svg');
+    background-image: url('../images/filters.svg');
   }
 
   &.plus{
-    background-image: image-path(' plus.svg');
+    background-image: url('../images/plus.svg');
   }
 
   &.disk{
-    background-image: image-path(' disk.svg');
+    background-image: url('../images/disk.svg');
   }
 
   &.search{
-    background-image: image-path(' search.svg');
+    background-image: url('../images/search.svg');
   }
 
   &.no_stored_searches{
-    background-image: image-path(' no_stored_searches.svg');
+    background-image: url('../images/no_stored_searches.svg');
   }
 
   & ~ .pr-icon-desc {
