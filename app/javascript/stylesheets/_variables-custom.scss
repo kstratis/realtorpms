@@ -2,7 +2,10 @@
 $gray-medium-light: #eaeaea;
 $bg-color-1: #f8faff;
 $bg-color-2: #f3f4f8;
-$breadcrumb-divider: none !important;
+
+// The following line causes a bug
+// $breadcrumb-divider: none !important;
+
 // This is for the sidebar
 $app-aside-light-bg: $bg-color-1;
 // This is for the .custom-select arrow indicator bug

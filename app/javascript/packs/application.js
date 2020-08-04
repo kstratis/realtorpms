@@ -15,7 +15,8 @@ import * as CustomActiveStorage from '../bundles/uploaders/custom_active_storage
 import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 
-import "bootstrap"
+import 'bootstrap'
+// import './lib_styles'
 import "../stylesheets/application"
 
 // const getExample = () => {
