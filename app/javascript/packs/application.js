@@ -23,6 +23,13 @@ import 'bootstrap'  // bootstrap js files
 //   ]);
 // };
 
+// This is how we manage to load webpack processed images skipping the asset pipeline entirely.
+// Note that images referenced from within webpack-processed scss are automatically included. However for
+// view helpers such `image_pack_tag` to work we need to require their context here.
+// See more in the docs: https://github.com/rails/webpacker/blob/master/docs/assets.md#link-in-your-rails-views
+require.context('../images', true)
+
+
 $(document).on('turbolinks:load', function(e) {
   if ($(".uppy-emitters, .file-emitters").length > 0){ CustomActiveStorage.start()}
   if ($('.dependent_input').length) setup_dependent_checkboxes();

@@ -15,10 +15,10 @@
   <title><%= full_title(yield(:title)) %></title>
 
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=greek" rel="stylesheet">
-<!--  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">-->
-  <%= render 'layouts/shared_style_assets' %>
+
+  <%= stylesheet_pack_tag 'style_loaders/main_stylesheet', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= render 'layouts/shim' %>
-  <%#= render 'layouts/shared_style_assets' %>
+
 </head>
 <body>
 <%= yield %>
