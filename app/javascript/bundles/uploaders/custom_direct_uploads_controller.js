@@ -1,6 +1,6 @@
 /* This is basically a customized version of active_uploads_controller.js of activestorage. */
-import { DirectUploadController } from "activestorage/src/direct_upload_controller";
-import { dispatchEvent } from 'activestorage/src/helpers';
+import { DirectUploadController } from "@rails/activestorage/src/direct_upload_controller";
+import { dispatchEvent } from '@rails/activestorage/src/helpers';
 
 // Changed line
 const uppySelector = "input[type=file][data-direct-upload-url].uppy-emitters:not([disabled])";

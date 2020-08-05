@@ -5,11 +5,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0'
 # gem 'rails', :git => 'https://github.com/rails/rails'
-# gem 'bootstrap-sass', '3.3.7'
 
 # Watch out! - Don't upgrade to 3.1.13 yet because it incurs severe performance degradation
 gem 'bcrypt', '3.1.12'

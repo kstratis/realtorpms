@@ -9,8 +9,9 @@
 
 require("@rails/ujs").start();
 import './turbolinks_wrapper';
-import 'stacked-menu'
 import 'clamp-js-main'
+// import 'stacked-menu'
+
 // ---
 // require("@rails/activestorage").start();
 // require("channels");
