@@ -19,7 +19,7 @@
               <div class="card-body">
                 <% if @events.blank? %>
                   <div class="state-figure text-center">
-                    <%= image_tag 'no_content.svg', class: 'img-fluid max-300' %>
+                    <%= image_pack_tag 'media/images/no_content.svg', class: "img-fluid max-300" %>
                   </div>
                   <h3 class="state-header text-center"><%= t('main.welcome.no_activities') %></h3>
                 <% else %>

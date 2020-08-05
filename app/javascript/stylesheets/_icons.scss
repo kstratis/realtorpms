@@ -1,0 +1,455 @@
+.pr-icon-wrap {
+  text-align: center;
+}
+
+.action-button-graphic {
+  display: block !important;
+  background-size: auto 100% !important;
+  padding: 0 !important
+}
+
+.sidebar-masked-icon {
+  display: inline-block;
+  //background-color: rgb(149, 134, 165);
+  background-color: #888c9b;
+  background-size: auto 85%;
+  background-repeat: no-repeat;
+  background-position: center center ;
+  mask-size: cover;
+  transition: background-color 0.15s linear 0s;
+
+  &.xs { width:  23px; height:  23px; vertical-align: middle;}
+  &.xxs { width:  20px; height:  20px; vertical-align: middle;}
+
+  &.masked-icon-dash{
+    mask: url('../images/sidebar/dashboard_n.svg');
+  }
+
+  &.masked-icon-partners{
+    mask: url('../images/sidebar/businessman.svg');
+  }
+
+  &.masked-icon-building{
+    mask: url('../images/sidebar/building.svg');
+  }
+
+  &.masked-icon-clients{
+    mask: url('../images/sidebar/partners.svg');
+  }
+
+  &.masked-icon-favorites{
+    mask: url('../images/sidebar/favorites.svg');
+  }
+
+  &.masked-icon-plug{
+    mask: url('../images/sidebar/plug.svg');
+  }
+
+  &.masked-icon-code{
+    mask: url('../images/sidebar/code.svg');
+  }
+
+  &.masked-icon-settings{
+    mask: url('../images/sidebar/gear.svg');
+  }
+
+  //&.masked-icon-favorites{
+  //  mask: url(sidebar/favorites.svg);
+  //}
+}
+
+.pr-icon {
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+
+  background-size: auto 85%;
+  background-repeat: no-repeat;
+  background-position: center center ;
+
+  &.xxxs { width:  15px; height:  15px; vertical-align: middle;}
+  &.xxs { width:  20px; height:  20px; vertical-align: middle;}
+  &.xs { width:  25px; height:  25px; vertical-align: middle;}
+  &.xss { width:  30px; height:  30px; vertical-align: middle;}
+  &.cs { width:  35px; height:  35px; }
+  &.css { width:  45px; height:  45px; }
+  &.sm { width:  50px; height:  50px; }
+  &.smm { width:  65px; height:  65px; }
+  &.smmm { width:  85px; height:  85px; }
+  &.md { width: 100px; height: 100px; }
+  &.lg { width: 200px; height: 200px; }
+  &.xl { width: 300px; height: 300px; }
+
+  &.house-colored{
+    background-image: url('../images/house_colored.svg');
+  }
+
+  &.house-add{
+    background-image: url('../images/houses/add_house.svg');
+  }
+
+  &.add-property-colored{
+    background-image: url('../images/add_property_colored.svg');
+  }
+
+  &.agent-colored{
+    background-image: url('../images/agent_colored.svg');
+  }
+
+  &.stats-colored{
+    background-image: url('../images/stats_colored.svg');
+  }
+
+  &.settings-colored{
+    background-image: url('../images/settings_colored.svg');
+  }
+
+  &.add-user-colored{
+    background-image: url('../images/add_user_colored.svg');
+  }
+
+  &.edit-user-colored{
+    background-image: url('../images/edit_colored.svg');
+  }
+
+  &.invite-user-colored{
+    background-image: url('../images/invite_user_colored.svg');
+  }
+
+  &.invite-user-colored2{
+    background-image: url('../images/invite_user_colored2.svg');
+  }
+
+  &.back-button{
+    background-image: url('../images/back_button.svg');
+  }
+
+  &.account-switch{
+    background-image: url('../images/account_switch.svg');
+  }
+
+  &.account-switch-navbar{
+    background-image: url('../images/switch_accounts_colored.svg');
+  }
+
+  &.assignments{
+    background-image: url('../images/assignments2.svg');
+  }
+
+  &.pencil{
+    background-image: url('../images/pencil_2.svg');
+  }
+
+  &.user-delete{
+    background-image: url('../images/trash_2.svg');
+  }
+
+  &.partner-info{
+    background-image: url('../images/business_card.svg');
+  }
+
+  &.bar-chart{
+    background-image: url('../images/bar_chart.svg');
+  }
+
+  &.checkmark{
+    background-image: url('../images/checkmark.svg');
+  }
+
+  &.cancel{
+    background-image: url('../images/cancel.svg');
+  }
+
+  &.properties{
+    background-image: url('../images/fireplace.svg');
+  }
+
+  &.clients{
+    background-image: url('../images/clients.svg');
+  }
+
+  &.users{
+    background-image: url('../images/dashboard/users.svg');
+  }
+
+  &.integrations{
+    background-image: url('../images/dashboard/plugin.svg');
+  }
+
+  &.mapping{
+    background-image: url('../images/dashboard/house_mapping.svg');
+  }
+
+  &.statistics{
+    background-image: url('../images/dashboard/stats.svg');
+  }
+
+  &.client{
+    background-image: url('../images/owners/client.svg');
+  }
+
+  &.house-avatar-placeholder{
+    background-image: url('../images/houses/house_placeholder.svg');
+  }
+
+  &.bedrooms{
+    background-image: url('../images/house_specs/bedrooms.svg');
+  }
+
+  &.bathrooms{
+    background-image: url('../images/house_specs/bathrooms.svg');
+  }
+
+  &.floor{
+    background-image: url('../images/house_specs/floor.svg');
+  }
+
+  &.parking{
+    background-image: url('../images/house_specs/parking.svg');
+  }
+
+  &.construction{
+    background-image: url('../images/house_specs/construction.svg');
+  }
+
+  &.availability{
+    background-image: url('../images/house_specs/availability.svg');
+  }
+
+  &.address{
+    background-image: url('../images/house_specs/pin.svg');
+  }
+
+  &.location{
+    background-image: url('../images/house_specs/location.svg');
+  }
+
+  &.neoclassical{
+    background-image: url('../images/house_specs/neoclassic.svg');
+  }
+
+  &.protected_pr{
+    background-image: url('../images/house_specs/protected_pr.svg');
+  }
+
+  &.loft_pr{
+    background-image: url('../images/house_specs/loft.svg');
+  }
+
+  &.traditional{
+    background-image: url('../images/house_specs/traditional.svg');
+  }
+
+  &.villa_pr{
+    background-image: url('../images/house_specs/mansion.svg');
+  }
+
+  &.stone{
+    background-image: url('../images/house_specs/stone_house.svg');
+  }
+
+  &.studio_pr{
+    background-image: url('../images/house_specs/studio.svg');
+  }
+
+  &.prefabricated_pr{
+    background-image: url('../images/house_specs/prefabricated.svg');
+  }
+
+  &.precast_pr{
+    background-image: url('../images/house_specs/precast.svg');
+  }
+
+  &.central{
+    background-image: url('../images/house_specs/central_heating.svg');
+  }
+
+  &.prive{
+    background-image: url('../images/house_specs/private_heating.svg');
+  }
+
+  &.facade{
+    background-image: url('../images/house_specs/facade.svg');
+  }
+
+  &.double_frontage{
+    background-image: url('../images/house_specs/double_frontage.svg');
+  }
+
+  &.corner{
+    background-image: url('../images/house_specs/corner.svg');
+  }
+
+  &.internal{
+    background-image: url('../images/house_specs/internal.svg');
+  }
+
+  &.sea_view{
+    background-image: url('../images/house_specs/sea_view.svg');
+  }
+
+  &.mountain_view{
+    background-image: url('../images/house_specs/mountain_view.svg');
+  }
+
+  &.forest_view{
+    background-image: url('../images/house_specs/forest_view.svg');
+  }
+
+  &.infinite_view{
+    background-image: url('../images/house_specs/panoramic_view.svg');
+  }
+
+  &.gas{
+    background-image: url('../images/house_specs/gas.svg');
+  }
+
+  &.solar_water_heating{
+    background-image: url('../images/house_specs/water_heater.svg');
+  }
+
+  &.furnished{
+    background-image: url('../images/house_specs/furnished.svg');
+  }
+
+  &.fireplace{
+    background-image: url('../images/house_specs/fireplace.svg');
+  }
+
+  &.awnings{
+    background-image: url('../images/house_specs/awnings.svg');
+  }
+
+  &.clima{
+    background-image: url('../images/house_specs/clima.svg');
+  }
+
+  &.security_door{
+    background-image: url('../images/house_specs/security_door.svg');
+  }
+
+  &.pool{
+    background-image: url('../images/house_specs/pool.svg');
+  }
+
+  &.no_elevator{
+    background-image: url('../images/house_specs/no_elevator.svg');
+  }
+
+  &.no_utility_bills{
+    background-image: url('../images/house_specs/no_utility_bills.svg');
+  }
+
+  &.fit_for_professional_use{
+    background-image: url('../images/house_specs/briefcase.svg');
+  }
+
+  &.roofdeck{
+    background-image: url('../images/house_specs/terrace.svg');
+  }
+
+  &.plot{
+    background-image: url('../images/house_specs/plot.svg');
+  }
+
+  &.garden{
+    background-image: url('../images/house_specs/garden.svg');
+  }
+
+  &.storage{
+    background-image: url('../images/house_specs/warehouse.svg');
+  }
+
+  &.list{
+    background-image: url('../images/house_specs/list.svg');
+  }
+
+  &.notes{
+    background-image: url('../images/house_specs/notes.svg');
+  }
+
+  &.info{
+    background-image: url('../images/house_specs/info.svg');
+  }
+
+  &.specs{
+    background-image: url('../images/house_specs/specs.svg');
+  }
+
+  &.assignments{
+    background-image: url('../images/house_specs/assignment.svg');
+  }
+
+  &.description{
+    background-image: url('../images/house_specs/description.svg');
+  }
+
+  &.dashboard_alt{
+    background-image: url('../images/dashboard_alt.svg');
+  }
+
+  &.price{
+    background-image: url('../images/house_specs/price.svg');
+  }
+
+  &.pricepersqmeter{
+    background-image: url('../images/house_specs/pricepersqmeter.svg');
+  }
+
+  &.size{
+    background-image: url('../images/house_specs/size.svg');
+  }
+
+  &.subcategory{
+    background-image: url('../images/house_specs/subcategory.svg');
+  }
+
+  &.businesstype{
+    background-image: url('../images/house_specs/businesstype.svg');
+  }
+
+  &.tel{
+    background-image: url('../images/house_specs/tel.svg');
+  }
+
+  &.created_at{
+    background-image: url('../images/house_specs/created_at.svg');
+  }
+
+  &.filters{
+    background-image: url('../images/filters.svg');
+  }
+
+  &.plus{
+    background-image: url('../images/plus.svg');
+  }
+
+  &.disk{
+    background-image: url('../images/disk.svg');
+  }
+
+  &.search{
+    background-image: url('../images/search.svg');
+  }
+
+  &.no_stored_searches{
+    background-image: url('../images/no_stored_searches.svg');
+  }
+
+  & ~ .pr-icon-desc {
+    display: block;
+    text-align: center;
+    font-size: 18px;
+  }
+
+}
+
+//.stacked-menu > .menu > .menu-item > .menu-link {
+//  //a.menu-link:hover i.pr-masked-icon {
+//  //background-color: rgb(189, 180, 199) !important;
+//  &:hover {
+//    .pr-masked-icon {
+//      background-color: red !important;
+//    }
+//  }
+//}
