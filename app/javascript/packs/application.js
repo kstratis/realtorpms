@@ -9,7 +9,6 @@
 
 require("@rails/ujs").start();
 import './turbolinks_wrapper';
-import 'clamp-js-main'
 // import 'stacked-menu'
 
 // ---
