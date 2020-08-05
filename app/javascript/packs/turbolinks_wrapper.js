@@ -1,3 +1,7 @@
+require("turbolinks").start();
+
+// ---
+// This is a small trick to allow us the use of animating the progress bar
 Turbolinks.BrowserAdapter.prototype.showProgressBarAfterDelay = function() {
   return this.progressBarTimeout = setTimeout(this.showProgressBar, 100);
 };
@@ -17,3 +21,18 @@ $(document).on('turbolinks:before-visit', function(e){
   }
 });
 
+$('document').ready(function() {
+  $('button.close').on('click', function(){
+    $('.alert').alert('close');
+  })
+});
+
+// After an ajax action a given button may either rewind history by 1
+// or return to a generic screen of our selection
+jQuery.fn.returnOnClick = function(location) {
+  $(this).on('click', function(e) {
+    e.preventDefault();
+    history.length === 2 ? Turbolinks.visit(location, { action: 'advance' }) : history.go(-1);
+  });
+  return this;
+};

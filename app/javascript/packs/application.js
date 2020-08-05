@@ -7,6 +7,14 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
+require("@rails/ujs").start();
+import './turbolinks_wrapper';
+import 'stacked-menu'
+import 'clamp-js-main'
+// ---
+// require("@rails/activestorage").start();
+// require("channels");
+
 import * as uploader from '../bundles/uploaders/uppy_controller';
 import flatpickr from "flatpickr";
 import { Greek } from "flatpickr/dist/l10n/gr.js"
@@ -15,6 +23,7 @@ import * as CustomActiveStorage from '../bundles/uploaders/custom_active_storage
 import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap'  // bootstrap js files
+
 
 // const getExample = () => {
 //   return Promise.all([
