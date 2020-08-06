@@ -25,7 +25,7 @@ class Filters extends React.Component {
             aria-expanded="false">
             {'Ταξινόμηση'}
           </button>
-          <div className="dropdown-arrow dropdown-arrow-left" />
+          {/*<div className="dropdown-arrow dropdown-arrow-left" />*/}
           <div className="dropdown-menu">
             <h6 className="dropdown-header d-none d-md-block d-lg-none">{'asdasd'}</h6>
             <a className="dropdown-item" href="#">

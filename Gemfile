@@ -101,7 +101,6 @@ gem 'listen', '~> 3.2.1'
 gem 'capistrano-rails-console', require: false
 
 group :development, :test do
-  gem 'factory_bot'
   gem 'rspec-rails', '4.0.1'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -116,6 +115,11 @@ group :development, :test do
   gem "better_errors", '~> 2.7.1'
   gem "binding_of_caller"
 
+  # Pry REPL and friends
+  gem 'pry-rails', '~> 0.3.9'
+  gem 'pry-byebug', '~> 3.9'
+  gem 'pry-doc', '~> 1.1'
+
 end
 
 group :development do
@@ -127,6 +131,9 @@ group :development do
 end
 
 group :test do
+  gem 'factory_bot_rails', '~> 6.1'
+  gem 'shoulda-matchers', '~> 4.3.0'
+  gem 'rspec-collection_matchers'
   gem 'rails-controller-testing', '1.0.5'
   gem 'minitest-reporters',       '1.4.2'
   gem 'guard',                    '2.16.2'

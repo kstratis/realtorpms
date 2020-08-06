@@ -11,12 +11,18 @@
 .sidebar-masked-icon {
   display: inline-block;
   //background-color: rgb(149, 134, 165);
-  background-color: #888c9b;
+  //background-color: #888c9b;
+  background-color: rgba(255, 255, 255, 0.8);
+  //background-color: #ffffff;
   background-size: auto 85%;
   background-repeat: no-repeat;
   background-position: center center ;
   mask-size: cover;
   transition: background-color 0.15s linear 0s;
+
+  //&:hover{
+  //  background-color: #ffffff;
+  //}
 
   &.xs { width:  23px; height:  23px; vertical-align: middle;}
   &.xxs { width:  20px; height:  20px; vertical-align: middle;}

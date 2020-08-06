@@ -1,5 +1,5 @@
 <!-- .app-header -->
-<header class="app-header app-header-light">
+<header class="app-header app-header-dark">
   <!-- .top-bar -->
   <div class="top-bar">
     <!-- .top-bar-brand -->
@@ -153,15 +153,36 @@
           <!-- /.nav-item -->
           <!-- .nav-item -->
 
+          <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown #{active_for(controller: ['users', 'invitations'])}" do %>
+            <%= link_to users_path, class: 'nav-link menu-link' do %>
+              <%= content_tag :span, nil, class: 'sidebar-masked-icon xs masked-icon-partners' %>
+            <% end %>
+          <% end %>
+
+          <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown #{active_for(controller: ['properties'])}" do %>
+            <%= link_to properties_path, class: 'nav-link menu-link' do %>
+              <%= content_tag :span, nil, class: 'sidebar-masked-icon xs masked-icon-building' %>
+            <% end %>
+          <% end %>
+
+          <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown #{active_for(controller: ['clients'])}" do %>
+            <%= link_to clients_path, class: 'nav-link menu-link' do %>
+              <%= content_tag :span, nil, class: 'sidebar-masked-icon xs masked-icon-clients' %>
+            <% end %>
+          <% end %>
+
+
           <!-- /.nav-item -->
           <!-- .nav-item -->
           <li class="nav-item dropdown header-nav-dropdown">
             <a class="nav-link" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="oi oi-grid-three-up"></span>
+              <span class="fas fa-th fa-lg"></span>
+
             </a>
-            <div class="dropdown-arrow"></div>
+
             <!-- .dropdown-menu -->
             <div class="dropdown-menu dropdown-menu-rich dropdown-menu-right">
+              <div class="dropdown-arrow"></div>
               <!-- .dropdown-sheets -->
               <div class="dropdown-sheets">
                 <!-- .dropdown-sheet-item -->
@@ -237,8 +258,8 @@
         </ul>
         <!-- /.nav -->
         <!-- .btn-account -->
-        <div class="dropdown">
-          <button class="btn-account d-none d-md-flex" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="dropdown d-none d-md-flex">
+          <button class="btn-account" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <span data-turbolinks-permanent id="<%= current_user.avatar.attached? ? 'header-avatar' : 'avatar-in-header' %>" class="<%= current_user.avatar.attached? ? 'user-avatar user-avatar-bordered user-avatar-lg' : '' %>">
 
                     <!-- This needs to be properly taken care of -->
@@ -251,9 +272,11 @@
                     <span class="account-description"><%= t "navbar.account.type.#{current_user.role(current_account)}" %></span>
                   </span>
           </button>
-          <div class="dropdown-arrow dropdown-arrow-left"></div>
+<!--          <div class="dropdown-arrow"></div>-->
           <!-- .dropdown-menu -->
           <div class="dropdown-menu">
+<!--            <div class="dropdown-arrow d-lg-none" x-arrow="" style="left: 113px;"></div>-->
+<!--            <div class="dropdown-arrow ml-3 d-none d-lg-block"></div>-->
             <h6 class="dropdown-header d-none d-md-block d-lg-none"><%= current_user.full_name %></h6>
             <%= render 'layouts/dropdown_menu' %>
           </div>

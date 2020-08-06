@@ -1,6 +1,8 @@
 <!-- .app-aside -->
 <!--<aside class="app-aside app-aside-light app-aside-expand-md">-->
-<aside class="app-aside app-aside-light app-aside-expand-lg">
+<!--<aside class="app-aside app-aside-light app-aside-expand-lg">-->
+<!-- Add the `app-aside-expand-lg` class to expand the aside menu on any screen size-->
+<aside class="app-aside app-aside-light">
   <!-- .aside-content -->
   <div class="aside-content">
     <!-- .aside-header -->
@@ -55,7 +57,7 @@
             <!-- .menu-item -->
             <%#= content_tag :li, class: "menu-item has-child #{active_for(controller: ['users', 'invitations'], except_action: 'edit', classname: 'open')}" do %>
             <%#= content_tag :li, class: "menu-item #{active_for(controller: ['users', 'invitations'], except_action: 'edit')}" do %>
-            <%= content_tag :li, class: "menu-item #{active_for(controller: ['users', 'invitations'])}" do %>
+            <%= content_tag :li, class: "menu-item " do %>
               <%= link_to users_path, class: 'menu-link' do %>
                 <%= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-partners' %>
                 <%= content_tag :span, t('partners.title'), class: 'menu-text menu-text-entry align-middle' %>
@@ -81,7 +83,7 @@
           <!-- /.menu-item -->
 
           <!-- .menu-item -->
-          <%= content_tag :li, class: "menu-item #{active_for(controller: ['properties'])}" do %>
+          <%= content_tag :li, class: "menu-item " do %>
             <%= link_to properties_path, class: 'menu-link' do %>
               <%= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-building' %>
               <%= content_tag :span, t('properties.title'), class: 'menu-text menu-text-entry align-middle' %>
@@ -117,7 +119,7 @@
           <% end %>
           <!-- /.menu-item -->
 
-          <%= content_tag :li, class: "menu-item #{active_for(controller: ['clients'])}" do %>
+          <%= content_tag :li, class: "menu-item " do %>
             <%= link_to clients_path, class: 'menu-link' do %>
               <%= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-clients' %>
               <%= content_tag :span, t('clients.title'), class: 'menu-text menu-text-entry align-middle' %>
@@ -132,61 +134,6 @@
               <% end %>
             <% end %>
           <% end %>
-
-          <!-- .menu-item -->
-          <!--          <li class="menu-item has-child">-->
-          <%#= link_to '#', class: 'menu-link' do %>
-          <%#= content_tag :span, nil, class: 'menu-icon fas fa-users fa-fw' %>
-          <%#= content_tag :span, t('sidebar.clients'), class: 'menu-text' %>
-          <%# end %>
-          <!-- child menu -->
-          <!--            <ul class="menu">-->
-          <!--              <li class="menu-item">-->
-          <%#= link_to '#', class: 'menu-link' do %>
-          <%#= content_tag :i, nil, class: 'fas fa-plus fa-fw' %>
-          <%#= content_tag :span, t('clients.add'), class: 'menu-text' %>
-          <%# end %>
-          <!--              </li>-->
-          <!--              <li class="menu-item">-->
-          <%#= link_to '#', class: 'menu-link' do %>
-          <%#= content_tag :i, nil, class: 'fas fa-address-book fa-fw' %>
-          <%#= content_tag :span, t('clients.list'), class: 'menu-text' %>
-          <%# end %>
-          <!--              </li>-->
-          <!--            </ul>-->
-          <!-- /child menu -->
-          <!--          </li>-->
-          <!-- /.menu-item -->
-
-
-            <!-- .menu-item -->
-<!--            <li class="menu-item ">-->
-              <%#= link_to '#', class: 'menu-link disabled', disabled: true do %>
-                <%#= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-plug' %>
-                <%#= content_tag :span, t('sidebar.integrations'), class: 'menu-text menu-text-entry align-middle' %>
-              <%# end %>
-<!--            </li>-->
-
-          <!-- .menu-item -->
-<!--          <li class="menu-item ">-->
-            <%#= link_to '#', class: 'menu-link disabled', disabled: true do %>
-              <%#= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-code' %>
-              <%#= content_tag :span, t('sidebar.widget'), class: 'menu-text menu-text-entry align-middle' %>
-            <%# end %>
-<!--          </li>-->
-            <!-- /.menu-item -->
-
-          <%# if current_user.is_admin? current_account %>
-            <!-- .menu-item -->
-<!--            <li class="menu-item ">-->
-              <%#= link_to '#', class: 'menu-link disabled', disabled: true do %>
-                <%#= content_tag :span, nil, class: 'menu-icon fas fa-credit-card fa-fw' %>
-                <%#= content_tag :span, t('sidebar.subscription'), class: 'menu-text' %>
-              <%# end %>
-<!--            </li>-->
-          <%# end %>
-          <!-- /.menu-item -->
-
 
         </ul>
         <!-- /.menu -->

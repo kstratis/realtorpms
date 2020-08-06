@@ -81,7 +81,7 @@ class InlineSearch extends React.Component {
         <input
           ref={this.searchInput}
           type="text"
-          className="form-control"
+          className="form-control theme-form-control"
           aria-describedby="Inline Search"
           aria-label="Inline Search"
           value={this.state.inlineSearchInput}

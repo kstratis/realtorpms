@@ -1423,19 +1423,44 @@ i.fa-lock:hover{
   padding: 8px 20px;
 }
 
+// ---Don't delete---
+//.has-active {
+//  .menu-link:before {
+//    background-color: $yellowbg;
+//    //background-color: #ea5f4a;
+//    display: block;
+//    content: "";
+//    position: absolute;
+//    top: 8px;
+//    left: 0;
+//    bottom: 8px;
+//    width: 6px;
+//    color: #ffffff !important;
+//    border-radius: 0 3px 3px 0;
+//    transition: background-color 0.15s linear 0s;
+//  }
+//
+//  .menu-icon, .menu-text {
+//    color: #ffffff !important;
+//  }
+//
+//  .sidebar-masked-icon {
+//    background-color: rgb(255, 255, 255) !important;
+//  }
+//}
+
 .has-active {
   .menu-link:before {
     background-color: $yellowbg;
-    //background-color: #ea5f4a;
     display: block;
     content: "";
     position: absolute;
-    top: 8px;
-    left: 0;
-    bottom: 8px;
-    width: 6px;
+    top: 34px;
+    left: 16px;
+    bottom: 0;
+    width: 25px;
     color: #ffffff !important;
-    border-radius: 0 3px 3px 0;
+    border-radius: 5px;
     transition: background-color 0.15s linear 0s;
   }
 
@@ -1482,8 +1507,8 @@ i.fa-lock:hover{
 }
 
 .app-header-dark .top-bar-brand {
-  //background-color: #37474f;
-  background: linear-gradient(rgb(74, 62, 86), rgb(48, 40, 57));
+  background-color: #37474f;
+  //background: linear-gradient(rgb(74, 62, 86), rgb(48, 40, 57));
 }
 
 .menu-text-entry{
@@ -1725,7 +1750,8 @@ a.text-link {
 
 .top-bar-list{
   //box-shadow: 0 1px 0 0 #ea9363, 0 0 1px 0 rgba(20, 20, 31, 0.15);
-  background: #ffffff;
+  //background: #ffffff;
+  background: #37474f;
   //background: #32629d;
   //background: #376dae;
 }
@@ -1783,7 +1809,7 @@ a.text-link {
   display: block;
   width: 8.25em;
   //height: 2em;
-  height: 40px;
+  height: 45px;
   margin: 0;
   padding: 0.1rem;
 }
@@ -1893,7 +1919,12 @@ a.text-link {
   color: red;
 }
 
-
+// Fix for svg icons in navbar
+.app-header-dark .header-nav .nav-link:hover{
+  .sidebar-masked-icon{
+    background-color: #ffffff;
+  }
+}
 //.modal-dialog-scrollable .modal-content.overflown{
 //  overflow: unset;
 //}
