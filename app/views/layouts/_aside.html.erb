@@ -1,7 +1,7 @@
 <!-- .app-aside -->
 <!--<aside class="app-aside app-aside-light app-aside-expand-md">-->
 <!--<aside class="app-aside app-aside-light app-aside-expand-lg">-->
-<!-- Add the `app-aside-expand-lg` class to expand the aside menu on any screen size-->
+<!-- *SOS* => Add the `app-aside-expand-lg` class to expand the aside menu on any screen size-->
 <aside class="app-aside app-aside-light">
   <!-- .aside-content -->
   <div class="aside-content">
@@ -45,7 +45,7 @@
           <li class="menu-header" data-toggle="tooltip" data-placement="right" title="<%= t('sidebar.subdomain_tooltip') %>"><%= current_account.subdomain.to_s.downcase %></li>
           <!-- /.menu-header -->
           <!-- .menu-item -->
-          <%= content_tag :li, class: "menu-item #{active_for(path: root_path)}" do %>
+          <%= content_tag :li, class: "menu-item " do %>
             <%= link_to root_path, class: "menu-link" do %>
               <%= content_tag :i, "", class: "sidebar-masked-icon xs masked-icon-dash" %>
               <%= content_tag :span, t('sidebar.main'), class: 'menu-text menu-text-entry align-middle' %>
