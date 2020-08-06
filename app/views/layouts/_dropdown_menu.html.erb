@@ -1,32 +1,32 @@
 <%= link_to edit_user_path(current_user), class: 'dropdown-item' do %>
-  <%= content_tag :span, nil, class: 'dropdown-icon oi oi-person' %> <%= t('navbar.profile') %>
+  <%= content_tag :i, nil, class: 'fas fa-user fa-fw' %> <span><%= t('navbar.profile') %></span>
 <% end %>
 
 <%# if (current_user.get_account_count > 1) || current_user.is_admin?(current_account) %>
 <% if (current_user.get_account_count > 1) || current_user.is_sysadmin? %>
   <%= link_to account_list_url, class: 'dropdown-item' do %>
-    <%= content_tag :span, nil, class: 'dropdown-icon oi oi-loop-circular' %> <%= t('navbar.switch') %>
+    <%= content_tag :i, nil, class: 'fas fa-exchange-alt fa-fw' %> <span><%= t('navbar.switch') %></span>
   <% end %>
 <% end %>
 
 <% if current_user.is_admin?(current_account) %>
   <%= link_to account_edit_path, class: 'dropdown-item' do %>
-    <%= content_tag :span, nil, class: 'dropdown-icon oi oi-cog' %> <%= t('navbar.account.title') %>
+    <%= content_tag :i, nil, class: 'fas fa-shield-alt fa-fw' %> <span><%= t('navbar.account.title') %></span>
   <% end %>
 <% end %>
 
 <div class="dropdown-divider"></div>
   <%= link_to favlists_path, class: 'dropdown-item' do %>
-    <%= content_tag :span, nil, class: 'dropdown-icon oi oi-heart' %> <%= t('navbar.favorites') %>
+    <%= content_tag :i, nil, class: 'fas fa-heart fa-fw' %> <span><%= t('navbar.favorites') %></span>
   <% end %>
 
 <div class="dropdown-divider"></div>
 
 <%= link_to '#', class: 'dropdown-item' do %>
-  <%= content_tag :span, nil, class: 'dropdown-icon oi oi-info' %> <%= t('navbar.help') %>
+  <%= content_tag :i, nil, class: 'fas fa-info fa-fw' %> <span><%= t('navbar.help') %></span>
 <% end %>
 
 <%= link_to logout_path, class: 'dropdown-item', method: :delete do %>
-  <%= content_tag :span, nil, class: 'dropdown-icon oi oi-account-logout' %> <%= t('navbar.logout') %>
+  <%= content_tag :i, nil, class: 'fas fa-sign-out-alt' %> <span><%= t('navbar.logout') %></span>
 <% end %>
 
