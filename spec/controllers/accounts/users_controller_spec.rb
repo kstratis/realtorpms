@@ -10,6 +10,21 @@ describe Accounts::UsersController, type: :controller do
     log_in(account_owner)
   end
 
+  shared_examples 'a guarded area for regular users' do |error|
+    let(:userExternal) { FactoryBot.create(:userExternal) }
+    before do
+      account.users << userExternal
+      log_out
+      log_in(userExternal)
+    end
+    it 'redirects to home page with a success message' do
+      subject
+      expect(subject).to redirect_to(root_url)
+      expect(subject.request.flash[:danger]).to eq(error)
+      # expect(subject.request.flash[:danger]).to eq(I18n.t 'users.flash_owner_only_action')
+    end
+  end
+
   describe 'GET #index' do
     subject { get :index, params: {}, format: :json }
 
@@ -19,6 +34,8 @@ describe Accounts::UsersController, type: :controller do
       account.users << partners.third
       account.users << partners.fourth
     end
+
+    it_behaves_like 'a guarded area for regular users', I18n.t('users.flash_owner_only_action')
 
     it { is_expected.to be_successful }
 
@@ -59,6 +76,8 @@ describe Accounts::UsersController, type: :controller do
                   password_confirmation: '' } }
       end
 
+      it_behaves_like 'a guarded area for regular users', I18n.t('users.flash_owner_only_action')
+
       it 'renders new with error message' do
         expect(subject).to render_template(:new)
         expect(flash[:danger]).to eq(I18n.t('users.flash_user_add_failed'))
@@ -76,6 +95,8 @@ describe Accounts::UsersController, type: :controller do
                   password_confirmation: 'abc123' } }
       end
 
+      it_behaves_like 'a guarded area for regular users', I18n.t('users.flash_owner_only_action')
+
       it 'redirects to show with a success message' do
         expect(subject).to redirect_to(assigns(:user))
         # Make sure the newly created user belongs to the account of the user who created him/her
@@ -88,11 +109,13 @@ describe Accounts::UsersController, type: :controller do
   describe 'GET #edit' do
     subject { get :edit, params: { id: partners.first.id } }
 
-    before {account.users << partners.first }
+    before { account.users << partners.first }
 
     it { is_expected.to be_successful }
 
     it { is_expected.to have_http_status(200) }
+
+    it_behaves_like 'a guarded area for regular users', I18n.t('users.flash_unauthorised_user_edit')
   end
 
   describe 'PUT #update' do
@@ -113,10 +136,13 @@ describe Accounts::UsersController, type: :controller do
                     password_confirmation: '' } }
         end
 
+        it_behaves_like 'a guarded area for regular users', I18n.t('users.flash_unauthorised_user_edit')
+
         it 'renders edit with error message' do
           expect(subject).to render_template(:edit)
           expect(flash[:danger]).to eq(I18n.t('users.flash_user_update_failed'))
         end
+
       end
 
       context 'and existing email is used' do
@@ -191,10 +217,61 @@ describe Accounts::UsersController, type: :controller do
           expect(subject).to redirect_to(assigns(:user))
           expect(subject.request.flash[:success]).to eq(I18n.t('users.flash_profile_updated'))
         end
+
+        context 'and is a regular user' do
+
+          let(:userExternal) { FactoryBot.create(:userExternal) }
+          subject { put :update, params: params.merge(id: userExternal.id) }
+
+          before do
+            account.users << userExternal
+            log_out
+            log_in(userExternal)
+          end
+
+          it 'redirects to home page with a success message' do
+            expect(subject).to redirect_to(assigns(:userExternal))
+            expect(subject.request.flash[:success]).to eq(I18n.t('users.flash_profile_updated'))
+          end
+        end
       end
     end
+  end
 
+  describe 'DELETE #destroy' do
+    before { account.users << partners.first }
 
+    context 'when deleting other users' do
+      subject { delete :destroy, params: { id: partners.first.id } }
+
+      it_behaves_like 'a guarded area for regular users', I18n.t('users.flash_owner_only_action')
+
+      it 'changes the count of the account users' do
+        expect do
+          subject
+        end.to change {
+          account.users.count
+        }.by(-1)
+      end
+
+      it 'destroys the configuration' do
+        subject
+
+        expect(account.users.where(id: partners.first.id).any?).to be_falsey
+      end
+
+      it 'redirects to index page successfully' do
+        subject
+
+        expect(response).to redirect_to(users_path)
+      end
+
+      it 'flashes a success message' do
+        subject
+
+        expect(subject.request.flash[:success]).to eq(I18n.t 'users.flash_delete')
+      end
+    end
   end
 end
 

@@ -31,7 +31,7 @@ module Accounts
 
     # GET the new user registration page
     def new  # This is basically the registration page in GET
-      @user = User.new
+      @user = current_account.users.new
     end
 
     # This is only accessible by account owners so no need to granulate its access
@@ -42,7 +42,7 @@ module Accounts
 
     # POST to the new user registration page
     def create
-      @user = User.new(user_params)
+      @user = current_account.users.new(user_params)
       if @user.save
         # log_in @user
         current_account.users << @user
