@@ -88,7 +88,7 @@ describe Accounts::UsersController, type: :controller do
     end
 
     describe 'GET #edit' do
-      
+
 
     end
 
