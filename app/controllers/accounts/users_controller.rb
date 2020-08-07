@@ -66,7 +66,7 @@ module Accounts
     # POST to the edit page
     def update
       # If a user belongs to multiple accounts we need to keep cfields data of both accounts and not overwrite each other
-      if @user.update_attributes(user_params.merge(preferences: @user.preferences.merge(user_params[:preferences] || {})))
+      if @user.update(user_params.merge(preferences: @user.preferences.merge(user_params[:preferences] || {})))
         flash[:success] = I18n.t 'users.flash_profile_updated'
         redirect_to @user
         # Handle a successful update.

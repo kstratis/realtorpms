@@ -5,12 +5,15 @@ describe Accounts::UsersController, type: :controller do
   let(:account_owner) { account.owner }
   let(:partners) { FactoryBot.create_list(:usersequence, 4) }
 
+  before do
+    @request.host = "#{account.subdomain}.lvh.me"
+    log_in(account_owner)
+  end
+
   describe 'GET #index' do
     subject { get :index, params: {}, format: :json }
 
     before do
-      @request.host = "#{account.subdomain}.lvh.me"
-      log_in(account_owner)
       account.users << partners.first
       account.users << partners.second
       account.users << partners.third
@@ -40,16 +43,10 @@ describe Accounts::UsersController, type: :controller do
       subject
       expect(JSON.parse(response.body)).to have_key('current_page')
     end
-
   end
 
   describe 'POST #create' do
     subject { post :create, params: params }
-
-    before do
-      @request.host = "#{account.subdomain}.lvh.me"
-      log_in(account_owner)
-    end
 
     context 'when not enough parameters are provided' do
       let(:params) do
@@ -61,6 +58,7 @@ describe Accounts::UsersController, type: :controller do
                   password: '',
                   password_confirmation: '' } }
       end
+
       it 'renders new with error message' do
         expect(subject).to render_template(:new)
         expect(flash[:danger]).to eq(I18n.t('users.flash_user_add_failed'))
@@ -90,11 +88,7 @@ describe Accounts::UsersController, type: :controller do
   describe 'GET #edit' do
     subject { get :edit, params: { id: partners.first.id } }
 
-    before do
-      @request.host = "#{account.subdomain}.lvh.me"
-      log_in(account_owner)
-      account.users << partners.first
-    end
+    before {account.users << partners.first }
 
     it { is_expected.to be_successful }
 
@@ -102,17 +96,13 @@ describe Accounts::UsersController, type: :controller do
   end
 
   describe 'PUT #update' do
-    before do
-      @request.host = "#{account.subdomain}.lvh.me"
-      log_in(account_owner)
-      account.users << partners.first
-    end
+
+    before { account.users << partners.first }
 
     context 'when updating other users' do
       subject { put :update, params: params.merge(id: partners.first.id) }
 
-
-      context 'when parameters are missing' do
+      context 'and parameters are missing' do
         let(:params) do
           { user: { first_name: '',
                     last_name: '',
@@ -122,13 +112,14 @@ describe Accounts::UsersController, type: :controller do
                     password: '',
                     password_confirmation: '' } }
         end
+
         it 'renders edit with error message' do
           expect(subject).to render_template(:edit)
           expect(flash[:danger]).to eq(I18n.t('users.flash_user_update_failed'))
         end
       end
 
-      context 'when existing email is used' do
+      context 'and existing email is used' do
         let(:params) do
           { user: { first_name: 'Jane',
                     last_name: 'Smith',
@@ -138,13 +129,14 @@ describe Accounts::UsersController, type: :controller do
                     password: '',
                     password_confirmation: '' } }
         end
+
         it 'renders edit with error message ' do
           expect(subject).to render_template(:edit)
           expect(flash[:danger]).to eq(I18n.t('users.flash_user_update_failed'))
         end
       end
 
-      context 'when parameters are good' do
+      context 'and parameters are good' do
         let(:params) do
           { user: { first_name: 'John',
                     last_name: 'Scruggs',
@@ -161,14 +153,13 @@ describe Accounts::UsersController, type: :controller do
           expect(assigns(:user).accounts.map(&:subdomain).first).to eq(account.subdomain)
           expect(subject.request.flash[:success]).to eq(I18n.t('users.flash_profile_updated'))
         end
-
       end
-
-
     end
+
     context 'when updating self' do
       subject { put :update, params: params.merge(id: account_owner.id) }
-      context 'when parameters are missing' do
+
+      context 'and parameters are missing' do
         let(:params) do
           { user: { first_name: '',
                     last_name: '',
@@ -178,14 +169,14 @@ describe Accounts::UsersController, type: :controller do
                     password: '',
                     password_confirmation: '' } }
         end
+
         it 'renders edit with error message' do
           expect(subject).to render_template(:edit)
           expect(flash[:danger]).to eq(I18n.t('users.flash_user_update_failed'))
         end
-
       end
 
-      context 'when parameters are good' do
+      context 'and parameters are good' do
         let(:params) do
           { user: { first_name: 'John',
                     last_name: 'Scruggs',
