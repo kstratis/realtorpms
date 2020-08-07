@@ -191,7 +191,6 @@ describe Accounts::UsersController, type: :controller do
           expect(subject).to redirect_to(assigns(:user))
           expect(subject.request.flash[:success]).to eq(I18n.t('users.flash_profile_updated'))
         end
-
       end
     end
 
