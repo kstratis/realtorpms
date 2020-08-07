@@ -707,11 +707,11 @@ en:
     title: "Partners"
     flash_delete: "User was successfully deleted"
     flash_welcome: "Welcome to %{brand}! Your profile is complete."
-    flash_user_added: "New user added successfully"
+    flash_user_added: "New user created successfully"
+    flash_user_added_failed: "Unable to create new user due to form errors"
     flash_profile_updated: "Profile successfully updated"
     flash_unauthorised_user_edit: "Unauthorized action"
     flash_owner_only_action: "Owner restricted action"
-    flash_add_user: "New user created successfully"
     user: "Partner"
     created:
       list: "List of current users"

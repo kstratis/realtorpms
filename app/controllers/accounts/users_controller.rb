@@ -50,8 +50,8 @@ module Accounts
 
         flash[:success] = I18n.t('users.flash_user_added')
         redirect_to @user
-        # Handle a successful save.
       else
+        flash[:danger] = I18n.t('users.flash_user_added_failed')
         # this merely re-renders the new template.
         # It doesn't fully redirect (in other words it doesn't go through the +new+ method)
         render :new
