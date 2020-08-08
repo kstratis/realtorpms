@@ -104,12 +104,12 @@ class User < ApplicationRecord
     end
   end
 
-  def is_privileged?(account)
-    Membership.find_by(account: account, user: self).privileged
-  end
-
   def is_admin?(account)
     %w(sysadmin admin).include?(role(account))
+  end
+
+  def is_privileged?(account)
+    Membership.find_by(account: account, user: self).privileged
   end
 
   # Remembers a user in the database for use in persistent sessions.

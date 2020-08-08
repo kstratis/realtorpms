@@ -674,7 +674,7 @@
                     <div class="d-flex">
                       <% if @property.model_type.fields.length == 0 %>
                         <button type="button" class="prev btn btn-secondary" data-validate="fieldset-6"><%= t('js.forms.properties.wizard.previous') %></button>
-                        <%= property.submit t('properties.edit.edit_button'), class: 'btn btn-primary ml-auto submit', "data-validate": "fieldset-6" %>
+                        <%= property.submit t('properties.new.add_button'), class: 'btn btn-primary ml-auto submit', "data-validate": "fieldset-6" %>
                       <% else %>
                         <button type="button" class="prev btn btn-secondary" data-validate="fieldset-6"><%= t('js.forms.properties.wizard.previous') %></button>
                         <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset-6"><%= t('js.forms.properties.wizard.next') %></button>
