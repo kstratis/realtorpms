@@ -18,10 +18,8 @@ describe Accounts::UsersController, type: :controller do
       log_in(userExternal)
     end
     it 'redirects to home page with a success message' do
-      subject
       expect(subject).to redirect_to(root_url)
       expect(subject.request.flash[:danger]).to eq(error)
-      # expect(subject.request.flash[:danger]).to eq(I18n.t 'users.flash_owner_only_action')
     end
   end
 
