@@ -55,7 +55,7 @@ $(document).on('turbolinks:load', function(e) {
    */
   $stepperForm.on('ajax:before', function(event, xhr, opts) {
     // DEBUG
-    console.log('ajax:before called');
+    // console.log('ajax:before called');
     if ($('#preventformsubmit').length > 0) {
       // DEBUG
       // console.log('#preventformsubmit exists');

@@ -8,21 +8,22 @@ environment.plugins.append("Provide", new webpack.ProvidePlugin({
   $clamp: ['clamp-js-main']
 }));
 
-// This is needed because of this:
+// This is needed because we need to be able to access jquery truly globally and not just
+// "webpack scoped" globally.
 // https://stackoverflow.com/questions/54758232/rendering-js-from-a-rails-controller-with-webpacker
-// environment.config.merge({
-//   module: {
-//     rules: [
-//       {
-//         test: require.resolve('jquery'),
-//         loader: 'expose-loader',
-//         options: {
-//           exposes: ['$', 'jQuery'],
-//         }
-//       }
-//     ]
-//   }
-// });
+environment.config.merge({
+  module: {
+    rules: [
+      {
+        test: require.resolve('jquery'),
+        loader: 'expose-loader',
+        options: {
+          exposes: ['$', 'jQuery'],
+        }
+      }
+    ]
+  }
+});
 
 // console.log(typeof(environment));
 

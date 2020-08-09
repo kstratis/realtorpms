@@ -76,7 +76,7 @@ export class CustomDirectUploadsController {
         });
       } else {
         // added line [added]
-        // document.getElementById('preventformsubmit').remove();
+        document.getElementById('preventformsubmit').remove();
         callback();
         this.dispatch('end');
       }
