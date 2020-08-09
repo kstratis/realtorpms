@@ -8,6 +8,22 @@ environment.plugins.append("Provide", new webpack.ProvidePlugin({
   $clamp: ['clamp-js-main']
 }));
 
+// This is needed because of this:
+// https://stackoverflow.com/questions/54758232/rendering-js-from-a-rails-controller-with-webpacker
+// environment.config.merge({
+//   module: {
+//     rules: [
+//       {
+//         test: require.resolve('jquery'),
+//         loader: 'expose-loader',
+//         options: {
+//           exposes: ['$', 'jQuery'],
+//         }
+//       }
+//     ]
+//   }
+// });
+
 // console.log(typeof(environment));
 
 // console.log(environment);

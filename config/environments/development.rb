@@ -91,8 +91,6 @@ Rails.application.configure do
   # }
   config.action_mailer.smtp_settings = {:address => 'localhost', :port => 1025 }
 
-  config.active_storage.service = :amazon
-
   # config.hosts << /(?:[a-zA-Z]+\.+)*lvh\.me/
   config.hosts << '.lvh.me'
 

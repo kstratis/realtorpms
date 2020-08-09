@@ -76,6 +76,7 @@ function submitForm(form) {
     const { disabled } = button;
     button.disabled = false;
     button.focus();
+    debugger;
     button.click();
     button.disabled = disabled;
   } else {
