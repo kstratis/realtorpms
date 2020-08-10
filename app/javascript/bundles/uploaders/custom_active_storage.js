@@ -23,34 +23,26 @@ export function start() {
 }
 
 function didClick(event) {
-  console.log('didClick running');
   const { target } = event;
-  console.log(target);
-  // target.disabled = false;
-  // console.log(target.tagName, target.type, target.form);
+
   if ((target.tagName == 'INPUT' || target.tagName == 'BUTTON') && target.type == 'submit' && target.form) {
-    console.log('weakmap');
     submitButtonsByForm.set(target.form, target);
   }
 }
 
 function didSubmitForm(event) {
-  console.log('didClick running');
   handleFormSubmissionEvent(event);
 }
 
 function didSubmitRemoteElement(event) {
-  console.log('didSubmitRemoteElement running');
   if (event.target.tagName == 'FORM') {
-    console.log('...and calling handleFormSubmissionEvent');
     handleFormSubmissionEvent(event);
   }
 }
 
 function handleFormSubmissionEvent(event) {
-  console.log('handleFormSubmissionEvent running');
   const form = event.target;
-  console.log(form);
+
   if (form.hasAttribute(processingAttribute)) {
     event.preventDefault();
     return;
@@ -60,7 +52,6 @@ function handleFormSubmissionEvent(event) {
   const controller = new CustomDirectUploadsController(form);
   // changed line
   const { inputs } = controller;
-  console.log(inputs.length);
   // changed line
   if (inputs.length) {
     event.preventDefault();
@@ -71,7 +62,6 @@ function handleFormSubmissionEvent(event) {
       if (error) {
         inputs.forEach(enable);
       } else {
-        console.log('submitting');
         submitForm(form);
       }
     });
@@ -79,20 +69,15 @@ function handleFormSubmissionEvent(event) {
 }
 
 function submitForm(form) {
-  console.log('executing submitForm');
-
   let button = submitButtonsByForm.get(form) || findElement(form, 'input[type=submit], button[type=submit]');
 
   if (button) {
-    console.log('inside if');
     const { disabled } = button;
     button.disabled = false;
     button.focus();
-    console.log('form button programmatically clicked');
     button.click();
     button.disabled = disabled;
   } else {
-    console.log('inside else');
     button = document.createElement('input');
     button.type = 'submit';
     button.style.display = 'none';

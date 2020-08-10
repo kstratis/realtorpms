@@ -11,25 +11,15 @@ export class CustomDirectUploadsController {
   constructor(form) {
     this.form = form;
     // Changed line
-    this.mockUppyEmitters = findElements(form, uppySelector);
-    this.mockFileEmitters = findElements(form, fileSelector);
-
-
-    // DEBUG
-    // console.log(`this.inputs are:`);
-    // console.log(this.inputs);
-    // console.log('---------');
+    this.uppyDOMNodes = findElements(form, uppySelector);
+    this.fileDOMNodes = findElements(form, fileSelector);
 
     // Changed line
     // Get file inputs with available files:
     // const activeFileInputs = $(fileSelector).filter((inputNo, input) => {return input.files.length});
-    const activeFileInputs = this.mockFileEmitters.filter((input) => {
+    const activeFileInputs = this.fileDOMNodes.filter((input) => {
       return input.files.length
     });
-
-    // DEBUG
-    // console.log(`activeFileInputs are:`);
-    // console.log(activeFileInputs);
 
     // Changed line
     // Get files from uppy:
@@ -41,8 +31,7 @@ export class CustomDirectUploadsController {
     });
 
     // Changed line
-    // this.inputs = this.mockUppyEmitters.concat(this.mockFileEmitters)
-    this.inputs = activeFileInputs.concat(uppy_files.length ? this.mockUppyEmitters : [])
+    this.inputs = activeFileInputs.concat(uppy_files.length ? this.uppyDOMNodes : [])
 
     // Changed line
     // Get regular files from file inputs:
@@ -58,12 +47,7 @@ export class CustomDirectUploadsController {
     const regular_files = nested_regular_files.reduce((acc, val) => acc.concat(val), []);
 
     // Changed line
-    // this.all_files = $.merge(uppy_files, regular_files) || [];
     this.all_files = uppy_files.concat(regular_files);
-
-    // DEBUG
-    // console.log(`all_files are:`);
-    // console.log(this.all_files);
   }
 
   start(callback) {
@@ -103,8 +87,8 @@ export class CustomDirectUploadsController {
       // Changed line
       // Single mock element guaranteed to be on the DOM.
       let mockEmitter = file.source === 'uppy'
-        ? this.mockUppyEmitters[0]
-        : this.mockFileEmitters[0];
+        ? this.uppyDOMNodes[0]
+        : this.fileDOMNodes[0];
 
       const controller = new DirectUploadController(mockEmitter, file);
       // const controller = new DirectUploadController(mockEmitter, filewrapper.data);

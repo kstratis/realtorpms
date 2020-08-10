@@ -171,8 +171,8 @@ module Accounts
 
       set_location
       set_category
-
-      normalized_property_params[:delete_images].try(:each) do |id|
+      
+      params[:delete_images].try(:each) do |id|
         @property.images.find(id).purge
       end
 
