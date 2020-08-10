@@ -63,10 +63,7 @@ function handleFormSubmissionEvent(event) {
   // changed line
   if (inputs.length) {
     event.preventDefault();
-    console.log($inputs.length);
-    // debugger;
     form.setAttribute(processingAttribute, '');
-    // changed line
     inputs.forEach(disable);
     controller.start(error => {
       form.removeAttribute(processingAttribute);
@@ -89,7 +86,7 @@ function submitForm(form) {
     const { disabled } = button;
     button.disabled = false;
     button.focus();
-    console.log('form button clicked');
+    console.log('form button programmatically clicked');
     button.click();
     button.disabled = disabled;
   } else {
