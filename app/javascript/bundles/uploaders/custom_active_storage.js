@@ -59,23 +59,19 @@ function handleFormSubmissionEvent(event) {
   // changed line
   const controller = new CustomDirectUploadsController(form);
   // changed line
-  const { $inputs } = controller;
-
+  const { inputs } = controller;
   // changed line
-  if ($inputs.length) {
+  if (inputs.length) {
     event.preventDefault();
     console.log($inputs.length);
     // debugger;
     form.setAttribute(processingAttribute, '');
     // changed line
-    // $inputs.forEach(disable);
-    $.each($inputs, (index, element) => disable(element));
+    inputs.forEach(disable);
     controller.start(error => {
       form.removeAttribute(processingAttribute);
       if (error) {
-        $inputs.forEach(enable);
-        // $.each($inputs, (index, element) => enable(element));
-        // $inputs.forEach(enable);
+        inputs.forEach(enable);
       } else {
         console.log('submitting');
         submitForm(form);
