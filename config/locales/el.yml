@@ -125,7 +125,7 @@ el:
           plot: "Οικόπεδο"
           plot_placeholder: "Εμβαδόν οικοπέδου"
       model_type:
-        name: 'Κατηγορία'
+        name: "Κατηγορία"
       entity_field:
         name: "Όνομα πεδίου"
         field_type: "Τύπος πεδίου"
@@ -299,6 +299,11 @@ el:
             minimum: "Ελάχιστη"
             maximum: "Μέγιστη"
     errors:
+      models:
+        property:
+          attributes:
+            model_type:
+              required: 'υποχρεωτικό πεδίο'
       messages:
         record_invalid: ! 'Η επικύρωση απέτυχε: %{errors}'
   js:

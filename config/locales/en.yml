@@ -328,6 +328,11 @@ en:
             minimum: "Minimum"
             maximum: "Maximum"
     errors:
+      models:
+        property:
+          attributes:
+            model_type:
+              required: 'required field'
       messages:
         record_invalid: ! 'Validation failed: %{errors}'
   js:
