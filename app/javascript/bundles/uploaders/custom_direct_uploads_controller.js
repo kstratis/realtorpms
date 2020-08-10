@@ -1,6 +1,6 @@
 /* This is basically a customized version of active_uploads_controller.js of activestorage. */
 import { DirectUploadController } from "@rails/activestorage/src/direct_upload_controller";
-import { dispatchEvent } from '@rails/activestorage/src/helpers';
+import { dispatchEvent, findElement } from '@rails/activestorage/src/helpers';
 
 // Changed line
 const uppySelector = "input[type=file][data-direct-upload-url].uppy-emitters:not([disabled])";
@@ -11,8 +11,8 @@ export class CustomDirectUploadsController {
   constructor(form) {
     this.form = form;
     // Changed line
-    this.$mockUppyEmitters = $(uppySelector);
-    this.$mockFileEmitters = $(fileSelector);
+    this.mockUppyEmitters = findElement(form, uppySelector);
+    this.mockFileEmitters = findElement(form, fileSelector);
 
     // Changed line
     this.$inputs = $(uppySelector + "," + fileSelector);
