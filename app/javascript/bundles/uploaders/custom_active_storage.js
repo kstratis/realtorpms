@@ -23,25 +23,34 @@ export function start() {
 }
 
 function didClick(event) {
+  console.log('didClick running');
   const { target } = event;
+  console.log(target);
+  // target.disabled = false;
+  // console.log(target.tagName, target.type, target.form);
   if ((target.tagName == 'INPUT' || target.tagName == 'BUTTON') && target.type == 'submit' && target.form) {
+    console.log('weakmap');
     submitButtonsByForm.set(target.form, target);
   }
 }
 
 function didSubmitForm(event) {
+  console.log('didClick running');
   handleFormSubmissionEvent(event);
 }
 
 function didSubmitRemoteElement(event) {
+  console.log('didSubmitRemoteElement running');
   if (event.target.tagName == 'FORM') {
+    console.log('...and calling handleFormSubmissionEvent');
     handleFormSubmissionEvent(event);
   }
 }
 
 function handleFormSubmissionEvent(event) {
+  console.log('handleFormSubmissionEvent running');
   const form = event.target;
-
+  console.log(form);
   if (form.hasAttribute(processingAttribute)) {
     event.preventDefault();
     return;
@@ -55,14 +64,20 @@ function handleFormSubmissionEvent(event) {
   // changed line
   if ($inputs.length) {
     event.preventDefault();
+    console.log($inputs.length);
+    // debugger;
     form.setAttribute(processingAttribute, '');
     // changed line
+    // $inputs.forEach(disable);
     $.each($inputs, (index, element) => disable(element));
     controller.start(error => {
       form.removeAttribute(processingAttribute);
       if (error) {
         $inputs.forEach(enable);
+        // $.each($inputs, (index, element) => enable(element));
+        // $inputs.forEach(enable);
       } else {
+        console.log('submitting');
         submitForm(form);
       }
     });
@@ -70,12 +85,15 @@ function handleFormSubmissionEvent(event) {
 }
 
 function submitForm(form) {
+  console.log('executing submitForm');
+
   let button = submitButtonsByForm.get(form) || findElement(form, 'input[type=submit], button[type=submit]');
 
   if (button) {
     const { disabled } = button;
     button.disabled = false;
     button.focus();
+    console.log('form button clicked');
     button.click();
     button.disabled = disabled;
   } else {
