@@ -7,7 +7,7 @@
 
 // changed line
 import { CustomDirectUploadsController } from './custom_direct_uploads_controller';
-import { findElement } from '@rails/activestorage/src/helpers';
+import { findElement, findElements } from '@rails/activestorage/src/helpers';
 
 const processingAttribute = 'data-direct-uploads-processing';
 const submitButtonsByForm = new WeakMap();
