@@ -14,12 +14,11 @@ export class CustomDirectUploadsController {
     this.mockUppyEmitters = findElements(form, uppySelector);
     this.mockFileEmitters = findElements(form, fileSelector);
 
-    // Changed line
-    this.inputs = this.mockUppyEmitters.concat(this.mockFileEmitters)
 
     // DEBUG
-    // console.log(`this.$inputs are:`);
-    // console.log(this.$inputs);
+    // console.log(`this.inputs are:`);
+    // console.log(this.inputs);
+    // console.log('---------');
 
     // Changed line
     // Get file inputs with available files:
@@ -40,6 +39,10 @@ export class CustomDirectUploadsController {
       // .data is where the actual File object resides in
       return input.data
     });
+
+    // Changed line
+    // this.inputs = this.mockUppyEmitters.concat(this.mockFileEmitters)
+    this.inputs = activeFileInputs.concat(uppy_files.length ? this.mockUppyEmitters : [])
 
     // Changed line
     // Get regular files from file inputs:

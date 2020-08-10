@@ -899,8 +899,8 @@ li.page-item {
     width: 25px;
     height: 25px;
     text-align: center;
-    line-height: 26px;
-    transition-duration: 0.4s;
+    line-height: 25px;
+    transition-duration: 0.2s;
     -webkit-transform: scale(0);
     -moz-transform: scale(0);
     -ms-transform: scale(0);
@@ -919,7 +919,7 @@ li.page-item {
 
   :checked + label:before {
     font-family: "Font Awesome\ 5 Free";
-    content: "\f00c";
+    content: "\f1f8";
     font-weight: 900;
     background-color: #EA6759;
     transform: scale(1);

@@ -58,7 +58,7 @@ $(document).on('turbolinks:load', function(e) {
     console.log('ajax:before event called');
     if ($('#preventformsubmit').length > 0) {
       // DEBUG
-      // console.log('#preventformsubmit exists');
+      console.log('#preventformsubmit exists');
       if (Object.keys(window.uppy_uploader.getState().files).length) {
         // DEBUG
         // console.log('files are: ' + Object.keys(window.uppy_uploader.getState().files).length);

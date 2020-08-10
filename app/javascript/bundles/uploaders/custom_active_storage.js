@@ -60,6 +60,7 @@ function handleFormSubmissionEvent(event) {
   const controller = new CustomDirectUploadsController(form);
   // changed line
   const { inputs } = controller;
+  console.log(inputs.length);
   // changed line
   if (inputs.length) {
     event.preventDefault();
@@ -83,6 +84,7 @@ function submitForm(form) {
   let button = submitButtonsByForm.get(form) || findElement(form, 'input[type=submit], button[type=submit]');
 
   if (button) {
+    console.log('inside if');
     const { disabled } = button;
     button.disabled = false;
     button.focus();
@@ -90,6 +92,7 @@ function submitForm(form) {
     button.click();
     button.disabled = disabled;
   } else {
+    console.log('inside else');
     button = document.createElement('input');
     button.type = 'submit';
     button.style.display = 'none';
