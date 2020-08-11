@@ -152,7 +152,7 @@ module Accounts
           @property.errors.each do |field, error|
             puts "#{field}: #{error}"
           end
-          format.html { render :new }
+          format.html { render :new, danger: 'yolo' }
           format.js { render 'shared/ajax/handler', locals: {resource: @property,
                                                              action: 'created',
                                                              partial_success: 'shared/ajax/success',
@@ -171,7 +171,7 @@ module Accounts
 
       set_location
       set_category
-      
+
       params[:delete_images].try(:each) do |id|
         @property.images.find(id).purge
       end

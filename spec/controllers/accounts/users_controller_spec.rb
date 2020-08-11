@@ -217,7 +217,6 @@ describe Accounts::UsersController, type: :controller do
         end
 
         context 'and is a regular user' do
-
           let(:userExternal) { FactoryBot.create(:userExternal) }
           subject { put :update, params: params.merge(id: userExternal.id) }
 
