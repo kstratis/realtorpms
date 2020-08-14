@@ -186,6 +186,8 @@ el:
         adxe_placeholder: "ΒΟΥΛΙΑΓΜΕΝΗ Κέντρο, studio 80 τ.μ., ισόγειο, 1 υ/δ, κατασκευή '02, αυτόνομη θέρμανση, καλή κατάσταση, αποτελείται από σαλόνι το οποίο..."
         adspitogatos: "Κείμενο αγγελίας spitogatos.gr"
         adspitogatos_placeholder: "ΒΟΥΛΑ: Πανόραμα, Μονοκατοικία 570τ.μ σε οικόπεδο 500τ.μ, 4 επιπέδων, minimal, γωνιακή, 5 υ/δ, ενδοδαπέδια θέρμανση, wc, τζάκι, ασανσέρ..."
+        flash_category_missing: "Υποχρεωτικό πεδίο: Κατηγορία"
+        flash_location_missing: "Υποχρεωτικό πεδίο: Τοποθεσία"
         enums:
           businesstype:
             title: "Είδος"
@@ -303,6 +305,16 @@ el:
         property:
           attributes:
             model_type:
+              required: 'υποχρεωτικό πεδίο'
+            account:
+              required: 'υποχρεωτικό πεδίο'
+            category:
+              required: 'υποχρεωτικό πεδίο'
+            location:
+              required: 'υποχρεωτικό πεδίο'
+        location:
+          attributes:
+            country:
               required: 'υποχρεωτικό πεδίο'
       messages:
         record_invalid: ! 'Η επικύρωση απέτυχε: %{errors}'

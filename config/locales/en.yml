@@ -215,6 +215,8 @@ en:
         adxe_placeholder: "Ad for xe.gr"
         adspitogatos: "Ad for spitogatos.gr"
         adspitogatos_placeholder: "Ad for spitogatos.gr"
+        flash_category_missing: "Required field: Category"
+        flash_location_missing: "Required field: Location"
         enums:
           businesstype:
             title: "Type"
@@ -332,6 +334,16 @@ en:
         property:
           attributes:
             model_type:
+              required: 'required field'
+            account:
+              required: 'required field'
+            category:
+              required: 'required field'
+            location:
+              required: 'required field'
+        location:
+          attributes:
+            country:
               required: 'required field'
       messages:
         record_invalid: ! 'Validation failed: %{errors}'

@@ -23,7 +23,15 @@ class Property < ApplicationRecord
 
   attr_searchable %w(slug title description notes adxe adspitogatos)
 
+  # before_save happens after validation that's why we use before_validation
   before_validation :handle_dependent_fields, on: :update
+
+  # before_save happens after validation that's why we use before_validation
+  before_validation do
+    if account.present?
+      self.model_type = account.model_types.find_by(name: 'properties')
+    end
+  end
 
   # This is for existing log records
   # https://stackoverflow.com/a/9326882/178728

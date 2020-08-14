@@ -5,9 +5,11 @@ module Accounts
     helper PropertyHeader
     helper Cfields
     helper ForbiddenIds
+
     before_action :set_property, only: [:show, :edit, :update, :destroy]
     after_action :log_action, only: [:create, :update, :destroy]
 
+    attr_accessor :params_copy, :category, :location
     # GET /properties
     # GET /properties.json
     def index
@@ -117,25 +119,41 @@ module Accounts
     # GET /properties/new
     def new
       @property = current_account.properties.new(model_type: current_account.model_types.find_by(name: 'properties'))
-      # Build a single new client
-      # @property.clients.new
     end
 
     # POST /properties
     # POST /properties.json
     def create
-      normalized_property_params = reconstruct_category(property_params)
-      clients_hash = normalized_property_params.extract!(:clients)
-      @property = current_account.properties.new(normalized_property_params)
-      set_location
-      set_category
-      # Scope the property to current account. This is only set once.
-      @property.account = current_account
-      @property.model_type = current_account.model_types.find_by(name: 'properties')
+      # binding.pry
+      puts 'INSIDE CREATE'
+
+      flash[:danger] = I18n.t('activerecord.attributes.property.flash_location_missing')
+      # binding.pry
+      return respond_to do |format|
+        format.html { redirect_to new_property_url }
+        format.js { redirect_to new_property_url }
+        # redirect_to new_property_url and return
+      end
+      puts 'AFTER REDIRECT'
+      # ---------------------------------------------------------------------------------
+      self.params_copy = property_params.dup.to_h
+
+      # Since we need to reconstruct the property's `category` and fetch its `location` before creating the actual object,
+      # we also have to early return if any of those are missing. However in such a scenario the property object wouldn't
+      # yet exist and thus we wouldn't be able to put `errors` to it and render our js response as we'd normally do.
+      # Instead we return early and redirect using one of the tricks found below:
+      # Ref: https://blog.arkency.com/2014/07/4-ways-to-early-return-from-a-rails-controller/
+      retrieve_category; return if performed?
+      retrieve_location; return if performed?
+
+      clients_hash = params_copy.extract!(:clients)
+
+      @property = current_account.properties.
+        new(params_copy.merge({category_id: category.id}).merge({location_id: location.id}))
 
       respond_to do |format|
         if @property.save
-          @property_slug = @property.slug # This is used for the Log model
+          @property_slug = @property.slug # This is used exclusively for the Log model (logging)
           if current_user.role(current_account) == 'user'
             current_user.properties <<  @property
           end
@@ -164,7 +182,7 @@ module Accounts
     # PATCH/PUT /properties/1
     # PATCH/PUT /properties/1.json
     def update
-      normalized_property_params = reconstruct_category(property_params)
+      normalized_property_params = retrieve_category(property_params)
       clients_hash = normalized_property_params.extract!(:clients)
       set_client(clients_hash)
       # normalized_property_params = set_client(normalized_property_params)
@@ -218,6 +236,9 @@ module Accounts
     end
 
     def log_action
+      # If an action fails, @property_slug will be `nil`
+      return if @property_slug.nil?
+
       if action_name == 'destroy'
         Log.create(author: current_user, author_name: current_user.full_name, property_name: @property_slug, action: action_name, account: current_account, account_name: current_account.subdomain, entity: 'properties')
       else
@@ -256,23 +277,26 @@ module Accounts
       end
     end
 
-    def set_location
-      # Assign the property's location no matter what.
-      @property.location = Location.find(params[:action] == 'update' ? property_params[:locationid] : @property.locationid)
-    end
+    def retrieve_location
+      self.location = Location.find_by(id: params_copy[:locationid])
 
-    def reconstruct_category(parameters)
-      # @category_instance = params[:action] == 'update' ? Category.find_by(slug: parameters[:subcategory], parent_slug: parameters[:category]) : Category.find(@property.category.id)
-      @category_instance = Category.find_by(slug: parameters[:subcategory], parent_slug: parameters[:category])
-      if @category_instance
-        parameters.to_h.except!(:category, :subcategory)
+      if location
+        params_copy.except!(:locationid)
       else
-        raise
+        flash[:danger] = I18n.t('activerecord.attributes.property.flash_location_missing')
+        redirect_to polymorphic_path([:property], action: action_name == 'create' ? :new : :edit)
       end
     end
 
-    def set_category
-      @property.category = @category_instance
+    def retrieve_category
+      self.category = Category.find_by(slug: params_copy[:subcategory], parent_slug: params_copy[:category])
+
+      if category
+        params_copy.except!(:category, :subcategory)
+      else
+        flash[:danger] = I18n.t('activerecord.attributes.property.flash_category_missing')
+        redirect_to polymorphic_path([:property], action: action_name == 'create' ? :new : :edit)
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

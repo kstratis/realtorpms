@@ -9,6 +9,7 @@ describe Accounts::PropertiesController, type: :controller do
   let(:partners) { FactoryBot.create_list(:usersequence, 4) }
 
   before do
+    use_categories_seed
     @request.host = "#{account.subdomain}.lvh.me"
     log_in(account_owner)
   end
@@ -71,22 +72,94 @@ describe Accounts::PropertiesController, type: :controller do
   end
 
   describe 'POST #create' do
-    let(:category) { Category.find((5..32).to_a.sample) }
-    let(:location) { Location.find(102723) }
-
     subject { post :create, params: params }
 
     context 'when not enough parameters are provided' do
 
+      context 'when category is missing' do
+        let(:params) do
+          { property: { businesstype: [:sell, :rent, :sell_rent].sample,
+                        description: Faker::Movies::Ghostbusters.quote }
+          }
+        end
+
+        it 'flashes an error message' do
+          # subject
+
+          expect(subject.request.flash[:danger]).to eq(I18n.t('activerecord.attributes.property.flash_location_missing'))
+        end
+
+        it 'redirects to new property page' do
+
+          subject
+          # binding.pry
+
+          # binding.pry
+          # expect(subject).to redirect_to(assigns(:user))
+          expect(response).to redirect_to(:action => :new)
+        end
+
+      end
+
+      context 'when location is missing' do
+        let(:params) do
+          { property: { subcategory: 'villa', category: 'residential',
+                        description: Faker::Movies::Ghostbusters.quote } }
+        end
+
+        it 'renders new with error message about location' do
+          expect(subject).to render_template(:new)
+          expect(flash[:danger]).to eq(I18n.t('activerecord.attributes.property.flash_location_missing'))
+        end
+      end
+
+    end
+
+    context 'when enough parameters are provided' do
+      let(:country) { Country.create!(name: 'Greece', initials: 'GR', continent: 'EU') }
+      let(:location) { Location.create(localname: "Λαμπρινή", globalname: "Lamprini", level: 3, parent_id: 2305, country_id: country.id, parent_localname: "Γαλάτσι", parent_globalname: "Galatsi") }
       let(:params) do
+
         { property: { businesstype: [:sell, :rent, :sell_rent].sample,
-                      description: Faker::Movies::Ghostbusters.quote }
+                      description: 'A very nice residential villa',
+                      category: 'residential',
+                      subcategory: 'villa',
+                      locationid: location.id}
         }
       end
 
-      it 'renders new with error message' do
-        expect(subject).to render_template(:new)
-        expect(flash[:danger]).to eq(I18n.t('users.flash_user_add_failed'))
+      it { is_expected.to be_successful }
+
+      it { is_expected.to have_http_status(200) }
+
+      it 'redirects to show with a success message' do
+        # expect(subject).to redirect_to(assigns(:user))
+        # Make sure the newly created user belongs to the account of the user who created him/her
+        # expect(assigns(:user).accounts.map(&:subdomain).first).to eq(account.subdomain)
+        # expect(subject.request.flash[:success]).to eq(I18n.t('users.flash_user_added'))
+      end
+
+      context 'when property owner is also provided' do
+        let(:params)  do
+          res = super()
+
+          puts 'MERGING'
+          # res[:property].update(filter_b: 'delicious')
+          puts res
+          res
+        end
+
+        it 'asdsd' do
+          is_expected.to be_successful
+        end
+
+        it { is_expected.to have_http_status(200) }
+
+      end
+
+      context 'when property images are also provided' do
+
+        # let(:params) { super().merge(filter_b: 'delicious') }
       end
 
 
