@@ -7,7 +7,7 @@ module Accounts
     helper ForbiddenIds
 
     before_action :set_property, only: [:show, :edit, :update, :destroy]
-    after_action :log_action, only: [:create, :update, :destroy]
+    # after_action :log_action, only: [:create, :update, :destroy]
 
     attr_accessor :params_copy, :category, :location
     # GET /properties
@@ -124,16 +124,14 @@ module Accounts
     # POST /properties
     # POST /properties.json
     def create
+      return redirect_to('/yolo')
       # binding.pry
-      puts 'INSIDE CREATE'
+      puts 'INSIDE CREATELKJLJ LKJLKJLKJLKJLKJ'
 
       flash[:danger] = I18n.t('activerecord.attributes.property.flash_location_missing')
       # binding.pry
-      return respond_to do |format|
-        format.html { redirect_to new_property_url }
-        format.js { redirect_to new_property_url }
-        # redirect_to new_property_url and return
-      end
+
+      # return redirect_to('/properties/new')
       puts 'AFTER REDIRECT'
       # ---------------------------------------------------------------------------------
       self.params_copy = property_params.dup.to_h
@@ -248,6 +246,7 @@ module Accounts
 
     def set_access
       if forbidden_entity_ids('properties').include?(@property.id)
+        puts 'ajsdlaksdjlakdjlaskjdalkjdlkajdlkasjdlkajsdlkajsdlkajsdlkasjdlkajsdlkjaslkj'
         redirect_to properties_path and return true
       end
     end

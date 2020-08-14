@@ -83,20 +83,23 @@ describe Accounts::PropertiesController, type: :controller do
           }
         end
 
+
+
+
         it 'flashes an error message' do
-          # subject
+          subject
 
           expect(subject.request.flash[:danger]).to eq(I18n.t('activerecord.attributes.property.flash_location_missing'))
         end
 
         it 'redirects to new property page' do
 
-          subject
+          # subject
           # binding.pry
-
+          # post :create, params: params
           # binding.pry
           # expect(subject).to redirect_to(assigns(:user))
-          expect(response).to redirect_to(:action => :new)
+          expect(subject).to redirect_to('/properties/new')
         end
 
       end
