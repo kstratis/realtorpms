@@ -101,10 +101,6 @@ describe Accounts::UsersController, type: :controller do
         expect(assigns(:user).accounts.map(&:subdomain).first).to eq(account.subdomain)
         expect(subject.request.flash[:success]).to eq(I18n.t('users.flash_user_added'))
       end
-
-      it 'yolo' do
-        expect(subject).to redirect_to('/users/new')
-      end
     end
   end
 
