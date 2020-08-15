@@ -215,8 +215,8 @@ en:
         adxe_placeholder: "Ad for xe.gr"
         adspitogatos: "Ad for spitogatos.gr"
         adspitogatos_placeholder: "Ad for spitogatos.gr"
-        flash_category_missing: "Required field: Category"
-        flash_location_missing: "Required field: Location"
+        flash_category_missing: "Unexpected error: 'Category' is required"
+        flash_location_missing: "Unexpected error: 'Location' is required"
         enums:
           businesstype:
             title: "Type"

@@ -126,10 +126,12 @@ module Accounts
     def create
       self.params_copy = property_params.dup.to_h
 
-      # Since we need to reconstruct the property's `category` and fetch its `location` before creating the actual object,
-      # we also have to early return if any of those are missing. However in such a scenario the property object wouldn't
-      # yet exist and thus we wouldn't be able to put `errors` to it and render our js response as we'd normally do.
-      # Instead we return early and redirect using one of the tricks found below:
+      # Notes:
+      # Since we need to reconstruct the property's `category` and fetch its `location` before creating the actual
+      # location object, we also have to early return if any of those are missing. However in such a scenario the
+      # property object wouldn't yet exist and thus we wouldn't be able to put `errors` to it and render our js response
+      # as we'd normally do. We'd have to build a second generic js.erb and so on and so forth.
+      # Instead we return early and -redirect- to :new using one of the tricks found below:
       # Ref: https://blog.arkency.com/2014/07/4-ways-to-early-return-from-a-rails-controller/
       retrieve_category; return if performed?
       retrieve_location; return if performed?

@@ -72,59 +72,59 @@ describe Accounts::PropertiesController, type: :controller do
   end
 
   describe 'POST #create' do
-    subject { post :create, params: params }
+    subject { post :create, params: params, format: :js}
+
+    let(:country) { Country.create!(name: 'Greece', initials: 'GR', continent: 'EU') }
+    let(:location) { Location.create(localname: "Λαμπρινή", globalname: "Lamprini", level: 3, parent_id: 2305, country_id: country.id, parent_localname: "Γαλάτσι", parent_globalname: "Galatsi") }
 
     context 'when not enough parameters are provided' do
 
       context 'when category is missing' do
-        let(:country) { Country.create!(name: 'Greece', initials: 'GR', continent: 'EU') }
-        let(:location) { Location.create(localname: "Λαμπρινή", globalname: "Lamprini", level: 3, parent_id: 2305, country_id: country.id, parent_localname: "Γαλάτσι", parent_globalname: "Galatsi") }
         let(:params) do
-
           { property: { businesstype: [:sell, :rent, :sell_rent].sample,
                         description: 'A very nice residential villa',
-                        category: 'residential',
-                        subcategory: 'villa',
-                        locationid: location.id}
+                        locationid: location.id }
           }
         end
 
-        it 'flashes an error message' do
+        it 'flashes an error message with category missing' do
           subject
 
-          expect(subject.request.flash[:danger]).to eq(I18n.t('activerecord.attributes.property.flash_location_missing'))
+          expect(subject.request.flash[:danger]).to eq(I18n.t('activerecord.attributes.property.flash_category_missing'))
         end
 
         it 'redirects to new property page' do
-          expect(subject).to redirect_to('/properties/new')
+          expect(subject).to redirect_to(new_property_path)
         end
 
       end
 
       context 'when location is missing' do
         let(:params) do
-          { property: { subcategory: 'villa', category: 'residential',
-                        description: Faker::Movies::Ghostbusters.quote } }
+          { property: { subcategory: 'villa',
+                        category: 'residential' } }
         end
 
-        it 'renders new with error message about location' do
-          expect(subject).to render_template(:new)
-          expect(flash[:danger]).to eq(I18n.t('activerecord.attributes.property.flash_location_missing'))
+        it 'flashes an error message with location missing' do
+          subject
+
+          expect(subject.request.flash[:danger]).to eq(I18n.t('activerecord.attributes.property.flash_location_missing'))
+        end
+
+        it 'redirects to new property page' do
+          expect(subject).to redirect_to(new_property_path)
         end
       end
 
     end
 
     context 'when enough parameters are provided' do
-      let(:country) { Country.create!(name: 'Greece', initials: 'GR', continent: 'EU') }
-      let(:location) { Location.create(localname: "Λαμπρινή", globalname: "Lamprini", level: 3, parent_id: 2305, country_id: country.id, parent_localname: "Γαλάτσι", parent_globalname: "Galatsi") }
       let(:params) do
-
         { property: { businesstype: [:sell, :rent, :sell_rent].sample,
                       description: 'A very nice residential villa',
                       category: 'residential',
                       subcategory: 'villa',
-                      locationid: location.id}
+                      locationid: location.id }
         }
       end
 
@@ -132,26 +132,26 @@ describe Accounts::PropertiesController, type: :controller do
 
       it { is_expected.to have_http_status(200) }
 
-      it 'redirects to show with a success message' do
-        # expect(subject).to redirect_to(assigns(:user))
-        # Make sure the newly created user belongs to the account of the user who created him/her
-        # expect(assigns(:user).accounts.map(&:subdomain).first).to eq(account.subdomain)
-        # expect(subject.request.flash[:success]).to eq(I18n.t('users.flash_user_added'))
+      it 'redirects to js generated page with success message' do
+        expect(subject).to render_template('shared/ajax/handler')
+      end
+
+      it 'makes sure the underlying object model has no errors' do
+        subject
+        expect(assigns(:property).errors).to be_empty
       end
 
       context 'when property owner is also provided' do
-        let(:params)  do
+        let(:params) do
           res = super()
 
-          puts 'MERGING'
+          # puts 'MERGING'
           # res[:property].update(filter_b: 'delicious')
-          puts res
-          res
+          # puts res
+          # res
         end
 
-        it 'asdsd' do
-          is_expected.to be_successful
-        end
+        it { is_expected.to be_successful }
 
         it { is_expected.to have_http_status(200) }
 
@@ -161,7 +161,6 @@ describe Accounts::PropertiesController, type: :controller do
 
         # let(:params) { super().merge(filter_b: 'delicious') }
       end
-
 
 
     end
