@@ -18,7 +18,6 @@ class ApplicationController < ActionController::Base
 
   def current_account
     # this results in 404 in production
-    puts 'inside current_account (application_controller.rb:21)'
     @current_account ||= Account.find_by!(subdomain: request.subdomain)
   end
 
