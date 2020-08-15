@@ -77,14 +77,17 @@ describe Accounts::PropertiesController, type: :controller do
     context 'when not enough parameters are provided' do
 
       context 'when category is missing' do
+        let(:country) { Country.create!(name: 'Greece', initials: 'GR', continent: 'EU') }
+        let(:location) { Location.create(localname: "Λαμπρινή", globalname: "Lamprini", level: 3, parent_id: 2305, country_id: country.id, parent_localname: "Γαλάτσι", parent_globalname: "Galatsi") }
         let(:params) do
+
           { property: { businesstype: [:sell, :rent, :sell_rent].sample,
-                        description: Faker::Movies::Ghostbusters.quote }
+                        description: 'A very nice residential villa',
+                        category: 'residential',
+                        subcategory: 'villa',
+                        locationid: location.id}
           }
         end
-
-
-
 
         it 'flashes an error message' do
           subject
@@ -93,12 +96,6 @@ describe Accounts::PropertiesController, type: :controller do
         end
 
         it 'redirects to new property page' do
-
-          # subject
-          # binding.pry
-          # post :create, params: params
-          # binding.pry
-          # expect(subject).to redirect_to(assigns(:user))
           expect(subject).to redirect_to('/properties/new')
         end
 

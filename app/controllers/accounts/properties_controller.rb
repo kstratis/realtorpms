@@ -7,9 +7,9 @@ module Accounts
     helper ForbiddenIds
 
     before_action :set_property, only: [:show, :edit, :update, :destroy]
-    # after_action :log_action, only: [:create, :update, :destroy]
+    after_action :log_action, only: [:create, :update, :destroy]
 
-    attr_accessor :params_copy, :category, :location
+    attr_accessor :params_copy, :category, :area_location
     # GET /properties
     # GET /properties.json
     def index
@@ -124,16 +124,6 @@ module Accounts
     # POST /properties
     # POST /properties.json
     def create
-      return redirect_to('/yolo')
-      # binding.pry
-      puts 'INSIDE CREATELKJLJ LKJLKJLKJLKJLKJ'
-
-      flash[:danger] = I18n.t('activerecord.attributes.property.flash_location_missing')
-      # binding.pry
-
-      # return redirect_to('/properties/new')
-      puts 'AFTER REDIRECT'
-      # ---------------------------------------------------------------------------------
       self.params_copy = property_params.dup.to_h
 
       # Since we need to reconstruct the property's `category` and fetch its `location` before creating the actual object,
@@ -147,7 +137,7 @@ module Accounts
       clients_hash = params_copy.extract!(:clients)
 
       @property = current_account.properties.
-        new(params_copy.merge({category_id: category.id}).merge({location_id: location.id}))
+        new(params_copy.merge({category_id: category.id}).merge({location_id: area_location.id}))
 
       respond_to do |format|
         if @property.save
@@ -246,7 +236,6 @@ module Accounts
 
     def set_access
       if forbidden_entity_ids('properties').include?(@property.id)
-        puts 'ajsdlaksdjlakdjlaskjdalkjdlkajdlkasjdlkajsdlkajsdlkajsdlkasjdlkajsdlkjaslkj'
         redirect_to properties_path and return true
       end
     end
@@ -277,9 +266,9 @@ module Accounts
     end
 
     def retrieve_location
-      self.location = Location.find_by(id: params_copy[:locationid])
+      self.area_location = Location.find_by(id: params_copy[:locationid])
 
-      if location
+      if area_location
         params_copy.except!(:locationid)
       else
         flash[:danger] = I18n.t('activerecord.attributes.property.flash_location_missing')
