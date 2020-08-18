@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Accounts::PropertiesController, type: :controller do
   let(:account) { FactoryBot.create(:account) }
-  let(:property1) { FactoryBot.create(:property, account: account) }
+  let(:property1) { FactoryBot.create(:property, account: account )}
   let(:property2) { FactoryBot.create(:property, account: account) }
   let(:property3) { FactoryBot.create(:property, account: account) }
   let(:account_owner) { account.owner }
@@ -91,7 +91,7 @@ describe Accounts::PropertiesController, type: :controller do
   end
 
   describe 'POST #create' do
-    subject { post :create, params: params, format: :js}
+    subject { post :create, params: params, format: :js }
 
     let(:country) { Country.create!(name: 'Greece', initials: 'GR', continent: 'EU') }
     let(:location) { Location.create(localname: "Λαμπρινή", globalname: "Lamprini", level: 3, parent_id: 2305, country_id: country.id, parent_localname: "Γαλάτσι", parent_globalname: "Galatsi") }
@@ -188,8 +188,61 @@ describe Accounts::PropertiesController, type: :controller do
           }.to change(ActiveStorage::Attachment, :count).by(2)
         end
       end
-
-
     end
   end
+
+
+  describe 'GET #edit' do
+    # property id could also be used here but we've manually disabled it in the controller.
+    subject { get :edit, params: { id: property1.slug } }
+
+    it { is_expected.to be_successful }
+
+    it { is_expected.to have_http_status(200) }
+
+    context 'when logged in as a regular account user' do
+      before do
+        log_out
+        log_in(account.users.first)
+      end
+
+      context 'who has not been assigned the property' do
+        it 'flashes an error message with access denied' do
+          subject
+
+          expect(subject.request.flash[:danger]).to eq(I18n.t('access_denied'))
+        end
+
+        it 'redirects to property index page' do
+          expect(subject).to redirect_to(properties_path)
+        end
+      end
+    end
+
+  end
+
+  describe 'PUT #update' do
+
+    before { account.users << partners.first }
+
+    context 'when updating other users' do
+      subject { put :update, params: params.merge(id: partners.first.id) }
+
+      context 'and parameters are missing' do
+        let(:params) do
+          { user: { first_name: '',
+                    last_name: '',
+                    email: '',
+                    phone1: '',
+                    dob: Date.new(1980, 4, 1),
+                    password: '',
+                    password_confirmation: '' } }
+        end
+
+        it_behaves_like 'a guarded area for regular users', I18n.t('users.flash_unauthorised_user_edit')
+
+      end
+    end
+  end
+
 end

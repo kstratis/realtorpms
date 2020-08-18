@@ -3,20 +3,19 @@ FactoryBot.define do
   factory :property, :class => Property do
     businesstype { [:sell, :rent, :sell_rent].sample }
     description { Faker::Movies::Ghostbusters.quote }
-    category { Category.find((5..32).to_a.sample) }
-    location {Location.find(102723)}
+
+    category { FactoryBot.create(:category) }
+    location { FactoryBot.create(:location) }
+
     size {rand(25..5000)}
     price { rand(5000..5000000) }
     bedrooms {rand(1..5)}
     floor { rand(0..10) }
     construction {rand(1970..2018) }
 
-    transient do
-      account { Account.first }
-    end
-
     before(:create) do |property, evaluator|
       property.account = evaluator.account
+      property.model_type = evaluator.account.model_types.find_by(name: 'properties')
     end
 
   end

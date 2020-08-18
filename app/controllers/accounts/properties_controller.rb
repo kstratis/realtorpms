@@ -238,6 +238,7 @@ module Accounts
 
     def set_access
       if forbidden_entity_ids('properties').include?(@property.id)
+        flash[:danger] = I18n.t('access_denied')
         redirect_to properties_path and return true
       end
     end
