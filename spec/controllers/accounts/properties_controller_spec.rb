@@ -18,7 +18,7 @@ describe Accounts::PropertiesController, type: :controller do
     log_in(account_owner)
   end
 
-  shared_examples 'the property is successfully created' do
+  shared_examples 'its operations are successful' do
 
     it { is_expected.to be_successful }
 
@@ -144,7 +144,7 @@ describe Accounts::PropertiesController, type: :controller do
         }
       end
 
-      it_behaves_like 'the property is successfully created'
+      it_behaves_like 'its operations are successful'
 
       context 'when property owner is also provided' do
         let(:client) { FactoryBot.create(:client, account: account) }
@@ -154,7 +154,7 @@ describe Accounts::PropertiesController, type: :controller do
           super_params
         end
 
-        it_behaves_like 'the property is successfully created'
+        it_behaves_like 'its operations are successful'
       end
 
       context 'when property avatar is also provided' do
@@ -274,7 +274,7 @@ describe Accounts::PropertiesController, type: :controller do
         }
       end
 
-      it_behaves_like 'the property is successfully created'
+      it_behaves_like 'its operations are successful'
 
       context 'when property owner is also provided' do
         let(:client) { FactoryBot.create(:client, account: account) }
@@ -284,7 +284,7 @@ describe Accounts::PropertiesController, type: :controller do
           super_params
         end
 
-        it_behaves_like 'the property is successfully created'
+        it_behaves_like 'its operations are successful'
       end
 
       context 'when property avatar is also provided' do

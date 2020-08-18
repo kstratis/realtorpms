@@ -13,7 +13,8 @@
       <% else %>
         <% pictures.each do |image| %>
           <div class="print-img ">
-            <%= image_pack_tag image, class: 'img-responsive' %>
+            <%# -=Attention!=- This is user-generated content and we still have to use the asset pipeline %>
+            <%= image_tag image, class: 'img-responsive' %>
           </div>
         <% end %>
       <% end %>

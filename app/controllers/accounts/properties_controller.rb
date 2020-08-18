@@ -44,7 +44,7 @@ module Accounts
           pictures = []
           if @property.images.attached? || @property.avatar.attached?
             @property.all_images[0..3].each do |image|
-              pictures << image.variant(resize: '400x250').processed.service_url
+              pictures << rails_representation_url(image.variant(resize: '400x250').processed)
             end
           end
           # @property.all_images[0..3]
