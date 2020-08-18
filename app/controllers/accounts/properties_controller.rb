@@ -151,6 +151,7 @@ module Accounts
           set_client(clients_hash)
 
           format.html { redirect_to @property, notice: I18n.t('properties.created.flash') }
+          # We don't need to set a flash here since we respond with js success page
           format.js { render 'shared/ajax/handler',
                              locals: {resource: @property,
                                       action: 'created',
@@ -160,7 +161,7 @@ module Accounts
           @property.errors.each do |field, error|
             puts "#{field}: #{error}"
           end
-          format.html { render :new, danger: 'yolo' }
+          format.html { render :new }
           format.js { render 'shared/ajax/handler', locals: {resource: @property,
                                                              action: 'created',
                                                              partial_success: 'shared/ajax/success',
@@ -172,20 +173,23 @@ module Accounts
     # PATCH/PUT /properties/1
     # PATCH/PUT /properties/1.json
     def update
-      normalized_property_params = retrieve_category(property_params)
-      clients_hash = normalized_property_params.extract!(:clients)
-      set_client(clients_hash)
-      # normalized_property_params = set_client(normalized_property_params)
+      self.params_copy = property_params.dup.to_h
 
-      set_location
-      set_category
+      retrieve_category; return if performed?
+      retrieve_location; return if performed?
 
-      params[:delete_images].try(:each) do |id|
+      clients_hash = params_copy.extract!(:clients)
+
+      params_copy[:delete_images].try(:each) do |id|
         @property.images.find(id).purge
       end
 
       respond_to do |format|
-        if @property.update(normalized_property_params)
+        if @property.update(params_copy.merge({category_id: category.id}).merge({location_id: area_location.id}))
+
+          # Sets the client and its required ownership attribute on the CPA many-to-many table
+          set_client(clients_hash)
+
           format.html { redirect_to @property, notice: I18n.t('properties.updated.flash') }
           format.js { render 'shared/ajax/handler',
                              locals: {resource: @property,
