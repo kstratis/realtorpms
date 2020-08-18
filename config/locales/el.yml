@@ -316,6 +316,10 @@ el:
           attributes:
             country:
               required: 'υποχρεωτικό πεδίο'
+        client:
+          attributes:
+            model_type:
+              required: 'υποχρεωτικό πεδίο'
       messages:
         record_invalid: ! 'Η επικύρωση απέτυχε: %{errors}'
   js:

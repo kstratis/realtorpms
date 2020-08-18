@@ -10,30 +10,30 @@ describe Accounts::PropertiesController, type: :controller do
 
   before do
     use_categories_seed
+    account.users << partners.first
+    account.users << partners.second
     @request.host = "#{account.subdomain}.lvh.me"
     log_in(account_owner)
   end
 
-  # shared_examples 'a guarded area for regular users' do |error|
-  #   let(:userExternal) { FactoryBot.create(:userExternal) }
-  #   before do
-  #     account.users << userExternal
-  #     log_out
-  #     log_in(userExternal)
-  #   end
-  #   it 'redirects to home page with a success message' do
-  #     expect(subject).to redirect_to(root_url)
-  #     expect(subject.request.flash[:danger]).to eq(error)
-  #   end
-  # end
+  shared_examples 'the property is successfully created' do
+
+    it { is_expected.to be_successful }
+
+    it { is_expected.to have_http_status(200) }
+
+    it 'redirects to js generated page with success message' do
+      expect(subject).to render_template('shared/ajax/handler')
+    end
+
+    it 'makes sure the underlying object model has no errors' do
+      subject
+      expect(assigns(:property).errors).to be_empty
+    end
+  end
 
   describe 'GET #index' do
     subject { get :index, params: {}, format: :json }
-
-    before do
-      account.users << partners.first
-      account.users << partners.second
-    end
 
     it { is_expected.to be_successful }
 
@@ -58,6 +58,25 @@ describe Accounts::PropertiesController, type: :controller do
       subject
       expect(JSON.parse(response.body)).to have_key('current_page')
     end
+
+    context 'when logged in as a regular account user' do
+      before do
+        log_out
+        log_in(account.users.first)
+      end
+
+      it { is_expected.to be_successful }
+
+      it { is_expected.to have_http_status(200) }
+    end
+  end
+
+  describe 'GET #new' do
+    subject { get :new, params: {} }
+
+    it { is_expected.to be_successful }
+
+    it { is_expected.to have_http_status(200) }
 
     context 'when logged in as a regular account user' do
       before do
@@ -96,7 +115,6 @@ describe Accounts::PropertiesController, type: :controller do
         it 'redirects to new property page' do
           expect(subject).to redirect_to(new_property_path)
         end
-
       end
 
       context 'when location is missing' do
@@ -115,7 +133,6 @@ describe Accounts::PropertiesController, type: :controller do
           expect(subject).to redirect_to(new_property_path)
         end
       end
-
     end
 
     context 'when enough parameters are provided' do
@@ -128,38 +145,48 @@ describe Accounts::PropertiesController, type: :controller do
         }
       end
 
-      it { is_expected.to be_successful }
-
-      it { is_expected.to have_http_status(200) }
-
-      it 'redirects to js generated page with success message' do
-        expect(subject).to render_template('shared/ajax/handler')
-      end
-
-      it 'makes sure the underlying object model has no errors' do
-        subject
-        expect(assigns(:property).errors).to be_empty
-      end
+      it_behaves_like 'the property is successfully created'
 
       context 'when property owner is also provided' do
+        let(:client) { FactoryBot.create(:client, account: account) }
         let(:params) do
-          res = super()
-
-          # puts 'MERGING'
-          # res[:property].update(filter_b: 'delicious')
-          # puts res
-          # res
+          super_params = super()
+          super()[:property].update(client: client)
+          super_params
         end
 
-        it { is_expected.to be_successful }
+        it_behaves_like 'the property is successfully created'
+      end
 
-        it { is_expected.to have_http_status(200) }
+      context 'when property avatar is also provided' do
+        let(:image_file) { fixture_file_upload(Rails.root.join('public', 'samples/semi_detached.jpg'), 'image/jpeg') }
+        let(:params) do
+          super_params = super()
+          super()[:property].update(avatar: image_file)
+          super_params
+        end
 
+        it "successfully uploads the property's avatar" do
+          expect {
+            subject
+          }.to change(ActiveStorage::Attachment, :count).by(1)
+        end
       end
 
       context 'when property images are also provided' do
+        let(:image_file1) { fixture_file_upload(Rails.root.join('public', 'samples/apartment1.jpg'), 'image/jpeg') }
+        let(:image_file2) { fixture_file_upload(Rails.root.join('public', 'samples/apartment2.jpg'), 'image/jpeg') }
+        let(:params) do
+          super_params = super()
+          super()[:property].update(images: [image_file1, image_file2])
+          super_params
+        end
 
-        # let(:params) { super().merge(filter_b: 'delicious') }
+        it 'successfully uploads the property images' do
+          expect {
+            subject
+          }.to change(ActiveStorage::Attachment, :count).by(2)
+        end
       end
 
 

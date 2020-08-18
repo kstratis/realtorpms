@@ -345,6 +345,10 @@ en:
           attributes:
             country:
               required: 'required field'
+        client:
+          attributes:
+            model_type:
+              required: 'required field'
       messages:
         record_invalid: ! 'Validation failed: %{errors}'
   js:

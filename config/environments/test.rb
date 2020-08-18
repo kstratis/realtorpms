@@ -50,6 +50,10 @@ Rails.application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
+  # Use inline job processing to make things happen immediately
+  config.active_job.queue_adapter = :inline
+
+  # Separate file storage in the test environment
   config.active_storage.service = :test
 
   # Raises error for missing translations
