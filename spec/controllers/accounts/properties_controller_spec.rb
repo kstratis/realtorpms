@@ -18,6 +18,18 @@ describe Accounts::PropertiesController, type: :controller do
     log_in(account_owner)
   end
 
+  shared_examples 'access is denied' do
+    it 'flashes an error message with access denied' do
+      subject
+
+      expect(subject.request.flash[:danger]).to eq(I18n.t('access_denied'))
+    end
+
+    it 'redirects to property index page' do
+      expect(subject).to redirect_to(properties_path)
+    end
+  end
+
   shared_examples 'its operations are successful' do
 
     it { is_expected.to be_successful }
@@ -188,6 +200,24 @@ describe Accounts::PropertiesController, type: :controller do
         end
       end
     end
+
+    context 'when logged in as a regular account user who has not been assigned the property' do
+      let(:params) do
+        { property: { businesstype: [:sell, :rent, :sell_rent].sample,
+                      description: 'A very nice residential villa',
+                      category: 'residential',
+                      subcategory: 'villa',
+                      locationid: location.id }
+        }
+      end
+      before do
+        log_out
+        log_in(account.users.first)
+      end
+
+      it_behaves_like 'its operations are successful'
+
+    end
   end
 
 
@@ -199,23 +229,13 @@ describe Accounts::PropertiesController, type: :controller do
 
     it { is_expected.to have_http_status(200) }
 
-    context 'when logged in as a regular account user' do
+    context 'when logged in as a regular account user who has not been assigned the property' do
       before do
         log_out
         log_in(account.users.first)
       end
 
-      context 'who has not been assigned the property' do
-        it 'flashes an error message with access denied' do
-          subject
-
-          expect(subject.request.flash[:danger]).to eq(I18n.t('access_denied'))
-        end
-
-        it 'redirects to property index page' do
-          expect(subject).to redirect_to(properties_path)
-        end
-      end
+      it_behaves_like 'access is denied'
     end
 
   end
@@ -317,6 +337,20 @@ describe Accounts::PropertiesController, type: :controller do
           }.to change(ActiveStorage::Attachment, :count).by(2)
         end
       end
+    end
+
+    context 'when logged in as a regular account user who has not been assigned the property' do
+      let(:params) do
+        { property: { businesstype: [:sell, :rent, :sell_rent].sample,
+                      description: 'A very nice residential villa' }
+        }
+      end
+      before do
+        log_out
+        log_in(account.users.first)
+      end
+
+      it_behaves_like 'access is denied'
     end
   end
 

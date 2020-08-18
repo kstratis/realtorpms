@@ -7,6 +7,8 @@ module Accounts
     helper ForbiddenIds
 
     before_action :set_property, only: [:show, :edit, :update, :destroy]
+    before_action :redirect_to_index, :if => :grant_access?, :only => [:edit, :update, :show, :destroy]
+
     after_action :log_action, only: [:create, :update, :destroy]
 
     attr_accessor :params_copy, :category, :area_location
@@ -27,11 +29,9 @@ module Accounts
       end
     end
 
-
     # GET /properties/1
     # GET /properties/1.json
     def show
-      set_access and return
       # friendly ids history slugs should not result in 404
       unless [property_path(@property), property_path(@property) + '?print=true'].include?(request.path)
         return redirect_to @property, :status => :moved_permanently
@@ -80,7 +80,6 @@ module Accounts
 
     # GET /properties/1/edit
     def edit
-      set_access and return
       # If an old id or a numeric id was used to find the record, then
       # the request path will not match the post_path, and we should do
       # a 301 redirect that uses the current friendly id.
@@ -224,6 +223,11 @@ module Accounts
 
     private
 
+    def redirect_to_index
+      flash[:danger] = I18n.t('access_denied')
+      redirect_to properties_path
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_property
       @property = current_account.properties.find(params[:id])
@@ -240,11 +244,8 @@ module Accounts
       end
     end
 
-    def set_access
-      if forbidden_entity_ids('properties').include?(@property.id)
-        flash[:danger] = I18n.t('access_denied')
-        redirect_to properties_path and return true
-      end
+    def grant_access?
+      forbidden_entity_ids('properties').include?(@property.id)
     end
 
     # Sets the selected client
