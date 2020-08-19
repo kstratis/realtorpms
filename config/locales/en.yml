@@ -832,14 +832,14 @@ en:
       add_another: "Try again"
       support: "Please contact support or"
     updated:
-      message: "Property successfully edited"
+      message: "Property successfully updated"
       message_feedback: "Manage your properties in %{brand} now"
       return: "Return"
       show: "Show"
       show_and_assign: "Assign"
       edit: "Edit"
       add_another: "Add new"
-      flash: "Property successfully edited"
+      flash: "Property successfully updated"
       support: "Please contact support or"
     not_updated:
       message: "Error editing the property"

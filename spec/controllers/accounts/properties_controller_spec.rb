@@ -354,5 +354,30 @@ describe Accounts::PropertiesController, type: :controller do
     end
   end
 
+  describe 'DELETE #destroy' do
+    subject { delete :destroy, params: { id: property1.id } }
+
+    context 'when deleting other users' do
+      it 'flashes an error message confirming property was deleted' do
+        subject
+
+        expect(subject.request.flash[:notice]).to eq(I18n.t('properties.destroyed.flash'))
+      end
+
+      it 'redirects to property index page' do
+        expect(subject).to redirect_to(properties_path)
+      end
+
+    end
+
+    context 'when logged in as a regular account user who has not been assigned the property' do
+      before do
+        log_out
+        log_in(account.users.first)
+      end
+
+      it_behaves_like 'access is denied'
+    end
+  end
 end
 
