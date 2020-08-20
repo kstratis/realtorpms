@@ -21,7 +21,7 @@
   <%= csrf_meta_tags %>
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
   <%= stylesheet_pack_tag 'style_loaders/main_stylesheet', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= render 'layouts/shared_script_assets' %>
+  <%#= render 'layouts/shared_script_assets' %>
   <%= render 'layouts/shim' %>
 </head>
 <body>
@@ -33,14 +33,12 @@
     <main class="auth">
       <header id="auth-header" class="auth-header" style="background-image: url(<%= asset_pack_path 'media/images/background/hero_bg.png' %>);">
         <h1>
-          <%#= image_tag('landia_logo.svg', class: 'navbar-brand', height: "52", title: BRANDNAME) %>
           <%= image_pack_tag('media/images/propertize_logo_light_v2.svg', class: 'navbar-brand', height: "80", title: BRANDNAME) %>
         </h1>
         <%= yield(:heading) %>
       </header>
       <%= yield(:content) %>
       <footer class="auth-footer">&copy; <%= Time.current.year %> <%= t('sessions.rights') %></footer>
-
     </main>
 
 
@@ -50,5 +48,17 @@
 
 
 </body>
+<script>
+  // This properly closes flash messages upon logout
+  window.addEventListener('DOMContentLoaded', () => {
+    const element = document.querySelectorAll("[data-dismiss='alert']")[0];
+    const removeAlert = function() {
+      document.querySelector('.alert,.alert-container').remove();
+    };
+    if (element){
+      element.addEventListener('click', removeAlert, false);
+    }
+  });
+</script>
 
 </html>

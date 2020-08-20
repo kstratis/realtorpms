@@ -48,5 +48,6 @@ $(document).on('turbolinks:load', function(e) {
   }
   $('[data-toggle="tooltip"]').tooltip();
   $('[data-toggle="popover"]').popover();
+
 });
 
