@@ -18,7 +18,7 @@
               <div class="user-avatar user-avatar-xl fileinput-button">
                 <div class="fileinput-button-label"><%= t('users.edit.change_pic') %></div>
 
-                <%= render_avatar(current_user, 'tile-xl', "avatar_preview") %>
+                <%= render_avatar(@user, 'tile-xl', "avatar_preview") %>
                 <%= f.file_field :avatar, id: "avatar_upload" %>
               </div><!-- /avatar -->
               <!-- .media-body -->
@@ -26,7 +26,7 @@
                 <h3 class="card-title profile-photo"><%= t('users.edit.photo_header') %></h3>
                 <h6 class="card-subtitle text-muted"><%= t('users.edit.photo_subheader') %></h6>
                 <p class="card-text">
-                  <% if current_user.avatar.attached? %>
+                  <% if @user.avatar.attached? %>
                     <%= link_to delete_avatar_user_url, method: :delete, data: {confirm: t('users.edit.delete_avatar')} do %>
                       <i class="fa fa-trash fa-fw"></i>&nbsp;|&nbsp;<small><%= t('users.edit.allowed_pic_specs') %></small>
                     <% end %>

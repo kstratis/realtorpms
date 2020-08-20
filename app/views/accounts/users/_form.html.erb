@@ -21,7 +21,12 @@
 <!-- .form-group -->
 <div class="form-group">
   <div class="form-label-group">
-    <%= f.email_field :email, class: 'form-control', placeholder: User.human_attribute_name("email"), 'data-parsley-required': "true", 'data-parsley-required-message': t("js.validator.required") %>
+    <%= f.email_field :email, class: 'form-control',
+                      placeholder: User.human_attribute_name("email"),
+                      'data-parsley-required': "true",
+                      'data-parsley-required-message': t("js.validator.required"),
+                      'data-parsley-type': "email",
+                      'data-parsley-type-message': t("js.validator.email") %>
     <%= f.label "email", User.human_attribute_name("email") %>
     <%= inline_error @user, :email, 'Email' %>
   </div>
