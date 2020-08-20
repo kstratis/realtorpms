@@ -357,7 +357,7 @@ describe Accounts::PropertiesController, type: :controller do
   describe 'DELETE #destroy' do
     subject { delete :destroy, params: { id: property1.id } }
 
-    context 'when deleting other users' do
+    context 'when deleting other properties' do
       it 'flashes an error message confirming property was deleted' do
         subject
 

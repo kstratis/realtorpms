@@ -23,6 +23,13 @@ class Client < ApplicationRecord
   validates :first_name, presence: true, length: { maximum: 50 }
   validates :last_name, presence: true, length: { maximum: 50 }
 
+  # before_save happens after validation that's why we use before_validation
+  before_validation do
+    if account.present?
+      self.model_type = account.model_types.find_by(name: 'clients')
+    end
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end

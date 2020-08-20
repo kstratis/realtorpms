@@ -141,7 +141,7 @@ module Accounts
         new(params_copy.merge({category_id: category.id}).merge({location_id: area_location.id}))
 
       respond_to do |format|
-        if @property.save
+        if @property.save  # model_type is automatically saved within a before_validation hook inside the model
           @property_slug = @property.slug # This is used exclusively for the Log model (logging)
           if current_user.role(current_account) == 'user'
             current_user.properties <<  @property

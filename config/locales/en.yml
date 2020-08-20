@@ -678,6 +678,8 @@ en:
     text_placeholder: "Search..."
   clients:
     flash_created: "Client successfully created"
+    flash_not_created: "Error creating new client"
+    flash_not_updated: "Error updating client data"
     flash_delete: "Client successfully deleted"
     flash_not_found: "Client not found"
     flash_profile_updated: "Client profile uccessfully updated"
