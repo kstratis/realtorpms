@@ -1,7 +1,8 @@
 module Accounts
   class ModelTypesController < Accounts::BaseController
-    before_action :admin_access
+    # Don't change the order here. Order matters.
     before_action :set_model_type, only: [:show, :edit, :update, :destroy]
+    before_action :redirect_to_index, :unless => :grant_access?, :only => [:edit, :update, :show, :destroy]
 
 
     # GET /model_types
@@ -78,6 +79,14 @@ module Accounts
 
     private
 
+    def redirect_to_index
+      flash[:danger] = I18n.t('access_denied')
+      redirect_to root_path
+    end
+
+    def grant_access?
+      current_user.role(current_account) == 'admin' && @model_type.account == current_account
+    end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_model_type

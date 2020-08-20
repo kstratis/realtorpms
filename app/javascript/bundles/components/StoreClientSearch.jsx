@@ -137,7 +137,7 @@ function StoreClientSearch({
             <div className="col-lg-12">
               <div className="alert alert-success has-icon" role="alert">
                 <div className="alert-icon">
-                  <span className="oi oi-check" />
+                  <span className="fa fa-check" />
                 </div>
                 <span>{renderHTML(remoteResponse)}</span>
               </div>
