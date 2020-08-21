@@ -207,5 +207,9 @@ class User < ApplicationRecord
     dob ? ((Time.zone.now - dob.to_time) / 1.year.seconds).floor : nil
   end
 
+  def client_ids
+    @clients_ids ||= clients.pluck(:id)
+  end
+
 
 end

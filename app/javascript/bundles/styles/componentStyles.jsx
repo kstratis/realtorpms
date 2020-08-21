@@ -14,19 +14,6 @@ const reactSelectStyles = {
       cursor: 'pointer'
     }
   }),
-  multiValueRemove: (base, state) => ({
-    ...base,
-    '&:hover': {
-      cursor: 'pointer'
-    }
-  }),
-  // menu: (base, state) => ({
-  //   ...base,
-  //   border: '1px solid #37474f',
-  //   '&:hover': {
-  //     cursor: 'pointer'
-  //   }
-  // }),
   dropdownIndicator: (base, state) => ({
     ...base,
     '&:hover': {
@@ -58,11 +45,23 @@ const reactSelectStyles = {
     color: '#FFFFFF',
     // display: 'flex',
   }),
-  multiValueLabel: base => ({
-    ...base,
-    background: '#216AB0',
-    color: '#FFFFFF',
-  })
+
+  multiValue: (base, state) => {
+    return state.data.isFixed ? { ...base, backgroundColor: 'gray' } : base;
+  },
+
+  multiValueLabel: (base, state) => {
+    return state.data.isFixed
+      ? { ...base, fontWeight: 'bold', color: 'white', paddingRight: 6 }
+      : {...base, background: '#216AB0', color: '#FFFFFF'}
+  },
+
+  multiValueRemove: (base, state) => {
+    return state.data.isFixed
+      ? { ...base, display: 'none' }
+      : { ...base, '&:hover': { cursor: 'pointer'}}
+
+  },
   // singleValue: (base, state) => ({
   //   ...base,
   //   fontWeight: 700,

@@ -1,7 +1,7 @@
 module AddRemoveAssociationsHandler
   extend ActiveSupport::Concern
 
-  # Add remove accociation entities based on each request (dropdown selection)
+  # Add remove association entities based on each request (dropdown selection)
   #
   # @param object [Object] The object in question. i.e. property or user
   # @param association [String] The association object. i.e For 'clients' that would be property.send('clients')

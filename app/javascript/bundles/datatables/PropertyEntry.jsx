@@ -23,6 +23,7 @@ class PropertyEntry extends React.Component {
                 {this.props.entry['allow_view'] ? (
                   <figcaption className="figure-caption">
                     <h6 className="figure-title figure-title-custom">{renderHTML(this.props.entry.mini_heading)}</h6>
+
                     <p className="text-muted mb-0 pb-1">{this.props.entry.location}</p>
                     <p className="text-muted mb-0 pt-1">
                       <span className={'highlighted-bg highlighted-fg p-1 '}>
