@@ -30,10 +30,17 @@ module AddRemoveAssociationsHandler
       # and appends it to +add_ids+. This wouldn't work for +users+ of course since it uses a join table for its model
       # type but that's fine since we don't -ever- create new system users from a dropdown. Remember that the user
       # dropdown in PropertiesController#show is not creatable.
-      add_ids << current_account.send(association).create(first_name: entry['value'].split(' ').try(:first) || '-',
+      newly_created_object = current_account.send(association).create(first_name: entry['value'].split(' ').try(:first) || '-',
                                                           last_name: entry['value'].split(' ').try(:second) || '-',
                                                           model_type: current_account.model_types.find_by(name: association),
-                                                          account: current_account).id
+                                                          account: current_account)
+
+      if current_user.role(current_account) == 'user'
+         current_user.send(association).push(newly_created_object)
+      end
+
+      add_ids << newly_created_object.id
+
     end
     # Apply the modifications
     # Ref: https://apidock.com/rails/ActiveRecord/Associations/CollectionProxy/delete

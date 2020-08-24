@@ -608,7 +608,7 @@
                               isClearable: true,
                               isMulti: true,
                               isCreatable: true,
-                              storedOption: @property.clients.blank? ? nil : @property.clients.map { |c| {"label": current_user.client_ids.include?(c.id) ? c.full_name : '*****', "value": c.id, isFixed: !current_user.client_ids.include?(c.id)} },
+                              storedOption: @property.clients.blank? ? nil : @property.viewable_dropdown_clients(current_account, current_user),
                               soloMode: true,
                               ajaxEnabled: true,
                               i18n: {

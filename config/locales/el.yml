@@ -362,7 +362,7 @@ el:
       select:
         noresults: "Δεν βρέθηκαν αποτελέσματα"
         loading_html: "Φόρτωση αποτελεσμάτων..."
-        add: "Προσθήκη "
+        add: "Δημιουργία νέου πελάτη: "
         placeholder: "Επιλέξτε"
         placeholder_title: "Πληκτρολογήστε για αναζήτηση..."
         placeholder_clients: "Αναζήτηση πελάτη..."

@@ -391,7 +391,7 @@ en:
       select:
         noresults: "No results were found"
         loading_html: "Loading results..."
-        add: "Add "
+        add: "Add new client: "
         placeholder: "Choose"
         placeholder_title: "Start typing to select..."
         placeholder_clients: "Search client..."

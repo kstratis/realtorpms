@@ -214,6 +214,15 @@ class Property < ApplicationRecord
     "#{slug.upcase} - #{self.category.localname} #{price ? ' - ' + ActionController::Base.helpers.number_to_currency(price).to_s : ''}"
   end
 
+  def viewable_dropdown_clients(account, user)
+    if user.role(account) == 'user'
+      list = clients.map { |c| { 'label': user.client_ids.include?(c.id) ? c.full_name : '*****', 'value': c.id, isFixed: !user.client_ids.include?(c.id)} }
+    else
+      list = clients.map { |c| { 'label': c.full_name, 'value': c.id, isFixed: false} }
+    end
+    list
+  end
+
   private
 
   # In the 'compound' extra fields for roofdeck, storage, garden and plot where each one comes with its own input,
