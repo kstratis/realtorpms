@@ -37,7 +37,7 @@ class PropertyEntry extends React.Component {
                 ) : (
                   <div className={'col-12'}>
                     <div>
-                      <h2>{this.props.entry['slug'].toUpperCase()}</h2>
+                      <h2>{this.props.entry['slug'].toUpperCase()}&nbsp;<i className={'fas fa-qrcode fa-fw'} /></h2>
                     </div>
                     <div className={'text-center'}>
                       <h3>{this.props.entry['access_msg']}</h3>
@@ -69,7 +69,7 @@ class PropertyEntry extends React.Component {
                   {!this.props.entry['allow_view'] ? (
                     <div className={'col-12'}>
                       <div>
-                        <h2>{this.props.entry['slug'].toUpperCase()}</h2>
+                        <h2>{this.props.entry['slug'].toUpperCase()}&nbsp;<i className={'fas fa-qrcode fa-fw'} /></h2>
                       </div>
                       <div className={'text-center'}>
                         <h3>{this.props.entry['access_msg']}</h3>
