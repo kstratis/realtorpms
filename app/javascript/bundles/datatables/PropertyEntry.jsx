@@ -61,7 +61,7 @@ class PropertyEntry extends React.Component {
                   )}
                 </div>
               </div>
-              <div className={'card-businesstype-header'}>
+              <div className={`card-businesstype-header ${this.props.entry['allow_view'] ? '' : 'frosty'}`}>
                 <span className={'highlighted-bg highlighted-fg'}>{this.props.entry.purpose}</span>
               </div>
               <div className="list-group-item-body custom-list-group-item-body-padding">
