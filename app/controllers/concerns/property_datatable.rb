@@ -114,6 +114,7 @@ module PropertyDatatable
     @properties.each do |property|
       if forbidden_entity_ids('properties').include?(property.id)
         hash = {
+            purpose: I18n.t("activerecord.attributes.property.enums.businesstype.#{property.businesstype}_banner"),
             slug: property.slug,
             avatar: property.avatar.attached? ? url_for(property.avatar) : nil,
             allow_view: false,
