@@ -1666,6 +1666,9 @@ a.tt-suggestion.tt-selectable{
   padding-bottom: 0 !important;
 }
 
+
+
+
 .index-slug{
   display: none;
   @media (min-width: 992px) and (max-width: 1549px) {
@@ -1924,4 +1927,24 @@ a.text-link {
   .sidebar-masked-icon{
     background-color: #ffffff;
   }
+}
+
+
+.table.table-property-entry{
+  td{
+    padding: 0.2rem;
+  }
+}
+
+.description-border{
+  border-top:1px solid grey;
+}
+
+.card-businesstype-header{
+  position: absolute;
+  left: 0;
+  border-top-left-radius: 0.25rem;
+  border: 1px solid #f3dc65;
+  background: #f3dc65;
+  padding: 0 0.25rem;
 }
