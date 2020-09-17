@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import AddRemoveFavLists from './AddRemoveFavLists';
-import StoreClientSearch from './StoreClientSearch';
-import RetrieveClientSearch from './RetrieveClientSearch';
-import AddRemoveShowings from './AddRemoveShowings';
-import ViewShowings from './ViewShowings';
-import AddRemovePartners from './AddRemovePartners';
-import { renderHTML } from '../utilities/helpers';
+const AddRemoveFavLists = React.lazy(() => import('./AddRemoveFavLists'));
+const StoreClientSearch = React.lazy(() => import('./StoreClientSearch'));
+const RetrieveClientSearch = React.lazy(() => import('./RetrieveClientSearch'));
+const AddRemoveShowings = React.lazy(() => import('./AddRemoveShowings'));
+const ViewShowings = React.lazy(() => import('./ViewShowings'));
+const AddRemovePartners = React.lazy(() => import('./AddRemovePartners'));
 import URLSearchParams from '@ungap/url-search-params';
 
 const components = {
@@ -84,7 +83,9 @@ class ModalContainer extends React.Component {
             ) : null}
           </ModalHeader>
           <ModalBody className={this.props.modalBodyClassNames ? this.props.modalBodyClassNames : ''}>
-            <SpecificSearch {...this.props} />
+            <Suspense fallback={<div>Loading...</div>}>
+              <SpecificSearch {...this.props} />
+            </Suspense>
           </ModalBody>
           <ModalFooter className={this.props.modalFooterClassNames ? this.props.modalFooterClassNames : ''}>
             <Button color="secondary" onClick={this.toggle}>
