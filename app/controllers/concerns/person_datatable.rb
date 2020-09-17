@@ -66,7 +66,7 @@ module PersonDatatable
       end
       # @persons = @persons.order("#{filters[:sorting]}": filters[:ordering])
     else
-      @persons = @persons.order(:created_at)
+      @persons = @persons.order(created_at: :desc)
     end
 
 
