@@ -1,5 +1,9 @@
 import React, { Suspense } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import Button from 'reactstrap/lib/Button';
+import Modal from 'reactstrap/lib/Modal';
+import ModalHeader from 'reactstrap/lib/ModalHeader';
+import ModalBody from 'reactstrap/lib/ModalBody';
+import ModalFooter from 'reactstrap/lib/ModalFooter';
 const AddRemoveFavLists = React.lazy(() => import('./AddRemoveFavLists'));
 const StoreClientSearch = React.lazy(() => import('./StoreClientSearch'));
 const RetrieveClientSearch = React.lazy(() => import('./RetrieveClientSearch'));
