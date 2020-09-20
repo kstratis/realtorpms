@@ -17,6 +17,31 @@
 
             <%= render 'accounts/users/form', f: f %>
 
+            <hr />
+            <!-- .form-group ONLY FOR NEWLY CREATED USER -->
+            <div class="form-group">
+              <div class="list-group-item d-flex justify-content-between align-items-center">
+                <strong><%= t('users.new.assign_all') %></strong> <!-- .switcher-control -->
+                <label class="switcher-control switcher-control-lg switcher-control-success">
+                  <%= f.check_box(:multi_assign, {class: "switcher-input", type: 'checkbox'}) %>
+                  <span class="switcher-indicator"></span>
+                  <span class="switcher-label-on"><%= t('true_upcase') %></span>
+                  <span class="switcher-label-off"><%= t('false_upcase') %></span>
+                </label> <!-- /.switcher-control -->
+              </div>
+
+<!--              <div class="custom-control custom-control-inline custom-radio">-->
+                <%#= f.radio_button :yolo, false, class: 'custom-control-input' %>
+                <%#= f.label "yolo", t('users.new.assign_all'), class: "custom-control-label" %>
+<!--              </div>-->
+<!--              <div class="custom-control custom-control-inline custom-radio">-->
+                <%#= f.radio_button :yolo, true, class: 'custom-control-input' %>
+                <%#= f.label "yolo", t('users.new.assign_none'), class: "custom-control-label" %>
+<!--              </div>-->
+
+            </div>
+            <!-- /.form-group -->
+
             <!-- Extended fields -->
             <%= f.fields_for :preferences, OpenStruct.new(@user.preferences) do |builder| %>
               <!-- That's a workaround to render an account's custom fields without actually creating an entry in model_types_users

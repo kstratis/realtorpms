@@ -7,7 +7,7 @@ class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i  # checks the email format
 
   self.per_page = 10 # This is for pagination
-  attr_accessor :remember_token, :reset_token
+  attr_accessor :remember_token, :reset_token, :multi_assign
 
   before_save { self.email = email.downcase }  # makes sure everything is lower case
   before_create { self.color = COLOR_PALETTE.sample } # This assigns a random bg color to each new user

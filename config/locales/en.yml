@@ -31,7 +31,9 @@
 ---
 en:
   true: "Yes"
+  true_upcase: "YES"
   false: "No"
+  false_upcase: "NO"
   sq_meters_html: "m<sup>2</sup>"
   prompt: "Are you sure you want to proceed with this action?"
   access_denied: "Access denied"
@@ -746,6 +748,8 @@ en:
       profile: "Add partner"
       new_button: "Add"
       feedback: "Type your partner's email"
+      assign_all: "Directly assign all available properties?"
+      assign_none: "Assign none of the properties"
     show:
       breadcrumb: "Partners"
       heading: "User info"
