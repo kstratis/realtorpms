@@ -256,6 +256,14 @@ const UsersList = ({
                           <tr className={'entry'} key={entry['id']}>
                             <td className={'align-middle text-nowrap'}>
                               <div className={'table-entry'}>
+
+
+
+
+
+
+
+                                
                                 <Avatar data={entry['avatar']} />
                                 <span>
                                   <a className={'user-entry-color'} href={entry['view_entity_path']}>
@@ -307,7 +315,7 @@ const UsersList = ({
                                   entry['active'] ? '' : 'active'
                                 }`}
                                 href={''}>
-                                <i className={`fas fa-user ${entry['active'] ? 'green' : 'red'}`} />
+                                <i className={`fas fa-stop ${entry['active'] ? 'orange' : 'red'}`} />
                               </a>
                               <a
                                 data-toggle="tooltip"
