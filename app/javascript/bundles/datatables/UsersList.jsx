@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from "react";
 import ReactPaginate from 'react-paginate';
 import withDatatable from './withDatatable';
 import Search from './Search';
@@ -38,6 +38,17 @@ const UsersList = ({
 }) => {
   const { filtersOpen, setFiltersOpen } = useFilterToggle('userFiltersOpen');
   const handleChange = event => setFiltersOpen(filtersOpen => !filtersOpen);
+
+  const [checkedItems, setCheckedItems] = useState({}); //plain object as state
+  const handleCheckboxChange = (event) => {
+    // See this: https://dev.to/sagar/three-dots---in-javascript-26ci
+    // This is basically doing
+    // var mergedObj = { ...obj1, ...obj2 };
+    // Object { foo: "baz", x: 42, y: 13 }
+    // It's making a copy of all checkedItems and adds the newest key/value pair:
+    // [event.target.id]: event.target.checked
+    setCheckedItems({...checkedItems, [event.target.id]: event.target.checked });
+  }
   useTooltips();
 
   return (
@@ -257,13 +268,25 @@ const UsersList = ({
                             <td className={'align-middle text-nowrap'}>
                               <div className={'table-entry'}>
 
+                                <div className="custom-control custom-control-inline custom-checkbox">
+                                  <input
+                                    type="checkbox"
+                                    className="custom-control-input"
+                                    name={entry['id']}
+                                    id={entry['id']}
+                                    checked={!!checkedItems[entry['id']]}
+                                    onChange={handleCheckboxChange}
+                                  />
+                                  <label className="custom-control-label" htmlFor={entry['id']}>
+                                    {entry['id']}
+                                  </label>
+                                </div>
 
 
 
 
 
 
-                                
                                 <Avatar data={entry['avatar']} />
                                 <span>
                                   <a className={'user-entry-color'} href={entry['view_entity_path']}>
