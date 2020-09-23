@@ -6,6 +6,7 @@ import ModalBody from 'reactstrap/lib/ModalBody';
 import ModalFooter from 'reactstrap/lib/ModalFooter';
 const AddRemoveFavLists = React.lazy(() => import('./AddRemoveFavLists'));
 const StoreClientSearch = React.lazy(() => import('./StoreClientSearch'));
+const MassAssignProperties = React.lazy(() => import('./MassAssignProperties'));
 const RetrieveClientSearch = React.lazy(() => import('./RetrieveClientSearch'));
 const AddRemoveShowings = React.lazy(() => import('./AddRemoveShowings'));
 const ViewShowings = React.lazy(() => import('./ViewShowings'));
@@ -13,19 +14,20 @@ const AddRemovePartners = React.lazy(() => import('./AddRemovePartners'));
 import URLSearchParams from '@ungap/url-search-params';
 
 const components = {
+  MassAssignProperties: MassAssignProperties,
   StoreClientSearch: StoreClientSearch,
   RetrieveClientSearch: RetrieveClientSearch,
   AddRemoveFavLists: AddRemoveFavLists,
   AddRemoveShowings: AddRemoveShowings,
   ViewShowings: ViewShowings,
-  AddRemovePartners: AddRemovePartners
+  AddRemovePartners: AddRemovePartners,
 };
 
 class ModalContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false
+      modal: false,
     };
     this.toggle = this.toggle.bind(this);
   }
@@ -33,7 +35,7 @@ class ModalContainer extends React.Component {
   toggle() {
     this.setState(
       prevState => ({
-        modal: !prevState.modal
+        modal: !prevState.modal,
       }),
       () => {
         let searchParams = new URLSearchParams(window.location.search);
@@ -58,7 +60,7 @@ class ModalContainer extends React.Component {
           data-placement={this.props.title ? 'top' : ''}
           title={this.props.title ? this.props.title : ''}
           className={this.props.fireButtonClassnames ? this.props.fireButtonClassnames : ''}
-          disabled={this.props.buttonDisabled || false}
+          disabled={this.props.buttonDisabled}
           size={this.props.fireButtonBtnSize ? this.props.fireButtonBtnSize : 'sm'}
           color={this.props.fireButtonBtnType ? this.props.fireButtonBtnType : 'secondary'}
           onClick={this.toggle}>

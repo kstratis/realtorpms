@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import withDatatable from './withDatatable';
 import Search from './Search';
@@ -9,7 +9,7 @@ import { hasParams, capitalizeFirstLetter } from '../utilities/helpers';
 import FormComponents from './fields/FormComponents';
 import useFilterToggle from '../hooks/useFilterToggle';
 import useTooltips from '../hooks/useTooltips';
-import ModalContainer from "../components/ModalContainer";
+import ModalContainer from '../components/ModalContainer';
 
 const UsersList = ({
   handlePageClick,
@@ -35,27 +35,23 @@ const UsersList = ({
   status_filter,
   searchInput,
   users_path,
-  cfields
+  cfields,
 }) => {
   const { filtersOpen, setFiltersOpen } = useFilterToggle('userFiltersOpen');
   const handleChange = event => setFiltersOpen(filtersOpen => !filtersOpen);
 
-  const [checkedItems, setCheckedItems] = useState({}); //plain object as state
-  const handleCheckboxChange = (event) => {
+  const [checkedItems, setCheckedItems] = useState({});
+  const handleCheckboxChange = event => {
     // See this: https://dev.to/sagar/three-dots---in-javascript-26ci
     // This is basically doing
     // var mergedObj = { ...obj1, ...obj2 };
     // Object { foo: "baz", x: 42, y: 13 }
     // It's making a copy of all checkedItems and adds the newest key/value pair:
     // [event.target.id]: event.target.checked
-    setCheckedItems({...checkedItems, [event.target.id]: event.target.checked });
-  }
+    setCheckedItems({ ...checkedItems, [event.target.id]: event.target.checked });
+  };
+
   useTooltips();
-
-
-
-
-
 
   return (
     <div className="users-list">
@@ -148,92 +144,42 @@ const UsersList = ({
                         <span className="d-none d-md-inline">&nbsp;{i18n.filters.title}</span>
                       </label>
 
-                      {/*<div className="dropdown">*/}
-                      <button type="button" data-toggle="dropdown" data-position="auto" title="" className="btn btn-md btn-icon btn-secondary btn-action" rel="nofollow">
-                        <i className={`fas fa-ellipsis-v fa-f`} />
-                      </button>
-                        <div className="dropdown-menu dropdown-menu-right cursor-pointer">
-                          <div className="dropdown-arrow" />
-                          <btn className="dropdown-item">{'Ανάθεση'}</btn>
-                          <btn className="dropdown-item">{'Διαγραφή'}</btn>
+                      {console.log(checkedItems)}
+                      {console.log(!Object.keys(checkedItems).some(i => checkedItems[i]))}
+                      {console.log(Object.keys(checkedItems).filter(i => checkedItems[i]).length)}
+                      <ModalContainer
+                        id={'modal-window'}
+                        origin={'menu'}
+                        modalSize={'lg'}
+                        fireButtonLabel={`<i class='fas fa-tasks fa-lg fa-fw' />`}
+                        fireButtonBtnSize={`md`}
+                        fireButtonBtnType={`success`}
+                        avatar={null}
+                        modalTitle={i18n.modal.mass_assignments.title}
+                        modalHeader={i18n.search_save_subtitle}
+                        child={'MassAssignProperties'}
+                        buttonCloseLabel={i18n.search_save_buttonCloseLabel}
+                        ajaxEnabled={true}
+                        isClearable={true}
+                        backspaceRemovesValue={true}
+                        isSearchable={true}
+                        title={i18n.search_save_title}
+                        i18n={i18n}
+                        buttonDisabled={!Object.keys(checkedItems).some(i => checkedItems[i])}
+                        clientsEndpoint={''}
+                        assignmentshipsEndpoint={''}
+                        i18nPriceOptions={''}
+                        i18nSizeOptions={''}
+                        i18nFloorOptions={''}
+                        i18nCategoryOptions={''}
+                        i18nCfieldOptions={''}
+                      />
+                      {Object.keys(checkedItems).filter(i => checkedItems[i]).length ? (
+                        <div className={'d-flex align-items-center justify-content-center user-assign-counter'}>
+                          <strong>{Object.keys(checkedItems).filter(i => checkedItems[i]).length}</strong>
                         </div>
-                      <div className={``}>
-                        <ModalContainer
-                          id={'modal-window'}
-                          fireButtonLabel={`<i class='fas fa-save fa-lg fa-fw' />`}
-                          fireButtonBtnSize={`md`}
-                          fireButtonBtnType={`success`}
-                          avatar={null}
-                          modalTitle={i18n.search_save_title}
-                          modalHeader={i18n.search_save_subtitle}
-                          child={'StoreClientSearch'}
-                          buttonCloseLabel={i18n.search_save_buttonCloseLabel}
-                          ajaxEnabled={true}
-                          isClearable={true}
-                          backspaceRemovesValue={true}
-                          isSearchable={true}
-                          title={i18n.search_save_title}
-                          i18n={i18n}
-                          buttonDisabled={!hasParams()}
-                          clientsEndpoint={clients_endpoint}
-                          assignmentshipsEndpoint={assignmentships_endpoint}
-                          i18nPriceOptions={price_filter['options']}
-                          i18nSizeOptions={size_filter['options']}
-                          i18nFloorOptions={floors_filter['options']}
-                          i18nCategoryOptions={category_filter['options']}
-                          i18nCfieldOptions={cfields['options']}
-                        />
-                      </div>
-                      {/*</div>*/}
-
-                      {/*<div className="dropdown-menu dropdown-menu-right dropdown-menu-md stop-propagation show"*/}
-                      {/*     style="position: absolute; top: 36px; left: -174px; will-change: top, left;"*/}
-                      {/*     x-placement="bottom-end">*/}
-                      {/*  <div className="dropdown-arrow" />*/}
-
-                      {/*  <div className="custom-control custom-radio">*/}
-                      {/*    <input type="radio" className="custom-control-input" id="dpToday" name="dpFilter"*/}
-                      {/*           data-start="2019/03/27" data-end="2019/03/27" />*/}
-                      {/*      <label className="custom-control-label d-flex justify-content-between" htmlFor="dpToday">*/}
-                      {/*        <span>Today</span>*/}
-                      {/*        <span className="text-muted">Mar 27</span>*/}
-                      {/*      </label>*/}
-                      {/*  </div>*/}
-
-                      {/*  <div className="custom-control custom-radio">*/}
-                      {/*    <input type="radio" className="custom-control-input" id="dpYesterday" name="dpFilter"*/}
-                      {/*           data-start="2019/03/26" data-end="2019/03/26" /> <label*/}
-                      {/*      className="custom-control-label d-flex justify-content-between"*/}
-                      {/*      htmlFor="dpYesterday"><span>Yesterday</span> <span*/}
-                      {/*      className="text-muted">Mar 26</span></label>*/}
-                      {/*  </div>*/}
-
-                      {/*  <div className="custom-control custom-radio">*/}
-                      {/*    <input type="radio" className="custom-control-input" id="dpWeek" name="dpFilter"*/}
-                      {/*           data-start="2019/03/21" data-end="2019/03/27" defaultChecked="" /> <label*/}
-                      {/*      className="custom-control-label d-flex justify-content-between" htmlFor="dpWeek"><span>This Week</span>*/}
-                      {/*      <span className="text-muted">Mar 21-27</span></label>*/}
-                      {/*  </div>*/}
-
-                      {/*</div>*/}
+                      ) : null}
                     </div>
-
-
-                    {/*<div className={'btn-group btn-group-toggle pl-2'}>*/}
-                    {/*  <label*/}
-                    {/*    className={`btn ${hasParams() ? 'btn-danger' : 'btn-secondary'} toggle-button ${*/}
-                    {/*      filtersOpen ? 'active' : ''*/}
-                    {/*    }`}>*/}
-                    {/*    <input*/}
-                    {/*      name={'filter-toggle'}*/}
-                    {/*      type="checkbox"*/}
-                    {/*      checked={{ filtersOpen }}*/}
-                    {/*      onChange={handleChange}*/}
-                    {/*    />*/}
-                    {/*    <i className={'fas fa-filter fa-fw'} />*/}
-                    {/*    <span className="d-none d-md-inline">&nbsp;{i18n.filters.title}</span>*/}
-                    {/*  </label>*/}
-                    {/*</div>*/}
 
                     <div>
                       <div className={'d-none d-sm-block'}>
@@ -277,15 +223,15 @@ const UsersList = ({
                         <tr>
                           <th>
                             <div className="custom-control custom-checkbox d-inline-block">
-                            <input
-                              type="checkbox"
-                              className="custom-control-input"
-                              name={'asd'}
-                              id={'aaa2'}
-                              checked={false}
-                              onChange={() => console.log('TODO CREATE MASS ASSIGN')}
-                            />
-                            <label className="custom-control-label" htmlFor={'aaa2'} />
+                              <input
+                                type="checkbox"
+                                className="custom-control-input"
+                                name={'asd'}
+                                id={'aaa2'}
+                                checked={false}
+                                onChange={() => console.log('TODO CREATE MASS ASSIGN')}
+                              />
+                              <label className="custom-control-label" htmlFor={'aaa2'} />
                             </div>
                             <a
                               id="sort_by_name"
@@ -420,11 +366,15 @@ const UsersList = ({
                                   data-placement="auto"
                                   onClick={e => handleAdminifyUser(e, meta['adminify_link'], entry['id'])}
                                   title={i18n['datatable']['tooltip_adminify_profile']}
-                                  className={`btn btn-md btn-icon btn-secondary btn-action ${entry['privileged'] ? 'active' : ''}`}
+                                  className={`btn btn-md btn-icon btn-secondary btn-action ${
+                                    entry['privileged'] ? 'active' : ''
+                                  }`}
                                   href={''}>
                                   <i className={`fas fa-angle-double-up ${entry['privileged'] ? 'blue' : ''}`} />
                                 </a>
-                              ) : ''}
+                              ) : (
+                                ''
+                              )}
                               <a
                                 data-toggle="tooltip"
                                 data-placement="auto"
@@ -548,7 +498,7 @@ UsersList.propTypes = {
   handlePageClick: PropTypes.func.isRequired,
   selectedPage: PropTypes.number.isRequired,
   sorting: PropTypes.string.isRequired,
-  ordering: PropTypes.string.isRequired
+  ordering: PropTypes.string.isRequired,
 };
 
 const UsersListWithDatatable = withDatatable(UsersList);

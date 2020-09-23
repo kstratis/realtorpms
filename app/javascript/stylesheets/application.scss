@@ -1964,3 +1964,16 @@ a.text-link {
 .cursor-pointer{
   cursor: pointer;
 }
+
+.user-assign-counter{
+  z-index: 1;
+  position: absolute;
+  background: #f3dc65;
+  //border: 1px solid black;
+  border-radius: 50%;
+  right: -5px;
+  top: -10px;
+  width: 1.2em;
+  height: 1.2em;
+  padding: 12px;
+}

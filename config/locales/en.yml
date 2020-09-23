@@ -390,6 +390,8 @@ en:
           add_list_action: "Add"
           loading_alt: "Loading..."
           deleted: "Η λίστα διεγράφη επιτυχώς"
+        mass_assignments:
+          title: "Assign the following properties:"
       select:
         noresults: "No results were found"
         loading_html: "Loading results..."
