@@ -14,7 +14,7 @@ gem 'bcrypt', '3.1.12'
 
 # gem 'bootstrap', '~> 4.4.1'
 
-gem 'bootsnap', '~> 1.4.7'
+gem 'bootsnap', '~> 1.4.8'
 
 gem 'e2mmap'
 
@@ -24,7 +24,7 @@ gem 'rack-cors'
 
 gem 'rake', '~> 13'
 
-gem 'sprockets-rails', '3.2.1'
+gem 'sprockets-rails', '3.2.2'
 
 # image metadata info
 gem 'exifr', '~> 1.3', '>= 1.3.5'
@@ -38,7 +38,7 @@ gem "mini_magick"
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.2.3'
 # Use Puma as the app server
-gem 'puma', '~> 4.3.5'
+gem 'puma', '~> 5.0.2'
 # Use SCSS for stylesheets
 # gem 'sass-rails', '~> 5.0.7'
 gem 'sassc-rails', '~> 2.1.2'
@@ -53,11 +53,11 @@ gem 'coffee-rails', '~> 5.0'
 gem 'turbolinks', '~> 5.2.1'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.10'
+gem 'jbuilder', '~> 2.10.1'
 
 gem 'jquery-rails', '~> 4.4.0'
 
-gem 'faker', '~> 2.13'
+gem 'faker', '~> 2.14'
 
 gem 'will_paginate', '~> 3.3.0'
 
@@ -67,9 +67,9 @@ gem 'bootstrap-will_paginate', '1.0.0'
 
 gem 'launchy', '2.5.0'
 
-gem 'react_on_rails', '12.0.1'
+gem 'react_on_rails', '12.0.3'
 
-gem 'webpacker', '~> 5.1.1'
+gem 'webpacker', '~> 5.2.1'
 
 gem "roo", "~> 2.8.3"
 
@@ -88,7 +88,7 @@ gem 'capistrano-rails', '~> 1.6.1'
 gem 'capistrano-passenger', '~> 0.2.0'
 gem 'capistrano-rbenv', '~> 2.2.0'
 
-gem 'friendly_id', '~> 5.3'
+gem 'friendly_id', '~> 5.4'
 gem 'public_uid' # Need this for pseudorandom ids
 
 # Use Redis adapter to run Action Cable in production
@@ -132,7 +132,7 @@ end
 
 group :test do
   gem 'factory_bot_rails', '~> 6.1'
-  gem 'shoulda-matchers', '~> 4.3.0'
+  gem 'shoulda-matchers', '~> 4.4.1'
   gem 'rspec-collection_matchers'
   gem 'rails-controller-testing', '1.0.5'
   gem 'minitest-reporters',       '1.4.2'
