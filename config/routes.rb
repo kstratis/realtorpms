@@ -52,6 +52,8 @@ Rails.application.routes.draw do
       end
 
       resources :users do
+        delete :mass_delete, on: :collection
+        post :mass_freeze, on: :collection
 
         member do
           patch :toggle_activation
@@ -62,11 +64,7 @@ Rails.application.routes.draw do
 
       resources :clients
 
-      #resources :clients do
-      #  member do
-      #    get '*tabs', to: 'clients#show', format: false
-      #  end
-      #end
+
 
 
 

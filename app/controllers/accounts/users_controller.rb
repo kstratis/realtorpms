@@ -4,7 +4,7 @@ module Accounts
     # Shows all account users
     before_action :all_account_users, only: [:show]
     before_action :user_self, only: [:edit, :update, :show] # Allows editing only on each user's self
-    before_action :owner_exclusive, only: [:new, :create, :destroy, :index]
+    before_action :owner_exclusive, only: [:new, :create, :destroy, :index, :mass_delete, :mass_freeze]
     before_action :check_page_validity, only: [:index]
     before_action :find_user!, only: [:delete_avatar, :toggle_activation, :toggle_adminify, :show]
     after_action :log_action, only: [:create, :update, :destroy]
@@ -99,6 +99,16 @@ module Accounts
     def toggle_adminify
       Membership.find_by(account: current_account, user: @user).toggle!(:privileged)
       render :json => {:status => "OK", :user_privileged => Membership.find_by(account: current_account, user: @user).privileged}
+    end
+
+    def mass_delete
+      current_account.users.where(id: params[:selection]).destroy_all
+      render :json => { :status => "OK", message: users_path }
+    end
+
+    def mass_freeze
+      Membership.where(account: current_account, user: params[:selection]).each { |entry| entry.toggle!(:active) }
+      render :json => { :status => "OK", message: users_path }
     end
 
     private

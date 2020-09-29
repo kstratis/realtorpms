@@ -143,36 +143,27 @@ const UsersList = ({
                         <i className={'fas fa-filter fa-fw'} />
                         <span className="d-none d-md-inline">&nbsp;{i18n.filters.title}</span>
                       </label>
-
-                      {console.log(checkedItems)}
-                      {console.log(!Object.keys(checkedItems).some(i => checkedItems[i]))}
-                      {console.log(Object.keys(checkedItems).filter(i => checkedItems[i]).length)}
+                      {/* DEBUG */}
+                      {/*{console.log(checkedItems)}*/}
+                      {/*{console.log(!Object.keys(checkedItems).some(i => checkedItems[i]))}*/}
+                      {/*{console.log(Object.keys(checkedItems).filter(i => checkedItems[i]).length)}*/}
                       <ModalContainer
                         id={'modal-window'}
                         origin={'menu'}
-                        modalSize={'lg'}
+                        modalSize={'md'}
                         fireButtonLabel={`<i class='fas fa-tasks fa-lg fa-fw' />`}
                         fireButtonBtnSize={`md`}
                         fireButtonBtnType={`success`}
-                        avatar={null}
-                        modalTitle={i18n.modal.mass_assignments.title}
-                        modalHeader={i18n.search_save_subtitle}
-                        child={'MassAssignProperties'}
-                        buttonCloseLabel={i18n.search_save_buttonCloseLabel}
-                        ajaxEnabled={true}
-                        isClearable={true}
-                        backspaceRemovesValue={true}
-                        isSearchable={true}
+                        modalTitle={i18n.modal.mass_actions.title}
+                        modalHeader={null}
+                        child={'MassActions'}
+                        buttonCloseLabel={i18n.modal.mass_actions.close_btn}
                         title={i18n.search_save_title}
                         i18n={i18n}
                         buttonDisabled={!Object.keys(checkedItems).some(i => checkedItems[i])}
-                        clientsEndpoint={''}
-                        assignmentshipsEndpoint={''}
-                        i18nPriceOptions={''}
-                        i18nSizeOptions={''}
-                        i18nFloorOptions={''}
-                        i18nCategoryOptions={''}
-                        i18nCfieldOptions={''}
+                        checkedItems={checkedItems}
+                        massDeleteUsersEndpoint={meta.mass_delete_users_link}
+                        massFreezeUsersEndpoint={meta.mass_freeze_users_link}
                       />
                       {Object.keys(checkedItems).filter(i => checkedItems[i]).length ? (
                         <div className={'d-flex align-items-center justify-content-center user-assign-counter'}>

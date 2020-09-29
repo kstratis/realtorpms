@@ -361,8 +361,9 @@ el:
           add_list_action: "Προσθήκη"
           loading_alt: "Φορτώνει..."
           deleted: "Η λίστα διεγράφη επιτυχώς"
-        mass_assignments:
-          title: "Ανάθεση των παρακάτω ακινήτων:"
+        mass_actions:
+          title: "Μαζικές ενέργειες:"
+          close_btn: "Κλείσιμο"
       select:
         noresults: "Δεν βρέθηκαν αποτελέσματα"
         loading_html: "Φόρτωση αποτελεσμάτων..."
@@ -437,6 +438,11 @@ el:
           submit: "Υποβολή"
     datatables:
       users:
+        add: "Προσθήκη"
+        edit: "Επεξεργασία"
+        delete: "Διαγραφή"
+        freeze: "Εναλλαγή παγώματος"
+        confirm_prompt: "Είστε σίγουρος;"
         partner: "Συνεργάτης"
         status:
           title: "Κατάσταση"

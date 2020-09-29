@@ -15,7 +15,10 @@ class User < ApplicationRecord
   # This is for existing log records. A user may also be an action author (user object again) thus we need to handle
   # that as well.
   # https://stackoverflow.com/a/9326882/178728
-  before_destroy { |record| Log.where(author_id: record).update_all(author_id: nil) }
+  before_destroy do |record|
+    Cpa.where(user_id: record).update_all(user_id: nil)
+    Log.where(author_id: record).update_all(author_id: nil)
+  end
 
   validates :first_name, presence: true, length: { maximum: 50 }
   validates :last_name, presence: true, length: { maximum: 50 }

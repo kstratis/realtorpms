@@ -390,8 +390,9 @@ en:
           add_list_action: "Add"
           loading_alt: "Loading..."
           deleted: "Η λίστα διεγράφη επιτυχώς"
-        mass_assignments:
-          title: "Assign the following properties:"
+        mass_actions:
+          title: "Mass actions:"
+          close_btn: "Close"
       select:
         noresults: "No results were found"
         loading_html: "Loading results..."
@@ -466,6 +467,11 @@ en:
           submit: "Submit"
     datatables:
       users:
+        add: "Add"
+        edit: "Edit"
+        delete: "Delete"
+        freeze: "Toggle freeze"
+        confirm_prompt: "Are you sure?"
         partner: "Partner"
         status:
           title: "Status"

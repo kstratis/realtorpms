@@ -6,7 +6,7 @@ import ModalBody from 'reactstrap/lib/ModalBody';
 import ModalFooter from 'reactstrap/lib/ModalFooter';
 const AddRemoveFavLists = React.lazy(() => import('./AddRemoveFavLists'));
 const StoreClientSearch = React.lazy(() => import('./StoreClientSearch'));
-const MassAssignProperties = React.lazy(() => import('./MassAssignProperties'));
+const MassActions = React.lazy(() => import('./MassActions'));
 const RetrieveClientSearch = React.lazy(() => import('./RetrieveClientSearch'));
 const AddRemoveShowings = React.lazy(() => import('./AddRemoveShowings'));
 const ViewShowings = React.lazy(() => import('./ViewShowings'));
@@ -14,7 +14,7 @@ const AddRemovePartners = React.lazy(() => import('./AddRemovePartners'));
 import URLSearchParams from '@ungap/url-search-params';
 
 const components = {
-  MassAssignProperties: MassAssignProperties,
+  MassActions: MassActions,
   StoreClientSearch: StoreClientSearch,
   RetrieveClientSearch: RetrieveClientSearch,
   AddRemoveFavLists: AddRemoveFavLists,

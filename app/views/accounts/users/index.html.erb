@@ -60,8 +60,9 @@
                     }
                 },
                 modal: {
-                    mass_assignments: {
-                      title: t('js.components.modal.mass_assignments.title'),
+                    mass_actions: {
+                      title: t('js.components.modal.mass_actions.title'),
+                      close_btn: t('js.components.modal.mass_actions.close_btn'),
                     }
                 },
                 cfields: {
@@ -72,6 +73,8 @@
             meta: {
                 freeze_link:  toggle_activation_user_url('USERID'),
                 adminify_link: toggle_adminify_user_url('USERID'),
+                mass_delete_users_link: mass_delete_users_url,
+                mass_freeze_users_link: mass_freeze_users_url,
                 is_account_owner: current_user.is_owner?(current_account) || current_user.is_sysadmin?
             }
           }, prerender: false) %>
