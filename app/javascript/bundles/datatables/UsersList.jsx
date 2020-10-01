@@ -230,12 +230,12 @@ const UsersList = ({
                               <input
                                 type="checkbox"
                                 className="custom-control-input"
-                                name={'masterCheck'}
-                                id={'masterCheck-users'}
+                                name={'master'}
+                                id={'master'}
                                 checked={!!masterCheck[selectedPage + 1]}
                                 onChange={() => checkAll(dataset.map((entry) => entry.id))}
                               />
-                              <label className="custom-control-label" htmlFor={'masterCheck'} />
+                              <label className="custom-control-label" htmlFor={'master'} />
                             </div>
                             <a
                               id="sort_by_name"
