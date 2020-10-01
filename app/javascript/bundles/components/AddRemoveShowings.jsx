@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import useFetch from '../hooks/useFetch';
 import useTooltips from '../hooks/useTooltips';
 import FlatPickrWrapper from './FlatPickrWrapper';

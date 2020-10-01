@@ -40,7 +40,19 @@ const UsersList = ({
 }) => {
   const { filtersOpen, setFiltersOpen } = useFilterToggle('userFiltersOpen');
   const handleChange = event => setFiltersOpen(filtersOpen => !filtersOpen);
-  const {checkedItems, masterCheck, checkAll, handleCheckboxChange } = useMultiCheckbox();
+  // const [masterCheck, setMasterCheck] = useState({});
+  // const [checkedItems, setCheckedItems] = useState({});
+
+
+  const { checkedItems, masterCheck, checkAll } = useMultiCheckbox(dataset.map(entry => entry.id), selectedPage);
+
+  const gotzira = () => {
+    console.log('yalantzi')
+  };
+
+  // const handleMasterCheck = (pageNo) => {
+  //   setMasterCheck({ ...masterCheck, [pageNo]: !masterCheck[pageNo] });
+  // }
 
   useTooltips();
 
@@ -210,7 +222,7 @@ const UsersList = ({
                                 name={'masterCheck'}
                                 id={'masterCheck-users'}
                                 checked={!!masterCheck[selectedPage + 1]}
-                                onChange={() => checkAll(dataset.map(entry => entry.id))}
+                                onChange={() => gotzira()}
                               />
                               <label className="custom-control-label" htmlFor={'masterCheck'} />
                             </div>
@@ -299,7 +311,7 @@ const UsersList = ({
                                     name={entry['id']}
                                     id={entry['id']}
                                     checked={!!checkedItems[entry['id']]}
-                                    onChange={handleCheckboxChange}
+                                    onChange={() => console.log('ad')}
                                   />
                                   <label className="custom-control-label" htmlFor={entry['id']} />
                                 </div>
