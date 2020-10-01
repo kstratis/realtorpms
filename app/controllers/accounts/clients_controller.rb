@@ -67,6 +67,16 @@ module Accounts
       filter_properties(current_account.properties.includes(:location), searchprefs)
     end
 
+    def mass_delete
+      current_account.users.where(id: params[:selection]).destroy_all
+      render :json => { :status => "OK", message: users_path }
+    end
+
+    def mass_freeze
+      Membership.where(account: current_account, user: params[:selection]).each { |entry| entry.toggle!(:active) }
+      render :json => { :status => "OK", message: users_path }
+    end
+
     private
       def client_params
         params.require(:client).permit(:first_name, :last_name, :email, :telephones, :job, :notes, :ordertoview, :ordertosell, :ordertoviewfile, :ordertosellfile, {preferences: {}})

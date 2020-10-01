@@ -9,6 +9,7 @@ import { hasParams, capitalizeFirstLetter } from '../utilities/helpers';
 import FormComponents from './fields/FormComponents';
 import useFilterToggle from '../hooks/useFilterToggle';
 import useTooltips from '../hooks/useTooltips';
+import useMultiCheckbox from '../hooks/useMultiCheckbox';
 import ModalContainer from '../components/ModalContainer';
 
 const UsersList = ({
@@ -39,17 +40,7 @@ const UsersList = ({
 }) => {
   const { filtersOpen, setFiltersOpen } = useFilterToggle('userFiltersOpen');
   const handleChange = event => setFiltersOpen(filtersOpen => !filtersOpen);
-
-  const [checkedItems, setCheckedItems] = useState({});
-  const handleCheckboxChange = event => {
-    // See this: https://dev.to/sagar/three-dots---in-javascript-26ci
-    // This is basically doing
-    // var mergedObj = { ...obj1, ...obj2 };
-    // Object { foo: "baz", x: 42, y: 13 }
-    // It's making a copy of all checkedItems and adds the newest key/value pair:
-    // [event.target.id]: event.target.checked
-    setCheckedItems({ ...checkedItems, [event.target.id]: event.target.checked });
-  };
+  const {checkedItems, masterCheck, checkAll, handleCheckboxChange } = useMultiCheckbox();
 
   useTooltips();
 
@@ -143,12 +134,9 @@ const UsersList = ({
                         <i className={'fas fa-filter fa-fw'} />
                         <span className="d-none d-md-inline">&nbsp;{i18n.filters.title}</span>
                       </label>
-                      {/* DEBUG */}
-                      {/*{console.log(checkedItems)}*/}
-                      {/*{console.log(!Object.keys(checkedItems).some(i => checkedItems[i]))}*/}
-                      {/*{console.log(Object.keys(checkedItems).filter(i => checkedItems[i]).length)}*/}
+
                       <ModalContainer
-                        id={'modal-window'}
+                        id={'user-list-modal'}
                         origin={'menu'}
                         modalSize={'md'}
                         fireButtonLabel={`<i class='fas fa-tasks fa-lg fa-fw' />`}
@@ -165,11 +153,13 @@ const UsersList = ({
                         massDeleteUsersEndpoint={meta.mass_delete_users_link}
                         massFreezeUsersEndpoint={meta.mass_freeze_users_link}
                       />
+
                       {Object.keys(checkedItems).filter(i => checkedItems[i]).length ? (
                         <div className={'d-flex align-items-center justify-content-center user-assign-counter'}>
                           <strong>{Object.keys(checkedItems).filter(i => checkedItems[i]).length}</strong>
                         </div>
                       ) : null}
+
                     </div>
 
                     <div>
@@ -217,12 +207,12 @@ const UsersList = ({
                               <input
                                 type="checkbox"
                                 className="custom-control-input"
-                                name={'asd'}
-                                id={'aaa2'}
-                                checked={false}
-                                onChange={() => console.log('TODO CREATE MASS ASSIGN')}
+                                name={'masterCheck'}
+                                id={'masterCheck-users'}
+                                checked={!!masterCheck[selectedPage + 1]}
+                                onChange={() => checkAll(dataset.map(entry => entry.id))}
                               />
-                              <label className="custom-control-label" htmlFor={'aaa2'} />
+                              <label className="custom-control-label" htmlFor={'masterCheck'} />
                             </div>
                             <a
                               id="sort_by_name"
@@ -268,13 +258,7 @@ const UsersList = ({
                             </a>
                           </th>
                           <th>
-                            <a
-                              id="sort_by_status"
-                              className={'sortable-header-name'}
-                              href={''}
-                              onClick={e => handleSort(e, 'status')}>
-                              <span>{i18n['datatable']['status']['title']}</span>
-                            </a>
+                            <span>{i18n['datatable']['status']['title']}</span>
                           </th>
                           <th className={'text-nowrap'}>
                             <a

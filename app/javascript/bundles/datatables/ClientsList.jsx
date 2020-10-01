@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from "react";
 import ReactPaginate from 'react-paginate';
 import withDatatable from './withDatatable';
 import Search from './Search';
@@ -9,6 +9,8 @@ import { capitalizeFirstLetter, hasParams } from '../utilities/helpers';
 import useFilterToggle from '../hooks/useFilterToggle';
 import FormComponents from './fields/FormComponents';
 import useTooltips from '../hooks/useTooltips';
+import ModalContainer from "../components/ModalContainer";
+import useMultiCheckbox from "../hooks/useMultiCheckbox";
 
 const ClientsList = ({
   handlePageClick,
@@ -33,6 +35,8 @@ const ClientsList = ({
 }) => {
   const { filtersOpen, setFiltersOpen } = useFilterToggle('clientFiltersOpen');
   const handleChange = event => setFiltersOpen(filtersOpen => !filtersOpen);
+  const {checkedItems, masterCheck, checkAll, handleCheckboxChange } = useMultiCheckbox();
+
   useTooltips();
 
   return (
@@ -112,6 +116,33 @@ const ClientsList = ({
                         <i className={'fas fa-filter fa-fw'} />
                         <span className="d-none d-md-inline">&nbsp;{i18n.filters.title}</span>
                       </label>
+
+                      <ModalContainer
+                        id={'client-list-modal'}
+                        origin={'menu'}
+                        modalSize={'md'}
+                        fireButtonLabel={`<i class='fas fa-tasks fa-lg fa-fw' />`}
+                        fireButtonBtnSize={`md`}
+                        fireButtonBtnType={`success`}
+                        modalTitle={i18n.modal.mass_actions.title}
+                        modalHeader={null}
+                        child={'MassActions'}
+                        buttonCloseLabel={i18n.modal.mass_actions.close_btn}
+                        title={i18n.search_save_title}
+                        i18n={i18n}
+                        buttonDisabled={!Object.keys(checkedItems).some(i => checkedItems[i])}
+                        checkedItems={checkedItems}
+                        massDeleteUsersEndpoint={meta.mass_delete_clients_link}
+                        massFreezeUsersEndpoint={meta.mass_freeze_clients_link}
+                      />
+
+                      {Object.keys(checkedItems).filter(i => checkedItems[i]).length ? (
+                        <div className={'d-flex align-items-center justify-content-center user-assign-counter'}>
+                          <strong>{Object.keys(checkedItems).filter(i => checkedItems[i]).length}</strong>
+                        </div>
+                      ) : null}
+
+
                     </div>
 
                     <div>
@@ -155,6 +186,17 @@ const ClientsList = ({
                       <thead>
                         <tr>
                           <th className={'text-nowrap'}>
+                            <div className="custom-control custom-checkbox d-inline-block">
+                              <input
+                                type="checkbox"
+                                className="custom-control-input"
+                                name={'masterCheck'}
+                                id={'masterCheck-clients'}
+                                checked={!!masterCheck[selectedPage + 1]}
+                                onChange={() => checkAll(dataset.map(entry => entry.id))}
+                              />
+                              <label className="custom-control-label" htmlFor={'masterCheck'} />
+                            </div>
                             <a
                               id="sort_by_name"
                               className={'sortable-header-name'}

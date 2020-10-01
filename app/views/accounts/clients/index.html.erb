@@ -52,6 +52,12 @@
                       inactive: t('js.datatables.filters.status.inactive')
                   }
               },
+              modal: {
+                  mass_actions: {
+                      title: t('js.components.modal.mass_actions.title'),
+                      close_btn: t('js.components.modal.mass_actions.close_btn'),
+                  }
+              },
               cfields: {
                   select_prompt: t('cfields.choose'),
                   text_prompt: t('cfields.text_placeholder')
@@ -59,7 +65,9 @@
           },
           meta: {
               is_admin: current_user.is_admin?(current_account),
-              freeze_link:  toggle_activation_user_url('USERID')
+              freeze_link:  toggle_activation_user_url('USERID'),
+              mass_delete_clients_link: mass_delete_clients_url,
+              mass_freeze_clients_link: mass_freeze_clients_url,
           }
       }, prerender: false) %>
       <div class="clearfix"></div>

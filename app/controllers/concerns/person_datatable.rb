@@ -3,6 +3,8 @@ module PersonDatatable
   include Cfields
   include Utilities
 
+  SORT_FILTERS = %w(last_name email created_at)
+
   def filter_persons(relation, filters = {})
     if filters[:page]
       param = Integer(filters[:page]) rescue nil
@@ -50,35 +52,13 @@ module PersonDatatable
 
     if filters[:sorting] && filters[:ordering]
       if filters['sorting'] == 'assignments_count'
-        # query = 'SELECT u.*, count(a.user_id) AS total_assignments FROM users AS u JOIN assignments AS a ON a.user_id = u.id GROUP BY u.id ORDER BY total_assignments;'
-        # query = 'SELECT u.* FROM "users" AS u JOIN "assignments" AS a ON a.user_id = u.id GROUP BY u.id ORDER BY count(a.user_id);'
-
         @persons = @persons.left_outer_joins(:assignments).group(:id).order("count(assignments.user_id) #{filters[:ordering]}, last_name DESC")
-        # @persons = @persons.find_by_sql(query)
-        # byebug
-        # @persons = @persons.order("count('assignments')")
-        # @persons = @persons.sort_by(&:get_total_properties)
-
-        # @persons = User.sorted_by_assignments_count(@persons)
-        # @persons = User.sorted_by_assignments_count(@persons)
       else
-        @persons = @persons.order("#{filters[:sorting]}": filters[:ordering])
+        @persons = @persons.order("#{filters[:sorting]}": filters[:ordering]) if SORT_FILTERS.include?(filters[:sorting])
       end
-      # @persons = @persons.order("#{filters[:sorting]}": filters[:ordering])
     else
       @persons = @persons.order(created_at: :desc)
     end
-
-
-    # if filters[:sorting] && filters[:ordering]
-    #   @properties = @properties.order("#{filters[:sorting]}": filters[:ordering])
-    # else
-    #   @properties = @properties.order(created_at: 'desc')
-    # end
-
-
-
-    # puts @persons.to_yaml
 
     @persons = @persons.paginate(page: filters[:page], :per_page => 10)
     # @persons = User.paginate(page: filters[:page], :per_page => 10)
