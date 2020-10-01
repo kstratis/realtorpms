@@ -35,7 +35,7 @@ const ClientsList = ({
 }) => {
   const { filtersOpen, setFiltersOpen } = useFilterToggle('clientFiltersOpen');
   const handleChange = event => setFiltersOpen(filtersOpen => !filtersOpen);
-  const {checkedItems, masterCheck, checkAll, handleCheckboxChange } = useMultiCheckbox();
+  const {checkedItems, masterCheck, checkAll, handleCheckboxChange} = useMultiCheckbox(dataset.map((entry) => entry.id), selectedPage)
 
   useTooltips();
 
@@ -185,21 +185,21 @@ const ClientsList = ({
                     <table id="usersTable" className={`table table-striped ${isLoading ? 'reduced-opacity' : ''}`}>
                       <thead>
                         <tr>
-                          <th className={'text-nowrap'}>
+                          <th>
                             <div className="custom-control custom-checkbox d-inline-block">
                               <input
                                 type="checkbox"
                                 className="custom-control-input"
-                                name={'masterCheck'}
-                                id={'masterCheck-clients'}
+                                name={'master-check-clients'}
+                                id={'master-check-clients'}
                                 checked={!!masterCheck[selectedPage + 1]}
-                                onChange={() => checkAll(dataset.map(entry => entry.id))}
+                                onChange={() => checkAll()}
                               />
-                              <label className="custom-control-label" htmlFor={'masterCheck'} />
+                              <label className="custom-control-label" htmlFor={'master-check-clients'} />
                             </div>
                             <a
                               id="sort_by_name"
-                              className={'sortable-header-name'}
+                              className={'sortable-header-name d-inline-block'}
                               href={''}
                               onClick={e => handleSort(e, 'last_name')}>
                               <span>{i18n['datatable']['name']}</span>
@@ -275,6 +275,17 @@ const ClientsList = ({
                           <tr className={'entry'} key={entry['id']}>
                             <td className={'align-middle text-nowrap'}>
                               <div className={'table-entry'}>
+                                <div className="custom-control custom-checkbox d-inline-block">
+                                  <input
+                                    type="checkbox"
+                                    className="custom-control-input"
+                                    name={entry['id']}
+                                    id={entry['id']}
+                                    checked={!!checkedItems[entry['id']]}
+                                    onChange={handleCheckboxChange}
+                                  />
+                                  <label className="custom-control-label" htmlFor={entry['id']} />
+                                </div>
                                 <Avatar data={entry['avatar']} />
                                 <span>
                                   <a className={'user-entry-color'} href={entry['view_entity_path']}>

@@ -1,13 +1,10 @@
-import { useEffect, useState } from 'react';
-import URLSearchParams from '@ungap/url-search-params';
+import { useState } from 'react';
 
 function useMultiCheckbox(ids, selectedPage) {
   const [checkedItems, setCheckedItems] = useState({});
   const [masterCheck, setMasterCheck] = useState({});
 
   const checkAll = () => {
-    console.log('executing');
-    console.log(ids);
     const pageEntries = {};
     const pageNo = selectedPage + 1;
     ids.forEach(entry => {
@@ -27,7 +24,7 @@ function useMultiCheckbox(ids, selectedPage) {
     setCheckedItems({ ...checkedItems, [event.target.id]: event.target.checked });
   };
 
-  return { checkedItems, masterCheck, checkAll };
+  return { checkedItems, masterCheck, checkAll, handleCheckboxChange };
 }
 
 export default useMultiCheckbox;

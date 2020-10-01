@@ -9,7 +9,7 @@ import { hasParams, capitalizeFirstLetter } from '../utilities/helpers';
 import FormComponents from './fields/FormComponents';
 import useFilterToggle from '../hooks/useFilterToggle';
 import useTooltips from '../hooks/useTooltips';
-// import useMultiCheckbox from '../hooks/useMultiCheckbox';
+import useMultiCheckbox from '../hooks/useMultiCheckbox';
 import ModalContainer from '../components/ModalContainer';
 
 const UsersList = ({
@@ -41,29 +41,32 @@ const UsersList = ({
   const { filtersOpen, setFiltersOpen } = useFilterToggle('userFiltersOpen');
   const handleChange = event => setFiltersOpen(filtersOpen => !filtersOpen);
 
-  const [masterCheck, setMasterCheck] = useState({});
-  const [checkedItems, setCheckedItems] = useState({});
+  const {checkedItems, masterCheck, checkAll, handleCheckboxChange} = useMultiCheckbox(dataset.map((entry) => entry.id), selectedPage)
 
-  const checkAll = (ids) => {
-    console.log('executing');
-    const pageEntries = {};
-    const pageNo = selectedPage + 1;
-    ids.forEach(entry => {
-      pageEntries[entry] = !masterCheck[pageNo];
-    });
-    setMasterCheck({ ...masterCheck, [selectedPage + 1]: !masterCheck[selectedPage + 1] });
-    setCheckedItems({ ...checkedItems, ...pageEntries });
-  };
-
-  const handleCheckboxChange = event => {
-    // See this: https://dev.to/sagar/three-dots---in-javascript-26ci
-    // This is basically doing
-    // var mergedObj = { ...obj1, ...obj2 };
-    // Object { foo: "baz", x: 42, y: 13 }
-    // It's making a copy of all checkedItems and adds the newest key/value pair:
-    // [event.target.id]: event.target.checked
-    setCheckedItems({ ...checkedItems, [event.target.id]: event.target.checked });
-  };
+  // --------
+  // const [masterCheck, setMasterCheck] = useState({});
+  // const [checkedItems, setCheckedItems] = useState({});
+  //
+  // const checkAll = (ids) => {
+  //   console.log('executing');
+  //   const pageEntries = {};
+  //   const pageNo = selectedPage + 1;
+  //   ids.forEach(entry => {
+  //     pageEntries[entry] = !masterCheck[pageNo];
+  //   });
+  //   setMasterCheck({ ...masterCheck, [selectedPage + 1]: !masterCheck[selectedPage + 1] });
+  //   setCheckedItems({ ...checkedItems, ...pageEntries });
+  // };
+  //
+  // const handleCheckboxChange = event => {
+  //   // See this: https://dev.to/sagar/three-dots---in-javascript-26ci
+  //   // This is basically doing
+  //   // var mergedObj = { ...obj1, ...obj2 };
+  //   // Object { foo: "baz", x: 42, y: 13 }
+  //   // It's making a copy of all checkedItems and adds the newest key/value pair:
+  //   // [event.target.id]: event.target.checked
+  //   setCheckedItems({ ...checkedItems, [event.target.id]: event.target.checked });
+  // };
 
   useTooltips();
 
@@ -230,12 +233,12 @@ const UsersList = ({
                               <input
                                 type="checkbox"
                                 className="custom-control-input"
-                                name={'master'}
-                                id={'master'}
+                                name={'master-check-users'}
+                                id={'master-check-users'}
                                 checked={!!masterCheck[selectedPage + 1]}
-                                onChange={() => checkAll(dataset.map((entry) => entry.id))}
+                                onChange={() => checkAll()}
                               />
-                              <label className="custom-control-label" htmlFor={'master'} />
+                              <label className="custom-control-label" htmlFor={'master-check-users'} />
                             </div>
                             <a
                               id="sort_by_name"
