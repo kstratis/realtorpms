@@ -40,17 +40,30 @@ const UsersList = ({
 }) => {
   const { filtersOpen, setFiltersOpen } = useFilterToggle('userFiltersOpen');
   const handleChange = event => setFiltersOpen(filtersOpen => !filtersOpen);
+
   const [masterCheck, setMasterCheck] = useState({});
   const [checkedItems, setCheckedItems] = useState({});
 
+  const checkAll = (ids) => {
+    console.log('executing');
+    const pageEntries = {};
+    const pageNo = selectedPage + 1;
+    ids.forEach(entry => {
+      pageEntries[entry] = !masterCheck[pageNo];
+    });
+    setMasterCheck({ ...masterCheck, [selectedPage + 1]: !masterCheck[selectedPage + 1] });
+    setCheckedItems({ ...checkedItems, ...pageEntries });
+  };
 
-  // const { checkedItems, masterCheck, checkAll } = useMultiCheckbox(dataset.map(entry => entry.id), selectedPage);gotzira = () => {
-  //   console.log('yalantzi')
-  // };
-
-  // const handleMasterCheck = (pageNo) => {
-  //   setMasterCheck({ ...masterCheck, [pageNo]: !masterCheck[pageNo] });
-  // }
+  const handleCheckboxChange = event => {
+    // See this: https://dev.to/sagar/three-dots---in-javascript-26ci
+    // This is basically doing
+    // var mergedObj = { ...obj1, ...obj2 };
+    // Object { foo: "baz", x: 42, y: 13 }
+    // It's making a copy of all checkedItems and adds the newest key/value pair:
+    // [event.target.id]: event.target.checked
+    setCheckedItems({ ...checkedItems, [event.target.id]: event.target.checked });
+  };
 
   useTooltips();
 
@@ -220,7 +233,7 @@ const UsersList = ({
                                 name={'masterCheck'}
                                 id={'masterCheck-users'}
                                 checked={!!masterCheck[selectedPage + 1]}
-                                onChange={()=>console.log('works')}
+                                onChange={() => checkAll(dataset.map((entry) => entry.id))}
                               />
                               <label className="custom-control-label" htmlFor={'masterCheck'} />
                             </div>
@@ -309,7 +322,7 @@ const UsersList = ({
                                     name={entry['id']}
                                     id={entry['id']}
                                     checked={!!checkedItems[entry['id']]}
-                                    onChange={() => console.log('ad')}
+                                    onChange={handleCheckboxChange}
                                   />
                                   <label className="custom-control-label" htmlFor={entry['id']} />
                                 </div>
