@@ -9,7 +9,7 @@ import { hasParams, capitalizeFirstLetter } from '../utilities/helpers';
 import FormComponents from './fields/FormComponents';
 import useFilterToggle from '../hooks/useFilterToggle';
 import useTooltips from '../hooks/useTooltips';
-import useMultiCheckbox from '../hooks/useMultiCheckbox';
+// import useMultiCheckbox from '../hooks/useMultiCheckbox';
 import ModalContainer from '../components/ModalContainer';
 
 const UsersList = ({
@@ -40,15 +40,13 @@ const UsersList = ({
 }) => {
   const { filtersOpen, setFiltersOpen } = useFilterToggle('userFiltersOpen');
   const handleChange = event => setFiltersOpen(filtersOpen => !filtersOpen);
-  // const [masterCheck, setMasterCheck] = useState({});
-  // const [checkedItems, setCheckedItems] = useState({});
+  const [masterCheck, setMasterCheck] = useState({});
+  const [checkedItems, setCheckedItems] = useState({});
 
 
-  const { checkedItems, masterCheck, checkAll } = useMultiCheckbox(dataset.map(entry => entry.id), selectedPage);
-
-  const gotzira = () => {
-    console.log('yalantzi')
-  };
+  // const { checkedItems, masterCheck, checkAll } = useMultiCheckbox(dataset.map(entry => entry.id), selectedPage);gotzira = () => {
+  //   console.log('yalantzi')
+  // };
 
   // const handleMasterCheck = (pageNo) => {
   //   setMasterCheck({ ...masterCheck, [pageNo]: !masterCheck[pageNo] });
@@ -222,7 +220,7 @@ const UsersList = ({
                                 name={'masterCheck'}
                                 id={'masterCheck-users'}
                                 checked={!!masterCheck[selectedPage + 1]}
-                                onChange={() => gotzira()}
+                                onChange={()=>console.log('works')}
                               />
                               <label className="custom-control-label" htmlFor={'masterCheck'} />
                             </div>
