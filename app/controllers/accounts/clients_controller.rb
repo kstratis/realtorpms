@@ -68,13 +68,8 @@ module Accounts
     end
 
     def mass_delete
-      current_account.users.where(id: params[:selection]).destroy_all
-      render :json => { :status => "OK", message: users_path }
-    end
-
-    def mass_freeze
-      Membership.where(account: current_account, user: params[:selection]).each { |entry| entry.toggle!(:active) }
-      render :json => { :status => "OK", message: users_path }
+      current_account.clients.where(id: params[:selection]).destroy_all
+      render :json => { :status => "OK", message: clients_path }
     end
 
     private

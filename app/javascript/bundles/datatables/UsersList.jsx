@@ -176,8 +176,8 @@ const UsersList = ({
                         i18n={i18n}
                         buttonDisabled={!Object.keys(checkedItems).some(i => checkedItems[i])}
                         checkedItems={checkedItems}
-                        massDeleteUsersEndpoint={meta.mass_delete_users_link}
-                        massFreezeUsersEndpoint={meta.mass_freeze_users_link}
+                        massDeletePersonsEndpoint={meta.mass_delete_users_link}
+                        massFreezePersonsEndpoint={meta.mass_freeze_users_link}
                       />
 
                       {Object.keys(checkedItems).filter(i => checkedItems[i]).length ? (

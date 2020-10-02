@@ -16,6 +16,13 @@ class Client < ApplicationRecord
 
   before_create { self.color = COLOR_PALETTE.sample } # This assigns a random bg color to each new user
 
+  # This is for existing log records. A user may also be an action author (user object again) thus we need to handle
+  # that as well.
+  # https://stackoverflow.com/a/9326882/178728
+  before_destroy do |record|
+    Cpa.where(client_id: record).update_all(client_id: nil)
+  end
+
   # This is for existing log records
   # https://stackoverflow.com/a/9326882/178728
   # before_destroy { |record| Log.where(client: record).update_all(client_name: record.full_name) }

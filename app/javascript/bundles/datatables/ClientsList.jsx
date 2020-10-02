@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import withDatatable from './withDatatable';
 import Search from './Search';
@@ -9,8 +9,8 @@ import { capitalizeFirstLetter, hasParams } from '../utilities/helpers';
 import useFilterToggle from '../hooks/useFilterToggle';
 import FormComponents from './fields/FormComponents';
 import useTooltips from '../hooks/useTooltips';
-import ModalContainer from "../components/ModalContainer";
-import useMultiCheckbox from "../hooks/useMultiCheckbox";
+import ModalContainer from '../components/ModalContainer';
+import useMultiCheckbox from '../hooks/useMultiCheckbox';
 
 const ClientsList = ({
   handlePageClick,
@@ -31,11 +31,14 @@ const ClientsList = ({
   handleCfieldTextfield,
   handleCfieldCheckbox,
   clients_path,
-  cfields
+  cfields,
 }) => {
   const { filtersOpen, setFiltersOpen } = useFilterToggle('clientFiltersOpen');
   const handleChange = event => setFiltersOpen(filtersOpen => !filtersOpen);
-  const {checkedItems, masterCheck, checkAll, handleCheckboxChange} = useMultiCheckbox(dataset.map((entry) => entry.id), selectedPage)
+  const { checkedItems, masterCheck, checkAll, handleCheckboxChange } = useMultiCheckbox(
+    dataset.map(entry => entry.id),
+    selectedPage
+  );
 
   useTooltips();
 
@@ -63,29 +66,31 @@ const ClientsList = ({
                 </div>
               </div>
               <div className="card-body">
-
-                {cfields.fields.length > 0
-                  ? (cfields.fields.map((cfield, index) => {
-                      return (
-                        <FormComponents
-                          key={index}
-                          cfield={cfield}
-                          storedSelection={cfields.storedSelections[Object.values(cfield)[0].slug] || null}
-                          i18n={i18n.cfields}
-                          handleCfieldDropdown={handleCfieldDropdown}
-                          handleCfieldTextfield={handleCfieldTextfield}
-                          handleCfieldCheckbox={handleCfieldCheckbox}
-                        />
-                      );
-                    }))
-                  : (<div>
+                {cfields.fields.length > 0 ? (
+                  cfields.fields.map((cfield, index) => {
+                    return (
+                      <FormComponents
+                        key={index}
+                        cfield={cfield}
+                        storedSelection={cfields.storedSelections[Object.values(cfield)[0].slug] || null}
+                        i18n={i18n.cfields}
+                        handleCfieldDropdown={handleCfieldDropdown}
+                        handleCfieldTextfield={handleCfieldTextfield}
+                        handleCfieldCheckbox={handleCfieldCheckbox}
+                      />
+                    );
+                  })
+                ) : (
+                  <div>
                     {/*<p className={'text-justify font-italic mb-4'}>{i18n.filters.nocfields_html}</p>*/}
-                    <p className={'text-justify font-italic mb-4'}><span dangerouslySetInnerHTML={{ __html: i18n.filters.nocfields_html }} /></p>
+                    <p className={'text-justify font-italic mb-4'}>
+                      <span dangerouslySetInnerHTML={{ __html: i18n.filters.nocfields_html }} />
+                    </p>
                     <div className={'text-center'}>
-                      <img alt={'no-cfields'} src={cfields.nocfieldsimg} className={'img-fluid max-300 text-center'}/>
+                      <img alt={'no-cfields'} src={cfields.nocfieldsimg} className={'img-fluid max-300 text-center'} />
                     </div>
-
-                  </div>)}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -116,33 +121,34 @@ const ClientsList = ({
                         <i className={'fas fa-filter fa-fw'} />
                         <span className="d-none d-md-inline">&nbsp;{i18n.filters.title}</span>
                       </label>
+                      {meta['is_admin'] ? (
+                        <>
+                          <ModalContainer
+                            id={'client-list-modal'}
+                            origin={'menu'}
+                            modalSize={'md'}
+                            fireButtonLabel={`<i class='fas fa-tasks fa-lg fa-fw' />`}
+                            fireButtonBtnSize={`md`}
+                            fireButtonBtnType={`success`}
+                            modalTitle={i18n.modal.mass_actions.title}
+                            modalHeader={null}
+                            child={'MassActions'}
+                            buttonCloseLabel={i18n.modal.mass_actions.close_btn}
+                            title={i18n.search_save_title}
+                            i18n={i18n}
+                            buttonDisabled={!Object.keys(checkedItems).some(i => checkedItems[i])}
+                            checkedItems={checkedItems}
+                            massDeletePersonsEndpoint={meta.mass_delete_clients_link}
+                            massFreezePersonsEndpoint={''}
+                          />
 
-                      <ModalContainer
-                        id={'client-list-modal'}
-                        origin={'menu'}
-                        modalSize={'md'}
-                        fireButtonLabel={`<i class='fas fa-tasks fa-lg fa-fw' />`}
-                        fireButtonBtnSize={`md`}
-                        fireButtonBtnType={`success`}
-                        modalTitle={i18n.modal.mass_actions.title}
-                        modalHeader={null}
-                        child={'MassActions'}
-                        buttonCloseLabel={i18n.modal.mass_actions.close_btn}
-                        title={i18n.search_save_title}
-                        i18n={i18n}
-                        buttonDisabled={!Object.keys(checkedItems).some(i => checkedItems[i])}
-                        checkedItems={checkedItems}
-                        massDeleteUsersEndpoint={meta.mass_delete_clients_link}
-                        massFreezeUsersEndpoint={meta.mass_freeze_clients_link}
-                      />
-
-                      {Object.keys(checkedItems).filter(i => checkedItems[i]).length ? (
-                        <div className={'d-flex align-items-center justify-content-center user-assign-counter'}>
-                          <strong>{Object.keys(checkedItems).filter(i => checkedItems[i]).length}</strong>
-                        </div>
+                          {Object.keys(checkedItems).filter(i => checkedItems[i]).length ? (
+                            <div className={'d-flex align-items-center justify-content-center user-assign-counter'}>
+                              <strong>{Object.keys(checkedItems).filter(i => checkedItems[i]).length}</strong>
+                            </div>
+                          ) : null}
+                        </>
                       ) : null}
-
-
                     </div>
 
                     <div>
@@ -186,17 +192,21 @@ const ClientsList = ({
                       <thead>
                         <tr>
                           <th>
-                            <div className="custom-control custom-checkbox d-inline-block">
-                              <input
-                                type="checkbox"
-                                className="custom-control-input"
-                                name={'master-check-clients'}
-                                id={'master-check-clients'}
-                                checked={!!masterCheck[selectedPage + 1]}
-                                onChange={() => checkAll()}
-                              />
-                              <label className="custom-control-label" htmlFor={'master-check-clients'} />
-                            </div>
+                            {meta['is_admin'] ? (
+                              <div className="custom-control custom-checkbox d-inline-block">
+                                <input
+                                  type="checkbox"
+                                  className="custom-control-input"
+                                  name={'master-check-clients'}
+                                  id={'master-check-clients'}
+                                  checked={!!masterCheck[selectedPage + 1]}
+                                  onChange={() => checkAll()}
+                                />
+                                <label className="custom-control-label" htmlFor={'master-check-clients'} />
+                              </div>
+                            ) : (
+                              ''
+                            )}
                             <a
                               id="sort_by_name"
                               className={'sortable-header-name d-inline-block'}
@@ -275,17 +285,21 @@ const ClientsList = ({
                           <tr className={'entry'} key={entry['id']}>
                             <td className={'align-middle text-nowrap'}>
                               <div className={'table-entry'}>
-                                <div className="custom-control custom-checkbox d-inline-block">
-                                  <input
-                                    type="checkbox"
-                                    className="custom-control-input"
-                                    name={entry['id']}
-                                    id={entry['id']}
-                                    checked={!!checkedItems[entry['id']]}
-                                    onChange={handleCheckboxChange}
-                                  />
-                                  <label className="custom-control-label" htmlFor={entry['id']} />
-                                </div>
+                                {meta['is_admin'] ? (
+                                  <div className="custom-control custom-checkbox d-inline-block">
+                                    <input
+                                      type="checkbox"
+                                      className="custom-control-input"
+                                      name={entry['id']}
+                                      id={entry['id']}
+                                      checked={!!checkedItems[entry['id']]}
+                                      onChange={handleCheckboxChange}
+                                    />
+                                    <label className="custom-control-label" htmlFor={entry['id']} />
+                                  </div>
+                                ) : (
+                                  ''
+                                )}
                                 <Avatar data={entry['avatar']} />
                                 <span>
                                   <a className={'user-entry-color'} href={entry['view_entity_path']}>
@@ -328,7 +342,8 @@ const ClientsList = ({
                                 <i className={`fas fa-pen`} />
                               </a>
                               <a
-                                data-toggle="tooltip" data-position="top"
+                                data-toggle="tooltip"
+                                data-position="top"
                                 title={i18n['datatable']['tooltip_delete_profile']}
                                 className={`btn btn-md btn-icon btn-secondary btn-action ${
                                   meta['is_admin'] ? '' : 'disabled'
@@ -432,7 +447,7 @@ ClientsList.propTypes = {
   handlePageClick: PropTypes.func.isRequired,
   selectedPage: PropTypes.number.isRequired,
   sorting: PropTypes.string.isRequired,
-  ordering: PropTypes.string.isRequired
+  ordering: PropTypes.string.isRequired,
 };
 
 const ClientsListWithDatatable = withDatatable(ClientsList);

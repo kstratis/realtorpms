@@ -461,6 +461,7 @@ el:
         tooltip_edit_profile: "Επεξεργασία χρήστη"
         tooltip_delete_profile: "Διαγραφή χρήστη"
       clients:
+        delete: "Διαγραφή"
         no_results: "Δεν βρέθηκαν πελάτες!"
         search_placeholder: "Αναζήτηση πελάτη..."
         name: "Όνομα"

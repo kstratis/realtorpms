@@ -66,8 +66,7 @@
           meta: {
               is_admin: current_user.is_admin?(current_account),
               freeze_link:  toggle_activation_user_url('USERID'),
-              mass_delete_clients_link: mass_delete_clients_url,
-              mass_freeze_clients_link: mass_freeze_clients_url,
+              mass_delete_clients_link: mass_delete_clients_url
           }
       }, prerender: false) %>
       <div class="clearfix"></div>

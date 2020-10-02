@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import useFetch from '../hooks/useFetch';
 
-function MassActions({ massDeleteUsersEndpoint, massFreezeUsersEndpoint, i18n, checkedItems }) {
+function MassActions({ id, massDeletePersonsEndpoint, massFreezePersonsEndpoint, i18n, checkedItems }) {
   const didMountForSaveSearchRef = useRef(false);
   const [deleteRequest, setDeleteRequest] = useState({});
   const { data, loading } = useFetch(deleteRequest, false, didMountForSaveSearchRef);
@@ -23,22 +23,27 @@ function MassActions({ massDeleteUsersEndpoint, massFreezeUsersEndpoint, i18n, c
 
   return (
     <div>
+      {console.log(id)}
       <button
         type="button"
         className="btn btn-danger btn-lg btn-block"
         onClick={() => {
-          if (window.confirm(i18n.datatable.confirm_prompt)) massHandler('delete', massDeleteUsersEndpoint);
+          if (window.confirm(i18n.datatable.confirm_prompt)) massHandler('delete', massDeletePersonsEndpoint);
         }}>
-        <i className={'fas fa-trash fa-fw'}/>&nbsp;{i18n.datatable.delete}
+        <i className={'fas fa-trash fa-fw'} />
+        &nbsp;{i18n.datatable.delete}
       </button>
-      <button
-        type="button"
-        className="btn btn-secondary btn-lg btn-block"
-        onClick={() => {
-          if (window.confirm(i18n.datatable.confirm_prompt)) massHandler('post', massFreezeUsersEndpoint);
-        }}>
-        <i className={'fas fa-exchange-alt fa-fw'}/>&nbsp;{i18n.datatable.freeze}
-      </button>
+      {id === 'user-list-modal' ? (
+        <button
+          type="button"
+          className="btn btn-secondary btn-lg btn-block"
+          onClick={() => {
+            if (window.confirm(i18n.datatable.confirm_prompt)) massHandler('post', massFreezePersonsEndpoint);
+          }}>
+          <i className={'fas fa-exchange-alt fa-fw'} />
+          &nbsp;{i18n.datatable.freeze}
+        </button>
+      ) : null}
     </div>
   );
 }
