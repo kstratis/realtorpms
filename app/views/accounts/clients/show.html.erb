@@ -69,7 +69,8 @@
                 property_cover_alt: t('js.components.modal.favlists.property_cover_alt'),
                 add_list_action: t('js.components.modal.favlists.add_list_action'),
                 loading_alt: t('js.components.modal.favlists.loading_alt'),
-                listname_placeholder: t('js.components.modal.favlists.listname_placeholder')
+                listname_placeholder: t('js.components.modal.favlists.listname_placeholder'),
+                loading: t('loading')
             }}) %>
         </div>
         <% if current_user.is_admin?(current_account) %>
@@ -113,7 +114,8 @@
                   feedback: t('js.components.select.assignments_client_feedback', client_name: @client.full_name),
                   # defaultOptions: current_account.users.last(5).reverse.count
 
-                }
+                },
+                loading: t('loading')
               }
             }, prerender: false) %>
           </div>

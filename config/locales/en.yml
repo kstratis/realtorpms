@@ -44,6 +44,7 @@ en:
   date_title: "Date"
   error: "Error"
   action_not_permitted_error: "Action not permitted"
+  loading: "💿 Loading... Please wait."
   tooltips:
     edit: "Edit"
     delete: "Delete"

@@ -88,8 +88,9 @@ class ModalContainer extends React.Component {
               </button>
             ) : null}
           </ModalHeader>
+          {console.log(this.props.i18n.loading)}
           <ModalBody className={this.props.modalBodyClassNames ? this.props.modalBodyClassNames : ''}>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<div className={'text-center'}>{this.props.i18n.loading}</div>}>
               <SpecificSearch {...this.props} />
             </Suspense>
           </ModalBody>
