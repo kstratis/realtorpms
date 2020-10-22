@@ -100,7 +100,9 @@ gem 'listen', '~> 3.2.1'
 # gem 'capistrano-rails', group: :development
 gem 'capistrano-rails-console', require: false
 
-gem "standard", group: [:development, :test]
+gem 'rubocop', require: false
+gem 'rubocop-rails', require: false
+gem 'rubocop-rspec', require: false
 
 group :development, :test do
   gem 'rspec-rails', '4.0.1'
