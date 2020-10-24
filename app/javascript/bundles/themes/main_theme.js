@@ -218,7 +218,7 @@ class Theme {
     // Turn off the transform placement on Popper
     Popper.Defaults.modifiers.computeStyle.gpuAcceleration = false
 
-    $('[data-toggle="tooltip"]').tooltip()
+    jQuery('[data-toggle="tooltip"]').tooltip()
   }
 
   /**

@@ -4,7 +4,6 @@ import { isUrl } from '../utilities/helpers';
 function Avatar(props) {
   return (
     <div className={`avatar-wrapper`}>
-      <div className={''}>
         <div className={`${isUrl(props.data.url) ? 'user-avatar user-avatar-md mr-2' : ''}`}>
           {isUrl(props.data.url) ? (
             <img className={`${props.data.classname}`} src={props.data.url} alt={'avatar'} />
@@ -16,7 +15,6 @@ function Avatar(props) {
             </div>
           )}
         </div>
-      </div>
     </div>
   );
 }

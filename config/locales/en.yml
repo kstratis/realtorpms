@@ -1,7 +1,39 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   'true': 'foo'
+#
+# To learn more, please read the Rails Internationalization guide
+# available at https://guides.rubyonrails.org/i18n.html.
 ---
 en:
   true: "Yes"
+  true_upcase: "YES"
   false: "No"
+  false_upcase: "NO"
   sq_meters_html: "m<sup>2</sup>"
   prompt: "Are you sure you want to proceed with this action?"
   access_denied: "Access denied"
@@ -12,6 +44,7 @@ en:
   date_title: "Date"
   error: "Error"
   action_not_permitted_error: "Action not permitted"
+  loading: "💿 Loading... Please wait."
   tooltips:
     edit: "Edit"
     delete: "Delete"
@@ -185,6 +218,8 @@ en:
         adxe_placeholder: "Ad for xe.gr"
         adspitogatos: "Ad for spitogatos.gr"
         adspitogatos_placeholder: "Ad for spitogatos.gr"
+        flash_category_missing: "Unexpected error: 'Category' is required"
+        flash_location_missing: "Unexpected error: 'Location' is required"
         enums:
           businesstype:
             title: "Type"
@@ -298,6 +333,25 @@ en:
             minimum: "Minimum"
             maximum: "Maximum"
     errors:
+      models:
+        property:
+          attributes:
+            model_type:
+              required: 'required field'
+            account:
+              required: 'required field'
+            category:
+              required: 'required field'
+            location:
+              required: 'required field'
+        location:
+          attributes:
+            country:
+              required: 'required field'
+        client:
+          attributes:
+            model_type:
+              required: 'required field'
       messages:
         record_invalid: ! 'Validation failed: %{errors}'
   js:
@@ -337,10 +391,13 @@ en:
           add_list_action: "Add"
           loading_alt: "Loading..."
           deleted: "Η λίστα διεγράφη επιτυχώς"
+        mass_actions:
+          title: "Mass actions:"
+          close_btn: "Close"
       select:
         noresults: "No results were found"
         loading_html: "Loading results..."
-        add: "Add "
+        add: "Add new client: "
         placeholder: "Choose"
         placeholder_title: "Start typing to select..."
         placeholder_clients: "Search client..."
@@ -411,6 +468,11 @@ en:
           submit: "Submit"
     datatables:
       users:
+        add: "Add"
+        edit: "Edit"
+        delete: "Delete"
+        freeze: "Toggle freeze"
+        confirm_prompt: "Are you sure?"
         partner: "Partner"
         status:
           title: "Status"
@@ -429,6 +491,7 @@ en:
         tooltip_edit_profile: "Edit user"
         tooltip_delete_profile: "Delete user"
       clients:
+        delete: "Delete"
         no_results: "Δεν βρέθηκαν πελάτες!"
         search_placeholder: "Client search..."
         name: "Name"
@@ -508,7 +571,8 @@ en:
     validator:
       regex: "Only iFrame tags are allowed. i.e. &lt;iframe src=&quot;...&quot;&gt;&lt;/iframe&gt;"
       required: "The field is required"
-      digits: "The field requires digits only"
+      digits: "The field only accepts digits"
+      tels: "The field only accepts telephone numbers"
       email: "Please enter a valid email address"
       email_exists: "Email already exists"
     alerts:
@@ -626,6 +690,8 @@ en:
     text_placeholder: "Search..."
   clients:
     flash_created: "Client successfully created"
+    flash_not_created: "Error creating new client"
+    flash_not_updated: "Error updating client data"
     flash_delete: "Client successfully deleted"
     flash_not_found: "Client not found"
     flash_profile_updated: "Client profile uccessfully updated"
@@ -676,11 +742,12 @@ en:
     title: "Partners"
     flash_delete: "User was successfully deleted"
     flash_welcome: "Welcome to %{brand}! Your profile is complete."
-    flash_user_added: "New user added successfully"
+    flash_user_added: "New user created successfully"
+    flash_user_add_failed: "Unable to create new user due to form errors"
+    flash_user_update_failed: "Unable to update user profile due to form errors"
     flash_profile_updated: "Profile successfully updated"
     flash_unauthorised_user_edit: "Unauthorized action"
     flash_owner_only_action: "Owner restricted action"
-    flash_add_user: "New user created successfully"
     user: "Partner"
     created:
       list: "List of current users"
@@ -691,6 +758,8 @@ en:
       profile: "Add partner"
       new_button: "Add"
       feedback: "Type your partner's email"
+      assign_all: "Directly assign all available properties?"
+      assign_none: "Assign none of the properties"
     show:
       breadcrumb: "Partners"
       heading: "User info"
@@ -717,6 +786,7 @@ en:
     title: "Assigment of %{entity}"
     client_title: "Assigment of client %{entity}"
     assigned: "Assigned"
+    assign_client: "Assign to partner"
   properties:
     property: "Property"
     identifier: "ID"
@@ -769,6 +839,7 @@ en:
       message_feedback: "Manage your properties in %{brand} now"
       return: "Return"
       show: "Show"
+      show_and_assign: "Assign"
       edit: "Edit"
       add_another: "Add new"
       flash: "Property successfully added"
@@ -777,13 +848,14 @@ en:
       add_another: "Try again"
       support: "Please contact support or"
     updated:
-      message: "Property successfully edited"
+      message: "Property successfully updated"
       message_feedback: "Manage your properties in %{brand} now"
       return: "Return"
       show: "Show"
+      show_and_assign: "Assign"
       edit: "Edit"
       add_another: "Add new"
-      flash: "Property successfully edited"
+      flash: "Property successfully updated"
       support: "Please contact support or"
     not_updated:
       message: "Error editing the property"

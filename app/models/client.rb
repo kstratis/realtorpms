@@ -16,12 +16,26 @@ class Client < ApplicationRecord
 
   before_create { self.color = COLOR_PALETTE.sample } # This assigns a random bg color to each new user
 
+  # This is for existing log records. A user may also be an action author (user object again) thus we need to handle
+  # that as well.
+  # https://stackoverflow.com/a/9326882/178728
+  before_destroy do |record|
+    Cpa.where(client_id: record).update_all(client_id: nil)
+  end
+
   # This is for existing log records
   # https://stackoverflow.com/a/9326882/178728
   # before_destroy { |record| Log.where(client: record).update_all(client_name: record.full_name) }
 
   validates :first_name, presence: true, length: { maximum: 50 }
   validates :last_name, presence: true, length: { maximum: 50 }
+
+  # before_save happens after validation that's why we use before_validation
+  before_validation do
+    if account.present?
+      self.model_type = account.model_types.find_by(name: 'clients')
+    end
+  end
 
   def full_name
     "#{first_name} #{last_name}"

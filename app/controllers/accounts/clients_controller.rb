@@ -1,8 +1,11 @@
 module Accounts
   class ClientsController < Accounts::BaseController
     helper Cfields
+    helper ForbiddenIds
 
-    before_action :verify_client, only: [:edit, :update, :show, :destroy]
+    before_action :set_client, only: [:show, :edit, :update, :destroy]
+    before_action :redirect_to_index, :if => :grant_access?, :only => [:edit, :update, :show, :destroy]
+
     after_action :log_action, only: [:create, :update, :destroy]
 
     def index
@@ -14,15 +17,14 @@ module Accounts
     end
 
     def edit
-
     end
 
     def update
-      if @client.update_attributes(client_params)
+      if @client.update(client_params)
         flash[:success] = I18n.t 'clients.flash_profile_updated'
         redirect_to @client
-        # Handle a successful update.
       else
+        flash[:danger] = I18n.t('clients.flash_not_updated')
         render :edit
       end
     end
@@ -30,8 +32,8 @@ module Accounts
     def destroy
       @client_full_name = @client.full_name
       @client.destroy
-      flash[:success] = I18n.t 'clients.flash_delete'
-      redirect_to clients_url
+      flash[:success] = I18n.t('clients.flash_delete')
+      redirect_to clients_path
     end
 
     def new
@@ -39,23 +41,16 @@ module Accounts
     end
 
     def create
-      @client = Client.new(client_params)
-      @client.account = current_account
-      @client.model_type = current_account.model_types.find_by(name: 'clients')
-      if @client.save
+      @client = current_account.clients.new(client_params)
+
+      if @client.save  # model_type is automatically saved within a before_validation hook inside the model
         if current_user.role(current_account) == 'user'
           current_user.clients <<  @client
         end
         flash[:success] = I18n.t('clients.flash_created')
         redirect_to @client
-        # Handle a successful save.
       else
-        # DEBUG
-        # @client.errors.each do |attr, msg|
-        #   puts attr, msg
-        # end
-        # this merely re-renders the new template.
-        # It doesn't fully redirect (in other words it doesn't go through the +new+ method)
+        flash[:danger] = I18n.t('clients.flash_not_created')
         render :new
       end
     end
@@ -72,9 +67,28 @@ module Accounts
       filter_properties(current_account.properties.includes(:location), searchprefs)
     end
 
+    def mass_delete
+      current_account.clients.where(id: params[:selection]).destroy_all
+      render :json => { :status => "OK", message: clients_path }
+    end
+
     private
       def client_params
         params.require(:client).permit(:first_name, :last_name, :email, :telephones, :job, :notes, :ordertoview, :ordertosell, :ordertoviewfile, :ordertosellfile, {preferences: {}})
+      end
+
+      # Use callbacks to share common setup or constraints between actions.
+      def set_client
+        @client = current_account.clients.find(params[:id])
+      end
+
+      def grant_access?
+        forbidden_entity_ids('clients').include?(@client.id)
+      end
+
+      def redirect_to_index
+        flash[:danger] = I18n.t('access_denied')
+        redirect_to clients_path
       end
 
       def log_action
@@ -85,16 +99,5 @@ module Accounts
         end
       end
 
-      def verify_client
-        if current_user.is_admin?(current_account)
-          @client = current_account.clients.find(params[:id])
-        else
-          @client = current_user.clients.find(params[:id])
-        end
-        unless @client
-          flash[:danger] = I18n.t 'clients.flash_not_found'
-          redirect_to(root_url)
-        end
-      end
   end
 end

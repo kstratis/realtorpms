@@ -37,7 +37,7 @@ class SortFilter extends React.Component {
             aria-expanded="false">
             <span className={'d-none d-sm-inline'}>{this.props.title}&nbsp;</span><i className="fas fa-sort" />
           </button>
-          <div className="dropdown-arrow dropdown-arrow-left" />
+          {/*<div className="dropdown-arrow dropdown-arrow-left" />*/}
           <div className="dropdown-menu">
             {this.props.options.map((option, index) => (
               <a

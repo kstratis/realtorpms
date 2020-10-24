@@ -50,7 +50,7 @@ const PropertiesList = ({
   clients_endpoint,
   assignmentships_endpoint,
   properties_path,
-  i18n
+  i18n,
 }) => {
   const { filtersOpen, setFiltersOpen } = useFilterToggle('propertyFiltersOpen');
   const handleChange = event => setFiltersOpen(filtersOpen => !filtersOpen);
@@ -274,15 +274,15 @@ const PropertiesList = ({
                             text: i18n.filters.sortByDate.option1,
                             sort_filter: 'created_at',
                             sort_order: 'desc',
-                            icon: 'fas fa-sort-amount-up fa-fw'
+                            icon: 'fas fa-sort-amount-up fa-fw',
                           },
                           {
                             sn: 1,
                             text: i18n.filters.sortByDate.option2,
                             sort_filter: 'created_at',
                             sort_order: 'asc',
-                            icon: 'fas fa-sort-amount-down fa-fw'
-                          }
+                            icon: 'fas fa-sort-amount-down fa-fw',
+                          },
                         ]}
                       />
                     </div>
@@ -385,7 +385,7 @@ PropertiesList.propTypes = {
   handlePageClick: PropTypes.func.isRequired,
   selectedPage: PropTypes.number.isRequired,
   sorting: PropTypes.string.isRequired,
-  ordering: PropTypes.string.isRequired
+  ordering: PropTypes.string.isRequired,
 };
 
 const PropertiesListWithDatatable = withDatatable(PropertiesList);

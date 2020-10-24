@@ -3,7 +3,6 @@ require 'constraints/subdomain_required'
 Rails.application.routes.draw do
 
 
-
   # get 'password_resets/new'
   # get 'password_resets/edit'
 
@@ -14,7 +13,7 @@ Rails.application.routes.draw do
 
   # resources :properties
   # resources :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   # root 'application#hello'
   # root 'users#index'
   #
@@ -53,6 +52,8 @@ Rails.application.routes.draw do
       end
 
       resources :users do
+        delete :mass_delete, on: :collection
+        post :mass_freeze, on: :collection
 
         member do
           patch :toggle_activation
@@ -61,15 +62,10 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :clients
-
-      #resources :clients do
-      #  member do
-      #    get '*tabs', to: 'clients#show', format: false
-      #  end
-      #end
-
-
+      resources :clients do
+        delete :mass_delete, on: :collection
+        post :mass_freeze, on: :collection
+      end
 
       resources :invitations, only: [:new, :create, :check_existing_user]
       get '/invitations/validate_user', to:'invitations#check_existing_user', as: :invitation_validate
@@ -77,6 +73,8 @@ Rails.application.routes.draw do
       # create a new assignment
       #
       #
+      #
+      get '/demo', to: 'properties#demo'
 
       post '/properties/uploads', to: 'properties#uploads'
 

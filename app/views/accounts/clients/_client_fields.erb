@@ -49,7 +49,7 @@
   <!-- .form-group -->
   <div class="form-group new_client">
     <div class="form-label-group">
-      <%= f.text_field :telephones, class: 'form-control new_client_input', placeholder: Client.human_attribute_name("telephones") %>
+      <%= f.text_field :telephones, class: 'form-control new_client_input', placeholder: Client.human_attribute_name("telephones"), 'data-parsley-pattern': '^[\d\+\-\.,\(\)\/\s]*$', 'data-parsley-pattern-message': t('js.validator.tels') %>
       <%= f.label "telephones", Client.human_attribute_name("telephones") %>
       <%#= inline_error @client, :telephones, 'Telephones' %>
     </div>

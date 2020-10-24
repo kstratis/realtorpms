@@ -11,5 +11,5 @@ case Rails.env
     options.merge!(domain: DOMAIN_PRODUCTION, tld_length: 1)
 end
 
-Propertyx::Application.config.session_store :cookie_store, options
+Propertyx::Application.config.session_store :cookie_store, **options
 Propertyx::Application.config.secret_key_base = Rails.application.credentials.secret_key_base

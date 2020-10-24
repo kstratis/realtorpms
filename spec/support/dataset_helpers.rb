@@ -2,6 +2,16 @@ require 'rails_helper'
 
 module DatasetHelpers
 
+  def use_categories_seed
+    Category.create(localname: "Διαμέρισμα", globalname: "Apartment", level: 2, parent_id: 1, parent_localname: "Κατοικία", parent_globalname: "Residential", slug: "apartment", parent_slug: "residential")
+    Category.create(localname: "Βίλλα", globalname: "Villa", level: 2, parent_id: 1, parent_localname: "Κατοικία", parent_globalname: "Residential", slug: "villa", parent_slug: "residential")
+  end
+
+  # def use_locations_seed2
+  #   Location.create(localname: "Λαμπρινή", globalname: "Lamprini", level: 3, parent_id: 2305, country_id: 1, parent_localname: "Γαλάτσι", parent_globalname: "Galatsi")
+  #   Location.create(localname: "Κυνοσάργους", globalname: "Kinosargous", level: 3, parent_id: 2033, country_id: 1, parent_localname: "Νέος Κόσμος", parent_globalname: "Neos Kosmos")
+  # end
+
   def use_regular_dataset
 
     @category = Category.create(localname: "Διαμέρισμα", globalname: "Apartment", level: 2, parent_id: 1, parent_localname: "Κατοικία", parent_globalname: "Residential", slug: "apartment", parent_slug: "residential")

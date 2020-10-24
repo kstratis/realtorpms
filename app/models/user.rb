@@ -7,7 +7,7 @@ class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i  # checks the email format
 
   self.per_page = 10 # This is for pagination
-  attr_accessor :remember_token, :reset_token
+  attr_accessor :remember_token, :reset_token, :multi_assign
 
   before_save { self.email = email.downcase }  # makes sure everything is lower case
   before_create { self.color = COLOR_PALETTE.sample } # This assigns a random bg color to each new user
@@ -15,7 +15,10 @@ class User < ApplicationRecord
   # This is for existing log records. A user may also be an action author (user object again) thus we need to handle
   # that as well.
   # https://stackoverflow.com/a/9326882/178728
-  before_destroy { |record| Log.where(author_id: record).update_all(author_id: nil) }
+  before_destroy do |record|
+    Cpa.where(user_id: record).update_all(user_id: nil)
+    Log.where(author_id: record).update_all(author_id: nil)
+  end
 
   validates :first_name, presence: true, length: { maximum: 50 }
   validates :last_name, presence: true, length: { maximum: 50 }
@@ -104,12 +107,12 @@ class User < ApplicationRecord
     end
   end
 
-  def is_privileged?(account)
-    Membership.find_by(account: account, user: self).privileged
-  end
-
   def is_admin?(account)
     %w(sysadmin admin).include?(role(account))
+  end
+
+  def is_privileged?(account)
+    Membership.find_by(account: account, user: self).privileged
   end
 
   # Remembers a user in the database for use in persistent sessions.
@@ -205,6 +208,10 @@ class User < ApplicationRecord
 
   def age
     dob ? ((Time.zone.now - dob.to_time) / 1.year.seconds).floor : nil
+  end
+
+  def client_ids
+    @clients_ids ||= clients.pluck(:id)
   end
 
 

@@ -1,4 +1,29 @@
 const { environment } = require('@rails/webpacker');
+const webpack = require('webpack');
+
+environment.plugins.append("Provide", new webpack.ProvidePlugin({
+  $: 'jquery',
+  jQuery: 'jquery',
+  Popper: ['popper.js', 'default'],
+  $clamp: ['clamp-js-main']
+}));
+
+// This is needed because we need to be able to access jquery truly globally and not just
+// "webpack scoped" globally.
+// https://stackoverflow.com/questions/54758232/rendering-js-from-a-rails-controller-with-webpacker
+environment.config.merge({
+  module: {
+    rules: [
+      {
+        test: require.resolve('jquery'),
+        loader: 'expose-loader',
+        options: {
+          exposes: ['$', 'jQuery'],
+        }
+      }
+    ]
+  }
+});
 
 // console.log(typeof(environment));
 

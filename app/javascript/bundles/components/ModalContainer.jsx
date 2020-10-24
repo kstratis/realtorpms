@@ -1,35 +1,53 @@
-import React from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import AddRemoveFavLists from './AddRemoveFavLists';
-import StoreClientSearch from './StoreClientSearch';
-import RetrieveClientSearch from './RetrieveClientSearch';
-import AddRemoveShowings from './AddRemoveShowings';
-import ViewShowings from './ViewShowings';
-import AddRemovePartners from './AddRemovePartners';
-import { renderHTML } from '../utilities/helpers';
+import React, { Suspense } from 'react';
+import Button from 'reactstrap/lib/Button';
+import Modal from 'reactstrap/lib/Modal';
+import ModalHeader from 'reactstrap/lib/ModalHeader';
+import ModalBody from 'reactstrap/lib/ModalBody';
+import ModalFooter from 'reactstrap/lib/ModalFooter';
+const AddRemoveFavLists = React.lazy(() => import('./AddRemoveFavLists'));
+const StoreClientSearch = React.lazy(() => import('./StoreClientSearch'));
+const MassActions = React.lazy(() => import('./MassActions'));
+const RetrieveClientSearch = React.lazy(() => import('./RetrieveClientSearch'));
+const AddRemoveShowings = React.lazy(() => import('./AddRemoveShowings'));
+const ViewShowings = React.lazy(() => import('./ViewShowings'));
+const AddRemovePartners = React.lazy(() => import('./AddRemovePartners'));
+import URLSearchParams from '@ungap/url-search-params';
+import Spinner from '../datatables/Spinner';
 
 const components = {
+  MassActions: MassActions,
   StoreClientSearch: StoreClientSearch,
   RetrieveClientSearch: RetrieveClientSearch,
   AddRemoveFavLists: AddRemoveFavLists,
   AddRemoveShowings: AddRemoveShowings,
   ViewShowings: ViewShowings,
-  AddRemovePartners: AddRemovePartners
+  AddRemovePartners: AddRemovePartners,
 };
 
 class ModalContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false
+      modal: false,
     };
     this.toggle = this.toggle.bind(this);
   }
 
   toggle() {
-    this.setState(prevState => ({
-      modal: !prevState.modal
-    }));
+    this.setState(
+      prevState => ({
+        modal: !prevState.modal,
+      }),
+      () => {
+        let searchParams = new URLSearchParams(window.location.search);
+        if (!searchParams.get('autoclick')) return;
+        searchParams.delete('autoclick');
+        let newUrlParams = searchParams.toString()
+          ? `${window.location.pathname}?${searchParams.toString()}`
+          : window.location.pathname;
+        history.replaceState(null, '', newUrlParams);
+      }
+    );
   }
 
   render() {
@@ -37,12 +55,13 @@ class ModalContainer extends React.Component {
     return (
       <>
         <Button
+          id={this.props.id}
           outline={this.props.outline}
           data-toggle={this.props.title ? 'tooltip' : ''}
           data-placement={this.props.title ? 'top' : ''}
           title={this.props.title ? this.props.title : ''}
           className={this.props.fireButtonClassnames ? this.props.fireButtonClassnames : ''}
-          disabled={this.props.buttonDisabled || false}
+          disabled={this.props.buttonDisabled}
           size={this.props.fireButtonBtnSize ? this.props.fireButtonBtnSize : 'sm'}
           color={this.props.fireButtonBtnType ? this.props.fireButtonBtnType : 'secondary'}
           onClick={this.toggle}>
@@ -59,18 +78,23 @@ class ModalContainer extends React.Component {
             className={`${this.props.modalHeaderClassNames ? this.props.modalHeaderClassNames : ''}`}
             toggle={this.toggle}>
             <span className={'d-inline-block align-middle'}>{this.props.modalTitle}</span>
-            {this.props.modalHelpPopover ?
-            <button
-              data-toggle="popover"
-              data-placement="auto"
-              data-trigger="hover"
-              data-content={this.props.modalHelpPopover}
-              className={`btn btn-sm btn-icon ml-2 btn-outline-info`}>
-              <i className={`fas fa-info colored`} />
-            </button> : null }
+            {this.props.modalHelpPopover ? (
+              <button
+                data-toggle="popover"
+                data-placement="auto"
+                data-trigger="hover"
+                data-content={this.props.modalHelpPopover}
+                className={`btn btn-sm btn-icon ml-2 btn-outline-info`}>
+                <i className={`fas fa-info colored`} />
+              </button>
+            ) : null}
           </ModalHeader>
           <ModalBody className={this.props.modalBodyClassNames ? this.props.modalBodyClassNames : ''}>
-            <SpecificSearch {...this.props} />
+              <Suspense fallback={<Spinner isLoading={true} />}>
+                {/*<div className={'modal-wrapper'}>*/}
+                  <SpecificSearch {...this.props} />
+                {/*</div>*/}
+              </Suspense>
           </ModalBody>
           <ModalFooter className={this.props.modalFooterClassNames ? this.props.modalFooterClassNames : ''}>
             <Button color="secondary" onClick={this.toggle}>

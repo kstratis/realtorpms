@@ -10,7 +10,7 @@
 
 <% content_for :content do %>
   <!-- form -->
-  <%= form_for(:session, url: login_path, html: {class: 'auth-form'}) do |f| %>
+  <%= form_for(:session, url: login_path, html: {class: 'auth-form', id: 'auth-form'}) do |f| %>
     <%#= render 'shared/error_messages' %>
 
     <!-- .form-group -->
@@ -33,7 +33,7 @@
 
     <!-- .form-group -->
     <div class="form-group">
-      <%= f.submit t('sessions.login_button'), class: 'btn btn-lg btn-primary btn-block' %>
+      <%= f.submit t('sessions.login_button'), class: 'btn btn-lg btn-primary btn-block', id: 'login-button' %>
     </div>
     <!-- /.form-group -->
 

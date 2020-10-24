@@ -18,7 +18,7 @@
               <div class="user-avatar user-avatar-xl fileinput-button">
                 <div class="fileinput-button-label"><%= t('users.edit.change_pic') %></div>
 
-                <%= render_avatar(current_user, 'tile-xl', "avatar_preview") %>
+                <%= render_avatar(@user, 'tile-xl', "avatar_preview") %>
                 <%= f.file_field :avatar, id: "avatar_upload" %>
               </div><!-- /avatar -->
               <!-- .media-body -->
@@ -26,7 +26,7 @@
                 <h3 class="card-title profile-photo"><%= t('users.edit.photo_header') %></h3>
                 <h6 class="card-subtitle text-muted"><%= t('users.edit.photo_subheader') %></h6>
                 <p class="card-text">
-                  <% if current_user.avatar.attached? %>
+                  <% if @user.avatar.attached? %>
                     <%= link_to delete_avatar_user_url, method: :delete, data: {confirm: t('users.edit.delete_avatar')} do %>
                       <i class="fa fa-trash fa-fw"></i>&nbsp;|&nbsp;<small><%= t('users.edit.allowed_pic_specs') %></small>
                     <% end %>
@@ -35,105 +35,10 @@
                   <% end %>
 
                 </p><!-- The avatar upload progress bar -->
-
               </div><!-- /.media-body -->
             </div><!-- /.media -->
-            <!-- form -->
 
-
-            <!-- .form-group -->
-            <div class="form-group">
-              <div class="form-label-group">
-                <%= f.text_field :first_name, class: 'form-control', placeholder: User.human_attribute_name("first_name") %>
-                <%= f.label :first_name, User.human_attribute_name("first_name") %>
-                <%= inline_error @user, :first_name, 'First name' %>
-              </div>
-            </div>
-            <!-- /.form-group -->
-
-            <!-- .form-group -->
-            <div class="form-group">
-              <div class="form-label-group">
-                <%= f.text_field :last_name, class: 'form-control', placeholder: User.human_attribute_name("last_name") %>
-                <%= f.label :last_name, User.human_attribute_name("last_name") %>
-                <%= inline_error @user, :last_name, 'Last name' %>
-              </div>
-            </div>
-            <!-- /.form-group -->
-
-            <!-- .form-group -->
-            <div class="form-group">
-              <div class="form-label-group">
-                <%= f.email_field :email, class: 'form-control', placeholder: User.human_attribute_name("email") %>
-                <%= f.label "email", User.human_attribute_name("email") %>
-                <%= inline_error @user, :email, 'Email' %>
-              </div>
-            </div>
-            <!-- /.form-group -->
-
-            <!-- .form-group -->
-            <!-- Formatting based on this: https://stackoverflow.com/a/8703173/178728 -->
-            <div class="form-group">
-              <%= f.label "dob", User.human_attribute_name("dob") %>
-              <div class="row">
-                <%= f.date_select(:dob, {selected: {day: @user.try(:dob).try(:day) || 1, month: @user.try(:dob).try(:month) || 1, year: @user.try(:dob).try(:year) || 1975}, start_year: Date.today.year - 85, end_year: Date.today.year - 18, order: [:day, :month, :year]}, class: 'custom-select date-select') %>
-                <%= inline_error @user, :dob, 'dob' %>
-              </div>
-            </div>
-            <!-- /.form-group -->
-
-            <!-- .form-group -->
-            <div class="form-group">
-              <div class="form-label-group">
-                <%= f.text_field :phone1, class: 'form-control', placeholder: User.human_attribute_name("phone1") %>
-                <%= f.label "phone1", User.human_attribute_name("phone1") %>
-                <%= inline_error @user, :phone1, 'Phone' %>
-              </div>
-            </div>
-            <!-- /.form-group -->
-
-            <!-- .form-group -->
-            <div class="form-group">
-              <div class="form-label-group">
-                <%= f.select :locale, options_for_select(User.lng_list, @user.locale || I18n.locale), {}, class: 'form-control custom-select' %>
-                <%= f.label :locale %>
-              </div>
-            </div>
-            <!-- /.form-group -->
-
-            <!-- .form-group -->
-            <div class="form-group">
-              <div class="form-label-group">
-                <%= f.time_zone_select :time_zone, nil, {}, {class: 'form-control custom-select'} %>
-                <%= f.label :time_zone %>
-              </div>
-            </div>
-            <!-- /.form-group -->
-
-            <!-- .form-group -->
-            <div class="form-group">
-              <div class="pb-2">
-                <span class="badge badge-info"><em><%= t('activerecord.attributes.user.password_leave_empty') %></em></span>
-              </div>
-              <div class="form-label-group">
-                <%= f.password_field :password, class: 'form-control', placeholder: User.human_attribute_name("password") %>
-                <%= f.label :password, User.human_attribute_name("password_new") %>
-                <%= inline_error @user, :password, 'Password' %>
-              </div>
-            </div>
-            <!-- /.form-group -->
-
-            <!-- .form-group -->
-            <div class="form-group">
-              <div class="pb-2">
-                <span class="badge badge-info"><em><%= t('activerecord.attributes.user.password_leave_empty') %></em></span>
-              </div>
-              <div class="form-label-group">
-                <%= f.password_field :password_confirmation, class: 'form-control', placeholder: User.human_attribute_name("password_confirmation") %>
-                <%= f.label :password_confirmation, User.human_attribute_name("password_confirmation") %>
-                <%= inline_error @user, :password_confirmation, 'Password confirmation' %>
-              </div>
-            </div> <!-- /.form-group -->
+            <%= render 'accounts/users/form', f: f %>
 
             <!-- Extended fields -->
             <%= f.fields_for :preferences, OpenStruct.new(@user.preferences) do |builder| %>

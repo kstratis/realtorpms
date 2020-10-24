@@ -45,7 +45,7 @@ $(document).on('turbolinks:load', function(e) {
    * its validations. If the validation fails it will stop the form dead on its tracks. No further action happens.
    * 2. Each time a form is submitted 2 main form handler functions run: active storage for handling file uploads and
    * UJS for ajax form submission. Both listen to (mostly) the same events and use ajax calls for their own purposes.
-   * 3. Once Parsley validations pass, the system keeps track of whether a user have used any attachments or not:
+   * 3. Once Parsley validations pass, the system keeps track of whether a user has used any attachments or not:
    *   a. If the user has placed files-to-be uploaded on uppyjs then UJS gets an event.preventDefault and stops. AS
    *      takes over and uploads all files. Once it's done, it removes #preventformsubmit from the DOM and resubmits the
    *      form. On form resubmission AS won't do anything this time since there will be no files left to upload leaving
@@ -55,7 +55,7 @@ $(document).on('turbolinks:load', function(e) {
    */
   $stepperForm.on('ajax:before', function(event, xhr, opts) {
     // DEBUG
-    // console.log('ajax:before called');
+    // console.log('ajax:before event called');
     if ($('#preventformsubmit').length > 0) {
       // DEBUG
       // console.log('#preventformsubmit exists');

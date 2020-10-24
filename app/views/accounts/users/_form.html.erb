@@ -1,0 +1,89 @@
+<!-- .form-group -->
+<div class="form-group">
+  <div class="form-label-group">
+    <%= f.text_field :first_name, class: 'form-control', placeholder: User.human_attribute_name("first_name"), 'data-parsley-required': "true", 'data-parsley-required-message': t("js.validator.required") %>
+    <%= f.label :first_name, User.human_attribute_name("first_name") %>
+    <%= inline_error @user, :first_name, 'First name' %>
+  </div>
+</div>
+<!-- /.form-group -->
+
+<!-- .form-group -->
+<div class="form-group">
+  <div class="form-label-group">
+    <%= f.text_field :last_name, class: 'form-control', placeholder: User.human_attribute_name("last_name"), 'data-parsley-required': "true", 'data-parsley-required-message': t("js.validator.required") %>
+    <%= f.label :last_name, User.human_attribute_name("last_name") %>
+    <%= inline_error @user, :last_name, 'Last name' %>
+  </div>
+</div>
+<!-- /.form-group -->
+
+<!-- .form-group -->
+<div class="form-group">
+  <div class="form-label-group">
+    <%= f.email_field :email, class: 'form-control',
+                      placeholder: User.human_attribute_name("email"),
+                      'data-parsley-required': "true",
+                      'data-parsley-required-message': t("js.validator.required"),
+                      'data-parsley-type': "email",
+                      'data-parsley-type-message': t("js.validator.email") %>
+    <%= f.label "email", User.human_attribute_name("email") %>
+    <%= inline_error @user, :email, 'Email' %>
+  </div>
+</div>
+<!-- /.form-group -->
+
+<!-- .form-group -->
+<!-- Formatting based on this: https://stackoverflow.com/a/8703173/178728 -->
+<div class="form-group">
+  <%= f.label "dob", User.human_attribute_name("dob") %>
+  <div class="row">
+    <%= f.date_select(:dob, {selected: {day: @user.try(:dob).try(:day) || 1, month: @user.try(:dob).try(:month) || 1, year: @user.try(:dob).try(:year) || 1975}, start_year: Date.today.year - 85, end_year: Date.today.year - 18, order: [:day, :month, :year]}, class: 'custom-select date-select') %>
+    <%= inline_error @user, :dob, 'dob' %>
+  </div>
+</div>
+<!-- /.form-group -->
+
+<!-- .form-group -->
+<div class="form-group">
+  <div class="form-label-group">
+    <%= f.text_field :phone1, class: 'form-control', placeholder: User.human_attribute_name("phone1"), 'data-parsley-pattern': '^[\d\+\-\.,\(\)\/\s]*$', 'data-parsley-pattern-message': t('js.validator.tels') %>
+    <%= f.label "phone1", User.human_attribute_name("phone1") %>
+    <%= inline_error @user, :phone1, 'Phone' %>
+  </div>
+</div>
+<!-- /.form-group -->
+
+<!-- .form-group -->
+<div class="form-group">
+  <div class="form-label-group">
+    <%= f.select :locale, options_for_select(User.lng_list, @user.locale || I18n.locale), {}, class: 'form-control custom-select' %>
+    <%= f.label :locale %>
+  </div>
+</div>
+<!-- /.form-group -->
+
+<!-- .form-group -->
+<div class="form-group">
+  <div class="pb-2">
+    <span class="badge badge-info"><em><%= t('activerecord.attributes.user.password_leave_empty') %></em></span>
+  </div>
+  <div class="form-label-group">
+    <%= f.password_field :password, class: 'form-control', placeholder: User.human_attribute_name("password") %>
+    <%= f.label :password, User.human_attribute_name("password_new") %>
+    <%= inline_error @user, :password, 'Password' %>
+  </div>
+</div>
+<!-- /.form-group -->
+
+<!-- .form-group -->
+<div class="form-group">
+  <div class="pb-2">
+    <span class="badge badge-info"><em><%= t('activerecord.attributes.user.password_leave_empty') %></em></span>
+  </div>
+  <div class="form-label-group">
+    <%= f.password_field :password_confirmation, class: 'form-control', placeholder: User.human_attribute_name("password_confirmation") %>
+    <%= f.label :password_confirmation, User.human_attribute_name("password_confirmation") %>
+    <%= inline_error @user, :password_confirmation, 'Password confirmation' %>
+  </div>
+</div> <!-- /.form-group -->

@@ -1,3 +1,4 @@
+import "parsleyjs";
 import { clearValidatableFields } from './utilities';
 
 $(document).on('turbolinks:load', function(e) {
@@ -19,7 +20,7 @@ $(document).on('turbolinks:load', function(e) {
 
   });
 
-  // Make sure that parsley validation is disabled when we remove a particalar custom field from the UI
+  // Make sure that parsley validation is disabled when we remove any particular custom field from the UI
   form.parsley().on('form:validate', function (formInstance) {
     clearValidatableFields('.cfield-validatable');
   });

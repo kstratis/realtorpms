@@ -19,7 +19,7 @@
               <div class="card-body">
                 <% if @events.blank? %>
                   <div class="state-figure text-center">
-                    <%= image_tag 'no_content.svg', class: 'img-fluid max-300' %>
+                    <%= image_pack_tag 'media/images/no_content.svg', class: "img-fluid max-300" %>
                   </div>
                   <h3 class="state-header text-center"><%= t('main.welcome.no_activities') %></h3>
                 <% else %>
@@ -101,7 +101,7 @@
             <div id="notfound-state" class="empty-state">
               <div class="empty-state-container">
                 <div class="state-figure">
-                  <%= image_tag 'no_content.svg', class: 'img-fluid max-300' %>
+                  <%= image_pack_tag 'media/images/no_content.svg', class: 'img-fluid max-300' %>
                 </div>
                 <h3 class="state-header"><%= t('main.welcome.no_content') %></h3>
                 <p class="state-description lead text-muted"><%= t('main.welcome.prompt') %></p>
@@ -123,6 +123,7 @@
   </div>
 </div>
 
+<%= link_to 'DEMO', 'demo' %>
 <%#= link_to image_tag('rails.png', alt: 'Rails logo'), 'http://rubyonrails.org/' %>
 
 

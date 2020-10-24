@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import withDatatable from './withDatatable';
 import Search from './Search';
@@ -9,6 +9,8 @@ import { hasParams, capitalizeFirstLetter } from '../utilities/helpers';
 import FormComponents from './fields/FormComponents';
 import useFilterToggle from '../hooks/useFilterToggle';
 import useTooltips from '../hooks/useTooltips';
+import useMultiCheckbox from '../hooks/useMultiCheckbox';
+import ModalContainer from '../components/ModalContainer';
 
 const UsersList = ({
   handlePageClick,
@@ -34,10 +36,38 @@ const UsersList = ({
   status_filter,
   searchInput,
   users_path,
-  cfields
+  cfields,
 }) => {
   const { filtersOpen, setFiltersOpen } = useFilterToggle('userFiltersOpen');
   const handleChange = event => setFiltersOpen(filtersOpen => !filtersOpen);
+
+  const {checkedItems, masterCheck, checkAll, handleCheckboxChange} = useMultiCheckbox(dataset.map((entry) => entry.id), selectedPage)
+
+  // --------
+  // const [masterCheck, setMasterCheck] = useState({});
+  // const [checkedItems, setCheckedItems] = useState({});
+  //
+  // const checkAll = (ids) => {
+  //   console.log('executing');
+  //   const pageEntries = {};
+  //   const pageNo = selectedPage + 1;
+  //   ids.forEach(entry => {
+  //     pageEntries[entry] = !masterCheck[pageNo];
+  //   });
+  //   setMasterCheck({ ...masterCheck, [selectedPage + 1]: !masterCheck[selectedPage + 1] });
+  //   setCheckedItems({ ...checkedItems, ...pageEntries });
+  // };
+  //
+  // const handleCheckboxChange = event => {
+  //   // See this: https://dev.to/sagar/three-dots---in-javascript-26ci
+  //   // This is basically doing
+  //   // var mergedObj = { ...obj1, ...obj2 };
+  //   // Object { foo: "baz", x: 42, y: 13 }
+  //   // It's making a copy of all checkedItems and adds the newest key/value pair:
+  //   // [event.target.id]: event.target.checked
+  //   setCheckedItems({ ...checkedItems, [event.target.id]: event.target.checked });
+  // };
+
   useTooltips();
 
   return (
@@ -115,6 +145,7 @@ const UsersList = ({
                         placeholder={i18n['search']}
                       />
                     </div>
+
                     <div className={'btn-group btn-group-toggle pl-2'}>
                       <label
                         className={`btn ${hasParams() ? 'btn-danger' : 'btn-secondary'} toggle-button ${
@@ -129,6 +160,32 @@ const UsersList = ({
                         <i className={'fas fa-filter fa-fw'} />
                         <span className="d-none d-md-inline">&nbsp;{i18n.filters.title}</span>
                       </label>
+
+                      <ModalContainer
+                        id={'user-list-modal'}
+                        origin={'menu'}
+                        modalSize={'md'}
+                        fireButtonLabel={`<i class='fas fa-tasks fa-lg fa-fw' />`}
+                        fireButtonBtnSize={`md`}
+                        fireButtonBtnType={`success`}
+                        modalTitle={i18n.modal.mass_actions.title}
+                        modalHeader={null}
+                        child={'MassActions'}
+                        buttonCloseLabel={i18n.modal.mass_actions.close_btn}
+                        title={i18n.search_save_title}
+                        i18n={i18n}
+                        buttonDisabled={!Object.keys(checkedItems).some(i => checkedItems[i])}
+                        checkedItems={checkedItems}
+                        massDeletePersonsEndpoint={meta.mass_delete_users_link}
+                        massFreezePersonsEndpoint={meta.mass_freeze_users_link}
+                      />
+
+                      {Object.keys(checkedItems).filter(i => checkedItems[i]).length ? (
+                        <div className={'d-flex align-items-center justify-content-center user-assign-counter'}>
+                          <strong>{Object.keys(checkedItems).filter(i => checkedItems[i]).length}</strong>
+                        </div>
+                      ) : null}
+
                     </div>
 
                     <div>
@@ -172,9 +229,20 @@ const UsersList = ({
                       <thead>
                         <tr>
                           <th>
+                            <div className="custom-control custom-checkbox d-inline-block">
+                              <input
+                                type="checkbox"
+                                className="custom-control-input"
+                                name={'master-check-users'}
+                                id={'master-check-users'}
+                                checked={!!masterCheck[selectedPage + 1]}
+                                onChange={() => checkAll()}
+                              />
+                              <label className="custom-control-label" htmlFor={'master-check-users'} />
+                            </div>
                             <a
                               id="sort_by_name"
-                              className={'sortable-header-name'}
+                              className={'sortable-header-name d-inline-block'}
                               href={''}
                               onClick={e => handleSort(e, 'last_name')}>
                               <span>{i18n['datatable']['partner']}</span>
@@ -216,13 +284,7 @@ const UsersList = ({
                             </a>
                           </th>
                           <th>
-                            <a
-                              id="sort_by_status"
-                              className={'sortable-header-name'}
-                              href={''}
-                              onClick={e => handleSort(e, 'status')}>
-                              <span>{i18n['datatable']['status']['title']}</span>
-                            </a>
+                            <span>{i18n['datatable']['status']['title']}</span>
                           </th>
                           <th className={'text-nowrap'}>
                             <a
@@ -256,6 +318,18 @@ const UsersList = ({
                           <tr className={'entry'} key={entry['id']}>
                             <td className={'align-middle text-nowrap'}>
                               <div className={'table-entry'}>
+                                <div className="custom-control custom-checkbox d-inline-block">
+                                  <input
+                                    type="checkbox"
+                                    className="custom-control-input"
+                                    name={entry['id']}
+                                    id={entry['id']}
+                                    checked={!!checkedItems[entry['id']]}
+                                    onChange={handleCheckboxChange}
+                                  />
+                                  <label className="custom-control-label" htmlFor={entry['id']} />
+                                </div>
+
                                 <Avatar data={entry['avatar']} />
                                 <span>
                                   <a className={'user-entry-color'} href={entry['view_entity_path']}>
@@ -293,11 +367,15 @@ const UsersList = ({
                                   data-placement="auto"
                                   onClick={e => handleAdminifyUser(e, meta['adminify_link'], entry['id'])}
                                   title={i18n['datatable']['tooltip_adminify_profile']}
-                                  className={`btn btn-md btn-icon btn-secondary btn-action ${entry['privileged'] ? 'active' : ''}`}
+                                  className={`btn btn-md btn-icon btn-secondary btn-action ${
+                                    entry['privileged'] ? 'active' : ''
+                                  }`}
                                   href={''}>
                                   <i className={`fas fa-angle-double-up ${entry['privileged'] ? 'blue' : ''}`} />
                                 </a>
-                              ) : ''}
+                              ) : (
+                                ''
+                              )}
                               <a
                                 data-toggle="tooltip"
                                 data-placement="auto"
@@ -307,7 +385,7 @@ const UsersList = ({
                                   entry['active'] ? '' : 'active'
                                 }`}
                                 href={''}>
-                                <i className={`fas fa-user ${entry['active'] ? 'green' : 'red'}`} />
+                                <i className={`fas fa-stop ${entry['active'] ? 'orange' : 'red'}`} />
                               </a>
                               <a
                                 data-toggle="tooltip"
@@ -421,7 +499,7 @@ UsersList.propTypes = {
   handlePageClick: PropTypes.func.isRequired,
   selectedPage: PropTypes.number.isRequired,
   sorting: PropTypes.string.isRequired,
-  ordering: PropTypes.string.isRequired
+  ordering: PropTypes.string.isRequired,
 };
 
 const UsersListWithDatatable = withDatatable(UsersList);

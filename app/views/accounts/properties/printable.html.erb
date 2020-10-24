@@ -8,11 +8,12 @@
     <div class="col-5">
       <% if pictures.blank? %>
         <div class="no-pic-container print-img">
-          <%= image_tag 'no_pic.png', class: 'img-responsive' %>
+          <%= image_pack_tag 'media/images/no_pic.png', class: "img-responsive" %>
         </div>
       <% else %>
         <% pictures.each do |image| %>
           <div class="print-img ">
+            <%# -=Attention!=- This is user-generated content and we still have to use the asset pipeline %>
             <%= image_tag image, class: 'img-responsive' %>
           </div>
         <% end %>
@@ -26,7 +27,7 @@
             <td class="align-middle nowrap">
               <div class="table-entry">
                 <div class="table-icon-wrapper">
-                  <%= image_tag "house_specs/#{value[:icon]}.svg", style: "width:20px" %>
+                  <%= image_pack_tag "house_specs/#{value[:icon]}.svg", style: "width:20px" %>
                 </div>
                 <span class="align-middle">&nbsp;&nbsp;<%= t("activerecord.attributes.property.#{value[:label].to_s}_title") %></span>
               </div>
@@ -46,7 +47,7 @@
             <td class="align-middle nowrap">
               <div class="table-entry">
                 <div class="table-icon-wrapper">
-                  <%= image_tag "house_specs/#{value[:icon]}.svg", style: "width:20px" %>
+                  <%= image_pack_tag "house_specs/#{value[:icon]}.svg", style: "width:20px" %>
                 </div>
                 <span class="align-middle">&nbsp;&nbsp;<%= t("activerecord.attributes.property.#{value[:label].to_s}_title") %></span>
               </div>

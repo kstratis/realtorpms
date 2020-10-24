@@ -10,7 +10,7 @@ module PropertyHeader
     localname = property.location.localname
     parent_localname = property.location.parent_localname
     price = property.price ? ActionController::Base.helpers.number_to_currency(property.price) : nil
-    [businesstype, "#{category} #{size}", localname, parent_localname, price].join(', ')
+    [businesstype, "#{category} #{size}", localname, parent_localname, price].compact.map(&:strip).join(', ')
   end
 
   def mini_heading(property)

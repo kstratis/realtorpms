@@ -7,7 +7,7 @@
 
 // changed line
 import { CustomDirectUploadsController } from './custom_direct_uploads_controller';
-import { findElement } from 'activestorage/src/helpers';
+import { findElement } from '@rails/activestorage/src/helpers';
 
 const processingAttribute = 'data-direct-uploads-processing';
 const submitButtonsByForm = new WeakMap();
@@ -24,6 +24,7 @@ export function start() {
 
 function didClick(event) {
   const { target } = event;
+
   if ((target.tagName == 'INPUT' || target.tagName == 'BUTTON') && target.type == 'submit' && target.form) {
     submitButtonsByForm.set(target.form, target);
   }
@@ -50,18 +51,16 @@ function handleFormSubmissionEvent(event) {
   // changed line
   const controller = new CustomDirectUploadsController(form);
   // changed line
-  const { $inputs } = controller;
-
+  const { inputs } = controller;
   // changed line
-  if ($inputs.length) {
+  if (inputs.length) {
     event.preventDefault();
     form.setAttribute(processingAttribute, '');
-    // changed line
-    $.each($inputs, (index, element) => disable(element));
+    inputs.forEach(disable);
     controller.start(error => {
       form.removeAttribute(processingAttribute);
       if (error) {
-        $inputs.forEach(enable);
+        inputs.forEach(enable);
       } else {
         submitForm(form);
       }

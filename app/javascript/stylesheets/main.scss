@@ -1,0 +1,163 @@
+@import "theme/variable-bs-overrides";
+
+
+
+// CUSTOM OVERRIDDEN VARIABLES
+// PUT ANY OVERRIDES HERE AND ONLY HERE
+// ---------------------------------------------------------------------------------------------
+// Application overrides
+$gray-medium-light: #eaeaea;
+$bg-color-1: #f8faff;
+$bg-color-2: #f3f4f8;
+
+// The following line causes a bug
+// $breadcrumb-divider: none !important;
+
+// This is for the sidebar
+$app-aside-light-bg: $bg-color-1;
+// This is for the .custom-select arrow indicator bug
+//$custom-select-indicator: url("data:image/svg+xml;charset=utf-8,%3Csvg width='14' height='14' fill='%23888c9b' viewBox='0 0 1792 1792' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1408 704q0 26-19 45l-448 448q-19 19-45 19t-45-19L403 749q-19-19-19-45t19-45 45-19h896q26 0 45 19t19 45z'/%3E%3C/svg%3E");
+
+$app-aside-width: 12rem;
+
+$grid-breakpoints: (
+        xs: 0,
+        sm: 576px,
+        md: 768px,
+        lg: 992px,
+        xl: 1200px,
+  //xxl: 1900px
+);
+
+$container-max-widths: (
+        sm: 540px,
+        md: 720px,
+        lg: 960px,
+        xl: 1200px
+        //xl: 1520px,
+  //xxl: 1610px
+);
+
+$yellowbg: #ffe000;
+$blackfg: #1d2d35;
+
+// END
+// ---------------------------------------------------------------------------------------------
+
+
+
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "theme/variables";
+@import "theme/mixins";
+
+@import "~bootstrap/scss/root";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/images";
+@import "~bootstrap/scss/code";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/tables";
+@import "~bootstrap/scss/forms";
+@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/transitions";
+@import "~bootstrap/scss/dropdown";
+@import "~bootstrap/scss/button-group";
+@import "~bootstrap/scss/input-group";
+@import "~bootstrap/scss/custom-forms";
+@import "~bootstrap/scss/nav";
+@import "~bootstrap/scss/navbar";
+@import "~bootstrap/scss/card";
+@import "~bootstrap/scss/breadcrumb";
+@import "~bootstrap/scss/pagination";
+@import "~bootstrap/scss/badge";
+@import "~bootstrap/scss/jumbotron";
+@import "~bootstrap/scss/alert";
+@import "~bootstrap/scss/progress";
+@import "~bootstrap/scss/media";
+@import "~bootstrap/scss/list-group";
+@import "~bootstrap/scss/close";
+@import "~bootstrap/scss/toasts";
+@import "~bootstrap/scss/modal";
+@import "~bootstrap/scss/tooltip";
+@import "~bootstrap/scss/popover";
+@import "~bootstrap/scss/carousel";
+@import "~bootstrap/scss/spinners";
+@import "~bootstrap/scss/utilities";
+@import "~bootstrap/scss/print";
+
+@import "theme/bootstrap/type";
+@import "theme/bootstrap/images";
+@import "theme/bootstrap/code";
+@import "theme/bootstrap/grid";
+@import "theme/bootstrap/embed-responsive";
+@import "theme/bootstrap/tables";
+@import "theme/bootstrap/buttons";
+@import "theme/bootstrap/alerts";
+@import "theme/bootstrap/badge";
+@import "theme/bootstrap/forms";
+@import "theme/bootstrap/input-group";
+@import "theme/bootstrap/custom-forms";
+@import "theme/bootstrap/list-group";
+@import "theme/bootstrap/cards";
+@import "theme/bootstrap/dropdowns";
+@import "theme/bootstrap/progress";
+@import "theme/bootstrap/breadcrumb";
+@import "theme/bootstrap/paginations";
+@import "theme/bootstrap/navs";
+@import "theme/bootstrap/navbar";
+@import "theme/bootstrap/modals";
+@import "theme/bootstrap/popovers";
+@import "theme/bootstrap/utilities";
+
+@import "~stacked-menu/src/scss/stacked-menu";
+
+@import "theme/components/plugins";
+
+@import "theme/components/base";
+@import "theme/components/header";
+@import "theme/components/aside";
+@import "theme/components/page";
+@import "theme/components/sidebar";
+@import "theme/components/footer";
+
+@import "theme/components/rating";
+@import "theme/components/switchers";
+@import "theme/components/icons";
+@import "theme/components/tiles";
+@import "theme/components/avatar";
+@import "theme/components/mention";
+@import "theme/components/event";
+@import "theme/components/hamburger";
+@import "theme/components/figure";
+@import "theme/components/outbound-link";
+@import "theme/components/steps";
+@import "theme/components/todos";
+@import "theme/components/progress-list";
+@import "theme/components/visual-picker";
+@import "theme/components/publisher";
+@import "theme/components/timeline";
+@import "theme/components/conversations";
+@import "theme/components/feeds";
+@import "theme/components/tasks";
+@import "theme/components/metrics";
+@import "theme/components/countdown";
+@import "theme/components/empty-state";
+@import "theme/components/invoice";
+
+@import "theme/components/auth";
+@import "theme/components/message";
+
+// Main application stylesheet
+@import "application";
+
+// External animate library for animations
+@import "animate";
+
+//@import "flatpickr_styles";
+//@import "uppyjs_styles";
+
+//@import "open-iconic/font/css/open-iconic-bootstrap.css";
+//@import "../../lib/assets/stylesheets/icomoon.css";

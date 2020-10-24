@@ -60,7 +60,7 @@
             </div><!-- /.card-header -->
             <!-- .card-body -->
             <div class="card-body">
-              <%= form_for(@property, remote: true, html: {class: "p-lg-4 p-sm-3 p-0", id: "edit_property_#{@property.id}", name: "stepperForm", 'data-parsley-excluded': "[disabled]"}) do |property| %>
+              <%= form_for(@property, remote: true, html: {class: "p-lg-4 p-sm-3 p-0 validatable", id: "edit_property_#{@property.id}", name: "stepperForm", 'data-parsley-excluded': "[disabled]"}) do |property| %>
 
                 <!-- Step 1 START -->
                 <div id="test-l-1" class="content dstepper-none fade">
@@ -608,7 +608,7 @@
                               isClearable: true,
                               isMulti: true,
                               isCreatable: true,
-                              storedOption: @property.clients.blank? ? nil : @property.clients.map { |c| {"label": c.full_name, "value": c.id} },
+                              storedOption: @property.clients.blank? ? nil : @property.viewable_dropdown_clients(current_account, current_user),
                               soloMode: true,
                               ajaxEnabled: true,
                               i18n: {

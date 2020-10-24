@@ -5,9 +5,13 @@ module Accounts
     helper PropertyHeader
     helper Cfields
     helper ForbiddenIds
+
     before_action :set_property, only: [:show, :edit, :update, :destroy]
+    before_action :redirect_to_index, :if => :grant_access?, :only => [:edit, :update, :show, :destroy]
+
     after_action :log_action, only: [:create, :update, :destroy]
 
+    attr_accessor :params_copy, :category, :area_location
     # GET /properties
     # GET /properties.json
     def index
@@ -16,11 +20,18 @@ module Accounts
       filter_properties(current_account.properties.includes(:location), params)
     end
 
+    # This is just a proof of concept
+    def demo
+      puts 'works'
+      respond_to do |format|
+        format.html
+        format.json
+      end
+    end
 
     # GET /properties/1
     # GET /properties/1.json
     def show
-      set_access and return
       # friendly ids history slugs should not result in 404
       unless [property_path(@property), property_path(@property) + '?print=true'].include?(request.path)
         return redirect_to @property, :status => :moved_permanently
@@ -33,7 +44,7 @@ module Accounts
           pictures = []
           if @property.images.attached? || @property.avatar.attached?
             @property.all_images[0..3].each do |image|
-              pictures << image.variant(resize: '400x250').processed.service_url
+              pictures << rails_representation_url(image.variant(resize: '400x250').processed)
             end
           end
           # @property.all_images[0..3]
@@ -69,7 +80,6 @@ module Accounts
 
     # GET /properties/1/edit
     def edit
-      set_access and return
       # If an old id or a numeric id was used to find the record, then
       # the request path will not match the post_path, and we should do
       # a 301 redirect that uses the current friendly id.
@@ -108,25 +118,31 @@ module Accounts
     # GET /properties/new
     def new
       @property = current_account.properties.new(model_type: current_account.model_types.find_by(name: 'properties'))
-      # Build a single new client
-      # @property.clients.new
     end
 
     # POST /properties
     # POST /properties.json
     def create
-      normalized_property_params = reconstruct_category(property_params)
-      clients_hash = normalized_property_params.extract!(:clients)
-      @property = current_account.properties.new(normalized_property_params)
-      set_location
-      set_category
-      # Scope the property to current account. This is only set once.
-      @property.account = current_account
-      @property.model_type = current_account.model_types.find_by(name: 'properties')
+      self.params_copy = property_params.dup.to_h
+
+      # Notes:
+      # Since we need to reconstruct the property's `category` and fetch its `location` before creating the actual
+      # location object, we also have to early return if any of those are missing. However in such a scenario the
+      # property object wouldn't yet exist and thus we wouldn't be able to put `errors` to it and render our js response
+      # as we'd normally do. We'd have to build a second generic js.erb and so on and so forth.
+      # Instead we return early and -redirect- to :new using one of the tricks found below:
+      # Ref: https://blog.arkency.com/2014/07/4-ways-to-early-return-from-a-rails-controller/
+      retrieve_category; return if performed?
+      retrieve_location; return if performed?
+
+      clients_hash = params_copy.extract!(:clients)
+
+      @property = current_account.properties.
+        new(params_copy.merge({category_id: category.id}).merge({location_id: area_location.id}))
 
       respond_to do |format|
-        if @property.save
-          @property_slug = @property.slug # This is used for the Log model
+        if @property.save  # model_type is automatically saved within a before_validation hook inside the model
+          @property_slug = @property.slug # This is used exclusively for the Log model (logging)
           if current_user.role(current_account) == 'user'
             current_user.properties <<  @property
           end
@@ -134,6 +150,7 @@ module Accounts
           set_client(clients_hash)
 
           format.html { redirect_to @property, notice: I18n.t('properties.created.flash') }
+          # We don't need to set a flash here since we respond with js success page
           format.js { render 'shared/ajax/handler',
                              locals: {resource: @property,
                                       action: 'created',
@@ -155,20 +172,23 @@ module Accounts
     # PATCH/PUT /properties/1
     # PATCH/PUT /properties/1.json
     def update
-      normalized_property_params = reconstruct_category(property_params)
-      clients_hash = normalized_property_params.extract!(:clients)
-      set_client(clients_hash)
-      # normalized_property_params = set_client(normalized_property_params)
+      self.params_copy = property_params.dup.to_h
 
-      set_location
-      set_category
+      retrieve_category; return if performed?
+      retrieve_location; return if performed?
 
-      normalized_property_params[:delete_images].try(:each) do |id|
+      clients_hash = params_copy.extract!(:clients)
+
+      params_copy[:delete_images].try(:each) do |id|
         @property.images.find(id).purge
       end
 
       respond_to do |format|
-        if @property.update(normalized_property_params)
+        if @property.update(params_copy.merge({category_id: category.id}).merge({location_id: area_location.id}))
+
+          # Sets the client and its required ownership attribute on the CPA many-to-many table
+          set_client(clients_hash)
+
           format.html { redirect_to @property, notice: I18n.t('properties.updated.flash') }
           format.js { render 'shared/ajax/handler',
                              locals: {resource: @property,
@@ -203,12 +223,20 @@ module Accounts
 
     private
 
+    def redirect_to_index
+      flash[:danger] = I18n.t('access_denied')
+      redirect_to properties_path
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_property
       @property = current_account.properties.find(params[:id])
     end
 
     def log_action
+      # If an action fails, @property_slug will be `nil`
+      return if @property_slug.nil?
+
       if action_name == 'destroy'
         Log.create(author: current_user, author_name: current_user.full_name, property_name: @property_slug, action: action_name, account: current_account, account_name: current_account.subdomain, entity: 'properties')
       else
@@ -216,10 +244,8 @@ module Accounts
       end
     end
 
-    def set_access
-      if forbidden_entity_ids('properties').include?(@property.id)
-        redirect_to properties_path and return true
-      end
+    def grant_access?
+      forbidden_entity_ids('properties').include?(@property.id)
     end
 
     # Sets the selected client
@@ -247,23 +273,26 @@ module Accounts
       end
     end
 
-    def set_location
-      # Assign the property's location no matter what.
-      @property.location = Location.find(params[:action] == 'update' ? property_params[:locationid] : @property.locationid)
-    end
+    def retrieve_location
+      self.area_location = Location.find_by(id: params_copy[:locationid])
 
-    def reconstruct_category(parameters)
-      # @category_instance = params[:action] == 'update' ? Category.find_by(slug: parameters[:subcategory], parent_slug: parameters[:category]) : Category.find(@property.category.id)
-      @category_instance = Category.find_by(slug: parameters[:subcategory], parent_slug: parameters[:category])
-      if @category_instance
-        parameters.to_h.except!(:category, :subcategory)
+      if area_location
+        params_copy.except!(:locationid)
       else
-        raise
+        flash[:danger] = I18n.t('activerecord.attributes.property.flash_location_missing')
+        redirect_to polymorphic_path([:property], action: action_name == 'create' ? :new : :edit)
       end
     end
 
-    def set_category
-      @property.category = @category_instance
+    def retrieve_category
+      self.category = Category.find_by(slug: params_copy[:subcategory], parent_slug: params_copy[:category])
+
+      if category
+        params_copy.except!(:category, :subcategory)
+      else
+        flash[:danger] = I18n.t('activerecord.attributes.property.flash_category_missing')
+        redirect_to polymorphic_path([:property], action: action_name == 'create' ? :new : :edit)
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

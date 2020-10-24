@@ -32,7 +32,8 @@
                 property_cover_alt: t('js.components.modal.favlists.property_cover_alt'),
                 add_list_action: t('js.components.modal.favlists.add_list_action'),
                 loading_alt: t('js.components.modal.favlists.loading_alt'),
-                listname_placeholder: t('js.components.modal.favlists.listname_placeholder')
+                listname_placeholder: t('js.components.modal.favlists.listname_placeholder'),
+                loading: t('loading')
             }
         }, prerender: false) %>
       </div>
@@ -40,6 +41,8 @@
         <%= react_component('ModalContainer', props: {
             id: 'property-showings',
             originator: 'property',
+            closeMenuOnSelect: true,
+            openMenuOnClick: true,
             scrollable: true,
             modalSize: 'lg',
             fireButtonLabel: '<i class="fas fa-eye colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.viewings') + '</span>',
@@ -95,7 +98,8 @@
                 property_cover_alt: t('js.components.modal.favlists.property_cover_alt'),
                 add_list_action: t('js.components.modal.favlists.add_list_action'),
                 loading_alt: t('js.components.modal.favlists.loading_alt'),
-                listname_placeholder: t('js.components.modal.favlists.listname_placeholder')
+                listname_placeholder: t('js.components.modal.favlists.listname_placeholder'),
+                loading: t('loading')
             }
         }, prerender: false) %>
       </div>
@@ -103,7 +107,7 @@
       <% if current_user.is_admin?(current_account) %>
         <div class="reactstrap-modal-button-x">
           <%= react_component('ModalContainer', props: {
-              id: 'assignment',
+              id: 'assignments',
               modalSize: 'md',
               fireButtonLabel: '<i class="fas fa-user-check colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('activerecord.attributes.property.assignments_title') + '</span>',
               avatar: @property.avatar.attached? ? url_for(@property.avatar.variant(resize: "30%")) : nil,
@@ -122,19 +126,23 @@
               ajaxEnabled: false,
               isClearable: false,
               openMenuOnClick: true,
+              closeMenuOnSelect: false,
+              closeMenu: true,
               backspaceRemovesValue: true,
               isSearchable: false,
               isMultiple: true,
               partners_url: users_url,
               partners_action_endpoint: assignments_path(@property),
               initial_data_url: existing_assignments_path(@property),
+              defaultOptions: current_account.users.blank? ? nil : current_account.users.order(created_at: :asc).last(8).map { |user| {label: "#{user.first_name} #{user.last_name}", value: user.id} },
               i18n: {
                   select: {
                       placeholder: t('js.components.select.placeholder_title'),
                       noresults: t('js.components.select.noresults'),
                       loading: t('js.components.select.loading_html'),
                       feedback: t('js.components.select.assignments_feedback', property_id: @property.slug.upcase)
-                  }
+                  },
+                  loading: t('loading')
               }
           }, prerender: false) %>
         </div>
@@ -393,6 +401,7 @@
         </div>
       </div>
       <%= render "accounts/helpers/locale" %>
+      <div id="automatedClicks"></div>
     </div>
 
   </div>

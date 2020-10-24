@@ -35,8 +35,8 @@ class FormSelect extends React.Component {
     ajaxEnabled: PropTypes.bool,
     i18n: PropTypes.shape({
       select: PropTypes.object,
-      validatorErrMsg: PropTypes.string
-    })
+      validatorErrMsg: PropTypes.string,
+    }),
   };
 
   constructor(props) {
@@ -74,7 +74,7 @@ class FormSelect extends React.Component {
 
   state = {
     selectedOption: this.props.storedOption || '',
-    isOpen: false
+    isOpen: false,
   };
 
   onMenuOpen = () => this.setState({ isOpen: true });
@@ -164,7 +164,7 @@ class FormSelect extends React.Component {
 
   render() {
     const opts = {
-      required: !!this.props.isRequired
+      required: !!this.props.isRequired,
     };
 
     // This is needed for the menu open/close styles
@@ -209,7 +209,7 @@ class FormSelect extends React.Component {
                 placeholder={
                   this.props.placeholderText ? this.props.placeholderText : this.props.i18n.select.placeholder
                 }
-                formatCreateLabel={(inputValue) => renderHTML(`${this.props.i18n.select.add} "${inputValue}"`)}
+                formatCreateLabel={inputValue => renderHTML(`${this.props.i18n.select.add} "${inputValue}"`)}
                 isDisabled={this.props.isDisabled}
                 isSearchable={this.props.isSearchable}
                 isClearable={this.props.isClearable}

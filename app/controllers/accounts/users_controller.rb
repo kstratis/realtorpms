@@ -4,12 +4,11 @@ module Accounts
     # Shows all account users
     before_action :all_account_users, only: [:show]
     before_action :user_self, only: [:edit, :update, :show] # Allows editing only on each user's self
-    before_action :owner_exclusive, only: [:new, :create, :destroy, :index]
+    before_action :owner_exclusive, only: [:new, :create, :destroy, :index, :mass_delete, :mass_freeze]
     before_action :check_page_validity, only: [:index]
     before_action :find_user!, only: [:delete_avatar, :toggle_activation, :toggle_adminify, :show]
     after_action :log_action, only: [:create, :update, :destroy]
-
-
+    after_action :set_assignments, only: [:create]
     # A model's +destroy+ method is different than the controller's +destroy+ action.
     # - Using the model's destroy method on a user object should delete all its dependancies (memberships, assignments,
     # clientships and favlists), its owning account and the user itself.
@@ -25,33 +24,33 @@ module Accounts
       else
         @user.destroy
       end
-      flash[:success] = I18n.t 'users.flash_delete'
+      flash[:success] = I18n.t "users.flash_delete"
       redirect_to users_url
     end
 
-    # GET the new user registration page
-    def new  # This is basically the registration page in GET
-      @user = User.new
+    # GET the new user registration page - This is basically the registration page in GET
+    def new
+      @user = current_account.users.new
     end
 
     # This is only accessible by account owners so no need to granulate its access
     def index
       # params because the required :user key of the filtered +user_params+ is only available in POST requests
-      filter_persons(current_account.send("#{params['backend_option'] || ''}users"), params)
+      filter_persons(current_account.send("#{params["backend_option"] || ""}users"), params)
     end
 
     # POST to the new user registration page
     def create
-      @user = User.new(user_params)
+      @user = current_account.users.new(user_params)
       if @user.save
         # log_in @user
         current_account.users << @user
-        current_account.model_types.find_by(name: 'users').users << @user
+        current_account.model_types.find_by(name: "users").users << @user
 
-        flash[:success] = I18n.t('users.flash_user_added')
+        flash[:success] = I18n.t("users.flash_user_added")
         redirect_to @user
-        # Handle a successful save.
       else
+        flash[:danger] = I18n.t("users.flash_user_add_failed")
         # this merely re-renders the new template.
         # It doesn't fully redirect (in other words it doesn't go through the +new+ method)
         render :new
@@ -65,12 +64,13 @@ module Accounts
 
     # POST to the edit page
     def update
-      # If a user belongs to mulitple accounts we need to keep cfields data of both accounts and not overwrite each other
-      if @user.update_attributes(user_params.merge(preferences: @user.preferences.merge(user_params[:preferences])))
-        flash[:success] = I18n.t 'users.flash_profile_updated'
+      # If a user belongs to multiple accounts we need to keep cfields data of both accounts and not overwrite each other
+      if @user.update(user_params.merge(preferences: @user.preferences.merge(user_params[:preferences] || {})))
+        flash[:success] = I18n.t "users.flash_profile_updated"
         redirect_to @user
         # Handle a successful update.
       else
+        flash[:danger] = I18n.t("users.flash_user_update_failed")
         render :edit
       end
     end
@@ -78,9 +78,9 @@ module Accounts
     def show
       @is_admin = @user.is_admin?(current_account)
       if @is_admin
-        filter_properties(current_account.properties.includes(:location), {page: params[:page]})
+        filter_properties(current_account.properties.includes(:location), { page: params[:page] })
       else
-        filter_properties(@user.properties.includes(:location), {page: params[:page]})
+        filter_properties(@user.properties.includes(:location), { page: params[:page] })
       end
     end
 
@@ -91,73 +91,89 @@ module Accounts
 
     def toggle_activation
       Membership.find_by(account: current_account, user: @user).toggle!(:active)
-      render :json => {:status => "OK", :user_active => Membership.find_by(account: current_account, user: @user).active}
+      render json: { status: "OK", user_active: Membership.find_by(account: current_account, user: @user).active }
     end
 
     def toggle_adminify
       Membership.find_by(account: current_account, user: @user).toggle!(:privileged)
-      render :json => {:status => "OK", :user_privileged => Membership.find_by(account: current_account, user: @user).privileged}
+      render json: { status: "OK", user_privileged: Membership.find_by(account: current_account, user: @user).privileged }
+    end
+
+    def mass_delete
+      current_account.users.where(id: params[:selection]).destroy_all
+      render json: { status: "OK", message: users_path, meta: params[:selection] }
+    end
+
+    def mass_freeze
+      Membership.where(account: current_account, user: params[:selection]).each { |entry| entry.toggle!(:active) }
+      render json: { status: "OK", message: users_path, meta: params[:selection] }
     end
 
     private
-      def user_params
-        params.require(:user).permit(:avatar, :first_name, :last_name, :email, :dob, :phone1, :locale, :time_zone, :password, :password_confirmation, {preferences: {}})
-      end
 
-      # Finds the given or throws
-      def find_user!
-        @user = current_account.all_users.find(params[:id])
-      end
+    def user_params
+      params.require(:user).permit(:avatar, :first_name, :last_name, :email, :dob, :phone1, :locale, :time_zone, :password, :password_confirmation, :multi_assign, { preferences: {} })
+    end
 
-      # Deletes all user assets but the user himself
-      def delete_user_assets(user, account)
-        Membership.find_by(account: account, user: user).destroy # This one is unique
-        Assignment.where(user: user).joins(:property).where(properties: {account: account}).try(:destroy_all)
-        Clientship.where(user: user).joins(:client).where(clients: {account: account}).try(:destroy_all)
-        Favlist.where(account: account, user: user).try(:destroy_all)
-      end
+    # Finds the given or throws
+    def find_user!
+      @user = current_account.all_users.find(params[:id])
+    end
 
-      # Logs the creation, update and destruction of user objects.
-      # The creation of user object is only happening through invitation thus the creation part
-      # remains unused here and is only utilized by the invitationreceivers_controller.rb
-      def log_action
-        if action_name == 'destroy'
-          Log.create(author: current_user, author_name: current_user.full_name, user_name: @user_full_name, action: action_name, account: current_account, account_name: current_account.subdomain, entity: 'users')
-        else
-          Log.create(author: current_user, author_name: current_user.full_name, user_name: @user.full_name, user: @user, action: action_name, account: current_account, account_name: current_account.subdomain, entity: 'users')
-        end
-      end
+    # Deletes all user assets but the user himself
+    def delete_user_assets(user, account)
+      Membership.find_by(account: account, user: user).destroy # This one is unique
+      Assignment.where(user: user).joins(:property).where(properties: { account: account }).try(:destroy_all)
+      Clientship.where(user: user).joins(:client).where(clients: { account: account }).try(:destroy_all)
+      Favlist.where(account: account, user: user).try(:destroy_all)
+    end
 
-      def all_account_users
-        # We use find_by instead of find because we need an association proxy and not just an object
-        @user = current_account.all_users.find_by(id: params[:id])
-        if @user.nil?
-          flash[:danger] = I18n.t 'users.flash_user_not_found'
-          redirect_to users_path
-        end
+    # Logs the creation, update and destruction of user objects.
+    # The creation of user object is only happening through invitation thus the creation part
+    # remains unused here and is only utilized by the invitationreceivers_controller.rb
+    def log_action
+      if action_name == "destroy"
+        Log.create(author: current_user, author_name: current_user.full_name, user_name: @user_full_name, action: action_name, account: current_account, account_name: current_account.subdomain, entity: "users")
+      else
+        Log.create(author: current_user, author_name: current_user.full_name, user_name: @user.full_name, user: @user, action: action_name, account: current_account, account_name: current_account.subdomain, entity: "users")
       end
+    end
 
-      # Confirms that an action concerning a particular user is initiated by that same user or an admin.
-      # Essentially prevents admins modifying others users' data.
-      def user_self
-        @user = current_account.all_users.find(params[:id])
-        unless current_user?(@user) || current_user.is_admin?(current_account)
-          flash[:danger] = I18n.t 'users.flash_unauthorised_user_edit'
-          redirect_to(root_url)
-        end
-      end
+    def set_assignments
+      return unless ActiveRecord::Type::Boolean.new.cast(user_params[:multi_assign])
 
-      # Confirms an admin user.
-      def admin_user
-        redirect_to(root_url) unless current_user.is_sysadmin?
-      end
+      @user.properties << current_account.properties
+    end
 
-      def owner_exclusive
-        unless current_user.is_admin?(current_account)
-          flash[:danger] = I18n.t 'users.flash_owner_only_action'
-          redirect_to root_url
-        end
+    def all_account_users
+      # We use find_by instead of find because we need an association proxy and not just an object
+      @user = current_account.all_users.find_by(id: params[:id])
+      if @user.nil?
+        flash[:danger] = I18n.t "users.flash_user_not_found"
+        redirect_to users_path
       end
+    end
+
+    # Confirms that an action concerning a particular user is initiated by that same user or an admin.
+    # Essentially prevents admins modifying others users' data.
+    def user_self
+      @user = current_account.all_users.find(params[:id])
+      unless current_user?(@user) || current_user.is_admin?(current_account)
+        flash[:danger] = I18n.t "users.flash_unauthorised_user_edit"
+        redirect_to(root_url)
+      end
+    end
+
+    # Confirms an admin user.
+    def admin_user
+      redirect_to(root_url) unless current_user.is_sysadmin?
+    end
+
+    def owner_exclusive
+      unless current_user.is_admin?(current_account)
+        flash[:danger] = I18n.t "users.flash_owner_only_action"
+        redirect_to root_url
+      end
+    end
   end
 end
-

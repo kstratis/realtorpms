@@ -27,7 +27,12 @@ module Utilities
     # request.session[:user_id] = user.id
   end
 
-
+  # Sign in helper method - request specs
+  # https://github.com/rails/rails/issues/23386#issuecomment-192954569
+  # https://stackoverflow.com/questions/5787409/stubbing-authentication-in-request-spec
+  def sign_in_as(user, subdomain)
+    post "http://#{subdomain}.lvh.me/login", params: { session: { email: user.email, password: user.password} }
+  end
 end
 
 

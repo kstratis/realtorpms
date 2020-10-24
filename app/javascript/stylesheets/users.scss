@@ -1,0 +1,214 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+a.user-entry-color {
+  color: #444;
+}
+
+span.subtitle {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+
+.invite-user, .add-user {
+  padding-right: 15px;
+  margin-right: 15px;
+
+  span.subtitle {
+    font-size: 14px !important;
+  }
+}
+
+.dataTableContainer {
+  padding: 0 15px 5px 15px; // external padding
+}
+
+.dataTable {
+  border: 0 none;
+  border-radius: 3px;
+  background-color: #fff;
+  -webkit-box-shadow: 0 -1px 1px #d4d8e3, 0 2px 3px #d4d8e3;
+  box-shadow: 0 -1px 1px #d4d8e3, 0 2px 3px #d4d8e3;
+
+  thead > tr > th {
+    padding: 15px 0 15px 8px;
+
+    div.table-entry {
+      margin-left: 10px;
+
+    }
+
+    span {
+      padding-left: 10px;
+    }
+
+    text-align: left;
+  }
+
+  tbody > tr:nth-of-type(odd) {
+    background: #f0f1f4;
+  }
+
+  .ef-btn {
+
+    &:focus {
+      background: #ffffff;
+    }
+  }
+
+  tbody > tr > td {
+    padding: 5px !important;
+    vertical-align: middle;
+    line-height: 1.6;
+    color: #444;
+    border-color: transparent;
+    text-align: left;
+
+    div.table-entry {
+      padding: 10px;
+    }
+
+    div.table-entry-image {
+      padding: 10px;
+    }
+
+    .action-buttons-container > .table-icon-entry {
+      margin: 0 5px 0 0;
+      display: inline-block;
+      color: #444;
+      border-radius: 50%;
+      transition: all .1s linear;
+
+      &:hover {
+        color: black;
+      }
+    }
+  }
+}
+
+.avatar-table-entry {
+  width: 36px;
+  margin-right: 8px;
+  border-radius: 50%;
+  border: 1px solid #444444;
+  padding: 1px;
+}
+
+.btn-custom {
+  padding: 11px 20px;
+}
+
+.glyphicon-search {
+  top: 3px;
+  font-weight: bold;
+}
+
+.centered {
+  img {
+    max-width: 70px;
+  }
+
+  border-radius: 50%;
+  z-index: 999999;
+  position: relative;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 -1px 1px #d4d8e3, 0 2px 3px #d4d8e3;
+  background-color: #fff;
+}
+
+.page, .next, .previous, .break-button {
+  cursor: pointer;
+}
+
+.no-users {
+  padding: 20px 0;
+  background: #f0f1f4;
+}
+
+.sortable-header-name {
+  color: #333333;
+  display: block;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  span > i {
+    color: #4c6bbe;
+  }
+}
+
+.spinner {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  display: flex;
+  position: absolute;
+  border: 1px solid #FFFFFF;
+  border-radius: 10px;
+  z-index: 1001;
+  //background: #563f7b;
+  background: #37474f;
+  text-align: center;
+  width: 110px;
+  height: 60px;
+  background-size: auto 95%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url('../images/spinners/ellipsis_loader.svg');
+  .spinner-modal{
+
+
+  }
+}
+
+.properties-spinner {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  position: fixed;
+  margin: auto;
+  //margin-left: auto;
+  //margin-right: auto;
+  border: 1px solid #FFFFFF;
+  border-radius: 10px;
+  z-index: 1501;
+  //background: #563f7b;
+  background: #37474f;
+  text-align: center;
+  width: 110px;
+  height: 60px;
+  background-size: auto 95%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url('../images/spinners/ellipsis_loader.svg');
+}
+
+#overlay {
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  cursor: pointer;
+}
+
+.min-width {
+  min-width: 180px;
+}
+
+.btn-action {
+  margin-right: 3px;
+}

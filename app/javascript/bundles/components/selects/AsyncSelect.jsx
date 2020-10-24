@@ -5,6 +5,7 @@ import makeAnimated from 'react-select/animated';
 import { debounce, renderHTML, safelyExecCallback } from '../../utilities/helpers';
 import { default as ASelect } from 'react-select/async';
 import { default as ACSelect } from 'react-select/async-creatable';
+import { components } from 'react-select';
 import AsyncPaginate from 'react-select-async-paginate';
 import { reactSelectStyles } from '../../styles/componentStyles';
 import PropTypes from 'prop-types';
@@ -40,8 +41,9 @@ AsyncSelect.propTypes = {
 
 // Normalizes and merges url GET params coming both from javascript and/or backend
 const constructURL = (origUrl, query) => {
-  console.log(origUrl);
-  console.log(query);
+  // DEBUG
+  // console.log(origUrl);
+  // console.log(query);
   const url = new URL(origUrl);
   let searchParams = new URLSearchParams(url.search || '');
   url.search = '';
@@ -50,7 +52,7 @@ const constructURL = (origUrl, query) => {
   return `${url.toString()}.json?${searchParams.toString()}`;
 };
 
-function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasFeedback, isCreatable, isClearable, isDisabled, openMenuOnClick, isNotAnimated, isMultiple, i18n }) {
+function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasFeedback, isCreatable, isClearable, isDisabled, openMenuOnClick, isNotAnimated, isMultiple, closeMenuOnSelect, defaultOptions, i18n }) {
   // custom hook to open/close modal
   const { isOpen, setIsOpen } = useModalToggle();
   // this is the request for the pool of options - won't run on mount
@@ -86,7 +88,7 @@ function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasF
   const handleChange = selectedOptions => {
     // GET requests (or non specified) are simply for searching and thus we skip XHR cause we handle it directly in the HOC
     if (!action_endpoint.action) {
-      safelyExecCallback(action_endpoint, selectedOptions);
+      safelyExecCallback(action_endpoint, selectedOptions || {});
       setData(selectedOptions);
       return;
     }
@@ -98,20 +100,23 @@ function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasF
     });
   };
 
-  const onInputChange = (query, {action}) => {
-    console.log(action);
+  // This functions helps to keep the input text field intact when selecting an option from the dropdown.
+  // Default behaviour is clear the input field on option selection.
+  // const onInputChange = (query, {action}) => {
+    // DEBUG
+    // console.log(action);
     // if (query) {
     //   setInputValue(query);
     // }
     // return inputValue;
-    if (action !== "set-value") {
+    // if (action !== "set-value") {
     // if (action.action !== "input-blur" && action.action !== "menu-close") {
-        setInputValue(query);
-        return query;
+    //     setInputValue(query);
+    //     return query;
 
-    }
-    return inputValue;
-  };
+    // }
+    // return inputValue;
+  // };
 
   // `callback` is a react-select native function which is used to  build the dropdown options. It is passed over to
   // our useFetch custom hook so that we can manipulate it and call it whenever we see fit.
@@ -161,6 +166,8 @@ function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasF
           loadOptions={loadAsyncOptionsDelayed}
           onMenuOpen={() => setIsOpen(true)}
           onMenuClose={() => setIsOpen(false)}
+          closeMenuOnSelect={closeMenuOnSelect}
+          defaultOptions={defaultOptions}
         />
       ) : (
         <ASelect
@@ -182,10 +189,11 @@ function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasF
           loadOptions={loadAsyncOptionsDelayed}
           onMenuOpen={() => setIsOpen(true)}
           onMenuClose={() => setIsOpen(false)}
-          onInputChange={onInputChange}
-          inputValue={inputValue}
+          // onInputChange={onInputChange}
+          // inputValue={inputValue}
           // defaultOptions={[{label: 'Hello', value: 1}, {label: 'world', value: 2}]}
-          closeMenuOnSelect={false}
+          closeMenuOnSelect={closeMenuOnSelect}
+          defaultOptions={defaultOptions}
         />
       )}
       {hasFeedback ? <small className="form-text text-muted">{i18n.select.feedback}</small> : ''}

@@ -23,7 +23,15 @@ class Property < ApplicationRecord
 
   attr_searchable %w(slug title description notes adxe adspitogatos)
 
+  # before_save happens after validation that's why we use before_validation
   before_validation :handle_dependent_fields, on: :update
+
+  # before_save happens after validation that's why we use before_validation
+  before_validation do
+    if account.present?
+      self.model_type = account.model_types.find_by(name: 'properties')
+    end
+  end
 
   # This is for existing log records
   # https://stackoverflow.com/a/9326882/178728
@@ -119,7 +127,7 @@ class Property < ApplicationRecord
           :price => {:label => 'price', :icon => 'price', :options => nil, :renderfn => Proc.new {|value| value ? ActionController::Base.helpers.number_to_currency(value) : '—' }},
           :pricepersqmeter => {:label => 'pricepersqmeter', :icon => 'pricepersqmeter', :options => nil, :renderfn => Proc.new {|value| value ? ActionController::Base.helpers.number_to_currency(value) : '—' }},
           :created_at => {:label => 'created_at', :icon => 'created_at', :options => nil, :renderfn => Proc.new {|value| value ? (I18n.l value, format: :custom) : '—' } },
-          :map_url => {:label => 'location', :icon => 'location', :options => nil, :renderfn => Proc.new {|value| "<button type='button' class='btn btn-secondary btn-sm printable' data-url='#{value.blank? ? '' : Property.iframe_parse(value) }' #{value.blank? ? 'disabled' : nil }><i class='fas fa-map fa-fw'></i></button>&nbsp;&nbsp;&nbsp;#{value.blank? ? "<span class='property-cover-popover' data-toggle='popover' data-placement='auto' data-trigger='hover' data-content='#{I18n.t('properties.map_feedback')}'><i class='fas fa-info-circle'></i></span>" : nil}"}}
+          :map_url => {:label => 'location', :icon => 'location', :options => nil, :renderfn => Proc.new {|value| "<button type='button' class='btn btn-secondary btn-sm printable' data-url='#{value.blank? ? '' : Property.iframe_parse(value) }' #{value.blank? ? 'disabled' : nil }><i class='fas fa-map fa-fw'></i></button>&nbsp;&nbsp;&nbsp;#{value.blank? ? "<span class='property-cover-popover' data-toggle='popover' data-placement='top' data-trigger='hover' data-content='#{I18n.t('properties.map_feedback')}'><i class='fas fa-info-circle'></i></span>" : nil}"}}
       }.freeze
     end
 
@@ -204,6 +212,15 @@ class Property < ApplicationRecord
   # end
   def dropdown_description
     "#{slug.upcase} - #{self.category.localname} #{price ? ' - ' + ActionController::Base.helpers.number_to_currency(price).to_s : ''}"
+  end
+
+  def viewable_dropdown_clients(account, user)
+    if user.role(account) == 'user'
+      list = clients.map { |c| { 'label': user.client_ids.include?(c.id) ? c.full_name : '*****', 'value': c.id, isFixed: !user.client_ids.include?(c.id)} }
+    else
+      list = clients.map { |c| { 'label': c.full_name, 'value': c.id, isFixed: false} }
+    end
+    list
   end
 
   private
