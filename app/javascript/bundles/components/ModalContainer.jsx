@@ -12,6 +12,7 @@ const AddRemoveShowings = React.lazy(() => import('./AddRemoveShowings'));
 const ViewShowings = React.lazy(() => import('./ViewShowings'));
 const AddRemovePartners = React.lazy(() => import('./AddRemovePartners'));
 import URLSearchParams from '@ungap/url-search-params';
+import Spinner from '../datatables/Spinner';
 
 const components = {
   MassActions: MassActions,
@@ -88,11 +89,12 @@ class ModalContainer extends React.Component {
               </button>
             ) : null}
           </ModalHeader>
-          {console.log(this.props.i18n.loading)}
           <ModalBody className={this.props.modalBodyClassNames ? this.props.modalBodyClassNames : ''}>
-            <Suspense fallback={<div className={'text-center'}>{this.props.i18n.loading}</div>}>
-              <SpecificSearch {...this.props} />
-            </Suspense>
+              <Suspense fallback={<Spinner isLoading={true} />}>
+                {/*<div className={'modal-wrapper'}>*/}
+                  <SpecificSearch {...this.props} />
+                {/*</div>*/}
+              </Suspense>
           </ModalBody>
           <ModalFooter className={this.props.modalFooterClassNames ? this.props.modalFooterClassNames : ''}>
             <Button color="secondary" onClick={this.toggle}>

@@ -48,6 +48,17 @@ body {
   margin: 0 auto;
 }
 
+// This is just a hack to preload images
+// https://stackoverflow.com/questions/1373142/preloading-css-images
+body::after {
+  position: absolute;
+  width:0;
+  height:0;
+  overflow:hidden;
+  z-index:-1;
+  content: url('../images/spinners/ellipsis_loader.svg');   // preload images
+}
+
 .page-container {
   //padding: 15px;
   margin-bottom: 10px;
@@ -1976,4 +1987,32 @@ a.text-link {
   width: 1.2em;
   height: 1.2em;
   padding: 12px;
+}
+
+// This is for the modals animation
+@keyframes fadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+// Slide slightly Up
+@keyframes slideSlightlyUp {
+  0%   { transform: translateY(20px) translateZ(0); }
+  100% { transform: translateY(0) translateZ(0); }
+}
+
+// Slide slightly Down
+@keyframes slideSlightlyDown {
+  0%   { transform: translateY(-5px) translateZ(0); }
+  100% { transform: translateY(0) translateZ(0); }
+}
+
+.modal-wrapper {
+  width: 100%;
+  -webkit-animation: fadeIn .2s ease, slideSlightlyUp .5s ease;
+  animation: fadeIn .2s ease, slideSlightlyUp .5s ease;
+}
+
+.modal-body {
+  min-height: 70px;
 }
