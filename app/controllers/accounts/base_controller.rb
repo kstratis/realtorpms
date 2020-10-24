@@ -38,12 +38,19 @@ module Accounts
       end
     end
 
+    # Users banned users with more than 1 account get to the account selection screen
+    # Users belonging to a single account just get redirected to the login screen
     def active_user
       unless owner? || current_user.is_sysadmin? # owners' relation to accounts is not determined by the Membership table
         unless Membership.find_by(account: current_account, user: current_user).try(:active) # use try here cause the membership entry may not exist
-          log_out if logged_in?
+          if current_user.get_account_count > 1
+            redirection = proc { redirect_to account_list_url(subdomain: false) and return }
+          else
+            log_out if logged_in?
+            redirection = proc { redirect_to root_url(subdomain: request.subdomain) }
+          end
           flash[:danger] = I18n.t "sessions.flash_suspended"
-          redirect_to root_url(subdomain: request.subdomain)
+          redirection.call
         end
       end
     end

@@ -4,9 +4,12 @@ module Accounts
     helper ForbiddenIds
 
     before_action :set_client, only: [:show, :edit, :update, :destroy]
-    before_action :redirect_to_index, :if => :grant_access?, :only => [:edit, :update, :show, :destroy]
+    before_action :redirect_to_index, :if => :forbid_access?, :only => [:edit, :update, :show, :destroy]
 
     after_action :log_action, only: [:create, :update, :destroy]
+
+    attr_reader :client
+    helper_method :client
 
     def index
       if current_user.is_admin?(current_account)
@@ -82,7 +85,7 @@ module Accounts
         @client = current_account.clients.find(params[:id])
       end
 
-      def grant_access?
+      def forbid_access?
         forbidden_entity_ids('clients').include?(@client.id)
       end
 
@@ -98,6 +101,5 @@ module Accounts
           Log.create(author: current_user, author_name: current_user.full_name, client_name: @client.full_name, client: @client, action: action_name, account: current_account, account_name: current_account.subdomain, entity: 'clients')
         end
       end
-
   end
 end

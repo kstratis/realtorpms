@@ -9,8 +9,8 @@ import FormSelect from '../bundles/components/selects/FormSelect';
 import AsyncSelectContainer from '../bundles/components/selects/AsyncSelectContainer';
 import AssociativeFormSelect from '../bundles/components/selects/AssociativeFormSelect';
 import ModalContainer from '../bundles/components/ModalContainer';
+import ModalControlStrip from "../bundles/components/modals/ModalControlStrip";
 import InlineSearch from '../bundles/components/InlineSearch';
-import AddRemoveShowings from '../bundles/components/AddRemoveShowings';
 
 // That's how react_on_rails "sees" our components in erb views.
 // Unfortunately we need to register everything up-front.
@@ -23,6 +23,7 @@ ReactOnRails.register({
   Favlists,
   FormSelect,
   AssociativeFormSelect,
+  ModalControlStrip,
   ModalContainer,
   AsyncSelectContainer,
   InlineSearch,

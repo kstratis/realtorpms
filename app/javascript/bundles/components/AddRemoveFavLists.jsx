@@ -62,7 +62,7 @@ function AddRemoveListForm({ addEntity, i18n, favlists_url, property_id }) {
           </div>
 
           <div className={'col-sm-4'}>
-            <input className={'btn btn-primary'} type="submit" value={i18n.add_list_action} />
+            <input className={'btn btn-outline-primary'} type="submit" value={i18n.add_list_action} />
           </div>
         </div>
       </form>
@@ -80,7 +80,7 @@ function AddRemoveFavLists({ modalHeader, avatar, favlists_url, favorites_url, p
   const { data, loading, setData } = useFetch(request, false);
 
   // What is the best way to trigger an effect dependent on multiple parameters, only when one of the parameters change?
-  // This is the question we must answer when using multiple `useEffect` with multiple interdependancies.
+  // This is the question we must answer when using multiple `useEffect` with multiple interdependencies.
   // See this: https://stackoverflow.com/q/55724642/178728
   const prevLoadingRef = useRef();
 
@@ -117,7 +117,7 @@ function AddRemoveFavLists({ modalHeader, avatar, favlists_url, favorites_url, p
 
   return (
     <div className="favlist-container mt-3">
-      <div className={'mt-3'}>
+      <div>
         {avatar ? (
           <figure className="user-avatar property-avatar user-avatar-xxl mx-auto d-block mb-3">
             <img src={avatar} className={'rounded'} alt={'i18n.property_cover_alt'} />
@@ -125,7 +125,6 @@ function AddRemoveFavLists({ modalHeader, avatar, favlists_url, favorites_url, p
         ) : null}
         <h2>{renderHTML(modalHeader)}</h2>
       </div>
-      <hr />
       <div className={'favlist-body'}>
         {data.length > 0 ? (
           data.map((favlist, index) => (
@@ -148,7 +147,6 @@ function AddRemoveFavLists({ modalHeader, avatar, favlists_url, favorites_url, p
           </div>
         )}
       </div>
-      <hr />
       <AddRemoveListForm addEntity={addEntity} i18n={i18n} favlists_url={favlists_url} property_id={property_id} />
     </div>
   );

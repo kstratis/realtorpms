@@ -116,7 +116,7 @@ group :development, :test do
   gem 'poltergeist'
   gem 'database_cleaner'
   gem 'spring-commands-rspec'
-  gem "better_errors", '~> 2.7.1'
+  gem "better_errors", '~> 2.8.3'
   gem "binding_of_caller"
 
   # Pry REPL and friends

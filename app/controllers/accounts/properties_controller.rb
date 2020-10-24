@@ -7,11 +7,15 @@ module Accounts
     helper ForbiddenIds
 
     before_action :set_property, only: [:show, :edit, :update, :destroy]
-    before_action :redirect_to_index, :if => :grant_access?, :only => [:edit, :update, :show, :destroy]
+    before_action :redirect_to_index, :if => :forbid_access?, :only => [:edit, :update, :show, :destroy]
 
     after_action :log_action, only: [:create, :update, :destroy]
 
     attr_accessor :params_copy, :category, :area_location
+
+    attr_reader :property
+    helper_method :property
+
     # GET /properties
     # GET /properties.json
     def index
@@ -244,7 +248,7 @@ module Accounts
       end
     end
 
-    def grant_access?
+    def forbid_access?
       forbidden_entity_ids('properties').include?(@property.id)
     end
 
