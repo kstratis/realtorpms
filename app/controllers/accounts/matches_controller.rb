@@ -15,7 +15,8 @@ module Accounts
                                               searchprefs: requested_search)
         current_user.clients << @client unless current_user.is_admin?(current_account)
         if @client.save
-          render json: {status: 200, message: I18n.t('js.components.select.search_saved_success_client_html', client_link: client_url(@client))} and return
+          # render json: {status: 200, message: I18n.t('js.components.select.search_saved_success_client_html', client_link: client_url(@client))} and return
+          render json: { status: 200, message: client_url(@client) } and return
         end
       end
 
@@ -29,14 +30,15 @@ module Accounts
       @requested_client.searchprefs = requested_search
       if @requested_client.save
         # render json: {status: 200, message: client_url(@requested_client)}
-        render json: {status: 200, message: I18n.t('js.components.select.search_saved_success_client_html', client_link: client_url(@requested_client))}
+        # render json: {status: 200, message: I18n.t('js.components.select.search_saved_success_client_html', client_link: client_url(@requested_client))}
+        render json: { status: 200, message: client_url(@requested_client) }
       end
     end
 
     private
       # Never trust parameters from the scary internet, only allow the white list through.
       def match_params
-        params.permit({selection: [:label, :value, :__isNew__]}, :searchstring, {match: {}})
+        params.permit({ selection: [:label, :value, :__isNew__] }, :searchstring, { match: {} })
       end
 
   end

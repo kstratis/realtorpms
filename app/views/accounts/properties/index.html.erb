@@ -120,6 +120,8 @@
               rooms: t('js.datatables.filters.bedrooms.title'),
               floors: t('js.datatables.filters.floors.title'),
               construction: t('js.datatables.filters.construction.title'),
+              search_saved_success: t('js.components.select.search_saved_success_client_html'),
+              client_profile: t('js.components.select.client_profile'),
               search_save_title: t('js.components.modal.search_save.title'),
               search_save_close: t('js.components.modal.search_save.close_btn'),
               search_save_feedback: t('js.components.modal.search_save.feeback'),
@@ -169,7 +171,7 @@
               },
               favourites_tooltip: t('js.properties_favourites_tooltip'),
               popover_title: t('properties.popover_client_title'),
-              popover_body: t('properties.popover_client_' + current_user.role(current_account)),
+              popover_body: t('properties.popover_client_' + current_user.role(current_account))
           }
       }, prerender: false) %>
     </div>

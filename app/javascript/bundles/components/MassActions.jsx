@@ -23,7 +23,6 @@ function MassActions({ id, massDeletePersonsEndpoint, massFreezePersonsEndpoint,
 
   return (
     <div>
-      {console.log(id)}
       <button
         type="button"
         className="btn btn-danger btn-lg btn-block"

@@ -9,7 +9,6 @@ const StoreClientSearch = React.lazy(() => import('./StoreClientSearch'));
 const MassActions = React.lazy(() => import('./MassActions'));
 const RetrieveClientSearch = React.lazy(() => import('./RetrieveClientSearch'));
 const AddRemoveShowings = React.lazy(() => import('./AddRemoveShowings'));
-// const ViewShowings = React.lazy(() => import('./ViewShowings'));
 const AddRemovePartners = React.lazy(() => import('./AddRemovePartners'));
 import URLSearchParams from '@ungap/url-search-params';
 import Spinner from '../datatables/Spinner';
@@ -20,7 +19,6 @@ const components = {
   RetrieveClientSearch: RetrieveClientSearch,
   AddRemoveFavLists: AddRemoveFavLists,
   AddRemoveShowings: AddRemoveShowings,
-  // ViewShowings: ViewShowings,
   AddRemovePartners: AddRemovePartners,
 };
 

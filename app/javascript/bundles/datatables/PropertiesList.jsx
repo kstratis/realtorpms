@@ -286,7 +286,7 @@ const PropertiesList = ({
                         ]}
                       />
                     </div>
-                    <div className={``}>
+                    <div>
                       <ModalContainer
                         id={'modal-window'}
                         fireButtonLabel={`<i class='fas fa-save fa-lg fa-fw' />`}

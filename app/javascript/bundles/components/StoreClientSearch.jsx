@@ -60,6 +60,11 @@ function StoreClientSearch({
     setSelectedOption(selection);
   };
 
+  const navigationHandler = (e) => {
+    e.preventDefault();
+    Turbolinks.visit(e.target.href);
+  }
+
   useTooltips();
   usePopovers();
 
@@ -139,7 +144,7 @@ function StoreClientSearch({
                 <div className="alert-icon">
                   <span className="fa fa-check" />
                 </div>
-                <span>{renderHTML(remoteResponse)}</span>
+                <span>{i18n.search_saved_success}<a href={remoteResponse} onClick={navigationHandler}>{i18n.client_profile}</a>{'.'}</span>
               </div>
             </div>
           </div>
