@@ -8,11 +8,13 @@ import ModalResourceWrapper from "./ModalResourceWrapper";
 const AddRemoveFavLists = preloadableLazy(() => import('../AddRemoveFavLists'));
 const AddRemoveShowings = preloadableLazy(() => import('../AddRemoveShowings'));
 const AddRemovePartners = preloadableLazy(() => import('../AddRemovePartners'));
+const StoreClientSearch = preloadableLazy(() => import('../StoreClientSearch'));
 
 const components = {
   AddRemoveFavLists: AddRemoveFavLists,
   AddRemoveShowings: AddRemoveShowings,
-  AddRemovePartners: AddRemovePartners
+  AddRemovePartners: AddRemovePartners,
+  StoreClientSearch: StoreClientSearch
 };
 
 function preloadableLazy(dynamicImport) {
@@ -58,12 +60,11 @@ function ModalControlStrip(props) {
   return (
     <>
       {props.entries.map((entry, index) => (
-        <div key={index} className={index === 0 ? 'reactstrap-modal-button-right' : 'reactstrap-modal-button-x'}>
+        <div key={index} className={(index === 0 && props.entries.length === 1) ? '' : (index === 0 && props.entries.length > 1) ? 'reactstrap-modal-button-right' : 'reactstrap-modal-button-x'}>
           <button
             key={index}
-            className={`btn btn-secondary btn-${entry.button.size}`}
-            // id={this.props.id}
-            // outline={this.props.outline}
+            disabled={entry.button.isDisabled}
+            className={`btn ${entry.button.classname ? entry.button.classname : 'btn-secondary'} btn-${entry.button.size}`}
             data-toggle={'tooltip'}
             data-placement={'top'}
             title={entry.button.tooltip}

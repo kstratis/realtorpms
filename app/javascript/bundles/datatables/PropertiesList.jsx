@@ -9,11 +9,11 @@ import AssociativeFormSelect from '../components/selects/AssociativeFormSelect';
 import Spinner from './Spinner';
 import PropertyEntry from './PropertyEntry';
 import URLSearchParams from '@ungap/url-search-params';
-import ModalContainer from '../components/ModalContainer';
 import AsyncSelectContainer from '../components/selects/AsyncSelectContainer';
 import FormComponents from './fields/FormComponents';
 import useFilterToggle from '../hooks/useFilterToggle';
 import { hasParams } from '../utilities/helpers';
+import ModalControlStrip from '../components/modals/ModalControlStrip';
 
 const PropertiesList = ({
   handleLocationInput,
@@ -54,6 +54,8 @@ const PropertiesList = ({
 }) => {
   const { filtersOpen, setFiltersOpen } = useFilterToggle('propertyFiltersOpen');
   const handleChange = event => setFiltersOpen(filtersOpen => !filtersOpen);
+
+  // const saveSearchData = [{}]
 
   return (
     <div className="properties-list">
@@ -287,30 +289,36 @@ const PropertiesList = ({
                       />
                     </div>
                     <div>
-                      <ModalContainer
-                        id={'modal-window'}
-                        fireButtonLabel={`<i class='fas fa-save fa-lg fa-fw' />`}
-                        fireButtonBtnSize={`md`}
-                        fireButtonBtnType={`success`}
-                        avatar={null}
-                        modalTitle={i18n.search_save_title}
-                        modalHeader={i18n.search_save_subtitle}
-                        child={'StoreClientSearch'}
-                        buttonCloseLabel={i18n.search_save_buttonCloseLabel}
-                        ajaxEnabled={true}
-                        isClearable={true}
-                        backspaceRemovesValue={true}
-                        isSearchable={true}
-                        title={i18n.search_save_title}
-                        i18n={i18n}
-                        buttonDisabled={!hasParams()}
-                        clientsEndpoint={clients_endpoint}
-                        assignmentshipsEndpoint={assignmentships_endpoint}
-                        i18nPriceOptions={price_filter['options']}
-                        i18nSizeOptions={size_filter['options']}
-                        i18nFloorOptions={floors_filter['options']}
-                        i18nCategoryOptions={category_filter['options']}
-                        i18nCfieldOptions={cfields['options']}
+                      <ModalControlStrip
+                        entries={[
+                          {
+                            name: 'StoreClientSearch',
+                            button: {
+                              content: `<i class='fas fa-save fa-lg fa-fw'/>`,
+                              size: 'md',
+                              classname: 'btn-success',
+                              tooltip: i18n.search_save_title,
+                              isDisabled: !hasParams()
+                            },
+                            modal: {
+                              i18n: i18n,
+                              avatar: null,
+                              title: i18n.search_save_title,
+                              buttonCloseLabel: i18n.search_save_buttonCloseLabel,
+                              ajaxEnabled: true,
+                              isClearable: true,
+                              backspaceRemovesValue: true,
+                              isSearchable: true,
+                              clientsEndpoint: clients_endpoint,
+                              assignmentshipsEndpoint: assignmentships_endpoint,
+                              i18nPriceOptions: price_filter['options'],
+                              i18nSizeOptions: size_filter['options'],
+                              i18nFloorOptions: floors_filter['options'],
+                              i18nCategoryOptions: category_filter['options'],
+                              i18nCfieldOptions: cfields['options']
+                            },
+                          },
+                        ]}
                       />
                     </div>
                   </div>
