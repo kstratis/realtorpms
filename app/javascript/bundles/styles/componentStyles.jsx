@@ -53,7 +53,13 @@ const reactSelectStyles = {
   multiValueLabel: (base, state) => {
     return state.data.isFixed
       ? { ...base, fontWeight: 'bold', color: 'white', paddingRight: 6 }
-      : {...base, background: '#216AB0', color: '#FFFFFF'}
+      : {...base,
+        // background: '#00766c',
+        background: '#00A28A',
+        color: '#FFFFFF',
+        padding: '2px 6px',
+        borderRadius: '2px 0 0 2px',
+      }
   },
 
   multiValueRemove: (base, state) => {

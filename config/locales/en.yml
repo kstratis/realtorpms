@@ -544,7 +544,9 @@ en:
       placeholder: "Search in description..."
     properties_view_btn: "View"
     properties_edit_btn: "Edit"
-    properties_favourites_tooltip: "Favourites"
+    properties_favourites_tooltip: "Favourites list"
+    properties_showings_tooltip: "Showings list"
+    properties_assignments_tooltip: "Assign to partner"
     properties_owner_unavailable: "N/Α"
     properties_owner_tel_unavailable: "Ν/Α"
     uppy:
@@ -994,5 +996,5 @@ en:
     comments: "Showing feedback"
     comments_placeholder: "i.e. Loved it but thinks it's too expensive"
     comments_feedback: "Max comments length: 512 characters"
-    help_popover_admin: "This is the list of showings for the property. You can view and delete any entry."
-    help_popover_user: "This is the list of showings for the property. You can only view and delete entries you have created yourself."
+    help_popover_admin: "This is the list of showings for the specified property. You may add or delete any entry."
+    help_popover_user: "This is the list of showings for the specified property. You can only view and delete entries you have created yourself."

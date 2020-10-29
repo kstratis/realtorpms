@@ -71,9 +71,8 @@ function AddShowing({
   };
 
   return (
-    <div className="favlist-container mt-3">
+    <div className="favlist-container">
       <h2>{i18n.form.title}</h2>
-      <hr />
       <div className={'favlist-body'}>
         <div className={'col-12 col-lg-6 offset-lg-3'}>
           <span className={'d-inline-block mt-2'}>
@@ -159,12 +158,12 @@ function AddShowing({
         </div>
         <div className={'col-6 offset-3 mb-1'}>
           <div className={'float-left mt-1 mb-3'}>
-            <button onClick={() => handleFormVisibility()} className={'btn btn-danger'}>
+            <button onClick={() => handleFormVisibility()} className={'btn btn-outline-danger'}>
               <i className={'fas fa-arrow-left fa-fw'}></i>&nbsp;{i18n.form.list}
             </button>
           </div>
           <div className={'float-right mt-1 mb-3'}>
-            <button onClick={()=>handleAddShowing(originator)} className={'btn btn-primary'}>
+            <button onClick={()=>handleAddShowing(originator)} className={'btn btn-outline-primary'}>
               {i18n.form.submit}
             </button>
           </div>
@@ -237,7 +236,7 @@ function AddRemoveShowings({
       ) : (
         <>
           {status === 'Error' ? window.location.reload() : null}
-          <div className={'mt-3'}>
+          <div className={'mt-2'}>
             {avatar ? (
               <figure className="user-avatar property-avatar user-avatar-xxl mx-auto d-block mb-3">
                 <img src={avatar} className={'rounded'} alt={'i18n.property_cover_alt'} />
@@ -245,7 +244,7 @@ function AddRemoveShowings({
             ) : null}
             <h2>{renderHTML(modalHeader)}</h2>
           </div>
-          {originator === 'property' ? <hr /> : null}
+          {/*{originator === 'property' ? <hr /> : null}*/}
 
           {data.length > 0 ? (
             <div className={'table-responsive'}>

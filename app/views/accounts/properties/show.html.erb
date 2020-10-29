@@ -1,152 +1,13 @@
 <% provide(:title, t('properties.show.heading')) %>
 
 <!-- Notice the use of render layout. We need layout instead of partial so that we can pass a block -->
-<%= render layout: 'layouts/breadcrumb', locals: {path: [
-    {:title => t('properties.index.breadcrumb'), :href => properties_path},
-    {title: @property.slug.upcase, :href => ''}], icon: 'house-colored'} do %>
+<%= render layout: 'layouts/breadcrumb', locals: { path: [
+    { :title => t('properties.index.breadcrumb'), :href => properties_path },
+    { title: @property.slug.upcase, :href => '' }], icon: 'house-colored' } do %>
+
   <div class="action-btns">
     <div class="btn-group btn-group-toggle">
-      <div class="reactstrap-modal-button-right">
-        <%= react_component('ModalContainer', props: {
-            id: 'favourites',
-            scrollable: true,
-            fireButtonLabel: '<i class="fas fa-heart colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.favourites') + '</span>',
-            avatar: @property.avatar.attached? ? url_for(@property.avatar.variant(resize: "30%")) : nil,
-            favorites_url: favorites_url,
-            favlists_url: favlists_url,
-            property_id: @property.id,
-            child: 'AddRemoveFavLists', # Due to react-on-rails restrictions we cant just ask to render children
-            modalTitle: t('properties.fav_lists'),
-            modalHeader: heading(@property),
-            buttonOKLabel: t('properties.ok_button'),
-            buttonCancelLabel: t('properties.cancel_button'),
-            buttonCloseLabel: t('properties.close_button'),
-            soloMode: true,
-            ajaxEnabled: false,
-            isClearable: true,
-            backspaceRemovesValue: true,
-            isSearchable: false,
-            feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
-            i18n: {
-                no_lists_available: t('js.components.modal.favlists.no_results'),
-                property_cover_alt: t('js.components.modal.favlists.property_cover_alt'),
-                add_list_action: t('js.components.modal.favlists.add_list_action'),
-                loading_alt: t('js.components.modal.favlists.loading_alt'),
-                listname_placeholder: t('js.components.modal.favlists.listname_placeholder'),
-                loading: t('loading')
-            }
-        }, prerender: false) %>
-      </div>
-      <div class="reactstrap-modal-button-x">
-        <%= react_component('ModalContainer', props: {
-            id: 'property-showings',
-            originator: 'property',
-            closeMenuOnSelect: true,
-            openMenuOnClick: true,
-            scrollable: true,
-            modalSize: 'lg',
-            fireButtonLabel: '<i class="fas fa-eye colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.viewings') + '</span>',
-            avatar: @property.avatar.attached? ? url_for(@property.avatar.variant(resize: "30%")) : nil,
-            showings_url: showings_url,
-            property_id: @property.id,
-            child: 'AddRemoveShowings', # Due to react-on-rails restrictions we cant just ask to render children
-            modalTitle: t('properties.viewings_history', entity: @property.slug.upcase),
-            modalHeader: heading(@property),
-            modalHelpPopover: t("viewings.help_popover_#{current_user.role(current_account)}"),
-            buttonOKLabel: t('properties.ok_button'),
-            buttonCancelLabel: t('properties.cancel_button'),
-            buttonCloseLabel: t('properties.close_button'),
-            soloMode: true,
-            ajaxEnabled: false,
-            isClearable: true,
-            backspaceRemovesValue: true,
-            isSearchable: false,
-            feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
-            clients_url: clients_url,
-            partners_url: "#{users_url}?backend_option=all_",
-            isAdmin: current_user.is_admin?(current_account),
-            i18n: {
-                table: {
-                    client: t('viewings.client'),
-                    user: t('viewings.user'),
-                    date_title: t('date_title'),
-                    add: t("viewings.add_btn"),
-                    actions: t("viewings.actions"),
-                    tooltip_delete: t('tooltips.delete'),
-                    delete_prompt: t('viewings.delete_prompt')
-                },
-                form: {
-                    title: t('viewings.add'),
-                    client: t('clients.client'),
-                    partner: t('users.user'),
-                    date: t('viewings.date'),
-                    submit: t('viewings.submit'),
-                    warning: t('viewings.empty_fields_msg'),
-                    list: t('viewings.list'),
-                    required: t('js.components.select.required'),
-                    comments: t('viewings.comments'),
-                    comments_placeholder: t('viewings.comments_placeholder'),
-                    comments_feedback: t('viewings.comments_feedback')
-                },
-                select: {
-                    placeholder: t('js.components.select.placeholder_title'),
-                    noresults: t('js.components.select.noresults'),
-                    loading: t('js.components.select.loading_html'),
-                    feedback: t('js.components.select.assignments_feedback', property_id: @property.slug.upcase)
-                },
-                no_lists_available: t('js.components.modal.favlists.no_results'),
-                property_cover_alt: t('js.components.modal.favlists.property_cover_alt'),
-                add_list_action: t('js.components.modal.favlists.add_list_action'),
-                loading_alt: t('js.components.modal.favlists.loading_alt'),
-                listname_placeholder: t('js.components.modal.favlists.listname_placeholder'),
-                loading: t('loading')
-            }
-        }, prerender: false) %>
-      </div>
-
-      <% if current_user.is_admin?(current_account) %>
-        <div class="reactstrap-modal-button-x">
-          <%= react_component('ModalContainer', props: {
-              id: 'assignments',
-              modalSize: 'md',
-              fireButtonLabel: '<i class="fas fa-user-check colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('activerecord.attributes.property.assignments_title') + '</span>',
-              avatar: @property.avatar.attached? ? url_for(@property.avatar.variant(resize: "30%")) : nil,
-              hasFeedback: true,
-              modalBodyClassNames: 'overflown',
-              modalFooterClassNames: 'overflown',
-              modalContentClassNames: 'overflown',
-              scrollable: false,
-              property_id: @property.id,
-              child: 'AddRemovePartners', # Due to react-on-rails restrictions we cant just ask to render children
-              modalTitle: t('assignments.title', entity: @property.slug.upcase),
-              modalHeader: heading(@property).html_safe,
-              buttonCancelLabel: t('properties.cancel_button'),
-              buttonCloseLabel: t('properties.close_button'),
-              soloMode: true,
-              ajaxEnabled: false,
-              isClearable: false,
-              openMenuOnClick: true,
-              closeMenuOnSelect: false,
-              closeMenu: true,
-              backspaceRemovesValue: true,
-              isSearchable: false,
-              isMultiple: true,
-              partners_url: users_url,
-              partners_action_endpoint: assignments_path(@property),
-              initial_data_url: existing_assignments_path(@property),
-              defaultOptions: current_account.users.blank? ? nil : current_account.users.order(created_at: :asc).last(8).map { |user| {label: "#{user.first_name} #{user.last_name}", value: user.id} },
-              i18n: {
-                  select: {
-                      placeholder: t('js.components.select.placeholder_title'),
-                      noresults: t('js.components.select.noresults'),
-                      loading: t('js.components.select.loading_html'),
-                      feedback: t('js.components.select.assignments_feedback', property_id: @property.slug.upcase)
-                  },
-                  loading: t('loading')
-              }
-          }, prerender: false) %>
-        </div>
-      <% end %>
+      <%= react_component('ModalControlStrip', props: { entries: properties_modal_data }) %>
 
       <button type="button" class="btn btn-secondary btn-sm printable" data-url="<%= property_url(@property) + '?print=true' %>">
         <i class="fas fa-print colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp<%= t 'properties.print' %></span>
@@ -157,11 +18,10 @@
       <% end %>
 
       <% if current_user.is_admin?(current_account) %>
-        <%= link_to @property, method: :delete, data: {confirm: t('prompt')}, class: 'btn btn-secondary btn-sm editable' do %>
+        <%= link_to @property, method: :delete, data: { confirm: t('prompt') }, class: 'btn btn-secondary btn-sm editable' do %>
           <i class="fas fa-trash colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp;<%= t 'properties.delete.delete_button' %></span>
         <% end %>
       <% end %>
-
 
     </div>
   </div>
@@ -172,7 +32,7 @@
     <div class="app-container">
       <!-- .card -->
       <div class="card">
-        <%= render partial: 'shared/card_header/header', locals: {title: heading(@property), btn_text: t('properties.show.back'), btn_link: :back} %>
+        <%= render partial: 'shared/card_header/header', locals: { title: heading(@property), btn_text: t('properties.show.back'), btn_link: :back } %>
         <!-- .card-body -->
         <div class="card-body">
           <div class="row">
@@ -207,7 +67,7 @@
                     </div>
                   </div><!-- .card-body -->
                   <div class="card-body">
-                    <%= render partial: 'accounts/properties/features', locals: {features: Property.basic_features, classNames: 'table-striped first-row-no-border'} %>
+                    <%= render partial: 'accounts/properties/features', locals: { features: Property.basic_features, classNames: 'table-striped first-row-no-border' } %>
                   </div><!-- /.card-body -->
                 </div><!-- /.card -->
               </div>
@@ -217,7 +77,7 @@
 
           <div class="d-none d-lg-block">
             <div class="col-12">
-              <hr/>
+              <hr />
             </div>
           </div>
 
@@ -234,7 +94,7 @@
                     </div>
                   </div><!-- .card-body -->
                   <div class="card-body">
-                    <%= render partial: 'accounts/properties/features', locals: {features: Property.extended_features, classNames: 'table-borderless normalize-table'} %>
+                    <%= render partial: 'accounts/properties/features', locals: { features: Property.extended_features, classNames: 'table-borderless normalize-table' } %>
                   </div><!-- /.card-body -->
                 </div><!-- /.card -->
               </div>
@@ -340,11 +200,11 @@
                               <td class="align-middle nowrap">
                                 <div class="table-entry">
                                   <% if forbidden.blank? %>
-                                    <%= link_to client_path(client), data: {toggle: "tooltip", placement: "top", title: t('properties.show.client_tooltip', user: client.full_name)} do %>
+                                    <%= link_to client_path(client), data: { toggle: "tooltip", placement: "top", title: t('properties.show.client_tooltip', user: client.full_name) } do %>
                                       <span class="align-middle"><%= client.full_name %></span>
                                     <% end %>
                                   <% else %>
-                                    <%= content_tag(:span, '*****', class: "align-middle forbidden-cursor", data: {toggle: "tooltip", placement: "top", title: t('access_denied')}) %>
+                                    <%= content_tag(:span, '*****', class: "align-middle forbidden-cursor", data: { toggle: "tooltip", placement: "top", title: t('access_denied') }) %>
                                   <% end %>
                                 </div>
                               </td>
@@ -352,7 +212,7 @@
                                 <% if forbidden.blank? %>
                                   <span><%= client.telephones.blank? ? '—' : client.telephones.split(/[\s,]+/).collect(&:strip).join(', ') %></span>
                                 <% else %>
-                                  <%= content_tag(:span, '*****', class: "forbidden-cursor", data: {toggle: "tooltip", placement: "top", title: t('access_denied')}) %>
+                                  <%= content_tag(:span, '*****', class: "forbidden-cursor", data: { toggle: "tooltip", placement: "top", title: t('access_denied') }) %>
                                 <% end %>
                               </td>
                             </tr>

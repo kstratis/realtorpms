@@ -1,140 +1,28 @@
 <% provide(:title, t('clients.show.heading')) %>
-<%#= render partial: 'layouts/breadcrumb', locals: {path: [{:title => t('users.show.breadcrumb'), :href => users_path}, {title: @user.full_name, :href => ''}], icon: 'house-colored'} %>
 
-<%= render layout: 'layouts/breadcrumb', locals: {path: [{:title => t('clients.show.breadcrumb'), :href => clients_path}, {title: @client.full_name, :href => ''}], icon: 'house-colored'} do %>
+<%= render layout: 'layouts/breadcrumb', locals: { path: [
+    { :title => t('clients.show.breadcrumb'), :href => clients_path },
+    { title: @client.full_name, :href => '' }], icon: 'house-colored' } do %>
+
   <div class="action-btns">
     <div class="btn-group btn-group-toggle">
-      <% if current_user.is_admin?(current_account) || current_user.clients.pluck(:id).include?(@client.id) %>
-        <div class="reactstrap-modal-button-right">
-        <%= react_component('ModalContainer', props: {
-            id: 'client-showings',
-            originator: 'client',
-            closeMenuOnSelect: true,
-            openMenuOnClick: true,
-            scrollable: true,
-            modalSize: 'lg',
-            fireButtonLabel: '<i class="fas fa-eye colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.viewings') + '</span>',
-            #avatar: @property.avatar.attached? ? url_for(@property.avatar.variant(resize: "30%")) : nil,
-            avatar: nil,
-            showings_url: showings_url,
-            client_id: @client.id,
-            child: 'AddRemoveShowings', # Due to react-on-rails restrictions we can't just ask to render children
-            modalTitle: t('properties.viewings_history', entity: "#{@client.first_name.capitalize} #{@client.last_name.capitalize}"),
-            modalHelpPopover: t("clients.help_popover_#{current_user.role(current_account)}"),
-            #modalHeader: heading(@property),
-            buttonOKLabel: t('properties.ok_button'),
-            buttonCancelLabel: t('properties.cancel_button'),
-            buttonCloseLabel: t('properties.close_button'),
-            soloMode: true,
-            ajaxEnabled: false,
-            isClearable: true,
-            backspaceRemovesValue: true,
-            isSearchable: false,
-            feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
-            clients_url: clients_url,
-            properties_url: properties_inlinesearch_url,
-            partners_url: "#{users_url}?backend_option=all_",
-            isAdmin: current_user.is_admin?(current_account),
-            i18n: {
-                table: {
-                    client: t('viewings.client'),
-                    property: t('viewings.property'),
-                    user: t('viewings.user'),
-                    date_title: t('date_title'),
-                    add: t("viewings.add_btn"),
-                    actions: t("viewings.actions"),
-                    tooltip_delete: t('tooltips.delete'),
-                    delete_prompt: t('viewings.delete_prompt')
-                },
-                form: {
-                    title: t('viewings.add'),
-                    property: t('properties.property'),
-                    partner: t('users.user'),
-                    date: t('viewings.date'),
-                    submit: t('viewings.submit'),
-                    warning: t('viewings.empty_fields_msg'),
-                    list: t('viewings.list'),
-                    required: t('js.components.select.required'),
-                    comments: t('viewings.comments'),
-                    comments_placeholder: t('viewings.comments_placeholder'),
-                    comments_feedback: t('viewings.comments_feedback')
-                },
-                select: {
-                    placeholder: t('js.components.select.placeholder_title'),
-                    noresults: t('js.components.select.noresults'),
-                    loading: t('js.components.select.loading_html'),
-                    feedback: 'yolo'
-                },
-                no_lists_available: t('js.components.modal.favlists.no_results'),
-                property_cover_alt: t('js.components.modal.favlists.property_cover_alt'),
-                add_list_action: t('js.components.modal.favlists.add_list_action'),
-                loading_alt: t('js.components.modal.favlists.loading_alt'),
-                listname_placeholder: t('js.components.modal.favlists.listname_placeholder'),
-                loading: t('loading')
-            }}) %>
-        </div>
-        <% if current_user.is_admin?(current_account) %>
-          <div class="reactstrap-modal-button-x">
-            <%= react_component('ModalContainer', props: {
-              id: 'assignment',
-              modalSize: 'md',
-              fireButtonLabel: '<i class="fas fa-user-check colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('activerecord.attributes.property.assignments_title') + '</span>',
-              avatar: nil,
-              hasFeedback: true,
-              modalBodyClassNames: 'overflown',
-              modalFooterClassNames: 'overflown',
-              modalContentClassNames: 'overflown',
-              scrollable: false,
-              property_id: @client.id,
-              child: 'AddRemovePartners', # Due to react-on-rails restrictions we cant just ask to render children
-              modalTitle: t('assignments.client_title', entity: @client.full_name),
-              modalHeader: nil,
-              buttonCancelLabel: t('properties.cancel_button'),
-              buttonCloseLabel: t('properties.close_button'),
-              soloMode: true,
-              ajaxEnabled: false,
-              isClearable: false,
-              backspaceRemovesValue: true,
-              isSearchable: false,
-              isMultiple: true,
-              partners_url: users_url,
-              partners_action_endpoint: clientships_path(@client),
-              initial_data_url: existing_clientships_path(@client),
-              openMenuOnClick: true,
-              closeMenuOnSelect: false,
-              defaultOptions: current_account.users.blank? ? nil : current_account.users.order(created_at: :asc).last(8).map { |user| {label: "#{user.first_name} #{user.last_name}", value: user.id} },
-                  # [{ value: 'chocolate', label: 'Chocolate' },
-                  # { value: 'strawberry', label: 'Strawberry' },
-                  # { value: 'vanilla', label: 'Vanilla' }],
-              i18n: {
-                select: {
-                  placeholder: t('js.components.select.placeholder_title'),
-                  noresults: t('js.components.select.noresults'),
-                  loading: t('js.components.select.loading_html'),
-                  feedback: t('js.components.select.assignments_client_feedback', client_name: @client.full_name),
-                  # defaultOptions: current_account.users.last(5).reverse.count
+      <%= react_component('ModalControlStrip', props: { entries: clients_modal_data }) %>
 
-                },
-                loading: t('loading')
-              }
-            }, prerender: false) %>
-          </div>
-        <% end %>
+      <% if current_user.is_admin?(current_account) || current_user.clients.pluck(:id).include?(@client.id) %>
         <%= link_to edit_client_path(@client), class: 'btn btn-secondary btn-sm editable' do %>
           <i class="fas fa-pen colored fa-fw"></i>
           <span class="d-none d-lg-inline">&nbsp;<%= t 'properties.edit.edit_button_alt' %></span>
         <% end %>
       <% end %>
+
       <% if current_user.is_admin?(current_account) %>
-        <%= link_to @client, method: :delete, data: {confirm: t('prompt')}, class: 'btn btn-secondary btn-sm editable' do %>
+        <%= link_to @client, method: :delete, data: { confirm: t('prompt') }, class: 'btn btn-secondary btn-sm editable' do %>
           <i class="fas fa-trash colored fa-fw"></i>
           <span class="d-none d-lg-inline">&nbsp;<%= t 'properties.delete.delete_button' %></span>
         <% end %>
       <% end %>
 
-
     </div>
-
   </div>
 <% end %>
 
@@ -181,7 +69,7 @@
                     <%= render_avatar(@client, 'tile-xl', "avatar_preview") %>
                   </div><!-- /avatar -->
                   <div class="media-body pl-3 pt-3">
-                    <strong><%= @client.full_name %></strong><br/><%= raw content_tag(:i, @client.job).html_safe unless @client.job.blank? %>
+                    <strong><%= @client.full_name %></strong><br /><%= raw content_tag(:i, @client.job).html_safe unless @client.job.blank? %>
                   </div>
                 </div> <!-- /.media -->
               </div>
@@ -332,7 +220,7 @@
             <div class="tab-pane fade" id="offering" role="tabpanel" aria-labelledby="integrations-tab">
               <div class="row">
                 <div class="col-lg-6 col-12 offset-lg-3">
-                  <% properties = @client.properties.references(:cpas).where(cpas: {ownership: true}) %>
+                  <% properties = @client.properties.references(:cpas).where(cpas: { ownership: true }) %>
                   <% if properties.length > 0 %>
                     <div class="list-group custom list-group-bordered mb-3">
                       <% properties.map do |property| %>

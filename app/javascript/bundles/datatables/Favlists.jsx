@@ -63,7 +63,7 @@ class Favlists extends React.Component {
               <div className="col-sm-12 col-lg-4">
                 <div className="list-group list-group-bordered mb-3">
                   {this.props.favlists.map(entry => (
-                    <div className={'d-flex'}>
+                    <div key={entry['id']} className={'d-flex'}>
                       <a
                         className={`flex-fill custom-list-group-item list-group-item list-group-item-action list-group-item-${
                           this.state.selectedIndex === entry['id'] ? 'success' : 'danger'

@@ -15,6 +15,7 @@ function AddRemovePartners({
   modalHeader,
   avatar,
   i18n,
+  isNotAnimated,
   defaultOptions
 }) {
   const [request, setRequest] = useState({
@@ -30,7 +31,7 @@ function AddRemovePartners({
 
   return (
     <>
-      <div className={'mt-3'}>
+      <div>
         {avatar ? (
           <figure className="user-avatar property-avatar user-avatar-xxl mx-auto d-block mb-3">
             <img src={avatar} className={'rounded'} alt={'i18n.property_cover_alt'} />
@@ -38,7 +39,6 @@ function AddRemovePartners({
         ) : null}
         <h2>{renderHTML(modalHeader)}</h2>
       </div>
-      <hr />
       <div className={'mb-3'}>
         {loading ? (
           <Spinner isLoading={loading} />
@@ -46,6 +46,7 @@ function AddRemovePartners({
           <AsyncSelectContainer
             id={'AsyncSelectContainerPartner'}
             i18n={i18n}
+            isNotAnimated={isNotAnimated}
             collection_endpoint={{ url: partners_url, action: 'get' }}
             action_endpoint={{ url: partners_action_endpoint, action: 'post' }}
             storedOptions={data}
