@@ -106,4 +106,46 @@ module ClientsHelper
     end
     entries
   end
+
+  def client_prefs_data
+    entries = [
+      {
+        name: 'RetrieveClientSearch',
+        button: {
+          content: '<i class="fas fa-list fa-fw"></i>',
+          size: 'md',
+          tooltip: t('clients.show.search_prefs'),
+          classname: 'btn-outline-primary btn-icon',
+          wrapperDivClassname: 'reactstrap-modal-button-right'
+        },
+        modal: {
+          i18n: {
+            search_save_filters: t('js.components.modal.search_save.filters'),
+            search_save_subtitle: t('js.components.modal.search_save.header', client_name: client.full_name),
+            no_lists_available: t('js.components.modal.favlists.no_results'),
+            search_save_criteria: t('js.components.modal.search_save.criteria'),
+            property_cover_alt: t('js.components.modal.favlists.property_cover_alt'),
+            add_list_action: t('js.components.modal.favlists.add_list_action'),
+            loading_alt: t('js.components.modal.favlists.loading_alt'),
+            listname_placeholder: t('js.components.modal.favlists.listname_placeholder')
+          },
+          title: t('js.components.modal.search_save.title_alt'),
+          buttonCloseLabel: t('properties.close_button'),
+          soloMode: true,
+          searchprefs: client.searchprefs,
+          ajaxEnabled: true,
+          isClearable: true,
+          buttonDisabled: client.searchprefs.blank?,
+          backspaceRemovesValue: true,
+          isSearchable: true,
+          i18nPriceOptions: price_options,
+          i18nSizeOptions: size_options,
+          i18nFloorOptions: floors_options,
+          i18nCategoryOptions: category_options,
+          i18nCfieldOptions: cfields_options,
+          feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
+        }
+      }
+    ]
+  end
 end

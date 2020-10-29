@@ -358,7 +358,7 @@ en:
     components:
       modal:
         search_save:
-          title: "Save search request"
+          title: "Save search preferences to client profile"
           title_alt: "Search info"
           subtitle: "Save search criteria"
           close_btn: "Close"
@@ -724,8 +724,8 @@ en:
       breadcrumb: "Clients"
       heading: "Client information"
       clients: "Clients"
-      search_prefs: "Search preferences"
-      edit_search_tooltip: "Edit search preferences"
+      search_prefs: "View client's saved search preferences"
+      edit_search_tooltip: "Edit client's saved search preferences"
       matches: "Matches"
       no_stored_searches_html: "The client has no stored search preferences. Navigate to the <a href='%{properties_path}'>properties screen</a>, set the client's filters and save its preferences."
       no_ownership: "The client doesn't seem to poccess any properties."

@@ -137,48 +137,8 @@
               <% unless @client.searchprefs.blank? %>
                 <div class="row pt-1 pl-2 d-flex justify-content-center">
                   <div class="btn-group btn-group-toggle">
-                    <div class="reactstrap-modal-button">
-                      <%= react_component('ModalContainer', props: {
-                          id: 'modal-window-saved-prefs',
-                          title: t('clients.show.search_prefs'),
-                          outline: true,
-                          # fireButtonLabel: '<i class="fas fa-info fa-fw"></i>&nbsp;' + t('clients.show.search_prefs'),
-                          fireButtonLabel: '<i class="fas fa-search fa-fw"></i>',
-                          fireButtonBtnType: 'primary',
-                          fireButtonBtnSize: 'md',
-                          avatar: nil,
-                          child: 'RetrieveClientSearch',
-                          modalTitle: t('js.components.modal.search_save.title_alt'),
-                          modalHeader: t('js.components.modal.search_save.subtitle'),
-                          buttonOKLabel: t('properties.ok_button'),
-                          buttonCancelLabel: t('properties.cancel_button'),
-                          buttonCloseLabel: t('properties.close_button'),
-                          soloMode: true,
-                          searchprefs: @client.searchprefs,
-                          ajaxEnabled: true,
-                          isClearable: true,
-                          buttonDisabled: @client.searchprefs.blank?,
-                          backspaceRemovesValue: true,
-                          isSearchable: true,
-                          i18nPriceOptions: price_options,
-                          i18nSizeOptions: size_options,
-                          i18nFloorOptions: floors_options,
-                          i18nCategoryOptions: category_options,
-                          i18nCfieldOptions: cfields_options,
-                          feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
-                          i18n: {
-                              search_save_filters: t('js.components.modal.search_save.filters'),
-                              search_save_subtitle: t('js.components.modal.search_save.header', client_name: @client.full_name),
-                              no_lists_available: t('js.components.modal.favlists.no_results'),
-                              search_save_criteria: t('js.components.modal.search_save.criteria'),
-                              property_cover_alt: t('js.components.modal.favlists.property_cover_alt'),
-                              add_list_action: t('js.components.modal.favlists.add_list_action'),
-                              loading_alt: t('js.components.modal.favlists.loading_alt'),
-                              listname_placeholder: t('js.components.modal.favlists.listname_placeholder')
-                          }
-                      }, prerender: false) %>
-                    </div>
-                    <a data-toggle="tooltip" data-position="top" title="<%= t('clients.show.edit_search_tooltip') %>" class="btn btn-md btn-outline-primary btn-action <%= @client.searchprefs.blank? ? 'disabled' : '' %>" href="<%= "#{properties_path}?#{@client.searchprefs}" %>">
+                    <%= react_component('ModalControlStrip', props: { entries: client_prefs_data }) %>
+                    <a type='button' data-toggle="tooltip" data-position="top" title="<%= t('clients.show.edit_search_tooltip') %>" class="btn btn-md btn-icon btn-outline-primary btn-action <%= @client.searchprefs.blank? ? 'disabled' : '' %>" href="<%= "#{properties_path}?#{@client.searchprefs}" %>">
                       <i class="fas fa-pen fa-fw orig"></i>
                     </a>
                   </div>

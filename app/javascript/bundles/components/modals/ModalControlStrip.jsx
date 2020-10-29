@@ -9,12 +9,14 @@ const AddRemoveFavLists = preloadableLazy(() => import('../AddRemoveFavLists'));
 const AddRemoveShowings = preloadableLazy(() => import('../AddRemoveShowings'));
 const AddRemovePartners = preloadableLazy(() => import('../AddRemovePartners'));
 const StoreClientSearch = preloadableLazy(() => import('../StoreClientSearch'));
+const RetrieveClientSearch = preloadableLazy(() => import('../RetrieveClientSearch'));
 
 const components = {
   AddRemoveFavLists: AddRemoveFavLists,
   AddRemoveShowings: AddRemoveShowings,
   AddRemovePartners: AddRemovePartners,
-  StoreClientSearch: StoreClientSearch
+  StoreClientSearch: StoreClientSearch,
+  RetrieveClientSearch: RetrieveClientSearch
 };
 
 function preloadableLazy(dynamicImport) {
@@ -53,14 +55,31 @@ function ModalControlStrip(props) {
     setComponentProps(data);
   };
 
-  const hideModal = () =>{
+  const hideModal = () => {
     setComponentResource(null);
+  }
+
+  const wrapperClassname = (buttonEl, buttonIdx, buttonsCnt) => {
+    let classname;
+    if (buttonEl.wrapperDivClassname) {
+      classname = buttonEl.wrapperDivClassname
+    } else {
+      if (buttonIdx === 0 && buttonsCnt === 1){
+        classname = ''
+      } else if (buttonIdx === 0 && props.entries.length > 1) {
+        classname = 'reactstrap-modal-button-right'
+      }
+      else {
+        classname = 'reactstrap-modal-button-x'
+      }
+    }
+    return classname;
   }
 
   return (
     <>
       {props.entries.map((entry, index) => (
-        <div key={index} className={(index === 0 && props.entries.length === 1) ? '' : (index === 0 && props.entries.length > 1) ? 'reactstrap-modal-button-right' : 'reactstrap-modal-button-x'}>
+        <div key={index} className={wrapperClassname(entry.button, index, props.entries.length)}>
           <button
             key={index}
             disabled={entry.button.isDisabled}
