@@ -43,6 +43,10 @@ const UsersList = ({
 
   const {checkedItems, masterCheck, checkAll, handleCheckboxChange} = useMultiCheckbox(dataset.map((entry) => entry.id), selectedPage)
 
+  const handleSignInAs = (e) => {
+    e.preventDefault();
+    console.log(e.target);
+  };
   // --------
   // const [masterCheck, setMasterCheck] = useState({});
   // const [checkedItems, setCheckedItems] = useState({});
@@ -393,6 +397,27 @@ const UsersList = ({
                                 href={''}>
                                 <i className={`fas fa-stop ${entry['active'] ? 'orange' : 'red'}`} />
                               </a>
+
+
+
+                              <a
+                                data-toggle="tooltip"
+                                data-placement="auto"
+                                onClick={e => handleSignInAs(e, entry['id'])}
+                                title={i18n['datatable']['tooltip_freeze_profile']}
+                                className={`btn btn-md btn-icon btn-secondary btn-action ${
+                                  entry['active'] ? '' : 'active'
+                                }`}
+                                href={''}>
+                                <i className={`fas fa-mask`} />
+                              </a>
+
+
+
+
+
+
+
                               <a
                                 data-toggle="tooltip"
                                 data-position="auto"

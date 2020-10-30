@@ -52,6 +52,8 @@ Rails.application.routes.draw do
       end
 
       resources :users do
+        resources :masquerades, only: [:new, :destroy]
+
         delete :mass_delete, on: :collection
         post :mass_freeze, on: :collection
 
