@@ -41,7 +41,7 @@
               <% end %>
             </div>
             <div class="col-lg-8 text-center flex-nowrap">
-              <nav class="nav nav-tabs nav-justified border-0 d-flex justify-content-center text-nowrap ">
+              <nav class="nav nav-tabs anchor-support nav-justified border-0 d-flex justify-content-center text-nowrap ">
                 <a href="#info" class="nav-link custom active text-nowrap" data-toggle="tab" role="tab" aria-selected="true"><i class="menu-icon fas fa-user fa-fw"></i><span class="d-none d-md-inline tab-text">&nbsp; <%= t('clients.show.tabs.info') %></span></a>
                 <a href="#searching" class="nav-link custom " data-toggle="tab" role="tab" aria-selected="false"><i class="menu-icon fas fa-search fa-fw"></i><span class="d-none d-md-inline tab-text">&nbsp; <%= t('clients.show.tabs.searching') %></span>
                 </a>
@@ -79,7 +79,7 @@
 
                   <!-- If case things get too slow... -->
                   <%#= react_component('TabWrapper', props: {base_path: client_path(@client)}) %>
-
+                  <%= link_to 'yes', property_path('pr61893'), class: "list-group-item list-group-item-action" %>
                   <div class="table-responsive">
                     <!-- .table -->
                     <table class="table table-striped">
@@ -184,17 +184,16 @@
                   <% if properties.length > 0 %>
                     <div class="list-group custom list-group-bordered mb-3">
                       <% properties.map do |property| %>
-                        <a href="<%= property_path(property) %>" class="list-group-item list-group-item-action">
+                        <%= link_to property_path(property), class: "list-group-item list-group-item-action", data: { turbolinks: 'true' } do %>
                           <div class="list-group-item-figure">
                             <div class="tile bg-success">
                               <i class="fas fa-home fa-fw"></i>
-                              <!--                          <span class="oi oi-house"></span>-->
                             </div>
                           </div>
                           <div class="list-group-item-body"><strong><%= property.slug.upcase %></strong>
                             - <%= property.category.localname %>
                             - <%= number_to_currency(property.price) %></div>
-                        </a>
+                        <% end %>
                       <% end %>
                     </div>
                   <% else %>

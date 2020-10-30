@@ -191,6 +191,11 @@ class FormSelect extends React.Component {
             menuIsOpen={isOpen}
             onMenuOpen={this.onMenuOpen}
             onMenuClose={this.onMenuClose}
+            formatOptionLabel={(data) => {
+              return (
+                <span dangerouslySetInnerHTML={{ __html: data.label }} />
+              );
+            }}
             ref={ref => {
               this.selectRef = ref;
             }}

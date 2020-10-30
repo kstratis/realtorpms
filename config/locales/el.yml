@@ -706,9 +706,9 @@ el:
       ordertoview: "Εντολή επίδειξης"
       ordertosell: "Εντολή υπόδειξης"
       tabs:
-        info: "Πληροφορίες"
-        searching: "Αναζήτηση"
-        offering: "Προσφορά"
+        info: "Καρτέλα"
+        searching: "Αναζητά"
+        offering: "Προσφέρει"
         handling: "Δικαιώματα"
     index:
       breadcrumb: "Πελάτες"

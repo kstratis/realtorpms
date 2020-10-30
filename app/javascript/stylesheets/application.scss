@@ -700,37 +700,38 @@ input[type="search"]::-webkit-search-cancel-button {
 
 button, a {
   &:hover {
-    .fa-heart.colored{
-      color: rgb(220, 72, 127);
-    }
-
-    .fa-print.colored {
-      color: $blue;
-    }
-
-    .fa-pen.colored {
-      color: $orange;
-    }
-
-    .fa-pen.orig {
-      color: unset;
-    }
-
-    .fa-trash.colored {
-      color: $pinterest_color;
-    }
-
-    .fa-user.colored, .fa-user-check.colored {
-      color: $pink;
-    }
-
-    .fa-eye.colored {
-      color: $teal;
-    }
-
-    .fa-comment-alt.colored {
-      color: $teal;
-    }
+    //.fa-heart.colored{
+    //  color: rgb(220, 72, 127);
+    //  //color: $yellowbg;
+    //}
+    //
+    //.fa-print.colored {
+    //  color: $blue;
+    //}
+    //
+    //.fa-pen.colored {
+    //  color: $orange;
+    //}
+    //
+    //.fa-pen.orig {
+    //  color: unset;
+    //}
+    //
+    //.fa-trash.colored {
+    //  color: $pinterest_color;
+    //}
+    //
+    //.fa-user.colored, .fa-user-check.colored {
+    //  color: $pink;
+    //}
+    //
+    //.fa-eye.colored {
+    //  color: $teal;
+    //}
+    //
+    //.fa-comment-alt.colored {
+    //  color: $teal;
+    //}
 
   }
 }
@@ -1289,6 +1290,7 @@ li.page-item {
 .badge-container {
   display: inline-block;
   padding: 3px 1px;
+  cursor: default;
 }
 
 .badge-custom {
@@ -1598,7 +1600,7 @@ a.tt-suggestion.tt-selectable{
     // use the linear-gradient for the fading effect
     // use a solid background color for a solid bar
     //background: linear-gradient(to right, transparent, #818078, transparent);
-    background: linear-gradient(to right, transparent, #777, transparent);
+    background: linear-gradient(to right, transparent, #37474f, transparent);
     position: absolute;
     left: 0;
     top: 50%;
@@ -1614,7 +1616,7 @@ a.tt-suggestion.tt-selectable{
     line-height: 1.5em;
     // this is really the only tricky part, you need to specify the background color of the container element...
     //color: #818078;
-    color: #777;
+    color: #37474f;
     background-color: #fcfcfa;
   }
 }
@@ -1906,10 +1908,10 @@ a.text-link {
 
 .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link.custom {
   border-color: $yellowbg;
+  //border-color: #37474f;
 }
 
 .nav-tabs .nav-link.custom {
-  //padding: 1rem 1rem 10px 1rem !important;
   padding: 0.5rem 1rem 0rem 1rem !important;
 }
 
@@ -2025,3 +2027,13 @@ a.text-link {
   border-top: 1px solid rgba(34, 34, 48, 0.1);
 }
 
+.btn-outline-control {
+  color: #37474f;
+  border-color: #37474f;
+
+  &:hover {
+    color: #ffffff;
+    background-color: #37474f;
+    border-color: #37474f;
+  }
+}

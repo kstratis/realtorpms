@@ -1,20 +1,17 @@
-$(document).on('turbolinks:load', function(e) {
+$(document).on('turbolinks:load', function (e) {
+  // Activate only if tabs are available
+  const tabs = $('.nav-tabs.anchor-support');
+  if (tabs.length < 1) return;
 
-    // Activate only if tabs are are available
-    const tabs = $('.nav-tabs.anchor-support');
-    if (tabs.length < 1) return;
+  var hash = window.location.hash;
+  hash && $('.nav a[href="' + hash + '"]').tab('show');
 
-    // Restore active tab from url anchor (if available)
-    var hash = window.location.hash;
-    hash && $('.nav a[href="' + hash + '"]').tab('show');
-
-    // Activate tab on click
-    $('.nav-tabs a').click(function(e) {
-      // $(this).tab('show');
-
-      var scrollmem = $('body').scrollTop();
-      window.location.hash = this.hash;
-      $('html,body').scrollTop(scrollmem);
-    });
-
+  // Activate tab on click
+  $('.nav-tabs a').click(function (e) {
+    var scrollmem = $('body').scrollTop();
+    // Back button with hashes in URL has a few known problems in Turbolinks.
+    // https://github.com/turbolinks/turbolinks/issues/219
+    history.pushState(history.state, '', this.hash);
+    $('html,body').scrollTop(scrollmem);
+  });
 });

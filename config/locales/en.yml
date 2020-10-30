@@ -362,7 +362,7 @@ en:
           title_alt: "Search info"
           subtitle: "Save search criteria"
           close_btn: "Close"
-          criteria: "You've chosen the following search criteria:"
+          criteria: "You've picked the following search criteria:"
           header: "%{client_name} is looking for:"
           feedback: ""
           filters:
@@ -733,8 +733,8 @@ en:
       ordertosell: "Broker listing agreement"
       tabs:
         info: "User info"
-        searching: "Searching"
-        offering: "Offering"
+        searching: "Looking for"
+        offering: "Offers"
         handling: "Permissions"
     index:
       breadcrumb: "Clients"
