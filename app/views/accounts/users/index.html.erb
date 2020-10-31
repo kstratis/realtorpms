@@ -24,8 +24,6 @@
           Rails automatically iterates through them and renders each one with the _user.html.erb partial
           (inferring the name of the partial from the name of the class). %>
       <%#= render @users %>
-      <%= link_to 'Masquerade', new_user_masquerade_path(User.find(67)) %>
-      <%#= link_to 'Masquerade', user_masquerade_path(User.find(67), method: 'destroy') %>
         <%= react_component('UsersListWithDatatable', props: {
             initial_payload: {
                 status_filter: {

@@ -86,6 +86,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    # special handling if in masquerading mode
+    return redirect_to root_url if masquerading?
     log_out if logged_in?
     flash[:danger] = I18n.t 'sessions.flash_logout'
     redirect_to root_url(subdomain: request.subdomain) # make the subdomain explicit

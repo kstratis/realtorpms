@@ -108,6 +108,9 @@ module SessionsHelper
     session[:forwarding_domain_name] = request.domain if request.get?
   end
 
+  def masquerading?
+    session[:admin_id].present?
+  end
 
   # Retrieves the subdomain
   def get_subdomain(user)

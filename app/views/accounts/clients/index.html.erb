@@ -11,6 +11,10 @@
 <div class="page-container">
   <div class="container">
     <div class="app-container">
+      <% if masquerading? %>
+        <%= link_to 'Stop Masquerading', user_masquerade_path(current_user), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%#= link_to "Stop Masquerading", "#" %>
+      <% end %>
       <%# Here we call render not on a string with the name of a partial, but rather on a user variable of class User;
           in this context, Rails automatically looks for a partial called _user.html.erb, which we must create.
           This is a definite improvement, but we can do even better: we can call render directly on the @users variable

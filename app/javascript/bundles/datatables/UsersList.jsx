@@ -43,9 +43,10 @@ const UsersList = ({
 
   const {checkedItems, masterCheck, checkAll, handleCheckboxChange} = useMultiCheckbox(dataset.map((entry) => entry.id), selectedPage)
 
-  const handleSignInAs = (e) => {
+  const handleMasquerade = (e, link) => {
     e.preventDefault();
     console.log(e.target);
+    Turbolinks.visit(link);
   };
   // --------
   // const [masterCheck, setMasterCheck] = useState({});
@@ -395,7 +396,7 @@ const UsersList = ({
                                   entry['active'] ? '' : 'active'
                                 }`}
                                 href={''}>
-                                <i className={`fas fa-stop ${entry['active'] ? 'orange' : 'red'}`} />
+                                <i className={`fas fa-ban ${entry['active'] ? 'orange' : 'red'}`} />
                               </a>
 
 
@@ -403,13 +404,11 @@ const UsersList = ({
                               <a
                                 data-toggle="tooltip"
                                 data-placement="auto"
-                                onClick={e => handleSignInAs(e, entry['id'])}
-                                title={i18n['datatable']['tooltip_freeze_profile']}
-                                className={`btn btn-md btn-icon btn-secondary btn-action ${
-                                  entry['active'] ? '' : 'active'
-                                }`}
+                                onClick={e => handleMasquerade(e, entry['masquerade_path'])}
+                                title={`${i18n['datatable']['tooltip_masquerade']} ${entry.name}`}
+                                className={`btn btn-md btn-icon btn-secondary btn-action ${entry['active']? '' : 'disabled'}`}
                                 href={''}>
-                                <i className={`fas fa-mask`} />
+                                <i className={`fas fa-sign-in-alt`} />
                               </a>
 
 

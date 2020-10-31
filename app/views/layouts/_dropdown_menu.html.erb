@@ -4,7 +4,7 @@
 
 <%# if (current_user.get_account_count > 1) || current_user.is_admin?(current_account) %>
 <% if (current_user.get_account_count > 1) || current_user.is_sysadmin? %>
-  <%= link_to account_list_url, class: 'dropdown-item' do %>
+  <%= link_to account_list_url, class: "dropdown-item #{masquerading? ? 'disabled' : '' }"  do %>
     <%= content_tag :i, nil, class: 'fas fa-exchange-alt fa-fw' %> <span><%= t('navbar.switch') %></span>
   <% end %>
 <% end %>
@@ -26,7 +26,9 @@
   <%= content_tag :i, nil, class: 'fas fa-info fa-fw' %> <span><%= t('navbar.help') %></span>
 <% end %>
 
-<%= link_to logout_path, class: 'dropdown-item', method: :delete do %>
-  <%= content_tag :i, nil, class: 'fas fa-sign-out-alt' %> <span><%= t('navbar.logout') %></span>
+<% unless masquerading? %>
+  <%= link_to logout_path, class: 'dropdown-item', method: :delete do %>
+    <%= content_tag :i, nil, class: 'fas fa-sign-out-alt' %> <span><%= t('navbar.logout') %></span>
+  <% end %>
 <% end %>
 
