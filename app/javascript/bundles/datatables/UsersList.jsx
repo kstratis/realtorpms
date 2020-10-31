@@ -37,11 +37,15 @@ const UsersList = ({
   searchInput,
   users_path,
   cfields,
+  is_masquerading,
 }) => {
   const { filtersOpen, setFiltersOpen } = useFilterToggle('userFiltersOpen');
   const handleChange = event => setFiltersOpen(filtersOpen => !filtersOpen);
 
-  const {checkedItems, masterCheck, checkAll, handleCheckboxChange} = useMultiCheckbox(dataset.map((entry) => entry.id), selectedPage)
+  const { checkedItems, masterCheck, checkAll, handleCheckboxChange } = useMultiCheckbox(
+    dataset.map(entry => entry.id),
+    selectedPage
+  );
 
   const handleMasquerade = (e, link) => {
     e.preventDefault();
@@ -196,7 +200,6 @@ const UsersList = ({
                           <strong>{Object.keys(checkedItems).filter(i => checkedItems[i]).length}</strong>
                         </div>
                       ) : null}
-
                     </div>
 
                     <div>
@@ -399,23 +402,20 @@ const UsersList = ({
                                 <i className={`fas fa-ban ${entry['active'] ? 'orange' : 'red'}`} />
                               </a>
 
-
-
-                              <a
-                                data-toggle="tooltip"
-                                data-placement="auto"
-                                onClick={e => handleMasquerade(e, entry['masquerade_path'])}
-                                title={`${i18n['datatable']['tooltip_masquerade']} ${entry.name}`}
-                                className={`btn btn-md btn-icon btn-secondary btn-action ${entry['active']? '' : 'disabled'}`}
-                                href={''}>
-                                <i className={`fas fa-sign-in-alt`} />
-                              </a>
-
-
-
-
-
-
+                              {/* Avoid masquerading inception */}
+                              {is_masquerading ? null : (
+                                <a
+                                  data-toggle="tooltip"
+                                  data-placement="auto"
+                                  onClick={e => handleMasquerade(e, entry['masquerade_path'])}
+                                  title={`${i18n['datatable']['tooltip_masquerade']} ${entry.name}`}
+                                  className={`btn btn-md btn-icon btn-secondary btn-action ${
+                                    entry['active'] ? '' : 'disabled'
+                                  }`}
+                                  href={''}>
+                                  <i className={`fas fa-sign-in-alt`} />
+                                </a>
+                              )}
 
                               <a
                                 data-toggle="tooltip"

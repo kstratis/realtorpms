@@ -112,6 +112,12 @@ module SessionsHelper
     session[:admin_id].present?
   end
 
+  def masqueraded_admin
+    return if session[:admin_id].nil?
+
+    current_account.all_users.find(session[:admin_id])
+  end
+
   # Retrieves the subdomain
   def get_subdomain(user)
 

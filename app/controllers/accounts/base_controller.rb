@@ -13,6 +13,7 @@ module Accounts
     # This comes from sessions_helper.rb which is included by application_controller.
     # It helps us know if a user is currently masquerading
     helper_method :masquerading?
+    helper_method :masqueraded_admin
 
     # before_action :logged_in_user, :allowed_subdomains, only: [:index, :edit, :update, :destroy]
     before_action :logged_in_user, :allowed_subdomains, :active_user # The order is guaranteed from left-to-right

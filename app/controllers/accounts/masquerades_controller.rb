@@ -9,14 +9,14 @@ module Accounts
       session[:admin_id] = current_user.id
       user = User.find(params[:user_id])
       log_in(user)
-      redirect_to root_path, notice: "Now masquerading as #{user.full_name}"
+      redirect_to root_path, notice: I18n.t('js.datatables.users.masquerading.enter_notice', user: user.full_name)
     end
 
     def destroy
       user = User.find(session[:admin_id])
       log_in(user)
       session[:admin_id] = nil
-      redirect_to users_path, notice: "Stopped masquerading"
+      redirect_to users_path, notice: I18n.t('js.datatables.users.masquerading.exit_notice', user: user.full_name)
     end
 
     private

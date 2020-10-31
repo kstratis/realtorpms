@@ -461,9 +461,14 @@ el:
         tooltip_view_profile: "Προβολή προφίλ"
         tooltip_freeze_profile: "Πάγωμα λογαριασμού χρήστη. Εάν ενεργοποιηθεί, ο χρήστης δεν θα μπορεί να εισέλθει στο σύστημα."
         tooltip_masquerade: "Είσοδος ως "
-        tooltip_adminify_profile: "Προαγωγή χρήστη. Εάν ενεργοποιηθεί, ο χρήστης αναβαθμίζεται σε διαχειριστή."
+        tooltip_adminify_profile: "Προαγωγή χρήστη. Εάν ενεργοποιηθεί, ο χρήστης γίνεται διαχειριστής."
         tooltip_edit_profile: "Επεξεργασία χρήστη"
         tooltip_delete_profile: "Διαγραφή χρήστη"
+        masquerading:
+          enter_notice: "Έχετε μπεί στο σύστημα ως %{user}"
+          active_notice: "Βλέπετε το σύστημα ως %{user}"
+          exit_prompt: "Επαναφορά ως %{user}"
+          exit_notice: "Επιστρέψατε το σύστημα ως %{user}"
       clients:
         delete: "Διαγραφή"
         confirm_prompt: "Είστε σίγουρος;"
