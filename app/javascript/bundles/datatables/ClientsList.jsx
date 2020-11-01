@@ -356,7 +356,7 @@ const ClientsList = ({
                                 }`}
                                 href={entry['view_entity_path']}
                                 data-method="delete"
-                                data-confirm="Are you sure?"
+                                data-confirm={i18n['datatable']['confirm_prompt']}
                                 rel="nofollow">
                                 <i className="fas fa-trash user-delete" />
                               </a>

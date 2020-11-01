@@ -5,6 +5,14 @@ module PropertyDatatable
   include LocationFinder
   include Cfields
 
+  def pick_avatar_pick(property)
+    return url_for(property.avatar.variant(resize: "30%")) if property.avatar.attached?
+
+    return if property.all_images.blank?
+
+    url_for(property.all_images.first.variant(resize: "30%"))
+  end
+
   def filter_properties(relation, filters = {})
 
     @properties = relation
@@ -135,7 +143,7 @@ module PropertyDatatable
             fav_entity_path: property_favorites_path(property),
             purpose: I18n.t("activerecord.attributes.property.enums.businesstype.#{property.businesstype}_banner"),
             businesstype: property.businesstype,
-            avatar: property.avatar.attached? ? url_for(property.avatar.variant(resize: "30%")) : nil,
+            avatar: pick_avatar_pick(property),
             slug: property.slug,
             # isFaved: property.is_faved_by?(current_user),
             # assignments: property.properties.count,
