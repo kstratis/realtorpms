@@ -10,13 +10,16 @@ const AddRemoveShowings = preloadableLazy(() => import('../AddRemoveShowings'));
 const AddRemovePartners = preloadableLazy(() => import('../AddRemovePartners'));
 const StoreClientSearch = preloadableLazy(() => import('../StoreClientSearch'));
 const RetrieveClientSearch = preloadableLazy(() => import('../RetrieveClientSearch'));
+const MassActions = preloadableLazy(() => import('../MassActions'));
+
 
 const components = {
   AddRemoveFavLists: AddRemoveFavLists,
   AddRemoveShowings: AddRemoveShowings,
   AddRemovePartners: AddRemovePartners,
   StoreClientSearch: StoreClientSearch,
-  RetrieveClientSearch: RetrieveClientSearch
+  RetrieveClientSearch: RetrieveClientSearch,
+  MassActions: MassActions
 };
 
 function preloadableLazy(dynamicImport) {

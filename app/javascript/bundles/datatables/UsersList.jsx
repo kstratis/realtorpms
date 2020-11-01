@@ -10,7 +10,7 @@ import FormComponents from './fields/FormComponents';
 import useFilterToggle from '../hooks/useFilterToggle';
 import useTooltips from '../hooks/useTooltips';
 import useMultiCheckbox from '../hooks/useMultiCheckbox';
-import ModalContainer from '../components/ModalContainer';
+import ModalControlStrip from "../components/modals/ModalControlStrip";
 
 const UsersList = ({
   handlePageClick,
@@ -161,23 +161,29 @@ const UsersList = ({
                         <span className="d-none d-md-inline">&nbsp;{i18n.filters.title}</span>
                       </label>
 
-                      <ModalContainer
-                        id={'user-list-modal'}
-                        origin={'menu'}
-                        modalSize={'md'}
-                        fireButtonLabel={`<i class='fas fa-tasks fa-lg fa-fw' />`}
-                        fireButtonBtnSize={`md`}
-                        fireButtonBtnType={`success`}
-                        modalTitle={i18n.modal.mass_actions.title}
-                        modalHeader={null}
-                        child={'MassActions'}
-                        buttonCloseLabel={i18n.modal.mass_actions.close_btn}
-                        title={i18n.search_save_title}
-                        i18n={i18n}
-                        buttonDisabled={!Object.keys(checkedItems).some(i => checkedItems[i])}
-                        checkedItems={checkedItems}
-                        massDeletePersonsEndpoint={meta.mass_delete_users_link}
-                        massFreezePersonsEndpoint={meta.mass_freeze_users_link}
+                      <ModalControlStrip
+                        entries={[
+                          {
+                            name: 'MassActions',
+                            button: {
+                              content: `<i class='fas fa-tasks fa-lg fa-fw'/>`,
+                              size: 'md',
+                              classname: 'btn-success action-toolbar-group-btn',
+                              tooltip: i18n.button.tooltip,
+                              isDisabled: !Object.keys(checkedItems).some(i => checkedItems[i])
+                            },
+                            modal: {
+                              id: 'user-list-modal',
+                              i18n: i18n,
+                              title: i18n.modal.mass_actions.title,
+                              buttonCloseLabel: i18n.modal.mass_actions.close_btn,
+                              origin: 'menu',
+                              checkedItems: checkedItems,
+                              massDeletePersonsEndpoint: meta.mass_delete_users_link,
+                              massFreezePersonsEndpoint: meta.mass_freeze_users_link
+                            },
+                          },
+                        ]}
                       />
 
                       {Object.keys(checkedItems).filter(i => checkedItems[i]).length ? (

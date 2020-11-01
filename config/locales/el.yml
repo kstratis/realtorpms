@@ -364,6 +364,7 @@ el:
           deleted: "Η λίστα διεγράφη επιτυχώς"
         mass_actions:
           title: "Μαζικές ενέργειες:"
+          tooltip: "Μαζικές ενέργειες"
           close_btn: "Κλείσιμο"
       select:
         noresults: "Δεν βρέθηκαν αποτελέσματα"
@@ -464,6 +465,7 @@ el:
         tooltip_delete_profile: "Διαγραφή χρήστη"
       clients:
         delete: "Διαγραφή"
+        confirm_prompt: "Είστε σίγουρος;"
         no_results: "Δεν βρέθηκαν πελάτες!"
         search_placeholder: "Αναζήτηση πελάτη..."
         name: "Όνομα"

@@ -712,7 +712,6 @@ function withDatatable(WrappedComponent) {
     }
 
     handleChangeStatus(e) {
-      console.log('running');
       this.setState({ isLoading: true });
       const newSelection = e.target.value;
       this.setState(prevState => ({

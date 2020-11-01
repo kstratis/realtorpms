@@ -8,7 +8,6 @@ import Favlists from '../bundles/datatables/Favlists';
 import FormSelect from '../bundles/components/selects/FormSelect';
 import AsyncSelectContainer from '../bundles/components/selects/AsyncSelectContainer';
 import AssociativeFormSelect from '../bundles/components/selects/AssociativeFormSelect';
-import ModalContainer from '../bundles/components/ModalContainer';
 import ModalControlStrip from "../bundles/components/modals/ModalControlStrip";
 import InlineSearch from '../bundles/components/InlineSearch';
 
@@ -24,7 +23,6 @@ ReactOnRails.register({
   FormSelect,
   AssociativeFormSelect,
   ModalControlStrip,
-  ModalContainer,
   AsyncSelectContainer,
   InlineSearch,
 });

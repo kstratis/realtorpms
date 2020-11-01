@@ -9,8 +9,8 @@ import { capitalizeFirstLetter, hasParams } from '../utilities/helpers';
 import useFilterToggle from '../hooks/useFilterToggle';
 import FormComponents from './fields/FormComponents';
 import useTooltips from '../hooks/useTooltips';
-import ModalContainer from '../components/ModalContainer';
 import useMultiCheckbox from '../hooks/useMultiCheckbox';
+import ModalControlStrip from "../components/modals/ModalControlStrip";
 
 const ClientsList = ({
   handlePageClick,
@@ -123,23 +123,29 @@ const ClientsList = ({
                       </label>
                       {meta['is_admin'] ? (
                         <>
-                          <ModalContainer
-                            id={'client-list-modal'}
-                            origin={'menu'}
-                            modalSize={'md'}
-                            fireButtonLabel={`<i class='fas fa-tasks fa-lg fa-fw' />`}
-                            fireButtonBtnSize={`md`}
-                            fireButtonBtnType={`success`}
-                            modalTitle={i18n.modal.mass_actions.title}
-                            modalHeader={null}
-                            child={'MassActions'}
-                            buttonCloseLabel={i18n.modal.mass_actions.close_btn}
-                            title={i18n.search_save_title}
-                            i18n={i18n}
-                            buttonDisabled={!Object.keys(checkedItems).some(i => checkedItems[i])}
-                            checkedItems={checkedItems}
-                            massDeletePersonsEndpoint={meta.mass_delete_clients_link}
-                            massFreezePersonsEndpoint={''}
+                          <ModalControlStrip
+                            entries={[
+                              {
+                                name: 'MassActions',
+                                button: {
+                                  content: `<i class='fas fa-tasks fa-lg fa-fw'/>`,
+                                  size: 'md',
+                                  classname: 'btn-success action-toolbar-group-btn',
+                                  tooltip: i18n.button.tooltip,
+                                  isDisabled: !Object.keys(checkedItems).some(i => checkedItems[i])
+                                },
+                                modal: {
+                                  id: 'client-list-modal',
+                                  i18n: i18n,
+                                  title: i18n.modal.mass_actions.title,
+                                  buttonCloseLabel: i18n.modal.mass_actions.close_btn,
+                                  origin: 'menu',
+                                  checkedItems: checkedItems,
+                                  massDeletePersonsEndpoint: meta.mass_delete_clients_link,
+                                  massFreezePersonsEndpoint: ''
+                                },
+                              },
+                            ]}
                           />
 
                           {Object.keys(checkedItems).filter(i => checkedItems[i]).length ? (
