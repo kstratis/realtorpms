@@ -1,7 +1,7 @@
 <% provide(:title, t('users.show.heading')) %>
 
 <!-- Notice the use of render partial -->
-<%= render layout: 'layouts/breadcrumb', locals: {path: [{:title => t('users.show.breadcrumb'), :href => users_path}, {title: @user.full_name, :href => ''}], icon: 'house-colored'} do %>
+<%= render layout: 'layouts/breadcrumb', locals: { path: [{ :title => t('users.show.breadcrumb'), :href => users_path }, { title: @user.full_name, :href => '' }], icon: 'house-colored' } do %>
   <div class="action-btns">
     <div class="btn-group btn-group-toggle">
       <% if current_user.is_admin?(current_account) %>
@@ -9,7 +9,7 @@
           <i class="fas fa-pen fa-fw"></i>
           <span class="d-none d-lg-inline">&nbsp;<%= t 'properties.edit.edit_button_alt' %></span>
         <% end %>
-        <%= link_to @user, method: :delete, data: {confirm: t('prompt')}, class: 'btn btn-secondary btn-sm editable' do %>
+        <%= link_to @user, method: :delete, data: { confirm: t('prompt') }, class: 'btn btn-secondary btn-sm editable' do %>
           <i class="fas fa-trash fa-fw"></i>
           <span class="d-none d-lg-inline">&nbsp;<%= t 'properties.delete.delete_button' %></span>
         <% end %>
@@ -33,11 +33,20 @@
             </div>
             <div class="col-lg-8 text-center flex-nowrap">
               <nav class="nav nav-tabs anchor-support nav-justified border-0 d-flex justify-content-center text-nowrap ">
-                <a href="#info" class="nav-link custom active text-nowrap" data-toggle="tab" role="tab" aria-selected="true"><i class="menu-icon far fa-address-card fa-fw"></i><span class="d-none d-md-inline tab-text">&nbsp; <%= t('clients.show.tabs.info') %></span></a>
-                <a href="#assignments" class="nav-link custom " data-toggle="tab" role="tab" aria-selected="false"><i class="menu-icon fas fa-home fa-fw"></i><span class="d-none d-md-inline tab-text">&nbsp; <%= t('assignments.assigned') %></span>
+
+                <a href="#info" class="nav-link custom active text-nowrap" data-toggle="tab" role="tab" aria-selected="true">
+                  <span class="tab-title-container-partner">
+                    <i class="menu-icon far fa-address-card fa-fw"></i>
+                    <span class="d-none d-md-inline tab-text">&nbsp; <%= t('clients.show.tabs.info') %></span>
+                  </span>
                 </a>
-                <!--              <a href="#offering" class="nav-link custom " data-toggle="tab" role="tab" aria-selected="false"><i class="menu-icon fas fa-home fa-fw"></i><span class="d-none d-md-inline tab-text">&nbsp; <%#= t('clients.show.tabs.offering') %></span>-->
-                <!--              </a>-->
+                <a href="#assignments" class="nav-link custom " data-toggle="tab" role="tab" aria-selected="false">
+                  <span class="tab-title-container-partner">
+                  <i class="menu-icon fas fa-home fa-fw"></i>
+                  <span class="d-none d-md-inline tab-text">&nbsp; <%= t('assignments.assigned') %></span>
+                  </span>
+                </a>
+
               </nav><!-- /.nav -->
             </div>
 
@@ -63,7 +72,8 @@
                   </div><!-- /avatar -->
                   <div class="media-body pl-3 pt-3">
                     <strong><%= @user.full_name %></strong>
-                    <% if @is_admin %> &nbsp;&nbsp;<span data-toggle="tooltip" data-position="auto" title="<%= t('accounts.account_owner') %>"><i class="fas fa-angle-double-up blue"></i></span><% end %><br>
+                    <% if @is_admin %> &nbsp;&nbsp;<span data-toggle="tooltip" data-position="auto" title="<%= t('accounts.account_owner') %>"><i class="fas fa-angle-double-up blue"></i></span>
+                    <% end %><br>
                     <span><%= @user.age ? @user.age : '—' %></span>
 
                   </div>
@@ -80,13 +90,13 @@
                       <div class="card-metric">
                         <div class="metric">
                           <p class="metric-value h3">
-<!--                            ∞-->
+                            <!--                            ∞-->
                             <sub><i class="fa fa-tasks fa-lg fa-fw"></i></sub>
                             <% if @is_admin %>
                               <span class="value"><i class="fas fa-infinity"></i></span>
-                              <% else %>
+                            <% else %>
                               <span class="value"><%= @user.assignments.count %></span>
-                              <% end %>
+                            <% end %>
 
                             <!--                    <sub><i class="pr-icon cs account-switch"></i></sub> <span class="value"><%#= @user.assignments.count %></span>-->
                           </p>
