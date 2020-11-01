@@ -101,6 +101,7 @@ module Accounts
 
     def mass_delete
       current_account.users.where(id: params[:selection]).destroy_all
+      flash[:success] = I18n.t('users.flash_delete_multiple')
       render json: { status: "OK", message: users_path, meta: params[:selection] }
     end
 

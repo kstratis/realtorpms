@@ -703,6 +703,7 @@ en:
     flash_not_created: "Error creating new client"
     flash_not_updated: "Error updating client data"
     flash_delete: "Client successfully deleted"
+    flash_delete_multiple: "Action completed successfully"
     flash_not_found: "Client not found"
     flash_profile_updated: "Client profile uccessfully updated"
     client: "Client"
@@ -751,6 +752,7 @@ en:
   users:
     title: "Partners"
     flash_delete: "User was successfully deleted"
+    flash_delete_multiple: "Action completed successfully"
     flash_welcome: "Welcome to %{brand}! Your profile is complete."
     flash_user_added: "New user created successfully"
     flash_user_add_failed: "Unable to create new user due to form errors"

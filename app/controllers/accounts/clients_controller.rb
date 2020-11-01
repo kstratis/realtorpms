@@ -72,6 +72,7 @@ module Accounts
 
     def mass_delete
       current_account.clients.where(id: params[:selection]).destroy_all
+      flash[:success] = I18n.t('clients.flash_delete_multiple')
       render :json => { :status => "OK", message: clients_path }
     end
 
