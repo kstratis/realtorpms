@@ -152,6 +152,18 @@
           <!--          </li>-->
           <!-- /.nav-item -->
           <!-- .nav-item -->
+          <% if masquerading? %>
+            <%= link_to user_masquerade_path(current_user),
+                        method: :delete,
+                        class: 'nav-link menu-link masquerading-special',
+                        data: {
+                            content: t('js.datatables.users.masquerading.exit_prompt', user: masqueraded_admin&.full_name),
+                            toggle: 'popover',
+                            trigger: 'hover' } do %>
+              <%= content_tag :span, nil, class: 'sidebar-masked-icon xs masked-icon-logout' %>
+            <% end %>
+          <% end %>
+
           <% if current_user.is_admin? current_account %>
             <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown #{active_for(controller: ['users', 'invitations'])}" do %>
               <%= link_to users_path, class: 'nav-link menu-link' do %>

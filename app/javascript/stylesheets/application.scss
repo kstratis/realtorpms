@@ -2038,7 +2038,12 @@ a.text-link {
   }
 }
 
-.action-toolbar-group-btn{
+.masquerading-special{
+  border: 2px dashed yellow !important;
+  border-radius: 5px !important;
+}
+
+.action-toolbar-group-btn {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }

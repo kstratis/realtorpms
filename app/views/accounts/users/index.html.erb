@@ -39,6 +39,8 @@
                 initial_ordering: @initial_ordering,
                 object_type: 'users',
                 users_path: users_path,
+                is_masquerading: masquerading?,
+                # masquerade_path: new_user_masquerade_path(user),
                 cfields: {
                     fields: get_cfields('users'),
                     storedSelections: @initial_cfields,

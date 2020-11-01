@@ -80,6 +80,7 @@ module PersonDatatable
           privileged: entry.class == User ? Membership.find_by(account: current_account, user: entry).privileged : nil,
           view_entity_path: polymorphic_path([entry.class.to_s.downcase.to_sym], id: entry.id),
           edit_entity_path: polymorphic_path([entry.class.to_s.downcase.to_sym], id: entry.id, action: :edit),
+          masquerade_path: entry.class == User ? user_masquerade_new_path(entry.id) : nil,
           telephones: entry.try(:telephones) || '—',
           # assignments: entry.properties.count,
           # registration: entry.created_at.to_formatted_s(:long)

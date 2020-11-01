@@ -52,6 +52,9 @@ Rails.application.routes.draw do
       end
 
       resources :users do
+        get '/masquerade/new', to: 'masquerades#new'
+        delete '/masquerade', to: 'masquerades#destroy'
+
         delete :mass_delete, on: :collection
         post :mass_freeze, on: :collection
 

@@ -90,6 +90,7 @@ function withDatatable(WrappedComponent) {
           }
           : '',
         cfields: this.props.initial_payload.cfields,
+        is_masquerading: this.props.initial_payload.is_masquerading,
         dataset: this.props.initial_payload.dataset_wrapper.dataset,
         resultsPerPage: this.props.initial_payload.results_per_page,
         isLoading: false,
