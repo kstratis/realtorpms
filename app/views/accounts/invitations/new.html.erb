@@ -19,9 +19,6 @@
 
                 <!-- .form-group -->
                 <div class="form-group">
-                  <div class="pb-2">
-                    <span class="badge badge-secondary"><em><%= t('users.new.feedback') %></em></span>
-                  </div>
                   <div class="form-label-group">
                     <%= f.email_field :email,
                                       class: 'form-control',
@@ -36,6 +33,7 @@
                     <%= f.label "email" do %>
                       <span><i class="far fa-envelope fa-fw"></i>&nbsp;<%= User.human_attribute_name("email") %></span>
                     <% end %>
+                    <span class="badge badge-subtle badge-secondary"><em><%= t('users.new.feedback') %></em></span>
                     <%= inline_error @invitation, :email, 'Email' %>
                   </div>
                 </div>
@@ -43,7 +41,7 @@
 
                 <!-- .form-actions -->
                 <div class="form-actions invite-action">
-                  <button type="submit" class="btn btn-primary btn-block"><%= t('invitations.new.inv_button') %></button>
+                  <button type="submit" class="btn btn-outline-primary btn-block"><%= t('invitations.new.inv_button') %></button>
                 </div> <!-- /.form-actions -->
               </div>
 

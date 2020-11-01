@@ -65,25 +65,22 @@
 
 <!-- .form-group -->
 <div class="form-group">
-  <div class="pb-2">
-    <span class="badge badge-info"><em><%= t('activerecord.attributes.user.password_leave_empty') %></em></span>
-  </div>
   <div class="form-label-group">
     <%= f.password_field :password, class: 'form-control', placeholder: User.human_attribute_name("password") %>
     <%= f.label :password, User.human_attribute_name("password_new") %>
     <%= inline_error @user, :password, 'Password' %>
   </div>
+  <span class="badge badge-subtle badge-secondary"><em><%= t('activerecord.attributes.user.password_leave_empty') %></em></span>
 </div>
 <!-- /.form-group -->
 
 <!-- .form-group -->
 <div class="form-group">
-  <div class="pb-2">
-    <span class="badge badge-info"><em><%= t('activerecord.attributes.user.password_leave_empty') %></em></span>
-  </div>
+
   <div class="form-label-group">
     <%= f.password_field :password_confirmation, class: 'form-control', placeholder: User.human_attribute_name("password_confirmation") %>
     <%= f.label :password_confirmation, User.human_attribute_name("password_confirmation") %>
     <%= inline_error @user, :password_confirmation, 'Password confirmation' %>
   </div>
+    <span class="badge badge-subtle badge-secondary"><em><%= t('activerecord.attributes.user.password_leave_empty') %></em></span>
 </div> <!-- /.form-group -->
