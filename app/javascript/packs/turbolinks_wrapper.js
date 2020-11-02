@@ -9,9 +9,9 @@ Turbolinks.BrowserAdapter.prototype.showProgressBarAfterDelay = function() {
 // On each visit turbolinks swaps the document body so 'animated' and 'fadeIn'
 // are automatically removed and don't add up.
 // Optional
-$(document).on('turbolinks:load', function(e){
-  $('#page-transition').addClass('animate__animated animate__fadeIn');
-});
+// $(document).on('turbolinks:load', function(e){
+//   $('#page-transition').addClass('animate__animated animate__fadeIn');
+// });
 
 $(document).on('turbolinks:before-visit', function(e){
   // window.location.pathname is the url before the new visit.
