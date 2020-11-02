@@ -1,5 +1,8 @@
 const Uppy = require('@uppy/core');
-const Dashboard = require('@uppy/dashboard');
+const Dashboard = require('@uppy/dashboard')
+
+require('@uppy/core/dist/style.css')
+// require('@uppy/dashboard/dist/style.css')
 
 $(document).on('turbolinks:load', function(e) {
 

@@ -39,7 +39,8 @@
     "spark-md5": "^3.0.1",
     "stacked-menu": "https://gitlab.com/bent10/stacked-menu.git#master",
     "turbolinks": "^5.2.0",
-    "uppy": "^1.0.2",
+    "@uppy/core": "^1.13.3",
+    "@uppy/dashboard": "^1.12.9",
     "webpack-cli": "^3.3.12",
     "wouter": "^2.5.1"
   },

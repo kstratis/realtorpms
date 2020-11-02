@@ -10,7 +10,7 @@ Turbolinks.BrowserAdapter.prototype.showProgressBarAfterDelay = function() {
 // are automatically removed and don't add up.
 // Optional
 $(document).on('turbolinks:load', function(e){
-  $('#page-transition').addClass('animated fadeIn');
+  $('#page-transition').addClass('animate__animated animate__fadeIn');
 });
 
 $(document).on('turbolinks:before-visit', function(e){
