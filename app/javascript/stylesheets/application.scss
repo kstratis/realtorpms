@@ -833,14 +833,6 @@ button, a {
   text-align: center;
 }
 
-//.uppy-Dashboard-poweredBy{
-//  display: none;
-//}
-//
-//.uppy-Dashboard-inner{
-//  border: 5px dotted rgba(147, 147, 147, .2)
-//}
-
 .disabledElement {
   pointer-events: none;
   opacity: 0.4;
@@ -1147,6 +1139,14 @@ li.page-item {
   background-repeat: no-repeat;
   background-position: center center;
   background-image: url('../images/list.svg');
+}
+
+.uppy-Dashboard-inner{
+  background-color: #ffffff;
+}
+
+.uppy-Dashboard-AddFiles-title{
+  color: #757575;
 }
 
 .count {
@@ -1909,9 +1909,7 @@ a.text-link {
 .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link.custom {
   border-bottom: none;
   border-width: 0 0 3px;
-  //border-top: 1px solid black;
-  //border-right: 1px solid black;
-  //border-left: 1px solid black;
+
   .tab-title-container-partner{
     border-radius: 5px;
     padding: 5px 40px 5px 40px;
@@ -1928,7 +1926,15 @@ a.text-link {
   }
 }
 
-.nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus{
+nav.nav-tabs a.nav-link.setting.active {
+  border-width: 0 0 0 3px;
+}
+
+nav.nav-tabs a.nav-link.setting:hover, nav.nav-tabs a.nav-link:focus{
+  border-color: #346CB0;
+}
+
+nav.nav-tabs a.nav-link:hover:not(.setting), nav.nav-tabs a.nav-link:focus:not(.setting){
   border-color: transparent;
 }
 
@@ -2073,3 +2079,11 @@ a.text-link {
   border-bottom-left-radius: 0;
 }
 
+.uppy-Dashboard-inner {
+  max-height: 510px !important;
+}
+
+.form-container.disabled{
+  pointer-events: none;
+  cursor: wait;
+}

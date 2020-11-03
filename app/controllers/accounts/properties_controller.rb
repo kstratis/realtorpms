@@ -183,7 +183,7 @@ module Accounts
 
       clients_hash = params_copy.extract!(:clients)
 
-      params_copy[:delete_images].try(:each) do |id|
+      params[:delete_images]&.reject(&:blank?)&.each do |id|
         @property.images.find(id).purge
       end
 

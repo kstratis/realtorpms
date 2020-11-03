@@ -17,7 +17,9 @@
         <ul>
           <% @property.images.each do |image| %>
             <li>
-              <%= check_box_tag 'delete_images[]', image.id, checked = false, class: "", id: "thumb" + image.id.to_s, type: 'checkbox' %>
+              <!-- We need custom check box ids so don't use the following -->
+              <%#= property.check_box :delete_images, { multiple: true }, image.id, nil, { id: "my_unique_id"} %>
+              <%= check_box_tag 'delete_images[]', image.id, checked = false, class: "delete-thumb", id: "thumb" + image.id.to_s, type: 'checkbox' %>
               <label for="thumb<%= image.id.to_s %>">
                 <div class="thumbnail-container"><%= image_tag image, class: 'thumbnail' %></div>
               </label>
