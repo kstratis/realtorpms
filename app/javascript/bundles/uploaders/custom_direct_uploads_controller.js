@@ -1,6 +1,7 @@
 /* This is basically a customized version of active_uploads_controller.js of activestorage. */
 import {DirectUploadController} from "@rails/activestorage/src/direct_upload_controller";
 import {dispatchEvent, findElement, findElements, toArray} from '@rails/activestorage/src/helpers';
+import Compressor from 'compressorjs';
 
 // Changed line
 const uppySelector = "input[type=file][data-direct-upload-url].uppy-emitters:not([disabled])";
@@ -51,50 +52,69 @@ export class CustomDirectUploadsController {
   }
 
   start(callback) {
-    const controllers = this.createUploadControllers();
+    this.createUploadControllers().then((controllers) => {
+      const startNextController = () => {
+        const controller = controllers.shift();
+        if (controller) {
+          controller.start(error => {
+            if (error) {
+              callback(error);
+              this.dispatch('end');
+            } else {
+              startNextController();
+            }
+          });
+        } else {
+          // added line [added]
+          findElement(this.form, '#preventformsubmit').remove();
+          callback();
+          this.dispatch('end');
+        }
+      };
 
-    const startNextController = () => {
-      const controller = controllers.shift();
-      if (controller) {
-        controller.start(error => {
-          if (error) {
-            callback(error);
-            this.dispatch('end');
-          } else {
-            startNextController();
-          }
-        });
-      } else {
-        // added line [added]
-        findElement(this.form, '#preventformsubmit').remove();
-        callback();
-        this.dispatch('end');
-      }
-    };
-
-    this.dispatch('start');
-    startNextController();
+      this.dispatch('start');
+      startNextController();
+    });
   }
 
   createUploadControllers() {
-    const controllers = [];
-    // changed line
+    // changed lines
+    const promisesArray = [];
 
     this.all_files.forEach((file) => {
-      // DEBUG
-      // console.log(file);
-
-      // Changed line
-      // Single mock element guaranteed to be on the DOM.
-      let mockEmitter = file.source === 'uppy'
-        ? this.uppyDOMNodes[0]
-        : this.fileDOMNodes[0];
-
-      const controller = new DirectUploadController(mockEmitter, file);
-      // const controller = new DirectUploadController(mockEmitter, filewrapper.data);
-      controllers.push(controller);
+      promisesArray.push(
+        new Promise((resolve, reject) => {
+          new Compressor(file,
+            {
+              quality: 0.8,
+              success: (result) => {
+                file.compressed = result;
+                return resolve(file);
+              },
+              error: (err) => {
+                console.error(err);
+                reject(err);
+              }
+            }
+          );
+        })
+      );
     });
-    return controllers;
+
+    return Promise.all(promisesArray).then((fileArray) => {
+      const controllers = [];
+      fileArray.forEach((file) => {
+        let mockEmitter = file.source === 'uppy'
+          ? this.uppyDOMNodes[0]
+          : this.fileDOMNodes[0];
+        const compressedFile = new File([file.compressed], file.name);
+        compressedFile.id = file.id;
+
+        const controller = new DirectUploadController(mockEmitter, compressedFile);
+        controllers.push(controller);
+      });
+      return controllers; // or Promise.resolve(controllers);
+    });
   }
 
   dispatch(name, detail = {}) {

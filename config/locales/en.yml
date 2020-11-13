@@ -558,9 +558,14 @@ en:
     properties_owner_unavailable: "N/Α"
     properties_owner_tel_unavailable: "Ν/Α"
     uppy:
+      addMore: "Add more"
+      addingMoreFiles: "Adding more files"
+      back: "Back"
       dropPaste: "Drop files here, paste or"
+      exceedsSize: "Το μέγεθος του αρχείου είναι μεγαλύτερο από "
+      noDuplicates: "Προσπαθείτε να μεταφορτώσετε το ίδιο αρχείο 2 φορές: %{fileName}"
       browse: "browse"
-      notes: "Only images are allowed. Max file size 2MB/file. Max number of files < 20."
+      notes: "Only images are allowed. Max file size 3.5MB/file. Total max number of files: 10."
       filename: "Filename:"
       editing: "Editing"
       done: "Close"
@@ -578,6 +583,10 @@ en:
       paused: "Paused"
       error: "Error"
       retry: "Please try again"
+      maxFileCountSingle: "You can only upload %{smart_count} file"
+      maxFileCountMulti: "You can only upload %{smart_count} files"
+      uploadingSingleFile: 'Uploading %{smart_count} file'
+      uploadingMultipleFiles: 'Uploading %{smart_count} files'
     validator:
       regex: "Only iFrame tags are allowed. i.e. &lt;iframe src=&quot;...&quot;&gt;&lt;/iframe&gt;"
       required: "The field is required"
@@ -725,7 +734,7 @@ en:
       change_pic: "Change photo"
       photo_header: "Profile photo"
       photo_subheader: "Click the current avatar to change the client's photo."
-      allowed_pic_specs: "JPG, GIF or PNG 400x400, < 2 MB."
+      allowed_pic_specs: "Image file < 3.5 MB."
       delete_avatar: "Are you sure you want to delete the client's picture?"
       add_owner: "Add co-owner"
     show:
@@ -788,7 +797,7 @@ en:
       change_pic: "Change photo"
       photo_header: "Profile photo"
       photo_subheader: "Click the current avatar to change your photo."
-      allowed_pic_specs: "JPG, GIF or PNG 400x400, < 2 MB."
+      allowed_pic_specs: "Image file < 3.5 MB."
       delete_avatar: "Are you sure you want to delete your avatar picture?"
     index:
       breadcrumb: "Partners"
@@ -830,6 +839,7 @@ en:
     popover_client_admin: "Choose a client from your account's pool of clients or alternatively start typing the first and last name of a new client to automatically create one. You can edit the client's full profile from the clients section after saving this search."
     popover_client_user: "Choose a client from the pool of your assigned clients or alternatively start typing the first and last name of a new client to automatically create one. You can edit the client's full profile from the clients section after saving this search."
     new:
+      avatar_title: "Property image cover"
       breadcrumb: "Properties"
       heading: "Add new property"
       heading_alt: "New property"
@@ -838,6 +848,7 @@ en:
       photo_header: "Cover photo"
       photo_subheader: "Click to change the cover photo for the property"
     edit:
+      avatar_title: "Property image cover"
       breadcrumb: "Properties"
       heading: "Edit property"
       edit_button_alt: "Edit"

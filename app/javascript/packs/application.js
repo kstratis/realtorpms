@@ -16,7 +16,6 @@ import './turbolinks_wrapper';
 // require("channels");
 // ---
 
-import * as uploader from '../bundles/uploaders/uppy_controller';
 import flatpickr from "flatpickr";
 import { Greek } from "flatpickr/dist/l10n/gr.js"
 import { setup_dependent_checkboxes } from '../bundles/utilities/helpers';
@@ -31,16 +30,25 @@ import 'bootstrap'  // bootstrap js files
 // See more in the docs: https://github.com/rails/webpacker/blob/master/docs/assets.md#link-in-your-rails-views
 require.context('../images', true)
 
-// const getExample = () => {
-//   return Promise.all([
-//     import(/* webpackChunkName: "Example" */
-//       '../bundles/Example.jsx'),
-//   ]);
-// };
+function noop() {}
 
 $(document).on('turbolinks:load', function(e) {
-  if ($(".uppy-emitters, .file-emitters").length > 0){ CustomActiveStorage.start()}
+  if ($(".uppy-emitters, .file-emitters").length > 0){
+    let modules = Promise.all([
+      import(/* webpackChunkName: "UppyController" */
+        '../bundles/uploaders/uppy_controller.js'),
+      import(/* webpackChunkName: "ASUploadHandler" */
+        './activestorage_upload_handler.js')
+    ]);
+    modules = modules || Promise.resolve({ default: noop });
+    modules.then(([{default: Uppy_ctrl}, {default: As_handler}]) => {
+      new Uppy_ctrl();
+      CustomActiveStorage.start();
+      new As_handler();
+    });
+  }
   if ($('.dependent_input').length) setup_dependent_checkboxes();
+  // TODO remove this on deploy
   if (window.location.pathname === '/demo'){
     import(/* webpackChunkName: "ExampleWOOT", webpackPrefetch: true */ '../bundles/Example.jsx').then(({default: Example}) => {
       ReactDOM.render(<Example />, document.getElementById('lazy'))
@@ -48,6 +56,5 @@ $(document).on('turbolinks:load', function(e) {
   }
   $('[data-toggle="tooltip"]').tooltip();
   $('[data-toggle="popover"]').popover();
-
 });
 
