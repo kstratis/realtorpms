@@ -17,7 +17,7 @@ module SearchFilter
     # puts filter
     # DEBUG
     puts "DEBUG: search term for #{object.name} is: #{params[:search]}"
-    @results = object.search(params[:search], filter, limit)
+    @results = object.search(params[:search].split(' ').map { |el| el.presence&.capitalize }.compact.join(' '), filter, limit)
 
     data = Array.new
     @results.each do |entry|
