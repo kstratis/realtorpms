@@ -14,13 +14,13 @@ module Searchable
     # Once included in a model it defines a class method which allows us to search through a collection of
     # entries. In order to properly work it requires that a model specifies the +:SEARCH_FIELDS+ constant which dictates
     # which model fields to search on. It also provides (very) limited support for looking through to an associated
-    # model using the dot ('.') character. However note that it's the responsibilty of the developer to ensure that
+    # model using the dot ('.') character. However note that it's the responsibility of the developer to ensure that
     # any associations are already established and operational.
-    def search(term, filter=nil, limit=nil)
+    def search(term, filter = nil, limit = nil)
       # Dynamically get the fields from the model
       fields = const_get(:SEARCH_FIELDS).dup
       # Even if one of them contains a dot that means we'll also have to search the associated model
-      associated_field = fields.detect {|field| field.include?('.')}
+      associated_field = fields.detect { |field| field.include?('.') }
       # Get the associated model
       associated_model = associated_field.blank? ? nil : associated_field.split('.').first
       # Once we have the associated model, normalize all fields (i.e. in +mymodel.myfield+ removes the +mymodel.part+)
