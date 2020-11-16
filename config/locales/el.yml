@@ -468,7 +468,7 @@ el:
           enter_notice: "Έχετε μπεί στο σύστημα ως %{user}"
           active_notice: "Βλέπετε το σύστημα ως %{user}"
           exit_prompt: "Επαναφορά ως %{user}"
-          exit_notice: "Επιστρέψατε το σύστημα ως %{user}"
+          exit_notice: "Επιστρέψατε στο σύστημα ως %{user}"
       clients:
         delete: "Διαγραφή"
         confirm_prompt: "Είστε σίγουρος;"
