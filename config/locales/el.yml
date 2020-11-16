@@ -465,7 +465,7 @@ el:
         tooltip_edit_profile: "Επεξεργασία χρήστη"
         tooltip_delete_profile: "Διαγραφή χρήστη"
         masquerading:
-          enter_notice: "Έχετε μπεί στο σύστημα ως %{user}"
+          enter_notice: "Έχετε εισέλθει στο σύστημα ως %{user}"
           active_notice: "Βλέπετε το σύστημα ως %{user}"
           exit_prompt: "Επαναφορά ως %{user}"
           exit_notice: "Επιστρέψατε στο σύστημα ως %{user}"
