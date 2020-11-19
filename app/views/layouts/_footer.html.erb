@@ -1,13 +1,49 @@
 <footer class="footer">
-  <small>
-    The <a href="http://www.railstutorial.org/">definitive real estate platform</a>
-    by <a href="http://www.michaelhartl.com/">Property X</a>
-  </small>
-  <nav>
-    <ul>
-      <li><%= link_to 'About', about_path %></li>
-      <li><%= link_to 'Contact', contact_path %></li>
-      <li><a href="http://news.railstutorial.org/">News</a></li>
-    </ul>
+<!--  <small>-->
+<!--    The <a href="http://www.railstutorial.org/">definitive real estate platform</a>-->
+<!--    by <a href="http://www.michaelhartl.com/">Property X</a>-->
+<!--  </small>-->
+  <nav class="footer-nav">
+    <table class="footer-table">
+      <tr>
+      <td>© 2018 - <%= Date.today.year %></td>
+        <td>&nbsp;/&nbsp;</td>
+        <td><%= t('version') %>:</td>
+        <td><%= version %></td>
+        <td>&nbsp;/&nbsp;</td>
+        <td class="pointer-hand">
+          <button
+              data-target="#modal-security"
+          data-toggle="modal"
+          data-placement="auto"
+          data-trigger="hover"
+          class="btn btn-icon btn-sm btn-outline-info">
+          <i class="fa fa-lock fa-fw"></i>
+          </button>
+        </td>
+      </tr>
+    </table>
   </nav>
+
 </footer>
+
+<!-- Modal -->
+<div class="modal fade" id="modal-security" tabindex="-1" aria-labelledby="modal-security" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="security-header"><%= t('footer.title') %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="security-notice">
+          <div class="d-flex justify-content-center"><i class="pr-icon lg padlock"> </i></div>
+          <p><%= t('footer.body1') %></p>
+          <p><%= t('footer.body2_html', subdomain: current_account.subdomain) %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -446,6 +446,10 @@
     background-image: url('../images/no_stored_searches.svg');
   }
 
+  &.padlock{
+    background-image: url('../images/footer/padlock.svg');
+  }
+
   & ~ .pr-icon-desc {
     display: block;
     text-align: center;
