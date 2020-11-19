@@ -81,7 +81,7 @@ class PropertyEntry extends React.Component {
                         <tbody>
                           <tr>
                             <td className={'text-left'}>
-                              <i className={'fas fa-cube fa-fw'} />
+                              <i className={'fas fa-cube fa-fw'} />&nbsp;
                               {renderHTML(this.props.entry.mini_heading, 'inline')}
                             </td>
                             <td className={'text-right'}>
@@ -91,7 +91,7 @@ class PropertyEntry extends React.Component {
                           </tr>
                           <tr>
                             <td className={'text-left'}>
-                              <i className={'fas fa-map-marker fa-fw'} />
+                              <i className={'fas fa-map fa-fw'} />&nbsp;
                               <strong>{this.props.entry.location}</strong>
                             </td>
                             <td className={'text-right text-nowrap'}>{this.props.entry.price}</td>
@@ -100,7 +100,7 @@ class PropertyEntry extends React.Component {
                           <tr>
                             {this.props.entry.registration ? (
                               <td className={'text-left'}>
-                                <i className={'fas fa-calendar fa-fw'} />
+                                <i className={'fas fa-calendar fa-fw'} />&nbsp;
                                 {this.props.entry.registration}
                               </td>
                             ) : null}

@@ -12,6 +12,9 @@
   }
 }
 
+.app-main {
+  min-height: 900px;
+}
 
 
 //@font-face {
@@ -1993,7 +1996,7 @@ nav.nav-tabs a.nav-link:hover:not(.setting), nav.nav-tabs a.nav-link:focus:not(.
 }
 
 .description-border{
-  border-top:1px solid grey;
+  border-top:1px solid rgba(20, 20, 31, 0.15);
 }
 
 .card-businesstype-header{
@@ -2087,3 +2090,37 @@ nav.nav-tabs a.nav-link:hover:not(.setting), nav.nav-tabs a.nav-link:focus:not(.
   pointer-events: none;
   cursor: wait;
 }
+
+.footer-nav{
+  padding: 5px 25px 25px 0;
+}
+
+.footer-table{
+  float:right;
+}
+
+.footer-table td {
+  text-align: right;
+}
+
+.pointer-hand button i{
+  cursor: pointer !important;
+}
+
+#security-notice{
+  padding:20px;
+}
+
+.table.table-property-entry td{
+  padding: 0.3rem;
+}
+
+.table.table-property-entry tr td:last-child {
+  padding-bottom: 8px;
+}
+
+.table-property-entry{
+  margin-bottom: 0;
+}
+
+
