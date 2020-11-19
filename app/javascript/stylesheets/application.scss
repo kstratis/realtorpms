@@ -12,6 +12,9 @@
   }
 }
 
+.app-main {
+  min-height: 900px;
+}
 
 
 //@font-face {
@@ -2086,4 +2089,24 @@ nav.nav-tabs a.nav-link:hover:not(.setting), nav.nav-tabs a.nav-link:focus:not(.
 .form-container.disabled{
   pointer-events: none;
   cursor: wait;
+}
+
+.footer-nav{
+  padding: 5px 25px 25px 0;
+}
+
+.footer-table{
+  float:right;
+}
+
+.footer-table td {
+  text-align: right;
+}
+
+.pointer-hand button i{
+  cursor: pointer !important;
+}
+
+#security-notice{
+  padding:20px;
 }

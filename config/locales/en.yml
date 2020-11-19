@@ -45,6 +45,16 @@ en:
   error: "Error"
   action_not_permitted_error: "Action not permitted"
   loading: "💿 Loading... Please wait."
+  version: "Version"
+  footer:
+    title: "This is a secured site"
+    body1: |
+      A secure site is a web site that is protected from prying eyes. When information passes back and forth
+      between our server and your computer, all the information is encrypted. That means that if anyone were
+      to 'listen in' and see this data, they will not be able to decrypt or read what it means.
+    body2_html: |
+      <strong>%{subdomain}</strong> uses this security (known as SSL) throughout the site and all its subdomains to make
+      sure that <strong>your personal information is not accessible by anyone but yourself.</strong>
   tooltips:
     edit: "Edit"
     delete: "Delete"
