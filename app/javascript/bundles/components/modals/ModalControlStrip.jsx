@@ -11,6 +11,7 @@ const AddRemovePartners = preloadableLazy(() => import('../AddRemovePartners'));
 const StoreClientSearch = preloadableLazy(() => import('../StoreClientSearch'));
 const RetrieveClientSearch = preloadableLazy(() => import('../RetrieveClientSearch'));
 const MassActions = preloadableLazy(() => import('../MassActions'));
+const AddRemoveProperties = preloadableLazy(() => import('../AddRemoveProperties'));
 
 
 const components = {
@@ -19,7 +20,8 @@ const components = {
   AddRemovePartners: AddRemovePartners,
   StoreClientSearch: StoreClientSearch,
   RetrieveClientSearch: RetrieveClientSearch,
-  MassActions: MassActions
+  MassActions: MassActions,
+  AddRemoveProperties: AddRemoveProperties
 };
 
 function preloadableLazy(dynamicImport) {
@@ -41,6 +43,7 @@ function ModalControlStrip(props) {
   const [componentsList, setComponentsList] = useState(() => {
     return props.entries.map((entry => entry.name ))
   });
+  const [reloadPage, setReloadPage] = useState(false);
 
   useTooltips();
 
@@ -60,6 +63,14 @@ function ModalControlStrip(props) {
 
   const hideModal = () => {
     setComponentResource(null);
+    if (reloadPage){
+      Turbolinks.visit(window.location.href);
+    }
+  }
+
+  // Reloads the page with fresh data when the modal is closed.
+  const handlePageParent = (value) => {
+    setReloadPage(value);
   }
 
   const wrapperClassname = (buttonEl, buttonIdx, buttonsCnt) => {
@@ -98,8 +109,8 @@ function ModalControlStrip(props) {
       {componentResource ? (
         <ModalPortalWrapper>
           <div className="modal fade" id="appModal" role="dialog" aria-labelledby="appModalLabel" aria-hidden="true">
-            <div className={`modal-dialog ${componentProps['modal']['size'] === 'md' ? '' : 'modal-' + componentProps['modal']['size']} modal-dialog-centered`} role="document">
-              <div className="modal-content">
+            <div className={`modal-dialog ${componentProps['modal']['modalDialogCSSClasses']} ${componentProps['modal']['size'] === 'md' ? '' : 'modal-' + componentProps['modal']['size']} modal-dialog-centered`} role="document">
+              <div className={`modal-content ${componentProps['modal']['modalContentCSSClasses']}`}>
                 <div className="modal-header">
                   <h5 id={componentProps['name']} className="modal-title">
                     {componentProps['modal']['title']}
@@ -116,9 +127,12 @@ function ModalControlStrip(props) {
                   ) : null}
                 </div>
 
-                <div className={`modal-body modal-wrapper`}>
+                <div className={`modal-body modal-wrapper ${componentProps['modal']['modalBodyCSSClasses']}`}>
                   <Suspense fallback={<Spinner isLoading={true} />}>
-                    <ModalResourceWrapper resource={componentResource} resourceProps={componentProps['modal']} hideModal={hideModal} />
+                    <ModalResourceWrapper resource={componentResource}
+                                          resourceProps={componentProps['modal']}
+                                          hideModal={hideModal}
+                                          handlePageParent={handlePageParent} />
                   </Suspense>
                 </div>
 

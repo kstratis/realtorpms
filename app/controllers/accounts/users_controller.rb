@@ -78,9 +78,9 @@ module Accounts
     def show
       @is_admin = @user.is_admin?(current_account)
       if @is_admin
-        filter_properties(current_account.properties.includes(:location), { page: params[:page] })
+        filter_properties(current_account.properties.includes(:location), { page: params[:page], purpose: 'sell_rent' })
       else
-        filter_properties(@user.properties.includes(:location), { page: params[:page] })
+        filter_properties(@user.properties.includes(:location), { page: params[:page], purpose: 'sell_rent' })
       end
     end
 

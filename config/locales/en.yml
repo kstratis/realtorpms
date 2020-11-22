@@ -406,7 +406,7 @@ en:
           tooltip: "Mass actions"
           close_btn: "Close"
       select:
-        noresults: "No results were found"
+        noresults: "No results found"
         loading_html: "Loading results..."
         add: "Add new client: "
         placeholder: "Choose"
@@ -645,8 +645,8 @@ en:
     heading: "Dashboard"
     subheading: "This is the dashboard for logged in users"
     overview: "Overview"
-    houses: "Properties"
-    partners: "Partners"
+    properties: "Properties"
+    users: "Partners"
     integrations: "Integrations"
     clients: "Clients"
     mapping: "Mapping"
@@ -797,6 +797,12 @@ en:
       users: "Users"
       assignments: "Assignments"
       processed: "Processed"
+      toolbar:
+        assignment_title: "Assignment"
+        assignment_tooltip: "Assign properties"
+      modal:
+        assignments_next: "Success"
+        no_results: "No results found"
     edit:
       breadcrumb: "Partners"
       edit_button: "Update"

@@ -479,9 +479,10 @@ function withDatatable(WrappedComponent) {
       this.setState({ isLoading: true });
       const selected = pageNo ? pageNumber : pageNumber.selected;
       let searchParams = new URLSearchParams(window.location.search);
+      // debugger;
       searchParams.set('page', selected + 1);
       let newUrlParams = searchParams.toString()
-        ? `${window.location.pathname}?${searchParams.toString()}`
+        ? `${window.location.pathname}?${searchParams.toString()}${window.location.hash}`
         : window.location.pathname;
       if (!browserButtonInvoked) history.pushState({ jsonpage: selected + 1 }, null, newUrlParams);
       // console.log(searchParams.toString());

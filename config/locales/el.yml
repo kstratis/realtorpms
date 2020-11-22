@@ -774,6 +774,12 @@ el:
       users: "Χρήστες"
       assignments: "Ανατεθημένα"
       processed: "Διεκπεραιώσεις"
+      toolbar:
+        assignment_title: "Ανάθεση"
+        assignment_tooltip: "Ανάθεση ακινήτων"
+      modal:
+        assignments_next: "Επιτυχία"
+        no_results: "Δεν βρέθηκαν αποτελέσματα"
     edit:
       breadcrumb: "Συνεργάτες"
       edit_button: "Ενημέρωση"

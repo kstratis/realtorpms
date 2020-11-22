@@ -5,6 +5,8 @@
   <div class="action-btns">
     <div class="btn-group btn-group-toggle">
       <% if current_user.is_admin?(current_account) %>
+        <%= react_component('ModalControlStrip', props: { entries: users_modal_data(@user) }) %>
+
         <%= link_to edit_user_path(@user), class: 'btn btn-secondary btn-sm editable' do %>
           <i class="fas fa-pen fa-fw"></i>
           <span class="d-none d-lg-inline">&nbsp;<%= t 'properties.edit.edit_button_alt' %></span>
@@ -185,8 +187,6 @@
                       no_results: t('js.components.select.noresults'),
                   }
               }, prerender: false) %>
-
-
             </div>
 
           </div>

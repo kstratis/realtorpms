@@ -16,7 +16,7 @@ const ModalResourceWrapper = props => {
     };
   });
 
-  return <ComponentResource {...props.resourceProps} />;
+  return <ComponentResource {...props.resourceProps} handlePageParent={props.handlePageParent} />;
 };
 
 export default ModalResourceWrapper;
