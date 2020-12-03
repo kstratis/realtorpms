@@ -3,7 +3,7 @@ module AddRemoveAssociationsHandler
 
   # Add remove association entities based on each request (dropdown selection)
   #
-  # @param object [Object] The object in question. i.e. property or user
+  # @param object [Object] The object in question. i.e. user/client
   # @param association [String] The association object. i.e For 'clients' that would be property.send('clients')
   # @param selections [Array] That's an array of objects.
   #   i.e. [{"label"=>"John Smith", "value"=>36}, {"label"=>"Jane Stevens", "value"=>"Jane Stevens", "__isNew__"=>true}],
@@ -46,7 +46,7 @@ module AddRemoveAssociationsHandler
     # Ref: https://apidock.com/rails/ActiveRecord/Associations/CollectionProxy/delete
     # current_account.send(association).find(id)) could also be written as: association.singularize.capitalize.constantize
     # but I believe it's safer this way even if it ever throws.
-    remove_ids.each {|id| object.send(association).delete(current_account.send(association).find(id))} unless remove_ids.blank?
+    remove_ids.each { |id| object.send(association).delete(current_account.send(association).find(id)) } unless remove_ids.blank?
     unless add_ids.blank?
       add_ids.each { |id| object.send(association) << current_account.send(association).find(id) }
       #add_ids.each { |id| current_account.cpas.create(property_id: object.id, client_id: current_account.send(association).find(id).id, account_id: current_account) }
@@ -58,13 +58,15 @@ module AddRemoveAssociationsHandler
     object.reload
 
     data = Array.new
+
     object.send(association).each do |entry|
       hash = {
-          label: "#{entry.first_name} #{entry.last_name}",
-          value: entry.id
+        label: "#{entry.first_name} #{entry.last_name}",
+        value: entry.id
       }
       data << hash
     end
+
     data
 
   end

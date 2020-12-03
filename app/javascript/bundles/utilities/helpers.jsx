@@ -31,6 +31,10 @@ const buildUserURL = (freeze_url, user_id) => {
   return freeze_url.replace(/USERID/i, user_id);
 };
 
+const buildPropertyURL = (assign_url, user_id) => {
+  return assign_url.replace(/PROPERTYID/i, property_id);
+};
+
 const isUrl = string => {
   const regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
   return regexp.test(string);
@@ -105,6 +109,15 @@ const hasParams = () => {
   return param_counter > 0;
 };
 
+// Turns an object to url params and removes all empty keys
+const objectToUrlParams = (obj) => {
+  const filteredObj = Object.entries(obj).reduce((a,[k,v]) => (v ? (a[k]=v, a) : a), {})
+
+  return Object.keys(filteredObj).map(function(key) {
+    return key + '=' + encodeURIComponent(obj[key]);
+  }).join('&');
+}
+
 // Sets up the
 const setup_dependent_checkboxes = () => {
   var elements = $('.dependent_check');
@@ -149,5 +162,6 @@ export {
   categoryFilterOptions,
   ifExists,
   hasParams,
-  setup_dependent_checkboxes
+  setup_dependent_checkboxes,
+  objectToUrlParams
 };

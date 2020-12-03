@@ -85,6 +85,9 @@ Rails.application.routes.draw do
       post '/assignments/property/:pid/users/', to: 'assignments#assign', as: :assignments
       get '/assignments/property/:pid/users/', to: 'assignments#assigned', as: :existing_assignments
 
+      post '/assignments/user/:uid/properties/', to: 'assignments#properties_modal_assign', as: :properties_modal_assign
+      get '/assignments/user/:uid/properties/', to: 'assignments#properties_modal_listing', as: :properties_modal_listing
+
       # i.e. /clients/25 - assign client to partner
       post '/clientships/client/:cid/users/', to: 'clientships#assign', as: :clientships
       get '/clientships/client/:cid/users/', to: 'clientships#assigned', as: :existing_clientships

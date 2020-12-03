@@ -166,26 +166,42 @@
 
           <% if current_user.is_admin? current_account %>
             <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown #{active_for(controller: ['users', 'invitations'])}" do %>
-              <%= link_to users_path, class: 'nav-link menu-link' do %>
+              <%= link_to users_path, class: 'nav-link menu-link', data: {
+                  content: t('users.title'),
+                  placement: 'bottom',
+                  toggle: 'popover',
+                  trigger: 'hover' } do %>
                 <%= content_tag :span, nil, class: 'sidebar-masked-icon xs masked-icon-partners' %>
               <% end %>
             <% end %>
           <% end %>
 
-          <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown #{active_for(controller: ['properties'])}" do %>
+          <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown #{active_for(controller: ['properties'])}", data: {
+              content: t('main.properties'),
+              placement: 'bottom',
+              toggle: 'popover',
+              trigger: 'hover' } do %>
             <%= link_to properties_path, class: 'nav-link menu-link' do %>
               <%= content_tag :span, nil, class: 'sidebar-masked-icon xs masked-icon-building' %>
             <% end %>
           <% end %>
 
-          <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown #{active_for(controller: ['clients'])}" do %>
+          <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown #{active_for(controller: ['clients'])}", data: {
+              content: t('clients.title'),
+              placement: 'bottom',
+              toggle: 'popover',
+              trigger: 'hover' } do %>
             <%= link_to clients_path, class: 'nav-link menu-link' do %>
               <%= content_tag :span, nil, class: 'sidebar-masked-icon xs masked-icon-clients' %>
             <% end %>
           <% end %>
 
           <% if current_user.is_admin? current_account %>
-            <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown #{active_for(controller: ['settings'])}" do %>
+            <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown #{active_for(controller: ['settings'])}", data: {
+                content: t('sidebar.settings'),
+                placement: 'bottom',
+                toggle: 'popover',
+                trigger: 'hover' } do %>
               <%= link_to settings_path, class: 'nav-link menu-link' do %>
                 <%= content_tag :span, nil, class: 'sidebar-masked-icon xs masked-icon-settings' %>
               <% end %>

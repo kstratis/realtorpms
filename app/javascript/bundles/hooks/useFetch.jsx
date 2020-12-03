@@ -9,10 +9,14 @@ axios.defaults.headers.common['X-CSRF-Token'] = ReactOnRails.authenticityToken()
 
 // didMountRef is used to control whether useFetch will fire upon first mount. If set to true or is omitted altogether,
 // useFetch will fire on first mount. Otherwise, if set to false, the ajax operation won't run on first mount.
-function useFetch(request, dropdown = true, fireAjaxOnMount = null) {
+
+// initialLoading is needed because this is optimised to load array of hashes. In case we need to load a hash instead,
+// on first render things will blow up (arrays would simply iterate over nothing); that's why we need to be
+// protected by initialLoading `true` (a non existing hash won't iterate and will blow up)
+function useFetch(request, dropdown = true, fireAjaxOnMount = null, isInitialLoading = false) {
   const [status, setStatus] = useState('');
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(isInitialLoading);
 
   useEffect(() => {
     const executeAjax = async () => {
