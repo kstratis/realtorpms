@@ -1,0 +1,16 @@
+<main class="auth" style="background: unset">
+  <div id="pending-email" class="auth-form">
+    <div class="d-flex justify-content-center"><i class="pr-icon lg stop"> </i></div>
+    <div><h2 style="line-height: 1.7"><%= t('emails.activation.lockout_html') %></h2></div>
+    <div class="text-center">
+      <%= link_to logout_path, class: 'btn btn-danger', method: :delete do %>
+        <span><%= t('navbar.logout') %></span>
+      <% end %>
+      <% if (current_user.get_account_count > 1) || current_user.is_sysadmin? %>
+        <%= link_to account_list_url, class: "btn btn-outline-info #{masquerading? ? 'disabled' : '' }" do %>
+          <%= content_tag :i, nil, class: 'fas fa-exchange-alt fa-fw' %> <span><%= t('navbar.switch') %></span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</main>

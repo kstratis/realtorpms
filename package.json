@@ -16,7 +16,7 @@
     "bootstrap": "^4.5.1",
     "bs-stepper": "https://github.com/kstratis/bs-stepper.git#events",
     "caniuse-lite": "^1.0.30001111",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "compressorjs": "^1.0.6",
     "flatpickr": "^4.6.3",
     "intl": "^1.2.5",

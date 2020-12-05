@@ -29,4 +29,13 @@ const setFlatPickrSettings = (locale) => {
     window.flatpickr.defaultConfig.altFormat = locale === 'gr' ? 'd M Y' : 'M d, Y';
 };
 
-export { clearValidatableFields, setFlatPickrSettings };
+const getParticles = () => {
+  return Promise.all([
+    import(/* webpackChunkName: "particlesjs" */
+      'particles.js'),
+    import(/* webpackChunkName: "particlesJSONData" */
+      './particles.json')
+  ]);
+};
+
+export { clearValidatableFields, setFlatPickrSettings, getParticles };

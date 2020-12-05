@@ -49,4 +49,8 @@ module ApplicationHelper
   #   I18n.t("activerecord.attributes.#{model.model_name.i18n_key}.enums.#{enum_name.to_s}.#{enum_value}")
   # end
 
+  def chart_data?(graph)
+    !graph[:datasets].first[:data].inject(0, :+).zero?
+  end
+
 end

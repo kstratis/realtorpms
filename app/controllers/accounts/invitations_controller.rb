@@ -9,7 +9,7 @@ module Accounts
     # Make sure the user an account owner is inviting is not already a member of his domain
     def check_existing_user
       user = current_account.all_users.find_by(email: params[:email])
-      render json: {status: "Checked" }, status: user.nil? ? 200 : 403
+      render json: { status: "Checked" }, status: user.nil? ? 200 : 403
     end
 
     def create

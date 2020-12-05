@@ -14,6 +14,14 @@ module Propertyx
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
 
+    config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
+    # The following works but is not optimal
+    # config.autoloader = :classic
+
+    # The following were found on the internet and don't work
+    # config.eager_load_paths << "#{config.root}/spec/mailers/previews"
+    # config.eager_load_paths += %W[#{config.root}/lib]
+
     config.generators do |g|
       g.test_framework :rspec,
       fixtures: true,

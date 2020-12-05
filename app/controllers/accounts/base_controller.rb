@@ -16,7 +16,7 @@ module Accounts
     helper_method :masqueraded_admin
 
     # before_action :logged_in_user, :allowed_subdomains, only: [:index, :edit, :update, :destroy]
-    before_action :logged_in_user, :allowed_subdomains, :active_user # The order is guaranteed from left-to-right
+    before_action :logged_in_user, :allowed_subdomains, :active_account, :active_user # The order is guaranteed from left-to-right
     after_action :store_referer_url, only: [:index, :edit, :update, :destroy]
 
     # before_action :correct_subdomain
@@ -37,6 +37,8 @@ module Accounts
     helper_method :owner?
 
     def logged_in_user
+      return true if controller_name == 'confirmations'
+
       unless logged_in?
         store_location
         redirect_to login_url
@@ -60,14 +62,19 @@ module Accounts
       end
     end
 
+    def active_account
+      unless current_account.email_confirmed? || current_user.is_sysadmin? || sys_admin_masquerading?
+        redirect_to lockout_path
+      end
+    end
+
     def store_referer_url
       session[:referrer_subdomain] = request.subdomain if request.get?
-      puts session[:referrer_subdomain]
     end
 
     def allowed_subdomains
       accounts = current_user.is_sysadmin? ? Account.all : current_user.all_accounts
-      subdomain_list = accounts.map(&:subdomain)
+      subdomain_list = accounts.pluck(:subdomain)
       unless session[:referrer_subdomain].blank?
         previous_subdomain = session[:referrer_subdomain]
         unless previous_subdomain == request.subdomain

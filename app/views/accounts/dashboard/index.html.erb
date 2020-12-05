@@ -85,9 +85,16 @@
           <div class="col-md-12 col-lg-5">
             <div class="card card-fluid">
               <div class="card-body">
-                <h3 class="card-title mb-4"><%= t('main.chart.title') %></h3>
+
+                    <h3 class="card-title mb-4"><%= chart_data?(@graph) ? t('main.chart.title') :  t('main.statistics') %></h3>
                 <div class="chartjs chart-container">
-                  <canvas class="chart"></canvas>
+                  <% if chart_data?(@graph) %>
+                    <canvas id="overview-chart" class="chart"></canvas>
+                  <% else %>
+                    <div style="position: relative; height: 218px;">
+                      <div class="chart-masker" style="height: 218px; margin: 0px;"></div>
+                    </div>
+                  <% end %>
                 </div>
               </div>
             </div>
@@ -123,7 +130,7 @@
   </div>
 </div>
 
-<%= link_to 'DEMO', 'demo' %>
+<%#= link_to 'DEMO', 'demo' %>
 <%#= link_to image_tag('rails.png', alt: 'Rails logo'), 'http://rubyonrails.org/' %>
 
 

@@ -450,6 +450,23 @@
     background-image: url('../images/footer/padlock.svg');
   }
 
+  &.email{
+    background-image: url('../images/email_animated.svg');
+  }
+
+  &.check{
+    background-image: url('../images/checkmark_animated.svg');
+  }
+
+  &.frozen{
+    background-image: url('../images/snowflake.svg');
+  }
+
+  &.stop{
+    background-image: url('../images/stop.svg');
+  }
+
+
   & ~ .pr-icon-desc {
     display: block;
     text-align: center;

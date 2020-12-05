@@ -1,0 +1,8 @@
+<% provide(:title, t('accounts.signup_title')) %>
+
+<% content_for :content do %>
+  <div id="pending-email" class="auth-form">
+    <div class="d-flex justify-content-center"><i class="pr-icon lg email"> </i></div>
+    <div><h2 style="line-height: 1.7"><%= t('accounts.pending_email_html', email: @owner_email) %></h2></div>
+  </div>
+<% end %>

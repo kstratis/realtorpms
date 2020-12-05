@@ -1,22 +1,13 @@
-const getParticles = () => {
-  return Promise.all([
-    import(/* webpackChunkName: "particlesjs" */
-    'particles.js'),
-    import(/* webpackChunkName: "particlesJSONData" */
-    './particles.json')
-  ]);
-};
+import { getParticles } from './utilities';
 
 const getFotorama = () => {
   return Promise.all([
-    import(/* webpackChunkName: "fotoramajs" */
-      'fotorama.dev.js'),
-    import(/* webpackChunkName: "fotoramacss" */
-      'fotorama.dev.css')
+    import(/* webpackChunkName: "fotoramajs" */ 'fotorama.dev.js'),
+    import(/* webpackChunkName: "fotoramacss" */ 'fotorama.dev.css'),
   ]);
 };
 
-$(document).on('turbolinks:load', function(e) {
+$(document).on('turbolinks:load', function (e) {
   if ($('.auth-header').length > 0) {
     getParticles().then(([particlesjs, particles_data]) => {
       particlesJS('auth-header', particles_data);
@@ -28,5 +19,4 @@ $(document).on('turbolinks:load', function(e) {
       $('.fotorama').fotorama();
     });
   }
-
 });

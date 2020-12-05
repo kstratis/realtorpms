@@ -155,9 +155,9 @@
           <% if masquerading? %>
             <%= link_to user_masquerade_path(current_user),
                         method: :delete,
-                        class: 'nav-link menu-link masquerading-special',
+                        class: "nav-link menu-link #{masqueraded_admin.is_sysadmin? ? 'masquerading-special-sysadmin' : 'masquerading-special'}",
                         data: {
-                            content: t('js.datatables.users.masquerading.exit_prompt', user: masqueraded_admin&.full_name),
+                            content: t('js.datatables.users.masquerading.exit_prompt', user: masqueraded_admin&.full_name) + (masqueraded_admin.is_sysadmin? ? '. ' + t('js.datatables.users.masquerading.sysadmin_prompt') : ''),
                             toggle: 'popover',
                             trigger: 'hover' } do %>
               <%= content_tag :span, nil, class: 'sidebar-masked-icon xs masked-icon-logout' %>

@@ -1,7 +1,12 @@
 class Account < ApplicationRecord
   belongs_to :owner, class_name: 'User'
   accepts_nested_attributes_for :owner
-  validates :subdomain, presence: true, length: { minimum: 3, maximum: 20 }, uniqueness: true
+  validates :subdomain,
+            presence: true,
+            length: { minimum: 3, maximum: 20 },
+            uniqueness: true,
+            format: /\A[a-zA-Z0-9]*\z/
+
   validates :name, presence: true, length: { maximum: 20 }, uniqueness: true
 
   has_many :invitations, dependent: :destroy # Only destroys invitations associated with the current account
@@ -24,6 +29,7 @@ class Account < ApplicationRecord
 
   validates_associated :owner
 
+  before_create :confirmation_token
   after_create :build_custom_fields
 
   # This is for existing log records
@@ -36,6 +42,12 @@ class Account < ApplicationRecord
     # Used to be:
     # users.joins(:accounts).where(accounts: {owner_id: user.id})
     users.union(User.where(id: owner.id))
+  end
+
+  def all_users_plus_sys
+    # Used to be:
+    # users.joins(:accounts).where(accounts: {owner_id: user.id})
+    users.union(User.where(id: [owner.id, 1]))
   end
 
   class << self
@@ -59,5 +71,19 @@ class Account < ApplicationRecord
     %w(users properties clients).each do |el|
       self.model_types.create(name: el.to_s)
     end
+  end
+
+  def email_activate
+    self.email_confirmed = true
+    self.confirm_token = nil
+    save!(:validate => false)
+  end
+
+  private
+
+  def confirmation_token
+    return unless self.confirm_token.blank?
+
+    self.confirm_token = SecureRandom.urlsafe_base64.to_s
   end
 end
