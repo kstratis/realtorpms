@@ -102,7 +102,8 @@ class Theme {
 
     this.perfectScrollbar()
     this.masonry()
-    this.chartjs()
+    // ATTENTION! This causes a bug! Please don't switch it on!
+    // this.chartjs()
     this.sparkline()
     this.easypie()
     this.knob()
@@ -930,6 +931,8 @@ class Theme {
       }
 
       // Merge settings to Chart JS default options
+      console.log('merging');
+      console.log(Chart.defaults)
       $.extend(true, Chart.defaults, settings)
     }
   }

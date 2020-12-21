@@ -994,9 +994,9 @@ li.page-item {
   padding: 10px 0 0 0;
 }
 
-.chart-container {
-  height: 310px;
-}
+//.chart-container {
+  //height: 310px;
+//}
 
 .profile-pic {
   width: 100%;
@@ -1105,6 +1105,10 @@ li.page-item {
 
 .reduced-opacity {
   opacity: 0.5;
+}
+
+.slightly-reduced-opacity {
+  opacity: 0.75;
 }
 
 .no-entries {
@@ -2089,6 +2093,11 @@ nav.nav-tabs a.nav-link:hover:not(.setting), nav.nav-tabs a.nav-link:focus:not(.
   border-radius: 5px !important;
 }
 
+.masquerading-special-sysadmin{
+  border: 2px dashed mediumpurple !important;
+  border-radius: 5px !important;
+}
+
 .action-toolbar-group-btn {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
@@ -2147,4 +2156,11 @@ nav.nav-tabs a.nav-link:hover:not(.setting), nav.nav-tabs a.nav-link:focus:not(.
 a.toggle.active {
   background: $teal !important;
   color: #ffffff !important;
+}
+
+.chart-masker{
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url('../images/graph_masker.svg');
+  background-position-y: 50%;
 }

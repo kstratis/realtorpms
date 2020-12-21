@@ -21,6 +21,9 @@ $(document).on('turbolinks:before-visit', function(e){
   }
 });
 
+
+
+
 $('document').ready(function() {
   $('button.close').on('click', function(){
     $('.alert').alert('close');

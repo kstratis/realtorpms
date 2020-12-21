@@ -49,8 +49,13 @@ const UsersList = ({
 
   const handleMasquerade = (e, link) => {
     e.preventDefault();
-    console.log(e.target);
-    Turbolinks.visit(link);
+    // Can't use Turbolinks.visit(link) here. If the account is deactivated a
+    // series of redirects will occur and the user may land on the login screen.
+    // However the login screen doesn't run any javascript which means no Turbolinks
+    // which means weird behavior.
+    // Turbolinks.visit(link);
+    window.location.href = link;
+
   };
   // --------
   // const [masterCheck, setMasterCheck] = useState({});
@@ -404,7 +409,7 @@ const UsersList = ({
 
                               {/* Avoid masquerading inception */}
                               {is_masquerading ? null : (
-                                <a
+                                <btn
                                   data-toggle="tooltip"
                                   data-placement="auto"
                                   onClick={e => handleMasquerade(e, entry['masquerade_path'])}
@@ -414,7 +419,7 @@ const UsersList = ({
                                   }`}
                                   href={''}>
                                   <i className={`fas fa-sign-in-alt`} />
-                                </a>
+                                </btn>
                               )}
 
                               <a

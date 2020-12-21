@@ -507,6 +507,7 @@ en:
           enter_notice: "You are now logged in as %{user}"
           active_notice: "You are currently acting as %{user}"
           exit_prompt: "Go back to being %{user}"
+          sysadmin_prompt: "You are sysadmin. This means that you may even inspect deactivated accounts."
           exit_notice: "You are now back as %{user}"
       clients:
         delete: "Delete"
@@ -928,6 +929,9 @@ en:
     english: "English"
     greek: "Greek"
   accounts:
+    pending_email_html: "We've sent you an email at <mark>%{email}</mark> containing account activation instructions."
+    activated_html: "Your account has been successfully activated! You may now enter using your credentials <a href='%{login_url}'>here</a>."
+    deactivated: "This account has not been activated yet"
     signup_title: "Signup"
     edit_title: "Edit account"
     greeting: "New account"
@@ -1003,6 +1007,13 @@ en:
       greeting_explained_html: "You have received an invite to connect to account %{subdomain} on %{brand}."
       accept: "ACCEPT"
       accept_text: "Use the link below to connect:"
+    activation:
+      subject: "Welcome to your new account! 🚀"
+      greeting: "Hi %{admin}"
+      greeting_explained_html: "Thanks for confirming your email. We are thrilled to have you on board!"
+      greeting_explained2_html: "Please click the link below to login to your account!"
+      login: "LOGIN"
+      lockout_html: "This account is currently deactivated."
   settings:
     sidebar:
       breadcrumb: "Settings"

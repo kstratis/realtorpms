@@ -12,13 +12,28 @@ class AccountsController < ApplicationController
   # POST to the new page
   def create
     @account = Account.new(account_params)
-    if @account.save
-      @account.model_types.find_by(name: 'users').users << @account.owner
-      log_in(@account.owner)
-      flash[:success] = I18n.t('accounts.created', brand: BRANDNAME)
-      redirect_to root_url(subdomain: @account.subdomain)
-    else
-      render :new
+
+    respond_to do |format|
+      if @account.save
+        @owner_email = @account.owner.email
+        @account.model_types.find_by(name: 'users').users << @account.owner
+        AccountMailer.account_confirmation(@account).deliver
+
+        # flash[:success] = "Please confirm your email address to continue"
+        # redirect_to root_url(subdomain: @account.subdomain)
+        # redirect_to account_created_url(subdomain: @account.subdomain)
+
+        # log_in(@account.owner)
+        # flash[:success] = I18n.t('accounts.created', brand: BRANDNAME)
+        # redirect_to root_url(subdomain: @account.subdomain)
+        # format.html
+        format.html { render :created }
+
+      else
+        flash.now[:error] = "Error creating account"
+
+        format.html { render :new }
+      end
     end
   end
 
@@ -41,17 +56,17 @@ class AccountsController < ApplicationController
 
   private
 
-    def account_params
-      params.require(:account).permit(:subdomain,
-                                      :website,
-                                      :name,
-                                      :email,
-                                      :telephones,
-                                      :address, {owner_attributes:
-                                                     [:first_name,
-                                                      :last_name,
-                                                      :email,
-                                                      :password,
-                                                      :password_confirmation]})
-    end
+  def account_params
+    params.require(:account).permit(:subdomain,
+                                    :website,
+                                    :name,
+                                    :email,
+                                    :telephones,
+                                    :address, { owner_attributes:
+                                                  [:first_name,
+                                                   :last_name,
+                                                   :email,
+                                                   :password,
+                                                   :password_confirmation] })
+  end
 end

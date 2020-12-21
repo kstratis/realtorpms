@@ -1,0 +1,6 @@
+<%= t('emails.activation.greeting', admin: @user.full_name) %>,
+
+<%= t('emails.activation.greeting_explained_html') %>
+<%= t('emails.activation.greeting_explained2_html') %>
+
+<%= account_confirmation_url(@account.confirm_token, subdomain: @account.subdomain) %>

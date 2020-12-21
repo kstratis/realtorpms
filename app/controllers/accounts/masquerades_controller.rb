@@ -22,6 +22,7 @@ module Accounts
     private
 
     def authorize_admin
+      puts 'INSIDE AUTHORIZE_ADMIN'
       return if current_user.is_admin?(current_account)
 
       flash[:danger] = I18n.t "users.flash_owner_only_action"

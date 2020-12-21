@@ -28,12 +28,15 @@ Rails.application.routes.draw do
   constraints(SubdomainRequired) do
     scope module: 'accounts' do
       root to: 'dashboard#index', as: :account_root
+      get '/account-confirmation/:token', to: 'confirmations#confirm_email', as: :account_confirmation
       get '/properties/locations', to: 'properties#locations'
       get '/properties/clients', to: 'properties#clients'
       get '/properties/inlinesearch', to: 'properties#inlinesearch'
       # resources :entityfields
       resources :model_types, only: [:edit, :update], :path => "extended-fields"
       resources :settings, only: [:index]
+
+      get '/inactive', to: 'lockout#show', as: :lockout
       # resources :model_types
 
       # favlists_path (GET, POST)
@@ -119,9 +122,9 @@ Rails.application.routes.draw do
   get '/switch/', to:'home#switch', as: :account_switch
   get '/accounts/', to:'home#accounts', as: :account_list
 
-  get '/accounts/new', to: 'accounts#new', as: :new_account
+  get '/create', to: 'accounts#new', as: :new_account
 
-  post '/accounts/new', to: 'accounts#create', as: :accounts
+  post '/create', to: 'accounts#create', as: :accounts
 
   get '/account/edit', to: 'accounts#edit', as: :account_edit
 

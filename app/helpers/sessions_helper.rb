@@ -112,10 +112,14 @@ module SessionsHelper
     session[:admin_id].present?
   end
 
+  def sys_admin_masquerading?
+    session[:admin_id].present? && session[:admin_id] == 1
+  end
+
   def masqueraded_admin
     return if session[:admin_id].nil?
 
-    current_account.all_users.find(session[:admin_id])
+    current_account.all_users_plus_sys.find(session[:admin_id])
   end
 
   # Retrieves the subdomain

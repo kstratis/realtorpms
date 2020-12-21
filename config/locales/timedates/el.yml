@@ -109,7 +109,7 @@ el:
       greater_than: πρέπει να είναι μεγαλύτερο από %{count}
       greater_than_or_equal_to: πρέπει να είναι μεγαλύτερο ή ίσο με %{count}
       inclusion: δεν συμπεριλαμβάνεται στη λίστα
-      invalid: είναι άκυρο
+      invalid: Μόνο λατινικοί χαρακτήρες
       less_than: πρέπει να είναι λιγότερο από %{count}
       less_than_or_equal_to: πρέπει να είναι λιγότερο ή ίσο με %{count}
       not_a_number: δεν είναι αριθμός

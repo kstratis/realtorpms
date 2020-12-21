@@ -34,10 +34,16 @@
 
               <div class="tab-content p-0" id="myTabContent">
                 <div class="tab-pane fade show active" id="cfields" role="tabpanel" aria-labelledby="profile-tab">
-                  <div class="section-block text-center">
-                    <div class="col-10 offset-1 text-sm-center">
-                      <h4 class="section-title section-title-custom pt-0"><%= t('settings.sidebar.cfields_subheader') %></h4><!-- .visual-picker -->
+                  <div class=" text-center">
+
+                    <div class="col-12">
+                      <div class="alert alert-primary has-icon" role="alert">
+                        <div class="alert-icon">
+                          <i class="fas fa-info"></i>
+                        </div><%= t('settings.sidebar.cfields_subheader') %>
+                      </div>
                     </div>
+
                     <div class="col-12">
                       <%= link_to edit_model_type_path(@users_id), class: "visual-picker visual-picker-md has-peek px-3" do %>
                         <!-- .visual-picker-figure -->
