@@ -46,6 +46,12 @@ en:
   action_not_permitted_error: "Action not permitted"
   loading: "💿 Loading... Please wait."
   version: "Version"
+  calendar: "Mini calendar"
+  event: "event"
+  events: "events"
+  no_events: "No events"
+  add: "Add"
+  event_info: "Event info:"
   footer:
     title: "This is a secured site"
     body1: |
@@ -678,6 +684,7 @@ en:
       prompt: "Use the button below to view all properties assigned to you."
       button_prompt: "Properties"
       button_prompt_add: "Add"
+      button_prompt_add_alt: "Add property"
   invitations:
     new:
       heading: "Add new partner"
@@ -1018,13 +1025,15 @@ en:
     sidebar:
       breadcrumb: "Settings"
       title: "Options"
+      logs: "Account logs"
       cfields: "Custom fields"
       subscription: "Subscription"
       integrations: "Integrations"
       widget: "Widget"
       under_construction: "Under construction..."
       info: "Details"
-      cfields_subheader: "This feature allows the creation of custom fields of information on each of the system's entitites: Partners, properties and clients. Collections of these entities can then be searched and filtered accordingly."
+      cfields_subheader: "This feature allows the creation of custom fields of information on each of the system's entities: Partners, properties and clients. Collections of these entities can then be searched and filtered accordingly."
+      logs_subheader: "This is the summary of the latest account activity"
       partners: "Partners"
       properties: "Properties"
       clients: "Clients"

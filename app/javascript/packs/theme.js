@@ -22,7 +22,7 @@ function completionTasksChart(themeInstance) {
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      legend: { display: true, position: 'right' },
+      legend: { display: true, position: 'bottom' },
       title: { display: false },
       fontFamily: '"Noto Sans", Arial, sans-serif',
       tooltips: {

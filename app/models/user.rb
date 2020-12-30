@@ -49,6 +49,8 @@ class User < ApplicationRecord
   has_one_attached :avatar
   has_and_belongs_to_many :model_types, -> {distinct}
 
+  has_many :calendar_events
+
   # has_many :properties, -> (account) { where('account_id = ?', account.id) }, through: :assignments
 
   # Basically class methods defined as instance methods in the singleton class

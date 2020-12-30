@@ -10,6 +10,32 @@ module Accounts
       @properties_id = current_account.model_types.find_by(name: 'properties').id
       @users_id = current_account.model_types.find_by(name: 'users').id
       @clients_id = current_account.model_types.find_by(name: 'clients').id
+
+      # This basically finds the latest 5 entries of the last 5 groups of events partitioned by day with a maximum of 25 total entries
+      # References:
+      # https://stackoverflow.com/questions/1313120/retrieving-the-last-record-in-each-group-mysql
+      # https://stackoverflow.com/questions/6133107/extract-date-yyyy-mm-dd-from-a-timestamp-in-postgresql
+      # https://stackoverflow.com/questions/1124603/grouped-limit-in-postgresql-show-the-first-n-rows-for-each-group
+      # https://stackoverflow.com/questions/55278576/postgresql-limit-by-n-groups
+      # https://docs.microsoft.com/en-us/sql/t-sql/functions/dense-rank-transact-sql?view=sql-server-2017
+      # http://www.postgresqltutorial.com/postgresql-dense_rank-function/
+      sql = %{
+        SELECT
+	        *
+        FROM (
+	        SELECT
+		        ROW_NUMBER() OVER (PARTITION BY created_at::date ORDER BY created_at::time DESC) AS row_number,
+		        DENSE_RANK() OVER (ORDER BY created_at::date DESC) AS group_number, l.*
+	        FROM
+		        logs l
+          WHERE account_id=#{current_account.id}) subquery
+        WHERE
+	        subquery.row_number <= 5
+	        AND group_number <=5
+        ORDER BY created_at DESC
+	      LIMIT 25;
+      }.gsub(/\s+/, " ").strip
+      @events = Log.find_by_sql(sql).group_by{ |t| t.created_at.beginning_of_day }
     end
 
     # GET /accounts/settings/1

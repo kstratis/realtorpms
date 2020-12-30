@@ -3,7 +3,8 @@
     <div class="app-container">
 
     <div class="card card-fluid">
-      <%= render partial: 'shared/card_header/header', locals: {title: t('cfields.title'), btn_text: t('properties.show.back'), btn_link: settings_path} %>
+      <%= render partial: 'shared/card_header/header',
+                 locals: { title: t('cfields.title'), btn_text: t('properties.show.back'), btn_link: settings_path(anchor: 'cfields') } %>
       <div class="card-body">
         <%= render 'form' %>
       </div>

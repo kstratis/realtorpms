@@ -86,7 +86,7 @@ const ClientsList = ({
                     <p className={'text-justify font-italic mb-4'}>
                       <span dangerouslySetInnerHTML={{ __html: i18n.filters.nocfields_html }} />
                     </p>
-                    <div className={'text-center'}>
+                    <div className={'text-center reduced-opacity'}>
                       <img alt={'no-cfields'} src={cfields.nocfieldsimg} className={'img-fluid max-300 text-center'} />
                     </div>
                   </div>

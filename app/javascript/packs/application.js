@@ -9,6 +9,8 @@
 
 require("@rails/ujs").start();
 import './turbolinks_wrapper';
+import './calendar'
+
 // import 'stacked-menu'
 
 // ---
@@ -54,6 +56,7 @@ $(document).on('turbolinks:load', function(e) {
       ReactDOM.render(<Example />, document.getElementById('lazy'))
     });
   }
+
   $('[data-toggle="tooltip"]').tooltip();
   $('[data-toggle="popover"]').popover();
 });

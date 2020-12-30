@@ -7,6 +7,7 @@ module Accounts
     include PersonDatatable
     include PropertyDatatable
     include Jsonifier
+    include CalendarEvents
 
     helper UserAvatar
 
