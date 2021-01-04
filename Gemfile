@@ -81,7 +81,7 @@ gem "irb"
 
 gem 'activerecord-import'
 
-gem 'nokogiri'
+gem 'nokogiri', '~> 1.11'
 
 gem 'capistrano', '~> 3.14.1'
 gem 'capistrano-rails', '~> 1.6.1'
