@@ -36,6 +36,8 @@ Rails.application.routes.draw do
       resources :model_types, only: [:edit, :update], :path => "extended-fields"
       resources :settings, only: [:index]
 
+      resources :calendar_events, only: [:create, :show, :index, :destroy]
+
       get '/inactive', to: 'lockout#show', as: :lockout
       # resources :model_types
 

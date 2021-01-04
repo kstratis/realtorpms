@@ -1,134 +1,119 @@
 <% provide(:title, t('main.title')) %>
 
-<%= render partial: 'layouts/breadcrumb', locals: {path: [{:title => t('main.heading'), :href => ''}], icon: 'house-colored', index: true} %>
+<%= render partial: 'layouts/breadcrumb', locals: { path: [{ :title => t('main.heading'), :href => '' }], icon: 'house-colored', index: true } %>
 
 <div class="page-container">
   <div class="container">
     <div class="app-container">
 
+      <%# Timeline date (admin only) %>
       <%= content_tag :div, class: "stats", id: "stats_data", data: {
-          graph: @graph
+        graph: @graph
       } do %>
       <% end %>
 
+      <%# Pre-rendering of calendar events %>
+      <%= content_tag :div, class: "calendar_events", id: "calendar_events", data: {
+        cevents: @calendar_events
+      } do %>
+      <% end %>
+
+      <%# Calendar translations %>
+      <%= content_tag :div, class: "calendar_events_i18n", id: "calendar_events_i18n", data: {
+        ceventsi18n: {
+          event: t('event'),
+          events: t('events'),
+          noEvents: t('no_events'),
+          add: t('add'),
+          eventInfo: t('event_info')
+        }
+      } do %>
+      <% end %>
+
+      <%= render "accounts/helpers/locale" %>
+
       <% if current_user.is_admin?(current_account) %>
 
+        <!-- Calendar-->
         <div class="row">
-          <div class="col-md-12 col-lg-7">
-            <div class="card">
+          <div class="col-md-12 col-lg-8">
+            <div class="card card-fluid">
+              <!-- .card-header -->
+              <div class="card-header"><i class="far fa-calendar fa-fw"></i>&nbsp;<%= t('calendar') %>
+              </div><!-- .card-body -->
               <div class="card-body">
-                <% if @events.blank? %>
-                  <div class="state-figure text-center">
-                    <%= image_pack_tag 'media/images/no_content.svg', class: "img-fluid max-300" %>
+                <div class="row">
+                  <div class="col-md-6 col-sm-12 justify-content-center">
+                    <div id="calendar"></div>
                   </div>
-                  <h3 class="state-header text-center"><%= t('main.welcome.no_activities') %></h3>
-                <% else %>
-                  <% @events.each do |hash_elements| %>
-
-                    <!--              <h3> <%#= Date::DAYNAMES[hash_elements.first] %> </h3>-->
-                    <!--              <h2 class="section-title"> <%#= t('main.timeline.today') %> </h2> -->
-                    <h2 class="section-title"> <%= l(hash_elements.first, format: :timelinehead) %> </h2>
-                    <ul class="timeline">
-                      <% hash_elements.second.each do |entry| %>
-
-                        <li class="timeline-item">
-                          <!-- .timeline-figure -->
-                          <div class="timeline-figure">
-                            <span class="tile tile-circle tile-sm"><i class="fa fa-cube fa-lg"></i></span>
-                          </div><!-- /.timeline-figure -->
-                          <!-- .timeline-body -->
-                          <div class="timeline-body">
-                            <!-- .media -->
-                            <div class="media">
-                              <!-- .media-body -->
-                              <div class="media-body">
-                                <h6 class="timeline-heading">
-                                  <%= link_to render_timeline_header(entry), entry.try(:entity) ? polymorphic_path(entry.try(:entity).try(:to_sym)) : '', class: "text-link px-1 #{entry.try(:entity)}-timeline-header" %>
-                                </h6>
-                                <p class="mb-0">
-                                  <span><%= t('user') %></span>
-                                  <% if entry.try(:author).blank? %>
-                                    <span><%= entry.try(:author_name) %></span>
-                                  <% else %>
-                                    <%= link_to entry.try(:author_name), polymorphic_path([entry.try(:author).class.try(:to_s).try(:downcase).try(:to_sym)], id: entry.try(:author)) %>
-                                  <% end %>
-                                  <strong><%= render_action(entry).html_safe %></strong>
-                                </p>
-                                <p class="timeline-date d-sm-none"><%= l(entry.created_at, format: :timelinebody) %></p>
-                              </div><!-- /.media-body -->
-                              <!-- .media-right -->
-                              <div class="d-none d-sm-block">
-                                <span class="timeline-date"><%= l(entry.created_at, format: :timelinebody) %></span>
-                              </div><!-- /.media-right -->
-                            </div><!-- /.media -->
-                          </div><!-- /.timeline-body -->
-                        </li>
-                      <% end %>
-                      <!-- /.timeline-item -->
-                    </ul>
-
-                  <% end %>
-
-                <% end %>
-
-
-
-                <%# %w(properties users clients mapping integrations statistics).each do |entry| %>
-                <!-- .timeline-item -->
-
-
+                  <div class="col-md-6 col-sm-12">
+                    <div id="events"></div>
+                  </div>
+                </div>
               </div>
-
             </div>
           </div>
 
-          <div class="col-md-12 col-lg-5">
+          <!-- Chart.js -->
+          <div class="col-md-12 col-lg-4">
             <div class="card card-fluid">
               <div class="card-body">
 
-                    <h3 class="card-title mb-4"><%= chart_data?(@graph) ? t('main.chart.title') :  t('main.statistics') %></h3>
+                <h3 class="card-title mb-4"><%= chart_data?(@graph) ? t('main.chart.title') : t('main.statistics') %></h3>
                 <div class="chartjs chart-container">
                   <% if chart_data?(@graph) %>
                     <canvas id="overview-chart" class="chart"></canvas>
                   <% else %>
                     <div style="position: relative; height: 218px;">
-                      <div class="chart-masker" style="height: 218px; margin: 0px;"></div>
+                      <div class="chart-masker" style="height: 218px; margin: 0;"></div>
                     </div>
                   <% end %>
                 </div>
               </div>
             </div>
           </div>
+        </div> <!-- row end -->
 
-
-        </div>
       <% else %>
         <div class="row">
-          <div class="col-12">
-            <div id="notfound-state" class="empty-state">
-              <div class="empty-state-container">
-                <div class="state-figure">
-                  <%= image_pack_tag 'media/images/no_content.svg', class: 'img-fluid max-300' %>
+          <div class="col-lg-8 offset-lg-2 col-12">
+            <div class="card">
+              <!-- .card-header -->
+              <div class="card-header"><i class="far fa-calendar fa-fw"></i>&nbsp;<%= t('calendar') %>
+              </div><!-- .card-body -->
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-6 col-sm-12 justify-content-center">
+                    <div id="calendar"></div>
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                    <div id="events"></div>
+                  </div>
                 </div>
-                <h3 class="state-header"><%= t('main.welcome.no_content') %></h3>
-                <p class="state-description lead text-muted"><%= t('main.welcome.prompt') %></p>
-                <div class="state-action">
-                  <%= link_to t('main.welcome.button_prompt'), properties_path, class: 'btn btn-primary' %>
-                </div>
-                <%= link_to new_property_path, class: 'btn btn-light' do %>
-                  <i class="far fa-plus-square mr-1"></i>&nbsp;<span><%= t('main.welcome.button_prompt_add') %></span>
-                <% end %>
               </div>
             </div>
+            <div class="d-flex justify-content-center">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="<%= clients_path %>" type="button" class="btn btn-secondary "><i class="fas fa-user fa-fw"></i>&nbsp;<span class="d-none d-sm-inline"><%= t('main.clients') %></span>
+                </a>
+                <a href="<%= properties_path %>" type="button" class="btn btn-secondary"><i class="fas fa-home fa-fw"></i>&nbsp;<span class="d-none d-sm-inline"><%= t('main.properties') %></span>
+                </a>
+              </div>
+              <%= link_to new_property_path, class: 'ml-2 btn btn-outline-danger' do %>
+                <i class="far fa-plus-square mr-1"></i>&nbsp;<span><%= t('main.welcome.button_prompt_add_alt') %></span>
+              <% end %>
+            </div>
+
           </div>
+        </div>
         </div>
 
       <% end %>
 
 
-    </div>
-  </div>
+      </div>
 </div>
+
 
 <%#= link_to 'DEMO', 'demo' %>
 <%#= link_to image_tag('rails.png', alt: 'Rails logo'), 'http://rubyonrails.org/' %>

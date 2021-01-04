@@ -15,8 +15,6 @@
 .app-main {
   min-height: 900px;
 }
-
-
 //@font-face {
 //  font-family: 'PFDinDisplayPro-Regular';
 //  font-style: normal;
@@ -995,7 +993,7 @@ li.page-item {
 }
 
 //.chart-container {
-  //height: 310px;
+//  height: 310px;
 //}
 
 .profile-pic {
@@ -1117,7 +1115,11 @@ li.page-item {
   padding: 20px 0 10px 0;
   background: #FFFFFF;
   color: grey;
-  //margin-bottom: 15px;
+}
+
+.no-entries-calendar {
+  text-align: center;
+  padding: 20px 0 10px 0;
 }
 
 .no-favlists {
@@ -1146,6 +1148,18 @@ li.page-item {
   background-repeat: no-repeat;
   background-position: center center;
   background-image: url('../images/cactus.svg');
+}
+
+.no-results-alt-2{
+  width: 200px;
+  height: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url('../images/no_content.svg');
 }
 
 .nothing-yet{
@@ -2163,4 +2177,113 @@ a.toggle.active {
   background-repeat: no-repeat;
   background-image: url('../images/graph_masker.svg');
   background-position-y: 50%;
+}
+
+.jsCalendar table{
+  font-family: 'Noto Sans', Arial, sans-serif !important;
+  box-shadow: unset;
+}
+
+.jsCalendar tbody td.jsCalendar-current{
+  background-color: #f6511d;
+}
+
+.jsCalendar tbody td:hover {
+  cursor: pointer;
+}
+
+#calendar{
+  min-width: 320px;
+}
+
+#events {
+  //float: left;
+  //width: 435px;
+  //margin: 10px 20px 10px 5px;
+}
+#events .title {
+  padding: 5px 0px;
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+#events .subtitle {
+  padding: 5px 0px;
+  font-size: 14px;
+  text-align: center;
+  color: #888;
+}
+#events .list {
+  height: 250px;
+  overflow-y: auto;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+#events .list .event-item {
+  line-height: 24px;
+  min-height: 24px;
+  padding: 5px;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+#events .list .event-item .close {
+  font-family: Tahoma, Geneva, sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+  color: #FFFFFF;
+  border-radius: 3px;
+  height: 14px;
+  //width: 14px;
+  line-height: 6px;
+  text-align: center;
+  float: right;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  padding: 2px;
+  margin: 5px;
+  display: block;
+  //overflow: hidden;
+  background: $danger;
+  cursor: pointer;
+}
+#events .action {
+  text-align: right;
+}
+#events .action input {
+  padding: 0px 5px;
+  font-size: 12px;
+  margin: 10px 5px;
+  border: 1px solid #999999;
+  height: 28px;
+  line-height: 28px;
+  width: 120px;
+  background: #f8f8f8;
+  color: black;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+#events .action input:hover {
+  background: $success;
+  color: #ffffff;
+  border: 1px solid $success;
+  //box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+// This is needed to prevent some funny add-to-calendar event effects
+//#events .action .btn-success:focus, .btn-success.focus{
+//  box-shadow: unset;
+//}
+
+.version {
+  font-size: 12px;
+  width: 800px;
+  margin: 0 auto;
+  text-align: right;
+}
+
+.calendar-entry-markup{
+  font-weight: bold;
+  color: #37474f;
+  margin-right: 5px;
+}
+
+.list-group-media .list-group-item{
+  z-index: 0;
 }

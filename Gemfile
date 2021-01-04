@@ -81,7 +81,7 @@ gem "irb"
 
 gem 'activerecord-import'
 
-gem 'nokogiri'
+gem 'nokogiri', '~> 1.11'
 
 gem 'capistrano', '~> 3.14.1'
 gem 'capistrano-rails', '~> 1.6.1'
@@ -116,7 +116,7 @@ group :development, :test do
   gem 'poltergeist'
   gem 'database_cleaner'
   gem 'spring-commands-rspec'
-  gem "better_errors", '~> 2.8.3'
+  gem "better_errors", '~> 2.9.1'
   gem "binding_of_caller"
 
   # Pry REPL and friends
