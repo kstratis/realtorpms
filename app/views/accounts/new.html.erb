@@ -36,8 +36,8 @@
       <!-- .form-group -->
       <div class="form-group">
         <div class="form-label-group">
-          <%= owner.text_field :first_name, class: 'form-control', placeholder: User.human_attribute_name("first_name") %>
-          <%= owner.label :first_name, User.human_attribute_name("first_name") %>
+          <%= owner.text_field :first_name, class: 'form-control', placeholder: User.human_attribute_name("first_name_admin") %>
+          <%= owner.label :first_name, User.human_attribute_name("first_name_admin") %>
           <%= inline_error @account.owner, :first_name, 'First name' %>
         </div>
       </div>
@@ -47,8 +47,8 @@
       <!-- .form-group -->
       <div class="form-group">
         <div class="form-label-group">
-          <%= owner.text_field :last_name, class: 'form-control', placeholder: User.human_attribute_name("last_name") %>
-          <%= owner.label :last_name, User.human_attribute_name("last_name") %>
+          <%= owner.text_field :last_name, class: 'form-control', placeholder: User.human_attribute_name("last_name_admin") %>
+          <%= owner.label :last_name, User.human_attribute_name("last_name_admin") %>
           <%= inline_error @account.owner, :last_name, 'Last name' %>
         </div>
       </div>
@@ -58,8 +58,8 @@
       <!-- .form-group -->
       <div class="form-group">
         <div class="form-label-group">
-          <%= owner.email_field :email, class: 'form-control', placeholder: User.human_attribute_name("email") %>
-          <%= owner.label "email", User.human_attribute_name("email") %>
+          <%= owner.email_field :email, class: 'form-control', placeholder: User.human_attribute_name("email_admin") %>
+          <%= owner.label "email", User.human_attribute_name("email_admin") %>
           <%= inline_error @account.owner, :email, 'Email' %>
         </div>
       </div>

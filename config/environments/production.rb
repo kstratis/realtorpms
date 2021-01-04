@@ -1,3 +1,5 @@
+require "active_support/core_ext/integer/time"
+
 def session_data(request)
   session_key = Rails.application.config.session_options[:key]
   request.cookie_jar.signed_or_encrypted[session_key] || {}
@@ -106,6 +108,12 @@ Rails.application.configure do
 
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
+
+  # Log disallowed deprecations.
+  config.active_support.disallowed_deprecation = :log
+
+  # Tell Active Support which deprecation messages to disallow.
+  config.active_support.disallowed_deprecation_warnings = []
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new

@@ -30,5 +30,4 @@ module SearchFilter
     render :json => {:status => "OK", :message => data}
 
   end
-
 end

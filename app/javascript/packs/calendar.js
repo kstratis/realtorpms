@@ -30,6 +30,7 @@ class CalendarManager {
     this.globalDate = new Date(); // This is today
     this.eventsUI = {};
     this.translation = {};
+    this.ajaxUrl = '';
     // Calendar events are stored in a structure like this:
     // this.events #=> {'22/12/2020': [{description: demo, id: 1}, {description: test, id: 2}],
     //                  '25/12/2020': [{description: sample, id: 3}, {description: check, id: 4}], ...}
@@ -66,6 +67,10 @@ class CalendarManager {
 
   setTranslation(translation){
     this.translation = translation;
+  }
+
+  setAjaxUrl(url){
+    this.ajaxUrl = url;
   }
 
   loadLocales() {
@@ -120,7 +125,7 @@ class CalendarManager {
   loadMonthEvents(date) {
     this.handleNetworkCall(
       'get',
-      `calendar_events.json`,
+      this.ajaxUrl,
       { date: this.convertDateToString(date), scope: 'month' },
       ajaxResponse => {
         this.storeEvents(ajaxResponse.data.message);
@@ -260,7 +265,7 @@ class CalendarManager {
 
         this.handleNetworkCall(
           'post',
-          `calendar_events.json`,
+          this.ajaxUrl,
           { description: description, created_for: dateString },
           event => {
             // Refresh events after submitting
@@ -288,6 +293,10 @@ $(document).on('turbolinks:load', function () {
   // Set its language
   const translation = JSON.parse(document.getElementById('calendar_events_i18n').dataset.ceventsi18n);
   calendar_manager.setTranslation(translation);
+  // Get its path
+  const url = document.getElementById('calendar_events_url').dataset.url;
+  calendar_manager.setAjaxUrl(url);
+
   // ...and fire it up
   calendar_manager.init();
   // By default show today's events

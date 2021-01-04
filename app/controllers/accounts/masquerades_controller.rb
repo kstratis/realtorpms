@@ -9,7 +9,7 @@ module Accounts
       session[:admin_id] = current_user.id
       user = User.find(params[:user_id])
       log_in(user)
-      redirect_to root_path, notice: I18n.t('js.datatables.users.masquerading.enter_notice', user: user.full_name)
+      redirect_to account_root_path, notice: I18n.t('js.datatables.users.masquerading.enter_notice', user: user.full_name)
     end
 
     def destroy
@@ -22,11 +22,10 @@ module Accounts
     private
 
     def authorize_admin
-      puts 'INSIDE AUTHORIZE_ADMIN'
       return if current_user.is_admin?(current_account)
 
       flash[:danger] = I18n.t "users.flash_owner_only_action"
-      redirect_to root_url
+      redirect_to account_root_url
     end
   end
 end

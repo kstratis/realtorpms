@@ -2,15 +2,15 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# This file is the source Rails uses to define your schema when running `rails
-# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
 # be faster and is potentially less error prone than running all of your
 # migrations from scratch. Old migrations may fail to apply correctly if those
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_24_112422) do
+ActiveRecord::Schema.define(version: 2021_04_09_173738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,10 +24,11 @@ ActiveRecord::Schema.define(version: 2021_01_24_112422) do
     t.string "telephones"
     t.string "address"
     t.string "email"
-    t.string "website"
     t.bigint "owner_id"
     t.boolean "email_confirmed", default: false
     t.string "confirm_token"
+    t.boolean "website_enabled"
+    t.text "description"
     t.index ["owner_id"], name: "index_accounts_on_owner_id"
     t.index ["subdomain"], name: "index_accounts_on_subdomain"
   end
@@ -50,7 +51,14 @@ ActiveRecord::Schema.define(version: 2021_01_24_112422) do
     t.bigint "byte_size", null: false
     t.string "checksum", null: false
     t.datetime "created_at", null: false
+    t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
   create_table "assignments", force: :cascade do |t|
@@ -306,6 +314,7 @@ ActiveRecord::Schema.define(version: 2021_01_24_112422) do
     t.jsonb "preferences", default: {}, null: false
     t.integer "energy_cert"
     t.boolean "has_energy_cert"
+    t.boolean "website_enabled", default: true
     t.index ["account_id"], name: "index_properties_on_account_id"
     t.index ["category_id"], name: "index_properties_on_category_id"
     t.index ["location_id"], name: "index_properties_on_location_id"
@@ -333,6 +342,7 @@ ActiveRecord::Schema.define(version: 2021_01_24_112422) do
   end
 
   add_foreign_key "accounts", "users", column: "owner_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "assignments", "properties"
   add_foreign_key "assignments", "users"
   add_foreign_key "calendar_events", "users"

@@ -387,5 +387,42 @@ module PropertiesHelper
     entries
   end
 
+  ### Client website helpers
+  def first_avail_image(entity)
+    return entity.avatar if entity.avatar.attached?
+
+    entity.images.first
+  end
+
+  def render_price(property)
+    return if property.price.blank?
+
+    render :partial => "accounts/websites/price", locals: { property: property }
+  end
+
+  def render_location(property)
+    [property.location.localname, property.location.parent_localname].reject(&:blank?).join(", ")
+  end
+
+  def render_residential_features(property)
+    wording = []
+    if property.floor.present?
+      wording << "#{I18n.t('activerecord.attributes.property.enums.floor.2')} #{I18n.t('activerecord.attributes.property.floor').downcase}"
+    end
+
+    if property.bedrooms.present?
+      wording << I18n.t('activerecord.attributes.property.bedroom', count: property.bedrooms).to_s
+    end
+
+    if property.bathrooms.present?
+      wording << I18n.t('activerecord.attributes.property.bathroom', count: property.bathrooms).to_s
+    end
+
+    if property.construction.present?
+      wording << "#{I18n.t('activerecord.attributes.property.construction_short')}: #{property.construction}"
+    end
+    wording
+  end
+  #---
 end
 

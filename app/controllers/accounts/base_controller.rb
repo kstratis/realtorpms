@@ -16,8 +16,9 @@ module Accounts
     helper_method :masquerading?
     helper_method :masqueraded_admin
 
+    before_action :logged_in_user, except: []
     # before_action :logged_in_user, :allowed_subdomains, only: [:index, :edit, :update, :destroy]
-    before_action :logged_in_user, :allowed_subdomains, :active_account, :active_user # The order is guaranteed from left-to-right
+    before_action :allowed_subdomains, :active_account, :active_user # The order is guaranteed from left-to-right
     after_action :store_referer_url, only: [:index, :edit, :update, :destroy]
 
     # before_action :correct_subdomain
@@ -55,7 +56,7 @@ module Accounts
             redirection = proc { redirect_to account_list_url(subdomain: false) and return }
           else
             log_out if logged_in?
-            redirection = proc { redirect_to root_url(subdomain: request.subdomain) }
+            redirection = proc { redirect_to login_url(subdomain: request.subdomain) }
           end
           flash[:danger] = I18n.t "sessions.flash_suspended"
           redirection.call

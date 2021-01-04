@@ -590,13 +590,13 @@ function withDatatable(WrappedComponent) {
       let resource;
       switch (object_type) {
         case 'property_users':
-          resource = `/properties/${this.props.initial_payload.pid}.json${query}`;
+          resource = `app/properties/${this.props.initial_payload.pid}.json${query}`;
           break;
         case 'users':
-          resource = `/users.json${query}`;
+          resource = `users.json${query}`;
           break;
         case 'clients':
-          resource = `/clients.json${query}`;
+          resource = `clients.json${query}`;
           break;
         case 'clientprefslist':
           resource = `${this.props.initial_payload.client_endpoint}.json${query}`;
@@ -605,7 +605,7 @@ function withDatatable(WrappedComponent) {
           resource = `${this.props.initial_payload.favlists_endpoint}.json${query}`;
           break;
         case 'properties':
-          resource = `/properties.json${query}`;
+          resource = `properties.json${query}`;
           break;
         default:
           console.warn('No resource specified');
@@ -655,7 +655,7 @@ function withDatatable(WrappedComponent) {
       const method = e.target.dataset['methodtype'];
       let entity = this.props.initial_payload.object_type;
       // todo This needs refactoring
-      axios[method](`/assignments/property/${pid}/user/${uid}.json`) // +1 because rails will_paginate starts from 1 while this starts from 0
+      axios[method](`app/assignments/property/${pid}/user/${uid}.json`) // +1 because rails will_paginate starts from 1 while this starts from 0
         .then(
           function(response) {
             // console.log('logging the response');

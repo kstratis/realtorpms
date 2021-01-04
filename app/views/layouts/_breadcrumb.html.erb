@@ -11,7 +11,7 @@
             <% end %>
           </li>
           <div class="d-none d-md-block">
-            <li><a href="/"><i id="breadcrumb-home" class="pr-icon xxs dashboard_alt"></i></a></li>
+            <li><a href="<%= account_root_path %>"><i id="breadcrumb-home" class="pr-icon xxs dashboard_alt"></i></a></li>
             <% path.each do |entry| %>
               <% if entry == path.last %>
                 <li class="active"><span> <%= entry[:title] %></span></li>

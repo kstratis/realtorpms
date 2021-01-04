@@ -8,6 +8,9 @@ class Account < ApplicationRecord
             format: /\A[a-zA-Z0-9]*\z/
 
   validates :name, presence: true, length: { maximum: 20 }, uniqueness: true
+  # This is intentionally commented out since accounts can't be created on signup without description.
+  # We only do js validation on this on the edit screen
+  # validates :description, presence: true
 
   has_many :invitations, dependent: :destroy # Only destroys invitations associated with the current account
   has_many :properties, dependent: :destroy # Only destroys properties associated with the current account
@@ -26,6 +29,8 @@ class Account < ApplicationRecord
   # However users may belong to multiple accounts and each account can have its own model fields. Thus for
   # users we use a HABTM association.
   has_many :model_types, dependent: :destroy
+
+  has_one_attached :avatar
 
   validates_associated :owner
 

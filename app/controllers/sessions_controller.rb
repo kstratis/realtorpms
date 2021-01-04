@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
       if session.key?('forwarding_url') && /\/invitations\/\w+\/accept/.match(session[:forwarding_url])
         log_in user
         # note that both 1 and 0 are true in the boolean context. if we had done
-        # +params[:session][:remember_me] ? remember(user) : forget(user)+, remeber(user)
+        # +params[:session][:remember_me] ? remember(user) : forget(user)+, remember(user)
         # would always get called
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
         # flash[:success] = 'You have successfully signed in.'
@@ -56,11 +56,11 @@ class SessionsController < ApplicationController
       redirect_to account_list_url(subdomain: false) and return if user.is_sysadmin?
 
       unless user.has_owning_accounts?.zero?
-        redirect_to root_url(subdomain: Account.find_by(owner_id: user.id).subdomain) and return
+        redirect_to account_root_url(subdomain: Account.find_by(owner_id: user.id).subdomain) and return
       end
 
       if user.accounts.exists?
-        redirect_to root_url(subdomain: user.accounts.first.subdomain)
+        redirect_to account_root_url(subdomain: user.accounts.first.subdomain)
       else
         redirect_to account_list_url(subdomain: false)
       end
@@ -87,10 +87,10 @@ class SessionsController < ApplicationController
 
   def destroy
     # special handling if in masquerading mode
-    return redirect_to root_url if masquerading?
+    return redirect_to account_root_url if masquerading?
     log_out if logged_in?
     flash[:danger] = I18n.t 'sessions.flash_logout'
-    redirect_to root_url(subdomain: request.subdomain) # make the subdomain explicit
+    redirect_to login_url(subdomain: request.subdomain) # make the subdomain explicit
   end
 
 end

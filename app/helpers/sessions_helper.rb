@@ -66,11 +66,6 @@ module SessionsHelper
 
   # Redirects to stored location (or to the default).
   def redirect_back_or(default, subdomain)
-    # puts "subdomain is: #{subdomain}"
-    # puts "the url is: #{session[:forwarding_url]}"
-
-    # obj.host.split('.')[0..-3].join(".")
-    # saved_url = session[:forwarding_url]
     begin
       stored_url = URI.parse(session[:forwarding_url])
       # stored_domain is needed for cases with more than 2nd level domains (a.k.a dev.app.io)
@@ -80,21 +75,13 @@ module SessionsHelper
       stored_domain = nil
     end
 
-
-    # full_redirection_url = build_redirection_url(stored_url, subdomain)
-    # puts "full redirection url is: #{stored_url.scheme}://#{subdomain}.#{extracted_hostname}#{stored_url.path}"
-    # obj.host.split('.').last(2).join('.')
-    # puts "the domain is: #{uri.domain}"
-    # redirect_to uri(subdomain: subdomain)
-    # redirect_to subdomain: subdomain
     if stored_url.nil?
-      redirect_to root_url(subdomain: subdomain) # make the subdomain explicit
+      redirect_to account_root_url(subdomain: subdomain) # make the subdomain explicit
     else
       redirect_to build_redirection_url(stored_url, stored_domain, subdomain)
       session.delete(:forwarding_url)
       session.delete(:forwarding_domain_name)
     end
-
   end
 
   # Stores the URL trying to be accessed.
@@ -121,25 +108,4 @@ module SessionsHelper
 
     current_account.all_users_plus_sys.find(session[:admin_id])
   end
-
-  # Retrieves the subdomain
-  def get_subdomain(user)
-
-
-    # subdomain = Account.get_subdomain(user)
-    # if request.subdomain.blank?
-    #   subdomain
-    # else
-    #   request.subdomain == subdomain ? subdomain : nil
-    # end
-
-
-
-
-  end
-
-
-
-
-
 end

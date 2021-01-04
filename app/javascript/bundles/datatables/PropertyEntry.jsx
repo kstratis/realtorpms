@@ -69,6 +69,19 @@ class PropertyEntry extends React.Component {
               <div className={`card-businesstype-header ${this.props.entry['allow_view'] ? '' : 'frosty'}`}>
                 <span className={'highlighted-bg highlighted-fg'}>{this.props.entry.purpose}</span>
               </div>
+              <div
+                className="special-active"
+                title={
+                  this.props.entry['website_enabled']
+                    ? this.props.i18n['website_enabled']
+                    : this.props.i18n['website_disabled']
+                }>
+                <div
+                  className={`active-indicator ${
+                    this.props.entry['website_enabled'] ? 'active-indicator-on' : 'active-indicator-off'
+                  }`}
+                />
+              </div>
               <div className="list-group-item-body custom-list-group-item-body-padding">
                 <div className={'row d-flex justify-content-end'}>
                   {!this.props.entry['allow_view'] ? (
@@ -133,12 +146,12 @@ class PropertyEntry extends React.Component {
                           ) : null}
                         </tbody>
                       </table>
-                      <div className={'controls'}>
+                      <div className={'properties-listing-controls d-flex justify-content-center'}>
                         <div
-                          title={this.props.i18n.label}
-                          className={'clone-button'}
+                          title={this.props.i18n.clone.label}
+                          className={'clone-button control-button'}
                           onClick={e => {
-                            if (window.confirm(this.props.i18n.prompt)) {
+                            if (window.confirm(this.props.i18n.clone.prompt)) {
                               this.props.handleClone(e, this.props.entry['clone_entity_path']);
                             } else {
                               // handleClone already takes care of preventDefault.
@@ -148,7 +161,7 @@ class PropertyEntry extends React.Component {
                               e.preventDefault();
                             }
                           }}>
-                          <i className={'far fa-copy fa-fw'} />
+                          <i className={'fas fa-copy fa-fw'} />
                         </div>
                       </div>
                     </>
@@ -167,7 +180,7 @@ PropertyEntry.propTypes = {
   entry: PropTypes.object,
   filtersOpen: PropTypes.bool,
   handleClone: PropTypes.func,
-  i18n: PropTypes.any
+  i18n: PropTypes.any,
 };
 
 export default PropertyEntry;

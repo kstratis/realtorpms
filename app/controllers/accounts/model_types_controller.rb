@@ -81,7 +81,7 @@ module Accounts
 
     def redirect_to_index
       flash[:danger] = I18n.t('access_denied')
-      redirect_to root_path
+      redirect_to account_root_path
     end
 
     def grant_access?

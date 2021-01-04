@@ -161,19 +161,19 @@ module Accounts
       @user = current_account.all_users.find(params[:id])
       unless current_user?(@user) || current_user.is_admin?(current_account)
         flash[:danger] = I18n.t "users.flash_unauthorised_user_edit"
-        redirect_to(root_url)
+        redirect_to(account_root_url)
       end
     end
 
     # Confirms an admin user.
     def admin_user
-      redirect_to(root_url) unless current_user.is_sysadmin?
+      redirect_to(account_root_url) unless current_user.is_sysadmin?
     end
 
     def owner_exclusive
       unless current_user.is_admin?(current_account)
         flash[:danger] = I18n.t "users.flash_owner_only_action"
-        redirect_to root_url
+        redirect_to account_root_url
       end
     end
   end

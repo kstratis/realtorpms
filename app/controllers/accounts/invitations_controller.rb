@@ -50,7 +50,7 @@ module Accounts
       def authorize_owner!
         unless owner?
           flash[:danger] = 'Only an account\'s owner can perform such action.'
-          redirect_to root_url(subdomain: current_account.subdomain)
+          redirect_to account_root_url(subdomain: current_account.subdomain)
         end
       end
 

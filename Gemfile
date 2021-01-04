@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0'
+gem 'rails', '~> 6.1'
 # gem 'rails', :git => 'https://github.com/rails/rails'
 
 # Watch out! - Don't upgrade to 3.1.13 yet because it incurs severe performance degradation
@@ -14,11 +14,13 @@ gem 'bcrypt', '3.1.12'
 
 # gem 'bootstrap', '~> 4.4.1'
 
-gem 'bootsnap', '~> 1.4.8'
+gem 'bootsnap', '~> 1.7.3'
 
 gem 'e2mmap'
 
 gem 'rack-cors'
+
+gem 'image_processing', '~> 1.2'
 
 # -----------
 
@@ -38,7 +40,7 @@ gem "mini_magick"
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.2.3'
 # Use Puma as the app server
-gem 'puma', '~> 5.0.2'
+gem 'puma', '~> 5.2.2'
 # Use SCSS for stylesheets
 # gem 'sass-rails', '~> 5.0.7'
 gem 'sassc-rails', '~> 2.1.2'
@@ -53,13 +55,15 @@ gem 'coffee-rails', '~> 5.0'
 gem 'turbolinks', '~> 5.2.1'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.10.1'
+gem 'jbuilder', '~> 2.11'
 
 gem 'jquery-rails', '~> 4.4.0'
 
-gem 'faker', '~> 2.14'
+gem 'faker', '~> 2.17'
 
 gem 'will_paginate', '~> 3.3.0'
+
+gem 'pagy'
 
 gem 'active_record_union', '~> 1.3.0'
 
@@ -67,7 +71,7 @@ gem 'bootstrap-will_paginate', '1.0.0'
 
 gem 'launchy', '2.5.0'
 
-gem 'react_on_rails', '12.0.3'
+gem 'react_on_rails', '12.2.0'
 
 gem 'webpacker', '~> 5.2.1'
 
@@ -83,7 +87,7 @@ gem 'activerecord-import'
 
 gem 'nokogiri', '~> 1.11'
 
-gem 'capistrano', '~> 3.14.1'
+gem 'capistrano', '~> 3.16'
 gem 'capistrano-rails', '~> 1.6.1'
 gem 'capistrano-passenger', '~> 0.2.0'
 gem 'capistrano-rbenv', '~> 2.2.0'
@@ -95,7 +99,7 @@ gem 'public_uid' # Need this for pseudorandom ids
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-gem 'listen', '~> 3.2.1'
+gem 'listen', '~> 3.5.1'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'capistrano-rails-console', require: false
@@ -105,11 +109,11 @@ gem 'rubocop-rails', require: false
 gem 'rubocop-rspec', require: false
 
 group :development, :test do
-  gem 'rspec-rails', '4.0.1'
+  gem 'rspec-rails', '5.0.1'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '~> 3.33.0'
+  gem 'capybara', '~> 3.35.0'
   gem 'selenium-webdriver'
   gem 'email_spec', '2.2.0'
   gem 'phantomjs'
@@ -128,7 +132,7 @@ end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console', '~> 4.0.4'
+  gem 'web-console', '~> 4.1'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.1'
@@ -136,10 +140,10 @@ end
 
 group :test do
   gem 'factory_bot_rails', '~> 6.1'
-  gem 'shoulda-matchers', '~> 4.4.1'
+  gem 'shoulda-matchers', '~> 4.5.1'
   gem 'rspec-collection_matchers'
   gem 'rails-controller-testing', '1.0.5'
-  gem 'minitest-reporters',       '1.4.2'
+  gem 'minitest-reporters',       '1.4.3'
   gem 'guard',                    '2.16.2'
   gem 'guard-minitest',           '2.4.6'
 end

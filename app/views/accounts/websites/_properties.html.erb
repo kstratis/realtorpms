@@ -1,0 +1,14 @@
+<% @properties.each do |property| %>
+  <div class="col mb-4">
+  <%= content_tag :div, id: dom_id(property), class: ["card", "mb-2", dom_class(property)] do %>
+<!--    <div class="card">-->
+      <img src="<%= property.avatar.attached? ? url_for(property.avatar) : nil %>" class="card-img-top img-fluid" alt="...">
+      <div class="card-body">
+        <h5 class="card-title"><%= property.slug %></h5>
+        <p class="card-text"><%= property.description %><%= link_to 'Show', property %></p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+<!--    </div>-->
+  <% end %>
+  </div>
+<% end %>

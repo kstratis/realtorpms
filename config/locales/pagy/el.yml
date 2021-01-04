@@ -1,0 +1,22 @@
+# :one_other pluralization (see https://github.com/ddnexus/pagy/blob/master/lib/locales/utils/p11n.rb)
+
+el:
+  pagy:
+
+    item_name:
+      one: "αποτέλεσμα"
+      other: "αποτελέσματα"
+
+    nav:
+      prev: "&lsaquo;"
+      next: "&rsaquo;"
+      gap: "&hellip;"
+
+    info:
+      no_items: "Κανένα %{item_name} δεν βρέθηκε"
+      single_page: "Εμφανίζονται <b>%{count}</b> %{item_name}"
+      multiple_pages: "Εμφανίζονται <b>%{from}-%{to}</b> %{item_name} από συνολικά <b>%{count}</b>"
+
+    combo_nav_js: "Σελίδα %{page_input} από %{pages}"
+
+    items_selector_js: "Εμφανίζονται %{items_input} %{item_name} ανά σελίδα"

@@ -135,6 +135,13 @@
                         </div>
                       </div>
 
+                      <div class="custom-control custom-switch website-enabled-control">
+                        <%= property.check_box(:website_enabled, {class: "custom-control-input", type: 'checkbox'}) %>
+                        <%= property.label(:website_enabled, {class: 'custom-control-label cursor-pointer'}) do %>
+                          <strong><%= t('properties.edit.website_enabled_html', website: websites_root_url) %></strong>
+                        <% end %>
+                      </div>
+
 
                       <div class="row">
                         <div class="col-md-12">
@@ -300,6 +307,7 @@
                                                       placeholder: Property.human_attribute_name("price_placeholder"),
                                                       class: 'form-control',
                                                       autocomplete: "off",
+                                                      'data-parsley-required': "true",
                                                       'data-parsley-group': "fieldset-2",
                                                       'data-parsley-type': "integer",
                                                       'data-parsley-type-message': t("js.validator.digits"),

@@ -1,35 +1,380 @@
-<div class="center jumbotron pr-container">
-
-  <h1>This is a website screen. </h1>
-  <h1>Under construction</h1>
-  <% if logged_in? %>
-
-    <p><strong>You are currently logged in as <u><%= current_user.email %></u></strong></p>
-    <% if @subdomain.blank? %>
-      <p><strong>Continue to the <%= link_to 'App', account_list_url %></strong></p>
-    <% else %>
-      <p><strong>Continue to the <%= link_to 'App', root_url(subdomain: @subdomain) %></strong></p>
-    <% end %>
-
-  <% else %>
-
-    <h1><%= BRANDNAME %></h1>
-    <h2>Account action screen</h2>
-    <div class="row">
-      <div class="controls col-4 offset-4">
-        <div class="center">
-      <%= link_to 'Sign up now!', new_account_url(subdomain: nil), class: 'btn btn-lg btn-primary' %>
-      <%= link_to 'Login!', login_url(subdomain: nil), class: 'btn btn-lg btn-primary' %>
-        </div>
-      </div>
+<% content_for :landing do %>
+  <!-- .app -->
+  <main class="app app-site website">
+    <!--[if lt IE 10]>
+    <div class="page-message" role="alert">You are using an <strong>outdated</strong> browser. Please <a
+      class="alert-link" href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and
+      security.
     </div>
-  <% end %>
+    <![endif]-->
+    <!-- site header -->
+    <!-- .navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light py-4" data-aos="fade-in">
+      <!-- .container -->
+      <div class="container">
+        <!-- .hamburger -->
+        <button class="hamburger hamburger-squeeze hamburger-light d-flex d-lg-none" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="hamburger-box"><span class="hamburger-inner"></span></span></button> <!-- /.hamburger -->
+        <!-- .navbar-brand -->
+        <a class="navbar-brand ml-auto mr-0" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="28" viewbox="0 0 351 100">
+            <defs>
+              <path id="a" d="M156.538 45.644v1.04a6.347 6.347 0 0 1-1.847 3.98L127.708 77.67a6.338 6.338 0 0 1-3.862 1.839h-1.272a6.34 6.34 0 0 1-3.862-1.839L91.728 50.664a6.353 6.353 0 0 1 0-9l9.11-9.117-2.136-2.138a3.171 3.171 0 0 0-4.498 0L80.711 43.913a3.177 3.177 0 0 0-.043 4.453l-.002.003.048.047 24.733 24.754-4.497 4.5a6.339 6.339 0 0 1-3.863 1.84h-1.27a6.337 6.337 0 0 1-3.863-1.84L64.971 50.665a6.353 6.353 0 0 1 0-9l26.983-27.008a6.336 6.336 0 0 1 4.498-1.869c1.626 0 3.252.622 4.498 1.87l26.986 27.006a6.353 6.353 0 0 1 0 9l-9.11 9.117 2.136 2.138a3.171 3.171 0 0 0 4.498 0l13.49-13.504a3.177 3.177 0 0 0 .046-4.453l.002-.002-.047-.048-24.737-24.754 4.498-4.5a6.344 6.344 0 0 1 8.996 0l26.983 27.006a6.347 6.347 0 0 1 1.847 3.98zm-46.707-4.095l-2.362 2.364a3.178 3.178 0 0 0 0 4.501l2.362 2.364 2.361-2.364a3.178 3.178 0 0 0 0-4.501l-2.361-2.364z"></path>
+            </defs>
+            <g fill="none" fill-rule="evenodd">
+              <path fill="currentColor" fill-rule="nonzero" d="M39.252 80.385c-13.817 0-21.06-8.915-21.06-22.955V13.862H.81V.936h33.762V58.1c0 6.797 4.346 9.026 9.026 9.026 2.563 0 5.237-.446 8.58-1.783l3.677 12.034c-5.794 1.894-9.694 3.009-16.603 3.009zM164.213 99.55V23.78h13.372l1.225 5.571h.335c4.457-4.011 10.585-6.908 16.491-6.908 13.817 0 22.174 11.031 22.174 28.08 0 18.943-11.588 29.863-23.957 29.863-4.903 0-9.694-2.117-13.594-6.017h-.446l.78 9.025V99.55h-16.38zm25.852-32.537c6.128 0 10.92-4.903 10.92-16.268 0-9.917-3.232-14.932-10.14-14.932-3.566 0-6.797 1.56-10.252 5.126v22.397c3.12 2.674 6.686 3.677 9.472 3.677zm69.643 13.372c-17.272 0-30.643-10.586-30.643-28.972 0-18.163 13.928-28.971 28.748-28.971 17.049 0 26.075 11.477 26.075 26.52 0 3.008-.558 6.017-.78 7.354h-37.663c1.56 8.023 7.465 11.589 16.491 11.589 5.014 0 9.36-1.337 14.263-3.9l5.46 9.917c-6.351 4.011-14.597 6.463-21.951 6.463zm-1.338-45.463c-6.462 0-11.031 3.454-12.702 10.363h23.622c-.78-6.797-4.568-10.363-10.92-10.363zm44.238 44.126V23.779h13.371l1.337 12.034h.334c5.46-9.025 13.595-13.371 22.398-13.371 4.902 0 7.465.78 10.697 2.228l-3.343 13.706c-3.454-1.003-5.683-1.56-9.806-1.56-6.797 0-13.928 3.566-18.608 13.483v28.749h-16.38z"></path>
+              <use class="fill-primary" xlink:href="#a"></use>
+            </g>
+          </svg>
+        </a> <!-- /.navbar-brand -->
+
+        <% if logged_in? %>
+          <a class="navbar-btn btn btn-outline-danger ml-auto order-lg-2" href="<%= redirect_to_app_url %>"><%= t('website.nav.app') %></a> <!-- .navbar-collapse -->
+        <% else %>
+          <a class="navbar-btn btn btn-lg btn-cta ml-auto order-lg-2" href="<%= new_account_url %>"><%= t('website.nav.signup') %></a> <!-- .navbar-collapse -->
+          <a class="navbar-btn btn ml-auto order-lg-2" href="<%= login_url %>"><%= t('website.nav.signin') %></a> <!-- .navbar-collapse -->
+        <% end %>
+
+        <div class="navbar-collapse collapse" id="navbarTogglerDemo01">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item mr-lg-3">
+              <a class="nav-link py-2 black-color" href="#features"><%= t('website.nav.features') %></a>
+            </li>
+            <li class="nav-item mr-lg-3">
+              <a class="nav-link py-2 black-color" href="#pricing"><%= t('website.nav.subscription') %></a>
+            </li>
+            <li class="nav-item mr-lg-3">
+              <a class="nav-link py-2 black-color" href="#contact"><%= t('website.nav.contact') %></a>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container -->
+    </nav><!-- /.navbar -->
+    <!-- /site header -->
+    <!-- hero -->
+    <div class="hero-section">
+    <section class="py-3">
+      <!-- .container -->
+      <div class="container container-fluid-xl">
+        <!-- .row -->
+        <div class="row align-items-center">
+          <!-- .col-md-6 -->
+
+          <!-- SVG SUN -->
+          <div class="col-12 d-lg-block d-none col-lg-5 order-md-2" data-aos="fade-left">
+            <svg id="sun" width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 80px; height: 80px;">
+              <g class="line-sun1-rotate" style="animation-duration: 60s;">
+                <circle class="stroke1 fill1" cx="49.7501" cy="50" r="24" fill="rgba(248,231,28,1)" stroke="rgba(0,0,0,1)" stroke-width="6.0px"></circle>
+                <path class="line-sun1-a stroke2" d="M49.7501 21.5V14" stroke="#000" stroke-width="6.0px" stroke-linecap="round"></path>
+                <path class="line-sun1-b stroke2" d="M49.7501 85.5V78" stroke="#000" stroke-width="6.0px" stroke-linecap="round"></path>
+                <path class="line-sun1-c stroke2" d="M74.2153 35.625L80.7104 31.875" stroke="#000" stroke-width="6.0px" stroke-linecap="round"></path>
+                <path class="line-sun1-d stroke2" d="M18.7897 67.625L25.2849 63.875" stroke="#000" stroke-width="6.0px" stroke-linecap="round"></path>
+                <path class="line-sun1-e stroke2" d="M74.2153 63.875L80.7104 67.625" stroke="#000" stroke-width="6.0px" stroke-linecap="round"></path>
+                <path class="line-sun1-f stroke2" d="M18.7897 31.875L25.2849 35.625" stroke="#000" stroke-width="6.0px" stroke-linecap="round"></path>
+                <path class="line-sun1-g stroke2" d="M70.1251 14.4594L63.8751 25.2847" stroke="#000" stroke-width="6.0px" stroke-linecap="round"></path>
+                <path class="line-sun1-h stroke2" d="M29.3751 85.0406L35.6251 74.2153" stroke="#000" stroke-width="6.0px" stroke-linecap="round"></path>
+                <path class="line-sun1-i stroke2" d="M90.5002 49.75L78.0002 49.75" stroke="#000" stroke-width="6.0px" stroke-linecap="round"></path>
+                <path class="line-sun1-j stroke2" d="M9 49.75L21.5 49.75" stroke="#000" stroke-width="6.0px" stroke-linecap="round"></path>
+                <path class="line-sun1-k stroke2" d="M70.1251 85.0406L63.8751 74.2153" stroke="#000" stroke-width="6.0px" stroke-linecap="round"></path>
+                <path class="line-sun1-l stroke2" d="M29.3751 14.4594L35.6251 25.2847" stroke="#000" stroke-width="6.0px" stroke-linecap="round"></path>
+              </g>
+            </svg>
+
+            <!-- SVG CLOUD -->
+            <svg id="clouds" class="solo-cloud" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0" y="0" width="512" height="512" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+              <path id="cloud-icon" d="M406.1 227.63c-8.23-103.65-144.71-137.8-200.49-49.05 -36.18-20.46-82.33 3.61-85.22 45.9C80.73 229.34 50 263.12 50 304.1c0 44.32 35.93 80.25 80.25 80.25h251.51c44.32 0 80.25-35.93 80.25-80.25C462 268.28 438.52 237.94 406.1 227.63z" />
+            </svg>
+
+            <!-- SVG BACKGROUND -->
+            <%= image_pack_tag 'media/images/website/cityscape_w_background.svg', class: "img-fluid img-float-md-6 mb-5 mb-md-0" %>
+          </div><!-- /.col-md-6 -->
+          <!-- .col-md-6 -->
+          <div class="col-12 col-lg-7 order-md-1" data-aos="fade-in">
+            <div class="pl-xl-3 ml-auto text-center text-sm-left">
+              <h1 class="display-4 enable-responsive-font-size mb-4">
+                <%= t('website.hero1') %><br><%= t('website.hero2') %></h1>
+              <p class="px-4 lead text-center mb-5"><%= t('website.subheader') %></p>
+            </div>
+          </div><!-- /.col-md-6 -->
+        </div><!-- /.row -->
+      </div><!-- /.container -->
+
+    </section><!-- /hero -->
+
+    <!-- .feature -->
+    <section class="py-5">
+      <!-- .container -->
+      <div class="container container-fluid">
+
+          <div class="card-deck-lg">
+            <!-- .card -->
+            <div class="card feature-card shadow aos-init aos-animate vw-75" data-aos="fade-up" data-aos-delay="0">
+              <!-- .card-body -->
+              <div class="card-body">
+                <div class="d-sm-flex align-items-start text-center text-sm-left ">
+                  <div class="col-12 text-center" data-aos="fade-up" data-aos-delay="0">
+                    <div class="graphic-container">
+                      <%= image_pack_tag 'media/images/website/engine.svg', class: "img-fluid py-2" %>
+                    </div>
+                    <h2 class="lead header"><%= t('website.feature_strip.a.title') %></h2>
+                    <h3 class="body"><%= t('website.feature_strip.a.body_html') %></h3>
+                  </div><!-- /.col -->
+                </div>
+              </div><!-- /.card-body -->
+            </div><!-- /.card -->
+            <!-- .card -->
+            <div class="card feature-card shadow aos-init aos-animate vw-75" data-aos="fade-up" data-aos-delay="100">
+              <!-- .card-body -->
+              <div class="card-body">
+                <div class="d-sm-flex align-items-start text-center text-sm-left">
+                  <div class="col-12 text-center" data-aos="fade-up" data-aos-delay="0">
+                    <div class="graphic-container">
+<!--                      <div className="d-flex justify-content-center mt-2">-->
+<!--                        <i className="pr-icon md search" />-->
+<!--                      </div>-->
+                      <%= image_pack_tag 'media/images/website/partners.svg', class: "img-fluid py-2" %>
+<!--                      <img class="mb-4" src="assets/images/illustration/lab.svg" alt="" height="72">-->
+                    </div>
+                    <h2 class="lead header"><%= t('website.feature_strip.b.title') %></h2>
+                    <h3 class="body"><%= t('website.feature_strip.b.body_html') %></h3>
+                  </div><!-- /.col -->
+                </div>
+              </div><!-- /.card-body -->
+            </div><!-- /.card -->
+
+            <div class="card feature-card shadow aos-init aos-animate vw-75" data-aos="fade-up" data-aos-delay="100">
+              <!-- .card-body -->
+              <div class="card-body">
+                <div class="d-sm-flex align-items-start text-center text-sm-left">
+                  <div class="col-12 text-center" data-aos="fade-up" data-aos-delay="0">
+                    <div class="graphic-container">
+                      <%#= image_pack_tag 'media/images/website/home.svg', class: "img-fluid img-float-md-6 mb-5 mb-md-0" %>
+                      <%= image_pack_tag 'media/images/website/portal.svg', class: "img-fluid py-2" %>
+
+                    </div>
+                    <h2 class="lead header"><%= t('website.feature_strip.c.title') %></h2>
+                    <h3 class="body"><%= t('website.feature_strip.c.body_html') %></h3>
+                  </div><!-- /.col -->
+                </div>
+              </div><!-- /.card-body -->
+            </div><!-- /.card -->
+
+            <div class="card feature-card shadow aos-init aos-animate vw-75" data-aos="fade-up" data-aos-delay="100">
+              <!-- .card-body -->
+              <div class="card-body">
+                <div class="d-sm-flex align-items-start text-center text-sm-left">
+                  <div class="col-12 text-center" data-aos="fade-up" data-aos-delay="0">
+                    <div class="graphic-container">
+                      <%#= image_pack_tag 'media/images/website/home.svg', class: "img-fluid img-float-md-6 mb-5 mb-md-0" %>
+                      <%= image_pack_tag 'media/images/website/encryption.svg', class: "img-fluid py-2" %>
+                    </div>
+                    <h2 class="lead header"><%= t('website.feature_strip.d.title') %></h2>
+                    <h3 class="body"><%= t('website.feature_strip.d.body_html') %></h3>
+                  </div><!-- /.col -->
+                </div>
+              </div><!-- /.card-body -->
+            </div><!-- /.card -->
 
 
-  <%#= link_to 'Sign up now!', new_account_path, class: 'btn btn-lg btn-primary' %>
-</div>
 
-<%#= link_to image_tag('rails.png', alt: 'Rails logo'), 'http://rubyonrails.org/' %>
+          </div>
+
+      </div><!-- /.container -->
+    </section><!-- /.feature -->
+    </div>
+
+    <!-- feature -->
+
+    <!-- divider -->
+    <section class="position-relative">
+      <!-- wave2.svg -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="192" viewbox="0 0 1440 240" preserveaspectratio="none">
+        <path class="fill-light" fill-rule="evenodd" d="M0 240V0c19.985 5.919 41.14 11.008 63.964 14.89 40.293 6.855 82.585 9.106 125.566 9.106 74.151 0 150.382-6.697 222.166-8.012 13.766-.252 27.51-.39 41.21-.39 99.76 0 197.087 7.326 282.907 31.263C827.843 72.527 860.3 117.25 906.926 157.2c43.505 37.277 115.38 51.186 208.485 53.076 7.584.153 15.156.224 22.714.224 40.887 0 81.402-2.062 121.914-4.125 40.512-2.062 81.027-4.125 121.902-4.125 1.01 0 2.019.002 3.03.004 16.208.042 34.959.792 55.029 2.234V240H0z"></path>
+      </svg>
+    </section><!-- /divider -->
+    <!-- feature -->
+    <section class="position-relative pb-5 bg-light">
+      <!-- .sticker -->
+      <div class="sticker">
+        <div class="sticker-item sticker-top-right sticker-soften">
+          <%= image_pack_tag 'media/images/website/cubes.svg', 'data-aos': "zoom-in" %>
+        </div>
+        <div class="sticker-item sticker-bottom-left sticker-soften scale-150">
+          <%= image_pack_tag 'media/images/website/cubes.svg', 'data-aos': "zoom-in" %>
+        </div>
+      </div><!-- /.sticker -->
+      <!-- .container -->
+      <div class="container position-relative">
+<!--        <span class="callout-header">-->
+<!--          <span class="pin-title font-weight-bold">56.000 €</span>-->
+<!--        </span>-->
+        <p>
+        <span id="features" class="callout-header">
+          <span class="text-center text-sm-left color-black letter-spacing-soft font-large pin-title font-weight-bold no-wrap"><%= t('website.benefits.header') %></span>
+        </span>
+        </p>
+        <p class="lead text-muted color-grey text-center text-sm-left mb-5"><%= t('website.benefits.subheader') %></p><!-- .card-deck -->
+        <div class="card-deck-lg">
+          <!-- .card -->
+          <div class="card shadow" data-aos="fade-up" data-aos-delay="0">
+            <!-- .card-body -->
+            <div class="card-body p-4">
+              <div class="d-sm-flex align-items-start text-center text-sm-left">
+                <%= image_pack_tag 'media/images/website/office.svg', class: 'mr-sm-4 mb-3 mb-sm-0', width: "72" %>
+                <div class="flex-fill">
+                  <h5 class="mt-0"><%= t('website.benefits.a.title') %></h5>
+                  <p class="text-muted font-size-lg"><%= t('website.benefits.a.body_html', BRANDNAME: BRANDNAME) %></p>
+                </div>
+              </div>
+            </div><!-- /.card-body -->
+          </div><!-- /.card -->
+          <!-- .card -->
+          <div class="card shadow" data-aos="fade-up" data-aos-delay="100">
+            <!-- .card-body -->
+            <div class="card-body p-4">
+              <div class="d-sm-flex align-items-start text-center text-sm-left">
+                <%= image_pack_tag 'media/images/website/privacy.svg', class: 'mr-sm-4 mb-3 mb-sm-0', width: "72" %>
+                <div class="flex-fill">
+                  <h5 class="mt-0"><%= t('website.benefits.b.title') %></h5>
+                  <p class="text-muted font-size-lg"><%= t('website.benefits.b.body_html') %></p>
+                </div>
+              </div>
+            </div><!-- /.card-body -->
+          </div><!-- /.card -->
+        </div><!-- /.card-deck -->
+        <!-- .card-deck -->
+        <div class="card-deck-lg">
+          <!-- .card -->
+          <div class="card shadow" data-aos="fade-up" data-aos-delay="200">
+            <!-- .card-body -->
+            <div class="card-body p-4">
+              <div class="d-sm-flex align-items-start text-center text-sm-left">
+                <%= image_pack_tag 'media/images/website/server.svg', class: 'mr-sm-4 mb-3 mb-sm-0', width: "72" %>
+                <div class="flex-fill">
+                  <h5 class="mt-0"><%= t('website.benefits.c.title') %></h5>
+                  <p class="text-muted font-size-lg"><%= t('website.benefits.c.body_html', BRANDNAME: BRANDNAME) %></p>
+                </div>
+              </div>
+            </div><!-- /.card-body -->
+          </div><!-- /.card -->
+          <!-- .card -->
+          <div class="card shadow" data-aos="fade-up" data-aos-delay="300">
+            <!-- .card-body -->
+            <div class="card-body p-4">
+              <div class="d-sm-flex align-items-start text-center text-sm-left">
+                <%= image_pack_tag 'media/images/website/clients.svg', class: 'mr-sm-4 mb-3 mb-sm-0', width: "72" %>
+                <div class="flex-fill">
+                  <h5 class="mt-0"><%= t('website.benefits.d.title') %></h5>
+                  <p class="text-muted font-size-lg"><%= t('website.benefits.d.body_html') %></p>
+                </div>
+              </div>
+            </div><!-- /.card-body -->
+          </div><!-- /.card -->
+        </div><!-- /.card-deck -->
+        <!-- .card-deck -->
+        <div class="card-deck-lg">
+          <!-- .card -->
+          <div class="card shadow" data-aos="fade-up" data-aos-delay="400">
+            <!-- .card-body -->
+            <div class="card-body p-4">
+              <div class="d-sm-flex align-items-start text-center text-sm-left">
+                <%= image_pack_tag 'media/images/website/showing.svg', class: 'mr-sm-4 mb-3 mb-sm-0', width: "72" %>
+                <div class="flex-fill">
+                  <h5 class="mt-0"><%= t('website.benefits.e.title') %></h5>
+                  <p class="text-muted font-size-lg"><%= t('website.benefits.e.body_html', BRANDNAME: BRANDNAME) %></p>
+                </div>
+              </div>
+            </div><!-- /.card-body -->
+          </div><!-- /.card -->
+          <!-- .card -->
+          <div class="card shadow" data-aos="fade-up" data-aos-delay="500">
+            <!-- .card-body -->
+            <div class="card-body p-4">
+              <div class="d-sm-flex align-items-start text-center text-sm-left">
+                <%= image_pack_tag 'media/images/website/website.svg', class: 'mr-sm-4 mb-3 mb-sm-0', width: "72" %>
+                <div class="flex-fill">
+                  <h5 class="mt-0"><%= t('website.benefits.f.title') %></h5>
+                  <p class="text-muted font-size-lg"><%= t('website.benefits.f.body_html', BRANDNAME: BRANDNAME) %></p>
+                </div>
+              </div>
+            </div><!-- /.card-body -->
+          </div><!-- /.card -->
+        </div><!-- /.card-deck -->
+      </div><!-- /.container -->
+    </section><!-- /feature -->
+    <!-- feature -->
+    <section class="position-relative py-5 bg-light">
+      <!-- .sticker -->
+      <div class="sticker">
+        <div class="sticker-item sticker-top-right sticker-soften translate-x-50">
+          <%= image_pack_tag 'media/images/website/bubble1.svg', 'data-aos': "fade-left" %>
+        </div>
+      </div><!-- /.sticker -->
+      <!-- .container -->
+      <div id="pricing" class="container position-relative">
+        <h2 class="text-center"><%= t('website.pricing.header') %></h2>
+        <p class="lead text-muted text-center mb-5"><%= t('website.pricing.subheader') %></p><!-- .row -->
+        <div class="row align-items-center">
+
+          <div class="col-md-6 offset-md-3 py-md-4 pr-md-0">
+            <div class="card font-size-lg shadow-lg" data-aos="fade-up">
+              <h5 class="card-header text-center text-success p-4 px-lg-5"><%= t('website.pricing.full_version') %></h5>
+              <div class="card-body p-4 p-lg-5">
+                <h3 class="display-3 text-center">
+                  <strong><%= t('website.pricing.offer', month: next_month_name) %></strong>
+                </h3>
+              </div>
+              <div class="p-2">
+                <%= link_to t('website.pricing.cta'), new_account_url, class: 'btn btn-primary btn-lg btn-block' %>
+              </div>
+            </div>
+          </div>
+
+          <!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container -->
+    </section><!-- /feature -->
+
+    <!-- call to action -->
+    <section class="py-5 position-relative bg-light">
+      <!-- .sticker -->
+      <div class="sticker">
+        <div class="sticker-item sticker-bottom-left w-100">
+          <!-- wave1.svg -->
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="120" viewbox="0 0 1440 240" preserveaspectratio="none">
+            <path class="fill-black" fill-rule="evenodd" d="M1070.39 25.041c107.898 11.22 244.461 20.779 369.477 51.164L1440 240H0L.133 72.135C350.236-17.816 721.61-11.228 1070.391 25.04z"></path>
+          </svg>
+        </div>
+      </div><!-- /.sticker -->
+      <!-- .container -->
+      <div id="contact" class="container">
+        <!-- .card -->
+        <div class="card bg-success text-white position-relative overflow-hidden shadow rounded-lg p-4 mb-0" data-aos="fade-up">
+          <!-- .sticker -->
+          <div class="sticker">
+            <div class="sticker-item sticker-middle-left">
+              <%= image_pack_tag 'media/images/website/bubble4.svg', class: 'flip-y' %>
+            </div>
+          </div><!-- /.sticker -->
+          <!-- .card-body -->
+          <div class="card-body d-md-flex justify-content-between align-items-center text-center position-relative">
+            <h2 class="font-weight-normal text-white mb-3 mb-md-0 mr-md-3"><%= t('website.questions.header') %></h2>
+            <%#= link_to 'Sign up now!', new_account_url(subdomain: nil), class: 'btn btn-lg btn-primary' %>
+            <%= link_to t('website.questions.cta'), "mailto:#{SUPPORT_MAIL}", target: "_blank", class: 'btn btn-lg btn-primary shadow' %>
+<!--            <a class="btn btn-lg btn-primary shadow" href="https://goo.gl/forms/2jb1vgCKkg8sdqld2"><%#= t('website.questions.cta') %></a>-->
+          </div><!-- /.card-body -->
+        </div><!-- /.card -->
+      </div><!-- /.container -->
+    </section><!-- /call to action -->
+    <!-- footer -->
+    <section class="py-5 bg-black text-white">
+      <!-- .container -->
+      <div class="container">
+        <p class="text-muted text-center mt-5"><%= BRANDNAME %> © <%= Date.current.year %> • All Rights reserved</p>
+      </div><!-- /.container -->
+    </section><!-- /footer -->
+  </main><!-- /.app -->
+<% end %>
 
 
 

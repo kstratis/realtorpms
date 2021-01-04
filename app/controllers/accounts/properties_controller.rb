@@ -77,7 +77,7 @@ module Accounts
           end
           # @property.all_images[0..3]
           html = render_to_string({template: 'accounts/properties/printable', layout: 'printer/printable', locals: {pictures: pictures}})
-          pdf = Grover.new(html, display_url: root_url).to_pdf
+          pdf = Grover.new(html, display_url: account_root_url).to_pdf
           # pdf = Grover.new(html).to_pdf
           # Demo
           # pdf = Grover.new('https://en.wikipedia.org/wiki/Greece').to_pdf
@@ -122,7 +122,17 @@ module Accounts
     end
 
     def locations
-      search(Location, {value: 'id', label: %w(localname parent_localname)}, I18n.locale == :el ? {field: 'country_id', value: 1} : nil, 5)
+      search(Location, { value: 'id', label: %w(localname parent_localname) }, I18n.locale == :el ? {field: 'country_id', value: 1} : nil, 5)
+    end
+
+    # Experimental
+    def client_locations
+      # relation = Account.first.properties.joins(:location).distinct.select('locations.id', 'locations.localname', 'locations.parent_localname')
+      # search(Location, { value: 'id', label: %w(localname parent_localname) }, I18n.locale == :el ? {field: 'country_id', value: 1} : nil, 5)
+      # render '_locations_from_website'
+
+      render partial: 'accounts/locations_from_website'
+
     end
 
     # These are effectively the property landlords.
@@ -350,6 +360,7 @@ module Accounts
                                        :notes,
                                        :adxe,
                                        :adspitogatos,
+                                       :website_enabled,
                                        :clients,
                                        :avatar,
                                        :map_url,

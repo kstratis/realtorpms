@@ -10,7 +10,6 @@ en:
     - Fri
     - Sat
     abbr_month_names:
-    -
     - Jan
     - Feb
     - Mar
@@ -35,8 +34,20 @@ en:
       default: "%Y-%m-%d"
       long: "%B %d, %Y"
       short: "%b %d"
+    month_names_gen:
+    - January
+    - February
+    - March
+    - April
+    - May
+    - June
+    - July
+    - August
+    - September
+    - October
+    - November
+    - December
     month_names:
-    -
     - January
     - February
     - March
