@@ -17,34 +17,29 @@
   <!-- full_title is defined in app/helpers/application_helper.rb. title is provided by each view file
        using the keyword 'provide' If the view file doesn't provide such value, 'full title' returns
        a generic title -->
+
   <title><%= full_title(yield(:title)) %></title>
+
   <%= csrf_meta_tags %>
 
+<!--  <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">-->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400&display=swap" rel="stylesheet">
 
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-  <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i&display=swap&subset=greek" rel="stylesheet">
-
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-
-  <!--  Order matters here. Don't change the order. external_stylesheets are basically the styles for flatpickr and -->
-  <!--  uppy.js. We need to load them first. -->
-  <%= stylesheet_pack_tag 'style_loaders/external_stylesheets', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_pack_tag 'style_loaders/website_lib_stylesheets', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= stylesheet_pack_tag 'style_loaders/main_stylesheet', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%#= render 'layouts/shared_style_assets' %>
-  <%#= render 'layouts/shared_script_assets' %>
-  <%#= render 'layouts/shim' %>
+
+  <%= javascript_packs_with_chunks_tag 'landing', 'data-turbolinks-track': 'reload' %>
+
+  <%= render 'layouts/shim' %>
 </head>
 
-<body style="background-color: #ffffff">
-      <div class="pr-body-container">
-        <%= render 'layouts/flash_messages' %>
-        <div id="page-transition">
-          <%= yield %>
-        </div>
-        <%#= debug(params) if Rails.env.development? %>
-      </div>
+<body data-turbolinks="false">
+  <%= yield(:landing) %>
+
+<!-- BEGIN THEME JS-->
+<!--<script src="assets/javascript/theme.min.js"></script>-->
+<!-- END THEME JS -->
 
 </body>
-
 </html>
