@@ -1,0 +1,16 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100px; height: 100px;"><style>
+  .line-home1 {animation:line-home1 2s infinite; transform-origin: 50px 68px;}
+  @keyframes line-home1{
+  0% {transform: scale3d(1, 1, 1);}
+  20% {transform: scale3d(.9, .9, .9);}
+  35% {transform: scale3d(1, 1, 1);}
+  50% {transform: scale3d(.9, .9, .9);}
+  75% {transform: scale3d(1, 1, 1);}
+  100% {transform: scale3d(1, 1, 1);}
+  }
+  @media (prefers-reduced-motion: reduce) {
+  .line-home1 {
+  animation: none;
+  }
+  }
+</style><rect class="stroke1 fill1" x="20" y="41" width="60" height="48" rx="1" fill="#FFF" stroke="#000" stroke-width="3.0px" style="animation-duration: 2s;"></rect><path class="line-home1 stroke2 fill2" d="M61.6114 71.7549C58.3404 74.9701 53.298 79.1192 50.9754 80.9974C50.2472 81.5863 49.2102 81.5809 48.4906 80.9814C46.2321 79.0995 41.3926 74.9762 38.3886 71.7549C35.5391 68.6993 34 67.1242 34 63.5767C34 60.0292 34.9686 57.2885 38.0229 55.3986C40.3466 53.9607 42.2286 53.8244 44.0571 54.1404C46.8581 54.6244 49.7257 58.6339 49.7257 58.6339C49.7257 58.6339 52.7844 54.637 55.6686 54.1404C57.4057 53.8413 59.9731 54.1475 61.9771 55.3986C65.0236 57.3006 66 60.0292 66 63.5767C66 67.1242 62.5257 70.8562 61.6114 71.7549Z" fill="rgba(208,2,27,1)" stroke="#000" stroke-width="3.0px" style="animation-duration: 2s;"></path><rect class="stroke1 fill1" x="21" y="11" width="13" height="28" rx="1" fill="#FFF" stroke="#000" stroke-width="3.0px" style="animation-duration: 2s;"></rect><path class="stroke1 fill1" d="M49.337 11.5873C49.7154 11.252 50.2846 11.252 50.663 11.5873L86.1309 43.0014C86.8199 43.6117 86.3882 44.75 85.4679 44.75H14.5321C13.6118 44.75 13.1801 43.6117 13.8691 43.0014L49.337 11.5873Z" fill="#FFF" stroke="#000" stroke-width="3.0px" style="animation-duration: 2s;"></path></svg>

@@ -31,7 +31,7 @@
         <% if logged_in? %>
           <a class="navbar-btn btn btn-outline-danger ml-auto order-lg-2" href="<%= redirect_to_app_url %>"><%= t('website.nav.app') %></a> <!-- .navbar-collapse -->
         <% else %>
-          <a class="navbar-btn btn btn-primary ml-auto order-lg-2" href="<%= new_account_url %>"><%= t('website.nav.signup') %></a> <!-- .navbar-collapse -->
+          <a class="navbar-btn btn btn-cta ml-auto order-lg-2" href="<%= new_account_url %>"><%= t('website.nav.signup') %></a> <!-- .navbar-collapse -->
           <a class="navbar-btn btn ml-auto order-lg-2" href="<%= login_url %>"><%= t('website.nav.signin') %></a> <!-- .navbar-collapse -->
         <% end %>
 
@@ -103,41 +103,78 @@
     <!-- .feature -->
     <section class="py-5">
       <!-- .container -->
-      <div class="container">
+      <div class="container container-fluid">
         <!-- .row -->
-        <div class="row text-center text-md-left">
-          <!-- .col -->
-          <div class="feature-strip-card">
-            <div class="col-12" data-aos="fade-up" data-aos-delay="0">
-              <div class="graphic-container">
-                <%= image_pack_tag 'media/images/website/cityscape_w_background.svg', class: "img-fluid img-float-md-6 mb-5 mb-md-0" %>
-                <img class="mb-4" src="assets/images/illustration/lab.svg" alt="" height="72">
-              </div>
-              <h2 class="lead"> Simple and Rich </h2>
-              <div>hello world</div>
-            </div><!-- /.col -->
-          </div><!-- /.feature-strip-card -->
-          <!-- .col -->
-          <div class="feature-strip-card">
-            <div class="col-6 col-md-3 py-4" data-aos="fade-up" data-aos-delay="100">
-              <img class="mb-4" src="assets/images/illustration/easy-config.svg" alt="" height="72">
-              <h2 class="lead"> Easy Cuztomizable </h2>
-            </div><!-- /.col -->
-          </div><!-- /.feature-strip-card -->
-          <!-- .col -->
-          <div class="feature-strip-card">
-            <div class="col-6 col-md-3 py-4" data-aos="fade-up" data-aos-delay="200">
-              <img class="mb-4" src="assets/images/illustration/scale.svg" alt="" height="72">
-              <h2 class="lead"> Fast and scalable </h2>
-            </div><!-- /.col -->
-          </div><!-- /.feature-strip-card -->
-          <!-- .col -->
-          <div class="feature-strip-card">
-            <div class="col-6 col-md-3 py-4" data-aos="fade-up" data-aos-delay="300">
-              <img class="mb-4" src="assets/images/illustration/support.svg" alt="" height="72">
-              <h2 class="lead"> Excellent Support </h2>
-            </div><!-- /.col -->
-          </div><!-- /.feature-strip-card -->
+        <div class="row justify-content-center">
+
+
+
+          <div class="card-deck-lg">
+            <!-- .card -->
+            <div class="card shadow aos-init aos-animate m-4 p-4" data-aos="fade-up" data-aos-delay="0">
+              <!-- .card-body -->
+              <div class="card-body p-4">
+                <div class="d-sm-flex align-items-start text-center text-sm-left">
+                  <div class="col-12 text-center" data-aos="fade-up" data-aos-delay="0">
+                    <div class="graphic-container">
+                      <%= image_pack_tag 'media/images/website/home.svg', class: "img-fluid" %>
+                    </div>
+                    <h2 class="lead"> property management</h2>
+                    <div>hello world</div>
+                  </div><!-- /.col -->
+                </div>
+              </div><!-- /.card-body -->
+            </div><!-- /.card -->
+            <!-- .card -->
+            <div class="card shadow aos-init aos-animate m-4 p-4" data-aos="fade-up" data-aos-delay="100">
+              <!-- .card-body -->
+              <div class="card-body p-4">
+                <div class="d-sm-flex align-items-start text-center text-sm-left">
+                  <div class="col-12" data-aos="fade-up" data-aos-delay="0">
+                    <div class="graphic-container">
+                      <%#= image_pack_tag 'media/images/website/home.svg', class: "img-fluid img-float-md-6 mb-5 mb-md-0" %>
+                      <img class="mb-4" src="assets/images/illustration/lab.svg" alt="" height="72">
+                    </div>
+                    <h2 class="lead"> easy customizable </h2>
+                    <div>hello world</div>
+                  </div><!-- /.col -->
+                </div>
+              </div><!-- /.card-body -->
+            </div><!-- /.card -->
+
+            <div class="card shadow aos-init aos-animate m-4 p-4" data-aos="fade-up" data-aos-delay="100">
+              <!-- .card-body -->
+              <div class="card-body p-4">
+                <div class="d-sm-flex align-items-start text-center text-sm-left">
+                  <div class="col-12" data-aos="fade-up" data-aos-delay="0">
+                    <div class="graphic-container">
+                      <%#= image_pack_tag 'media/images/website/home.svg', class: "img-fluid img-float-md-6 mb-5 mb-md-0" %>
+                      <img class="mb-4" src="assets/images/illustration/lab.svg" alt="" height="72">
+                    </div>
+                    <h2 class="lead"> 3 </h2>
+                    <div>hello world</div>
+                  </div><!-- /.col -->
+                </div>
+              </div><!-- /.card-body -->
+            </div><!-- /.card -->
+
+            <div class="card shadow aos-init aos-animate m-4 p-4" data-aos="fade-up" data-aos-delay="100">
+              <!-- .card-body -->
+              <div class="card-body p-4">
+                <div class="d-sm-flex align-items-start text-center text-sm-left">
+                  <div class="col-12" data-aos="fade-up" data-aos-delay="0">
+                    <div class="graphic-container">
+                      <%#= image_pack_tag 'media/images/website/home.svg', class: "img-fluid img-float-md-6 mb-5 mb-md-0" %>
+                      <img class="mb-4" src="assets/images/illustration/lab.svg" alt="" height="72">
+                    </div>
+                    <h2 class="lead"> 4 </h2>
+                    <div>hello world</div>
+                  </div><!-- /.col -->
+                </div>
+              </div><!-- /.card-body -->
+            </div><!-- /.card -->
+
+          </div>
         </div><!-- /.row -->
       </div><!-- /.container -->
     </section><!-- /.feature -->

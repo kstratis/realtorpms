@@ -2303,7 +2303,8 @@ a.toggle.active {
 // WEBSITE CSS
 .website{
   font-family: 'Fira Sans', sans-serif;
-  background-color: #ffffff;
+  background-color: gold;
+  color: #000;
 
   .lead{
     font-weight: 400;
@@ -2320,7 +2321,7 @@ a.toggle.active {
 
   .solo-cloud {
     top: 125px;
-    left: 15px;
+    left: 35px;
     fill: #ffffff;
     animation-delay: 0s;
     animation: move linear 5s infinite alternate;
@@ -2329,13 +2330,13 @@ a.toggle.active {
 
   @-webkit-keyframes move {
     from {-webkit-transform: translateY(0px);}
-    to {-webkit-transform: translateY(10px);}
+    to {-webkit-transform: translateY(15px);}
   }
 
   // HERO SUN SVG + ANIMATION
   svg#sun {
-    top: 40px;
-    left: 120px;
+    top: 65px;
+    left: 135px;
     z-index: 200;
     width: 80px;
     position: absolute;
@@ -2469,11 +2470,11 @@ a.toggle.active {
     margin: auto;
   }
 
-
-
-
-
-
+  .btn-cta{
+    background-color: #007aff;
+    border-color: #007aff;
+    color: #fff;
+  }
 
 
 }
