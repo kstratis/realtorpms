@@ -2306,9 +2306,35 @@ a.toggle.active {
   background-color: gold;
   color: #000;
 
+  h1{
+    line-height: 70px;
+    font-weight: 600;
+  }
+
   .lead{
     font-weight: 400;
   }
+
+  .hero-section {
+    .hero-color{
+      color: #000 !important;
+    }
+    .feature-card {
+      background: #3c4257;
+      .header{
+        color: gold
+      }
+      .body{
+        color: #FFFFFF;
+        line-height: 1.4;
+      }
+    }
+  }
+
+
+
+
+
 
   //  -=HERO START=-
   // HERO CLOUD SVG + ANIMATION

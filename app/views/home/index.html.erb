@@ -31,20 +31,20 @@
         <% if logged_in? %>
           <a class="navbar-btn btn btn-outline-danger ml-auto order-lg-2" href="<%= redirect_to_app_url %>"><%= t('website.nav.app') %></a> <!-- .navbar-collapse -->
         <% else %>
-          <a class="navbar-btn btn btn-cta ml-auto order-lg-2" href="<%= new_account_url %>"><%= t('website.nav.signup') %></a> <!-- .navbar-collapse -->
+          <a class="navbar-btn btn btn-lg btn-cta ml-auto order-lg-2" href="<%= new_account_url %>"><%= t('website.nav.signup') %></a> <!-- .navbar-collapse -->
           <a class="navbar-btn btn ml-auto order-lg-2" href="<%= login_url %>"><%= t('website.nav.signin') %></a> <!-- .navbar-collapse -->
         <% end %>
 
         <div class="navbar-collapse collapse" id="navbarTogglerDemo01">
           <ul class="navbar-nav mx-auto">
             <li class="nav-item mr-lg-3">
-              <a class="nav-link py-2" href="#"><%= t('website.nav.features') %></a>
+              <a class="nav-link py-2 hero-color" href="#"><%= t('website.nav.features') %></a>
             </li>
             <li class="nav-item mr-lg-3">
-              <a class="nav-link py-2" href="#"><%= t('website.nav.subscription') %></a>
+              <a class="nav-link py-2 hero-color" href="#"><%= t('website.nav.subscription') %></a>
             </li>
             <li class="nav-item mr-lg-3">
-              <a class="nav-link py-2" href="#"><%= t('website.nav.contact') %></a>
+              <a class="nav-link py-2 hero-color" href="#"><%= t('website.nav.contact') %></a>
             </li>
           </ul>
         </div><!-- /.navbar-collapse -->
@@ -52,7 +52,8 @@
     </nav><!-- /.navbar -->
     <!-- /site header -->
     <!-- hero -->
-    <section class="py-5">
+    <div class="hero-section">
+    <section class="py-3">
       <!-- .container -->
       <div class="container container-fluid-xl">
         <!-- .row -->
@@ -92,13 +93,13 @@
             <div class="pl-xl-3 ml-auto text-center text-sm-left">
               <h1 class="display-4 enable-responsive-font-size mb-4">
                 <%= t('website.hero1') %><br><%= t('website.hero2') %></h1>
-              <p class="px-4 lead text-center text-muted mb-5"><strong><%= t('website.subheader') %></strong></p>
+              <p class="px-4 lead text-center mb-5"><%= t('website.subheader') %></p>
             </div>
           </div><!-- /.col-md-6 -->
         </div><!-- /.row -->
       </div><!-- /.container -->
-    </section><!-- /hero -->
 
+    </section><!-- /hero -->
 
     <!-- .feature -->
     <section class="py-5">
@@ -107,68 +108,69 @@
         <!-- .row -->
         <div class="row justify-content-center">
 
-
-
           <div class="card-deck-lg">
             <!-- .card -->
-            <div class="card shadow aos-init aos-animate m-4 p-4" data-aos="fade-up" data-aos-delay="0">
+            <div class="card feature-card shadow aos-init aos-animate w-75" data-aos="fade-up" data-aos-delay="0">
+              <!-- .card-body -->
+              <div class="card-body">
+                <div class="d-sm-flex align-items-start text-center text-sm-left ">
+                  <div class="col-12 text-center" data-aos="fade-up" data-aos-delay="0">
+                    <div class="graphic-container">
+                      <%= image_pack_tag 'media/images/website/home.svg', class: "img-fluid" %>
+                    </div>
+                    <h2 class="lead header"><%= t('website.feature_strip.a.title') %></h2>
+                    <h3 class="body"><%= t('website.feature_strip.a.body_html') %></h3>
+                  </div><!-- /.col -->
+                </div>
+              </div><!-- /.card-body -->
+            </div><!-- /.card -->
+            <!-- .card -->
+            <div class="card feature-card shadow aos-init aos-animate w-75" data-aos="fade-up" data-aos-delay="100">
               <!-- .card-body -->
               <div class="card-body p-4">
                 <div class="d-sm-flex align-items-start text-center text-sm-left">
                   <div class="col-12 text-center" data-aos="fade-up" data-aos-delay="0">
                     <div class="graphic-container">
-                      <%= image_pack_tag 'media/images/website/home.svg', class: "img-fluid" %>
+<!--                      <div className="d-flex justify-content-center mt-2">-->
+<!--                        <i className="pr-icon md search" />-->
+<!--                      </div>-->
+                      <%= image_pack_tag 'media/images/website/partners.svg', class: "img-fluid" %>
+<!--                      <img class="mb-4" src="assets/images/illustration/lab.svg" alt="" height="72">-->
                     </div>
-                    <h2 class="lead"> property management</h2>
-                    <div>hello world</div>
-                  </div><!-- /.col -->
-                </div>
-              </div><!-- /.card-body -->
-            </div><!-- /.card -->
-            <!-- .card -->
-            <div class="card shadow aos-init aos-animate m-4 p-4" data-aos="fade-up" data-aos-delay="100">
-              <!-- .card-body -->
-              <div class="card-body p-4">
-                <div class="d-sm-flex align-items-start text-center text-sm-left">
-                  <div class="col-12" data-aos="fade-up" data-aos-delay="0">
-                    <div class="graphic-container">
-                      <%#= image_pack_tag 'media/images/website/home.svg', class: "img-fluid img-float-md-6 mb-5 mb-md-0" %>
-                      <img class="mb-4" src="assets/images/illustration/lab.svg" alt="" height="72">
-                    </div>
-                    <h2 class="lead"> easy customizable </h2>
-                    <div>hello world</div>
+                    <h2 class="lead header"><%= t('website.feature_strip.b.title') %></h2>
+                    <h3 class="body"><%= t('website.feature_strip.b.body_html') %></h3>
                   </div><!-- /.col -->
                 </div>
               </div><!-- /.card-body -->
             </div><!-- /.card -->
 
-            <div class="card shadow aos-init aos-animate m-4 p-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="card feature-card shadow aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
               <!-- .card-body -->
               <div class="card-body p-4">
                 <div class="d-sm-flex align-items-start text-center text-sm-left">
-                  <div class="col-12" data-aos="fade-up" data-aos-delay="0">
+                  <div class="col-12 text-center" data-aos="fade-up" data-aos-delay="0">
                     <div class="graphic-container">
                       <%#= image_pack_tag 'media/images/website/home.svg', class: "img-fluid img-float-md-6 mb-5 mb-md-0" %>
                       <img class="mb-4" src="assets/images/illustration/lab.svg" alt="" height="72">
                     </div>
-                    <h2 class="lead"> 3 </h2>
-                    <div>hello world</div>
+                    <h2 class="lead header"><%= t('website.feature_strip.c.title') %></h2>
+                    <h3 class="body"><%= t('website.feature_strip.c.body_html', brand: BRANDNAME.capitalize) %></h3>
                   </div><!-- /.col -->
                 </div>
               </div><!-- /.card-body -->
             </div><!-- /.card -->
 
-            <div class="card shadow aos-init aos-animate m-4 p-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="card feature-card shadow aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
               <!-- .card-body -->
               <div class="card-body p-4">
                 <div class="d-sm-flex align-items-start text-center text-sm-left">
-                  <div class="col-12" data-aos="fade-up" data-aos-delay="0">
+                  <div class="col-12 text-center" data-aos="fade-up" data-aos-delay="0">
                     <div class="graphic-container">
                       <%#= image_pack_tag 'media/images/website/home.svg', class: "img-fluid img-float-md-6 mb-5 mb-md-0" %>
                       <img class="mb-4" src="assets/images/illustration/lab.svg" alt="" height="72">
                     </div>
-                    <h2 class="lead"> 4 </h2>
-                    <div>hello world</div>
+                    <h2 class="lead header"><%= t('website.feature_strip.d.title') %></h2>
+                    <h3 class="body"><%= t('website.feature_strip.d.body_html') %></h3>
                   </div><!-- /.col -->
                 </div>
               </div><!-- /.card-body -->
@@ -178,6 +180,7 @@
         </div><!-- /.row -->
       </div><!-- /.container -->
     </section><!-- /.feature -->
+    </div>
 
 
     <!-- sections title -->
