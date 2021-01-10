@@ -38,13 +38,13 @@
         <div class="navbar-collapse collapse" id="navbarTogglerDemo01">
           <ul class="navbar-nav mx-auto">
             <li class="nav-item mr-lg-3">
-              <a class="nav-link py-2 hero-color" href="#"><%= t('website.nav.features') %></a>
+              <a class="nav-link py-2 black-color" href="#"><%= t('website.nav.features') %></a>
             </li>
             <li class="nav-item mr-lg-3">
-              <a class="nav-link py-2 hero-color" href="#"><%= t('website.nav.subscription') %></a>
+              <a class="nav-link py-2 black-color" href="#"><%= t('website.nav.subscription') %></a>
             </li>
             <li class="nav-item mr-lg-3">
-              <a class="nav-link py-2 hero-color" href="#"><%= t('website.nav.contact') %></a>
+              <a class="nav-link py-2 black-color" href="#"><%= t('website.nav.contact') %></a>
             </li>
           </ul>
         </div><!-- /.navbar-collapse -->
@@ -105,18 +105,16 @@
     <section class="py-5">
       <!-- .container -->
       <div class="container container-fluid">
-        <!-- .row -->
-        <div class="row justify-content-center">
 
           <div class="card-deck-lg">
             <!-- .card -->
-            <div class="card feature-card shadow aos-init aos-animate w-75" data-aos="fade-up" data-aos-delay="0">
+            <div class="card feature-card shadow aos-init aos-animate vw-75" data-aos="fade-up" data-aos-delay="0">
               <!-- .card-body -->
               <div class="card-body">
                 <div class="d-sm-flex align-items-start text-center text-sm-left ">
                   <div class="col-12 text-center" data-aos="fade-up" data-aos-delay="0">
                     <div class="graphic-container">
-                      <%= image_pack_tag 'media/images/website/home.svg', class: "img-fluid" %>
+                      <%= image_pack_tag 'media/images/website/engine.svg', class: "img-fluid py-2" %>
                     </div>
                     <h2 class="lead header"><%= t('website.feature_strip.a.title') %></h2>
                     <h3 class="body"><%= t('website.feature_strip.a.body_html') %></h3>
@@ -125,16 +123,16 @@
               </div><!-- /.card-body -->
             </div><!-- /.card -->
             <!-- .card -->
-            <div class="card feature-card shadow aos-init aos-animate w-75" data-aos="fade-up" data-aos-delay="100">
+            <div class="card feature-card shadow aos-init aos-animate vw-75" data-aos="fade-up" data-aos-delay="100">
               <!-- .card-body -->
-              <div class="card-body p-4">
+              <div class="card-body">
                 <div class="d-sm-flex align-items-start text-center text-sm-left">
                   <div class="col-12 text-center" data-aos="fade-up" data-aos-delay="0">
                     <div class="graphic-container">
 <!--                      <div className="d-flex justify-content-center mt-2">-->
 <!--                        <i className="pr-icon md search" />-->
 <!--                      </div>-->
-                      <%= image_pack_tag 'media/images/website/partners.svg', class: "img-fluid" %>
+                      <%= image_pack_tag 'media/images/website/partners.svg', class: "img-fluid py-2" %>
 <!--                      <img class="mb-4" src="assets/images/illustration/lab.svg" alt="" height="72">-->
                     </div>
                     <h2 class="lead header"><%= t('website.feature_strip.b.title') %></h2>
@@ -144,14 +142,14 @@
               </div><!-- /.card-body -->
             </div><!-- /.card -->
 
-            <div class="card feature-card shadow aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+            <div class="card feature-card shadow aos-init aos-animate vw-75" data-aos="fade-up" data-aos-delay="100">
               <!-- .card-body -->
-              <div class="card-body p-4">
+              <div class="card-body">
                 <div class="d-sm-flex align-items-start text-center text-sm-left">
                   <div class="col-12 text-center" data-aos="fade-up" data-aos-delay="0">
                     <div class="graphic-container">
                       <%#= image_pack_tag 'media/images/website/home.svg', class: "img-fluid img-float-md-6 mb-5 mb-md-0" %>
-                      <img class="mb-4" src="assets/images/illustration/lab.svg" alt="" height="72">
+                      <%= image_pack_tag 'media/images/website/privacy.svg', class: "img-fluid py-2" %>
                     </div>
                     <h2 class="lead header"><%= t('website.feature_strip.c.title') %></h2>
                     <h3 class="body"><%= t('website.feature_strip.c.body_html', brand: BRANDNAME.capitalize) %></h3>
@@ -160,14 +158,15 @@
               </div><!-- /.card-body -->
             </div><!-- /.card -->
 
-            <div class="card feature-card shadow aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+            <div class="card feature-card shadow aos-init aos-animate vw-75" data-aos="fade-up" data-aos-delay="100">
               <!-- .card-body -->
-              <div class="card-body p-4">
+              <div class="card-body">
                 <div class="d-sm-flex align-items-start text-center text-sm-left">
                   <div class="col-12 text-center" data-aos="fade-up" data-aos-delay="0">
                     <div class="graphic-container">
                       <%#= image_pack_tag 'media/images/website/home.svg', class: "img-fluid img-float-md-6 mb-5 mb-md-0" %>
-                      <img class="mb-4" src="assets/images/illustration/lab.svg" alt="" height="72">
+                      <%= image_pack_tag 'media/images/website/rocket.svg', class: "img-fluid py-2" %>
+
                     </div>
                     <h2 class="lead header"><%= t('website.feature_strip.d.title') %></h2>
                     <h3 class="body"><%= t('website.feature_strip.d.body_html') %></h3>
@@ -177,7 +176,7 @@
             </div><!-- /.card -->
 
           </div>
-        </div><!-- /.row -->
+
       </div><!-- /.container -->
     </section><!-- /.feature -->
     </div>

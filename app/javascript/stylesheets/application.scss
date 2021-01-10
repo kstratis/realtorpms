@@ -2306,6 +2306,10 @@ a.toggle.active {
   background-color: gold;
   color: #000;
 
+  .black-color{
+    color: #000 !important;
+  }
+
   h1{
     line-height: 70px;
     font-weight: 600;
