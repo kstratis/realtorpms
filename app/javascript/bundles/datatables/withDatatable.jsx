@@ -137,6 +137,8 @@ function withDatatable(WrappedComponent) {
       this.handleCfieldDropdown = this.handleCfieldDropdown.bind(this);
       this.handleCfieldTextfield = this.handleCfieldTextfield.bind(this);
       this.handleCfieldCheckbox = this.handleCfieldCheckbox.bind(this);
+      this.handleClone = this.handleClone.bind(this);
+      this.ajaxCallback = this.ajaxCallback.bind(this);
       this.handleAjaxRequestDelayed = debounce(this.handleAjaxRequest, 300);
       this.handleCfieldTextfieldDelayed = debounce(this.handleCfieldTextfield, 150);
       this.compoundDelayedAction = debounce(this.compoundDelayedAction.bind(this), 300);
@@ -614,14 +616,7 @@ function withDatatable(WrappedComponent) {
         .get(resource) // +1 because rails will_paginate starts from 1 while this starts from 0
         .then(
           function(response) {
-            let newData = response.data.datalist;
-            this.setState({
-              dataset: newData.dataset,
-              pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),
-              isLoading: false,
-              count: response.data.total_entries,
-              selectedPage: response.data.current_page - 1
-            });
+            this.ajaxCallback(response);
           }.bind(this)
         )
         .catch(
@@ -637,9 +632,21 @@ function withDatatable(WrappedComponent) {
       searchParams.toString() ? this.handleAjaxRequest(`?${searchParams.toString()}`) : this.handleAjaxRequest();
     }
 
+    ajaxCallback(response){
+      let newData = response.data.datalist;
+      this.setState({
+        dataset: newData.dataset,
+        pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),
+        isLoading: false,
+        count: response.data.total_entries,
+        selectedPage: response.data.current_page - 1
+      });
+    }
+
     handleAssign(e) {
       e.preventDefault();
-      console.log('executing handle assign');
+      // DEBUG
+      // console.log('executing handle assign');
       // console.log(e.target.dataset);
       // console.log(e.target.dataset.uid);
       let pid = this.props.initial_payload['pid'];
@@ -770,7 +777,8 @@ function withDatatable(WrappedComponent) {
 
     handleCfieldCheckbox(selection, slug){
       this.setState({ isLoading: true });
-      console.log(selection);
+      // DEBUG
+      // console.log(selection);
       let searchParams = new URLSearchParams(window.location.search);
       if (!selection) {
         searchParams.delete(`cfield_${slug}`);
@@ -782,7 +790,26 @@ function withDatatable(WrappedComponent) {
         ? `${window.location.pathname}?${searchParams.toString()}`
         : window.location.pathname;
       this.compoundDelayedAction(searchParams, newUrlParams);
+    }
 
+    handleClone(e, cloneUrl){
+      e.preventDefault();
+      this.setState({ isLoading: true });
+      // DEBUG
+      // console.log(cloneUrl);
+      let searchParams = new URLSearchParams(window.location.search);
+      axios({
+        method: 'post',
+        url: `${cloneUrl}.json?${searchParams}`,
+        data: {}
+      }).then((response) => {
+        this.ajaxCallback(response)
+      }).catch(
+        function(error) {
+          console.warn(error);
+          this.setState({ isLoading: false });
+        }.bind(this)
+      );
     }
 
     render() {
@@ -821,6 +848,7 @@ function withDatatable(WrappedComponent) {
             handleCfieldDropdown={this.handleCfieldDropdown}
             handleCfieldTextfield={this.handleCfieldTextfieldDelayed}
             handleCfieldCheckbox={this.handleCfieldCheckbox}
+            handleClone={this.handleClone}
             cfields={this.props.initial_payload.cfields}
             {...this.state}
           />

@@ -847,6 +847,9 @@ en:
     ok_button: "Add"
     cancel_button: "Cancel"
     close_button: "Close"
+    clone:
+      label: "Clone"
+      prompt: "Are you sure you want to clone this?"
     print: "Print"
     info: "Details"
     map: "Map"
