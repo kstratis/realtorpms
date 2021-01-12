@@ -179,7 +179,8 @@
                   </div><!-- .card-body -->
                   <div class="card-body">
                     <table class="table normalize-table">
-                      <% if @property.clients.blank? %>
+                      <% property_owners = @property.clients.references(:cpas).where(cpas: { ownership: true }) %>
+                      <% if property_owners.blank? %>
                         <h2><%= t 'activerecord.attributes.property.owner_header_missing' %></h2>
                         <div class="no-entries">
                           <i class="no-results"> </i>
@@ -194,7 +195,7 @@
                         <tbody>
                         <div class="table-responsive">
                           <% forbidden = nil %>
-                          <% @property.clients.each do |client| %>
+                          <% property_owners.each do |client| %>
                             <% forbidden = forbidden_entity_ids('clients').include?(client.id) %>
                             <tr>
                               <td class="align-middle nowrap">

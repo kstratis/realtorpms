@@ -37,7 +37,10 @@ class PropertyEntry extends React.Component {
                 ) : (
                   <div className={'col-12'}>
                     <div>
-                      <h2>{this.props.entry['slug'].toUpperCase()}&nbsp;<i className={'fas fa-qrcode fa-fw'} /></h2>
+                      <h2>
+                        {this.props.entry['slug'].toUpperCase()}&nbsp;
+                        <i className={'fas fa-qrcode fa-fw'} />
+                      </h2>
                     </div>
                     <div className={'text-center'}>
                       <h3>{this.props.entry['access_msg']}</h3>
@@ -51,7 +54,9 @@ class PropertyEntry extends React.Component {
           <div className="list-group list-group-media mb-3 d-none d-sm-block">
             <a
               href={this.props.entry['allow_view'] ? this.props.entry['view_entity_path'] : ''}
-              className={`list-group-item list-group-item-action property-index-avatar ${this.props.entry['allow_view'] ? '' : 'disabled'}`}>
+              className={`list-group-item list-group-item-action property-index-avatar ${
+                this.props.entry['allow_view'] ? '' : 'disabled'
+              }`}>
               <div className="list-group-item-figure rounded-left ">
                 <div className={`thumb-container ${this.props.entry['allow_view'] ? '' : 'frosty'}`}>
                   {this.props.entry['avatar'] ? (
@@ -69,7 +74,10 @@ class PropertyEntry extends React.Component {
                   {!this.props.entry['allow_view'] ? (
                     <div className={'col-12'}>
                       <div>
-                        <h2>{this.props.entry['slug'].toUpperCase()}&nbsp;<i className={'fas fa-qrcode fa-fw'} /></h2>
+                        <h2>
+                          {this.props.entry['slug'].toUpperCase()}&nbsp;
+                          <i className={'fas fa-qrcode fa-fw'} />
+                        </h2>
                       </div>
                       <div className={'text-center'}>
                         <h3>{this.props.entry['access_msg']}</h3>
@@ -81,7 +89,8 @@ class PropertyEntry extends React.Component {
                         <tbody>
                           <tr>
                             <td className={'text-left'}>
-                              <i className={'fas fa-cube fa-fw'} />&nbsp;
+                              <i className={'fas fa-cube fa-fw'} />
+                              &nbsp;
                               {renderHTML(this.props.entry.mini_heading, 'inline')}
                             </td>
                             <td className={'text-right'}>
@@ -91,7 +100,8 @@ class PropertyEntry extends React.Component {
                           </tr>
                           <tr>
                             <td className={'text-left'}>
-                              <i className={'fas fa-map fa-fw'} />&nbsp;
+                              <i className={'fas fa-map fa-fw'} />
+                              &nbsp;
                               <strong>{this.props.entry.location}</strong>
                             </td>
                             <td className={'text-right text-nowrap'}>{this.props.entry.price}</td>
@@ -100,13 +110,14 @@ class PropertyEntry extends React.Component {
                           <tr>
                             {this.props.entry.registration ? (
                               <td className={'text-left'}>
-                                <i className={'fas fa-calendar fa-fw'} />&nbsp;
+                                <i className={'fas fa-calendar fa-fw'} />
+                                &nbsp;
                                 {this.props.entry.registration}
                               </td>
                             ) : null}
                             {this.props.entry.price &&
                             this.props.entry.size &&
-                            this.props.entry.businesstype == 'sell' ? (
+                            this.props.entry.businesstype === 'sell' ? (
                               <td className={'text-right text-nowrap'}>
                                 {renderHTML(this.props.entry.pricepersqmeter, 'inline')}
                               </td>
@@ -122,6 +133,24 @@ class PropertyEntry extends React.Component {
                           ) : null}
                         </tbody>
                       </table>
+                      <div className={'controls'}>
+                        <div
+                          title={this.props.i18n.label}
+                          className={'clone-button'}
+                          onClick={e => {
+                            if (window.confirm(this.props.i18n.prompt)) {
+                              this.props.handleClone(e, this.props.entry['clone_entity_path']);
+                            } else {
+                              // handleClone already takes care of preventDefault.
+                              // We need to use it here as well since canceling the action
+                              // will invoke the normal browser click since property entry
+                              // is an href
+                              e.preventDefault();
+                            }
+                          }}>
+                          <i className={'far fa-copy fa-fw'} />
+                        </div>
+                      </div>
                     </>
                   )}
                 </div>
@@ -137,6 +166,8 @@ class PropertyEntry extends React.Component {
 PropertyEntry.propTypes = {
   entry: PropTypes.object,
   filtersOpen: PropTypes.bool,
+  handleClone: PropTypes.func,
+  i18n: PropTypes.any
 };
 
 export default PropertyEntry;

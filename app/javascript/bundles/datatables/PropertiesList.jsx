@@ -37,6 +37,7 @@ const PropertiesList = ({
   construction_filter,
   locations_filter,
   advanceByTwo,
+  handleClone,
   isLoading,
   dataset,
   pageCount,
@@ -332,7 +333,7 @@ const PropertiesList = ({
                 <div className={`row relativeposition ${isLoading ? 'reduced-opacity' : ''}`}>
                   <FlipMove typeName={null}>
                     {dataset.map((entry, index) => (
-                      <PropertyEntry key={entry.slug} entry={entry} filtersOpen={filtersOpen} />
+                      <PropertyEntry key={entry.slug} entry={entry} filtersOpen={filtersOpen} handleClone={handleClone} i18n={i18n.clone} />
                     ))}
                   </FlipMove>
                 </div>

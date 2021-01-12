@@ -33,6 +33,30 @@ module Accounts
       end
     end
 
+    # POST /properties/:id/clone
+    def clone
+      property_to_clone = current_account.properties.find(params[:id])
+
+      new_property = property_to_clone.dup.tap do |destination_package|
+        if property_to_clone.avatar.attached?
+          destination_package.avatar.attach(property_to_clone.avatar.blob)
+        end
+        if property_to_clone.images.present?
+          property_to_clone.images.each do |image|
+            destination_package.images.attach(image.blob)
+          end
+        end
+        property_owners = property_to_clone.clients.references(:cpas).where(cpas: { ownership: true })
+        destination_package.clients << property_owners if property_owners
+      end
+
+      new_property.save!
+
+      Cpa.where(property: new_property).update_all(ownership: true)
+
+      filter_properties(current_account.properties.includes(:location), params)
+    end
+
     # GET /properties/1
     # GET /properties/1.json
     def show

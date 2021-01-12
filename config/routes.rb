@@ -52,6 +52,7 @@ Rails.application.routes.draw do
         resource :favorites, only: [:create, :destroy]
 
         member do
+          post :clone
           delete :delete_avatar
         end
       end

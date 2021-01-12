@@ -2287,3 +2287,15 @@ a.toggle.active {
 .list-group-media .list-group-item{
   z-index: 0;
 }
+
+.controls{
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  &:hover{
+    .fa-copy {
+      color: #0d84de;
+    }
+  }
+}
+
