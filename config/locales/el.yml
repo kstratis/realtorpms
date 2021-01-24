@@ -200,6 +200,7 @@ el:
         parking_title: "Θέση στάθμευσης"
         levels: "Επίπεδα"
         availability_title: "Διαθεσιμότητα"
+        energy_cert_title: "Ενεργειακό πιστοποιητικό"
         availability_feedback_html: "Επιλέξτε ημερομηνία"
         notes_title: "Σημειώσεις"
         notes_feedback_html: "π.χ. Ημιυπαίθριοι χώροι τακτοποιημένοι"
@@ -210,6 +211,16 @@ el:
         flash_category_missing: "Σφάλμα: Η 'κατηγορία' είναι υποχρεωτικό πεδίο"
         flash_location_missing: "Σφάλμα: Η 'τοποθεσία' είναι υποχρεωτικό πεδίο"
         enums:
+          energy_cert:
+            a_plus: 'A+'
+            a: 'Α'
+            b_plus: 'Β+'
+            b: 'Β'
+            c: 'Γ'
+            d: 'Δ'
+            e: 'Ε'
+            z: 'Ζ'
+            h: 'Η'
           businesstype:
             title: "Είδος"
             sell: "Πώληση"

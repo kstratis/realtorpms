@@ -364,7 +364,26 @@
                             }, prerender: false) %>
                           </div>
                         </div>
-                      </div><!-- /.row -->
+                      <!-- /.row -->
+
+                      <!-- Energy cert -->
+                      <div class="col-md-6 col-sm-12">
+                        <div class="form-group mb-4">
+                          <div class="custom-control custom-checkbox app-checkbox">
+                              <div>
+                                <%= property.check_box :has_energy_cert, class: 'custom-control-input dependent_check' %>
+                                <%= property.label :has_energy_cert, class: 'custom-control-label dependent_label' do %>
+                                  <%= t("activerecord.attributes.property.energy_cert_title") %>
+                                <% end %>
+                              </div>
+                              <div class="mt-1">
+                                <%= property.select :energy_cert, Property.energy_certs.keys.collect { |energy_cert| [ Property.human_enum_name(:energy_cert, energy_cert), energy_cert ] }, {}, {class: 'form-control custom-control-label custom-select dependent_input'} %>
+                              </div>
+                          </div>
+                          </div><!-- /.form-group -->
+                        </div> <!-- /Energy cert -->
+                      </div>
+                      <!-- /.row -->
 
                       <div class="row">
                         <!-- Description -->

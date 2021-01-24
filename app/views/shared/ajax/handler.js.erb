@@ -6,3 +6,5 @@ $('.content-swap').fadeOut('fast', function () {
   $("#form-" + "<%= resource.errors.empty? ? 'success' : 'error' %>" ).fadeIn('fast');
   $('.back-button').returnOnClick("<%= Rails.application.routes.url_helpers.send("#{resource.class.to_s.downcase.pluralize}_path") %>");
 });
+
+window.scroll({ top: 0, left: 0, behavior: 'smooth' });

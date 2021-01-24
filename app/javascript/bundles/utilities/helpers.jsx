@@ -122,6 +122,7 @@ const objectToUrlParams = (obj) => {
 const setup_dependent_checkboxes = () => {
   var elements = $('.dependent_check');
   var status;
+  // On load
   elements.each(function() {
     status = $(this).prop('checked');
     $(this)
@@ -135,6 +136,7 @@ const setup_dependent_checkboxes = () => {
       .find('.dependent_label.plain')
       .toggleClass('disabled', !status);
   });
+  // On change
   elements.change(function() {
     $(this)
       .parent()
