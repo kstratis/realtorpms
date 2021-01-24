@@ -24,7 +24,8 @@ class Property < ApplicationRecord
   attr_searchable %w(slug title description notes adxe adspitogatos)
 
   # before_save happens after validation that's why we use before_validation
-  before_validation :handle_dependent_fields, on: :update
+  before_validation :handle_dependent_extra_fields, on: :update
+  before_validation :handle_dependent_energy_field, on: :update
 
   # before_save happens after validation that's why we use before_validation
   before_validation do
@@ -78,6 +79,8 @@ class Property < ApplicationRecord
   attr_accessor :categoryid, :locationid, :clientid, :noclient, :delete_images
 
   enum businesstype: [:sell, :rent, :sell_rent]
+
+  enum energy_cert: [:a_plus, :a, :b_plus, :b, :c, :d, :e, :z, :h]
 
   enum floor: [:basement, :semi_basement, :ground_floor, :mezzanine].concat(Array(1..50).map(&:to_s).map(&:to_sym))
 
@@ -139,7 +142,8 @@ class Property < ApplicationRecord
           # :render_extra => {:label => 'parking', :icon => 'parking', :options => 'parking', :renderfn => Proc.new {|value| value.blank? ? I18n.t('false') : I18n.t('true')}}, # Casting tip see here: https://stackoverflow.com/a/44322375/178728
           :construction => {:label => 'construction', :icon => 'construction', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
           :address => {:label => 'address', :icon => 'address', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
-          :availability => {:label => 'availability', :icon => 'availability', :options => nil, :renderfn => Proc.new {|value| value ? (I18n.l value, format: :custom) : '—' }}
+          :availability => {:label => 'availability', :icon => 'availability', :options => nil, :renderfn => Proc.new {|value| value ? (I18n.l value, format: :custom) : '—' }},
+          :energy_cert => {:label => 'energy_cert', :icon => 'energy_cert', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : '<mark class="highlighted">'+ I18n.t("activerecord.attributes.property.enums.energy_cert.#{value}") + '</mark>'} },
           # :owner_info => {:label => 'owner', :icon => 'client', :options => 'full_name', :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN}
       }.freeze
     end
@@ -227,8 +231,8 @@ class Property < ApplicationRecord
 
   # In the 'compound' extra fields for roofdeck, storage, garden and plot where each one comes with its own input,
   # make sure that if unchecked on update action, the existing input value will also be cleared.
-  def handle_dependent_fields
-    edited_extras = extras.reject {|c| c.blank?}.collect {|extra| Extra.find(extra.id).name}
+  def handle_dependent_extra_fields
+    edited_extras = extras.reject { |c| c.blank? }.collect { |extra| Extra.find(extra.id).name }
     set_diff = %w(roofdeck storage garden plot) - edited_extras
     set_diff.each do |el|
       # DEBUG
@@ -238,4 +242,9 @@ class Property < ApplicationRecord
     end
   end
 
+  def handle_dependent_energy_field
+    return if has_energy_cert?
+
+    write_attribute(:energy_cert, nil)
+  end
 end

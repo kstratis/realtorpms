@@ -227,6 +227,7 @@ en:
         parking_title: "Parking"
         levels: "Levels"
         availability_title: "Availability"
+        energy_cert_title: "Display Energy Certificate (DEC)"
         availability_feedback_html: "Pick a date"
         notes_title: "Notes"
         notes_feedback_html: "i.e. Mortgage"
@@ -237,6 +238,16 @@ en:
         flash_category_missing: "Unexpected error: 'Category' is required"
         flash_location_missing: "Unexpected error: 'Location' is required"
         enums:
+          energy_cert:
+            a_plus: 'A+'
+            a: 'Α'
+            b_plus: 'Β+'
+            b: 'Β'
+            c: 'C'
+            d: 'D'
+            e: 'E'
+            z: 'Z'
+            h: 'H'
           businesstype:
             title: "Type"
             sell: "Sell"
