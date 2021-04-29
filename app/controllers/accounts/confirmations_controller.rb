@@ -13,7 +13,7 @@ module Accounts
         end
       else
         flash[:error] = "Wrong token"
-        redirect_to root_url
+        redirect_to landing_root_url
       end
     end
 

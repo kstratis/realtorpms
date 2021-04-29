@@ -2,6 +2,8 @@ class Property < ApplicationRecord
   extend FriendlyId
   include Searchable
 
+  include Filterable
+
   # History module is used for the redirects
   friendly_id :unique_identifier, use: [:slugged, :finders, :history]
 
@@ -51,12 +53,22 @@ class Property < ApplicationRecord
   has_and_belongs_to_many :extras
   # CPA stands for Client-Property-Association (many-to-many join table)
   has_many :cpas, inverse_of: :property, dependent: :destroy
-  has_many :clients, -> {order('cpas.updated_at').select('clients.*, cpas.updated_at').distinct}, through: :cpas
+  has_many :clients, -> { order('cpas.updated_at').select('clients.*, cpas.updated_at').distinct }, through: :cpas
 
-  # accepts_nested_attributes_for :clients, allow_destroy: true
-  # accepts_nested_attributes_for :clients, :reject_if => proc {|attributes| attributes.all? {|k,v| v.blank?} }
   accepts_nested_attributes_for :clients, reject_if: :all_blank, allow_destroy: true
 
+  # The following scopes are only used at client website
+  scope :filter_by_businesstype, -> (businesstype) do
+    if (businesstype == 'sell_rent') || businesstype.blank?
+      where('businesstype = ?', Property.businesstypes[:sell]).or(where('businesstype = ?', Property.businesstypes[:rent]))
+    else
+      public_send(businesstype)
+    end
+  end
+  scope :filter_by_category, -> (category) { joins(:category).where(categories: { parent_slug: category }) }
+  scope :filter_by_location, -> (location_id) { where location_id: location_id }
+
+  scope :website_enabled, -> { where website_enabled: true }
 
   def cpas_attributes=(cpa_attributes)
     cpa_attributes.values.each do |client_attribute|
@@ -89,10 +101,10 @@ class Property < ApplicationRecord
   # validates :category, presence: true
   # validates :subcategory, presence: true
   # validates :locationid, presence: true
-  validates :size, numericality: {only_integer: true}, allow_blank: true
-  validates :price, numericality: {only_integer: true}, allow_blank: true
-  validates :bedrooms, numericality: {only_integer: true}, allow_blank: true
-  validates :bathrooms, numericality: {only_integer: true}, allow_blank: true
+  validates :size, numericality: { only_integer: true }, allow_blank: true
+  validates :price, numericality: { only_integer: true }, allow_blank: false
+  validates :bedrooms, numericality: { only_integer: true }, allow_blank: true
+  validates :bathrooms, numericality: { only_integer: true }, allow_blank: true
   # Look only for iframes
   validates :map_url, format: { with: /(?:<iframe[^>]*)(?:(?:\/>)|(?:>.*?<\/iframe>))/i }, if: -> { map_url.present? }
 

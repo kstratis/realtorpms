@@ -1,0 +1,13 @@
+---
+en:
+  website:
+    nav:
+      features: 'FEATURES'
+      subscription: 'PRICING'
+      contact: 'GET IN TOUCH'
+      app: 'APP'
+      signup: 'START FOR FREE'
+      signin: 'LOGIN'
+    hero1: 'All-inclusive business software'
+    hero2: 'for project-driven agents'
+    subheader: 'Property management. Redefined.'

@@ -1,4 +1,5 @@
 module ApplicationHelper
+  include Pagy::Frontend
 
   CLASSNAME = {
       'active': 'has-active',
@@ -51,6 +52,11 @@ module ApplicationHelper
 
   def chart_data?(graph)
     !graph[:datasets].first[:data].inject(0, :+).zero?
+  end
+
+  def next_month_name
+    date = Time.zone.now.end_of_month + 1.day
+    I18n.t('date.month_names_gen')[date.month - 1]
   end
 
 end

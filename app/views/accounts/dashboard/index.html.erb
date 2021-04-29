@@ -18,6 +18,12 @@
       } do %>
       <% end %>
 
+      <%# Calendar event routes %>
+      <%= content_tag :div, class: "calendar_events", id: "calendar_events_url", data: {
+        url: "#{calendar_events_path}.json",
+      } do %>
+      <% end %>
+
       <%# Calendar translations %>
       <%= content_tag :div, class: "calendar_events_i18n", id: "calendar_events_i18n", data: {
         ceventsi18n: {

@@ -103,7 +103,7 @@ class InlineSearch extends React.Component {
             ) : this.state.results.length > 0 ? (
               <>
                 {this.state.results.map(entry => (
-                  <a key={entry.value} href={`/properties/${entry.value}`} className="tt-suggestion tt-selectable">
+                  <a key={entry.value} href={`/app/properties/${entry.value}`} className="tt-suggestion tt-selectable">
                     <strong>{entry.label}</strong>
                   </a>
                 ))}

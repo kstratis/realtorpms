@@ -1,6 +1,5 @@
 module PathHelper
   def path_printer(path)
-    puts path
     root_path = '<li><a href="/"><i class="fas fa-home"> </i></a></li>'
     partial_paths = []
     path.each do |entry|

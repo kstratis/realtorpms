@@ -52,6 +52,22 @@ en:
   no_events: "No events"
   add: "Add"
   event_info: "Event info:"
+  nothing_to_see: "There's nothing to see here"
+  website_disabled_html: "The business webpage is disabled. <br>Activate it from within the application under the 'Settings' section"
+  area: "Area"
+  type: "Type"
+  submit: "Search"
+  clear: ""
+  pinned: "Handpicked properties"
+  home: "Home"
+  about: "About"
+  contact: "Contact"
+  results: "Search results"
+  no_results: "No results were found"
+  property_code: "ID"
+  properties_count:
+    one: "1 result"
+    other: "%{count} results"
   footer:
     title: "This is a secured site"
     body1: |
@@ -79,7 +95,7 @@ en:
       account:
         subdomain: "Account name"
         name: "Agency"
-        website: "Website"
+        description: "Company statement/motto"
         email: "Corporate email"
         telephones: "Contact number(s)"
         address: "Address"
@@ -100,11 +116,14 @@ en:
         registered: "Registration date"
         availability: "Visible by:"
       user:
+        first_name_admin: "First name (admin)"
+        last_name_admin: "Last name (admin)"
         first_name: "First name"
         first_name_feedback_html: "i.e. John"
         last_name: "Last name"
         last_name_feedback_html: "i.e. Smith"
         email: "Email"
+        email_admin: "Email (admin)"
         email_feedback_html: "i.e. jsmith@gmail.com"
         age: "Age"
         age_placeholder: "i.e. 30"
@@ -201,11 +220,19 @@ en:
         size_meter_html: "%{size} m<sup>2</sup>"
         sm_html: "m<sup>2</sup>"
         bedrooms_title: "Bedrooms"
+        bedrooms_short: "Brooms"
+        bedroom:
+          one: "1 bedroom"
+          other: "%{count} bedrooms"
         bedrooms_feedback_html: "i.e. 2"
         bathrooms_title: "Bathrooms"
+        bathroom:
+          one: "1 bathroom"
+          other: "%{count} bathrooms"
         bathrooms_feedback_html: "i.e. 2"
         construction: "Construction"
         construction_title: "Construction"
+        construction_short: "Built"
         location: "Location"
         location_title: "Location"
         owner: "Owner"
@@ -453,6 +480,10 @@ en:
         required: "Required field"
         optional: "Optional field"
         assign_completed: "Assignment successfully updated"
+      bootstrap_select:
+        noneSelectedText: '-=None selected=-'
+        noneResultsText: 'No results'
+        maxOptionsText: 'Max number of choices'
     forms:
       properties:
         wizard:
@@ -876,6 +907,7 @@ en:
     popover_houseowner_user: "Pick the property's owner from the pool of your assigned clients or alternatively start typing the first and last name of a new client to automatically create and bind him/her to the property in one go. You can later edit the client's profile from the clients section."
     popover_client_admin: "Choose a client from your account's pool of clients or alternatively start typing the first and last name of a new client to automatically create one. You can edit the client's full profile from the clients section after saving this search."
     popover_client_user: "Choose a client from the pool of your assigned clients or alternatively start typing the first and last name of a new client to automatically create one. You can edit the client's full profile from the clients section after saving this search."
+    popover_property_description: "The description field is optional. However it is strongly suggested to fill it out as it enriches each listing's information in your website. It is especially useful in land-based ads as the attribute autocompletion feature won't work there."
     new:
       avatar_title: "Property image cover"
       breadcrumb: "Properties"
@@ -886,6 +918,7 @@ en:
       photo_header: "Cover photo"
       photo_subheader: "Click to change the cover photo for the property"
     edit:
+      website_enabled_html: "Show on <u><a target=\"_blank\" href=\"%{website}\">website</a></u>."
       avatar_title: "Property image cover"
       breadcrumb: "Properties"
       heading: "Edit property"
@@ -903,6 +936,7 @@ en:
       show_and_assign: "Assign"
       edit: "Edit"
       add_another: "Add new"
+      list: "Index"
       flash: "Property successfully added"
     not_created:
       message: "Error adding new property"
@@ -916,6 +950,7 @@ en:
       show_and_assign: "Assign"
       edit: "Edit"
       add_another: "Add new"
+      list: "Index"
       flash: "Property successfully updated"
       support: "Please contact support or"
     not_updated:
@@ -967,8 +1002,13 @@ en:
     updated: "Profile successfully update"
     domain: "Domain"
     role: "Role"
+    popover_edit_html: "These fields are used to enrich your <u><a target=\"_blank\" href=\"%{site}\">website</a></u> information by filling out the \"About\" & \"Contact\" headers. They are also used when printing property handouts."
+    avatar_header: "Business logo"
+    avatar_body: "Click to change your logo. Prefer images with aspect ratio 16:9"
+    avatar_delete_prompt: "Are you sure you want to delete your current logo?"
     flash:
       success: "Account settings successfully updated"
+      failed: "Unable to create a new account"
   sessions:
     login_title: "Login"
     forgot_title: "Forgot password"
@@ -1051,6 +1091,9 @@ en:
       partners: "Partners"
       properties: "Properties"
       clients: "Clients"
+      website_toggle_html: "Activate/deactivate your <u><a target=\"_blank\" href=\"%{website}\">public website</a></u>"
+      submit: "Update"
+      flash_error: "Something went wrong! Please try again."
   viewings:
     client: "To client"
     user: "By partner"

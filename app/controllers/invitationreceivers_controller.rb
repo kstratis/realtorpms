@@ -21,7 +21,7 @@ class InvitationreceiversController < ApplicationController
       if @user.is_owner?(current_account)
         @invitation.destroy!
         flash[:danger] = I18n.t('invitations.accepted.flash_existing', account: current_account.subdomain)
-        redirect_to root_url(subdomain: current_account.subdomain) and return
+        redirect_to account_root_url(subdomain: current_account.subdomain) and return
       end
     else
       user_params = params[:user].permit(
@@ -53,7 +53,7 @@ class InvitationreceiversController < ApplicationController
     # redirect_to root_url
     flash[:success] = I18n.t('invitations.accepted.flash_success', account: current_account.subdomain)
     # puts "the redirect will be on: #{root_url(subdomain: current_account.subdomain)}"
-    redirect_to root_url(subdomain: current_account.subdomain)
+    redirect_to account_root_url(subdomain: current_account.subdomain)
   end
 
   private

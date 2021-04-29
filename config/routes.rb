@@ -2,7 +2,6 @@ require 'constraints/subdomain_required'
 
 Rails.application.routes.draw do
 
-
   # get 'password_resets/new'
   # get 'password_resets/edit'
 
@@ -23,107 +22,112 @@ Rails.application.routes.draw do
   patch 'password/:id/reset', to: 'password_resets#update', as: :password_reset_update
   # resources :password_resets, only: [:new, :create, :edit, :update]
 
-
   # root 'main_pages#home'
   constraints(SubdomainRequired) do
     scope module: 'accounts' do
-      root to: 'dashboard#index', as: :account_root
-      get '/account-confirmation/:token', to: 'confirmations#confirm_email', as: :account_confirmation
-      get '/properties/locations', to: 'properties#locations'
-      get '/properties/clients', to: 'properties#clients'
-      get '/properties/inlinesearch', to: 'properties#inlinesearch'
-      # resources :entityfields
-      resources :model_types, only: [:edit, :update], :path => "extended-fields"
-      resources :settings, only: [:index]
+      root to: 'websites#index', as: :websites_root
+      get '/results-count', to: 'websites#count', as: :results_count
+      # post '/website/search', to: 'websites#search', as: :website_search
+      # get '/properties/client_locations', to: 'properties#client_locations'
+      # get '/properties/locations_from_website', to: 'properties#locations_from_website', as: :locations_external
 
-      resources :calendar_events, only: [:create, :show, :index, :destroy]
+      # Admin area
+      scope 'app' do
+        root to: 'dashboard#index', as: :account_root
+        get '/account-confirmation/:token', to: 'confirmations#confirm_email', as: :account_confirmation
+        get '/properties/locations', to: 'properties#locations'
+        get '/properties/clients', to: 'properties#clients'
+        get '/properties/inlinesearch', to: 'properties#inlinesearch'
+        # resources :entityfields
+        resources :model_types, only: [:edit, :update], :path => "extended-fields"
+        resources :settings, only: [:index]
 
-      get '/inactive', to: 'lockout#show', as: :lockout
-      # resources :model_types
+        resources :calendar_events, only: [:create, :show, :index, :destroy]
 
-      # favlists_path (GET, POST)
-      # favlist_path (DELETE)
-      resources :favlists, only: [:create, :destroy, :index, :show]
-      post 'favorites', to: 'favlists#create_favorite'
-      delete 'favorites', to: 'favlists#destroy_favorite'
+        get '/inactive', to: 'lockout#show', as: :lockout
+        # resources :model_types
 
-      resources :properties do
-        # resources :build, controller: 'property_steps'
-        resource :favorites, only: [:create, :destroy]
+        # favlists_path (GET, POST)
+        # favlist_path (DELETE)
+        resources :favlists, only: [:create, :destroy, :index, :show]
+        post 'favorites', to: 'favlists#create_favorite'
+        delete 'favorites', to: 'favlists#destroy_favorite'
 
-        member do
-          post :clone
-          delete :delete_avatar
+        resources :properties do
+          # resources :build, controller: 'property_steps'
+          resource :favorites, only: [:create, :destroy]
+
+          member do
+            post :clone
+            delete :delete_avatar
+          end
         end
-      end
 
-      resources :users do
-        get '/masquerade/new', to: 'masquerades#new'
-        delete '/masquerade', to: 'masquerades#destroy'
+        resources :users do
+          get '/masquerade/new', to: 'masquerades#new'
+          delete '/masquerade', to: 'masquerades#destroy'
 
-        delete :mass_delete, on: :collection
-        post :mass_freeze, on: :collection
+          delete :mass_delete, on: :collection
+          post :mass_freeze, on: :collection
 
-        member do
-          patch :toggle_activation
-          patch :toggle_adminify
-          delete :delete_avatar
+          member do
+            patch :toggle_activation
+            patch :toggle_adminify
+            delete :delete_avatar
+          end
         end
+
+        resources :clients do
+          delete :mass_delete, on: :collection
+          post :mass_freeze, on: :collection
+        end
+
+        resources :invitations, only: [:new, :create, :check_existing_user]
+        get '/invitations/validate_user', to: 'invitations#check_existing_user', as: :invitation_validate
+        # post '/properties/uploads', to: 'properties#uploads'
+        # create a new assignment
+        #
+        #
+        #
+        get '/demo', to: 'properties#demo'
+
+        post '/properties/uploads', to: 'properties#uploads'
+
+        # i.e. /properties/21 - assign property to partner
+        post '/assignments/property/:pid/users/', to: 'assignments#assign', as: :assignments
+        get '/assignments/property/:pid/users/', to: 'assignments#assigned', as: :existing_assignments
+
+        post '/assignments/user/:uid/properties/', to: 'assignments#properties_modal_assign', as: :properties_modal_assign
+        get '/assignments/user/:uid/properties/', to: 'assignments#properties_modal_listing', as: :properties_modal_listing
+
+        # i.e. /clients/25 - assign client to partner
+        post '/clientships/client/:cid/users/', to: 'clientships#assign', as: :clientships
+        get '/clientships/client/:cid/users/', to: 'clientships#assigned', as: :existing_clientships
+
+        # i.e. /properties - assign search/state to client
+        post '/matches/', to: 'matches#assign', as: :matches
+
+        get '/showings', to: 'showings#index'
+        post '/showings/', to: 'showings#create'
+        delete '/showings/', to: 'showings#delete'
+        #
+        #post '/matches/', to: 'matches#assign', as: :matches
+
+        # resources :invitations, only: [:new, :create] do
+        #   member do
+        #     get :accept
+        #     patch :accepted
+        #   end
+        # end
       end
-
-      resources :clients do
-        delete :mass_delete, on: :collection
-        post :mass_freeze, on: :collection
-      end
-
-      resources :invitations, only: [:new, :create, :check_existing_user]
-      get '/invitations/validate_user', to:'invitations#check_existing_user', as: :invitation_validate
-      # post '/properties/uploads', to: 'properties#uploads'
-      # create a new assignment
-      #
-      #
-      #
-      get '/demo', to: 'properties#demo'
-
-      post '/properties/uploads', to: 'properties#uploads'
-
-      # i.e. /properties/21 - assign property to partner
-      post '/assignments/property/:pid/users/', to: 'assignments#assign', as: :assignments
-      get '/assignments/property/:pid/users/', to: 'assignments#assigned', as: :existing_assignments
-
-      post '/assignments/user/:uid/properties/', to: 'assignments#properties_modal_assign', as: :properties_modal_assign
-      get '/assignments/user/:uid/properties/', to: 'assignments#properties_modal_listing', as: :properties_modal_listing
-
-      # i.e. /clients/25 - assign client to partner
-      post '/clientships/client/:cid/users/', to: 'clientships#assign', as: :clientships
-      get '/clientships/client/:cid/users/', to: 'clientships#assigned', as: :existing_clientships
-
-      # i.e. /properties - assign search/state to client
-      post '/matches/', to: 'matches#assign', as: :matches
-
-      get '/showings', to: 'showings#index'
-      post '/showings/', to: 'showings#create'
-      delete '/showings/', to: 'showings#delete'
-      #
-      #post '/matches/', to: 'matches#assign', as: :matches
-
-
-      # resources :invitations, only: [:new, :create] do
-      #   member do
-      #     get :accept
-      #     patch :accepted
-      #   end
-      # end
-
       # resources :invitations, only: [:new, :create]
     end
   end
 
+  root to: 'home#index', as: :landing_root
 
-  root to: 'home#index'
-
-  get '/switch/', to:'home#switch', as: :account_switch
-  get '/accounts/', to:'home#accounts', as: :account_list
+  get '/switch/', to: 'home#switch', as: :account_switch
+  get '/accounts/', to: 'home#accounts', as: :account_list
 
   get '/create', to: 'accounts#new', as: :new_account
 
@@ -133,23 +137,19 @@ Rails.application.routes.draw do
 
   patch '/account/edit', to: 'accounts#update', as: :account_update
 
-  # post '/accounts', to: 'accounts#create', as: :accounts
+  delete '/account/delete_avatar', to: 'accounts#delete_avatar', as: :delete_avatar_account
 
-  get  '/help', to: 'main_pages#help'
-  get  '/about', to: 'main_pages#about'
-  get  '/contact', to: 'main_pages#contact'
-  get  '/signup',  to: 'users#new'
+  get '/help', to: 'main_pages#help'
+  get '/about', to: 'main_pages#about'
+  get '/contact', to: 'main_pages#contact'
+  get '/signup', to: 'users#new'
 
-  get    '/login',   to: 'sessions#new'
-  post   '/login',   to: 'sessions#create'
-  delete '/logout',  to: 'sessions#destroy'
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
 
   get '/invitations/:id/accept', to: 'invitationreceivers#accept', as: :accept_invitation
   patch '/invitations/:id/accepted', to: 'invitationreceivers#accepted', as: :accepted_invitation
-
-
-
-
 
   # root 'application#hello'
 end

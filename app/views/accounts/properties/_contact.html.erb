@@ -2,7 +2,7 @@
   <div class="container">
     <div class="circle">
       <div class="aligner">
-        <% %w(name website email address telephones).each do |element| %>
+        <% %w(name email address telephones).each do |element| %>
           <% unless current_account.send(element).blank? %>
             <%= current_account.send(element) %><br>
           <% end %>

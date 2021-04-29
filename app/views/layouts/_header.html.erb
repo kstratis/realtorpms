@@ -4,8 +4,7 @@
   <div class="top-bar">
     <!-- .top-bar-brand -->
     <div id="logo" class="top-bar-brand" data-turbolinks-permanent="true">
-      <%#= link_to image_tag('propertize_logo_light_v2.svg', height: "40", title: BRANDNAME), root_path, class: 'navbar-brand top-nav__logo' %>
-      <%= link_to root_path, class: 'navbar-brand top-nav__logo' do %>
+      <%= link_to account_root_path, class: 'navbar-brand top-nav__logo' do %>
         <svg width="150px" height="50px" viewBox="0 0 314 112" xmlns="http://www.w3.org/2000/svg">
           <title id="propertize-logo-title"><%= BRANDNAME.capitalize + ' | ' + t('sidebar.main') %></title>
           <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">

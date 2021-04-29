@@ -1,0 +1,505 @@
+.website-container{
+  background: radial-gradient(#d7e0ea 18.75%,transparent 0) 2px 2px/10px 10px #ecf0f5;
+  background-image: radial-gradient(#d7e0ea 18.75%,transparent 0);
+//background: #edf6fe;
+  font-family: 'Fira Sans', sans-serif;
+}
+
+.callout-website {
+h4 {
+  line-height: 1.5;
+}
+mark {
+  background-color: gold;
+}
+}
+
+.callout-picture{
+width: 300px;
+height: 300px;
+margin-left: auto;
+margin-right: auto;
+display: inline-block;
+}
+
+.selectize-control {
+padding: 0;
+}
+.selectize-input {
+border: none;
+}
+
+.header {
+border: 2px solid black;
+border-radius: 5px;
+padding: 15px 0 15px 0;
+background: gold;
+}
+
+.callout{
+border: 2px solid #0a2540;
+border-radius: 5px;
+padding: 15px 0 15px 0;
+background: #0a2540;
+}
+
+#pinned-properties-container {
+
+}
+
+#results-container {
+border: 2px solid #0a2540;
+//border-radius: 5px;
+//margin: 0 15px;
+padding: 15px;
+background: #0a2540;
+//background: #edf6fe;
+}
+
+select.multi-ajax-select{
+display: none;
+}
+
+.visual-items-container{
+background: #ffffff;
+//padding: 5px;
+border-radius: .25rem;
+border: 1px solid #ced4da;
+padding: .375rem .75rem;
+line-height: 1.5;
+font-size: inherit;
+font-family: inherit;
+
+
+.item {
+ color: #ffffff;
+ font-weight: 300;
+ background-color: #4a4a4a;
+ padding: 3px 6px;
+ cursor: default;
+ //border-radius: 3px;
+}
+}
+
+.option{
+cursor: pointer;
+}
+
+.results{
+position: absolute !important;
+z-index: 99;
+//overflow: visible;
+width: 300px;
+margin-top: 4px;
+margin-bottom: 20px;
+//overflow: hidden;
+//font-size: 12px;
+//color: var(--color-text-primary);
+//background-color: var(--color-bg-overlay);
+background-clip: padding-box;
+//border: 1px solid var(--color-border-overlay);
+border-radius: 6px;
+box-shadow: 0 8px 24px rgba(149,157,165,0.2);
+//box-shadow: var(--color-shadow-large);
+}
+
+.remove-item{
+padding: 0 0 0 5px;
+display: inline-block;
+background-color: transparent;
+border: 1px solid transparent;
+font-weight: bold;
+//border-left: 1px solid;
+//padding-left: 3px;
+//padding-right: 3px;
+//margin: 0 5px 0 5px;
+//margin: 0;
+//position: absolute;
+color: gold;
+//background: darkred;
+
+}
+
+.bootstrap-select .dropdown-toggle::after {
+font-family: "Font Awesome 5 Free";
+font-weight: 900;
+display: inline-block;
+margin-left: .255em;
+vertical-align: .255em;
+content: "\f0dc";
+border-top: unset;
+border-right: unset;
+border-bottom: unset;
+border-left: unset;
+}
+
+
+.callout-header {
+//grid-column: 2/5;
+position: relative;
+padding: 0;
+margin: 0 0 4em 0;
+//font-family: "Jost", sans-serif;
+font-weight: 600;
+font-style: italic;
+font-size: .95em;
+text-align: center;
+}
+
+.callout-header>span {
+display: inline-block;
+padding: 1em 2em;
+background-color: #77e8b9;
+clip-path: polygon(5% 10%, 46% 1%, 46% 10%, 100% 0, 95% 90%, 31% 100%, 31% 90%, 0% 100%);
+}
+
+.img-brand{
+display: block;
+max-width:250px;
+max-height:40px;
+width: auto;
+height: auto;
+}
+.navbar-nav > li{
+padding-left: 5px;
+padding-right: 5px;
+}
+
+.lower-opacity{
+opacity: 0.8;
+}
+
+.turbolinks-progress-bar {
+z-index: 2000;
+height: 2px;
+background-color: #F7C46C;
+box-shadow: 0 0 10px rgba(119, 182, 255, 0.7);
+}
+
+#results-count-container{
+position: absolute;
+right: 15px;
+top: 0;
+font-style: italic;
+font-weight: 400;
+font-size: 14px;
+border-radius: 3px;
+padding: 1px 5px;
+color: gold;
+background: #0a2540;
+opacity: 0.85
+}
+
+.pr-icon {
+margin-left: auto;
+margin-right: auto;
+display: inline-block;
+padding-top: 20px;
+top: 15px;
+
+background-size: auto 65%;
+background-repeat: no-repeat;
+background-position: center center ;
+
+&.xxxs { width:  15px; height:  15px; vertical-align: middle;}
+&.xxs { width:  20px; height:  20px; vertical-align: middle;}
+&.xs { width:  25px; height:  25px; vertical-align: middle;}
+&.xss { width:  30px; height:  30px; vertical-align: middle;}
+&.cs { width:  35px; height:  35px; }
+&.css { width:  45px; height:  45px; }
+&.sm { width:  50px; height:  50px; }
+&.smm { width:  65px; height:  65px; }
+&.smmm { width:  85px; height:  85px; }
+&.md { width: 100px; height: 100px; }
+&.mdd { width: 150px; height: 150px; }
+&.lg { width: 200px; height: 200px; }
+&.lgg { width: 220px; height: 220px; }
+&.xl { width: 300px; height: 300px; }
+
+&.house-avatar-placeholder{
+  background-image: url('../../images/houses/house_placeholder.svg');
+}
+}
+
+.card-img-top{
+width: 100%;
+height: 20vw;
+object-fit: cover;
+}
+
+.thumb-container {
+display: flex;
+flex-flow: column;
+justify-content: center;
+align-items: center;
+overflow: hidden;
+width: auto;
+height: 220px;
+&:hover{
+  opacity: 0.8;
+}
+}
+
+.thumb {
+width: 100%;
+height: auto;
+}
+
+#results-container .card {
+.card-title{
+  //color: red;
+  font-weight: bold;
+  font-size: 17px;
+}
+.card-text {
+  font-size: 15px;
+}
+}
+
+// FANCYBOX STYLES
+// ==============
+
+/*
+Step 1
+======
+Style your page (the property list)
+*/
+
+.property {
+  //float: left;
+  //margin: 10px;
+}
+
+.property .property-images,
+.property .property-form {
+  display: none;
+}
+
+/*
+Step 2
+======
+Reposition and redesign fancyBox blocks
+*/
+
+/* This elements contains both blocks */
+.fancybox-inner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  width: calc(100% - 40px);
+  height: calc(100% - 40px);
+  max-width: 1000px;
+  max-height: 600px;
+}
+
+/* Left block will contain the gallery */
+.fancybox-stage {
+  width: 60%;
+  background: #fff;
+}
+
+/* Right block - close button and the form */
+.fancybox-form-wrap {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  bottom: 40px;
+  width: 40%;
+  background: #fff;
+}
+
+/* Add vertical lines */
+.fancybox-form-wrap::before,
+.fancybox-form-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.fancybox-form-wrap::before {
+  width: 8px;
+  background: #f4f4f4;
+}
+
+.fancybox-form-wrap::after {
+  width: 1px;
+  background: #e9e9e9;
+}
+
+/* Set position and colors for close buttons */
+.fancybox-button:hover {
+  color: #111;
+  background: gold;
+  svg path {
+    fill: #000 !important;
+    stroke: #000 !important;
+  }
+}
+
+.fancybox-button svg path {
+  stroke-width: 1 !important;
+  fill: #FFFFFF !important;
+  stroke: #FFFFFF !important;
+  stroke-linejoin: round;
+}
+
+.fancybox-button--close {
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  background: #F0F0F0 !important;
+  color: #222 !important;
+  padding: 5px !important;
+  svg path {
+    stroke-width: 1 !important;
+    fill: #000 !important;
+    stroke: #000 !important;
+    stroke-linejoin: round;
+  }
+}
+
+/* Set position of the form */
+.fancybox-inner .property-form {
+  overflow: auto;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  bottom: 50px;
+  left: 0;
+  padding: 0 50px;
+  text-align: center;
+}
+
+
+/*
+
+Step 3
+======
+
+Tweak fade animation
+
+*/
+
+.fancybox-inner {
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+.fancybox-is-open .fancybox-inner {
+  opacity: 1;
+}
+
+.fancybox-is-closing .fancybox-fx-fade {
+  opacity: 1 !important; /* Prevent double-fading */
+}
+
+/*
+
+Step 2
+======
+
+Bullet navigation design
+
+*/
+.property-bullets {
+  list-style: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  z-index: 99999;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.property-bullets li {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.property-bullets li a {
+  display: block;
+  height: 30px;
+  width: 20px;
+  position: relative;
+}
+
+.property-bullets li a span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 99px;
+  text-indent: -99999px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0px 0px 2px rgba(0,0,0,0.5);
+}
+
+.property-bullets li.active a span {
+  background: #FF6666;
+}
+
+// END FANCYBOX STYLES
+// ==============
+
+
+// Styles copied over from application.scss
+.card-businesstype-header{
+  cursor: default;
+  z-index: 1;
+  font-size: 15px;
+  position: absolute;
+  left: 0;
+  border-top-left-radius: 0.1rem;
+  border: 1px solid #f3dc65;
+  background: #f3dc65;
+  padding: 0 0.25rem;
+}
+
+.highlighted {
+  background-color: #ffd54f;
+}
+
+.highlighted-bg {
+  background: #f3dc65;
+  font-weight: bold;
+}
+
+.highlighted-fg {
+  color: #e0301d !important;
+}
+
+.property-form{
+  font-family: "Fira Sans", serif;
+  font-size: 15px;
+}
+
+.house-placeholder-image-container{
+  text-align: center;
+}
+
+.house-placeholder-image{
+  padding: 40px 30px 40px 30px;
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+  width: 200px;
+}
+
+.house-placeholder-image-slider-avatar{
+  padding: 150px !important;
+}
+
+footer{
+  //background: #ffffff;
+}

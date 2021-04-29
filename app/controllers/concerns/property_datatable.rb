@@ -146,6 +146,7 @@ module PropertyDatatable
             businesstype: property.businesstype,
             avatar: pick_avatar_pick(property),
             slug: property.slug,
+            website_enabled: property.website_enabled,
             # isFaved: property.is_faved_by?(current_user),
             # assignments: property.properties.count,
             # registration: property.created_at.to_formatted_s(:long)

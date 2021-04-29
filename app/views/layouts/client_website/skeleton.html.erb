@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible"
+        content="IE=edge">
+
+  <meta name="format-detection"
+        content="telephone=no">
+
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
+        name='viewport'/>
+
+  <meta name="apple-mobile-web-app-capable"
+        content="yes">
+
+  <meta name="turbolinks-cache-control" content="no-cache">
+  <!-- full_title is defined in app/helpers/application_helper.rb. title is provided by each view file
+       using the keyword 'provide' If the view file doesn't provide such value, 'full title' returns
+       a generic title -->
+
+  <title><%= full_title(yield(:title)) %></title>
+
+  <%= csrf_meta_tags %>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+<!--  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">-->
+
+  <%= stylesheet_pack_tag 'style_loaders/client_websites_stylesheet', media: 'all' %>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+  <%= javascript_packs_with_chunks_tag 'client_website' %>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+  <script src="https://kit.fontawesome.com/20b2864e17.js" crossorigin="anonymous"></script>
+  <%= render 'layouts/shim' %>
+</head>
+
+<body>
+<div class="website-container">
+<%= yield(:website) %>
+
+</div>
+<!-- BEGIN THEME JS-->
+<!--<script src="assets/javascript/theme.min.js"></script>-->
+<!-- END THEME JS -->
+
+</body>
+</html>

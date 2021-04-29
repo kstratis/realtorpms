@@ -9,7 +9,7 @@ module RolesAccess
   def admin_access
     unless current_user.role(current_account) == 'admin'
       flash[:danger] = I18n.t('action_not_permitted_error')
-      redirect_to root_path
+      redirect_to account_root_path
     end
   end
 

@@ -4,13 +4,13 @@
 
 <%# if (current_user.get_account_count > 1) || current_user.is_admin?(current_account) %>
 <% if (current_user.get_account_count > 1) || current_user.is_sysadmin? %>
-  <%= link_to account_list_url, class: "dropdown-item #{masquerading? ? 'disabled' : '' }"  do %>
+  <%= link_to account_list_url(subdomain: nil), class: "dropdown-item #{masquerading? ? 'disabled' : '' }"  do %>
     <%= content_tag :i, nil, class: 'fas fa-exchange-alt fa-fw' %> <span><%= t('navbar.switch') %></span>
   <% end %>
 <% end %>
 
 <% if current_user.is_admin?(current_account) %>
-  <%= link_to account_edit_path, class: 'dropdown-item' do %>
+  <%= link_to account_edit_path, class: 'dropdown-item colored-mark' do %>
     <%= content_tag :i, nil, class: 'fas fa-shield-alt fa-fw' %> <span><%= t('navbar.account.title') %></span>
   <% end %>
 <% end %>

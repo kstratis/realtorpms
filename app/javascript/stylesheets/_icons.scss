@@ -471,6 +471,9 @@
     background-image: url('../images/stop.svg');
   }
 
+  &.disconnect{
+    background-image: url('../images/disconnect.svg');
+  }
 
   & ~ .pr-icon-desc {
     display: block;

@@ -1,5 +1,5 @@
 # Load the Rails application.
-require_relative 'application'
+require_relative "application"
 
 # Load the app's custom environment variables here, so that they are loaded before environments/*.rb
 # Taken from here: https://stackoverflow.com/a/11765775/178728
