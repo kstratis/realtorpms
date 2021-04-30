@@ -14,15 +14,19 @@ Turbolinks.BrowserAdapter.prototype.showProgressBarAfterDelay = function() {
 // });
 
 $(document).on('turbolinks:before-visit', function(e){
+  // Paths defined at app/views/layouts/_routes.html.erb
+  const affected_pages = [
+    $('#users-list-path').text(),
+    $('#clients-list-path').text(),
+    $('#properties-list-path').text(),
+    $('#favlists-list-path').text()
+  ];
   // window.location.pathname is the url before the new visit.
   // We need to know where we jumping from due to this: https://github.com/turbolinks/turbolinks/issues/219
-  if ((['/app/users', '/app/clients', '/app/properties', '/app/favlists'].indexOf(window.location.pathname) > -1) && (window.location.href.indexOf('?') !== -1)){
+  if ((affected_pages.indexOf(window.location.pathname) > -1) && (window.location.href.indexOf('?') !== -1)){
     history.replaceState({ turbolinks: {} }, '');
   }
 });
-
-
-
 
 $('document').ready(function() {
   $('button.close').on('click', function(){
