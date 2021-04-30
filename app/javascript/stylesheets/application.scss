@@ -2309,16 +2309,19 @@ a.toggle.active {
   border-radius: 5px;
   background: #37474f;
   padding: 2px 5px;
-  &:hover{
-    .fa-copy {
-      color: #ffe000;
-    }
-    .fa-globe {
-      color: #ffe000;
-    }
-  }
   .control-button {
     color: rgba(255, 255, 255, 0.8);
+    &:hover{
+      .fa-copy {
+        color: #ffe000;
+      }
+      .fa-globe {
+        color: #ffe000;
+      }
+      .fa-pen {
+        color: #ffe000;
+      }
+    }
     &:not(:last-child) {
       margin-right: 5px;
     }

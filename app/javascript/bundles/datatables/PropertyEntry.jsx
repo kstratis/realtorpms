@@ -146,7 +146,21 @@ class PropertyEntry extends React.Component {
                           ) : null}
                         </tbody>
                       </table>
+                      {/*<div className="btn-group" role="group" aria-label="Basic example">*/}
+                      {/*  <button type="button" className="btn btn-secondary">Left</button>*/}
+                      {/*  <button type="button" className="btn btn-secondary">Middle</button>*/}
+                      {/*  <button type="button" className="btn btn-secondary">Right</button>*/}
+                      {/*</div>*/}
                       <div className={'properties-listing-controls d-flex justify-content-center'}>
+                        <div
+                          title={'Επεξεργασία'}
+                          className={'edit-button control-button'}
+                          onClick={e => {
+                              e.preventDefault();
+                              Turbolinks.visit(this.props.entry['edit_entity_path']);
+                          }}>
+                          <i className={'fas fa-pen fa-fw'} />
+                        </div>
                         <div
                           title={this.props.i18n.clone.label}
                           className={'clone-button control-button'}
