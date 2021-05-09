@@ -1903,6 +1903,37 @@ a.text-link {
 .top-nav__logo .card--back {
   transition-delay: 0.1s;
 }
+// logo animation end
+
+#gear-special{
+  //position: absolute;
+  //transform-origin: 393.785px 409.5px;
+  animation: spin 5000ms linear infinite;
+  //animation-delay: 0.8s;
+  //transform-origin:right bottom;
+  transform-origin: center center;
+  //transform-origin: -5px;
+}
+
+@keyframes spin {
+  //0% {
+  //  transform: rotate(0deg);
+  //}
+  from {
+    transform:rotate(0deg);
+  }
+  to {
+    transform:rotate(360deg);
+  }
+}
+
+//@keyframes spin-reverse {
+//  100% {
+//    -moz-transform: rotate(-360deg);
+//    -webkit-transform: rotate(-360deg);
+//    transform: rotate(-360deg);
+//  }
+//}
 
 .page-container .app-container{
   background: #f8faff;
