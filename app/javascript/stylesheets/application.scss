@@ -1903,11 +1903,15 @@ a.text-link {
 .top-nav__logo .card--back {
   transition-delay: 0.1s;
 }
+
 // logo animation end
-#gear{
-  animation: spin 15000ms linear infinite;
-  transform-origin: 8px 8px;
+.top-nav__logo:hover{
+  #gear{
+    animation: spin 15000ms linear infinite;
+    transform-origin: 8px 8px;
+  }
 }
+
 @-moz-keyframes spin {
   from { -moz-transform: rotate(0deg); }
   to { -moz-transform: rotate(360deg); }
