@@ -1871,7 +1871,7 @@ a.text-link {
   display: block;
   width: 8.25em;
   //height: 2em;
-  height: 45px;
+  //height: 45px;
   margin: 0;
   padding: 0.1rem;
 }
@@ -1904,36 +1904,22 @@ a.text-link {
   transition-delay: 0.1s;
 }
 // logo animation end
-
-#gear-special{
-  //position: absolute;
-  //transform-origin: 393.785px 409.5px;
-  animation: spin 5000ms linear infinite;
-  //animation-delay: 0.8s;
-  //transform-origin:right bottom;
-  transform-origin: center center;
-  //transform-origin: -5px;
+#gear{
+  animation: spin 15000ms linear infinite;
+  transform-origin: 8px 8px;
 }
-
+@-moz-keyframes spin {
+  from { -moz-transform: rotate(0deg); }
+  to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+  from { -webkit-transform: rotate(0deg); }
+  to { -webkit-transform: rotate(360deg); }
+}
 @keyframes spin {
-  //0% {
-  //  transform: rotate(0deg);
-  //}
-  from {
-    transform:rotate(0deg);
-  }
-  to {
-    transform:rotate(360deg);
-  }
+  from {transform:rotate(0deg);}
+  to {transform:rotate(360deg);}
 }
-
-//@keyframes spin-reverse {
-//  100% {
-//    -moz-transform: rotate(-360deg);
-//    -webkit-transform: rotate(-360deg);
-//    transform: rotate(-360deg);
-//  }
-//}
 
 .page-container .app-container{
   background: #f8faff;
@@ -1942,8 +1928,6 @@ a.text-link {
 
 .borderlesss-card{
   box-shadow: unset;
-  //border: 1px solid;
-
 }
 
 .simplified-header{
@@ -1954,7 +1938,6 @@ a.text-link {
   &:first-child span{
     border-bottom: 0.2em solid #ffe000;
   }
-
 }
 
 .forbidden-cursor{
