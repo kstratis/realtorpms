@@ -1,5 +1,4 @@
 import Spinner from './Spinner';
-import FlipMove from 'react-flip-move';
 import { renderHTML } from '../utilities/helpers';
 import ClampWrapper from '../components/ClampWrapper';
 import ReactPaginate from 'react-paginate';
@@ -9,6 +8,7 @@ import React from 'react';
 import PropertyEntry from './PropertyEntry';
 
 const ShowUserFavList = ({ handlePageClick, advanceByTwo, isLoading, dataset, pageCount, selectedPage, i18n }) => {
+  {console.log(i18n)}
   return (
     <div className="show-user-favlist">
       <div className={'ShowUserFavListContainer'}>
@@ -17,11 +17,9 @@ const ShowUserFavList = ({ handlePageClick, advanceByTwo, isLoading, dataset, pa
             <Spinner isLoading={isLoading} version={2} />
             {dataset.length > 0 ? (
               <div className={`${isLoading ? 'reduced-opacity' : ''}`}>
-                <FlipMove typeName={null}>
                 {dataset.map((entry, index) => (
-                  <PropertyEntry key={entry.slug} entry={entry} filtersOpen={true} />
+                  <PropertyEntry key={entry.slug} entry={entry} filtersOpen={true} i18n={i18n} />
                 ))}
-                </FlipMove>
 
                 {/* CARD END */}
                 <div className={'clearfix'} />

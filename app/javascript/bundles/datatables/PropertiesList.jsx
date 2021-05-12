@@ -4,7 +4,6 @@ import ReactPaginate from 'react-paginate';
 import withDatatable from './withDatatable';
 import ClampWrapper from '../components/ClampWrapper';
 import SortFilter from './SortFilter';
-import FlipMove from 'react-flip-move';
 import AssociativeFormSelect from '../components/selects/AssociativeFormSelect';
 import Spinner from './Spinner';
 import PropertyEntry from './PropertyEntry';
