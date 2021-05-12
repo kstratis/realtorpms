@@ -13,7 +13,10 @@ class Favlist < ApplicationRecord
     favlists = Array.new
     User.find(user_id).favlists.where(account: account_id).find_each do |favlist|
       # Building a hash conditionally. Reference: https://stackoverflow.com/a/5751839/178728
-      favlists << {id: favlist.id, name: favlist.name, isFaved: (favlist.has_faved?(property_id) if property_id)}.compact
+      favlists << { id: favlist.id,
+                    name: favlist.name,
+                    isFaved: (favlist.has_faved?(property_id) if property_id),
+                    show_favlist_path: Rails.application.routes.url_helpers.favlist_path(favlist) }.compact
     end
     favlists
   end

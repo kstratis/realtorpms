@@ -1,5 +1,4 @@
 import Spinner from './Spinner';
-import FlipMove from 'react-flip-move';
 import ClampWrapper from '../components/ClampWrapper';
 import ReactPaginate from 'react-paginate';
 import PropTypes from 'prop-types';
@@ -17,11 +16,9 @@ const ClientPrefsList = ({ handlePageClick, advanceByTwo, isLoading, dataset, pa
             {dataset.length > 0 ? (
               <>
                 <div className={`row relativeposition ${isLoading ? 'reduced-opacity' : ''}`}>
-                  <FlipMove typeName={null}>
-                    {dataset.map((entry, index) => (
-                      <PropertyEntry key={entry.slug} entry={entry} filtersOpen={false} />
-                    ))}
-                  </FlipMove>
+                  {dataset.map((entry, index) => (
+                    <PropertyEntry key={entry.slug} entry={entry} filtersOpen={false} i18n={i18n} />
+                  ))}
                 </div>
                 {/* CARD END */}
                 <div className={'clearfix'} />

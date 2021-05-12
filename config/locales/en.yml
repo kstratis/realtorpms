@@ -1004,7 +1004,7 @@ en:
     role: "Role"
     popover_edit_html: "These fields are used to enrich your <u><a target=\"_blank\" href=\"%{site}\">website</a></u> information by filling out the \"About\" & \"Contact\" headers. They are also used when printing property handouts."
     avatar_header: "Business logo"
-    avatar_body: "Click to change your logo. Prefer images with aspect ratio 16:9"
+    avatar_body: "Click to change your logo. For best results, prefer images with aspect ratio 16:10. JPEG/PNG images only."
     avatar_delete_prompt: "Are you sure you want to delete your current logo?"
     flash:
       success: "Account settings successfully updated"

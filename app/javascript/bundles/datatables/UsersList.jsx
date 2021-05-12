@@ -409,7 +409,7 @@ const UsersList = ({
 
                               {/* Avoid masquerading inception */}
                               {is_masquerading ? null : (
-                                <btn
+                                <a
                                   data-toggle="tooltip"
                                   data-placement="auto"
                                   onClick={e => handleMasquerade(e, entry['masquerade_path'])}
@@ -419,7 +419,7 @@ const UsersList = ({
                                   }`}
                                   href={''}>
                                   <i className={`fas fa-sign-in-alt`} />
-                                </btn>
+                                </a>
                               )}
 
                               <a
