@@ -298,7 +298,7 @@ const PropertiesList = ({
                               size: 'md',
                               classname: 'btn-success',
                               tooltip: i18n.search_save_title,
-                              isDisabled: !hasParams()
+                              isDisabled: !hasParams(),
                             },
                             modal: {
                               i18n: i18n,
@@ -315,7 +315,7 @@ const PropertiesList = ({
                               i18nSizeOptions: size_filter['options'],
                               i18nFloorOptions: floors_filter['options'],
                               i18nCategoryOptions: category_filter['options'],
-                              i18nCfieldOptions: cfields['options']
+                              i18nCfieldOptions: cfields['options'],
                             },
                           },
                         ]}
@@ -331,7 +331,13 @@ const PropertiesList = ({
               <>
                 <div className={`row relativeposition ${isLoading ? 'reduced-opacity' : ''}`}>
                   {dataset.map((entry, index) => (
-                    <PropertyEntry key={entry.slug} entry={entry} filtersOpen={filtersOpen} handleClone={handleClone} i18n={i18n} />
+                    <PropertyEntry
+                      key={entry.slug}
+                      entry={entry}
+                      filtersOpen={filtersOpen}
+                      handleClone={handleClone}
+                      i18n={i18n}
+                    />
                   ))}
                 </div>
 
