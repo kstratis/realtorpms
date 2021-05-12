@@ -330,11 +330,9 @@ const PropertiesList = ({
             {dataset.length > 0 ? (
               <>
                 <div className={`row relativeposition ${isLoading ? 'reduced-opacity' : ''}`}>
-                  <FlipMove typeName={null}>
-                    {dataset.map((entry, index) => (
-                      <PropertyEntry key={entry.slug} entry={entry} filtersOpen={filtersOpen} handleClone={handleClone} i18n={i18n} />
-                    ))}
-                  </FlipMove>
+                  {dataset.map((entry, index) => (
+                    <PropertyEntry key={entry.slug} entry={entry} filtersOpen={filtersOpen} handleClone={handleClone} i18n={i18n} />
+                  ))}
                 </div>
 
                 {/* CARD END */}
