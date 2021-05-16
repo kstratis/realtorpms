@@ -8,7 +8,6 @@ import React from 'react';
 import PropertyEntry from './PropertyEntry';
 
 const ShowUserFavList = ({ handlePageClick, advanceByTwo, isLoading, dataset, pageCount, selectedPage, i18n }) => {
-  {console.log(i18n)}
   return (
     <div className="show-user-favlist">
       <div className={'ShowUserFavListContainer'}>
