@@ -146,24 +146,37 @@ class PropertyEntry extends React.Component {
                           ) : null}
                         </tbody>
                       </table>
-                      <div className={'properties-listing-controls d-flex justify-content-center'}>
-                        <div
-                          title={this.props.i18n.clone.label}
-                          className={'clone-button control-button'}
-                          onClick={e => {
-                            if (window.confirm(this.props.i18n.clone.prompt)) {
-                              this.props.handleClone(e, this.props.entry['clone_entity_path']);
-                            } else {
-                              // handleClone already takes care of preventDefault.
-                              // We need to use it here as well since canceling the action
-                              // will invoke the normal browser click since property entry
-                              // is an href
+                      {this.props.showControls ? (
+                        <div className={'properties-listing-controls d-flex justify-content-center'}>
+                          <div
+                            title={'Επεξεργασία'}
+                            className={'edit-button control-button'}
+                            onClick={e => {
                               e.preventDefault();
-                            }
-                          }}>
-                          <i className={'fas fa-copy fa-fw'} />
+                              Turbolinks.visit(this.props.entry['edit_entity_path']);
+                            }}>
+                            <i className={'fas fa-pen fa-fw'} />
+                          </div>
+                          <div
+                            title={this.props.i18n.clone.label}
+                            className={'clone-button control-button'}
+                            onClick={e => {
+                              if (window.confirm(this.props.i18n.clone.prompt)) {
+                                this.props.handleClone(e, this.props.entry['clone_entity_path']);
+                              } else {
+                                // handleClone already takes care of preventDefault.
+                                // We need to use it here as well since canceling the action
+                                // will invoke the normal browser click since property entry
+                                // is an href
+                                e.preventDefault();
+                              }
+                            }}>
+                            <i className={'fas fa-copy fa-fw'} />
+                          </div>
                         </div>
-                      </div>
+                      ) : (
+                        ''
+                      )}
                     </>
                   )}
                 </div>

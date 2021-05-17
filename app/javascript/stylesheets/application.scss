@@ -1871,7 +1871,7 @@ a.text-link {
   display: block;
   width: 8.25em;
   //height: 2em;
-  height: 45px;
+  //height: 45px;
   margin: 0;
   padding: 0.1rem;
 }
@@ -1904,6 +1904,27 @@ a.text-link {
   transition-delay: 0.1s;
 }
 
+// logo animation end
+.top-nav__logo:hover{
+  #gear{
+    animation: spin 15000ms linear infinite;
+    transform-origin: 8px 8px;
+  }
+}
+
+@-moz-keyframes spin {
+  from { -moz-transform: rotate(0deg); }
+  to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+  from { -webkit-transform: rotate(0deg); }
+  to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(360deg);}
+}
+
 .page-container .app-container{
   background: #f8faff;
   box-shadow: unset;
@@ -1911,8 +1932,6 @@ a.text-link {
 
 .borderlesss-card{
   box-shadow: unset;
-  //border: 1px solid;
-
 }
 
 .simplified-header{
@@ -1923,7 +1942,6 @@ a.text-link {
   &:first-child span{
     border-bottom: 0.2em solid #ffe000;
   }
-
 }
 
 .forbidden-cursor{
@@ -2309,16 +2327,19 @@ a.toggle.active {
   border-radius: 5px;
   background: #37474f;
   padding: 2px 5px;
-  &:hover{
-    .fa-copy {
-      color: #ffe000;
-    }
-    .fa-globe {
-      color: #ffe000;
-    }
-  }
   .control-button {
     color: rgba(255, 255, 255, 0.8);
+    &:hover{
+      .fa-copy {
+        color: #ffe000;
+      }
+      .fa-globe {
+        color: #ffe000;
+      }
+      .fa-pen {
+        color: #ffe000;
+      }
+    }
     &:not(:last-child) {
       margin-right: 5px;
     }
@@ -2660,4 +2681,8 @@ a.icon-font-delete{
   padding: 1em 2em;
   background-color: #3c4257;
   clip-path: polygon(5% 10%, 46% 1%, 46% 10%, 100% 0, 95% 90%, 31% 100%, 31% 90%, 0% 100%);
+}
+
+.no-text-decoration:hover{
+  text-decoration: none;
 }

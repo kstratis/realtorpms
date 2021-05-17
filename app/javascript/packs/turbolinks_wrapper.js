@@ -13,16 +13,41 @@ Turbolinks.BrowserAdapter.prototype.showProgressBarAfterDelay = function() {
 //   $('#page-transition').addClass('animate__animated animate__fadeIn');
 // });
 
+// We need this to build a regex from a regular string in
+// `preprocess_url_for_substitution`
+RegExp.escape_fw_slash = function(string) {
+  return string.replace(/[\/]/g, '\\$&')
+};
+
+function preprocess_url_for_substitution(url){
+ return url.replace("id", "\\d+")
+}
+
+function check_conditions_for_turbo_nav(affected_page){
+  let regex = new RegExp(affected_page, 'g');
+  return (affected_page === window.location.pathname) && (window.location.href.indexOf('?') !== -1) ||
+    window.location.pathname.match(regex)
+}
+
 $(document).on('turbolinks:before-visit', function(e){
+  const favlist_path = preprocess_url_for_substitution($('#favlist-path').text());
+  // Paths defined at app/views/layouts/_routes.html.erb
+  const affected_pages = [
+    $('#users-list-path').text(),
+    $('#clients-list-path').text(),
+    $('#properties-list-path').text(),
+    $('#favlists-list-path').text(),
+    favlist_path
+  ].filter(() => true);
   // window.location.pathname is the url before the new visit.
   // We need to know where we jumping from due to this: https://github.com/turbolinks/turbolinks/issues/219
-  if ((['/users', '/clients', '/properties', '/favlists'].indexOf(window.location.pathname) > -1) && (window.location.href.indexOf('?') !== -1)){
-    history.replaceState({ turbolinks: {} }, '');
-  }
+  affected_pages.some((affected_page)=>{
+    if (check_conditions_for_turbo_nav(affected_page)){
+      history.replaceState({ turbolinks: {} }, '');
+      return true;
+    }
+  });
 });
-
-
-
 
 $('document').ready(function() {
   $('button.close').on('click', function(){

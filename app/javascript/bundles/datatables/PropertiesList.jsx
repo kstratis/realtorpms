@@ -4,7 +4,6 @@ import ReactPaginate from 'react-paginate';
 import withDatatable from './withDatatable';
 import ClampWrapper from '../components/ClampWrapper';
 import SortFilter from './SortFilter';
-import FlipMove from 'react-flip-move';
 import AssociativeFormSelect from '../components/selects/AssociativeFormSelect';
 import Spinner from './Spinner';
 import PropertyEntry from './PropertyEntry';
@@ -51,6 +50,7 @@ const PropertiesList = ({
   clients_endpoint,
   assignmentships_endpoint,
   properties_path,
+  showControls,
   i18n,
 }) => {
   const { filtersOpen, setFiltersOpen } = useFilterToggle('propertyFiltersOpen');
@@ -299,7 +299,7 @@ const PropertiesList = ({
                               size: 'md',
                               classname: 'btn-success',
                               tooltip: i18n.search_save_title,
-                              isDisabled: !hasParams()
+                              isDisabled: !hasParams(),
                             },
                             modal: {
                               i18n: i18n,
@@ -316,7 +316,7 @@ const PropertiesList = ({
                               i18nSizeOptions: size_filter['options'],
                               i18nFloorOptions: floors_filter['options'],
                               i18nCategoryOptions: category_filter['options'],
-                              i18nCfieldOptions: cfields['options']
+                              i18nCfieldOptions: cfields['options'],
                             },
                           },
                         ]}
@@ -331,11 +331,16 @@ const PropertiesList = ({
             {dataset.length > 0 ? (
               <>
                 <div className={`row relativeposition ${isLoading ? 'reduced-opacity' : ''}`}>
-                  <FlipMove typeName={null}>
-                    {dataset.map((entry, index) => (
-                      <PropertyEntry key={entry.slug} entry={entry} filtersOpen={filtersOpen} handleClone={handleClone} i18n={i18n} />
-                    ))}
-                  </FlipMove>
+                  {dataset.map((entry, index) => (
+                    <PropertyEntry
+                      key={entry.slug}
+                      entry={entry}
+                      filtersOpen={filtersOpen}
+                      handleClone={handleClone}
+                      i18n={i18n}
+                      showControls={showControls}
+                    />
+                  ))}
                 </div>
 
                 {/* CARD END */}

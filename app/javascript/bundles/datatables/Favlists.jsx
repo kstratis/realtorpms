@@ -28,16 +28,16 @@ class Favlists extends React.Component {
     this.handleFavlist = this.handleFavlist.bind(this);
   }
 
-  handleFavlist(e, favlist_id) {
+  handleFavlist(e, favlist_id, favlist_path= null) {
     e.preventDefault();
     this.setState({
       selectedIndex: favlist_id,
       isLoadingFavlist: true
     });
     // Dynamically construct the next favlist's url.
-    const newUrl = `/favlists/${favlist_id}`;
-    history.replaceState(null, '', newUrl);
-    axios.get(`${newUrl}.json`).then(
+    // const favlist_path = `/favlists/${favlist_id}`;
+    history.replaceState(null, '', favlist_path);
+    axios.get(`${favlist_path}.json`).then(
       function(response) {
         this.setState({
           dataset: response.data.datalist,
@@ -48,7 +48,7 @@ class Favlists extends React.Component {
           current_page: response.data.current_page,
           total_entries: response.data.total_entries,
           isLoadingFavlist: false,
-          favlists_endpoint: newUrl
+          favlists_endpoint: favlist_path
         });
       }.bind(this)
     );
@@ -70,7 +70,7 @@ class Favlists extends React.Component {
                         }`}
                         key={entry['id']}
                         href=""
-                        onClick={e => this.handleFavlist(e, entry['id'])}>
+                        onClick={e => this.handleFavlist(e, entry['id'], entry['show_favlist_path'])}>
                         {entry['name']}
                       </a>
                       <div className={'custom-list-button'}>

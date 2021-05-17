@@ -843,6 +843,7 @@ function withDatatable(WrappedComponent) {
             properties_path={this.props.initial_payload.properties_path}
             users_path={this.props.initial_payload.users_path}
             clients_path={this.props.initial_payload.clients_path}
+            showControls={this.props.initial_payload.showControls}
             handleChangePurpose={this.handleChangePurpose}
             handleChangeStatus={this.handleChangeStatus}
             handleCfieldDropdown={this.handleCfieldDropdown}
