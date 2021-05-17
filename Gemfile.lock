@@ -107,7 +107,7 @@ GEM
       sshkit (>= 1.9.0)
     capistrano-bundler (2.0.1)
       capistrano (~> 3.1)
-    capistrano-passenger (0.2.0)
+    capistrano-passenger (0.2.1)
       capistrano (~> 3.0)
     capistrano-rails (1.6.1)
       capistrano (~> 3.1)
@@ -440,7 +440,7 @@ DEPENDENCIES
   bootstrap-will_paginate (= 1.0.0)
   byebug
   capistrano (~> 3.16)
-  capistrano-passenger (~> 0.2.0)
+  capistrano-passenger (~> 0.2.1)
   capistrano-rails (~> 1.6.1)
   capistrano-rails-console
   capistrano-rbenv (~> 2.2.0)

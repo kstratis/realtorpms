@@ -89,7 +89,7 @@ gem 'nokogiri', '~> 1.11'
 
 gem 'capistrano', '~> 3.16'
 gem 'capistrano-rails', '~> 1.6.1'
-gem 'capistrano-passenger', '~> 0.2.0'
+gem 'capistrano-passenger', '~> 0.2.1'
 gem 'capistrano-rbenv', '~> 2.2.0'
 
 gem 'friendly_id', '~> 5.4'
