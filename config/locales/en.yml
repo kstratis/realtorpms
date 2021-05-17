@@ -865,6 +865,7 @@ en:
       photo_subheader: "Click the current avatar to change your photo."
       allowed_pic_specs: "Image file < 3.5 MB."
       delete_avatar: "Are you sure you want to delete your avatar picture?"
+      delete_avatar_tooltip: "Remove avatar"
     index:
       breadcrumb: "Partners"
       heading: "Partner list"

@@ -50,6 +50,7 @@ const PropertiesList = ({
   clients_endpoint,
   assignmentships_endpoint,
   properties_path,
+  showControls,
   i18n,
 }) => {
   const { filtersOpen, setFiltersOpen } = useFilterToggle('propertyFiltersOpen');
@@ -337,6 +338,7 @@ const PropertiesList = ({
                       filtersOpen={filtersOpen}
                       handleClone={handleClone}
                       i18n={i18n}
+                      showControls={showControls}
                     />
                   ))}
                 </div>
