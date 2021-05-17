@@ -1,8 +1,8 @@
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.11.0"
+lock "~> 3.16.0"
 
-set :application, "propertyx"
-set :repo_url, "git@gitlab.com:konos5/propertyx.git"
+set :application, "realtorpms"
+set :repo_url, "git@github.com:kstratis/realtorpms.git"
 
 # Deploy to the user's home directory
 set :deploy_to, "/home/deploy/projects/#{fetch :application}"
