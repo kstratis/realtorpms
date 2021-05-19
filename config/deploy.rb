@@ -14,7 +14,7 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/pack
 # Only keep the last 2 releases to save disk space
 set :keep_releases, 2
 
-set :linked_files, %w{config/master.key}
+# set :linked_files, %w{config/master.key}
 
 # Optionally, you can symlink your database.yml and/or secrets.yml file from the shared directory during deploy
 # This is useful if you don't want to use ENV variables
