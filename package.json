@@ -4,6 +4,7 @@
   "dependencies": {
     "@babel/core": "^7.14.3",
     "@babel/runtime": "^7.14.0",
+    "@babel/preset-react": "^7.13.13",
     "@fancyapps/fancybox": "^3.5.7",
     "@fullcalendar/core": "^5.4.0",
     "@fullcalendar/daygrid": "^5.4.0",
