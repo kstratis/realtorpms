@@ -1,5 +1,5 @@
 if Rails.env.development?
-  ENV['MEDIA_DIR'] = '/Users/kstratis/efi_pics/'
+  ENV['MEDIA_DIR'] = '/Users/kstratis/house_pics/'
 end
 
 if Rails.env.staging?
