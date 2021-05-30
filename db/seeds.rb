@@ -213,7 +213,7 @@ end
       model_type: demo.model_types.find_by(name: 'properties')
   )
   property.avatar.attach(
-      io: File.open(Dir["#{ENV['MEDIA_DIR']}#{rand(1..9)}/*"].sample),
+      io: File.open(Dir["#{ENV['MEDIA_DIR']}#{rand(1..5)}/*"].sample),
       filename: "file-#{Faker::Number.number(digits: 4)}.png"
   )
   regulardemouser1.properties << property
@@ -240,7 +240,7 @@ end
   )
 
   property.avatar.attach(
-      io: File.open(Dir["#{ENV['MEDIA_DIR']}#{rand(1..9)}/*"].sample),
+      io: File.open(Dir["#{ENV['MEDIA_DIR']}#{rand(1..5)}/*"].sample),
       filename: "file-#{Faker::Number.number(digits: 4)}.png"
   )
   regulardemouser1.properties << property
@@ -264,7 +264,7 @@ end
 
   )
   property.avatar.attach(
-      io: File.open(Dir["#{ENV['MEDIA_DIR']}#{rand(1..9)}/*"].sample),
+      io: File.open(Dir["#{ENV['MEDIA_DIR']}#{rand(1..5)}/*"].sample),
       filename: "file-#{Faker::Number.number(digits: 4)}.png"
   )
   regularbluedomainuser1.properties << property
