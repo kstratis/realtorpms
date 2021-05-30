@@ -1,1 +1,1 @@
-Rails.application.config.middleware.use CloudfrontDenier, target: 'https://dev.propertize.io'
+Rails.application.config.middleware.use CloudfrontDenier, target: 'https://realtorpms.com'
