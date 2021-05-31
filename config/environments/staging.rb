@@ -112,12 +112,12 @@ Rails.application.configure do
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
-  config.action_mailer.default_url_options = { :host => "dev.realtorpms.com" }
+  config.action_mailer.default_url_options = { :host => "realtorpms.com" }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
       address: 'smtp.sendgrid.net',
       port: 587,
-      domain: "dev.realtorpms.com",
+      domain: "realtorpms.com",
       user_name: Rails.application.credentials.dig(:sendgrid, :username),
       password: Rails.application.credentials.dig(:sendgrid, :password),
       authentication: :plain,
