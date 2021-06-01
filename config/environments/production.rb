@@ -119,7 +119,7 @@ Rails.application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  config.action_dispatch.tld_length = 2
+  config.action_dispatch.tld_length = 1
 
   # Use a different logger for distributed setups.
   # require 'syslog/logger'
