@@ -37,9 +37,7 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  # config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
-  config.public_file_server.enabled = true
-  config.serve_static_assets = true
+  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   # Compress CSS using a preprocessor.
   config.assets.js_compressor = :uglifier
@@ -60,15 +58,14 @@ Rails.application.configure do
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  #  config.action_controller.asset_host = 'd13refwsasr6jm.cloudfront.net'
+   config.action_controller.asset_host = 'd13refwsasr6jm.cloudfront.net'
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
-  # config.active_storage.service = :amazon
-  config.active_storage.service = :local
+  config.active_storage.service = :amazon
 
   # Don't overwrite files on update action (Rails 6).
   # See this: https://github.com/rails/rails/issues/35817#issuecomment-628654948
