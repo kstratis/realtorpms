@@ -51,6 +51,7 @@ johnymnemonic = User.create!(first_name: 'Johny',
 demo = Account.create!(
     subdomain: 'demo',
     name: 'Demo',
+    email_confirmed: true,
     owner: User.second
 )
 demo.model_types.find_by(name: 'users').users << tonystark
@@ -59,6 +60,7 @@ demo.model_types.find_by(name: 'users').users << tonystark
 bluedomain = Account.create!(
     subdomain: 'bluedomain',
     name: 'Bluedomain',
+    email_confirmed: true,
     owner: User.third
 )
 bluedomain.model_types.find_by(name: 'users').users << hulkhogan
@@ -67,6 +69,7 @@ bluedomain.model_types.find_by(name: 'users').users << hulkhogan
 reddomain = Account.create!(
     subdomain: 'reddomain',
     name: 'Reddomain',
+    email_confirmed: true,
     owner: User.fourth
 )
 reddomain.model_types.find_by(name: 'users').users << johnymnemonic
