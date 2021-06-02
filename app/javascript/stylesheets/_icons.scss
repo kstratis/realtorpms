@@ -475,6 +475,10 @@
     background-image: url('../images/disconnect.svg');
   }
 
+  &.geardemo {
+    background-image: url('../images/sidebar/gear.svg');
+  }
+
   & ~ .pr-icon-desc {
     display: block;
     text-align: center;
