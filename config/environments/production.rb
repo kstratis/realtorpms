@@ -120,11 +120,6 @@ Rails.application.configure do
 
   config.action_dispatch.tld_length = 1
 
-  config.public_file_server.headers = {
-    'Access-Control-Allow-Origin' => 'https://demo.realtorpms.com'
-    # 'Access-Control-Allow-Origin' => 'https://demo.realtorpms.com'
-  }
-
   # Use a different logger for distributed setups.
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')

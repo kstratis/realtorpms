@@ -112,6 +112,3 @@ production:
 
   # workaround to work with CDN
   public_output_path: assets/packs
-
-  headers:
-    'Access-Control-Allow-Origin': '*'
