@@ -7,10 +7,15 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins '*'
-    resource '/assets/*',
+    origins %w[
+      https://realtorpms.com
+      http://realtorpms.com
+      https://*.realtorpms.com
+      http://*.realtorpms.com
+    ]
+    resource '/assets/*'
       # resource '/(assets|packs)/*',
-             headers: :any,
-             methods: [:get]
+      #        headers: :any,
+      #        methods: [:get]
   end
 end
