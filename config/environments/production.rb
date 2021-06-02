@@ -120,11 +120,10 @@ Rails.application.configure do
 
   config.action_dispatch.tld_length = 1
 
-  config.hosts << "realtorpms.com"
-
-  config.hosts << "*.realtorpms.com"
-
-  config.hosts << 'd13refwsasr6jm.cloudfront.net'
+  config.public_file_server.headers = {
+    'Access-Control-Allow-Origin' => 'https://demo.realtorpms.com'
+    # 'Access-Control-Allow-Origin' => 'https://demo.realtorpms.com'
+  }
 
   # Use a different logger for distributed setups.
   # require 'syslog/logger'
