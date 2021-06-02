@@ -124,6 +124,8 @@ Rails.application.configure do
 
   config.hosts << "*.realtorpms.com"
 
+  config.hosts << 'd13refwsasr6jm.cloudfront.net'
+
   # Use a different logger for distributed setups.
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
