@@ -20,10 +20,6 @@
   mask-size: cover;
   transition: background-color 0.15s linear 0s;
 
-  //&:hover{
-  //  background-color: #ffffff;
-  //}
-
   &.xs { width:  23px; height:  23px; vertical-align: middle;}
   &.xxs { width:  20px; height:  20px; vertical-align: middle;}
 
@@ -31,7 +27,7 @@
     mask: url('../images/sidebar/dashboard_opt.svg');
   }
 
-  &.masked-icon-partner-opt{
+  &.masked-icon-partners-opt{
     mask: url('../images/sidebar/businessman_opt.svg');
   }
 
