@@ -170,7 +170,7 @@
                             content: t('js.datatables.users.masquerading.exit_prompt', user: masqueraded_admin&.full_name) + (masqueraded_admin.is_sysadmin? ? '. ' + t('js.datatables.users.masquerading.sysadmin_prompt') : ''),
                             toggle: 'popover',
                             trigger: 'hover' } do %>
-              <%= content_tag :span, nil, class: 'sidebar-masked-icon xs masked-icon-logout' %>
+              <%= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-logout' %>
             <% end %>
           <% end %>
 
@@ -181,7 +181,7 @@
                   placement: 'bottom',
                   toggle: 'popover',
                   trigger: 'hover' } do %>
-                <%= content_tag :span, nil, class: 'sidebar-masked-icon xs masked-icon-partners' %>
+                <%= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-partners' %>
               <% end %>
             <% end %>
           <% end %>
@@ -202,7 +202,7 @@
               toggle: 'popover',
               trigger: 'hover' } do %>
             <%= link_to clients_path, class: 'nav-link menu-link' do %>
-              <%= content_tag :span, nil, class: 'sidebar-masked-icon xs masked-icon-clients' %>
+              <%= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-clients' %>
             <% end %>
           <% end %>
 
@@ -213,7 +213,7 @@
                 toggle: 'popover',
                 trigger: 'hover' } do %>
               <%= link_to settings_path, class: 'nav-link menu-link' do %>
-                <%= content_tag :span, nil, class: 'sidebar-masked-icon xs masked-icon-settings' %>
+                <%= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-settings' %>
               <% end %>
             <% end %>
           <% end %>
