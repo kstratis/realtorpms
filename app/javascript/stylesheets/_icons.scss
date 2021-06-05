@@ -31,8 +31,12 @@
     mask: url('../images/sidebar/dashboard_n.svg');
   }
 
-  &.masked-icon-partners{
+  &.masked-icon-partners-opt{
     mask: url('../images/sidebar/businessman_opt.svg');
+  }
+
+  &.masked-icon-partners{
+    mask: url('../images/sidebar/businessman.svg');
   }
 
   &.masked-icon-building{
