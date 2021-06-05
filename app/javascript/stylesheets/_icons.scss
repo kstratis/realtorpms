@@ -35,16 +35,12 @@
     mask: url('../images/sidebar/businessman_opt.svg');
   }
 
-  &.masked-icon-partners{
-    mask: url('../images/sidebar/businessman.svg');
-  }
-
   &.masked-icon-building{
     mask: url('../images/sidebar/building.svg');
   }
 
-  &.masked-icon-clients{
-    mask: url('../images/sidebar/partners.svg');
+  &.masked-icon-clients-opt{
+    mask: url('../images/sidebar/partners_opt.svg');
   }
 
   &.masked-icon-favorites{
@@ -59,8 +55,8 @@
     mask: url('../images/sidebar/code.svg');
   }
 
-  &.masked-icon-settings{
-    mask: url('../images/sidebar/gear.svg');
+  &.masked-icon-settings-opt{
+    mask: url('../images/sidebar/gear_opt.svg');
   }
 
   &.masked-icon-logout{
