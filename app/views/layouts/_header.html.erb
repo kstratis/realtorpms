@@ -175,12 +175,12 @@
           <% end %>
 
           <% if current_user.is_admin? current_account %>
-            <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown #{active_for(controller: ['users', 'invitations'])}" do %>
-              <%= link_to users_path, class: 'nav-link menu-link', data: {
-                  content: t('users.title'),
-                  placement: 'bottom',
-                  toggle: 'popover',
-                  trigger: 'hover' } do %>
+            <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown #{active_for(controller: %w[users invitations])}", data: {
+              content: t('users.title'),
+              placement: 'bottom',
+              toggle: 'popover',
+              trigger: 'hover' } do %>
+              <%= link_to users_path, class: 'nav-link menu-link' do %>
                 <%= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-partners' %>
               <% end %>
             <% end %>
