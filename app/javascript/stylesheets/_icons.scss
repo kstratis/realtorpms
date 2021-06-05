@@ -27,11 +27,11 @@
   &.xs { width:  23px; height:  23px; vertical-align: middle;}
   &.xxs { width:  20px; height:  20px; vertical-align: middle;}
 
-  &.masked-icon-dash{
-    mask: url('../images/sidebar/dashboard_n.svg');
+  &.masked-icon-dash-opt{
+    mask: url('../images/sidebar/dashboard_opt.svg');
   }
 
-  &.masked-icon-partners-opt{
+  &.masked-icon-partner-opt{
     mask: url('../images/sidebar/businessman_opt.svg');
   }
 
@@ -473,10 +473,6 @@
 
   &.disconnect{
     background-image: url('../images/disconnect.svg');
-  }
-
-  &.geardemo {
-    background-image: url('../images/sidebar/gear.svg');
   }
 
   & ~ .pr-icon-desc {
