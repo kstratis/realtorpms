@@ -14,13 +14,13 @@ gem 'bcrypt', '3.1.12'
 
 # gem 'bootstrap', '~> 4.4.1'
 
-gem 'bootsnap', '~> 1.7.3'
+gem 'bootsnap', '~> 1.7.5'
 
 gem 'e2mmap'
 
 gem 'rack-cors'
 
-gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.12.1'
 
 # -----------
 
@@ -40,7 +40,7 @@ gem "mini_magick"
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.2.3'
 # Use Puma as the app server
-gem 'puma', '~> 5.2.2'
+gem 'puma', '~> 5.3.2'
 # Use SCSS for stylesheets
 # gem 'sass-rails', '~> 5.0.7'
 gem 'sassc-rails', '~> 2.1.2'
@@ -59,7 +59,7 @@ gem 'jbuilder', '~> 2.11'
 
 gem 'jquery-rails', '~> 4.4.0'
 
-gem 'faker', '~> 2.17'
+gem 'faker', '~> 2.18'
 
 gem 'will_paginate', '~> 3.3.0'
 
@@ -73,7 +73,8 @@ gem 'launchy', '2.5.0'
 
 gem 'react_on_rails', '12.2.0'
 
-gem 'webpacker', '~> 5.4.0'
+# gem 'webpacker', '~> 5.4.0'
+gem 'webpacker', '6.0.0.beta.7'
 
 gem "roo", "~> 2.8.3"
 
@@ -139,12 +140,12 @@ group :development do
 end
 
 group :test do
-  gem 'factory_bot_rails', '~> 6.1'
+  gem 'factory_bot_rails', '~> 6.2'
   gem 'shoulda-matchers', '~> 4.5.1'
   gem 'rspec-collection_matchers'
   gem 'rails-controller-testing', '1.0.5'
   gem 'minitest-reporters',       '1.4.3'
-  gem 'guard',                    '2.16.2'
+  gem 'guard',                    '2.17'
   gem 'guard-minitest',           '2.4.6'
 end
 
