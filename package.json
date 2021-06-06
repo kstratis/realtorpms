@@ -3,7 +3,6 @@
   "private": true,
   "dependencies": {
     "@babel/core": "^7.11.1",
-    "@babel/preset-react": "^7.13.13",
     "@babel/runtime": "^7.11.2",
     "@fancyapps/fancybox": "^3.5.7",
     "@rails/actioncable": "6.0.3-7",
@@ -24,7 +23,7 @@
     "expose-loader": "^1.0.3",
     "flatpickr": "^4.6.3",
     "intl": "^1.2.5",
-    "jquery": "3.5.1",
+    "jquery": "^3.6.0",
     "js-yaml": "^3.14.0",
     "node-sass": "^4.14.1",
     "parsleyjs": "^2.9.2",
@@ -53,7 +52,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.14.3",
-    "@babel/core": "^7.11.1",
+    "@babel/core": "^7.14.3",
     "@babel/node": "^7.14.2",
     "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.14.2",

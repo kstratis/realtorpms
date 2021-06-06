@@ -57,7 +57,7 @@ gem 'turbolinks', '~> 5.2.1'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.11'
 
-gem 'jquery-rails', '~> 4.4.0'
+# gem 'jquery-rails', '~> 4.4.0'
 
 gem 'faker', '~> 2.18'
 
@@ -73,7 +73,7 @@ gem 'launchy', '2.5.0'
 
 gem 'react_on_rails', '12.2.0'
 
-gem 'webpacker', '~> 5.2.1'
+gem 'webpacker', '~> 5.4.0'
 
 gem "roo", "~> 2.8.3"
 

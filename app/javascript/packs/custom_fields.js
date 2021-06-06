@@ -1,3 +1,4 @@
+import 'parsleyjs'
 import { clearValidatableFields } from './utilities';
 
 $(document).on('turbolinks:load', function(e) {
