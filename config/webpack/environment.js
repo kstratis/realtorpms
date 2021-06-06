@@ -1,5 +1,6 @@
 const { environment } = require('@rails/webpacker');
 const webpack = require('webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 environment.plugins.append("Provide", new webpack.ProvidePlugin({
   $: 'jquery',
@@ -7,6 +8,8 @@ environment.plugins.append("Provide", new webpack.ProvidePlugin({
   Popper: ['popper.js', 'default'],
   $clamp: ['clamp-js-main']
 }));
+
+environment.plugins.append('BundleAnalyzer', new BundleAnalyzerPlugin());
 
 // This is needed because we need to be able to access jquery truly globally and not just
 // "webpack scoped" globally.
