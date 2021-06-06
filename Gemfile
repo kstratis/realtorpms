@@ -10,15 +10,17 @@ gem 'rails', '~> 6.0'
 # gem 'rails', :git => 'https://github.com/rails/rails'
 
 # Watch out! - Don't upgrade to 3.1.13 yet because it incurs severe performance degradation
-gem 'bcrypt', '3.1.12'
+gem 'bcrypt', '3.1.16'
 
 # gem 'bootstrap', '~> 4.4.1'
 
-gem 'bootsnap', '~> 1.4.8'
+gem 'bootsnap', '~> 1.7.5'
 
 gem 'e2mmap'
 
 gem 'rack-cors'
+
+gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f'
 
 # -----------
 
