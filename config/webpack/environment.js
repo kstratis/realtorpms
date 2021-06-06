@@ -1,5 +1,8 @@
 const { environment } = require('@rails/webpacker');
 const webpack = require('webpack');
+// Uncomment to show bundle size with `NODE_ENV=production bin/webpack`
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 
 environment.plugins.append("Provide", new webpack.ProvidePlugin({
   $: 'jquery',
@@ -7,6 +10,9 @@ environment.plugins.append("Provide", new webpack.ProvidePlugin({
   Popper: ['popper.js', 'default'],
   $clamp: ['clamp-js-main']
 }));
+
+// Uncomment to show bundle size with `NODE_ENV=production bin/webpack`
+// environment.plugins.append('BundleAnalyzer', new BundleAnalyzerPlugin());
 
 // This is needed because we need to be able to access jquery truly globally and not just
 // "webpack scoped" globally.
@@ -25,12 +31,7 @@ environment.config.merge({
   }
 });
 
-// console.log(typeof(environment));
-
-// console.log(environment);
-// environment.splitChunks();
 environment.splitChunks(config => {
-  // console.log(config);
   config.externals = {moment: 'moment'};
   let newconf = Object.assign({}, config, {
     optimization: {
