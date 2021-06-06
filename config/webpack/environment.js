@@ -1,5 +1,7 @@
 const { environment } = require('@rails/webpacker');
 const webpack = require('webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 
 environment.plugins.append("Provide", new webpack.ProvidePlugin({
   $: 'jquery',
@@ -8,6 +10,7 @@ environment.plugins.append("Provide", new webpack.ProvidePlugin({
   $clamp: ['clamp-js-main']
 }));
 
+environment.plugins.append('BundleAnalyzer', new BundleAnalyzerPlugin());
 // This is needed because we need to be able to access jquery truly globally and not just
 // "webpack scoped" globally.
 // https://stackoverflow.com/questions/54758232/rendering-js-from-a-rails-controller-with-webpacker
@@ -25,12 +28,7 @@ environment.config.merge({
   }
 });
 
-// console.log(typeof(environment));
-
-// console.log(environment);
-// environment.splitChunks();
 environment.splitChunks(config => {
-  // console.log(config);
   config.externals = {moment: 'moment'};
   let newconf = Object.assign({}, config, {
     optimization: {
