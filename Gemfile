@@ -79,8 +79,6 @@ gem "roo", "~> 2.8.3"
 
 gem "aws-sdk-s3", require: false
 
-# gem "parsley-rails"
-
 gem "irb"
 
 gem 'activerecord-import'
