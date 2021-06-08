@@ -1,3 +1,5 @@
+import { setFlatPickrSettings } from "../../packs/utilities";
+
 class Theme {
   constructor () {
     // looper color scheme refer from our _variable-bs-overrides.scss
@@ -1242,7 +1244,9 @@ class Theme {
    */
   flatpickr () {
     if (window.flatpickr) {
-      flatpickr.defaultConfig.disableMobile = true
+      const active_locale = $('#current_locale').data().i18n.locale || 'en';
+      window.flatpickr.defaultConfig.disableMobile = true
+      setFlatPickrSettings(active_locale === 'el' ? 'gr' : active_locale);
 
       $('[data-toggle="flatpickr"]').each(function () {
         const selector = this
