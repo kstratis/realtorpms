@@ -1,6 +1,7 @@
 <%= content_tag :div, class: "", id: "current_locale", data: {
-    i18n: {
-        locale: I18n.locale,
-    }
+  i18n: {
+    locale: I18n.locale,
+  },
+  routes: [new_property_path, edit_property_path(:id)]
 } do %>
 <% end %>

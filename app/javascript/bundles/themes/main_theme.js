@@ -1244,9 +1244,9 @@ class Theme {
    */
   flatpickr () {
     if (window.flatpickr) {
-      const active_locale = $('#current_locale').data().i18n.locale || 'en';
+      // const active_locale = $('#current_locale').data().i18n.locale || 'en';
       window.flatpickr.defaultConfig.disableMobile = true
-      setFlatPickrSettings(active_locale === 'el' ? 'gr' : active_locale);
+      // setFlatPickrSettings(active_locale === 'el' ? 'gr' : active_locale);
 
       $('[data-toggle="flatpickr"]').each(function () {
         const selector = this
