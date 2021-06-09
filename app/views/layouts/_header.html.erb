@@ -207,6 +207,18 @@
           <% end %>
 
           <% if current_user.is_admin? current_account %>
+            <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown", data: {
+              content: current_account.website_enabled? ? 'Website' : t('website_enable'),
+              placement: 'bottom',
+              toggle: 'popover',
+              trigger: 'hover' } do %>
+              <%= link_to websites_root_url, target: "_blank", class: "nav-link menu-link #{current_account.website_enabled? ? '' : 'disabled'}" do %>
+                <%= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-www' %>
+              <% end %>
+            <% end %>
+          <% end %>
+
+          <% if current_user.is_admin? current_account %>
             <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown #{active_for(controller: ['settings'])}", data: {
                 content: t('sidebar.settings'),
                 placement: 'bottom',

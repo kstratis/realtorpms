@@ -53,7 +53,7 @@ en:
   add: "Add"
   event_info: "Event info:"
   nothing_to_see: "There's nothing to see here"
-  website_disabled_html: "The business webpage is disabled. <br>Activate it from within the application under the 'Settings' section"
+  website_disabled_html: "The business webpage is disabled. <br>Activate it from within the application <a href='%{account_path}'>in settings</a>"
   area: "Area"
   type: "Type"
   submit: "Search"
@@ -65,6 +65,7 @@ en:
   results: "Search results"
   no_results: "No results were found"
   property_code: "ID"
+  website_enable: "Please enable your website through the account settings"
   properties_count:
     one: "1 result"
     other: "%{count} results"
