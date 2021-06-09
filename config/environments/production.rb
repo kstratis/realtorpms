@@ -130,8 +130,8 @@ Rails.application.configure do
       address: 'smtp.sendgrid.net',
       port: 587,
       domain: "realtorpms.com",
-      user_name: Rails.application.credentials.dig(:sendgrid, :username),
-      password: Rails.application.credentials.dig(:sendgrid, :password),
+      user_name: 'apikey',
+      password: Rails.application.credentials.dig(:sendgrid, :api_key),
       authentication: :plain,
       enable_starttls_auto: true
   }
