@@ -1071,8 +1071,9 @@ en:
       accept: "ACCEPT"
       accept_text: "Use the link below to connect:"
     activation:
+      activation_subject: '👀 Account activation'
       subject: "Welcome to your new account! 🚀"
-      greeting: "Hi %{admin}"
+      greeting: "Hi %{admin} 🎉"
       greeting_explained_html: "Thanks for confirming your email. We are thrilled to have you on board!"
       greeting_explained2_html: "Please click the link below to login to your account!"
       login: "LOGIN"
