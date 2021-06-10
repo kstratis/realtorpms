@@ -902,7 +902,7 @@ en:
     popover_avatar: "The cover picture is a unique image used to identify each property. Should you choose one, mind that you don't need to reupload it in the photos section below."
     popover_avatar_title: "Cover picture"
     popover_map_title: "Map usage"
-    popover_map: "Navigate to Google maps and locate the property of your choosing. Click on 'Share' and select the 'Embed a map' tab. Copy and paste the given url the map field above."
+    popover_map: "Navigate to Google maps and locate the property of your choosing. Click on 'Share' and select the 'Embed a map' tab. Click on 'COPY HTML' and paste the given url to the map field above."
     popover_houseowner_title: "Owner management"
     popover_client_title: "Client management"
     popover_houseowner_admin: "Pick the property's owner from your account's pool of clients or alternatively start typing the first and last name of a new client to automatically create and bind him/her to the property in one go. You can later edit the client's profile from the clients section."
