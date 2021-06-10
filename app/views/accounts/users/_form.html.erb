@@ -66,7 +66,7 @@
 <!-- .form-group -->
 <div class="form-group">
   <div class="form-label-group">
-    <%= f.password_field :password, class: 'form-control', placeholder: User.human_attribute_name("password") %>
+    <%= f.password_field :password, class: 'form-control' %>
     <%= f.label :password, User.human_attribute_name("password_new") %>
     <%= inline_error @user, :password, 'Password' %>
   </div>
@@ -78,7 +78,7 @@
 <div class="form-group">
 
   <div class="form-label-group">
-    <%= f.password_field :password_confirmation, class: 'form-control', placeholder: User.human_attribute_name("password_confirmation") %>
+    <%= f.password_field :password_confirmation, class: 'form-control' %>
     <%= f.label :password_confirmation, User.human_attribute_name("password_confirmation") %>
     <%= inline_error @user, :password_confirmation, 'Password confirmation' %>
   </div>
