@@ -423,7 +423,17 @@
                         <!-- Notes -->
                         <div class="col-md-12">
                           <div class="form-group mb-4">
-                            <label class="control-label" for="notes"><%= t('activerecord.attributes.property.notes_title') %></label>
+                            <%= property.label :notes do %>
+                              <span><%= t('activerecord.attributes.property.notes_title') %></span>&nbsp;
+                              <span class="property-cover-popover"
+                                    data-toggle="popover"
+                                    data-placement="top"
+                                    data-trigger="hover"
+                                    data-content="<%= t('properties.popover_notes_body') %>"
+                                    title="<%= t('properties.popover_notes_title') %>">
+                                <i class="fas fa-info-circle"></i>
+                              </span>
+                            <% end %>
                             <%= property.text_area :notes,
                                                    class: 'form-control',
                                                    id: 'notes',
