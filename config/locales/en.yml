@@ -911,6 +911,8 @@ en:
     popover_client_admin: "Choose a client from your account's pool of clients or alternatively start typing the first and last name of a new client to automatically create one. You can edit the client's full profile from the clients section after saving this search."
     popover_client_user: "Choose a client from the pool of your assigned clients or alternatively start typing the first and last name of a new client to automatically create one. You can edit the client's full profile from the clients section after saving this search."
     popover_property_description: "The description field is optional. However it is strongly suggested to fill it out as it enriches each listing's information in your website. It is especially useful in land-based ads as the attribute autocompletion feature won't work there."
+    popover_description_title: "Property description"
+    popover_description_body: "Each property on your public website includes an automated ad text. If you fill out the field below then the ad text gets replaced with your custom description. Properties of type \"Land\" have the automated text generation switched off which makes this option particularly useful."
     new:
       avatar_title: "Property image cover"
       breadcrumb: "Properties"
