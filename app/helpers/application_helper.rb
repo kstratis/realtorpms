@@ -59,4 +59,6 @@ module ApplicationHelper
     I18n.t('date.month_names_gen')[date.month - 1]
   end
 
+
+
 end

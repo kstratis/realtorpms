@@ -500,6 +500,10 @@ Bullet navigation design
   padding: 150px !important;
 }
 
-footer{
-  //background: #ffffff;
+.outline-dashed {
+  background: coral;
+  border-radius: 5px;
+  span, i {
+    color: #ffffff
+  }
 }

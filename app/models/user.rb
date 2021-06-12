@@ -114,7 +114,7 @@ class User < ApplicationRecord
   end
 
   def is_privileged?(account)
-    Membership.find_by(account: account, user: self).privileged
+    Membership.find_by(account: account, user: self).try(:privileged)
   end
 
   # Remembers a user in the database for use in persistent sessions.

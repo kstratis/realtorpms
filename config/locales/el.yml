@@ -36,6 +36,7 @@ el:
   no_results: "Δυστυχώς δεν βρέθηκαν αποτελέσματα!"
   property_code: "Κωδικός"
   website_enable: "Πρέπει να ενεργοποιήσετε το website απο τις ρυθμίσεις λογαριασμού"
+  application: "Εφαρμογή"
   properties_count:
     one: "1 αποτέλεσμα"
     other: "%{count} αποτελέσματα"

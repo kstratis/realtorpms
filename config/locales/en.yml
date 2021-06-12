@@ -66,6 +66,7 @@ en:
   no_results: "No results were found"
   property_code: "ID"
   website_enable: "Please enable your website through the account settings"
+  application: "Admin"
   properties_count:
     one: "1 result"
     other: "%{count} results"
