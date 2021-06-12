@@ -67,10 +67,12 @@
               <!-- .form-group -->
               <div class="form-group">
                 <div class="form-label-group">
-                  <%= f.text_field :email, class: 'form-control', placeholder: Account.human_attribute_name("email"),
-                                   required: true,
-                                   # 'data-parsley-trigger': 'change',
-                                   'data-parsley-required-message': t("js.validator.required") %>
+                  <%= f.text_field :email, class: 'form-control',
+                                   placeholder: Account.human_attribute_name("email"),
+                                   'data-parsley-required': "true",
+                                   'data-parsley-required-message': t("js.validator.required"),
+                                   'data-parsley-type': "email",
+                                   'data-parsley-type-message': t("js.validator.email") %>
                   <%= f.label :email, Account.human_attribute_name("email") %>
                 </div>
               </div>
