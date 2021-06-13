@@ -18,7 +18,7 @@ $(document).on('turbolinks:load', function(e) {
   const slideElements = $('.splide');
   console.log(slideElements);
   slideElements.each((_, slideElement) => {
-    new window.Splide(slideElement, { type: 'loop'}).mount();
+    new window.Splide(slideElement, { type: 'loop', lazyLoad: 'nearby'}).mount();
   });
 
   $('[data-fancybox^="regular-info"]').fancybox({

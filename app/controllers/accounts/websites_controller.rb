@@ -3,7 +3,7 @@ module Accounts
     include Pagy::Backend
 
     before_action { @pagy_locale = I18n.locale }
-    before_action :website_enabled_or_return
+    before_action :client_website_enabled_or_return
 
     layout 'client_website/skeleton'
 
@@ -33,29 +33,18 @@ module Accounts
       %w[businesstype category location].any? { |param| params.has_key?(param) && params[param].present? }
     end
 
-    # def search
-    #   puts params
-    #   @properties = current_account.properties.order(:id).all
-    #   respond_to do |format|
-    #     format.html
-    #     format.json do
-    #       render json: { entries: render_to_string(partial: "properties", formats: [:html]) }
-    #     end
-    #   end
-    # end
-
     private
 
-    def render_403
+    def render_client_website_unavailable
       respond_to do |format|
-        format.html { render :template => "403", :layout => false, :status => :forbidden }
+        format.html { render :template => "client_website_unavailable", :layout => false, :status => :forbidden }
         format.xml  { head :forbidden }
         format.any  { head :forbidden }
       end
     end
 
-    def website_enabled_or_return
-      render_403 if current_account.website_enabled.blank?
+    def client_website_enabled_or_return
+      render_client_website_unavailable if current_account.website_enabled.blank?
     end
   end
 end

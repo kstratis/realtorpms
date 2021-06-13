@@ -1,247 +1,249 @@
-<div class="header-strip">
-  <!-- Image and text -->
-  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0a2540;">
-    <div id="logo" class="top-bar-brand" data-turbolinks-permanent="true">
-      <a class="navbar-brand" href="<%= websites_root_path %>">
-        <% if current_account.avatar.attached? %>
-          <%= image_tag current_account.avatar, class: "d-inline-block align-top img-brand" %>
-        <% else %>
-          <%= image_pack_tag "media/images/logo_placeholder.png", class: "d-inline-block align-top img-brand" %>
-        <% end %>
-      </a>
-    </div>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="<%= websites_root_path %>"><%= t('home') %></a>
-        </li>
-        <li class="nav-item">
-          <a data-fancybox="about-info" data-src="#company-modal" href="javascript:;" class="nav-link"><%= t('about') %></a>
-          <div style="display: none;" id="company-modal" class="text-center">
-            <div class="info">
-              <h2><%= current_account.name.presence %></h2>
-              <% if current_account.description.present? %>
-                <p><i><%= current_account.description %></i></p>
-              <% end %>
-            </div>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a data-fancybox="regular-info" data-src="#contact-modal" href="javascript:;" class="nav-link"><%= t('contact') %></a>
-          <div style="display: none;" id="contact-modal" class="text-center">
-            <div class="info">
-              <h2><%= current_account.name %></h2>
-              <p><strong><%= current_account.email %></strong></p>
-              <p class="highlighted-bg"><%= current_account.telephones %></p>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <% if logged_in? && current_user.is_admin?(current_account) %>
-        <ul class="navbar-nav">
-          <li class="nav-item outline-dashed">
-            <a data-turbolinks="false" href="<%= account_root_path %>" class="nav-link">
-              <i class="fas fa-external-link-alt fa-fw"></i>&nbsp;<span><%= t('application') %></span></a>
+<div class="website-container">
+  <div class="header-strip">
+    <!-- Image and text -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0a2540;">
+      <div id="logo" class="top-bar-brand" data-turbolinks-permanent="true">
+        <a class="navbar-brand" href="<%= websites_root_path %>">
+          <% if current_account.avatar.attached? %>
+            <%= image_tag current_account.avatar, class: "d-inline-block align-top img-brand" %>
+          <% else %>
+            <%= image_pack_tag "media/images/logo_placeholder.png", class: "d-inline-block align-top img-brand" %>
+          <% end %>
+        </a>
+      </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="<%= websites_root_path %>"><%= t('home') %></a>
           </li>
-        </ul>
-      <% end %>
-    </div>
-  </nav>
-</div>
-
-<div data-controller="filters">
-  <div class="container container-fluid-xl mt-5 header">
-
-    <div class="row">
-      <div class="col-md-3">
-        <label for="businesstype" class="form-label"><%= t('activerecord.attributes.property.businesstype_title') %></label>
-        <%= select_tag("businesstype",
-                       options_for_select(
-                         Property.businesstypes.keys.map { |t| [Property.human_enum_name(:businesstype, t), t] }, params[:businesstype]
-                       ),
-                       include_blank: t('js.components.bootstrap_select.noneSelectedText'),
-                       class: 'form-control businesstype-select',
-                       data: { 'filters-target': "filter", action: 'filters#setCount' }) %>
-      </div>
-
-      <div class="col-md-3">
-        <label for="property-type" class="form-label"><%= t('type') %></label>
-        <%= select_tag(:category,
-                       options_for_select(
-                         Category.first(4).map { |category| [t("activerecord.attributes.property.enums.category.#{category[:slug].to_s}"), category.slug] }, params[:category]
-                       ),
-                       include_blank: t('js.components.bootstrap_select.noneSelectedText'),
-                       class: 'form-control category-select',
-                       data: { 'filters-target': "filter", action: 'filters#setCount' }) %>
-
-      </div>
-
-      <div class="col-md-6">
-        <div id="results-count-container" class="d-none">
-          <span data-filters-target="count" id="property_count"><%= t('properties_count', count: @pagy.count) %></span>
-        </div>
-        <label for="property-type" class="form-label"><%= t('area') %></label>
-        <%= select_tag(:location,
-                       options_for_select(
-                         current_account.properties.website_enabled.joins(:location).distinct.select('locations.id', 'locations.localname').order('locations.localname').map { |el| [el.localname, el.id] }
-                       ),
-                       multiple: true,
-                       data: { 'live-search': true,
-                               'max-options': 4,
-                               'max-options-text': t('js.components.bootstrap_select.maxOptionsText'),
-                               'none-selected-text': t('js.components.bootstrap_select.noneSelectedText'),
-                               'none-results-text': t('js.components.bootstrap_select.noneResultsText'),
-                               'filters-target': "multiFilter",
-                               'action': 'filters#setCount' },
-                       class: 'form-control location-select') %>
-      </div>
-
-      <div class="offset-md-8 col-md-4">
-        <div class="d-flex">
-          <%= button_tag class: 'btn btn-sm btn-secondary form-control mt-4 mr-1', id: 'clear-form', disabled: true, data: { action: "filters#clear" } do %>
-            <span><i class="fas fa-eraser fa-fw"></i>&nbsp;<%= t('clear') %></span>
-          <% end %>
-          <%= button_tag class: 'btn btn-sm btn-primary form-control mt-4 ml-1', id: "submit-form", data: { action: "filters#filter", disable_with: t('submit') } do %>
-            <span><i class="fas fa-search fa-fw"></i>&nbsp;<%= t('submit') %></span>
-          <% end %>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<div id="results-container" class="mt-5">
-  <% if @properties.blank? %>
-    <div class="d-block col-4 offset-4 p-4">
-      <%= image_pack_tag 'media/images/no_stored_searches.svg', class: "img-fluid rounded mx-auto d-block" %>
-    </div>
-    <div class="text-center text-light">
-      <span class="d-inline-block text-center"><%= t('no_results') %></span>
-    </div>
-  <% end %>
-
-  <div class="container container-fluid-xl p-0">
-    <div class="row row-cols-1 row-cols-md-3">
-      <% @properties.each do |property| %>
-        <div class="col mb-4">
-          <%= content_tag :div, id: dom_id(property), class: ["card", "mb-2", dom_class(property)] do %>
-            <div class='card-businesstype-header'>
-              <span class='highlighted-bg highlighted-fg'><%= t("activerecord.attributes.property.enums.businesstype.#{property.businesstype}_banner") %></span>
-            </div>
-            <div class="property">
-              <% if property.images.blank? && !property.avatar.attached? %>
-                <a href="<%= website_property_url(property) %>">
-                  <div class="thumb-container">
-                    <%= image_pack_tag('media/images/houses/house_placeholder.svg', class: 'house-placeholder-image thumb') %>
-                  </div>
-                </a>
-              <% elsif property.all_images.size == 1 %>
-                <a href="<%= website_property_url(property) %>">
-                  <div class="thumb-container">
-                    <img src="<%= url_for(first_avail_image(property)) %>" class="thumb"/>
-                  </div>
-                </a>
-              <% else %>
-                <div class="splide">
-                  <div class="splide__track">
-                    <ul class="splide__list">
-                      <% property.all_images[0..4].each do |image| %>
-                        <li class="splide__slide <%= (property.images.blank? && !property.avatar.attached?) ? 'd-flex house-placeholder-image-container ' : 'thumb-container' %>">
-                          <a href="<%= website_property_url(property) %>">
-                            <img src="<%= url_for(image) %>" class="thumb"/>
-                          </a>
-                        </li>
-                      <% end %>
-                    </ul>
-                  </div>
-                </div>
-              <% end %>
-              <div class="property-form">
-                <h3>
-                  <%= t("activerecord.attributes.property.enums.subcategory.#{property.category.slug}") %>
-                  <% if property.size.present? %>
-                    <span>| </span><span><%= "#{property.size} #{t('sq_meters_html')}".html_safe %></span>
-                  <% end %>
-                </h3>
-
-                <div>
-                  <% if %w[residential commercial].include?(property.category.parent_slug) %>
-                    <div><span><%= render_residential_features(property).join(' • ') %></span></div>
-                  <% end %>
-                  <% if property.price.present? %>
-                    <div><%= t('activerecord.attributes.property.price_title') %>
-                      : <%= number_to_currency(property.price) %></div>
-                    <% if property.size.present? %>
-                      <div><%= t('activerecord.attributes.property.pricepersqmeter_title') %>
-                        : <%= number_to_currency(property.pricepersqmeter) %></div>
-                    <% end %>
-                  <% end %>
-                  <% if property.description.present? %>
-                    <hr />
-                    <p><strong><%= t('activerecord.attributes.property.description_title') %></strong></p>
-                    <div><%= property.description.presence %></div>
-                  <% end %>
-                </div>
+          <li class="nav-item">
+            <a data-fancybox="about-info" data-src="#company-modal" href="javascript:;" class="nav-link"><%= t('about') %></a>
+            <div style="display: none;" id="company-modal" class="text-center">
+              <div class="info">
+                <h2><%= current_account.name.presence %></h2>
+                <% if current_account.description.present? %>
+                  <p><i><%= current_account.description %></i></p>
+                <% end %>
               </div>
             </div>
+          </li>
+          <li class="nav-item">
+            <a data-fancybox="regular-info" data-src="#contact-modal" href="javascript:;" class="nav-link"><%= t('contact') %></a>
+            <div style="display: none;" id="contact-modal" class="text-center">
+              <div class="info">
+                <h2><%= current_account.name %></h2>
+                <p><strong><%= current_account.email %></strong></p>
+                <p class="highlighted-bg"><%= current_account.telephones %></p>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <% if logged_in? && current_user.is_admin?(current_account) %>
+          <ul class="navbar-nav">
+            <li class="nav-item outline-dashed">
+              <a data-turbolinks="false" href="<%= account_root_path %>" class="nav-link">
+                <i class="fas fa-external-link-alt fa-fw"></i>&nbsp;<span><%= t('application') %></span></a>
+            </li>
+          </ul>
+        <% end %>
+      </div>
+    </nav>
+  </div>
 
-            <div class="card-body">
-              <p class="card-title"><%= render_location(property) %></p>
-              <div class="d-flex flex-row">
-                <div class="flex-grow-1">
-                  <p class="card-title" style="font-size: 15px;">
+  <div data-controller="filters">
+    <div class="container container-fluid-xl mt-5 header">
+
+      <div class="row">
+        <div class="col-md-3">
+          <label for="businesstype" class="form-label"><%= t('activerecord.attributes.property.businesstype_title') %></label>
+          <%= select_tag("businesstype",
+                         options_for_select(
+                           Property.businesstypes.keys.map { |t| [Property.human_enum_name(:businesstype, t), t] }, params[:businesstype]
+                         ),
+                         include_blank: t('js.components.bootstrap_select.noneSelectedText'),
+                         class: 'form-control businesstype-select',
+                         data: { 'filters-target': "filter", action: 'filters#setCount' }) %>
+        </div>
+
+        <div class="col-md-3">
+          <label for="property-type" class="form-label"><%= t('type') %></label>
+          <%= select_tag(:category,
+                         options_for_select(
+                           Category.first(4).map { |category| [t("activerecord.attributes.property.enums.category.#{category[:slug].to_s}"), category.slug] }, params[:category]
+                         ),
+                         include_blank: t('js.components.bootstrap_select.noneSelectedText'),
+                         class: 'form-control category-select',
+                         data: { 'filters-target': "filter", action: 'filters#setCount' }) %>
+
+        </div>
+
+        <div class="col-md-6">
+          <div id="results-count-container" class="d-none">
+            <span data-filters-target="count" id="property_count"><%= t('properties_count', count: @pagy.count) %></span>
+          </div>
+          <label for="property-type" class="form-label"><%= t('area') %></label>
+          <%= select_tag(:location,
+                         options_for_select(
+                           current_account.properties.website_enabled.joins(:location).distinct.select('locations.id', 'locations.localname').order('locations.localname').map { |el| [el.localname, el.id] }
+                         ),
+                         multiple: true,
+                         data: { 'live-search': true,
+                                 'max-options': 4,
+                                 'max-options-text': t('js.components.bootstrap_select.maxOptionsText'),
+                                 'none-selected-text': t('js.components.bootstrap_select.noneSelectedText'),
+                                 'none-results-text': t('js.components.bootstrap_select.noneResultsText'),
+                                 'filters-target': "multiFilter",
+                                 'action': 'filters#setCount' },
+                         class: 'form-control location-select') %>
+        </div>
+
+        <div class="offset-md-8 col-md-4">
+          <div class="d-flex">
+            <%= button_tag class: 'btn btn-sm btn-secondary form-control mt-4 mr-1', id: 'clear-form', disabled: true, data: { action: "filters#clear" } do %>
+              <span><i class="fas fa-eraser fa-fw"></i>&nbsp;<%= t('clear') %></span>
+            <% end %>
+            <%= button_tag class: 'btn btn-sm btn-primary form-control mt-4 ml-1', id: "submit-form", data: { action: "filters#filter", disable_with: t('submit') } do %>
+              <span><i class="fas fa-search fa-fw"></i>&nbsp;<%= t('submit') %></span>
+            <% end %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="results-container" class="mt-5">
+    <% if @properties.blank? %>
+      <div class="d-block col-4 offset-4 p-4">
+        <%= image_pack_tag 'media/images/no_stored_searches.svg', class: "img-fluid rounded mx-auto d-block" %>
+      </div>
+      <div class="text-center text-light">
+        <span class="d-inline-block text-center"><%= t('no_results') %></span>
+      </div>
+    <% end %>
+
+    <div class="container container-fluid-xl p-0">
+      <div class="row row-cols-1 row-cols-md-3">
+        <% @properties.each do |property| %>
+          <div class="col mb-4">
+            <%= content_tag :div, id: dom_id(property), class: ["card", "mb-2", dom_class(property)] do %>
+              <div class='card-businesstype-header'>
+                <span class='highlighted-bg highlighted-fg'><%= t("activerecord.attributes.property.enums.businesstype.#{property.businesstype}_banner") %></span>
+              </div>
+              <div class="property">
+                <% if property.images.blank? && !property.avatar.attached? %>
+                  <a href="<%= website_property_url(property) %>">
+                    <div class="thumb-container">
+                      <%= image_pack_tag('media/images/houses/house_placeholder.svg', class: 'house-placeholder-image thumb') %>
+                    </div>
+                  </a>
+                <% elsif property.all_images.size == 1 %>
+                  <a href="<%= website_property_url(property) %>">
+                    <div class="thumb-container">
+                      <img src="<%= url_for(first_avail_image(property)) %>" class="thumb" />
+                    </div>
+                  </a>
+                <% else %>
+                  <div class="splide">
+                    <div class="splide__track">
+                      <ul class="splide__list">
+                        <% property.all_images[0..4].each do |image| %>
+                          <li class="splide__slide <%= (property.images.blank? && !property.avatar.attached?) ? 'd-flex house-placeholder-image-container ' : 'thumb-container' %>">
+                            <a href="<%= website_property_url(property) %>">
+                              <img data-splide-lazy="<%= url_for(image) %>" class="thumb" />
+                            </a>
+                          </li>
+                        <% end %>
+                      </ul>
+                    </div>
+                  </div>
+                <% end %>
+                <div class="property-form">
+                  <h3>
                     <%= t("activerecord.attributes.property.enums.subcategory.#{property.category.slug}") %>
                     <% if property.size.present? %>
                       <span>| </span><span><%= "#{property.size} #{t('sq_meters_html')}".html_safe %></span>
                     <% end %>
-                    <%#= property.size.present? ? "| #{property.size} #{t('sq_meters_html')}".html_safe : nil %>
-                  </p>
+                  </h3>
+
+                  <div>
+                    <% if %w[residential commercial].include?(property.category.parent_slug) %>
+                      <div><span><%= render_residential_features(property).join(' • ') %></span></div>
+                    <% end %>
+                    <% if property.price.present? %>
+                      <div><%= t('activerecord.attributes.property.price_title') %>
+                        : <%= number_to_currency(property.price) %></div>
+                      <% if property.size.present? %>
+                        <div><%= t('activerecord.attributes.property.pricepersqmeter_title') %>
+                          : <%= number_to_currency(property.pricepersqmeter) %></div>
+                      <% end %>
+                    <% end %>
+                    <% if property.description.present? %>
+                      <hr />
+                      <p><strong><%= t('activerecord.attributes.property.description_title') %></strong></p>
+                      <div><%= property.description.presence %></div>
+                    <% end %>
+                  </div>
                 </div>
-                <div><p class="" style="font-size: 15px;">
-                  <i class="fas fa-qrcode fa-fw"></i><span><%= property.slug.upcase %></span></p></div>
               </div>
 
-              <%#= Render whatever's available to render %>
-              <div class="property-basic-info" style="font-size: 15px;">
-                <% if %w[residential commercial].include?(property.category.parent_slug) %>
-                  <div><span><%= render_residential_features(property).join(' • ') %></span></div>
-                <% end %>
-                <% if property.description.present? %>
-                  <hr />
-                  <div><%= property.description.presence %></div>
-                <% end %>
+              <div class="card-body">
+                <p class="card-title"><%= render_location(property) %></p>
+                <div class="d-flex flex-row">
+                  <div class="flex-grow-1">
+                    <p class="card-title" style="font-size: 15px;">
+                      <%= t("activerecord.attributes.property.enums.subcategory.#{property.category.slug}") %>
+                      <% if property.size.present? %>
+                        <span>| </span><span><%= "#{property.size} #{t('sq_meters_html')}".html_safe %></span>
+                      <% end %>
+                      <%#= property.size.present? ? "| #{property.size} #{t('sq_meters_html')}".html_safe : nil %>
+                    </p>
+                  </div>
+                  <div><p class="" style="font-size: 15px;">
+                    <i class="fas fa-qrcode fa-fw"></i><span><%= property.slug.upcase %></span></p></div>
+                </div>
+
+                <%#= Render whatever's available to render %>
+                <div class="property-basic-info" style="font-size: 15px;">
+                  <% if %w[residential commercial].include?(property.category.parent_slug) %>
+                    <div><span><%= render_residential_features(property).join(' • ') %></span></div>
+                  <% end %>
+                  <% if property.description.present? %>
+                    <hr />
+                    <div><%= property.description.presence %></div>
+                  <% end %>
+                </div>
+                <%= render_price(property) %>
               </div>
-              <%= render_price(property) %>
-            </div>
-          <% end %>
+            <% end %>
+          </div>
+        <% end %>
+
+      </div>
+      <% if @pagy.count > 12 %>
+        <div class="d-flex justify-content-end">
+          <%== pagy_bootstrap_nav(@pagy) %>
         </div>
       <% end %>
-
     </div>
-    <% if @pagy.count > 12 %>
-      <div class="d-flex justify-content-end">
-        <%== pagy_bootstrap_nav(@pagy) %>
+
+  </div>
+
+  <footer>
+    <!--  <hr />-->
+    <div class="d-flex">
+      <div class="flex-fill justify-content-start p-2">
+        <span><small>© Copyright <%= Date.current.year %> • All Rights reserved</small></span>
       </div>
-    <% end %>
-  </div>
+      <div class="justify-content-end p-2">
+        <span><small>🚀 Powered by <u><%= link_to BRANDNAME, landing_root_url(subdomain: nil), target: "_blank" %></u></small></span>
+      </div>
+    </div>
 
+  </footer>
+
+  <%= content_tag :h1, t('results'), class: 'menu-text menu-text-entry align-middle d-none', id: 'pin-title-translation' %>
 </div>
-
-<footer>
-  <!--  <hr />-->
-  <div class="d-flex">
-    <div class="flex-fill justify-content-start p-2">
-      <span><small>© Copyright <%= Date.current.year %> • All Rights reserved</small></span>
-    </div>
-    <div class="justify-content-end p-2">
-      <span><small>🚀 Powered by <u><%= link_to BRANDNAME, landing_root_url(subdomain: nil), target: "_blank" %></u></small></span>
-    </div>
-  </div>
-
-</footer>
-
-<%= content_tag :h1, t('results'), class: 'menu-text menu-text-entry align-middle d-none', id: 'pin-title-translation' %>
