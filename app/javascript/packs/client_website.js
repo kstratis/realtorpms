@@ -13,6 +13,14 @@ application.load(definitionsFromContext(context));
 
 // Fancybox functionality
 $(document).on('turbolinks:load', function(e) {
+  // Initialize carousel elements via `Splide`
+  // `Splide` is loaded directly via jsdelivr in skeleton.html.erb
+  const slideElements = $('.splide');
+  console.log(slideElements);
+  slideElements.each((_, slideElement) => {
+    new window.Splide(slideElement, { type: 'loop'}).mount();
+  });
+
   $('[data-fancybox^="regular-info"]').fancybox({
     afterLoad: function( instance ) {
       if (instance.$refs.inner.find('div.info').length){

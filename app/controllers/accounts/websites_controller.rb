@@ -15,6 +15,10 @@ module Accounts
       @pagy, @properties = pagy(@properties)
     end
 
+    def show
+      @property = current_account.properties.website_enabled.find(params[:id])
+    end
+
     def count
       properties = current_account.properties.website_enabled.params_filter(params.slice(:businesstype, :category, :location))
       respond_to do |format|

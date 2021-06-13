@@ -133,21 +133,39 @@
               <span class='highlighted-bg highlighted-fg'><%= t("activerecord.attributes.property.enums.businesstype.#{property.businesstype}_banner") %></span>
             </div>
               <div class="property">
-                <a href="<%= (property.images.blank? && !property.avatar.attached?) ? asset_pack_path('media/images/houses/house_placeholder.svg') : url_for(first_avail_image(property)) %>"
-                   data-fancybox="pictures-<%= property.slug %>"
-                   data-type="image" class="<%= (property.images.blank? && !property.avatar.attached?) ? 'd-flex house-placeholder-image-container' : 'thumb-container' %>">
-                  <% if property.images.blank? && !property.avatar.attached? %>
-                    <%= image_pack_tag('media/images/houses/house_placeholder.svg', class: 'house-placeholder-image') %>
-                  <% else %>
-                    <img src="<%= url_for(first_avail_image(property)) %>" class="thumb"/>
+                <% if property.images.blank? && !property.avatar.attached? %>
+                  <a href="<%= website_property_url(property) %>">
+                    <div class="thumb-container">
+                      <%= image_pack_tag('media/images/houses/house_placeholder.svg', class: 'house-placeholder-image thumb') %>
+                    </div>
+                  </a>
+                <% elsif property.all_images.size == 1 %>
+                  <a href="<%= website_property_url(property) %>">
+                    <div class="thumb-container">
+                      <img src="<%= url_for(first_avail_image(property)) %>" class="thumb"/>
+                    </div>
+                  </a>
+                <% else %>
+                    <div class="splide">
+                      <div class="splide__track">
+                        <ul class="splide__list">
+                          <% property.all_images[0..4].each do |image| %>
+                            <li class="splide__slide <%= (property.images.blank? && !property.avatar.attached?) ? 'd-flex house-placeholder-image-container ' : 'thumb-container' %>">
+                              <a href="<%= website_property_url(property) %>">
+                                <img src="<%= url_for(image) %>" class="thumb"/>
+                              </a>
+                            </li>
+                          <% end %>
+                        </ul>
+                      </div>
+                    </div>
                   <% end %>
-                </a>
-                <div class="property-images">
+<!--                <div class="property-images">-->
                   <!--  We need to use drop due to the way fancybox works -->
-                  <% property.all_images.to_a.drop(1).map do |image| %>
-                    <a href="<%= url_for(image) %>" data-fancybox="pictures-<%= property.slug %>" data-type="image"></a>
-                  <% end %>
-                </div>
+                  <%# property.all_images.to_a.drop(1).map do |image| %>
+<!--                    <a href="<%#= url_for(image) %>" data-fancybox="pictures-<%#= property.slug %>" data-type="image"></a>-->
+                  <%# end %>
+<!--                </div>-->
                 <div class="property-form">
                   <h3>
                     <%= t("activerecord.attributes.property.enums.subcategory.#{property.category.slug}") %>
