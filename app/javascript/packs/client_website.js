@@ -15,11 +15,7 @@ application.load(definitionsFromContext(context));
 $(document).on('turbolinks:load', function(e) {
   // Initialize carousel elements via `Splide`
   // `Splide` is loaded directly via jsdelivr in skeleton.html.erb
-  const slideElements = $('.splide');
-  console.log(slideElements);
-  slideElements.each((_, slideElement) => {
-    new window.Splide(slideElement, { type: 'loop', lazyLoad: 'nearby'}).mount();
-  });
+  initCarousels();
 
   $('[data-fancybox^="regular-info"]').fancybox({
     afterLoad: function( instance ) {
@@ -131,3 +127,42 @@ $(document).on('turbolinks:load', function(e) {
     }
   });
 })
+
+function initCarousels() {
+  const slideElements = $('.splide').not('.splide-gallery');
+  slideElements.each((_, slideElement) => {
+    new window.Splide(slideElement, { type: 'loop', lazyLoad: 'nearby'}).mount();
+  });
+
+  var splide = new Splide('.splide-gallery');
+  var images = document.querySelectorAll( '.js-thumbnails li' );
+
+  var activeImage;
+  var activeClass = 'is-active';
+
+  for ( let i = 0, len = images.length; i < len; i++ ) {
+    const image = images[ i ];
+
+    splide.on( 'click', function () {
+      if ( activeImage !== image ) {
+        splide.go( i );
+      }
+    }, image );
+  }
+
+  splide.on( 'mounted move', function ( newIndex ) {
+    // newIndex will be undefined through the "mounted" event.
+    var image = images[ newIndex !== undefined ? newIndex : splide.index ];
+
+    if ( image && activeImage !== image ) {
+      if ( activeImage ) {
+        activeImage.classList.remove( activeClass );
+      }
+
+      image.classList.add( activeClass );
+      activeImage = image;
+    }
+  } );
+
+  splide.mount();
+}

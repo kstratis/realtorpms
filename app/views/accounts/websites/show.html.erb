@@ -1,1 +1,50 @@
-<h1>hello</h1>
+<div class="container container-fluid-xl">
+<div class="row">
+  <div class="carousel-container col-md-8 col-sm-12 ">
+
+
+    <div class="splide splide-gallery">
+      <div class="splide__track ">
+        <ul class="splide__list ">
+          <% @property.all_images.each do |image| %>
+            <!--        <li class="splide__slide <%#= (@property.images.blank? && !@property.avatar.attached?) ? 'd-flex house-placeholder-image-container ' : 'thumb-container' %>">-->
+            <li class="splide__slide carousel-slide">
+              <!--            <a href="<%#= website_property_url(property) %>">-->
+              <!--          <img data-splide-lazy="<%#= url_for(image) %>" class="thumb" />-->
+              <img src="<%= url_for(image) %>" />
+              <!--            </a>-->
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+    <div class="thumbnails js-thumbnails">
+      <ul class="thumbnails__list overflow-auto">
+        <% @property.all_images.each_with_index do |image, idx| %>
+          <!--        <li class="splide__slide <%#= (@property.images.blank? && !@property.avatar.attached?) ? 'd-flex house-placeholder-image-container ' : 'thumb-container' %>">-->
+          <li class="thumbnails__item" role="button" tabindex="0">
+            <img src="<%= url_for(image.variant(resize_to_limit: [100, 100])) %>" alt="Thumbnail <%= idx %>" />
+          </li>
+          <!--        <li class="splide__slide">-->
+          <!--            <a href="<%#= website_property_url(property) %>">-->
+          <!--          <img data-splide-lazy="<%#= url_for(image) %>" class="thumb" />-->
+          <!--          <img src="<%#= url_for(image) %>" />-->
+          <!--            </a>-->
+          <!--        </li>-->
+        <% end %>
+      </ul>
+    </div>
+
+
+
+
+  </div>
+
+  <div class="summary-container col-md-4 col-sm-12 px-2">
+
+    300.000E
+
+  </div>
+</div>
+</div>
