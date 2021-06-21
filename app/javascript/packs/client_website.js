@@ -129,12 +129,14 @@ $(document).on('turbolinks:load', function(e) {
 })
 
 function initCarousels() {
-  const slideElements = $('.splide').not('.splide-gallery');
+  const slideElements = $('.splide').not('#splide-gallery');
   slideElements.each((_, slideElement) => {
     new window.Splide(slideElement, { type: 'loop', lazyLoad: 'nearby'}).mount();
   });
 
-  var splide = new Splide('.splide-gallery');
+  if ($('#splide-gallery').length === 0) return;
+
+  var splide = new window.Splide('#splide-gallery');
   var images = document.querySelectorAll( '.js-thumbnails li' );
 
   var activeImage;

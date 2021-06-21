@@ -41,13 +41,14 @@
   <%= render 'layouts/shim' %>
 </head>
 
-<body>
+<body class="website-container">
+<%= render 'layouts/client_website/header' %>
 
 <%= yield %>
 
 <!-- BEGIN THEME JS-->
 <!--<script src="assets/javascript/theme.min.js"></script>-->
 <!-- END THEME JS -->
-
+<%= render 'layouts/client_website/footer' %>
 </body>
 </html>
