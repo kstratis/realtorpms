@@ -136,7 +136,7 @@ function initCarousels() {
 
   if ($('#splide-gallery').length === 0) return;
 
-  var splide = new window.Splide('#splide-gallery');
+  var splide = new window.Splide('#splide-gallery', { pagination: false });
   var images = document.querySelectorAll( '.js-thumbnails li' );
 
   var activeImage;
@@ -153,6 +153,9 @@ function initCarousels() {
   }
 
   splide.on( 'mounted move', function ( newIndex ) {
+    if ( splide.length === 1 ) {
+      splide.options.drag = false;
+    }
     // newIndex will be undefined through the "mounted" event.
     var image = images[ newIndex !== undefined ? newIndex : splide.index ];
 
@@ -163,6 +166,13 @@ function initCarousels() {
 
       image.classList.add( activeClass );
       activeImage = image;
+    }
+  } );
+
+  splide.on( 'arrows:updated', function( prev, next ) {
+    if ( splide.length === 1 ) {
+      prev.hidden = true;
+      next.hidden = true;
     }
   } );
 
