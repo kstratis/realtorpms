@@ -153,9 +153,11 @@ function initCarousels() {
   }
 
   splide.on( 'mounted move', function ( newIndex ) {
+    // Deactivate dragging when there's a single slide
     if ( splide.length === 1 ) {
       splide.options.drag = false;
     }
+
     // newIndex will be undefined through the "mounted" event.
     var image = images[ newIndex !== undefined ? newIndex : splide.index ];
 
@@ -170,6 +172,7 @@ function initCarousels() {
   } );
 
   splide.on( 'arrows:updated', function( prev, next ) {
+    // Hide navigation arrow when there's a single slide
     if ( splide.length === 1 ) {
       prev.hidden = true;
       next.hidden = true;
