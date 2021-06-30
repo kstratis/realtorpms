@@ -67,7 +67,7 @@ border: 1px solid #ced4da;
 padding: .375rem .75rem;
 line-height: 1.5;
 font-size: inherit;
-font-family: inherit;
+font-family: 'Fira Sans', sans-serif;
 
 
 .item {
@@ -120,7 +120,7 @@ color: gold;
 }
 
 .bootstrap-select .dropdown-toggle::after {
-font-family: "Font Awesome 5 Free";
+font-family: 'Fira Sans', sans-serif;
 font-weight: 900;
 display: inline-block;
 margin-left: .255em;
@@ -138,7 +138,7 @@ border-left: unset;
 position: relative;
 padding: 0;
 margin: 0 0 4em 0;
-//font-family: "Jost", sans-serif;
+//font-family: "Jost",'Fira Sans', sans-serif;
 font-weight: 600;
 font-style: italic;
 font-size: .95em;
@@ -479,7 +479,7 @@ Bullet navigation design
 }
 
 .property-form{
-  font-family: "Fira Sans", serif;
+  font-family: 'Fira Sans', sans-serif;
   font-size: 15px;
 }
 

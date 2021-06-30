@@ -4,7 +4,7 @@
 
       <div class="row">
         <div class="col-md-3">
-          <label for="businesstype" class="form-label"><%= t('activerecord.attributes.property.businesstype_title') %></label>
+          <label for="businesstype" class="form-label"><strong><%= t('activerecord.attributes.property.businesstype_title') %></strong></label>
           <%= select_tag("businesstype",
                          options_for_select(
                            Property.businesstypes.keys.map { |t| [Property.human_enum_name(:businesstype, t), t] }, params[:businesstype]
@@ -15,7 +15,7 @@
         </div>
 
         <div class="col-md-3">
-          <label for="property-type" class="form-label"><%= t('type') %></label>
+          <label for="property-type" class="form-label"><strong><%= t('type') %></strong></label>
           <%= select_tag(:category,
                          options_for_select(
                            Category.first(4).map { |category| [t("activerecord.attributes.property.enums.category.#{category[:slug].to_s}"), category.slug] }, params[:category]
@@ -30,7 +30,7 @@
           <div id="results-count-container" class="d-none">
             <span data-filters-target="count" id="property_count"><%= t('properties_count', count: @pagy.count) %></span>
           </div>
-          <label for="property-type" class="form-label"><%= t('area') %></label>
+          <label for="property-type" class="form-label"><strong><%= t('area') %></strong></label>
           <%= select_tag(:location,
                          options_for_select(
                            current_account.properties.website_enabled.joins(:location).distinct.select('locations.id', 'locations.localname').order('locations.localname').map { |el| [el.localname, el.id] }

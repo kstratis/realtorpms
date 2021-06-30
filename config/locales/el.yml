@@ -458,7 +458,7 @@ el:
         optional: "Προεραιτικό πεδίο"
         assign_completed: "Οι αναθέσεις ενημερώθηκαν επιτυχώς"
       bootstrap_select:
-        noneSelectedText: '-Επιλέξτε-'
+        noneSelectedText: '-Επίλεξε-'
         noneResultsText: 'Δεν βρέθηκαν αποτελέσματα'
         maxOptionsText: 'Μεγ. αριθμός επιλογών'
     forms:
