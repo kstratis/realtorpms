@@ -32,8 +32,10 @@
 en:
   true: "Yes"
   true_upcase: "YES"
+  confirm: "Confirm"
   false: "No"
   false_upcase: "NO"
+  cancel: "Cancel"
   sq_meters_html: "m<sup>2</sup>"
   prompt: "Are you sure you want to proceed with this action?"
   access_denied: "Access denied"
@@ -59,7 +61,7 @@ en:
   area: "Area"
   type: "Type"
   submit: "Search"
-  clear: ""
+  clear: "Clear"
   pinned: "Handpicked properties"
   home: "Home"
   about: "About"
@@ -994,7 +996,7 @@ en:
     greek: "Greek"
   accounts:
     pending_email_html: "We've sent you an email at <mark>%{email}</mark> containing account activation instructions."
-    activated_html: "Your account has been successfully activated! You may now enter using your credentials <a href='%{login_url}'>here</a>."
+    activated_html: "Your account has been successfully activated! Click here <a href='%{login_url}'>here</a> to start."
     deactivated: "This account has not been activated yet"
     signup_title: "Signup"
     edit_title: "Edit account"

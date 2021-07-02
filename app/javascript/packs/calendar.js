@@ -201,12 +201,11 @@ class CalendarManager {
               centerVertical: true,
               buttons: {
                 confirm: {
-                  label: 'Yes',
-                  className: 'btn-success'
+                  label: that.translation['confirm'],
+                  className: 'btn-danger'
                 },
                 cancel: {
-                  label: 'No',
-                  className: 'btn-danger'
+                  label: that.translation['cancel']
                 }
               },
               callback: function (result) {
@@ -273,6 +272,15 @@ class CalendarManager {
         bootbox.prompt({
           title: this.translation['eventInfoAddTitle'],
           centerVertical: true,
+          buttons: {
+            confirm: {
+              label: this.translation['add'],
+              className: 'btn-primary'
+            },
+            cancel: {
+              label: this.translation['cancel']
+            }
+          },
           callback: description => {
             console.log(description);
             // Return on cancel

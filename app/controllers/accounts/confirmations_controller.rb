@@ -8,6 +8,7 @@ module Accounts
       @account = Account.find_by_confirm_token(params[:token])
       if @account
         @account.email_activate
+        log_in(@account.owner)
         respond_to do |format|
           format.html
         end

@@ -2,8 +2,10 @@
 el:
   true: "Ναί"
   true_upcase: "ΝΑΙ"
+  confirm: "Επιβεβαίωση"
   false: "Όχι"
   false_upcase: "ΟΧΙ"
+  cancel: "Ακύρωση"
   sq_meters_html: "τ.μ."
   prompt: "Θέλετε σίγουρα να προχωρήσετε σε αυτήν την ενέργεια;"
   access_denied: "Διαβαθμισμένη πρόσβαση"
@@ -971,7 +973,7 @@ el:
     greek: "Ελληνικά"
   accounts:
     pending_email_html: "Έχει αποσταλεί email στο <mark>%{email}</mark> με οδηγίες ενεργοποίησης του λογαριασμού σας"
-    activated_html: "Ο λογαριασμός σας έχει ενεργοποιηθεί επιτυχώς! Μπορείτε τώρα να εισέλθετε με τα στοιχεία εισόδου σας <a href='%{login_url}'>εδώ</a>."
+    activated_html: "Ο λογαριασμός σου έχει ενεργοποιηθεί επιτυχώς! Πάτησε <a href='%{login_url}'>εδώ</a> για να μεταβείς στην εφαρμογή."
     deactivated: "Ο λογαριασμός δεν έχει ενεργοποιηθεί"
     signup_title: "Εγγραφή"
     edit_title: "Επεξεργασία λογαριασμού"
@@ -982,7 +984,7 @@ el:
     sysadmin: "SysAdmin"
     account_owner: "Διαχειριστής"
     account_user: "Χρήστης"
-    switch_domain: "Βρίσκεστε στο: %{subdomain}"
+    switch_domain: "Βρίσκεσαι στο: %{subdomain}"
     switch_info: "Έχετε συνδεθεί επιτυχώς!"
     created: "Καλωσήρθατε στο %{brand}. Ο καινούργιος σας λογαριασμός είναι έτοιμος."
     updated: "Το προφίλ ενημερώθηκε επιτυχώς"
@@ -1057,7 +1059,7 @@ el:
     activation:
       activation_subject: '👀 Ενεργοποίηση λογαριασμού'
       subject: "Καλωσήρθες στον νέο σου λογαριασμό! 🚀"
-      greeting: "Γεια σου %{admin} 🎉"
+      greeting: "Καλωσήρθες %{admin}! 🎉"
       greeting_explained_html: "Ευχαριστούμε που γράφτηκες στην υπηρεσία μας. Μαζί θα φτιάξουμε σπουδαία πράγματα!"
       greeting_explained2_html: "Πάτησε τον σύνδεσμο παρακάτω για να ενεργοποιήσεις τον λογαριασμό σου!"
       login: "ΕΝΕΡΓΟΠΟΙΗΣΗ"
