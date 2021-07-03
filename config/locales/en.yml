@@ -71,6 +71,9 @@ en:
   property_code: "ID"
   website_enable: "Please enable your website through the account settings"
   application: "Admin"
+  support:
+    title: "Support"
+    message_html: "For questions and/or support you can reach us at <a href='mailto:info@realtorpms.com'>info@realtorpms.com</a>."
   properties_count:
     one: "1 result"
     other: "%{count} results"

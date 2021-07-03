@@ -41,6 +41,9 @@ el:
   property_code: "Κωδικός"
   website_enable: "Πρέπει να ενεργοποιήσετε το website απο τις ρυθμίσεις λογαριασμού"
   application: "Εφαρμογή"
+  support:
+    title: "Υποστήριξη"
+    message_html: "Για υποστήριξη και ερωτήσεις μπορείς να στέλνεις email στο <a href='mailto:info@realtorpms.com'>info@realtorpms.com</a>."
   properties_count:
     one: "1 αποτέλεσμα"
     other: "%{count} αποτελέσματα"
