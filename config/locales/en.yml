@@ -73,7 +73,7 @@ en:
   application: "Admin"
   support:
     title: "Support"
-    message_html: "For questions and/or support you can reach us at <a href='mailto:info@realtorpms.com'>info@realtorpms.com</a>."
+    message_html: "For questions and/or support you can reach us at <a target='_blank' href='mailto:info@realtorpms.com'>info@realtorpms.com</a>."
   properties_count:
     one: "1 result"
     other: "%{count} results"

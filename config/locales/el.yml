@@ -43,7 +43,7 @@ el:
   application: "Εφαρμογή"
   support:
     title: "Υποστήριξη"
-    message_html: "Για υποστήριξη και ερωτήσεις μπορείς να στέλνεις email στο <a href='mailto:info@realtorpms.com'>info@realtorpms.com</a>."
+    message_html: "Για υποστήριξη/ερωτήσεις στείλε στο <a target='_blank' href='mailto:info@realtorpms.com'>info@realtorpms.com</a>."
   properties_count:
     one: "1 αποτέλεσμα"
     other: "%{count} αποτελέσματα"
