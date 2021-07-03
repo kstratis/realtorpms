@@ -13,6 +13,10 @@ application.load(definitionsFromContext(context));
 
 // Fancybox functionality
 $(document).on('turbolinks:load', function(e) {
+  // Initialize carousel elements via `Splide`
+  // `Splide` is loaded directly via jsdelivr in skeleton.html.erb
+  initCarousels();
+
   $('[data-fancybox^="regular-info"]').fancybox({
     afterLoad: function( instance ) {
       if (instance.$refs.inner.find('div.info').length){
@@ -123,3 +127,57 @@ $(document).on('turbolinks:load', function(e) {
     }
   });
 })
+
+function initCarousels() {
+  const slideElements = $('.splide').not('#splide-gallery');
+  slideElements.each((_, slideElement) => {
+    new window.Splide(slideElement, { type: 'loop', lazyLoad: 'nearby'}).mount();
+  });
+
+  if ($('#splide-gallery').length === 0) return;
+
+  var splide = new window.Splide('#splide-gallery', { pagination: false });
+  var images = document.querySelectorAll( '.js-thumbnails li' );
+
+  var activeImage;
+  var activeClass = 'is-active';
+
+  for ( let i = 0, len = images.length; i < len; i++ ) {
+    const image = images[ i ];
+
+    splide.on( 'click', function () {
+      if ( activeImage !== image ) {
+        splide.go( i );
+      }
+    }, image );
+  }
+
+  splide.on( 'mounted move', function ( newIndex ) {
+    // Deactivate dragging when there's a single slide
+    if ( splide.length === 1 ) {
+      splide.options.drag = false;
+    }
+
+    // newIndex will be undefined through the "mounted" event.
+    var image = images[ newIndex !== undefined ? newIndex : splide.index ];
+
+    if ( image && activeImage !== image ) {
+      if ( activeImage ) {
+        activeImage.classList.remove( activeClass );
+      }
+
+      image.classList.add( activeClass );
+      activeImage = image;
+    }
+  } );
+
+  splide.on( 'arrows:updated', function( prev, next ) {
+    // Hide navigation arrow when there's a single slide
+    if ( splide.length === 1 ) {
+      prev.hidden = true;
+      next.hidden = true;
+    }
+  } );
+
+  splide.mount();
+}

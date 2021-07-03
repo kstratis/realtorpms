@@ -1,0 +1,53 @@
+<div class="header-strip">
+  <!-- Image and text -->
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0a2540;">
+    <div id="logo" class="top-bar-brand" data-turbolinks-permanent="true">
+      <a class="navbar-brand" href="<%= websites_root_path %>">
+        <% if current_account.avatar.attached? %>
+          <%= image_tag current_account.avatar, class: "d-inline-block align-top img-brand" %>
+        <% else %>
+          <%= image_pack_tag "media/images/logo_placeholder.png", class: "d-inline-block align-top img-brand" %>
+        <% end %>
+      </a>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="<%= websites_root_path %>"><%= t('home') %></a>
+        </li>
+        <li class="nav-item">
+          <a data-fancybox="about-info" data-src="#company-modal" href="javascript:;" class="nav-link"><%= t('about') %></a>
+          <div style="display: none;" id="company-modal" class="text-center">
+            <div class="info">
+              <h2><%= current_account.name.presence %></h2>
+              <% if current_account.description.present? %>
+                <p><i><%= current_account.description %></i></p>
+              <% end %>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a data-fancybox="regular-info" data-src="#contact-modal" href="javascript:;" class="nav-link"><%= t('contact') %></a>
+          <div style="display: none;" id="contact-modal" class="text-center">
+            <div class="info">
+              <h2><%= current_account.name %></h2>
+              <p><strong><%= current_account.email %></strong></p>
+              <p class="highlighted-bg"><%= current_account.telephones %></p>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <% if logged_in? && current_user.is_admin?(current_account) %>
+        <ul class="navbar-nav">
+          <li class="nav-item outline-dashed">
+            <a data-turbolinks="false" href="<%= account_root_path %>" class="nav-link">
+              <i class="fas fa-external-link-alt fa-fw"></i>&nbsp;<span><%= t('application') %></span></a>
+          </li>
+        </ul>
+      <% end %>
+    </div>
+  </nav>
+</div>

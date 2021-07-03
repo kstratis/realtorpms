@@ -1,6 +1,7 @@
 import jsCalendar_lang_gr from 'jsCalendar-custom.lang.gr'; // Don't remove this
 import jsCalendar from 'jsCalendar-custom';
 import axios from 'axios';
+import bootbox from 'bootbox';
 
 // Polyfill for Object.entries
 // ---------------------------
@@ -192,8 +193,29 @@ class CalendarManager {
       divCloseBtn.addEventListener(
         'click',
         ((dateString, index) => {
+          let that = this;
           return () => {
-            this.handleRemoveEvent(dateString, index, event.path);
+            bootbox.confirm({
+              title: that.translation['eventInfoDeleteTitle'],
+              message: that.translation['eventInfoDeleteBody'],
+              centerVertical: true,
+              buttons: {
+                confirm: {
+                  label: that.translation['confirm'],
+                  className: 'btn-danger'
+                },
+                cancel: {
+                  label: that.translation['cancel']
+                }
+              },
+              callback: function (result) {
+                console.log('This was logged in the callback: ' + result);
+                if(result){
+                  that.handleRemoveEvent(dateString, index, event.path);
+                }
+              }
+            });
+
           };
         })(dateString, index),
         false
@@ -247,32 +269,46 @@ class CalendarManager {
       'click',
       () => {
         // Get event info
-        const description = prompt(this.translation['eventInfo']);
+        bootbox.prompt({
+          title: this.translation['eventInfoAddTitle'],
+          centerVertical: true,
+          buttons: {
+            confirm: {
+              label: this.translation['add'],
+              className: 'btn-primary'
+            },
+            cancel: {
+              label: this.translation['cancel']
+            }
+          },
+          callback: description => {
+            console.log(description);
+            // Return on cancel
+            if (description === null || description === '') {
+              return;
+            }
 
-        // Return on cancel
-        if (description === null || description === '') {
-          return;
-        }
+            const dateString = this.convertDateToString(this.globalDate);
 
-        const dateString = this.convertDateToString(this.globalDate);
+            if (!this.events.hasOwnProperty(dateString)) {
+              this.events[dateString] = [];
+            }
 
-        if (!this.events.hasOwnProperty(dateString)) {
-          this.events[dateString] = [];
-        }
+            // Highlight (outline) selected date in Calendar if no events previously existed
+            if (!this.events[dateString].length) this.calendar.select(this.globalDate);
 
-        // Highlight (outline) selected date in Calendar if no events previously existed
-        if (!this.events[dateString].length) this.calendar.select(this.globalDate);
-
-        this.handleNetworkCall(
-          'post',
-          this.ajaxUrl,
-          { description: description, created_for: dateString },
-          event => {
-            // Refresh events after submitting
-            this.events[dateString].push(event.data.message);
-            this.showDateEvents(this.globalDate);
-          }
-        );
+            this.handleNetworkCall(
+              'post',
+              this.ajaxUrl,
+              { description: description, created_for: dateString },
+              event => {
+                // Refresh events after submitting
+                this.events[dateString].push(event.data.message);
+                this.showDateEvents(this.globalDate);
+              }
+            );
+          },
+        });
       },
       false
     );

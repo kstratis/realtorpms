@@ -66,9 +66,13 @@ module Accounts
     def update
       # If a user belongs to multiple accounts we need to keep cfields data of both accounts and not overwrite each other
       if @user.update(user_params.merge(preferences: @user.preferences.merge(user_params[:preferences] || {})))
-        flash[:success] = I18n.t "users.flash_profile_updated"
-        redirect_to @user
         # Handle a successful update.
+        flash[:success] = I18n.t "users.flash_profile_updated"
+        if @user.is_sysadmin?
+          redirect_to edit_user_path(@user)
+        else
+          redirect_to @user
+        end
       else
         flash[:danger] = I18n.t("users.flash_user_update_failed")
         render :edit
@@ -158,11 +162,14 @@ module Accounts
     # Confirms that an action concerning a particular user is initiated by that same user or an admin.
     # Essentially prevents admins modifying others users' data.
     def user_self
-      @user = current_account.all_users.find(params[:id])
-      unless current_user?(@user) || current_user.is_admin?(current_account)
-        flash[:danger] = I18n.t "users.flash_unauthorised_user_edit"
-        redirect_to(account_root_url)
-      end
+      @user = current_user
+      return if current_user.is_admin?(current_account)
+
+      @user = current_account.users.find(params[:id])
+      return if current_user?(@user)
+
+      flash[:danger] = I18n.t "users.flash_unauthorised_user_edit"
+      redirect_to(account_root_url)
     end
 
     # Confirms an admin user.

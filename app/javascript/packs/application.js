@@ -6,6 +6,8 @@
 //
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
+import bootbox from "bootbox";
+
 require("@rails/ujs").start();
 import './turbolinks_wrapper';
 import './calendar'
@@ -58,5 +60,18 @@ $(document).on('turbolinks:load', function(e) {
 
   $('[data-toggle="tooltip"]').tooltip();
   $('[data-toggle="popover"]').popover();
+
+  // Set its language
+  const translation = JSON.parse(document.getElementById('menu_i18n').dataset.menui18n);
+
+  // This is for the Menu item 'Support'
+  $('#support').on('click', (e)=>{
+    e.preventDefault()
+    bootbox.alert({
+      title: translation['support']['title'],
+      message: translation['support']['message_html'],
+      centerVertical: true,
+    })
+  })
 });
 

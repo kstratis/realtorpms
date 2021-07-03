@@ -39,6 +39,8 @@ body {
   text-align: left;
   //font-family: 'Roboto', Arial, sans-serif;
   font-family: 'Noto Sans', Arial, sans-serif;
+  //font-family: $proxima-nova;
+  //font-family: 'Roboto', sans-serif;
   //font-family: 'Clear Sans Regular', Arial, sans-serif;
   //font-family: 'PFDinDisplayPro-Regular', sans-serif;
   //font-family: 'Poppins', helvetica, sans-serif;
@@ -2346,7 +2348,8 @@ input.no-full-width{
   width: unset;
 }
 
-// WEBSITE CSS
+// --------------------------------- WEBSITE CSS -----------------------------------------------------
+// --------------------------------- =========== -----------------------------------------------------
 .website{
   font-family: 'Fira Sans', sans-serif;
   background-color: gold;

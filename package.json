@@ -17,6 +17,7 @@
     "aos": "^3.0.0-beta.6",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
+    "bootbox": "^5.5.2",
     "bs-stepper": "https://github.com/kstratis/bs-stepper.git#events",
     "caniuse-lite": "^1.0.30001111",
     "chart.js": "^2.9.4",

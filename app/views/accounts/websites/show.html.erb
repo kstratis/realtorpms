@@ -1,0 +1,79 @@
+<div class="show-container container container-fluid-xl pt-5">
+<div class="row">
+  <div class="carousel-container col-md-8 col-sm-12">
+
+
+    <div id="splide-gallery" class="splide">
+      <div class="splide__track ">
+        <ul class="splide__list ">
+          <% @property.all_images.each do |image| %>
+            <!--        <li class="splide__slide <%#= (@property.images.blank? && !@property.avatar.attached?) ? 'd-flex house-placeholder-image-container ' : 'thumb-container' %>">-->
+            <li class="splide__slide carousel-slide">
+              <!--            <a href="<%#= website_property_url(property) %>">-->
+              <!--          <img data-splide-lazy="<%#= url_for(image) %>" class="thumb" />-->
+              <img src="<%= url_for(image) %>" />
+              <!--            </a>-->
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+    <div class="thumbnails js-thumbnails">
+      <ul class="thumbnails__list overflow-auto">
+        <% @property.all_images.each_with_index do |image, idx| %>
+          <!--        <li class="splide__slide <%#= (@property.images.blank? && !@property.avatar.attached?) ? 'd-flex house-placeholder-image-container ' : 'thumb-container' %>">-->
+          <li class="thumbnails__item" role="button" tabindex="0">
+            <img src="<%= url_for(image.variant(resize_to_limit: [100, 100])) %>" alt="Thumbnail <%= idx %>" />
+          </li>
+          <!--        <li class="splide__slide">-->
+          <!--            <a href="<%#= website_property_url(property) %>">-->
+          <!--          <img data-splide-lazy="<%#= url_for(image) %>" class="thumb" />-->
+          <!--          <img src="<%#= url_for(image) %>" />-->
+          <!--            </a>-->
+          <!--        </li>-->
+        <% end %>
+      </ul>
+    </div>
+
+
+
+
+  </div>
+
+  <div class="summary-container col-md-4 col-sm-12 py-5 shadow px-2 mb-5 bg-white rounded">
+
+    <div class="property-form">
+      <div class="text-center">
+        <h3><strong>
+          <%= t("activerecord.attributes.property.enums.subcategory.#{@property.category.slug}") %>
+          <% if @property.size.present? %>
+            <span>| </span><span><%= "#{@property.size} #{t('sq_meters_html')}".html_safe %></span>
+          <% end %>
+        </strong></h3>
+
+
+      <div>
+        <% if %w[residential commercial].include?(@property.category.parent_slug) %>
+          <div><span><%= render_residential_features(@property).join(' • ') %></span></div>
+        <% end %>
+        <% if @property.price.present? %>
+          <div><%= t('activerecord.attributes.property.price_title') %>
+            : <strong class="price-span"><%= number_to_currency(@property.price) %></strong></div>
+          <% if @property.size.present? %>
+            <div><%= t('activerecord.attributes.property.pricepersqmeter_title') %>
+              : <strong class="price-span"><%= number_to_currency(@property.pricepersqmeter) %></strong></div>
+          <% end %>
+        <% end %>
+        <% if @property.description.present? %>
+          <hr />
+          <p><strong><%= t('activerecord.attributes.property.description_title') %></strong></p>
+          <div><%= @property.description.presence %></div>
+        <% end %>
+      </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>

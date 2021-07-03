@@ -3,6 +3,6 @@
 <% content_for :content do %>
   <div id="pending-email" class="auth-form">
     <div class="d-flex justify-content-center"><i class="pr-icon lg check"> </i></div>
-    <div><h2 style="line-height: 1.7"><%= t('accounts.activated_html', login_url: login_url(subdomain: @account.subdomain)) %></h2></div>
+    <div><h2 style="line-height: 1.7"><%= t('accounts.activated_html', login_url: account_root_url(subdomain: @account.subdomain)) %></h2></div>
   </div>
 <% end %>

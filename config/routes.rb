@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   constraints(SubdomainRequired) do
     scope module: 'accounts' do
       root to: 'websites#index', as: :websites_root
+      get '/properties/:id', to: 'websites#show', as: :website_property
       get '/results-count', to: 'websites#count', as: :results_count
       # post '/website/search', to: 'websites#search', as: :website_search
       # get '/properties/client_locations', to: 'properties#client_locations'
