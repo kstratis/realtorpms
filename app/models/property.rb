@@ -68,6 +68,9 @@ class Property < ApplicationRecord
   scope :filter_by_category, -> (category) { joins(:category).where(categories: { parent_slug: category }) }
   scope :filter_by_location, -> (location_id) { where location_id: location_id }
 
+  scope :filter_by_pricemin, -> (pricemin) { where("price >= ?", pricemin) }
+  scope :filter_by_pricemax, -> (pricemax) { where("price <= ?", pricemax) }
+
   scope :website_enabled, -> { where website_enabled: true }
 
   def cpas_attributes=(cpa_attributes)

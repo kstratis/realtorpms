@@ -45,13 +45,25 @@
                                  'action': 'filters#setCount' },
                          class: 'form-control location-select') %>
         </div>
+      </div>
+      <div class="row pt-0 pt-md-3">
 
-        <div class="offset-md-8 col-md-4">
+        <div class="col-md-3">
+          <label for="property-type" class="form-label"><strong><%= t('price_from') %></strong></label>
+          <%= number_field_tag(:pricemin, params[:pricemin], class: 'form-control', placeholder: t('price_placeholder'), min: 0, step: 50,  data: { 'filters-target': "filter", action: 'filters#setCount' }) %>
+        </div>
+
+        <div class="col-md-3">
+          <label for="property-type" class="form-label"><strong><%= t('price_to') %></strong></label>
+          <%= number_field_tag(:pricemax, params[:pricemax], class: 'form-control', placeholder: t('price_placeholder'), min: 0, step: 50, data: { 'filters-target': "filter", action: 'filters#setCount' }) %>
+        </div>
+
+        <div class="offset-md-2 col-md-4">
           <div class="d-flex">
-            <%= button_tag class: 'btn btn-sm btn-secondary form-control mt-4 mr-1', id: 'clear-form', disabled: true, data: { action: "filters#clear" } do %>
+            <%= button_tag class: 'btn btn-sm btn-secondary form-control mt-4 mt-md-0 mr-1 text-nowrap', id: 'clear-form', disabled: true, data: { action: "filters#clear" } do %>
               <span><i class="fas fa-eraser fa-fw"></i>&nbsp;<%= t('clear') %></span>
             <% end %>
-            <%= button_tag class: 'btn btn-sm btn-primary form-control mt-4 ml-1', id: "submit-form", data: { action: "filters#filter", disable_with: t('submit') } do %>
+            <%= button_tag class: 'btn btn-sm btn-primary form-control mt-4 mt-md-0 ml-1 text-nowrap', id: "submit-form", data: { action: "filters#filter", disable_with: t('submit') } do %>
               <span><i class="fas fa-search fa-fw"></i>&nbsp;<%= t('submit') %></span>
             <% end %>
           </div>
@@ -81,13 +93,13 @@
               </div>
               <div class="property">
                 <% if property.images.blank? && !property.avatar.attached? %>
-                  <a href="<%= website_property_url(property) %>">
+                  <a target="_blank" href="<%= website_property_url(property) %>">
                     <div class="thumb-container">
                       <%= image_pack_tag('media/images/houses/house_placeholder.svg', class: 'house-placeholder-image thumb') %>
                     </div>
                   </a>
                 <% elsif property.all_images.size == 1 %>
-                  <a href="<%= website_property_url(property) %>">
+                  <a target="_blank" href="<%= website_property_url(property) %>">
                     <div class="thumb-container">
                       <img src="<%= url_for(first_avail_image(property)) %>" class="thumb" />
                     </div>
@@ -98,7 +110,7 @@
                       <ul class="splide__list">
                         <% property.all_images[0..4].each do |image| %>
                           <li class="splide__slide <%= (property.images.blank? && !property.avatar.attached?) ? 'd-flex house-placeholder-image-container ' : 'thumb-container' %>">
-                            <a href="<%= website_property_url(property) %>">
+                            <a target="_blank" href="<%= website_property_url(property) %>">
                               <img data-splide-lazy="<%= url_for(image) %>" class="thumb" />
                             </a>
                           </li>
@@ -123,7 +135,7 @@
                       <div><%= t('activerecord.attributes.property.price_title') %>
                         : <%= number_to_currency(property.price) %></div>
                       <% if property.size.present? %>
-                        <div><%= t('activerecord.attributes.property.pricepersqmeter_title') %>
+                        <div><%= t('activerecord.attributes.property.pricepersqmeter_title_html') %>
                           : <%= number_to_currency(property.pricepersqmeter) %></div>
                       <% end %>
                     <% end %>

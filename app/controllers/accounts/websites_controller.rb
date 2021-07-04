@@ -9,7 +9,7 @@ module Accounts
 
     def index
       @properties = if params_exist?(params)
-                      current_account.properties.website_enabled.params_filter(params.slice(:businesstype, :category, :location)).order(created_at: :desc)
+                      current_account.properties.website_enabled.params_filter(params.slice(:businesstype, :category, :location, :pricemin, :pricemax)).order(created_at: :desc)
                     else
                       current_account.properties.website_enabled.order(created_at: :desc).limit(3)
                     end
@@ -21,7 +21,7 @@ module Accounts
     end
 
     def count
-      properties = current_account.properties.website_enabled.params_filter(params.slice(:businesstype, :category, :location))
+      properties = current_account.properties.website_enabled.params_filter(params.slice(:businesstype, :category, :location, :pricemin, :pricemax))
       respond_to do |format|
         format.json do
           render json: { status: 'OK', message: I18n.t('properties_count', count: properties.size) }, status: 200
@@ -30,7 +30,7 @@ module Accounts
     end
 
     def params_exist?(params)
-      %w[businesstype category location].any? { |param| params.has_key?(param) && params[param].present? }
+      %w[businesstype category location pricemin pricemax].any? { |param| params.has_key?(param) && params[param].present? }
     end
 
     private
