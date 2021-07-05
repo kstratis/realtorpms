@@ -65,7 +65,7 @@ $(document).on('turbolinks:load', function(e) {
   const translation = JSON.parse(document.getElementById('menu_i18n').dataset.menui18n);
 
   // This is for the Menu item 'Support'
-  $('#support').on('click', (e)=>{
+  $('#support').on('click', (e) => {
     e.preventDefault()
     bootbox.alert({
       title: translation['support']['title'],
