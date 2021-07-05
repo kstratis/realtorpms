@@ -19,18 +19,10 @@
           <a class="nav-link" href="<%= websites_root_path %>"><%= t('home') %></a>
         </li>
         <li class="nav-item">
-          <a data-fancybox="about-info" data-src="#company-modal" href="javascript:;" class="nav-link"><%= t('about') %></a>
-          <div style="display: none;" id="company-modal" class="text-center">
-            <div class="info">
-              <h2><%= current_account.name.presence %></h2>
-              <% if current_account.description.present? %>
-                <p><i><%= current_account.description %></i></p>
-              <% end %>
-            </div>
-          </div>
+          <a id="about" href="javascript:;" class="nav-link"><%= t('about') %></a>
         </li>
         <li class="nav-item">
-          <a data-fancybox="regular-info" data-src="#contact-modal" href="javascript:;" class="nav-link"><%= t('contact') %></a>
+          <a id="contact" href="javascript:;" class="nav-link"><%= t('contact') %></a>
           <div style="display: none;" id="contact-modal" class="text-center">
             <div class="info">
               <h2><%= current_account.name %></h2>
@@ -50,4 +42,20 @@
       <% end %>
     </div>
   </nav>
+
+  <%# header translations %>
+  <%= content_tag :div, class: "", id: "nav_i18n", data: {
+    navi18n: {
+      about: {
+        title: current_account.name.presence,
+        description: current_account.description.presence
+      },
+      contact: {
+        title: current_account.name.presence,
+        email: current_account.email,
+        telephones_html: current_account.telephones
+      }
+    }
+  } do %>
+  <% end %>
 </div>

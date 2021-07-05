@@ -5,7 +5,6 @@
     "@babel/core": "^7.14.3",
     "@babel/runtime": "^7.13.17",
     "@babel/preset-react": "^7.13.13",
-    "@fancyapps/fancybox": "^3.5.7",
     "@rails/actioncable": "6.0.3-7",
     "@rails/activestorage": "6.0.3-7",
     "@rails/ujs": "6.0.3-7",
