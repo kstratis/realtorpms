@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_09_173738) do
+ActiveRecord::Schema.define(version: 2021_07_10_175352) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -338,6 +338,7 @@ ActiveRecord::Schema.define(version: 2021_04_09_173738) do
     t.string "color"
     t.string "time_zone", default: "UTC"
     t.jsonb "preferences", default: {}, null: false
+    t.boolean "has_taken_tour", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

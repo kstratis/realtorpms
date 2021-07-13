@@ -10,7 +10,7 @@ import bootbox from "bootbox";
 
 require("@rails/ujs").start();
 import './turbolinks_wrapper';
-import './calendar'
+import './calendar';
 
 // import 'stacked-menu'
 
@@ -61,6 +61,7 @@ $(document).on('turbolinks:load', function(e) {
   $('[data-toggle="tooltip"]').tooltip();
   $('[data-toggle="popover"]').popover();
 
+  // BOOTBOX STUFF
   // Set its language
   const translation = JSON.parse(document.getElementById('menu_i18n').dataset.menui18n);
 
@@ -73,5 +74,15 @@ $(document).on('turbolinks:load', function(e) {
       centerVertical: true,
     })
   })
+
+  // TOUR DATA
+  const tour_check = JSON.parse(document.getElementById('tour-check').dataset.tour);
+
+  if ((!tour_check['has_taken_tour']) && (window.innerWidth > 767)){
+    const tour_data = JSON.parse(document.getElementById('tour').dataset.tour);
+    import(/* webpackChunkName: "TourManager", webpackPrefetch: true */ '../packs/tour_manager.js').then(({default: TourManager}) => {
+      new TourManager(tour_data).start();
+    });
+  }
 });
 
