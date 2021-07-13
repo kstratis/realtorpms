@@ -6,7 +6,7 @@ module Accounts
     before_action :user_self, only: [:edit, :update, :show] # Allows editing only on each user's self
     before_action :owner_exclusive, only: [:new, :create, :destroy, :index, :mass_delete, :mass_freeze]
     before_action :check_page_validity, only: [:index]
-    before_action :find_user!, only: [:delete_avatar, :toggle_activation, :toggle_adminify, :show]
+    before_action :find_user!, only: [:delete_avatar, :toggle_activation, :toggle_adminify, :toggle_tour, :show]
     after_action :log_action, only: [:create, :update, :destroy]
     after_action :set_assignments, only: [:create]
     # A model's +destroy+ method is different than the controller's +destroy+ action.
@@ -101,6 +101,12 @@ module Accounts
     def toggle_adminify
       Membership.find_by(account: current_account, user: @user).toggle!(:privileged)
       render json: { status: "OK", user_privileged: Membership.find_by(account: current_account, user: @user).privileged }
+    end
+
+    # PATCH `toggle_tour_user_url(USERID)`
+    def toggle_tour
+      @user.toggle!(:has_taken_tour)
+      render json: { message: "OK" }, status: 200
     end
 
     def mass_delete

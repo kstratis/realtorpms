@@ -194,7 +194,7 @@
           <% end %>
 
           <% if current_user.is_admin? current_account %>
-            <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown #{active_for(controller: %w[users invitations])}", data: {
+            <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown #{active_for(controller: %w[users invitations])}", id: 'partners-nav', data: {
               content: t('users.title'),
               placement: 'bottom',
               toggle: 'popover',
@@ -205,7 +205,7 @@
             <% end %>
           <% end %>
 
-          <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown #{active_for(controller: ['properties'])}", data: {
+          <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown #{active_for(controller: ['properties'])}", id: 'properties-nav', data: {
               content: t('main.properties'),
               placement: 'bottom',
               toggle: 'popover',
@@ -215,7 +215,7 @@
             <% end %>
           <% end %>
 
-          <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown #{active_for(controller: ['clients'])}", data: {
+          <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown #{active_for(controller: ['clients'])}", id: 'clients-nav', data: {
               content: t('clients.title'),
               placement: 'bottom',
               toggle: 'popover',
@@ -226,7 +226,7 @@
           <% end %>
 
           <% if current_user.is_admin? current_account %>
-            <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown", data: {
+            <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown", id: 'website-nav', data: {
               content: current_account.website_enabled? ? 'Website' : t('website_enable'),
               placement: 'bottom',
               toggle: 'popover',
@@ -238,7 +238,7 @@
           <% end %>
 
           <% if current_user.is_admin? current_account %>
-            <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown #{active_for(controller: ['settings'])}", data: {
+            <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown #{active_for(controller: ['settings'])}", id: 'settings-nav', data: {
                 content: t('sidebar.settings'),
                 placement: 'bottom',
                 toggle: 'popover',
@@ -284,12 +284,69 @@
   </div>
   <!-- /.top-bar -->
 
-  <%# Menu translations %>
+  <%# Menu translation data %>
   <%= content_tag :div, class: "", id: "menu_i18n", data: {
     menui18n: {
-      support: t('support')
+      support: {
+        title: t('support.title'),
+        message_html: t('support.message_html', brandname: BRANDNAME.downcase)
+      }
     }
   } do %>
   <% end %>
 
+  <!-- ---------------Tour (onboarding data)--------------- -->
+  <%= content_tag :div, class: "", id: "tour-check", data: {
+    tour: {
+      has_taken_tour: current_user.has_taken_tour
+    }
+  } do %>
+  <% end %>
+
+  <!-- Do not pollute the DOM if a user has already taken the tour -->
+  <% unless current_user.has_taken_tour %>
+    <%= content_tag :div, class: "", id: "tour", data: {
+      tour: {
+        tour_url: toggle_tour_user_url(current_user.id),
+        is_admin: current_user.is_admin?(current_account),
+        i18n: {
+          confirm_cancel_message: t('tour.confirm_cancel_message'),
+          buttons: {
+            next: t('tour.buttons.next'),
+            back: t('tour.buttons.back'),
+            end: t('tour.buttons.end')
+          },
+          welcome:{
+            title: t('tour.welcome.title', brandname: BRANDNAME),
+            body_html: t('tour.welcome.body_html', brandname: BRANDNAME),
+          },
+          goodbye:{
+            title: t('tour.goodbye.title', brandname: BRANDNAME),
+            body_html: t('tour.goodbye.body_html', brandname: BRANDNAME.downcase),
+          },
+          partners: {
+            title: t('tour.partners.title'),
+            body_html: t('tour.partners.body_html'),
+          },
+          properties: {
+            title: t('tour.properties.title'),
+            body_html: t('tour.properties.body_html'),
+          },
+          clients: {
+            title: t('tour.clients.title'),
+            body_html: t('tour.clients.body_html'),
+          },
+          website: {
+            title: t('tour.website.title'),
+            body_html: t('tour.website.body_html'),
+          },
+          settings: {
+            title: t('tour.settings.title'),
+            body_html: t('tour.settings.body_html'),
+          }
+        }
+      }
+    } do  %>
+    <% end %>
+  <% end %>
 </header>

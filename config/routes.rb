@@ -74,6 +74,7 @@ Rails.application.routes.draw do
           member do
             patch :toggle_activation
             patch :toggle_adminify
+            patch :toggle_tour
             delete :delete_avatar
           end
         end

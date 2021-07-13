@@ -74,9 +74,40 @@ en:
   property_code: "ID"
   website_enable: "Please enable your website through the account settings"
   application: "Admin"
+  tour:
+    confirm_cancel_message: "Are you sure you want to quit the tour?"
+    buttons:
+      next: "Next"
+      back: "Back"
+      end: "Complete"
+    welcome:
+      title: "<b>%{brandname}</b>"
+      body_html: "<p>Welcome to %{brandname}!</p><br><p class='font-lg'>🎉🎉🎉</p><br><p>We are thrilled to have you on board!</p><br><p><strong>Enjoy!</strong></p>"
+    goodbye:
+      title: "<b>%{brandname}</b>"
+      body_html: "<p>You successfully reached the end of the tour!</p><p>If there's anything else we can help you with, please drop us a line at: <a target='_blank' href='mailto:info@%{brandname}.com'>info@%{brandname}.com</a>.</p> <p>Our support is top-notch and we respond to each and every query.</p>"
+    partners:
+      title: "Partners 💼"
+      body_html: "<p>This is the partners area.</p><p>From this screen you can manage your people, assign properties to them and check their stats.</p>"
+    properties:
+      title: "Properties 🏠"
+      body_html: "<p>Here lies your inventory.</p> <p>Manage your properties, monitor your partners' showings and store client requests.</p> <p>You can also select which properties you want listed on your website.</p>"
+    clients:
+      title: "Clients 👱‍♂️"
+      body_html: "<p>This is your clients list.</p> <p>You can add/remove clients, manage their stored requests and watch for all possible matches between clients' stored requests and the current status of your portfolio.</p>"
+    website:
+      title: "Website 🌐"
+      body_html: "<p>Once activated, this button will take you to your website.</p><p>Your website is automatically generated for you on sign-up and contains any properties you have chosen to publicly list.</p><p>Share its url on social media and watch your traffic explode!</p>"
+    settings:
+      title: "Settings 🛠"
+      body_html: |
+        <p>This is where you can set up custom fields on properties, clients and partners.</p>
+        <p>For example you may wish to add a new true/false field called "mortgage".<p>
+        <p>Use this screen to create the field, optionally set a default value and edit any property you think this applies to by setting its option to true.<p>
+        <p>You can then filter the property results based on whether properties are mortgaged or not.<p>
   support:
     title: "Support"
-    message_html: "For questions and/or support you can reach us at <a target='_blank' href='mailto:info@realtorpms.com'>info@realtorpms.com</a>."
+    message_html: "For questions and/or support you can reach us at <a target='_blank' href='mailto:info@%{brandname}.com'>info@%{brandname}.com</a>."
   properties_count:
     one: "1 result"
     other: "%{count} results"
