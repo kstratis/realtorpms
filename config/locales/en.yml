@@ -1160,3 +1160,5 @@ en:
     comments_feedback: "Max comments length: 512 characters"
     help_popover_admin: "This is the list of showings for the specified property. You may add or delete any entry."
     help_popover_user: "This is the list of showings for the specified property. You can only view and delete entries you have created yourself."
+  favlists:
+    help_popover: "Add the property you like in your favourites. You can create any number favourite list. This way your favourite properties are always a click away."

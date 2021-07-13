@@ -44,6 +44,14 @@
           <!-- .menu-header -->
           <li class="menu-header" data-toggle="tooltip" data-placement="right" title="<%= t('sidebar.subdomain_tooltip') %>"><%= current_account.subdomain.to_s.downcase %></li>
           <!-- /.menu-header -->
+
+          <% if masquerading? %>
+            <%= link_to user_masquerade_path(current_user), method: :delete, class: "menu-link #{masqueraded_admin.is_sysadmin? ? 'masquerading-special-sysadmin' : 'masquerading-special'}" do %>
+              <%= content_tag :i, "", class: "sidebar-masked-icon xs masked-icon-logout" %>
+              <%= content_tag :span, t('clear'), class: 'menu-text menu-text-entry align-middle' %>
+            <% end %>
+          <% end %>
+
           <!-- .menu-item -->
           <%= content_tag :li, class: "menu-item " do %>
             <%= link_to account_root_path, class: "menu-link" do %>
@@ -127,12 +135,21 @@
           <% end %>
 
           <% if current_user.is_admin? current_account %>
+
+            <%= content_tag :li, class: "menu-item" do %>
+              <%= link_to websites_root_url, class: "menu-link #{current_account.website_enabled? ? '' : 'disabled'}" do %>
+                <%= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-www' %>
+                <%= content_tag :span, "Website" , class: 'menu-text menu-text-entry align-middle' %>
+              <% end %>
+            <% end %>
+
             <%= content_tag :li, class: "menu-item #{active_for(controller: ['settings'])}" do %>
               <%= link_to settings_path, class: 'menu-link' do %>
                 <%= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-settings-opt' %>
                 <%= content_tag :span, t('sidebar.settings'), class: 'menu-text menu-text-entry align-middle' %>
               <% end %>
             <% end %>
+
           <% end %>
 
         </ul>

@@ -273,6 +273,7 @@ module PropertiesHelper
           size: 'md',
           title: t('properties.fav_lists'),
           avatar: property.avatar.attached? ? url_for(property.avatar.variant(resize: "30%")) : nil,
+          modalHeaderHelp: t("favlists.help_popover"),
           favlists_url: favlists_url,
           favorites_url: favorites_url,
           property_id: property.id,

@@ -100,8 +100,8 @@ function ListPicker({
                 activeClassName={'active'}
                 forcePage={data['extra']['current_page'] - 1}
                 pageClassName={'page-item page-item-upper'}
-                previousLinkClassName={'page-link'}
-                nextLinkClassName={'page-link'}
+                previousLinkClassName={'btn btn-md btn-icon btn-secondary'}
+                nextLinkClassName={'btn btn-md btn-icon btn-secondary'}
                 nextClassName={'next'}
                 previousClassName={'previous'}
               />

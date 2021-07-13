@@ -18,11 +18,11 @@ export default class TourManager {
       },
       scrollTo: { behavior: 'smooth', block: 'center' },
     });
-    this.initSteps();
-    this.attachTourHandlers();
+    this.setupTourSteps();
+    this.setupTourHandlers();
   }
 
-  initSteps() {
+  setupTourSteps() {
     this.tourInstance.addSteps([
       {
         id: 'welcome-slide',
@@ -33,7 +33,7 @@ export default class TourManager {
           {
             text: this.tour_data.i18n.buttons.next,
             action: this.tourInstance.next,
-            classes: 'flex-grow-1'
+            classes: 'flex-grow-1',
           },
         ],
       },
@@ -47,7 +47,7 @@ export default class TourManager {
         },
         canClickTarget: false,
         cancelIcon: {
-          enabled: true
+          enabled: true,
         },
         classes: '',
         buttons: [
@@ -56,12 +56,12 @@ export default class TourManager {
               return this.back();
             },
             classes: 'shepherd-button-secondary',
-            text: this.tour_data.i18n.buttons.back
+            text: this.tour_data.i18n.buttons.back,
           },
           {
             text: this.tour_data.i18n.buttons.next,
             action: this.tourInstance.next,
-            classes: 'flex-grow-1'
+            classes: 'flex-grow-1',
           },
         ],
         popperOptions: {
@@ -78,7 +78,7 @@ export default class TourManager {
         },
         canClickTarget: false,
         cancelIcon: {
-          enabled: true
+          enabled: true,
         },
         classes: '',
         buttons: [
@@ -87,12 +87,12 @@ export default class TourManager {
               return this.back();
             },
             classes: 'shepherd-button-secondary',
-            text: this.tour_data.i18n.buttons.back
+            text: this.tour_data.i18n.buttons.back,
           },
           {
             text: this.tour_data.i18n.buttons.next,
             action: this.tourInstance.next,
-            classes: 'flex-grow-1'
+            classes: 'flex-grow-1',
           },
         ],
         popperOptions: {
@@ -113,7 +113,7 @@ export default class TourManager {
           },
           canClickTarget: false,
           cancelIcon: {
-            enabled: true
+            enabled: true,
           },
           classes: '',
           buttons: [
@@ -122,12 +122,12 @@ export default class TourManager {
                 return this.back();
               },
               classes: 'shepherd-button-secondary',
-              text: this.tour_data.i18n.buttons.back
+              text: this.tour_data.i18n.buttons.back,
             },
             {
               text: this.tour_data.i18n.buttons.next,
               action: this.tourInstance.next,
-              classes: 'flex-grow-1'
+              classes: 'flex-grow-1',
             },
           ],
           popperOptions: {
@@ -147,7 +147,7 @@ export default class TourManager {
           },
           canClickTarget: false,
           cancelIcon: {
-            enabled: true
+            enabled: true,
           },
           classes: '',
           buttons: [
@@ -156,12 +156,12 @@ export default class TourManager {
                 return this.back();
               },
               classes: 'shepherd-button-secondary',
-              text: this.tour_data.i18n.buttons.back
+              text: this.tour_data.i18n.buttons.back,
             },
             {
               text: this.tour_data.i18n.buttons.next,
               action: this.tourInstance.next,
-              classes: 'flex-grow-1'
+              classes: 'flex-grow-1',
             },
           ],
           popperOptions: {
@@ -178,7 +178,7 @@ export default class TourManager {
           },
           canClickTarget: false,
           cancelIcon: {
-            enabled: true
+            enabled: true,
           },
           classes: '',
           buttons: [
@@ -187,41 +187,43 @@ export default class TourManager {
                 return this.back();
               },
               classes: 'shepherd-button-secondary',
-              text: this.tour_data.i18n.buttons.back
+              text: this.tour_data.i18n.buttons.back,
             },
             {
               text: this.tour_data.i18n.buttons.next,
               action: this.tourInstance.next,
-              classes: 'flex-grow-1'
+              classes: 'flex-grow-1',
             },
           ],
           popperOptions: {
             modifiers: [{ name: 'offset', options: { offset: [0, 14] } }],
           },
         },
-        {
-          id: 'goodbye-slide',
-          title: `<div class='tour-title'>${this.tour_data.i18n.goodbye.title}</div>`,
-          text: `<div class='tour-body text-center'>${this.tour_data.i18n.goodbye.body_html}</div>`,
-          classes: '',
-          buttons: [
-            {
-              text: this.tour_data.i18n.buttons.end,
-              action: this.tourInstance.next,
-              classes: 'flex-grow-1'
-            },
-          ],
-        },
       ]);
     }
+    this.tourInstance.addStep({
+      id: 'goodbye-slide',
+      title: `<div class='tour-title'>${this.tour_data.i18n.goodbye.title}</div>`,
+      text: `<div class='tour-body text-center'>${this.tour_data.i18n.goodbye.body_html}</div>`,
+      classes: '',
+      buttons: [
+        {
+          text: this.tour_data.i18n.buttons.end,
+          action: this.tourInstance.next,
+          classes: 'flex-grow-1',
+        },
+      ],
+    });
   }
 
-  attachTourHandlers() {
-    ['complete', 'cancel'].forEach(event => this.tourInstance.on(event, () => {
-      this.handleNetworkCall('patch', this.tour_data.tour_url, {}, event => {
-        console.log('Welcome Tour successfully ended');
-      });
-    }));
+  setupTourHandlers() {
+    ['complete', 'cancel'].forEach(event =>
+      this.tourInstance.on(event, () => {
+        this.handleNetworkCall('patch', this.tour_data.tour_url, {}, event => {
+          console.log('Welcome Tour successfully ended');
+        });
+      })
+    );
   }
 
   // Makes the actual AJAX call

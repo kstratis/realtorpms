@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import useFetch from '../hooks/useFetch';
 import { renderHTML } from '../utilities/helpers';
+import useTooltips from "../hooks/useTooltips";
+import usePopovers from "../hooks/usePopovers";
 
 function AddRemoveEntry({ addEntity, favlist, index, favorites_url, property_id, completeFavlist, removeFavlist }) {
   return (
@@ -114,6 +116,9 @@ function AddRemoveFavLists({ modalHeader, avatar, favlists_url, favorites_url, p
   const addEntity = payload => {
     setRequest(payload);
   };
+
+  useTooltips();
+  usePopovers();
 
   return (
     <div className="favlist-container mt-3">
