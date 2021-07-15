@@ -219,7 +219,7 @@ export default class TourManager {
   setupTourHandlers() {
     ['complete', 'cancel'].forEach(event =>
       this.tourInstance.on(event, () => {
-        this.handleNetworkCall('patch', `${this.tour_data.tour_url}.json`, {}, event => {
+        this.handleNetworkCall('patch', this.tour_data.tour_url, {}, event => {
           console.log('Welcome Tour successfully ended');
         });
       })

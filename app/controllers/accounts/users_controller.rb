@@ -105,7 +105,11 @@ module Accounts
 
     # PATCH `toggle_tour_user_url(USERID)`
     def toggle_tour
-      @user.toggle!(:has_taken_tour)
+      # `@user` will be `nil` if logging in as sysadmin
+      # Chek `find_user!` for more context
+      if @user.present?
+        @user.toggle!(:has_taken_tour)
+      end
       render json: { message: "OK" }, status: 200
     end
 

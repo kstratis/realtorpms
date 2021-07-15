@@ -298,7 +298,7 @@
   <!-- ---------------Tour (onboarding data)--------------- -->
   <%= content_tag :div, class: "", id: "tour-check", data: {
     tour: {
-      has_taken_tour: current_user.has_taken_tour
+      has_taken_tour: current_user.is_sysadmin? ? true : current_user.has_taken_tour
     }
   } do %>
   <% end %>
