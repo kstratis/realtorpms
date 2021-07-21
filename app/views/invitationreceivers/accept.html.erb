@@ -3,7 +3,7 @@
 <% content_for :heading do %>
   <div>
     <% if !logged_in? %>
-      <p> <%= t('invitations.accept.subheading_html', login_link: login_url) %> </p>
+      <p> <%= t('invitations.accept.subheading_html', login_link: login_url(locale: I18n.locale)) %> </p>
       <p><%= t('invitations.accept.subheading_feedback_new_user_html', account: @invitation.account.subdomain) %></p>
     <% else %>
       <p><%= t('invitations.accept.subheading_feedback_html', account: @invitation.account.subdomain) %></p>

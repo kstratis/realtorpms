@@ -55,14 +55,22 @@
         </a> <!-- /.navbar-brand -->
 
         <% if logged_in? %>
-          <a class="navbar-btn btn btn-outline-danger ml-auto order-lg-2" href="<%= redirect_to_app_url %>"><%= t('website.nav.app') %></a> <!-- .navbar-collapse -->
+          <a class="d-lg-block d-none navbar-btn btn btn-outline-danger ml-auto order-lg-1" href="<%= redirect_to_app_url %>"><%= t('website.nav.app') %></a> <!-- .navbar-collapse -->
         <% else %>
-          <a class="navbar-btn btn btn-lg btn-cta ml-auto order-lg-2" href="<%= new_account_url %>"><%= t('website.nav.signup') %></a> <!-- .navbar-collapse -->
-          <a class="navbar-btn btn ml-auto order-lg-2" href="<%= login_url %>"><%= t('website.nav.signin') %></a> <!-- .navbar-collapse -->
+          <a class="d-lg-block d-none navbar-btn btn btn-lg btn-cta ml-auto order-lg-2" href="<%= new_account_url %>"><%= t('website.nav.signup') %></a> <!-- .navbar-collapse -->
+          <a class="d-lg-block d-none navbar-btn btn btn-lg ml-auto order-lg-3" href="<%= login_url %>"><%= t('website.nav.signin') %></a> <!-- .navbar-collapse -->
         <% end %>
 
         <div class="navbar-collapse collapse" id="navbarTogglerDemo01">
           <ul class="navbar-nav mx-auto">
+            <li class="nav-item mr-lg-3 d-md-none">
+              <% if logged_in? %>
+                <a class="nav-link py-2 black-color" href="<%= redirect_to_app_url %>"><%= t('website.nav.app') %></a> <!-- .navbar-collapse -->
+              <% else %>
+                <a class="nav-link py-2 black-color" href="<%= new_account_url %>"><%= t('website.nav.signup') %></a> <!-- .navbar-collapse -->
+                <a class="nav-link py-2 black-color" href="<%= login_url %>"><%= t('website.nav.signin') %></a> <!-- .navbar-collapse -->
+              <% end %>
+            </li>
             <li class="nav-item mr-lg-3">
               <a class="nav-link py-2 black-color" href="#features"><%= t('website.nav.features') %></a>
             </li>
@@ -396,7 +404,15 @@
     <section class="py-5 bg-black text-white">
       <!-- .container -->
       <div class="container">
-        <p class="text-muted text-center mt-5"><%= BRANDNAME %> © <%= Date.current.year %> • All Rights reserved</p>
+        <p class="text-muted text-center mt-5"><%= BRANDNAME %> © <%= Date.current.year %> • <%= t('website.rights') %> • <%= t('website.footer_html') %> •
+          <span>
+          <% if I18n.locale.downcase.to_s == 'en' %>
+            <%= content_tag(:span, 'EN') %> | <%= link_to('ΕΛ', landing_root_url(locale: 'el'), class: '') %>
+          <% else %>
+            <%= link_to('EN', landing_root_url(locale: 'en'), class: '') %> | <%= content_tag(:span, 'ΕΛ') %>
+          <% end %>
+        </span></p>
+
       </div><!-- /.container -->
     </section><!-- /footer -->
   </main><!-- /.app -->

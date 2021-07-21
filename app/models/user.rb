@@ -51,6 +51,8 @@ class User < ApplicationRecord
 
   has_many :calendar_events
 
+  enum locale: [:en, :el]
+
   # has_many :properties, -> (account) { where('account_id = ?', account.id) }, through: :assignments
 
   # Basically class methods defined as instance methods in the singleton class

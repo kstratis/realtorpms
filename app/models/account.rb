@@ -37,6 +37,10 @@ class Account < ApplicationRecord
   before_create :confirmation_token
   after_create :build_custom_fields
 
+  before_validation do
+    self.subdomain = self.subdomain.downcase unless subdomain.blank?
+  end
+
   # This is for existing log records
   # https://stackoverflow.com/a/9326882/178728
   # before_destroy { |record| Log.where(account: record).update_all(account_name: record.subdomain) }

@@ -184,6 +184,10 @@ en:
         password_leave_empty: "Leave empty to keep unchanged"
         remember_me: "Remember me on this computer"
         registered: "Registration date"
+        enums:
+          locale:
+            en: "English (US)"
+            el: "Greek"
       extra:
         housetype:
           title: "Type"
@@ -1112,7 +1116,7 @@ en:
     invites:
       subject: "Invitation to connect to account %{subdomain} on %{brand}"
       greeting: "Hi,"
-      greeting_explained_html: "You have received an invite to connect to account %{subdomain} on %{brand}."
+      greeting_explained_html: "You have received an invite to connect to account %{subdomain} on %{brand} platform."
       accept: "ACCEPT"
       accept_text: "Use the link below to connect:"
     activation:

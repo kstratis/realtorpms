@@ -59,6 +59,12 @@ module ApplicationHelper
     I18n.t('date.month_names_gen')[date.month - 1]
   end
 
-
-
+  def language_switcher
+    if I18n.locale == 'en'
+      content_tag :i, nil, class: 'fas fa-user fa-fw'
+      "#{content_tag(:span, 'EN')} | #{link_to('ΕΛ', landing_root_url(locale: 'el'), class: '')}"
+    else
+      "#{content_tag(:span, 'ΕΛ')} | #{link_to('EN', landing_root_url(locale: 'en'), class: '')}"
+    end
+  end
 end

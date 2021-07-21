@@ -47,6 +47,7 @@ module SessionsHelper
     forget(current_user)
     session.delete(:user_id)
     session.delete(:referer_url)
+    session.delete(:forwarding_url)
     @current_user = nil
   end
 

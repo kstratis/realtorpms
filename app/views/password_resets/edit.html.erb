@@ -7,7 +7,7 @@
 
 <% content_for :content do %>
   <!-- form -->
-  <%= form_for(@user, url: password_reset_update_path(params[:id]), html: {class: 'auth-form'}) do |f| %>
+  <%= form_for(@user, url: password_reset_update_path(params[:id], locale: I18n.locale), html: {class: 'auth-form'}) do |f| %>
     <%= hidden_field_tag :email, @user.email %>
 
 

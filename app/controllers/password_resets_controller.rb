@@ -23,7 +23,7 @@ class PasswordResetsController < ApplicationController
       @user.create_reset_digest
       @user.send_password_reset_email(request.subdomain)
       flash[:info] = I18n.t 'sessions.flash_passwd_reset_email_sent'
-      redirect_to root_url
+      redirect_to login_url(locale: I18n.locale)
     else
       flash.now[:danger] = I18n.t 'sessions.flash_passwd_reset_email_not_found'
       render :new
@@ -40,9 +40,9 @@ class PasswordResetsController < ApplicationController
     elsif params[:user][:password] != params[:user][:password_confirmation]
       flash.now[:danger] = I18n.t 'sessions.flash_new_passwd_no_match'
       render 'edit'
-    elsif @user.update_attributes(user_params)
+    elsif @user.update(user_params)
       # log_in @user
-      @user.update_attribute(:reset_digest, nil)
+      @user.update({reset_digest: nil})
       flash[:success] = I18n.t 'sessions.flash_passwd_reset_success'
       redirect_to login_url(subdomain: request.subdomain)
     else

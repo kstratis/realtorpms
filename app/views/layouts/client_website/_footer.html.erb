@@ -8,10 +8,9 @@
             <span><small>© Copyright <%= Date.current.year %> • All Rights reserved</small></span>
           </div>
           <div class="justify-content-end p-2">
-            <span><small>🚀 Powered by <u><%= link_to BRANDNAME, landing_root_url(subdomain: nil), target: "_blank" %></u></small></span>
+            <span><small>🚀 Powered by <u><%= link_to BRANDNAME, landing_root_url(subdomain: nil, locale: I18n.locale), target: "_blank" %></u></small></span>
           </div>
         </div>
-
       </footer>
     </div>
   </div>
