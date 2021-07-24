@@ -75,6 +75,7 @@ class AccountsController < ApplicationController
                                                   [:first_name,
                                                    :last_name,
                                                    :email,
+                                                   :locale,
                                                    :password,
                                                    :password_confirmation] })
   end

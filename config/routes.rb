@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # get 'password_resets/new'
   # get 'password_resets/edit'
 
-  get 'hello_world', to: 'hello_world#index'
+  # get 'hello_world', to: 'hello_world#index'
   # get 'sessions/new'
 
   # get 'users/new'
@@ -15,11 +15,6 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   # root 'application#hello'
   # root 'users#index'
-  #
-  get 'password/request/new', to: 'password_resets#new', as: :password_reset_request_new
-  post 'password/request/new', to: 'password_resets#create', as: :password_reset_request_create
-  get 'password/:id/reset', to: 'password_resets#edit', as: :password_reset_edit
-  patch 'password/:id/reset', to: 'password_resets#update', as: :password_reset_update
   # resources :password_resets, only: [:new, :create, :edit, :update]
 
   # root 'main_pages#home'
@@ -126,14 +121,12 @@ Rails.application.routes.draw do
     end
   end
 
-  root to: 'home#index', as: :landing_root
+  # get '/login', to: 'sessions#new'
+  # post '/login', to: 'sessions#create'
+  # delete '/logout', to: 'sessions#destroy'
 
   get '/switch/', to: 'home#switch', as: :account_switch
   get '/accounts/', to: 'home#accounts', as: :account_list
-
-  get '/create', to: 'accounts#new', as: :new_account
-
-  post '/create', to: 'accounts#create', as: :accounts
 
   get '/account/edit', to: 'accounts#edit', as: :account_edit
 
@@ -141,17 +134,30 @@ Rails.application.routes.draw do
 
   delete '/account/delete_avatar', to: 'accounts#delete_avatar', as: :delete_avatar_account
 
-  get '/help', to: 'main_pages#help'
-  get '/about', to: 'main_pages#about'
-  get '/contact', to: 'main_pages#contact'
-  get '/signup', to: 'users#new'
-
-  get '/login', to: 'sessions#new'
-  post '/login', to: 'sessions#create'
-  delete '/logout', to: 'sessions#destroy'
-
   get '/invitations/:id/accept', to: 'invitationreceivers#accept', as: :accept_invitation
   patch '/invitations/:id/accepted', to: 'invitationreceivers#accepted', as: :accepted_invitation
 
-  # root 'application#hello'
+  scope ":locale", locale: /en|el/ do
+    root to: 'home#index', as: :landing_root
+    get '/create', to: 'accounts#new', as: :new_account
+
+    post '/create', to: 'accounts#create', as: :accounts
+    get '/login', to: 'sessions#new'
+    post '/login', to: 'sessions#create'
+    delete '/logout', to: 'sessions#destroy'
+
+    get 'password/request/new', to: 'password_resets#new', as: :password_reset_request_new
+    post 'password/request/new', to: 'password_resets#create', as: :password_reset_request_create
+    get 'password/:id/reset', to: 'password_resets#edit', as: :password_reset_edit
+    patch 'password/:id/reset', to: 'password_resets#update', as: :password_reset_update
+  end
+
+  match '*path',
+        to: redirect(status: 302) { |_, request| "#{request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first}#{request.path}" },
+        constraints: lambda { |req| req.path.exclude? 'rails/active_storage' },
+        via: :get
+
+  match '', to: redirect(status: 302) { |_, request| request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first },
+        constraints: lambda { |req| req.path.exclude? 'rails/active_storage' },
+        via: :get
 end

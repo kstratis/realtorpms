@@ -4,6 +4,6 @@ class InvitationMailer < ApplicationMailer
     @invitation = invitation
     mail(to: invitation.email, subject: I18n.t('emails.invites.subject',
                                                subdomain: invitation.account.subdomain,
-                                               brand: BRANDNAME.capitalize))
+                                               brand: BRANDNAME))
   end
 end

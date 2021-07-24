@@ -43,7 +43,7 @@ module Accounts
 
       unless logged_in?
         store_location
-        redirect_to login_url
+        redirect_to login_url(locale: I18n.locale)
       end
     end
 

@@ -27,7 +27,7 @@
 <% end %>
 
 <% unless masquerading? %>
-  <%= link_to logout_path, class: 'dropdown-item', method: :delete do %>
+  <%= link_to logout_path(locale: I18n.locale), class: 'dropdown-item', method: :delete do %>
     <%= content_tag :i, nil, class: 'fas fa-sign-out-alt' %> <span><%= t('navbar.logout') %></span>
   <% end %>
 <% end %>

@@ -20,7 +20,7 @@ class HomeController < ApplicationController
   # when we need use the flash functionality
   def switch
     if request.subdomain.blank?
-      redirect_to root_url(subdomain: nil)
+      redirect_to landing_root_url(subdomain: nil, locale: I18n.locale)
     else
       flash[:success] = I18n.t 'accounts.switch_info'
       redirect_to account_root_url(subdomain: request.subdomain)

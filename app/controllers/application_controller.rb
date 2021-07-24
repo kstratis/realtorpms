@@ -9,11 +9,12 @@ class ApplicationController < ActionController::Base
 
   rescue_from ActiveRecord::RecordNotFound, with: -> { render_404  }
 
-  before_action :set_locale
+  around_action :switch_locale
   around_action :set_time_zone, if: :current_user
 
-  def set_locale
-    I18n.locale = params[:locale] || current_user.try(:locale) || I18n.default_locale
+  def switch_locale(&action)
+    locale = params[:locale] || current_user.try(:locale) || extract_locale_from_accept_language_header || I18n.default_locale
+    I18n.with_locale(locale, &action)
   end
 
   def current_account
@@ -65,4 +66,7 @@ class ApplicationController < ActionController::Base
       Time.use_zone(current_user.time_zone, &block)
     end
 
+    def extract_locale_from_accept_language_header
+      request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+    end
 end

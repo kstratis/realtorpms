@@ -68,6 +68,20 @@
       <!-- .form-group -->
       <div class="form-group">
         <div class="form-label-group">
+          <%= owner.select "locale",
+                           User.locales.keys.collect { |locale| [ User.human_enum_name(:locale, locale), locale ] },
+                           { selected:  params[:locale] },
+                           { class: 'custom-select' } %>
+
+          <%= owner.label "locale", User.human_attribute_name("locale") %>
+          <%= inline_error @account.owner, :locale, 'Locale' %>
+        </div>
+      </div>
+      <!-- /.form-group -->
+
+      <!-- .form-group -->
+      <div class="form-group">
+        <div class="form-label-group">
           <%= owner.password_field :password, class: 'form-control', placeholder: User.human_attribute_name("password") %>
           <%= owner.label :password, User.human_attribute_name("password") %>
           <%= inline_error @account.owner, :password, 'Password' %>

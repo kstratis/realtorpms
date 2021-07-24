@@ -2351,6 +2351,7 @@ input.no-full-width{
 // --------------------------------- WEBSITE CSS -----------------------------------------------------
 // --------------------------------- =========== -----------------------------------------------------
 .website{
+  //font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-family: 'Fira Sans', sans-serif;
   background-color: gold;
   color: #000;
@@ -2360,8 +2361,15 @@ input.no-full-width{
   }
 
   h1{
-    line-height: 70px;
-    font-weight: 600;
+    line-height: 1.15em;
+    letter-spacing: 0.5px;
+    font-weight: 800;
+  }
+
+  .subheader-text{
+    font-size: 22px;
+    line-height: 1.3em;
+    margin-bottom: -20px;
   }
 
   .lead{
@@ -2697,3 +2705,27 @@ a.icon-font-delete{
 .font-lg{
   font-size: 48px;
 }
+
+.logo-container{
+  text-align: center;
+  display: inline-block;
+}
+
+.menu-item.dropdown:not(:last-child){
+  position: relative;
+}
+
+//-----------MENU SEPARATORS-----------------
+//.menu-item.dropdown:not(:last-child):after{
+//  content: '';
+//  height: 50%; //You can change this if you want smaller/bigger borders
+//  width: 2px;
+//
+//  position: absolute;
+//  right: 0;
+//  top: 12px; // If you want to set a smaller height and center it, change this value
+//
+//  background-color: #ffffff; // The color of your border
+//}
+//--------------------------------------------
+
