@@ -127,7 +127,7 @@
             <div class="pl-xl-3 ml-auto text-center text-sm-left">
               <h1 class="display-4 enable-responsive-font-size mb-4">
                 <%= t('website.hero1') %><br><%= t('website.hero2') %></h1>
-              <p class="px-4 lead text-center mb-5"><%= t('website.subheader') %></p>
+              <p class="px-4 lead text-center mb-5 subheader-text"><%= t('website.subheader', brand: BRANDNAME) %></p>
             </div>
           </div><!-- /.col-md-6 -->
         </div><!-- /.row -->
@@ -151,7 +151,7 @@
                       <%= image_pack_tag 'media/images/website/engine.svg', class: "img-fluid py-2" %>
                     </div>
                     <h2 class="lead header"><%= t('website.feature_strip.a.title') %></h2>
-                    <h3 class="body"><%= t('website.feature_strip.a.body_html') %></h3>
+                    <h3 class="body"><%= t('website.feature_strip.a.body_html', brand: BRANDNAME) %></h3>
                   </div><!-- /.col -->
                 </div>
               </div><!-- /.card-body -->
@@ -170,7 +170,7 @@
 <!--                      <img class="mb-4" src="assets/images/illustration/lab.svg" alt="" height="72">-->
                     </div>
                     <h2 class="lead header"><%= t('website.feature_strip.b.title') %></h2>
-                    <h3 class="body"><%= t('website.feature_strip.b.body_html') %></h3>
+                    <h3 class="body"><%= t('website.feature_strip.b.body_html', brand: BRANDNAME) %></h3>
                   </div><!-- /.col -->
                 </div>
               </div><!-- /.card-body -->
@@ -208,8 +208,6 @@
                 </div>
               </div><!-- /.card-body -->
             </div><!-- /.card -->
-
-
 
           </div>
 
@@ -257,7 +255,7 @@
                 <%= image_pack_tag 'media/images/website/office.svg', class: 'mr-sm-4 mb-3 mb-sm-0', width: "72" %>
                 <div class="flex-fill">
                   <h5 class="mt-0"><%= t('website.benefits.a.title') %></h5>
-                  <p class="text-muted font-size-lg"><%= t('website.benefits.a.body_html', BRANDNAME: BRANDNAME) %></p>
+                  <p class="text-muted font-size-lg"><%= t('website.benefits.a.body_html', brand: BRANDNAME) %></p>
                 </div>
               </div>
             </div><!-- /.card-body -->
@@ -286,7 +284,7 @@
                 <%= image_pack_tag 'media/images/website/server.svg', class: 'mr-sm-4 mb-3 mb-sm-0', width: "72" %>
                 <div class="flex-fill">
                   <h5 class="mt-0"><%= t('website.benefits.c.title') %></h5>
-                  <p class="text-muted font-size-lg"><%= t('website.benefits.c.body_html', BRANDNAME: BRANDNAME) %></p>
+                  <p class="text-muted font-size-lg"><%= t('website.benefits.c.body_html', brand: BRANDNAME) %></p>
                 </div>
               </div>
             </div><!-- /.card-body -->
@@ -299,7 +297,7 @@
                 <%= image_pack_tag 'media/images/website/clients.svg', class: 'mr-sm-4 mb-3 mb-sm-0', width: "72" %>
                 <div class="flex-fill">
                   <h5 class="mt-0"><%= t('website.benefits.d.title') %></h5>
-                  <p class="text-muted font-size-lg"><%= t('website.benefits.d.body_html') %></p>
+                  <p class="text-muted font-size-lg"><%= t('website.benefits.d.body_html', brand: BRANDNAME) %></p>
                 </div>
               </div>
             </div><!-- /.card-body -->
@@ -315,7 +313,7 @@
                 <%= image_pack_tag 'media/images/website/showing.svg', class: 'mr-sm-4 mb-3 mb-sm-0', width: "72" %>
                 <div class="flex-fill">
                   <h5 class="mt-0"><%= t('website.benefits.e.title') %></h5>
-                  <p class="text-muted font-size-lg"><%= t('website.benefits.e.body_html', BRANDNAME: BRANDNAME) %></p>
+                  <p class="text-muted font-size-lg"><%= t('website.benefits.e.body_html', brand: BRANDNAME) %></p>
                 </div>
               </div>
             </div><!-- /.card-body -->
@@ -328,7 +326,7 @@
                 <%= image_pack_tag 'media/images/website/website.svg', class: 'mr-sm-4 mb-3 mb-sm-0', width: "72" %>
                 <div class="flex-fill">
                   <h5 class="mt-0"><%= t('website.benefits.f.title') %></h5>
-                  <p class="text-muted font-size-lg"><%= t('website.benefits.f.body_html', BRANDNAME: BRANDNAME) %></p>
+                  <p class="text-muted font-size-lg"><%= t('website.benefits.f.body_html', brand: BRANDNAME) %></p>
                 </div>
               </div>
             </div><!-- /.card-body -->

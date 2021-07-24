@@ -4,12 +4,55 @@ en:
     nav:
       features: 'FEATURES'
       subscription: 'PRICING'
-      contact: 'GET IN TOUCH'
+      contact: 'CONTACT'
       app: 'APP'
       signup: 'START FOR FREE'
       signin: 'LOGIN'
-    hero1: 'All-inclusive business software'
-    hero2: 'for project-driven agents'
-    subheader: 'Property management. Redefined.'
+    hero1: 'Batteries-included business software'
+    hero2: 'for modern realtors'
+    subheader: '%{brand} helps you manage your properties, clients, partners and more using our powerful engine and built-in automations'
+    feature_strip:
+      a:
+        title: 'Best-in-class management engine'
+        body_html: 'Our custom-build management engine takes care of all your daily tasks. Even the most complex <mark>workflows become easy and accessible</mark> at the click of a button.'
+      b:
+        title: 'Multiple business partners'
+        body_html: "%{brand} is a <mark>multi-user</mark> management system. This means you don't have to do eveything on your own. Add your partners, share your properties and clients lists and split your workload."
+      c:
+        title: 'Listing website'
+        body_html: 'Realtors automatically get their <mark>own website</mark> on signup. Choose the properties you wish to list from the administration panel and promote them on your own website!'
+      d:
+        title: 'Security & speed'
+        body_html: 'The platform runs on modern cloud infrastructure which provides world class <mark>reliability and speed</mark>. Our data encryption uses the strongest and most up-to-date security protocols.'
+    benefits:
+      header: 'GET IN CONTROL 💪'
+      subheader: "Power and flexibility to meet the demands of power users:"
+      a:
+        title: 'Agency management'
+        body_html: '<strong>%{brand}</strong> is a complete real estate management system. From matching properties to clients to your very own listing website, we got you covered.'
+      b:
+        title: 'Permissions'
+        body_html: "Share properties with your partners and split your workload. Share exactly what needs to be shared or share it all. It's up to you."
+      c:
+        title: 'Custom fields'
+        body_html: 'Sometimes people have different or unexpected needs. To cater for these cases, %{brand} allows you to define custom fields on properties, partners and clients.'
+      d:
+        title: 'Clientele'
+        body_html: "Keep track of your clients. Store what they are looking for (or offering) and look for potential matches in your inventory. Each time your inventory is updated with a new entry, your clients' matches will be automatically updated too."
+      e:
+        title: 'Showings'
+        body_html: "Keep your showings history at hand. <strong>%{brand}</strong> will store any property showing from any of your partners."
+      f:
+        title: 'Agent co-operations'
+        body_html: "Invite realtors from other agencies using %{brand} to your own portal. They'll be able to only see the bits you allow them to and vice-versa."
+    pricing:
+      full_version: "Full version"
+      header: 'One solution for every business size'
+      subheader: 'Start free and upgrade while you grow'
+      offer: 'Free until the end of %{month}'
+      cta: 'Sign up'
+    questions:
+      header: 'How can we help?'
+      cta: 'Contact'
     rights: 'All rights reserved'
     footer_html: 'Made with ❤️ in Greece'

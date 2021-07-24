@@ -158,7 +158,7 @@ el:
         registered: "Ημερομηνία εγγραφής"
         enums:
           locale:
-            en: "Αγγλικά"
+            en: "Αγγλικά (Η.Π.Α)"
             el: "Ελληνικά"
       extra:
         housetype:
