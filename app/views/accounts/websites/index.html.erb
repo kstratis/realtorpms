@@ -93,13 +93,13 @@
               </div>
               <div class="property">
                 <% if property.images.blank? && !property.avatar.attached? %>
-                  <a target="_blank" href="<%= website_property_url(property) %>">
+                  <a target="_blank" href="<%= website_property_url(property, locale: I18n.locale) %>">
                     <div class="thumb-container">
                       <%= image_pack_tag('media/images/houses/house_placeholder.svg', class: 'house-placeholder-image thumb') %>
                     </div>
                   </a>
                 <% elsif property.all_images.size == 1 %>
-                  <a target="_blank" href="<%= website_property_url(property) %>">
+                  <a target="_blank" href="<%= website_property_url(property, locale: I18n.locale) %>">
                     <div class="thumb-container">
                       <img src="<%= url_for(first_avail_image(property)) %>" class="thumb" />
                     </div>
@@ -110,7 +110,7 @@
                       <ul class="splide__list">
                         <% property.all_images[0..4].each do |image| %>
                           <li class="splide__slide <%= (property.images.blank? && !property.avatar.attached?) ? 'd-flex house-placeholder-image-container ' : 'thumb-container' %>">
-                            <a target="_blank" href="<%= website_property_url(property) %>">
+                            <a target="_blank" href="<%= website_property_url(property, locale: I18n.locale) %>">
                               <img data-splide-lazy="<%= url_for(image) %>" class="thumb" />
                             </a>
                           </li>

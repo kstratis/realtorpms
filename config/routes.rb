@@ -2,30 +2,14 @@ require 'constraints/subdomain_required'
 
 Rails.application.routes.draw do
 
-  # get 'password_resets/new'
-  # get 'password_resets/edit'
-
-  # get 'hello_world', to: 'hello_world#index'
-  # get 'sessions/new'
-
-  # get 'users/new'
-
-  # resources :properties
-  # resources :users
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  # root 'application#hello'
-  # root 'users#index'
-  # resources :password_resets, only: [:new, :create, :edit, :update]
-
-  # root 'main_pages#home'
   constraints(SubdomainRequired) do
     scope module: 'accounts' do
-      root to: 'websites#index', as: :websites_root
-      get '/properties/:id', to: 'websites#show', as: :website_property
+      # Language support on client mini websites
+      scope ":locale", locale: /en|el/ do
+        root to: 'websites#index', as: :websites_root
+        get '/properties/:id', to: 'websites#show', as: :website_property
+      end
       get '/results-count', to: 'websites#count', as: :results_count
-      # post '/website/search', to: 'websites#search', as: :website_search
-      # get '/properties/client_locations', to: 'properties#client_locations'
-      # get '/properties/locations_from_website', to: 'properties#locations_from_website', as: :locations_external
 
       # Admin area
       scope 'app' do
@@ -81,11 +65,7 @@ Rails.application.routes.draw do
 
         resources :invitations, only: [:new, :create, :check_existing_user]
         get '/invitations/validate_user', to: 'invitations#check_existing_user', as: :invitation_validate
-        # post '/properties/uploads', to: 'properties#uploads'
-        # create a new assignment
-        #
-        #
-        #
+
         get '/demo', to: 'properties#demo'
 
         post '/properties/uploads', to: 'properties#uploads'
@@ -107,23 +87,9 @@ Rails.application.routes.draw do
         get '/showings', to: 'showings#index'
         post '/showings/', to: 'showings#create'
         delete '/showings/', to: 'showings#delete'
-        #
-        #post '/matches/', to: 'matches#assign', as: :matches
-
-        # resources :invitations, only: [:new, :create] do
-        #   member do
-        #     get :accept
-        #     patch :accepted
-        #   end
-        # end
       end
-      # resources :invitations, only: [:new, :create]
     end
   end
-
-  # get '/login', to: 'sessions#new'
-  # post '/login', to: 'sessions#create'
-  # delete '/logout', to: 'sessions#destroy'
 
   get '/switch/', to: 'home#switch', as: :account_switch
   get '/accounts/', to: 'home#accounts', as: :account_list
@@ -137,6 +103,7 @@ Rails.application.routes.draw do
   get '/invitations/:id/accept', to: 'invitationreceivers#accept', as: :accept_invitation
   patch '/invitations/:id/accepted', to: 'invitationreceivers#accepted', as: :accepted_invitation
 
+  # Language support on website (landing) pages
   scope ":locale", locale: /en|el/ do
     root to: 'home#index', as: :landing_root
     get '/create', to: 'accounts#new', as: :new_account
@@ -153,11 +120,44 @@ Rails.application.routes.draw do
   end
 
   match '*path',
-        to: redirect(status: 302) { |_, request| "#{request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first}#{request.path}" },
-        constraints: lambda { |req| req.path.exclude? 'rails/active_storage' },
+        to: redirect(status: 302) { |_, request| locale_handler(request) },
+        constraints: lambda { |req| constraint_handler(req) },
         via: :get
 
   match '', to: redirect(status: 302) { |_, request| request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first },
         constraints: lambda { |req| req.path.exclude? 'rails/active_storage' },
         via: :get
+end
+
+# Returns `true` if redirection should continue otherwise `false`
+# @param request [ActionController::Parameters] The client request
+#
+# @return [Boolean] Whether the constraint should be skipped or not
+def constraint_handler(request)
+  # Don't do anything if the given route is active storage related
+  return false if request.path.include?('rails/active_storage')
+
+  locale = request.path.scan(/^\/([a-z]{2})/).flatten.first
+
+  # If we already have a locale prefix in our path (`/en/unknown`), stop redirecting any further cause
+  # we may cause an infinite redirection loop
+  return false if %w[en el].include?(locale)
+
+  # In the general scenario, redirect
+  true
+end
+
+# If no locale prefix is present (i.e. `/unknown`), then redirect using the locale taken from the `HTTP_ACCEPT_LANGUAGE`
+# header given its English or Greek. Default to English otherwise.
+#
+# @param request [ActionController::Parameters] The client request
+#
+# @return [String] The path to redirect to
+def locale_handler(request)
+  locale = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+  if %w[en el].include?(locale)
+    "#{locale}#{request.path}"
+  else
+    "#{I18n.default_locale}#{request.path}"
+  end
 end

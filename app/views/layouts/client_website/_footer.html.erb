@@ -6,6 +6,22 @@
         <div class="d-flex">
           <div class="flex-fill justify-content-start p-2">
             <span><small>© Copyright <%= Date.current.year %> • All Rights reserved</small></span>
+            <span> • <small>
+              <% if request.path.include?('properties') %>
+                <% if I18n.locale.downcase.to_s == 'en' %>
+                  <%= content_tag(:span, 'EN') %> | <%= link_to('ΕΛ', website_property_url(id: params[:id], locale: 'el'), class: '') %>
+                <% else %>
+                  <%= link_to('EN', website_property_url(id: params[:id], locale: 'en'), class: '') %> | <%= content_tag(:span, 'ΕΛ') %>
+                <% end %>
+              <% else  %>
+                <% if I18n.locale.downcase.to_s == 'en' %>
+                  <%= content_tag(:span, 'EN') %> | <%= link_to('ΕΛ', websites_root_url(locale: 'el'), class: '') %>
+                <% else %>
+                  <%= link_to('EN', websites_root_url(locale: 'en'), class: '') %> | <%= content_tag(:span, 'ΕΛ') %>
+                <% end %>
+              <% end %>
+            </small>
+        </span>
           </div>
           <div class="justify-content-end p-2">
             <span><small>🚀 Powered by <u><%= link_to BRANDNAME, landing_root_url(subdomain: nil, locale: I18n.locale), target: "_blank" %></u></small></span>
