@@ -154,8 +154,8 @@ end
 #
 # @return [String] The path to redirect to
 def locale_handler(request)
-  locale = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
-  if %w[en el].include?(locale)
+  locale = request.env['HTTP_ACCEPT_LANGUAGE']&.scan(/^[a-z]{2}/)&.first
+  if locale.present? && %w[en el].include?(locale)
     "#{locale}#{request.path}"
   else
     "#{I18n.default_locale}#{request.path}"
