@@ -142,7 +142,7 @@
                       <div class="custom-control custom-switch website-enabled-control">
                         <%= property.check_box(:website_enabled, {class: "custom-control-input", type: 'checkbox'}) %>
                         <%= property.label(:website_enabled, {class: 'custom-control-label cursor-pointer'}) do %>
-                          <strong><%= t('properties.edit.website_enabled_html', website: websites_root_url) %></strong>
+                          <strong><%= t('properties.edit.website_enabled_html', website: websites_root_url(locale: I18n.locale)) %></strong>
                         <% end %>
                       </div>
 

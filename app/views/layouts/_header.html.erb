@@ -231,7 +231,7 @@
               placement: 'bottom',
               toggle: 'popover',
               trigger: 'hover' } do %>
-              <%= link_to websites_root_url, class: "nav-link menu-link #{current_account.website_enabled? ? '' : 'disabled'}", data: { turbolinks: false } do %>
+              <%= link_to websites_root_url(locale: I18n.locale), class: "nav-link menu-link #{current_account.website_enabled? ? '' : 'disabled'}", data: { turbolinks: false } do %>
                 <%= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-www' %>
               <% end %>
             <% end %>

@@ -16,7 +16,7 @@
               <div class="shoutout shoutout-danger has-icon" role="alert">
                 <div class="alert-icon">
                   <i class="fas fa-info"></i>
-                </div><%= t('accounts.popover_edit_html', site: websites_root_url) %>
+                </div><%= t('accounts.popover_edit_html', site: websites_root_url(locale: I18n.locale)) %>
               </div>
 
 
@@ -120,7 +120,7 @@
                 <div class="custom-control custom-switch">
                   <%= f.check_box(:website_enabled, {class: "custom-control-input", type: 'checkbox'}) %>
                   <%= f.label(:website_enabled, {class: 'custom-control-label cursor-pointer'}) do %>
-                    <strong><%= t('settings.sidebar.website_toggle_html', website: websites_root_url) %></strong>
+                    <strong><%= t('settings.sidebar.website_toggle_html', website: websites_root_url(locale: I18n.locale)) %></strong>
                   <% end %>
                   </div>
               </div>

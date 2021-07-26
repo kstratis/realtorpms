@@ -137,7 +137,7 @@
           <% if current_user.is_admin? current_account %>
 
             <%= content_tag :li, class: "menu-item" do %>
-              <%= link_to websites_root_url, class: "menu-link #{current_account.website_enabled? ? '' : 'disabled'}" do %>
+              <%= link_to websites_root_url(locale: I18n.locale), class: "menu-link #{current_account.website_enabled? ? '' : 'disabled'}" do %>
                 <%= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-www' %>
                 <%= content_tag :span, "Website" , class: 'menu-text menu-text-entry align-middle' %>
               <% end %>
