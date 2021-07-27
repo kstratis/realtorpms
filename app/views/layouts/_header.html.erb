@@ -6,7 +6,7 @@
     <div id="logo" class="top-bar-brand" data-turbolinks-permanent="true">
       <%= link_to account_root_path, class: 'navbar-brand top-nav__logo' do %>
         <% if current_account.avatar.attached? %>
-          <%= image_tag current_account.avatar, class: "d-inline-block align-top img-brand", height: '50px' %>
+          <%= image_tag current_account.avatar, class: "d-inline-block align-top img-brand user-logo-image" %>
         <% else %>
 <!--          <svg width="166px" height="27px" viewBox="0 0 166 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">-->
           <svg width="180" height="53" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
