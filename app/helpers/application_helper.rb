@@ -41,7 +41,13 @@ module ApplicationHelper
   end
 
   def version
-    `git rev-parse --short HEAD`
+    if Rails.env.development?
+      `git rev-parse --short HEAD`
+    else
+      Rails.cache.fetch(:version, expires_in: 10.minutes) do
+        File.read(Rails.root.join("REVISION")).first(8)
+      end
+    end
   end
 
   # +human_enum_name+ is defined in application_record from which all models inherit from as of Rails 5.
