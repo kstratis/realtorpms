@@ -1146,6 +1146,30 @@ li.page-item {
   background-image: url('../images/dinosaurus.svg');
 }
 
+.no-results-partners{
+  width: 200px;
+  height: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+  background-size: auto 135%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url('../images/employee.svg');
+}
+
+.no-results-properties{
+  width: 200px;
+  height: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+  background-size: auto 135%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url('../images/no_properties.svg');
+}
+
 .no-results-alt{
   width: 200px;
   height: 200px;

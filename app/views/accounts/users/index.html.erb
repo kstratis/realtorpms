@@ -54,6 +54,7 @@
                 search: t('js.users_search.placeholder'),
                 clear: t('js.datatables.clear'),
                 loading: t('loading'),
+                new_partner_cta: t('users.new_partner_cta'),
                 filters: {
                     title: t('js.datatables.filters.title'),
                     status: {
@@ -81,7 +82,8 @@
                 adminify_link: toggle_adminify_user_url('USERID'),
                 mass_delete_users_link: mass_delete_users_url,
                 mass_freeze_users_link: mass_freeze_users_url,
-                is_account_owner: current_user.is_owner?(current_account) || current_user.is_sysadmin?
+                is_account_owner: current_user.is_owner?(current_account) || current_user.is_sysadmin?,
+                new_user_link: new_user_path
             }
           }, prerender: false) %>
       <div class="clearfix"></div>

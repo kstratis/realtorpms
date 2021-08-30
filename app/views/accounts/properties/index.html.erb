@@ -73,9 +73,10 @@
               clients_endpoint: clients_url,
               assignmentships_endpoint: matches_url,
               properties_path: properties_path,
+              new_property_endpoint: new_property_path,
               hasFeedback: false,
               object_type: 'properties',
-              showControls: true
+              showControls: true,
           },
           i18n: {
               cfields: {
@@ -178,7 +179,8 @@
               },
               favourites_tooltip: t('js.properties_favourites_tooltip'),
               popover_title: t('properties.popover_client_title'),
-              popover_body: t('properties.popover_client_' + current_user.role(current_account))
+              popover_body: t('properties.popover_client_' + current_user.role(current_account)),
+              new_property_cta: t('properties.new_property_cta')
           }
       }, prerender: false) %>
     </div>

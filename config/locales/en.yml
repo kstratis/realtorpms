@@ -866,6 +866,7 @@ en:
     add: "Add client"
     list: "Client list"
   users:
+    new_partner_cta: "Add!"
     title: "Partners"
     flash_delete: "User was successfully deleted"
     flash_delete_multiple: "Action completed successfully"
@@ -923,6 +924,7 @@ en:
     assigned: "Assigned"
     assign_client: "Assign to partner"
   properties:
+    new_property_cta: "Add the first!"
     property: "Property"
     identifier: "ID"
     title: "Properties"

@@ -10,7 +10,7 @@ import FormComponents from './fields/FormComponents';
 import useFilterToggle from '../hooks/useFilterToggle';
 import useTooltips from '../hooks/useTooltips';
 import useMultiCheckbox from '../hooks/useMultiCheckbox';
-import ModalControlStrip from "../components/modals/ModalControlStrip";
+import ModalControlStrip from '../components/modals/ModalControlStrip';
 
 const UsersList = ({
   handlePageClick,
@@ -55,7 +55,6 @@ const UsersList = ({
     // which means weird behavior.
     // Turbolinks.visit(link);
     window.location.href = link;
-
   };
   // --------
   // const [masterCheck, setMasterCheck] = useState({});
@@ -184,7 +183,7 @@ const UsersList = ({
                               size: 'md',
                               classname: 'btn-success action-toolbar-group-btn',
                               tooltip: i18n.button.tooltip,
-                              isDisabled: !Object.keys(checkedItems).some(i => checkedItems[i])
+                              isDisabled: !Object.keys(checkedItems).some(i => checkedItems[i]),
                             },
                             modal: {
                               id: 'user-list-modal',
@@ -194,7 +193,7 @@ const UsersList = ({
                               origin: 'menu',
                               checkedItems: checkedItems,
                               massDeletePersonsEndpoint: meta.mass_delete_users_link,
-                              massFreezePersonsEndpoint: meta.mass_freeze_users_link
+                              massFreezePersonsEndpoint: meta.mass_freeze_users_link,
                             },
                           },
                         ]}
@@ -513,8 +512,11 @@ const UsersList = ({
                 </div>
               ) : (
                 <div className={`no-entries ${isLoading ? 'reduced-opacity' : ''}`}>
-                  <i className="no-results"> </i>
+                  <i className="no-results-partners"> </i>
                   <h3>{i18n['no_results']}</h3>
+                  <a href={meta['new_user_link']} className={'btn btn-lg btn-primary'}>
+                    {i18n['new_partner_cta']}
+                  </a>
                 </div>
               )}
             </div>

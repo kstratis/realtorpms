@@ -843,6 +843,7 @@ el:
     add: "Προσθήκη"
     list: "Κατάλογος"
   users:
+    new_partner_cta: "Πρόσθεσε έναν!"
     title: "Συνεργάτες"
     flash_delete: "Ο χρήστης διεγράφη επιτυχώς"
     flash_delete_multiple: "Η ενέργεια ολοκληρώθηκε επιτυχώς"
@@ -900,6 +901,7 @@ el:
     assigned: "Ανατεθειμένα"
     assign_client: "Ανάθεση σε συνεργάτη"
   properties:
+    new_property_cta: "Πρόσθεσε ένα!"
     property: "Ακίνητο"
     identifier: "ID"
     title: "Ακίνητα"
