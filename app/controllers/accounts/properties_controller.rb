@@ -7,7 +7,7 @@ module Accounts
     helper ForbiddenIds
 
     before_action :set_property, only: [:show, :edit, :update, :destroy]
-    before_action :redirect_to_index, :if => :forbid_access?, :only => [:edit, :update, :show, :destroy]
+    before_action :redirect_to_show, :if => :forbid_access?, :only => [:edit, :update, :destroy]
 
     after_action :log_action, only: [:create, :update, :destroy]
 
@@ -261,9 +261,9 @@ module Accounts
 
     private
 
-    def redirect_to_index
+    def redirect_to_show
       flash[:danger] = I18n.t('access_denied')
-      redirect_to properties_path
+      redirect_to @property
     end
 
     # Use callbacks to share common setup or constraints between actions.

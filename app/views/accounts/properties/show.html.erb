@@ -13,8 +13,10 @@
         <i class="fas fa-print colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp<%= t 'properties.print' %></span>
       </button>
 
-      <%= link_to edit_property_path(@property), class: 'btn btn-secondary btn-sm editable' do %>
-        <i class="fas fa-pen colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp;<%= t 'properties.edit.edit_button_alt' %></span>
+      <% if current_user.is_admin?(current_account) || current_user.properties.exists?(@property.id) %>
+        <%= link_to edit_property_path(@property), class: 'btn btn-secondary btn-sm editable' do %>
+          <i class="fas fa-pen colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp;<%= t 'properties.edit.edit_button_alt' %></span>
+        <% end %>
       <% end %>
 
       <% if current_user.is_admin?(current_account) %>
@@ -205,16 +207,12 @@
                                       <span class="align-middle"><%= client.full_name %></span>
                                     <% end %>
                                   <% else %>
-                                    <%= content_tag(:span, '*****', class: "align-middle forbidden-cursor", data: { toggle: "tooltip", placement: "top", title: t('access_denied') }) %>
+                                    <%= content_tag(:span, client.full_name, class: "align-middle cursor-default") %>
                                   <% end %>
                                 </div>
                               </td>
                               <td class="align-middle nowrap">
-                                <% if forbidden.blank? %>
-                                  <span><%= client.telephones.blank? ? '—' : client.telephones.split(/[\s,]+/).collect(&:strip).join(', ') %></span>
-                                <% else %>
-                                  <%= content_tag(:span, '*****', class: "forbidden-cursor", data: { toggle: "tooltip", placement: "top", title: t('access_denied') }) %>
-                                <% end %>
+                                <span><%= client.telephones.blank? ? '—' : client.telephones.split(/[\s,]+/).collect(&:strip).join(', ') %></span>
                               </td>
                             </tr>
                           <% end %>
