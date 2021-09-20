@@ -120,11 +120,14 @@ Rails.application.routes.draw do
   end
 
   match '*path',
-        to: redirect(status: 302) { |_, request| locale_handler(request) },
+        # to: redirect(status: 302) { |_, request| locale_handler(request) },
+        to: redirect(status: 302) { |_, request| "#{:el.to_s}#{request.path}" },
         constraints: lambda { |req| constraint_handler(req) },
         via: :get
 
-  match '', to: redirect(status: 302) { |_, request| request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first },
+  match '',
+        # to: redirect(status: 302) { |_, request| request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first },
+        to: redirect(status: 302) { |_, request| "#{:el.to_s}"},
         constraints: lambda { |req| req.path.exclude? 'rails/active_storage' },
         via: :get
 end
