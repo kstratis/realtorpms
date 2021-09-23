@@ -76,11 +76,7 @@ class PropertyEntry extends React.Component {
                     ? this.props.i18n['website_enabled']
                     : this.props.i18n['website_disabled']
                 }>
-                <div
-                  className={`active-indicator ${
-                    this.props.entry['website_enabled'] ? 'active-indicator-on' : 'active-indicator-off'
-                  }`}
-                />
+                <div className={'fas fa-globe fa-globe-on fa-fw'} />
               </div>
               <div className="list-group-item-body custom-list-group-item-body-padding">
                 <div className={'row d-flex justify-content-end'}>

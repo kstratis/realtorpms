@@ -942,6 +942,8 @@ en:
     clone:
       label: "Clone"
       prompt: "Are you sure you want to clone this?"
+    website_enabled: "Live!"
+    website_disabled: "Offline"
     print: "Print"
     info: "Details"
     map: "Map"
