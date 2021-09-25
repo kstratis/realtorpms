@@ -54,6 +54,10 @@ module Accounts
 
       Cpa.where(property: new_property).update_all(ownership: true)
 
+      unless current_user.is_admin?(current_account)
+        current_user.properties << new_property
+      end
+
       filter_properties(current_account.properties.includes(:location), params)
     end
 

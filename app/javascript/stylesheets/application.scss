@@ -2352,28 +2352,43 @@ a.toggle.active {
 }
 
 .properties-listing-controls{
+  visibility: hidden;
   position: absolute;
   right: 5px;
   bottom: 5px;
   border-radius: 5px;
+  //border: 1px solid black;
   background: #37474f;
-  padding: 2px 5px;
+  //background: #ffffff;
+  padding: 4px 5px;
   .control-button {
+    //border: 1px solid #37474f;
+    border-radius: 50%;
+    padding: 2px 4px 2px 4px;
+    //padding-right: 2px;
+    //padding-left: 2px;
     color: rgba(255, 255, 255, 0.8);
     &:hover{
-      .fa-copy {
-        color: #ffe000;
-      }
-      .fa-globe {
-        color: #ffe000;
-      }
-      .fa-pen {
-        color: #ffe000;
-      }
+      color: #37474f;
+      background: #ffe000;
     }
     &:not(:last-child) {
       margin-right: 5px;
     }
+  }
+}
+
+.property-index-avatar.on {
+  box-shadow: 0 0 0 1px #28a745 !important;
+}
+
+.property-index-avatar.off {
+  box-shadow: 0 0 0 1px #ff6333 !important;
+}
+
+.property-index-avatar:hover{
+  .properties-listing-controls {
+    visibility: visible;
   }
 }
 
@@ -2670,12 +2685,36 @@ a.icon-font-delete{
   cursor: help;
 }
 
-.fa-globe-on{
-  color: #28a745;
+.website-enabled {
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  cursor: help;
+  background: #fff;
+  //border-radius: 50%;
+  padding-left: 2px;
+  padding-right: 2px;
 }
 
-.fa-globe-off{
-  color: gray;
+.property-permissions{
+  position: absolute;
+  bottom: 4px;
+  left: 22px;
+  cursor: help;
+  background: #fff;
+  //border-radius: 50%;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+
+
+.active-indicator-on {
+  background-color: #28a745;
+}
+
+.active-indicator-off {
+  background-color: gray;
 }
 
 .active-indicator {

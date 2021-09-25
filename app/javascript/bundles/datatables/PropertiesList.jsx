@@ -336,6 +336,7 @@ const PropertiesList = ({
                     <PropertyEntry
                       key={entry.slug}
                       entry={entry}
+                      userEditable={entry['userEditable']}
                       filtersOpen={filtersOpen}
                       handleClone={handleClone}
                       i18n={i18n}

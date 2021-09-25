@@ -919,8 +919,8 @@ el:
     clone:
       label: "Δημιουργία γρήγορου αντιγράφου"
       prompt: "Είσαι βέβαιος πως θέλεις να δημιουργηθεί ένα ακριβές αντίγραφο;"
-    website_enabled: "Ορατό στο website σου"
-    website_disabled: "Offline"
+    website_enabled: "Ορατό στο website"
+    website_disabled: "Μη ορατό στο website"
     print: "Εκτύπωση"
     info: "Λεπτομέρειες"
     map: "Χάρτης"
