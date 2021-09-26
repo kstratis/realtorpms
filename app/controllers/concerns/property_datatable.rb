@@ -120,41 +120,32 @@ module PropertyDatatable
     @propertieslist = {:dataset => Array.new}
 
     @properties.each do |property|
-      if forbidden_entity_ids('properties').include?(property.id)
-        hash = {
-            purpose: I18n.t("activerecord.attributes.property.enums.businesstype.#{property.businesstype}_banner"),
-            slug: property.slug,
-            avatar: property.avatar.attached? ? url_for(property.avatar) : nil,
-            allow_view: false,
-            access_msg: I18n.t('access_denied')
-        }
-      else
-        hash = {
-            id: property.id,
-            title: property.title,
-            description: property.description,
-            mini_heading: mini_heading(property),
-            size: property.size ? I18n.t('activerecord.attributes.property.size_meter_html', size: property.size.to_s) : '',
-            price: property.price ? ActionController::Base.helpers.number_to_currency(property.price) : '',
-            pricepersqmeter: property.price && property.size ? "#{ActionController::Base.helpers.number_to_currency(property.pricepersqmeter)} / #{I18n.t('activerecord.attributes.property.sm_html')}" : '',
-            location: property.location.localname,
-            view_entity_path: property_path(property),
-            edit_entity_path: edit_property_path(property),
-            fav_entity_path: property_favorites_path(property),
-            clone_entity_path: clone_property_path(property),
-            purpose: I18n.t("activerecord.attributes.property.enums.businesstype.#{property.businesstype}_banner"),
-            businesstype: property.businesstype,
-            avatar: pick_avatar_pick(property),
-            slug: property.slug,
-            website_enabled: property.website_enabled,
-            # isFaved: property.is_faved_by?(current_user),
-            # assignments: property.properties.count,
-            # registration: property.created_at.to_formatted_s(:long)
-            # registration: property.created_at.strftime('%d %b. %y'),
-            registration: l(property.created_at, format: :property),
-            allow_view: true
-        }
-      end
+      hash = {
+        id: property.id,
+        title: property.title,
+        description: property.description,
+        mini_heading: mini_heading(property),
+        size: property.size ? I18n.t('activerecord.attributes.property.size_meter_html', size: property.size.to_s) : '',
+        price: property.price ? ActionController::Base.helpers.number_to_currency(property.price) : '',
+        pricepersqmeter: property.price && property.size ? "#{ActionController::Base.helpers.number_to_currency(property.pricepersqmeter)} / #{I18n.t('activerecord.attributes.property.sm_html')}" : '',
+        location: property.location.localname,
+        view_entity_path: property_path(property),
+        edit_entity_path: edit_property_path(property),
+        fav_entity_path: property_favorites_path(property),
+        clone_entity_path: clone_property_path(property),
+        purpose: I18n.t("activerecord.attributes.property.enums.businesstype.#{property.businesstype}_banner"),
+        businesstype: property.businesstype,
+        avatar: pick_avatar_pick(property),
+        slug: property.slug,
+        website_enabled: property.website_enabled,
+        userEditable: current_user.is_admin?(current_account) || current_user.properties.exists?(property.id),
+        # isFaved: property.is_faved_by?(current_user),
+        # assignments: property.properties.count,
+        # registration: property.created_at.to_formatted_s(:long)
+        # registration: property.created_at.strftime('%d %b. %y'),
+        registration: l(property.created_at, format: :property),
+        allow_view: true
+      }
       @propertieslist[:dataset] << hash
     end
 

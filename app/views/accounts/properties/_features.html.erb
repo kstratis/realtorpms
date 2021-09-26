@@ -8,7 +8,11 @@
             <div class="table-icon-wrapper">
               <i class="pr-icon xs <%= value[:icon] %>"></i>
             </div>
-            <span class="align-middle">&nbsp;&nbsp;<%= t("activerecord.attributes.property.#{value[:label].to_s}_title").html_safe %></span>
+            <% if value[:label] == 'pricepersqmeter' %>
+              <span class="align-middle">&nbsp;&nbsp;<%= t("activerecord.attributes.property.#{value[:label].to_s}_title_html") %></span>
+            <% else %>
+              <span class="align-middle">&nbsp;&nbsp;<%= t("activerecord.attributes.property.#{value[:label].to_s}_title") %></span>
+            <% end %>
           </div>
         </td>
         <td class="align-middle nowrap">

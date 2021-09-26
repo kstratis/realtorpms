@@ -55,8 +55,9 @@ class PropertyEntry extends React.Component {
             <a
               href={this.props.entry['allow_view'] ? this.props.entry['view_entity_path'] : ''}
               className={`list-group-item list-group-item-action property-index-avatar ${
-                this.props.entry['allow_view'] ? '' : 'disabled'
-              }`}>
+                this.props.entry['website_enabled'] ? 'on' : 'off'
+              }`}
+            title={this.props.entry['website_enabled'] ? this.props.i18n['website_enabled'] : this.props.i18n['website_disabled']}>
               <div className="list-group-item-figure rounded-left ">
                 <div className={`thumb-container ${this.props.entry['allow_view'] ? '' : 'frosty'}`}>
                   {this.props.entry['avatar'] ? (
@@ -68,19 +69,6 @@ class PropertyEntry extends React.Component {
               </div>
               <div className={`card-businesstype-header ${this.props.entry['allow_view'] ? '' : 'frosty'}`}>
                 <span className={'highlighted-bg highlighted-fg'}>{this.props.entry.purpose}</span>
-              </div>
-              <div
-                className="special-active"
-                title={
-                  this.props.entry['website_enabled']
-                    ? this.props.i18n['website_enabled']
-                    : this.props.i18n['website_disabled']
-                }>
-                <div
-                  className={`active-indicator ${
-                    this.props.entry['website_enabled'] ? 'active-indicator-on' : 'active-indicator-off'
-                  }`}
-                />
               </div>
               <div className="list-group-item-body custom-list-group-item-body-padding">
                 <div className={'row d-flex justify-content-end'}>
@@ -148,15 +136,16 @@ class PropertyEntry extends React.Component {
                       </table>
                       {this.props.showControls ? (
                         <div className={'properties-listing-controls d-flex justify-content-center'}>
+                          {this.props.entry['userEditable'] ?
                           <div
-                            title={'Επεξεργασία'}
+                            title={this.props.i18n.edit}
                             className={'edit-button control-button'}
                             onClick={e => {
                               e.preventDefault();
                               Turbolinks.visit(this.props.entry['edit_entity_path']);
                             }}>
-                            <i className={'fas fa-pen fa-fw'} />
-                          </div>
+                            <i className={`fas fa-pen fa-fw`} />
+                          </div> : '' }
                           <div
                             title={this.props.i18n.clone.label}
                             className={'clone-button control-button'}
@@ -171,7 +160,7 @@ class PropertyEntry extends React.Component {
                                 e.preventDefault();
                               }
                             }}>
-                            <i className={'fas fa-copy fa-fw'} />
+                            <i className={'fas fa-copy fa-copy-on fa-fw'} />
                           </div>
                         </div>
                       ) : (

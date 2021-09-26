@@ -424,6 +424,6 @@ module PropertiesHelper
     end
     wording
   end
-  #---
 end
+
 

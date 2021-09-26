@@ -234,15 +234,31 @@ class Property < ApplicationRecord
   end
 
   def viewable_dropdown_clients(account, user)
-    if user.role(account) == 'user'
-      list = clients.map { |c| { 'label': user.client_ids.include?(c.id) ? c.full_name : '*****', 'value': c.id, isFixed: !user.client_ids.include?(c.id)} }
-    else
-      list = clients.map { |c| { 'label': c.full_name, 'value': c.id, isFixed: false} }
+    clients.map do |c|
+      { 'label': c.full_name,
+        'value': c.id,
+        isFixed: option_meta(account, user, c) }
     end
-    list
+  end
+
+  def render_owner(user, client, account)
+    if user.clients.where(account: account).exists?(client.id) || user.is_admin?(account)
+      :link
+    elsif user.properties.where(account: account).exists?(id)
+      :text
+    else
+      :none
+    end
   end
 
   private
+
+  # Determine whether an owner can be removed when editing a property
+  def option_meta(account, user, client)
+    return false if user.is_admin?(account)
+
+    !user.client_ids.include?(client.id)
+  end
 
   # In the 'compound' extra fields for roofdeck, storage, garden and plot where each one comes with its own input,
   # make sure that if unchecked on update action, the existing input value will also be cleared.
