@@ -155,7 +155,7 @@
                         <i class="pr-icon xs notes"></i>
                       </div>
 
-                      <span class="align-middle"><span class="property-cover-popover" data-trigger="hover" data-toggle="popover" data-placement="auto" data-content="<%= t 'properties.show.tooltip_internal_notes' %>"><i class="fas fa-lock fa-fw"></i>&nbsp; <%= t 'activerecord.attributes.property.notes_title' %></span> </span>
+                      <span class="align-middle"><span class="property-cover-popover" data-trigger="hover" data-toggle="popover" data-placement="auto" data-content="<%= t 'properties.show.tooltip_internal_notes' %>">&nbsp; <%= t 'activerecord.attributes.property.notes_title' %></span> </span>
                     </div>
                   </div><!-- .card-body -->
                   <div class="card-body">
@@ -176,7 +176,7 @@
                       <div class="table-icon-wrapper">
                         <i class="pr-icon xs info"></i>
                       </div>
-                      <span class="align-middle"><span class="property-cover-popover" data-trigger="hover" data-toggle="popover" data-placement="auto" data-content="<%= t "properties.show.tooltip_owner_#{current_user.role(current_account)}" %>"><i class="fas fa-lock fa-fw"></i>&nbsp; <%= t 'activerecord.attributes.property.owner_title' %></span> </span>
+                      <span class="align-middle"><span class="property-cover-popover" data-trigger="hover" data-toggle="popover" data-placement="auto" data-content="<%= t "properties.show.tooltip_owner_#{current_user.role(current_account)}" %>">&nbsp; <%= t 'activerecord.attributes.property.owner_title' %></span> </span>
                     </div>
                   </div><!-- .card-body -->
                   <div class="card-body">
@@ -195,28 +195,35 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <div class="table-responsive">
-                          <% forbidden = nil %>
-                          <% property_owners.each do |client| %>
-                            <% forbidden = forbidden_entity_ids('clients').include?(client.id) %>
-                            <tr>
-                              <td class="align-middle nowrap">
-                                <div class="table-entry">
-                                  <% if forbidden.blank? %>
-                                    <%= link_to client_path(client), data: { toggle: "tooltip", placement: "top", title: t('properties.show.client_tooltip', user: client.full_name) } do %>
-                                      <span class="align-middle"><%= client.full_name %></span>
+                          <div class="table-responsive">
+                            <% property_owners.each do |property_owner| %>
+                              <% print_type = @property.render_owner(current_user, property_owner, current_account) %>
+                                <tr>
+                                  <td class="align-middle nowrap"> <!-- Owner name -->
+                                    <div class="table-entry">
+                                    <% case print_type
+                                       when :link %>
+                                        <%= link_to client_path(property_owner), data: { toggle: "tooltip", placement: "top", title: t('properties.show.client_tooltip', user: property_owner.full_name) } do %>
+                                          <span class="align-middle"><%= property_owner.full_name %></span>
+                                        <% end %>
+                                    <% when :text %>
+                                        <%= content_tag(:span, property_owner.full_name, class: "align-middle cursor-default") %>
+                                      <% when :none %>
+                                        <%= content_tag(:span, nil, class: "align-middle forbidden-cursor fas fa-lock fa-fw", data: { toggle: "tooltip", placement: "top", title: t('access_denied') }) %>
                                     <% end %>
-                                  <% else %>
-                                    <%= content_tag(:span, client.full_name, class: "align-middle cursor-default") %>
-                                  <% end %>
-                                </div>
-                              </td>
-                              <td class="align-middle nowrap">
-                                <span><%= client.telephones.blank? ? '—' : client.telephones.split(/[\s,]+/).collect(&:strip).join(', ') %></span>
-                              </td>
-                            </tr>
-                          <% end %>
-                        </div>
+                                    </div>
+                                  </td>
+                                  <td class="align-middle nowrap"> <!-- Owner telephone -->
+                                    <% case print_type
+                                       when :link, :text %>
+                                        <span><%= property_owner.telephones.blank? ? '—' : property_owner.telephones.split(/[\s,]+/).collect(&:strip).join(', ') %></span>
+                                    <% when :none %>
+                                      <%= content_tag(:span, nil, class: "align-middle forbidden-cursor fas fa-lock fa-fw", data: { toggle: "tooltip", placement: "top", title: t('access_denied') }) %>
+                                    <% end %>
+                                  </td>
+                                </tr>
+                              <% end %>
+                          </div>
                         </tbody>
                       <% end %>
                     </table>

@@ -895,6 +895,7 @@ en:
       users: "Users"
       assignments: "Assignments"
       processed: "Processed"
+      no_assigned_client: "The partner doesn't seem to have any clients assigned."
       toolbar:
         assignment_title: "Assignment"
         assignment_tooltip: "Assign properties"

@@ -48,6 +48,12 @@
                   <span class="d-none d-md-inline tab-text">&nbsp; <%= t('assignments.assigned') %></span>
                   </span>
                 </a>
+                <a href="#clients" class="nav-link custom " data-toggle="tab" role="tab" aria-selected="false">
+                  <span class="tab-title-container-partner">
+                  <i class="menu-icon fas fa-user fa-fw"></i>
+                  <span class="d-none d-md-inline tab-text">&nbsp; Πελάτες</span>
+                  </span>
+                </a>
 
               </nav><!-- /.nav -->
             </div>
@@ -194,6 +200,70 @@
                       }
                   }
               }, prerender: false) %>
+            </div>
+
+            <div class="tab-pane fade" id="assignments" role="tabpanel" aria-labelledby="subscription-tab">
+              <%= react_component('ClientPrefsListWithDatatable', props: {
+                initial_payload: {
+                  dataset_wrapper: @propertieslist,
+                  results_per_page: @results_per_page,
+                  total_entries: @total_entries,
+                  current_page: @current_page,
+                  initial_search: @initial_search,
+                  initial_sorting: @initial_sorting,
+                  initial_ordering: @initial_ordering,
+                  locations_endpoint: properties_locations_url,
+                  clients_endpoint: users_url,
+                  client_endpoint: user_path(@user),
+                  assignmentships_endpoint: matches_url,
+                  properties_path: properties_path,
+                  hasFeedback: false,
+                  object_type: 'clientprefslist',
+                  showControls: false
+                },
+                i18n: {
+                  no_results: t('js.components.select.noresults'),
+                  website_enabled: t('properties.website_enabled'),
+                  website_disabled: t('properties.website_disabled'),
+                  clone: {
+                    label: t('properties.clone.label'),
+                    prompt: t('properties.clone.prompt')
+                  }
+                }
+              }, prerender: false) %>
+            </div>
+
+            <div class="tab-pane fade" id="clients" role="tabpanel" aria-labelledby="offering-tab">
+              <div class="row">
+                <div class="col-lg-6 col-12 offset-lg-3">
+                  <% clients = @user.clients.where(account: current_account) %>
+                  <% if clients.length > 0 %>
+                    <div class="list-group custom list-group-bordered mb-3">
+                      <% clients.map do |client| %>
+                        <%= link_to client_path(client), class: "list-group-item list-group-item-action", data: { turbolinks: 'true' } do %>
+                          <div class="list-group-item-figure">
+                            <div class="tile bg-success">
+                              <i class="fas fa-user fa-fw"></i>
+                            </div>
+                          </div>
+                          <div class="list-group-item-body"><strong><%= client.last_name %></strong>
+                            - <%= client.full_name %>
+                            - <%= client.telephones %></div>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  <% else %>
+                    <div class="d-flex justify-content-center">
+                      <p class="text-justify font-italic mb-4 max-300">
+                        <span><%= t('users.show.no_assigned_client') %></span></p>
+                    </div>
+                    <div class="text-center reduced-opacity">
+                      <%= image_pack_tag 'media/images/no_stored_searches.svg', class: "img-fluid max-300" %>
+                    </div>
+
+                  <% end %>
+                </div>
+              </div>
             </div>
 
           </div>

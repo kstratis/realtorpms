@@ -241,6 +241,16 @@ class Property < ApplicationRecord
     end
   end
 
+  def render_owner(user, client, account)
+    if user.clients.where(account: account).exists?(client.id) || user.is_admin?(account)
+      :link
+    elsif user.properties.where(account: account).exists?(id)
+      :text
+    else
+      :none
+    end
+  end
+
   private
 
   # Determine whether an owner can be removed when editing a property
