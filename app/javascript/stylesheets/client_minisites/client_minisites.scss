@@ -357,3 +357,20 @@ select.multi-ajax-select{
     border-top: unset;
   }
 }
+
+.pinned{
+  top: -38px;
+  background: mediumpurple;
+
+  padding: 10px;
+  //border: 2px solid gold;
+  border-radius: 5px;
+  transform: rotate(3deg);
+  .pinned-text{
+    color: #ffffff;
+    letter-spacing: 2px;
+    text-align: center;
+    //color: red;
+    font-weight: bold;
+  }
+}

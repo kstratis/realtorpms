@@ -74,6 +74,10 @@
   </div>
 
   <div id="results-container" class="mt-5">
+    <div class="pinned col-6 offset-3 col-md-2 offset-md-5">
+      <div class="pinned-text"><%= @results_label %></div>
+    </div>
+
     <% if @properties.blank? %>
       <div class="d-block col-4 offset-4 p-4">
         <%= image_pack_tag 'media/images/no_stored_searches.svg', class: "img-fluid rounded mx-auto d-block" %>

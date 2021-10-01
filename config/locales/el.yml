@@ -35,7 +35,7 @@ el:
   price_placeholder: '-Όλες-'
   submit: "Αναζήτηση"
   clear: "Επαναφορά"
-  pinned: "Επιλεγμένα ακίνητα"
+  pinned: "Προτεινόμενα"
   home: "Αρχική"
   about: "Εταιρία"
   contact: "Επικοινωνία"

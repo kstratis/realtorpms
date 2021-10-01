@@ -56,7 +56,12 @@ export default class extends Controller {
   }
 
   filter() {
-    const url = `${window.location.pathname}?${this.params}`;
+    let url;
+    if (this.params !== ''){
+      url = `${window.location.pathname}?${this.params}`;
+    } else {
+      url = `${window.location.pathname}?search=all`;
+    }
     this.navigate(url)
   }
 
