@@ -1,5 +1,5 @@
 <div class="index-container pt-5">
-  <div data-controller="filters">
+  <div data-controller="filters" data-filters-url-value="<%= results_count_path %>">
     <div class="container container-fluid-xl header">
 
       <div class="row">
@@ -22,7 +22,8 @@
                          ),
                          include_blank: t('js.components.bootstrap_select.noneSelectedText'),
                          class: 'form-control category-select',
-                         data: { 'filters-target': "filter", action: 'filters#setCount' }) %>
+                         data: { 'filters-target': "filter",
+                                 action: 'filters#setCount' }) %>
 
         </div>
 

@@ -1,10 +1,11 @@
 // filters_controller.js
-import { Controller } from 'stimulus';
+import { Controller } from '@hotwired/stimulus';
 import Rails from '@rails/ujs';
 import URLSearchParams from '@ungap/url-search-params';
 
 export default class extends Controller {
   static targets = ['filter', 'count', 'multiFilter'];
+  static values = { url: String }
 
   connect() {
     // Initialize bootstrap-select
@@ -19,17 +20,18 @@ export default class extends Controller {
   }
 
   setResultCounterVisibility(params) {
-    if (params.toString().length){
+    if (this._counterVisibilityConditions(params)){
       $('#results-count-container').removeClass('d-none');
       $('#clear-form').attr('disabled', false);
-    } else {
+    }
+    else {
       $('#results-count-container').addClass('d-none');
       $('#clear-form').attr('disabled', true);
     }
   }
 
   setCount() {
-    const url = `/results-count?${this.params}`;
+    const url = `${this.urlValue}?${this.params}`;
     this.fetchCount(url);
   }
 
@@ -56,12 +58,9 @@ export default class extends Controller {
   }
 
   filter() {
-    let url;
-    if (this.params !== ''){
-      url = `${window.location.pathname}?${this.params}`;
-    } else {
-      url = `${window.location.pathname}?search=all`;
-    }
+    const url = this.params === ''
+      ? `${window.location.pathname}?search=all`
+      : `${window.location.pathname}?${this.params}`
     this.navigate(url)
   }
 
@@ -87,5 +86,14 @@ export default class extends Controller {
     });
 
     return params.toString();
+  }
+
+  // Show the results counter if
+  // (1) The ajax request has filter parameters
+  // (2) The ajax request has no filter parameters but the existing
+  //     address bar contains `?search=all`.
+  _counterVisibilityConditions(params){
+    return params.toString().length ||
+      ((params.toString() === '') && window.location.search)
   }
 }

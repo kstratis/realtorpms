@@ -8,8 +8,8 @@ Rails.application.routes.draw do
       scope ":locale", locale: /en|el/ do
         root to: 'websites#index', as: :websites_root
         get '/properties/:id', to: 'websites#show', as: :website_property
+        get '/results-count', to: 'websites#count', as: :results_count
       end
-      get '/results-count', to: 'websites#count', as: :results_count
 
       # Admin area
       scope 'app' do
