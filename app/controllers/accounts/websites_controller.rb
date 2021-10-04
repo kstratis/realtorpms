@@ -13,7 +13,7 @@ module Accounts
                     elsif params[:search] == 'all'
                       current_account.properties.website_enabled.order(created_at: :desc)
                     else
-                      current_account.properties.website_enabled.order(created_at: :desc).limit(3)
+                      current_account.properties.website_enabled.pinned.order(created_at: :desc).limit(3)
                     end
       @pagy, @properties = pagy(@properties)
       @results_label = if request.query_string.present?

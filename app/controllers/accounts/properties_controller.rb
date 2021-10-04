@@ -365,6 +365,7 @@ module Accounts
                                        :adxe,
                                        :adspitogatos,
                                        :website_enabled,
+                                       :pinned,
                                        :clients,
                                        :avatar,
                                        :map_url,

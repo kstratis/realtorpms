@@ -516,6 +516,10 @@ el:
             floor_feedback: "Επιλέξτε όροφο"
             construction_feedback: "Έτος κατασκευής"
             levels_feedback: "Αριθμός επιπέδων"
+            website_enabled: "Ορατό στο website"
+            website_disabled: "Μη ορατό στο website"
+            pinned: "Προτεινόμενο"
+            pinned_tooltip: "Να φαίνεται πάντα στο website όταν η αναζήτηση είναι ανενεργή"
           step2:
             anchor: "Πληροφορίες"
             title: "Συμπληρωματικές πληροφορίες"
@@ -920,8 +924,6 @@ el:
     clone:
       label: "Δημιουργία γρήγορου αντιγράφου"
       prompt: "Είσαι βέβαιος πως θέλεις να δημιουργηθεί ένα ακριβές αντίγραφο;"
-    website_enabled: "Ορατό στο website"
-    website_disabled: "Μη ορατό στο website"
     print: "Εκτύπωση"
     info: "Λεπτομέρειες"
     map: "Χάρτης"

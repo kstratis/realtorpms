@@ -543,6 +543,10 @@ en:
             floor_feedback: "Pick a floor"
             construction_feedback: "Construction year"
             levels_feedback: "Floors"
+            website_enabled: "Live!"
+            website_disabled: "Offline"
+            pinned: "Pinned"
+            pinned_tooltip: "Pinned property on the website"
           step2:
             anchor: "Info"
             title: "Complementary information"
@@ -943,8 +947,6 @@ en:
     clone:
       label: "Clone"
       prompt: "Are you sure you want to clone this?"
-    website_enabled: "Live!"
-    website_disabled: "Offline"
     print: "Print"
     info: "Details"
     map: "Map"
