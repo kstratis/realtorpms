@@ -2804,3 +2804,23 @@ a.icon-font-delete{
 .cursor-default{
   cursor: default;
 }
+
+.badges{
+  position: absolute;
+  top: -13px;
+  right: 0;
+}
+
+.pinned-sign{
+  color: #e91e1e;
+  z-index: 100;
+}
+
+.pinned-globe{
+  color: dodgerblue;
+  z-index: 100;
+}
+
+.pinned-sign + .pinned-globe{
+  padding-left: 5px;
+}

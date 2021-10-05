@@ -138,6 +138,7 @@ module PropertyDatatable
         avatar: pick_avatar_pick(property),
         slug: property.slug,
         website_enabled: property.website_enabled,
+        pinned: property.pinned,
         userEditable: current_user.is_admin?(current_account) || current_user.properties.exists?(property.id),
         # isFaved: property.is_faved_by?(current_user),
         # assignments: property.properties.count,

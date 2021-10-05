@@ -52,12 +52,17 @@ class PropertyEntry extends React.Component {
           </div>
 
           <div className="list-group list-group-media mb-3 d-none d-sm-block">
+
             <a
               href={this.props.entry['allow_view'] ? this.props.entry['view_entity_path'] : ''}
               className={`list-group-item list-group-item-action property-index-avatar ${
                 this.props.entry['website_enabled'] ? 'on' : 'off'
               }`}
             title={this.props.entry['website_enabled'] ? this.props.i18n['website_enabled'] : this.props.i18n['website_disabled']}>
+              <div className={'d-flex justify-content-end badges'}>
+                {this.props.entry['pinned'] ? <div className="pinned-sign"><i className="fas fa-bookmark fa-lg"/></div> : '' }
+                {this.props.entry['website_enabled'] ? <div className="pinned-globe"><i className="fas fa-globe fa-lg"/></div> : '' }
+              </div>
               <div className="list-group-item-figure rounded-left ">
                 <div className={`thumb-container ${this.props.entry['allow_view'] ? '' : 'frosty'}`}>
                   {this.props.entry['avatar'] ? (

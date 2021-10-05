@@ -374,3 +374,11 @@ select.multi-ajax-select{
     font-weight: bold;
   }
 }
+
+.pinned-sign{
+  color: #e91e1e;
+  position: absolute;
+  top: -12px;
+  right: -5px;
+  z-index: 100;
+}
