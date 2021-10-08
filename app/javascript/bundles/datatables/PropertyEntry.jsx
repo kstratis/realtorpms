@@ -52,7 +52,6 @@ class PropertyEntry extends React.Component {
           </div>
 
           <div className="list-group list-group-media mb-3 d-none d-sm-block">
-
             <a
               href={this.props.entry['allow_view'] ? this.props.entry['view_entity_path'] : ''}
               className={`list-group-item list-group-item-action property-index-avatar ${

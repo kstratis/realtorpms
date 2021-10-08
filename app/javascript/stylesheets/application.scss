@@ -2821,6 +2821,8 @@ a.icon-font-delete{
   z-index: 100;
 }
 
+// This means .pinned-sign followed by .pinned-globe.
+// Then and only then apply css rules to the second
 .pinned-sign + .pinned-globe{
   padding-left: 5px;
 }
