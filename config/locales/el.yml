@@ -516,6 +516,10 @@ el:
             floor_feedback: "Επιλέξτε όροφο"
             construction_feedback: "Έτος κατασκευής"
             levels_feedback: "Αριθμός επιπέδων"
+            website_enabled: "Ορατό στο portal"
+            website_disabled: "Μη ορατό στο portal"
+            pinned: "Καρφιτσωμένο"
+            pinned_tooltip: "Να φαίνεται πάντα στο website όταν η αναζήτηση είναι ανενεργή"
           step2:
             anchor: "Πληροφορίες"
             title: "Συμπληρωματικές πληροφορίες"
@@ -920,8 +924,6 @@ el:
     clone:
       label: "Δημιουργία γρήγορου αντιγράφου"
       prompt: "Είσαι βέβαιος πως θέλεις να δημιουργηθεί ένα ακριβές αντίγραφο;"
-    website_enabled: "Ορατό στο website"
-    website_disabled: "Μη ορατό στο website"
     print: "Εκτύπωση"
     info: "Λεπτομέρειες"
     map: "Χάρτης"
@@ -951,7 +953,7 @@ el:
       photo_header: "Φωτογραφία εξωφύλλου"
       photo_subheader: "Κάντε κλικ για ν'αλλάξετε την φωτογραφία εξωφύλλου"
     edit:
-      website_enabled_html: "Να εμφανίζεται στο <u><a target=\"_blank\" href=\"%{website}\">website</a></u>."
+      website_enabled_html: "Ορατό στο <u><a target=\"_blank\" href=\"%{website}\">portal</a></u> σου."
       avatar_title: "Φωτογραφία εξωφύλλου"
       breadcrumb: "Ακίνητα"
       heading: "Επεξεργασία"

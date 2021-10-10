@@ -144,8 +144,16 @@
                         <%= property.label(:website_enabled, {class: 'custom-control-label cursor-pointer'}) do %>
                           <strong><%= t('properties.edit.website_enabled_html', website: websites_root_url(locale: I18n.locale)) %></strong>
                         <% end %>
+                        <div class="d-inline pinned-globe"><i class="fas fa-globe"></i></div>
                       </div>
 
+                      <div class="custom-control custom-switch pinned-control">
+                        <%= property.check_box(:pinned, {class: "custom-control-input", type: 'checkbox'}) %>
+                        <%= property.label(:pinned, {class: 'custom-control-label cursor-pointer'}) do %>
+                          <strong><%= t('js.forms.properties.wizard.step1.pinned') %></strong>
+                        <% end %>
+                        <div class="d-inline pinned-bookmark"><i class="fas fa-bookmark"></i></div>
+                      </div>
 
                       <div class="row">
                         <div class="col-md-12">
@@ -153,7 +161,7 @@
                           <!-- .d-flex -->
                           <div class="d-flex">
                             <div class="flex-grow-1"></div>
-                            <%= property.submit t('properties.edit.edit_button'), class: 'btn btn-primary ml-auto submit mr-1', "data-validate": "fieldset-1" %>
+                            <%= property.submit t('properties.edit.edit_button'), class: 'btn btn-danger ml-auto submit mr-1', "data-validate": "fieldset-1" %>
                             <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset-1"><%= t('js.forms.properties.wizard.next') %></button>
                           </div><!-- /.d-flex -->
                         </div>
@@ -451,7 +459,7 @@
                         <div class="flex-grow-1">
                           <button type="button" class="prev btn btn-secondary" data-validate="fieldset-2"><%= t('js.forms.properties.wizard.previous') %></button>
                         </div>
-                        <%= property.submit t('properties.edit.edit_button'), class: 'btn btn-primary ml-auto submit mr-1', "data-validate": "fieldset-2" %>
+                        <%= property.submit t('properties.edit.edit_button'), class: 'btn btn-danger ml-auto submit mr-1', "data-validate": "fieldset-2" %>
                         <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset-2"><%= t('js.forms.properties.wizard.next') %></button>
                       </div>
 
@@ -512,7 +520,7 @@
                         <div class="flex-grow-1">
                           <button type="button" class="prev btn btn-secondary" data-validate="fieldset-3"><%= t('js.forms.properties.wizard.previous') %></button>
                         </div>
-                        <%= property.submit t('properties.edit.edit_button'), class: 'btn btn-primary ml-auto submit mr-1', "data-validate": "fieldset-3" %>
+                        <%= property.submit t('properties.edit.edit_button'), class: 'btn btn-danger ml-auto submit mr-1', "data-validate": "fieldset-3" %>
                         <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset-3"><%= t('js.forms.properties.wizard.next') %></button>
                       </div>
                     </fieldset><!-- /fieldset -->
@@ -620,7 +628,7 @@
                         <div class="flex-grow-1">
                           <button type="button" class="prev btn btn-secondary" data-validate="fieldset-4"><%= t('js.forms.properties.wizard.previous') %></button>
                         </div>
-                        <%= property.submit t('properties.edit.edit_button'), class: 'btn btn-primary ml-auto submit mr-1', "data-validate": "fieldset-4" %>
+                        <%= property.submit t('properties.edit.edit_button'), class: 'btn btn-danger ml-auto submit mr-1', "data-validate": "fieldset-4" %>
                         <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset-4"><%= t('js.forms.properties.wizard.next') %></button>
                       </div>
                     </fieldset><!-- /fieldset -->
@@ -679,7 +687,7 @@
                         <div class="flex-grow-1">
                           <button type="button" class="prev btn btn-secondary flex-grow-1" data-validate="fieldset-5"><%= t('js.forms.properties.wizard.previous') %></button>
                         </div>
-                        <%= property.submit t('properties.edit.edit_button'), class: 'btn btn-primary ml-auto submit mr-1', "data-validate": "fieldset-5" %>
+                        <%= property.submit t('properties.edit.edit_button'), class: 'btn btn-danger ml-auto submit mr-1', "data-validate": "fieldset-5" %>
                         <button type="button" class="next btn btn-primary ml-auto" data-validate="fieldset-5"><%= t('js.forms.properties.wizard.next') %></button>
                       </div>
 

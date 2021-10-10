@@ -2378,13 +2378,13 @@ a.toggle.active {
   }
 }
 
-.property-index-avatar.on {
-  box-shadow: 0 0 0 1px #28a745 !important;
-}
-
-.property-index-avatar.off {
-  box-shadow: 0 0 0 1px #ff6333 !important;
-}
+//.property-index-avatar.on {
+//  box-shadow: 0 0 0 1px #28a745 !important;
+//}
+//
+//.property-index-avatar.off {
+//  box-shadow: 0 0 0 1px #ff6333 !important;
+//}
 
 .property-index-avatar:hover{
   .properties-listing-controls {
@@ -2674,7 +2674,7 @@ a.icon-font-delete{
   cursor: pointer;
 }
 
-.website-enabled-control{
+.website-enabled-control, .pinned-control{
   z-index: 0;
 }
 
@@ -2803,4 +2803,31 @@ a.icon-font-delete{
 
 .cursor-default{
   cursor: default;
+}
+
+.badges{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  background: #ffffff;
+  padding: 2px 5px 2px 5px;
+  box-shadow: 0 0 0 1px rgba(20, 20, 31, 0.05), 0 1px 3px 0 rgba(20, 20, 31, 0.15);
+  border-radius: 3px;
+}
+
+.pinned-bookmark{
+  color: #e91e1e;
+  z-index: 100;
+}
+
+.pinned-globe{
+  color: dodgerblue;
+  z-index: 100;
+}
+
+// This means .pinned-bookmark followed by .pinned-globe.
+// Then and only then apply css rules to the second
+.pinned-bookmark + .pinned-globe{
+  padding-left: 5px;
 }

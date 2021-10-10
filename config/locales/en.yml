@@ -543,6 +543,10 @@ en:
             floor_feedback: "Pick a floor"
             construction_feedback: "Construction year"
             levels_feedback: "Floors"
+            website_enabled: "Visible on your portal"
+            website_disabled: "Offline"
+            pinned: "Pinned"
+            pinned_tooltip: "Pinned"
           step2:
             anchor: "Info"
             title: "Complementary information"
@@ -943,8 +947,6 @@ en:
     clone:
       label: "Clone"
       prompt: "Are you sure you want to clone this?"
-    website_enabled: "Live!"
-    website_disabled: "Offline"
     print: "Print"
     info: "Details"
     map: "Map"
@@ -974,7 +976,7 @@ en:
       photo_header: "Cover photo"
       photo_subheader: "Click to change the cover photo for the property"
     edit:
-      website_enabled_html: "Show on <u><a target=\"_blank\" href=\"%{website}\">website</a></u>."
+      website_enabled_html: "Visible on your <u><a target=\"_blank\" href=\"%{website}\">portal</a></u>"
       avatar_title: "Property image cover"
       breadcrumb: "Properties"
       heading: "Edit property"

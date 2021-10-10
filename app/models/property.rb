@@ -72,6 +72,7 @@ class Property < ApplicationRecord
   scope :filter_by_pricemax, -> (pricemax) { where("price <= ?", pricemax) }
 
   scope :website_enabled, -> { where website_enabled: true }
+  scope :pinned, -> { where pinned: true }
 
   def cpas_attributes=(cpa_attributes)
     cpa_attributes.values.each do |client_attribute|

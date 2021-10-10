@@ -140,8 +140,16 @@
                         <%= property.label(:website_enabled, {class: 'custom-control-label cursor-pointer'}) do %>
                           <strong><%= t('properties.edit.website_enabled_html', website: websites_root_url(locale: I18n.locale)) %></strong>
                         <% end %>
+                        <div class="d-inline pinned-globe"><i class="fas fa-globe"></i></div>
                       </div>
 
+                      <div class="custom-control custom-switch pinned-control">
+                        <%= property.check_box(:pinned, {class: "custom-control-input", type: 'checkbox'}) %>
+                        <%= property.label(:pinned, {class: 'custom-control-label cursor-pointer'}) do %>
+                          <strong><%= t('js.forms.properties.wizard.step1.pinned') %></strong>
+                        <% end %>
+                        <div class="d-inline pinned-bookmark"><i class="fas fa-bookmark"></i></div>
+                      </div>
 
                       <div class="row">
                         <div class="col-md-12">
