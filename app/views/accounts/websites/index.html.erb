@@ -94,7 +94,7 @@
           <div class="col mb-4">
             <%= content_tag :div, id: dom_id(property), class: ["card", "mb-2", dom_class(property)] do %>
               <% if property.pinned? && request.query_parameters.empty? %>
-                <div class="pinned-sign"><i class="fas fa-bookmark fa-lg"></i></div>
+                <div class="pinned-bookmark"><i class="fas fa-bookmark fa-lg"></i></div>
               <% end %>
               <div class='card-businesstype-header'>
                 <span class='highlighted-bg highlighted-fg'><%= t("activerecord.attributes.property.enums.businesstype.#{property.businesstype}_banner") %></span>

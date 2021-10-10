@@ -2385,12 +2385,12 @@ a.toggle.active {
 //.property-index-avatar.off {
 //  box-shadow: 0 0 0 1px #ff6333 !important;
 //}
-//
-//.property-index-avatar:hover{
-//  .properties-listing-controls {
-//    visibility: visible;
-//  }
-//}
+
+.property-index-avatar:hover{
+  .properties-listing-controls {
+    visibility: visible;
+  }
+}
 
 input.no-full-width{
   width: unset;
@@ -2807,11 +2807,16 @@ a.icon-font-delete{
 
 .badges{
   position: absolute;
-  top: -13px;
-  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  background: #ffffff;
+  padding: 2px 5px 2px 5px;
+  box-shadow: 0 0 0 1px rgba(20, 20, 31, 0.05), 0 1px 3px 0 rgba(20, 20, 31, 0.15);
+  border-radius: 3px;
 }
 
-.pinned-sign{
+.pinned-bookmark{
   color: #e91e1e;
   z-index: 100;
 }
@@ -2821,8 +2826,8 @@ a.icon-font-delete{
   z-index: 100;
 }
 
-// This means .pinned-sign followed by .pinned-globe.
+// This means .pinned-bookmark followed by .pinned-globe.
 // Then and only then apply css rules to the second
-.pinned-sign + .pinned-globe{
+.pinned-bookmark + .pinned-globe{
   padding-left: 5px;
 }
