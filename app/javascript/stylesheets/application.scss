@@ -177,13 +177,20 @@ h3 {
 //  }
 //}
 #logo{
-  width: auto;
-  height: auto
+  //object-fit: contain;
+  //width: 120px;
+  //height: 250px;
 }
 
 .user-logo-image{
-  width: 100%;
+  display: block;
+  max-width:230px;
+  max-height:45px;
+  width: auto;
   height: auto;
+  //width: 100%;
+  //height: auto;
+  //max-height: 50px;
 }
 
 /* footer */
@@ -1879,6 +1886,9 @@ a.text-link {
   //box-shadow: 0 2px 0 0 #ea9363, 0 0 1px 0 rgba(20, 20, 31, 0.15);
   //transition: background-color 0.2s linear;
   transition: box-shadow 0.2s linear;
+  // Careful with this as it overrides defaults.
+  // Default width in this case is 12rem;
+  width: unset;
 
 }
 
@@ -1899,12 +1909,15 @@ a.text-link {
 
 // LOGO ANIMATION
 .top-nav__logo {
-  display: block;
-  width: 8.25em;
+  //display: block;
+  //width: 100%;
   //height: 2em;
   //height: 45px;
-  margin: 0;
-  padding: 0.1rem;
+  //margin: 0;
+  //padding: 0.1rem;
+  object-fit: cover;
+  width: 100%;
+  //height: 50px;
 }
 
 .top-nav__logo .icon {
