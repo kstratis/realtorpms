@@ -2394,6 +2394,17 @@ a.icon-font-delete{
   color: #9b9b9b;
 }
 
+.color-gold{
+  color: gold;
+}
+
+.color-white{
+  color: #FFFFFF;
+  &:hover{
+    color: gold;
+  }
+}
+
 .letter-spacing-soft{
   letter-spacing: 1px;
 }

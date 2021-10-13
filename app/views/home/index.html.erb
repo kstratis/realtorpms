@@ -349,20 +349,68 @@
         <p class="lead text-muted text-center mb-5"><%= t('website.pricing.subheader') %></p><!-- .row -->
         <div class="row align-items-center">
 
-          <div class="col-md-6 offset-md-3 py-md-4 pr-md-0">
+          <div class="col-12 col-md-5 offset-md-1 py-md-4 pr-md-0">
             <div class="card font-size-lg shadow-lg" data-aos="fade-up">
-              <h5 class="card-header text-center text-success p-4 px-lg-5"><%= t('website.pricing.full_version') %></h5>
+              <h5 class="card-header text-center text-success p-4 px-lg-5"><%= t('website.pricing.free_license.title') %></h5>
               <div class="card-body p-4 p-lg-5">
                 <h3 class="display-3 text-center">
-                  <strong><%= t('website.pricing.offer', month: next_month_name) %></strong>
+                  <small><%= t('website.pricing.free_license.motto') %></small>
                 </h3>
+                <p class="text-center text-muted mb-5"><%= t('website.pricing.free_license.header') %></p>
+                <ul class="list-icons">
+                  <li class="mb-2 pl-1">
+                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><%= t('website.pricing.free_license.bullet1') %></li>
+                  <li class="mb-2 pl-1">
+                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><%= t('website.pricing.free_license.bullet2') %></li>
+                  <li class="mb-2 pl-1">
+                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><%= t('website.pricing.free_license.bullet3') %></li>
+                  <li class="mb-2 pl-1">
+                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><%= t('website.pricing.free_license.bullet4') %></li>
+                  <li class="mb-2 pl-1">
+                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><%= t('website.pricing.free_license.bullet5') %></li>
+                </ul>
               </div>
-              <div class="p-2">
-                <%= link_to t('website.pricing.cta'), new_account_url, class: 'btn btn-primary btn-lg btn-block' %>
+              <div class="card-footer">
+                <% if logged_in? %>
+                  <a href="<%= redirect_to_app_url %>" class="card-footer-item p-4 px-lg-5"><strong><%= t('website.gotoapp') %></strong></a>
+                <% else %>
+                  <a href="<%= new_account_url %>" class="card-footer-item p-4 px-lg-5"><strong><%= t('website.pricing.cta_start_free') %></strong></a>
+                <% end %>
               </div>
             </div>
-          </div>
-
+          </div><!-- /.col -->
+          <!-- .col -->
+          <div class="col-12 col-md-5 py-md-4 pl-md-0">
+            <div class="card font-size-lg card-inverse bg-primary shadow" data-aos="fade-up" data-aos-delay="200">
+              <h5 class="card-header text-center p-4 px-lg-5"><%= t('website.pricing.paid_license.title') %></h5>
+              <div class="card-body p-4 p-lg-5">
+                <h3 class="display-3 text-center color-gold">
+                  <%= t('website.pricing.paid_license.motto') %>
+                </h3>
+                <p class="text-center text-muted-light mb-5"><%= t('website.pricing.paid_license.header') %></p>
+                <ul class="list-icons">
+                  <li class="mb-2 pl-1">
+                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><%= t('website.pricing.paid_license.bullet1') %></li><li class="mb-2 pl-1">
+                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><%= t('website.pricing.paid_license.bullet2') %></li><li class="mb-2 pl-1">
+                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><%= t('website.pricing.paid_license.bullet3') %></li><li class="mb-2 pl-1">
+                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><%= t('website.pricing.paid_license.bullet4') %></li><li class="mb-2 pl-1">
+                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><%= t('website.pricing.paid_license.bullet5') %></li><li class="mb-2 pl-1">
+                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><strong class="color-gold"><%= t('website.pricing.paid_license.bullet6') %></strong></li><li class="mb-2 pl-1">
+                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><strong class="color-gold"><%= t('website.pricing.paid_license.bullet7') %></strong></li><li class="mb-2 pl-1">
+                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><strong class="color-gold"><%= t('website.pricing.paid_license.bullet8') %></strong></li><li class="mb-2 pl-1">
+                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><strong class="color-gold"><%= t('website.pricing.paid_license.bullet9_html') %></strong></li><li class="mb-2 pl-1">
+                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><strong class="color-gold"><%= t('website.pricing.paid_license.bullet10') %></strong></li><li class="mb-2 pl-1">
+                </ul>
+              </div>
+              <div class="card-footer">
+                <% if logged_in? %>
+                  <a href="<%= redirect_to_app_url %>" class="card-footer-item p-4 px-lg-5 color-white"><strong><%= t('website.gotoapp') %></strong></a>
+                <% else %>
+                  <a href="<%= new_account_url %>" class="card-footer-item p-4 px-lg-5 color-white"><strong><%= t('website.pricing.cta_start_free') %></strong></a>
+                <% end %>
+              </div>
+            </div>
+          </div><!-- /.col -->
           <!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container -->
