@@ -14,7 +14,7 @@ module Accounts
         end
       else
         flash[:error] = "Wrong token"
-        redirect_to landing_root_url
+        redirect_to landing_root_url(locale: I18n.locale)
       end
     end
 
