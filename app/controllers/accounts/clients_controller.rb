@@ -6,7 +6,7 @@ module Accounts
     before_action :set_client, only: [:show, :edit, :update, :destroy]
     before_action :redirect_to_index, :if => :forbid_access?, :only => [:edit, :update, :show, :destroy]
 
-    after_action :log_action, only: [:create, :update, :destroy]
+    after_action :log_action, only: [:create, :update, :destroy], unless: Proc.new { current_user.is_sysadmin? }
 
     attr_reader :client
     helper_method :client

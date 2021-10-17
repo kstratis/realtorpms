@@ -7,7 +7,7 @@ module Accounts
     before_action :owner_exclusive, only: [:new, :create, :destroy, :index, :mass_delete, :mass_freeze]
     before_action :check_page_validity, only: [:index]
     before_action :find_user!, only: [:delete_avatar, :toggle_activation, :toggle_adminify, :toggle_tour, :show]
-    after_action :log_action, only: [:create, :update, :destroy]
+    after_action :log_action, only: [:create, :update, :destroy], unless: Proc.new { current_user.is_sysadmin? }
     after_action :set_assignments, only: [:create]
     # A model's +destroy+ method is different than the controller's +destroy+ action.
     # - Using the model's destroy method on a user object should delete all its dependancies (memberships, assignments,
@@ -147,6 +147,7 @@ module Accounts
     # The creation of user object is only happening through invitation thus the creation part
     # remains unused here and is only utilized by the invitationreceivers_controller.rb
     def log_action
+
       if action_name == "destroy"
         Log.create(author: current_user, author_name: current_user.full_name, user_name: @user_full_name, action: action_name, account: current_account, account_name: current_account.subdomain, entity: "users")
       else

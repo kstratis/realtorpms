@@ -9,7 +9,7 @@ module Accounts
     before_action :set_property, only: [:show, :edit, :update, :destroy]
     before_action :redirect_to_show, :if => :forbid_access?, :only => [:edit, :update, :destroy]
 
-    after_action :log_action, only: [:create, :update, :destroy]
+    after_action :log_action, only: [:create, :update, :destroy], unless: Proc.new { current_user.is_sysadmin? }
 
     attr_accessor :params_copy, :category, :area_location
 
