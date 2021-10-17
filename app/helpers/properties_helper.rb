@@ -405,10 +405,16 @@ module PropertiesHelper
     [property.location.localname, property.location.parent_localname].reject(&:blank?).join(", ")
   end
 
+  def floor_wording(floor)
+    return "#{I18n.t("activerecord.attributes.property.enums.floor.#{floor}")}" if floor.to_i.zero?
+
+    "#{I18n.t("activerecord.attributes.property.enums.floor.#{floor.to_i}")} #{I18n.t('activerecord.attributes.property.floor').downcase}"
+  end
+
   def render_residential_features(property)
     wording = []
     if property.floor.present?
-      wording << "#{I18n.t('activerecord.attributes.property.enums.floor.2')} #{I18n.t('activerecord.attributes.property.floor').downcase}"
+      wording << floor_wording(property.floor)
     end
 
     if property.bedrooms.present?
