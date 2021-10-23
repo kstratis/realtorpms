@@ -44,6 +44,7 @@ el:
   property_code: "Κωδικός"
   website_enable: "Πρέπει να ενεργοποιήσετε το website απο τις ρυθμίσεις λογαριασμού"
   application: "Εφαρμογή"
+  no_photos: "Δεν υπάρχουν διαθέσιμες φωτογραφίες"
   tour:
     confirm_cancel_message: "Είσαι βέβαιος πως θέλεις να εγκαταλείψεις τον οδηγό;"
     buttons:

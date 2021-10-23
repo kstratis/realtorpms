@@ -7,31 +7,41 @@
 <div class="show-container container container-fluid-xl pt-5">
 
 <div class="row">
-  <div class="carousel-container col-md-8 col-sm-12">
 
-    <div id="splide-gallery" class="splide">
-      <div class="splide__track ">
-        <ul class="splide__list ">
-          <% @property.all_images.each do |image| %>
-            <li class="splide__slide carousel-slide">
-              <img src="<%= url_for(image) %>" />
+  <% if @property.images.blank? && !@property.avatar.attached? %>
+    <div class="carousel-container col-md-8 col-sm-12">
+      <div class="thumb-container">
+        <%= image_pack_tag('media/images/houses/house_placeholder.svg', class: 'house-placeholder-image thumb') %>
+      </div>
+      <div class="d-inline text-center"><h3><%= t('no_photos') %></h3></div>
+    </div>
+  <% else %>
+    <div class="carousel-container col-md-8 col-sm-12">
+      <div id="splide-gallery" class="splide">
+        <div class="splide__track ">
+          <ul class="splide__list ">
+            <% @property.all_images.each do |image| %>
+              <li class="splide__slide carousel-slide">
+                <img src="<%= url_for(image) %>" />
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+
+      <div class="thumbnails js-thumbnails">
+        <ul class="thumbnails__list overflow-auto">
+          <% @property.all_images.each_with_index do |image, idx| %>
+            <li class="thumbnails__item" role="button" tabindex="0">
+              <img src="<%= url_for(image.variant(resize_to_limit: [100, 100])) %>" alt="Thumbnail <%= idx %>" />
             </li>
           <% end %>
         </ul>
       </div>
-    </div>
 
-    <div class="thumbnails js-thumbnails">
-      <ul class="thumbnails__list overflow-auto">
-        <% @property.all_images.each_with_index do |image, idx| %>
-          <li class="thumbnails__item" role="button" tabindex="0">
-            <img src="<%= url_for(image.variant(resize_to_limit: [100, 100])) %>" alt="Thumbnail <%= idx %>" />
-          </li>
-        <% end %>
-      </ul>
-    </div>
 
-  </div>
+    </div>
+  <% end %>
 
   <div class="summary-container col-md-4 col-sm-12 py-5 shadow px-2 mb-5 bg-white rounded">
 
