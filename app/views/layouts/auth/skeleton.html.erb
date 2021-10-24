@@ -25,7 +25,9 @@
   <%= javascript_packs_with_chunks_tag 'auth_screen', 'data-turbolinks-track': 'reload' %>
 
 <!--  <script defer data-domain="realtorpms.com" src="https://plausible.io/js/plausible.js"></script>-->
-  <script data-token="AOX6ILZTEIVP" async src="https://cdn.splitbee.io/sb.js"></script>
+  <% if Rails.env.production? %>
+    <script data-token="AOX6ILZTEIVP" async src="https://cdn.splitbee.io/sb.js"></script>
+  <% end %>
 
   <%= render 'layouts/shim' %>
 </head>

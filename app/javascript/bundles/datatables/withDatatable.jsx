@@ -154,6 +154,10 @@ function withDatatable(WrappedComponent) {
       $('[data-toggle="tooltip"]').tooltip();
     }
 
+    componentDidUpdate(){
+      $('[data-toggle="tooltip"]').tooltip();
+    }
+
     componentWillUnmount() {
       window.removeEventListener('popstate', this.bound_onHistoryButton);
     }

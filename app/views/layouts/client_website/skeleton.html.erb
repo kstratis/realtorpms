@@ -49,7 +49,9 @@
   <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
   <script src="https://kit.fontawesome.com/20b2864e17.js" crossorigin="anonymous"></script>
 <!--  <script defer data-domain="realtorpms.com" src="https://plausible.io/js/plausible.js"></script>-->
-  <script data-token="AOX6ILZTEIVP" async src="https://cdn.splitbee.io/sb.js"></script>
+  <% if Rails.env.production? %>
+    <script data-token="AOX6ILZTEIVP" async src="https://cdn.splitbee.io/sb.js"></script>
+  <% end %>
   <%= render 'layouts/shim' %>
 </head>
 
