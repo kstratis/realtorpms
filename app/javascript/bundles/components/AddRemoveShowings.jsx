@@ -210,7 +210,7 @@ function AddRemoveShowings({
     handleSetRequest({
       url: showings_url,
       method: 'delete',
-      payload: { showing_id: id, property_id: property_id }
+      payload: { showing_id: id, property_id: property_id, originator: originator, client_id: client_id }
     });
   };
 

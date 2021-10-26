@@ -40,7 +40,18 @@ module Accounts
     end
 
     def new
-      @client = current_account.clients.new(model_type: current_account.model_types.find_by(name: 'clients'))
+      first_name, last_name = handle_prefilled_attrs
+      attrs = {
+        first_name: first_name.presence,
+        last_name: last_name.presence
+      }
+      @client = current_account.clients.new({model_type: current_account.model_types.find_by(name: 'clients')}.merge(attrs))
+      respond_to do |format|
+        format.html
+        format.json {
+          render json: { message: render_to_string(partial: "/accounts/clients/form", formats: [:html]) }
+        }
+      end
     end
 
     def create
@@ -50,8 +61,17 @@ module Accounts
         if current_user.role(current_account) == 'user'
           current_user.clients <<  @client
         end
-        flash[:success] = I18n.t('clients.flash_created')
-        redirect_to @client
+
+        respond_to do |format|
+          format.html do
+            flash[:success] = I18n.t('clients.flash_created')
+            redirect_to @client
+          end
+          # This responds to the inline form creation
+          format.json {
+            render json: { message: { label: @client.full_name, value: @client.id } }, status: :created
+          }
+        end
       else
         flash[:danger] = I18n.t('clients.flash_not_created')
         render :new
@@ -77,6 +97,12 @@ module Accounts
     end
 
     private
+      def handle_prefilled_attrs
+        return if params[:name].nil?
+
+        params[:name].split
+      end
+
       def client_params
         params.require(:client).permit(:first_name, :last_name, :email, :telephones, :job, :notes, :ordertoview, :ordertosell, :ordertoviewfile, :ordertosellfile, {preferences: {}})
       end

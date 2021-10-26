@@ -12,18 +12,7 @@
         <!-- .card-body -->
         <div class="card-body">
           <!-- form -->
-          <%= form_for(@client, html: {class: 'js-validatable'}) do |f| %>
-            <div class="col-lg-6 offset-lg-3 col-md-12">
-              <%= render 'accounts/clients/client_fields', f: f %>
-              <hr/>
-              <!-- .form-actions -->
-              <div class="form-actions">
-                <button type="submit" class="btn btn-primary ml-auto"><%= t('clients.new.add_button') %></button>
-              </div> <!-- /.form-actions -->
-            </div>
-
-          <% end %> <!-- /form -->
-
+          <%= render 'accounts/clients/form' %>
         </div><!-- /.card-body -->
       </div><!-- /.card -->
     </div>

@@ -18,6 +18,7 @@ function StoreClientSearch({
   child,
   clientsEndpoint,
   assignmentshipsEndpoint,
+  new_client_endpoint,
   i18n,
   i18nCfieldOptions,
   i18nPriceOptions,
@@ -109,7 +110,8 @@ function StoreClientSearch({
                     placeholder: i18n.select.placeholder_clients,
                     noresults: i18n.select.noresults,
                     loading: i18n.select.loading,
-                    feedback: i18n.select.clientship_feedback
+                    feedback: i18n.select.clientship_feedback,
+                    nested_client_add: i18n.select.nested_client_add
                   }
                 }}
                 isCreatable={true}
@@ -117,6 +119,7 @@ function StoreClientSearch({
                 isClearable={true}
                 collection_endpoint={{ url: clientsEndpoint, action: 'get' }}
                 action_endpoint={{ url: '', action: '', callback: asyncSelectCallback }}
+                new_client_endpoint={new_client_endpoint}
                 storedOptions={[]}
                 hasFeedback={false}
               />

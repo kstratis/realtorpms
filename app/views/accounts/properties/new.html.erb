@@ -641,6 +641,7 @@
                                 inputClassName: 'form-control existing_client_input',
                                 validatorGroup: 'fieldset-5',
                                 endpoint: properties_clients_path,
+                                new_client_endpoint: new_client_path,
                                 isRequired: false,
                                 renderFormField: true,
                                 formID: 'new_property',
@@ -655,7 +656,7 @@
                                 i18n: {
                                     select: t('js.components.select'),
                                     validatorErrMsg: t('js.validator.required'),
-
+                                    modal_title: t('clients.new.owner_profile')
                                 }
                             }, prerender: false) %>
                           </div><!-- /.form-group -->

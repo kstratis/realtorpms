@@ -7,6 +7,8 @@ import { default as ACSelect } from 'react-select/async-creatable';
 import ReactOnRails from 'react-on-rails';
 import { reactSelectStyles } from '../../styles/componentStyles';
 import { debounce, renderHTML, safelyExecCallback } from '../../utilities/helpers';
+import Rails from '@rails/ujs';
+import bootbox from 'bootbox';
 
 class FormSelect extends React.Component {
   static propTypes = {
@@ -16,6 +18,7 @@ class FormSelect extends React.Component {
     inputName: PropTypes.string,
     inputIsDisabled: PropTypes.bool,
     endpoint: PropTypes.string,
+    new_client_endpoint: PropTypes.string,
     validatorGroup: PropTypes.string,
     isMulti: PropTypes.bool,
     isCreatable: PropTypes.bool,
@@ -45,6 +48,10 @@ class FormSelect extends React.Component {
     this.getOptions = this.getOptions.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.updateExternalDOM = this.updateExternalDOM.bind(this);
+    this.handleCreateOption = this.handleCreateOption.bind(this);
+    this.handleNewClientForm = this.handleNewClientForm.bind(this);
+    this.addFormListeners = this.addFormListeners.bind(this);
+    this.removeFormListeners = this.removeFormListeners.bind(this);
     this.handleAjaxRequestDelayed = debounce(this.handleAjaxRequest.bind(this), 300);
     axios.defaults.headers.common['X-CSRF-Token'] = ReactOnRails.authenticityToken();
   }
@@ -141,6 +148,68 @@ class FormSelect extends React.Component {
     }
   }
 
+  // Imperative JQuery code for the new client inline form
+  addFormListeners(target) {
+    // Get new client form
+    const $new_client_form = $('#new_client');
+    // Attach js form validator
+    let myparsley = $new_client_form.parsley();
+    // Attach the button listener (we'll use it to ajax POST the new client)
+    $new_client_form.find("button[type='submit']").on('click', e => {
+      e.preventDefault();
+      if (!myparsley.validate()) return;
+
+      const endpoint = $new_client_form.attr('action');
+
+      // Since we need to upload attachments (blob) we have to use
+      // FormData and wrap our form. In any other case we'd simply do
+      // const form_data = $new_client_form.serialize() and use `form_data`
+      // instead.
+      // Ref 1: https://stackoverflow.com/questions/58036713/rails-form-submission-by-ajax-with-an-active-storage-attachment
+      // Ref 2: https://stackoverflow.com/questions/5392344/sending-multipart-formdata-with-jquery-ajax
+      const formData = new FormData($new_client_form[0]);
+
+      Rails.ajax({
+        type: 'POST',
+        data: formData,
+        url: endpoint,
+        dataType: 'json',
+        success: response => {
+          // DEBUG
+          // console.log(response.message);
+
+          // When all options are removed, `this.state.selectedOption` is `null` and
+          // `...this.state.selectedOption` blows up. In this case we need to turn `null`
+          // to an empty string first.
+          const existingSelection = this.state.selectedOption ? this.state.selectedOption : '';
+          this.setState(
+            {
+              selectedOption: [...existingSelection, { label: response.message.label, value: response.message.value }],
+            },
+            () => {
+              if (this.props.renderFormField) {
+                this.updateExternalDOM(this.state.selectedOption);
+              }
+              $(target).modal('hide');
+            }
+          );
+        },
+      });
+    });
+  }
+
+  // Imperative JQuery code to remove new inline client form listeners
+  removeFormListeners() {
+    // Fetch the new client form
+    const $new_client_form = $('#new_client');
+    if (!$new_client_form) return;
+
+    // Detach js form validator on bootbox hide
+    $new_client_form.parsley().destroy();
+    // Detach button listeners on bootbox hide
+    $new_client_form.find("button[type='submit']").off('click');
+  }
+
   // This is called on every value change to update the current value and the "true" hidden input field.
   // If it is the parent dropdown that is change it will also call the handleOptions from DependantSelect
   // to update the childen's dropdown values accordingly
@@ -159,6 +228,38 @@ class FormSelect extends React.Component {
       safelyExecCallback(this.props, selectedOption);
       if (!this.props.renderFormField) return;
       this.updateExternalDOM(this.state.selectedOption);
+    });
+  }
+
+  // Imperative JQuery code
+  // Invoke bootbox with the new client form and handle it with JQuery
+  handleNewClientForm(form, selectedOptions) {
+    let modalForm = bootbox.dialog({
+      message: form,
+      size: 'large',
+      title: this.props.i18n.modal_title,
+      onShown: e => {
+        this.addFormListeners(e.target);
+      },
+      onHide: e => {
+        this.removeFormListeners();
+      },
+      show: true,
+      onEscape: function () {
+        modalForm.modal('hide');
+      },
+    });
+  }
+
+  handleCreateOption(newOption) {
+    Rails.ajax({
+      type: 'GET',
+      url: `${this.props.new_client_endpoint}?name=${newOption}`,
+      dataType: 'json',
+      success: response => {
+        const form = response.message;
+        this.handleNewClientForm(form, newOption);
+      },
     });
   }
 
@@ -191,10 +292,8 @@ class FormSelect extends React.Component {
             menuIsOpen={isOpen}
             onMenuOpen={this.onMenuOpen}
             onMenuClose={this.onMenuClose}
-            formatOptionLabel={(data) => {
-              return (
-                <span dangerouslySetInnerHTML={{ __html: data.label }} />
-              );
+            formatOptionLabel={data => {
+              return <span dangerouslySetInnerHTML={{ __html: data.label }} />;
             }}
             ref={ref => {
               this.selectRef = ref;
@@ -229,6 +328,7 @@ class FormSelect extends React.Component {
                 onMenuOpen={this.onMenuOpen}
                 onMenuClose={this.onMenuClose}
                 onChange={this.handleChange}
+                onCreateOption={this.handleCreateOption}
                 ref={ref => {
                   this.asyncRef = ref;
                 }}

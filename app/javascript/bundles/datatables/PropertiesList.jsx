@@ -52,6 +52,7 @@ const PropertiesList = ({
   properties_path,
   showControls,
   new_property_endpoint,
+  new_client_endpoint,
   i18n,
 }) => {
   const { filtersOpen, setFiltersOpen } = useFilterToggle('propertyFiltersOpen');
@@ -245,6 +246,7 @@ const PropertiesList = ({
                         i18n={i18n}
                         collection_endpoint={{ url: locations_endpoint, action: 'get' }}
                         action_endpoint={{ url: '', action: '', callback: handleLocationInput }}
+                        new_client_endpoint={new_client_endpoint}
                         storedOptions={locations_filter['storedOptions']}
                         hasFeedback={false}
                         isCreatable={false}
@@ -313,6 +315,7 @@ const PropertiesList = ({
                               isSearchable: true,
                               clientsEndpoint: clients_endpoint,
                               assignmentshipsEndpoint: assignmentships_endpoint,
+                              new_client_endpoint: new_client_endpoint,
                               i18nPriceOptions: price_filter['options'],
                               i18nSizeOptions: size_filter['options'],
                               i18nFloorOptions: floors_filter['options'],

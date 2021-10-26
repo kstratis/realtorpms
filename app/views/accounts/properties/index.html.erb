@@ -74,6 +74,7 @@
               assignmentships_endpoint: matches_url,
               properties_path: properties_path,
               new_property_endpoint: new_property_path,
+              new_client_endpoint: new_client_path,
               hasFeedback: false,
               object_type: 'properties',
               showControls: true,
@@ -105,7 +106,17 @@
                   save_btn: t('js.components.select.save_btn'),
                   saved_btn: t('js.components.select.saved_btn'),
                   search_saved_success_client_html: t('js.components.select.search_saved_success_client_html'),
-                  category: t('js.components.select.category')
+                  category: t('js.components.select.category'),
+                  nested_client_add: {
+                    modal_title: t('clients.new.profile'),
+                    name: t('activerecord.attributes.client.first_name'),
+                    surname: t('activerecord.attributes.client.last_name'),
+                    email: t('activerecord.attributes.client.email'),
+                    telephone: t('activerecord.attributes.client.telephones'),
+                    profession: t('activerecord.attributes.client.job'),
+                    notes_title: t('activerecord.attributes.client.notes_title'),
+                    notes_footer: t('activerecord.attributes.client.notes'),
+                  }
               },
               no_results: t('js.components.select.noresults'),
               datatable: t('js.datatables.properties'),

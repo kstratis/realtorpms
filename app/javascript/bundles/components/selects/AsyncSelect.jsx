@@ -10,17 +10,20 @@ import AsyncPaginate from 'react-select-async-paginate';
 import { reactSelectStyles } from '../../styles/componentStyles';
 import PropTypes from 'prop-types';
 import URLSearchParams from '@ungap/url-search-params';
+import bootbox from 'bootbox';
+import Rails from '@rails/ujs';
+
 const animatedComponents = makeAnimated();
 
 AsyncSelect.propTypes = {
   collection_endpoint: PropTypes.shape({
     url: PropTypes.string.isRequired,
-    action: PropTypes.string.isRequired
+    action: PropTypes.string.isRequired,
   }).isRequired,
   action_endpoint: PropTypes.shape({
     url: PropTypes.string.isRequired,
     action: PropTypes.string.isRequired,
-    callback: PropTypes.func
+    callback: PropTypes.func,
   }).isRequired,
   storedOptions: PropTypes.array,
   hasFeedback: PropTypes.bool,
@@ -34,9 +37,9 @@ AsyncSelect.propTypes = {
       placeholder: PropTypes.string.isRequired,
       noresults: PropTypes.string.isRequired,
       loading: PropTypes.string.isRequired,
-      feedback: PropTypes.string.isRequired
-    })
-  }).isRequired
+      feedback: PropTypes.string
+    }),
+  }).isRequired,
 };
 
 // Normalizes and merges url GET params coming both from javascript and/or backend
@@ -52,7 +55,22 @@ const constructURL = (origUrl, query) => {
   return `${url.toString()}.json?${searchParams.toString()}`;
 };
 
-function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasFeedback, isCreatable, isClearable, isDisabled, openMenuOnClick, isNotAnimated, isMultiple, closeMenuOnSelect, defaultOptions, i18n }) {
+function AsyncSelect({
+  collection_endpoint,
+  action_endpoint,
+  new_client_endpoint,
+  storedOptions,
+  hasFeedback,
+  isCreatable,
+  isClearable,
+  isDisabled,
+  openMenuOnClick,
+  isNotAnimated,
+  isMultiple,
+  closeMenuOnSelect,
+  defaultOptions,
+  i18n,
+}) {
   // custom hook to open/close modal
   const { isOpen, setIsOpen } = useModalToggle();
   // this is the request for the pool of options - won't run on mount
@@ -77,8 +95,6 @@ function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasF
   // In this case we do need internal state
   const { data, setData } = useFetch(selectionRequest, false, didMountForAssignmentsRef);
 
-  const [inputValue, setInputValue] = useState('');
-
   // Only on mount load the existing data
   useEffect(() => {
     setData(storedOptions);
@@ -88,35 +104,103 @@ function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasF
   const handleChange = selectedOptions => {
     // GET requests (or non specified) are simply for searching and thus we skip XHR cause we handle it directly in the HOC
     if (!action_endpoint.action) {
-      safelyExecCallback(action_endpoint, selectedOptions || {});
-      setData(selectedOptions);
+      if (selectedOptions && selectedOptions.__isNew__) {
+        Rails.ajax({
+          type: 'GET',
+          url: `${new_client_endpoint}?name=${selectedOptions['label']}`,
+          dataType: 'json',
+          success: response => {
+            const form = response.message;
+            handleNewClientForm(form, selectedOptions);
+          },
+        });
+      }
+      else {
+        safelyExecCallback(action_endpoint, selectedOptions || {});
+        setData(selectedOptions);
+      }
       return;
     }
     setSelectionRequest({
       url: action_endpoint.url,
       method: action_endpoint.action,
       payload: { selection: selectedOptions || [] },
-      callback: action_endpoint.callback
+      callback: action_endpoint.callback,
     });
   };
 
-  // This functions helps to keep the input text field intact when selecting an option from the dropdown.
-  // Default behaviour is clear the input field on option selection.
-  // const onInputChange = (query, {action}) => {
-    // DEBUG
-    // console.log(action);
-    // if (query) {
-    //   setInputValue(query);
-    // }
-    // return inputValue;
-    // if (action !== "set-value") {
-    // if (action.action !== "input-blur" && action.action !== "menu-close") {
-    //     setInputValue(query);
-    //     return query;
+  // Imperative JQuery code for the new client inline form
+  const addFormListeners = (target) => {
+    // Get new client form
+    const $new_client_form = $('#new_client');
+    // Attach js form validator
+    let myparsley = $new_client_form.parsley();
+    // Attach the button listener (we'll use it to ajax POST the new client)
+    $new_client_form.find("button[type='submit']").on('click', (e) => {
+      e.preventDefault();
+      if (!myparsley.validate()) return;
 
-    // }
-    // return inputValue;
-  // };
+      const endpoint = $new_client_form.attr('action');
+
+      // Since we need to upload attachments (blob) we have to use
+      // FormData and wrap our form. In any other case we'd simply do
+      // const form_data = $new_client_form.serialize() and use `form_data`
+      // instead.
+      // Ref 1: https://stackoverflow.com/questions/58036713/rails-form-submission-by-ajax-with-an-active-storage-attachment
+      // Ref 2: https://stackoverflow.com/questions/5392344/sending-multipart-formdata-with-jquery-ajax
+      const formData = new FormData($new_client_form[0])
+
+      Rails.ajax({
+        type: 'POST',
+        data: formData,
+        url: endpoint,
+        dataType: 'json',
+        success: response => {
+          // DEBUG
+          // console.log(response.message);
+          // Once the response is back, use it to set the visible value
+          // in react-select (`setData`) and also update the ajax action
+          // handler (`safelyExecCallback` - StoreClientSearch.jsx)
+          safelyExecCallback(action_endpoint, response.message || {});
+          setData(response.message);
+          $(target).modal('hide');
+        },
+      });
+    });
+  };
+
+  // Imperative JQuery code to remove new inline client form listeners
+  const removeFormListeners = () => {
+    // Fetch the new client form
+    const $new_client_form = $('#new_client');
+    if (!$new_client_form) return;
+
+    // Detach js form validator on bootbox hide
+    $new_client_form.parsley().destroy();
+    // Detach button listeners on bootbox hide
+    $new_client_form.find("button[type='submit']").off('click');
+  };
+
+  // Imperative JQuery code
+  // Invoke bootbox with the new client form and handle it with JQuery
+  const handleNewClientForm = (form, selectedOptions) => {
+    const name = selectedOptions['label']
+    let modalForm = bootbox.dialog({
+      message: form,
+      size: 'large',
+      title: i18n.select.nested_client_add.modal_title,
+      onShown: (e) => {
+        addFormListeners(e.target);
+      },
+      onHide: (e) => {
+        removeFormListeners();
+      },
+      show: true,
+      onEscape: function () {
+        modalForm.modal('hide');
+      },
+    });
+  }
 
   // `callback` is a react-select native function which is used to  build the dropdown options. It is passed over to
   // our useFetch custom hook so that we can manipulate it and call it whenever we see fit.
@@ -128,11 +212,11 @@ function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasF
       url: constructURL(collection_endpoint.url, query),
       method: collection_endpoint.action,
       payload: {},
-      callback: callback
+      callback: callback,
     });
   };
 
-  // On fast key presses, bounce back the multiple requests
+  // Debounce key presses
   const loadAsyncOptionsDelayed = debounce(loadAsyncOptions, 300);
 
   return (
@@ -160,7 +244,7 @@ function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasF
           isMulti={isMultiple == null ? false : isMultiple}
           backspaceRemovesValue={false}
           placeholder={i18n.select.placeholder}
-          formatCreateLabel={(inputValue) => renderHTML(`${i18n.select.add} "${inputValue}"`)}
+          formatCreateLabel={inputValue => renderHTML(`${i18n.select.add} "${inputValue}"`)}
           noOptionsMessage={() => renderHTML(i18n.select.noresults)}
           loadingMessage={() => renderHTML(i18n.select.loading)}
           loadOptions={loadAsyncOptionsDelayed}
@@ -189,9 +273,6 @@ function AsyncSelect({ collection_endpoint, action_endpoint, storedOptions, hasF
           loadOptions={loadAsyncOptionsDelayed}
           onMenuOpen={() => setIsOpen(true)}
           onMenuClose={() => setIsOpen(false)}
-          // onInputChange={onInputChange}
-          // inputValue={inputValue}
-          // defaultOptions={[{label: 'Hello', value: 1}, {label: 'world', value: 2}]}
           closeMenuOnSelect={closeMenuOnSelect}
           defaultOptions={defaultOptions}
         />
