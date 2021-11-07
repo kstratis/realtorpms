@@ -467,7 +467,7 @@
                               <!--                            <div class="col-md-2">-->
                               <label class="control-label checkbox-header app-checkbox"><strong><%= t("activerecord.attributes.extra.#{category}.title") %></strong></label>
                               <div class="col-md-12">
-                                <%= property.collection_check_boxes :extra_ids, Extra.where(subtype: category), :id, :name do |b| %>
+                                <%= property.collection_check_boxes :extra_ids, Extra.order(:id).where(subtype: category), :id, :name do |b| %>
                                   <div class="custom-control custom-checkbox app-checkbox">
                                     <%= b.check_box({ class: "custom-control-input", type: 'checkbox' }) %>
                                     <%= b.label({ class: 'custom-control-label' }) do %>

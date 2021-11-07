@@ -224,7 +224,7 @@ en:
           fireplace: "Fireplace"
           furnished: "Furnished"
           tents: "Sun shades"
-          no_elevator: "No elevator"
+          elevator: "Elevator"
           clima: "Air conditioning"
           security_door: "Security door"
           pool: "Pool"

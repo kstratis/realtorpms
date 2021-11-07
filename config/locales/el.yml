@@ -197,7 +197,7 @@ el:
           fireplace: "Τζάκι"
           furnished: "Επιπλωμένο"
           awnings: "Τέντες"
-          no_elevator: "Χωρίς ασανσέρ"
+          elevator: "Ασανσέρ"
           no_utility_bills: "Χωρίς κοινόχρηστα"
           clima: "Κλιματισμός"
           security_door: "Πόρτα ασφαλείας"
