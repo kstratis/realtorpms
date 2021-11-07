@@ -33,6 +33,8 @@ Rails.application.routes.draw do
         post 'favorites', to: 'favlists#create_favorite'
         delete 'favorites', to: 'favlists#destroy_favorite'
 
+
+
         resources :properties do
           # resources :build, controller: 'property_steps'
           resource :favorites, only: [:create, :destroy]
@@ -54,6 +56,8 @@ Rails.application.routes.draw do
             patch :toggle_activation
             patch :toggle_adminify
             patch :toggle_tour
+            # Get global tour data
+            get :tour_data
             delete :delete_avatar
           end
         end

@@ -25,7 +25,8 @@ import { setup_dependent_checkboxes } from '../bundles/utilities/helpers';
 import * as CustomActiveStorage from '../bundles/uploaders/custom_active_storage';
 import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
-import 'bootstrap'  // bootstrap js files
+import 'bootstrap'
+import Rails from "@rails/ujs";  // bootstrap js files
 
 // This is how we manage to load webpack processed images skipping the asset pipeline entirely.
 // Note that images referenced from within webpack-processed scss are automatically included. However for
@@ -61,7 +62,7 @@ $(document).on('turbolinks:load', function(e) {
   $('[data-toggle="tooltip"]').tooltip();
   $('[data-toggle="popover"]').popover();
 
-  // BOOTBOX STUFF
+  // -====BOOTBOX STUFF====-
   // Set its language
   const translation = JSON.parse(document.getElementById('menu_i18n').dataset.menui18n);
 
@@ -74,25 +75,47 @@ $(document).on('turbolinks:load', function(e) {
       centerVertical: true,
     })
   })
+  // -====BOOTBOX STUFF END====-
 
-  // -====TOUR DATA====-
+  // -====TOUR HANDLER====-
+  // Preload some data from the HTML
+  const { has_taken_tour, tour_data_url } = JSON.parse(document.getElementById('tour_metadata').dataset.tour);
+
   function loadTour(stage) {
-    const tour_check = JSON.parse(document.getElementById('tour-check').dataset.tour);
-    if (tour_check['has_taken_tour'] && (stage === 'onload')) return;
+    if (has_taken_tour && (stage === 'onload')) return;
 
     if (window.innerWidth > 767){
-      const tour_data = JSON.parse(document.getElementById('tour').dataset.tour);
+      const tour_content = JSON.parse(document.getElementById('tour_content').dataset.tour);
       import(/* webpackChunkName: "TourManager", webpackPrefetch: true */ '../packs/tour_manager.js').then(({default: TourManager}) => {
-        new TourManager(tour_data, stage).start();
+        new TourManager(tour_content, stage).start();
       });
     }
   }
 
   loadTour('onload');
 
-  $('#tour-toggle').on('click', (e) => {
+  // This is the on-demand tour handler.
+  // If the tour has already been taken by a user, allow him
+  // to watch it again on demand. The first time he asks for it load
+  // the data through ajax
+  $('#tour_toggle').on('click', (e) => {
     e.preventDefault()
-    loadTour('onclick');
+
+    if ($('#tour_content').length === 0) {
+      Rails.ajax({
+        type: 'GET',
+        url: tour_data_url,
+        dataType: 'json',
+        success: response => {
+          const data = response.message;
+          $('#tour_container').html(data)
+          loadTour('onclick');
+        },
+      });
+    } else{
+      loadTour('onclick');
+    }
   });
+  // -====TOUR HANDLER END====-
 });
 

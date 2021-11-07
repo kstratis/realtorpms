@@ -113,6 +113,14 @@ module Accounts
       render json: { message: "OK" }, status: 200
     end
 
+    def tour_data
+      respond_to do |format|
+        format.json {
+          render json: { message: render_to_string(partial: 'layouts/tour', formats: [:html]) }
+        }
+      end
+    end
+
     def mass_delete
       current_account.users.where(id: params[:selection]).destroy_all
       flash[:success] = I18n.t('users.flash_delete_multiple')

@@ -1,0 +1,43 @@
+<%= content_tag :div, class: "", id: "tour_content", data: {
+  tour: {
+    tour_url: toggle_tour_user_url(current_user.id),
+    is_admin: current_user.is_admin?(current_account),
+    i18n: {
+      confirm_cancel_message: t('tour.confirm_cancel_message'),
+      buttons: {
+        next: t('tour.buttons.next'),
+        back: t('tour.buttons.back'),
+        end: t('tour.buttons.end')
+      },
+      welcome: {
+        title: t('tour.welcome.title', brandname: BRANDNAME),
+        body_html: t('tour.welcome.body_html', brandname: BRANDNAME),
+      },
+      goodbye: {
+        title: t('tour.goodbye.title', brandname: BRANDNAME),
+        body_html: t('tour.goodbye.body_html', brandname: BRANDNAME.downcase),
+      },
+      partners: {
+        title: t('tour.partners.title'),
+        body_html: t('tour.partners.body_html'),
+      },
+      properties: {
+        title: t('tour.properties.title'),
+        body_html: t('tour.properties.body_html'),
+      },
+      clients: {
+        title: t('tour.clients.title'),
+        body_html: t('tour.clients.body_html'),
+      },
+      website: {
+        title: t('tour.website.title'),
+        body_html: t('tour.website.body_html'),
+      },
+      settings: {
+        title: t('tour.settings.title'),
+        body_html: t('tour.settings.body_html'),
+      }
+    }
+  }
+} do %>
+<% end %>
