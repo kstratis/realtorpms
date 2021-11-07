@@ -46,6 +46,7 @@ el:
   application: "Εφαρμογή"
   no_photos: "Δεν υπάρχουν διαθέσιμες φωτογραφίες"
   tour:
+    title: "Οδηγός"
     confirm_cancel_message: "Είσαι βέβαιος πως θέλεις να εγκαταλείψεις τον οδηγό;"
     buttons:
       next: "Επόμενο"

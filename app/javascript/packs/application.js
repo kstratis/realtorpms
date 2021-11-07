@@ -75,14 +75,24 @@ $(document).on('turbolinks:load', function(e) {
     })
   })
 
-  // TOUR DATA
-  const tour_check = JSON.parse(document.getElementById('tour-check').dataset.tour);
+  // -====TOUR DATA====-
+  function loadTour(stage) {
+    const tour_check = JSON.parse(document.getElementById('tour-check').dataset.tour);
+    if (tour_check['has_taken_tour'] && (stage === 'onload')) return;
 
-  if ((!tour_check['has_taken_tour']) && (window.innerWidth > 767)){
-    const tour_data = JSON.parse(document.getElementById('tour').dataset.tour);
-    import(/* webpackChunkName: "TourManager", webpackPrefetch: true */ '../packs/tour_manager.js').then(({default: TourManager}) => {
-      new TourManager(tour_data).start();
-    });
+    if (window.innerWidth > 767){
+      const tour_data = JSON.parse(document.getElementById('tour').dataset.tour);
+      import(/* webpackChunkName: "TourManager", webpackPrefetch: true */ '../packs/tour_manager.js').then(({default: TourManager}) => {
+        new TourManager(tour_data, stage).start();
+      });
+    }
   }
+
+  loadTour('onload');
+
+  $('#tour-toggle').on('click', (e) => {
+    e.preventDefault()
+    loadTour('onclick');
+  });
 });
 

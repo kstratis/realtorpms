@@ -76,6 +76,7 @@ en:
   application: "Admin"
   no_photos: "No available photos"
   tour:
+    title: "Tour"
     confirm_cancel_message: "Are you sure you want to quit the tour?"
     buttons:
       next: "Next"

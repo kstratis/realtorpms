@@ -2,7 +2,7 @@ import Shepherd from 'shepherd.js';
 import axios from 'axios';
 
 export default class TourManager {
-  constructor(tour_data) {
+  constructor(tour_data, stage) {
     this.tour_data = tour_data;
     this.tourInstance = new Shepherd.Tour({
       useModalOverlay: true,
@@ -19,7 +19,10 @@ export default class TourManager {
       scrollTo: { behavior: 'smooth', block: 'center' },
     });
     this.setupTourSteps();
-    this.setupTourHandlers();
+    // Avoid ajax calls when replaying the tour
+    if (stage === 'onload') {
+      this.setupTourHandlers();
+    }
   }
 
   setupTourSteps() {
