@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_04_135626) do
+ActiveRecord::Schema.define(version: 2021_11_09_075310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -281,6 +281,20 @@ ActiveRecord::Schema.define(version: 2021_10_04_135626) do
     t.index ["user_id"], name: "index_model_types_users_on_user_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.string "recipient_type", null: false
+    t.bigint "recipient_id", null: false
+    t.string "type", null: false
+    t.jsonb "params"
+    t.datetime "read_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "account_id"
+    t.index ["account_id"], name: "index_notifications_on_account_id"
+    t.index ["read_at"], name: "index_notifications_on_read_at"
+    t.index ["recipient_type", "recipient_id"], name: "index_notifications_on_recipient"
+  end
+
   create_table "properties", force: :cascade do |t|
     t.text "description"
     t.datetime "created_at", null: false
@@ -369,6 +383,7 @@ ActiveRecord::Schema.define(version: 2021_10_04_135626) do
   add_foreign_key "memberships", "accounts"
   add_foreign_key "memberships", "users"
   add_foreign_key "model_types", "accounts"
+  add_foreign_key "notifications", "accounts"
   add_foreign_key "properties", "accounts"
   add_foreign_key "properties", "categories"
   add_foreign_key "properties", "locations"

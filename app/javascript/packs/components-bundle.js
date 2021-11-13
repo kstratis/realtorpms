@@ -1,6 +1,7 @@
 import ReactOnRails from 'react-on-rails';
 import UsersListWithDatatable from '../bundles/datatables/UsersList';
 import ClientsListWithDatatable from '../bundles/datatables/ClientsList';
+import NotificationsListWithDatatable from '../bundles/datatables/NotificationsList';
 import PropertiesListWithDatatable from '../bundles/datatables/PropertiesList';
 import ClientPrefsListWithDatatable from '../bundles/datatables/ClientPrefsList';
 import ShowUserFavListWithDatatable from '../bundles/datatables/ShowUserFavList';
@@ -16,6 +17,7 @@ import InlineSearch from '../bundles/components/InlineSearch';
 ReactOnRails.register({
   UsersListWithDatatable,
   ClientsListWithDatatable,
+  NotificationsListWithDatatable,
   PropertiesListWithDatatable,
   ClientPrefsListWithDatatable,
   ShowUserFavListWithDatatable,

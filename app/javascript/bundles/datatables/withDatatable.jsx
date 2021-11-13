@@ -138,6 +138,8 @@ function withDatatable(WrappedComponent) {
       this.handleCfieldTextfield = this.handleCfieldTextfield.bind(this);
       this.handleCfieldCheckbox = this.handleCfieldCheckbox.bind(this);
       this.handleClone = this.handleClone.bind(this);
+      this.handleReadNotification = this.handleReadNotification.bind(this);
+      this._handleParams = this._handleParams.bind(this);
       this.ajaxCallback = this.ajaxCallback.bind(this);
       this.handleAjaxRequestDelayed = debounce(this.handleAjaxRequest, 300);
       this.handleCfieldTextfieldDelayed = debounce(this.handleCfieldTextfield, 150);
@@ -217,10 +219,7 @@ function withDatatable(WrappedComponent) {
         searchParams.set(getName(topLevel), selection.value);
         searchParams.delete('page');
       }
-      let newUrlParams = searchParams.toString()
-        ? `${window.location.pathname}?${searchParams.toString()}`
-        : window.location.pathname;
-      this.compoundDelayedAction(searchParams, newUrlParams);
+      this._handleParams(searchParams);
     }
 
     handleSizeInput(topLevel, selection, browserButtonInvoked = false) {
@@ -242,10 +241,7 @@ function withDatatable(WrappedComponent) {
         searchParams.set(`${getName(topLevel)}meta`, selection.meta);
         searchParams.delete('page');
       }
-      let newUrlParams = searchParams.toString()
-        ? `${window.location.pathname}?${searchParams.toString()}`
-        : window.location.pathname;
-      this.compoundDelayedAction(searchParams, newUrlParams);
+      this._handleParams(searchParams);
     }
 
     handleRoomsInput(topLevel, selection, browserButtonInvoked = false) {
@@ -265,10 +261,7 @@ function withDatatable(WrappedComponent) {
         searchParams.set(getName(topLevel), selection.value);
         searchParams.delete('page');
       }
-      let newUrlParams = searchParams.toString()
-        ? `${window.location.pathname}?${searchParams.toString()}`
-        : window.location.pathname;
-      this.compoundDelayedAction(searchParams, newUrlParams);
+      this._handleParams(searchParams);
     }
 
     handleFloorsInput(topLevel, selection, browserButtonInvoked = false) {
@@ -288,10 +281,7 @@ function withDatatable(WrappedComponent) {
         searchParams.set(getName(topLevel), selection.value);
         searchParams.delete('page');
       }
-      let newUrlParams = searchParams.toString()
-        ? `${window.location.pathname}?${searchParams.toString()}`
-        : window.location.pathname;
-      this.compoundDelayedAction(searchParams, newUrlParams);
+      this._handleParams(searchParams);
     }
 
     handleConstructionInput(topLevel, selection, browserButtonInvoked = false) {
@@ -311,10 +301,7 @@ function withDatatable(WrappedComponent) {
         searchParams.set(getName(topLevel), selection.value);
         searchParams.delete('page');
       }
-      let newUrlParams = searchParams.toString()
-        ? `${window.location.pathname}?${searchParams.toString()}`
-        : window.location.pathname;
-      this.compoundDelayedAction(searchParams, newUrlParams);
+      this._handleParams(searchParams);
     }
 
     // topLevel comes from the AssosiativeFormSelect.jsx which uses the currying techique.
@@ -456,10 +443,7 @@ function withDatatable(WrappedComponent) {
         searchParams.set(getName(topLevel), selection.value);
         searchParams.delete('page');
       }
-      let newUrlParams = searchParams.toString()
-        ? `${window.location.pathname}?${searchParams.toString()}`
-        : window.location.pathname;
-      this.compoundDelayedAction(searchParams, newUrlParams);
+      this._handleParams(searchParams);
     }
 
     handleLocationInput(locations, browserButtonInvoked = false) {
@@ -472,13 +456,7 @@ function withDatatable(WrappedComponent) {
         searchParams.set('locations', locationids);
         searchParams.delete('page');
       }
-      let newUrlParams = searchParams.toString()
-        ? `${window.location.pathname}?${searchParams.toString()}`
-        : window.location.pathname;
-      // DEBUG
-      // console.log(`callback running with location id: ${locations[0].value}`);
-      // console.log(`callback running with location name: ${locations[0].label}`);
-      this.compoundDelayedAction(searchParams, newUrlParams);
+      this._handleParams(searchParams);
     }
 
     handlePageClick(pageNumber, pageNo = false, browserButtonInvoked = false) {
@@ -491,7 +469,6 @@ function withDatatable(WrappedComponent) {
         ? `${window.location.pathname}?${searchParams.toString()}${window.location.hash}`
         : window.location.pathname;
       if (!browserButtonInvoked) history.pushState({ jsonpage: selected + 1 }, null, newUrlParams);
-      // console.log(searchParams.toString());
       this.handleAjaxRequest(`?${searchParams.toString()}`);
     }
 
@@ -504,12 +481,7 @@ function withDatatable(WrappedComponent) {
       } else {
         searchParams.delete('search');
       }
-      let newUrlParams = searchParams.toString()
-        ? `${window.location.pathname}?${searchParams.toString()}`
-        : window.location.pathname;
-      // Use this to debounce both the ajax request and the history replaceState
-      // https://github.com/ReactTraining/history/issues/291
-      this.compoundDelayedAction(searchParams, newUrlParams);
+      this._handleParams(searchParams)
     }
 
     handleFav(e, url, isFaved, id) {
@@ -534,7 +506,6 @@ function withDatatable(WrappedComponent) {
         .catch(
           function(error) {
             console.warn(error);
-            // this.setState({isLoading: false});
           }.bind(this)
         );
     }
@@ -553,8 +524,6 @@ function withDatatable(WrappedComponent) {
           dataset: newDataset
         });
       });
-
-
     }
 
     handleFreezeUser(e, freeze_url, user_id) {
@@ -580,10 +549,7 @@ function withDatatable(WrappedComponent) {
       let searchParams = new URLSearchParams(window.location.search);
       searchParams.set('sorting', field);
       searchParams.set('ordering', updatedOrdering);
-      let newUrlParams = searchParams.toString()
-        ? `${window.location.pathname}?${searchParams.toString()}`
-        : window.location.pathname;
-      this.compoundDelayedAction(searchParams, newUrlParams);
+      this._handleParams(searchParams);
     }
 
     handleAjaxRequest(query = '') {
@@ -610,6 +576,9 @@ function withDatatable(WrappedComponent) {
           break;
         case 'properties':
           resource = `properties.json${query}`;
+          break;
+        case 'notifications':
+          resource = `notifications.json${query}`;
           break;
         default:
           console.warn('No resource specified');
@@ -649,10 +618,6 @@ function withDatatable(WrappedComponent) {
 
     handleAssign(e) {
       e.preventDefault();
-      // DEBUG
-      // console.log('executing handle assign');
-      // console.log(e.target.dataset);
-      // console.log(e.target.dataset.uid);
       let pid = this.props.initial_payload['pid'];
       let uid = parseInt(e.target.dataset['uid']);
       // Get the type of method from data-method
@@ -662,10 +627,6 @@ function withDatatable(WrappedComponent) {
       axios[method](`app/assignments/property/${pid}/user/${uid}.json`) // +1 because rails will_paginate starts from 1 while this starts from 0
         .then(
           function(response) {
-            // console.log('logging the response');
-            // console.log(response);
-            // console.log(this.state.dataset);
-            // copy current state
             let new_dataset = this.state.dataset.slice();
             let el = new_dataset.find(user => user.id === uid);
             let position = new_dataset.indexOf(el);
@@ -679,13 +640,6 @@ function withDatatable(WrappedComponent) {
             this.setState({
               dataset: new_dataset
             });
-            // let newData = response.data.userslist;
-            // this.setState({
-            //   dataset: newData.dataset,
-            //   pageCount: Math.ceil(response.data.total_entries / this.state.resultsPerPage),
-            //   isLoading: false,
-            //   selectedPage: response.data.current_page - 1
-            // });
           }.bind(this)
         )
         .catch(
@@ -715,13 +669,7 @@ function withDatatable(WrappedComponent) {
         searchParams.delete('purpose');
       }
       searchParams.delete('page');
-
-      let newUrlParams = searchParams.toString()
-        ? `${window.location.pathname}?${searchParams.toString()}`
-        : window.location.pathname;
-      // Use this to debounce both the ajax request and the history replaceState
-      // https://github.com/ReactTraining/history/issues/291
-      this.compoundDelayedAction(searchParams, newUrlParams);
+      this._handleParams(searchParams)
     }
 
     handleChangeStatus(e) {
@@ -740,13 +688,7 @@ function withDatatable(WrappedComponent) {
         searchParams.delete('status');
       }
       searchParams.delete('page');
-
-      let newUrlParams = searchParams.toString()
-        ? `${window.location.pathname}?${searchParams.toString()}`
-        : window.location.pathname;
-      // Use this to debounce both the ajax request and the history replaceState
-      // https://github.com/ReactTraining/history/issues/291
-      this.compoundDelayedAction(searchParams, newUrlParams);
+      this._handleParams(searchParams);
     }
 
     handleCfieldDropdown(selection, slug){
@@ -758,10 +700,7 @@ function withDatatable(WrappedComponent) {
         searchParams.set(`cfield_${slug}`, selection.value);
         searchParams.delete('page');
       }
-      let newUrlParams = searchParams.toString()
-        ? `${window.location.pathname}?${searchParams.toString()}`
-        : window.location.pathname;
-      this.compoundDelayedAction(searchParams, newUrlParams);
+      this._handleParams(searchParams);
     }
 
     handleCfieldTextfield(selection, slug){
@@ -773,16 +712,11 @@ function withDatatable(WrappedComponent) {
         searchParams.set(`cfield_${slug}`, selection);
         searchParams.delete('page');
       }
-      let newUrlParams = searchParams.toString()
-        ? `${window.location.pathname}?${searchParams.toString()}`
-        : window.location.pathname;
-      this.compoundDelayedAction(searchParams, newUrlParams);
+      this._handleParams(searchParams);
     }
 
     handleCfieldCheckbox(selection, slug){
       this.setState({ isLoading: true });
-      // DEBUG
-      // console.log(selection);
       let searchParams = new URLSearchParams(window.location.search);
       if (!selection) {
         searchParams.delete(`cfield_${slug}`);
@@ -790,17 +724,12 @@ function withDatatable(WrappedComponent) {
         searchParams.set(`cfield_${slug}`, selection ? '1' : '0');
         searchParams.delete('page');
       }
-      let newUrlParams = searchParams.toString()
-        ? `${window.location.pathname}?${searchParams.toString()}`
-        : window.location.pathname;
-      this.compoundDelayedAction(searchParams, newUrlParams);
+      this._handleParams(searchParams);
     }
 
     handleClone(e, cloneUrl){
       e.preventDefault();
       this.setState({ isLoading: true });
-      // DEBUG
-      // console.log(cloneUrl);
       let searchParams = new URLSearchParams(window.location.search);
       axios({
         method: 'post',
@@ -816,8 +745,34 @@ function withDatatable(WrappedComponent) {
       );
     }
 
+    // This is specific to reading notifications
+    handleReadNotification(read_path, callbackFn) {
+      let searchParams = new URLSearchParams(window.location.search);
+      axios({
+        method: 'post',
+        url: `${read_path}.json?${searchParams}`,
+        data: {}
+      }).then((response) => {
+        this.ajaxCallback(response);
+        callbackFn(response.data.unread_notifications_count);
+      }).catch(
+        function(error) {
+          console.warn(error);
+          this.setState({ isLoading: false });
+        }.bind(this)
+      );
+    }
+
+    _handleParams(searchParams){
+      let newUrlParams = searchParams.toString()
+        ? `${window.location.pathname}?${searchParams.toString()}`
+        : window.location.pathname;
+      // Use this to debounce both the ajax request and the history replaceState
+      // https://github.com/ReactTraining/history/issues/291
+      this.compoundDelayedAction(searchParams, newUrlParams);
+    }
+
     render() {
-      // {console.log(this.displayName)}
       return (
         <div>
           <WrappedComponent
@@ -856,6 +811,7 @@ function withDatatable(WrappedComponent) {
             handleCfieldTextfield={this.handleCfieldTextfieldDelayed}
             handleCfieldCheckbox={this.handleCfieldCheckbox}
             handleClone={this.handleClone}
+            handleReadNotification={this.handleReadNotification}
             cfields={this.props.initial_payload.cfields}
             {...this.state}
           />

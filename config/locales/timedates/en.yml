@@ -212,7 +212,7 @@ en:
     am: am
     formats:
       default: "%a, %d %b %Y %H:%M:%S %z"
-      custom: ! '%b %d, %Y'
+      custom: ! '%b %d, %Y %H:%M'
       long: "%B %d, %Y %H:%M"
       short: "%d %b %H:%M"
       property: ! '%-d/%b/%y'

@@ -41,6 +41,7 @@
               result_count: t('js.datatables.pagination.results'),
               no_results: t('js.datatables.clients.no_results'),
               search: t('js.datatables.clients.search_placeholder'),
+              new_client_cta: t('clients.new_client_cta'),
               clear: t('js.datatables.clear'),
               loading: t('loading'),
               filters: {
@@ -70,7 +71,8 @@
           meta: {
               is_admin: current_user.is_admin?(current_account),
               freeze_link:  toggle_activation_user_url('USERID'),
-              mass_delete_clients_link: mass_delete_clients_url
+              mass_delete_clients_link: mass_delete_clients_url,
+              new_client_link: new_client_path
           }
       }, prerender: false) %>
       <div class="clearfix"></div>

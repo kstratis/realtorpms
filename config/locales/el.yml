@@ -45,6 +45,7 @@ el:
   website_enable: "Πρέπει να ενεργοποιήσετε το website απο τις ρυθμίσεις λογαριασμού"
   application: "Εφαρμογή"
   no_photos: "Δεν υπάρχουν διαθέσιμες φωτογραφίες"
+  notifications: "Ειδοποιήσεις"
   tour:
     title: "Οδηγός"
     confirm_cancel_message: "Είσαι βέβαιος πως θέλεις να εγκαταλείψεις τον οδηγό;"
@@ -98,7 +99,7 @@ el:
     edit: "Επεξεργασία"
     delete: "Διαγραφή"
   header:
-    search: "Αναζήτηση κωδ. ακινήτου"
+    search: "Αναζήτηση ακινήτου με κωδικό"
   activerecord:
     models:
       invitation: "Πρόσκληση"
@@ -438,7 +439,7 @@ el:
           title_alt: "Πληροφορίες αναζήτησης"
           subtitle: "Αποθήκευση κριτηρίων αναζήτησης"
           close_btn: "Κλείσιμο"
-          criteria: "Έχετε επιλέξει τα εξής κριτήρια:"
+          criteria: "Έχεις επιλέξει τα εξής κριτήρια:"
           header: "Ο/Η %{client_name} ψάχνει για:"
           feedback: ""
           filters:
@@ -495,7 +496,7 @@ el:
         clientship_feedback: "Αποθήκευση προτιμήσεων πελάτη"
         save_btn: "Αποθήκευση"
         saved_btn: "Αποθηκεύτηκε"
-        search_saved_success_client_html: "Η αποθήκευση των κριτηρίων ολοκληρώθηκε επιτυχώς. Μπορείτε να μεταβείτε στην "
+        search_saved_success_client_html: "Η αποθήκευση των κριτηρίων ολοκληρώθηκε επιτυχώς. Μπορείς να μεταβείς στην "
         client_profile: "καρτέλα πελάτη"
         category: "Κατηγορία"
         subcategory: "Υποκατηγορία"
@@ -512,7 +513,7 @@ el:
           step1:
             anchor: "Τύπος"
             title: "Βασικές πληροφορίες"
-            type_of_offer_feedback: "Επιλέξτε ανάμεσα σε πώληση, ενοικίαση ή και δύο μαζί"
+            type_of_offer_feedback: "Επίλεξε ανάμεσα σε πώληση, ενοικίαση ή και δύο μαζί"
             type_of_category_feedback: "Επιλέξτε κατηγορία"
             type_of_subcategory_feedback: "Επιλέξτε υποκατηγορία"
             floor_feedback: "Επιλέξτε όροφο"
@@ -535,7 +536,7 @@ el:
           step5:
             anchor: "Ιδιοκτήτης"
             title: "Στοιχεία ιδιοκτήτη"
-            subtitle: "Επιλέξτε από τους υφιστάμενους πελάτες σας ή δημιουργήστε νέο/νέους."
+            subtitle: "Επίλεξε από τους υφιστάμενους πελάτες σου ή δημιούργησε νέο/νέους."
             existing_client: "Επιλογή απο υφιστάμενους"
             new_owner: "Δημιουργία νέου ιδιοκτήτη"
             no_owner: "Χωρίς ιδιοκτήτη"
@@ -545,7 +546,7 @@ el:
             anchor: "Φωτογραφίες"
             title: "Φωτογραφίες"
             existing_files: "Υφιστάμενα αρχεία"
-            existing_files_delete_html: "Επιλέξτε τυχόν <strong>αρχεία προς διαγραφή</strong>. Τα αρχεία θα διαγραφούν αμέσως μόλις υποβάλετε τις αλλαγές."
+            existing_files_delete_html: "Επίλεξε τυχόν <strong>αρχεία προς διαγραφή</strong>. Τα αρχεία θα διαγραφούν αμέσως μόλις υποβάλεις τις αλλαγές."
           step7:
             anchor: "Extra πεδία"
             title: "Extra πεδία"
@@ -553,12 +554,23 @@ el:
           previous: "Προηγούμενο"
           submit: "Υποβολή"
     datatables:
+      notifications:
+        message: "Μήνυμα"
+        date: "Ημερομηνία"
+        status:
+          title: "Κατάσταση"
+          read: "Διαβάστηκε"
+          unread: "Αδιάβαστο"
+        no_results: 'Δεν βρέθηκαν ειδοποιήσεις'
+        actions: 'Ενέργειες'
+        delete: "Διαγραφή"
+        confirm_prompt: "Είσαι σίγουρος/η;"
       users:
         add: "Προσθήκη"
         edit: "Επεξεργασία"
         delete: "Διαγραφή"
         freeze: "Εναλλαγή παγώματος"
-        confirm_prompt: "Είστε σίγουρος;"
+        confirm_prompt: "Είσαι σίγουρος/η;"
         partner: "Συνεργάτης"
         status:
           title: "Κατάσταση"
@@ -578,14 +590,14 @@ el:
         tooltip_edit_profile: "Επεξεργασία χρήστη"
         tooltip_delete_profile: "Διαγραφή χρήστη"
         masquerading:
-          enter_notice: "Έχετε εισέλθει στο σύστημα ως %{user}"
-          active_notice: "Βλέπετε το σύστημα ως %{user}"
+          enter_notice: "Έχεις εισέλθει στο σύστημα ως %{user}"
+          active_notice: "Βλέπεις το σύστημα ως %{user}"
           exit_prompt: "Επαναφορά ως %{user}"
-          sysadmin_prompt: "Είστε sysadmin. Αυτό σημαίνει πως επιπλέον μπορείτε να εισέλθετε ακόμα και σε απενεργοποιημένους λογαριασμούς."
-          exit_notice: "Επιστρέψατε στο σύστημα ως %{user}"
+          sysadmin_prompt: "Είσαι sysadmin. Αυτό σημαίνει πως επιπλέον μπορείς να εισέλθεις ακόμα και σε απενεργοποιημένους λογαριασμούς."
+          exit_notice: "Επέστρεψες στο σύστημα ως %{user}"
       clients:
         delete: "Διαγραφή"
-        confirm_prompt: "Είστε σίγουρος;"
+        confirm_prompt: "Είσαι σίγουρος/η;"
         no_results: "Δεν βρέθηκαν πελάτες!"
         search_placeholder: "Αναζήτηση πελάτη..."
         name: "Όνομα"
@@ -598,6 +610,7 @@ el:
         tooltip_delete_profile: "Διαγραφή πελάτη"
       properties:
         description: "Περιγραφή"
+        no_results: 'Δεν βρέθηκαν ακίνητα!'
       pagination:
         results: "εγγραφές"
       sorting:
@@ -685,8 +698,8 @@ el:
       email_exists: "Υπάρχει ήδη καταχωρημένος χρήστης με αυτό το email"
     alerts:
       file_upload_fail_title: "Ούπς..."
-      file_upload_fail_body: "Φαίνεται κάτι πήγε στραβά... Ελέγξτε τη σύνδεση του δικτύου και προσπαθήστε πάλι."
-      leave_page: "Οι αλλαγές σας θα χαθούν. Είστε σίγουρος ότι θέλετε να αλλάξετε σελίδα;"
+      file_upload_fail_body: "Φαίνεται κάτι πήγε στραβά... Έλεγξε τη σύνδεση του δικτύου σου και προσπάθησε πάλι."
+      leave_page: "Οι αλλαγές σου θα χαθούν. Είσαι σίγουρος πως θες ν'αλλάξεις σελίδα;"
   navbar:
     profile: "Προφίλ"
     account:
@@ -702,7 +715,7 @@ el:
     switch: "Εναλλαγή λογαριασμού"
     favorites: "Αγαπημένα"
   sidebar:
-    subdomain_tooltip: "Το subdomain στο οποίο βρίσκεστε."
+    subdomain_tooltip: "Το subdomain στο οποίο βρίσκεσαι."
     menu: "ΕΝΕΡΓΕΙΕΣ"
     main: "Κεντρική"
     properties: "Ακίνητα"
@@ -798,6 +811,7 @@ el:
     choose: "Επιλέξτε..."
     text_placeholder: "Αναζήτηση..."
   clients:
+    new_client_cta: "Πρόσθεσε έναν!"
     flash_created: "Ο πελάτης προστέθηκε επιτυχώς"
     flash_not_created: "Σφάλμα: Αδυναμία προσθήκης πελάτη"
     flash_not_updated: "Σφάλμα: Αδυναμία ενημέρωσης πελάτη"

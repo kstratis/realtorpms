@@ -248,6 +248,21 @@
               <% end %>
             <% end %>
           <% end %>
+
+          <div class="notifications-icon-wrapper">
+          <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown #{active_for(controller: ['notifications'])}", id: 'notifications-nav', data: {
+            content: t('notifications'),
+            placement: 'bottom',
+            toggle: 'popover',
+            trigger: 'hover' } do %>
+            <%= link_to notifications_path, class: 'nav-link menu-link' do %>
+              <%= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-bell' %>
+            <% end %>
+          <% end %>
+            <% if current_user.notifications.unread.size > 0 %>
+              <div id="unread-notifications-count"><%= current_user.notifications.unread.size %></div>
+            <% end %>
+          </div>
           <!-- /.nav-item -->
         </ul>
         <!-- /.nav -->

@@ -71,7 +71,7 @@ gem 'bootstrap-will_paginate', '1.0.0'
 
 gem 'launchy', '2.5.0'
 
-gem 'react_on_rails', '12.2.0'
+gem 'react_on_rails', '12.4.0'
 
 gem 'webpacker', '~> 5.4.0'
 
@@ -151,3 +151,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'mini_racer', platforms: :ruby
 
+
+gem "noticed", "~> 1.4"

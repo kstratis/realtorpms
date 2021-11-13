@@ -6,6 +6,7 @@ module Accounts
     include ForbiddenIds
     include PersonDatatable
     include PropertyDatatable
+    include NotificationDatatable
     include Jsonifier
     include CalendarEvents
 
