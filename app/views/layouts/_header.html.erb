@@ -270,7 +270,6 @@
         <div class="dropdown d-none d-md-flex">
           <button class="btn-account" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <span data-turbolinks-permanent id="<%= current_user.avatar.attached? ? 'header-avatar' : 'avatar-in-header' %>" class="<%= current_user.avatar.attached? ? 'user-avatar user-avatar-bordered user-avatar-lg' : '' %>">
-
                     <!-- This needs to be properly taken care of -->
                     <%= render_avatar(current_user) %>
                     <%#= gravatar_for current_user, size: 64, classname: 'avatar-outline' %>
