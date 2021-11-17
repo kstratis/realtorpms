@@ -945,6 +945,9 @@ en:
     client_title: "Assigment of client %{entity}"
     assigned: "Assigned"
     assign_client: "Assign to partner"
+    notifications:
+      properties_html: "You were assigned property <a href='%{entity_path}'>%{entity_name}</a>. The owner field is now visible."
+      clients_html: "You were assigned client <a href='%{entity_path}'>%{entity_name}</a>."
   properties:
     new_property_cta: "Add the first!"
     property: "Property"

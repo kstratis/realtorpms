@@ -259,8 +259,8 @@
               <%= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-bell' %>
             <% end %>
           <% end %>
-            <% if current_user.notifications.unread.size > 0 %>
-              <div id="unread-notifications-count"><%= current_user.notifications.unread.size %></div>
+            <% if unread_user_notifications > 0 %>
+              <div id="unread-notifications-count"><%= unread_user_notifications %></div>
             <% end %>
           </div>
           <!-- /.nav-item -->

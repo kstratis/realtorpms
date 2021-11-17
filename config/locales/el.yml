@@ -922,6 +922,9 @@ el:
     client_title: "Ανάθεση του πελάτη %{entity}"
     assigned: "Ανατεθειμένα"
     assign_client: "Ανάθεση σε συνεργάτη"
+    notifications:
+      properties_html: "Σου ανατέθηκε το ακίνητο με κωδικό <a href='%{entity_path}'>%{entity_name}</a>."
+      clients_html: "Σου ανατέθηκε ο πελάτης <a href='%{entity_path}'>%{entity_name}</a>. "
   properties:
     new_property_cta: "Πρόσθεσε ένα!"
     property: "Ακίνητο"

@@ -7,6 +7,7 @@ import useTooltips from '../hooks/useTooltips';
 import useMultiCheckbox from '../hooks/useMultiCheckbox';
 import ModalControlStrip from '../components/modals/ModalControlStrip';
 import ModalPortalWrapper from '../components/modals/ModalPortalWrapper';
+import { renderHTML } from "../utilities/helpers";
 
 // Imperative code. Given as callback after a notification is read.
 // Updates the unread notifications counter on the header.
@@ -75,7 +76,7 @@ const NotificationsList = ({
                   <i className={'fas fa-envelope fa-fw'} />
                 </h5>
               </div>
-              <div className={`modal-body modal-wrapper`}>{notification.message}</div>
+              <div className={`modal-body modal-wrapper`}>{renderHTML(notification.message, 'span')}</div>
               <div className="modal-footer modal-footer-border">
                 <button type="button" className="btn btn-outline-secondary" data-dismiss="modal">
                   {i18n.modal.mass_actions.close_btn}
@@ -208,10 +209,10 @@ const NotificationsList = ({
                                   href={''}
                                   onClick={e => showMessage(e, entry['id'], entry['message'], entry['read_path'])}>
                                   {entry['read_at'] ? (
-                                    `${entry['message']} ${entry['id']}`
+                                    renderHTML(entry['message'], 'span')
                                   ) : (
                                     <strong>
-                                      {entry['message']} {entry['id']}
+                                      {renderHTML(entry['message'], 'span')}
                                     </strong>
                                   )}
                                 </a>
