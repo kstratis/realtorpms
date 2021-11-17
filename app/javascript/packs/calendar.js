@@ -209,7 +209,8 @@ class CalendarManager {
                 }
               },
               callback: function (result) {
-                console.log('This was logged in the callback: ' + result);
+                // DEBUG
+                // console.log('This was logged in the callback: ' + result);
                 if(result){
                   that.handleRemoveEvent(dateString, index, event.path);
                 }

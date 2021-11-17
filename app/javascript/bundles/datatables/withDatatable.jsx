@@ -486,8 +486,8 @@ function withDatatable(WrappedComponent) {
 
     handleFav(e, url, isFaved, id) {
       e.preventDefault();
-      console.log(url);
-      console.log(isFaved);
+      // console.log(url);
+      // console.log(isFaved);
       axios[isFaved ? 'delete' : 'post'](url) // +1 because rails will_paginate starts from 1 while this starts from 0
         .then(
           function(response) {
