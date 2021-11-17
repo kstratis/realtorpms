@@ -73,4 +73,8 @@ module ApplicationHelper
       "#{content_tag(:span, 'ΕΛ')} | #{link_to('EN', landing_root_url(locale: 'en'), class: '')}"
     end
   end
+
+  def unread_user_notifications
+    @unread_user_notifications ||= current_account.notifications.where(recipient_id: current_user.id).unread.size
+  end
 end

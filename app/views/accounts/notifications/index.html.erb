@@ -1,0 +1,46 @@
+<% provide(:title, t('notifications')) %>
+
+<%#= render layout: 'layouts/breadcrumb', locals: {path: [{:title => t('notifications'), :href => notifications_path}], icon: 'house-colored', index: true} %>
+
+<div class="page-container">
+  <div class="container">
+    <div class="app-container">
+      <%# Here we call render not on a string with the name of a partial, but rather on a user variable of class User;
+          in this context, Rails automatically looks for a partial called _user.html.erb, which we must create.
+          This is a definite improvement, but we can do even better: we can call render directly on the @users variable
+          Here Rails infers that @users is a list of User objects; moreover, when called with a collection of users,
+          Rails automatically iterates through them and renders each one with the _user.html.erb partial
+          (inferring the name of the partial from the name of the class). %>
+      <%#= render @users %>
+      <%= react_component('NotificationsListWithDatatable', props: {
+        initial_payload: {
+          dataset_wrapper: @notificationslist,
+          results_per_page: @results_per_page,
+          total_entries: @total_entries,
+          current_page: @current_page,
+          object_type: 'notifications',
+          notifications_path: notifications_path
+        },
+        i18n: {
+          datatable: t('js.datatables.notifications'),
+          result_count: t('js.datatables.pagination.results'),
+          no_results: t('js.datatables.notifications.no_results'),
+          loading: t('loading'),
+          modal: {
+            mass_actions: {
+              title: t('js.components.modal.mass_actions.title'),
+              close_btn: t('js.components.modal.mass_actions.close_btn'),
+            }
+          },
+          button: {
+            tooltip: t('js.components.modal.mass_actions.tooltip')
+          },
+        },
+        meta: {
+          mass_delete_notifications_link: mass_delete_notifications_url
+        }
+      }, prerender: false) %>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div>

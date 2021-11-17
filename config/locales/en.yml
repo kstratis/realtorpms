@@ -75,6 +75,7 @@ en:
   website_enable: "Please enable your website through the account settings"
   application: "Admin"
   no_photos: "No available photos"
+  notifications: "Notifications"
   tour:
     title: "Tour"
     confirm_cancel_message: "Are you sure you want to quit the tour?"
@@ -580,6 +581,17 @@ en:
           previous: "Previous"
           submit: "Submit"
     datatables:
+      notifications:
+        message: "Message"
+        date: "Date"
+        status:
+          title: "Status"
+          read: "Read"
+          unread: "Unread"
+        no_results: 'No notifications available'
+        actions: 'Actions'
+        delete: 'Delete'
+        confirm_prompt: "Are you sure?"
       users:
         add: "Add"
         edit: "Edit"
@@ -612,7 +624,7 @@ en:
           exit_notice: "You are now back as %{user}"
       clients:
         delete: "Delete"
-        no_results: "Δεν βρέθηκαν πελάτες!"
+        no_results: "No clients found!"
         search_placeholder: "Client search..."
         name: "Name"
         email: "Email"
@@ -626,6 +638,7 @@ en:
         results: "Results"
       properties:
         description: "Description"
+        no_results: 'No notifications available'
       sorting:
         title: "Sorting"
       clear: "Clear"
@@ -674,8 +687,8 @@ en:
       addingMoreFiles: "Adding more files"
       back: "Back"
       dropPaste: "Drop files here, paste or"
-      exceedsSize: "Το μέγεθος του αρχείου είναι μεγαλύτερο από "
-      noDuplicates: "Προσπαθείτε να μεταφορτώσετε το ίδιο αρχείο 2 φορές: %{fileName}"
+      exceedsSize: "The file size is bigger than "
+      noDuplicates: "You're trying to upload the same file twice: %{fileName}"
       browse: "browse"
       notes: "Only images are allowed. Max file size 3.5MB/file. Total max number of files: 10."
       filename: "Filename:"
@@ -821,6 +834,7 @@ en:
     choose: "Choose..."
     text_placeholder: "Search..."
   clients:
+    new_client_cta: "Add a new one!"
     flash_created: "Client successfully created"
     flash_not_created: "Error creating new client"
     flash_not_updated: "Error updating client data"
@@ -931,6 +945,9 @@ en:
     client_title: "Assigment of client %{entity}"
     assigned: "Assigned"
     assign_client: "Assign to partner"
+    notifications:
+      properties_html: "You were assigned property <a href='%{entity_path}'>%{entity_name}</a>. The owner field is now visible."
+      clients_html: "You were assigned client <a href='%{entity_path}'>%{entity_name}</a>."
   properties:
     new_property_cta: "Add the first!"
     property: "Property"

@@ -432,8 +432,11 @@ const ClientsList = ({
                 </div>
               ) : (
                 <div className={`no-entries ${isLoading ? 'reduced-opacity' : ''}`}>
-                  <i className="no-results"> </i>
+                  <i className="no-results-clients"> </i>
                   <h3>{i18n['no_results']}</h3>
+                  <a href={meta['new_client_link']} className={'btn btn-lg btn-primary'}>
+                    {i18n['new_client_cta']}
+                  </a>
                 </div>
               )}
             </div>

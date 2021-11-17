@@ -689,8 +689,6 @@ input[type="search"]::-webkit-search-cancel-button {
   i.far.fa-heart {
     color: #ffffff;
   }
-
-  //color: #ffffff;
 }
 
 /* When you mouse over the container, fade in the overlay icon*/
@@ -1166,6 +1164,30 @@ li.page-item {
   background-image: url('../images/employee.svg');
 }
 
+.no-results-notifications{
+  width: 200px;
+  height: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+  background-size: auto 135%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url('../images/empty_email.svg');
+}
+
+.no-results-clients{
+  width: 200px;
+  height: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+  background-size: auto 135%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url('../images/empty_clients.svg');
+}
+
 .no-results-properties{
   width: 200px;
   height: 200px;
@@ -1235,8 +1257,16 @@ li.page-item {
   margin-bottom: 15px;
 }
 
+.pointer-questionmark{
+  cursor: help;
+}
+
 .green {
   color: $teal !important;
+}
+
+.gray {
+  color: $gray-700 !important;
 }
 
 .red {
@@ -2844,4 +2874,18 @@ a.icon-font-delete{
 // Then and only then apply css rules to the second
 .pinned-bookmark + .pinned-globe{
   padding-left: 5px;
+}
+
+.notifications-icon-wrapper{
+  position: relative;
+}
+
+#unread-notifications-count{
+  position: absolute;
+  top: -3px;
+  right: 5px;
+  color: black;
+  border-radius: 50%;
+  background: gold;
+  padding: 0 7px 0 7px;
 }

@@ -204,7 +204,7 @@ el:
     am: π.μ.
     formats:
       default: ! '%d %B %Y %H:%M'
-      custom: ! '%d %b %Y'
+      custom: ! '%d %b %Y %H:%M'
       long: ! '%A %d %B %Y %H:%M:%S %Z'
       short: ! '%d %b %H:%M'
       property: ! '%-d/%b/%y'

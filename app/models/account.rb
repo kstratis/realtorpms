@@ -30,6 +30,8 @@ class Account < ApplicationRecord
   # users we use a HABTM association.
   has_many :model_types, dependent: :destroy
 
+  has_many :notifications
+
   has_one_attached :avatar
 
   validates_associated :owner

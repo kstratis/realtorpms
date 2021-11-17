@@ -51,6 +51,8 @@ class User < ApplicationRecord
 
   has_many :calendar_events
 
+  has_many :notifications, as: :recipient
+
   enum locale: [:en, :el]
 
   # has_many :properties, -> (account) { where('account_id = ?', account.id) }, through: :assignments

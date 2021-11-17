@@ -152,6 +152,13 @@
 
           <% end %>
 
+          <%= content_tag :li, class: "menu-item #{active_for(controller: ['notifications'])}" do %>
+            <%= link_to notifications_path, class: 'menu-link' do %>
+              <%= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-bell' %>
+              <%= content_tag :span, t('notifications'), class: 'menu-text menu-text-entry align-middle' %>
+            <% end %>
+          <% end %>
+
         </ul>
         <!-- /.menu -->
       </nav>
