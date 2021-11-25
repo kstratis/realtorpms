@@ -73,7 +73,7 @@ gem 'launchy', '2.5.0'
 
 gem 'react_on_rails', '12.4.0'
 
-gem 'webpacker', '~> 5.4.0'
+gem 'webpacker', '~> 5.4.3'
 
 gem "roo", "~> 2.8.3"
 
