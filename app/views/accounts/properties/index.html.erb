@@ -69,6 +69,7 @@
               initial_search: @initial_search,
               initial_sorting: @initial_sorting,
               initial_ordering: @initial_ordering,
+              force_filters_open: @force_filters_open,
               locations_endpoint: properties_locations_url,
               clients_endpoint: clients_url,
               assignmentships_endpoint: matches_url,
@@ -80,6 +81,7 @@
               showControls: true,
           },
           i18n: {
+              toast: t('properties.toast'),
               cfields: {
                   select_prompt: t('cfields.choose'),
                   text_prompt: t('cfields.text_placeholder')
