@@ -5,13 +5,13 @@
     { title: @client.full_name, :href => '' }], icon: 'house-colored' } do %>
 
   <div class="action-btns">
-    <div class="btn-group btn-group-toggle">
+    <div class="btn-group btn-group-toggle client-controls">
+      <%= react_component('ModalControlStrip', props: { entries: clients_modal_data }) %>
+
       <%= link_to properties_path(force_filters_open: true), class: 'btn btn-secondary btn-sm editable' do %>
-        <i class="fas fa-check colored fa-fw"></i>
+        <i class="fas fa-search colored fa-fw"></i>
         <span class="d-none d-lg-inline">&nbsp;<%= t 'clients.show.preferences' %></span>
       <% end %>
-
-      <%= react_component('ModalControlStrip', props: { entries: clients_modal_data }) %>
 
       <% if current_user.is_admin?(current_account) || current_user.clients.pluck(:id).include?(@client.id) %>
         <%= link_to edit_client_path(@client), class: 'btn btn-secondary btn-sm editable' do %>

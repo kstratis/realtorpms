@@ -26,7 +26,7 @@ class User < ApplicationRecord
             format: { with: VALID_EMAIL_REGEX },
             uniqueness: { case_sensitive: false }
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  validates :password, presence: true, length: { minimum: 8 }, allow_nil: true
 
   # Deleting a given user -provided he is the owner of an account- cascades and deletes all his related data including,
   # properties, user assignments, favorites and attachments
