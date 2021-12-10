@@ -866,6 +866,7 @@ en:
       delete_avatar: "Are you sure you want to delete the client's picture?"
       add_owner: "Add co-owner"
     show:
+      preferences: "Preferences"
       breadcrumb: "Clients"
       heading: "Client information"
       clients: "Clients"
@@ -964,6 +965,7 @@ en:
     ok_button: "Add"
     cancel_button: "Cancel"
     close_button: "Close"
+    toast: "Use the filters to set client search criteria and store the search on the client's profile for easy future reference."
     clone:
       label: "Clone"
       prompt: "Are you sure you want to clone this?"

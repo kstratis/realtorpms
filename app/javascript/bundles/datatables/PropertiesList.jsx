@@ -1,17 +1,17 @@
 import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
+import toast, { Toaster } from 'react-hot-toast';
 import withDatatable from './withDatatable';
 import ClampWrapper from '../components/ClampWrapper';
 import SortFilter from './SortFilter';
 import AssociativeFormSelect from '../components/selects/AssociativeFormSelect';
 import Spinner from './Spinner';
 import PropertyEntry from './PropertyEntry';
-import URLSearchParams from '@ungap/url-search-params';
 import AsyncSelectContainer from '../components/selects/AsyncSelectContainer';
 import FormComponents from './fields/FormComponents';
 import useFilterToggle from '../hooks/useFilterToggle';
-import { hasParams } from '../utilities/helpers';
+import { hasParams, comesFromClient } from '../utilities/helpers';
 import ModalControlStrip from '../components/modals/ModalControlStrip';
 
 const PropertiesList = ({
@@ -53,15 +53,60 @@ const PropertiesList = ({
   showControls,
   new_property_endpoint,
   new_client_endpoint,
+  forceFiltersOpen,
   i18n,
 }) => {
-  const { filtersOpen, setFiltersOpen } = useFilterToggle('propertyFiltersOpen');
+  const { filtersOpen, setFiltersOpen } = useFilterToggle('propertyFiltersOpen', forceFiltersOpen);
   const handleChange = event => setFiltersOpen(filtersOpen => !filtersOpen);
 
-  // const saveSearchData = [{}]
+  const clearHandler = e => {
+    e.preventDefault();
+    toast.remove();
+    Turbolinks.visit(properties_path);
+  };
+
+  // React hot toast does not yet support a dismiss button.
+  // Until then use jquery to simulate a dismiss button
+  // References:
+  // https://react-hot-toast.com/docs/version-2
+  // https://github.com/timolins/react-hot-toast/issues/7
+  useEffect(() => {
+    $(document).on('click', '.client-search-toast', () => {
+      toast.dismiss();
+    });
+  }, []);
+
+  useEffect(() => {
+    if (comesFromClient()) {
+      toast(
+        i18n.toast,
+        {
+          duration: Infinity,
+          position: 'bottom-right',
+          className: 'client-search-toast',
+          icon: '🔍',
+          style: {
+            borderRadius: '10px',
+            background: 'gold',
+            color: '#333',
+          },
+          ariaProps: {
+            role: 'status',
+            'aria-live': 'polite',
+          },
+        }
+      );
+    }
+    return () => {
+      toast.dismiss();
+    };
+  }, []);
 
   return (
     <div className="properties-list">
+      <div>
+        <Toaster />
+      </div>
       <div className={'PropertyListContainer'}>
         <div className={'row'}>
           <div className={`filters col-12 col-xl-4 ${filtersOpen ? 'd-block' : 'd-none'} animated fadeIn`}>
@@ -74,7 +119,12 @@ const PropertiesList = ({
                   <span className="align-middle">&nbsp; {i18n.filters.title}</span>
                   <div className="float-right">
                     <span className="badge badge-pill badge-success p-2 mr-2">{`${i18n.entry_count}: ${count}`}</span>
-                    <a className={'btn btn-outline-danger btn-sm'} href={properties_path}>
+                    <a
+                      className={'btn btn-outline-danger btn-sm'}
+                      href={''}
+                      onClick={e => {
+                        clearHandler(e);
+                      }}>
                       {i18n.clear}
                     </a>
                   </div>
@@ -300,7 +350,7 @@ const PropertiesList = ({
                             button: {
                               content: `<i class='fas fa-save fa-lg fa-fw'/>`,
                               size: 'md',
-                              classname: 'btn-success',
+                              classname: `btn-success ${!!forceFiltersOpen ? 'pulsing-button' : ''}`,
                               tooltip: i18n.search_save_title,
                               isDisabled: !hasParams(),
                             },

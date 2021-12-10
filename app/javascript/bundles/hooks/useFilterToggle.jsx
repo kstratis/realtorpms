@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-function useFilterToggle(name) {
-  const [filtersOpen, setFiltersOpen] = useState(() => JSON.parse(localStorage.getItem(name)));
+function useFilterToggle(name, forceFiltersOpen) {
+  const [filtersOpen, setFiltersOpen] = useState(() => !!forceFiltersOpen || JSON.parse(localStorage.getItem(name)));
 
   useEffect(() => {
     localStorage.setItem(name, filtersOpen);

@@ -13,6 +13,7 @@ function withDatatable(WrappedComponent) {
       initial_payload: PropTypes.shape({
         dataset_wrapper: PropTypes.object.isRequired,
         results_per_page: PropTypes.number.isRequired,
+        force_filters_open: PropTypes.bool,
         total_entries: PropTypes.number.isRequired,
         object_type: PropTypes.string.isRequired,
         current_page: PropTypes.number,
@@ -93,6 +94,7 @@ function withDatatable(WrappedComponent) {
         is_masquerading: this.props.initial_payload.is_masquerading,
         dataset: this.props.initial_payload.dataset_wrapper.dataset,
         resultsPerPage: this.props.initial_payload.results_per_page,
+        forceFiltersOpen: this.props.initial_payload.force_filters_open,
         isLoading: false,
         pageCount: Math.ceil(this.props.initial_payload.total_entries / this.props.initial_payload.results_per_page),
         count: this.props.initial_payload.total_entries,

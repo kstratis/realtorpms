@@ -4,9 +4,9 @@
     <div id="logo" class="top-bar-brand" data-turbolinks-permanent="true">
       <a class="navbar-brand" href="<%= websites_root_path %>">
         <% if current_account.avatar.attached? %>
-          <%= image_tag current_account.avatar, class: "d-inline-block align-top img-brand" %>
+          <%= image_tag current_account.avatar, class: "d-inline-block align-top img-brand", alt: "Real estate agency logo" %>
         <% else %>
-          <%= image_pack_tag "media/images/logo_placeholder.png", class: "d-inline-block align-top img-brand" %>
+          <%= image_pack_tag "media/images/logo_placeholder.png", class: "d-inline-block align-top img-brand", alt: "Default real estate agency logo" %>
         <% end %>
       </a>
     </div>

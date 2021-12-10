@@ -113,6 +113,8 @@ module PropertyDatatable
       @properties = @properties.order(created_at: 'desc')
     end
 
+    @force_filters_open = ActiveModel::Type::Boolean.new.cast(filters[:force_filters_open])
+
     # DEBUG - Pagination
     # puts filters[:page]
     @properties = @properties.paginate(page: filters[:page], :per_page => 10)
@@ -182,7 +184,8 @@ module PropertyDatatable
       format.json { render json: {results_per_page: @results_per_page,
                                   datalist: @propertieslist,
                                   total_entries: @properties.total_entries,
-                                  current_page: @properties.current_page}, status: 200 }
+                                  current_page: @properties.current_page,
+                                  force_filters_open: @force_filters_open}, status: 200 }
     end
 
   end

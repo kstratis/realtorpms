@@ -96,13 +96,19 @@ const ifExists = (collection, item) => {
   return collection ? collection[item] : '';
 };
 
+const comesFromClient = () => {
+  let searchParams = new URLSearchParams(window.location.search);
+
+  return searchParams.get('force_filters_open') === 'true';
+}
+
 // Disable the save search button when no params are available
 const hasParams = () => {
   let searchParams = new URLSearchParams(window.location.search);
   let param_counter = 0;
   for (let p of searchParams) {
     // count these out
-    if (['page', 'sizeminmeta', 'sizemaxmeta', 'ordering', 'sorting'].indexOf(p[0]) === -1) {
+    if (['page', 'sizeminmeta', 'sizemaxmeta', 'ordering', 'sorting', 'force_filters_open'].indexOf(p[0]) === -1) {
       param_counter = param_counter + 1;
     }
   }
@@ -165,5 +171,6 @@ export {
   ifExists,
   hasParams,
   setup_dependent_checkboxes,
-  objectToUrlParams
+  objectToUrlParams,
+  comesFromClient
 };
