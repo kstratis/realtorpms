@@ -103,13 +103,13 @@
                 <% if property.images.blank? && !property.avatar.attached? %>
                   <a target="_blank" href="<%= website_property_url(property, locale: I18n.locale) %>">
                     <div class="thumb-container">
-                      <%= image_pack_tag('media/images/houses/house_placeholder.svg', class: 'house-placeholder-image thumb') %>
+                      <%= image_pack_tag('media/images/houses/house_placeholder.svg', class: 'house-placeholder-image thumb', alt: "no property image thumb")  %>
                     </div>
                   </a>
                 <% elsif property.all_images.size == 1 %>
                   <a target="_blank" href="<%= website_property_url(property, locale: I18n.locale) %>">
                     <div class="thumb-container">
-                      <img src="<%= url_for(first_avail_image(property).variant(resize_to_fill: [400, 450])) %>" class="thumb" />
+                      <img src="<%= url_for(first_avail_image(property).variant(resize_to_fill: [400, 450])) %>" class="thumb" alt="single property thumb" />
                     </div>
                   </a>
                 <% else %>
