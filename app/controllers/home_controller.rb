@@ -28,8 +28,8 @@ class HomeController < ApplicationController
   end
 
   def accounts
-    return redirect_to landing_root_url(subdomain: nil, locale: I18n.locale) if current_user.nil?
-    return redirect_to account_root_url(subdomain: request.subdomain) if masquerading?
+    return redirect_to landing_root_url(subdomain: nil, locale: I18n.locale) if current_user.nil? || masquerading?
+    # return redirect_to account_root_url(subdomain: request.referrer) if masquerading?
     # @accounts = current_user.admin? ? Account.all : current_user.all_accounts
     # @properties = @properties.paginate(page: params[:page], :per_page => 10)
     # byebug
