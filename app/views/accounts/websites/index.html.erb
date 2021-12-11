@@ -109,7 +109,7 @@
                 <% elsif property.all_images.size == 1 %>
                   <a target="_blank" href="<%= website_property_url(property, locale: I18n.locale) %>">
                     <div class="thumb-container">
-                      <img src="<%= url_for(first_avail_image(property)) %>" class="thumb" />
+                      <img src="<%= url_for(first_avail_image(property).variant(resize_to_fill: [400, 450])) %>" class="thumb" />
                     </div>
                   </a>
                 <% else %>
