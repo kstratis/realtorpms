@@ -173,6 +173,8 @@ function withDatatable(WrappedComponent) {
     handleHistoryButton(e) {
       // DEBUG
       // console.log(e.state);
+      if (!e.state) return;
+
       const historyPage = this.getSelectedPage();
       if (!('turbolinks' in e.state)) {
         this.handlePageClick(historyPage, true, true);

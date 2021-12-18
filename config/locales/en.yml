@@ -919,9 +919,12 @@ en:
       breadcrumb: "Partners"
       heading: "User info"
       users: "Users"
-      assignments: "Assignments"
+      property_assignments: "Assigned properties"
+      client_assignments: "Assigned clients"
       processed: "Processed"
       no_assigned_client: "The partner doesn't seem to have any clients assigned."
+      assigned_properties_explanation: "When you assign a property to a partner you are effectively granting him/her access to the owner's identity and telephone number."
+      assigned_clients_explanation: "When you assign a client to a partner you are effectively granting him/her access to the owner's entire inventory."
       toolbar:
         assignment_title: "Assignment"
         assignment_tooltip: "Assign properties"

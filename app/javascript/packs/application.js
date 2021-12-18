@@ -117,5 +117,21 @@ $(document).on('turbolinks:load', function(e) {
     }
   });
   // -====TOUR HANDLER END====-
+
+  // users_controller#show
+  $("#tabUserProperties").on('click', (e) => {
+    e.preventDefault();
+    location.hash = '#assignments';
+    $('.nav-tabs a[href="#assignments"]').tab('show');
+
+  })
+
+  $("#tabUserClients").on('click', (e) => {
+    e.preventDefault();
+    location.hash = '#clients';
+    $('.nav-tabs a[href="#clients"]').tab('show');
+  })
+
+
 });
 

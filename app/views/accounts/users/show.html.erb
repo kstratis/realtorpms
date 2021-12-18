@@ -45,12 +45,12 @@
                 <a href="#assignments" class="nav-link custom " data-toggle="tab" role="tab" aria-selected="false">
                   <span class="tab-title-container-partner">
                   <i class="menu-icon fas fa-home fa-fw"></i>
-                  <span class="d-none d-md-inline tab-text">&nbsp; <%= t('assignments.assigned') %></span>
+                  <span class="d-none d-md-inline tab-text">&nbsp; <%= t('main.properties') %></span>
                   </span>
                 </a>
                 <a href="#clients" class="nav-link custom " data-toggle="tab" role="tab" aria-selected="false">
                   <span class="tab-title-container-partner">
-                  <i class="menu-icon fas fa-user fa-fw"></i>
+                  <i class="menu-icon fas fa-users fa-fw"></i>
                   <span class="d-none d-md-inline tab-text">&nbsp; <%= t('main.clients') %></span>
                   </span>
                 </a>
@@ -90,39 +90,50 @@
 
               <div class="row">
                 <div class="col-lg-6 offset-lg-3 col-md-12">
-                  <div class="metric-row">
+                  <div class="metric-row justify-content-center">
 
-                    <div class="col-6 col-sm-6 col-lg-6">
+                    <% if @user.role(current_account) == 'user' %>
+                      <div class="d-flex justify-content-center">
+                        <!-- metric column -->
+                        <%= link_to nil, id: "tabUserProperties", class: "visual-picker visual-picker-lg has-peek", 'data-toggle': "popover", 'data-placement': "left", 'data-trigger': "hover", 'data-content': I18n.t('users.show.assigned_properties_explanation') do %>
+                          <!-- .visual-picker-figure -->
+                          <div class="visual-picker-figure">
+                            <!-- .visual-picker-content -->
+                            <span class="visual-picker-content">
+                              <p class="metric-value h3">
+                                <sub><i class="fa fa-home fa-lg fa-fw"></i></sub>
+                                <span class="value"><%= @user.properties.count %></span>
+                              </p>
+                            </span> <!-- /.visual-picker-content -->
+                          </div><!-- /.visual-picker-figure -->
+                          <!-- .visual-picker-peek -->
+                          <strong class="visual-picker-peek"><mark><%= t('users.show.property_assignments') %></mark></strong>
+                        <% end %> <!-- /.visual-picker -->
+<!--                        <span class="property-cover-popover" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="<%#= t('properties.popover_houseowner_' + current_user.role(current_account)) %>" title="<%#= t('properties.popover_houseowner_title') %>"><i class="fas fa-info-circle"></i></span>-->
+                      </div>
+                    <% end %>
 
-                      <!-- metric column -->
-                      <div class="card-metric">
-                        <div class="metric">
-                          <p class="metric-value h3">
-                            <!--                            ∞-->
-                            <sub><i class="fa fa-tasks fa-lg fa-fw"></i></sub>
-                            <% if @is_admin %>
-                              <span class="value"><i class="fas fa-infinity"></i></span>
-                            <% else %>
-                              <span class="value"><%= @user.assignments.count %></span>
-                            <% end %>
+                    <div class="col-6">
 
-                            <!--                    <sub><i class="pr-icon cs account-switch"></i></sub> <span class="value"><%#= @user.assignments.count %></span>-->
-                          </p>
-                          <h2 class="metric-label"><%= t('users.show.assignments') %></h2>
+                      <% if @user.role(current_account) == 'user' %>
+                        <div class="d-flex justify-content-center">
+                          <!-- metric column -->
+                          <%= link_to nil, id: "tabUserClients", class: "visual-picker visual-picker-lg has-peek", 'data-toggle': "popover", 'data-placement': "right", 'data-trigger': "hover", 'data-content': I18n.t('users.show.assigned_clients_explanation') do %>
+                            <!-- .visual-picker-figure -->
+                            <div class="visual-picker-figure">
+                              <!-- .visual-picker-content -->
+                              <span class="visual-picker-content">
+                              <p class="metric-value h3">
+                                <sub><i class="fa fa-users fa-lg fa-fw"></i></sub>
+                                <span class="value"><%= @user.clients.count %></span>
+                              </p>
+                            </span> <!-- /.visual-picker-content -->
+                            </div><!-- /.visual-picker-figure -->
+                            <!-- .visual-picker-peek -->
+                            <strong class="visual-picker-peek"><mark><%= t('users.show.client_assignments') %></mark></strong>
+                          <% end %> <!-- /.visual-picker -->
                         </div>
-                      </div><!-- /.metric -->
-                    </div>
-
-                    <div class="col-6 col-sm-6 col-lg-6">
-
-                      <div class="card-metric">
-                        <div class="metric">
-                          <p class="metric-value h3">
-                            <sub><i class="fa fa-check fa-lg fa-fw"></i></sub> <span class="value">N/A</span>
-                          </p>
-                          <h2 class="metric-label"><%= t('users.show.processed') %></h2>
-                        </div>
-                      </div><!-- /.metric -->
+                      <% end %>
 
                     </div>
 
