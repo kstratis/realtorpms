@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_09_075310) do
+ActiveRecord::Schema.define(version: 2021_12_18_134317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -330,6 +330,7 @@ ActiveRecord::Schema.define(version: 2021_11_09_075310) do
     t.boolean "has_energy_cert"
     t.boolean "website_enabled", default: true
     t.boolean "pinned", default: false
+    t.boolean "active", default: true
     t.index ["account_id"], name: "index_properties_on_account_id"
     t.index ["category_id"], name: "index_properties_on_category_id"
     t.index ["location_id"], name: "index_properties_on_location_id"
