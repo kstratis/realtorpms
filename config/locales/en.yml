@@ -285,6 +285,9 @@ en:
         construction_short: "Built"
         location: "Location"
         location_title: "Location"
+        status_title: "Market status"
+        status_active: "On market"
+        status_inactive: "Off market"
         owner: "Owner"
         owner_title: "Owner/s"
         owner_header_name: "Name"
@@ -540,6 +543,7 @@ en:
           step1:
             anchor: "Type"
             title: "Basic Information"
+            options: "Options"
             type_of_offer_feedback: "Sell, rent or offer both"
             type_of_category_feedback: "Choose a category"
             type_of_subcategory_feedback: "Choose a subcategory"

@@ -2914,3 +2914,20 @@ a.icon-font-delete{
 .client-search-toast{
   cursor: pointer;
 }
+
+.indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-left: 5px;
+  border: 1px solid black;
+}
+
+.indicator-on {
+  background: $teal !important;
+}
+
+.indicator-off{
+  background: grey !important;
+}

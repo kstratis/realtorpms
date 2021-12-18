@@ -139,12 +139,15 @@
                         </div>
                       </div>
 
+                      <hr />
+
+                      <legend><%= t('js.forms.properties.wizard.step1.options') %></legend> <!-- .form-group -->
+
                       <div class="custom-control custom-switch website-enabled-control">
                         <%= property.check_box(:website_enabled, {class: "custom-control-input", type: 'checkbox'}) %>
                         <%= property.label(:website_enabled, {class: 'custom-control-label cursor-pointer'}) do %>
                           <strong><%= t('properties.edit.website_enabled_html', website: websites_root_url(locale: I18n.locale)) %></strong>
                         <% end %>
-                        <div class="d-inline pinned-globe"><i class="fas fa-globe"></i></div>
                       </div>
 
                       <div class="custom-control custom-switch pinned-control">
@@ -152,7 +155,13 @@
                         <%= property.label(:pinned, {class: 'custom-control-label cursor-pointer'}) do %>
                           <strong><%= t('js.forms.properties.wizard.step1.pinned') %></strong>
                         <% end %>
-                        <div class="d-inline pinned-bookmark"><i class="fas fa-bookmark"></i></div>
+                      </div>
+
+                      <div class="custom-control custom-switch pinned-control">
+                        <%= property.check_box(:active, {class: "custom-control-input", type: 'checkbox'}) %>
+                        <%= property.label(:active, {class: 'custom-control-label cursor-pointer'}) do %>
+                          <strong><%= t('activerecord.attributes.property.status_title') %></strong>
+                        <% end %>
                       </div>
 
                       <div class="row">

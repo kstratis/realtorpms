@@ -47,7 +47,7 @@ el:
   no_photos: "Δεν υπάρχουν διαθέσιμες φωτογραφίες"
   notifications: "Ειδοποιήσεις"
   tour:
-    title: "Οδηγός"
+    title: "Οδηγίες"
     confirm_cancel_message: "Είσαι βέβαιος πως θέλεις να εγκαταλείψεις τον οδηγό;"
     buttons:
       next: "Επόμενο"
@@ -258,6 +258,9 @@ el:
         construction_short: "Κατασκευή"
         location: "Τοποθεσία"
         location_title: "Τοποθεσία"
+        status_title: "Κατάσταση"
+        status_active: "Διαθέσιμο"
+        status_inactive: "Μη διαθέσιμο"
         owner: "Ιδιοκτήτης"
         owner_title: "Ιδιοκτήτης/ες"
         owner_header_name: "Ονομ/μό"
@@ -276,7 +279,7 @@ el:
         floor_title: "Όροφος"
         parking_title: "Θέση στάθμευσης"
         levels: "Επίπεδα"
-        availability_title: "Διαθεσιμότητα"
+        availability_title: "Ελεύθερο από:"
         energy_cert_title: "Ενεργειακό πιστοποιητικό"
         availability_feedback_html: "Επιλέξτε ημερομηνία"
         notes_title: "Σημειώσεις"
@@ -513,6 +516,7 @@ el:
           step1:
             anchor: "Τύπος"
             title: "Βασικές πληροφορίες"
+            options: "Επιλογές"
             type_of_offer_feedback: "Επίλεξε ανάμεσα σε πώληση, ενοικίαση ή και δύο μαζί"
             type_of_category_feedback: "Επιλέξτε κατηγορία"
             type_of_subcategory_feedback: "Επιλέξτε υποκατηγορία"

@@ -369,6 +369,7 @@ module Accounts
                                        :clients,
                                        :avatar,
                                        :map_url,
+                                       :active,
                                        {preferences: {}},
                                        delete_images: [],
                                        images: [],
