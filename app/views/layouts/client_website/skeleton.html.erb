@@ -30,7 +30,7 @@
        using the keyword 'provide' If the view file doesn't provide such value, 'full title' returns
        a generic title -->
 
-  <title><%= full_title(yield(:title)) %></title>
+  <title><%= full_title(current_account.name) %></title>
 
   <%= csrf_meta_tags %>
   <link rel="preconnect" href="https://fonts.gstatic.com">

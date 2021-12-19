@@ -339,6 +339,20 @@ const PropertiesList = ({
                             sort_order: 'asc',
                             icon: 'fas fa-sort-amount-down fa-fw',
                           },
+                          {
+                            sn: 1,
+                            text: 'Τιμή αύξουσα',
+                            sort_filter: 'price',
+                            sort_order: 'asc',
+                            icon: 'fas fa-coins fa-fw',
+                          },
+                          {
+                            sn: 0,
+                            text: 'Τιμή φθίνουσα',
+                            sort_filter: 'price',
+                            sort_order: 'desc',
+                            icon: 'fas fa-money-bill fa-fw',
+                          }
                         ]}
                       />
                     </div>
