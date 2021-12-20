@@ -106,6 +106,8 @@ gem 'rubocop', require: false
 gem 'rubocop-rails', require: false
 gem 'rubocop-rspec', require: false
 
+gem 'geocoder'
+
 group :development, :test do
   gem 'rspec-rails', '5.0.1'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

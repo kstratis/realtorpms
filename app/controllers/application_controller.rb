@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery prepend: true
   include SessionsHelper
   include UserAvatar
+  include LanguageSwitcher
   helper UserAvatar
   include TimelineHelper
 

@@ -173,6 +173,7 @@ GEM
     formatador (0.2.5)
     friendly_id (5.4.2)
       activerecord (>= 4.0.0)
+    geocoder (1.7.0)
     globalid (0.5.2)
       activesupport (>= 5.0)
     grover (1.0.0)
@@ -471,6 +472,7 @@ DEPENDENCIES
   factory_bot_rails (~> 6.2)
   faker (~> 2.18)
   friendly_id (~> 5.4)
+  geocoder
   grover
   guard (= 2.17)
   guard-minitest (= 2.4.6)

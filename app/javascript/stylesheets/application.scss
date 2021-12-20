@@ -2484,11 +2484,6 @@ input.no-full-width{
     }
   }
 
-
-
-
-
-
   //  -=HERO START=-
   // HERO CLOUD SVG + ANIMATION
   svg#clouds {
@@ -2653,6 +2648,57 @@ input.no-full-width{
     background-color: #007aff;
     border-color: #007aff;
     color: #fff;
+  }
+}
+
+#language-switcher-container{
+  font-family: 'Fira Sans', sans-serif;
+  background-color: #424245;
+  color: white;
+}
+
+.country-prompt{
+  cursor: default;
+}
+
+// This belongs to the website but falls outside of .website
+.country-proposal{
+  cursor: default;
+  border: 1px solid white;
+  padding: 5px;
+  text-align: center;
+  border-radius: 3px;
+  background: #0C5EAE;
+}
+
+.locale-redirect {
+  padding: 4px 12px;
+  border-radius: 3px;
+  background: gold;
+  color: #424245;
+  &:hover{
+    text-decoration: none;
+    background: #FFFFFF;
+    strong {
+      color: #424245;
+    }
+  }
+}
+
+.locale-dismiss{
+  text-decoration: none;
+  padding: 3px 8px;
+  border-radius: 3px;
+  border: 1px solid #ffffff;
+  cursor: pointer;
+  strong {
+    color: #ffffff;
+  }
+  &:hover{
+    background: #FFFFFF;
+    strong {
+      color: #424245;
+    }
   }
 }
 
@@ -2931,3 +2977,4 @@ a.icon-font-delete{
 .indicator-off{
   background: grey !important;
 }
+

@@ -49,6 +49,10 @@
 </head>
 
 <body data-turbolinks="false">
+  <% if request.params[:locale].blank? && @locale_switch_dismissed.blank? && greek_user? %>
+    <%= render 'shared/locale_switcher' %>
+  <% end %>
+
   <%= yield(:landing) %>
 
 <!-- BEGIN THEME JS-->

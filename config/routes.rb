@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   constraints(SubdomainRequired) do
     scope module: 'accounts' do
       # Language support on client mini websites
-      scope ":locale", locale: /en|el/ do
+      scope "(:locale)", locale: /en|el/ do
         root to: 'websites#index', as: :websites_root
         get '/properties/:id', to: 'websites#show', as: :website_property
         get '/results-count', to: 'websites#count', as: :results_count
@@ -116,7 +116,7 @@ Rails.application.routes.draw do
   patch '/invitations/:id/accepted', to: 'invitationreceivers#accepted', as: :accepted_invitation
 
   # Language support on website (landing) pages
-  scope ":locale", locale: /en|el/ do
+  scope "(:locale)", locale: /en|el/ do
     root to: 'home#index', as: :landing_root
     get '/create', to: 'accounts#new', as: :new_account
 
@@ -132,14 +132,14 @@ Rails.application.routes.draw do
   end
 
   match '*path',
-        # to: redirect(status: 302) { |_, request| locale_handler(request) },
-        to: redirect(status: 302) { |_, request| "#{:el.to_s}#{request.path}" },
+        to: redirect(status: 302) { |_, request| locale_handler(request) },
+        # to: redirect(status: 302) { |_, request| "#{:el.to_s}#{request.path}" },
         constraints: lambda { |req| constraint_handler(req) },
         via: :get
 
   match '',
-        # to: redirect(status: 302) { |_, request| request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first },
-        to: redirect(status: 302) { |_, request| "#{:el.to_s}"},
+        to: redirect(status: 302) { |_, request| request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first },
+        # to: redirect(status: 302) { |_, request| "#{:el.to_s}"},
         constraints: lambda { |req| req.path.exclude? 'rails/active_storage' },
         via: :get
 end

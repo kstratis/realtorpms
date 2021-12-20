@@ -1,6 +1,10 @@
 ---
 en:
   website:
+    locale:
+      prompt: 'Επιβεβαίωσε την χώρα ή την περιοχή, για να δεις περιεχόμενο σχετικό με την τοποθεσία σου.'
+      country_proposal: 'Ελλάδα'
+      continue: 'Συνέχεια'
     nav:
       features: 'FEATURES'
       subscription: 'PRICING'

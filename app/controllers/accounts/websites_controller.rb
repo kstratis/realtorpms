@@ -2,10 +2,14 @@ module Accounts
   class WebsitesController < ApplicationController
     include Pagy::Backend
 
+    layout 'client_website/skeleton'
+
     before_action { @pagy_locale = I18n.locale }
     before_action :client_website_enabled_or_return
 
-    layout 'client_website/skeleton'
+    before_action :client_country
+    before_action :locale_switch_dismissed
+    helper_method :greek_user?
 
     def index
       @properties = if params_exist?(params)

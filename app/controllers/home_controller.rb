@@ -2,6 +2,10 @@ class HomeController < ApplicationController
   # render :action => 'accounts', :layout => 'auth/skeleton'
   # layout 'auth/skeleton', only: [:accounts]  # show the barebones version only when signing up/in
   # layout 'website/skeleton'
+  before_action :client_country
+  before_action :locale_switch_dismissed
+
+  helper_method :greek_user?
 
   def index
     @subdomain = nil
@@ -36,6 +40,4 @@ class HomeController < ApplicationController
     @accounts = current_user.is_sysadmin? ? Account.all.paginate(page: params[:page], :per_page => 25) : current_user.all_accounts.paginate(page: params[:page], :per_page => 25)
     render :layout => 'auth/skeleton'
   end
-
-
 end
