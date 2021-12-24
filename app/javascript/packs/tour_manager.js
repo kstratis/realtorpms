@@ -141,18 +141,54 @@ export default class TourManager {
       );
       this.tourInstance.addSteps([
         {
+          id: 'protools-nav',
+          title: `<div class='tour-title'>${this.tour_data.i18n.protools.title}</div>`,
+          text: `<div class='tour-body'>${this.tour_data.i18n.protools.body_html}</div>`,
+          attachTo: {
+            element: '#protools-nav',
+            on: 'left',
+          },
+          canClickTarget: false,
+          cancelIcon: {
+            enabled: true,
+          },
+          classes: 'shepherd-website-centering',
+          buttons: [
+            {
+              action() {
+                return this.back();
+              },
+              classes: 'shepherd-button-secondary',
+              text: this.tour_data.i18n.buttons.back,
+            },
+            {
+              text: this.tour_data.i18n.buttons.next,
+              action: this.tourInstance.next,
+              classes: 'flex-grow-1',
+            },
+          ],
+          popperOptions: {
+            modifiers: [{ name: 'offset', options: { offset: [0, 14] } }],
+          },
+          when: {
+            // Use this to show the menu modal before the first menu entry is introduced.
+            show: function() {
+              $('#account-dropdown-menu-element').dropdown('toggle');
+            }
+          }
+        },
+        {
           id: 'website-nav',
           title: `<div class='tour-title'>${this.tour_data.i18n.website.title}</div>`,
           text: `<div class='tour-body'>${this.tour_data.i18n.website.body_html}</div>`,
           attachTo: {
             element: '#website-nav',
-            on: 'bottom',
+            on: 'left',
           },
           canClickTarget: false,
           cancelIcon: {
             enabled: true,
           },
-          classes: '',
           buttons: [
             {
               action() {
@@ -170,38 +206,14 @@ export default class TourManager {
           popperOptions: {
             modifiers: [{ name: 'offset', options: { offset: [0, 14] } }],
           },
-        },
-        {
-          id: 'settings-nav',
-          title: `<div class='tour-title'>${this.tour_data.i18n.settings.title}</div>`,
-          text: `<div class='tour-body'>${this.tour_data.i18n.settings.body_html}</div>`,
-          attachTo: {
-            element: '#settings-nav',
-            on: 'bottom',
-          },
-          canClickTarget: false,
-          cancelIcon: {
-            enabled: true,
-          },
-          classes: '',
-          buttons: [
-            {
-              action() {
-                return this.back();
-              },
-              classes: 'shepherd-button-secondary',
-              text: this.tour_data.i18n.buttons.back,
-            },
-            {
-              text: this.tour_data.i18n.buttons.next,
-              action: this.tourInstance.next,
-              classes: 'flex-grow-1',
-            },
-          ],
-          popperOptions: {
-            modifiers: [{ name: 'offset', options: { offset: [0, 14] } }],
-          },
-        },
+          when: {
+            // Use this to dispose the modal after the last menu entry is introduced.
+            hide: function() {
+              $('#account-dropdown-menu-element').dropdown('hide');
+              $('#account-dropdown-menu-element').dropdown('dispose');
+            }
+          }
+        }
       ]);
     }
     this.tourInstance.addStep({

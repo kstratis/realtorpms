@@ -1,7 +1,7 @@
 import React from "react"
 import flatpickr from "flatpickr";
 import PropTypes from 'prop-types';
-import { setFlatPickrSettings } from '../../packs/utilities';
+import { setFlatPickrSettings, normalizeFlatPickrDate } from '../../packs/utilities';
 
 class FlatPickrWrapper extends React.Component {
 
@@ -16,10 +16,12 @@ class FlatPickrWrapper extends React.Component {
 
     window.flatpickr(".datetime", {
       onChange: function(dateObj, dateStr) {
-        handleChange({dateObj, dateStr})
+        const normalizedDateString = normalizeFlatPickrDate(dateStr)
+        handleChange({dateObj, dateStr: normalizedDateString})
         // DEBUG
         // console.info(dateObj);
         // console.info(dateStr);
+        // console.info(normalizedDateString);
       }
     });
   }

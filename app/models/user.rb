@@ -53,6 +53,13 @@ class User < ApplicationRecord
 
   has_many :notifications, as: :recipient
 
+  # scope :admin, -> (account) do
+  #   %w(sysadmin admin).include?(role(account))
+  #   where("price <= ?", pricemax)
+  # end
+
+  # scope :website_enabled, -> { where website_enabled: true }
+
   enum locale: [:en, :el]
 
   # has_many :properties, -> (account) { where('account_id = ?', account.id) }, through: :assignments

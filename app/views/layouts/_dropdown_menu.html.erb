@@ -1,39 +1,56 @@
 <%= link_to edit_user_path(current_user), class: 'dropdown-item' do %>
-  <%= content_tag :i, nil, class: 'fas fa-user fa-fw' %> <span><%= t('navbar.profile') %></span>
-<% end %>
-
-<%# if (current_user.get_account_count > 1) || current_user.is_admin?(current_account) %>
-<% if (current_user.get_account_count > 1) || current_user.is_sysadmin? %>
-  <%= link_to account_list_url(subdomain: nil), class: "dropdown-item #{masquerading? ? 'disabled' : '' }"  do %>
-    <%= content_tag :i, nil, class: 'fas fa-exchange-alt fa-fw' %> <span><%= t('navbar.switch') %></span>
-  <% end %>
-<% end %>
-
-<% if current_user.is_admin?(current_account) %>
-  <%= link_to account_edit_path, class: 'dropdown-item colored-mark' do %>
-    <%= content_tag :i, nil, class: 'fas fa-shield-alt fa-fw' %> <span><%= t('navbar.account.title') %></span>
-  <% end %>
+  <%= content_tag :i, nil, class: 'fas fa-user fa-fw' %>&nbsp; <span><%= t('navbar.profile') %></span>
 <% end %>
 
 <div class="dropdown-divider"></div>
 
 <%= link_to favlists_path, class: 'dropdown-item' do %>
-  <%= content_tag :i, nil, class: 'fas fa-heart fa-fw' %> <span><%= t('navbar.favorites') %></span>
+  <%= content_tag :i, nil, class: 'fas fa-heart fa-fw' %>&nbsp; <span><%= t('navbar.favorites') %></span>
 <% end %>
 
 <%= link_to '#', class: 'dropdown-item', id: 'tour_toggle' do %>
-  <%= content_tag :i, nil, class: 'fas fa-play fa-fw' %> <span><%= t('tour.title') %></span>
+  <%= content_tag :i, nil, class: 'fas fa-play fa-fw' %>&nbsp; <span><%= t('tour.title') %></span>
+<% end %>
+
+<%# if (current_user.get_account_count > 1) || current_user.is_admin?(current_account) %>
+<% if (current_user.get_account_count > 1) || current_user.is_sysadmin? %>
+  <div class="dropdown-divider"></div>
+  <%= link_to account_list_url(subdomain: nil), class: "dropdown-item #{masquerading? ? 'disabled' : '' }"  do %>
+    <%= content_tag :i, nil, class: 'fas fa-exchange-alt fa-fw' %>&nbsp; <span><%= t('navbar.switch') %></span>
+  <% end %>
+<% end %>
+
+<% if current_user.is_admin?(current_account) %>
+  <div class="dropdown-divider"></div>
+  <%#= link_to account_edit_path, class: 'dropdown-item colored-mark' do %>
+  <%= link_to account_edit_path, class: 'dropdown-item' do %>
+    <%= content_tag :i, nil, class: 'fas fa-cog fa-fw' %>&nbsp; <span><%= t('sidebar.settings') %></span>
+  <% end %>
+<% end %>
+
+<% if current_user.is_admin?(current_account) %>
+  <%= link_to settings_path, class: 'dropdown-item', id: 'protools-nav' do %>
+    <%= content_tag :i, nil, class: 'fas fa-toolbox fa-fw' %>&nbsp; <span><%= t('pro_tools') %></span>&nbsp; <span class="badge badge-success">Pro</span>
+  <% end %>
+<% end %>
+
+<%# if current_account.website_enabled? && current_user.is_admin?(current_account) %>
+<% if current_account.website_enabled? %>
+  <div class="dropdown-divider"></div>
+  <%= link_to websites_root_url(locale: I18n.locale), class: 'dropdown-item', id: 'website-nav', target: '_blank' do %>
+    <%= content_tag :i, nil, class: 'fas fa-link fa-fw' %>&nbsp; <span>Website</span>
+  <% end %>
 <% end %>
 
 <div class="dropdown-divider"></div>
 
 <%= link_to '#', class: 'dropdown-item', id: 'support' do %>
-  <%= content_tag :i, nil, class: 'fas fa-info fa-fw' %> <span><%= t('navbar.help') %></span>
+  <%= content_tag :i, nil, class: 'fas fa-info fa-fw' %>&nbsp; <span><%= t('navbar.help') %></span>
 <% end %>
 
 <% unless masquerading? %>
   <%= link_to logout_path(locale: I18n.locale), class: 'dropdown-item', method: :delete do %>
-    <%= content_tag :i, nil, class: 'fas fa-sign-out-alt' %> <span><%= t('navbar.logout') %></span>
+    <%= content_tag :i, nil, class: 'fas fa-sign-out-alt fa-fw' %>&nbsp; <span><%= t('navbar.logout') %></span>
   <% end %>
 <% end %>
 

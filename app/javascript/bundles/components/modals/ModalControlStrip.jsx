@@ -113,7 +113,7 @@ function ModalControlStrip(props) {
               <div className={`modal-content ${componentProps['modal']['modalContentCSSClasses']}`}>
                 <div className="modal-header">
                   <h5 id={componentProps['name']} className="modal-title">
-                    {componentProps['modal']['title']}
+                    {renderHTML(componentProps['modal']['title'])}
                   </h5>
                   {componentProps['modal']['modalHeaderHelp'] ? (
                     <button

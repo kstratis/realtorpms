@@ -78,6 +78,7 @@ en:
   application: "Admin"
   no_photos: "No available photos"
   notifications: "Notifications"
+  pro_tools: "Pro tools"
   tour:
     title: "Tour"
     confirm_cancel_message: "Are you sure you want to quit the tour?"
@@ -87,29 +88,48 @@ en:
       end: "Complete"
     welcome:
       title: "<b>%{brandname}</b>"
-      body_html: "<p>Welcome to %{brandname}!</p><br><p class='font-lg'>🎉🎉🎉</p><br><p>We are thrilled to have you on board!</p><br><p><strong>Enjoy!</strong></p>"
+      body_html: |
+        <p>Welcome to %{brandname}!</p><br>
+        <p class='font-lg'>🎉🎉🎉</p><br>
+        <p><strong>We are thrilled</strong> to have you on board!</p><br>
+        <p>We know your time is super precious but if you can afford a minute or two, this little tour will (hopefully) give you a nice peek into how %{brandname} works.</p>
+        <p><strong>Enjoy!</strong></p>
     goodbye:
       title: "<b>%{brandname}</b>"
       body_html: "<p>You successfully reached the end of the tour!</p><p>If there's anything else we can help you with, please drop us a line at: <a target='_blank' href='mailto:info@%{brandname}.com'>info@%{brandname}.com</a>.</p> <p>Our support is top-notch and we respond to each and every query.</p>"
     partners:
       title: "Partners 💼"
-      body_html: "<p>This is the partners area.</p><p>From this screen you can manage your people, assign properties to them and check their stats.</p>"
+      body_html: |
+        <p>This is the partners screen.<p>
+        <p>From here you can manage your team members, monitor their stats and manage their assignments.</p>
+        <p>Your team members, <strong><u>as simple users</u></strong>, have access to your firm's listings but can only see the details of the clients/owners assigned directly to them.</p>
+        <p>Team members <strong><u>with admin-level access</u></strong> can directly access the full clientele.<p>
     properties:
       title: "Properties 🏠"
-      body_html: "<p>Here lies your inventory.</p> <p>Manage your properties, monitor your partners' showings and store client requests.</p> <p>You can also select which properties you want listed on your website.</p>"
+      body_html: "<p>Here lies your inventory.</p> <p><strong>Manage</strong> your properties, <strong>monitor</strong> your partners' private showings and <strong>store client requests</strong>.</p> <p>You can also select <strong>which properties</strong> you want <strong>listed</strong> on your website.</p>"
     clients:
       title: "Clients 👱‍♂️"
-      body_html: "<p>This is your clients list.</p> <p>You can add/remove clients, manage their stored requests and watch for all possible matches between clients' stored requests and the current status of your portfolio.</p>"
+      body_html: |
+        <p>This is your clients list.</p>
+        <p><strong>Anyone can be a client</strong>:
+        <ul>
+          <li>A property owner</li>
+          <li>Someone looking for a new property</li>
+          <li>A real estate agent</li>
+          <li>Any combination of the above</li>
+        </ul>
+        <p>You can <strong>add/remove clients</strong>, <strong>manage their preferences</strong> and <strong>monitor possible matches</strong> between clients' preferences and the current status of your portfolio.</p>
+        <p><u>Using this screen you can assign client/s to each team member which effectively means that they will be able to access full property information (if applicable) such as the owner and their contact details.</u></p>
     website:
       title: "Website 🌐"
-      body_html: "<p>Once activated, this button will take you to your website.</p><p>Your website is automatically generated for you on sign-up and contains any properties you have chosen to publicly list.</p><p>Share its url on social media and watch your traffic explode!</p>"
-    settings:
-      title: "Settings 🛠"
+      body_html: "<p>Once activated, this button will take you to your website.</p><p>Your website is automatically generated for you on the sign-up step and contains any properties you have chosen to publicly list.</p><p><strong>Share its url</strong> on social media and watch your traffic blow up!</p>"
+    protools:
+      title: "Pro tools 🧰"
       body_html: |
-        <p>This is where you can set up custom fields on properties, clients and partners.</p>
-        <p>For example you may wish to add a new true/false field called "mortgage".<p>
-        <p>Use this screen to create the field, optionally set a default value and edit any property you think this applies to by setting its option to true.<p>
-        <p>You can then filter the property results based on whether properties are mortgaged or not.<p>
+        <p>This is where you can set up <strong>custom fields</strong> on properties, clients and partners.</p>
+        <p>Example: You may wish to add a new true/false field called "mortgage" on every property to keep track of which of your listings are mortgaged.<p>
+        <p>Use this screen to <strong>create the field</strong>, optionally <strong>set a default value</strong> and edit any property you think this applies to by flipping its option to true.<p>
+        <p>You can then <strong>filter the property results</strong> based on whether properties are mortgaged or not.<p>
   support:
     title: "Support"
     message_html: "For questions and/or support you can reach us at <a target='_blank' href='mailto:info@%{brandname}.com'>info@%{brandname}.com</a>."
@@ -849,8 +869,8 @@ en:
     flash_not_found: "Client not found"
     flash_profile_updated: "Client profile successfully updated"
     client: "Client"
-    help_popover_admin: "This is the list of properties which have already been shown to the client."
-    help_popover_user: "This is the list of properties which have already been shown to the client. You can only view showings whose units you already have access to."
+    help_popover_admin: "This is the list of properties which have already been shown to the client. The partner who does the showing has to have the selected client assigned or be an administrator."
+    help_popover_user: "This is the list of properties which have already been shown to the client."
     new:
       heading: "Add"
       heading_alt: "New client"
@@ -1200,7 +1220,7 @@ en:
     comments: "Showing feedback"
     comments_placeholder: "i.e. Loved it but thinks it's too expensive"
     comments_feedback: "Max comments length: 512 characters"
-    help_popover_admin: "This is the list of showings for the specified property. You may add or delete any entry."
-    help_popover_user: "This is the list of showings for the specified property. You can only view and delete entries you have created yourself."
+    help_popover_admin: "This is the list of showings for the specified property. You may add or delete any entry. The partner who does the showing has to have the selected client assigned or be an administrator."
+    help_popover_user: "This is the list of showings for the specified property. You may not be able to view the client of all showings if he/she hasn't been assigned to you."
   favlists:
     help_popover: "Add the property you like in your favourites. You can create any number favourite list. This way your favourite properties are always a click away."

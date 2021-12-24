@@ -29,9 +29,9 @@ module Searchable
         element.slice((element.index('.') + 1..-1))
       end
       if term && !fields.blank?
-        query = "unaccent(#{fields.shift}) ILIKE unaccent('%#{term}%')"
+        query = "unaccent(#{self.name.downcase.pluralize}.#{fields.shift}) ILIKE unaccent('%#{term}%')"
         fields.each do |field|
-          query << " OR unaccent(#{field}) ILIKE unaccent('%#{term}%')"
+          query << " OR unaccent(#{self.name.downcase.pluralize}.#{field}) ILIKE unaccent('%#{term}%')"
         end
         unless filter.blank?
           query << " AND #{filter.fetch(:field)} = #{filter.fetch(:value)}"

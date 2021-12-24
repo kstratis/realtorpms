@@ -33,10 +33,30 @@ module Accounts
       @user = current_account.users.new
     end
 
-    # This is only accessible by account owners so no need to granulate its access
     def index
-      # params because the required :user key of the filtered +user_params+ is only available in POST requests
-      filter_persons(current_account.send("#{params["backend_option"] || ""}users"), params)
+      option = params['backend_option']
+
+      case option
+      when 'all_'
+        filter_persons(current_account.send(:all_users), params)
+      when /(\d+)/
+        # This one is a bit tricky. We need to select all users who have this client assigned
+        # AND all admins who have no restrictions. We use `union` for that but there's a gotcha: We have to have
+        # the same number of columns on each union which we don't have since `client.users` return custom sql.
+        # The solution is to undo part of the original custom sql using this:
+        # https://stackoverflow.com/questions/4966683/activerecord-select-possible-to-clear-old-selects
+        client = current_account.clients.find_by_id($1)
+        if client.present?
+          relation = client.users.reselect('users.*').except(:order).
+            union(User.where(id: current_account.owner.id)).
+            union(User.joins(:memberships).where(memberships: { privileged: true, account: current_account }))
+          filter_persons(relation, params)
+        else # client not found case
+          filter_persons(current_account.send(:users), params)
+        end
+      else
+        filter_persons(current_account.send(:users), params)
+      end
     end
 
     # POST to the new user registration page

@@ -92,6 +92,7 @@ function withDatatable(WrappedComponent) {
           : '',
         cfields: this.props.initial_payload.cfields,
         is_masquerading: this.props.initial_payload.is_masquerading,
+        current_user_id: this.props.initial_payload.current_user_id,
         dataset: this.props.initial_payload.dataset_wrapper.dataset,
         resultsPerPage: this.props.initial_payload.results_per_page,
         forceFiltersOpen: this.props.initial_payload.force_filters_open,

@@ -38,6 +38,7 @@ const UsersList = ({
   users_path,
   cfields,
   is_masquerading,
+  current_user_id,
 }) => {
   const { filtersOpen, setFiltersOpen } = useFilterToggle('userFiltersOpen');
   const handleChange = event => setFiltersOpen(filtersOpen => !filtersOpen);
@@ -429,17 +430,19 @@ const UsersList = ({
                                 href={entry['edit_entity_path']}>
                                 <i className="fas fa-pen" />
                               </a>
-                              <a
-                                data-toggle="tooltip"
-                                data-position="auto"
-                                title={i18n['datatable']['tooltip_delete_profile']}
-                                className="btn btn-md btn-icon btn-secondary btn-action"
-                                href={entry['view_entity_path']}
-                                data-method="delete"
-                                data-confirm="Are you sure?"
-                                rel="nofollow">
-                                <i className="fas fa-trash user-delete" />
-                              </a>
+                              {entry.id !== current_user_id ? (
+                                <a
+                                  data-toggle="tooltip"
+                                  data-position="auto"
+                                  title={i18n['datatable']['tooltip_delete_profile']}
+                                  className="btn btn-md btn-icon btn-secondary btn-action"
+                                  href={entry['view_entity_path']}
+                                  data-method="delete"
+                                  data-confirm="Are you sure?"
+                                  rel="nofollow">
+                                  <i className="fas fa-trash user-delete" />
+                                </a>
+                              ) : null}
                             </td>
                           </tr>
                         ))}

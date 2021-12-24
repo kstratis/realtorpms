@@ -29,6 +29,15 @@ const setFlatPickrSettings = (locale) => {
     window.flatpickr.defaultConfig.altFormat = locale === 'gr' ? 'd M Y' : 'M d, Y';
 };
 
+// We need to normalize the date taken from JS due to this:
+// https://stackoverflow.com/questions/7556591/is-the-javascript-date-object-always-one-day-off
+const normalizeFlatPickrDate = (dateStr) => {
+  const dateString = new Date(dateStr);
+  const normalizedDateObject = new Date( dateString.getTime() + Math.abs(dateString.getTimezoneOffset()*60000) )
+
+  return normalizedDateObject.toJSON();
+}
+
 const getParticles = () => {
   return Promise.all([
     import(/* webpackChunkName: "particlesjs" */
@@ -62,4 +71,4 @@ function eraseCookie(name) {
   document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 
-export { clearValidatableFields, setFlatPickrSettings, getParticles, setCookie, getCookie, eraseCookie };
+export { clearValidatableFields, setFlatPickrSettings, normalizeFlatPickrDate, getParticles, setCookie, getCookie, eraseCookie };

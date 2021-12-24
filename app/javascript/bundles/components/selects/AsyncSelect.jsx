@@ -265,6 +265,7 @@ function AsyncSelect({
           openMenuOnClick={!!openMenuOnClick}
           menuIsOpen={isOpen}
           isClearable={isClearable}
+          isDisabled={isDisabled}
           isMulti={isMultiple == null ? true : isMultiple}
           backspaceRemovesValue={false}
           placeholder={i18n.select.placeholder}

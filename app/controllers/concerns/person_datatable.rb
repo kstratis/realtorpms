@@ -21,7 +21,7 @@ module PersonDatatable
     # end
 
     if filters[:search]
-      @persons = @persons.search(filters[:search], nil, filters[:dropdown].blank? ? nil: 5)
+      @persons = @persons.search(filters[:search], nil, filters[:dropdown].blank? ? nil : 5)
     end
 
     ####################
@@ -86,7 +86,7 @@ module PersonDatatable
           # assignments: entry.properties.count,
           # registration: entry.created_at.to_formatted_s(:long)
           # registration: entry.created_at.strftime('%d %b. %y'),
-          registration: l(entry.created_at, format: :regular),
+          registration: l(entry.created_at, format: :showings),
           is_assigned: @property ? @property.users.exists?(entry.id) : nil,
           assignments_count: @property ? entry.properties.count : nil,
           # property_id: property ? property.id : nil

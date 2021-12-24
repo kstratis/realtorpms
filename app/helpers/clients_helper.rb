@@ -4,7 +4,7 @@ module ClientsHelper
       {
         name: 'AddRemoveShowings',
         button: {
-          content: '<i class="fas fa-eye colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.viewings') + '</span>',
+          content: '<i class="fas fa-users fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.viewings') + '</span>',
           size: 'sm',
           tooltip: t('js.properties_showings_tooltip')
         },
@@ -13,6 +13,7 @@ module ClientsHelper
             table: {
               client: t('viewings.client'),
               user: t('viewings.user'),
+              property: t('properties.property'),
               date_title: t('date_title'),
               add: t("viewings.add_btn"),
               actions: t("viewings.actions"),
@@ -61,7 +62,7 @@ module ClientsHelper
           feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
           clients_url: clients_url,
           properties_url: properties_inlinesearch_url,
-          partners_url: "#{users_url}?backend_option=all_",
+          partners_url: "#{users_url}?backend_option=#{@client.id}",
           isAdmin: current_user.is_admin?(current_account)
         }
       }

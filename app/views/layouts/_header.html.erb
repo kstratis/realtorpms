@@ -225,30 +225,6 @@
             <% end %>
           <% end %>
 
-          <% if current_user.is_admin? current_account %>
-            <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown", id: 'website-nav', data: {
-              content: current_account.website_enabled? ? 'Website' : t('website_enable'),
-              placement: 'bottom',
-              toggle: 'popover',
-              trigger: 'hover' } do %>
-              <%= link_to websites_root_url(locale: I18n.locale), class: "nav-link menu-link #{current_account.website_enabled? ? '' : 'disabled'}", data: { turbolinks: false } do %>
-                <%= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-www' %>
-              <% end %>
-            <% end %>
-          <% end %>
-
-          <% if current_user.is_admin? current_account %>
-            <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown #{active_for(controller: ['settings'])}", id: 'settings-nav', data: {
-                content: t('sidebar.settings'),
-                placement: 'bottom',
-                toggle: 'popover',
-                trigger: 'hover' } do %>
-              <%= link_to settings_path, class: 'nav-link menu-link' do %>
-                <%= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-settings-opt' %>
-              <% end %>
-            <% end %>
-          <% end %>
-
           <div class="notifications-icon-wrapper">
           <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown #{active_for(controller: ['notifications'])}", id: 'notifications-nav', data: {
             content: t('notifications'),
@@ -267,8 +243,8 @@
         </ul>
         <!-- /.nav -->
         <!-- .btn-account -->
-        <div class="dropdown d-none d-md-flex">
-          <button class="btn-account" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div id="account-dropdown-menu-element" class="dropdown d-md-flex">
+          <button id="account-dropdown-menu-trigger" class="btn-account" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <span data-turbolinks-permanent id="<%= current_user.avatar.attached? ? 'header-avatar' : 'avatar-in-header' %>" class="<%= current_user.avatar.attached? ? 'user-avatar user-avatar-bordered user-avatar-lg' : '' %>">
                     <!-- This needs to be properly taken care of -->
                     <%= render_avatar(current_user) %>

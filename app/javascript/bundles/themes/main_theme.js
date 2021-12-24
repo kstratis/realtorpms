@@ -1,4 +1,4 @@
-import { setFlatPickrSettings } from "../../packs/utilities";
+import { normalizeFlatPickrDate } from "../../packs/utilities";
 
 class Theme {
   constructor () {
@@ -1271,6 +1271,19 @@ class Theme {
 
         flatpickr(selector, options)
       })
+
+      // We only currently support one flatpickr element.
+      // DO NOT USE THIS FOR MULTIPLE ELEMENTS!
+      window.flatpickr('[data-toggle="flatpickr"]', {
+        onChange: function(dateObj, dateStr) {
+          const normalizedDateString = normalizeFlatPickrDate(dateStr)
+          $('[data-toggle="flatpickr"]').val(normalizedDateString);
+          // DEBUG
+          // console.info(dateObj);
+          // console.info(dateStr);
+          // console.info(normalizedDateString);
+        }
+      });
     }
   }
 

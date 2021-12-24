@@ -285,7 +285,7 @@ module PropertiesHelper
       {
         name: 'AddRemoveShowings',
         button: {
-          content: '<i class="fas fa-eye colored fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.viewings') + '</span>',
+          content: '<i class="fas fa-users fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.viewings') + '</span>',
           size: 'sm',
           tooltip: t('js.properties_showings_tooltip')
         },
@@ -338,7 +338,8 @@ module PropertiesHelper
           isSearchable: false,
           feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
           clients_url: clients_url,
-          partners_url: users_url(backend_option: 'all_'),
+          # partners_url: users_url(backend_option: 'all_'),
+          partners_url: users_url,
           isAdmin: current_user.is_admin?(current_account)
         }
       }]

@@ -12,10 +12,22 @@ module Accounts
     helper_method :client
 
     def index
-      if current_user.is_admin?(current_account)
-        filter_persons(current_account.clients, params)
+      option = params["backend_option"]
+      user = current_account.all_users.find_by_id(option)
+      # Use the current user if no user is provided
+      if user.blank?
+        if current_user.is_admin?(current_account)
+          filter_persons(current_account.clients, params)
+        else
+          filter_persons(current_user.clients, params)
+        end
+      # Otherwise
       else
-        filter_persons(current_user.clients, params)
+        if user.is_admin?(current_account)
+          filter_persons(current_account.clients, params)
+        else
+          filter_persons(user.clients, params)
+        end
       end
     end
 

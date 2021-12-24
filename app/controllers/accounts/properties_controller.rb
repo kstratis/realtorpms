@@ -150,11 +150,13 @@ module Accounts
     end
 
     def inlinesearch
-      if current_user.is_admin?(current_account)
-        search(current_account.properties, {value: 'slug', label: %w(dropdown_description)}, nil, 5)
-      else
-        search(current_user.properties.where(account: current_account), {value: 'slug', label: %w(dropdown_description)}, nil, 5)
-      end
+      # Legacy code. Used to be when partners couldn't see the entire inventory
+      # if current_user.is_admin?(current_account)
+      #   search(current_account.properties, {value: 'slug', label: %w(dropdown_description)}, nil, 5)
+      # else
+      #   search(current_user.properties.where(account: current_account), {value: 'slug', label: %w(dropdown_description)}, nil, 5)
+      # end
+      search(current_account.properties, {value: 'slug', label: %w(dropdown_description)}, nil, 5)
     end
 
     # GET /properties/new

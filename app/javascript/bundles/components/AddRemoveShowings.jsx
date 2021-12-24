@@ -6,6 +6,21 @@ import Spinner from '../datatables/Spinner';
 import AsyncSelectContainer from './selects/AsyncSelectContainer';
 import { renderHTML } from '../utilities/helpers';
 import usePopovers from '../hooks/usePopovers';
+import URLSearchParams from '@ungap/url-search-params';
+
+const isClientEmpty = client => {
+  return Object.keys(client).length === 0;
+};
+
+const fetchUrlWithRestrictions = (url, client) => {
+  if (isClientEmpty(client)) {
+    return url;
+  }
+  let partners_url = new URL(url);
+  let searchParams = new URLSearchParams();
+  searchParams.set('backend_option', client.value);
+  return `${partners_url}?${searchParams}`;
+};
 
 function AddShowing({
   i18n,
@@ -16,11 +31,12 @@ function AddShowing({
   isAdmin,
   property_id,
   client_id,
+  user_id,
   handleSetRequest,
   handleFormVisibility,
   closeMenuOnSelect,
   openMenuOnClick,
-  originator
+  originator,
 }) {
   const [client, setClient] = useState({});
   const [property, setProperty] = useState({});
@@ -35,10 +51,27 @@ function AddShowing({
   const asyncSetDate = selection => setDate(selection);
   const asyncSetComments = e => setComments(e.target.value);
 
+  const getTitles = originator => {
+    const entities = {};
+    if (originator === 'user') {
+      entities['first'] = i18n.form.property;
+      entities['second'] = i18n.form.client;
+    } else if (originator === 'client') {
+      entities['first'] = i18n.form.property;
+      entities['second'] = i18n.form.partner;
+    } else if (originator === 'property') {
+      entities['first'] = i18n.form.client;
+      entities['second'] = i18n.form.partner;
+    }
+    return entities;
+  };
+
   const handleAddShowing = originator => {
     let fieldsValidationArray;
     if (originator === 'property') {
       fieldsValidationArray = isAdmin ? [client, partner, date] : [client, date];
+    } else if (originator === 'user') {
+      fieldsValidationArray = isAdmin ? [property, client, date] : [property, date];
     } else {
       fieldsValidationArray = isAdmin ? [property, partner, date] : [property, date];
     }
@@ -64,9 +97,10 @@ function AddShowing({
         property_id: property_id,
         property: property,
         client_id: client_id,
-        originator: originator
+        user_id: user_id,
+        originator: originator,
       },
-      callback: response => handleFormVisibility()
+      callback: response => handleFormVisibility(),
     });
   };
 
@@ -77,8 +111,7 @@ function AddShowing({
         <div className={'col-12 col-lg-6 offset-lg-3'}>
           <span className={'d-inline-block mt-2'}>
             <label htmlFor={'AsyncSelectContainerClient'}>
-              <strong>{originator === 'property' ? i18n.form.client : i18n.form.property} </strong>&nbsp;
-              <abbr title={i18n.form.required}>*</abbr>
+              <strong>{getTitles(originator)['first']}</strong>&nbsp;<abbr title={i18n.form.required}>*</abbr>
             </label>
           </span>
           {originator === 'property' ? (
@@ -111,21 +144,53 @@ function AddShowing({
           <div className={'col-12 col-lg-6 offset-lg-3 my-1'}>
             <span className={'d-inline-block mt-2'}>
               <label htmlFor={'AsyncSelectContainerPartner'}>
-                <strong>{i18n.form.partner}</strong>&nbsp;<abbr title={i18n.form.required}>*</abbr>
+                <strong>{getTitles(originator)['second']}</strong>&nbsp;<abbr title={i18n.form.required}>*</abbr>
               </label>
             </span>
-            <AsyncSelectContainer
-              id={'AsyncSelectContainerPartner'}
-              i18n={i18n}
-              collection_endpoint={{ url: partners_url, action: 'get' }}
-              action_endpoint={{ url: '', action: '', callback: asyncSetPartner }}
-              hasFeedback={false}
-              isCreatable={false}
-              isClearable={true}
-              isMultiple={false}
-              openMenuOnClick={openMenuOnClick}
-              closeMenuOnSelect={closeMenuOnSelect}
-            />
+            {originator === 'user' ? (
+              <AsyncSelectContainer
+                id={'AsyncSelectContainerClient'}
+                i18n={i18n}
+                collection_endpoint={{ url: clients_url, action: 'get' }}
+                action_endpoint={{ url: '', action: '', callback: asyncSetClient }}
+                hasFeedback={false}
+                isCreatable={false}
+                isClearable={true}
+                isMultiple={false}
+                openMenuOnClick={openMenuOnClick}
+              />
+            ) : originator === 'property' ? (
+              // They `key` trick forces a re-render each time it changes. It is
+              // particularly useful when we have dependant selects.
+              // See this: https://stackoverflow.com/a/55142916/178728
+              <AsyncSelectContainer
+                key={`my_unique_select_key__${client.value}`}
+                id={'AsyncSelectContainerPartner'}
+                i18n={i18n}
+                collection_endpoint={{ url: fetchUrlWithRestrictions(partners_url, client), action: 'get' }}
+                action_endpoint={{ url: '', action: '', callback: asyncSetPartner }}
+                hasFeedback={false}
+                isCreatable={false}
+                isClearable={true}
+                isMultiple={false}
+                isDisabled={isClientEmpty(client)}
+                openMenuOnClick={openMenuOnClick}
+                closeMenuOnSelect={closeMenuOnSelect}
+              />
+            ) : (
+              <AsyncSelectContainer
+                id={'AsyncSelectContainerPartner'}
+                i18n={i18n}
+                collection_endpoint={{ url: partners_url, action: 'get' }}
+                action_endpoint={{ url: '', action: '', callback: asyncSetPartner }}
+                hasFeedback={false}
+                isCreatable={false}
+                isClearable={true}
+                isMultiple={false}
+                openMenuOnClick={openMenuOnClick}
+                closeMenuOnSelect={closeMenuOnSelect}
+              />
+            )}
           </div>
         ) : null}
         <div className={'col-12 col-lg-6 offset-lg-3 my-1'}>
@@ -163,7 +228,7 @@ function AddShowing({
             </button>
           </div>
           <div className={'float-right mt-1 mb-3'}>
-            <button onClick={()=>handleAddShowing(originator)} className={'btn btn-outline-primary'}>
+            <button onClick={() => handleAddShowing(originator)} className={'btn btn-outline-primary'}>
               {i18n.form.submit}
             </button>
           </div>
@@ -181,22 +246,29 @@ function AddRemoveShowings({
   properties_url,
   property_id,
   client_id,
+  user_id,
   showings_url,
   isAdmin,
   originator,
   i18n,
   closeMenuOnSelect,
-  openMenuOnClick
+  openMenuOnClick,
 }) {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const handleFormVisibility = () => {
     setIsFormVisible(isFormVisible => !isFormVisible);
   };
 
+  const getOriginator = () => {
+    if (originator === 'property') return property_id;
+    else if (originator === 'client') return client_id;
+    else if (originator === 'user') return user_id;
+  };
+
   const [request, setRequest] = useState({
-    url: `${showings_url}.json?${originator}_id=${originator === 'property' ? property_id : client_id}&originator=${originator}`,
+    url: `${showings_url}.json?${originator}_id=${getOriginator()}&originator=${originator}`,
     method: 'get',
-    payload: {}
+    payload: {},
   });
   const didMountForSaveSearchRef = useRef(true);
   const { status, data, loading, setData } = useFetch(request, false, didMountForSaveSearchRef);
@@ -210,7 +282,7 @@ function AddRemoveShowings({
     handleSetRequest({
       url: showings_url,
       method: 'delete',
-      payload: { showing_id: id, property_id: property_id, originator: originator, client_id: client_id }
+      payload: { showing_id: id, property_id: property_id, originator: originator, client_id: client_id },
     });
   };
 
@@ -226,6 +298,7 @@ function AddRemoveShowings({
           properties_url={properties_url}
           property_id={property_id}
           client_id={client_id}
+          user_id={user_id}
           originator={originator}
           isAdmin={isAdmin}
           handleSetRequest={handleSetRequest}
@@ -252,10 +325,10 @@ function AddRemoveShowings({
                 <thead>
                   <tr>
                     <th className={'text-nowrap'} scope="col">
-                      {originator === 'client' ? i18n.table.property : i18n.table.client}
+                      {originator === 'client' || originator === 'user' ? i18n.table.property : i18n.table.client}
                     </th>
                     <th className={'text-nowrap'} scope="col">
-                      {i18n.table.user}
+                      {originator === 'user' ? i18n.table.client : i18n.table.user}
                     </th>
                     <th className={'text-nowrap'} scope="col">
                       {i18n.table.date_title}
