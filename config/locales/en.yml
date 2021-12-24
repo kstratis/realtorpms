@@ -30,6 +30,8 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 ---
 en:
+  meta:
+    description: "Brokerage management system"
   true: "Yes"
   true_upcase: "YES"
   confirm: "Confirm"

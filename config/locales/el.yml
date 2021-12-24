@@ -1,5 +1,7 @@
 ---
 el:
+  meta:
+    description: "Εφαρμογή διαχείρισης ακινήτων"
   true: "Ναί"
   true_upcase: "ΝΑΙ"
   confirm: "Επιβεβαίωση"

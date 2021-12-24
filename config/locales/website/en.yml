@@ -19,17 +19,21 @@ en:
       a:
         title: 'Best-in-class management engine'
         body_html: 'Our custom-build management engine takes care of all your daily tasks. Even the most complex <mark>workflows become easy and accessible</mark> at the click of a button.'
+        alt: 'Advanced management engine'
       b:
         title: 'Multiple business partners'
         body_html: "%{brand} is a <mark>multi-user</mark> management system. This means you don't have to do eveything on your own. Add your partners, share your properties and clients lists and split your workload."
+        alt: 'Multi-user environment'
       c:
         title: 'Listing website'
         body_html: 'Realtors automatically get their <mark>own website</mark> on signup. Choose the properties you wish to list from the administration panel and promote them on your own website!'
+        alt: 'Brokerage portal'
       d:
         title: 'Security & speed'
         body_html: 'The platform runs on modern cloud infrastructure which provides world class <mark>reliability and speed</mark>. Our data encryption uses the strongest and most up-to-date security protocols.'
+        alt: 'State of the art encryption'
     benefits:
-      header: 'GET IN CONTROL 💪'
+      header: 'TAKE CONTROL 💪'
       subheader: "Power and flexibility to meet the demands of power users:"
       a:
         title: 'Agency management'

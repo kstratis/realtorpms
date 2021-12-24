@@ -47,7 +47,7 @@
               </g>
               <path d="M56.304 16.157h122.544v18.404H56.304z"/>
               <text fill="#EEE" fill-rule="nonzero" font-family="YuKyo-Bold, YuKyokasho" font-size="18" font-weight="bold" transform="translate(52.328 16.157)">
-                <tspan x="5.716" y="16.9">RealtorPMS</tspan>
+                <tspan x="5.716" y="16.9"><%= BRANDNAME %></tspan>
               </text>
             </g>
           </svg>
@@ -121,7 +121,7 @@
             </svg>
 
             <!-- SVG BACKGROUND -->
-            <%= image_pack_tag 'media/images/website/cityscape_w_background.svg', class: "img-fluid img-float-md-6 mb-5 mb-md-0" %>
+            <%= image_pack_tag 'media/images/website/cityscape_w_background.svg', class: "img-fluid img-float-md-6 mb-5 mb-md-0", alt: 'cityscape background' %>
           </div><!-- /.col-md-6 -->
           <!-- .col-md-6 -->
           <div class="col-12 col-lg-7 order-md-1" data-aos="fade-in">
@@ -149,7 +149,7 @@
                 <div class="d-sm-flex align-items-start text-center text-sm-left ">
                   <div class="col-12 text-center" data-aos="fade-up" data-aos-delay="0">
                     <div class="graphic-container">
-                      <%= image_pack_tag 'media/images/website/engine.svg', class: "img-fluid py-2" %>
+                      <%= image_pack_tag 'media/images/website/engine.svg', class: "img-fluid py-2", alt: t('website.feature_strip.a.alt') %>
                     </div>
                     <h2 class="lead header"><%= t('website.feature_strip.a.title') %></h2>
                     <h3 class="body"><%= t('website.feature_strip.a.body_html', brand: BRANDNAME) %></h3>
@@ -167,7 +167,7 @@
 <!--                      <div className="d-flex justify-content-center mt-2">-->
 <!--                        <i className="pr-icon md search" />-->
 <!--                      </div>-->
-                      <%= image_pack_tag 'media/images/website/partners.svg', class: "img-fluid py-2" %>
+                      <%= image_pack_tag 'media/images/website/partners.svg', class: "img-fluid py-2", alt: t('website.feature_strip.b.alt') %>
 <!--                      <img class="mb-4" src="assets/images/illustration/lab.svg" alt="" height="72">-->
                     </div>
                     <h2 class="lead header"><%= t('website.feature_strip.b.title') %></h2>
@@ -184,7 +184,7 @@
                   <div class="col-12 text-center" data-aos="fade-up" data-aos-delay="0">
                     <div class="graphic-container">
                       <%#= image_pack_tag 'media/images/website/home.svg', class: "img-fluid img-float-md-6 mb-5 mb-md-0" %>
-                      <%= image_pack_tag 'media/images/website/portal.svg', class: "img-fluid py-2" %>
+                      <%= image_pack_tag 'media/images/website/portal.svg', class: "img-fluid py-2", alt: t('website.feature_strip.c.alt') %>
 
                     </div>
                     <h2 class="lead header"><%= t('website.feature_strip.c.title') %></h2>
@@ -201,7 +201,7 @@
                   <div class="col-12 text-center" data-aos="fade-up" data-aos-delay="0">
                     <div class="graphic-container">
                       <%#= image_pack_tag 'media/images/website/home.svg', class: "img-fluid img-float-md-6 mb-5 mb-md-0" %>
-                      <%= image_pack_tag 'media/images/website/encryption.svg', class: "img-fluid py-2" %>
+                      <%= image_pack_tag 'media/images/website/encryption.svg', class: "img-fluid py-2", alt: t('website.feature_strip.d.alt') %>
                     </div>
                     <h2 class="lead header"><%= t('website.feature_strip.d.title') %></h2>
                     <h3 class="body"><%= t('website.feature_strip.d.body_html') %></h3>
