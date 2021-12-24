@@ -1,6 +1,8 @@
 ---
 en:
   website:
+    meta:
+      description: "RealtorPMS - Real estate brokerage management system"
     locale:
       prompt: 'Επιβεβαίωσε την χώρα ή την περιοχή, για να δεις περιεχόμενο σχετικό με την τοποθεσία σου.'
       country_proposal: 'Ελλάδα'
@@ -37,7 +39,7 @@ en:
       subheader: "Power and flexibility to meet the demands of power users:"
       a:
         title: 'Agency management'
-        body_html: '<strong>%{brand}</strong> is a complete real estate management system. From matching properties to clients to your very own listing website, we got you covered.'
+        body_html: '<strong>%{brand}</strong> is a complete real estate brokerage management system. From matching properties to clients to your very own listing website, we got you covered.'
       b:
         title: 'Permissions'
         body_html: "Share properties with your partners and split your workload. Share exactly what needs to be shared or share it all. It's up to you."

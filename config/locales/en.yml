@@ -31,7 +31,7 @@
 ---
 en:
   meta:
-    description: "Brokerage management system"
+    description: "%{subdomain} admin"
   true: "Yes"
   true_upcase: "YES"
   confirm: "Confirm"

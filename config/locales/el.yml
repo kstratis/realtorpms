@@ -1,7 +1,7 @@
 ---
 el:
   meta:
-    description: "Εφαρμογή διαχείρισης ακινήτων"
+    description: "%{subdomain} διαχειριστικό"
   true: "Ναί"
   true_upcase: "ΝΑΙ"
   confirm: "Επιβεβαίωση"

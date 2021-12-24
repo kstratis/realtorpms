@@ -1,6 +1,8 @@
 ---
 el:
   website:
+    meta:
+      description: "RealtorPMS - Εφαρμογή διαχείρισης ακινήτων"
     locale:
       prompt: 'Επιβεβαίωσε την χώρα ή την περιοχή, για να δεις περιεχόμενο σχετικό με την τοποθεσία σου.'
       country_proposal: 'Ελλάδα'
