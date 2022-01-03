@@ -4,12 +4,14 @@
       <div class="col-6">
         <div class="country-prompt"><%= I18n.t('website.locale.prompt') %></div>
       </div>
-      <div class="col-2">
-        <div class="country-proposal"><%= I18n.t('website.locale.country_proposal') %></div>
-      </div>
-      <div class="col-2 nowrap">
-        <a id="locale-switch-accept" class="d-inline locale-redirect" href="<%= landing_root_url(locale: 'el', params: request.query_parameters) %>"><strong><%= I18n.t('website.locale.continue') %></strong></a>
-        <div id="locale-switch-reject" class="d-inline locale-dismiss ml-2"><strong>Χ</strong></div>
+      <div class="col-6 row align-items-center ">
+        <div class="col-12 col-md-6  d-lg-inline-flex justify-content-end">
+          <div class="d-inline country-proposal px-5 py-2"><%= I18n.t('website.locale.country_proposal') %></div>
+        </div>
+        <div class="col-12 col-md-6 mt-3 mt-md-0 d-inline-flex">
+          <a id="locale-switch-accept" class="d-inline locale-redirect" href="<%= landing_root_url(locale: 'el', params: request.query_parameters) %>"><strong><%= I18n.t('website.locale.continue') %></strong></a>
+          <div id="locale-switch-reject" class="d-inline locale-dismiss ml-2"><strong>Χ</strong></div>
+        </div>
       </div>
     </div>
   </div>
