@@ -656,6 +656,7 @@ en:
         email: "Email"
         telephones:
           title: "Telephone/s"
+        agent: "Agent"
         registration: "Registration"
         actions: "Actions"
         tooltip_edit_profile: "Edit client"
@@ -871,6 +872,7 @@ en:
     client: "Client"
     help_popover_admin: "This is the list of properties which have already been shown to the client. The partner who does the showing has to have the selected client assigned or be an administrator."
     help_popover_user: "This is the list of properties which have already been shown to the client."
+    agent: "Agent"
     new:
       heading: "Add"
       heading_alt: "New client"
@@ -878,6 +880,7 @@ en:
       owner_profile: "Add new owner"
       add_button: "Add"
       add_owner: "Add co-owner"
+      agent: "Agent?"
     edit:
       breadcrumb: "Clients"
       edit_button: "Update"
@@ -891,6 +894,7 @@ en:
       allowed_pic_specs: "Image file < 3.5 MB."
       delete_avatar: "Are you sure you want to delete the client's picture?"
       add_owner: "Add co-owner"
+      agent: "Agent?"
     show:
       preferences: "Preferences"
       breadcrumb: "Clients"
@@ -901,12 +905,12 @@ en:
       matches: "Matches"
       no_stored_searches_html: "The client has no stored search preferences. Navigate to the <a href='%{properties_path}'>properties screen</a>, set the client's filters and save its preferences."
       no_ownership: "The client doesn't seem to poccess any properties."
-      ordertoview: "Buyer broker agreement"
-      ordertosell: "Broker listing agreement"
+      ordertoview: "Buyer broker agreement sheet"
+      ordertosell: "Broker listing agreement sheet"
       tabs:
         info: "User info"
         searching: "Looking for"
-        offering: "Offers"
+        offering: "Offering"
         handling: "Permissions"
     index:
       breadcrumb: "Clients"

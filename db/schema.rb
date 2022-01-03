@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_18_134317) do
+ActiveRecord::Schema.define(version: 2022_01_03_134831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 2021_12_18_134317) do
     t.integer "model_type_id"
     t.boolean "ordertosell", default: false
     t.boolean "ordertoview", default: false
+    t.boolean "agent", default: false
     t.index ["account_id"], name: "index_clients_on_account_id"
     t.index ["last_name"], name: "index_clients_on_last_name"
   end

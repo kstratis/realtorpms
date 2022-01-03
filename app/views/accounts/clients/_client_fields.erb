@@ -73,6 +73,18 @@
     </small>
   </div>
 
+  <!-- .form-group -->
+  <div class="form-group new_client shoutout-field">
+    <div class="custom-control custom-checkbox app-checkbox align-items-center d-flex pl-3">
+      <div class="col-lg-5 col-sm-3 pr-3">
+        <%= f.check_box(:agent, {class: "custom-control-input dependent_check", type: 'checkbox'}) %>
+        <%= f.label(:agent, {class: 'custom-control-label dependent_label'}) do %>
+          <%= t('clients.edit.agent') %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
   <div class="custom-control custom-checkbox app-checkbox align-items-center d-flex pl-3">
     <div class="col-lg-5 col-sm-3 pr-3">
     <%= f.check_box(:ordertoview, {class: "custom-control-input dependent_check", type: 'checkbox'}) %>
@@ -111,6 +123,8 @@
       <%= f.file_field :ordertosellfile, class: 'dependent_input', multiple: false %>
     </div>
   </div>
+
+  <hr />
 
   <!-- Extended fields -->
   <%= f.fields_for :preferences, OpenStruct.new(@client.preferences) do |builder| %>

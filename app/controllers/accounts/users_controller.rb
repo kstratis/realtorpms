@@ -8,7 +8,6 @@ module Accounts
     before_action :check_page_validity, only: [:index]
     before_action :find_user!, only: [:delete_avatar, :toggle_activation, :toggle_adminify, :toggle_tour, :show]
     after_action :log_action, only: [:create, :update, :destroy], unless: Proc.new { current_user.is_sysadmin? }
-    after_action :set_assignments, only: [:create]
     # A model's +destroy+ method is different than the controller's +destroy+ action.
     # - Using the model's destroy method on a user object should delete all its dependancies (memberships, assignments,
     # clientships and favlists), its owning account and the user itself.
@@ -155,7 +154,7 @@ module Accounts
     private
 
     def user_params
-      params.require(:user).permit(:avatar, :first_name, :last_name, :email, :dob, :phone1, :locale, :time_zone, :password, :password_confirmation, :multi_assign, { preferences: {} })
+      params.require(:user).permit(:avatar, :first_name, :last_name, :email, :dob, :phone1, :locale, :time_zone, :password, :password_confirmation, { preferences: {} })
     end
 
     # Finds the given or throws
@@ -181,12 +180,6 @@ module Accounts
       else
         Log.create(author: current_user, author_name: current_user.full_name, user_name: @user.full_name, user: @user, action: action_name, account: current_account, account_name: current_account.subdomain, entity: "users")
       end
-    end
-
-    def set_assignments
-      return unless ActiveRecord::Type::Boolean.new.cast(user_params[:multi_assign])
-
-      @user.properties << current_account.properties
     end
 
     def all_account_users
