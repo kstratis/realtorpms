@@ -116,7 +116,7 @@ module Accounts
       end
 
       def client_params
-        params.require(:client).permit(:first_name, :last_name, :email, :telephones, :job, :notes, :ordertoview, :ordertosell, :ordertoviewfile, :ordertosellfile, {preferences: {}})
+        params.require(:client).permit(:first_name, :last_name, :email, :telephones, :job, :notes, :agent, :ordertoview, :ordertosell, :ordertoviewfile, :ordertosellfile, {preferences: {}})
       end
 
       # Use callbacks to share common setup or constraints between actions.

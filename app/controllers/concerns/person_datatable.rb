@@ -91,6 +91,7 @@ module PersonDatatable
           assignments_count: @property ? entry.properties.count : nil,
           # property_id: property ? property.id : nil
       }
+      hash[:agent] = I18n.t(entry.try(:agent?)) if entry.class.to_s == 'Client'
       @personslist[:dataset] << hash
     end
     # The following entries are only for the first render

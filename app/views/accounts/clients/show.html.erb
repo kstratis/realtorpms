@@ -114,6 +114,10 @@
                         <td><%= l(@client.created_at, format: :custom) %></td>
                       </tr>
                       <tr>
+                        <td class="<%= @client.agent? ? 'table-danger' : '' %>"><%= t('clients.agent') %></td>
+                        <td class="<%= @client.agent? ? 'table-danger' : '' %>"><%= t(@client.agent?) %></td>
+                      </tr>
+                      <tr>
                         <td><%= t('clients.show.ordertoview') %></td>
                         <td><%= t(@client.ordertoview.to_s.downcase) %>&nbsp;<%= (@client.try(:ordertoviewfile).try(:attached?) && @client.ordertoview) ? link_to('&#10515'.html_safe, rails_blob_path(@client.ordertoviewfile, disposition: "attachment"), class: 'no-underline') : '' %></td>
                       </tr>

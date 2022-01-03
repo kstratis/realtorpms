@@ -260,6 +260,9 @@ const ClientsList = ({
                             <span>{i18n['datatable']['telephones']['title']}</span>
                           </th>
                           <th className={'text-nowrap'}>
+                            <span>{i18n['datatable']['agent']}</span>
+                          </th>
+                          <th className={'text-nowrap'}>
                             <a
                               id="sort_by_date"
                               className={'sortable-header-name'}
@@ -329,6 +332,12 @@ const ClientsList = ({
                                   {entry['telephones']}
                                 </span>
                                 {/*<i className={'fas fa-phone-alt fa-fw'} />*/}
+                              </div>
+                            </td>
+
+                            <td className={'align-middle'}>
+                              <div className={'table-entry'}>
+                                <span><mark>{entry['agent']}</mark></span>
                               </div>
                             </td>
 
