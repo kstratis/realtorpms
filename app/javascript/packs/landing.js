@@ -1,6 +1,6 @@
 import 'bootstrap'  // bootstrap js files
 import AOS from 'aos'; // animate on scroll lib
-import { setCookie } from './utilities';
+import { initLanguageSwitcher } from "./utilities";
 
 // No Turbolinks at this point
 $(document).ready(function() {
@@ -12,9 +12,5 @@ $(document).ready(function() {
     once: true
   });
 
-  $('#locale-switch-reject').on('click', (e) => {
-    e.preventDefault();
-    $('#language-switcher-container').hide();
-    setCookie('locale_switch_dismissed','ok',2);
-  })
+  initLanguageSwitcher();
 });

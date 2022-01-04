@@ -47,6 +47,14 @@ const getParticles = () => {
   ]);
 };
 
+function initLanguageSwitcher() {
+  $('#locale-switch-reject').on('click', (e) => {
+    e.preventDefault();
+    $('#language-switcher-container').hide();
+    setCookie('locale_switch_dismissed','ok',2);
+  });
+}
+
 function setCookie(name, value, days) {
   let expires = "";
   if (days) {
@@ -71,4 +79,4 @@ function eraseCookie(name) {
   document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 
-export { clearValidatableFields, setFlatPickrSettings, normalizeFlatPickrDate, getParticles, setCookie, getCookie, eraseCookie };
+export { clearValidatableFields, setFlatPickrSettings, normalizeFlatPickrDate, getParticles, setCookie, getCookie, eraseCookie, initLanguageSwitcher };

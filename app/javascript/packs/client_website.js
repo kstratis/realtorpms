@@ -5,6 +5,7 @@ import { definitionsFromContext } from '@hotwired/stimulus-webpack-helpers';
 require("@rails/ujs").start();
 import './turbolinks_wrapper';
 import bootbox from "bootbox";
+import { initLanguageSwitcher } from "./utilities";
 // STIMULUS BOOTSTRAPPING
 const application = Application.start();
 const context = require.context('../controllers', true, /\.js$/);
@@ -15,6 +16,7 @@ $(document).on('turbolinks:load', function(e) {
   // Initialize carousel elements via `Splide`
   // `Splide` is loaded directly via jsdelivr in skeleton.html.erb
   initCarousels();
+  initLanguageSwitcher();
 
   // Initialize any bootbox modals
   const translation = JSON.parse(document.getElementById('nav_i18n').dataset.navi18n);
