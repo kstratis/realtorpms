@@ -2,7 +2,7 @@ module LanguageSwitcher
   extend ActiveSupport::Concern
 
   def greek_user?
-    @client_country == 'GR' || Rails.env.development?
+    (@client_country == 'GR') || Rails.env.development?
   end
 
   def locale_switch_dismissed

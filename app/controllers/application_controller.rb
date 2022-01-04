@@ -14,7 +14,8 @@ class ApplicationController < ActionController::Base
   around_action :set_time_zone, if: :current_user
 
   def switch_locale(&action)
-    locale = params[:locale] || current_user.try(:locale) || extract_locale_from_accept_language_header || I18n.default_locale
+    # locale = params[:locale] || current_user.try(:locale) || extract_locale_from_accept_language_header || I18n.default_locale
+    locale = params[:locale] || current_user.try(:locale) || I18n.default_locale
     I18n.with_locale(locale, &action)
   end
 
