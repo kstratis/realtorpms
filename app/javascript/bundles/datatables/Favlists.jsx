@@ -76,7 +76,7 @@ class Favlists extends React.Component {
                       <div className={'custom-list-button'}>
                         <a
                           className={'btn btn-icon btn-light list-group-item-action text-center'}
-                          href={`/favlists/${entry['id']}`}
+                          href={entry['show_favlist_path']}
                           data-method="delete"
                           data-confirm={this.props.i18n['prompt']}>
                           <i className="fas fa-trash" />
