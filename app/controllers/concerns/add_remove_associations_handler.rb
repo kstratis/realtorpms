@@ -65,13 +65,14 @@ module AddRemoveAssociationsHandler
         # does not make sense for a notification as clients are not system users,
         if association == 'users'
           recipient = current_account.users.find(id)
-          if recipient.role(current_account) == 'user'
+          # Notify any user about an assignment. Not just plain users.
+          # if recipient.role(current_account) == 'user'
             Accounts::Notifications::PropertyAssignNotification.
               with(payload: I18n.t("assignments.notifications.#{object.class.to_s.pluralize.downcase}_html",
                                    entity_name: entity_name, entity_path: entity_path),
                    account: current_account).
               deliver(recipient)
-          end
+          # end
         end
       end
       #add_ids.each { |id| current_account.cpas.create(property_id: object.id, client_id: current_account.send(association).find(id).id, account_id: current_account) }
