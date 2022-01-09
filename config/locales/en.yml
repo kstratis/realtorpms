@@ -777,6 +777,7 @@ en:
     subscription: "Subscription"
     settings: "Settings"
     widget: "Widget"
+    account: "Account"
   partners:
     title: "Partners"
     list: "Partner list"
@@ -1076,6 +1077,10 @@ en:
       breadcrumb: "Properties"
       heading: "Properties"
       new_button: "Add new property"
+      pin_shoutout_html: |
+        <p>Unless you "pin" a property, <a href="%{site}">your website</a> will look empty without a specific search.</p> 
+        <span>Edit a property of your choosing and pin it to enrich the default landing page of your website.</span>
+        <span>Pinned properties will always appear on top when no search query is given.</span>
     show:
       client_tooltip: "User info %{user}"
       breadcrumb: "Properties"

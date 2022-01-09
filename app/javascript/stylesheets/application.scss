@@ -2714,43 +2714,31 @@ a.icon-font-delete{
   border-radius: unset !important;
 }
 
+.shoutout {
+  border: 1px solid;
+  font-size: 0.875rem;
+  position: relative;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
+
+.shoutout-danger {
+  color: #9d5d8e;
+  background-color: #fcf9fb;
+  border-color: #b76ba3;
+}
+
+.shoutout-info {
+  color: #046992;
+  background-color: #f5fafc;
+  border-color: #0179a8;
+}
+
 .shoutout.has-icon {
   padding-left: 4rem;
   min-height: 4rem;
-}
-
-.shoutout {
-  border: 1px solid !important;
-  -webkit-animation: fadein 0.5s;
-  animation: fadein 0.5s;
-}
-.shoutout {
-  min-height: 55px;
-  padding-top: 1rem;
-}
-@media (min-width: 768px) {
-  .shoutout {
-    border: 1px solid;
-    font-size: 0.875rem;
-  }
-  .shoutout {
-    /* border-width: 3px 0 0 0; */
-    //box-shadow: 0 0 0 1px rgb(20 20 31 / 5%), 0 1px 3px 0 rgb(20 20 31 / 15%);
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-  }
-  .shoutout-danger {
-    color: #9d5d8e;
-    background-color: #fcf9fb;
-    border-color: #b76ba3;
-  }
-  .shoutout {
-    position: relative;
-    padding: 0.75rem 1.25rem;
-    margin-bottom: 1rem;
-    border: 1px solid transparent;
-    border-radius: 0.25rem;
-  }
 }
 
 .shoutout-field {
