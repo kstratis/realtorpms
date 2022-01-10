@@ -572,7 +572,7 @@ en:
             floor_feedback: "Pick a floor"
             construction_feedback: "Construction year"
             levels_feedback: "Floors"
-            website_enabled: "Visible on your portal"
+            website_enabled: "Available on your portal"
             website_disabled: "Offline"
             pinned: "Pinned"
             pinned_tooltip: "Pinned"
@@ -1032,7 +1032,7 @@ en:
       photo_header: "Cover photo"
       photo_subheader: "Click to change the cover photo for the property"
     edit:
-      website_enabled_html: "Visible on your <u><a target=\"_blank\" href=\"%{website}\">portal</a></u>"
+      website_enabled_html: "Available on your <u><a target=\"_blank\" href=\"%{website}\">portal</a></u>"
       avatar_title: "Property image cover"
       breadcrumb: "Properties"
       heading: "Edit property"
@@ -1078,9 +1078,11 @@ en:
       heading: "Properties"
       new_button: "Add new property"
       pin_shoutout_html: |
-        <p>Unless you "pin" a property, <a href="%{site}">your website</a> will look empty without a specific search.</p> 
-        <span>Edit a property of your choosing and pin it to enrich the default landing page of your website.</span>
-        <span>Pinned properties will always appear on top when no search query is given.</span>
+        <ul>
+        <li>Properties of your choice show up on your <a href="%{site}">portal</a> by flipping the "<strong>available on your portal</strong>" switch under a property's <strong>settings</strong>.</li>
+        <li>If you choose to also "pin" a property, it will show up on your <a href="%{site}">portal</a> when no search query exist.</li> 
+        <li>Try pinning a couple of properties in order to enrich your <a href="%{site}">portal</a>'s landing page.</li>
+        </ul>
     show:
       client_tooltip: "User info %{user}"
       breadcrumb: "Properties"
