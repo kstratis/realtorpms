@@ -26,8 +26,8 @@ tonystark = User.create!(first_name: 'Tony',
                          email: 'tstark@gmail.com',
                          phone1: '6945567345',
                          dob: Date.new(1976, 2, 3),
-                         password: 'abc123',
-                         password_confirmation: 'abc123')
+                         password: 'abc123abc',
+                         password_confirmation: 'abc123abc')
 
 # Owner of +bluedomain+
 hulkhogan = User.create!(first_name: 'Hulk',
@@ -35,8 +35,8 @@ hulkhogan = User.create!(first_name: 'Hulk',
                          email: 'hh@gmail.com',
                          phone1: '6935567342',
                          dob: Date.new(1980, 4, 1),
-                         password: 'abc123',
-                         password_confirmation: 'abc123')
+                         password: 'abc123abc',
+                         password_confirmation: 'abc123abc')
 
 # Owner of +reddomain+
 johnymnemonic = User.create!(first_name: 'Johny',
@@ -44,8 +44,8 @@ johnymnemonic = User.create!(first_name: 'Johny',
                              email: 'jm@gmail.com',
                              phone1: '6901560342',
                              dob: Date.new(1969, 12, 17),
-                             password: 'abc123',
-                             password_confirmation: 'abc123')
+                             password: 'abc123abc',
+                             password_confirmation: 'abc123abc')
 
 # This the first account and belongs to Tony Stark (tstark@gmail.com) - regular admin
 demo = Account.create!(
@@ -88,22 +88,22 @@ brussels = Location.find(5007) # Brussels - Belgium (level 3) - INT
 regulardemouser1 = User.create!(first_name: 'Will',
                                 last_name: 'Smith',
                                 email: 'wm@gmail.com',
-                                password: 'abc123',
-                                password_confirmation: 'abc123')
+                                password: 'abc123abc',
+                                password_confirmation: 'abc123abc')
 
 regulardemouser2 = User.create!(first_name: 'John',
                                 last_name: 'Travolta',
                                 email: 'jt@gmail.com',
-                                password: 'abc123',
-                                password_confirmation: 'abc123')
+                                password: 'abc123abc',
+                                password_confirmation: 'abc123abc')
 # -------------------------
 #
 # 1 memorable bluedomain user
 regularbluedomainuser1 = User.create!(first_name: 'Lakis',
                                       last_name: 'Gavalas',
                                       email: 'lg@gmail.com',
-                                      password: 'abc123',
-                                      password_confirmation: 'abc123')
+                                      password: 'abc123abc',
+                                      password_confirmation: 'abc123abc')
 
 # ----------------------------------------------------------
 
@@ -148,7 +148,7 @@ end
   email = "demouser-#{n + 1}@gmail.com"
   dob = rand(10.years).seconds.ago
   phone1 = "69#{rand(0..9)}76548#{rand(0..9)}#{rand(0..9)}"
-  password = 'abc123'
+  password = 'abc123abc'
   user = User.create!(first_name: first_name,
                       last_name: last_name,
                       email: email,
@@ -165,7 +165,7 @@ end
   email = "bluedomainuser-#{n + 1}@gmail.com"
   dob = rand(10.years).seconds.ago
   phone1 = "69#{rand(0..9)}76548#{rand(0..9)}#{rand(0..9)}"
-  password = 'abc123'
+  password = 'abc123abc'
   user = User.create!(first_name: first_name,
                       last_name: last_name,
                       email: email,
