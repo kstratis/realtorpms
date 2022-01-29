@@ -53,7 +53,7 @@ $(document).on('turbolinks:load', function(e) {
   }
   if ($('.dependent_input').length) setup_dependent_checkboxes();
   // TODO remove this on deploy
-  if (window.location.pathname === '/demo'){
+  if (window.location.pathname === '/app/demo'){
     import(/* webpackChunkName: "ExampleWOOT", webpackPrefetch: true */ '../bundles/Example.jsx').then(({default: Example}) => {
       ReactDOM.render(<Example />, document.getElementById('lazy'))
     });
