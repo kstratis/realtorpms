@@ -71,6 +71,7 @@ class AccountsController < ApplicationController
                                     :telephones,
                                     :website_enabled,
                                     :avatar,
+                                    :flavor,
                                     :address, { owner_attributes:
                                                   [:first_name,
                                                    :last_name,

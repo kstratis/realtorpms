@@ -43,6 +43,9 @@ class Account < ApplicationRecord
     self.subdomain = self.subdomain.downcase unless subdomain.blank?
   end
 
+  enum flavor: { :greek => 0, :international => 1 }
+
+
   # This is for existing log records
   # https://stackoverflow.com/a/9326882/178728
   # before_destroy { |record| Log.where(account: record).update_all(account_name: record.subdomain) }
