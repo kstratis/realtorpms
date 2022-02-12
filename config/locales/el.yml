@@ -134,6 +134,11 @@ el:
         email: "Εταιρικό email"
         telephones: "Τηλέφωνα επικοινωνίας"
         address: "Διεύθυνση"
+        flavor: "Έκδοση"
+        enums:
+          flavor:
+            greek: "Ελληνική"
+            international: "Διεθνής"
       client:
         first_name: "Όνομα"
         first_name_feedback_html: "π.χ. Δημήτρης"

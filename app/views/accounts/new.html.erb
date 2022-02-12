@@ -30,6 +30,19 @@
 
     </div><!-- /.form-group -->
 
+    <div class="form-group">
+      <div class="form-label-group">
+        <%= account_builder.select "flavor",
+                                   Account.flavors.keys.collect { |flavor| [ Account.human_enum_name(:flavor, flavor), flavor ] },
+                                   { selected:  params[:locale] == 'el' ? :greek : :international },
+                                   { class: 'custom-select' } %>
+
+        <%= account_builder.label "flavor", Account.human_attribute_name("flavor") %>
+        <%= inline_error @account, :name, 'Flavor' %>
+      </div><!-- /.input-group -->
+
+    </div><!-- /.form-group -->
+
     <%# This is for the nested user fields %>
     <%= account_builder.fields_for :owner do |owner| %>
 

@@ -167,6 +167,11 @@ en:
         email: "Corporate email"
         telephones: "Contact number(s)"
         address: "Address"
+        flavor: "Version"
+        enums:
+          flavor:
+            greek: "Greek"
+            international: "International"
       client:
         first_name: "First name"
         first_name_feedback_html: "i.e. John"
