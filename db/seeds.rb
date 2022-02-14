@@ -52,7 +52,8 @@ demo = Account.create!(
     subdomain: 'demo',
     name: 'Demo',
     email_confirmed: true,
-    owner: User.second
+    owner: User.second,
+    flavor: :greek
 )
 demo.model_types.find_by(name: 'users').users << tonystark
 
@@ -61,7 +62,8 @@ bluedomain = Account.create!(
     subdomain: 'bluedomain',
     name: 'Bluedomain',
     email_confirmed: true,
-    owner: User.third
+    owner: User.third,
+    flavor: :greek
 )
 bluedomain.model_types.find_by(name: 'users').users << hulkhogan
 
@@ -70,7 +72,8 @@ reddomain = Account.create!(
     subdomain: 'reddomain',
     name: 'Reddomain',
     email_confirmed: true,
-    owner: User.fourth
+    owner: User.fourth,
+    flavor: :international
 )
 reddomain.model_types.find_by(name: 'users').users << johnymnemonic
 

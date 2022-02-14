@@ -18,7 +18,7 @@ class FormSelect extends React.Component {
     inputName: PropTypes.string,
     inputIsDisabled: PropTypes.bool,
     endpoint: PropTypes.string,
-    new_client_endpoint: PropTypes.string,
+    create_new_entity_form: PropTypes.string,
     validatorGroup: PropTypes.string,
     isMulti: PropTypes.bool,
     isCreatable: PropTypes.bool,
@@ -32,6 +32,7 @@ class FormSelect extends React.Component {
     renderFormField: PropTypes.bool,
     storedOption: PropTypes.any,
     placeholderText: PropTypes.string,
+    accountFlavor: PropTypes.string,
     // soloMode guards against dynamically setting the dropdown options
     // and gettings a ref which is needed in DependantSelect
     soloMode: PropTypes.bool,
@@ -151,23 +152,23 @@ class FormSelect extends React.Component {
   // Imperative JQuery code for the new client inline form
   addFormListeners(target) {
     // Get new client form
-    const $new_client_form = $('#new_client');
+    const $form = $('#new_client,#new_ilocation');
     // Attach js form validator
-    let myparsley = $new_client_form.parsley();
+    let myparsley = $form.parsley();
     // Attach the button listener (we'll use it to ajax POST the new client)
-    $new_client_form.find("button[type='submit']").on('click', e => {
+    $form.find("button[type='submit']").on('click', e => {
       e.preventDefault();
       if (!myparsley.validate()) return;
 
-      const endpoint = $new_client_form.attr('action');
+      const endpoint = $form.attr('action');
 
       // Since we need to upload attachments (blob) we have to use
       // FormData and wrap our form. In any other case we'd simply do
-      // const form_data = $new_client_form.serialize() and use `form_data`
+      // const form_data = $form.serialize() and use `form_data`
       // instead.
       // Ref 1: https://stackoverflow.com/questions/58036713/rails-form-submission-by-ajax-with-an-active-storage-attachment
       // Ref 2: https://stackoverflow.com/questions/5392344/sending-multipart-formdata-with-jquery-ajax
-      const formData = new FormData($new_client_form[0]);
+      const formData = new FormData($form[0]);
 
       Rails.ajax({
         type: 'POST',
@@ -184,7 +185,9 @@ class FormSelect extends React.Component {
           const existingSelection = this.state.selectedOption ? this.state.selectedOption : '';
           this.setState(
             {
-              selectedOption: [...existingSelection, { label: response.message.label, value: response.message.value }],
+              selectedOption: Array.isArray(existingSelection)
+                ? [...[existingSelection].flat(), { label: response.message.label, value: response.message.value }]
+                : [{ label: response.message.label, value: response.message.value }],
             },
             () => {
               if (this.props.renderFormField) {
@@ -201,13 +204,13 @@ class FormSelect extends React.Component {
   // Imperative JQuery code to remove new inline client form listeners
   removeFormListeners() {
     // Fetch the new client form
-    const $new_client_form = $('#new_client');
-    if (!$new_client_form) return;
+    const $form = $('#new_client,#new_ilocation');
+    if (!$form) return;
 
     // Detach js form validator on bootbox hide
-    $new_client_form.parsley().destroy();
+    $form.parsley().destroy();
     // Detach button listeners on bootbox hide
-    $new_client_form.find("button[type='submit']").off('click');
+    $form.find("button[type='submit']").off('click');
   }
 
   // This is called on every value change to update the current value and the "true" hidden input field.
@@ -254,7 +257,7 @@ class FormSelect extends React.Component {
   handleCreateOption(newOption) {
     Rails.ajax({
       type: 'GET',
-      url: `${this.props.new_client_endpoint}?name=${newOption}`,
+      url: `${this.props.create_new_entity_form}?name=${newOption}`,
       dataType: 'json',
       success: response => {
         const form = response.message;
@@ -267,7 +270,6 @@ class FormSelect extends React.Component {
     const opts = {
       required: !!this.props.isRequired,
     };
-
     // This is needed for the menu open/close styles
     const { isOpen } = this.state;
 
@@ -313,7 +315,15 @@ class FormSelect extends React.Component {
                 placeholder={
                   this.props.placeholderText ? this.props.placeholderText : this.props.i18n.select.placeholder
                 }
-                formatCreateLabel={inputValue => renderHTML(`${this.props.i18n.select.add} "${inputValue}"`)}
+                formatCreateLabel={inputValue =>
+                  renderHTML(
+                    `${
+                      this.props.accountFlavor === 'international'
+                        ? this.props.i18n.select.add_location + ' ' + inputValue
+                        : this.props.i18n.select.add + ' ' + inputValue
+                    }`
+                  )
+                }
                 isDisabled={this.props.isDisabled}
                 isSearchable={this.props.isSearchable}
                 isClearable={this.props.isClearable}

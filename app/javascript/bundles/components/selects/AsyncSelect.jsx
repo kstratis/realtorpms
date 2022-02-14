@@ -58,7 +58,7 @@ const constructURL = (origUrl, query) => {
 function AsyncSelect({
   collection_endpoint,
   action_endpoint,
-  new_client_endpoint,
+  create_new_entity_form,
   storedOptions,
   hasFeedback,
   isCreatable,
@@ -107,7 +107,7 @@ function AsyncSelect({
       if (selectedOptions && selectedOptions.__isNew__) {
         Rails.ajax({
           type: 'GET',
-          url: `${new_client_endpoint}?name=${selectedOptions['label']}`,
+          url: `${create_new_entity_form}?name=${selectedOptions['label']}`,
           dataType: 'json',
           success: response => {
             const form = response.message;

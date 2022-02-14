@@ -1,0 +1,10 @@
+<%= form_for(@ilocation, html: {class: 'js-validatable'}) do |f| %>
+  <div class="col-lg-6 offset-lg-3 col-md-12 pt-3 pb-3">
+    <%= render 'accounts/ilocations/ilocation_fields', f: f %>
+    <!-- .form-actions -->
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary ml-auto"><%= t('clients.new.add_button') %></button>
+    </div> <!-- /.form-actions -->
+  </div>
+
+<% end %> <!-- /form -->

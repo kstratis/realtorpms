@@ -18,7 +18,7 @@ function StoreClientSearch({
   child,
   clientsEndpoint,
   assignmentshipsEndpoint,
-  new_client_endpoint,
+  create_new_entity_form,
   i18n,
   i18nCfieldOptions,
   i18nPriceOptions,
@@ -119,7 +119,7 @@ function StoreClientSearch({
                 isClearable={true}
                 collection_endpoint={{ url: clientsEndpoint, action: 'get' }}
                 action_endpoint={{ url: '', action: '', callback: asyncSelectCallback }}
-                new_client_endpoint={new_client_endpoint}
+                create_new_entity_form={create_new_entity_form}
                 storedOptions={[]}
                 hasFeedback={false}
               />

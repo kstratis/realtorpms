@@ -1,0 +1,14 @@
+<div class="client-fields mt-3">
+  <!-- .form-group -->
+  <div class="form-group new_ilocation">
+    <div class="form-label-group">
+      <%= f.text_field :area,
+                       class: 'form-control new_ilocation_input field-validatable',
+                       placeholder: Ilocation.human_attribute_name("area"),
+                       'data-parsley-required': "true",
+                       'data-parsley-required-message': t("js.validator.required") %>
+      <%= f.label :area, Ilocation.human_attribute_name("area") %>
+    </div>
+  </div>
+  <!-- /.form-group -->
+</div>

@@ -130,7 +130,7 @@ module PropertyDatatable
         size: property.size ? I18n.t('activerecord.attributes.property.size_meter_html', size: property.size.to_s) : '',
         price: property.price ? ActionController::Base.helpers.number_to_currency(property.price) : '',
         pricepersqmeter: property.price && property.size ? "#{ActionController::Base.helpers.number_to_currency(property.pricepersqmeter)} / #{I18n.t('activerecord.attributes.property.sm_html')}" : '',
-        location: property.location.localname,
+        location: property.location&.localname || property.ilocation&.area,
         view_entity_path: property_path(property),
         edit_entity_path: edit_property_path(property),
         fav_entity_path: property_favorites_path(property),

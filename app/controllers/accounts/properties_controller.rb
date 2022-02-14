@@ -11,9 +11,10 @@ module Accounts
 
     after_action :log_action, only: [:create, :update, :destroy], unless: Proc.new { current_user.is_sysadmin? }
 
-    attr_accessor :params_copy, :category, :area_location
+    attr_accessor :params_copy, :category, :location_label, :location_value
 
     attr_reader :property
+
     helper_method :property
 
     # GET /properties
@@ -26,7 +27,7 @@ module Accounts
 
     # This is just a proof of concept
     def demo
-      puts 'works'
+      puts 'properties_controller#demo'
       respond_to do |format|
         format.html
         format.json
@@ -65,7 +66,7 @@ module Accounts
     # GET /properties/1.json
     def show
       # friendly ids history slugs should not result in 404
-      unless [property_path(@property), property_path(@property) + '?print=true'].include?(request.path)
+      unless [property_path(@property), "#{property_path(@property)}?print=true"].include?(request.path)
         return redirect_to @property, :status => :moved_permanently
       end
       if current_user.is_admin?(current_account)
@@ -129,6 +130,11 @@ module Accounts
       search(Location, { value: 'id', label: %w(localname parent_localname) }, I18n.locale == :el ? {field: 'country_id', value: 1} : nil, 5)
     end
 
+    # international locations (tags)
+    def ilocations
+      search(Ilocation, { value: 'id', label: %w(area) }, nil, 5)
+    end
+
     # Experimental
     def client_locations
       # relation = Account.first.properties.joins(:location).distinct.select('locations.id', 'locations.localname', 'locations.parent_localname')
@@ -182,7 +188,7 @@ module Accounts
       clients_hash = params_copy.extract!(:clients)
 
       @property = current_account.properties.
-        new(params_copy.merge({category_id: category.id}).merge({location_id: area_location.id}))
+        new(params_copy.merge({ category_id: category.id }).merge(Hash[attributize_label, location_value]))
 
       respond_to do |format|
         if @property.save  # model_type is automatically saved within a before_validation hook inside the model
@@ -228,7 +234,7 @@ module Accounts
       end
 
       respond_to do |format|
-        if @property.update(params_copy.merge({category_id: category.id}).merge({location_id: area_location.id}))
+        if @property.update(params_copy.merge({ category_id: category.id }).merge(Hash[attributize_label, location_value]))
 
           # Sets the client and its required ownership attribute on the CPA many-to-many table
           set_client(clients_hash)
@@ -318,10 +324,24 @@ module Accounts
     end
 
     def retrieve_location
-      self.area_location = Location.find_by(id: params_copy[:locationid])
+      return if params_copy[:locationid].nil? && params_copy[:ilocationid].nil?
 
-      if area_location
-        params_copy.except!(:locationid)
+      # Looking for a param key which contains the word `location`.
+      # Can be either `locationid` or `ilocationid`.
+      location_data = params_copy.select { |k, _| k.match(/location/) }
+      return unless location_data.keys.one?
+
+      # We parse the location parameters and turn them to an array we can consume
+      self.location_label, self.location_value = location_data.transform_values do |location_value|
+        parse_location_value(location_value)
+      end.to_a.first
+
+      # Remove the `id` part so we can get and instantiate the corresponding model
+      location_klass = location_label[0...-2].classify.safe_constantize
+
+      if location_klass.find_by(id: location_value)
+        # Exclude the param from further processing
+        params_copy.except!(location_label.to_sym)
       else
         flash[:danger] = I18n.t('activerecord.attributes.property.flash_location_missing')
         redirect_to polymorphic_path([:property], action: action_name == 'create' ? :new : :edit)
@@ -345,6 +365,7 @@ module Accounts
       params.require(:property).permit(:description,
                                        :businesstype,
                                        :locationid,
+                                       :ilocationid,
                                        :categoryid,
                                        :category,
                                        :subcategory,
@@ -378,7 +399,25 @@ module Accounts
                                        extra_ids: [])
     end
 
+    # Location comes from params and may take the following 2 forms:
+    # {'locationid': '106314'} or {'ilocationid': "[{\"label\":\"nolita\", \"value\":9}]".
+    # We can only have one of them and we should query only the respective model
+    #
+    # @return [Integer] The `location` or `ilocation` id
+    def parse_location_value(location_value)
+      result = JSON.parse(location_value)
+      return result if result.is_a? Integer
 
+      result.first['value']
+    end
+
+    # location_label is either `locationid` or `ilocationid`.
+    # We need to get it to either `location_id` or `ilocation_id`
+    #
+    # @return [String] The db column to update
+    def attributize_label
+      "#{location_label[0...-2]}_id"
+    end
   end
 end
 

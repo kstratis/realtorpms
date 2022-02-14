@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_12_143455) do
+ActiveRecord::Schema.define(version: 2022_02_13_142226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -210,6 +210,14 @@ ActiveRecord::Schema.define(version: 2022_02_12_143455) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
+  create_table "ilocations", force: :cascade do |t|
+    t.string "area"
+    t.bigint "account_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_ilocations_on_account_id"
+  end
+
   create_table "invitations", force: :cascade do |t|
     t.string "email"
     t.bigint "account_id"
@@ -333,8 +341,10 @@ ActiveRecord::Schema.define(version: 2022_02_12_143455) do
     t.boolean "website_enabled", default: true
     t.boolean "pinned", default: false
     t.boolean "active", default: true
+    t.bigint "ilocation_id"
     t.index ["account_id"], name: "index_properties_on_account_id"
     t.index ["category_id"], name: "index_properties_on_category_id"
+    t.index ["ilocation_id"], name: "index_properties_on_ilocation_id"
     t.index ["location_id"], name: "index_properties_on_location_id"
   end
 
@@ -376,6 +386,7 @@ ActiveRecord::Schema.define(version: 2022_02_12_143455) do
   add_foreign_key "favlists", "users"
   add_foreign_key "favorites", "properties"
   add_foreign_key "favorites", "users"
+  add_foreign_key "ilocations", "accounts"
   add_foreign_key "invitations", "accounts"
   add_foreign_key "locations", "countries"
   add_foreign_key "logs", "accounts"
@@ -389,5 +400,6 @@ ActiveRecord::Schema.define(version: 2022_02_12_143455) do
   add_foreign_key "notifications", "accounts"
   add_foreign_key "properties", "accounts"
   add_foreign_key "properties", "categories"
+  add_foreign_key "properties", "ilocations"
   add_foreign_key "properties", "locations"
 end

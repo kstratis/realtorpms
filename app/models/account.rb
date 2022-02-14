@@ -32,6 +32,8 @@ class Account < ApplicationRecord
 
   has_many :notifications
 
+  has_many :ilocations, dependent: :destroy
+
   has_one_attached :avatar
 
   validates_associated :owner

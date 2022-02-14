@@ -57,7 +57,7 @@ module Accounts
         first_name: first_name.presence,
         last_name: last_name.presence
       }
-      @client = current_account.clients.new({model_type: current_account.model_types.find_by(name: 'clients')}.merge(attrs))
+      @client = current_account.clients.new({ model_type: current_account.model_types.find_by(name: 'clients') }.merge(attrs))
       respond_to do |format|
         format.html
         format.json {
