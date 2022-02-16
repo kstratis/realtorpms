@@ -675,7 +675,7 @@ en:
         results: "Results"
       properties:
         description: "Description"
-        no_results: 'No notifications available'
+        no_results: 'No properties found'
       sorting:
         title: "Sorting"
       clear: "Clear"
@@ -872,7 +872,7 @@ en:
     choose: "Choose..."
     text_placeholder: "Search..."
   clients:
-    new_client_cta: "Add a new one!"
+    new_client_cta: "Add one!"
     flash_created: "Client successfully created"
     flash_not_created: "Error creating new client"
     flash_not_updated: "Error updating client data"
@@ -929,7 +929,7 @@ en:
     add: "Add client"
     list: "Client list"
   users:
-    new_partner_cta: "Add!"
+    new_partner_cta: "Add one!"
     title: "Partners"
     flash_delete: "User was successfully deleted"
     flash_delete_multiple: "Action completed successfully"
@@ -994,7 +994,7 @@ en:
       properties_html: "You were assigned property <a href='%{entity_path}'>%{entity_name}</a>. The owner field is now visible."
       clients_html: "You were assigned client <a href='%{entity_path}'>%{entity_name}</a>."
   properties:
-    new_property_cta: "Add the first!"
+    new_property_cta: "Add one!"
     property: "Property"
     identifier: "ID"
     title: "Properties"
@@ -1140,6 +1140,7 @@ en:
       success: "Account settings successfully updated"
       failed: "Unable to create a new account"
   sessions:
+    flavor_warning: "* Your account will be bound to the version you choose. Once selected, this option can't be changed"
     login_title: "Login"
     forgot_title: "Forgot password"
     forgot_password_header: "Password reset request"

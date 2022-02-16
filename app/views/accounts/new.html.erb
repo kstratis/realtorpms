@@ -38,10 +38,12 @@
                                    { class: 'custom-select' } %>
 
         <%= account_builder.label "flavor", Account.human_attribute_name("flavor") %>
-        <%= inline_error @account, :name, 'Flavor' %>
       </div><!-- /.input-group -->
-
     </div><!-- /.form-group -->
+
+    <div><small class="form-text flavor-warning"><%= t('sessions.flavor_warning') %></small></div>
+
+    <hr />
 
     <%# This is for the nested user fields %>
     <%= account_builder.fields_for :owner do |owner| %>

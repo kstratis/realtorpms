@@ -33,7 +33,6 @@
                     <%= f.label "email" do %>
                       <span><i class="far fa-envelope fa-fw"></i>&nbsp;<%= User.human_attribute_name("email") %></span>
                     <% end %>
-                    <span class="badge badge-subtle badge-secondary"><em><%= t('users.new.feedback') %></em></span>
                     <%= inline_error @invitation, :email, 'Email' %>
                   </div>
                 </div>
