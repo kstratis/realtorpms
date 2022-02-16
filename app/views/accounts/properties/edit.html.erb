@@ -548,28 +548,58 @@
                               <%= content_tag(:i, nil, class: 'fas fa-map fa-fw') + ' ' + t('activerecord.attributes.property.location') %>
                               <abbr title="<%= t('js.components.select.required') %>">*</abbr>
                             <% end %>
-                            <%= react_component('FormSelect', props: {
-                                id: 'f',
-                                inputID: 'property_locationid',
-                                inputName: 'property[locationid]',
+
+                            <!-- Greek Market -->
+                            <% if current_account.greek? %>
+                              <%= react_component('FormSelect', props: {
+                                  id: 'f',
+                                  inputID: 'property_locationid',
+                                  inputName: 'property[locationid]',
+                                  inputClassName: 'form-control',
+                                  validatorGroup: 'fieldset-4',
+                                  endpoint: properties_locations_path,
+                                  isRequired: true,
+                                  renderFormField: true,
+                                  formID: "edit_property_#{@property.id}",
+                                  className: 'simple-select',
+                                  isSearchable: true,
+                                  isClearable: true,
+                                  storedOption: { "label": "#{@property.location.localname} - #{@property.location.parent_localname}", "value": @property.location.id },
+                                  soloMode: true,
+                                  ajaxEnabled: true,
+                                  i18n: {
+                                      select: t('js.components.select'),
+                                      validatorErrMsg: t('js.validator.required'),
+                                  }
+                              }, prerender: false) %>
+                            <!-- International Market -->
+                            <% else %>
+                              <%= react_component('FormSelect', props: {
+                                id: 'ff',
+                                inputID: 'property_ilocationid',
+                                inputName: 'property[ilocationid]',
                                 inputClassName: 'form-control',
                                 validatorGroup: 'fieldset-4',
-                                endpoint: properties_locations_path,
-                                isRequired: true,
+                                endpoint: properties_ilocations_path,
+                                create_new_entity_form: new_ilocation_path,
+                                isRequired: current_account.international?,
                                 renderFormField: true,
-                                formID: "edit_property_#{@property.id}",
+                                formID: 'new_property',
                                 className: 'simple-select',
                                 isSearchable: true,
                                 isClearable: true,
-                                storedOption: { "label": "#{@property.location.localname} - #{@property.location.parent_localname}", "value": @property.location.id },
+                                storedOption: { "label": @property.location.present? ? "#{@property.location.localname} - #{@property.location.parent_localname}" : @property.ilocation.area, "value": @property.location.present? ? @property.location.id : @property.ilocation.id },
+                                isCreatable: true,
                                 soloMode: true,
                                 ajaxEnabled: true,
+                                accountFlavor: current_account.flavor,
                                 i18n: {
-                                    select: t('js.components.select'),
-                                    validatorErrMsg: t('js.validator.required'),
+                                  select: t('js.components.select'),
+                                  validatorErrMsg: t('js.validator.required'),
                                 }
-                            }, prerender: false) %>
+                              }, prerender: false) %>
 
+                            <% end %>
                           </div>
                         </div>
                       </div>
@@ -670,7 +700,7 @@
                                 inputClassName: 'form-control existing_client_input',
                                 validatorGroup: 'fieldset-5',
                                 endpoint: properties_clients_path,
-                                new_client_endpoint: new_client_path,
+                                create_new_entity_form: new_client_path,
                                 isRequired: false,
                                 renderFormField: true,
                                 formID: "edit_property_#{@property.id}",

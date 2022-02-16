@@ -16,6 +16,7 @@ Rails.application.routes.draw do
         root to: 'dashboard#index', as: :account_root
         get '/account-confirmation/:token', to: 'confirmations#confirm_email', as: :account_confirmation
         get '/properties/locations', to: 'properties#locations'
+        get '/properties/ilocations', to: 'properties#ilocations'
         get '/properties/clients', to: 'properties#clients'
         get '/properties/inlinesearch', to: 'properties#inlinesearch'
         # resources :entityfields
@@ -61,6 +62,8 @@ Rails.application.routes.draw do
             delete :delete_avatar
           end
         end
+
+        resources :ilocations
 
         resources :clients do
           delete :mass_delete, on: :collection

@@ -7,10 +7,8 @@ module PropertyHeader
     businesstype = t("activerecord.attributes.property.enums.businesstype.#{property.businesstype}")
     category = t("activerecord.attributes.property.enums.subcategory.#{property.category.slug}")
     size = property.size ? t("activerecord.attributes.property.size_meter_html", size: property.size.to_s) : nil
-    localname = property.location.localname
-    parent_localname = property.location.parent_localname
     price = property.price ? ActionController::Base.helpers.number_to_currency(property.price) : nil
-    [businesstype, "#{category} #{size}", localname, parent_localname, price].compact.map(&:strip).join(', ')
+    [businesstype, "#{category} #{size}", retrieve_location(property), price].compact.map(&:strip).join(', ')
   end
 
   def mini_heading(property)
@@ -19,4 +17,13 @@ module PropertyHeader
     "#{category} #{size}"
   end
 
+  private
+
+  def retrieve_location(property)
+    if property.location.present?
+      "#{property.location.localname} #{property.location.parent_localname}"
+    else
+      property.ilocation.area
+    end
+  end
 end

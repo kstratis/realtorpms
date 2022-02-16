@@ -5,6 +5,12 @@ module PropertyDatatable
   include LocationFinder
   include Cfields
 
+  def fetch_initial_locations
+    return if @locations_filter.nil?
+
+    @locations_filter[:value].blank? ? [] : parse_initial_locations(@locations_filter)
+  end
+
   def pick_avatar_pick(property)
     return url_for(property.avatar.variant(resize: "30%")) if property.avatar.attached?
 
@@ -17,7 +23,12 @@ module PropertyDatatable
 
     @properties = relation
 
-    if filters[:locations]
+    if filters[:ilocations].present?
+      @locations_filter = { label: 'ilocations', value: filters[:ilocations] }
+      ilocation_ids = filters[:ilocations].split(",").map(&:to_i)
+      @properties = @properties.where(ilocation_id: ilocation_ids)
+    elsif filters[:locations].present?
+      @locations_filter = { label: 'locations', value: filters[:locations] }
       locations = filters[:locations].split(",").map(&:to_i)
       locations.each do |locationid|
         location = Location.find(locationid)
@@ -25,13 +36,13 @@ module PropertyDatatable
           @properties = @properties.where(location_id: location.id)
         else # level 1 & 2
           s = Location
-                  .select('DISTINCT mainLocations.id')
-                  .from(Location.where(parent_id: locationid))
-                  .joins('INNER JOIN locations AS mainLocations ON subquery.id = mainLocations.parent_id')
-                  .union(Location.select('id')
-                             .where(parent_id: locationid).or(Location.select('id').where(id: locationid)))
+                .select('DISTINCT mainLocations.id')
+                .from(Location.where(parent_id: locationid))
+                .joins('INNER JOIN locations AS mainLocations ON subquery.id = mainLocations.parent_id')
+                .union(Location.select('id')
+                               .where(parent_id: locationid)
+                               .or(Location.select('id').where(id: locationid)))
           @properties = @properties.where(location_id: s)
-
         end
       end
     end
@@ -130,7 +141,7 @@ module PropertyDatatable
         size: property.size ? I18n.t('activerecord.attributes.property.size_meter_html', size: property.size.to_s) : '',
         price: property.price ? ActionController::Base.helpers.number_to_currency(property.price) : '',
         pricepersqmeter: property.price && property.size ? "#{ActionController::Base.helpers.number_to_currency(property.pricepersqmeter)} / #{I18n.t('activerecord.attributes.property.sm_html')}" : '',
-        location: property.location.localname,
+        location: property.location&.localname || property.ilocation&.area,
         view_entity_path: property_path(property),
         edit_entity_path: edit_property_path(property),
         fav_entity_path: property_favorites_path(property),
@@ -160,7 +171,7 @@ module PropertyDatatable
     @current_page = @properties.current_page
     @results_per_page = 10
     @initial_search = filters[:search] || ''
-    @initial_locations = filters[:locations].blank? ? [] : get_initial_locations(filters[:locations].split(','))
+    @initial_locations = fetch_initial_locations || ''
     @initial_sorting = filters[:sorting] || 'created_at'
     @initial_ordering = filters[:ordering] || 'desc'
     @initial_purpose = filters[:purpose] || 'sell'

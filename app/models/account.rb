@@ -32,6 +32,8 @@ class Account < ApplicationRecord
 
   has_many :notifications
 
+  has_many :ilocations, dependent: :destroy
+
   has_one_attached :avatar
 
   validates_associated :owner
@@ -42,6 +44,9 @@ class Account < ApplicationRecord
   before_validation do
     self.subdomain = self.subdomain.downcase unless subdomain.blank?
   end
+
+  enum flavor: { :greek => 0, :international => 1 }
+
 
   # This is for existing log records
   # https://stackoverflow.com/a/9326882/178728

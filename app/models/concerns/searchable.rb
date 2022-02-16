@@ -29,18 +29,24 @@ module Searchable
         element.slice((element.index('.') + 1..-1))
       end
       if term && !fields.blank?
-        query = "unaccent(#{self.name.downcase.pluralize}.#{fields.shift}) ILIKE unaccent('%#{term}%')"
+        query_string = "unaccent(#{self.name.downcase.pluralize}.#{fields.shift}) ILIKE unaccent('%#{term}%')"
+
         fields.each do |field|
-          query << " OR unaccent(#{self.name.downcase.pluralize}.#{field}) ILIKE unaccent('%#{term}%')"
+          query_string << " OR unaccent(#{self.name.downcase.pluralize}.#{field}) ILIKE unaccent('%#{term}%')"
         end
-        unless filter.blank?
-          query << " AND #{filter.fetch(:field)} = #{filter.fetch(:value)}"
+
+        if filter.present?
+          filter_query_string = "#{filter.fetch(:field)} = #{filter.fetch(:value)}"
+          final_query = where(query_string).where(filter_query_string)
+        else
+          final_query = where(query_string)
         end
+
         # This is the limit parameter. Used mainly in dropwdowns
         if limit.blank?
-          associated_model.blank? ? where(query) : joins(associated_model.to_sym).where(query)
+          associated_model.blank? ? final_query : joins(associated_model.to_sym).final_query
         else
-          associated_model.blank? ? where(query).limit(limit) : joins(associated_model.to_sym).where(query).limit(limit)
+          associated_model.blank? ? final_query.limit(limit) : joins(associated_model.to_sym).final_query.limit(limit)
         end
       end
     end

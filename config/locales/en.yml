@@ -167,6 +167,15 @@ en:
         email: "Corporate email"
         telephones: "Contact number(s)"
         address: "Address"
+        flavor: "Version"
+        enums:
+          flavor:
+            greek: "Greek"
+            international: "International"
+      ilocation:
+        area: "Area"
+        flash_created: "Area successfully created"
+        flash_not_created: "Error: Area not saved. Please try again"
       client:
         first_name: "First name"
         first_name_feedback_html: "i.e. John"
@@ -528,6 +537,7 @@ en:
         noresults: "No results found"
         loading_html: "Loading results..."
         add: "Add new client: "
+        add_location: "Add new location: "
         placeholder: "Choose"
         placeholder_title: "Start typing to select..."
         placeholder_clients: "Search client..."

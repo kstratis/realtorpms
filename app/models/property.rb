@@ -8,7 +8,7 @@ class Property < ApplicationRecord
   friendly_id :unique_identifier, use: [:slugged, :finders, :history]
 
   # Use the identifier method to get a uid
-  # If non-unique identifier is occured, append the property id
+  # If non-unique identifier is occurred, append the property id
   def unique_identifier
     [
         :identifier,
@@ -42,7 +42,11 @@ class Property < ApplicationRecord
 
   belongs_to :account
   belongs_to :category
-  belongs_to :location
+
+  # A property may either belong to :location or :ilocation (international location)
+  belongs_to :location, optional: true
+  belongs_to :ilocation, optional: true
+
   belongs_to :model_type
   has_and_belongs_to_many :favlists, -> { distinct }
 
@@ -92,7 +96,7 @@ class Property < ApplicationRecord
   # Collection of properties which have been favorited by a particular user
   scope :faved_by, -> (user) {joins(:favorites).where(favorites: {user: user})}
 
-  attr_accessor :categoryid, :locationid, :clientid, :noclient, :delete_images
+  attr_accessor :categoryid, :locationid, :ilocationid, :clientid, :noclient, :delete_images
 
   enum businesstype: [:sell, :rent, :sell_rent]
 

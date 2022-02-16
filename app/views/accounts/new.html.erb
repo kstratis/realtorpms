@@ -15,7 +15,7 @@
       <div class="input-group input-group-alt">
         <%= account_builder.text_field :subdomain, class: 'form-control prepended-label-fix', placeholder: Account.human_attribute_name("subdomain") %>
         <div class="input-group-append">
-          <span class="input-group-text">.<%= BRANDNAME.downcase %>.io</span>
+          <span class="input-group-text">.<%= BRANDNAME.downcase %>.com</span>
         </div>
       </div><!-- /.input-group -->
       <%= inline_error @account, :subdomain, 'Subdomain' %>
@@ -26,6 +26,19 @@
         <%= account_builder.text_field :name, class: 'form-control', placeholder: Account.human_attribute_name("name") %>
         <%= account_builder.label :name, Account.human_attribute_name("name") %>
         <%= inline_error @account, :name, 'Name' %>
+      </div><!-- /.input-group -->
+
+    </div><!-- /.form-group -->
+
+    <div class="form-group">
+      <div class="form-label-group">
+        <%= account_builder.select "flavor",
+                                   Account.flavors.keys.collect { |flavor| [ Account.human_enum_name(:flavor, flavor), flavor ] },
+                                   { selected:  params[:locale] == 'el' ? :greek : :international },
+                                   { class: 'custom-select' } %>
+
+        <%= account_builder.label "flavor", Account.human_attribute_name("flavor") %>
+        <%= inline_error @account, :name, 'Flavor' %>
       </div><!-- /.input-group -->
 
     </div><!-- /.form-group -->

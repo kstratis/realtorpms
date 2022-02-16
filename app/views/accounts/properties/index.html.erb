@@ -78,15 +78,18 @@
               initial_sorting: @initial_sorting,
               initial_ordering: @initial_ordering,
               force_filters_open: @force_filters_open,
-              locations_endpoint: properties_locations_url,
+              # `properties_locations_url` for `greek`, `properties_ilocations_url` otherwise
+              locations_endpoint: current_account.greek? ? properties_locations_url : properties_ilocations_url,
               clients_endpoint: clients_url,
               assignmentships_endpoint: matches_url,
               properties_path: properties_path,
               new_property_endpoint: new_property_path,
-              new_client_endpoint: new_client_path,
+              create_new_entity_form: new_client_path,
               hasFeedback: false,
               object_type: 'properties',
               showControls: true,
+              # stick `greek` if you'd like to test
+              accountFlavor: current_account.flavor
           },
           i18n: {
               toast: t('properties.toast'),

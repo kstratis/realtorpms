@@ -134,6 +134,15 @@ el:
         email: "Εταιρικό email"
         telephones: "Τηλέφωνα επικοινωνίας"
         address: "Διεύθυνση"
+        flavor: "Έκδοση"
+        enums:
+          flavor:
+            greek: "Ελληνική"
+            international: "Διεθνής"
+      ilocation:
+        area: "Περιοχή"
+        flash_created: "Η νέα περιοχή δημιουργήθηκε επιτυχώς"
+        flash_not_created: "Σφάλμα: Η περιοχή δεν αποθηκεύτηκε. Δοκιμάστε εκ νέου"
       client:
         first_name: "Όνομα"
         first_name_feedback_html: "π.χ. Δημήτρης"
@@ -496,6 +505,7 @@ el:
         noresults: "Δεν βρέθηκαν αποτελέσματα"
         loading_html: "Φόρτωση αποτελεσμάτων..."
         add: "Δημιουργία νέου πελάτη: "
+        add_location: "Δημιουργία νέας τοποθεσίας: "
         placeholder: "Επιλέξτε"
         placeholder_title: "Πληκτρολογήστε για αναζήτηση..."
         placeholder_clients: "Αναζήτηση πελάτη..."
