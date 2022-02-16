@@ -22,7 +22,11 @@ module Accounts
     def index
       # preload location & owner
       # params because the required :property key of the filtered +property_params+ is only available in POST requests
-      filter_properties(current_account.properties.includes(:location), params)
+      if current_account.greek?
+        filter_properties(current_account.properties.includes(:location), params)
+      else
+        filter_properties(current_account.properties.includes(:ilocation), params)
+      end
     end
 
     # This is just a proof of concept
@@ -132,7 +136,7 @@ module Accounts
 
     # international locations (tags)
     def ilocations
-      search(Ilocation, { value: 'id', label: %w(area) }, nil, 5)
+      search(current_account.ilocations, { value: 'id', label: %w(area) }, nil, 5)
     end
 
     # Experimental
