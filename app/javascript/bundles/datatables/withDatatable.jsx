@@ -451,14 +451,17 @@ function withDatatable(WrappedComponent) {
       this._handleParams(searchParams);
     }
 
-    handleLocationInput(locations, browserButtonInvoked = false) {
+    handleLocationInput(locationsInputSelection, browserButtonInvoked = false) {
       let searchParams = new URLSearchParams(window.location.search);
       // In this case delete the relevant params entry
-      if (locations === null || !locations.length) {
-        searchParams.delete('locations');
+      const locationsUrlParamName = this.props.initial_payload.accountFlavor === 'greek'
+          ? 'locations'
+          : 'ilocations';
+      if (locationsInputSelection === null || !locationsInputSelection.length) {
+        searchParams.delete(locationsUrlParamName);
       } else {
-        const locationids = locations.map(loc => `${loc.value}:${loc.label}`).join(',');
-        searchParams.set('locations', locationids);
+        const locationids = locationsInputSelection.map(loc => `${loc.value}:${loc.label}`).join(',');
+        searchParams.set(locationsUrlParamName, locationids);
         searchParams.delete('page');
       }
       this._handleParams(searchParams);
@@ -468,7 +471,6 @@ function withDatatable(WrappedComponent) {
       this.setState({ isLoading: true });
       const selected = pageNo ? pageNumber : pageNumber.selected;
       let searchParams = new URLSearchParams(window.location.search);
-      // debugger;
       searchParams.set('page', selected + 1);
       let newUrlParams = searchParams.toString()
         ? `${window.location.pathname}?${searchParams.toString()}${window.location.hash}`

@@ -323,6 +323,7 @@ module Accounts
       end
     end
 
+    # This will either give us `location` or `ilocation`
     def retrieve_location
       return if params_copy[:locationid].nil? && params_copy[:ilocationid].nil?
 
