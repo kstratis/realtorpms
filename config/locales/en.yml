@@ -102,11 +102,33 @@ en:
       body_html: |
         <p>This is the partners screen.<p>
         <p>From here you can manage your team members, monitor their stats and manage their assignments.</p>
-        <p>Your team members, <strong><u>as simple users</u></strong>, have access to your firm's listings but can only see the details of the clients/owners assigned directly to them.</p>
-        <p>Team members <strong><u>with admin-level access</u></strong> can directly access the full clientele.<p>
+        <p>Your team members, <strong><u>as regular users</u></strong>:<p>
+        <p>
+          <ul>
+            <li>Have access to all the listings of your brokerage</li> 
+            <li>Have access to the property owners/clients you have explicitly assigned them to</li>
+          </ul>
+        </p>
+        <p>For example, if a member of your team views a property not explicitly assigned to them or whose owner is not explicitly assigned to him/her then any contact details remain hidden.</p>
+        <p>Team members <strong><u>with admin-level access</u></strong> can do everything a regular user can plus:<p>
+        <p>
+          <ul>
+            <li>Get access to the entire clientele without restrictions.<p></li>
+          </ul>
+        </p>
     properties:
       title: "Properties 🏠"
-      body_html: "<p>Here lies your inventory.</p> <p><strong>Manage</strong> your properties, <strong>monitor</strong> your partners' private showings and <strong>store client requests</strong>.</p> <p>You can also select <strong>which properties</strong> you want <strong>listed</strong> on your website.</p>"
+      body_html:  | 
+        <p>Here lies your entire inventory.</p>
+        <p>
+          <ul>
+            <li><strong>Add, edit, assign or delete</strong> each of your properties</li>
+            <li><strong>Store</strong> your clients' preferences</li>
+            <li><strong>Monitor</strong> your team's showings or add your own</li>
+            <li><strong>Print</strong> property brochures</li>
+          </ul>
+        </p>
+        <p>Don't forget to pick the properties of your choice and put them up on your portal</p>
     clients:
       title: "Clients 👱‍♂️"
       body_html: |
@@ -118,11 +140,16 @@ en:
           <li>A real estate agent</li>
           <li>Any combination of the above</li>
         </ul>
-        <p>You can <strong>add/remove clients</strong>, <strong>manage their preferences</strong> and <strong>monitor possible matches</strong> between clients' preferences and the current status of your portfolio.</p>
-        <p><u>Using this screen you can assign client/s to each team member which effectively means that they will be able to access full property information (if applicable) such as the owner and their contact details.</u></p>
+        <p><strong>In this screen you can:</strong></p>
+        <ul>
+          <li>Manage your clientele</li>
+          <li>Process their search criterias</li>
+          <li>Stay up-to-date on client <=> property matches based on the current state of your listings</li>
+        </ul>
+        <p><i>Here you can assign clients to your team members. In practise this means that the partners you choose will be able to access all the information of the properties belonging to the selected clients (including contact info).</i></p>
     website:
       title: "Website 🌐"
-      body_html: "<p>Once activated, this button will take you to your website.</p><p>Your website is automatically generated for you on the sign-up step and contains any properties you have chosen to publicly list.</p><p><strong>Share its url</strong> on social media and watch your traffic blow up!</p>"
+      body_html: "<p>This button activates/deactivates your listing website (portal).</p><p>Account portals are automatically generated on the sign-up step and contain any properties you've chosen to publicly list.</p><p><strong>Share its url</strong> on social media and watch your traffic blow up!</p>"
     protools:
       title: "Pro tools 🧰"
       body_html: |
@@ -582,8 +609,8 @@ en:
             floor_feedback: "Pick a floor"
             construction_feedback: "Construction year"
             levels_feedback: "Floors"
-            website_enabled: "Available on your portal"
-            website_disabled: "Offline"
+            website_enabled: "Discoverable on your portal"
+            website_disabled: "Unavailable on your portal"
             pinned: "Pinned"
             pinned_tooltip: "Pinned"
           step2:
@@ -1089,8 +1116,8 @@ en:
       new_button: "Add new property"
       pin_shoutout_html: |
         <ul>
-        <li>Properties of your choice show up on your <a href="%{site}">portal</a> by flipping the "<strong>available on your portal</strong>" switch under a property's <strong>settings</strong>.</li>
-        <li>If you choose to also "pin" a property, it will show up on your <a href="%{site}">portal</a> when no search query exist.</li> 
+        <li>Properties of your choice show up on your <a target="_blank" href="%{site}"><i class="fas fa-link fa-fw"></i>portal</a> by flipping the "<strong>available on your portal</strong>" switch under a property's <strong>settings</strong>.</li>
+        <li>If you choose to also "pin" <i class="fas fa-bookmark fa-fw"></i> a property, it will show up on your <a href="%{site}">portal</a> when no search query exist.</li> 
         <li>Try pinning a couple of properties in order to enrich your <a href="%{site}">portal</a>'s landing page.</li>
         </ul>
     show:
@@ -1136,6 +1163,8 @@ en:
     avatar_header: "Business logo"
     avatar_body: "Click to change your logo. For best results, prefer images with aspect ratio 16:10. JPEG/PNG images only."
     avatar_delete_prompt: "Are you sure you want to delete your current logo?"
+    website_toggle: "Portal status updated"
+    website_toggle_popover: "Toggle your portal on/off"
     flash:
       success: "Account settings successfully updated"
       failed: "Unable to create a new account"

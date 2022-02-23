@@ -226,19 +226,39 @@
           <% end %>
 
           <div class="notifications-icon-wrapper">
-          <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown #{active_for(controller: ['notifications'])}", id: 'notifications-nav', data: {
-            content: t('notifications'),
-            placement: 'bottom',
-            toggle: 'popover',
-            trigger: 'hover' } do %>
-            <%= link_to notifications_path, class: 'nav-link menu-link' do %>
-              <%= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-bell' %>
+            <%= content_tag :li, class: "menu-item dropdown header-nav-dropdown #{active_for(controller: ['notifications'])}", id: 'notifications-nav', data: {
+              content: t('notifications'),
+              placement: 'bottom',
+              toggle: 'popover',
+              trigger: 'hover' } do %>
+              <%= link_to notifications_path, class: 'nav-link menu-link' do %>
+                <%= content_tag :i, nil, class: 'sidebar-masked-icon xs masked-icon-bell' %>
+              <% end %>
             <% end %>
-          <% end %>
-            <% if unread_user_notifications > 0 %>
-              <div id="unread-notifications-count"><%= unread_user_notifications %></div>
-            <% end %>
+              <% if unread_user_notifications > 0 %>
+                <div id="unread-notifications-count"><%= unread_user_notifications %></div>
+              <% end %>
           </div>
+
+          <!-- Website toggle -->
+          <div id="website-toggle" class="d-flex align-items-center" data-content="<%= t('accounts.website_toggle_popover') %>" data-placement="bottom" data-toggle="popover" data-trigger="hover">
+            <div class="website-toggler d-inline-flex align-items-center">&nbsp;
+              <strong>Live</strong>&nbsp;
+              <strong>
+                <%= link_to websites_root_url(locale: I18n.locale), target: '_blank', id: 'portal-link' do %>
+                  <%= content_tag :i, nil, class: 'fas fa-link fa-fw' %>
+                <% end %>
+              </strong>&nbsp;
+              <%= form_for(current_account, url: account_update_path, html: { id: 'header-website-toggle-form' }) do |f| %>
+                  <div class="custom-control custom-switch">
+                    <%= f.check_box(:website_enabled, {class: "custom-control-input", type: 'checkbox'}) %>
+                    <%= f.label(:website_enabled, {class: 'custom-control-label cursor-pointer'}) do %>
+                    <% end %>
+                  </div>
+              <% end %>
+            </div>
+          </div>
+
           <!-- /.nav-item -->
         </ul>
         <!-- /.nav -->

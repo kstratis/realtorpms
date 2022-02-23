@@ -116,17 +116,6 @@
 
               <hr />
 
-              <div class="form-group shoutout-field">
-                <div class="custom-control custom-switch">
-                  <%= f.check_box(:website_enabled, {class: "custom-control-input", type: 'checkbox'}) %>
-                  <%= f.label(:website_enabled, {class: 'custom-control-label cursor-pointer'}) do %>
-                    <strong><%= t('settings.sidebar.website_toggle_html', website: websites_root_url(locale: I18n.locale)) %></strong>
-                  <% end %>
-                  </div>
-              </div>
-
-              <hr />
-
               <!-- .form-actions -->
               <div class="form-actions">
                 <button type="submit" class="btn btn-primary ml-auto"><%= t('users.edit.edit_button') %></button>

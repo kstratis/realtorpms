@@ -34,14 +34,6 @@
   <% end %>
 <% end %>
 
-<%# if current_account.website_enabled? && current_user.is_admin?(current_account) %>
-<% if current_account.website_enabled? %>
-  <div class="dropdown-divider"></div>
-  <%= link_to websites_root_url(locale: I18n.locale), class: 'dropdown-item', id: 'website-nav', target: '_blank' do %>
-    <%= content_tag :i, nil, class: 'fas fa-link fa-fw' %>&nbsp; <span>Website</span>
-  <% end %>
-<% end %>
-
 <div class="dropdown-divider"></div>
 
 <%= link_to '#', class: 'dropdown-item', id: 'support' do %>

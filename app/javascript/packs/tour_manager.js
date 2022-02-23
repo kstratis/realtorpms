@@ -173,16 +173,21 @@ export default class TourManager {
           when: {
             // Use this to show the menu modal before the first menu entry is introduced.
             show: function() {
-              $('#account-dropdown-menu-element').dropdown('toggle');
+              $('#account-dropdown-menu-element').dropdown('toggle')
+            },
+            // Use this to dispose the modal after the last menu entry is introduced.
+            hide: function() {
+              $('#account-dropdown-menu-element').dropdown('hide');
+              $('#account-dropdown-menu-element').dropdown('dispose');
             }
           }
         },
         {
-          id: 'website-nav',
+          id: 'website-toggle',
           title: `<div class='tour-title'>${this.tour_data.i18n.website.title}</div>`,
           text: `<div class='tour-body'>${this.tour_data.i18n.website.body_html}</div>`,
           attachTo: {
-            element: '#website-nav',
+            element: '#website-toggle',
             on: 'left',
           },
           canClickTarget: false,
@@ -205,13 +210,6 @@ export default class TourManager {
           ],
           popperOptions: {
             modifiers: [{ name: 'offset', options: { offset: [0, 14] } }],
-          },
-          when: {
-            // Use this to dispose the modal after the last menu entry is introduced.
-            hide: function() {
-              $('#account-dropdown-menu-element').dropdown('hide');
-              $('#account-dropdown-menu-element').dropdown('dispose');
-            }
           }
         }
       ]);

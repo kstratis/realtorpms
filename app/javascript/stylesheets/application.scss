@@ -2849,7 +2849,11 @@ a.icon-font-delete{
 }
 
 .tour-body{
-  font-size: 15px;
+  font-size: 13px;
+}
+
+footer:not(.auth-footer){
+  margin-top: unset;
 }
 
 .font-lg{
@@ -2984,4 +2988,21 @@ a.icon-font-delete{
 
 #account_flavor{
   border: 2px dashed gray;
+}
+
+.website-toggler{
+  cursor: default;
+  border: 1px solid gold;
+  border-radius: 20px;
+  padding: 5px;
+  .custom-control-input:checked ~ .custom-control-label::before {
+    border-color: gold;
+    background-color: gold;
+  }
+  #portal-link{
+    color: #ffffff;
+    &:hover{
+      color: gold;
+    }
+  }
 }

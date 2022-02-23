@@ -47,8 +47,18 @@ class AccountsController < ApplicationController
   def update
     @account = Account.find_by!(subdomain: request.subdomain)
     if @account.update(account_params)
-      flash[:success] = I18n.t('accounts.flash.success')
-      redirect_to account_edit_path
+      respond_to do |format|
+
+        format.json do
+          render json: { message: I18n.t('accounts.website_toggle') }, status: :ok
+        end
+
+        format.html do
+          flash[:success] = I18n.t('accounts.flash.success')
+          redirect_to account_edit_path
+        end
+
+      end
     else
       # Before we get to this we already have js validation in place
       render :edit
