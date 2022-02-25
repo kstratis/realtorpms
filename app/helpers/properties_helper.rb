@@ -403,7 +403,11 @@ module PropertiesHelper
   end
 
   def render_location(property)
-    [property.location.localname, property.location.parent_localname].reject(&:blank?).join(", ")
+    if current_account.greek?
+      [property.location.localname, property.location.parent_localname].reject(&:blank?).join(", ")
+    else
+      [property.ilocation.area].reject(&:blank?).join(", ")
+    end
   end
 
   def floor_wording(floor)

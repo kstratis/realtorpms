@@ -71,6 +71,7 @@ class Property < ApplicationRecord
   end
   scope :filter_by_category, -> (category) { joins(:category).where(categories: { parent_slug: category }) }
   scope :filter_by_location, -> (location_id) { where location_id: location_id }
+  scope :filter_by_ilocation, -> (ilocation_id) { where ilocation_id: ilocation_id }
 
   scope :filter_by_pricemin, -> (pricemin) { where("price >= ?", pricemin) }
   scope :filter_by_pricemax, -> (pricemax) { where("price <= ?", pricemax) }

@@ -1,5 +1,5 @@
 <div class="index-container pt-5">
-  <div data-controller="filters" data-filters-url-value="<%= results_count_path %>">
+  <div data-controller="filters" data-filters-url-value="<%= results_count_path %>" data-filters-location-value="<%= current_account.flavor %>">
     <div class="container container-fluid-xl header">
 
       <div class="row">
@@ -33,9 +33,7 @@
           </div>
           <label for="property-type" class="form-label"><strong><%= t('area') %></strong></label>
           <%= select_tag(:location,
-                         options_for_select(
-                           current_account.properties.website_enabled.joins(:location).distinct.select('locations.id', 'locations.localname').order('locations.localname').map { |el| [el.localname, el.id] }
-                         ),
+                         options_for_select(options_for_locations),
                          multiple: true,
                          data: { 'live-search': true,
                                  'max-options': 4,

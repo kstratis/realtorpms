@@ -5,7 +5,7 @@ import URLSearchParams from '@ungap/url-search-params';
 
 export default class extends Controller {
   static targets = ['filter', 'count', 'multiFilter'];
-  static values = { url: String }
+  static values = { url: String, location: String }
 
   connect() {
     // Initialize bootstrap-select
@@ -16,7 +16,7 @@ export default class extends Controller {
     this.setResultCounterVisibility(params)
 
     // Initialize the bootstrap-select multiselect with pre-selections from url
-    $('#location').selectpicker('val', params.getAll('location[]'));
+    $('#location').selectpicker('val', params.getAll(this.locationParamLabel));
   }
 
   setResultCounterVisibility(params) {
@@ -82,10 +82,14 @@ export default class extends Controller {
     const locationValues = $('#location').val()
     locationValues.forEach((locationValue) => {
       // Append to URLSearchParams
-      params.append('location[]', locationValue)
+      params.append(this.locationParamLabel, locationValue)
     });
 
     return params.toString();
+  }
+
+  get locationParamLabel() {
+    return this.locationValue === 'greek' ? 'location[]' : 'ilocation[]'
   }
 
   // Show the results counter if
