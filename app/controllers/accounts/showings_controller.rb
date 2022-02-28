@@ -4,7 +4,7 @@ module Accounts
     before_action :find_references!, only: [:create]
 
     def index
-      render json: {status: "OK", message: showings}
+      render json: { status: "OK", message: showings }
     end
 
     def create
@@ -79,7 +79,11 @@ module Accounts
     end
 
     def find_reference!
-      @entity = current_account.send(params['originator'].pluralize).find(params["#{params['originator']}_id"])
+      if (params['originator'] == 'user') && current_user.is_admin?(current_account)
+        @entity = current_account.all_users.find(params["#{params['originator']}_id"])
+      else
+        @entity = current_account.send(params['originator'].pluralize).find(params["#{params['originator']}_id"])
+      end
     end
 
     def find_references!

@@ -580,7 +580,7 @@ en:
         placeholder_floors_max: "To: All"
         placeholder_construction_min: "From: Year"
         placeholder_construction_max: "To: Year"
-        assignments_feedback: "Property %{property_id} is available to all admins and any partners specified above."
+        assignments_feedback: "Full property %{property_id} details are available to all admins and any partners specified above."
         assignments_client_feedback: "Client %{client_name} is available to all admins and any partners specified above."
         clientship_feedback: "Client search preferences"
         save_btn: "Save"
@@ -968,6 +968,7 @@ en:
     flash_unauthorised_user_edit: "Unauthorized action"
     flash_owner_only_action: "Owner restricted action"
     user: "Partner"
+    help_popover_admin: "This is the list of property showings conducted by your partner. You may add or delete any entry. The partner who conducts the showing needs to have the selected client assigned or be an administrator himself."
     created:
       list: "List of current users"
     new:
@@ -980,6 +981,14 @@ en:
       assign_all: "Directly assign all available properties?"
       assign_none: "Assign none of the properties"
     show:
+      properties_assigned_to_admin_html: |
+        %{user} has administrator priviledges.<br /><br />
+        <strong>This practically means that he/she's able to view all info of <u><a href="%{properties_path}">all properties</a></u> without explicit assignments.</strong> <br /><br/> 
+        <i>In case of user demotion, then and only then, the assignments policy will kick in.</i>
+      clients_assigned_to_admin_html: |
+        %{user} has administrator priviledges.<br /><br />
+        <strong>This practically means that he/she's able to view <u><a href="%{clients_path}">the entire clientele</a></u> without explicit assignments.</strong> <br /><br/> 
+        <i>In case of user demotion, then and only then, the assignments policy will kick in.</i>
       breadcrumb: "Partners"
       heading: "User info"
       users: "Users"

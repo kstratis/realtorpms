@@ -40,7 +40,7 @@ module Accounts
     # This is used from the assignments modal under `/users/:id`
     def properties_modal_assign
       property_id = params[:pid]
-      user = current_account.users.find(assignment_params[:uid])
+      user = current_account.all_users.find(assignment_params[:uid])
 
       if user.properties.map(&:id).include?(property_id)
         user.properties.delete(property_id)
@@ -61,7 +61,7 @@ module Accounts
     def format_data(uid, page)
       results_per_page = 6
 
-      user = current_account.users.find(uid)
+      user = current_account.all_users.find(uid)
       # properties = current_account.properties.order(created_at: 'desc')
       properties = @properties.paginate(page: page, per_page: results_per_page)
       data = {}
