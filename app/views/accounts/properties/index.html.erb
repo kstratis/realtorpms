@@ -14,7 +14,7 @@
   <div class="container">
     <div class="app-container">
       <% if current_account.website_enabled? && current_account.properties.pinned.blank? %>
-        <div class="alert alert-warning alert-dismissible has-icon" role="alert">
+        <div class="alert alert-danger alert-dismissible has-icon" role="alert">
           <button type="button" class="close" data-dismiss="alert">×</button>
           <div class="alert-icon">
             <i class="fas fa-info"></i>

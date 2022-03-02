@@ -401,7 +401,7 @@ const UsersList = ({
                                 onClick={e => handleFreezeUser(e, meta['freeze_link'], entry['id'])}
                                 title={i18n['datatable']['tooltip_freeze_profile']}
                                 className={`btn btn-md btn-icon btn-secondary btn-action ${
-                                  entry['active'] ? '' : 'active'
+                                  entry['same_user'] ? 'disabled' : entry['active'] ? '' : 'active'
                                 }`}
                                 href={''}>
                                 <i className={`fas fa-ban ${entry['active'] ? 'orange' : 'red'}`} />

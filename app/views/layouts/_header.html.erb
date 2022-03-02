@@ -251,7 +251,7 @@
               </strong>&nbsp;
               <%= form_for(current_account, url: account_update_path, html: { id: 'header-website-toggle-form' }) do |f| %>
                   <div class="custom-control custom-switch">
-                    <%= f.check_box(:website_enabled, {class: "custom-control-input", type: 'checkbox'}) %>
+                    <%= f.check_box(:website_enabled, {class: "custom-control-input solo-attribute-updater", type: 'checkbox'}) %>
                     <%= f.label(:website_enabled, {class: 'custom-control-label cursor-pointer'}) do %>
                     <% end %>
                   </div>

@@ -132,10 +132,10 @@ $(document).on('turbolinks:load', function(e) {
     $('.nav-tabs a[href="#clients"]').tab('show');
   })
 
-  // Website toggle in header
-  $('#account_website_enabled').on('change', (e) => {
+  // Website single attribute ajax updater
+  $('.solo-attribute-updater').on('change', (e) => {
     e.preventDefault();
-    const $form = $('#header-website-toggle-form')
+    const $form = $(e.currentTarget).closest('form');  // Get the form
     const endpoint = $form.attr('action');
     const formData = $form.serialize()
 
@@ -143,13 +143,8 @@ $(document).on('turbolinks:load', function(e) {
       type: 'POST',
       data: formData,
       url: endpoint,
-      dataType: 'json',
-      success: response => {
-        console.log(response);
-      }
+      dataType: 'json'
     })
   })
-
-
 });
 

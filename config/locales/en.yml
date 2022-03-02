@@ -1126,7 +1126,7 @@ en:
       pin_shoutout_html: |
         <ul>
         <li>Properties of your choice show up on your <a target="_blank" href="%{site}"><i class="fas fa-link fa-fw"></i>portal</a> by flipping the "<strong>available on your portal</strong>" switch under a property's <strong>settings</strong>.</li>
-        <li>If you choose to also "pin" <i class="fas fa-bookmark fa-fw"></i> a property, it will show up on your <a href="%{site}">portal</a> when no search query exist.</li> 
+        <li>If you choose to also "pin" (<i class="fas fa-bookmark fa-fw"></i>) a property, it will show up on your <a href="%{site}">portal</a> when no search query exist.</li> 
         <li>Try pinning a couple of properties in order to enrich your <a href="%{site}">portal</a>'s landing page.</li>
         </ul>
     show:

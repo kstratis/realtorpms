@@ -228,8 +228,10 @@ module Accounts
     def update
       self.params_copy = property_params.dup.to_h
 
-      retrieve_category; return if performed?
-      retrieve_location; return if performed?
+      unless solo_attribute_update?
+        retrieve_category; return if performed?
+        retrieve_location; return if performed?
+      end
 
       clients_hash = params_copy.extract!(:clients)
 
@@ -238,8 +240,12 @@ module Accounts
       end
 
       respond_to do |format|
-        if @property.update(params_copy.merge({ category_id: category.id }).merge(Hash[attributize_label, location_value]))
-
+        attributes = if solo_attribute_update?
+                       params_copy
+                     else
+                       params_copy.merge({ category_id: category.id }).merge(Hash[attributize_label, location_value])
+                     end
+        if @property.update(attributes)
           # Sets the client and its required ownership attribute on the CPA many-to-many table
           set_client(clients_hash)
 
@@ -249,6 +255,9 @@ module Accounts
                                       action: 'updated',
                                       partial_success: 'shared/ajax/success',
                                       partial_failure: 'shared/ajax/failure'} }
+          format.json do
+            render json: { message: I18n.t('accounts.website_toggle') }, status: :ok
+          end
         else
 
           format.html { render :edit }
@@ -329,6 +338,9 @@ module Accounts
 
     # This will either give us `location` or `ilocation`
     def retrieve_location
+      # if solo_attribute_update?
+      #   self.category = @property.category && return
+      # end
       return if params_copy[:locationid].nil? && params_copy[:ilocationid].nil?
 
       # Looking for a param key which contains the word `location`.
@@ -354,6 +366,10 @@ module Accounts
     end
 
     def retrieve_category
+      # if solo_attribute_update?
+      #   self.category = @property.category && return
+      # end
+
       self.category = Category.find_by(slug: params_copy[:subcategory], parent_slug: params_copy[:category])
 
       if category
@@ -398,7 +414,7 @@ module Accounts
                                        :avatar,
                                        :map_url,
                                        :active,
-                                       {preferences: {}},
+                                       { preferences: {} },
                                        delete_images: [],
                                        images: [],
                                        extra_ids: [])
@@ -422,6 +438,15 @@ module Accounts
     # @return [String] The db column to update
     def attributize_label
       "#{location_label[0...-2]}_id"
+    end
+
+    def solo_attribute_update?
+      action_name == 'update' &&
+        request.patch? &&
+        params_copy[:subcategory].nil? &&
+        params_copy[:category].nil? &&
+        params_copy[:locationid].nil? &&
+        params_copy[:ilocationid].nil?
     end
   end
 end

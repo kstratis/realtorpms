@@ -27,13 +27,13 @@ module Accounts
         render json: {status: "OK", message: showings}
       else
         flash[:danger] = I18n.t('viewings.flash_error')
-        render json: {status: "Error", message: showings}
+        render json: { status: "Error", message: showings }
       end
     end
 
     def delete
       current_account.cpas.find(showing_params['showing_id']).destroy
-      render json: {status: "OK", message: showings}
+      render json: { status: "OK", message: showings }
     end
 
     private
