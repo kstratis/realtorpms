@@ -70,7 +70,9 @@
     <%= f.label :password, User.human_attribute_name("password_new") %>
     <%= inline_error @user, :password, 'Password' %>
   </div>
-  <span class="badge badge-subtle badge-secondary"><em><%= t('activerecord.attributes.user.password_leave_empty') %></em></span>
+  <% if action_name == 'edit' %>
+    <span class="badge badge-subtle badge-secondary"><em><%= t('activerecord.attributes.user.password_leave_empty') %></em></span>
+  <% end %>
 </div>
 <!-- /.form-group -->
 
@@ -82,5 +84,7 @@
     <%= f.label :password_confirmation, User.human_attribute_name("password_confirmation") %>
     <%= inline_error @user, :password_confirmation, 'Password confirmation' %>
   </div>
+  <% if action_name == 'edit' %>
     <span class="badge badge-subtle badge-secondary"><em><%= t('activerecord.attributes.user.password_leave_empty') %></em></span>
+  <% end %>
 </div> <!-- /.form-group -->
