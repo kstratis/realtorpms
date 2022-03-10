@@ -69,6 +69,7 @@
                     </div>
                   </div><!-- .card-body -->
                   <div class="card-body">
+
                     <%= render partial: 'accounts/properties/features', locals: { features: Property.basic_features, classNames: 'table-striped first-row-no-border' } %>
                   </div><!-- /.card-body -->
                 </div><!-- /.card -->
@@ -86,46 +87,6 @@
           <div class="row">
             <div class="col-lg-6 col-xs-12">
               <div class="col-12">
-                <div class="property-quick-actions-container row">
-                  <div class="col-2 d-flex align-items-center quick-actions-title"><mark><strong><%= t('viewings.actions') %></strong></mark></div>
-                  <div class="col-10">
-
-                  <div class="custom-control custom-switch website-enabled-control">
-                    <%= form_for(@property, url: property_path(@property), html: { id: 'property-website-membership-form' }) do |f| %>
-                      <div class="custom-control custom-switch">
-                        <%= f.check_box(:website_enabled, {class: "custom-control-input solo-attribute-updater", type: 'checkbox'}) %>
-                        <%= f.label(:website_enabled, {class: 'custom-control-label cursor-pointer'}) do %>
-                          <strong><%= t('properties.edit.website_enabled_html', website: websites_root_url(locale: I18n.locale)) %></strong>
-                        <% end %>
-                      </div>
-                    <% end %>
-                  </div>
-
-                  <div class="custom-control custom-switch pinned-control">
-                    <%= form_for(@property, url: property_path(@property), html: { id: 'property-website-membership-form' }) do |f| %>
-                      <div class="custom-control custom-switch">
-                        <%= f.check_box(:pinned, {class: "custom-control-input solo-attribute-updater", type: 'checkbox'}) %>
-                        <%= f.label(:pinned, {class: 'custom-control-label cursor-pointer'}) do %>
-                          <strong><%= t('js.forms.properties.wizard.step1.pinned') %></strong>
-                        <% end %>
-                      </div>
-                    <% end %>
-                  </div>
-
-                  <div class="custom-control custom-switch pinned-control">
-                    <%= form_for(@property, url: property_path(@property), html: { id: 'property-website-membership-form' }) do |f| %>
-                      <div class="custom-control custom-switch">
-                        <%= f.check_box(:active, {class: "custom-control-input solo-attribute-updater", type: 'checkbox'}) %>
-                        <%= f.label(:active, {class: 'custom-control-label cursor-pointer'}) do %>
-                          <strong><%= t('activerecord.attributes.property.status_title') %></strong>
-                        <% end %>
-                      </div>
-                    <% end %>
-                  </div>
-                  </div>
-
-
-                </div>
                 <div class="card borderlesss-card">
                   <div class="card-header header-public simplified-header">
                     <div class="table-entry">

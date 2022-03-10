@@ -79,6 +79,7 @@ en:
   no_photos: "No available photos"
   notifications: "Notifications"
   pro_tools: "Pro tools"
+  page_refresh: "Refresh page"
   tour:
     title: "Tour"
     confirm_cancel_message: "Are you sure you want to quit the tour?"
@@ -1130,6 +1131,11 @@ en:
         <li>Try pinning a couple of properties in order to enrich your <a href="%{site}">portal</a>'s landing page.</li>
         </ul>
     show:
+      quick_actions:
+        title: "Quick actions"
+        show_on_website_html: "Enable on your <u><a target=\"_blank\" href=\"%{website}\">portal</a></u>."
+        pin_html: "Pin on your <u><a target=\"_blank\" href=\"%{website}\">portal</a></u>."
+        set_available: "Set availability"
       client_tooltip: "User info %{user}"
       breadcrumb: "Properties"
       catalog: "Catalog"

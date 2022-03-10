@@ -138,12 +138,18 @@ $(document).on('turbolinks:load', function(e) {
     const $form = $(e.currentTarget).closest('form');  // Get the form
     const endpoint = $form.attr('action');
     const formData = $form.serialize()
+    const hasCallback = $(e.currentTarget).hasClass('with-callback');
 
     Rails.ajax({
       type: 'POST',
       data: formData,
       url: endpoint,
-      dataType: 'json'
+      dataType: 'json',
+      success: response => {
+        if (hasCallback) {
+          $('#refresh-link').removeClass('d-none');
+        }
+      },
     })
   })
 });

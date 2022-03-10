@@ -1,0 +1,50 @@
+<div class="property-quick-actions-container">
+  <div class="quick-actions-title mb-3">
+    <div class="col-12 text-center">
+      <mark><strong><%= t('properties.show.quick_actions.title') %></strong></mark>
+    </div>
+  </div>
+    <div class="row col-12 ">
+
+        <div class="custom-control custom-switch pinned-control">
+          <%= form_for(@property, url: property_path(@property), html: { id: 'property-website-membership-form' }) do |f| %>
+            <div class="custom-control custom-switch">
+              <%= f.check_box(:website_enabled, {class: "custom-control-input solo-attribute-updater", type: 'checkbox'}) %>
+              <%= f.label(:website_enabled, {class: 'custom-control-label cursor-pointer'}) do %>
+                <strong><%= t('properties.show.quick_actions.show_on_website_html', website: websites_root_url(locale: I18n.locale)) %></strong>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+
+
+        <div class="custom-control custom-switch pinned-control">
+          <%= form_for(@property, url: property_path(@property), html: { id: 'property-website-membership-form' }) do |f| %>
+            <div class="custom-control custom-switch">
+              <%= f.check_box(:pinned, {class: "custom-control-input solo-attribute-updater", type: 'checkbox'}) %>
+              <%= f.label(:pinned, {class: 'custom-control-label cursor-pointer'}) do %>
+                <strong><%= t('properties.show.quick_actions.pin_html', website: websites_root_url(locale: I18n.locale)) %></strong>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="custom-control custom-switch pinned-control">
+          <%= form_for(@property, url: property_path(@property), html: { id: 'property-website-membership-form' }) do |f| %>
+            <div class="custom-control custom-switch">
+              <%= f.check_box(:active, {class: "custom-control-input solo-attribute-updater with-callback", type: 'checkbox'}) %>
+              <%= f.label(:active, {class: 'custom-control-label cursor-pointer'}) do %>
+                <div class="d-flex">
+                  <strong><%= t('properties.show.quick_actions.set_available') %></strong>&nbsp;
+                  <div id="refresh-link" class="d-none">
+                    <a title="<%= t('page_refresh') %>" href="javascript:window.location.href=window.location.href">
+                      <i class="fas fa-sync fa-fw"></i>
+                    </a>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+    </div>
+</div>

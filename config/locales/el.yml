@@ -49,6 +49,7 @@ el:
   no_photos: "Δεν υπάρχουν διαθέσιμες φωτογραφίες"
   notifications: "Ειδοποιήσεις"
   pro_tools: "Εργαλεία"
+  page_refresh: "Ανανέωση σελίδας"
   tour:
     title: "Οδηγίες"
     confirm_cancel_message: "Είσαι βέβαιος πως θέλεις να εγκαταλείψεις τον οδηγό;"
@@ -1103,6 +1104,11 @@ el:
         αρχική σου σελίδα.</li>
         </ul>
     show:
+      quick_actions:
+        title: "Γρήγορες ενέργειες"
+        show_on_website_html: "Εμφάνισε το στο <u><a target=\"_blank\" href=\"%{website}\">portal</a></u> σου."
+        pin_html: "Καρφίτσωσε το στο <u><a target=\"_blank\" href=\"%{website}\">portal</a></u> σου."
+        set_available: "Διαθέσιμο"
       client_tooltip: "Προβολή καρτέλας %{user}"
       breadcrumb: "Ακίνητα"
       catalog: "Κατάλογος"
