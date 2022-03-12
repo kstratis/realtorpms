@@ -1,131 +1,124 @@
-<% provide(:title, t('accounts.edit_title')) %>
+<% content_for(:nested_settings_header) do %>
+  <%= t('accounts.edit_title') %>
+<% end %>
 
-<%= render partial: 'layouts/breadcrumb', locals: { path: [{ :title => t('accounts.edit_title'), :href => '' }], icon: 'house-colored' } %>
-
-<div class="page-container">
-  <div class="container">
-    <div class="app-container">
-      <!-- .card -->
-      <div class="card card-fluid">
-        <h2 class="card-header"> <%= t('accounts.edit_title') %></h2>
-        <!-- .card-body -->
-        <div class="card-body">
-          <!-- .media -->
-          <%= form_for(@account, url: account_update_path, html: { class: 'js-validatable' }) do |f| %>
-            <div class="col-lg-6 offset-lg-3 col-md-12">
-              <div class="shoutout shoutout-danger has-icon" role="alert">
-                <div class="alert-icon">
-                  <i class="fas fa-info"></i>
-                </div><%= t('accounts.popover_edit_html', site: websites_root_url(locale: I18n.locale)) %>
-              </div>
-
-
-              <div class="media mb-3">
-                <!-- avatar -->
-                <div class="user-avatar user-avatar-xxl business-avatar fileinput-button">
-                  <div class="fileinput-button-label"><%= t('users.edit.change_pic') %></div>
-
-                  <%= render_avatar(@account, 'tile-xl business-avatar', "avatar_preview") %>
-                  <%= f.file_field :avatar, id: "avatar_upload" %>
-                </div><!-- /avatar -->
-                <!-- .media-body -->
-                <div class="media-body pl-3">
-                  <h3 class="card-title profile-photo"><%= t('accounts.avatar_header') %></h3>
-                  <h6 class="card-subtitle text-muted"><%= t('accounts.avatar_body') %></h6>
-                  <p class="card-text">
-                    <% if @account.avatar.attached? %>
-                      <%= link_to delete_avatar_account_path, class: 'icon-font-delete', title:"Διαγραφή", method: :delete, data: {confirm: t('accounts.avatar_delete_prompt')} do %>
-                        <i class="fa fa-trash fa-fw"></i>
-                      <% end %>|&nbsp;<small><%= t('users.edit.allowed_pic_specs') %></small>
-                    <% else %>
-                      <small><%= t('users.edit.allowed_pic_specs') %></small>
-                    <% end %>
-
-                  </p><!-- The avatar upload progress bar -->
-                </div><!-- /.media-body -->
-              </div><!-- /.media -->
-
-
-
-
-
-              <!-- .form-group -->
-              <div class="form-group">
-                <div class="form-label-group">
-                  <%= f.text_field :name,
-                                   class: 'form-control',
-                                   placeholder: Account.human_attribute_name("name"),
-                                   required: true,
-                                   'data-parsley-trigger': 'change',
-                                   'data-parsley-required-message': t("js.validator.required") %>
-                  <%= f.label :name, Account.human_attribute_name("name") %>
-                  <%= inline_error @account, :name, 'Name' %>
+<% content_for(:account_edit) do %>
+          <div class="col-12">
+            <!-- .media -->
+            <%= form_for(@account, url: account_update_path, html: { class: 'js-validatable' }) do |f| %>
+<!--              <div class="col-lg-6 offset-lg-3 col-md-12">-->
+                <div class="shoutout shoutout-danger has-icon" role="alert">
+                  <div class="alert-icon">
+                    <i class="fas fa-info"></i>
+                  </div><%= t('accounts.popover_edit_html', site: websites_root_url(locale: I18n.locale)) %>
                 </div>
-              </div>
-              <!-- /.form-group -->
 
-              <!-- .form-group -->
-              <div class="form-group">
-                <div class="form-label-group">
-                  <%= f.text_field :email, class: 'form-control',
-                                   placeholder: Account.human_attribute_name("email"),
-                                   'data-parsley-required': "true",
-                                   'data-parsley-required-message': t("js.validator.required"),
-                                   'data-parsley-type': "email",
-                                   'data-parsley-type-message': t("js.validator.email") %>
-                  <%= f.label :email, Account.human_attribute_name("email") %>
+
+                <div class="media mb-3">
+                  <!-- avatar -->
+                  <div class="user-avatar user-avatar-xxl business-avatar fileinput-button">
+                    <div class="fileinput-button-label"><%= t('users.edit.change_pic') %></div>
+
+                    <%= render_avatar(@account, 'tile-xl business-avatar', "avatar_preview") %>
+                    <%= f.file_field :avatar, id: "avatar_upload" %>
+                  </div><!-- /avatar -->
+                  <!-- .media-body -->
+                  <div class="media-body pl-3 pt-3">
+                    <h3 class="card-title profile-photo"><%= t('accounts.avatar_header') %></h3>
+                    <h6 class="card-subtitle text-muted"><%= t('accounts.avatar_body') %></h6>
+                    <p class="card-text">
+                      <% if @account.avatar.attached? %>
+                        <%= link_to delete_avatar_account_path, class: 'icon-font-delete', title:"Διαγραφή", method: :delete, data: {confirm: t('accounts.avatar_delete_prompt')} do %>
+                          <i class="fa fa-trash fa-fw"></i>
+                        <% end %>|&nbsp;<small><%= t('users.edit.allowed_pic_specs') %></small>
+                      <% else %>
+                        <small><%= t('users.edit.allowed_pic_specs') %></small>
+                      <% end %>
+
+                    </p><!-- The avatar upload progress bar -->
+                  </div><!-- /.media-body -->
+                </div><!-- /.media -->
+
+
+
+
+
+                <!-- .form-group -->
+                <div class="form-group">
+                  <div class="form-label-group">
+                    <%= f.text_field :name,
+                                     class: 'form-control',
+                                     placeholder: Account.human_attribute_name("name"),
+                                     required: true,
+                                     'data-parsley-trigger': 'change',
+                                     'data-parsley-required-message': t("js.validator.required") %>
+                    <%= f.label :name, Account.human_attribute_name("name") %>
+                    <%= inline_error @account, :name, 'Name' %>
+                  </div>
                 </div>
-              </div>
-              <!-- /.form-group -->
+                <!-- /.form-group -->
 
-              <!-- .form-group -->
-              <div class="form-group">
-                <div class="form-label-group">
-                  <%= f.text_field :address, class: 'form-control', placeholder: Account.human_attribute_name("address") %>
-                  <%= f.label :address, Account.human_attribute_name("address") %>
+                <!-- .form-group -->
+                <div class="form-group">
+                  <div class="form-label-group">
+                    <%= f.text_field :email, class: 'form-control',
+                                     placeholder: Account.human_attribute_name("email"),
+                                     'data-parsley-required': "true",
+                                     'data-parsley-required-message': t("js.validator.required"),
+                                     'data-parsley-type': "email",
+                                     'data-parsley-type-message': t("js.validator.email") %>
+                    <%= f.label :email, Account.human_attribute_name("email") %>
+                  </div>
                 </div>
-              </div>
-              <!-- /.form-group -->
+                <!-- /.form-group -->
 
-
-              <!-- .form-group -->
-              <div class="form-group">
-                <div class="form-label-group">
-                  <%= f.text_field :telephones, class: 'form-control', placeholder: Account.human_attribute_name("telephones"),
-                                   required: true,
-                                   # 'data-parsley-trigger': 'change',
-                                   'data-parsley-required-message': t("js.validator.required") %>
-                  <%= f.label "telephones", Account.human_attribute_name("telephones") %>
+                <!-- .form-group -->
+                <div class="form-group">
+                  <div class="form-label-group">
+                    <%= f.text_field :address, class: 'form-control', placeholder: Account.human_attribute_name("address") %>
+                    <%= f.label :address, Account.human_attribute_name("address") %>
+                  </div>
                 </div>
-              </div>
-              <!-- /.form-group -->
+                <!-- /.form-group -->
 
-              <!-- .form-group -->
-              <div class="form-group">
-                <div class="form-label-group">
-                  <%= f.text_area :description,
-                                  rows: 5,
-                                  class: 'form-control',
-                                  placeholder: Account.human_attribute_name("description"),
-                                  required: true,
-                                  'data-parsley-required-message': t("js.validator.required") %>
-                  <%#= f.label :description, Account.human_attribute_name("description") %>
+
+                <!-- .form-group -->
+                <div class="form-group">
+                  <div class="form-label-group">
+                    <%= f.text_field :telephones, class: 'form-control', placeholder: Account.human_attribute_name("telephones"),
+                                     required: true,
+                                     # 'data-parsley-trigger': 'change',
+                                     'data-parsley-required-message': t("js.validator.required") %>
+                    <%= f.label "telephones", Account.human_attribute_name("telephones") %>
+                  </div>
                 </div>
-              </div>
-              <!-- /.form-group -->
+                <!-- /.form-group -->
 
-              <hr />
+                <!-- .form-group -->
+                <div class="form-group">
+                  <div class="form-label-group">
+                    <%= f.text_area :description,
+                                    rows: 5,
+                                    class: 'form-control',
+                                    placeholder: Account.human_attribute_name("description"),
+                                    required: true,
+                                    'data-parsley-required-message': t("js.validator.required") %>
+                    <%#= f.label :description, Account.human_attribute_name("description") %>
+                  </div>
+                </div>
+                <!-- /.form-group -->
 
-              <!-- .form-actions -->
-              <div class="form-actions">
-                <button type="submit" class="btn btn-primary ml-auto"><%= t('users.edit.edit_button') %></button>
-              </div> <!-- /.form-actions -->
-            </div>
+                <hr />
 
-          <% end %> <!-- /form -->
+                <!-- .form-actions -->
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-primary ml-auto"><%= t('users.edit.edit_button') %></button>
+                </div> <!-- /.form-actions -->
+<!--              </div>-->
 
-        </div><!-- /.card-body -->
-      </div><!-- /.card -->
-    </div>
-  </div>
-</div>
+            <% end %> <!-- /form -->
+
+          </div>
+
+
+<% end %>
