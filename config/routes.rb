@@ -19,9 +19,15 @@ Rails.application.routes.draw do
         get '/properties/ilocations', to: 'properties#ilocations'
         get '/properties/clients', to: 'properties#clients'
         get '/properties/inlinesearch', to: 'properties#inlinesearch'
-        # resources :entityfields
-        resources :model_types, only: [:edit, :update], :path => "extended-fields"
-        resources :settings, only: [:index]
+
+        # resources :model_types, only: [:edit, :update], :path => "extended-fields"
+
+        # resources :settings, only: [:index]
+        namespace :settings do
+          root to: 'timeline#index', as: :timeline
+          # resources :settings, only: [:index]
+          resources :model_types, only: [:index, :edit, :update], :path => "extended-fields"
+        end
 
         resources :calendar_events, only: [:create, :show, :index, :destroy]
 

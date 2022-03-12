@@ -1,0 +1,48 @@
+<% content_for(:nested_settings_header) do %>
+  <%= t('settings.sidebar.cfields') %>
+<% end %>
+
+<% content_for :custom_fields do %>
+    <div class=" text-center">
+      <div class="col-12">
+        <div class="alert alert-primary has-icon" role="alert">
+          <div class="alert-icon">
+            <i class="fas fa-info"></i>
+          </div><%= t('settings.sidebar.cfields_subheader') %>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <%= link_to edit_settings_model_type_path(@users_id), class: "visual-picker visual-picker-md has-peek px-3" do %>
+          <!-- .visual-picker-figure -->
+          <div class="visual-picker-figure">
+            <!-- .visual-picker-content -->
+            <span class="visual-picker-content"><span class="tile tile-lg bg-info"><i class="fas fa-user"></i></span></span> <!-- /.visual-picker-content -->
+          </div><!-- /.visual-picker-figure -->
+          <!-- .visual-picker-peek -->
+          <span class="visual-picker-peek"><%= t('settings.sidebar.partners') %></span>
+        <% end %> <!-- /.visual-picker -->
+        <!-- .visual-picker -->
+        <%= link_to edit_settings_model_type_path(@properties_id), class: "visual-picker visual-picker-md has-peek px-3" do %>
+          <!-- .visual-picker-figure -->
+          <div class="visual-picker-figure">
+            <!-- .visual-picker-content -->
+            <span class="visual-picker-content"><span class="tile tile-lg bg-danger"><i class="fas fa-home"></i></span></span> <!-- /.visual-picker-content -->
+          </div><!-- /.visual-picker-figure -->
+          <!-- .visual-picker-peek -->
+          <span class="visual-picker-peek"><%= t('settings.sidebar.properties') %></span>
+        <% end %> <!-- /.visual-picker -->
+        <!-- .visual-picker -->
+        <%= link_to edit_settings_model_type_path(@clients_id), class: "visual-picker visual-picker-md has-peek px-3" do %>
+          <!-- .visual-picker-figure -->
+          <div class="visual-picker-figure">
+            <!-- .visual-picker-content -->
+            <span class="visual-picker-content"><span class="tile tile-lg bg-success"><i class="fas fa-users"></i></span></span> <!-- /.visual-picker-content -->
+          </div><!-- /.visual-picker-figure -->
+          <!-- .visual-picker-peek -->
+          <span class="visual-picker-peek"><%= t('settings.sidebar.clients') %></span>
+        <% end %> <!-- /.visual-picker -->
+        <!-- .visual-picker -->
+      </div>
+    </div>
+<% end %>

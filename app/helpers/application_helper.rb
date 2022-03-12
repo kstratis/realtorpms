@@ -18,16 +18,27 @@ module ApplicationHelper
 
   # Returns the has-active or has-open HTML class names according to navigation
   def active_for(options)
-    names_of_controllers = Array.wrap(options.fetch(:controller) { nil })
-    name_of_action     = options.fetch(:action) { nil }
-    name_of_excepted_action = options.fetch(:except_action) { nil }
-    request_path       = options.fetch(:path) { nil }
-    request_class      = options.fetch(:classname) { 'active' }
+    names_of_controllers = Array.wrap(options.fetch(:controller, nil))
+    name_of_action     = options.fetch(:action, nil)
+    name_of_excepted_action = options.fetch(:except_action, nil)
+    request_path       = options.fetch(:path, nil)
+    request_class      = options.fetch(:classname, 'active')
+    plain_name = options.fetch(:plain_name, false)
 
-    return CLASSNAME[request_class.to_sym] if request_path && request_path == request.path
+    class_name = render_classname_for_active_links(plain_name, request_class)
+
+    return class_name if request_path && request_path == request.path
 
     if names_of_controllers && names_of_controllers.any? { |controller| controller == controller_name } && name_of_excepted_action != action_name
-      CLASSNAME[request_class.to_sym] if name_of_action.nil? || (name_of_action == action_name)
+      class_name if name_of_action.nil? || (name_of_action == action_name)
+    end
+  end
+
+  def render_classname_for_active_links(plain_name, request_class)
+    if plain_name.present?
+      request_class
+    else
+      CLASSNAME[request_class.to_sym]
     end
   end
 
