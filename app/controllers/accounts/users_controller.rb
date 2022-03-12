@@ -98,7 +98,8 @@ module Accounts
       end
     end
 
-    def show
+    def
+      show
       @is_admin = @user.is_admin?(current_account)
       if @is_admin
         filter_properties(current_account.properties.includes(:location), { page: params[:page], purpose: 'sell_rent' })

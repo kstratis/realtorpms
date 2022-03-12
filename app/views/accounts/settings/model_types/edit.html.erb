@@ -1,0 +1,16 @@
+<% content_for(:nested_settings_header) do %>
+  <%= t('settings.sidebar.cfields') %>
+<% end %>
+
+<% content_for :custom_fields do %>
+
+  <div class="col-12">
+<!--    <div class="card card-fluid">-->
+      <%#= render partial: 'shared/card_header/header',
+                 locals: { title: t('cfields.title'), btn_text: t('properties.show.back'), btn_link: settings_model_types_path } %>
+<!--      <div class="card-body">-->
+        <%= render 'form' %>
+<!--      </div>-->
+<!--    </div>-->
+  </div>
+<% end %>

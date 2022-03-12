@@ -1,0 +1,48 @@
+<% content_for :settings do %>
+  <% provide(:title, t('clients.show.heading')) %>
+
+  <%= render partial: 'layouts/breadcrumb', locals: {path: [{:title => t('settings.sidebar.breadcrumb'), :href => settings_timeline_path}, {title: '', :href => ''}], icon: 'house-colored'} %>
+
+  <div class="page-container">
+    <div class="container">
+      <div class="app-container">
+        <!-- grid row -->
+        <div class="row">
+          <!-- grid column -->
+          <div class="col-lg-4">
+            <!-- .card -->
+            <div class="card card-fluid">
+              <h2 class="card-header"><%= t('settings.sidebar.title') %></h2><!-- .nav -->
+              <nav class="nav nav-tabs anchor-support flex-column border-0">
+                <a href="<%= settings_timeline_path %>" class="nav-link setting <%= active_for(controller: ['timeline'], plain_name: true) %>" aria-selected="true"><span class=""><i class="menu-icon fas fa-clipboard fa-fw"></i>&nbsp; <span class="d-none d-md-inline tab-text"><%= t('settings.sidebar.logs') %></span></span>
+                </a>
+                <a href="<%= settings_model_types_path %>" class="nav-link setting <%= active_for(controller: ['model_types'], plain_name: true) %>"  aria-selected="true"><span class=""><i class="menu-icon fas fa-database fa-fw"></i>&nbsp; <span class="d-none d-md-inline tab-text"><%= t('settings.sidebar.cfields') %></span></span>
+                </a>
+                <a href="<%= account_edit_path %>" class="nav-link setting <%= active_for(controller: ['accounts'], plain_name: true) %>"  aria-selected="true"><span class=""><i class="menu-icon fas fa-id-card-alt fa-fw"></i>&nbsp; <span class="d-none d-md-inline tab-text"><%= t('accounts.edit_title') %></span></span>
+                </a>
+                <a href="#" class="nav-link setting <%= active_for(controller: ['accounts'], plain_name: true) %>"  aria-selected="true"><span class=""><i class="menu-icon fas fa-credit-card fa-fw"></i>&nbsp; <span class="d-none d-md-inline tab-text"><%= t('sidebar.subscription') %></span></span>
+                </a>
+              </nav><!-- /.nav -->
+
+            </div><!-- /.card -->
+          </div><!-- /grid column -->
+          <!-- grid column -->
+          <div class="col-lg-8">
+
+            <div class="card card-fluid">
+              <h2 class="card-header"><%= yield(:nested_settings_header) %></h2><!-- .card-body -->
+              <div class="card-body">
+                <%= yield(:timeline) %>
+                <%= yield(:custom_fields) %>
+                <%= yield(:account_edit) %>
+              </div>
+            </div><!-- /.card-body -->
+          </div><!-- /.card -->
+        </div><!-- /grid column -->
+
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= render template: "layouts/application" %>

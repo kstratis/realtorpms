@@ -19,9 +19,12 @@ Rails.application.routes.draw do
         get '/properties/ilocations', to: 'properties#ilocations'
         get '/properties/clients', to: 'properties#clients'
         get '/properties/inlinesearch', to: 'properties#inlinesearch'
-        # resources :entityfields
-        resources :model_types, only: [:edit, :update], :path => "extended-fields"
-        resources :settings, only: [:index]
+
+        # There is also a scope for account edit
+        namespace :settings do
+          root to: 'timeline#index', as: :timeline
+          resources :model_types, only: [:index, :edit, :update], :path => "extended-fields"
+        end
 
         resources :calendar_events, only: [:create, :show, :index, :destroy]
 
@@ -104,14 +107,19 @@ Rails.application.routes.draw do
         delete '/showings/', to: 'showings#delete'
       end
     end
+
+    # This is needed to enable account edit and update while under `/app/settings`
+    # Note that the `AccountsController` is not namespaced under `Accounts`.
+    scope 'app' do
+      scope 'settings' do
+        get '/account/edit', to: 'accounts#edit', as: :account_edit
+        patch '/account/edit', to: 'accounts#update', as: :account_update
+      end
+    end
   end
 
   get '/switch/', to: 'home#switch', as: :account_switch
   get '/accounts/', to: 'home#accounts', as: :account_list
-
-  get '/account/edit', to: 'accounts#edit', as: :account_edit
-
-  patch '/account/edit', to: 'accounts#update', as: :account_update
 
   delete '/account/delete_avatar', to: 'accounts#delete_avatar', as: :delete_avatar_account
 
