@@ -2608,3 +2608,11 @@ footer:not(.auth-footer){
     top: 0.25rem !important;
   }
 }
+
+.info-container {
+  border: 1px solid grey;
+  padding: 8px;
+  border-radius: 3px;
+  border-top-color: #01A28A;
+  border-top-width: 3px;
+}

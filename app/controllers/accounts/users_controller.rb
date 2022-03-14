@@ -1,12 +1,13 @@
 module Accounts
   class UsersController < Accounts::BaseController
     helper Cfields
+
+    before_action :admin_user
     # Shows all account users
     before_action :all_account_users, only: [:show]
-    before_action :user_self, only: [:edit, :update, :show] # Allows editing only on each user's self
     before_action :owner_exclusive, only: [:new, :create, :destroy, :index, :mass_delete, :mass_freeze]
     before_action :check_page_validity, only: [:index]
-    before_action :find_user!, only: [:delete_avatar, :toggle_activation, :toggle_adminify, :toggle_tour, :show]
+    before_action :find_user!, only: [:delete_avatar, :toggle_activation, :toggle_adminify, :toggle_tour, :show, :edit, :update]
     after_action :log_action, only: [:create, :update, :destroy], unless: Proc.new { current_user.is_sysadmin? }
     # A model's +destroy+ method is different than the controller's +destroy+ action.
     # - Using the model's destroy method on a user object should delete all its dependancies (memberships, assignments,
@@ -78,6 +79,7 @@ module Accounts
 
     # GET the edit page
     def edit
+      redirect_to(users_path) if @user.is_owner?(current_account) && @user != current_user
       # We already get +@user+ from +user_self+. Nothing to do here... yet...
     end
 
@@ -98,8 +100,7 @@ module Accounts
       end
     end
 
-    def
-      show
+    def show
       @is_admin = @user.is_admin?(current_account)
       if @is_admin
         filter_properties(current_account.properties.includes(:location), { page: params[:page], purpose: 'sell_rent' })
@@ -192,22 +193,9 @@ module Accounts
       end
     end
 
-    # Confirms that an action concerning a particular user is initiated by that same user or an admin.
-    # Essentially prevents admins modifying others users' data.
-    def user_self
-      @user = current_user
-      return if current_user.is_admin?(current_account)
-
-      @user = current_account.users.find(params[:id])
-      return if current_user?(@user)
-
-      flash[:danger] = I18n.t "users.flash_unauthorised_user_edit"
-      redirect_to(account_root_url)
-    end
-
     # Confirms an admin user.
     def admin_user
-      redirect_to(account_root_url) unless current_user.is_sysadmin?
+      redirect_to(account_root_url) unless current_user.is_admin?(current_account)
     end
 
     def owner_exclusive

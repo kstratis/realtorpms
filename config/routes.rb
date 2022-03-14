@@ -23,7 +23,7 @@ Rails.application.routes.draw do
         # There is also a scope for account edit
         namespace :settings do
           root to: 'timeline#index', as: :timeline
-          resources :model_types, only: [:index, :edit, :update], :path => "extended-fields"
+          resources :model_types, only: [:index, :edit, :update], :path => "custom-fields"
         end
 
         resources :calendar_events, only: [:create, :show, :index, :destroy]

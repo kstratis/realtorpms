@@ -189,11 +189,9 @@
             <div class="tab-pane fade" id="assignments" role="tabpanel" aria-labelledby="subscription-tab">
               <% if @user.is_admin?(current_account) %>
                 <div class="col-lg-6 col-12 offset-lg-3">
-                  <div class="alert alert-success has-icon" role="alert">
-                    <div class="alert-icon">
-                      <i class="fas fa-info"></i>
-                    </div><%= t('users.show.properties_assigned_to_admin_html',
-                                user: current_user.full_name,
+                  <div class="info-container">
+                    <%= t('users.show.properties_assigned_to_admin_html',
+                                user: @user.full_name,
                                 properties_path: properties_path) %>
                   </div>
                 </div>
@@ -233,10 +231,8 @@
               <div class="row">
                 <div class="col-lg-6 col-12 offset-lg-3">
                   <% if @user.is_admin?(current_account) %>
-                    <div class="alert alert-success has-icon" role="alert">
-                      <div class="alert-icon">
-                        <i class="fas fa-info"></i>
-                      </div><%= t('users.show.clients_assigned_to_admin_html', user: current_user.full_name, clients_path: clients_path) %>
+                    <div class="info-container">
+                      <%= t('users.show.clients_assigned_to_admin_html', user: @user.full_name, clients_path: clients_path) %>
                     </div>
                   <% else %>
                     <% clients = @user.clients.where(account: current_account) %>
@@ -260,8 +256,8 @@
                         <p class="text-justify font-italic mb-4 max-300">
                           <span><%= t('users.show.no_assigned_client') %></span></p>
                       </div>
-                      <div class="text-center reduced-opacity">
-                        <%= image_pack_tag 'media/images/no_stored_searches.svg', class: "img-fluid max-300" %>
+                      <div class="text-center">
+                        <i class="no-results-clients"> </i>
                       </div>
 
                     <% end %>

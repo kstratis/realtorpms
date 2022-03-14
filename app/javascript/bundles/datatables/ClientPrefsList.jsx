@@ -56,7 +56,7 @@ const ClientPrefsList = ({ handlePageClick, advanceByTwo, isLoading, dataset, pa
               </>
             ) : (
               <div className={`no-entries ${isLoading ? 'reduced-opacity' : ''}`}>
-                <i className="no-results"> </i>
+                <i className="no-results-properties"> </i>
                 <h3>{i18n['no_results']}</h3>
               </div>
             )}
