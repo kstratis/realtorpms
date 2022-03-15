@@ -23,7 +23,7 @@
 <% if current_user.is_admin?(current_account) %>
   <div class="dropdown-divider"></div>
   <%= link_to settings_timeline_path, class: 'dropdown-item', id: 'protools-nav' do %>
-    <%= content_tag :i, nil, class: 'fas fa-cog fa-fw' %>&nbsp; <span><%= t('sidebar.settings') %></span>&nbsp; <span class="badge badge-success">Pro</span>
+    <%= content_tag :i, nil, class: 'fas fa-cog fa-fw' %>&nbsp; <span><%= t('sidebar.settings') %></span>
   <% end %>
 <% end %>
 
