@@ -1,0 +1,17 @@
+<% content_for(:nested_settings_header) do %>
+  <%= t('sidebar.subscription') %>
+<% end %>
+
+<% content_for(:subscriptions) do %>
+  <div class="col-12">
+    <h1>Συνδρομή (index)</h1>
+    <div id="payment">
+      <a href="<%= subscription_path %>">PHGAINE</a>
+<!--      <a href="#!" class="paddle_button" data-product="12345">Buy Now!</a>-->
+
+<!--      <a class="gumroad-button" href="https://kstratis.gumroad.com/l/xzmNy">Buy on</a>-->
+<!--      <script src="https://gumroad.com/js/gumroad.js"></script>-->
+
+    </div>
+  </div>
+<% end %>

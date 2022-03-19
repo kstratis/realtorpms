@@ -10,14 +10,6 @@ class HomeController < ApplicationController
   def index
     @subdomain = nil
     render :layout => 'website/skeleton'
-    # if logged_in?
-    #   if current_user.accounts.count == 0
-        # exclude the admin case who may not have a linked account
-        # unless current_user.admin?
-        #   @subdomain = Account.find_by(owner_id: current_user.id).subdomain
-        # end
-      # end
-    # end
   end
 
   # Use this action instead of directly linking to other urls from view

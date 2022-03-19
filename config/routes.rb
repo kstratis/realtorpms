@@ -132,6 +132,11 @@ Rails.application.routes.draw do
     get '/tos', to: 'home#tos', as: :tos
     get '/privacy-policy', to: 'home#privacy', as: :privacy
     get '/cookie-policy', to: 'home#cookie', as: :cookie
+
+    get '/subscriptions/new', to: 'subscriptions#new', as: :new_subscription # page to start payment
+    post '/subscriptions/create', to: 'subscriptions#create', as: :subscription # listens to paddle webhook
+    get '/subscriptions/thankyou', to: 'subscriptions#thankyou', as: :subscription_completed # Immediate redirect after successful payment
+
     get '/create', to: 'accounts#new', as: :new_account
 
     post '/create', to: 'accounts#create', as: :accounts
