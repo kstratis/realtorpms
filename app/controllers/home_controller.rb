@@ -5,8 +5,6 @@ class HomeController < ApplicationController
   before_action :client_country
   before_action :locale_switch_dismissed
 
-  helper_method :greek_user?
-
   def index
     @subdomain = nil
     render :layout => 'website/skeleton'
