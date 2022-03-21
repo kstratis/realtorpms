@@ -20,6 +20,10 @@ class HomeController < ApplicationController
     # end
   end
 
+  def tos
+    render :layout => 'website/skeleton'
+  end
+
   # Use this action instead of directly linking to other urls from view
   # when we need use the flash functionality
   def switch
