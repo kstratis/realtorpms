@@ -3,7 +3,7 @@ class AccountsController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update, :delete_avatar]
 
   layout 'auth/skeleton', only: [:new, :create] # show the barebones version only when signing up
-  layout 'settings', only: [:edit, :update]
+
   # GET the new page
   def new
     return redirect_to login_url(subdomain: request.subdomain) if request.subdomain.present?
@@ -41,6 +41,7 @@ class AccountsController < ApplicationController
   # GET the edit page
   def edit
     @account = Account.find_by!(subdomain: request.subdomain)
+    render :layout => 'settings'
   end
 
   # PUT to the edit page
