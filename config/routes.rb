@@ -130,6 +130,7 @@ Rails.application.routes.draw do
   scope "(:locale)", locale: /en|el/ do
     root to: 'home#index', as: :landing_root
     get '/tos', to: 'home#tos', as: :tos
+    get '/privacy-policy', to: 'home#privacy', as: :privacy
     get '/create', to: 'accounts#new', as: :new_account
 
     post '/create', to: 'accounts#create', as: :accounts
