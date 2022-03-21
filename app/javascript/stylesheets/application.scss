@@ -2394,6 +2394,17 @@ a.icon-font-delete{
   color: #9b9b9b;
 }
 
+.color-gold{
+  color: gold;
+}
+
+.color-white{
+  color: #FFFFFF;
+  &:hover{
+    color: gold;
+  }
+}
+
 .letter-spacing-soft{
   letter-spacing: 1px;
 }
@@ -2607,6 +2618,10 @@ footer:not(.auth-footer){
   .custom-switch .custom-control-label::before {
     top: 0.25rem !important;
   }
+}
+
+.btn-floated-left {
+  left: 1.25rem;
 }
 
 .info-container {
