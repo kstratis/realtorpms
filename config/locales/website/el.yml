@@ -90,6 +90,9 @@ el:
       cta: 'Επικοινωνία'
     gotoapp: 'ΜΕΤΑΒΑΣΗ ΣΤΗΝ ΕΦΑΡΜΟΓΗ'
     rights: 'Με την επιφύλαξη παντός νομίμου δικαιώματος'
+    terms_and_conditions: 'Όροι χρήσης'
+    privacy_policy: 'Πολιτική απορρήτου'
+    cookie_policy: 'Πολιτική cookies'
     footer_html: 'Φτιαγμένο με πολύ ❤️ στην Ελλάδα'
 
 

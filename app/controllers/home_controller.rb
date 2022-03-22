@@ -40,4 +40,19 @@ class HomeController < ApplicationController
     @accounts = current_user.is_sysadmin? ? Account.all.paginate(page: params[:page], :per_page => 25) : current_user.all_accounts.paginate(page: params[:page], :per_page => 25)
     render :layout => 'auth/skeleton'
   end
+
+  # footer
+  def tos
+    render :layout => 'website/skeleton'
+  end
+
+  # footer
+  def privacy
+    render :layout => 'website/skeleton'
+  end
+
+  # footer
+  def cookie
+    render :layout => 'website/skeleton'
+  end
 end

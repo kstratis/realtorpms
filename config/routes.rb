@@ -129,6 +129,9 @@ Rails.application.routes.draw do
   # Language support on website (landing) pages
   scope "(:locale)", locale: /en|el/ do
     root to: 'home#index', as: :landing_root
+    get '/tos', to: 'home#tos', as: :tos
+    get '/privacy-policy', to: 'home#privacy', as: :privacy
+    get '/cookie-policy', to: 'home#cookie', as: :cookie
     get '/create', to: 'accounts#new', as: :new_account
 
     post '/create', to: 'accounts#create', as: :accounts
