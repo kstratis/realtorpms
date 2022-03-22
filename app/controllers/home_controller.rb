@@ -20,14 +20,6 @@ class HomeController < ApplicationController
     # end
   end
 
-  def tos
-    render :layout => 'website/skeleton'
-  end
-
-  def privacy
-    render :layout => 'website/skeleton'
-  end
-
   # Use this action instead of directly linking to other urls from view
   # when we need use the flash functionality
   def switch
@@ -47,5 +39,20 @@ class HomeController < ApplicationController
     # byebug
     @accounts = current_user.is_sysadmin? ? Account.all.paginate(page: params[:page], :per_page => 25) : current_user.all_accounts.paginate(page: params[:page], :per_page => 25)
     render :layout => 'auth/skeleton'
+  end
+
+  # footer
+  def tos
+    render :layout => 'website/skeleton'
+  end
+
+  # footer
+  def privacy
+    render :layout => 'website/skeleton'
+  end
+
+  # footer
+  def cookie
+    render :layout => 'website/skeleton'
   end
 end
