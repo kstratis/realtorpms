@@ -13,13 +13,4 @@ $(document).ready(function() {
   });
 
   initLanguageSwitcher();
-
-  import(/* webpackIgnore: true */ 'https://cdn.paddle.com/paddle/paddle.js').then(()=>{
-    // Sandbox setup
-    Paddle.Environment.set('sandbox');
-    Paddle.Setup({ vendor: 5206 });
-    // Production setup
-    // Paddle.Setup({ vendor: 1234567 });
-    // Paddle.Checkout.open({ product: 12345 });
-  });
 });

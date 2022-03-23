@@ -1270,6 +1270,8 @@ en:
       website_toggle_html: "Activate/deactivate your <u><a target=\"_blank\" href=\"%{website}\">public website</a></u>"
       submit: "Update"
       flash_error: "Something went wrong! Please try again."
+    subscriptions:
+      thankyou: '🎉 Your subscription has been successfully activated! 🎉'
   viewings:
     client: "To client"
     user: "By partner"

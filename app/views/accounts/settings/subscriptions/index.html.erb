@@ -6,8 +6,15 @@
   <div class="col-12">
     <h1>Συνδρομή (index)</h1>
     <div id="payment">
-      <a href="<%= subscription_path %>">PHGAINE</a>
+<!--      <a href="<%#= subscription_path %>">PHGAINE</a>-->
 <!--      <a href="#!" class="paddle_button" data-product="12345">Buy Now!</a>-->
+      <a href="#!" class="paddle_button"
+         data-product="12345"
+         data-email="<%= current_user.email %>"
+         data-success="<%= settings_subscription_completed_path %>"
+      >
+        <%= t('website.activate') %>
+      </a>
 
 <!--      <a class="gumroad-button" href="https://kstratis.gumroad.com/l/xzmNy">Buy on</a>-->
 <!--      <script src="https://gumroad.com/js/gumroad.js"></script>-->

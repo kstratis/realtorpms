@@ -1,0 +1,10 @@
+<% content_for :thankyou do %>
+  <main class="app app-site p-4">
+    <div class="container container-fluid-xl">
+      <div class="col-12 text-center">
+        <div class="pb-4"><h2><%= t('settings.subscriptions.thankyou') %></h2></div>
+        <div class="offset-4 col-4 py-4"><%= image_pack_tag 'check.svg', class: "thankyou-checkmark" %></div>
+      </div>
+    </div>
+  </main>
+<% end %>

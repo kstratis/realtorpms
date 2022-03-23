@@ -151,6 +151,23 @@ $(document).on('turbolinks:load', function(e) {
         }
       },
     })
+  });
+
+  // Payment handler
+  $('#pay').on('click', (e) =>{
+    e.preventDefault();
+
+    import(/* webpackIgnore: true */ 'https://cdn.paddle.com/paddle/paddle.js').then(()=>{
+      // Sandbox setup
+      Paddle.Environment.set('sandbox');
+      Paddle.Setup({ vendor: 5206 });
+      Paddle.Checkout.open({
+        override: $(e.currentTarget).data('paymentLink')
+      });
+      // Production setup
+      // Paddle.Setup({ vendor: 1234567 });
+      // Paddle.Checkout.open({ product: 12345 });
+    });
   })
 });
 
