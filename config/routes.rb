@@ -24,6 +24,12 @@ Rails.application.routes.draw do
         namespace :settings do
           root to: 'timeline#index', as: :timeline
           resources :model_types, only: [:index, :edit, :update], :path => "custom-fields"
+          # resources :subscriptions, :path => "subscriptions"
+
+          get '/subscriptions/new', to: 'subscriptions#new', as: :new_subscription # page to start payment
+          get '/subscriptions', to: 'subscriptions#index', as: :subscriptions # page to start payment
+          post '/subscriptions/create', to: 'subscriptions#create', as: :subscription # listens to paddle webhook
+          get '/subscriptions/thankyou', to: 'subscriptions#thankyou', as: :subscription_completed # Immediate redirect after successful payment
         end
 
         resources :calendar_events, only: [:create, :show, :index, :destroy]
@@ -126,12 +132,18 @@ Rails.application.routes.draw do
   get '/invitations/:id/accept', to: 'invitationreceivers#accept', as: :accept_invitation
   patch '/invitations/:id/accepted', to: 'invitationreceivers#accepted', as: :accepted_invitation
 
+  # Payment webhooks
+  post '/payments/subscription-created',  to: 'payments#created', as: :subscription_created
+  post '/payments/subscription-cancelled',  to: 'payments#cancelled', as: :subscription_cancelled
+
+
   # Language support on website (landing) pages
   scope "(:locale)", locale: /en|el/ do
     root to: 'home#index', as: :landing_root
     get '/tos', to: 'home#tos', as: :tos
     get '/privacy-policy', to: 'home#privacy', as: :privacy
     get '/cookie-policy', to: 'home#cookie', as: :cookie
+
     get '/create', to: 'accounts#new', as: :new_account
 
     post '/create', to: 'accounts#create', as: :accounts

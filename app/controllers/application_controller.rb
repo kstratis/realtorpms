@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
   helper UserAvatar
   include TimelineHelper
 
+  helper_method :greek_user?
+
   rescue_from ActiveRecord::RecordNotFound, with: -> { render_404  }
 
   around_action :switch_locale

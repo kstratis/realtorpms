@@ -20,6 +20,8 @@ module Accounts
     before_action :logged_in_user, except: []
     # before_action :logged_in_user, :allowed_subdomains, only: [:index, :edit, :update, :destroy]
     before_action :allowed_subdomains, :active_account, :active_user # The order is guaranteed from left-to-right
+
+    before_action :paid_account
     after_action :store_referer_url, only: [:index, :edit, :update, :destroy]
 
     # before_action :correct_subdomain
@@ -111,6 +113,11 @@ module Accounts
       end
     end
 
+    def paid_account
+      return if current_account.trial? || current_account.active?
+
+      redirect_to settings_subscriptions_path unless controller_name == 'subscriptions'
+    end
 
   end
 end

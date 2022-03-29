@@ -20,6 +20,8 @@
                 </a>
                 <a href="<%= account_edit_path %>" class="nav-link setting <%= active_for(controller: ['accounts'], plain_name: true) %>"  aria-selected="true"><span class=""><i class="menu-icon fas fa-globe fa-fw"></i>&nbsp; <span class="d-none d-md-inline tab-text"><%= t('accounts.edit_title') %></span></span>
                 </a>
+                <a href="<%= settings_subscriptions_path %>" class="nav-link setting <%= active_for(controller: ['subscriptions'], plain_name: true) %>"  aria-selected="true"><span class=""><i class="menu-icon fas fa-credit-card fa-fw"></i>&nbsp; <span class="d-none d-md-inline tab-text"><%= t('sidebar.subscription') %></span></span>
+                </a>
               </nav><!-- /.nav -->
 
             </div><!-- /.card -->
@@ -33,6 +35,8 @@
                 <%= yield(:timeline) %>
                 <%= yield(:custom_fields) %>
                 <%= yield(:account_edit) %>
+                <%= yield(:subscription) %>
+                <%= yield(:thankyou) %>
               </div>
             </div><!-- /.card-body -->
           </div><!-- /.card -->

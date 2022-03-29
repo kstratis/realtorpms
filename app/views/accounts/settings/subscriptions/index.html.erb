@@ -1,0 +1,21 @@
+<% content_for(:nested_settings_header) do %>
+  <%= t('sidebar.subscription') %>
+<% end %>
+
+<% content_for(:subscription) do %>
+<!--  <h1><%#= current_account.subscription_status %></h1>-->
+  <div class="col-12 text-center py-4">
+      <h3><%= t("settings.subscriptions.index.#{current_account.subscription_status}.active_plan_html") %></h3>
+      <h3><%= t("settings.subscriptions.index.#{current_account.subscription_status}.expire_date_html", expiration_date: l(current_account.created_at + 1.month)) %></h3>
+      <h3><%= t("settings.subscriptions.index.#{current_account.subscription_status}.action_prompt_html") %></h3>
+      <% if current_account.trial? %>
+        <button id="pay" class="btn btn-success btn-lg mt-4" data-payment-link="<%= @paddle_checkout_url %>" data-email="<%= current_user.email %>">
+          <i class="fas fa-rocket fa-fw"></i>&nbsp; <%= t('settings.subscriptions.activate_cta') %>
+        </button>
+      <% elsif current_account.active? %>
+        <button id="cancel-pay" class="btn btn-outline-danger mt-4">
+          <i class="fas fa-house-damage fa-fw"></i>&nbsp; <%= t('settings.subscriptions.cancel_cta') %>
+        </button>
+    <% end %>
+  </div>
+<% end %>

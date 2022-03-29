@@ -1,0 +1,18 @@
+<% content_for(:nested_settings_header) do %>
+  <%= t('sidebar.subscription') %>
+<% end %>
+
+<% content_for(:subscription) do %>
+  <div class="col-12">
+    <h1>Συνδρομή (index)</h1>
+    <div id="payment">
+      <button id="pay"
+              class="btn btn-success btn-lg"
+              data-payment-link="<%= @paddle_checkout_url %>"
+              data-email="<%= current_user.email %>"
+      >
+        <%= t('website.activate') %>
+      </button>
+    </div>
+  </div>
+<% end %>

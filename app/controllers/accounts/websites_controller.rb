@@ -9,7 +9,6 @@ module Accounts
 
     before_action :client_country
     before_action :locale_switch_dismissed
-    helper_method :greek_user?
 
     helper_method :options_for_locations
 

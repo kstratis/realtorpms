@@ -1270,6 +1270,21 @@ en:
       website_toggle_html: "Activate/deactivate your <u><a target=\"_blank\" href=\"%{website}\">public website</a></u>"
       submit: "Update"
       flash_error: "Something went wrong! Please try again."
+    subscriptions:
+      thankyou: '🎉 Your subscription has been successfully activated! 🎉'
+      activate_cta: 'Activate'
+      cancel_cta: 'Cancel subscription'
+      index:
+        trial:
+          active_plan_html: 'You are on <u>14-day trial period</u>.'
+          expire_date_html: 'Your trial expires at: <mark>%{expiration_date}</mark>.'
+          action_prompt_html: 'Activate your subsription by clicking below:'
+        active:
+          active_plan_html: 'Your subscription is active.'
+          expire_date_html: 'Expires at: <mark>%{expiration_date}</mark>.'
+          action_prompt_html: 'In case you wish to cancel your subscription click below:'
+        cancelled:
+        expired:
   viewings:
     client: "To client"
     user: "By partner"
