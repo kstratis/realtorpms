@@ -82,7 +82,7 @@ Rails.application.configure do
 
   config.log_tags = [ :subdomain, user ]
 
-  config.action_dispatch.tld_length = 2
+  config.action_dispatch.tld_length = 1
   # Raises error for missing translations
 
   # config.i18n.raise_on_missing_translations = true  # Rails 6.0
@@ -110,7 +110,6 @@ Rails.application.configure do
 
   # config.hosts << /(?:[a-zA-Z]+\.+)*lvh\.me/
   config.hosts << '.lvh.me'
-  config.hosts << '030d-2a02-2149-8a84-1700-a022-766a-f51d-deca.ngrok.io'
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
