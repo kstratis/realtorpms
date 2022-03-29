@@ -4,6 +4,7 @@
       <div class="col-12 text-center">
         <div class="pb-4"><h2><%= t('settings.subscriptions.thankyou') %></h2></div>
         <div class="offset-4 col-4 py-4"><%= image_pack_tag 'check.svg', class: "thankyou-checkmark" %></div>
+        <div class="pt-4"><i class="fas fa-angle-left fa-fw"></i><a href="<%= settings_subscriptions_path %>"><%= t('invitations.created.return') %></a></div>
       </div>
     </div>
   </main>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_13_142226) do
+ActiveRecord::Schema.define(version: 2022_03_29_103655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(version: 2022_02_13_142226) do
     t.boolean "website_enabled"
     t.text "description"
     t.integer "flavor"
+    t.integer "subscription_status", default: 0
+    t.datetime "last_paid_at"
     t.index ["owner_id"], name: "index_accounts_on_owner_id"
     t.index ["subdomain"], name: "index_accounts_on_subdomain"
   end

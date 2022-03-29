@@ -5,12 +5,17 @@ module Accounts
 
       layout 'settings'
 
-      def new
+      def new; end
+
+      def index
+        return unless current_account.trial?
+
         url = 'https://sandbox-vendors.paddle.com/api/2.0/product/generate_pay_link'
         request_body = {
           "vendor_id" => 5206,
           "vendor_auth_code" => "14d4ccf4f2d54b00a93a259a56cbd9aebe222060c888fc22fe",
           "product_id" => "25568",
+          "passthrough" => { "subdomain" => current_account.subdomain.to_s, "user_email" => current_user.email.to_s }.to_json,
           "customer_email" => current_user.email,
           "return_url" => settings_subscription_completed_path,
           "title" => "RealtorPMS subscription"
@@ -25,7 +30,6 @@ module Accounts
 
         parsed_response = JSON.parse(response.body)
         @paddle_checkout_url = parsed_response.dig('response', 'url')
-
       end
 
       def thankyou; end

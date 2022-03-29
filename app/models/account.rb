@@ -47,6 +47,7 @@ class Account < ApplicationRecord
 
   enum flavor: { :greek => 0, :international => 1 }
 
+  enum subscription_status: { :trial => 0, :active => 1, :cancelled => 2, :expired => 3 }
 
   # This is for existing log records
   # https://stackoverflow.com/a/9326882/178728

@@ -27,6 +27,7 @@ Rails.application.routes.draw do
           # resources :subscriptions, :path => "subscriptions"
 
           get '/subscriptions/new', to: 'subscriptions#new', as: :new_subscription # page to start payment
+          get '/subscriptions', to: 'subscriptions#index', as: :subscriptions # page to start payment
           post '/subscriptions/create', to: 'subscriptions#create', as: :subscription # listens to paddle webhook
           get '/subscriptions/thankyou', to: 'subscriptions#thankyou', as: :subscription_completed # Immediate redirect after successful payment
         end
@@ -130,6 +131,11 @@ Rails.application.routes.draw do
 
   get '/invitations/:id/accept', to: 'invitationreceivers#accept', as: :accept_invitation
   patch '/invitations/:id/accepted', to: 'invitationreceivers#accepted', as: :accepted_invitation
+
+  # Payment webhooks
+  post '/payments/subscription-created',  to: 'payments#created', as: :subscription_created
+  post '/payments/subscription-cancelled',  to: 'payments#cancelled', as: :subscription_cancelled
+
 
   # Language support on website (landing) pages
   scope "(:locale)", locale: /en|el/ do
