@@ -1246,18 +1246,23 @@ el:
       flash_error: "Κάτι πήγε στραβά! Δοκίμασε εκ νέου."
     subscriptions:
       thankyou: '🎉 Η συνδρομή σου ενεργοποιήθηκε επιτυχώς! 🎉'
+      cancel_html: 'Η συνδρομή σου έχει ακυρωθεί. <br> Λυπούμαστε που δεν θα σε έχουμε μαζί μας. <br> Αν αλλάξεις γνώμη μπορεί να ενεργοποιήσεις νέα συνδρομή πατώντας <a href="%{settings_subscriptions_path}">εδώ</a>.'
       activate_cta: 'Ενεργοποίηση'
       cancel_cta: 'Ακύρωση συνδρομής'
+      error_cancelling: 'Φαίνεται πως κάτι πήγε στραβά 🤔. Δοκίμασε ξανά ή επικοινώνησε με την υποστήριξη.'
       index:
         trial:
-          active_plan_html: 'Αυτή τη στιγμή βρίσκεσαι σε <u>δοκιμαστική περίοδο 14 ημερών</u>.'
+          active_plan_html: 'Αυτή τη στιγμή βρίσκεσαι σε <span class="badge badge-pill badge-warning">δοκιμαστική περίοδο 14 ημερών</span>.'
           expire_date_html: 'Η πρόσβαση σου λήγει στις <mark>%{expiration_date}</mark>.'
           action_prompt_html: 'Για να συνεχίσεις να χρησιμοποιείς την πλατφόρμα ενεργοποίησε μια συνδρομή πατώντας εδώ:'
         active:
-          active_plan_html: 'Η συνδρομή σου είναι ενεργή.'
+          active_plan_html: 'Η συνδρομή σου είναι <span class="badge badge-pill badge-success">ενεργή</span>.'
           expire_date_html: 'Η πρόσβαση σου λήγει στις <mark>%{expiration_date}</mark>.'
           action_prompt_html: 'Σε περίπτωση που επιθυμείς να ακυρώσεις την συνδρομή σου πάτησε εδώ:'
         cancelled:
+          active_plan_html: 'Η συνδρομή σου έχει <span class="badge badge-pill badge-danger">ακυρωθεί</span>.'
+          expire_date_html: 'Δεν έχεις πρόσβαση στην πλατφόρμα.'
+          action_prompt_html: 'Σε περίπτωση που επιθυμείς να ενεργοποιήσεις εκ νέου συνδρομή, πάτησε εδώ:'
         expired:
   viewings:
     client: "Πελάτης"

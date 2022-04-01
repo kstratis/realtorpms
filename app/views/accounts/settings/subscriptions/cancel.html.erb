@@ -1,0 +1,11 @@
+<% content_for :cancelled do %>
+  <main class="app app-site p-4">
+    <div class="container container-fluid-xl">
+      <div class="col-12 text-center">
+        <div class="pb-4"><h2><%= t('settings.subscriptions.cancel_html', settings_subscriptions_path: settings_subscriptions_path) %></h2></div>
+        <div class="offset-4 col-4 py-4"><%= image_pack_tag 'cancel.svg', class: "thankyou-checkmark" %></div>
+        <div class="pt-4"><i class="fas fa-angle-left fa-fw"></i><a href="<%= settings_subscriptions_path %>"><%= t('invitations.created.return') %></a></div>
+      </div>
+    </div>
+  </main>
+<% end %>

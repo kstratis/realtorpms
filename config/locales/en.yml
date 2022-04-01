@@ -1272,18 +1272,23 @@ en:
       flash_error: "Something went wrong! Please try again."
     subscriptions:
       thankyou: '🎉 Your subscription has been successfully activated! 🎉'
+      cancel_html: 'Your subscription has been cancelled. <br> We are sorry to see you go. <br> You can always activate a new subscription by clicking <a href="%{settings_subscriptions_path}">here</a>.'
       activate_cta: 'Activate'
       cancel_cta: 'Cancel subscription'
+      error_cancelling: 'It appears something went wrong 🤔. Please try again or contact support.'
       index:
         trial:
-          active_plan_html: 'You are on <u>14-day trial period</u>.'
+          active_plan_html: 'You are on <span class="badge badge-pill badge-warning">14-day trial period</span>.'
           expire_date_html: 'Your trial expires at: <mark>%{expiration_date}</mark>.'
           action_prompt_html: 'Activate your subsription by clicking below:'
         active:
-          active_plan_html: 'Your subscription is active.'
+          active_plan_html: 'Your subscription is <span class="badge badge-pill badge-success">active</span>.'
           expire_date_html: 'Expires at: <mark>%{expiration_date}</mark>.'
           action_prompt_html: 'In case you wish to cancel your subscription click below:'
         cancelled:
+          active_plan_html: 'Your subscription has been <span class="badge badge-pill badge-danger">cancelled</span>.'
+          expire_date_html: 'You currently do not have access to the platform'
+          action_prompt_html: 'Regain access by activating a new subscription here: '
         expired:
   viewings:
     client: "To client"

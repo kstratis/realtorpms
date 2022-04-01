@@ -8,8 +8,54 @@ module Accounts
       def new; end
 
       def index
-        return unless current_account.trial?
+        return if current_account.active?
 
+        retrieve_checkout_url
+      end
+
+      def thankyou; end
+      def cancelled; end
+
+      def cancel
+        response = cancel_subscription
+        if response['success'] == false
+          flash[:danger] = I18n.t('settings.subscriptions.error_cancelling')
+          redirect_to request.referer
+        end
+      end
+
+      # Resource route. No UI
+      def create
+        # DEBUG
+        # puts params
+        @user = User.find_by(email: params['email'])
+        @account = @user&.owned_accounts&.first
+        return head(:bad_request) if @user.blank? || @account.blank?
+
+        @account.update(paid_at: Time.current)
+        head :ok
+      end
+
+      private
+
+      def cancel_subscription
+        url = 'https://sandbox-vendors.paddle.com/api/2.0/subscription/users_cancel'
+        request_body = {
+          "vendor_id" => 5206,
+          "vendor_auth_code" => "14d4ccf4f2d54b00a93a259a56cbd9aebe222060c888fc22fe",
+          "subscription_id" => current_account.subscription_id
+        }
+
+        connection = Faraday.new(
+          headers: { 'Content-Type' => 'application/x-www-form-urlencoded' },
+          ssl: { verify: false }
+        )
+        response = connection.post(url, request_body)
+
+        JSON.parse(response.body)
+      end
+
+      def retrieve_checkout_url
         url = 'https://sandbox-vendors.paddle.com/api/2.0/product/generate_pay_link'
         request_body = {
           "vendor_id" => 5206,
@@ -32,19 +78,6 @@ module Accounts
         @paddle_checkout_url = parsed_response.dig('response', 'url')
       end
 
-      def thankyou; end
-
-      # This is a resource route. No UI
-      def create
-        # DEBUG
-        # puts params
-        @user = User.find_by(email: params['email'])
-        @account = @user&.owned_accounts&.first
-        return head(:bad_request) if @user.blank? || @account.blank?
-
-        @account.update(paid_at: Time.current)
-        head :ok
-      end
     end
   end
 end
