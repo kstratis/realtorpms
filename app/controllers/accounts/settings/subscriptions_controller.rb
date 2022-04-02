@@ -18,10 +18,10 @@ module Accounts
 
       def cancel
         response = cancel_subscription
-        if response['success'] == false
-          flash[:danger] = I18n.t('settings.subscriptions.error_cancelling')
-          redirect_to request.referer
-        end
+        return unless response['success'] == false
+
+        flash[:danger] = I18n.t('settings.subscriptions.error_cancelling')
+        redirect_to request.referer
       end
 
       # Resource route. No UI

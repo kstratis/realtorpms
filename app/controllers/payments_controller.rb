@@ -23,7 +23,9 @@ class PaymentsController < ApplicationController
     subscription_id = params[:subscription_id]
 
     account = Account.find_by(subdomain: subdomain)
-    account.update({ subscription_status: :active, last_paid_at: event_time, subscription_id: subscription_id })
+    if account.present?
+      account.update({ subscription_status: :active, last_paid_at: event_time, subscription_id: subscription_id })
+    end
     head :ok
   end
 
