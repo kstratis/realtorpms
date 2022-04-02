@@ -1261,7 +1261,7 @@ el:
           action_prompt_html: 'Σε περίπτωση που επιθυμείς να ακυρώσεις την συνδρομή σου πάτησε εδώ:'
         cancelled:
           active_plan_html: 'Η συνδρομή σου έχει <span class="badge badge-pill badge-danger">ακυρωθεί</span>.'
-          expire_date_html: 'Δεν έχεις πρόσβαση στην πλατφόρμα.'
+          expire_date_html: 'Για την ώρα, δεν έχεις πρόσβαση στην πλατφόρμα.'
           action_prompt_html: 'Σε περίπτωση που επιθυμείς να ενεργοποιήσεις εκ νέου συνδρομή, πάτησε εδώ:'
         expired:
   viewings:
