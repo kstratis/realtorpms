@@ -5,10 +5,10 @@ class PaymentsController < ApplicationController
     @alert_name = params[:alert_name]
 
     case @alert_name
+    when 'subscription_created'
+      created
     when 'subscription_cancelled'
       cancelled
-    when 'subscription_payment_succeeded'
-      created
     else
       head :ok
     end
@@ -30,9 +30,12 @@ class PaymentsController < ApplicationController
   def cancelled
     data = JSON.parse(params[:passthrough]).with_indifferent_access
     subdomain = data.values_at(:subdomain)
+    subscription_id = params[:subscription_id]
 
-    account = Account.find_by(subdomain: subdomain)
-    account.update({ subscription_status: :cancelled })
+    account = Account.find_by(subdomain: subdomain, subscription_id: subscription_id)
+    if account.present?
+      account.update({ subscription_status: :cancelled })
+    end
     head :ok
   end
 end
