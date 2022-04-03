@@ -81,6 +81,10 @@ class Account < ApplicationRecord
       subdomain = self.find_by(subdomain: requested_subdomain)
       !!subdomain
     end
+
+    def deactivate_trials
+      where(subscription_status: :trial).where("created_at < ?", 14.days.ago).update(subscription_status: :expired)
+    end
   end
 
   # self is explicitly used here to indicate the newly created object

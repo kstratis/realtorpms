@@ -21,6 +21,8 @@ require 'capistrano/rails/console'
 require "capistrano/scm/git"
 install_plugin Capistrano::SCM::Git
 
+require "whenever/capistrano"
+
 set :rbenv_type, :user
 set :rbenv_ruby, '2.7.5'
 

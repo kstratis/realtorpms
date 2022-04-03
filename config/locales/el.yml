@@ -1256,7 +1256,7 @@ el:
           expire_date_html: 'Η πρόσβαση σου λήγει στις <mark>%{expiration_date}</mark>.'
           action_prompt_html: 'Για να συνεχίσεις να χρησιμοποιείς την πλατφόρμα ενεργοποίησε μια συνδρομή πατώντας εδώ:'
         active:
-          active_plan_html: 'Η συνδρομή σου είναι <span class="badge badge-pill badge-success">ενεργή</span>.'
+          active_plan_html: 'Η συνδρομή σου είναι <span class="badge badge-pill badge-success">ενεργή</span> 🚀'
           expire_date_html: 'Η πρόσβαση σου λήγει στις <mark>%{expiration_date}</mark>.'
           action_prompt_html: 'Σε περίπτωση που επιθυμείς να ακυρώσεις την συνδρομή σου πάτησε εδώ:'
         cancelled:
@@ -1264,6 +1264,9 @@ el:
           expire_date_html: 'Για την ώρα, δεν έχεις πρόσβαση στην πλατφόρμα.'
           action_prompt_html: 'Σε περίπτωση που επιθυμείς να ενεργοποιήσεις εκ νέου συνδρομή, πάτησε εδώ:'
         expired:
+          active_plan_html: 'Η δοκιμαστική περίοδος έχει <span class="badge badge-pill badge-danger">λήξει</span>.'
+          expire_date_html: 'Για την ώρα, δεν έχεις πρόσβαση στην πλατφόρμα.'
+          action_prompt_html: 'Σε περίπτωση που επιθυμείς να ενεργοποιήσεις νέα συνδρομή, πάτησε εδώ:'
   viewings:
     client: "Πελάτης"
     user: "Συνεργάτης"

@@ -1282,14 +1282,17 @@ en:
           expire_date_html: 'Your trial expires at: <mark>%{expiration_date}</mark>.'
           action_prompt_html: 'Activate your subsription by clicking below:'
         active:
-          active_plan_html: 'Your subscription is <span class="badge badge-pill badge-success">active</span>.'
+          active_plan_html: 'Your subscription is <span class="badge badge-pill badge-success">active</span> 🚀'
           expire_date_html: 'Expires at: <mark>%{expiration_date}</mark>.'
           action_prompt_html: 'In case you wish to cancel your subscription click below:'
         cancelled:
           active_plan_html: 'Your subscription has been <span class="badge badge-pill badge-danger">cancelled</span>.'
-          expire_date_html: 'You currently do not have access to the platform'
+          expire_date_html: 'At the moment you have no access to the platform'
           action_prompt_html: 'Regain access by activating a new subscription here: '
         expired:
+          active_plan_html: 'The trial period has <span class="badge badge-pill badge-danger">expired</span>.'
+          expire_date_html: 'At the moment you have no access to the platform'
+          action_prompt_html: 'Regain access by activating a new subscription here: '
   viewings:
     client: "To client"
     user: "By partner"

@@ -9,6 +9,8 @@ class PaymentsController < ApplicationController
       created
     when 'subscription_cancelled'
       cancelled
+    when 'subscription_payment_success'
+      update_latest_payment_date
     else
       head :ok
     end
@@ -19,8 +21,8 @@ class PaymentsController < ApplicationController
   def created
     data = JSON.parse(params[:passthrough]).with_indifferent_access
     subdomain = data.values_at(:subdomain)
-    event_time = params[:event_time].to_datetime
     subscription_id = params[:subscription_id]
+    event_time = params[:event_time].to_datetime
 
     account = Account.find_by(subdomain: subdomain)
     if account.present?
@@ -37,6 +39,18 @@ class PaymentsController < ApplicationController
     account = Account.find_by(subdomain: subdomain, subscription_id: subscription_id)
     if account.present?
       account.update({ subscription_status: :cancelled })
+    end
+    head :ok
+  end
+
+  def update_latest_payment_date
+    data = JSON.parse(params[:passthrough]).with_indifferent_access
+    subdomain = data.values_at(:subdomain)
+    event_time = params[:event_time].to_datetime
+
+    account = Account.find_by(subdomain: subdomain)
+    if account.present?
+      account.update({ last_paid_at: event_time })
     end
     head :ok
   end

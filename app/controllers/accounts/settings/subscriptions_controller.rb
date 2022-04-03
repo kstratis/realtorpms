@@ -2,6 +2,7 @@ module Accounts
   module Settings
     class SubscriptionsController < Accounts::BaseController
       skip_before_action :verify_authenticity_token
+      before_action :set_expiration_date, only: :index
 
       layout 'settings'
 
@@ -37,6 +38,14 @@ module Accounts
       end
 
       private
+
+      def set_expiration_date
+        @expiration_date = if current_account.trial?
+                             I18n.l(current_account.created_at + 14.days, format: :property)
+                           elsif current_account.active?
+                             I18n.l(current_account.last_paid_at + 30.days, format: :property)
+                           end
+      end
 
       def cancel_subscription
         url = 'https://sandbox-vendors.paddle.com/api/2.0/subscription/users_cancel'
