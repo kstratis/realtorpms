@@ -19,6 +19,8 @@ set :default_environment, {
   'DISABLE_DATABASE_ENVIRONMENT_CHECK' => '1'
 }
 
+# ** (SOS) Remember to initiate rbenv when called non-interactively (cron) or else things will fall apart **
+# https://github.com/javan/whenever/issues/486#issuecomment-58009257
 set :whenever_enviroment, 'production'
 
 # set :linked_files, %w{config/master.key}
