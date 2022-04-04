@@ -19,26 +19,7 @@ set :default_environment, {
   'DISABLE_DATABASE_ENVIRONMENT_CHECK' => '1'
 }
 
-##
-# Rbenv Setup
-# set :rbenv_type, :system
-# set :rbenv_ruby, '2.7.5'
-rbenv_prefix = [
-  "RBENV_ROOT=#{fetch(:rbenv_path)}",
-  "RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
-]
-set :rbenv_prefix, rbenv_prefix.join(' ')
-set :rbenv_map_bins, %w(rake gem bundle ruby rails)
-set :bundle_binstubs, -> { shared_path.join('bin') }
-
-
-# Configure 'whenever'
-vars = lambda do
-  "'environment=#{fetch :whenever_environment}" \
-  "&rbenv_root=#{fetch :rbenv_custom_path}" \
-  "&rbenv_version=#{fetch :rbenv_ruby}'"
-end
-set :whenever_variables, vars
+set :whenever_enviroment, 'production'
 
 # set :linked_files, %w{config/master.key}
 
