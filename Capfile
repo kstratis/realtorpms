@@ -8,6 +8,7 @@ require "capistrano/deploy"
 require 'capistrano/rails'
 require 'capistrano/passenger'
 require 'capistrano/rbenv'
+require 'whenever/capistrano'
 
 require 'capistrano/rails/console'
 # Load the SCM plugin appropriate to your project:
@@ -20,8 +21,6 @@ require 'capistrano/rails/console'
 # or
 require "capistrano/scm/git"
 install_plugin Capistrano::SCM::Git
-
-require "whenever/capistrano"
 
 set :rbenv_type, :user
 set :rbenv_ruby, '2.7.5'
