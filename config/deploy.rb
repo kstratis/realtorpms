@@ -21,8 +21,8 @@ set :default_environment, {
 
 ##
 # Rbenv Setup
-set :rbenv_type, :system
-set :rbenv_ruby, '2.7.5'
+# set :rbenv_type, :system
+# set :rbenv_ruby, '2.7.5'
 rbenv_prefix = [
   "RBENV_ROOT=#{fetch(:rbenv_path)}",
   "RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
