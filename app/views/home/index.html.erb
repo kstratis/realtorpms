@@ -10,7 +10,7 @@
     <![endif]-->
     <!-- site header -->
     <!-- .navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light py-4" data-aos="fade-in">
+    <nav class="navbar navbar-expand-lg navbar-light py-4">
       <!-- .container -->
       <div class="container">
         <!-- .hamburger -->
@@ -96,7 +96,7 @@
           <!-- .col-md-6 -->
 
           <!-- SVG SUN -->
-          <div class="col-12 d-lg-block d-none col-lg-5 order-md-2" data-aos="fade-left">
+          <div class="col-12 d-lg-block d-none col-lg-5 order-md-2" data-aos="fade-left" data-aos-offset="500" data-aos-duration="300">
             <svg id="sun" width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 80px; height: 80px;">
               <g class="line-sun1-rotate" style="animation-duration: 60s;">
                 <circle class="stroke1 fill1" cx="49.7501" cy="50" r="24" fill="rgba(248,231,28,1)" stroke="rgba(0,0,0,1)" stroke-width="6.0px"></circle>
@@ -124,7 +124,7 @@
             <%= image_pack_tag 'media/images/website/cityscape_w_background.svg', class: "img-fluid img-float-md-6 mb-5 mb-md-0", alt: 'cityscape background' %>
           </div><!-- /.col-md-6 -->
           <!-- .col-md-6 -->
-          <div class="col-12 col-lg-7 order-md-1" data-aos="fade-in">
+          <div class="col-12 col-lg-7 order-md-1">
             <div class="pl-xl-3 ml-auto text-center text-sm-left">
               <h1 class="display-4 enable-responsive-font-size mb-4">
                 <%= t('website.hero1') %><br><%= t('website.hero2') %></h1>
@@ -143,11 +143,11 @@
 
           <div class="card-deck-lg">
             <!-- .card -->
-            <div class="card feature-card shadow aos-init aos-animate vw-75" data-aos="fade-up" data-aos-delay="0">
+            <div class="card feature-card shadow aos-init aos-animate vw-75">
               <!-- .card-body -->
               <div class="card-body">
                 <div class="d-sm-flex align-items-start text-center text-sm-left ">
-                  <div class="col-12 text-center" data-aos="fade-up" data-aos-delay="0">
+                  <div class="col-12 text-center">
                     <div class="graphic-container">
                       <%= image_pack_tag 'media/images/website/engine.svg', class: "img-fluid py-2", alt: t('website.feature_strip.a.alt') %>
                     </div>
@@ -158,11 +158,11 @@
               </div><!-- /.card-body -->
             </div><!-- /.card -->
             <!-- .card -->
-            <div class="card feature-card shadow aos-init aos-animate vw-75" data-aos="fade-up" data-aos-delay="100">
+            <div class="card feature-card shadow aos-init aos-animate vw-75">
               <!-- .card-body -->
               <div class="card-body">
                 <div class="d-sm-flex align-items-start text-center text-sm-left">
-                  <div class="col-12 text-center" data-aos="fade-up" data-aos-delay="0">
+                  <div class="col-12 text-center">
                     <div class="graphic-container">
 <!--                      <div className="d-flex justify-content-center mt-2">-->
 <!--                        <i className="pr-icon md search" />-->
@@ -177,11 +177,11 @@
               </div><!-- /.card-body -->
             </div><!-- /.card -->
 
-            <div class="card feature-card shadow aos-init aos-animate vw-75" data-aos="fade-up" data-aos-delay="100">
+            <div class="card feature-card shadow aos-init aos-animate vw-75">
               <!-- .card-body -->
               <div class="card-body">
                 <div class="d-sm-flex align-items-start text-center text-sm-left">
-                  <div class="col-12 text-center" data-aos="fade-up" data-aos-delay="0">
+                  <div class="col-12 text-center">
                     <div class="graphic-container">
                       <%#= image_pack_tag 'media/images/website/home.svg', class: "img-fluid img-float-md-6 mb-5 mb-md-0" %>
                       <%= image_pack_tag 'media/images/website/portal.svg', class: "img-fluid py-2", alt: t('website.feature_strip.c.alt') %>
@@ -194,11 +194,11 @@
               </div><!-- /.card-body -->
             </div><!-- /.card -->
 
-            <div class="card feature-card shadow aos-init aos-animate vw-75" data-aos="fade-up" data-aos-delay="100">
+            <div class="card feature-card shadow aos-init aos-animate vw-75">
               <!-- .card-body -->
               <div class="card-body">
                 <div class="d-sm-flex align-items-start text-center text-sm-left">
-                  <div class="col-12 text-center" data-aos="fade-up" data-aos-delay="0">
+                  <div class="col-12 text-center">
                     <div class="graphic-container">
                       <%#= image_pack_tag 'media/images/website/home.svg', class: "img-fluid img-float-md-6 mb-5 mb-md-0" %>
                       <%= image_pack_tag 'media/images/website/encryption.svg', class: "img-fluid py-2", alt: t('website.feature_strip.d.alt') %>
@@ -347,39 +347,10 @@
       <div id="pricing" class="container position-relative">
         <h2 class="text-center"><%= t('website.pricing.header') %></h2>
         <p class="lead text-muted text-center mb-5"><%= t('website.pricing.subheader') %></p><!-- .row -->
-        <div class="row align-items-center">
+        <div class="row justify-content-center">
 
-          <div class="col-12 col-md-5 offset-md-1 py-md-4 pr-md-0">
-            <div class="card font-size-lg shadow-lg" data-aos="fade-up">
-              <h5 class="card-header text-center text-success p-4 px-lg-5"><%= t('website.pricing.free_license.title') %></h5>
-              <div class="card-body p-4 p-lg-5">
-                <h3 class="display-3 text-center">
-                  <small><%= t('website.pricing.free_license.motto') %></small>
-                </h3>
-                <p class="text-center text-muted mb-5"><%= t('website.pricing.free_license.header') %></p>
-                <ul class="list-icons">
-                  <li class="mb-2 pl-1">
-                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><%= t('website.pricing.free_license.bullet1') %></li>
-                  <li class="mb-2 pl-1">
-                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><%= t('website.pricing.free_license.bullet2') %></li>
-                  <li class="mb-2 pl-1">
-                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><%= t('website.pricing.free_license.bullet3') %></li>
-                  <li class="mb-2 pl-1">
-                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><%= t('website.pricing.free_license.bullet4') %></li>
-                  <li class="mb-2 pl-1">
-                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><%= t('website.pricing.free_license.bullet5') %></li>
-                </ul>
-              </div>
-              <div class="card-footer">
-                <% if logged_in? %>
-                  <a href="<%= redirect_to_app_url %>" class="card-footer-item p-4 px-lg-5"><strong><%= t('website.gotoapp') %></strong></a>
-                <% else %>
-                  <a href="<%= new_account_url %>" class="card-footer-item p-4 px-lg-5"><strong><%= t('website.pricing.cta_start_free') %></strong></a>
-                <% end %>
-              </div>
-            </div>
-          </div><!-- /.col -->
           <!-- .col -->
+<!--          <div class="col-12 col-md-5 py-md-4 pl-md-0">-->
           <div class="col-12 col-md-5 py-md-4 pl-md-0">
             <div class="card font-size-lg card-inverse bg-primary shadow" data-aos="fade-up" data-aos-delay="200">
               <h5 class="card-header text-center p-4 px-lg-5"><%= t('website.pricing.paid_license.title') %></h5>
@@ -387,7 +358,7 @@
                 <h3 class="display-3 text-center color-gold">
                   <%= t('website.pricing.paid_license.motto') %>
                 </h3>
-                <p class="text-center text-muted-light mb-5"><%= t('website.pricing.paid_license.header') %></p>
+                <p class="text-center text-muted-light mb-5"><u><%= t('website.pricing.paid_license.header') %></u></p>
                 <ul class="list-icons">
                   <li class="mb-2 pl-1">
                     <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><%= t('website.pricing.paid_license.bullet1') %></li><li class="mb-2 pl-1">
@@ -410,7 +381,22 @@
                 <% end %>
               </div>
             </div>
+
           </div><!-- /.col -->
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <p class="lead text-muted text-center mb-5">✓ <%= t('website.pricing.free_trial') %>&nbsp;✓ <%= t('website.pricing.no_credit_card') %>&nbsp;✓ <%= t('website.pricing.cancel_anytime') %></p>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div>
+            <p class="text-muted text-center mb-5"><%= t('website.pricing.money_back_html') %></p>
+          </div>
+        </div>
+
+
+
           <!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container -->

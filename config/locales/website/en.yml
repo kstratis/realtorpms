@@ -14,7 +14,7 @@ en:
       app: 'APP'
       signup: 'START FOR FREE'
       signin: 'LOGIN'
-    hero1: 'Best-in-class business software'
+    hero1: 'Flexible business software'
     hero2: 'for modern real estate brokerages'
     subheader: '%{brand} helps you manage your properties, clients, partners and more using our powerful engine and built-in automations'
     feature_strip:
@@ -57,24 +57,19 @@ en:
         body_html: "Invite realtors from other agencies using %{brand} to your own portal. They'll be able to only see the bits you allow them to and vice-versa."
     pricing:
       full_version: "Full version"
-      header: 'One solution for every business size'
-      subheader: 'Start free and upgrade while you grow'
+      header: 'Single, flat price'
+      subheader: 'No hidden functionality or features behind a paywall'
       offer: 'Free until the end of %{month}'
       cta: 'Sign up'
-      cta_start_free: 'START WITH FREE PLAN'
-      free_license:
-        title: 'Basic plan'
-        motto: 'Free forever'
-        header: 'For brokers working alone'
-        bullet1: 'Property management'
-        bullet2: 'Client management'
-        bullet3: 'Property matching'
-        bullet4: 'Showings'
-        bullet5: 'Portal'
+      free_trial: 'Free trial'
+      no_credit_card: 'No credit card required'
+      cancel_anytime: 'Cancel anytime'
+      cta_start_free: 'GET STARTED FOR FREE'
+      money_back_html: '<u>+ 30-days money back guarantee</u> if you stay unsatisfied'
       paid_license:
         title: 'Premium plan'
         motto: '€39/month'
-        header: 'Medium-sized brokerages'
+        header: 'after the trial period expires, if you opt-in'
         bullet1: 'Property management'
         bullet2: 'Client management'
         bullet3: 'Property matching'
