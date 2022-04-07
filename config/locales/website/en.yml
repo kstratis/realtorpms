@@ -10,6 +10,7 @@ en:
     nav:
       features: 'FEATURES'
       subscription: 'PRICING'
+      testimonials: 'TESTIMONIALS'
       contact: 'CONTACT'
       app: 'APP'
       signup: 'START FOR FREE'
@@ -55,6 +56,14 @@ en:
       f:
         title: 'Agent co-operations'
         body_html: "Invite realtors from other agencies using %{brand} to your own portal. They'll be able to only see the bits you allow them to and vice-versa."
+    testimonials:
+      header: 'TESTIMONIALS 🎙'
+      customer_1:
+        identity_html: "Jim Psomiadis - <a target='_blank' rel='noopener noreferrer' href='https://escalate.gr/en/?ref=%{brand}'>escalate.gr</a>"
+        body_html: '<i>%{brand} helped me put an order in the chaos of my daily tasks. The fully automated built-in properties website also helped me find new clients in brand new markets! </i> 🙏'
+      customer_2:
+        identity_html: "Stavros Stamou - Real estate broker"
+        body_html: '<i>%{brand} is a truly indispensable tool: A simple and intuitive management system which saves us countless manhours per month by helping us do the work that truly matters.  </i>'
     pricing:
       full_version: "Full version"
       header: 'Single, flat price'

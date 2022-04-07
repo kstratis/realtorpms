@@ -76,6 +76,9 @@
               <a class="nav-link py-2 black-color" href="#features"><%= t('website.nav.features') %></a>
             </li>
             <li class="nav-item mr-lg-3">
+              <a class="nav-link py-2 black-color" href="#testimonials"><%= t('website.nav.testimonials') %></a>
+            </li>
+            <li class="nav-item mr-lg-3">
               <a class="nav-link py-2 black-color" href="#pricing"><%= t('website.nav.subscription') %></a>
             </li>
             <li class="nav-item mr-lg-3">
@@ -335,6 +338,51 @@
         </div><!-- /.card-deck -->
       </div><!-- /.container -->
     </section><!-- /feature -->
+
+    <section class="position-relative py-5 bg-light">
+      <div id="testimonials" class="container position-relative">
+        <p>
+          <span id="features" class="callout-header">
+            <span class="text-center text-sm-left color-black letter-spacing-soft font-large pin-title font-weight-bold no-wrap"><%= t('website.testimonials.header') %></span>
+          </span>
+        </p>
+
+        <div class="card-deck-lg">
+          <div class="card feature-card shadow ">
+            <!-- .card-body -->
+            <div class="card-body">
+              <div class="d-sm-flex align-items-start text-center text-sm-left ">
+                <div class="col-12 text-center">
+                  <div class="graphic-container">
+                    <%= image_pack_tag 'media/images/testimonials/psom.jpg', class: "img-fluid w-25 pt-2 pb-3 testimonial-avatar", alt: 'avatar of client testimonial 1' %>
+                  </div>
+                  <h3 class="lead header"><strong><%= t('website.testimonials.customer_1.identity_html', brand: "#{BRANDNAME.downcase}.com") %></strong></h3>
+                  <h3 class="body"><%= t('website.testimonials.customer_1.body_html', brand: BRANDNAME) %></h3>
+                </div><!-- /.col -->
+              </div>
+            </div><!-- /.card-body -->
+          </div><!-- /.card -->
+
+          <div class="card feature-card shadow ">
+            <!-- .card-body -->
+            <div class="card-body">
+              <div class="d-sm-flex align-items-start text-center text-sm-left ">
+                <div class="col-12 text-center">
+                  <div class="graphic-container">
+                    <%= image_pack_tag 'media/images/testimonials/eustratiou.png', class: "img-fluid w-25 pt-2 pb-3 testimonial-avatar", alt: 'avatar of client testimonial 2' %>
+                  </div>
+                  <h3 class="lead header"><strong><%= t('website.testimonials.customer_2.identity_html') %></strong></h3>
+                  <h3 class="body"><%= t('website.testimonials.customer_2.body_html', brand: BRANDNAME) %></h3>
+                </div><!-- /.col -->
+              </div>
+            </div><!-- /.card-body -->
+          </div><!-- /.card -->
+
+        </div>
+
+      </div>
+    </section>
+
     <!-- feature -->
     <section class="position-relative py-5 bg-light">
       <!-- .sticker -->
