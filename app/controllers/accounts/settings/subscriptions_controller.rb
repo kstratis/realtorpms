@@ -48,7 +48,7 @@ module Accounts
       end
 
       def cancel_subscription
-        url = 'https://sandbox-vendors.paddle.com/api/2.0/subscription/users_cancel'
+        url = "#{Rails.application.credentials.dig(:paddle, :base_url)}subscription/users_cancel"
         request_body = {
           "vendor_id" => Rails.application.credentials.dig(:paddle, :vendor_id),
           "vendor_auth_code" => Rails.application.credentials.dig(:paddle, :vendor_auth_code),
@@ -65,7 +65,7 @@ module Accounts
       end
 
       def retrieve_checkout_url
-        url = 'https://sandbox-vendors.paddle.com/api/2.0/product/generate_pay_link'
+        url = "#{Rails.application.credentials.dig(:paddle, :base_url)}product/generate_pay_link"
         request_body = {
           "vendor_id" => Rails.application.credentials.dig(:paddle, :vendor_id),
           "vendor_auth_code" => Rails.application.credentials.dig(:paddle, :vendor_auth_code),
