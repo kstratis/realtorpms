@@ -50,8 +50,8 @@ module Accounts
       def cancel_subscription
         url = 'https://sandbox-vendors.paddle.com/api/2.0/subscription/users_cancel'
         request_body = {
-          "vendor_id" => 5206,
-          "vendor_auth_code" => "14d4ccf4f2d54b00a93a259a56cbd9aebe222060c888fc22fe",
+          "vendor_id" => Rails.application.credentials.dig(:paddle, :vendor_id),
+          "vendor_auth_code" => Rails.application.credentials.dig(:paddle, :vendor_auth_code),
           "subscription_id" => current_account.subscription_id
         }
 
@@ -67,9 +67,9 @@ module Accounts
       def retrieve_checkout_url
         url = 'https://sandbox-vendors.paddle.com/api/2.0/product/generate_pay_link'
         request_body = {
-          "vendor_id" => 5206,
-          "vendor_auth_code" => "14d4ccf4f2d54b00a93a259a56cbd9aebe222060c888fc22fe",
-          "product_id" => "25568",
+          "vendor_id" => Rails.application.credentials.dig(:paddle, :vendor_id),
+          "vendor_auth_code" => Rails.application.credentials.dig(:paddle, :vendor_auth_code),
+          "product_id" => Rails.application.credentials.dig(:paddle, :plan_id),
           "passthrough" => { "subdomain" => current_account.subdomain.to_s, "user_email" => current_user.email.to_s }.to_json,
           "customer_email" => current_user.email,
           "return_url" => settings_subscription_completed_path,
