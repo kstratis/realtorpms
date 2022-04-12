@@ -73,6 +73,9 @@ body::after {
 .app{
   background: $bg-color-1; //hack
 }
+#logo-overflow {
+  overflow: visible;
+}
 
 textarea {
   resize: vertical;
