@@ -85,8 +85,6 @@ module Accounts
         response = connection.post(url, request_body)
 
         parsed_response = JSON.parse(response.body)
-        Rails.logger.info '-==PRINTING URL==-'
-        Rails.logger.info parsed_response.dig('response', 'url')
 
         @paddle_checkout_url = parsed_response.dig('response', 'url')
       end
