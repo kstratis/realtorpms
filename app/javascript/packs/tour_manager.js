@@ -39,6 +39,16 @@ export default class TourManager {
             classes: 'flex-grow-1',
           },
         ],
+        when: {
+          // This prevents the overlapping between the "welcome" flash message and the tour guide
+          // when a user logs in for the first time
+          show: function() {
+            const flash_element = document.querySelectorAll('.alert button.close')[0]
+            if (flash_element) {
+              flash_element.click()
+            }
+          }
+        }
       },
       {
         id: 'properties-nav',

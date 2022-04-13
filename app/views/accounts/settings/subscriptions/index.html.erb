@@ -9,7 +9,7 @@
       <h3><%= t("settings.subscriptions.index.#{current_account.subscription_status}.expire_date_html", expiration_date: @expiration_date) %></h3>
       <h3><%= t("settings.subscriptions.index.#{current_account.subscription_status}.action_prompt_html") %></h3>
       <% if current_account.trial? || current_account.expired? || current_account.cancelled? %>
-        <button id="pay" class="btn btn-success btn-lg mt-4" data-payment-link="<%= @paddle_checkout_url %>" data-email="<%= current_user.email %>">
+        <button id="pay" class="btn btn-success btn-lg mt-4" data-vendor="<%= Rails.application.credentials.dig(:paddle, :vendor_id) %>" data-environment="<%= Rails.env %>" data-payment-link="<%= @paddle_checkout_url %>" data-email="<%= current_user.email %>">
           <i class="fas fa-rocket fa-fw"></i>&nbsp; <%= t('settings.subscriptions.activate_cta') %>
         </button>
       <% elsif current_account.active? %>
