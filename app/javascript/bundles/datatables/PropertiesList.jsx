@@ -450,7 +450,7 @@ const PropertiesList = ({
               <div className={`no-entries ${isLoading ? 'reduced-opacity' : ''}`}>
                 <i className="no-results-properties"> </i>
                 <h3>{i18n['no_results']}</h3>
-                <a href={new_property_endpoint} className={'btn btn-lg btn-primary'}>
+                <a href={new_property_endpoint} className={'btn btn-lg btn-outline-primary'}>
                   {i18n['new_property_cta']}
                 </a>
               </div>

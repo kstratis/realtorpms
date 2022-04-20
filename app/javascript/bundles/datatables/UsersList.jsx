@@ -517,7 +517,7 @@ const UsersList = ({
                 <div className={`no-entries ${isLoading ? 'reduced-opacity' : ''}`}>
                   <i className="no-results-partners"> </i>
                   <h3>{i18n['no_results']}</h3>
-                  <a href={meta['new_user_link']} className={'btn btn-lg btn-primary'}>
+                  <a href={meta['new_user_link']} className={'btn btn-lg btn-outline-primary'}>
                     {i18n['new_partner_cta']}
                   </a>
                 </div>

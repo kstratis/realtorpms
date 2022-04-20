@@ -76,7 +76,6 @@ module Accounts
           "title" => "RealtorPMS subscription",
           "image_url" => view_context.asset_pack_path('media/images/beaver_graphic_solo_hd.png')
         }
-        # 'vendor_id=5206&vendor_auth_code=14d4ccf4f2d54b00a93a259a56cbd9aebe222060c888fc22fe&product_id=&title=&webhook_url=&prices=&recurring_prices=&trial_days=&custom_message=&coupon_code=&discountable=&image_url=&return_url=&quantity_variable=&quantity=&expires=&marketing_consent=&customer_email=&customer_country=&customer_postcode=&is_recoverable=&passthrough=&vat_number=&vat_company_name=&vat_street=&vat_city=&vat_state=&vat_country=&vat_postcode='
 
         connection = Faraday.new(
           headers: { 'Content-Type' => 'application/x-www-form-urlencoded' },
