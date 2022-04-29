@@ -159,7 +159,7 @@ class Account < ApplicationRecord
         address: '15 Hudson Yard',
         unit: '#19D',
         account: self,
-        notes: 'Price negotiable but no lower than 3,800,000',
+        notes: 'Price negotiable but no lower than $3,800,000',
         availability: DateTime.current.to_date,
         ilocation: self.ilocations.create({ area: 'Hudson Yards' }),
         model_type: self.model_types.find_by(name: 'properties'),

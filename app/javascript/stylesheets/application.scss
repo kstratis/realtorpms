@@ -61,7 +61,7 @@ body::after {
 }
 
 .page-container {
-  //padding: 15px;
+  padding-top: 3.25rem;
   margin-bottom: 10px;
   border: 0 none;
   border-radius: 3px;
@@ -1283,6 +1283,10 @@ i.fa-lock:hover{
   //background-color: #455a64;
   //background-color: #263238;
   //background-color: #32363c;
+}
+
+.app-header{
+  z-index: 1032;
 }
 
 .app-header-dark .top-bar-brand {
@@ -2665,4 +2669,11 @@ footer:not(.auth-footer){
   font-weight: bold;
   letter-spacing: 1.5px;
   box-shadow: 0 calc(-1*var(--f)) 0 inset #0005;
+}
+
+.fixed-breadcrumb-navbar{
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 1030;
 }
