@@ -70,7 +70,7 @@
                   </div><!-- .card-body -->
                   <div class="card-body">
 
-                    <%= render partial: 'accounts/properties/features', locals: { features: Property.basic_features, classNames: 'table-striped first-row-no-border' } %>
+                    <%= render partial: 'accounts/properties/features', locals: { features: Property.basic_features(current_account), classNames: 'table-striped first-row-no-border' } %>
                   </div><!-- /.card-body -->
                 </div><!-- /.card -->
               </div>
@@ -97,7 +97,7 @@
                     </div>
                   </div><!-- .card-body -->
                   <div class="card-body">
-                    <%= render partial: 'accounts/properties/features', locals: { features: Property.extended_features, classNames: 'table-borderless normalize-table' } %>
+                    <%= render partial: 'accounts/properties/features', locals: { features: Property.extended_features(current_account), classNames: 'table-borderless normalize-table' } %>
                   </div><!-- /.card-body -->
                 </div><!-- /.card -->
               </div>

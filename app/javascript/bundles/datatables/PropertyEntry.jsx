@@ -89,6 +89,7 @@ class PropertyEntry extends React.Component {
                     </div>
                   ) : (
                     <>
+                      {this.props.entry['sample'] ? <div className="sample-ribbon">{this.props.i18n['sample']}</div> : '' }
                       <table className="table table-property-entry table-borderless">
                         <tbody>
                           <tr>

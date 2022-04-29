@@ -39,7 +39,7 @@ class Account < ApplicationRecord
   validates_associated :owner
 
   before_create :confirmation_token
-  after_create :build_custom_fields
+  after_create :build_custom_fields, :generate_sample_properties
 
   before_validation do
     self.subdomain = self.subdomain.downcase unless subdomain.blank?
@@ -91,6 +91,104 @@ class Account < ApplicationRecord
   def build_custom_fields
     %w(users properties clients).each do |el|
       self.model_types.create(name: el.to_s)
+    end
+  end
+
+  def generate_sample_properties
+    if greek?
+      sample_data_a = {
+          title: 'Νεόδμητο διαμέρισμα στο Γαλάτσι',
+          description: 'Διαμέρισμα 85τμ 1ου ορόφου, νεόδμητο, με εκπληκτική θέα θάλασσα, πολυτελούς κατασκευής με ακριβά υλικά, άριστα σχεδιασμένα σε minimal γραμμές. Διαθέτει 2υ/δ, ένα πλήρες μπάνιο, wc επισκεπτών, χώρο υποδοχής με τζάκι και κουζίνα open plan. Επιπλέον διαθέτει εξωτερική θερμοπρόσοψη, κουφώματα με θερμοδιακοπή και ενεργειακά κρύσταλλα, ενδοδαπέδια θέρμανση με ατομικό λέβητα φυσικού αερίου.',
+          businesstype: :sell,
+          category: Category.find(5),
+          size: 85,
+          price: 285000,
+          bedrooms: 2,
+          floor: 3,
+          construction: 2018,
+          account: self,
+          location: Location.find(2122),
+          model_type: self.model_types.find_by(name: 'properties'),
+          sample: true
+        }
+      sample_data_b = {
+        title: 'Επαγγελματικός χώρος στην Βούλα',
+        description: 'Γραφείο 1ου ορόφου με κουζινάκι και 2 WC. Παρέχει κλιματισμό, έχει δομημένη καλωδίωση καθώς και φωτιστικά οροφής. Πρόκειται για εξαιρετική τοποθεσία σε ήσυχο μέρος με θέα δάσος.',
+        businesstype: :sell,
+        category: Category.find(14),
+        size: 125,
+        price: 400000,
+        bedrooms: 0,
+        floor: 1,
+        construction: 2001,
+        account: self,
+        location: Location.find(2205),
+        model_type: self.model_types.find_by(name: 'properties'),
+        sample: true
+      }
+      propertya = properties.create!(sample_data_a)
+      propertyb = properties.create!(sample_data_b)
+      propertya.avatar.attach(
+        io: File.open("#{ENV['MEDIA_DIR']}property_sample_1.webp"),
+        filename: "property_sample_1"
+      )
+      propertya.images.attach(
+        io: File.open("#{ENV['MEDIA_DIR']}property_sample_2.webp"),
+        filename: "property_sample_2"
+      )
+      propertyb.avatar.attach(
+        io: File.open("#{ENV['MEDIA_DIR']}property_sample_3.webp"),
+        filename: "property_sample_3"
+      )
+      propertyb.images.attach(
+        io: File.open("#{ENV['MEDIA_DIR']}property_sample_4.webp"),
+        filename: "property_sample_4"
+      )
+    else
+      sample_data_c = {
+        title: '25 Hudson Yard #19D, New York, NY 10001',
+        description: 'Take advantage of this unique opportunity to purchase this luxurious resale unit (no transfer taxes) with tons of upgrades (including window treatments, lighting upgrades, custom closets, customized bathroom hardware, and glass shower enclosure in the second bath) at an incredible price.',
+        businesstype: :sell,
+        category: Category.find(5),
+        size: 1563,
+        price: 4000000,
+        bedrooms: 2,
+        bathrooms: 3,
+        floor: 2,
+        construction: 1990,
+        address: '15 Hudson Yard',
+        unit: '#19D',
+        account: self,
+        notes: 'Price negotiable but no lower than 3,800,000',
+        availability: DateTime.current.to_date,
+        ilocation: self.ilocations.create({ area: 'Hudson Yards' }),
+        model_type: self.model_types.find_by(name: 'properties'),
+        sample: true
+      }
+      # sample_data_d = {
+      #   title: 'Επαγγελματικός χώρος στην Βούλα',
+      #   description: 'Γραφείο 1ου ορόφου με κουζινάκι και 2 WC. Παρέχει κλιματισμό, έχει δομημένη καλωδίωση καθώς και φωτιστικά οροφής. Πρόκειται για εξαιρετική τοποθεσία σε ήσυχο μέρος με θέα δάσος.',
+      #   businesstype: :sell,
+      #   category: Category.find(14),
+      #   size: 125,
+      #   price: 400000,
+      #   bedrooms: 0,
+      #   floor: 1,
+      #   construction: 2001,
+      #   account: self,
+      #   location: Location.find(2205),
+      #   model_type: self.model_types.find_by(name: 'properties'),
+      #   sample: true
+      # }
+      propertyc = properties.create!(sample_data_c)
+      propertyc.avatar.attach(
+        io: File.open("#{ENV['MEDIA_DIR']}property_sample_1_en.webp"),
+        filename: "property_sample_1_en"
+      )
+      propertyc.images.attach(
+        io: File.open("#{ENV['MEDIA_DIR']}property_sample_2_en.webp"),
+        filename: "property_sample_2_en"
+      )
     end
   end
 
