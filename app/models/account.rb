@@ -181,6 +181,9 @@ class Account < ApplicationRecord
       #   sample: true
       # }
       propertyc = properties.create!(sample_data_c)
+      # central heating, fireplace, clima and furnished
+      extras = Extra.find([16, 23, 27, 22])
+      propertyc.extras << extras
       propertyc.avatar.attach(
         io: File.open("#{ENV['MEDIA_DIR']}property_sample_1_en.webp"),
         filename: "property_sample_1_en"

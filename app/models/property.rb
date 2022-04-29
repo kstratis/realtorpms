@@ -146,7 +146,7 @@ class Property < ApplicationRecord
 
     def basic_features(account)
       {
-          :businesstype => {:label => 'businesstype', :icon => 'businesstype', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : '<mark class="highlighted">'+ I18n.t("activerecord.attributes.property.enums.businesstype.#{value}") + '</mark>'} },
+          :businesstype => {:label => 'businesstype', :icon => 'businesstype', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : '<mark class="highlighted">'+ I18n.t("activerecord.attributes.property.enums.businesstype.#{value}_heading") + '</mark>'} },
           :category_info => {:label => 'subcategory', :icon => 'subcategory', :options => 'slug', :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.subcategory.#{value}")} },
           #:location_info => {:label => 'location', :icon => 'location', :options => 'localname', :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
           :size => {:label => 'size', :icon => 'size', :options => nil, :renderfn => Proc.new {|value| value ? I18n.t('activerecord.attributes.property.size_meter_html', size: value.to_s) : '—' }},

@@ -365,6 +365,9 @@ el:
             sell_banner: "ΠΩΛΕΙΤΑΙ"
             rent_banner: "ΕΝΟΙΚΙΑΖΕΤΑΙ"
             sell_rent_banner: "ΔΙΑΤΙΘΕΤΑΙ"
+            sell_heading: "ΠΩΛΗΣΗ"
+            rent_heading: "ΕΝΟΙΚΙΑΣΗ"
+            sell_rent_heading: "ΔΙΑΘΕΣΗ"
           floor:
             basement: "Υπόγειο"
             semi_basement: "Ημιυπόγειο"

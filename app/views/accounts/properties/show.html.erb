@@ -134,11 +134,13 @@
                     </div>
                   </div><!-- .card-body -->
                   <div class="card-body">
+                    <div class="description-wrapper">
                     <% if @property.description.blank? %>
                       <h3><%= t('activerecord.attributes.property.description_not_found') %></h3>
                     <% else %>
                       <div><%= @property.description %></div>
                     <% end %>
+                    </div>
                   </div><!-- /.card-body -->
                 </div><!-- /.card -->
               </div>
