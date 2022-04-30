@@ -415,7 +415,6 @@
                                 <i class="fas fa-info-circle"></i>
                               </span>
                             <% end %>
-                            <label class="control-label" for="notes"><%= t('activerecord.attributes.property.notes_title') %></label>
                             <%= property.text_area :notes,
                                                    class: 'form-control',
                                                    id: 'notes',
@@ -528,7 +527,7 @@
                                 ajaxEnabled: true,
                                 accountFlavor: current_account.flavor,
                                 i18n: {
-                                    select: t('js.components.select.add'),
+                                    select: t('js.components.select'),
                                     validatorErrMsg: t('js.validator.required'),
                                 }
                             }, prerender: false) %>

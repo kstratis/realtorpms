@@ -293,6 +293,7 @@ class Property < ApplicationRecord
   end
 
   def destroy_orphan_ilocations
+    return if account.greek?
     return unless orphan_ilocation?
 
     self.ilocation.destroy!

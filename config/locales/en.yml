@@ -352,7 +352,7 @@ en:
         owner_title: "Owner/s"
         owner_header_name: "Name"
         owner_header_tel: "Tel."
-        owner_header_missing: "No owner found!"
+        owner_header_missing: "No registered owner found!"
         contact: "Contact"
         contact_title: "Contact"
         created_at: "Entry date"
