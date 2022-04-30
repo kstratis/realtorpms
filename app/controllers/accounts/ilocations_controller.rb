@@ -18,6 +18,7 @@ module Accounts
 
     def create
       @ilocation = current_account.ilocations.new(ilocation_params)
+      binding.pry
 
       if @ilocation.save
         respond_to do |format|

@@ -4,6 +4,8 @@ class Property < ApplicationRecord
 
   include Filterable
 
+  after_destroy :destroy_orphan_ilocations
+
   # History module is used for the redirects
   friendly_id :unique_identifier, use: [:slugged, :finders, :history]
 
@@ -117,7 +119,7 @@ class Property < ApplicationRecord
   # Look only for iframes
   validates :map_url, format: { with: /(?:<iframe[^>]*)(?:(?:\/>)|(?:>.*?<\/iframe>))/i }, if: -> { map_url.present? }
 
-  DEFAULT_ATTRIBUTE_RENDER_FN = Proc.new {|value| value.blank? ? '—' : value}
+  DEFAULT_ATTRIBUTE_RENDER_FN = Proc.new { |value| value.blank? ? '—' : value }
 
   def pricepersqmeter
     (price / size.to_f).ceil.to_s unless price.blank? || size.blank? || size == 0
@@ -142,32 +144,36 @@ class Property < ApplicationRecord
     #   }.freeze
     # end
 
-    def basic_features
+    def basic_features(account)
       {
-          :businesstype => {:label => 'businesstype', :icon => 'businesstype', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : '<mark class="highlighted">'+ I18n.t("activerecord.attributes.property.enums.businesstype.#{value}") + '</mark>'} },
+          :businesstype => {:label => 'businesstype', :icon => 'businesstype', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : '<mark class="highlighted">'+ I18n.t("activerecord.attributes.property.enums.businesstype.#{value}_heading") + '</mark>'} },
           :category_info => {:label => 'subcategory', :icon => 'subcategory', :options => 'slug', :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.subcategory.#{value}")} },
           #:location_info => {:label => 'location', :icon => 'location', :options => 'localname', :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
           :size => {:label => 'size', :icon => 'size', :options => nil, :renderfn => Proc.new {|value| value ? I18n.t('activerecord.attributes.property.size_meter_html', size: value.to_s) : '—' }},
-          :price => {:label => 'price', :icon => 'price', :options => nil, :renderfn => Proc.new {|value| value ? ActionController::Base.helpers.number_to_currency(value) : '—' }},
-          :pricepersqmeter => {:label => 'pricepersqmeter', :icon => 'pricepersqmeter', :options => nil, :renderfn => Proc.new {|value| value ? ActionController::Base.helpers.number_to_currency(value) : '—' }},
+          :price => {:label => 'price', :icon => 'price', :options => nil, :renderfn => Proc.new {|value| value ? ActionController::Base.helpers.number_to_currency(value, precision: 0, round_mode: :up) : '—' }},
+          :pricepersqmeter => {:label => 'pricepersqmeter', :icon => 'pricepersqmeter', :options => nil, :renderfn => Proc.new {|value| value ? ActionController::Base.helpers.number_to_currency(value, precision: 0, round_mode: :up) : '—' }},
           :created_at => {:label => 'created_at', :icon => 'created_at', :options => nil, :renderfn => Proc.new {|value| value ? (I18n.l value, format: :custom) : '—' } },
           :map_url => {:label => 'location', :icon => 'location', :options => nil, :renderfn => Proc.new {|value| "<button type='button' class='btn btn-secondary btn-sm printable' data-url='#{value.blank? ? '' : Property.iframe_parse(value) }' #{value.blank? ? 'disabled' : nil }><i class='fas fa-map fa-fw'></i></button>&nbsp;&nbsp;&nbsp;#{value.blank? ? "<span class='property-cover-popover' data-toggle='popover' data-placement='top' data-trigger='hover' data-content='#{I18n.t('properties.map_feedback')}'><i class='fas fa-info-circle'></i></span>" : nil}"}},
           :active => {:label => 'status', :icon => 'status', :options => nil, :renderfn => Proc.new {|value| value ? "#{I18n.t('activerecord.attributes.property.status_active')} <div class='indicator indicator-on'></div>" : "#{I18n.t('activerecord.attributes.property.status_inactive')} <div class='indicator indicator-off'></div>"}}
       }.freeze
     end
 
-    def extended_features
-      {
+    def extended_features(account)
+      extended = {
           :bedrooms => {:label => 'bedrooms', :icon => 'bedrooms', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
           :bathrooms => {:label => 'bathrooms', :icon => 'bathrooms', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
           :floor => {:label => 'floor', :icon => 'floor', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.floor.#{value}")}},
           # :render_extra => {:label => 'parking', :icon => 'parking', :options => 'parking', :renderfn => Proc.new {|value| value.blank? ? I18n.t('false') : I18n.t('true')}}, # Casting tip see here: https://stackoverflow.com/a/44322375/178728
           :construction => {:label => 'construction', :icon => 'construction', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
           :address => {:label => 'address', :icon => 'address', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
-          :availability => {:label => 'availability', :icon => 'availability', :options => nil, :renderfn => Proc.new {|value| value ? (I18n.l value, format: :showings) : '—' }},
-          :energy_cert => {:label => 'energy_cert', :icon => 'energy_cert', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : '<mark class="highlighted">'+ I18n.t("activerecord.attributes.property.enums.energy_cert.#{value}") + '</mark>'} },
+          :availability => {:label => 'availability', :icon => 'availability', :options => nil, :renderfn => Proc.new {|value| value ? (I18n.l value, format: :showings) : '—' }}
           # :owner_info => {:label => 'owner', :icon => 'client', :options => 'full_name', :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN}
-      }.freeze
+      }
+      if account.greek?
+        extended.merge(:energy_cert => {:label => 'energy_cert', :icon => 'energy_cert', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : '<mark class="highlighted">'+ I18n.t("activerecord.attributes.property.enums.energy_cert.#{value}") + '</mark>'} },)
+      else
+        extended.reverse_merge(:unit => {:label => 'unit', :icon => 'unit', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN })
+      end
     end
   end
 
@@ -284,5 +290,16 @@ class Property < ApplicationRecord
     return if has_energy_cert?
 
     write_attribute(:energy_cert, nil)
+  end
+
+  def destroy_orphan_ilocations
+    return if account.greek?
+    return unless orphan_ilocation?
+
+    self.ilocation.destroy!
+  end
+
+  def orphan_ilocation?
+    self.account.properties.joins(:ilocation).where(ilocations: { area: self.ilocation.area }).empty?
   end
 end

@@ -22,7 +22,7 @@
     <div class="col-7">
       <table class="table ">
         <tbody>
-        <% Property.basic_features.except(:created_at, :map_url, :pricepersqmeter).each do |key, value| %>
+        <% Property.basic_features(current_account).except(:created_at, :map_url, :pricepersqmeter).each do |key, value| %>
           <tr>
             <td class="align-middle nowrap">
               <div class="table-entry">
@@ -42,7 +42,7 @@
       <h2 class="decorated"><span><%= t 'properties.info' %></span></h2>
       <table class="table ">
         <tbody>
-        <% Property.extended_features.except(:address).each do |key, value| %>
+        <% Property.extended_features(current_account).except(:address).each do |key, value| %>
           <tr>
             <td class="align-middle nowrap">
               <div class="table-entry">

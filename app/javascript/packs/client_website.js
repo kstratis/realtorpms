@@ -54,21 +54,20 @@ function initCarousels() {
 
   if ($('#splide-gallery').length === 0) return;
 
-  var splide = new window.Splide('#splide-gallery', { pagination: false });
-  var images = document.querySelectorAll( '.js-thumbnails li' );
+  var splide = new window.Splide('#splide-gallery', { type: 'loop', pagination: false });
+  var images = $('.js-thumbnails li');
 
   var activeImage;
   var activeClass = 'is-active';
 
-  for ( let i = 0, len = images.length; i < len; i++ ) {
-    const image = images[ i ];
-
-    splide.on( 'click', function () {
-      if ( activeImage !== image ) {
-        splide.go( i );
+  // Thumbnails functionality
+  $(images).each(function(index, image){
+    $(image).on('click', function () {
+      if ( activeImage !== image) {
+        splide.go( index );
       }
-    }, image );
-  }
+    });
+  });
 
   splide.on( 'mounted move', function ( newIndex ) {
     // Deactivate dragging when there's a single slide
