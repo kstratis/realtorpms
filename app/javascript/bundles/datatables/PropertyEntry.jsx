@@ -124,7 +124,7 @@ class PropertyEntry extends React.Component {
                             this.props.entry.size &&
                             this.props.entry.businesstype === 'sell' ? (
                               <td className={'text-right text-nowrap'}>
-                                {renderHTML(this.props.entry.pricepersqmeter, 'inline')}
+                                {renderHTML(this.props.entry.pricepersize, 'inline')}
                               </td>
                             ) : null}
                           </tr>

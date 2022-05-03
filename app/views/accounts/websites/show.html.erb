@@ -64,7 +64,7 @@
             : <strong class="price-span"><%= number_to_currency(@property.price) %></strong></div>
           <% if @property.size.present? %>
             <div><%= t('activerecord.attributes.property.pricepersqmeter_title_html') %>
-              : <strong class="price-span"><%= number_to_currency(@property.pricepersqmeter) %></strong></div>
+              : <strong class="price-span"><%= number_to_currency(@property.pricepersize) %></strong></div>
           <% end %>
         <% end %>
         <% if @property.description.present? %>

@@ -22,7 +22,7 @@
     <div class="col-7">
       <table class="table ">
         <tbody>
-        <% Property.basic_features(current_account).except(:created_at, :map_url, :pricepersqmeter).each do |key, value| %>
+        <% Property.basic_features(current_account).except(:created_at, :map_url, :pricepersize).each do |key, value| %>
           <tr>
             <td class="align-middle nowrap">
               <div class="table-entry">

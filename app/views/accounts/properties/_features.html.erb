@@ -8,8 +8,12 @@
             <div class="table-icon-wrapper">
               <i class="pr-icon xs <%= value[:icon] %>"></i>
             </div>
-            <% if value[:label] == 'pricepersqmeter' %>
-              <span class="align-middle">&nbsp;&nbsp;<%= t("activerecord.attributes.property.#{value[:label].to_s}_title_html") %></span>
+            <% if value[:label] == 'pricepersize' %>
+              <% if current_account.greek? %>
+                <span class="align-middle">&nbsp;&nbsp;<%= t("activerecord.attributes.property.#{value[:label].to_s}_meters_title_html") %></span>
+              <% else %>
+                <span class="align-middle">&nbsp;&nbsp;<%= t("activerecord.attributes.property.#{value[:label].to_s}_feet_title_html") %></span>
+              <% end %>
             <% else %>
               <span class="align-middle">&nbsp;&nbsp;<%= t("activerecord.attributes.property.#{value[:label].to_s}_title") %></span>
             <% end %>

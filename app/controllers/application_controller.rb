@@ -7,8 +7,10 @@ class ApplicationController < ActionController::Base
   include LanguageSwitcher
   helper UserAvatar
   include TimelineHelper
+  include SizeConverter
 
   helper_method :greek_user?
+  helper_method :print_size
 
   rescue_from ActiveRecord::RecordNotFound, with: -> { render_404  }
 

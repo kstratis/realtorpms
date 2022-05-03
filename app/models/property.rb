@@ -1,5 +1,7 @@
 class Property < ApplicationRecord
   extend FriendlyId
+  extend SizeConverter
+
   include Searchable
 
   include Filterable
@@ -121,7 +123,7 @@ class Property < ApplicationRecord
 
   DEFAULT_ATTRIBUTE_RENDER_FN = Proc.new { |value| value.blank? ? '—' : value }
 
-  def pricepersqmeter
+  def pricepersize
     (price / size.to_f).ceil.to_s unless price.blank? || size.blank? || size == 0
   end
 
@@ -146,28 +148,28 @@ class Property < ApplicationRecord
 
     def basic_features(account)
       {
-          :businesstype => {:label => 'businesstype', :icon => 'businesstype', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : '<mark class="highlighted">'+ I18n.t("activerecord.attributes.property.enums.businesstype.#{value}_heading") + '</mark>'} },
-          :category_info => {:label => 'subcategory', :icon => 'subcategory', :options => 'slug', :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.subcategory.#{value}")} },
-          #:location_info => {:label => 'location', :icon => 'location', :options => 'localname', :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
-          :size => {:label => 'size', :icon => 'size', :options => nil, :renderfn => Proc.new {|value| value ? I18n.t('activerecord.attributes.property.size_meter_html', size: value.to_s) : '—' }},
-          :price => {:label => 'price', :icon => 'price', :options => nil, :renderfn => Proc.new {|value| value ? ActionController::Base.helpers.number_to_currency(value, precision: 0, round_mode: :up) : '—' }},
-          :pricepersqmeter => {:label => 'pricepersqmeter', :icon => 'pricepersqmeter', :options => nil, :renderfn => Proc.new {|value| value ? ActionController::Base.helpers.number_to_currency(value, precision: 0, round_mode: :up) : '—' }},
-          :created_at => {:label => 'created_at', :icon => 'created_at', :options => nil, :renderfn => Proc.new {|value| value ? (I18n.l value, format: :custom) : '—' } },
-          :map_url => {:label => 'location', :icon => 'location', :options => nil, :renderfn => Proc.new {|value| "<button type='button' class='btn btn-secondary btn-sm printable' data-url='#{value.blank? ? '' : Property.iframe_parse(value) }' #{value.blank? ? 'disabled' : nil }><i class='fas fa-map fa-fw'></i></button>&nbsp;&nbsp;&nbsp;#{value.blank? ? "<span class='property-cover-popover' data-toggle='popover' data-placement='top' data-trigger='hover' data-content='#{I18n.t('properties.map_feedback')}'><i class='fas fa-info-circle'></i></span>" : nil}"}},
-          :active => {:label => 'status', :icon => 'status', :options => nil, :renderfn => Proc.new {|value| value ? "#{I18n.t('activerecord.attributes.property.status_active')} <div class='indicator indicator-on'></div>" : "#{I18n.t('activerecord.attributes.property.status_inactive')} <div class='indicator indicator-off'></div>"}}
-      }.freeze
+        :businesstype => {:label => 'businesstype', :icon => 'businesstype', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : '<mark class="highlighted">'+ I18n.t("activerecord.attributes.property.enums.businesstype.#{value}_heading") + '</mark>'} },
+        :category_info => {:label => 'subcategory', :icon => 'subcategory', :options => 'slug', :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.subcategory.#{value}")} },
+        #:location_info => {:label => 'location', :icon => 'location', :options => 'localname', :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
+        :size => { :label => 'size', :icon => 'size', :options => nil, :renderfn => Proc.new { |value| value.blank? ? '—' : print_size(value, account) } },
+        :price => {:label => 'price', :icon => 'price', :options => nil, :renderfn => Proc.new {|value| value ? ActionController::Base.helpers.number_to_currency(value, precision: 0, round_mode: :up) : '—' }},
+        :pricepersize => { :label => 'pricepersize', :icon => 'pricepersqmeter', :options => nil, :renderfn => Proc.new {|value| value ? ActionController::Base.helpers.number_to_currency(value, precision: 0, round_mode: :up) : '—' }},
+        :created_at => {:label => 'created_at', :icon => 'created_at', :options => nil, :renderfn => Proc.new {|value| value ? (I18n.l value, format: :custom) : '—' } },
+        :map_url => {:label => 'location', :icon => 'location', :options => nil, :renderfn => Proc.new {|value| "<button type='button' class='btn btn-secondary btn-sm printable' data-url='#{value.blank? ? '' : Property.iframe_parse(value) }' #{value.blank? ? 'disabled' : nil }><i class='fas fa-map fa-fw'></i></button>&nbsp;&nbsp;&nbsp;#{value.blank? ? "<span class='property-cover-popover' data-toggle='popover' data-placement='top' data-trigger='hover' data-content='#{I18n.t('properties.map_feedback')}'><i class='fas fa-info-circle'></i></span>" : nil}"}},
+        :active => {:label => 'status', :icon => 'status', :options => nil, :renderfn => Proc.new {|value| value ? "#{I18n.t('activerecord.attributes.property.status_active')} <div class='indicator indicator-on'></div>" : "#{I18n.t('activerecord.attributes.property.status_inactive')} <div class='indicator indicator-off'></div>"}}
+      }
     end
 
     def extended_features(account)
       extended = {
-          :bedrooms => {:label => 'bedrooms', :icon => 'bedrooms', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
-          :bathrooms => {:label => 'bathrooms', :icon => 'bathrooms', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
-          :floor => {:label => 'floor', :icon => 'floor', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.floor.#{value}")}},
-          # :render_extra => {:label => 'parking', :icon => 'parking', :options => 'parking', :renderfn => Proc.new {|value| value.blank? ? I18n.t('false') : I18n.t('true')}}, # Casting tip see here: https://stackoverflow.com/a/44322375/178728
-          :construction => {:label => 'construction', :icon => 'construction', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
-          :address => {:label => 'address', :icon => 'address', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
-          :availability => {:label => 'availability', :icon => 'availability', :options => nil, :renderfn => Proc.new {|value| value ? (I18n.l value, format: :showings) : '—' }}
-          # :owner_info => {:label => 'owner', :icon => 'client', :options => 'full_name', :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN}
+        :bedrooms => {:label => 'bedrooms', :icon => 'bedrooms', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
+        :bathrooms => {:label => 'bathrooms', :icon => 'bathrooms', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
+        :floor => {:label => 'floor', :icon => 'floor', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.floor.#{value}")}},
+        # :render_extra => {:label => 'parking', :icon => 'parking', :options => 'parking', :renderfn => Proc.new {|value| value.blank? ? I18n.t('false') : I18n.t('true')}}, # Casting tip see here: https://stackoverflow.com/a/44322375/178728
+        :construction => {:label => 'construction', :icon => 'construction', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
+        :address => {:label => 'address', :icon => 'address', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
+        :availability => {:label => 'availability', :icon => 'availability', :options => nil, :renderfn => Proc.new {|value| value ? (I18n.l value, format: :showings) : '—' }}
+        # :owner_info => {:label => 'owner', :icon => 'client', :options => 'full_name', :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN}
       }
       if account.greek?
         extended.merge(:energy_cert => {:label => 'energy_cert', :icon => 'energy_cert', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : '<mark class="highlighted">'+ I18n.t("activerecord.attributes.property.enums.energy_cert.#{value}") + '</mark>'} },)

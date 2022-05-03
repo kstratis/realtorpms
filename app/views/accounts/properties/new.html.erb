@@ -236,8 +236,11 @@
                                 <% end %>
                               </label>
                             </div>
-                            <small class="form-text text-muted"><%= t('activerecord.attributes.property.size_feedback_html') %>
-                            </small>
+                            <% if current_account.greek? %>
+                              <small class="form-text text-muted"><%= t('activerecord.attributes.property.size_meter_feedback_html') %></small>
+                            <% else %>
+                              <small class="form-text text-muted"><%= t('activerecord.attributes.property.size_feet_feedback_html') %></small>
+                            <% end %>
                             <div class="invalid-feedback"></div>
                           </div>
                         </div>
