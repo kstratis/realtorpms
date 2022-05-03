@@ -161,7 +161,7 @@
                     <p class="card-title" style="font-size: 15px;">
                       <%= t("activerecord.attributes.property.enums.subcategory.#{property.category.slug}") %>
                       <% if property.size.present? %>
-                        <span>| </span><span><%= "#{property.size} #{t('sq_meters_html')}".html_safe %></span>
+                        <span>| </span><span><%= print_size(property.size, property.account) %></span>
                       <% end %>
                       <%#= property.size.present? ? "| #{property.size} #{t('sq_meters_html')}".html_safe : nil %>
                     </p>

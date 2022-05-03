@@ -1135,9 +1135,9 @@ en:
       new_button: "Add new property"
       pin_shoutout_html: |
         <ul>
-        <li>Properties of your choice show up on your <a target="_blank" href="%{site}"><i class="fas fa-link fa-fw"></i>portal</a> by flipping the "<strong>available on your portal</strong>" switch under a property's <strong>settings</strong>.</li>
-        <li>If you choose to also "pin" (<i class="fas fa-bookmark fa-fw"></i>) a property, it will show up on your <a href="%{site}">portal</a> when no search query exist.</li> 
-        <li>Try pinning a couple of properties in order to enrich your <a href="%{site}">portal</a>'s landing page.</li>
+        <li>Properties you select show up on your <a target="_blank" href="%{site}"><i class="fas fa-link fa-fw"></i>portal</a> by flipping the "<strong>available on your portal</strong>" switch under the quick actions submenu <nobr>(<i class="fas fa-bolt fa-fw"></i>)</nobr> from within the property <strong>show</strong> screen.</li>
+        <li>If you choose to also "pin" (<i class="fas fa-bookmark fa-fw"></i>) a property, it will show up on your <a href="%{site}">portal</a> <u>when no search query exist</u>.</li> 
+        <li>Try pinning a few properties to enrich your <a href="%{site}">portal</a>'s default look.</li>
         </ul>
     show:
       quick_actions:
