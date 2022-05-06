@@ -164,7 +164,7 @@
                         <!-- grid column -->
 
                         <!-- Floor -->
-                        <div class="col-md-6 col-sm-12">
+                        <div class="col-md-6 col-sm-12 form-field-container">
                           <div class="form-group mb-4">
                             <%= property.label :floor do %>
                               <%= Property.human_attribute_name(:floor) %>
@@ -196,7 +196,7 @@
                         </div>
 
                         <!-- Construction -->
-                        <div class="col-md-6 col-sm-12">
+                        <div class="col-md-6 col-sm-12 form-field-container">
                           <div class="form-group mb-4">
                             <%= property.label :construction do %>
                               <%= Property.human_attribute_name(:construction) %>
@@ -228,7 +228,7 @@
                         </div>
 
                         <!-- Size -->
-                        <div class="col-md-6 col-sm-12">
+                        <div class="col-md-6 col-sm-12 form-field-container">
                           <div class="form-group mb-4">
                             <div class="form-label-group">
                               <%= property.text_field :size,
@@ -254,7 +254,7 @@
                         </div>
 
                         <!-- Bedrooms -->
-                        <div class="col-md-6 col-sm-12">
+                        <div class="col-md-6 col-sm-12 form-field-container">
                           <div class="form-group mb-4">
                             <div class="form-label-group">
                               <%= property.text_field :bedrooms,
@@ -277,7 +277,7 @@
                         </div>
 
                         <!-- Bathrooms -->
-                        <div class="col-md-6 col-sm-12">
+                        <div class="col-md-6 col-sm-12 form-field-container">
                           <div class="form-group mb-4">
                             <div class="form-label-group">
                               <%= property.text_field :bathrooms,
@@ -300,7 +300,7 @@
                         </div>
 
                         <!-- Price -->
-                        <div class="col-md-6 col-sm-12">
+                        <div class="col-md-6 col-sm-12 form-field-container">
                           <div class="form-group mb-4">
                             <div class="form-label-group">
                               <%= property.text_field :price,
@@ -325,7 +325,7 @@
 
 
                         <!-- Availability -->
-                        <div class="col-md-6 col-sm-12">
+                        <div class="col-md-6 col-sm-12 form-field-container">
                           <div class="form-group mb-4">
                             <%= property.label :availability, t('activerecord.attributes.property.availability_title'), class: 'control-label' %>
                             <%= property.text_field :availability, class: 'form-control', :data => { :toggle => 'flatpickr' } %>
@@ -335,7 +335,7 @@
 
 
                         <!-- Levels -->
-                        <div class="col-md-6 col-sm-12">
+                        <div class="col-md-6 col-sm-12 form-field-container">
                           <div class="form-group mb-4">
                             <%= property.label :levels do %>
                               <%= Property.human_attribute_name(:levels) %>
@@ -368,7 +368,7 @@
                       <!-- /.row -->
 
                       <!-- Energy cert -->
-                      <div class="col-md-6 col-sm-12">
+                      <div class="col-md-6 col-sm-12 form-field-container">
                         <div class="form-group mb-4">
                           <div class="custom-control custom-checkbox app-checkbox">
                               <div>
@@ -388,7 +388,7 @@
 
                       <div class="row">
                         <!-- Description -->
-                        <div class="col-md-12">
+                        <div class="col-md-12 form-field-container">
                           <div class="form-group mb-4">
                             <label class="control-label" for="notes"><%= t('activerecord.attributes.property.description_title') %></label>
                             <%= property.label :description do %>&nbsp;
@@ -415,7 +415,7 @@
 
                       <div class="row">
                         <!-- Notes -->
-                        <div class="col-md-12">
+                        <div class="col-md-12 form-field-container">
                           <div class="form-group mb-4">
                             <%= property.label :notes do %>
                               <span><%= t('activerecord.attributes.property.notes_title') %></span>&nbsp;
@@ -459,7 +459,7 @@
                       <legend><%= t('js.forms.properties.wizard.step3.title') %></legend> <!-- .custom-control -->
                       <div class="multivalue-checkboxes">
                         <div class="form-row justify-content-center">
-                          <% %w(housetype heating orientation view other).each do |category| %>
+                          <% %w(housetype heating orientation view other access power slope).each do |category| %>
 
                             <div class="form-group">
                               <!--                              <div class="col-md-2">-->

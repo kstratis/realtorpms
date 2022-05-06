@@ -38,6 +38,11 @@ class AssociativeFormSelect extends React.Component {
     this.buildRangeSelectOptions = this.buildRangeSelectOptions.bind(this);
   }
 
+  componentDidMount() {
+    console.log('component mounted')
+    console.log(this.props.storedMasterOption)
+  }
+
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.props.mode !== 'range') return;
     // DEBUG SOS
@@ -94,6 +99,17 @@ class AssociativeFormSelect extends React.Component {
         : this.buildRangeSelectOptions(false)
   };
 
+  // Hides fields according to current selection.
+  // i.e. A land plot property can't have bedrooms/bathrooms
+  hideInvalidFormFields(selectedOption){
+    console.log(selectedOption);
+    const optionName = selectedOption['value'];
+    if (optionName === 'land'){
+      $("input[name='property[bathrooms]']").closest('.form-field-container').addClass('d-none')
+    }
+
+  }
+
   // Set the subcategory's options according to parent selection.
   // Mind that this fires for both components (master & slave).
   handleOptions = (selectedOption, isMaster) => {
@@ -103,6 +119,7 @@ class AssociativeFormSelect extends React.Component {
     if (!isMaster) return;
     // If it fires on the parent, set subcategory's options and enable it
     if (selectedOption) {
+      this.hideInvalidFormFields(selectedOption)
       // Reset the value if 'max' is smaller than 'min'
       if (
         this.props.mode === 'range' &&
