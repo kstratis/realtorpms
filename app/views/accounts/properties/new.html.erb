@@ -336,7 +336,7 @@
                                 inputID: 'property_levels',
                                 inputName: 'property[levels]',
                                 inputClassName: 'form-control',
-                                validatorGroup: 'fieldset-1',
+                                validatorGroup: 'fieldset-2',
                                 isRequired: false,
                                 renderFormField: true,
                                 formID: 'new_property',
@@ -353,6 +353,94 @@
                                     validatorErrMsg: t('js.validator.required'),
                                 }
                             }, prerender: false) %>
+                          </div>
+                        </div>
+
+                        <!-- Facade length -->
+                        <div class="col-md-6 col-sm-12 form-field-container">
+                          <div class="form-group mb-4">
+                            <div class="form-label-group">
+                              <%= property.text_field :facade_length,
+                                                      class: 'form-control',
+                                                      autocomplete: "off",
+                                                      'data-parsley-group': "fieldset-2",
+                                                      'data-parsley-type': "integer",
+                                                      'data-parsley-type-message': t("js.validator.digits") %>
+                              <label for="facade_length">
+                                <%= content_tag :span do %>
+                                  <%= content_tag(:i, nil, class: 'fas fa-arrows-alt-h fa-fw') + ' ' + t('activerecord.attributes.property.facade_length') %>
+                                <% end %>
+                              </label>
+                            </div>
+                            <small class="form-text text-muted"><%= t('activerecord.attributes.property.facade_length_feedback_html') %>
+                            </small>
+                            <div class="invalid-feedback"></div>
+                          </div>
+                        </div>
+
+                        <!-- Distance from sea -->
+                        <div class="col-md-6 col-sm-12 form-field-container">
+                          <div class="form-group mb-4">
+                            <div class="form-label-group">
+                              <%= property.text_field :distance_from_sea,
+                                                      class: 'form-control',
+                                                      autocomplete: "off",
+                                                      'data-parsley-group': "fieldset-2",
+                                                      'data-parsley-type': "integer",
+                                                      'data-parsley-type-message': t("js.validator.digits") %>
+                              <label for="distance_from_sea">
+                                <%= content_tag :span do %>
+                                  <%= content_tag(:i, nil, class: 'fas fa-walking fa-fw') + ' ' + t('activerecord.attributes.property.distance_from_sea') %>
+                                <% end %>
+                              </label>
+                            </div>
+                            <small class="form-text text-muted"><%= t('activerecord.attributes.property.distance_from_sea_feedback_html') %>
+                            </small>
+                            <div class="invalid-feedback"></div>
+                          </div>
+                        </div>
+
+                        <!-- Building coefficient -->
+                        <div class="col-md-6 col-sm-12 form-field-container">
+                          <div class="form-group mb-4">
+                            <div class="form-label-group">
+                              <%= property.text_field :building_coefficient,
+                                                      class: 'form-control',
+                                                      autocomplete: "off",
+                                                      'data-parsley-group': "fieldset-2",
+                                                      'data-parsley-type': "number",
+                                                      'data-parsley-type-message': t("js.validator.numbers") %>
+                              <label for="building_coefficient">
+                                <%= content_tag :span do %>
+                                  <%= content_tag(:i, nil, class: 'fas fa-calculator fa-fw') + ' ' + t('activerecord.attributes.property.building_coefficient') %>
+                                <% end %>
+                              </label>
+                            </div>
+                            <small class="form-text text-muted"><%= t('activerecord.attributes.property.building_coefficient_feedback_html') %>
+                            </small>
+                            <div class="invalid-feedback"></div>
+                          </div>
+                        </div>
+
+                        <!-- Coverage ratio -->
+                        <div class="col-md-6 col-sm-12 form-field-container">
+                          <div class="form-group mb-4">
+                            <div class="form-label-group">
+                              <%= property.text_field :coverage_ratio,
+                                                      class: 'form-control',
+                                                      autocomplete: "off",
+                                                      'data-parsley-group': "fieldset-2",
+                                                      'data-parsley-type': "integer",
+                                                      'data-parsley-type-message': t("js.validator.digits") %>
+                              <label for="coverage_ratio">
+                                <%= content_tag :span do %>
+                                  <%= content_tag(:i, nil, class: 'fas fa-percentage fa-fw') + ' ' + t('activerecord.attributes.property.coverage_ratio') %>
+                                <% end %>
+                              </label>
+                            </div>
+                            <small class="form-text text-muted"><%= t('activerecord.attributes.property.coverage_ratio_feedback_html') %>
+                            </small>
+                            <div class="invalid-feedback"></div>
                           </div>
                         </div>
 

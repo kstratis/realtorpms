@@ -39,8 +39,11 @@ class AssociativeFormSelect extends React.Component {
   }
 
   componentDidMount() {
-    console.log('component mounted')
-    console.log(this.props.storedMasterOption)
+    if (this.props?.formdata?.categoryid !== 'property_category') return;
+
+    if (!this.props.storedMasterOption){
+      this.disableStepper();
+    }
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -99,15 +102,42 @@ class AssociativeFormSelect extends React.Component {
         : this.buildRangeSelectOptions(false)
   };
 
+  enableStepper(){
+    $('li.step > a').removeClass('no-pointer-events');
+    $('li.step').removeClass('cursor-not-allowed');
+  }
+
+  disableStepper(){
+    $('li.step > a').addClass('no-pointer-events');
+    $('li.step').addClass('cursor-not-allowed');
+  }
+
+  restoreAllPropertyAttributes(){
+    // Iterate over all map inputs/checkboxes etc and do the following:
+    $("input[name='property[bedrooms]']").prop('disabled', false)
+    $("input[name='property[bedrooms]']").closest('.form-field-container').removeClass('d-none')
+  }
+
   // Hides fields according to current selection.
   // i.e. A land plot property can't have bedrooms/bathrooms
-  hideInvalidFormFields(selectedOption){
-    console.log(selectedOption);
-    const optionName = selectedOption['value'];
-    if (optionName === 'land'){
-      $("input[name='property[bathrooms]']").closest('.form-field-container').addClass('d-none')
-    }
+  hideInvalidFormFields(selectedOption) {
+    console.log('hideInvalidFormFields is running');
 
+    if (!selectedOption) {
+      this.disableStepper();
+    } else {
+      this.enableStepper();
+      // DEBUG
+      console.log(selectedOption);
+
+      const optionName = selectedOption['value'];
+      this.restoreAllPropertyAttributes();
+      if (optionName === 'land') {
+        // Iterate over all map inputs/checkboxes etc and do the following:
+        $("input[name='property[bedrooms]']").prop('disabled', true)
+        $("input[name='property[bedrooms]']").closest('.form-field-container').addClass('d-none')
+      }
+    }
   }
 
   // Set the subcategory's options according to parent selection.
@@ -117,9 +147,14 @@ class AssociativeFormSelect extends React.Component {
     // For example if 'apartment' is changed to 'villa' you don't need to change the property category
     // because they are both under 'residential'.
     if (!isMaster) return;
+
+    // If category selection is changed hide inappropriate fields.
+    // If left empty, disable the form stepper.
+    if (this.props?.formdata?.categoryid === 'property_category') {
+      this.hideInvalidFormFields(selectedOption)
+    }
     // If it fires on the parent, set subcategory's options and enable it
     if (selectedOption) {
-      this.hideInvalidFormFields(selectedOption)
       // Reset the value if 'max' is smaller than 'min'
       if (
         this.props.mode === 'range' &&

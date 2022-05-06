@@ -13,7 +13,7 @@ ActiveRecord::Base.transaction do
   %w(sea_view mountain_view forest_view infinite_view).each do |extra|
     Extra.create!(name: extra, subtype: 'view')
   end
-  %w(gas solar_water_heating furnished fireplace awnings clima security_door pool elevator no_utility_bills fit_for_professional_use parking load_ramp service_lift alarm equipment balcony investment).each do |extra|
+  %w(gas solar_water_heating furnished fireplace awnings clima security_door pool elevator no_utility_bills fit_for_professional_use parking load_ramp service_lift alarm equipment balcony investment within_urban_plan agricultural_use exchange_scheme).each do |extra|
     Extra.create!(name: extra, subtype: 'other')
   end
   %w(roofdeck plot garden storage ).each do |extra|

@@ -111,7 +111,7 @@ function leavePage(msg) {
 // This basically listens for window unload
 $(document).on("page:before-change turbolinks:before-visit", function() {
   // Make sure it only works on the properties stepper
-  if (window.location.pathname === '/properties/new' || window.location.pathname.match(/^\/properties\/\d+\/edit$/)) {
+  if (window.location.pathname === '/app/properties/new' || window.location.pathname.match(/^\/app\/properties\/[a-zA-Z]{2}\d+\/edit$/)) {
     // Gets the stepper status. If untouched then don't bug the user. Otherwise, show a warning
     if (!window.form_stepper.getStatus()) return;
     var alertsDomNode = $('#alerts');

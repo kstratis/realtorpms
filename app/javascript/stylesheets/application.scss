@@ -2682,3 +2682,11 @@ footer:not(.auth-footer){
   border: 3px dotted grey;
   padding: 10px;
 }
+
+.no-pointer-events {
+  pointer-events: none;
+}
+
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
