@@ -28,6 +28,9 @@ ActiveRecord::Base.transaction do
   %w(plane inclining amphitheatrical).each do |extra|
     Extra.create!(name: extra, subtype: 'slope')
   end
+  %w(residential agricultural commercial industrial recreational unincorporated).each do |extra|
+    Extra.create!(name: extra, subtype: 'zone')
+  end
 end
 
 puts 'All good'

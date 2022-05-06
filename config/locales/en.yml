@@ -299,7 +299,7 @@ en:
           balcony: "Balcony"
           investment: "Investment friendly"
         access:
-          title: "Access"
+          title: "Access from"
           asphalt: "Road"
           sidewalk: "Sidewalk"
           cobblestone: "Cobblestone street"
@@ -317,6 +317,14 @@ en:
           plane: "Plane"
           inclining: "Inclining"
           amphitheatrical: "Amphitheatrical"
+        zone:
+          title: "Zone"
+          residential: "Residential"
+          agricultural: "Agricultural"
+          commercial: "Commercial"
+          industrial: "Industrial"
+          recreational: "Recreational"
+          unincorporated: "Unincorporated"
         dependent:
           storage: "Storage space"
           storage_placeholder: "Storage size in sq meters"

@@ -285,6 +285,14 @@ el:
           plane: "Επίπεδο"
           inclining: "Επικλινές"
           amphitheatrical: "Αμφιθεατρικό"
+        zone:
+          title: "Ζώνη"
+          residential: "Οικιστική"
+          agricultural: "Αγροτική"
+          commercial: "Εμπορική"
+          industrial: "Βιομηχανική"
+          recreational: "Ανάπλασης"
+          unincorporated: "Εκτός σχεδίου"
         dependent:
           storage: "Αποθήκη"
           storage_placeholder: "Εμβαδόν αποθήκης"
