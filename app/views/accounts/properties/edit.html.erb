@@ -167,7 +167,7 @@
                         <div class="col-md-6 col-sm-12 form-field-container">
                           <div class="form-group mb-4">
                             <%= property.label :floor do %>
-                              <%= Property.human_attribute_name(:floor) %>
+                              <span><i class="fas fa-arrows-alt-v fa-fw"></i></span>&nbsp;<%= Property.human_attribute_name(:floor) %>
                             <% end %>
                             <%= react_component('FormSelect', props: {
                                 id: 'c',
@@ -199,7 +199,7 @@
                         <div class="col-md-6 col-sm-12 form-field-container">
                           <div class="form-group mb-4">
                             <%= property.label :construction do %>
-                              <%= Property.human_attribute_name(:construction) %>
+                              <span><i class="fas fa-calendar-day fa-fw"></i></span>&nbsp;<%= Property.human_attribute_name(:construction) %>
                             <% end %>
                             <%= react_component('FormSelect', props: {
                                 id: 'd',
