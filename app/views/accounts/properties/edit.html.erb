@@ -164,7 +164,7 @@
                         <!-- grid column -->
 
                         <!-- Floor -->
-                        <div class="col-md-6 col-sm-12 form-field-container">
+                        <div class="col-md-6 col-sm-12 form-field-container floor">
                           <div class="form-group mb-4">
                             <%= property.label :floor do %>
                               <span><i class="fas fa-arrows-alt-v fa-fw"></i></span>&nbsp;<%= Property.human_attribute_name(:floor) %>
@@ -196,7 +196,7 @@
                         </div>
 
                         <!-- Construction -->
-                        <div class="col-md-6 col-sm-12 form-field-container">
+                        <div class="col-md-6 col-sm-12 form-field-container construction">
                           <div class="form-group mb-4">
                             <%= property.label :construction do %>
                               <span><i class="fas fa-calendar-day fa-fw"></i></span>&nbsp;<%= Property.human_attribute_name(:construction) %>
@@ -228,7 +228,7 @@
                         </div>
 
                         <!-- Size -->
-                        <div class="col-md-6 col-sm-12 form-field-container">
+                        <div class="col-md-6 col-sm-12 form-field-container size">
                           <div class="form-group mb-4">
                             <div class="form-label-group">
                               <%= property.text_field :size,
@@ -254,7 +254,7 @@
                         </div>
 
                         <!-- Bedrooms -->
-                        <div class="col-md-6 col-sm-12 form-field-container">
+                        <div class="col-md-6 col-sm-12 form-field-container bedrooms">
                           <div class="form-group mb-4">
                             <div class="form-label-group">
                               <%= property.text_field :bedrooms,
@@ -277,7 +277,7 @@
                         </div>
 
                         <!-- Bathrooms -->
-                        <div class="col-md-6 col-sm-12 form-field-container">
+                        <div class="col-md-6 col-sm-12 form-field-container bathrooms">
                           <div class="form-group mb-4">
                             <div class="form-label-group">
                               <%= property.text_field :bathrooms,
@@ -300,7 +300,7 @@
                         </div>
 
                         <!-- Price -->
-                        <div class="col-md-6 col-sm-12 form-field-container">
+                        <div class="col-md-6 col-sm-12 form-field-container price">
                           <div class="form-group mb-4">
                             <div class="form-label-group">
                               <%= property.text_field :price,
@@ -325,7 +325,7 @@
 
 
                         <!-- Availability -->
-                        <div class="col-md-6 col-sm-12 form-field-container">
+                        <div class="col-md-6 col-sm-12 form-field-container availability">
                           <div class="form-group mb-4">
                             <%= property.label :availability, t('activerecord.attributes.property.availability_title'), class: 'control-label' %>
                             <%= property.text_field :availability, class: 'form-control', :data => { :toggle => 'flatpickr' } %>
@@ -335,7 +335,7 @@
 
 
                         <!-- Levels -->
-                        <div class="col-md-6 col-sm-12 form-field-container">
+                        <div class="col-md-6 col-sm-12 form-field-container levels">
                           <div class="form-group mb-4">
                             <%= property.label :levels do %>
                               <%= Property.human_attribute_name(:levels) %>
@@ -368,7 +368,7 @@
                       <!-- /.row -->
 
                       <!-- Facade length -->
-                      <div class="col-md-6 col-sm-12 form-field-container">
+                      <div class="col-md-6 col-sm-12 form-field-container facade_length">
                         <div class="form-group mb-4">
                           <div class="form-label-group">
                             <%= property.text_field :facade_length,
@@ -390,7 +390,7 @@
                       </div>
 
                       <!-- Distance from sea -->
-                      <div class="col-md-6 col-sm-12 form-field-container">
+                      <div class="col-md-6 col-sm-12 form-field-container distance_from_sea">
                         <div class="form-group mb-4">
                           <div class="form-label-group">
                             <%= property.text_field :distance_from_sea,
@@ -412,7 +412,7 @@
                       </div>
 
                       <!-- Building coefficient -->
-                      <div class="col-md-6 col-sm-12 form-field-container">
+                      <div class="col-md-6 col-sm-12 form-field-container building_coefficient">
                         <div class="form-group mb-4">
                           <div class="form-label-group">
                             <%= property.text_field :building_coefficient,
@@ -434,7 +434,7 @@
                       </div>
 
                       <!-- Coverage ratio -->
-                      <div class="col-md-6 col-sm-12 form-field-container">
+                      <div class="col-md-6 col-sm-12 form-field-container coverage_ratio">
                         <div class="form-group mb-4">
                           <div class="form-label-group">
                             <%= property.text_field :coverage_ratio,
@@ -456,7 +456,7 @@
                       </div>
 
                       <!-- Energy cert -->
-                      <div class="col-md-6 col-sm-12 form-field-container">
+                      <div class="col-md-6 col-sm-12 form-field-container has_energy_cert">
                         <div class="form-group mb-4">
                           <div class="custom-control custom-checkbox app-checkbox">
                               <div>
@@ -476,7 +476,7 @@
 
                       <div class="row">
                         <!-- Description -->
-                        <div class="col-md-12 form-field-container">
+                        <div class="col-md-12 form-field-container description">
                           <div class="form-group mb-4">
                             <label class="control-label" for="notes"><%= t('activerecord.attributes.property.description_title') %></label>
                             <%= property.label :description do %>&nbsp;
@@ -503,7 +503,7 @@
 
                       <div class="row">
                         <!-- Notes -->
-                        <div class="col-md-12 form-field-container">
+                        <div class="col-md-12 form-field-container notes">
                           <div class="form-group mb-4">
                             <%= property.label :notes do %>
                               <span><%= t('activerecord.attributes.property.notes_title') %></span>&nbsp;
@@ -549,18 +549,22 @@
                         <div class="form-row justify-content-center">
                           <% %w(housetype heating orientation view other access power slope zone).each do |category| %>
 
-                            <div class="form-group">
-                              <!--                              <div class="col-md-2">-->
-                              <label class="control-label checkbox-header app-checkbox"><strong><%= t("activerecord.attributes.extra.#{category}.title") %></strong></label>
-                              <div class="col-md-12">
-                                <%= property.collection_check_boxes :extra_ids, Extra.order(:id).where(subtype: category), :id, :name do |b| %>
-                                  <div class="custom-control custom-checkbox app-checkbox">
-                                    <%= b.check_box({ class: "custom-control-input", type: 'checkbox' }) %>
-                                    <%= b.label({ class: 'custom-control-label' }) do %>
-                                      <%= t("activerecord.attributes.extra.#{category}.#{b.text}") %>
-                                    <% end %>
-                                  </div>
-                                <% end %>
+                            <div class="form-field-container <%= category.to_s %>">
+                              <div class="form-group">
+                                <!--                              <div class="col-md-2">-->
+                                <label class="control-label checkbox-header app-checkbox"><strong><%= t("activerecord.attributes.extra.#{category}.title") %></strong></label>
+                                <div class="col-md-12">
+                                  <%= property.collection_check_boxes :extra_ids, Extra.order(:id).where(subtype: category), :id, :name do |b| %>
+                                    <div class="form-field-container <%= b.text.to_s %>">
+                                      <div class="custom-control custom-checkbox app-checkbox">
+                                        <%= b.check_box({ class: "custom-control-input", type: 'checkbox' }) %>
+                                        <%= b.label({ class: 'custom-control-label' }) do %>
+                                          <%= t("activerecord.attributes.extra.#{category}.#{b.text}") %>
+                                        <% end %>
+                                      </div>
+                                    </div>
+                                  <% end %>
+                                </div>
                               </div>
                             </div>
                           <% end %>
@@ -896,6 +900,7 @@
                   <input id="preventformsubmit" type="hidden">
                   <%= property.file_field :images, class: 'form-control uppy-emitters', multiple: true, direct_upload: true %>
                   <%= render "accounts/helpers/locale" %>
+                  <%= render "accounts/helpers/property_filters" %>
 
                 <% end %> <!-- /form -->
               </div>

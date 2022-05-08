@@ -414,6 +414,10 @@ module Accounts
                                        :avatar,
                                        :map_url,
                                        :active,
+                                       :facade_length,
+                                       :distance_from_sea,
+                                       :building_coefficient,
+                                       :coverage_ratio,
                                        { preferences: {} },
                                        delete_images: [],
                                        images: [],
@@ -443,10 +447,10 @@ module Accounts
     def solo_attribute_update?
       action_name == 'update' &&
         request.patch? &&
-        params_copy[:subcategory].nil? &&
-        params_copy[:category].nil? &&
-        params_copy[:locationid].nil? &&
-        params_copy[:ilocationid].nil?
+        property_params[:subcategory].nil? &&
+        property_params[:category].nil? &&
+        property_params[:locationid].nil? &&
+        property_params[:ilocationid].nil?
     end
   end
 end

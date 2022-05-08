@@ -39,10 +39,15 @@ class AssociativeFormSelect extends React.Component {
   }
 
   componentDidMount() {
+    // This component is also used in dependant min/max fields like `price`.
+    // If one of those cases, bail out. Otherwise its a category dependant attribute
+    // where we deal with the stepper and the filtered out property attributes
     if (this.props?.formdata?.categoryid !== 'property_category') return;
 
     if (!this.props.storedMasterOption){
       this.disableStepper();
+    } else {
+      this.hideInvalidFormFields(this.props.storedMasterOption)
     }
   }
 
@@ -112,31 +117,46 @@ class AssociativeFormSelect extends React.Component {
     $('li.step').addClass('cursor-not-allowed');
   }
 
-  restoreAllPropertyAttributes(){
+  // Parses and returns the property attributes map embedded in DOM
+  propertyFilterAttrsHash(){
+    return $('#filters').data();
+  }
+
+  // Re-enables all property attributes which may be filtered out
+  restoreAllPropertyAttrs(){
     // Iterate over all map inputs/checkboxes etc and do the following:
-    $("input[name='property[bedrooms]']").prop('disabled', false)
-    $("input[name='property[bedrooms]']").closest('.form-field-container').removeClass('d-none')
+    const attrs = Object.values(this.propertyFilterAttrsHash()).reduce((acc, curVal) => {
+      return acc.concat(curVal)
+    }, []);
+
+    for (const attr of attrs){
+      $(`.${attr}`).find('input').prop('disabled', false)
+      $(`.form-field-container.${attr}`).removeClass('d-none')
+      $(`.form-group-container.${attr}`).removeClass('d-none')
+    }
+  }
+
+  // Filters out invalid property attributes using DOM operations
+  filterOutInvalidPropertyAttrs(attr){
+    const invalidAttrs = this.propertyFilterAttrsHash()[attr];
+    for (const attr of invalidAttrs) {
+      // Iterate over all map inputs/checkboxes etc and do the following:
+      $(`.${attr}`).find('input').prop('disabled', true)
+      $(`.form-field-container.${attr}`).addClass('d-none')
+      $(`.form-group-container.${attr}`).addClass('d-none')
+    }
   }
 
   // Hides fields according to current selection.
   // i.e. A land plot property can't have bedrooms/bathrooms
   hideInvalidFormFields(selectedOption) {
-    console.log('hideInvalidFormFields is running');
-
     if (!selectedOption) {
       this.disableStepper();
     } else {
       this.enableStepper();
-      // DEBUG
-      console.log(selectedOption);
-
       const optionName = selectedOption['value'];
-      this.restoreAllPropertyAttributes();
-      if (optionName === 'land') {
-        // Iterate over all map inputs/checkboxes etc and do the following:
-        $("input[name='property[bedrooms]']").prop('disabled', true)
-        $("input[name='property[bedrooms]']").closest('.form-field-container').addClass('d-none')
-      }
+      this.restoreAllPropertyAttrs();
+      this.filterOutInvalidPropertyAttrs(optionName)
     }
   }
 
