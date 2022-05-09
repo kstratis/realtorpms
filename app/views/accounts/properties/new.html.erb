@@ -197,7 +197,11 @@
                                                       'data-parsley-required-message': t("js.validator.required") %>
                               <label for="bedrooms">
                                 <%= content_tag :span do %>
-                                  <%= content_tag(:i, nil, class: 'fas fa-euro-sign fa-fw') + ' ' + t('activerecord.attributes.property.price_title') %>
+                                  <% if current_account.greek? %>
+                                    <%= content_tag(:i, nil, class: 'fas fa-euro-sign fa-fw') + ' ' + t('activerecord.attributes.property.price_title') %>
+                                  <% else %>
+                                    <%= content_tag(:i, nil, class: 'fas fa-dollar-sign fa-fw') + ' ' + t('activerecord.attributes.property.price_title') %>
+                                  <% end %>
                                 <% end %>
                               </label>
                             </div>
@@ -568,7 +572,11 @@
                                     <% end %>
                                   </div>
                                   <div class="mt-1">
-                                    <input type="number" name="property[<%= b.text %>_space]" class="form-control custom-control-label dependent_input" placeholder="<%= t("activerecord.attributes.extra.dependent.#{b.text}_placeholder") %>">
+                                    <% if current_account.greek? %>
+                                      <input type="number" name="property[<%= b.text %>_space]" class="form-control custom-control-label dependent_input" placeholder="<%= t("activerecord.attributes.extra.dependent.#{b.text}_placeholder") %>">
+                                    <% else %>
+                                      <input type="number" name="property[<%= b.text %>_space]" class="form-control custom-control-label dependent_input" placeholder="<%= t("activerecord.attributes.extra.dependent.#{b.text}_placeholder_footage") %>">
+                                    <% end %>
                                   </div>
                                 </div>
                               <% end %>
