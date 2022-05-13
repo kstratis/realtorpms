@@ -50,7 +50,7 @@
         <h3><strong>
           <%= t("activerecord.attributes.property.enums.subcategory.#{@property.category.slug}") %>
           <% if @property.size.present? %>
-            <span>| </span><span><%= print_size(@property.size, @property.account) %></span>
+            <span>| </span><span><%= print_size(@property.size, @property.account).html_safe %></span>
           <% end %>
         </strong></h3>
 

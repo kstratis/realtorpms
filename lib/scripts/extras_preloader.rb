@@ -22,7 +22,7 @@ ActiveRecord::Base.transaction do
   %w(asphalt sidewalk cobblestone dirt_road sea other no_access).each do |extra|
     Extra.create!(name: extra, subtype: 'access')
   end
-  %w(one_phase three_phase industrial).each do |extra|
+  %w(one_phase three_phase industrial_phase).each do |extra|
     Extra.create!(name: extra, subtype: 'power')
   end
   %w(plane inclining amphitheatrical).each do |extra|

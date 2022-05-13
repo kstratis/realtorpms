@@ -355,6 +355,138 @@
     background-image: url('../images/house_specs/security_door.svg');
   }
 
+  &.alarm{
+    background-image: url('../images/house_specs/alarm.png');
+  }
+
+  &.balcony{
+    background-image: url('../images/house_specs/balcony.png');
+  }
+
+  &.residential{
+    background-image: url('../images/house_specs/residential_zone.png');
+  }
+
+  &.agricultural{
+    background-image: url('../images/house_specs/agricultural_zone.png');
+  }
+
+  &.commercial{
+    background-image: url('../images/house_specs/commercial_zone.png');
+  }
+
+  &.industrial{
+    background-image: url('../images/house_specs/industrial_zone.png');
+  }
+
+  &.recreational{
+    background-image: url('../images/house_specs/recreational_zone.png');
+  }
+
+  &.unincorporated{
+    background-image: url('../images/house_specs/unincorporated_zone.png');
+  }
+
+  &.investment{
+    background-image: url('../images/house_specs/investment.png');
+  }
+
+  &.load_ramp{
+    background-image: url('../images/house_specs/load_ramp.png');
+  }
+
+  &.service_lift{
+    background-image: url('../images/house_specs/service_lift.png');
+  }
+
+  &.equipment{
+    background-image: url('../images/house_specs/equipment.png');
+  }
+
+  &.asphalt{
+    background-image: url('../images/house_specs/asphalt.png');
+  }
+
+  &.sidewalk{
+    background-image: url('../images/house_specs/sidewalk.png');
+  }
+
+  &.cobblestone{
+    background-image: url('../images/house_specs/stone_house.svg');
+  }
+
+  &.dirt_road{
+    background-image: url('../images/house_specs/dirt_road.png');
+  }
+
+  &.sea{
+    background-image: url('../images/house_specs/sea_view.svg');
+  }
+
+  &.other{
+    background-image: url('../images/house_specs/entry_other.png');
+  }
+
+  &.no_access{
+    background-image: url('../images/house_specs/no_access.png');
+  }
+
+  &.one_phase {
+    background-image: url('../images/house_specs/one_phase.png');
+  }
+
+  &.three_phase {
+    background-image: url('../images/house_specs/three_phase.png');
+  }
+
+  &.industrial_phase {
+    background-image: url('../images/house_specs/industrial_power.png');
+  }
+
+  &.agricultural_use {
+    background-image: url('../images/house_specs/industrial_power.png');
+  }
+
+  &.agricultural_use {
+    background-image: url('../images/house_specs/agricultural_zone.png');
+  }
+
+  &.plane {
+    background-image: url('../images/house_specs/straight_line.png');
+  }
+
+  &.inclining {
+    background-image: url('../images/house_specs/inclining.png');
+  }
+
+  &.amphitheatrical {
+    background-image: url('../images/house_specs/amphitheatrical.png');
+  }
+
+  &.exchange_scheme {
+    background-image: url('../images/house_specs/exchange_scheme.png');
+  }
+
+  &.facade_length {
+    background-image: url('../images/house_specs/facade_length.svg');
+  }
+
+  &.distance_from_sea {
+    background-image: url('../images/house_specs/distance_from_sea.svg');
+  }
+
+  &.building_coefficient {
+    background-image: url('../images/house_specs/building_coefficient.svg');
+  }
+
+  &.coverage_ratio {
+    background-image: url('../images/house_specs/coverage_ratio.svg');
+  }
+
+  //&.coverage_ratio {
+  //  background-image: url('../images/house_specs/coverage_ratio.svg');
+  //}
+
   &.pool{
     background-image: url('../images/house_specs/pool.svg');
   }

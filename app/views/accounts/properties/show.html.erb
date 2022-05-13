@@ -97,7 +97,9 @@
                     </div>
                   </div><!-- .card-body -->
                   <div class="card-body">
-                    <%= render partial: 'accounts/properties/features', locals: { features: Property.extended_features(current_account), classNames: 'table-borderless normalize-table' } %>
+                    <%= render partial: 'accounts/properties/features',
+                               locals: { features: Property.filtered_extended_features(current_account, @property),
+                                         classNames: 'table-borderless normalize-table' } %>
                   </div><!-- /.card-body -->
                 </div><!-- /.card -->
               </div>
@@ -270,6 +272,7 @@
         </div>
       </div>
       <%= render "accounts/helpers/locale" %>
+      <%= render "accounts/helpers/property_filters" %>
       <div id="automatedClicks"></div>
     </div>
 
