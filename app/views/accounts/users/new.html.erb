@@ -17,7 +17,9 @@
 
             <%= render 'accounts/users/form', f: f %>
 
-            <hr />
+            <% if current_account.model_types.find_by(name: 'users').fields.present? %>
+              <hr />
+            <% end %>
             <!-- Extended fields -->
             <%= f.fields_for :preferences, OpenStruct.new(@user.preferences) do |builder| %>
               <!-- That's a workaround to render an account's custom fields without actually creating an entry in model_types_users

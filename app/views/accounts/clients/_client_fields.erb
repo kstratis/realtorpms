@@ -124,7 +124,9 @@
     </div>
   </div>
 
-  <hr />
+  <% if @client.model_type.fields.present? %>
+    <hr />
+  <% end %>
 
   <!-- Extended fields -->
   <%= f.fields_for :preferences, OpenStruct.new(@client.preferences) do |builder| %>
