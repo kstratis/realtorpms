@@ -384,6 +384,7 @@ module Accounts
     def property_params
       # noclient may be redundant here
       params.require(:property).permit(:description,
+                                       :description_en,
                                        :businesstype,
                                        :locationid,
                                        :ilocationid,
@@ -418,6 +419,7 @@ module Accounts
                                        :distance_from_sea,
                                        :building_coefficient,
                                        :coverage_ratio,
+                                       :unit,
                                        { preferences: {} },
                                        delete_images: [],
                                        images: [],

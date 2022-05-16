@@ -65,11 +65,9 @@
                   </div>
                 <% end %>
               <% end %>
-              <% if @property.description.present? %>
-                <hr/>
-                <p><strong><%= t('activerecord.attributes.property.description_title') %></strong></p>
-                <div><%= @property.description.presence %></div>
-              <% end %>
+
+              <%= render partial: 'accounts/websites/description', locals: { property: @property, headers: true } %>
+
               <% if @property.extras.present? %>
                 <hr/>
                 <div class="row justify-content-center">

@@ -526,6 +526,35 @@
                         </div>
                       </div><!-- /.row -->
 
+                      <% if current_account.greek? %>
+                        <div class="row">
+                          <!-- Description (English)-->
+                          <div class="col-md-12 form-field-container description">
+                            <div class="form-group mb-4">
+                              <%= property.label :description_en do %>
+                                <span><%= t('activerecord.attributes.property.description_en_title') %></span>&nbsp;
+                                <span class="property-cover-popover"
+                                      data-toggle="popover"
+                                      data-placement="top"
+                                      data-trigger="hover"
+                                      data-content="<%= t('properties.popover_description_en_body') %>"
+                                      title="<%= t('properties.popover_description_title') %>">
+                                  <i class="fas fa-info-circle"></i>
+                                </span>
+                              <% end %>
+                              <%= property.text_area :description_en,
+                                                     class: 'form-control',
+                                                     id: 'description',
+                                                     autocomplete: 'off',
+                                                     'rows': '5' %>
+                              <small class="form-text text-muted"><%= t('activerecord.attributes.property.description_en_feedback_html') %>
+                              </small>
+                              <div class="invalid-feedback"></div>
+                            </div>
+                          </div>
+                        </div><!-- /.row -->
+                      <% end %>
+
                       <div class="row">
                         <!-- Notes -->
                         <div class="col-md-12 form-field-container notes">

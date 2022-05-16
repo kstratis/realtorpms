@@ -175,10 +175,14 @@
                   <% if %w[residential commercial].include?(property.category.parent_slug) %>
                     <div><span><%= render_residential_features(property).join(' • ') %></span></div>
                   <% end %>
-                  <% if property.description.present? %>
-                    <hr />
-                    <div><%= property.description.presence %></div>
-                  <% end %>
+
+                  <%= render partial: 'accounts/websites/description', locals: { property: property, headers: false } %>
+
+                  <%# if property.description.present? %>
+<!--                    <hr />-->
+<!--                    <div><%#= property.description.presence %></div>-->
+                  <%# end %>
+
                 </div>
                 <%= render_price(property) %>
               </div>
