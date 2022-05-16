@@ -82,6 +82,12 @@ en:
   notifications: "Notifications"
   pro_tools: "Pro tools"
   page_refresh: "Refresh page"
+  plan:
+    title: "Subscription"
+    trial: "Trial"
+    active: "Active"
+    cancelled: "Cancelled"
+    expired: "Expired"
   tour:
     title: "Tour"
     confirm_cancel_message: "Are you sure you want to quit the tour?"

@@ -13,9 +13,14 @@
   }
 }
 
-.app-main {
-  min-height: 900px;
+.app{
+  min-height: unset;
+  overflow-x: unset;
 }
+
+//.app-main {
+//  min-height: 900px;
+//}
 //@font-face {
 //  font-family: 'PFDinDisplayPro-Regular';
 //  font-style: normal;
@@ -47,6 +52,7 @@ body {
   //font-family: 'Poppins', helvetica, sans-serif;
   font-size: 14px;
   margin: 0 auto;
+  background: #f8faff;
 }
 
 // This is just a hack to preload images
@@ -134,8 +140,9 @@ h3 {
 
 footer:not(.auth-footer) {
   margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid #eaeaea;
+  padding-top: 10px;
+  //border-top: 1px solid #eaeaea;
+  border-top: 1px solid #cdcfd5;
   color: #777;
 
   a {
@@ -1852,7 +1859,12 @@ nav.nav-tabs a.nav-link:hover:not(.setting), nav.nav-tabs a.nav-link:focus:not(.
 }
 
 .footer-nav{
-  padding: 5px 25px 25px 0;
+  padding: 0 25px 25px 0;
+
+}
+
+.footer-styles{
+  background: #ffffff
 }
 
 .footer-table{

@@ -71,7 +71,7 @@
 
   <%= render 'layouts/shim' %>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
 <!-- .app -->
 <div class="app">
@@ -102,13 +102,13 @@
     <!-- /.wrapper -->
   </main>
   <!-- /.app-main -->
-  <%= render 'layouts/footer' %>
+
 
   <div id="modal-root"></div>
 
 </div>
 <!-- /.app -->
-
+<%= render 'layouts/footer' %>
 </body>
 
 </html>

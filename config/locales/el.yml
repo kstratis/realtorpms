@@ -52,6 +52,12 @@ el:
   notifications: "Ειδοποιήσεις"
   pro_tools: "Εργαλεία"
   page_refresh: "Ανανέωση σελίδας"
+  plan:
+    title: "Συνδρομή"
+    trial: "Δοκιμαστική περίοδος"
+    active: "Ενεργή"
+    cancelled: "Ακυρώθηκε"
+    expired: "Έληξε"
   tour:
     title: "Οδηγίες"
     confirm_cancel_message: "Είσαι βέβαιος πως θέλεις να εγκαταλείψεις τον οδηγό;"
