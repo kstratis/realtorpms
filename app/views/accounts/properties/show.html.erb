@@ -97,7 +97,9 @@
                     </div>
                   </div><!-- .card-body -->
                   <div class="card-body">
-                    <%= render partial: 'accounts/properties/features', locals: { features: Property.extended_features(current_account), classNames: 'table-borderless normalize-table' } %>
+                    <%= render partial: 'accounts/properties/features',
+                               locals: { features: Property.filtered_extended_features(current_account, @property),
+                                         classNames: 'table-borderless normalize-table' } %>
                   </div><!-- /.card-body -->
                 </div><!-- /.card -->
               </div>
@@ -116,7 +118,7 @@
                     <% if @property.extras.blank? %>
                       <h3><%= t('activerecord.attributes.property.extras_not_found') %></h3>
                     <% else %>
-                      <%= render partial: 'accounts/properties/extras' %>
+                      <%= render partial: 'accounts/properties/extras', locals: { columns: 3 } %>
                     <% end %>
                   </div><!-- /.card-body -->
                 </div><!-- /.card -->
@@ -145,6 +147,29 @@
                 </div><!-- /.card -->
               </div>
 
+              <% if current_account.greek? %>
+              <div class="col-12">
+                <div class="card borderlesss-card">
+                  <div class="card-header header-public simplified-header">
+                    <div class="table-entry">
+                      <div class="table-icon-wrapper">
+                        <i class="pr-icon xs description_en"></i>
+                      </div>
+                      <span class="align-middle">&nbsp; <%= t 'activerecord.attributes.property.description_en_title' %></span>
+                    </div>
+                  </div><!-- .card-body -->
+                  <div class="card-body">
+                    <div class="description-wrapper">
+                      <% if @property.description_en.blank? %>
+                        <h3><%= t('activerecord.attributes.property.description_not_found') %></h3>
+                      <% else %>
+                        <div><%= @property.description_en %></div>
+                      <% end %>
+                    </div>
+                  </div><!-- /.card-body -->
+                </div><!-- /.card -->
+              </div>
+              <% end %>
             </div>
 
 
@@ -270,6 +295,7 @@
         </div>
       </div>
       <%= render "accounts/helpers/locale" %>
+      <%= render "accounts/helpers/property_filters" %>
       <div id="automatedClicks"></div>
     </div>
 

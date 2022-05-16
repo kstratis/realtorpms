@@ -1,0 +1,25 @@
+<% if current_account.greek? && I18n.locale == :el %>
+  <% if property.description.present? %>
+    <hr/>
+    <% if headers.present? %>
+      <p><strong><%= t('activerecord.attributes.property.description_title') %></strong></p>
+    <% end %>
+    <div><%= property.description.presence %></div>
+  <% end %>
+<% else %>
+  <% if property.description_en.present? %>
+    <hr/>
+    <% if headers.present? %>
+      <p><strong><%= t('activerecord.attributes.property.description_title') %></strong></p>
+    <% end %>
+    <div><%= property.description_en.presence %></div>
+  <% else %>
+    <% if property.description.present? %>
+      <hr/>
+      <% if headers.present? %>
+        <p><strong><%= t('activerecord.attributes.property.description_title') %></strong></p>
+      <% end %>
+      <div><%= property.description.presence %></div>
+    <% end %>
+  <% end %>
+<% end %>

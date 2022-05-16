@@ -164,10 +164,10 @@
                         <!-- grid column -->
 
                         <!-- Floor -->
-                        <div class="col-md-6 col-sm-12">
+                        <div class="col-md-6 col-sm-12 form-field-container floor">
                           <div class="form-group mb-4">
                             <%= property.label :floor do %>
-                              <%= Property.human_attribute_name(:floor) %>
+                              <span><i class="fas fa-arrows-alt-v fa-fw"></i></span>&nbsp;<%= Property.human_attribute_name(:floor) %>
                             <% end %>
                             <%= react_component('FormSelect', props: {
                                 id: 'c',
@@ -196,10 +196,10 @@
                         </div>
 
                         <!-- Construction -->
-                        <div class="col-md-6 col-sm-12">
+                        <div class="col-md-6 col-sm-12 form-field-container construction">
                           <div class="form-group mb-4">
                             <%= property.label :construction do %>
-                              <%= Property.human_attribute_name(:construction) %>
+                              <span><i class="fas fa-calendar-day fa-fw"></i></span>&nbsp;<%= Property.human_attribute_name(:construction) %>
                             <% end %>
                             <%= react_component('FormSelect', props: {
                                 id: 'd',
@@ -228,7 +228,7 @@
                         </div>
 
                         <!-- Size -->
-                        <div class="col-md-6 col-sm-12">
+                        <div class="col-md-6 col-sm-12 form-field-container size">
                           <div class="form-group mb-4">
                             <div class="form-label-group">
                               <%= property.text_field :size,
@@ -254,7 +254,7 @@
                         </div>
 
                         <!-- Bedrooms -->
-                        <div class="col-md-6 col-sm-12">
+                        <div class="col-md-6 col-sm-12 form-field-container bedrooms">
                           <div class="form-group mb-4">
                             <div class="form-label-group">
                               <%= property.text_field :bedrooms,
@@ -277,7 +277,7 @@
                         </div>
 
                         <!-- Bathrooms -->
-                        <div class="col-md-6 col-sm-12">
+                        <div class="col-md-6 col-sm-12 form-field-container bathrooms">
                           <div class="form-group mb-4">
                             <div class="form-label-group">
                               <%= property.text_field :bathrooms,
@@ -300,7 +300,7 @@
                         </div>
 
                         <!-- Price -->
-                        <div class="col-md-6 col-sm-12">
+                        <div class="col-md-6 col-sm-12 form-field-container price">
                           <div class="form-group mb-4">
                             <div class="form-label-group">
                               <%= property.text_field :price,
@@ -313,7 +313,11 @@
                                                       'data-parsley-required-message': t("js.validator.required") %>
                               <label for="bedrooms">
                                 <%= content_tag :span do %>
-                                  <%= content_tag(:i, nil, class: 'fas fa-euro-sign fa-fw') + ' ' + t('activerecord.attributes.property.price_title') %>
+                                  <% if current_account.greek? %>
+                                    <%= content_tag(:i, nil, class: 'fas fa-euro-sign fa-fw') + ' ' + t('activerecord.attributes.property.price_title') %>
+                                  <% else %>
+                                    <%= content_tag(:i, nil, class: 'fas fa-dollar-sign fa-fw') + ' ' + t('activerecord.attributes.property.price_title') %>
+                                  <% end %>
                                 <% end %>
                               </label>
                             </div>
@@ -325,7 +329,7 @@
 
 
                         <!-- Availability -->
-                        <div class="col-md-6 col-sm-12">
+                        <div class="col-md-6 col-sm-12 form-field-container availability">
                           <div class="form-group mb-4">
                             <%= property.label :availability, t('activerecord.attributes.property.availability_title'), class: 'control-label' %>
                             <%= property.text_field :availability, class: 'form-control', :data => { :toggle => 'flatpickr' } %>
@@ -335,7 +339,7 @@
 
 
                         <!-- Levels -->
-                        <div class="col-md-6 col-sm-12">
+                        <div class="col-md-6 col-sm-12 form-field-container levels">
                           <div class="form-group mb-4">
                             <%= property.label :levels do %>
                               <%= Property.human_attribute_name(:levels) %>
@@ -367,8 +371,96 @@
                         </div>
                       <!-- /.row -->
 
+                      <!-- Facade length -->
+                      <div class="col-md-6 col-sm-12 form-field-container facade_length">
+                        <div class="form-group mb-4">
+                          <div class="form-label-group">
+                            <%= property.text_field :facade_length,
+                                                    class: 'form-control',
+                                                    autocomplete: "off",
+                                                    'data-parsley-group': "fieldset-2",
+                                                    'data-parsley-type': "integer",
+                                                    'data-parsley-type-message': t("js.validator.digits") %>
+                            <label for="facade_length">
+                              <%= content_tag :span do %>
+                                <%= content_tag(:i, nil, class: 'fas fa-arrows-alt-h fa-fw') + ' ' + t('activerecord.attributes.property.facade_length') %>
+                              <% end %>
+                            </label>
+                          </div>
+                          <small class="form-text text-muted"><%= t('activerecord.attributes.property.facade_length_feedback_html') %>
+                          </small>
+                          <div class="invalid-feedback"></div>
+                        </div>
+                      </div>
+
+                      <!-- Distance from sea -->
+                      <div class="col-md-6 col-sm-12 form-field-container distance_from_sea">
+                        <div class="form-group mb-4">
+                          <div class="form-label-group">
+                            <%= property.text_field :distance_from_sea,
+                                                    class: 'form-control',
+                                                    autocomplete: "off",
+                                                    'data-parsley-group': "fieldset-2",
+                                                    'data-parsley-type': "integer",
+                                                    'data-parsley-type-message': t("js.validator.digits") %>
+                            <label for="distance_from_sea">
+                              <%= content_tag :span do %>
+                                <%= content_tag(:i, nil, class: 'fas fa-walking fa-fw') + ' ' + t('activerecord.attributes.property.distance_from_sea') %>
+                              <% end %>
+                            </label>
+                          </div>
+                          <small class="form-text text-muted"><%= t('activerecord.attributes.property.distance_from_sea_feedback_html') %>
+                          </small>
+                          <div class="invalid-feedback"></div>
+                        </div>
+                      </div>
+
+                      <!-- Building coefficient -->
+                      <div class="col-md-6 col-sm-12 form-field-container building_coefficient">
+                        <div class="form-group mb-4">
+                          <div class="form-label-group">
+                            <%= property.text_field :building_coefficient,
+                                                    class: 'form-control',
+                                                    autocomplete: "off",
+                                                    'data-parsley-group': "fieldset-2",
+                                                    'data-parsley-type': "number",
+                                                    'data-parsley-type-message': t("js.validator.numbers") %>
+                            <label for="building_coefficient">
+                              <%= content_tag :span do %>
+                                <%= content_tag(:i, nil, class: 'fas fa-calculator fa-fw') + ' ' + t('activerecord.attributes.property.building_coefficient') %>
+                              <% end %>
+                            </label>
+                          </div>
+                          <small class="form-text text-muted"><%= t('activerecord.attributes.property.building_coefficient_feedback_html') %>
+                          </small>
+                          <div class="invalid-feedback"></div>
+                        </div>
+                      </div>
+
+                      <!-- Coverage ratio -->
+                      <div class="col-md-6 col-sm-12 form-field-container coverage_ratio">
+                        <div class="form-group mb-4">
+                          <div class="form-label-group">
+                            <%= property.text_field :coverage_ratio,
+                                                    class: 'form-control',
+                                                    autocomplete: "off",
+                                                    'data-parsley-group': "fieldset-2",
+                                                    'data-parsley-type': "integer",
+                                                    'data-parsley-type-message': t("js.validator.digits") %>
+                            <label for="coverage_ratio">
+                              <%= content_tag :span do %>
+                                <%= content_tag(:i, nil, class: 'fas fa-percentage fa-fw') + ' ' + t('activerecord.attributes.property.coverage_ratio') %>
+                              <% end %>
+                            </label>
+                          </div>
+                          <small class="form-text text-muted"><%= t('activerecord.attributes.property.coverage_ratio_feedback_html') %>
+                          </small>
+                          <div class="invalid-feedback"></div>
+                        </div>
+                      </div>
+
                       <!-- Energy cert -->
-                      <div class="col-md-6 col-sm-12">
+                      <div class="col-md-6 col-sm-12 form-field-container has_energy_cert">
                         <div class="form-group mb-4">
                           <div class="custom-control custom-checkbox app-checkbox">
                               <div>
@@ -383,12 +475,33 @@
                           </div>
                           </div><!-- /.form-group -->
                         </div> <!-- /Energy cert -->
+
+                        <% if current_account.international? %>
+                          <!-- Unit -->
+                          <div class="col-md-6 col-sm-12 form-field-container unit">
+                            <div class="form-group mb-4">
+                              <div class="form-label-group">
+                                <%= property.text_field :unit,
+                                                        class: 'form-control',
+                                                        autocomplete: "off" %>
+                                <label for="unit">
+                                  <%= content_tag :span do %>
+                                    <%= content_tag(:i, nil, class: 'fas fa-hashtag fa-fw') + ' ' + t('activerecord.attributes.property.unit_title') %>
+                                  <% end %>
+                                </label>
+                              </div>
+                              <small class="form-text text-muted"><%= t('activerecord.attributes.property.unit_feedback_html') %>
+                              </small>
+                              <div class="invalid-feedback"></div>
+                            </div>
+                          </div>
+                        <% end %>
                       </div>
                       <!-- /.row -->
 
                       <div class="row">
                         <!-- Description -->
-                        <div class="col-md-12">
+                        <div class="col-md-12 form-field-container description">
                           <div class="form-group mb-4">
                             <label class="control-label" for="notes"><%= t('activerecord.attributes.property.description_title') %></label>
                             <%= property.label :description do %>&nbsp;
@@ -413,9 +526,38 @@
                         </div>
                       </div><!-- /.row -->
 
+                      <% if current_account.greek? %>
+                        <div class="row">
+                          <!-- Description (English)-->
+                          <div class="col-md-12 form-field-container description">
+                            <div class="form-group mb-4">
+                              <%= property.label :description_en do %>
+                                <span><%= t('activerecord.attributes.property.description_en_title') %></span>&nbsp;
+                                <span class="property-cover-popover"
+                                      data-toggle="popover"
+                                      data-placement="top"
+                                      data-trigger="hover"
+                                      data-content="<%= t('properties.popover_description_en_body') %>"
+                                      title="<%= t('properties.popover_description_title') %>">
+                                  <i class="fas fa-info-circle"></i>
+                                </span>
+                              <% end %>
+                              <%= property.text_area :description_en,
+                                                     class: 'form-control',
+                                                     id: 'description',
+                                                     autocomplete: 'off',
+                                                     'rows': '5' %>
+                              <small class="form-text text-muted"><%= t('activerecord.attributes.property.description_en_feedback_html') %>
+                              </small>
+                              <div class="invalid-feedback"></div>
+                            </div>
+                          </div>
+                        </div><!-- /.row -->
+                      <% end %>
+
                       <div class="row">
                         <!-- Notes -->
-                        <div class="col-md-12">
+                        <div class="col-md-12 form-field-container notes">
                           <div class="form-group mb-4">
                             <%= property.label :notes do %>
                               <span><%= t('activerecord.attributes.property.notes_title') %></span>&nbsp;
@@ -459,20 +601,24 @@
                       <legend><%= t('js.forms.properties.wizard.step3.title') %></legend> <!-- .custom-control -->
                       <div class="multivalue-checkboxes">
                         <div class="form-row justify-content-center">
-                          <% %w(housetype heating orientation view other).each do |category| %>
+                          <% %w(housetype heating orientation view other access power slope zone).each do |category| %>
 
-                            <div class="form-group">
-                              <!--                              <div class="col-md-2">-->
-                              <label class="control-label checkbox-header app-checkbox"><strong><%= t("activerecord.attributes.extra.#{category}.title") %></strong></label>
-                              <div class="col-md-12">
-                                <%= property.collection_check_boxes :extra_ids, Extra.order(:id).where(subtype: category), :id, :name do |b| %>
-                                  <div class="custom-control custom-checkbox app-checkbox">
-                                    <%= b.check_box({ class: "custom-control-input", type: 'checkbox' }) %>
-                                    <%= b.label({ class: 'custom-control-label' }) do %>
-                                      <%= t("activerecord.attributes.extra.#{category}.#{b.text}") %>
-                                    <% end %>
-                                  </div>
-                                <% end %>
+                            <div class="form-field-container <%= category.to_s %>">
+                              <div class="form-group">
+                                <!--                              <div class="col-md-2">-->
+                                <label class="control-label checkbox-header app-checkbox"><strong><%= t("activerecord.attributes.extra.#{category}.title") %></strong></label>
+                                <div class="col-md-12">
+                                  <%= property.collection_check_boxes :extra_ids, Extra.order(:id).where(subtype: category), :id, :name do |b| %>
+                                    <div class="form-field-container <%= b.text.to_s %>">
+                                      <div class="custom-control custom-checkbox app-checkbox">
+                                        <%= b.check_box({ class: "custom-control-input", type: 'checkbox' }) %>
+                                        <%= b.label({ class: 'custom-control-label' }) do %>
+                                          <%= t("activerecord.attributes.extra.#{category}.#{b.text}") %>
+                                        <% end %>
+                                      </div>
+                                    </div>
+                                  <% end %>
+                                </div>
                               </div>
                             </div>
                           <% end %>
@@ -489,7 +635,11 @@
                                     <% end %>
                                   </div>
                                   <div class="mt-1">
-                                    <input value="<%= @property.send("#{b.text}_space") %>" type="number" name="property[<%= b.text %>_space]" class="form-control custom-control-label dependent_input" placeholder="<%= t("activerecord.attributes.extra.dependent.#{b.text}_placeholder") %>">
+                                    <% if current_account.greek? %>
+                                      <input value="<%= @property.send("#{b.text}_space") %>" type="number" name="property[<%= b.text %>_space]" class="form-control custom-control-label dependent_input" placeholder="<%= t("activerecord.attributes.extra.dependent.#{b.text}_placeholder") %>">
+                                    <% else %>
+                                      <input value="<%= @property.send("#{b.text}_space") %>" type="number" name="property[<%= b.text %>_space]" class="form-control custom-control-label dependent_input" placeholder="<%= t("activerecord.attributes.extra.dependent.#{b.text}_placeholder_footage") %>">
+                                    <% end %>
                                   </div>
                                 </div>
                               <% end %>
@@ -808,6 +958,7 @@
                   <input id="preventformsubmit" type="hidden">
                   <%= property.file_field :images, class: 'form-control uppy-emitters', multiple: true, direct_upload: true %>
                   <%= render "accounts/helpers/locale" %>
+                  <%= render "accounts/helpers/property_filters" %>
 
                 <% end %> <!-- /form -->
               </div>

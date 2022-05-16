@@ -161,7 +161,7 @@
                     <p class="card-title" style="font-size: 15px;">
                       <%= t("activerecord.attributes.property.enums.subcategory.#{property.category.slug}") %>
                       <% if property.size.present? %>
-                        <span>| </span><span><%= print_size(property.size, property.account) %></span>
+                        <span>| </span><span><%= print_size(property.size, property.account).html_safe %></span>
                       <% end %>
                       <%#= property.size.present? ? "| #{property.size} #{t('sq_meters_html')}".html_safe : nil %>
                     </p>
@@ -175,10 +175,14 @@
                   <% if %w[residential commercial].include?(property.category.parent_slug) %>
                     <div><span><%= render_residential_features(property).join(' • ') %></span></div>
                   <% end %>
-                  <% if property.description.present? %>
-                    <hr />
-                    <div><%= property.description.presence %></div>
-                  <% end %>
+
+                  <%= render partial: 'accounts/websites/description', locals: { property: property, headers: false } %>
+
+                  <%# if property.description.present? %>
+<!--                    <hr />-->
+<!--                    <div><%#= property.description.presence %></div>-->
+                  <%# end %>
+
                 </div>
                 <%= render_price(property) %>
               </div>

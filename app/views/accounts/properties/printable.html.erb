@@ -42,7 +42,7 @@
       <h2 class="decorated"><span><%= t 'properties.info' %></span></h2>
       <table class="table ">
         <tbody>
-        <% Property.extended_features(current_account).except(:address).each do |key, value| %>
+        <% Property.filtered_extended_features(current_account, @property).except(:address).each do |key, value| %>
           <tr>
             <td class="align-middle nowrap">
               <div class="table-entry">

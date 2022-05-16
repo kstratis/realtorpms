@@ -384,6 +384,7 @@ module Accounts
     def property_params
       # noclient may be redundant here
       params.require(:property).permit(:description,
+                                       :description_en,
                                        :businesstype,
                                        :locationid,
                                        :ilocationid,
@@ -414,6 +415,11 @@ module Accounts
                                        :avatar,
                                        :map_url,
                                        :active,
+                                       :facade_length,
+                                       :distance_from_sea,
+                                       :building_coefficient,
+                                       :coverage_ratio,
+                                       :unit,
                                        { preferences: {} },
                                        delete_images: [],
                                        images: [],
@@ -443,10 +449,10 @@ module Accounts
     def solo_attribute_update?
       action_name == 'update' &&
         request.patch? &&
-        params_copy[:subcategory].nil? &&
-        params_copy[:category].nil? &&
-        params_copy[:locationid].nil? &&
-        params_copy[:ilocationid].nil?
+        property_params[:subcategory].nil? &&
+        property_params[:category].nil? &&
+        property_params[:locationid].nil? &&
+        property_params[:ilocationid].nil?
     end
   end
 end

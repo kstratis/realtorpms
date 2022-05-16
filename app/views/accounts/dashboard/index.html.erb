@@ -30,7 +30,7 @@
           event: t('event'),
           events: t('events'),
           noEvents: t('no_events'),
-          add: t('add'),
+          add: t('new_event'),
           eventInfoAddTitle: t('event_info_add_title'),
           eventInfoDeleteTitle: t('event_info_delete_title'),
           eventInfoDeleteBody: t('event_info_delete_body'),
@@ -66,6 +66,7 @@
           </div>
 
           <!-- Chart.js -->
+
           <div class="col-md-12 col-lg-4">
             <div class="card card-fluid">
               <div class="card-body">
@@ -81,6 +82,44 @@
                   <% end %>
                 </div>
               </div>
+            </div>
+            <div>
+              <div class="card card-fluid">
+                <div class="card-body">
+                  <div class="container-fluid d-flex justify-content-center">
+                    <%= link_to users_path, class: "visual-picker visual-picker-sm px-3" do %>
+                      <!-- .visual-picker-figure -->
+                      <div class="visual-picker-figure">
+                        <!-- .visual-picker-content -->
+                        <span class="visual-picker-content"><span class="tile tile-sm bg-info"><i class="fas fa-user"></i></span></span> <!-- /.visual-picker-content -->
+                      </div><!-- /.visual-picker-figure -->
+                      <!-- .visual-picker-peek -->
+                      <span class="visual-picker-peek"><%= t('settings.sidebar.partners') %></span>
+                    <% end %> <!-- /.visual-picker -->
+                    <!-- .visual-picker -->
+                    <%= link_to properties_path, class: "visual-picker visual-picker-sm px-3" do %>
+                      <!-- .visual-picker-figure -->
+                      <div class="visual-picker-figure">
+                        <!-- .visual-picker-content -->
+                        <span class="visual-picker-content"><span class="tile tile-sm bg-danger"><i class="fas fa-home"></i></span></span> <!-- /.visual-picker-content -->
+                      </div><!-- /.visual-picker-figure -->
+                      <!-- .visual-picker-peek -->
+                      <span class="visual-picker-peek"><%= t('settings.sidebar.properties') %></span>
+                    <% end %> <!-- /.visual-picker -->
+                    <!-- .visual-picker -->
+                    <%= link_to clients_path, class: "visual-picker visual-picker-sm px-3" do %>
+                      <!-- .visual-picker-figure -->
+                      <div class="visual-picker-figure">
+                        <!-- .visual-picker-content -->
+                        <span class="visual-picker-content"><span class="tile tile-sm bg-success"><i class="fas fa-users"></i></span></span> <!-- /.visual-picker-content -->
+                      </div><!-- /.visual-picker-figure -->
+                      <!-- .visual-picker-peek -->
+                      <span class="visual-picker-peek"><%= t('settings.sidebar.clients') %></span>
+                    <% end %> <!-- /.visual-picker -->
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div> <!-- row end -->

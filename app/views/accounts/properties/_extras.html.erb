@@ -1,10 +1,29 @@
-<% @property.extras.map do |element| %>
-  <div class="badge-container">
-    <span class="badge badge-success badge-custom">
-      <i class="pr-icon xs <%= element.name %>"></i>
-      <span class="badge-text">&nbsp;<%= t("activerecord.attributes.extra.#{element.subtype}.#{element.name}") %><%= render_extra_value(@property, "#{element.name}_space").to_s.html_safe %></span>
-    </span>
-  </div>
+<table>
+<% @property.extras.each_with_index.map do |element, index| %>
+  <% if index % columns == 0 %>
+    <tr>
+      <td>
+        <div class="badge-container d-block">
+          <span class="d-inline-block w-100 badge badge-success badge-custom">
+            <i class="pr-icon xs <%= element.name %>"></i>
+            <span class="badge-text">&nbsp;<%= t("activerecord.attributes.extra.#{element.subtype}.#{element.name}") %><%= render_extra_value(@property, "#{element.name}_space").to_s.html_safe %></span>
+          </span>
+        </div>
+      </td>
+  <% else %>
+    <td>
+      <div class="badge-container d-block">
+        <span class="d-inline-block w-100 badge badge-success badge-custom">
+          <i class="pr-icon xs <%= element.name %>"></i>
+          <span class="badge-text">&nbsp;<%= t("activerecord.attributes.extra.#{element.subtype}.#{element.name}") %><%= render_extra_value(@property, "#{element.name}_space").to_s.html_safe %></span>
+        </span>
+      </div>
+    </td>
+    <% if index % columns == 0 %>
+      </tr>
+      <tr>
+    <% end %>
+  <% end %>
 <% end %>
-
+</table>
 

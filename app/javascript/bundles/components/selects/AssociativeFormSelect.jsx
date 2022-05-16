@@ -38,6 +38,19 @@ class AssociativeFormSelect extends React.Component {
     this.buildRangeSelectOptions = this.buildRangeSelectOptions.bind(this);
   }
 
+  componentDidMount() {
+    // This component is also used in dependant min/max fields like `price`.
+    // If one of those cases, bail out. Otherwise its a category dependant attribute
+    // where we deal with the stepper and the filtered out property attributes
+    if (this.props?.formdata?.categoryid !== 'property_category') return;
+
+    if (!this.props.storedMasterOption){
+      this.disableStepper();
+    } else {
+      this.hideInvalidFormFields(this.props.storedMasterOption)
+    }
+  }
+
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.props.mode !== 'range') return;
     // DEBUG SOS
@@ -94,6 +107,59 @@ class AssociativeFormSelect extends React.Component {
         : this.buildRangeSelectOptions(false)
   };
 
+  enableStepper(){
+    $('li.step > a').removeClass('no-pointer-events');
+    $('li.step').removeClass('cursor-not-allowed');
+  }
+
+  disableStepper(){
+    $('li.step > a').addClass('no-pointer-events');
+    $('li.step').addClass('cursor-not-allowed');
+  }
+
+  // Parses and returns the property attributes map embedded in DOM
+  propertyFilterAttrsHash(){
+    return $('#filters').data();
+  }
+
+  // Re-enables all property attributes which may be filtered out
+  restoreAllPropertyAttrs(){
+    // Iterate over all map inputs/checkboxes etc and do the following:
+    const attrs = Object.values(this.propertyFilterAttrsHash()).reduce((acc, curVal) => {
+      return acc.concat(curVal)
+    }, []);
+
+    for (const attr of attrs){
+      $(`.${attr}`).find('input').prop('disabled', false)
+      $(`.form-field-container.${attr}`).removeClass('d-none')
+      $(`.form-group-container.${attr}`).removeClass('d-none')
+    }
+  }
+
+  // Filters out invalid property attributes using DOM operations
+  filterOutInvalidPropertyAttrs(attr){
+    const invalidAttrs = this.propertyFilterAttrsHash()[attr];
+    for (const attr of invalidAttrs) {
+      // Iterate over all map inputs/checkboxes etc and do the following:
+      $(`.${attr}`).find('input').prop('disabled', true)
+      $(`.form-field-container.${attr}`).addClass('d-none')
+      $(`.form-group-container.${attr}`).addClass('d-none')
+    }
+  }
+
+  // Hides fields according to current selection.
+  // i.e. A land plot property can't have bedrooms/bathrooms
+  hideInvalidFormFields(selectedOption) {
+    if (!selectedOption) {
+      this.disableStepper();
+    } else {
+      this.enableStepper();
+      const optionName = selectedOption['value'];
+      this.restoreAllPropertyAttrs();
+      this.filterOutInvalidPropertyAttrs(optionName)
+    }
+  }
+
   // Set the subcategory's options according to parent selection.
   // Mind that this fires for both components (master & slave).
   handleOptions = (selectedOption, isMaster) => {
@@ -101,6 +167,12 @@ class AssociativeFormSelect extends React.Component {
     // For example if 'apartment' is changed to 'villa' you don't need to change the property category
     // because they are both under 'residential'.
     if (!isMaster) return;
+
+    // If category selection is changed hide inappropriate fields.
+    // If left empty, disable the form stepper.
+    if (this.props?.formdata?.categoryid === 'property_category') {
+      this.hideInvalidFormFields(selectedOption)
+    }
     // If it fires on the parent, set subcategory's options and enable it
     if (selectedOption) {
       // Reset the value if 'max' is smaller than 'min'

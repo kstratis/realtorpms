@@ -2,7 +2,7 @@ module Accounts
   class UsersController < Accounts::BaseController
     helper Cfields
 
-    before_action :admin_user
+    before_action :admin_user, except: [:toggle_tour, :tour_data]
     # Shows all account users
     before_action :all_account_users, only: [:show]
     before_action :owner_exclusive, only: [:new, :create, :destroy, :index, :mass_delete, :mass_freeze]
@@ -131,7 +131,7 @@ module Accounts
       if @user.present?
         @user.toggle!(:has_taken_tour)
       end
-      render json: { message: "OK" }, status: 200
+      render json: { message: "OK" }, status: :ok
     end
 
     def tour_data
@@ -195,7 +195,15 @@ module Accounts
 
     # Confirms an admin user.
     def admin_user
-      redirect_to(account_root_url) unless current_user.is_admin?(current_account)
+      return if current_user.is_admin?(current_account)
+
+      user = if params[:id].present?
+               current_account.all_users.find(params[:id])
+             end
+
+      redirect_to(account_root_url) and return if user.nil?
+
+      redirect_to(account_root_url) unless user == current_user
     end
 
     def owner_exclusive
