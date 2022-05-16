@@ -150,8 +150,8 @@ class Property < ApplicationRecord
       {
         residential: %w[facade_length distance_from_sea building_coefficient coverage_ratio slope power access within_urban_plan equipment service_lift load_ramp agricultural_use exchange_scheme],
         commercial: %w[facade_length distance_from_sea building_coefficient coverage_ratio orientation view fit_for_professional_use fireplace slope within_urban_plan exchange_scheme pool],
-        land: %w[floor construction bedrooms bathrooms levels energy_cert power housetype heating gas solar_water_heating furnished fireplace awnings clima security_door pool elevator no_utility_bills roofdeck equipment balcony service_lift load_ramp alarm within_urban_plan],
-        other: %w[facade_length distance_from_sea building_coefficient coverage_ratio orientation view fit_for_professional_use fireplace slope within_urban_plan exchange_scheme pool zone power investment no_utility_bills]
+        land: %w[floor construction bedrooms bathrooms levels energy_cert power housetype heating gas solar_water_heating furnished fireplace awnings clima security_door pool elevator no_utility_bills roofdeck equipment balcony service_lift load_ramp alarm within_urban_plan unit],
+        other: %w[facade_length distance_from_sea building_coefficient coverage_ratio orientation view fit_for_professional_use fireplace slope within_urban_plan exchange_scheme pool zone power investment no_utility_bills unit]
       }
     end
 
@@ -161,8 +161,8 @@ class Property < ApplicationRecord
         :category_info => {:label => 'subcategory', :icon => 'subcategory', :options => 'slug', :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.subcategory.#{value}")} },
         #:location_info => {:label => 'location', :icon => 'location', :options => 'localname', :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
         :size => { :label => 'size', :icon => 'size', :options => nil, :renderfn => Proc.new { |value| value.blank? ? '—' : print_size(value, account) } },
-        :price => {:label => 'price', :icon => 'price', :options => nil, :renderfn => Proc.new {|value| value ? ActionController::Base.helpers.number_to_currency(value, precision: 0, round_mode: :up) : '—' }},
-        :pricepersize => { :label => 'pricepersize', :icon => 'pricepersqmeter', :options => nil, :renderfn => Proc.new {|value| value ? ActionController::Base.helpers.number_to_currency(value, precision: 0, round_mode: :up) : '—' }},
+        :price => {:label => 'price', :icon => 'price', :options => nil, :renderfn => Proc.new {|value| value ? print_price(value, account) : '—' }},
+        :pricepersize => { :label => 'pricepersize', :icon => 'pricepersqmeter', :options => nil, :renderfn => Proc.new {|value| value ? print_price(value, account) : '—' }},
         :created_at => {:label => 'created_at', :icon => 'created_at', :options => nil, :renderfn => Proc.new {|value| value ? (I18n.l value, format: :custom) : '—' } },
         :map_url => {:label => 'location', :icon => 'location', :options => nil, :renderfn => Proc.new {|value| "<button type='button' class='btn btn-secondary btn-sm printable' data-url='#{value.blank? ? '' : Property.iframe_parse(value) }' #{value.blank? ? 'disabled' : nil }><i class='fas fa-map fa-fw'></i></button>&nbsp;&nbsp;&nbsp;#{value.blank? ? "<span class='property-cover-popover' data-toggle='popover' data-placement='top' data-trigger='hover' data-content='#{I18n.t('properties.map_feedback')}'><i class='fas fa-info-circle'></i></span>" : nil}"}},
         :active => {:label => 'status', :icon => 'status', :options => nil, :renderfn => Proc.new {|value| value ? "#{I18n.t('activerecord.attributes.property.status_active')} <div class='indicator indicator-on'></div>" : "#{I18n.t('activerecord.attributes.property.status_inactive')} <div class='indicator indicator-off'></div>"}}

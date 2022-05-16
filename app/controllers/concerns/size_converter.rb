@@ -22,4 +22,14 @@ module SizeConverter
              price: ActionController::Base.helpers.number_to_currency(property_pricepersize, precision: 0, round_mode: :up))
     end
   end
+
+  def print_price(property_price, account)
+    return if property_price.blank?
+
+    if account.greek?
+      ActionController::Base.helpers.number_to_currency(property_price, locale: :el, precision: 0, round_mode: :up)
+    else
+      ActionController::Base.helpers.number_to_currency(property_price, locale: :en, precision: 0, round_mode: :up)
+    end
+  end
 end

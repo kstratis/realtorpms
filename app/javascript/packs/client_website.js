@@ -98,3 +98,4 @@ function initCarousels() {
 
   splide.mount();
 }
+

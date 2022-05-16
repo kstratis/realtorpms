@@ -1,1 +1,1 @@
-import "../../stylesheets/client_minisites/client_minisites";
+import "../../stylesheets/client_minisites";

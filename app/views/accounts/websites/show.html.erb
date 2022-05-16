@@ -1,86 +1,85 @@
-<!--<div class="row">-->
-<!--  <div class="back-button-container">-->
-<!--    <a onclick="history.go(-1)" href="#" class="btn btn-info"><i class="fas fa-arrow-left fa-fw"></i>&nbsp;<span>Επιστροφή</span></a>-->
-<!--  </div>-->
-<!--</div>-->
-
-<div class="show-container container container-fluid-xl pt-5">
-
-<div class="row">
-
-  <% if @property.images.blank? && !@property.avatar.attached? %>
-    <div class="carousel-container col-md-8 col-sm-12">
-      <div class="thumb-container">
-        <%= image_pack_tag('media/images/houses/house_placeholder.svg', class: 'house-placeholder-image thumb') %>
+<div class="container pt-5">
+  <div class="row">
+    <% if @property.images.blank? && !@property.avatar.attached? %>
+      <div class="carousel-container col-lg-8 col-xl-8 col-sm-12">
+        <div class="thumb-container">
+          <%= image_pack_tag('media/images/houses/house_placeholder.svg', class: 'house-placeholder-image thumb') %>
+        </div>
+        <div class="d-inline text-center"><h3><%= t('no_photos') %></h3></div>
       </div>
-      <div class="d-inline text-center"><h3><%= t('no_photos') %></h3></div>
-    </div>
-  <% else %>
-    <div class="carousel-container col-md-8 col-sm-12">
-      <div id="splide-gallery" class="splide">
-        <div class="splide__track ">
-          <ul class="splide__list ">
-            <% @property.all_images.each do |image| %>
-              <li class="splide__slide carousel-slide">
-                <img src="<%= url_for(image) %>" />
+    <% else %>
+      <div class="carousel-container col-lg-8 col-xl-8 col-sm-12">
+        <div id="splide-gallery" class="splide">
+          <div class="splide__track ">
+            <ul class="splide__list ">
+              <% @property.all_images.each do |image| %>
+                <li class="splide__slide carousel-slide">
+                  <img src="<%= url_for(image) %>"/>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+
+        <div class="thumbnails js-thumbnails">
+          <ul class="thumbnails__list overflow-auto">
+            <% @property.all_images.each_with_index do |image, idx| %>
+              <li class="thumbnails__item" role="button" tabindex="0">
+                <img src="<%= url_for(image.variant(resize_to_limit: [100, 100])) %>" alt="Thumbnail <%= idx %>"/>
               </li>
             <% end %>
           </ul>
         </div>
       </div>
+    <% end %>
 
-      <div class="thumbnails js-thumbnails">
-        <ul class="thumbnails__list overflow-auto">
-          <% @property.all_images.each_with_index do |image, idx| %>
-            <li class="thumbnails__item" role="button" tabindex="0">
-              <img src="<%= url_for(image.variant(resize_to_limit: [100, 100])) %>" alt="Thumbnail <%= idx %>" />
-            </li>
-          <% end %>
-        </ul>
-      </div>
-
-
-    </div>
-  <% end %>
-
-  <div class="summary-container col-md-4 col-sm-12 py-5 shadow px-2 mb-5 bg-white rounded">
-
-    <div class="property-form">
-      <div class="text-center">
-        <h3><strong>
-          <%= t("activerecord.attributes.property.enums.subcategory.#{@property.category.slug}") %>
-          <% if @property.size.present? %>
-            <span>| </span><span><%= print_size(@property.size, @property.account).html_safe %></span>
-          <% end %>
-        </strong></h3>
-
-
-      <div>
-        <% if %w[residential commercial].include?(@property.category.parent_slug) %>
-          <div><span><%= render_residential_features(@property).join(' • ') %></span></div>
-        <% end %>
-        <% if @property.price.present? %>
-          <div><%= t('activerecord.attributes.property.price_title') %>
-            : <strong class="price-span"><%= number_to_currency(@property.price, precision: 0, round_mode: :up) %></strong></div>
-          <% if @property.size.present? %>
-            <div>
-              <% if @property.account.greek? %>
-                <%= t('activerecord.attributes.property.pricepersize_meters_title_html') %>
-              <% else %>
-                <%= t('activerecord.attributes.property.pricepersize_feet_title_html') %>
+    <div class="col-lg-4 col-xl-4 col-sm-12  ">
+      <div class="summary-container bg-white rounded shadow p-5 mb-5">
+        <div class="property-form">
+          <div class="text-center">
+            <h3><strong>
+              <%= t("activerecord.attributes.property.enums.subcategory.#{@property.category.slug}") %>
+              <% if @property.size.present? %>
+                <span>| </span><span><%= print_size(@property.size, @property.account).html_safe %></span>
               <% end %>
-              : <strong class="price-span"><%= number_to_currency(@property.pricepersize, precision: 0, round_mode: :up) %></strong></div>
-          <% end %>
-        <% end %>
-        <% if @property.description.present? %>
-          <hr />
-          <p><strong><%= t('activerecord.attributes.property.description_title') %></strong></p>
-          <div><%= @property.description.presence %></div>
-        <% end %>
-      </div>
+            </strong></h3>
+
+
+            <div>
+              <% if %w[residential commercial].include?(@property.category.parent_slug) %>
+                <div><span><%= render_residential_features(@property).join(' • ') %></span></div>
+              <% end %>
+              <% if @property.price.present? %>
+                <div>
+                  <%= t('activerecord.attributes.property.price_title') %>:&nbsp;
+                  <strong class="price-span"><%= print_price(@property.price, current_account) %></strong>
+                </div>
+                <% if @property.size.present? %>
+                  <div>
+                    <% if @property.account.greek? %>
+                      <%= t('activerecord.attributes.property.pricepersize_meters_title_html') %>:&nbsp;
+                    <% else %>
+                      <%= t('activerecord.attributes.property.pricepersize_feet_title_html') %>:&nbsp;
+                    <% end %>
+                    <strong class="price-span"><%= print_price(@property.pricepersize, current_account) %></strong>
+                  </div>
+                <% end %>
+              <% end %>
+              <% if @property.description.present? %>
+                <hr/>
+                <p><strong><%= t('activerecord.attributes.property.description_title') %></strong></p>
+                <div><%= @property.description.presence %></div>
+              <% end %>
+              <% if @property.extras.present? %>
+                <hr/>
+                <div class="row justify-content-center">
+                  <%= render partial: 'accounts/properties/extras', locals: { columns: 2 } %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
   </div>
-</div>
 </div>

@@ -422,6 +422,10 @@ module PropertiesHelper
       wording << floor_wording(property.floor)
     end
 
+    if current_account.international? && property.unit.present?
+      wording << I18n.t('activerecord.attributes.property.unit', unit: property.unit).to_s
+    end
+
     if property.bedrooms.present?
       wording << I18n.t('activerecord.attributes.property.bedroom', count: property.bedrooms).to_s
     end

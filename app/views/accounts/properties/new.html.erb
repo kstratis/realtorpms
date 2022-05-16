@@ -464,6 +464,27 @@
                             </div>
                           </div><!-- /.form-group -->
                         </div> <!-- /Energy cert -->
+
+                        <% if current_account.international? %>
+                          <!-- Unit -->
+                          <div class="col-md-6 col-sm-12 form-field-container unit">
+                            <div class="form-group mb-4">
+                              <div class="form-label-group">
+                                <%= property.text_field :unit,
+                                                        class: 'form-control',
+                                                        autocomplete: "off" %>
+                                <label for="unit">
+                                  <%= content_tag :span do %>
+                                    <%= content_tag(:i, nil, class: 'fas fa-hashtag fa-fw') + ' ' + t('activerecord.attributes.property.unit_title') %>
+                                  <% end %>
+                                </label>
+                              </div>
+                              <small class="form-text text-muted"><%= t('activerecord.attributes.property.unit_feedback_html') %>
+                              </small>
+                              <div class="invalid-feedback"></div>
+                            </div>
+                          </div>
+                        <% end %>
                       </div>
                       <!-- /.row -->
 

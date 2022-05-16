@@ -57,21 +57,17 @@
   <%= render 'layouts/shim' %>
 </head>
 
-<body>
+<body class="website-container d-flex flex-column min-vh-100">
 <% if request.params[:locale].blank? && @locale_switch_dismissed.blank? && !logged_in? && greek_user? %>
   <%= render 'shared/locale_switcher' %>
 <% end %>
 
-<div class="website-container">
-
-  <%= render 'layouts/client_website/header' %>
-
-  <%= yield %>
+<%= render 'layouts/client_website/header' %>
+<%= yield %>
 
   <!-- BEGIN THEME JS-->
   <!--<script src="assets/javascript/theme.min.js"></script>-->
   <!-- END THEME JS -->
-  <%= render 'layouts/client_website/footer' %>
-</div>
+<%= render 'layouts/client_website/footer' %>
 </body>
 </html>

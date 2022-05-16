@@ -59,7 +59,7 @@ class PropertyEntry extends React.Component {
               }`}>
               <div className={`d-flex justify-content-end ${this.props.entry['pinned'] || this.props.entry['website_enabled'] ? 'badges' : ''} `}>
                 {this.props.entry['pinned'] ? <div className="pinned-bookmark" data-toggle="tooltip" data-position="top" title={this.props.i18n['pinned']}><i className="fas fa-bookmark"/></div> : '' }
-                {this.props.entry['website_enabled'] ? <div className="pinned-globe" data-toggle="tooltip" data-position="top" title={this.props.i18n['website_enabled']}><i className="fas fa-globe"/></div> : '' }
+                {this.props.entry['website_enabled'] ? <div className="pinned-globe" data-toggle="tooltip" data-position="top" title={this.props.i18n['website_enabled']}><i className="fas fa-search"/></div> : '' }
               </div>
               <div className="list-group-item-figure rounded-left ">
                 <div className={`thumb-container ${this.props.entry['allow_view'] ? '' : 'frosty'}`}>

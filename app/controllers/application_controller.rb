@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   include SizeConverter
 
   helper_method :greek_user?
-  helper_method :print_size, :print_price_per_size
+  helper_method :print_size, :print_price_per_size, :print_price
 
   rescue_from ActiveRecord::RecordNotFound, with: -> { render_404  }
 

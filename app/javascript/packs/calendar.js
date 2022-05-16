@@ -175,7 +175,7 @@ class CalendarManager {
 
       spanLabel = document.createElement('span');
       spanLabel.className = "calendar-entry-markup";
-      spanLabel.textContent = "•";
+      spanLabel.textContent = "♦";
       divLabel.appendChild(spanLabel);
 
       spanText = document.createElement('span');
@@ -184,9 +184,9 @@ class CalendarManager {
       divLabel.appendChild(spanText);
 
       divWrapper.appendChild(divLabel);
-      divCloseBtn = document.createElement('div');
-      divCloseBtn.className = 'close align-self-center';
-      divCloseBtn.textContent = '×';
+      divCloseBtn = document.createElement('i');
+      divCloseBtn.className = 'fas fa-window-close fa-fw close align-self-center';
+      // divCloseBtn.textContent = '×';
       divWrapper.appendChild(divCloseBtn);
 
 

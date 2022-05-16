@@ -118,7 +118,7 @@
                     <% if @property.extras.blank? %>
                       <h3><%= t('activerecord.attributes.property.extras_not_found') %></h3>
                     <% else %>
-                      <%= render partial: 'accounts/properties/extras' %>
+                      <%= render partial: 'accounts/properties/extras', locals: { columns: 3 } %>
                     <% end %>
                   </div><!-- /.card-body -->
                 </div><!-- /.card -->

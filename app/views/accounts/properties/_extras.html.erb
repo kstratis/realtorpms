@@ -1,6 +1,6 @@
 <table>
 <% @property.extras.each_with_index.map do |element, index| %>
-  <% if index % 3 == 0 %>
+  <% if index % columns == 0 %>
     <tr>
       <td>
         <div class="badge-container d-block">
@@ -19,7 +19,7 @@
         </span>
       </div>
     </td>
-    <% if index % 3 == 0 %>
+    <% if index % columns == 0 %>
       </tr>
       <tr>
     <% end %>
