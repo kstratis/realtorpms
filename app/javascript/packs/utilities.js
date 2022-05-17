@@ -79,4 +79,21 @@ function eraseCookie(name) {
   document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 
-export { clearValidatableFields, setFlatPickrSettings, normalizeFlatPickrDate, getParticles, setCookie, getCookie, eraseCookie, initLanguageSwitcher };
+function initCrisp(lang){
+  window.CRISP_RUNTIME_CONFIG = {
+    locale : lang
+  };
+  window.$crisp = [];
+  window.CRISP_WEBSITE_ID = "166e3d44-c91d-4359-bab2-80b3aff6d583";
+
+  (function() {
+    var d = document;
+    var s = d.createElement("script");
+
+    s.src = "https://client.crisp.chat/l.js";
+    s.async = 1;
+    d.getElementsByTagName("head")[0].appendChild(s);
+  })();
+}
+
+export { clearValidatableFields, setFlatPickrSettings, normalizeFlatPickrDate, getParticles, setCookie, getCookie, eraseCookie, initLanguageSwitcher, initCrisp };

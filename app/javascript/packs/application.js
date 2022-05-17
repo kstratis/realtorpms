@@ -11,6 +11,7 @@ import bootbox from "bootbox";
 require("@rails/ujs").start();
 import './turbolinks_wrapper';
 import './calendar';
+import { initCrisp } from "./utilities";
 
 // import 'stacked-menu'
 

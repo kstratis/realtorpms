@@ -1,6 +1,6 @@
 import 'bootstrap'  // bootstrap js files
 import AOS from 'aos'; // animate on scroll lib
-import { initLanguageSwitcher } from "./utilities";
+import { initLanguageSwitcher, initCrisp } from "./utilities";
 
 // No Turbolinks at this point
 $(document).ready(function() {
@@ -11,6 +11,7 @@ $(document).ready(function() {
     duration: 1000,
     once: true
   });
-
+  let active_locale = $('#current_locale').data().i18n.locale || 'en';
   initLanguageSwitcher();
+  initCrisp(active_locale);
 });

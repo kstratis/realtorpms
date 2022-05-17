@@ -18,6 +18,12 @@
   overflow-x: unset;
 }
 
+// This is only used in the main website page
+// since its layout is different than the application.
+.hidden-x-overflow {
+  overflow-x: hidden;
+}
+
 //.app-main {
 //  min-height: 900px;
 //}
