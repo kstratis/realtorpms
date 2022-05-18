@@ -133,7 +133,8 @@ el:
         να φιλτράρεις τα αποτελέσματα των αναζητήσεων σου βάσει αυτού.<p>
   support:
     title: "Υποστήριξη"
-    message_html: "Για υποστήριξη/ερωτήσεις στείλε στο <a target='_blank' href='mailto:info@%{brandname}.com'>info@%{brandname}.com</a>."
+    message_admin_html: "Για υποστήριξη ενεργοποίησε το widget συνομιλίας μέσα απο τις <a href='%{chat}'>ρυθμίσεις</a> ή στείλε email στο <a target='_blank' href='mailto:info@%{brandname}.com'>info@%{brandname}.com</a>."
+    message_user_html: "Για υποστήριξη επικοινώνησε με έναν διαχειριστή ή στείλε email στο <a target='_blank' href='mailto:info@%{brandname}.com'>info@%{brandname}.com</a>."
   properties_count:
     one: "1 αποτέλεσμα"
     other: "%{count} αποτελέσματα"

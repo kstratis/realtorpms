@@ -14,15 +14,15 @@
             <div class="card card-fluid">
               <h2 class="card-header"><%= t('settings.sidebar.title') %></h2><!-- .nav -->
               <nav class="nav nav-tabs anchor-support flex-column border-0">
-                <a href="<%= settings_timeline_path %>" class="nav-link setting <%= active_for(controller: ['timeline'], plain_name: true) %>" aria-selected="true"><span class=""><i class="menu-icon fas fa-clipboard fa-fw"></i>&nbsp; <span class="d-none d-md-inline tab-text"><%= t('settings.sidebar.logs') %></span></span>
+                <a href="<%= settings_timeline_path %>" class="nav-link setting <%= active_for(controller: ['timeline'], plain_name: true) %>" aria-selected="true"><span class=""><i class="menu-icon fas fa-clipboard fa-fw"></i>&nbsp; <span class="d-inline tab-text"><%= t('settings.sidebar.logs') %></span></span>
                 </a>
-                <a href="<%= settings_model_types_path %>" class="nav-link setting <%= active_for(controller: ['model_types'], plain_name: true) %>"  aria-selected="true"><span class=""><i class="menu-icon fas fa-address-card fa-fw"></i>&nbsp; <span class="d-none d-md-inline tab-text"><%= t('settings.sidebar.cfields') %></span>&nbsp; <span class="badge badge-success">Pro</span></span>
+                <a href="<%= settings_model_types_path %>" class="nav-link setting <%= active_for(controller: ['model_types'], plain_name: true) %>"  aria-selected="true"><span class=""><i class="menu-icon fas fa-address-card fa-fw"></i>&nbsp; <span class="d-inline tab-text"><%= t('settings.sidebar.cfields') %></span>&nbsp; <span class="badge badge-success">Pro</span></span>
                 </a>
-                <a href="<%= account_edit_path %>" class="nav-link setting <%= active_for(controller: ['accounts'], plain_name: true) %>"  aria-selected="true"><span class=""><i class="menu-icon fas fa-globe fa-fw"></i>&nbsp; <span class="d-none d-md-inline tab-text"><%= t('accounts.edit_title') %></span></span>
+                <a href="<%= account_edit_path %>" class="nav-link setting <%= active_for(controller: ['accounts'], plain_name: true) %>"  aria-selected="true"><span class=""><i class="menu-icon fas fa-globe fa-fw"></i>&nbsp; <span class="d-inline tab-text"><%= t('accounts.edit_title') %></span></span>
                 </a>
-                <a href="<%= settings_chat_index_path %>" class="nav-link setting <%= active_for(controller: ['chat'], plain_name: true) %>"  aria-selected="true"><span class=""><i class="menu-icon fas fa-headset fa-fw"></i>&nbsp; <span class="d-none d-md-inline tab-text"><%= t('settings.sidebar.support') %></span></span>
+                <a href="<%= settings_chat_index_path %>" class="nav-link setting <%= active_for(controller: ['chat'], plain_name: true) %>"  aria-selected="true"><span class=""><i class="menu-icon fas fa-headset fa-fw"></i>&nbsp; <span class="d-inline tab-text"><%= t('settings.sidebar.support') %></span></span>
                 </a>
-                <a href="<%= settings_subscriptions_path %>" class="nav-link setting <%= active_for(controller: ['subscriptions'], plain_name: true) %>"  aria-selected="true"><span class=""><i class="menu-icon fas fa-credit-card fa-fw"></i>&nbsp; <span class="d-none d-md-inline tab-text"><%= t('sidebar.subscription') %></span></span>
+                <a href="<%= settings_subscriptions_path %>" class="nav-link setting <%= active_for(controller: ['subscriptions'], plain_name: true) %>"  aria-selected="true"><span class=""><i class="menu-icon fas fa-credit-card fa-fw"></i>&nbsp; <span class="d-inline tab-text"><%= t('sidebar.subscription') %></span></span>
                 </a>
               </nav><!-- /.nav -->
 

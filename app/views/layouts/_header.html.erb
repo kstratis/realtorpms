@@ -324,7 +324,7 @@
     menui18n: {
       support: {
         title: t('support.title'),
-        message_html: t('support.message_html', brandname: BRANDNAME.downcase)
+        message_html: current_user.is_admin?(current_account) ? t('support.message_admin_html', brandname: BRANDNAME.downcase, chat: settings_chat_index_path) : t('support.message_user_html', brandname: BRANDNAME.downcase)
       }
     }
   } do %>

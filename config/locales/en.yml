@@ -168,7 +168,8 @@ en:
         <p>You can then <strong>filter the property results</strong> based on whether properties are mortgaged or not.<p>
   support:
     title: "Support"
-    message_html: "For questions and/or support you can reach us at <a target='_blank' href='mailto:info@%{brandname}.com'>info@%{brandname}.com</a>."
+    message_admin_html: "To get support, navigate to the <a href='%{chat}'>settings page</a> and activate the live chat widget. Alternatively, drop us an email at <a target='_blank' href='mailto:info@%{brandname}.com'>info@%{brandname}.com</a>."
+    message_user_html: "To get support, please contact an admin or drop us a line at <a target='_blank' href='mailto:info@%{brandname}.com'>info@%{brandname}.com</a>."
   properties_count:
     one: "1 result"
     other: "%{count} results"

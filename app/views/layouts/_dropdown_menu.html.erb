@@ -8,7 +8,7 @@
   <%= content_tag :i, nil, class: 'fas fa-heart fa-fw' %>&nbsp; <span><%= t('navbar.favorites') %></span>
 <% end %>
 
-<%= link_to '#', class: 'dropdown-item', id: 'tour_toggle' do %>
+<%= link_to '#', class: 'dropdown-item d-none d-md-inline-block', id: 'tour_toggle' do %>
   <%= content_tag :i, nil, class: 'fas fa-play fa-fw' %>&nbsp; <span><%= t('tour.title') %></span>
 <% end %>
 

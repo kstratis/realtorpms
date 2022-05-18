@@ -5,9 +5,9 @@
       <td>© 2018 - <%= Date.today.year %></td>
         <td>&nbsp;/&nbsp;</td>
         <% if current_user.is_admin?(current_account) %>
-          <td><%= t('plan.title') %>:</td>
-          <td><u><%= link_to t("plan.#{current_account.subscription_status.to_s}"), settings_subscriptions_url %></u></td>
-          <td>&nbsp;/&nbsp;</td>
+          <td class="d-none d-md-inline"><%= t('plan.title') %>:</td>
+          <td class="d-none d-md-inline"><u><%= link_to t("plan.#{current_account.subscription_status.to_s}"), settings_subscriptions_url %></u></td>
+          <td class="d-none d-md-inline">&nbsp;/&nbsp;</td>
         <% end %>
         <td><%= t('version') %>:</td>
         <td><%= version %></td>

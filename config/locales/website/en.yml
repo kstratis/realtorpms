@@ -66,8 +66,8 @@ en:
         body_html: '<i>%{brand} is a truly indispensable tool: A simple and intuitive management system which saves us countless manhours per month by helping us do the work that truly matters.  </i>'
     pricing:
       full_version: "Full version"
-      header: 'Single, flat price'
-      subheader: 'No hidden functionality or features behind a paywall'
+      header_html: 'Single, <u>flat price</u>'
+      subheader_html: '<u>No hidden functionality</u> or features behind a paywall'
       offer: 'Free until the end of %{month}'
       cta: 'Sign up'
       free_trial: 'Free trial'
