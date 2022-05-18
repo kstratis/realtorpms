@@ -7,7 +7,7 @@ module Accounts
     before_action :all_account_users, only: [:show]
     before_action :owner_exclusive, only: [:new, :create, :destroy, :index, :mass_delete, :mass_freeze]
     before_action :check_page_validity, only: [:index]
-    before_action :find_user!, only: [:delete_avatar, :toggle_activation, :toggle_adminify, :toggle_tour, :show, :edit, :update]
+    before_action :find_user!, only: [:delete_avatar, :toggle_activation, :toggle_adminify, :toggle_tour, :toggle_chat, :show, :edit, :update]
     after_action :log_action, only: [:create, :update, :destroy], unless: Proc.new { current_user.is_sysadmin? }
     # A model's +destroy+ method is different than the controller's +destroy+ action.
     # - Using the model's destroy method on a user object should delete all its dependancies (memberships, assignments,
@@ -122,6 +122,11 @@ module Accounts
     def toggle_adminify
       Membership.find_by(account: current_account, user: @user).toggle!(:privileged)
       render json: { status: "OK", user_privileged: Membership.find_by(account: current_account, user: @user).privileged }
+    end
+
+    def toggle_chat
+      @user.toggle!(:chat)
+      render json: { status: "OK", user_chat: @user.chat }
     end
 
     # PATCH `toggle_tour_user_url(USERID)`

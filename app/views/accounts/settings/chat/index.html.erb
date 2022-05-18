@@ -1,0 +1,17 @@
+<% content_for(:nested_settings_header) do %>
+  <%= t('sidebar.subscription') %>
+<% end %>
+
+<% content_for(:chat) do %>
+  <div class="col-12 text-center py-4">
+    <div class="mb-4"><i class="fas fa-headset fa-5x"></i></div>
+    <%= form_for(current_user, url: toggle_chat_user_path(current_user), html: { id: 'settings-userchat-toggle-form' }) do |f| %>
+      <div class="custom-control custom-switch">
+        <%= f.check_box(:chat, { class: "custom-control-input solo-attribute-updater with-chat", type: 'checkbox' }) %>
+        <%= f.label(:chat, { class: 'custom-control-label cursor-pointer' }) do %>
+          <%= t('settings.sidebar.activate_support') %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

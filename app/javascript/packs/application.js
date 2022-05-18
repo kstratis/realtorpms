@@ -37,7 +37,21 @@ require.context('../images', true)
 
 function noop() {}
 
+function handleChatWidget(response, locale) {
+  const user_chat = response['user_chat'];
+
+  if (window.$crisp && user_chat) {
+    $crisp.push(["do", "chat:show"]);
+  } else if (window.$crisp && !user_chat) {
+    $crisp.push(["do", "chat:hide"])
+  } else if (!window.$crisp && user_chat) {
+    initCrisp(locale);
+  }
+}
+
 $(document).on('turbolinks:load', function(e) {
+  const active_locale = $('#current_locale').data().i18n.locale || 'en';
+
   if ($(".uppy-emitters, .file-emitters").length > 0){
     let modules = Promise.all([
       import(/* webpackChunkName: "UppyController" */
@@ -133,13 +147,16 @@ $(document).on('turbolinks:load', function(e) {
     $('.nav-tabs a[href="#clients"]').tab('show');
   })
 
-  // Website single attribute ajax updater
+  const user_chat = $('#chat-widget').data().response.user_chat;
+  if (user_chat) handleChatWidget({ user_chat }, active_locale);
+  // Website/Chat single attribute ajax updater
   $('.solo-attribute-updater').on('change', (e) => {
     e.preventDefault();
     const $form = $(e.currentTarget).closest('form');  // Get the form
     const endpoint = $form.attr('action');
     const formData = $form.serialize()
     const hasCallback = $(e.currentTarget).hasClass('with-callback');
+    const hasChat = $(e.currentTarget).hasClass('with-chat');
 
     Rails.ajax({
       type: 'POST',
@@ -149,6 +166,8 @@ $(document).on('turbolinks:load', function(e) {
       success: response => {
         if (hasCallback) {
           $('#refresh-link').removeClass('d-none');
+        } else if (hasChat){
+          handleChatWidget(response, active_locale);
         }
       },
     })

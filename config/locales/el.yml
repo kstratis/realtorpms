@@ -1305,6 +1305,8 @@ el:
       logs: "Τελ. Κινήσεις"
       cfields: "Custom πεδία"
       subscription: "Συνδρομή"
+      support: "Υποστήριξη"
+      activate_support: "Ενεργοποίηση υποστήριξης"
       integrations: "Διασυνδέσεις"
       widget: "Widget"
       under_construction: "Υπό κατασκευή..."

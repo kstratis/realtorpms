@@ -24,6 +24,7 @@ Rails.application.routes.draw do
         namespace :settings do
           root to: 'timeline#index', as: :timeline
           resources :model_types, only: [:index, :edit, :update], :path => "custom-fields"
+          resources :chat, only: [:index]
           # resources :subscriptions, :path => "subscriptions"
 
           get '/subscriptions/new', to: 'subscriptions#new', as: :new_subscription # page to start payment
@@ -69,6 +70,7 @@ Rails.application.routes.draw do
           member do
             patch :toggle_activation
             patch :toggle_adminify
+            patch :toggle_chat
             patch :toggle_tour
             # Get global tour data
             get :tour_data

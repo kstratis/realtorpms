@@ -1332,6 +1332,8 @@ en:
       logs: "Account logs"
       cfields: "Custom fields"
       subscription: "Subscription"
+      support: "Support"
+      activate_support: "Activate support widget"
       integrations: "Integrations"
       widget: "Widget"
       under_construction: "Under construction..."
