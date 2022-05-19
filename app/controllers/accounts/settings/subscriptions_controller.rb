@@ -33,7 +33,7 @@ module Accounts
         @account = @user&.owned_accounts&.first
         return head(:bad_request) if @user.blank? || @account.blank?
 
-        @account.update(paid_at: Time.current)
+        @account.update(last_paid_at: Time.current)
         head :ok
       end
 

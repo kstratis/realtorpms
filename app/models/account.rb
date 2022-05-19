@@ -85,6 +85,10 @@ class Account < ApplicationRecord
     def deactivate_trials
       where(subscription_status: :trial).where("created_at < ?", 14.days.ago).update(subscription_status: :expired)
     end
+
+    def deactivate_stale_accounts
+      where(subscription_status: :active).where("last_paid_at < ?", 40.days.ago).update(subscription_status: :expired)
+    end
   end
 
   # self is explicitly used here to indicate the newly created object

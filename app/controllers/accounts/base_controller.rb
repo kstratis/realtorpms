@@ -21,7 +21,7 @@ module Accounts
     # before_action :logged_in_user, :allowed_subdomains, only: [:index, :edit, :update, :destroy]
     before_action :allowed_subdomains, :active_account, :active_user # The order is guaranteed from left-to-right
 
-    before_action :paid_account
+    before_action :paid_account, except: [:toggle_chat]  # Chat should be available at all times
     after_action :store_referer_url, only: [:index, :edit, :update, :destroy]
 
     # before_action :correct_subdomain
@@ -115,8 +115,9 @@ module Accounts
 
     def paid_account
       return if current_account.trial? || current_account.active?
+      return if controller_name == 'subscriptions' || controller_name == 'chat'
 
-      redirect_to settings_subscriptions_path unless controller_name == 'subscriptions'
+      redirect_to settings_subscriptions_path
     end
 
   end
