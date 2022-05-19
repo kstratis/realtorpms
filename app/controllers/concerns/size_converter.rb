@@ -32,4 +32,24 @@ module SizeConverter
       ActionController::Base.helpers.number_to_currency(property_price, locale: :en, precision: 0, round_mode: :up)
     end
   end
+
+  def print_telephone(property_telephones, account)
+    return '' if property_telephones.blank?
+    return property_telephones if account.international?
+
+    telephones_list = property_telephones.split(/[\s,']/).reject(&:empty?)
+    telephones_list.map do |tel|
+      ActionController::Base.helpers.number_to_phone(tel, delimiter: " ")
+    end.first
+  end
+
+  def print_telephones(property_telephones, account)
+    return '' if property_telephones.blank?
+    return property_telephones if account.international?
+
+    telephones_list = property_telephones.split(/[\s,']/).reject(&:empty?)
+    telephones_list.map do |tel|
+      ActionController::Base.helpers.number_to_phone(tel, delimiter: " ")
+    end.join(', ')
+  end
 end

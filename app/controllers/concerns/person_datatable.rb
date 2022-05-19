@@ -83,7 +83,7 @@ module PersonDatatable
           view_entity_path: polymorphic_path([entry.class.to_s.downcase.to_sym], id: entry.id),
           edit_entity_path: polymorphic_path([entry.class.to_s.downcase.to_sym], id: entry.id, action: :edit),
           masquerade_path: entry.instance_of?(User) ? user_masquerade_new_path(entry.id) : nil,
-          telephones: entry.try(:telephones) || '—',
+          telephones: retrieve_telephone(entry),
           # assignments: entry.properties.count,
           # registration: entry.created_at.to_formatted_s(:long)
           # registration: entry.created_at.strftime('%d %b. %y'),
@@ -118,5 +118,15 @@ module PersonDatatable
 
   def get_total_properties
     properties.count
+  end
+
+  private
+
+  def retrieve_telephone(entry)
+    if entry.instance_of?(User)
+      entry.try(:phone1) || entry.try(:phone2) || '-'
+    else
+      entry.telephones.present? ? print_telephone(entry.telephones, current_account) : '—'
+    end
   end
 end

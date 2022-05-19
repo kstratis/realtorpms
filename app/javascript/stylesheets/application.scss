@@ -2706,3 +2706,10 @@ footer:not(.auth-footer){
 .crisp-client .cc-kv6t .cc-1xry a.cc-unoo{
   bottom: 55px !important;
 }
+
+.client-qr-code-container {
+  position: fixed;
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 6px;
+}

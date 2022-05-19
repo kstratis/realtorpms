@@ -64,6 +64,12 @@
           <div class="tab-content p-0" id="ClientContent">
             <!-- Tab 1 - Client info-->
             <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
+              <% if @client.qrcode.present? %>
+                <div class="client-qr-code-container d-none d-lg-block" data-toggle="tooltip" data-placement="bottom" title="<%= t('clients.show.qrcode_tooltip') %>">
+                  <%= @client.qrcode.html_safe %>
+                </div>
+              <% end %>
+
               <div class="col-lg-6 offset-lg-3 col-md-12">
                 <div class="media mb-3">
                   <div class="user-avatar user-avatar-xl fileinput-button">
@@ -102,7 +108,8 @@
                       </tr>
                       <tr>
                         <td><%= t('activerecord.attributes.client.telephones') %></td>
-                        <td><%= @client.telephones.blank? ? '-' : @client.telephones %></td>
+<!--                        <td><%#= @client.telephones.blank? ? '-' : @client.telephones %></td>-->
+                        <td><%= print_telephones(@client.telephones, current_account) %></td>
                       </tr>
                       <tr>
                         <td><%= t('activerecord.attributes.client.registered') %></td>

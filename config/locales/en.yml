@@ -1009,6 +1009,7 @@ en:
       add_owner: "Add co-owner"
       agent: "Agent?"
     show:
+      qrcode_tooltip: "Use your phone's camera to scan this qr code and store this contact directly to your device."
       preferences: "Preferences"
       breadcrumb: "Clients"
       heading: "Client information"
