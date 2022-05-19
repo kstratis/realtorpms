@@ -2708,7 +2708,7 @@ footer:not(.auth-footer){
 }
 
 .client-qr-code-container {
-  position: fixed;
+  position: absolute;
   border: 1px solid black;
   padding: 10px;
   border-radius: 6px;
