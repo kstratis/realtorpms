@@ -95,7 +95,7 @@
                     <% if @user.role(current_account) == 'user' %>
                       <div class="d-flex justify-content-center">
                         <!-- metric column -->
-                        <%= link_to nil, id: "tabUserProperties", class: "visual-picker visual-picker-lg has-peek", 'data-toggle': "popover", 'data-placement': "left", 'data-trigger': "hover", 'data-content': I18n.t('users.show.assigned_properties_explanation') do %>
+                        <%= link_to nil, id: "tabUserProperties", class: "visual-picker visual-picker-md has-peek", 'data-toggle': "popover", 'data-placement': "left", 'data-trigger': "hover", 'data-content': I18n.t('users.show.assigned_properties_explanation') do %>
                           <!-- .visual-picker-figure -->
                           <div class="visual-picker-figure">
                             <!-- .visual-picker-content -->
@@ -118,7 +118,7 @@
                       <% if @user.role(current_account) == 'user' %>
                         <div class="d-flex justify-content-center">
                           <!-- metric column -->
-                          <%= link_to nil, id: "tabUserClients", class: "visual-picker visual-picker-lg has-peek", 'data-toggle': "popover", 'data-placement': "right", 'data-trigger': "hover", 'data-content': I18n.t('users.show.assigned_clients_explanation') do %>
+                          <%= link_to nil, id: "tabUserClients", class: "visual-picker visual-picker-md has-peek", 'data-toggle': "popover", 'data-placement': "right", 'data-trigger': "hover", 'data-content': I18n.t('users.show.assigned_clients_explanation') do %>
                             <!-- .visual-picker-figure -->
                             <div class="visual-picker-figure">
                               <!-- .visual-picker-content -->

@@ -7,6 +7,10 @@
 @import "users";
 @import 'theme/components/sticker';
 
+// Old background
+// $application-background-color: #f8faff;
+$application-background-color: #eff3f6;
+
 %table-first-row-no-border {
   tbody > tr:first-child > td {
     border: none;
@@ -46,7 +50,6 @@ body {
   line-height: 1.5em;
   color: #454545;
   //color: #1d2d35;
-
   text-align: left;
   //font-family: 'Roboto', Arial, sans-serif;
   //font-family: 'Fira Sans', Arial, sans-serif;
@@ -58,7 +61,7 @@ body {
   //font-family: 'Poppins', helvetica, sans-serif;
   font-size: 14px;
   margin: 0 auto;
-  background: #f8faff;
+  background: $application-background-color;
 }
 
 // This is just a hack to preload images
@@ -78,13 +81,14 @@ body::after {
   border: 0 none;
   border-radius: 3px;
 
-  background-color: $bg-color-1;
+  background-color: $application-background-color;
   transition: all 1s ease;
 }
 
 .app{
-  background: $bg-color-1; //hack
+  background: $application-background-color; //hack
 }
+
 #logo-overflow {
   overflow: visible;
 }
@@ -1032,6 +1036,10 @@ li.page-item {
   margin-top: -10px;
 }
 
+.card-header{
+  background-color: #FAFBFC;
+}
+
 .card-header-custom {
   padding: 0.5rem 1rem;
 
@@ -1642,7 +1650,7 @@ a.text-link {
 }
 
 .page-container .app-container{
-  background: #f8faff;
+  background: $application-background-color;
   box-shadow: unset;
 }
 
@@ -2712,4 +2720,5 @@ footer:not(.auth-footer){
   border: 1px solid black;
   padding: 10px;
   border-radius: 6px;
+  cursor: help;
 }
