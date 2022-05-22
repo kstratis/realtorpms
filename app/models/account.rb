@@ -87,7 +87,7 @@ class Account < ApplicationRecord
     end
 
     def deactivate_stale_accounts
-      where(subscription_status: :active).where("last_paid_at < ?", 40.days.ago).update(subscription_status: :expired)
+      where(subscription_status: :active).where.not(subdomain: %w[demo escalate akinitoexpert]).where("last_paid_at < ?", 40.days.ago).update(subscription_status: :expired)
     end
   end
 
