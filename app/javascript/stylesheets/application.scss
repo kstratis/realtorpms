@@ -2753,6 +2753,7 @@ footer:not(.auth-footer){
   padding-right: 40% !important;
   padding-left: 40% !important;
   box-shadow: 0 5px 15px rgb(0 0 0 / 20%);
+  z-index: 1;
 }
 
 .unset-card-box-shadow{
