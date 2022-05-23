@@ -29,7 +29,7 @@ function PropertyFilters(props) {
 
   return (
     // <div className="card unset-card-box-shadow card-special-padding">
-    <div className="card ">
+    <div className="card unset-card-box-shadow mb-5">
       <div className="card-header">
         <div className="table-entry">
           <div className="table-icon-wrapper">
