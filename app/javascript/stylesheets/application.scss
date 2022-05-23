@@ -2735,7 +2735,7 @@ footer:not(.auth-footer){
   left: 0;
   opacity: 0;
   visibility: hidden;
-  overflow: auto;
+  overflow-y: scroll;
   z-index: 1032;  /*z-index of standard bootstrap navbar is 1030 + 1 offset due to side-drawer-void*/
   transition: all .15s;
 }
@@ -2747,6 +2747,7 @@ footer:not(.auth-footer){
 
 .drawer-controls{
   position: fixed;
+  height: 70px;
   width: 100%;
   bottom: 0;
   left: 0;

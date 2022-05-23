@@ -28,7 +28,8 @@ function PropertyFilters(props) {
   } = props;
 
   return (
-    <div className="card unset-card-box-shadow card-special-padding">
+    // <div className="card unset-card-box-shadow card-special-padding">
+    <div className="card ">
       <div className="card-header">
         <div className="table-entry">
           <div className="table-icon-wrapper">
@@ -48,7 +49,8 @@ function PropertyFilters(props) {
           </div>
         </div>
       </div>
-      <div className="card-body col-md-6 offset-md-3 col-xl-12 offset-xl-0 py-5 py-xl-3">
+      {/*<div className="card-body col-md-6 offset-md-3 col-xl-12 offset-xl-0 py-5 py-xl-3">*/}
+      <div className="card-body col-md-6 offset-md-3 col-xl-12 offset-xl-0">
         <label className="d-block">
           <h5 className="card-title filter-header">{i18n.filters.type.title}:</h5>
         </label>
