@@ -82,6 +82,8 @@ en:
   notifications: "Notifications"
   pro_tools: "Pro tools"
   page_refresh: "Refresh page"
+  apply: "Apply"
+  ok: "OK"
   plan:
     title: "Subscription"
     trial: "Trial"

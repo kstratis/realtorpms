@@ -52,6 +52,8 @@ el:
   notifications: "Ειδοποιήσεις"
   pro_tools: "Εργαλεία"
   page_refresh: "Ανανέωση σελίδας"
+  apply: "Εφαρμογή"
+  ok: "OK"
   plan:
     title: "Συνδρομή"
     trial: "Δοκιμαστική περίοδος"

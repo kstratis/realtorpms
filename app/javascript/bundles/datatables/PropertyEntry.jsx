@@ -8,7 +8,7 @@ class PropertyEntry extends React.Component {
   }
   render() {
     return (
-      <div className={`${this.props.filtersOpen ? 'col-lg-12' : 'col-lg-6'}`}>
+      <div className={`${this.props.filtersOpen ? 'col-lg-6 col-xl-12' : 'col-lg-6'}`}>
         <div className={`text-center text-md-left`}>
           <div className="card card-figure card-figure-custom d-block d-sm-none">
             <a
