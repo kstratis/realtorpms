@@ -28,7 +28,7 @@ function PropertyFilters(props) {
   } = props;
 
   return (
-    <div className="card unset-card-box-shadow">
+    <div className="card unset-card-box-shadow card-special-padding">
       <div className="card-header">
         <div className="table-entry">
           <div className="table-icon-wrapper">

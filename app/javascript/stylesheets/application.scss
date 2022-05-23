@@ -2761,4 +2761,10 @@ footer:not(.auth-footer){
   }
 }
 
+.card-special-padding {
+  @media (max-width: 1199px) {
+    padding-bottom: 2rem !important;
+  }
+}
+
 // --- Filters drawer end ---
