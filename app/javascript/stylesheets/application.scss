@@ -2726,56 +2726,91 @@ footer:not(.auth-footer){
 
 // --- Filters drawer ---
 
-.side-drawer {
-  position: relative;
-  height: 100vh;
-  //width: 336px;  /*Ideal width for sidebar accdg to https://forums.envato.com/t/standard-sidebar-width/75633*/
-  width: 100%;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  visibility: hidden;
-  overflow-y: scroll;
-  z-index: 1032;  /*z-index of standard bootstrap navbar is 1030 + 1 offset due to side-drawer-void*/
-  transition: all .15s;
-}
 
-.side-drawer-active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.drawer-controls{
+.filters-drawer-container,
+.filters-drawer {
   position: fixed;
-  height: 70px;
-  width: 100%;
+  top: 0;
   bottom: 0;
-  left: 0;
+}
+
+.filters-drawer-container {
   right: 0;
-  z-index: 1;
-  background: #ffffff;
-  padding-right: 40% !important;
-  padding-left: 40% !important;
-  box-shadow: 0 5px 15px rgb(0 0 0 / 20%);
-}
+  left: 0;
+  transition: all .15s;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 9;
 
-.unset-card-box-shadow{
-  @media (max-width: 1199px) {
-    box-shadow: unset;
+  &.active {
+    visibility: visible;
+    opacity: 1;
+    background-color: rgba($black, .3);
   }
 }
 
-.card-special-padding {
-  @media (max-width: 1199px) {
-    padding-bottom: 3rem !important;
+.filters-drawer {
+  margin-bottom: 0;
+  width: 100%;
+
+  &.active {
+    z-index: 10;
+    box-shadow: 2px 0 20px rgb(0 0 0 / 20%);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
-.overflow-y-hidden{
-  overflow-y: hidden !important;
-}
+//.side-drawer {
+//  position: fixed;
+//  height: 100vh;
+//  //width: 336px;  /*Ideal width for sidebar accdg to https://forums.envato.com/t/standard-sidebar-width/75633*/
+//  width: 100%;
+//  top: 0;
+//  left: 0;
+//  opacity: 0;
+//  visibility: hidden;
+//  overflow-y: scroll;
+//  z-index: 1032;  /*z-index of standard bootstrap navbar is 1030 + 1 offset due to side-drawer-void*/
+//  transition: all .15s;
+//}
 
-#filter-drawer {
-  -webkit-overflow-scrolling: touch;
-}
+//.side-drawer-active {
+//  opacity: 1;
+//  visibility: visible;
+//}
+
+//.drawer-controls{
+//  position: fixed;
+//  height: 70px;
+//  width: 100%;
+//  bottom: 0;
+//  left: 0;
+//  right: 0;
+//  z-index: 1;
+//  background: #ffffff;
+//  padding-right: 40% !important;
+//  padding-left: 40% !important;
+//  box-shadow: 0 5px 15px rgb(0 0 0 / 20%);
+//}
+//
+//.unset-card-box-shadow{
+//  @media (max-width: 1199px) {
+//    box-shadow: unset;
+//  }
+//}
+//
+//.card-special-padding {
+//  @media (max-width: 1199px) {
+//    padding-bottom: 3rem !important;
+//  }
+//}
+//
+//.overflow-y-hidden{
+//  overflow-y: hidden !important;
+//}
+//
+//#filter-drawer {
+//  -webkit-overflow-scrolling: touch;
+//}
 // --- Filters drawer end ---

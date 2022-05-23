@@ -33,29 +33,31 @@ function FilterDrawer(props) {
   }, [filtersOpen, windowSize]);
 
   useEffect(() => {
-    targetElement.current = document.querySelector('#filter-drawer');
+    targetElement.current = document.querySelector('#filters-drawer-element');
   }, []);
 
   return (
-    <div
-      id={'filter-drawer'}
-      className={`
+    <div className={`filters-drawer-container ${filtersOpen ? 'active' : ''}` }>
+      <section
+        id={'filters-drawer-element'}
+        className={`
         ${
           windowSize[0] < 1200
             ? filtersOpen
-              ? 'side-drawer position-fixed d-block d-xl-none side-drawer-active'
+              ? 'side-drawer position-fixed d-block d-xl-none active'
               : 'side-drawer position-fixed'
             : filtersOpen
             ? 'filters col-xl-4 d-none d-lg-block animated fadeIn'
             : 'filters d-none animated fadeIn'
-        } bg-white`}>
-      <PropertyFilters {...props} />
+        } bg-white filters-drawer`}>
+        <PropertyFilters {...props} />
 
-      <div className={`${windowSize[0] < 1200 ? '' : 'd-none'} drawer-controls d-flex align-items-center py-3`}>
-        <button className={'btn btn-primary btn-md btn-block'} onClick={e => props.handleChange()}>
-          {props.i18n.ok}
-        </button>
-      </div>
+        <div className={`${windowSize[0] < 1200 ? '' : 'd-none'} drawer-controls d-flex align-items-center py-3`}>
+          <button className={'btn btn-primary btn-md btn-block'} onClick={e => props.handleChange()}>
+            {props.i18n.ok}
+          </button>
+        </div>
+      </section>
     </div>
   );
 }
