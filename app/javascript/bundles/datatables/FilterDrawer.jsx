@@ -17,13 +17,18 @@ function FilterDrawer(props) {
   useLayoutEffect(() => {
     function fixOveflow() {
       if (windowSize[0] >= 1200) {
-        $('.app').removeClass('overflow-y-hidden');
+        document.body.classList.remove("overflow-y-hidden");
+        document.documentElement.classList.remove('overflow-y-hidden')
       } else if (windowSize[0] < 1200 && filtersOpen){
-        $('.app').addClass('overflow-y-hidden');
+        document.body.classList.add("overflow-y-hidden");
+        document.documentElement.classList.add('overflow-y-hidden')
       }
     }
     fixOveflow();
-    return () => $('.app').removeClass('overflow-y-hidden');
+    return () => {
+      document.body.classList.remove("overflow-y-hidden");
+      document.documentElement.classList.remove('overflow-y-hidden')
+    }
   }, [filtersOpen, windowSize]);
 
   return (
