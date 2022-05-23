@@ -1,8 +1,10 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect, useEffect } from 'react';
 import PropertyFilters from './PropertyFilters';
 
 function FilterDrawer(props) {
   const [windowSize, setWindowSize] = useState([0, 0]);
+  const { filtersOpen } = props;
+
   useLayoutEffect(() => {
     function updateSize() {
       setWindowSize([window.innerWidth, window.innerHeight]);
@@ -11,7 +13,18 @@ function FilterDrawer(props) {
     updateSize();
     return () => window.removeEventListener('resize', updateSize);
   }, []);
-  const { filtersOpen } = props;
+
+  useLayoutEffect(() => {
+    function fixOveflow() {
+      if (windowSize[0] >= 1200) {
+        $('.app').removeClass('overflow-y-hidden');
+      } else if (windowSize[0] < 1200 && filtersOpen){
+        $('.app').addClass('overflow-y-hidden');
+      }
+    }
+    fixOveflow();
+    return () => $('.app').removeClass('overflow-y-hidden');
+  }, [filtersOpen, windowSize]);
 
   return (
     <div

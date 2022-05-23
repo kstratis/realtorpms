@@ -2749,11 +2749,13 @@ footer:not(.auth-footer){
   position: fixed;
   width: 100%;
   bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
   background: #ffffff;
   padding-right: 40% !important;
   padding-left: 40% !important;
   box-shadow: 0 5px 15px rgb(0 0 0 / 20%);
-  z-index: 1;
 }
 
 .unset-card-box-shadow{
@@ -2764,8 +2766,12 @@ footer:not(.auth-footer){
 
 .card-special-padding {
   @media (max-width: 1199px) {
-    padding-bottom: 2rem !important;
+    padding-bottom: 3rem !important;
   }
+}
+
+.overflow-y-hidden{
+  overflow-y: hidden !important;
 }
 
 // --- Filters drawer end ---
