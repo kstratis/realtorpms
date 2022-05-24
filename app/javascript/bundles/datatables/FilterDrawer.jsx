@@ -1,52 +1,37 @@
-import React, { useState, useLayoutEffect, useEffect, useRef } from 'react';
-// import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
+import React, { useState, useLayoutEffect } from 'react';
 import PropertyFilters from './PropertyFilters';
 
 function FilterDrawer(props) {
   const [windowSize, setWindowSize] = useState([0, 0]);
   const { filtersOpen } = props;
-  const targetElement = useRef(null);
 
   useLayoutEffect(() => {
     function updateSize() {
       setWindowSize([window.innerWidth, window.innerHeight]);
     }
+
     window.addEventListener('resize', updateSize);
     updateSize();
     return () => window.removeEventListener('resize', updateSize);
   }, []);
 
-  // useLayoutEffect(()=>{
-  //   document.body.classList.toggle('modal-open', isOpen);
-  // })
-
   useLayoutEffect(() => {
-    function fixOveflow() {
-      console.log('running')
+    // If a modal/overlay is open and scrollable, the main page gets also
+    // scrolled. This is particularly problematic in iOS. The solution is
+    // to prevent scrolling on `body` (`overflow: hidden`).
+    function handleScrolling() {
       if (windowSize[0] >= 1200) {
-        document.body.classList.remove('modal-open')
+        document.body.classList.remove('modal-open');
+      } else if (windowSize[0] < 1200 && filtersOpen) {
+        document.body.classList.add('modal-open');
       }
-      else if (windowSize[0] < 1200 && filtersOpen) {
-        document.body.classList.add('modal-open')
-      }
-      // document.body.classList.toggle('modal-open', filtersOpen);
-      // if (!targetElement.current) return;
-
-      // if (windowSize[0] >= 1200) {
-        // disableBodyScroll(targetElement.current);
-      // } else if (windowSize[0] < 1200 && filtersOpen) {
-        // enableBodyScroll(targetElement.current);
-      // }
     }
-    fixOveflow();
+
+    handleScrolling();
     return () => {
       document.body.classList.remove('modal-open');
     };
   }, [filtersOpen, windowSize]);
-  //
-  // useEffect(() => {
-  //   targetElement.current = document.querySelector('#filter-drawer-element');
-  // }, []);
 
   return (
     <div

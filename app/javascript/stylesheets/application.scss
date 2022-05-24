@@ -2736,7 +2736,6 @@ footer:not(.auth-footer){
 .filter-drawer-container {
   right: 0;
   left: 0;
-  transition: all .15s;
   visibility: hidden;
   opacity: 0;
   z-index: 99998;
@@ -2764,19 +2763,19 @@ footer:not(.auth-footer){
 .bottom-actions{
   display: flex;
   position: fixed;
+  align-items: center;
   bottom: 0;
   flex-wrap: wrap;
   -webkit-box-align: center;
-  align-items: center;
   -webkit-box-pack: justify;
   justify-content: space-between;
-  box-shadow: 0 5px 15px rgb(0 0 0 / 20%);
   right: 0;
   left: 0;
   z-index: 90;
   margin: 0;
-  background: #FFFFFF;
   padding: 16px;
+  background: #FFFFFF;
+  box-shadow: 0 5px 15px rgb(0 0 0 / 20%);
 }
 
 .unset-card-box-shadow{

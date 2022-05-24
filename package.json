@@ -17,7 +17,6 @@
     "@uppy/dashboard": "^1.12.9",
     "aos": "^3.0.0-beta.6",
     "axios": "^0.21.1",
-    "body-scroll-lock": "^4.0.0-beta.0",
     "bootbox": "^5.5.2",
     "bootstrap": "^4.6.1",
     "bs-stepper": "https://github.com/kstratis/bs-stepper.git#events",
