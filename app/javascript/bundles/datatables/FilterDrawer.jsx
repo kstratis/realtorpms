@@ -16,41 +16,53 @@ function FilterDrawer(props) {
     return () => window.removeEventListener('resize', updateSize);
   }, []);
 
-  // useLayoutEffect(() => {
-  //   function fixOveflow() {
-  //     if (!targetElement.current) return;
-  //
-  //     if (windowSize[0] >= 1200) {
-  //       disableBodyScroll(targetElement.current);
-  //     } else if (windowSize[0] < 1200 && filtersOpen) {
-  //       enableBodyScroll(targetElement.current);
-  //     }
-  //   }
-  //   fixOveflow();
-  //   return () => {
-  //     clearAllBodyScrollLocks();
-  //   };
-  // }, [filtersOpen, windowSize]);
+  // useLayoutEffect(()=>{
+  //   document.body.classList.toggle('modal-open', isOpen);
+  // })
 
+  useLayoutEffect(() => {
+    function fixOveflow() {
+      console.log('running')
+      if (windowSize[0] >= 1200) {
+        document.body.classList.remove('modal-open')
+      }
+      else if (windowSize[0] < 1200 && filtersOpen) {
+        document.body.classList.add('modal-open')
+      }
+      // document.body.classList.toggle('modal-open', filtersOpen);
+      // if (!targetElement.current) return;
+
+      // if (windowSize[0] >= 1200) {
+        // disableBodyScroll(targetElement.current);
+      // } else if (windowSize[0] < 1200 && filtersOpen) {
+        // enableBodyScroll(targetElement.current);
+      // }
+    }
+    fixOveflow();
+    return () => {
+      document.body.classList.remove('modal-open');
+    };
+  }, [filtersOpen, windowSize]);
+  //
   // useEffect(() => {
   //   targetElement.current = document.querySelector('#filter-drawer-element');
   // }, []);
 
   return (
-      // <div className={`filter-drawer-container ${windowSize[0] < 1200 && filtersOpen ? 'filter-drawer-container-active' : ''}`}>
-      <div className={`
+    <div
+      className={`
         ${
           windowSize[0] < 1200
-              ? filtersOpen
-                  ? 'filter-drawer-container d-block d-xl-none filter-drawer-container-active'
-                  : 'd-none'
-              : filtersOpen
-                  ? 'filters col-xl-4 d-none d-lg-block animated fadeIn'
-                  : 'filters d-none animated fadeIn'
-      }`}>
-    <div
-      id={'filter-drawer-element'}
-      className={`
+            ? filtersOpen
+              ? 'filter-drawer-container d-block d-xl-none filter-drawer-container-active'
+              : 'd-none'
+            : filtersOpen
+            ? 'filters col-xl-4 d-none d-lg-block animated fadeIn'
+            : 'filters d-none animated fadeIn'
+        }`}>
+      <div
+        id={'filter-drawer-element'}
+        className={`
         ${
           windowSize[0] < 1200
             ? filtersOpen
@@ -60,14 +72,14 @@ function FilterDrawer(props) {
             ? 'filters animated fadeIn'
             : 'filters d-none animated fadeIn'
         }`}>
-      <PropertyFilters {...props} />
-      <div className={`${windowSize[0] < 1200 ? '' : 'd-none'} bottom-actions drawer-controls`}>
-        <button className={'btn btn-primary btn-md btn-block'} onClick={e => props.handleChange()}>
-          {props.i18n.ok}
-        </button>
+        <PropertyFilters {...props} />
+        <div className={`${windowSize[0] < 1200 ? '' : 'd-none'} bottom-actions drawer-controls`}>
+          <button className={'btn btn-primary btn-md btn-block'} onClick={e => props.handleChange()}>
+            {props.i18n.ok}
+          </button>
+        </div>
       </div>
     </div>
-      </div>
   );
 }
 
