@@ -10,7 +10,8 @@ import useFilterToggle from '../hooks/useFilterToggle';
 import FormComponents from './fields/FormComponents';
 import useTooltips from '../hooks/useTooltips';
 import useMultiCheckbox from '../hooks/useMultiCheckbox';
-import ModalControlStrip from "../components/modals/ModalControlStrip";
+import ModalControlStrip from '../components/modals/ModalControlStrip';
+import FiltersRenderer from './FiltersRenderer';
 
 const ClientsList = ({
   handlePageClick,
@@ -40,6 +41,12 @@ const ClientsList = ({
     selectedPage
   );
 
+  const clearHandler = e => {
+    e.preventDefault();
+    if (window.innerWidth < 1200) setFiltersOpen(false);
+    Turbolinks.visit(clients_path);
+  };
+
   useTooltips();
 
   return (
@@ -47,8 +54,10 @@ const ClientsList = ({
       <Spinner isLoading={isLoading} />
       <div className={'ClientListContainer'}>
         <div className={'row'}>
-          <div className={`filters col-12 col-xl-4 ${filtersOpen ? 'd-block' : 'd-none'} animated fadeIn`}>
-            <div className="card">
+
+          {/* Side Drawer Content */}
+          <FiltersRenderer i18n={i18n} filtersOpen={filtersOpen} handleChange={handleChange}>
+            <div className="card unset-card-box-shadow mb-5">
               <div className="card-header">
                 <div className="table-entry">
                   <div className="table-icon-wrapper">
@@ -59,7 +68,12 @@ const ClientsList = ({
                     <span className="badge badge-pill badge-success p-2 mr-2">{`${capitalizeFirstLetter(
                       i18n['result_count']
                     )}: ${count}`}</span>
-                    <a className={'btn btn-outline-danger btn-sm'} href={clients_path}>
+                    <a
+                      className={'btn btn-outline-danger btn-sm'}
+                      href={''}
+                      onClick={e => {
+                        clearHandler(e);
+                      }}>
                       {i18n.clear}
                     </a>
                   </div>
@@ -93,9 +107,9 @@ const ClientsList = ({
                 )}
               </div>
             </div>
-          </div>
+          </FiltersRenderer>
 
-          <div className={`d-block ${filtersOpen ? 'col-xl-8' : 'col-xl-12'}`}>
+          <div className={`d-block ${filtersOpen ? 'col-lg-12 col-xl-8' : 'col-lg-12'}`}>
             <div className={'card'}>
               <div className={'card-body'}>
                 <div className={'row'}>
@@ -132,7 +146,7 @@ const ClientsList = ({
                                   size: 'md',
                                   classname: 'btn-success action-toolbar-group-btn',
                                   tooltip: i18n.button.tooltip,
-                                  isDisabled: !Object.keys(checkedItems).some(i => checkedItems[i])
+                                  isDisabled: !Object.keys(checkedItems).some(i => checkedItems[i]),
                                 },
                                 modal: {
                                   id: 'client-list-modal',
@@ -142,7 +156,7 @@ const ClientsList = ({
                                   origin: 'menu',
                                   checkedItems: checkedItems,
                                   massDeletePersonsEndpoint: meta.mass_delete_clients_link,
-                                  massFreezePersonsEndpoint: ''
+                                  massFreezePersonsEndpoint: '',
                                 },
                               },
                             ]}
@@ -337,7 +351,9 @@ const ClientsList = ({
 
                             <td className={'align-middle'}>
                               <div className={'table-entry'}>
-                                <span><mark>{entry['agent']}</mark></span>
+                                <span>
+                                  <mark>{entry['agent']}</mark>
+                                </span>
                               </div>
                             </td>
 

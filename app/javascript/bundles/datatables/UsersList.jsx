@@ -11,6 +11,7 @@ import useFilterToggle from '../hooks/useFilterToggle';
 import useTooltips from '../hooks/useTooltips';
 import useMultiCheckbox from '../hooks/useMultiCheckbox';
 import ModalControlStrip from '../components/modals/ModalControlStrip';
+import FiltersRenderer from './FiltersRenderer';
 
 const UsersList = ({
   handlePageClick,
@@ -82,6 +83,12 @@ const UsersList = ({
   //   setCheckedItems({ ...checkedItems, [event.target.id]: event.target.checked });
   // };
 
+  const clearHandler = e => {
+    e.preventDefault();
+    if (window.innerWidth < 1200) setFiltersOpen(false);
+    Turbolinks.visit(users_path);
+  };
+
   useTooltips();
 
   return (
@@ -89,8 +96,10 @@ const UsersList = ({
       <Spinner isLoading={isLoading} />
       <div className={'UserListContainer'}>
         <div className={'row'}>
-          <div className={`filters col-12 col-xl-4 ${filtersOpen ? 'd-block' : 'd-none'} animated fadeIn`}>
-            <div className="card">
+
+          {/* Side Drawer Content */}
+          <FiltersRenderer i18n={i18n} filtersOpen={filtersOpen} handleChange={handleChange}>
+            <div className="card unset-card-box-shadow mb-5">
               <div className="card-header">
                 <div className="table-entry">
                   <div className="table-icon-wrapper">
@@ -101,7 +110,12 @@ const UsersList = ({
                     <span className="badge badge-pill badge-success p-2 mr-2">{`${capitalizeFirstLetter(
                       i18n['result_count']
                     )}: ${count}`}</span>
-                    <a className={'btn btn-outline-danger btn-sm'} href={users_path}>
+                    <a
+                      className={'btn btn-outline-danger btn-sm'}
+                      href={''}
+                      onClick={e => {
+                        clearHandler(e);
+                      }}>
                       {i18n.clear}
                     </a>
                   </div>
@@ -145,9 +159,9 @@ const UsersList = ({
                 })}
               </div>
             </div>
-          </div>
+          </FiltersRenderer>
 
-          <div className={`d-block ${filtersOpen ? 'col-xl-8' : 'col-xl-12'}`}>
+          <div className={`d-block ${filtersOpen ? 'col-lg-12 col-xl-8' : 'col-lg-12'}`}>
             <div className={'card'}>
               <div className={'card-body'}>
                 <div className={'row'}>

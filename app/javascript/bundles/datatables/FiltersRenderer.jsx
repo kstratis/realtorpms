@@ -1,7 +1,6 @@
 import React, { useState, useLayoutEffect } from 'react';
-import PropertyFilters from './PropertyFilters';
 
-function FilterDrawer(props) {
+function FiltersRenderer(props) {
   const [windowSize, setWindowSize] = useState([0, 0]);
   const { filtersOpen } = props;
 
@@ -57,7 +56,7 @@ function FilterDrawer(props) {
             ? 'filters animated fadeIn'
             : 'filters d-none animated fadeIn'
         }`}>
-        <PropertyFilters {...props} />
+        {props.children}
         <div className={`${windowSize[0] < 1200 ? '' : 'd-none'} bottom-actions drawer-controls`}>
           <button className={'btn btn-primary btn-md btn-block'} onClick={e => props.handleChange()}>
             {props.i18n.ok}
@@ -68,4 +67,4 @@ function FilterDrawer(props) {
   );
 }
 
-export default FilterDrawer;
+export default FiltersRenderer;
