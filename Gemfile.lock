@@ -460,6 +460,8 @@ GEM
     whenever (1.0.0)
       chronic (>= 0.6.3)
     will_paginate (3.3.1)
+    xmlrpc (0.3.2)
+      webrick
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yard (0.9.27)
@@ -545,6 +547,7 @@ DEPENDENCIES
   webpacker (~> 5.4.3)
   whenever
   will_paginate (~> 3.3.0)
+  xmlrpc
 
 BUNDLED WITH
    2.3.5
