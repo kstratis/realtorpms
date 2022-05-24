@@ -2757,11 +2757,11 @@ footer:not(.auth-footer){
 //  box-shadow: 0 5px 15px rgb(0 0 0 / 20%);
 //}
 //
-//.unset-card-box-shadow{
-//  @media (max-width: 1199px) {
-//    box-shadow: unset;
-//  }
-//}
+.unset-card-box-shadow{
+  @media (max-width: 1199px) {
+    box-shadow: unset;
+  }
+}
 
 // ----------SKR styles--------
 
@@ -2792,6 +2792,7 @@ footer:not(.auth-footer){
   width: 100%;
 
   &.filter-drawer-active {
+    background: #FFFFFF;
     z-index: 99999;
     box-shadow: 2px 0 20px black;
     overflow-y: auto;
@@ -2813,7 +2814,7 @@ footer:not(.auth-footer){
   left: 0;
   z-index: 90;
   margin: 0;
-  background: #f8f8f8;
+  background: #FFFFFF;
   padding: 16px;
 }
 
