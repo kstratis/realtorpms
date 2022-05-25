@@ -285,6 +285,10 @@ class Property < ApplicationRecord
     end
   end
 
+  def custom_fields_count
+    @custom_fields_count ||= model_type.fields.size
+  end
+
   private
 
   # Determine whether an owner can be removed when editing a property
