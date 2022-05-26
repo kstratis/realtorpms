@@ -24,6 +24,12 @@ class FormStepper {
   }
 
   kill(){
+    $('.validatable-form-submit-element').off('click');
+    window.Parsley.off('form:error');
+    $('.next, .prev').off('click');
+    $('body').off('leaveStep');
+    $('body').off('showStep');
+    $('form').off('submit');
     this.form.destroy();
   }
 
@@ -52,12 +58,7 @@ class FormStepper {
     const formInstance = this.form
       // On form validation stop the normal behaviour and do it in groups
       .on('form:validate', function(formInstance) {
-        $.each(steps, (index, step) => {
-          step['stepperDOMel'].removeClass('success error');
-          formInstance.isValid({ group: step['group'] })
-            ? step['stepperDOMel'].addClass('success')
-            : step['stepperDOMel'].addClass('error');
-        });
+        FormStepper.colorizeSteps(steps, formInstance);
       });
 
     const isFormValid = formInstance.validate(multiple ? {} : { group: steps[0]['group'] });
@@ -88,6 +89,15 @@ class FormStepper {
       return currentStep < newStep ? 'forward' : 'backward';
     }
     return 'forward';
+  }
+
+  static colorizeSteps(steps, formInstance){
+    $.each(steps, (index, step) => {
+      step['stepperDOMel'].removeClass('success error');
+      formInstance.isValid({ group: step['group'] })
+          ? step['stepperDOMel'].addClass('success')
+          : step['stepperDOMel'].addClass('error');
+    });
   }
 
   // Handles the event listeners
@@ -135,6 +145,7 @@ class FormStepper {
       self.current_step = params;
     });
 
+    // This handler may not be needed
     $('form').on('submit', function(e) {
       const groups = self.stepperDOMelements.map((index, el) => ({
         group: `fieldset-${index + 1}`,
@@ -143,6 +154,31 @@ class FormStepper {
       if (self.validateStep(groups, self.current_step, true)) {
         self.setStatus(0);
       }
+    });
+
+    // On form submit - actually even before form submit -> on button click!
+    // 1) Prevent the form from submitting
+    // 2) Set a special data attribute
+    // 3) Submit the form
+    $('.validatable-form-submit-element').on('click', function(e){
+      e.preventDefault();
+      const $form = $('form.validatable');
+      $form.attr('data-validate-all', 1)
+      $form[0].requestSubmit();
+    });
+
+    // If the form has any errors. check whether the form was submitted or a single step failed validation.
+    // If the first, color all steps if the latter, do nothing since the other handler will take care of it.
+    window.Parsley.on('form:error', function(formInstance) {
+      const $form = $('form.validatable');
+      if ($form.attr('data-validate-all') === '0') return;
+      // `self` is an instance of the `FormStepper` class
+      const allSteps = self.stepperDOMelements.map((index, el) => ({
+        group: `fieldset-${index + 1}`,
+        stepperDOMel: $(el)
+      }));
+      FormStepper.colorizeSteps(allSteps, formInstance);
+      $form.attr('data-validate-all', 0)
     });
   }
 

@@ -72,6 +72,12 @@ $(document).on('turbolinks:load', function(e) {
       }
     }
   });
+
+  // This is necessary for killing form stepper listeners
+  // when creating properties back-to-back
+  $stepperForm.on('ajax:success', function(event, xhr, opts) {
+    window.form_stepper.kill();
+  });
   // --------------------------------
 
   // This handles the nested property owner form to either select from an existing list or create a new

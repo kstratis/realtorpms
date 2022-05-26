@@ -9,6 +9,7 @@
 import bootbox from "bootbox";
 
 require("@rails/ujs").start();
+import "./polyfills/form-request-submit-polyfill"
 import './turbolinks_wrapper';
 import './calendar';
 import { initCrisp } from "./utilities";

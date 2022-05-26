@@ -60,7 +60,7 @@
             <div class="card-body">
               <div class="form-container">
                 <!-- The form's validatable class is used by the custom_fields.js which basically validates dynamically imported form fields -->
-                <%= form_for(@property, remote: true, html: { class: "p-lg-4 p-sm-3 p-0 validatable", id: "new_property", name: "stepperForm", 'data-parsley-excluded': "[disabled]" }) do |property| %>
+                <%= form_for(@property, remote: true, html: { class: "p-lg-4 p-sm-3 p-0 validatable", id: "new_property", name: "stepperForm", 'data-parsley-excluded': "[disabled]", 'data-validate-all': 0 }) do |property| %>
 
                   <!-- Step 1 START -->
                   <div id="test-l-1" class="content dstepper-none fade">
@@ -913,10 +913,10 @@
                       <div class="d-flex">
                         <% if @property.custom_fields_count > 0 %>
                           <button type="button" class="prev btn btn-secondary" data-validate="fieldset-7"><%= t('js.forms.properties.wizard.previous') %></button>
-                          <%= property.submit t('properties.new.add_button'), class: 'btn btn-primary ml-auto submit', "data-validate": "fieldset-7" %>
+                          <%= property.submit t('properties.new.add_button'), class: 'btn btn-primary ml-auto submit validatable-form-submit-element', "data-validate": "fieldset-7" %>
                         <% else  %>
                           <button type="button" class="prev btn btn-secondary" data-validate="fieldset-6"><%= t('js.forms.properties.wizard.previous') %></button>
-                          <%= property.submit t('properties.new.add_button'), class: 'btn btn-primary ml-auto submit', "data-validate": "fieldset-6" %>
+                          <%= property.submit t('properties.new.add_button'), class: 'btn btn-primary ml-auto submit validatable-form-submit-element', "data-validate": "fieldset-6" %>
                         <% end %>
                       </div>
 
