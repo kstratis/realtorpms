@@ -613,7 +613,7 @@ el:
         placeholder_title: "Πληκτρολόγησε για αναζήτηση..."
         placeholder_clients: "Αναζήτηση πελάτη..."
         placeholder_user_assignment: "Ανάθεση σε συνεργάτη"
-        placeholder_area_title: "Περιοχή... 🔍"
+        placeholder_area_title: "Αναζήτηση περιοχής"
         placeholder_prices_min: "Από: Όλες"
         placeholder_prices_max: "Έως: Όλες"
         placeholder_sizes_min: "Από: Όλα"
@@ -783,7 +783,7 @@ el:
           active: "Ενεργός"
           inactive: "Ανενεργός"
     users_search:
-      placeholder: "Αναζήτηση συνεργάτη..."
+      placeholder: "Αναζήτηση συνεργάτη"
     properties_search:
       placeholder: "Αναζήτηση ακινήτου..."
     properties_view_btn: "Προβολή"

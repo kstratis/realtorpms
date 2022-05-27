@@ -13,7 +13,7 @@ const Checkbox = props => {
   return (
     <div className={'mb-3'}>
       <div className="form-group mb-4">
-        <div className="custom-control custom-checkbox app-checkbox">
+        <div className="custom-control custom-checkbox app-checkbox custom-field-checkbox">
           <input
             id={slug}
             type="checkbox"

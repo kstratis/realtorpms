@@ -188,7 +188,7 @@ en:
     edit: "Edit"
     delete: "Delete"
   header:
-    search: "Search using property code"
+    search: "Search via property code"
   activerecord:
     models:
       invitation: "Invitation"
@@ -645,7 +645,7 @@ en:
         placeholder_title: "Start typing to select..."
         placeholder_clients: "Search client..."
         placeholder_user_assignment: "Assign to user"
-        placeholder_area_title: "Area search... 🔍"
+        placeholder_area_title: "Search areas"
         placeholder_prices_min: "From: All"
         placeholder_prices_max: "To: All"
         placeholder_sizes_min: "From: All"
@@ -764,7 +764,7 @@ en:
       clients:
         delete: "Delete"
         no_results: "No clients found!"
-        search_placeholder: "Client search..."
+        search_placeholder: "Search clients"
         name: "Name"
         email: "Email"
         telephones:
@@ -780,20 +780,22 @@ en:
         description: "Description"
         no_results: 'No properties found'
       sorting:
-        title: "Sorting"
+        title: "Sort"
       clear: "Clear"
       entry_count: "Entries"
       filters:
         nocfields_html: "Advanced client search filters are only useful if you first define extra fields in the <a href='%{cfields_link}'>settings screen</a>. For basic search on first name, last name & email fields, please use the search bar."
         title: "Filters"
         date:
-          title: "Sorting"
-          ascending: "Ascending"
-          descending: "Descending"
+          title: "Sort"
+          descending: "Newest first"
+          ascending: "Oldest first"
         price:
           title: "Price"
-          ascending: "Αύξουσα"
-          descending: "Φθίνουσα"
+          ascending: "Price: Low -> High"
+          descending: "Price: High -> Low"
+          from: "From "
+          to: "to "
         type:
           title: "Type"
           sell: "Sell"
@@ -812,7 +814,7 @@ en:
           active: "Active"
           inactive: "Inactive"
     users_search:
-      placeholder: "i.e. John Smith"
+      placeholder: "Search partners"
     properties_search:
       placeholder: "Search in description..."
     properties_view_btn: "View"

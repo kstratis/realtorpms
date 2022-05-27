@@ -19,7 +19,7 @@ const Search = ({ searchInput, handleSearchInput, placeholder }) => {
           </button>
           <label className="input-group-prepend" htmlFor="search">
             <span className="input-group-text">
-              <span className="oi oi-magnifying-glass" />
+              <span className="fas fa-search" />
             </span>
           </label>
           <input

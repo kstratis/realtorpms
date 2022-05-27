@@ -37,7 +37,7 @@ AsyncSelect.propTypes = {
       placeholder: PropTypes.string.isRequired,
       noresults: PropTypes.string.isRequired,
       loading: PropTypes.string.isRequired,
-      feedback: PropTypes.string
+      feedback: PropTypes.string,
     }),
   }).isRequired,
 };
@@ -70,6 +70,7 @@ function AsyncSelect({
   closeMenuOnSelect,
   defaultOptions,
   i18n,
+  htmlPlaceholder,
 }) {
   // custom hook to open/close modal
   const { isOpen, setIsOpen } = useModalToggle();
@@ -114,8 +115,7 @@ function AsyncSelect({
             handleNewClientForm(form, selectedOptions);
           },
         });
-      }
-      else {
+      } else {
         safelyExecCallback(action_endpoint, selectedOptions || {});
         setData(selectedOptions);
       }
@@ -130,13 +130,13 @@ function AsyncSelect({
   };
 
   // Imperative JQuery code for the new client inline form
-  const addFormListeners = (target) => {
+  const addFormListeners = target => {
     // Get new client form
     const $new_client_form = $('#new_client');
     // Attach js form validator
     let myparsley = $new_client_form.parsley();
     // Attach the button listener (we'll use it to ajax POST the new client)
-    $new_client_form.find("button[type='submit']").on('click', (e) => {
+    $new_client_form.find("button[type='submit']").on('click', e => {
       e.preventDefault();
       if (!myparsley.validate()) return;
 
@@ -148,7 +148,7 @@ function AsyncSelect({
       // instead.
       // Ref 1: https://stackoverflow.com/questions/58036713/rails-form-submission-by-ajax-with-an-active-storage-attachment
       // Ref 2: https://stackoverflow.com/questions/5392344/sending-multipart-formdata-with-jquery-ajax
-      const formData = new FormData($new_client_form[0])
+      const formData = new FormData($new_client_form[0]);
 
       Rails.ajax({
         type: 'POST',
@@ -184,15 +184,15 @@ function AsyncSelect({
   // Imperative JQuery code
   // Invoke bootbox with the new client form and handle it with JQuery
   const handleNewClientForm = (form, selectedOptions) => {
-    const name = selectedOptions['label']
+    const name = selectedOptions['label'];
     let modalForm = bootbox.dialog({
       message: form,
       size: 'large',
       title: i18n.select.nested_client_add.modal_title,
-      onShown: (e) => {
+      onShown: e => {
         addFormListeners(e.target);
       },
-      onHide: (e) => {
+      onHide: e => {
         removeFormListeners();
       },
       show: true,
@@ -200,7 +200,7 @@ function AsyncSelect({
         modalForm.modal('hide');
       },
     });
-  }
+  };
 
   // `callback` is a react-select native function which is used to  build the dropdown options. It is passed over to
   // our useFetch custom hook so that we can manipulate it and call it whenever we see fit.
@@ -243,7 +243,7 @@ function AsyncSelect({
           isDisabled={isDisabled}
           isMulti={isMultiple == null ? false : isMultiple}
           backspaceRemovesValue={false}
-          placeholder={i18n.select.placeholder}
+          placeholder={htmlPlaceholder ? htmlPlaceholder : i18n.select.placeholder}
           formatCreateLabel={inputValue => renderHTML(`${i18n.select.add} "${inputValue}"`)}
           noOptionsMessage={() => renderHTML(i18n.select.noresults)}
           loadingMessage={() => renderHTML(i18n.select.loading)}
@@ -268,7 +268,7 @@ function AsyncSelect({
           isDisabled={isDisabled}
           isMulti={isMultiple == null ? true : isMultiple}
           backspaceRemovesValue={false}
-          placeholder={i18n.select.placeholder}
+          placeholder={htmlPlaceholder ? htmlPlaceholder : i18n.select.placeholder}
           noOptionsMessage={() => renderHTML(i18n.select.noresults)}
           loadingMessage={() => renderHTML(i18n.select.loading)}
           loadOptions={loadAsyncOptionsDelayed}

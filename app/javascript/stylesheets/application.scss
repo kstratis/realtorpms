@@ -1653,6 +1653,7 @@ a.text-link {
 .page-container .app-container{
   background: $application-background-color;
   box-shadow: unset;
+  overflow: inherit;
 }
 
 .borderlesss-card{
@@ -2784,3 +2785,7 @@ footer:not(.auth-footer){
   }
 }
 // --- Filters drawer end ---
+
+.custom-field-checkbox {
+  z-index: unset;
+}

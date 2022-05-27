@@ -296,6 +296,7 @@ const PropertiesList = ({
                       <AsyncSelectContainer
                         id={'AsyncSelectContainer'}
                         i18n={i18n}
+                        htmlPlaceholder={<span><i className={'fas fa-search fa-fw'}></i>&nbsp;&nbsp;&nbsp;{i18n.select.placeholder}</span>}
                         collection_endpoint={{ url: locations_endpoint, action: 'get' }}
                         action_endpoint={{ url: '', action: '', callback: handleLocationInput }}
                         create_new_entity_form={create_new_entity_form}
@@ -343,14 +344,14 @@ const PropertiesList = ({
                           },
                           {
                             sn: 1,
-                            text: 'Τιμή αύξουσα',
+                            text: i18n.filters.sortByPrice.option1,
                             sort_filter: 'price',
                             sort_order: 'asc',
                             icon: 'fas fa-coins fa-fw',
                           },
                           {
                             sn: 0,
-                            text: 'Τιμή φθίνουσα',
+                            text: i18n.filters.sortByPrice.option2,
                             sort_filter: 'price',
                             sort_order: 'desc',
                             icon: 'fas fa-money-bill fa-fw',

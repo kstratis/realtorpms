@@ -17,7 +17,7 @@ const Textfield = (props) => {
       <label htmlFor={name}><strong>{name}:</strong></label>
       <input
         type="text"
-        className="input form-control"
+        className="input form-control custom-field-textfield"
         value={selection}
         onChange={handleChange}
         placeholder={props.i18n.text_prompt}
