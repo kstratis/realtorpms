@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import AsyncSelectContainer from './selects/AsyncSelectContainer';
 import useFetch from '../hooks/useFetch';
 import useSearchParams from '../hooks/useSearchParams';
@@ -7,10 +7,8 @@ import {
   categoryFilterOptions,
   floorFilterOptions,
   priceFilterOptions,
-  renderHTML,
   sizeFilterOptions
 } from '../utilities/helpers';
-import AsyncSelect from './selects/AsyncSelect';
 import useTooltips from '../hooks/useTooltips';
 import usePopovers from '../hooks/usePopovers';
 
@@ -19,6 +17,7 @@ function StoreClientSearch({
   clientsEndpoint,
   assignmentshipsEndpoint,
   create_new_entity_form,
+  storedOptions,
   i18n,
   i18nCfieldOptions,
   i18nPriceOptions,
@@ -33,6 +32,15 @@ function StoreClientSearch({
   const didMountForSaveSearchRef = useRef(false);
   const { data, loading } = useFetch(selectionRequest, false, didMountForSaveSearchRef);
   const params = useSearchParams(window.location.search);
+
+  useEffect(() => {
+    function checkPreselectedClient(){
+      if (storedOptions.length > 0){
+        setSelectedOption(storedOptions[0])
+      }
+    }
+    checkPreselectedClient();
+  },[]);
 
   // Sets the users preferences/search and renders the server reponse
   const savePreferencesHandler = () => {
@@ -58,7 +66,7 @@ function StoreClientSearch({
   const asyncSelectCallback = selection => {
     // DEBUG
     // console.log(selection);
-    setSelectedOption(selection);
+    setSelectedOption(Object.keys(selection).length === 0 ? '' : selection);
   };
 
   const navigationHandler = (e) => {
@@ -120,7 +128,7 @@ function StoreClientSearch({
                 collection_endpoint={{ url: clientsEndpoint, action: 'get' }}
                 action_endpoint={{ url: '', action: '', callback: asyncSelectCallback }}
                 create_new_entity_form={create_new_entity_form}
-                storedOptions={[]}
+                storedOptions={storedOptions ? storedOptions : []}
                 hasFeedback={false}
               />
               <div className={'text-center'}>

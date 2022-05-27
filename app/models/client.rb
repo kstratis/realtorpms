@@ -69,4 +69,8 @@ class Client < ApplicationRecord
     # We need to skip callbacks cause otherwise we'll face infinite loops
     update_column(:qrcode, qrcode_svg)
   end
+
+  def searchprefs_available
+    @searchprefs_available ||= searchprefs.present?
+  end
 end

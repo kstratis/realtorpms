@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
 import toast, { Toaster } from 'react-hot-toast';
 import withDatatable from './withDatatable';
@@ -55,6 +55,7 @@ const PropertiesList = ({
   new_property_endpoint,
   create_new_entity_form,
   forceFiltersOpen,
+  preselectedClient,
   i18n,
 }) => {
   const { filtersOpen, setFiltersOpen } = useFilterToggle('propertyFiltersOpen', forceFiltersOpen);
@@ -379,6 +380,7 @@ const PropertiesList = ({
                               ajaxEnabled: true,
                               isClearable: true,
                               backspaceRemovesValue: true,
+                              storedOptions: preselectedClient,
                               isSearchable: true,
                               clientsEndpoint: clients_endpoint,
                               assignmentshipsEndpoint: assignmentships_endpoint,

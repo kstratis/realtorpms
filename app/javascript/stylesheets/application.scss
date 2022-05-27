@@ -1689,7 +1689,7 @@ a.text-link {
 
   .tab-title-container-partner{
     border-radius: 5px;
-    padding: 5px 40px 5px 40px;
+    padding: 5px 15px 5px 15px;
     color: #af5a98;
     background-color: rgba(183,107,163,.08);
     border-color: transparent;
@@ -1699,7 +1699,7 @@ a.text-link {
     color: #008974;
     background-color: rgba(0,162,138,.08);
     border-color: transparent;
-    padding: 5px 40px 5px 40px;
+    padding: 5px 15px 5px 15px;
   }
 }
 
@@ -2788,4 +2788,21 @@ footer:not(.auth-footer){
 
 .custom-field-checkbox {
   z-index: unset;
+}
+
+.closer-button {
+  background-color: transparent;
+  border: 0;
+  float: right;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  text-shadow: none;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  padding: 0.75rem 1.25rem;
+  color: inherit;
 }

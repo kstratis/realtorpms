@@ -8,14 +8,20 @@
     <div class="btn-group btn-group-toggle client-controls">
       <%= react_component('ModalControlStrip', props: { entries: clients_modal_data }) %>
 
-      <%= link_to properties_path(force_filters_open: true), class: 'btn btn-secondary btn-sm editable' do %>
-        <i class="fas fa-search colored fa-fw"></i>
-        <span class="d-none d-lg-inline">&nbsp;<%= t 'clients.show.preferences' %></span>
+      <% if @client.searchprefs_available %>
+        <%= react_component('ModalControlStrip', props: { entries: client_prefs_data }) %>
+        <%= link_to @client.searchprefs_available ? "#{properties_path}?#{@client.searchprefs}" : properties_path(force_filters_open: true, preselected_client: @client.id),
+                    data: { toggle: "tooltip", position: "bottom" },
+                    title: t('clients.show.edit_search_tooltip'),
+                    class: 'btn btn-secondary btn-sm' do %>
+          <i class="fas fa-edit fa-fw orig"></i>
+          <span class="d-none d-lg-inline">&nbsp;<%= t('js.clients_edit_store_searches_tooltip') %></span>
+        <% end %>
       <% end %>
 
       <% if current_user.is_admin?(current_account) || current_user.clients.pluck(:id).include?(@client.id) %>
         <%= link_to edit_client_path(@client), class: 'btn btn-secondary btn-sm editable' do %>
-          <i class="fas fa-pen colored fa-fw"></i>
+          <i class="fas fa-user-edit colored fa-fw"></i>
           <span class="d-none d-lg-inline">&nbsp;<%= t 'properties.edit.edit_button_alt' %></span>
         <% end %>
       <% end %>
@@ -48,9 +54,9 @@
             <div class="col-lg-8 text-center flex-nowrap">
               <nav class="nav nav-tabs anchor-support nav-justified border-0 d-flex justify-content-center text-nowrap ">
                 <a href="#info" class="nav-link custom active text-nowrap" data-toggle="tab" role="tab" aria-selected="true"><span class="tab-title-container-client"><i class="menu-icon fas fa-user fa-fw"></i><span class="d-none d-md-inline tab-text">&nbsp; <%= t('clients.show.tabs.info') %></span></span></a>
-                <a href="#searching" class="nav-link custom " data-toggle="tab" role="tab" aria-selected="false"><span class="tab-title-container-client"><i class="menu-icon fas fa-search fa-fw"></i><span class="d-none d-md-inline tab-text">&nbsp; <%= t('clients.show.tabs.searching') %></span></span>
+                <a href="#searching" class="nav-link custom " data-toggle="tab" role="tab" aria-selected="false"><span class="tab-title-container-client"><i class="menu-icon fas fa-tasks fa-fw"></i><span class="d-none d-md-inline tab-text">&nbsp; <%= t('clients.show.tabs.searching') %></span></span>
                 </a>
-                <a href="#offering" class="nav-link custom " data-toggle="tab" role="tab" aria-selected="false"><span class="tab-title-container-client"><i class="menu-icon fas fa-home fa-fw"></i><span class="d-none d-md-inline tab-text">&nbsp; <%= t('clients.show.tabs.offering') %></span></span>
+                <a href="#offering" class="nav-link custom " data-toggle="tab" role="tab" aria-selected="false"><span class="tab-title-container-client"><i class="menu-icon fas fa-hand-point-right fa-fw"></i><span class="d-none d-md-inline tab-text">&nbsp; <%= t('clients.show.tabs.offering') %></span></span>
                 </a>
               </nav><!-- /.nav -->
             </div>
@@ -145,17 +151,30 @@
 
             </div>
             <div class="tab-pane fade" id="searching" role="tabpanel" aria-labelledby="searching-tab">
-              <% unless @client.searchprefs.blank? %>
-                <div class="row pt-1 pl-2 d-flex justify-content-center">
-                  <div class="btn-group btn-group-toggle">
-                    <%= react_component('ModalControlStrip', props: { entries: client_prefs_data }) %>
-                    <a type='button' data-toggle="tooltip" data-position="top" title="<%= t('clients.show.edit_search_tooltip') %>" class="btn btn-md btn-icon btn-outline-primary btn-action <%= @client.searchprefs.blank? ? 'disabled' : '' %>" href="<%= "#{properties_path}?#{@client.searchprefs}" %>">
-                      <i class="fas fa-pen fa-fw orig"></i>
-                    </a>
-                  </div>
 
+                <div class="row">
+                  <div class="col-lg-6 col-12 offset-lg-3">
+
+                    <div class="alert alert-primary pr-5 has-icon" role="alert">
+                      <button type="button" class="closer-button pt-3">×</button>
+                      <div class="alert-icon">
+                        <i class="fas fa-info"></i>
+                      </div><%= t('clients.show.mappings_tooltip_html') %>
+                    </div>
+
+                    <% unless @client.searchprefs_available %>
+                      <div class="alert alert-warning pr-5 has-icon" role="alert">
+                        <button type="button" class="closer-button pt-3">×</button>
+                        <div class="alert-icon">
+                          <i class="fas fa-exclamation"></i>
+                        </div><%= t('clients.show.mappings_tooltip_empty')%>
+                      </div>
+                    <% end %>
+
+                  </div>
                 </div>
-                <hr class="hr-text" data-content="&#9672;&nbsp; <%= t('clients.show.matches') %> &nbsp;&#9672;">
+
+              <% if @client.searchprefs_available %>
                 <%= react_component('ClientPrefsListWithDatatable', props: {
                     initial_payload: {
                         dataset_wrapper: @propertieslist,
@@ -181,12 +200,15 @@
                     }
                 }, prerender: false) %>
               <% else %>
-                <div class="d-flex justify-content-center">
-                  <p class="text-justify font-italic mb-4 max-300">
-                    <span><%= t('clients.show.no_stored_searches_html', properties_path: properties_path) %></span></p>
-                </div>
                 <div class="text-center reduced-opacity">
                   <%= image_pack_tag 'media/images/no_stored_searches.svg', class: "img-fluid max-300" %>
+                </div>
+                <div class="d-flex justify-content-center mt-5">
+                  <p class="text-justify mb-4 max-300">
+                    <a type='button' class="btn btn-lg btn-danger btn-action"
+                       href="<%= properties_path(force_filters_open: true, preselected_client: @client.id) %>">
+                      <%= t('clients.show.new_search') %>
+                    </a></p>
                 </div>
               <% end %>
             </div>
@@ -211,10 +233,15 @@
                       <% end %>
                     </div>
                   <% else %>
+
                     <div class="d-flex justify-content-center">
-                      <p class="text-justify font-italic mb-4 max-300">
-                        <span><%= t('clients.show.no_ownership') %></span></p>
+                      <div class="alert alert-warning has-icon" role="alert">
+                        <div class="alert-icon">
+                          <i class="fas fa-exclamation"></i>
+                        </div><%= t('clients.show.no_ownership') %>
+                      </div>
                     </div>
+
                     <div class="text-center reduced-opacity">
                       <%= image_pack_tag 'media/images/no_stored_searches.svg', class: "img-fluid max-300" %>
                     </div>

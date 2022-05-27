@@ -126,6 +126,15 @@ module PropertyDatatable
 
     @force_filters_open = ActiveModel::Type::Boolean.new.cast(filters[:force_filters_open])
 
+    if filters[:preselected_client]
+      return unless current_user.is_admin?(current_account) || current_user.clients.pluck(:id).include?(filters[:preselected_client])
+
+      client = Client.find(filters[:preselected_client])
+      @preselected_client = [{ label: client.full_name, value: client.id }]
+    else
+      @preselected_client = []
+    end
+
     # DEBUG - Pagination
     # puts filters[:page]
     @properties = @properties.paginate(page: filters[:page], :per_page => 10)
@@ -197,7 +206,8 @@ module PropertyDatatable
                                   datalist: @propertieslist,
                                   total_entries: @properties.total_entries,
                                   current_page: @properties.current_page,
-                                  force_filters_open: @force_filters_open}, status: 200 }
+                                  force_filters_open: @force_filters_open,
+                                  preselected_client: @preselected_client}, status: 200 }
     end
 
   end

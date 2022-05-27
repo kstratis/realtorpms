@@ -148,6 +148,15 @@ $(document).on('turbolinks:load', function(e) {
     $('.nav-tabs a[href="#clients"]').tab('show');
   })
 
+  // When using the default `.close` class, bootstrap.js closes
+  // all alert panels at once. We need the styling of `.close` and
+  // the granularity of closing alerts one-by-one
+  $('.closer-button').on('click', (e) => {
+    e.preventDefault();
+    const $alert = $(e.currentTarget).closest('div.alert');  // Get the alert div
+    $alert.fadeOut();
+  })
+
   const user_chat = $('#chat-widget').data().response.user_chat;
   if (user_chat) handleChatWidget({ user_chat }, active_locale);
   // Website/Chat single attribute ajax updater

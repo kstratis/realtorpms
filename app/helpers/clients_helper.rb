@@ -4,9 +4,9 @@ module ClientsHelper
       {
         name: 'AddRemoveShowings',
         button: {
-          content: '<i class="fas fa-users fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.viewings') + '</span>',
+          content: '<i class="fas fa-city fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.viewings') + '</span>',
           size: 'sm',
-          tooltip: t('js.properties_showings_tooltip')
+          tooltip: t('js.clients_showings_tooltip')
         },
         modal: {
           i18n: {
@@ -113,11 +113,11 @@ module ClientsHelper
       {
         name: 'RetrieveClientSearch',
         button: {
-          content: '<i class="fas fa-list fa-fw"></i>',
-          size: 'md',
+          content: '<i class="fas fa-eye fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('js.clients_store_searches_tooltip') + '</span>',
+          size: 'sm',
           tooltip: t('clients.show.search_prefs'),
-          classname: 'btn-outline-primary btn-icon',
-          wrapperDivClassname: 'reactstrap-modal-button-right'
+          classname: 'btn-secondary',
+          wrapperDivClassname: 'reactstrap-modal-button-x'
         },
         modal: {
           i18n: {

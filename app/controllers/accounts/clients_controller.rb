@@ -91,7 +91,7 @@ module Accounts
     end
 
     def show
-      if @client.searchprefs.blank?
+      unless @client.searchprefs_available
         return
       end
       searchprefs = @client.searchprefs

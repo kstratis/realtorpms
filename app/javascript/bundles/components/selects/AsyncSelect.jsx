@@ -6,7 +6,6 @@ import { debounce, renderHTML, safelyExecCallback } from '../../utilities/helper
 import { default as ASelect } from 'react-select/async';
 import { default as ACSelect } from 'react-select/async-creatable';
 import { components } from 'react-select';
-import AsyncPaginate from 'react-select-async-paginate';
 import { reactSelectStyles } from '../../styles/componentStyles';
 import PropTypes from 'prop-types';
 import URLSearchParams from '@ungap/url-search-params';

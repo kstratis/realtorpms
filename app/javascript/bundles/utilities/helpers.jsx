@@ -108,7 +108,7 @@ const hasParams = () => {
   let param_counter = 0;
   for (let p of searchParams) {
     // count these out
-    if (['page', 'sizeminmeta', 'sizemaxmeta', 'ordering', 'sorting', 'force_filters_open'].indexOf(p[0]) === -1) {
+    if (['page', 'sizeminmeta', 'sizemaxmeta', 'ordering', 'sorting', 'force_filters_open', 'preselected_client'].indexOf(p[0]) === -1) {
       param_counter = param_counter + 1;
     }
   }
