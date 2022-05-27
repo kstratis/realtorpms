@@ -145,7 +145,8 @@ class FormStepper {
       self.current_step = params;
     });
 
-    // This handler may not be needed
+    // When the stepper is valid, greens out all steps just before submission
+    // and resets the special "working" status.
     $('form').on('submit', function(e) {
       const groups = self.stepperDOMelements.map((index, el) => ({
         group: `fieldset-${index + 1}`,
