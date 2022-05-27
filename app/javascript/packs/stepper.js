@@ -73,8 +73,9 @@ $(document).on('turbolinks:load', function(e) {
     }
   });
 
-  // This is necessary for killing form stepper listeners
-  // when creating properties back-to-back
+  // This is necessary to prevent memory links and doubly registered handlers after a form
+  // is successfully submitted and the user requests a new one while parsley is already installed on window
+  // from the first submission.
   $stepperForm.on('ajax:success', function(event, xhr, opts) {
     window.form_stepper.kill();
   });
