@@ -149,4 +149,15 @@ module ClientsHelper
       }
     ]
   end
+
+  def construct_search_prefs_edit_url(client)
+    return properties_path(force_filters_open: true, preselected_client: client.id) unless client.searchprefs_available
+
+    parsed_client_search_terms = Addressable::URI.parse("#{properties_url}?#{client.searchprefs}")
+    parsed_client_search_terms.query_values = (parsed_client_search_terms&.query_values || {}).merge({
+                                                                                                       'force_filters_open' => 'true',
+                                                                                                       'preselected_client' => client.id })
+
+    parsed_client_search_terms.to_s
+  end
 end

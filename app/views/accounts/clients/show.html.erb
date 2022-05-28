@@ -10,7 +10,7 @@
 
       <% if @client.searchprefs_available %>
         <%= react_component('ModalControlStrip', props: { entries: client_prefs_data }) %>
-        <%= link_to @client.searchprefs_available ? "#{properties_path}?#{@client.searchprefs}" : properties_path(force_filters_open: true, preselected_client: @client.id),
+        <%= link_to construct_search_prefs_edit_url(@client),
                     data: { toggle: "tooltip", position: "bottom" },
                     title: t('clients.show.edit_search_tooltip'),
                     class: 'btn btn-secondary btn-sm' do %>
