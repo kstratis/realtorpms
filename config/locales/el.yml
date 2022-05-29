@@ -135,8 +135,8 @@ el:
         να φιλτράρεις τα αποτελέσματα των αναζητήσεων σου βάσει αυτού.<p>
   support:
     title: "Υποστήριξη"
-    message_admin_html: "Για υποστήριξη ενεργοποίησε το widget συνομιλίας μέσα απο τις <a href='%{chat}'>ρυθμίσεις</a> ή στείλε email στο <a target='_blank' href='mailto:info@%{brandname}.com'>info@%{brandname}.com</a>."
-    message_user_html: "Για υποστήριξη επικοινώνησε με έναν διαχειριστή ή στείλε email στο <a target='_blank' href='mailto:info@%{brandname}.com'>info@%{brandname}.com</a>."
+    message_admin_html: "Για υποστήριξη ενεργοποίησε το widget συνομιλίας μέσα απο τις <u><a href='%{chat}'>ρυθμίσεις</a></u> ή στείλε email στο <u><a target='_blank' href='mailto:info@%{brandname}.com'>info@%{brandname}.com</a></u>."
+    message_user_html: "Για υποστήριξη επικοινώνησε με έναν διαχειριστή ή στείλε email στο <u><a target='_blank' href='mailto:info@%{brandname}.com'>info@%{brandname}.com</a></u>."
   properties_count:
     one: "1 αποτέλεσμα"
     other: "%{count} αποτελέσματα"
@@ -383,8 +383,8 @@ el:
         location: "Τοποθεσία"
         location_title: "Τοποθεσία"
         status_title: "Κατάσταση"
-        status_active: "Διαθέσιμο"
-        status_inactive: "Μη διαθέσιμο"
+        status_active: "Ενεργό"
+        status_inactive: "Μη ενεργό"
         owner: "Ιδιοκτήτης"
         owner_title: "Ιδιοκτήτης/ες"
         owner_header_name: "Ονομ/μό"
@@ -771,6 +771,10 @@ el:
           sell: "Πώληση"
           rent: "Ενοικίαση"
           both: "Και τα δύο"
+        property_status:
+          title: "Κατάσταση"
+          all: "Όλα"
+          active_only: "Μόνο ενεργά ακίνητα"
         size:
           title: "Εμβαδό"
         bedrooms:
@@ -1188,10 +1192,11 @@ el:
         </ul>
     show:
       quick_actions:
-        title: "Γρήγορες ενέργειες"
+        portal_title: "Ενέργειες portal"
+        status_title: "Κατάσταση"
         show_on_website_html: "Εμφάνισε το στο <u><a target=\"_blank\" href=\"%{website}\">portal</a></u> σου."
         pin_html: "Καρφίτσωσε το στο <u><a target=\"_blank\" href=\"%{website}\">portal</a></u> σου."
-        set_available: "Διαθέσιμο"
+        set_available: "Ενεργό"
       client_tooltip: "Προβολή καρτέλας %{user}"
       breadcrumb: "Ακίνητα"
       catalog: "Κατάλογος"

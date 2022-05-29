@@ -17,7 +17,7 @@ const ShowUserFavList = ({ handlePageClick, advanceByTwo, isLoading, dataset, pa
             {dataset.length > 0 ? (
               <div className={`${isLoading ? 'reduced-opacity' : ''}`}>
                 {dataset.map((entry, index) => (
-                  <PropertyEntry key={entry.slug} entry={entry} filtersOpen={true} i18n={i18n} />
+                  <PropertyEntry key={entry.slug} entry={entry} filtersOpen={true} i18n={i18n} active={entry.active} />
                 ))}
 
                 {/* CARD END */}

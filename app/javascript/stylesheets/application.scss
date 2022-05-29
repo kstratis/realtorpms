@@ -2024,13 +2024,15 @@ i.close.fa-window-close:hover{
 }
 
 .properties-listing-controls{
-  visibility: hidden;
   position: absolute;
   right: 5px;
-  bottom: 5px;
+  bottom: 0;
   border-radius: 5px;
   background: #37474f;
   padding: 4px 5px;
+  opacity: 0;
+  transition: all .2s ease;
+
   .control-button {
     border-radius: 50%;
     padding: 2px 4px 2px 4px;
@@ -2047,7 +2049,8 @@ i.close.fa-window-close:hover{
 
 .property-index-avatar:hover{
   .properties-listing-controls {
-    visibility: visible;
+    transform: translateY(-5px);
+    opacity: 1
   }
 }
 

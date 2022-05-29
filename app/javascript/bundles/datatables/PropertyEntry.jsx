@@ -17,7 +17,7 @@ class PropertyEntry extends React.Component {
     return (
       <div className={`${this.props.filtersOpen ? 'col-lg-6 col-xl-12' : 'col-lg-6'}`}>
         <div className={`text-center text-md-left`}>
-          <div className="card card-figure card-figure-custom d-block d-sm-none">
+          <div className={`card card-figure card-figure-custom d-block d-sm-none ${ this.props.active ? '' : 'opaque' }`}>
             <a
               className={'property-entry'}
               href={this.props.entry['allow_view'] ? this.props.entry['view_entity_path'] : ''}>
@@ -58,8 +58,9 @@ class PropertyEntry extends React.Component {
             </a>
           </div>
 
-          <div className="list-group list-group-media mb-3 d-none d-sm-block">
+          <div className={`list-group list-group-media mb-3 d-none d-sm-block ${ this.props.active ? '' : 'opaque' }`}>
             <a
+              data-toggle={this.props.active ? '' : 'tooltip'} data-placement={'right'} title={this.props.active ? '' : this.props.i18n['status_inactive']}
               href={this.props.entry['allow_view'] ? this.props.entry['view_entity_path'] : ''}
               className={`list-group-item list-group-item-action property-index-avatar ${
                 this.props.entry['website_enabled'] ? 'on' : 'off'

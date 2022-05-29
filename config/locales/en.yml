@@ -170,8 +170,8 @@ en:
         <p>You can then <strong>filter the property results</strong> based on whether properties are mortgaged or not.<p>
   support:
     title: "Support"
-    message_admin_html: "To get support, navigate to the <a href='%{chat}'>settings page</a> and activate the live chat widget. Alternatively, drop us an email at <a target='_blank' href='mailto:info@%{brandname}.com'>info@%{brandname}.com</a>."
-    message_user_html: "To get support, please contact an admin or drop us a line at <a target='_blank' href='mailto:info@%{brandname}.com'>info@%{brandname}.com</a>."
+    message_admin_html: "To get support, navigate to the <u><a href='%{chat}'>settings page</a></u> and activate the live chat widget. Alternatively, drop us an email at <u><a target='_blank' href='mailto:info@%{brandname}.com'>info@%{brandname}.com</a></u>."
+    message_user_html: "To get support, please contact an admin or drop us a line at <u><a target='_blank' href='mailto:info@%{brandname}.com'>info@%{brandname}.com</a></u>."
   properties_count:
     one: "1 result"
     other: "%{count} results"
@@ -415,8 +415,8 @@ en:
         location: "Location"
         location_title: "Location"
         status_title: "Market status"
-        status_active: "On market"
-        status_inactive: "Off market"
+        status_active: "Active"
+        status_inactive: "Inactive"
         owner: "Owner"
         owner_title: "Owner/s"
         owner_header_name: "Name"
@@ -802,6 +802,10 @@ en:
           sell: "Sell"
           rent: "Rent"
           both: "Both"
+        property_status:
+          title: "Status"
+          all: "All"
+          active_only: "Active only"
         size:
           title: "Size"
         bedrooms:
@@ -1218,10 +1222,11 @@ en:
         </ul>
     show:
       quick_actions:
-        title: "Quick actions"
+        portal_title: "Portal actions"
+        status_title: "Status"
         show_on_website_html: "Enable on your <u><a target=\"_blank\" href=\"%{website}\">portal</a></u>."
         pin_html: "Pin on your <u><a target=\"_blank\" href=\"%{website}\">portal</a></u>."
-        set_available: "Set availability"
+        set_available: "Active"
       client_tooltip: "User info %{user}"
       breadcrumb: "Properties"
       catalog: "Catalog"

@@ -23,7 +23,7 @@ const Checkbox = props => {
             onChange={handleChange}
           />
           <label htmlFor={slug} className={'custom-control-label'}>
-            <strong>{name}</strong>
+            {name}
           </label>
         </div>
       </div>

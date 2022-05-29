@@ -113,6 +113,10 @@ module PropertyDatatable
       @properties = @properties.where("construction <= ?", filters[:constructionmax])
     end
 
+    if filters[:active_only]
+      @properties = @properties.where(active: true)
+    end
+
     # Custom fields filtering
     @properties, initial_cfields = cfields_filtering('properties', @properties, filters)
 
@@ -163,6 +167,7 @@ module PropertyDatatable
         pinned: property.pinned,
         sample: property.sample,
         userEditable: current_user.is_admin?(current_account) || current_user.properties.exists?(property.id),
+        active: property.active,
         # isFaved: property.is_faved_by?(current_user),
         # assignments: property.properties.count,
         # registration: property.created_at.to_formatted_s(:long)
@@ -198,6 +203,7 @@ module PropertyDatatable
     @initial_floorsmax = filters[:floorsmax] || ''
     @initial_constructionmin = filters[:constructionmin] || ''
     @initial_constructionmax = filters[:constructionmax] || ''
+    @initial_active_only_filter = filters[:active_only] || ''
     @initial_cfields = initial_cfields
 
     respond_to do |format|

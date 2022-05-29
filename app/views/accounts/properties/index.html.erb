@@ -65,6 +65,9 @@
               locations_filter: {
                   storedOptions: @initial_locations
               },
+              active_only_filter: {
+                  isChecked: @initial_active_only_filter
+              },
               cfields: {
                   fields: get_cfields('properties'),
                   storedSelections: @initial_cfields,
@@ -205,6 +208,10 @@
                       option2: t('js.datatables.filters.type.rent'),
                   }
               },
+              status_title: t('js.datatables.filters.property_status.title'),
+              status_inactive: t('activerecord.attributes.property.status_inactive'),
+              status_active: t('activerecord.attributes.property.status_active'),
+              status_active_only: t('js.datatables.filters.property_status.active_only'),
               favourites_tooltip: t('js.properties_favourites_tooltip'),
               popover_title: t('properties.popover_client_title'),
               popover_body: t('properties.popover_client_' + current_user.role(current_account)),

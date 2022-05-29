@@ -92,6 +92,7 @@ function withDatatable(WrappedComponent) {
             storedOptions: this.props.initial_payload.locations_filter.storedOptions
           }
           : '',
+        active_only_filter: { isChecked: this.props.initial_payload.active_only_filter.isChecked},
         cfields: this.props.initial_payload.cfields,
         is_masquerading: this.props.initial_payload.is_masquerading,
         current_user_id: this.props.initial_payload.current_user_id,
@@ -146,6 +147,7 @@ function withDatatable(WrappedComponent) {
       this.handleCfieldCheckbox = this.handleCfieldCheckbox.bind(this);
       this.handleClone = this.handleClone.bind(this);
       this.handleReadNotification = this.handleReadNotification.bind(this);
+      this.handleActiveOnlyFilter = this.handleActiveOnlyFilter.bind(this);
       this._handleParams = this._handleParams.bind(this);
       this.ajaxCallback = this.ajaxCallback.bind(this);
       this.handleAjaxRequestDelayed = debounce(this.handleAjaxRequest, 300);
@@ -729,10 +731,24 @@ function withDatatable(WrappedComponent) {
     handleCfieldCheckbox(selection, slug){
       this.setState({ isLoading: true });
       let searchParams = new URLSearchParams(window.location.search);
+
       if (!selection) {
         searchParams.delete(`cfield_${slug}`);
       } else {
         searchParams.set(`cfield_${slug}`, selection ? '1' : '0');
+        searchParams.delete('page');
+      }
+      this._handleParams(searchParams);
+    }
+
+    handleActiveOnlyFilter(selection){
+      this.setState({ isLoading: true });
+      let searchParams = new URLSearchParams(window.location.search);
+
+      if (!selection) {
+        searchParams.delete(`active_only`);
+      } else {
+        searchParams.set(`active_only`, selection ? '1' : '0');
         searchParams.delete('page');
       }
       this._handleParams(searchParams);
@@ -823,6 +839,7 @@ function withDatatable(WrappedComponent) {
             handleCfieldCheckbox={this.handleCfieldCheckbox}
             handleClone={this.handleClone}
             handleReadNotification={this.handleReadNotification}
+            handleActiveOnlyFilter={this.handleActiveOnlyFilter}
             cfields={this.props.initial_payload.cfields}
             {...this.state}
           />

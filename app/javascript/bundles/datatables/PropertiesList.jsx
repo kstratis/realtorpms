@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
 import toast, { Toaster } from 'react-hot-toast';
 import withDatatable from './withDatatable';
@@ -28,12 +28,14 @@ const PropertiesList = ({
   handleCfieldDropdown,
   handleCfieldTextfield,
   handleCfieldCheckbox,
+  handleActiveOnlyFilter,
   buysell_filter,
   category_filter,
   price_filter,
   size_filter,
   rooms_filter,
   floors_filter,
+  active_only_filter,
   construction_filter,
   locations_filter,
   advanceByTwo,
@@ -60,6 +62,13 @@ const PropertiesList = ({
 }) => {
   const { filtersOpen, setFiltersOpen } = useFilterToggle('propertyFiltersOpen', forceFiltersOpen);
   const handleChange = event => setFiltersOpen(filtersOpen => !filtersOpen);
+
+  const [activeOnlyFilterChecked, setActiveOnlyFilterChecked] = useState(() => (active_only_filter['isChecked'] ? !!active_only_filter['isChecked'] : ''));
+
+  const handleCheckboxChange = e => {
+    setActiveOnlyFilterChecked(e.target.checked);
+    handleActiveOnlyFilter(e.target.checked);
+  };
 
   const clearHandler = e => {
     e.preventDefault();
@@ -270,6 +279,29 @@ const PropertiesList = ({
                   storedSlaveOption={construction_filter['storedSlaveOption']}
                 />
                 <hr />
+
+                <label className="d-block">
+                  <h5 className="card-title filter-header">{i18n.status_title}:</h5>
+                </label>
+                <div className={'mb-3'}>
+                  <div className="form-group mb-4">
+                    <div className="custom-control custom-checkbox app-checkbox custom-field-checkbox">
+                      <input
+                          id={'active'}
+                          type="checkbox"
+                          name={'active'}
+                          className="custom-control-input"
+                          checked={!!activeOnlyFilterChecked}
+                          onChange={handleCheckboxChange}
+                      />
+                      <label htmlFor={'active'} className={'custom-control-label'}>
+                        {i18n.status_active_only}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <hr />
                 {cfields.fields.map((cfield, index) => {
                   return (
                     <FormComponents
@@ -413,6 +445,7 @@ const PropertiesList = ({
                       handleClone={handleClone}
                       i18n={i18n}
                       showControls={showControls}
+                      active={entry['active']}
                     />
                   ))}
                 </div>

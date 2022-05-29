@@ -17,7 +17,7 @@ const ClientPrefsList = ({ handlePageClick, advanceByTwo, isLoading, dataset, pa
               <>
                 <div className={`row relativeposition ${isLoading ? 'reduced-opacity' : ''}`}>
                   {dataset.map((entry, index) => (
-                    <PropertyEntry key={entry.slug} entry={entry} filtersOpen={false} i18n={i18n} showControls={showControls} visited={visited} />
+                    <PropertyEntry key={entry.slug} entry={entry} filtersOpen={false} i18n={i18n} showControls={showControls} visited={visited} active={entry.active} />
                   ))}
                 </div>
                 {/* CARD END */}
