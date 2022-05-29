@@ -689,6 +689,7 @@ en:
             website_disabled: "Unavailable on your portal"
             pinned: "Pinned"
             pinned_tooltip: "Pinned"
+            client_has_visited: "Already been shown to the client"
           step2:
             anchor: "Info"
             title: "Complementary information"

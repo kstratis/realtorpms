@@ -6,7 +6,7 @@ import withDatatable from './withDatatable';
 import React from 'react';
 import PropertyEntry from './PropertyEntry';
 
-const ClientPrefsList = ({ handlePageClick, advanceByTwo, isLoading, dataset, pageCount, selectedPage, i18n, showControls }) => {
+const ClientPrefsList = ({ handlePageClick, advanceByTwo, isLoading, dataset, pageCount, selectedPage, i18n, showControls, visited }) => {
   return (
     <div className="client-prefs-list">
       <div className={'ClientPrefsListContainer'}>
@@ -17,7 +17,7 @@ const ClientPrefsList = ({ handlePageClick, advanceByTwo, isLoading, dataset, pa
               <>
                 <div className={`row relativeposition ${isLoading ? 'reduced-opacity' : ''}`}>
                   {dataset.map((entry, index) => (
-                    <PropertyEntry key={entry.slug} entry={entry} filtersOpen={false} i18n={i18n} showControls={showControls} />
+                    <PropertyEntry key={entry.slug} entry={entry} filtersOpen={false} i18n={i18n} showControls={showControls} visited={visited} />
                   ))}
                 </div>
                 {/* CARD END */}

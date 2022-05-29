@@ -197,7 +197,9 @@
                         website_enabled: t('js.forms.properties.wizard.step1.website_enabled'),
                         website_disabled: t('js.forms.properties.wizard.step1.website_disabled'),
                         pinned: t('js.forms.properties.wizard.step1.pinned'),
-                    }
+                        client_has_visited: t('js.forms.properties.wizard.step1.client_has_visited')
+                    },
+                    visited: @visited
                 }, prerender: false) %>
               <% else %>
                 <div class="text-center reduced-opacity">

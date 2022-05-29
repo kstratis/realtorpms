@@ -19,7 +19,8 @@ function withDatatable(WrappedComponent) {
         object_type: PropTypes.string.isRequired,
         current_page: PropTypes.number,
         pid: PropTypes.number // This is the property id
-      })
+      }),
+      visited: PropTypes.array
     };
 
     /**
@@ -98,6 +99,7 @@ function withDatatable(WrappedComponent) {
         resultsPerPage: this.props.initial_payload.results_per_page,
         forceFiltersOpen: this.props.initial_payload.force_filters_open,
         preselectedClient: this.props.initial_payload.preselected_client,
+        visited: this.props.visited,
         isLoading: false,
         pageCount: Math.ceil(this.props.initial_payload.total_entries / this.props.initial_payload.results_per_page),
         count: this.props.initial_payload.total_entries,

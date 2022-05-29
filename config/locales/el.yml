@@ -657,6 +657,7 @@ el:
             website_disabled: "Μη διαθέσιμο στο portal"
             pinned: "Καρφιτσωμένο"
             pinned_tooltip: "Να φαίνεται πάντα στο website όταν η αναζήτηση είναι ανενεργή"
+            client_has_visited: "Έχει ήδη επιδειχθεί στον πελάτη"
           step2:
             anchor: "Πληροφορίες"
             title: "Συμπληρωματικές πληροφορίες"

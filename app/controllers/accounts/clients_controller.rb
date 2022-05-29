@@ -99,6 +99,7 @@ module Accounts
       searchprefs = Rack::Utils.parse_query(searchprefs).deep_symbolize_keys
       searchprefs.except!(:sizeminmeta, :sizemaxmeta, :page)
       searchprefs[:page] = params[:page]
+      @visited =  @client.visited(current_account)
       filter_properties(current_account.properties.includes(:location), searchprefs)
     end
 

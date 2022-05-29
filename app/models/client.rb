@@ -73,4 +73,8 @@ class Client < ApplicationRecord
   def searchprefs_available
     @searchprefs_available ||= searchprefs.present?
   end
+
+  def visited(account)
+    Property.joins(:cpas).where(cpas: { viewership: true, client: self, account: account }).pluck(:slug)
+  end
 end

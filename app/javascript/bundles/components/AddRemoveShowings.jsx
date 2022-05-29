@@ -37,6 +37,7 @@ function AddShowing({
   closeMenuOnSelect,
   openMenuOnClick,
   originator,
+  handlePageParent
 }) {
   const [client, setClient] = useState({});
   const [property, setProperty] = useState({});
@@ -85,6 +86,8 @@ function AddShowing({
       setErrormsg(i18n.form.warning);
       return;
     }
+
+    handlePageParent(true);
 
     handleSetRequest({
       url: showings_url,
@@ -253,6 +256,7 @@ function AddRemoveShowings({
   i18n,
   closeMenuOnSelect,
   openMenuOnClick,
+  handlePageParent
 }) {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const handleFormVisibility = () => {
@@ -305,6 +309,7 @@ function AddRemoveShowings({
           handleFormVisibility={handleFormVisibility}
           closeMenuOnSelect={closeMenuOnSelect}
           openMenuOnClick={openMenuOnClick}
+          handlePageParent={handlePageParent}
         />
       ) : (
         <>
