@@ -2730,10 +2730,28 @@ footer:not(.auth-footer){
 
 .client-qr-code-container {
   position: absolute;
-  border: 1px solid black;
   padding: 10px;
   border-radius: 6px;
   cursor: help;
+  border: 1px solid #37474f;
+}
+
+.user-new-icon-container {
+  position: absolute;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: default;
+  border: 1px solid grey;
+  opacity: 0.8
+}
+
+.client-new-icon-container {
+  position: absolute;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: default;
+  border: 1px solid grey;
+  opacity: 0.8
 }
 
 // --- Filters drawer ---

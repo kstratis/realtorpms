@@ -92,7 +92,7 @@ function withDatatable(WrappedComponent) {
             storedOptions: this.props.initial_payload.locations_filter.storedOptions
           }
           : '',
-        active_only_filter: { isChecked: this.props.initial_payload.active_only_filter.isChecked},
+        active_only_filter: { isChecked: this.props.initial_payload?.active_only_filter?.isChecked || false },
         cfields: this.props.initial_payload.cfields,
         is_masquerading: this.props.initial_payload.is_masquerading,
         current_user_id: this.props.initial_payload.current_user_id,

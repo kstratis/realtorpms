@@ -10,6 +10,9 @@
       <%= render partial: 'shared/card_header/header', locals: {title: @user.full_name, btn_text: t('properties.show.back'), btn_link: :back}  %>
       <!-- .card-body -->
       <div class="card-body">
+        <div class="user-new-icon-container d-none d-lg-block">
+          <i class="fas fa-user-tie fa-8x"></i>
+        </div>
         <!-- .media -->
         <%= form_for(@user, html: {class: "js-validatable"}) do |f| %>
           <div class="col-lg-6 offset-lg-3 col-md-12">
