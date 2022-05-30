@@ -40,7 +40,9 @@
 <!--  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>-->
 <!--  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">-->
 
-<!--  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">-->
+  <% if Rails.env.development? %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+  <% end %>
 
 <!--  Order matters here. Don't change the order. external_stylesheets are basically the styles for flatpickr and -->
 <!--  uppy.js. We need to load them first. -->
@@ -64,9 +66,8 @@
                                        'automatedClicks',
                                        'data-turbolinks-track': 'reload' %>
 
-  <script src="https://kit.fontawesome.com/20b2864e17.js" crossorigin="anonymous"></script>
-
   <% if Rails.env.production? %>
+    <script src="https://kit.fontawesome.com/20b2864e17.js" crossorigin="anonymous"></script>
     <script data-token="AOX6ILZTEIVP" async src="https://cdn.splitbee.io/sb.js"></script>
   <% end %>
 
