@@ -83,6 +83,7 @@
 
   &.xxxs { width:  15px; height:  15px; vertical-align: middle;}
   &.xxs { width:  20px; height:  20px; vertical-align: middle;}
+  &.spitogatos-custom-size { width:  28px; height:  18px; vertical-align: middle; }
   &.xs { width:  25px; height:  25px; vertical-align: middle;}
   &.xss { width:  30px; height:  30px; vertical-align: middle;}
   &.cs { width:  35px; height:  35px; }
@@ -621,6 +622,11 @@
 
   &.disconnect{
     background-image: url('../images/disconnect.svg');
+  }
+
+  &.spitogatos{
+    background-image: url('../images/spitogatos_logo.svg');
+
   }
 
   & ~ .pr-icon-desc {

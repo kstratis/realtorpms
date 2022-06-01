@@ -132,6 +132,7 @@ function withDatatable(WrappedComponent) {
       this.advanceByTwo = this.advanceByTwo.bind(this);
       this.handleFreezeUser = this.handleFreezeUser.bind(this);
       this.handleAdminifyUser = this.handleAdminifyUser.bind(this);
+      this.handleSpitogatosSync = this.handleSpitogatosSync.bind(this);
       this.handleFav = this.handleFav.bind(this);
       this.handleLocationInput = this.handleLocationInput.bind(this);
       this.handleCategoryInput = this.handleCategoryInput.bind(this);
@@ -539,6 +540,21 @@ function withDatatable(WrappedComponent) {
       });
     }
 
+    handleSpitogatosSync(e, spitogatos_sync_url, property_id){
+      e.preventDefault();
+      axios.patch(spitogatos_sync_url).then(response => {
+        // DEBUG
+        // console.log(response);
+        const index = this.state.dataset.findIndex(element => element.id === property_id);
+        let element = this.state.dataset[index];
+        element['spitogatos_sync'] = !element['spitogatos_sync'];
+        let newDataset = [...this.state.dataset];
+        this.setState({
+          dataset: newDataset
+        });
+      });
+    }
+
     handleFreezeUser(e, freeze_url, user_id) {
       e.preventDefault();
       const url = buildUserURL(freeze_url, user_id);
@@ -818,6 +834,7 @@ function withDatatable(WrappedComponent) {
             handleSearchInput={this.handleSearchInput}
             handleFreezeUser={this.handleFreezeUser}
             handleAdminifyUser={this.handleAdminifyUser}
+            handleSpitogatosSync={this.handleSpitogatosSync}
             i18n={this.props.i18n}
             meta={this.props.meta}
             add_user_link={this.props.initial_payload.add_user_link}

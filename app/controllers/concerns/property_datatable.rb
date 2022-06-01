@@ -159,6 +159,8 @@ module PropertyDatatable
         edit_entity_path: edit_property_path(property),
         fav_entity_path: property_favorites_path(property),
         clone_entity_path: clone_property_path(property),
+        sync_entity_path: sync_property_path(property),
+        spitogatos_sync: property.spitogatos_sync,
         purpose: I18n.t("activerecord.attributes.property.enums.businesstype.#{property.businesstype}_banner"),
         businesstype: property.businesstype,
         avatar: pick_avatar_pick(property),

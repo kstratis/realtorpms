@@ -1153,6 +1153,8 @@ en:
     clone:
       label: "Clone"
       prompt: "Are you sure you want to clone this?"
+    sync:
+      spitogatos_label: "Sync with spitogatos.gr"
     print: "Print"
     info: "Details"
     map: "Map"

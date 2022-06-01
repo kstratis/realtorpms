@@ -66,6 +66,13 @@ module Accounts
       filter_properties(current_account.properties.includes(:location), params)
     end
 
+    def sync
+      property_to_sync = current_account.properties.find(params[:id])
+      property_to_sync.toggle!(:spitogatos_sync)
+
+      head :ok
+    end
+
     # GET /properties/1
     # GET /properties/1.json
     def show

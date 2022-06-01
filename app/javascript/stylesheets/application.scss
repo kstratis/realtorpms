@@ -2514,13 +2514,14 @@ footer:not(.auth-footer){
 
 .badges{
   position: absolute;
-  bottom: 0;
-  left: 0;
+  bottom: 5px;
+  left: 5px;
   z-index: 1;
   background: #ffffff;
   padding: 2px 5px 2px 5px;
   box-shadow: 0 0 0 1px rgba(20, 20, 31, 0.05), 0 1px 3px 0 rgba(20, 20, 31, 0.15);
   border-radius: 3px;
+  cursor: help;
 }
 
 .pinned-badge {
@@ -2900,6 +2901,16 @@ footer:not(.auth-footer){
   border: 1px solid;
 }
 
-a.leaflet-control-zoom-in, a.leaflet-control-zoom-out{
+a.leaflet-control-zoom-in, a.leaflet-control-zoom-out {
   text-decoration: none !important;
+}
+
+.spitogatos-container{
+  position:absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+.btn-spitogatos{
+  background: #FE900A !important;
 }

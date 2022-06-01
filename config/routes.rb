@@ -56,6 +56,7 @@ Rails.application.routes.draw do
 
           member do
             post :clone
+            patch :sync
             delete :delete_avatar
           end
         end

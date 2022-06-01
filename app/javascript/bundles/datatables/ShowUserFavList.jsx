@@ -7,7 +7,7 @@ import withDatatable from './withDatatable';
 import React from 'react';
 import PropertyEntry from './PropertyEntry';
 
-const ShowUserFavList = ({ handlePageClick, advanceByTwo, isLoading, dataset, pageCount, selectedPage, i18n }) => {
+const ShowUserFavList = ({ handlePageClick, advanceByTwo, isLoading, dataset, pageCount, selectedPage, i18n, handleSpitogatosSync }) => {
   return (
     <div className="show-user-favlist">
       <div className={'ShowUserFavListContainer'}>
@@ -17,7 +17,7 @@ const ShowUserFavList = ({ handlePageClick, advanceByTwo, isLoading, dataset, pa
             {dataset.length > 0 ? (
               <div className={`${isLoading ? 'reduced-opacity' : ''}`}>
                 {dataset.map((entry, index) => (
-                  <PropertyEntry key={entry.slug} entry={entry} filtersOpen={true} i18n={i18n} active={entry.active} />
+                  <PropertyEntry key={entry.slug} entry={entry} filtersOpen={true} i18n={i18n} active={entry.active} handleSpitogatosSync={handleSpitogatosSync} />
                 ))}
 
                 {/* CARD END */}
