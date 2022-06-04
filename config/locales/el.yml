@@ -54,6 +54,7 @@ el:
   page_refresh: "Ανανέωση σελίδας"
   apply: "Εφαρμογή"
   ok: "OK"
+  coming_soon: "Σύντομα"
   plan:
     title: "Συνδρομή"
     trial: "Δοκιμαστική περίοδος"
@@ -451,7 +452,7 @@ el:
             basement: "Υπόγειο"
             semi_basement: "Ημιυπόγειο"
             ground_floor: "Ισόγειο"
-            mezzanine: "Ημιόροφος"
+            semi_ground_floor: "Ημιόροφος"
             1: "1ος"
             2: "2ος"
             3: "3ος"
@@ -1337,7 +1338,30 @@ el:
       subscription: "Συνδρομή"
       support: "Υποστήριξη"
       activate_support: "Ενεργοποίηση υποστήριξης"
-      integrations: "Διασυνδέσεις"
+      integrations:
+        title: "Διασυνδέσεις"
+        spitogatos:
+          save: "Αποθήκευση"
+          edit: "Επεξεργασία"
+          check: "Επικύρωση"
+          credentials_title: "Στοιχεία διασύνδεσης με spitogatos.gr"
+          broker_id: 'Broker ID'
+          broker_id_placeholder: 'Το Broker ID που σου έδωσε ο spitogatos'
+          username: 'Όνομα χρήστη'
+          username_placeholder: 'Το username σου στο spitogatos.gr'
+          password: 'Κωδικός'
+          password_placeholder: 'Το password σου στο spitogatos.gr'
+          status:
+            success: "Η διασύνδεση δουλεύει σωστά!"
+            error: "Σφάλμα διασύνδεσης. Ελέγξτε τα στοιχεία σας."
+            unknown: "Άγνωστη κατάσταση. Δοκιμάστε πάλι."
+          flash:
+            add_success: 'Οι ρυθμίσεις διασύνδεσης αποθηκεύτηκαν επιτυχώς'
+            add_failure: 'Κάτι πήγε στραβά!'
+            edit_success: 'Οι ρυθμίσεις διασύνδεσης ενημερώθηκαν επιτυχώς'
+            edit_failure: 'Κάτι πήγε στραβά!'
+            destroy_success: 'Οι ρυθμίσεις διασύνδεσης διαγράφηκαν επιτυχώς'
+            destroy_failure: 'Κάτι πήγε στραβά!'
       widget: "Widget"
       under_construction: "Υπό κατασκευή..."
       info: "Αναλυτικά"

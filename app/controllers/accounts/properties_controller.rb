@@ -66,10 +66,12 @@ module Accounts
       filter_properties(current_account.properties.includes(:location), params)
     end
 
+    # Flagged to sync with Spitogatos
     def sync
+      return unless current_account.spitogatos_enabled?
+
       property_to_sync = current_account.properties.find(params[:id])
       property_to_sync.toggle!(:spitogatos_sync)
-
       head :ok
     end
 

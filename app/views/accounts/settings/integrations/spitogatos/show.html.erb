@@ -1,0 +1,43 @@
+<% content_for(:nested_settings_header) do %>
+  <%= t('settings.sidebar.integrations.title') %>
+<% end %>
+
+<% content_for(:integrations) do %>
+  <h2><%= t('settings.sidebar.integrations.spitogatos.credentials_title') %></h2>
+  <div class="col-12 col-lg-6 offset-lg-3 py-4 table-responsive">
+
+    <table class="table table-striped">
+      <tr>
+        <td><%= t('settings.sidebar.integrations.spitogatos.broker_id') %>:</td>
+        <td><%= @spitogatos.broker_id %></td>
+      </tr>
+      <tr>
+        <td><%= t('settings.sidebar.integrations.spitogatos.username') %>:</td>
+        <td><%= @spitogatos.username %></td>
+      </tr>
+      <tr>
+        <td><%= t('settings.sidebar.integrations.spitogatos.password') %>:</td>
+        <td><%= @spitogatos.password %></td>
+      </tr>
+    </table>
+
+    <div class="spitogatos-sync-result-container pt-3 text-center">
+      <span id="spitogatos-sync-result"
+            data-unknown-msg="<%= t('settings.sidebar.integrations.spitogatos.status.unknown') %>"
+            class="">
+      </span>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="form-actions">
+    <button id="spitogatos-config-check"
+            class="btn btn-outline-danger mr-auto"
+            data-remote-path="<%= settings_integrations_validate_spitogatos_config_path(@spitogatos) %>"><%= t('settings.sidebar.integrations.spitogatos.check') %>
+    </button>
+
+    <%= link_to t('settings.sidebar.integrations.spitogatos.edit'), edit_settings_integrations_spitogato_path(@spitogatos), class: 'btn btn-outline-primary ml-auto' %>
+  </div>
+
+<% end %>

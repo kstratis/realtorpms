@@ -107,7 +107,7 @@ class Property < ApplicationRecord
 
   enum energy_cert: [:a_plus, :a, :b_plus, :b, :c, :d, :e, :z, :h]
 
-  enum floor: [:basement, :semi_basement, :ground_floor, :mezzanine].concat(Array(1..50).map(&:to_s).map(&:to_sym))
+  enum floor: [:basement, :semi_basement, :ground_floor, :semi_ground_floor].concat(Array(1..50).map(&:to_s).map(&:to_sym))
 
   enum marker: [:exact, :circle, :nonvisible]
 

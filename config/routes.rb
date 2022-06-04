@@ -25,7 +25,12 @@ Rails.application.routes.draw do
           root to: 'timeline#index', as: :timeline
           resources :model_types, only: [:index, :edit, :update], :path => "custom-fields"
           resources :chat, only: [:index]
-          # resources :subscriptions, :path => "subscriptions"
+
+          namespace :integrations do
+            root to: 'integrations#index'
+            resources :spitogatos, except: [:index]
+            get '/spitogatos/:id/validate', to: 'spitogatos#validate_configuration', as: :validate_spitogatos_config
+          end
 
           get '/subscriptions/new', to: 'subscriptions#new', as: :new_subscription # page to start payment
           get '/subscriptions', to: 'subscriptions#index', as: :subscriptions # page to start payment

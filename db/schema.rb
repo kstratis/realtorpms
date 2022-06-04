@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_16_111749) do
+ActiveRecord::Schema.define(version: 2022_06_04_175416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 2022_06_16_111749) do
     t.integer "subscription_status", default: 0
     t.datetime "last_paid_at"
     t.integer "subscription_id"
-    t.boolean "spitogatos", default: false
     t.index ["owner_id"], name: "index_accounts_on_owner_id"
     t.index ["subdomain"], name: "index_accounts_on_subdomain"
   end

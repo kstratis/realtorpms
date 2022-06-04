@@ -1,0 +1,35 @@
+<!-- .form-group -->
+<div class="form-group">
+  <div class="form-label-group">
+    <%= f.text_field :broker_id, class: 'form-control',
+                     placeholder: t('settings.sidebar.integrations.spitogatos.broker_id_placeholder'),
+                     'data-parsley-required': "true",
+                     'data-parsley-required-message': t("js.validator.required") %>
+    <%= f.label :broker_id, t('settings.sidebar.integrations.spitogatos.broker_id') %>
+  </div>
+</div>
+<!-- /.form-group -->
+
+<!-- .form-group -->
+<div class="form-group">
+  <div class="form-label-group">
+    <%= f.text_field :username, class: 'form-control',
+                     placeholder: t('settings.sidebar.integrations.spitogatos.username_placeholder'),
+                     'data-parsley-required': "true",
+                     'data-parsley-required-message': t("js.validator.required") %>
+    <%= f.label :username, t('settings.sidebar.integrations.spitogatos.username') %>
+  </div>
+</div>
+<!-- /.form-group -->
+
+<!-- .form-group -->
+<div class="form-group">
+  <div class="form-label-group">
+    <%= f.text_field :password, class: 'form-control',
+                     placeholder: t('settings.sidebar.integrations.spitogatos.password_placeholder'),
+                     'data-parsley-required': "true",
+                     'data-parsley-required-message': t("js.validator.required") %>
+    <%= f.label :password, t('settings.sidebar.integrations.spitogatos.password') %>
+  </div>
+</div>
+<!-- /.form-group -->

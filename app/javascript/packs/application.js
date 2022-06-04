@@ -205,5 +205,42 @@ $(document).on('turbolinks:load', function(e) {
       new MapManager();
     });
   }
+
+  $('#spitogatos-config-check').on('click', function (e) {
+    e.preventDefault();
+    // Set the loading state first
+    const $result = $('#spitogatos-sync-result');
+    $result.removeClass('badge badge-success badge-danger badge-info').html(`<i class="fas fa-cog fa-2x fa-spin"></i>`);
+
+    // disable the button
+    $(e.currentTarget).addClass('disabled');
+
+    // Get the endpoint
+    const endpoint = $(e.currentTarget).data('remotePath');
+
+    // Make the call
+    Rails.ajax({
+      type: 'GET',
+      url: endpoint,
+      dataType: 'json',
+      success: response => {
+        const status = response['status'];
+        const message = response['message'];
+
+        const unknownMsg = $result.data('unknownMsg');
+
+        if (message) {
+          $result.text(message)
+          $result.addClass('badge').addClass(status === 'ok' ? 'badge-success' : 'badge-danger')
+        } else {
+          $result.text(unknownMsg)
+          $result.addClass('badge badge-info')
+        }
+
+        // Restore the button
+        $(e.currentTarget).removeClass('disabled');
+      },
+    })
+  })
 });
 

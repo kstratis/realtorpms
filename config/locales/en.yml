@@ -84,6 +84,7 @@ en:
   page_refresh: "Refresh page"
   apply: "Apply"
   ok: "OK"
+  coming_soon: "Coming soon"
   plan:
     title: "Subscription"
     trial: "Trial"
@@ -484,7 +485,7 @@ en:
             basement: "Basement"
             semi_basement: "Semi-basement"
             ground_floor: "Ground floor"
-            mezzanine: "Mezzanine"
+            semi_ground_floor: "Mezzanine"
             1: "1st"
             2: "2nd"
             3: "3rd"
@@ -1367,7 +1368,30 @@ en:
       subscription: "Subscription"
       support: "Support"
       activate_support: "Activate support widget"
-      integrations: "Integrations"
+      integrations:
+        title: "Integrations"
+        spitogatos:
+          save: "Save"
+          edit: "Edit"
+          check: "Validate"
+          credentials_title: "spitogatos.gr credentials"
+          broker_id: 'Broker ID'
+          broker_id_placeholder: 'Broker ID as given to you by spitogatos'
+          username: 'Username'
+          username_placeholder: 'Username used in spitogatos.gr'
+          password: 'Password'
+          password_placeholder: 'Password used in spitogatos.gr'
+          status:
+            success: "The integration is working fine."
+            error: "Connection error. Please check spitogatos.gr login credentials."
+            unknown: "Unknown error. Please try again."
+          flash:
+            add_success: 'Configuration added successfully'
+            add_failure: 'Oops! Something went wrong!'
+            edit_success: 'Configuration successfully updated'
+            edit_failure: 'Oops! Something went wrong!'
+            destroy_success: 'Configuration settings successfully deleted'
+            destroy_failure: 'Oops! Something went wrong!'
       widget: "Widget"
       under_construction: "Under construction..."
       info: "Details"

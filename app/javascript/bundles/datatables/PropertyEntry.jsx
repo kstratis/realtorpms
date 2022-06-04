@@ -71,7 +71,7 @@ class PropertyEntry extends React.Component {
                 {this.isVisited() ? <div className="pinned-badge pinned-client-visited" data-toggle="tooltip" data-position="top" title={this.props.i18n['client_has_visited']}><i className="fas fa-expand"/></div> : '' }
               </div>
               <div className="list-group-item-figure rounded-left ">
-                <div className={'spitogatos-container'}>
+                <div className={`spitogatos-container ${this.props.spitogatosEnabled ? '' : 'd-none'}`}>
                   <button
                       data-toggle="tooltip"
                       data-placement="auto"

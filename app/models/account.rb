@@ -36,6 +36,8 @@ class Account < ApplicationRecord
 
   has_one_attached :avatar
 
+  has_one :spitogatos
+
   validates_associated :owner
 
   before_create :confirmation_token
@@ -254,6 +256,12 @@ class Account < ApplicationRecord
     self.email_confirmed = true
     self.confirm_token = nil
     save!(:validate => false)
+  end
+
+  def spitogatos_enabled?
+    return false if spitogatos.blank?
+
+    spitogatos.active
   end
 
   private
