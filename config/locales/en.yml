@@ -290,6 +290,7 @@ en:
           forest_view: "Forest view"
           infinite_view: "Limitless view"
         other:
+          title: "Other"
           parking: "Parking"
           gas: "Natural gas"
           solar_water_heating: "Solar water heating"
@@ -399,6 +400,8 @@ en:
         unit: "Unit: %{unit}"
         construction: "Construction"
         construction_title: "Construction"
+        renovation: "Renovation"
+        renovation_title: "Renovation"
         construction_short: "Built"
         facade_length: "Facade length"
         facade_length_title: "Facade"
@@ -677,13 +680,14 @@ en:
         wizard:
           step1:
             anchor: "Type"
-            title: "Basic Information"
+            title: "Property type"
             options: "Options"
             type_of_offer_feedback: "Sell, rent or offer both"
             type_of_category_feedback: "Choose a category"
             type_of_subcategory_feedback: "Choose a subcategory"
             floor_feedback: "Pick a floor"
             construction_feedback: "Construction year"
+            renovation_feedback: "Renovation year"
             levels_feedback: "Floors"
             website_enabled: "Discoverable on your portal"
             website_disabled: "Unavailable on your portal"
@@ -692,7 +696,7 @@ en:
             client_has_visited: "Already been shown to the client"
           step2:
             anchor: "Info"
-            title: "Complementary information"
+            title: "Basic info"
             type_of_location_feedback: "Choose an area"
           step3:
             anchor: "Amenities"

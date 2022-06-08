@@ -367,6 +367,8 @@ el:
         unit: "Διαμέρισμα: %{unit}"
         construction: "Έτος κατασκευής"
         construction_title: "Έτος κατασκευής"
+        renovation: "Έτος ανακαίνισης"
+        renovation_title: "Έτος ανακαίνισης"
         construction_short: "Κατασκευή"
         facade_length: "Μήκος πρόσοψης"
         facade_length_title: "Πρόσοψη"
@@ -645,13 +647,14 @@ el:
         wizard:
           step1:
             anchor: "Τύπος"
-            title: "Βασικές πληροφορίες"
+            title: "Είδος ακινήτου"
             options: "Επιλογές"
             type_of_offer_feedback: "Επίλεξε ανάμεσα σε πώληση, ενοικίαση ή και δύο μαζί"
             type_of_category_feedback: "Επιλέξτε κατηγορία"
             type_of_subcategory_feedback: "Επιλέξτε υποκατηγορία"
             floor_feedback: "Επιλέξτε όροφο"
             construction_feedback: "Έτος κατασκευής"
+            renovation_feedback: "Έτος ανακαίνισης"
             levels_feedback: "Αριθμός επιπέδων"
             website_enabled: "Διαθέσιμο προς αναζήτηση στο portal"
             website_disabled: "Μη διαθέσιμο στο portal"
@@ -660,11 +663,11 @@ el:
             client_has_visited: "Έχει ήδη επιδειχθεί στον πελάτη"
           step2:
             anchor: "Πληροφορίες"
-            title: "Συμπληρωματικές πληροφορίες"
+            title: "Βασικά στοιχεία"
             type_of_location_feedback: "Επιλέξτε περιοχή"
           step3:
-            anchor: "Παροχές"
-            title: "Παροχές / Χαρακτηριστικά"
+            anchor: "Χαρ/κά"
+            title: "Χαρακτηριστικά"
           step4:
             anchor: "Τοποθεσία"
             title: "Πληροφορίες τοποθεσίας"

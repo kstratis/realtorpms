@@ -45,7 +45,7 @@
                   </li>
                   <% if @property.custom_fields_count > 0 %>
                     <li class="step" data-fieldset="fieldset-6" data-target="#test-l-6">
-                      <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-align-justify fa-fw"> </i></span>
+                      <a href="#" class="step-trigger" tabindex="-1"><span class="step-indicator step-indicator-icon"><i class="fas fa-clipboard-list fa-fw"> </i></span>
                         <span class="d-none d-lg-inline"><%= t('js.forms.properties.wizard.step7.anchor') %></span></a>
                     </li>
                   <% end %>
@@ -66,9 +66,9 @@
                   <div id="test-l-1" class="content dstepper-none fade">
                     <!-- fieldset -->
                     <fieldset>
-                      <legend><%= t('js.forms.properties.wizard.step1.title') %></legend> <!-- .form-group -->
                       <div class="row">
                         <div class="col-md-6 col-sm-12">
+                          <legend class="property-add-edit-title"><%= t('js.forms.properties.wizard.step1.title') %></legend> <!-- .form-group -->
                           <div class="form-group mb-4">
                             <%= property.label :businesstype do %>
                               <%= Property.human_attribute_name(:businesstype) %>
@@ -153,35 +153,12 @@
                   <div id="test-l-2" class="content dstepper-none fade">
                     <!-- fieldset -->
                     <fieldset>
-                      <legend><%= t('js.forms.properties.wizard.step2.title') %></legend> <!-- .row -->
-                      <div class="row">
-                        <!-- grid column -->
 
-                        <!-- Size -->
-                        <div class="col-md-6 col-sm-12 form-field-container size">
-                          <div class="form-group mb-4">
-                            <div class="form-label-group">
-                              <%= property.text_field :size,
-                                                      class: 'form-control',
-                                                      autocomplete: "off",
-                                                      'data-parsley-group': "fieldset-2",
-                                                      'data-parsley-type': "integer",
-                                                      'data-parsley-type-message': t("js.validator.digits"),
-                                                      'data-parsley-required-message': t("js.validator.required") %>
-                              <label for="size">
-                                <%= content_tag :span do %>
-                                  <%= content_tag(:i, nil, class: 'fas fa-arrows-alt fa-fw') + ' ' + t('activerecord.attributes.property.size_title') %>
-                                <% end %>
-                              </label>
-                            </div>
-                            <% if current_account.greek? %>
-                              <small class="form-text text-muted"><%= t('activerecord.attributes.property.size_meter_feedback_html') %></small>
-                            <% else %>
-                              <small class="form-text text-muted"><%= t('activerecord.attributes.property.size_feet_feedback_html') %></small>
-                            <% end %>
-                            <div class="invalid-feedback"></div>
-                          </div>
+                      <div class="row">
+                        <div class="col-12">
+                          <legend class="property-add-edit-title"><%= t('js.forms.properties.wizard.step2.title') %></legend> <!-- .row -->
                         </div>
+                        <!-- grid column -->
 
                         <!-- Price -->
                         <div class="col-md-6 col-sm-12 form-field-container price">
@@ -211,6 +188,80 @@
                           </div>
                         </div>
 
+                        <!-- Size -->
+                        <div class="col-md-6 col-sm-12 form-field-container size">
+                          <div class="form-group mb-4">
+                            <div class="form-label-group">
+                              <%= property.text_field :size,
+                                                      class: 'form-control',
+                                                      autocomplete: "off",
+                                                      'data-parsley-group': "fieldset-2",
+                                                      'data-parsley-type': "integer",
+                                                      'data-parsley-type-message': t("js.validator.digits"),
+                                                      'data-parsley-required-message': t("js.validator.required") %>
+                              <label for="size">
+                                <%= content_tag :span do %>
+                                  <%= content_tag(:i, nil, class: 'fas fa-arrows-alt fa-fw') + ' ' + t('activerecord.attributes.property.size_title') %>
+                                <% end %>
+                              </label>
+                            </div>
+                            <% if current_account.greek? %>
+                              <small class="form-text text-muted"><%= t('activerecord.attributes.property.size_meter_feedback_html') %></small>
+                            <% else %>
+                              <small class="form-text text-muted"><%= t('activerecord.attributes.property.size_feet_feedback_html') %></small>
+                            <% end %>
+                            <div class="invalid-feedback"></div>
+                          </div>
+                        </div>
+
+                        <!-- Bedrooms -->
+                        <div class="col-md-6 col-sm-12 form-field-container bedrooms">
+                          <div class="form-group mb-4">
+                            <div class="form-label-group">
+                              <%= property.text_field :bedrooms,
+                                                      class: 'form-control',
+                                                      autocomplete: "off",
+                                                      'data-parsley-group': "fieldset-2",
+                                                      'data-parsley-type': "integer",
+                                                      'data-parsley-type-message': t("js.validator.digits"),
+                                                      'data-parsley-required-message': t("js.validator.required") %>
+                              <label for="bedrooms">
+                                <%= content_tag :span do %>
+                                  <%= content_tag(:i, nil, class: 'fas fa-bed fa-fw') + ' ' + t('activerecord.attributes.property.bedrooms_title') %>
+                                <% end %>
+                              </label>
+                            </div>
+
+                            <small class="form-text text-muted"><%= t('activerecord.attributes.property.bedrooms_feedback_html') %></small>
+                            <div class="invalid-feedback"></div>
+                          </div>
+                        </div>
+
+                        <!-- Bathrooms -->
+                        <div class="col-md-6 col-sm-12 form-field-container bathrooms">
+                          <div class="form-group mb-4">
+                            <div class="form-label-group">
+                              <%= property.text_field :bathrooms,
+                                                      class: 'form-control',
+                                                      autocomplete: "off",
+                                                      'data-parsley-group': "fieldset-2",
+                                                      'data-parsley-type': "integer",
+                                                      'data-parsley-type-message': t("js.validator.digits"),
+                                                      'data-parsley-required-message': t("js.validator.required") %>
+                              <label for="bathrooms">
+                                <%= content_tag :span do %>
+                                  <%= content_tag(:i, nil, class: 'fas fa-bath fa-fw') + ' ' + t('activerecord.attributes.property.bathrooms_title') %>
+                                <% end %>
+                              </label>
+                            </div>
+                            <small class="form-text text-muted"><%= t('activerecord.attributes.property.bathrooms_feedback_html') %>
+                            </small>
+                            <div class="invalid-feedback"></div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
                         <!-- Floor -->
                         <div class="col-md-6 col-sm-12 form-field-container floor">
                           <div class="form-group mb-4">
@@ -238,6 +289,37 @@
                                     select: t('js.components.select'),
                                     validatorErrMsg: t('js.validator.required'),
                                 }
+                            }, prerender: false) %>
+                          </div>
+                        </div>
+
+                        <!-- Levels -->
+                        <div class="col-md-6 col-sm-12 form-field-container levels">
+                          <div class="form-group mb-4">
+                            <%= property.label :levels do %>
+                              <%= Property.human_attribute_name(:levels) %>
+                            <% end %>
+                            <%= react_component('FormSelect', props: {
+                              id: 'e',
+                              inputID: 'property_levels',
+                              inputName: 'property[levels]',
+                              inputClassName: 'form-control',
+                              validatorGroup: 'fieldset-2',
+                              isRequired: false,
+                              renderFormField: true,
+                              formID: 'new_property',
+                              className: 'simple-select',
+                              options: (1..10).collect { |level| { label: level, value: level } },
+                              soloMode: true,
+                              ajaxEnabled: false,
+                              isClearable: true,
+                              backspaceRemovesValue: true,
+                              searchable: false,
+                              feedback: t('js.forms.properties.wizard.step1.levels_feedback'),
+                              i18n: {
+                                select: t('js.components.select'),
+                                validatorErrMsg: t('js.validator.required'),
+                              }
                             }, prerender: false) %>
                           </div>
                         </div>
@@ -273,92 +355,39 @@
                           </div>
                         </div>
 
-                        <!-- Bedrooms -->
-                        <div class="col-md-6 col-sm-12 form-field-container bedrooms">
+                        <!-- Renovation -->
+                        <div class="col-md-6 col-sm-12 form-field-container renovation">
                           <div class="form-group mb-4">
-                            <div class="form-label-group">
-                              <%= property.text_field :bedrooms,
-                                                      class: 'form-control',
-                                                      autocomplete: "off",
-                                                      'data-parsley-group': "fieldset-2",
-                                                      'data-parsley-type': "integer",
-                                                      'data-parsley-type-message': t("js.validator.digits"),
-                                                      'data-parsley-required-message': t("js.validator.required") %>
-                              <label for="bedrooms">
-                                <%= content_tag :span do %>
-                                  <%= content_tag(:i, nil, class: 'fas fa-bed fa-fw') + ' ' + t('activerecord.attributes.property.bedrooms_title') %>
-                                <% end %>
-                              </label>
-                            </div>
-                            <small class="form-text text-muted"><%= t('activerecord.attributes.property.bedrooms_feedback_html') %>
-                            </small>
-                            <div class="invalid-feedback"></div>
-                          </div>
-                        </div>
-
-                        <!-- Bathrooms -->
-                        <div class="col-md-6 col-sm-12 form-field-container bathrooms">
-                          <div class="form-group mb-4">
-                            <div class="form-label-group">
-                              <%= property.text_field :bathrooms,
-                                                      class: 'form-control',
-                                                      autocomplete: "off",
-                                                      'data-parsley-group': "fieldset-2",
-                                                      'data-parsley-type': "integer",
-                                                      'data-parsley-type-message': t("js.validator.digits"),
-                                                      'data-parsley-required-message': t("js.validator.required") %>
-                              <label for="bedrooms">
-                                <%= content_tag :span do %>
-                                  <%= content_tag(:i, nil, class: 'fas fa-bath fa-fw') + ' ' + t('activerecord.attributes.property.bathrooms_title') %>
-                                <% end %>
-                              </label>
-                            </div>
-                            <small class="form-text text-muted"><%= t('activerecord.attributes.property.bathrooms_feedback_html') %>
-                            </small>
-                            <div class="invalid-feedback"></div>
-                          </div>
-                        </div>
-
-                        <!-- Availability -->
-                        <div class="col-md-6 col-sm-12 form-field-container availability">
-                          <div class="form-group mb-4">
-                            <%= property.label :availability, t('activerecord.attributes.property.availability_title'), class: 'control-label' %>
-                            <%= property.text_field :availability, class: 'form-control', :data => { :toggle => 'flatpickr' } %>
-                            <small class="form-text text-muted"><%= t('activerecord.attributes.property.availability_feedback_html') %></small>
-                          </div><!-- /.form-group -->
-                        </div>
-
-
-                        <!-- Levels -->
-                        <div class="col-md-6 col-sm-12 form-field-container levels">
-                          <div class="form-group mb-4">
-                            <%= property.label :levels do %>
-                              <%= Property.human_attribute_name(:levels) %>
+                            <%= property.label :renovation do %>
+                              <span><i class="fas fa-calendar-day fa-fw"></i></span>&nbsp;<%= Property.human_attribute_name(:renovation) %>
                             <% end %>
                             <%= react_component('FormSelect', props: {
-                                id: 'e',
-                                inputID: 'property_levels',
-                                inputName: 'property[levels]',
-                                inputClassName: 'form-control',
-                                validatorGroup: 'fieldset-2',
-                                isRequired: false,
-                                renderFormField: true,
-                                formID: 'new_property',
-                                className: 'simple-select',
-                                options: (1..10).collect { |level| { label: level, value: level } },
-                                soloMode: true,
-                                ajaxEnabled: false,
-                                isClearable: true,
-                                backspaceRemovesValue: true,
-                                searchable: false,
-                                feedback: t('js.forms.properties.wizard.step1.levels_feedback'),
-                                i18n: {
-                                    select: t('js.components.select'),
-                                    validatorErrMsg: t('js.validator.required'),
-                                }
+                              id: 'd',
+                              inputID: 'property_renovation',
+                              inputName: 'property[renovation]',
+                              inputClassName: 'form-control',
+                              validatorGroup: 'fieldset-2',
+                              isRequired: false,
+                              renderFormField: true,
+                              formID: 'new_property',
+                              className: 'simple-select',
+                              options: (1940..Time.zone.now.year + 2).collect { |year| { label: year, value: year } },
+                              soloMode: true,
+                              ajaxEnabled: false,
+                              isClearable: true,
+                              backspaceRemovesValue: true,
+                              searchable: true,
+                              feedback: t('js.forms.properties.wizard.step1.renovation_feedback'),
+                              i18n: {
+                                select: t('js.components.select'),
+                                validatorErrMsg: t('js.validator.required'),
+                              }
                             }, prerender: false) %>
                           </div>
                         </div>
+                      </div>
+
+                      <div class="row">
 
                         <!-- Facade length -->
                         <div class="col-md-6 col-sm-12 form-field-container facade_length">
@@ -448,8 +477,17 @@
                           </div>
                         </div>
 
+                        <!-- Availability -->
+                        <div class="col-md-6 col-sm-12 form-field-container availability">
+                          <div class="form-group mb-4">
+                            <%= property.label :availability, t('activerecord.attributes.property.availability_title'), class: 'control-label' %>
+                            <%= property.text_field :availability, class: 'form-control', :data => { :toggle => 'flatpickr' } %>
+                            <small class="form-text text-muted"><%= t('activerecord.attributes.property.availability_feedback_html') %></small>
+                          </div><!-- /.form-group -->
+                        </div>
+
                         <!-- Energy cert -->
-                        <div class="col-md-6 col-sm-12 form-field-container has_energy_cert">
+                        <div class="col-md-6 col-sm-12 form-field-container energy_cert">
                           <div class="form-group mb-4">
                             <div class="custom-control custom-checkbox app-checkbox">
                               <div>
@@ -519,29 +557,29 @@
                         <div class="row">
                           <!-- Description (English)-->
                           <div class="col-md-12 form-field-container description">
-                            <div class="form-group mb-4">
-                              <%= property.label :description_en do %>
-                                <span><%= t('activerecord.attributes.property.description_en_title') %></span>&nbsp;
-                                <span class="property-cover-popover"
-                                      data-toggle="popover"
-                                      data-placement="top"
-                                      data-trigger="hover"
-                                      data-content="<%= t('properties.popover_description_en_body') %>"
-                                      title="<%= t('properties.popover_description_title') %>">
-                                  <i class="fas fa-info-circle"></i>
-                                </span>
-                              <% end %>
-                              <%= property.text_area :description_en,
-                                                     class: 'form-control',
-                                                     id: 'description',
-                                                     autocomplete: 'off',
-                                                     'rows': '5' %>
-                              <small class="form-text text-muted"><%= t('activerecord.attributes.property.description_en_feedback_html') %>
-                              </small>
-                              <div class="invalid-feedback"></div>
-                            </div>
+                            <%= property.label :description_en do %>
+                              <span><%= t('activerecord.attributes.property.description_en_title') %></span>&nbsp;
+                              <span class="property-cover-popover"
+                                    data-toggle="popover"
+                                    data-placement="top"
+                                    data-trigger="hover"
+                                    data-content="<%= t('properties.popover_description_en_body') %>"
+                                    title="<%= t('properties.popover_description_title') %>">
+                                <i class="fas fa-info-circle"></i>
+                              </span>
+                            <% end %>
+                            <%= property.text_area :description_en,
+                                                   class: 'form-control',
+                                                   id: 'description',
+                                                   autocomplete: 'off',
+                                                   'rows': '5' %>
+                            <small class="form-text text-muted"><%= t('activerecord.attributes.property.description_en_feedback_html') %></small>
+                            <div class="invalid-feedback"></div>
                           </div>
                         </div><!-- /.row -->
+
+                        <hr class="my-4" />
+
                       <% end %>
 
                       <div class="row">
@@ -585,15 +623,24 @@
                   <div id="test-l-3" class="content dstepper-none fade">
                     <!-- fieldset -->
                     <fieldset>
-                      <legend><%= t('js.forms.properties.wizard.step3.title') %></legend> <!-- .custom-control -->
+                      <div class="row">
+                        <div class="col-12">
+                          <legend class="property-add-edit-title"><%= t('js.forms.properties.wizard.step3.title') %></legend> <!-- .row -->
+                        </div>
+                      </div>
                       <div class="multivalue-checkboxes">
                         <div class="form-row justify-content-center">
                           <% %w(housetype heating orientation view other access power slope zone).each do |category| %>
 
                             <div class="form-group-container <%= category.to_s %>">
-                              <div class="form-group">
-                                <!--                            <div class="col-md-2">-->
-                                <label class="control-label checkbox-header app-checkbox"><strong><%= t("activerecord.attributes.extra.#{category}.title") %></strong></label>
+                              <div class="form-group bottom-corner-separator">
+
+                                <label class="control-label checkbox-header app-checkbox">
+                                  <span class="callout-header">
+                                    <span class="pin-title font-weight-bold"><%= t("activerecord.attributes.extra.#{category}.title") %></span>
+                                  </span>
+                                </label>
+
                                 <div class="col-md-12">
                                   <%= property.collection_check_boxes :extra_ids, Extra.order(:id).where(subtype: category), :id, :name do |b| %>
                                     <div class="form-field-container <%= b.text.to_s %>">
@@ -609,8 +656,12 @@
                               </div>
                             </div>
                           <% end %>
+                        </div>
 
-                          <div class="col-md-12">
+                        <hr />
+
+                        <div class="form-row justify-content-center">
+                        <div class="col-md-12">
                             <div class="form-row form-group justify-content-center">
 
                               <%= property.collection_check_boxes :extra_ids, Extra.where(subtype: 'dependent'), :id, :name do |b| %>
@@ -650,7 +701,9 @@
                   <div id="test-l-4" class="content dstepper-none fade">
                     <!-- fieldset -->
                     <fieldset>
-                      <legend><%= t('js.forms.properties.wizard.step4.title') %></legend>
+                      <div class="row">
+                        <legend class="property-add-edit-title"><%= t('js.forms.properties.wizard.step4.title') %></legend> <!-- .row -->
+                      </div>
                       <div class="row">
                         <div class="col-md-6 col-sm-12">
                           <div class="form-group mb-4">
@@ -782,14 +835,21 @@
                   <div id="test-l-5" class="content dstepper-none fade">
                     <!-- fieldset -->
                     <fieldset>
-                      <legend><%= t('js.forms.properties.wizard.step5.title') %></legend>
                       <div class="row">
                         <div class="col-12">
-                          <i><%= t('js.forms.properties.wizard.step5.subtitle') %></i>
+                          <legend class="property-add-edit-title"><%= t('js.forms.properties.wizard.step5.title') %></legend> <!-- .row -->
                         </div>
                       </div>
 
-                      <hr />
+                      <div class="row">
+                        <div class="col-8 offset-2">
+                          <div class="alert alert-primary has-icon" role="alert">
+                            <div class="alert-icon">
+                              <i class="fas fa-info"></i>
+                            </div><%= t('js.forms.properties.wizard.step5.subtitle') %>
+                          </div>
+                        </div>
+                      </div>
 
                       <div class="row">
                         <div class="col-md-8 offset-md-2 col-sm-12">
@@ -842,7 +902,9 @@
                     <!-- Custom fields -->
                     <div id="test-l-6" class="content dstepper-none fade">
                       <fieldset>
-                        <legend><%= t('js.forms.properties.wizard.step7.title') %></legend>
+                        <div class="col-12">
+                          <legend class="property-add-edit-title"><%= t('js.forms.properties.wizard.step7.title') %></legend> <!-- .row -->
+                        </div>
                         <div class="row mb-3">
                           <%#= property.hidden_field :model_type_id %>
                           <%= property.fields_for :preferences do |builder| %>
@@ -865,7 +927,9 @@
                   <div id="test-l-<%= @property.custom_fields_count > 0 ? '7' : '6' %>" class="content dstepper-none fade">
                     <!-- fieldset -->
                     <fieldset>
-                      <legend><%= t('js.forms.properties.wizard.step6.title') %></legend> <!-- .row -->
+                      <div class="col-12">
+                        <legend class="property-add-edit-title"><%= t('js.forms.properties.wizard.step6.title') %></legend> <!-- .row -->
+                      </div>
                       <div class="row mb-3">
 
                         <div class="user-avatar property-avatar-xl fileinput-button">

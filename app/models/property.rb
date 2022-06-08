@@ -150,7 +150,7 @@ class Property < ApplicationRecord
       {
         residential: %w[facade_length distance_from_sea building_coefficient coverage_ratio slope power access within_urban_plan equipment service_lift load_ramp agricultural_use exchange_scheme],
         commercial: %w[facade_length distance_from_sea building_coefficient coverage_ratio orientation view fit_for_professional_use fireplace slope within_urban_plan exchange_scheme pool],
-        land: %w[floor construction bedrooms bathrooms levels energy_cert power housetype heating gas solar_water_heating furnished fireplace awnings clima security_door pool elevator no_utility_bills roofdeck equipment balcony service_lift load_ramp alarm within_urban_plan unit],
+        land: %w[floor construction renovation bedrooms bathrooms levels energy_cert power housetype heating gas solar_water_heating furnished fireplace awnings clima security_door pool elevator no_utility_bills roofdeck equipment balcony service_lift load_ramp alarm within_urban_plan unit],
         other: %w[facade_length distance_from_sea building_coefficient coverage_ratio orientation view fit_for_professional_use fireplace slope within_urban_plan exchange_scheme pool zone power investment no_utility_bills unit]
       }
     end
@@ -176,6 +176,7 @@ class Property < ApplicationRecord
         :floor => {:label => 'floor', :icon => 'floor', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.floor.#{value}")}},
         # :render_extra => {:label => 'parking', :icon => 'parking', :options => 'parking', :renderfn => Proc.new {|value| value.blank? ? I18n.t('false') : I18n.t('true')}}, # Casting tip see here: https://stackoverflow.com/a/44322375/178728
         :construction => {:label => 'construction', :icon => 'construction', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
+        :renovation => {:label => 'renovation', :icon => 'renovation', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
         :facade_length => {:label => 'facade_length', :icon => 'facade_length', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
         :distance_from_sea => {:label => 'distance_from_sea', :icon => 'distance_from_sea', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
         :building_coefficient => {:label => 'building_coefficient', :icon => 'building_coefficient', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},

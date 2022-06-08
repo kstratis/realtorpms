@@ -68,14 +68,11 @@ const reactSelectStyles = {
       : { ...base, '&:hover': { cursor: 'pointer'}}
 
   },
-  // singleValue: (base, state) => ({
-  //   ...base,
-  //   fontWeight: 700,
-  //   backgroundColor: '#216AB0',
-  //   color: '#FFFFFF',
-  //   paddingLeft: '5px',
-  //   paddingRight: '5px'
-  // })
+
+  menuPortal: base => ({
+    ...base,
+    zIndex: 999999
+  })
 };
 
 export { reactSelectStyles };

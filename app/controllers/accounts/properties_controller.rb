@@ -401,6 +401,7 @@ module Accounts
                                        :has_energy_cert,
                                        :energy_cert,
                                        :construction,
+                                       :renovation,
                                        :roofdeck_space,
                                        :storage_space,
                                        :garden_space,

@@ -282,6 +282,7 @@ class FormSelect extends React.Component {
             name={this.props.name}
             value={this.state.selectedOption}
             className={this.props.className}
+            menuPortalTarget={document.body}
             styles={reactSelectStyles}
             onChange={this.handleChange}
             options={this.props.options}
