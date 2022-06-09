@@ -130,6 +130,7 @@ class Account < ApplicationRecord
         size: 125,
         price: 400000,
         floor: :"1",
+        bedrooms: 1,
         bathrooms: 1,
         construction: 2001,
         address: 'Δημητρακοπούλου 41',
