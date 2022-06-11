@@ -245,7 +245,23 @@ module Accounts
                      else
                        params_copy.merge({ category_id: category.id }).merge(Hash[attributize_label, location_value])
                      end
-        if @property.update(attributes)
+
+        @property.assign_attributes(attributes)
+
+        if @property.category_id_changed?
+          blacklist_attrs = Property.filters[Category.find(@property.category_id).parent_slug.to_sym]
+
+          blacklist_attrs.each do |attr|
+            if @property.respond_to?(attr.to_sym)
+              @property.send("#{attr}=", nil)
+            else
+              extra_attrs = @property.extras.where(subtype: attr.to_s).or(@property.extras.where(name: attr.to_s))
+              extra_attrs.each { |extra_attr| @property.extras.delete(extra_attr) }
+            end
+          end
+        end
+
+        if @property.save
           # Sets the client and its required ownership attribute on the CPA many-to-many table
           set_client(clients_hash)
 
@@ -261,10 +277,10 @@ module Accounts
         else
 
           format.html { render :edit }
-          format.js { render 'shared/ajax/handler', locals: {resource: @property,
-                                                             action: 'updated',
-                                                             partial_success: 'shared/ajax/success',
-                                                             partial_failure: 'shared/ajax/failure'} }
+          format.js { render 'shared/ajax/handler', locals: { resource: @property,
+                                                              action: 'updated',
+                                                              partial_success: 'shared/ajax/success',
+                                                              partial_failure: 'shared/ajax/failure' } }
         end
       end
     end
