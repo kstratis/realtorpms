@@ -339,6 +339,8 @@ el:
         description_not_found: "Δεν βρέθηκε"
         businesstype: "Σκοπός"
         businesstype_title: "Σκοπός"
+        marker: "Σήμανση στο χάρτη"
+        marker_title: "Σήμανση στο χάρτη"
         subcategory_title: "Τύπος"
         pricepersqmeter: "Τιμή/τ.μ."
         pricepersize_meters_title_html: "Τιμή / τ.μ."
@@ -382,8 +384,8 @@ el:
         coverage_ratio: "Συντελεστής κάλυψης"
         coverage_ratio_title: "Συντελεστής κάλυψης"
         coverage_ratio_feedback_html: "π.χ. 70 (επι τοις εκατό)"
-        location: "Τοποθεσία"
-        location_title: "Τοποθεσία"
+        location: "Περιοχή"
+        location_title: "Περιοχή"
         status_title: "Κατάσταση"
         status_active: "Ενεργό"
         status_inactive: "Μη ενεργό"
@@ -397,7 +399,7 @@ el:
         created_at: "Ημ/νία καταχώρισης"
         created_at_title: "Ημ/νία καταχώρισης"
         address_title: "Διεύθυνση"
-        address_feedback_html: "π.χ. Βασιλίσσης Σοφίας 64, 115 28 "
+        address_feedback_html: "Οι υπηρεσίες χάρτη θα ανακτήσουν τις συντεταγμένες της επιθυμητής διεύθυνσης ωστόσο το κείμενο μπορεί να μην είναι πάντα ακριβές. Στο πεδίο αυτό μπορείς να το επεξεργαστείς."
         map_url: "Χάρτης"
         map_url_title: "Google maps url"
         map_url_feedback_html: "Επικολλήστε το url ενός embeddable iFrame"
@@ -440,6 +442,11 @@ el:
             sell_heading: "ΠΩΛΗΣΗ"
             rent_heading: "ΕΝΟΙΚΙΑΣΗ"
             sell_rent_heading: "ΔΙΑΘΕΣΗ"
+          marker:
+            title: "Σήμανση στο χάρτη"
+            exact: "Ακριβής τοποθεσία (pin)"
+            circle: "Γενική τοποθεσία (κύκλος)"
+            nonvisible: "Μη ορατή τοποθεσία"
           floor:
             basement: "Υπόγειο"
             semi_basement: "Ημιυπόγειο"
@@ -636,6 +643,7 @@ el:
         category: "Κατηγορία"
         subcategory: "Υποκατηγορία"
         required: "Υποχρεωτικό πεδίο"
+        conditional_required: "Υποχρεωτικό εφόσον δηλωθεί ακριβής διεύθυνση"
         optional: "Προεραιτικό πεδίο"
         assign_completed: "Οι αναθέσεις ενημερώθηκαν επιτυχώς"
       bootstrap_select:
@@ -671,6 +679,8 @@ el:
           step4:
             anchor: "Τοποθεσία"
             title: "Πληροφορίες τοποθεσίας"
+            search_location_prompt: 'Πληκτρολόγησε την οδό και αριθμό'
+            type_of_marker_feedback: "Επίλεξε ανάμεσα σε ακριβή, γενική ή μη ορατή τοποθεσία"
           step5:
             anchor: "Ιδιοκτήτης"
             title: "Στοιχεία ιδιοκτήτη"

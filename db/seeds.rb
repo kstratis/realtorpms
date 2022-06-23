@@ -192,6 +192,7 @@ end
       construction: rand(1970..2018),
       account: demo,
       location: perissos,
+      marker: :exact,
       model_type: demo.model_types.find_by(name: 'properties')
   )
   property.avatar.attach(
@@ -216,6 +217,7 @@ end
       construction: rand(1970..2018),
       account: demo,
       location: lamprini,
+      marker: :exact,
       model_type: demo.model_types.find_by(name: 'properties')
   )
   property.avatar.attach(
@@ -242,6 +244,7 @@ end
       construction: rand(1970..2018),
       account: demo,
       location: lamprini,
+      marker: :exact,
       model_type: demo.model_types.find_by(name: 'properties')
   )
 
@@ -266,6 +269,7 @@ end
       bedrooms: rand(1..5),
       account: bluedomain,
       location: palatiani,
+      marker: :exact,
       model_type: bluedomain.model_types.find_by(name: 'properties')
 
   )

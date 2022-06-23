@@ -707,7 +707,8 @@
                         <legend class="property-add-edit-title"><%= t('js.forms.properties.wizard.step4.title') %></legend> <!-- .row -->
                       </div>
                       <div class="row">
-                        <div class="col-md-6 col-sm-12">
+                      <div class="col-12 col-lg-6">
+                        <div class="col-md-12 col-sm-12">
                           <div class="form-group mb-4">
                             <%= property.label :location do %>
                               <%= content_tag(:i, nil, class: 'fas fa-map fa-fw') + ' ' + t('activerecord.attributes.property.location') %>
@@ -766,62 +767,55 @@
                             <% end %>
                           </div>
                         </div>
+
+                        <%= property.hidden_field :lat %>
+                        <%= property.hidden_field :lng %>
+
+                        <hr />
+
+                        <div class="col-md-12 col-sm-12">
+                          <%= property.label :marker do %>
+                            <%= content_tag(:i, nil, class: 'fas fa-map-marker-alt fa-fw') + ' ' + Property.human_attribute_name(:marker) %>
+                            <abbr title="<%= t('js.components.select.conditional_required') %>">**</abbr>
+                          <% end %>
+                          <%= react_component('FormSelect', props: {
+                            id: 'a',
+                            inputID: 'property_marker',
+                            inputName: 'property[marker]',
+                            inputClassName: 'form-control',
+                            validatorGroup: 'fieldset-4',
+                            isRequired: !!(@property.lat && @property.lng && @property.address),
+                            renderFormField: true,
+                            formID: "edit_property_#{@property.id}",
+                            className: 'simple-select',
+                            options: Property.markers.keys.collect { |marker| { label: Property.human_enum_name(:marker, marker), value: marker } },
+                            soloMode: true,
+                            ajaxEnabled: false,
+                            isClearable: true,
+                            backspaceRemovesValue: true,
+                            isSearchable: false,
+                            feedback: t('js.forms.properties.wizard.step4.type_of_marker_feedback'),
+                            i18n: {
+                              select: t('js.components.select'),
+                              validatorErrMsg: t('js.validator.required'),
+                            }
+                          }, prerender: false) %>
+                        </div>
                       </div>
 
-                      <div class="row">
+                      <div class="col-12 col-lg-6 pb-2">
+                        <div class="col-md-12">
+                          <div id="map"
+                               data-search-prompt="<%= t('js.forms.properties.wizard.step4.search_location_prompt') %>"
+                               data-brand="<%= BRANDNAME %>"
+                               data-environment="<%= Rails.env %>"
+                               data-account-flavor="<%= current_account.flavor %>"></div>
+                        </div>
+
                         <!-- Address -->
-                        <div class="col-md-6 col-sm-12">
-                          <div class="form-group mb-4">
-                            <div class="form-label-group">
-                              <%= property.text_field :address,
-                                                      class: 'form-control',
-                                                      autocomplete: "off" %>
-                              <label for="address">
-                                <%= content_tag :span do %>
-                                  <%= content_tag(:i, nil, class: 'fas fa-map-marker-alt fa-fw') + ' ' + t('activerecord.attributes.property.address_title') %>
-                                <% end %>
-                              </label>
-                            </div>
-                            <small class="form-text text-muted"><%= t('activerecord.attributes.property.address_feedback_html') %>
-                            </small>
-                            <div class="invalid-feedback"></div>
-                          </div>
-                        </div>
+                        <%= property.hidden_field :address %>
 
                       </div>
-
-                      <div class="row">
-                        <!-- Map url -->
-                        <div class="col-md-6 col-sm-12">
-                          <div class="form-group mb-4">
-                            <div class="form-label-group">
-                              <%= property.text_field :map_url,
-                                                      class: 'form-control',
-                                                      autocomplete: "off",
-                                                      'data-parsley-required': "false",
-                                                      'data-parsley-group': "fieldset-4",
-                                                      'data-parsley-type-message': t("js.validator.required"),
-                                                      'data-parsley-pattern-message': t("js.validator.regex"),
-                                                      'data-parsley-pattern': "(?:<iframe[^>]*)(?:(?:\\/>)|(?:>.*?<\\/iframe>))" %>
-                              <label for="map_url">
-                                <%= content_tag :span do %>
-                                  <%= content_tag(:i, nil, class: 'fas fa-map-marked-alt fa-fw') + ' ' + t('activerecord.attributes.property.map_url_title') %>
-                                <% end %>
-                              </label>
-                            </div>
-                            <small class="form-text text-muted"><%= t('activerecord.attributes.property.map_url_feedback_html') %>
-                              <span class="property-cover-popover"
-                                    data-toggle="popover"
-                                    data-placement="top"
-                                    data-trigger="hover"
-                                    title="<%= t('properties.popover_map_title') %>"
-                                    data-content="<%= t('properties.popover_map') %>">
-                              <i class="fas fa-info-circle"></i>
-                            </span>
-                            </small>
-                            <div class="invalid-feedback"></div>
-                          </div>
-                        </div>
 
                       </div>
 

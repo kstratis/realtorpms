@@ -2883,3 +2883,23 @@ footer:not(.auth-footer){
   bottom: -5px;
   left: 0;
 }
+
+#map {
+  position: relative;
+  border: 1px solid black;
+  border-radius: 0.25rem;
+  height: 400px;  /* or as desired */
+  width: 100%;  /* This means "100% of the width of its container", the .col-md-8 */
+}
+
+.disabled-address-field {
+  border-color: #9a99a5 !important;
+  background-color: rgba(239, 239, 241, 0.5);
+  cursor: not-allowed;
+  border-radius: 0.25rem;
+  border: 1px solid;
+}
+
+a.leaflet-control-zoom-in, a.leaflet-control-zoom-out{
+  text-decoration: none !important;
+}

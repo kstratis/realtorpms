@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_18_200753) do
+ActiveRecord::Schema.define(version: 2022_06_16_111749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -353,10 +353,29 @@ ActiveRecord::Schema.define(version: 2022_05_18_200753) do
     t.float "building_coefficient"
     t.integer "coverage_ratio"
     t.text "description_en"
+    t.boolean "spitogatos_sync", default: false
+    t.datetime "spitogatos_created_at"
+    t.datetime "spitogatos_updated_at"
+    t.string "spitogatos_id"
+    t.decimal "lat", precision: 10, scale: 6
+    t.decimal "lng", precision: 10, scale: 6
+    t.integer "marker"
     t.index ["account_id"], name: "index_properties_on_account_id"
     t.index ["category_id"], name: "index_properties_on_category_id"
     t.index ["ilocation_id"], name: "index_properties_on_ilocation_id"
     t.index ["location_id"], name: "index_properties_on_location_id"
+  end
+
+  create_table "spitogatos", force: :cascade do |t|
+    t.string "email"
+    t.string "username"
+    t.string "password"
+    t.string "broker_id"
+    t.bigint "account_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "active", default: false
+    t.index ["account_id"], name: "index_spitogatos_on_account_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -414,4 +433,5 @@ ActiveRecord::Schema.define(version: 2022_05_18_200753) do
   add_foreign_key "properties", "categories"
   add_foreign_key "properties", "ilocations"
   add_foreign_key "properties", "locations"
+  add_foreign_key "spitogatos", "accounts"
 end

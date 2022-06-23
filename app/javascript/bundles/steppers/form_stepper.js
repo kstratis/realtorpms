@@ -138,6 +138,8 @@ class FormStepper {
     // `showStep` listener. This only applies to the step navigation ribbon and won't fire on next/back buttons.
     // params is the number of the current step.
     $('body').on('showStep', function(element, params) {
+      if (window.$map) window.$map.invalidateSize();
+
       self.setStatus(1);
       // DEBUG
       // console.trace();

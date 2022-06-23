@@ -172,30 +172,17 @@
               <% end %>
             </div>
 
-
             <div class="col-lg-6 col-xs-12">
 
-              <div class="col-12">
-                <div class="card borderlesss-card">
-                  <div class="card-header header-internal simplified-header">
-                    <div class="table-entry">
-                      <div class="table-icon-wrapper">
-                        <i class="pr-icon xs notes"></i>
-                      </div>
-
-                      <span class="align-middle"><span class="property-cover-popover" data-trigger="hover" data-toggle="popover" data-placement="auto" data-content="<%= t 'properties.show.tooltip_internal_notes' %>">&nbsp; <%= t 'activerecord.attributes.property.notes_title' %></span> </span>
-                    </div>
-                  </div><!-- .card-body -->
-                  <div class="card-body">
-                    <% if @property.notes.blank? %>
-                      <h3><%= t('activerecord.attributes.property.extras_not_found') %></h3>
-                    <% else %>
-                      <div><%= @property.notes %></div>
-                    <% end %>
-                  </div><!-- /.card-body -->
-                </div><!-- /.card -->
-              </div>
-
+              <% if @property.address.present? && @property.lat.present? && @property.lng.present? %>
+                <div class="col-12">
+                  <div id="map" data-brand="<%= BRANDNAME %>"
+                       data-lat="<%= @property.lat %>"
+                       data-lng="<%= @property.lng %>"
+                       data-address="<%= @property.address %>"
+                       data-marker="<%= @property.marker %>"></div>
+                </div>
+              <% end %>
 
               <div class="col-12">
                 <div class="card borderlesss-card">
@@ -257,6 +244,27 @@
                     </table>
                   </div>
                 </div>
+              </div>
+
+              <div class="col-12">
+                <div class="card borderlesss-card">
+                  <div class="card-header header-internal simplified-header">
+                    <div class="table-entry">
+                      <div class="table-icon-wrapper">
+                        <i class="pr-icon xs notes"></i>
+                      </div>
+
+                      <span class="align-middle"><span class="property-cover-popover" data-trigger="hover" data-toggle="popover" data-placement="auto" data-content="<%= t 'properties.show.tooltip_internal_notes' %>">&nbsp; <%= t 'activerecord.attributes.property.notes_title' %></span> </span>
+                    </div>
+                  </div><!-- .card-body -->
+                  <div class="card-body">
+                    <% if @property.notes.blank? %>
+                      <h3><%= t('activerecord.attributes.property.extras_not_found') %></h3>
+                    <% else %>
+                      <div><%= @property.notes %></div>
+                    <% end %>
+                  </div><!-- /.card-body -->
+                </div><!-- /.card -->
               </div>
 
               <!-- Custom fields-->

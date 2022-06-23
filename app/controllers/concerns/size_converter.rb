@@ -52,4 +52,8 @@ module SizeConverter
       ActionController::Base.helpers.number_to_phone(tel, delimiter: " ")
     end.join(', ')
   end
+
+  def print_location(property_location, account)
+    return '' if property_location.blank?
+  end
 end

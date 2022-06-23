@@ -53,6 +53,7 @@ class FormSelect extends React.Component {
     this.handleNewClientForm = this.handleNewClientForm.bind(this);
     this.addFormListeners = this.addFormListeners.bind(this);
     this.removeFormListeners = this.removeFormListeners.bind(this);
+    this.checkIfRequired = this.checkIfRequired.bind(this);
     this.handleAjaxRequestDelayed = debounce(this.handleAjaxRequest.bind(this), 300);
     axios.defaults.headers.common['X-CSRF-Token'] = ReactOnRails.authenticityToken();
   }
@@ -68,6 +69,8 @@ class FormSelect extends React.Component {
     // then
     if (!this.props.renderFormField) return;
     this.state.selectedOption ? this.updateExternalDOM(this.state.selectedOption, false) : '';
+
+    window.addEventListener("mapChange", this.checkIfRequired);
   }
 
   // Same as above but destroys the reference instead
@@ -78,15 +81,27 @@ class FormSelect extends React.Component {
     // console.log(this.state.validator);
     // window.form_stepper.destroy();
     // this.state.validator.destroy();
+    window.removeEventListener("mapChange", this.checkIfRequired);
   }
 
   state = {
     selectedOption: this.props.storedOption || '',
     isOpen: false,
+    isRequired: this.props.isRequired || false
   };
 
   onMenuOpen = () => this.setState({ isOpen: true });
   onMenuClose = () => this.setState({ isOpen: false });
+
+  checkIfRequired(e) {
+    // DEBUG
+    // console.log(`checkIfRequired is running for: ${this.props.inputID}`);
+    if (this.props.inputID !== 'property_marker'){
+      this.setState({ isRequired: this.props.isRequired });
+    } else {
+      this.setState({ isRequired: e.detail });
+    }
+  }
 
   // This operates outside react and is used to store the value
   // at the true input field which is eventually used by the rails form
@@ -268,7 +283,7 @@ class FormSelect extends React.Component {
 
   render() {
     const opts = {
-      required: !!this.props.isRequired,
+      required: this.state.isRequired,
     };
     // This is needed for the menu open/close styles
     const { isOpen } = this.state;

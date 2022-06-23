@@ -109,8 +109,11 @@ class Property < ApplicationRecord
 
   enum floor: [:basement, :semi_basement, :ground_floor, :mezzanine].concat(Array(1..50).map(&:to_s).map(&:to_sym))
 
+  enum marker: [:exact, :circle, :nonvisible]
+
   # Validations should match their ujs_form_handler.js counterparts
   validates :businesstype, presence: true
+  # validates :marker, presence: true
   # validates :category, presence: true
   # validates :subcategory, presence: true
   # validates :locationid, presence: true
@@ -159,12 +162,12 @@ class Property < ApplicationRecord
       {
         :businesstype => {:label => 'businesstype', :icon => 'businesstype', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : '<mark class="highlighted">'+ I18n.t("activerecord.attributes.property.enums.businesstype.#{value}_heading") + '</mark>'} },
         :category_info => {:label => 'subcategory', :icon => 'subcategory', :options => 'slug', :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.subcategory.#{value}")} },
-        #:location_info => {:label => 'location', :icon => 'location', :options => 'localname', :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
+        :location_info => {:label => 'location', :icon => 'location', :options => 'localname', :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
         :size => { :label => 'size', :icon => 'size', :options => nil, :renderfn => Proc.new { |value| value.blank? ? '—' : print_size(value, account) } },
         :price => {:label => 'price', :icon => 'price', :options => nil, :renderfn => Proc.new {|value| value ? print_price(value, account) : '—' }},
         :pricepersize => { :label => 'pricepersize', :icon => 'pricepersqmeter', :options => nil, :renderfn => Proc.new {|value| value ? print_price(value, account) : '—' }},
         :created_at => {:label => 'created_at', :icon => 'created_at', :options => nil, :renderfn => Proc.new {|value| value ? (I18n.l value, format: :custom) : '—' } },
-        :map_url => {:label => 'location', :icon => 'location', :options => nil, :renderfn => Proc.new {|value| "<button type='button' class='btn btn-secondary btn-sm printable' data-url='#{value.blank? ? '' : Property.iframe_parse(value) }' #{value.blank? ? 'disabled' : nil }><i class='fas fa-map fa-fw'></i></button>&nbsp;&nbsp;&nbsp;#{value.blank? ? "<span class='property-cover-popover' data-toggle='popover' data-placement='top' data-trigger='hover' data-content='#{I18n.t('properties.map_feedback')}'><i class='fas fa-info-circle'></i></span>" : nil}"}},
+        # :map_url => {:label => 'location', :icon => 'location', :options => nil, :renderfn => Proc.new {|value| "<button type='button' class='btn btn-secondary btn-sm printable' data-url='#{value.blank? ? '' : Property.iframe_parse(value) }' #{value.blank? ? 'disabled' : nil }><i class='fas fa-map fa-fw'></i></button>&nbsp;&nbsp;&nbsp;#{value.blank? ? "<span class='property-cover-popover' data-toggle='popover' data-placement='top' data-trigger='hover' data-content='#{I18n.t('properties.map_feedback')}'><i class='fas fa-info-circle'></i></span>" : nil}"}},
         :active => {:label => 'status', :icon => 'status', :options => nil, :renderfn => Proc.new {|value| value ? "#{I18n.t('activerecord.attributes.property.status_active')} <div class='indicator indicator-on'></div>" : "#{I18n.t('activerecord.attributes.property.status_inactive')} <div class='indicator indicator-off'></div>"}}
       }
     end

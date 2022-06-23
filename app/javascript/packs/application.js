@@ -198,5 +198,12 @@ $(document).on('turbolinks:load', function(e) {
       });
     });
   })
+
+  if ($('#map').length > 0) {
+    // Map handler
+    import(/* webpackChunkName: "MapManager", webpackPrefetch: true */ '../packs/map_manager.js').then(({default: MapManager}) => {
+      new MapManager();
+    });
+  }
 });
 

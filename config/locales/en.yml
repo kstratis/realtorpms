@@ -372,6 +372,8 @@ en:
         description_not_found: "None found"
         businesstype: "Purpose"
         businesstype_title: "Purpose"
+        marker: "Map marker"
+        marker_title: "Map marker"
         subcategory_title: "Type"
         pricepersqmeter: "Price/m<sup>2</sup>"
         pricepersize_meters_title_html: "Price / m<sup>2</sup>"
@@ -430,7 +432,7 @@ en:
         created_at: "Entry date"
         created_at_title: "Entry date"
         address_title: "Address"
-        address_feedback_html: "i.e. 51 Mackintosh Place, CF24 4RL"
+        address_feedback_html: "Map services will retrieve the coordinates of the desired property even though the address text may not always be exact. This is where you can edit the text."
         map_url: "Map"
         map_url_title: "Google maps url"
         map_url_feedback_html: "Paste the url of an embeddable iFrame"
@@ -473,6 +475,11 @@ en:
             sell_heading: "SALE"
             rent_heading: "RENT"
             sell_rent_heading: "SALE/RENT"
+          marker:
+            title: "Map marker"
+            exact: "Exact location (pin)"
+            circle: "Loose location (circle)"
+            nonvisible: "Non-visible location"
           floor:
             basement: "Basement"
             semi_basement: "Semi-basement"
@@ -669,6 +676,7 @@ en:
         category: "Category"
         subcategory: "Subcategory"
         required: "Required field"
+        conditional_required: "Required if an address is specified"
         optional: "Optional field"
         assign_completed: "Assignment successfully updated"
       bootstrap_select:
@@ -704,6 +712,8 @@ en:
           step4:
             anchor: "Location"
             title: "Location information"
+            search_location_prompt: 'Enter address'
+            type_of_marker_feedback: "Select among exact location, loose location (circle) or non visible"
           step5:
             anchor: "Owner"
             title: "Owner details"
