@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_04_175416) do
+ActiveRecord::Schema.define(version: 2022_07_04_183801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(version: 2022_06_04_175416) do
     t.string "parent_globalname"
     t.string "slug"
     t.string "parent_slug"
+    t.string "spitogatos_slug"
   end
 
   create_table "clients", force: :cascade do |t|
