@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_04_183801) do
+ActiveRecord::Schema.define(version: 2022_07_12_134942) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 2022_07_04_183801) do
     t.string "slug"
     t.string "parent_slug"
     t.string "spitogatos_slug"
+    t.integer "rank"
   end
 
   create_table "clients", force: :cascade do |t|
