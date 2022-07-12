@@ -537,6 +537,11 @@ el:
             detachable: "Λυόμενο"
             air: "Αέρας"
             other_various: "Λοιπές κατηγορίες ακινήτων"
+            farm: "Φάρμα"
+            houseboat: "Πλωτό σπίτι"
+            other_residential: "Άλλες κατηγορίες"
+            other_commercial: "Άλλες κατηγορίες"
+            other_land: "Άλλες κατηγορίες"
           type:
             neoclassical: "Νεοκλασικό"
             protected_pr: "Διατηρητέο"

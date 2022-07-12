@@ -570,6 +570,11 @@ en:
             detachable: "Detachable"
             air: "Air"
             other_various: "Other"
+            farm: "Farm"
+            houseboat: "Houseboat"
+            other_residential: "Other categories"
+            other_commercial: "Other categories"
+            other_land: "Other categories"
           type:
             neoclassical: "Neoclassical"
             protected_property: "Protected property"
