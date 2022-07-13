@@ -1,7 +1,7 @@
 module PropertiesHelper
   def category_options
     options = {}
-    Category.where(id: (5..32).to_a).each do |entry|
+    Category.where.not(parent_slug: nil).order(:rank).to_a.each do |entry|
       if options.key?(entry[:parent_slug])
         options[entry[:parent_slug]][:subcategory] << { entry[:slug] => t("activerecord.attributes.property.enums.subcategory.#{entry[:slug].to_s}") }
       else
