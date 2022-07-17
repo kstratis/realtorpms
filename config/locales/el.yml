@@ -248,12 +248,6 @@ el:
           title: "Θέρμανση"
           central: "Κεντρική θέρμανση"
           prive: "Αυτόνομη θέρμανση"
-        orientation:
-          title: "Είδος"
-          facade: "Προσόψεως"
-          double_frontage: "Διαμπερές"
-          corner: "Γωνιακό"
-          internal: "Εσωτερικό"
         view:
           title: "Θέα"
           sea_view: "Θέα θάλασσα"
@@ -285,6 +279,10 @@ el:
           exchange_scheme: "Αντιπαροχή"
           night_power: "Νυχτερινό ρεύμα"
           heating_under_floor: "Ενδοδαπέδια θέρμανση"
+          facade: "Προσόψεως"
+          double_frontage: "Διαμπερές"
+          corner: "Γωνιακό"
+          internal: "Εσωτερικό"
         access:
           title: "Πρόσβαση"
           asphalt: "Πρόσβαση από: Άσφαλτο"

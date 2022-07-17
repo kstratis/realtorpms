@@ -7,13 +7,10 @@ ActiveRecord::Base.transaction do
   %w(central prive).each do |extra|
     Extra.create!(name: extra, subtype: 'heating')
   end
-  %w(facade double_frontage corner internal).each do |extra|
-    Extra.create!(name: extra, subtype: 'orientation')
-  end
   %w(sea_view mountain_view forest_view infinite_view).each do |extra|
     Extra.create!(name: extra, subtype: 'view')
   end
-  %w(gas solar_water_heating furnished fireplace awnings clima security_door pool elevator no_utility_bills fit_for_professional_use parking load_ramp service_lift alarm equipment balcony investment within_urban_plan agricultural_use exchange_scheme night_power heating_under_floor).each do |extra|
+  %w(gas solar_water_heating furnished fireplace awnings clima security_door pool elevator no_utility_bills fit_for_professional_use parking load_ramp service_lift alarm equipment balcony investment within_urban_plan agricultural_use exchange_scheme night_power heating_under_floor facade double_frontage corner internal).each do |extra|
     Extra.create!(name: extra, subtype: 'other')
   end
   %w(roofdeck plot garden storage ).each do |extra|

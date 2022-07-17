@@ -281,12 +281,6 @@ en:
           title: "Heating"
           central: "Central heating"
           prive: "Autonomous heating system"
-        orientation:
-          title: "Orientation"
-          facade: "Frontage lot"
-          double_frontage: "Double frontage"
-          corner: "Corner lot"
-          internal: "Inwards facing lot"
         view:
           title: "View"
           sea_view: "Sea view"
@@ -318,6 +312,10 @@ en:
           exchange_scheme: "Exchange scheme"
           night_power: "Off-peak electricity discount"
           heating_under_floor: "Heated floors"
+          facade: "Frontage lot"
+          double_frontage: "Double frontage"
+          corner: "Corner lot"
+          internal: "Inwards facing lot"
         access:
           title: "Access from"
           asphalt: "Road access"
