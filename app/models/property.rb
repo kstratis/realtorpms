@@ -105,7 +105,7 @@ class Property < ApplicationRecord
 
   enum businesstype: [:sell, :rent, :sell_rent]
 
-  enum energy_cert: [:a_plus, :a, :b_plus, :b, :c, :d, :e, :z, :h]
+  enum energy_cert: [:a_plus, :a, :b_plus, :b, :c, :d, :e, :z, :h, :excempt, :processing]
 
   enum floor: [:basement, :semi_basement, :ground_floor, :semi_ground_floor].concat(Array(1..50).map(&:to_s).map(&:to_sym))
 
@@ -153,8 +153,8 @@ class Property < ApplicationRecord
       {
         residential: %w[facade_length distance_from_sea building_coefficient coverage_ratio slope power access within_urban_plan equipment service_lift load_ramp agricultural_use exchange_scheme],
         commercial: %w[facade_length distance_from_sea building_coefficient coverage_ratio orientation view fit_for_professional_use fireplace slope within_urban_plan exchange_scheme pool],
-        land: %w[floor construction renovation bedrooms bathrooms levels energy_cert power housetype heating gas solar_water_heating furnished fireplace awnings clima security_door pool elevator no_utility_bills roofdeck equipment balcony service_lift load_ramp alarm within_urban_plan unit],
-        other: %w[facade_length distance_from_sea building_coefficient coverage_ratio orientation view fit_for_professional_use fireplace slope within_urban_plan exchange_scheme pool zone power investment no_utility_bills unit]
+        land: %w[floor construction renovation bedrooms bathrooms levels energy_cert power housetype heating gas solar_water_heating furnished fireplace awnings clima security_door pool elevator no_utility_bills roofdeck equipment balcony service_lift load_ramp alarm within_urban_plan unit night_power heating_under_floor],
+        other: %w[facade_length distance_from_sea building_coefficient coverage_ratio orientation view fit_for_professional_use fireplace slope within_urban_plan exchange_scheme pool zone power investment no_utility_bills unit night_power heating_under_floor]
       }
     end
 

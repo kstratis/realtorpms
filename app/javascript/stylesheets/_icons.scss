@@ -292,6 +292,14 @@
     background-image: url('../images/house_specs/precast.svg');
   }
 
+  &.new_development{
+    background-image: url('../images/house_specs/new_development.svg');
+  }
+
+  &.penthouse{
+    background-image: url('../images/house_specs/top_floor.svg');
+  }
+
   &.central{
     background-image: url('../images/house_specs/central_heating.svg');
   }

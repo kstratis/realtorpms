@@ -241,12 +241,15 @@ el:
           studio_pr: "Studio"
           prefabricated_pr: "Λυόμενο"
           precast_pr: "Προκατασκευή"
+          new_development: "Νεόδμητο"
+          penthouse: "Ρετιρέ"
+          unfinished: "Ημιτελές"
         heating:
           title: "Θέρμανση"
           central: "Κεντρική θέρμανση"
           prive: "Αυτόνομη θέρμανση"
         orientation:
-          title: "Προσανατολισμός"
+          title: "Είδος"
           facade: "Προσόψεως"
           double_frontage: "Διαμπερές"
           corner: "Γωνιακό"
@@ -280,6 +283,8 @@ el:
           within_urban_plan: "Εντός σχεδίου πόλεως"
           agricultural_use: "Κατάλληλο για αγροτική χρήση"
           exchange_scheme: "Αντιπαροχή"
+          night_power: "Νυχτερινό ρεύμα"
+          heating_under_floor: "Ενδοδαπέδια θέρμανση"
         access:
           title: "Πρόσβαση"
           asphalt: "Πρόσβαση από: Άσφαλτο"
@@ -432,6 +437,8 @@ el:
             e: 'Ε'
             z: 'Ζ'
             h: 'Η'
+            excempt: 'Δεν απαιτείται'
+            processing: 'Υπο έκδοση'
           businesstype:
             title: "Είδος"
             sell: "Πώληση"
@@ -552,6 +559,8 @@ el:
             studio_pr: "Studio"
             prefabricated_pr: "Λυόμενο"
             precast_pr: "Προκατασκευή"
+            penthouse: "Ρετιρέ"
+            unfinished: "Ημιτελές"
           price:
             all: "Όλες"
             minimum: "Ελάχιστη"
