@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_12_134942) do
+ActiveRecord::Schema.define(version: 2022_07_19_141509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -362,6 +362,11 @@ ActiveRecord::Schema.define(version: 2022_07_12_134942) do
     t.decimal "lat", precision: 10, scale: 6
     t.decimal "lng", precision: 10, scale: 6
     t.integer "marker"
+    t.integer "orientation"
+    t.integer "power"
+    t.integer "slope"
+    t.integer "living_rooms"
+    t.integer "wcs"
     t.index ["account_id"], name: "index_properties_on_account_id"
     t.index ["category_id"], name: "index_properties_on_category_id"
     t.index ["ilocation_id"], name: "index_properties_on_ilocation_id"

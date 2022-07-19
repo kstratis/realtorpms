@@ -81,6 +81,16 @@ module Converters
         type: 'integer',
         category: 'propertyDetails'
       },
+      wcs: {
+        name: 'halfBathrooms',
+        type: 'integer',
+        category: 'propertyDetails'
+      },
+      living_rooms: {
+        name: 'livingRooms',
+        type: 'integer',
+        category: 'detailedCharacteristics'
+      },
       businesstype: {
         name: 'listingType',
         type: 'options',
@@ -404,6 +414,50 @@ module Converters
           excempt: 'excemption',
           processing: 'under_issuance'
         }
+      },
+      orientation: {
+        name: 'orientation',
+        type: 'enum',
+        category: 'detailedCharacteristics',
+        values: {
+          east: 'e',
+          east_west: 'ew',
+          east_meridian: 'em',
+          north: 'n',
+          north_east: 'ne',
+          north_west: 'nw',
+          west: 'w',
+          west_meridian: 'wm',
+          meridian: 'm',
+          south: 's',
+          south_east: 'se',
+          south_west: 'sw'
+        }
+      },
+      power: {
+        name: 'current',
+        type: 'enum',
+        category: 'detailedCharacteristics',
+        values: {
+          one_phase: 'single phase',
+          three_phase: 'three phase',
+          industrial_phase: 'industrial'
+        }
+      },
+      slope: {
+        name: 'slope',
+        type: 'enum',
+        category: 'detailedCharacteristics',
+        values: {
+          plane: 'plane',
+          inclining: 'inclining',
+          amphitheatrical: 'amphitheatric'
+        }
+      },
+      no_agent_fee: {
+        name: 'noAgentFee',
+        type: 'string',
+        category: 'detailedCharacteristics'
       }
     }.freeze
 
@@ -427,8 +481,7 @@ module Converters
     # name (Spitogatos attribute name: i.e. energy_cert)
     def value_mapper(spitogatos_attr_name, attr)
       handler = SPITOGATOS_ATTR_MAPPING.dig(attr, :handler)
-      # DEBUG
-      # puts "Attr is: #{attr}, spitogatos_attr_name is: #{spitogatos_attr_name} and handler is: #{handler}"
+
       value = if handler.present?
                 send(handler)
               elsif @property.respond_to?(attr) # direct method
@@ -437,8 +490,12 @@ module Converters
                 property_extras.include?(attr.to_s) ? 'yes' : 'no'
               end
 
+      # DEBUG - Do not erase
+      # puts "#{BRANDNAME} `attr` is: `#{attr}`, `spitogatos_attr_name` attr is: `#{spitogatos_attr_name}`, `value` is: `#{value}` and handler is: `#{handler.presence}`"
+      # puts '---'
+
       case attr
-      when :businesstype, :marker, :energy_cert  #For simple enum values - no special handler
+      when :businesstype, :marker, :energy_cert, :orientation  #For simple enum values - no special handler
         { spitogatos_attr_name => SPITOGATOS_ATTR_MAPPING.dig(attr, :values)[value.to_sym] }
       when :floor
         formatted_value = begin
@@ -479,7 +536,7 @@ module Converters
                :currency, :spitogatos_id, :new_development, :published_spitogatos, :clima, :alarm, :balcony, :building_coefficient, :corner, :elevator, :facade, :fireplace,
                :service_lift, :furnished, :parking, :garden, :heating_controller, :load_ramp, :penthouse, :access_controller, :security_door, :solar_water_heating, :storage,
                :pool, :view_controller, :within_city_plan, :zoning_controller, :protected_pr, :investment, :unfinished, :night_power, :neoclassical, :equipment, :agricultural_use,
-               :heating_under_floor, :coverage_ratio, :energy_cert]
+               :heating_under_floor, :coverage_ratio, :energy_cert, :orientation, :power, :slope, :no_agent_fee, :wcs, :living_rooms]
 
       # This is a special hash. If the key does not exist, creates the key and assigns it an empty hash
       # which in turn has the exact same property: if its key does not exist, creates the key and assigns

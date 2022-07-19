@@ -216,6 +216,14 @@
     background-image: url('../images/house_specs/bathrooms.svg');
   }
 
+  &.living_rooms{
+    background-image: url('../images/house_specs/living_rooms.svg');
+  }
+
+  &.wcs{
+    background-image: url('../images/house_specs/wcs.svg');
+  }
+
   &.floor{
     background-image: url('../images/house_specs/floor.svg');
   }
@@ -238,6 +246,18 @@
 
   &.energy_cert{
     background-image: url('../images/house_specs/energy_cert.svg');
+  }
+
+  &.orientation{
+    background-image: url('../images/house_specs/compass.svg');
+  }
+
+  &.power{
+    background-image: url('../images/house_specs/bolt.svg');
+  }
+
+  &.slope{
+    background-image: url('../images/house_specs/slope.svg');
   }
 
   &.unit{
@@ -444,36 +464,12 @@
     background-image: url('../images/house_specs/no_access.png');
   }
 
-  &.one_phase {
-    background-image: url('../images/house_specs/one_phase.png');
-  }
-
-  &.three_phase {
-    background-image: url('../images/house_specs/three_phase.png');
-  }
-
-  &.industrial_phase {
-    background-image: url('../images/house_specs/industrial_power.png');
-  }
-
-  &.agricultural_use {
-    background-image: url('../images/house_specs/industrial_power.png');
+  &.no_agent_fee{
+    background-image: url('../images/house_specs/no_agent_fee.png');
   }
 
   &.agricultural_use {
     background-image: url('../images/house_specs/agricultural_zone.png');
-  }
-
-  &.plane {
-    background-image: url('../images/house_specs/straight_line.png');
-  }
-
-  &.inclining {
-    background-image: url('../images/house_specs/inclining.png');
-  }
-
-  &.amphitheatrical {
-    background-image: url('../images/house_specs/amphitheatrical.png');
   }
 
   &.exchange_scheme {

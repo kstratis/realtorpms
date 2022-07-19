@@ -17,6 +17,7 @@ const ClientPrefsList = ({
   showControls,
   visited,
   handleSpitogatosSync,
+  spitogatosEnabled
 }) => {
   return (
     <div className="client-prefs-list">
@@ -37,6 +38,7 @@ const ClientPrefsList = ({
                       visited={visited}
                       active={entry.active}
                       handleSpitogatosSync={handleSpitogatosSync}
+                      spitogatosEnabled={spitogatosEnabled}
                     />
                   ))}
                 </div>

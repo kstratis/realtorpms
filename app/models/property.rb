@@ -111,6 +111,12 @@ class Property < ApplicationRecord
 
   enum marker: [:exact, :circle, :nonvisible]
 
+  enum orientation: [:east, :east_west, :east_meridian, :north, :north_east, :north_west, :west, :west_meridian, :meridian, :south, :south_east, :south_west]
+
+  enum power: [:one_phase, :three_phase, :industrial_phase]
+
+  enum slope: [:plane, :inclining, :amphitheatrical]
+
   # Validations should match their ujs_form_handler.js counterparts
   validates :businesstype, presence: true
   # validates :marker, presence: true
@@ -152,9 +158,9 @@ class Property < ApplicationRecord
     def filters
       {
         residential: %w[facade_length distance_from_sea building_coefficient coverage_ratio slope power access within_urban_plan equipment service_lift load_ramp agricultural_use exchange_scheme],
-        commercial: %w[facade_length distance_from_sea building_coefficient coverage_ratio orientation view fit_for_professional_use fireplace slope within_urban_plan exchange_scheme pool],
-        land: %w[floor construction renovation bedrooms bathrooms levels energy_cert power housetype heating gas solar_water_heating furnished fireplace awnings clima security_door pool elevator no_utility_bills roofdeck equipment balcony service_lift load_ramp alarm within_urban_plan unit night_power heating_under_floor],
-        other: %w[facade_length distance_from_sea building_coefficient coverage_ratio orientation view fit_for_professional_use fireplace slope within_urban_plan exchange_scheme pool zone power investment no_utility_bills unit night_power heating_under_floor]
+        commercial: %w[facade_length distance_from_sea building_coefficient coverage_ratio orientation view fit_for_professional_use fireplace slope within_urban_plan exchange_scheme pool orientation],
+        land: %w[floor construction renovation living_rooms bedrooms bathrooms wcs levels energy_cert power housetype heating gas solar_water_heating furnished fireplace awnings clima security_door pool elevator no_utility_bills roofdeck equipment balcony service_lift load_ramp alarm within_urban_plan unit night_power heating_under_floor],
+        other: %w[facade_length distance_from_sea building_coefficient coverage_ratio orientation view fit_for_professional_use fireplace slope within_urban_plan exchange_scheme pool zone power investment no_utility_bills unit night_power heating_under_floor orientation]
       }
     end
 
@@ -174,8 +180,10 @@ class Property < ApplicationRecord
 
     def extended_features(account)
       extended = {
+        :living_rooms => {:label => 'living_rooms', :icon => 'living_rooms', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
         :bedrooms => {:label => 'bedrooms', :icon => 'bedrooms', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
         :bathrooms => {:label => 'bathrooms', :icon => 'bathrooms', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
+        :wcs => {:label => 'wcs', :icon => 'wcs', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
         :floor => {:label => 'floor', :icon => 'floor', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.floor.#{value}")}},
         # :render_extra => {:label => 'parking', :icon => 'parking', :options => 'parking', :renderfn => Proc.new {|value| value.blank? ? I18n.t('false') : I18n.t('true')}}, # Casting tip see here: https://stackoverflow.com/a/44322375/178728
         :construction => {:label => 'construction', :icon => 'construction', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
@@ -184,8 +192,11 @@ class Property < ApplicationRecord
         :distance_from_sea => {:label => 'distance_from_sea', :icon => 'distance_from_sea', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
         :building_coefficient => {:label => 'building_coefficient', :icon => 'building_coefficient', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
         :coverage_ratio => {:label => 'coverage_ratio', :icon => 'coverage_ratio', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
+        :availability => {:label => 'availability', :icon => 'availability', :options => nil, :renderfn => Proc.new {|value| value ? (I18n.l value, format: :showings) : '—' }},
         :address => {:label => 'address', :icon => 'address', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
-        :availability => {:label => 'availability', :icon => 'availability', :options => nil, :renderfn => Proc.new {|value| value ? (I18n.l value, format: :showings) : '—' }}
+        :orientation => {:label => 'orientation', :icon => 'orientation', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.orientation.#{value}")} },
+        :power => {:label => 'power', :icon => 'power', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.power.#{value}")} },
+        :slope => {:label => 'slope', :icon => 'slope', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.slope.#{value}")} }
         # :owner_info => {:label => 'owner', :icon => 'client', :options => 'full_name', :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN}
       }
       if account.greek?
