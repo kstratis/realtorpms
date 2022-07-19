@@ -186,6 +186,11 @@ module Converters
         type: 'integer',
         category: 'propertyDetails'
       },
+      balcony_space: {
+        name: 'balconyArea',
+        type: 'integer',
+        category: 'detailedCharacteristics'
+      },
       currency: {
         name: 'currency',
         type: 'string',
@@ -496,8 +501,8 @@ module Converters
               end
 
       # DEBUG - Do not erase
-      # puts "#{BRANDNAME} `attr` is: `#{attr}`, `spitogatos_attr_name` attr is: `#{spitogatos_attr_name}`, `value` is: `#{value}` and handler is: `#{handler.presence}`"
-      # puts '---'
+      puts "#{BRANDNAME} `attr` is: `#{attr}`, `spitogatos_attr_name` attr is: `#{spitogatos_attr_name}`, `value` is: `#{value}` and handler is: `#{handler.presence}`"
+      puts '---'
 
       case attr
       when :businesstype, :marker, :energy_cert, :orientation  #For simple enum values - no special handler
@@ -514,7 +519,7 @@ module Converters
         { spitogatos_attr_name => value.to_date.strftime("%d/%m/%Y") }
       when :category_id
         { spitogatos_attr_name => @property.category.parent_slug, 'propertyType' => @property.category.spitogatos_slug }
-      when :plot_space
+      when :plot_space, :balcony_space
         formatted_value = begin
                             Integer(value)
                           rescue
@@ -537,7 +542,7 @@ module Converters
 
     def convert!
       # attrs = property_attributes
-      attrs = [:price, :description, :description_en, :businesstype, :floor, :renovation, :display_address, :marker, :category_id, :plot_space,
+      attrs = [:price, :description, :description_en, :businesstype, :floor, :renovation, :display_address, :marker, :category_id, :plot_space, :balcony_space,
                :currency, :spitogatos_id, :new_development, :published_spitogatos, :clima, :alarm, :balcony, :building_coefficient, :corner, :elevator, :facade, :fireplace,
                :service_lift, :furnished, :parking, :garden, :heating_controller, :load_ramp, :penthouse, :access_controller, :security_door, :solar_water_heating, :storage,
                :pool, :view_controller, :within_city_plan, :zoning_controller, :protected_pr, :investment, :unfinished, :night_power, :neoclassical, :equipment, :agricultural_use,

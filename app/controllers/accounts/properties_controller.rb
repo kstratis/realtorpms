@@ -434,6 +434,7 @@ module Accounts
                                        :storage_space,
                                        :garden_space,
                                        :plot_space,
+                                       :balcony_space,
                                        :address,
                                        :notes,
                                        :adxe,

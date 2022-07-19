@@ -358,6 +358,9 @@ en:
           plot: "Land plot"
           plot_placeholder: "Garden size in sq meters"
           plot_placeholder_footage: "Garden size in sq. feet"
+          balcony: "Balcony"
+          balcony_placeholder: "Balcony size in sq meters"
+          balcony_placeholder_footage: "Balcony size in sq. feet"
       model_type:
         name: "Category"
       entity_field:
