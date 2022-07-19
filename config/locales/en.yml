@@ -398,6 +398,7 @@ en:
         bedrooms_title: "Bedrooms"
         living_rooms_title: "Living rooms"
         wcs_title: "WC"
+        kitchens_title: "Kitchens"
         bedrooms_short: "Brooms"
         bedroom:
           one: "1 bedroom"
@@ -405,6 +406,7 @@ en:
         bedrooms_feedback_html: "i.e. 2"
         living_rooms_feedback_html: "i.e. 1"
         wcs_feedback_html: "i.e. 1"
+        kitchens_feedback_html: "i.e. 1"
         bathrooms_title: "Bathrooms"
         bathroom:
           one: "1 bathroom"

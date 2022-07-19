@@ -91,6 +91,11 @@ module Converters
         type: 'integer',
         category: 'detailedCharacteristics'
       },
+      kitchens: {
+        name: 'kitchens',
+        type: 'integer',
+        category: 'detailedCharacteristics'
+      },
       businesstype: {
         name: 'listingType',
         type: 'options',
@@ -536,7 +541,7 @@ module Converters
                :currency, :spitogatos_id, :new_development, :published_spitogatos, :clima, :alarm, :balcony, :building_coefficient, :corner, :elevator, :facade, :fireplace,
                :service_lift, :furnished, :parking, :garden, :heating_controller, :load_ramp, :penthouse, :access_controller, :security_door, :solar_water_heating, :storage,
                :pool, :view_controller, :within_city_plan, :zoning_controller, :protected_pr, :investment, :unfinished, :night_power, :neoclassical, :equipment, :agricultural_use,
-               :heating_under_floor, :coverage_ratio, :energy_cert, :orientation, :power, :slope, :no_agent_fee, :wcs, :living_rooms]
+               :heating_under_floor, :coverage_ratio, :energy_cert, :orientation, :power, :slope, :no_agent_fee, :wcs, :living_rooms, :kitchens]
 
       # This is a special hash. If the key does not exist, creates the key and assigns it an empty hash
       # which in turn has the exact same property: if its key does not exist, creates the key and assigns

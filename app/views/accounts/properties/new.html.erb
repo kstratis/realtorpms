@@ -161,7 +161,7 @@
                         <!-- grid column -->
 
                         <!-- Price -->
-                        <div class="col-md-6 col-sm-12 form-field-container price">
+                        <div class="col-md-4 col-sm-12 form-field-container price">
                           <div class="form-group mb-4">
                             <div class="form-label-group">
                               <%= property.text_field :price,
@@ -189,7 +189,7 @@
                         </div>
 
                         <!-- Size -->
-                        <div class="col-md-6 col-sm-12 form-field-container size">
+                        <div class="col-md-4 col-sm-12 form-field-container size">
                           <div class="form-group mb-4">
                             <div class="form-label-group">
                               <%= property.text_field :size,
@@ -216,7 +216,7 @@
                         </div>
 
                         <!-- Living rooms -->
-                        <div class="col-md-6 col-sm-12 form-field-container living_rooms">
+                        <div class="col-md-4 col-sm-12 form-field-container living_rooms">
                           <div class="form-group mb-4">
                             <div class="form-label-group">
                               <%= property.text_field :living_rooms,
@@ -240,7 +240,7 @@
                         </div>
 
                         <!-- Bedrooms -->
-                        <div class="col-md-6 col-sm-12 form-field-container bedrooms">
+                        <div class="col-md-4 col-sm-12 form-field-container bedrooms">
                           <div class="form-group mb-4">
                             <div class="form-label-group">
                               <%= property.text_field :bedrooms,
@@ -264,7 +264,7 @@
                         </div>
 
                         <!-- Bathrooms -->
-                        <div class="col-md-6 col-sm-12 form-field-container bathrooms">
+                        <div class="col-md-4 col-sm-12 form-field-container bathrooms">
                           <div class="form-group mb-4">
                             <div class="form-label-group">
                               <%= property.text_field :bathrooms,
@@ -287,7 +287,7 @@
                         </div>
 
                         <!-- WCs -->
-                        <div class="col-md-6 col-sm-12 form-field-container wcs">
+                        <div class="col-md-4 col-sm-12 form-field-container wcs">
                           <div class="form-group mb-4">
                             <div class="form-label-group">
                               <%= property.text_field :wcs,
@@ -309,11 +309,34 @@
                           </div>
                         </div>
 
+                        <!-- Kitchens -->
+                        <div class="col-md-4 col-sm-12 form-field-container kitchens">
+                          <div class="form-group mb-4">
+                            <div class="form-label-group">
+                              <%= property.text_field :kitchens,
+                                                      class: 'form-control',
+                                                      autocomplete: "off",
+                                                      'data-parsley-group': "fieldset-2",
+                                                      'data-parsley-type': "integer",
+                                                      'data-parsley-type-message': t("js.validator.digits"),
+                                                      'data-parsley-required-message': t("js.validator.required") %>
+                              <label for="kitchens">
+                                <%= content_tag :span do %>
+                                  <%= content_tag(:i, nil, class: '') + ' ' + t('activerecord.attributes.property.kitchens_title') %>
+                                <% end %>
+                              </label>
+                            </div>
+                            <small class="form-text text-muted"><%= t('activerecord.attributes.property.kitchens_feedback_html') %>
+                            </small>
+                            <div class="invalid-feedback"></div>
+                          </div>
+                        </div>
+
                       </div>
 
                       <div class="row">
                         <!-- Floor -->
-                        <div class="col-md-6 col-sm-12 form-field-container floor">
+                        <div class="col-md-4 col-sm-12 form-field-container floor">
                           <div class="form-group mb-4">
                             <%= property.label :floor do %>
                               <span><i class="fas fa-arrows-alt-v fa-fw"></i></span>&nbsp;<%= Property.human_attribute_name(:floor) %>
@@ -344,7 +367,7 @@
                         </div>
 
                         <!-- Levels -->
-                        <div class="col-md-6 col-sm-12 form-field-container levels">
+                        <div class="col-md-4 col-sm-12 form-field-container levels">
                           <div class="form-group mb-4">
                             <%= property.label :levels do %>
                               <%= Property.human_attribute_name(:levels) %>
@@ -375,7 +398,7 @@
                         </div>
 
                         <!-- Construction -->
-                        <div class="col-md-6 col-sm-12 form-field-container construction">
+                        <div class="col-md-4 col-sm-12 form-field-container construction">
                           <div class="form-group mb-4">
                             <%= property.label :construction do %>
                               <span><i class="fas fa-calendar-day fa-fw"></i></span>&nbsp;<%= Property.human_attribute_name(:construction) %>
@@ -406,7 +429,7 @@
                         </div>
 
                         <!-- Renovation -->
-                        <div class="col-md-6 col-sm-12 form-field-container renovation">
+                        <div class="col-md-4 col-sm-12 form-field-container renovation">
                           <div class="form-group mb-4">
                             <%= property.label :renovation do %>
                               <span><i class="fas fa-calendar-day fa-fw"></i></span>&nbsp;<%= Property.human_attribute_name(:renovation) %>

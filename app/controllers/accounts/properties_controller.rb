@@ -420,6 +420,7 @@ module Accounts
                                        :bathrooms,
                                        :wcs,
                                        :living_rooms,
+                                       :kitchens,
                                        :price,
                                        :size,
                                        :floor,

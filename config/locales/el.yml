@@ -365,6 +365,7 @@ el:
         bedrooms_title: "Υπνοδωμάτια"
         living_rooms_title: "Σαλόνια"
         wcs_title: "WC"
+        kitchens_title: "Κουζίνες"
         bedrooms_short: "Υ/Δ"
         bedroom:
           one: "1 υπνοδωμάτιο"
@@ -372,6 +373,7 @@ el:
         bedrooms_feedback_html: "π.χ. 2"
         living_rooms_feedback_html: "π.χ. 1"
         wcs_feedback_html: "π.χ. 1"
+        kitchens_feedback_html: "π.χ. 1"
         bathrooms_title: "Μπάνια"
         bathroom:
           one: "1 μπάνιο"
