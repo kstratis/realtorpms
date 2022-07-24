@@ -3,7 +3,7 @@ module Converters
 
     EXCLUDED_PROPERTY_ATTRIBUTES = [:id, :created_at, :updated_at, :website_enabled, :pinned, :sample, :active,
                                     :account_id, :spitogatos_sync, :spitogatos_created_at, :spitogatos_updated_at,
-                                    :ilocation_id, :model_type_id].freeze
+                                    :ilocation_id, :model_type_id, :unit, :preferences, :notes, :has_energy_cert, :garden_space].freeze
 
     EXTRA_PROPERTY_ATTRIBUTES = %w(display_address currency published_spitogatos heating_controller access_controller view_controller within_city_plan zoning_controller).freeze
 
@@ -125,12 +125,12 @@ module Converters
         type: 'integer',
         category: 'location'
       },
-      latitude: {
+      lat: {
         name: 'latitude',
         type: 'decimal',
         category: 'location'
       },
-      longitude: {
+      lng: {
         name: 'longitude',
         type: 'decimal',
         category: 'location'
@@ -183,12 +183,17 @@ module Converters
       },
       plot_space: {
         name: 'lotSize',
-        type: 'integer',
+        type: 'string',
         category: 'propertyDetails'
       },
       balcony_space: {
         name: 'balconyArea',
-        type: 'integer',
+        type: 'string',
+        category: 'detailedCharacteristics'
+      },
+      shopwindow_space: {
+        name: 'shopWindowLength',
+        type: 'string',
         category: 'detailedCharacteristics'
       },
       currency: {
@@ -223,12 +228,16 @@ module Converters
         type: 'string',
         category: 'detailedCharacteristics'
       },
-      # preferences: ,
-      # energy_cert: ,
-      # has_energy_cert: ,
-      # unit: ,
-      # facade_length: ,
-      # distance_from_sea: ,
+      facade_length: {
+        name: 'facadeLength',
+        type: 'integer',
+        category: 'detailedCharacteristics'
+      },
+      distance_from_sea: {
+        name: 'distanceSea',
+        type: 'integer',
+        category: 'detailedCharacteristics'
+      },
       building_coefficient: {
         name: 'buildingCoefficient',
         type: 'string',
@@ -377,8 +386,53 @@ module Converters
         type: 'string',
         category: 'detailedCharacteristics'
       },
+      renovated: {
+        name: 'renovated',
+        type: 'string',
+        category: 'detailedCharacteristics'
+      },
+      pest_net: {
+        name: 'pestNet',
+        type: 'string',
+        category: 'detailedCharacteristics'
+      },
+      awnings: {
+        name: 'awning',
+        type: 'string',
+        category: 'detailedCharacteristics'
+      },
+      double_glass: {
+        name: 'doubleGlass',
+        type: 'string',
+        category: 'detailedCharacteristics'
+      },
+      double_frontage: {
+        name: 'airy',
+        type: 'string',
+        category: 'detailedCharacteristics'
+      },
+      fresh_paint_coat: {
+        name: 'painted',
+        type: 'string',
+        category: 'detailedCharacteristics'
+      },
+      fit_for_professional_use: {
+        name: 'forCommercialUse',
+        type: 'string',
+        category: 'detailedCharacteristics'
+      },
+      structured_wiring: {
+        name: 'structuredWiring',
+        type: 'string',
+        category: 'detailedCharacteristics'
+      },
+      accessible_for_disabled: {
+        name: 'accessibleForDisabled',
+        type: 'string',
+        category: 'detailedCharacteristics'
+      },
       night_power: {
-        name: 'night_power',
+        name: 'nightPower',
         type: 'string',
         category: 'detailedCharacteristics'
       },
@@ -464,9 +518,43 @@ module Converters
           amphitheatrical: 'amphitheatric'
         }
       },
+      joinery: {
+        name: 'joinery',
+        type: 'enum',
+        category: 'detailedCharacteristics',
+        values: {
+          wooden: 'wooden',
+          aluminium: 'aluminium',
+          synthetic: 'synthetic'
+        }
+      },
+      floortype: {
+        name: 'floorType',
+        type: 'enum',
+        category: 'detailedCharacteristics',
+        values: {
+          marble: "marble",
+          wood: "wood",
+          stone: "stone",
+          ceramic_tiles: "ceramic tiles",
+          mosaic_tiles: "mosaic tiles",
+          wood_and_marble: "wood and marble",
+          marble_and_tile: "marble and tile",
+          wood_and_stone: "wood and stone",
+          stone_and_marble: "stone and marble",
+          wood_and_tile: "wood and tile",
+          wood_and_mosaic: "wood and mosaic",
+          industrial: "industrial"
+        }
+      },
       no_agent_fee: {
         name: 'noAgentFee',
         type: 'string',
+        category: 'detailedCharacteristics'
+      },
+      common_expenses: {
+        name: 'commonExpenses',
+        type: 'integer',
         category: 'detailedCharacteristics'
       }
     }.freeze
@@ -477,7 +565,7 @@ module Converters
 
     def property_attributes
       basic_attributes = ((@property.attribute_names + EXTRA_PROPERTY_ATTRIBUTES) - EXCLUDED_PROPERTY_ATTRIBUTES.map(&:to_s)).select do |attr|
-        @property.send(attr.to_sym).present?
+        fetch_attribute_value(attr).present?
       end
       extra_attributes = property_extras - EXCLUDED_EXTRA_PROPERTY_ATTRIBUTES
 
@@ -490,23 +578,20 @@ module Converters
     # returns a hash
     # name (Spitogatos attribute name: i.e. energy_cert)
     def value_mapper(spitogatos_attr_name, attr)
-      handler = SPITOGATOS_ATTR_MAPPING.dig(attr, :handler)
+      value = fetch_attribute_value(attr)
 
-      value = if handler.present?
-                send(handler)
-              elsif @property.respond_to?(attr) # direct method
-                @property.send(attr)
-              else # extras method
-                property_extras.include?(attr.to_s) ? 'yes' : 'no'
-              end
+      if [true, false].include?(value)
+        value = value ? 'yes' : 'no'
+      end
 
       # DEBUG - Do not erase
-      puts "#{BRANDNAME} `attr` is: `#{attr}`, `spitogatos_attr_name` attr is: `#{spitogatos_attr_name}`, `value` is: `#{value}` and handler is: `#{handler.presence}`"
-      puts '---'
+      # puts "#{BRANDNAME} `attr` is: `#{attr}`, `spitogatos_attr_name` attr is: `#{spitogatos_attr_name}`, `value` is: `#{value}` and handler is: `#{handler.presence}`"
+      puts "#{BRANDNAME} `attr` is: `#{attr}`, `spitogatos_attr_name` attr is: `#{spitogatos_attr_name}`, `value` is: `#{value}`"
+      # puts '---'
 
       case attr
-      when :businesstype, :marker, :energy_cert, :orientation  #For simple enum values - no special handler
-        { spitogatos_attr_name => SPITOGATOS_ATTR_MAPPING.dig(attr, :values)[value.to_sym] }
+      when :businesstype, :marker, :energy_cert, :orientation, :floortype, :power, :slope, :joinery  #For simple enum values - no special handler
+        { spitogatos_attr_name => SPITOGATOS_ATTR_MAPPING.dig(attr, :values)[value&.to_sym] }
       when :floor
         formatted_value = begin
                             Integer(value)
@@ -519,7 +604,7 @@ module Converters
         { spitogatos_attr_name => value.to_date.strftime("%d/%m/%Y") }
       when :category_id
         { spitogatos_attr_name => @property.category.parent_slug, 'propertyType' => @property.category.spitogatos_slug }
-      when :plot_space, :balcony_space
+      when :plot_space, :balcony_space, :shopwindow_space
         formatted_value = begin
                             Integer(value)
                           rescue
@@ -541,12 +626,13 @@ module Converters
     end
 
     def convert!
-      # attrs = property_attributes
-      attrs = [:price, :description, :description_en, :businesstype, :floor, :renovation, :display_address, :marker, :category_id, :plot_space, :balcony_space,
-               :currency, :spitogatos_id, :new_development, :published_spitogatos, :clima, :alarm, :balcony, :building_coefficient, :corner, :elevator, :facade, :fireplace,
-               :service_lift, :furnished, :parking, :garden, :heating_controller, :load_ramp, :penthouse, :access_controller, :security_door, :solar_water_heating, :storage,
-               :pool, :view_controller, :within_city_plan, :zoning_controller, :protected_pr, :investment, :unfinished, :night_power, :neoclassical, :equipment, :agricultural_use,
-               :heating_under_floor, :coverage_ratio, :energy_cert, :orientation, :power, :slope, :no_agent_fee, :wcs, :living_rooms, :kitchens]
+      attrs = property_attributes.map(&:to_sym)
+      # attrs = [:price, :description, :description_en, :businesstype, :floor, :renovation, :display_address, :marker, :category_id, :plot_space, :balcony_space,
+      #          :currency, :spitogatos_id, :new_development, :published_spitogatos, :clima, :alarm, :balcony, :building_coefficient, :corner, :elevator, :facade, :fireplace,
+      #          :service_lift, :furnished, :parking, :garden, :heating_controller, :load_ramp, :penthouse, :access_controller, :security_door, :solar_water_heating, :storage,
+      #          :pool, :view_controller, :within_city_plan, :zoning_controller, :protected_pr, :investment, :unfinished, :renovated, :pest_net, :night_power, :neoclassical, :equipment, :agricultural_use,
+      #          :heating_under_floor, :coverage_ratio, :energy_cert, :orientation, :power, :slope, :no_agent_fee, :wcs, :living_rooms, :kitchens, :distance_from_sea, :common_expenses,
+      #          :facade_length, :shopwindow_space, :joinery, :floortype, :awnings, :double_glass, :double_frontage, :fresh_paint_coat, :fit_for_professional_use, :structured_wiring, :accessible_for_disabled]
 
       # This is a special hash. If the key does not exist, creates the key and assigns it an empty hash
       # which in turn has the exact same property: if its key does not exist, creates the key and assigns
@@ -580,6 +666,18 @@ module Converters
 
     private
 
+    def fetch_attribute_value(attr)
+      handler = SPITOGATOS_ATTR_MAPPING.dig(attr.to_sym, :handler)
+
+      if handler.present?
+        send(handler)
+      elsif @property.respond_to?(attr) # direct method
+        @property.send(attr)
+      else # extras method
+        property_extras.include?(attr.to_s)
+      end
+    end
+
     def display_address
       return 'yes' if @property.exact?
 
@@ -591,7 +689,7 @@ module Converters
     end
 
     def published_spitogatos
-      'yes'
+      Rails.env.production? ? 'yes' : 'no'
     end
 
     def heating_controller

@@ -23,7 +23,8 @@ class Spitogatos < ApplicationRecord
   end
 
   def new_listing(data)
-    client.call("sync.newListing", SPITOGATOS_APP_KEY, 0, username, password, data)
+    # client.call("sync.newListing", SPITOGATOS_APP_KEY, 0, username, password, data)
+    client.call("sync.newListing", SPITOGATOS_APP_KEY, '13956', username, password, data)
   end
 
   def renew_listing(property_id)
@@ -51,6 +52,8 @@ class Spitogatos < ApplicationRecord
 
     def spitogatos_accounts
       # Get all accounts associated with an active spitogatos configuration record
+      # TODO;
+      # GREEK ACCOUNTS ONLY
       Account.joins(:spitogatos).where(spitogatos: { active: true })
     end
 

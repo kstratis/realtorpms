@@ -245,6 +245,7 @@ el:
           new_development: "Νεόδμητο"
           penthouse: "Ρετιρέ"
           unfinished: "Ημιτελές"
+          renovated: "Ανακαινισμένο"
         heating:
           title: "Θέρμανση"
           central: "Κεντρική θέρμανση"
@@ -285,6 +286,11 @@ el:
           corner: "Γωνιακό"
           internal: "Εσωτερικό"
           no_agent_fee: "Χωρίς μεσιτική αμοιβή"
+          pest_net: "Σίτες"
+          double_glass: "Διπλά τζάμια"
+          fresh_paint_coat: "Βαμμένο"
+          structured_wiring: "Δομημένη καλωδίωση"
+          accessible_for_disabled: "Πρόσβαση για ΑμεΑ"
         access:
           title: "Πρόσβαση"
           asphalt: "Πρόσβαση από: Άσφαλτο"
@@ -328,6 +334,9 @@ el:
           balcony: "Βεράντα"
           balcony_placeholder: "Εμβαδόν βεράντας σε τ.μ."
           balcony_placeholder_footage: "Εμβαδόν βεράντας σε τ.π."
+          shopwindow: "Βιτρίνα"
+          shopwindow_placeholder: "Μήκος βιτρίνας σε μέτρα"
+          shopwindow_placeholder_footage: "Μήκος βιτρίνας σε πόδια"
       model_type:
         name: "Κατηγορία"
       entity_field:
@@ -369,6 +378,7 @@ el:
         living_rooms_title: "Σαλόνια"
         wcs_title: "WC"
         kitchens_title: "Κουζίνες"
+        common_expenses_title: "Κοινόχρηστα"
         bedrooms_short: "Υ/Δ"
         bedroom:
           one: "1 υπνοδωμάτιο"
@@ -377,6 +387,7 @@ el:
         living_rooms_feedback_html: "π.χ. 1"
         wcs_feedback_html: "π.χ. 1"
         kitchens_feedback_html: "π.χ. 1"
+        common_expenses_feedback_html: "π.χ. 100"
         bathrooms_title: "Μπάνια"
         bathroom:
           one: "1 μπάνιο"
@@ -403,6 +414,8 @@ el:
         orientation_title: "Προσανατολισμός"
         power_title: "Ρεύμα"
         slope_title: "Κλίση"
+        joinery_title: "Κουφώματα"
+        floortype_title: "Δάπεδα"
         location: "Περιοχή"
         location_title: "Περιοχή"
         status_title: "Κατάσταση"
@@ -492,6 +505,25 @@ el:
             plane: "Επίπεδο"
             inclining: "Επικλινές"
             amphitheatrical: "Αμφιθεατρικό"
+          joinery:
+            title: "Κουφώματα"
+            wooden: "Ξύλινα"
+            aluminium: "Αλουμινίου"
+            synthetic: "Συνθετικά"
+          floortype:
+            title: "Δάπεδα"
+            marble: "Μάρμαρο"
+            wood: "Ξύλο"
+            stone: "Πέτρα"
+            ceramic_tiles: "Πλακάκι"
+            mosaic_tiles: "Μωσαϊκό"
+            wood_and_marble: "Μάρμαρο – Ξύλο"
+            marble_and_tile: "Μάρμαρο – Πλακάκι"
+            wood_and_stone: "Πέτρα – Ξύλο"
+            stone_and_marble: "Πέτρα – Μάρμαρο"
+            wood_and_tile: "Πλακάκι – Ξύλο"
+            wood_and_mosaic: "Μωσαϊκό – Ξύλο"
+            industrial: "Βιομηχανικό δάπεδο"
           floor:
             basement: "Υπόγειο"
             semi_basement: "Ημιυπόγειο"

@@ -228,6 +228,10 @@
     background-image: url('../images/house_specs/oven.svg');
   }
 
+  &.common_expenses{
+    background-image: url('../images/house_specs/coins.svg');
+  }
+
   &.floor{
     background-image: url('../images/house_specs/floor.svg');
   }
@@ -241,7 +245,35 @@
   }
 
   &.renovation{
-    background-image: url('../images/house_specs/renovation.svg');
+    background-image: url('../images/house_specs/renovated_black.svg');
+  }
+
+  &.renovated{
+    background-image: url('../images/house_specs/renovated.svg');
+  }
+
+  &.pest_net{
+    background-image: url('../images/house_specs/pest_net.svg');
+  }
+
+  &.double_glass{
+    background-image: url('../images/house_specs/double_glass.svg');
+  }
+
+  &.double_glass{
+    background-image: url('../images/house_specs/double_glass.svg');
+  }
+
+  &.fresh_paint_coat {
+    background-image: url('../images/house_specs/fresh_paint_coat.svg');
+  }
+
+  &.structured_wiring {
+    background-image: url('../images/house_specs/structured_wiring.svg');
+  }
+
+  &.accessible_for_disabled {
+    background-image: url('../images/house_specs/accessible.svg');
   }
 
   &.availability{
@@ -262,6 +294,14 @@
 
   &.slope{
     background-image: url('../images/house_specs/slope.svg');
+  }
+
+  &.joinery{
+    background-image: url('../images/house_specs/joinery.svg');
+  }
+
+  &.floortype{
+    background-image: url('../images/house_specs/floortype.svg');
   }
 
   &.unit{
@@ -522,6 +562,10 @@
 
   &.plot{
     background-image: url('../images/house_specs/plot.svg');
+  }
+
+  &.shopwindow{
+    background-image: url('../images/house_specs/shopwindow.svg');
   }
 
   &.garden{

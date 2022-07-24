@@ -130,7 +130,7 @@ class AssociativeFormSelect extends React.Component {
     }, []);
 
     for (const attr of attrs){
-      $(`.${attr}`).find('input').prop('disabled', false)
+      $(`.${attr}`).find('input, select').prop('disabled', false)
       $(`.form-field-container.${attr}`).removeClass('d-none')
       $(`.form-group-container.${attr}`).removeClass('d-none')
     }
@@ -141,7 +141,7 @@ class AssociativeFormSelect extends React.Component {
     const invalidAttrs = this.propertyFilterAttrsHash()[attr];
     for (const attr of invalidAttrs) {
       // Iterate over all map inputs/checkboxes etc and do the following:
-      $(`.${attr}`).find('input').prop('disabled', true)
+      $(`.${attr}`).find('input, select').prop('disabled', true)
       $(`.form-field-container.${attr}`).addClass('d-none')
       $(`.form-group-container.${attr}`).addClass('d-none')
     }

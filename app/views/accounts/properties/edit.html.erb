@@ -338,6 +338,29 @@
                           </div>
                         </div>
 
+                        <!-- Common expenses -->
+                        <div class="col-md-4 col-sm-12 form-field-container common_expenses">
+                          <div class="form-group mb-4">
+                            <div class="form-label-group">
+                              <%= property.text_field :common_expenses,
+                                                      class: 'form-control',
+                                                      autocomplete: "off",
+                                                      'data-parsley-group': "fieldset-2",
+                                                      'data-parsley-type': "integer",
+                                                      'data-parsley-type-message': t("js.validator.digits"),
+                                                      'data-parsley-required-message': t("js.validator.required") %>
+                              <label for="common_expenses">
+                                <%= content_tag :span do %>
+                                  <%= content_tag(:i, nil, class: 'fas fa-coins fa-fw') + ' ' + t('activerecord.attributes.property.common_expenses_title') %>
+                                <% end %>
+                              </label>
+                            </div>
+                            <small class="form-text text-muted"><%= t('activerecord.attributes.property.common_expenses_feedback_html') %>
+                            </small>
+                            <div class="invalid-feedback"></div>
+                          </div>
+                        </div>
+
                       </div>
 
                       <div class="row">
@@ -792,6 +815,34 @@
                           </div><!-- /.form-group -->
                         </div> <!-- /Slope -->
 
+                        <!-- Joinery -->
+                        <div class="col-md-6 col-sm-12 form-field-container joinery">
+                          <div class="form-group mb-4">
+                            <div class="mt-1">
+                              <label class="control-label checkbox-header app-checkbox">
+                                <span class="callout-header">
+                                  <span class="pin-title font-weight-bold"><%= t('activerecord.attributes.property.enums.joinery.title') %></span>
+                                </span>
+                              </label>
+                              <%= property.select :joinery, Property.joineries.keys.collect { |joinery| [ Property.human_enum_name(:joinery, joinery), joinery ] }, { :include_blank => t('none_specified') }, { class: 'form-control custom-control-label custom-select' } %>
+                            </div>
+                          </div><!-- /.form-group -->
+                        </div> <!-- /Joinery -->
+
+                        <!-- Floor type -->
+                        <div class="col-md-6 col-sm-12 form-field-container floortype">
+                          <div class="form-group mb-4">
+                            <div class="mt-1">
+                              <label class="control-label checkbox-header app-checkbox">
+                                <span class="callout-header">
+                                  <span class="pin-title font-weight-bold"><%= t('activerecord.attributes.property.enums.floortype.title') %></span>
+                                </span>
+                              </label>
+                              <%= property.select :floortype, Property.floortypes.keys.collect { |floortype| [ Property.human_enum_name(:floortype, floortype), floortype ] }, { :include_blank => t('none_specified') }, { class: 'form-control custom-control-label custom-select' } %>
+                            </div>
+                          </div><!-- /.form-group -->
+                        </div> <!-- /Floor type -->
+
                       </div>
 
                         <hr />
@@ -801,19 +852,21 @@
                             <div class="form-row form-group justify-content-center">
 
                               <%= property.collection_check_boxes :extra_ids, Extra.where(subtype: 'dependent'), :id, :name do |b| %>
-                                <div class="custom-control custom-checkbox app-checkbox m-2">
-                                  <div>
-                                    <%= b.check_box({ class: "custom-control-input dependent_check", type: 'checkbox' }) %>
-                                    <%= b.label({ class: 'custom-control-label dependent_label' }) do %>
-                                      <%= t("activerecord.attributes.extra.dependent.#{b.text}") %>
-                                    <% end %>
-                                  </div>
-                                  <div class="mt-1">
-                                    <% if current_account.greek? %>
-                                      <input value="<%= @property.send("#{b.text}_space") %>" type="number" name="property[<%= b.text %>_space]" class="form-control custom-control-label dependent_input" placeholder="<%= t("activerecord.attributes.extra.dependent.#{b.text}_placeholder") %>">
-                                    <% else %>
-                                      <input value="<%= @property.send("#{b.text}_space") %>" type="number" name="property[<%= b.text %>_space]" class="form-control custom-control-label dependent_input" placeholder="<%= t("activerecord.attributes.extra.dependent.#{b.text}_placeholder_footage") %>">
-                                    <% end %>
+                                <div class="form-field-container <%= b.text.to_s %>">
+                                  <div class="custom-control custom-checkbox app-checkbox m-2">
+                                    <div>
+                                      <%= b.check_box({ class: "custom-control-input dependent_check", type: 'checkbox' }) %>
+                                      <%= b.label({ class: 'custom-control-label dependent_label' }) do %>
+                                        <%= t("activerecord.attributes.extra.dependent.#{b.text}") %>
+                                      <% end %>
+                                    </div>
+                                    <div class="mt-1">
+                                      <% if current_account.greek? %>
+                                        <input value="<%= @property.send("#{b.text}_space") %>" type="number" name="property[<%= b.text %>_space]" class="form-control custom-control-label dependent_input" placeholder="<%= t("activerecord.attributes.extra.dependent.#{b.text}_placeholder") %>">
+                                      <% else %>
+                                        <input value="<%= @property.send("#{b.text}_space") %>" type="number" name="property[<%= b.text %>_space]" class="form-control custom-control-label dependent_input" placeholder="<%= t("activerecord.attributes.extra.dependent.#{b.text}_placeholder_footage") %>">
+                                      <% end %>
+                                    </div>
                                   </div>
                                 </div>
                               <% end %>

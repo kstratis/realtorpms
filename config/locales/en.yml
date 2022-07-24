@@ -278,6 +278,7 @@ en:
           new_development: "New development"
           penthouse: "Penthouse"
           unfinished: "Unfinished"
+          renovated: "Renovated"
         heating:
           title: "Heating"
           central: "Central heating"
@@ -318,6 +319,11 @@ en:
           corner: "Corner lot"
           internal: "Inwards facing lot"
           no_agent_fee: "Agent fee waiver"
+          pest_net: "Pest net"
+          double_glass: "Double glazed windows"
+          fresh_paint_coat: "Freshly painted"
+          structured_wiring: "Structured wiring"
+          accessible_for_disabled: "Accessible"
         access:
           title: "Access from"
           asphalt: "Road access"
@@ -361,6 +367,9 @@ en:
           balcony: "Balcony"
           balcony_placeholder: "Balcony size in sq meters"
           balcony_placeholder_footage: "Balcony size in sq. feet"
+          shopwindow: "Store window"
+          shopwindow_placeholder: "Store window length in meters"
+          shopwindow_placeholder_footage: "Store window length in feet"
       model_type:
         name: "Category"
       entity_field:
@@ -402,6 +411,7 @@ en:
         living_rooms_title: "Living rooms"
         wcs_title: "WC"
         kitchens_title: "Kitchens"
+        common_expenses_title: "Common expenses"
         bedrooms_short: "Brooms"
         bedroom:
           one: "1 bedroom"
@@ -410,6 +420,7 @@ en:
         living_rooms_feedback_html: "i.e. 1"
         wcs_feedback_html: "i.e. 1"
         kitchens_feedback_html: "i.e. 1"
+        common_expenses_feedback_html: "i.e. 100"
         bathrooms_title: "Bathrooms"
         bathroom:
           one: "1 bathroom"
@@ -436,6 +447,8 @@ en:
         orientation_title: "Orientation"
         power_title: "Electricity"
         slope_title: "Slope"
+        joinery_title: "Window frames"
+        floortype_title: "Floor type"
         location: "Location"
         location_title: "Location"
         status_title: "Market status"
@@ -525,6 +538,25 @@ en:
             plane: "Plane"
             inclining: "Inclining"
             amphitheatrical: "Amphitheatrical"
+          joinery:
+            title: "Window frames"
+            wooden: "Wooden"
+            aluminium: "Aluminium"
+            synthetic: "Synthetic"
+          floortype:
+            title: "Floor type"
+            marble: "Marble"
+            wood: "Wood"
+            stone: "Stone"
+            ceramic_tiles: "Ceramic tiles"
+            mosaic_tiles: "Mosaic tiles"
+            wood_and_marble: "Wood & marble"
+            marble_and_tile: "Marble & tile"
+            wood_and_stone: "Wood & stone"
+            stone_and_marble: "Stone & marble"
+            wood_and_tile: "Wood & tile"
+            wood_and_mosaic: "Wood & mosaic"
+            industrial: "Industrial"
           floor:
             basement: "Basement"
             semi_basement: "Semi-basement"
