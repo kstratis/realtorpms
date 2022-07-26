@@ -1,5 +1,4 @@
 import FormStepper from '../bundles/steppers/form_stepper';
-import { setup_dependent_checkboxes } from '../bundles/utilities/helpers';
 
 // Handles the property form validators (new, edit)
 $(document).on('turbolinks:load', function(e) {

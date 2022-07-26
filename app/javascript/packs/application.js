@@ -23,7 +23,7 @@ import { initCrisp } from "./utilities";
 
 import flatpickr from "flatpickr";
 import { Greek } from "flatpickr/dist/l10n/gr.js"
-import { setup_dependent_checkboxes } from '../bundles/utilities/helpers';
+import { fireDependantFieldListeners } from '../bundles/utilities/helpers';
 import * as CustomActiveStorage from '../bundles/uploaders/custom_active_storage';
 import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
@@ -68,7 +68,7 @@ $(document).on('turbolinks:load', function(e) {
     });
   }
 
-  if ($('.dependent_input').length) setup_dependent_checkboxes();
+  fireDependantFieldListeners();
 
   // TODO remove this on deploy
   if (window.location.pathname === '/app/demo'){
@@ -205,30 +205,6 @@ $(document).on('turbolinks:load', function(e) {
     // Map handler
     import(/* webpackChunkName: "MapManager", webpackPrefetch: true */ '../packs/map_manager.js').then(({default: MapManager}) => {
       new MapManager();
-    });
-  }
-
-  // The following code block works in conjunction with the DOM manipulations
-  // taking place in `AssociativeFormSelect`
-  if ($('[name="stepperForm"]').length > 0 ) {
-    const $heatingType = $('[name="property[heatingtype]"]');
-    const $heatingMedium = $('[name="property[heatingmedium]"]');
-    $heatingType.on('change', (e) => {
-      // DEBUG
-      // console.log(e.target.value);
-      const selection = e.target.value;
-      switch (selection) {
-        case "no_system":
-        case "":
-          $heatingMedium.prop('disabled', true)
-          break;
-        case "prive":
-        case "central":
-          $heatingMedium.prop('disabled', false)
-          break;
-        default:
-          break;
-      }
     });
   }
 
