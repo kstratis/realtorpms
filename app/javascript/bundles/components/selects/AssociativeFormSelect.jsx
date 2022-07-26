@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FormSelect from './FormSelect';
+import {restoreAllPropertyAttrs, filterOutInvalidPropertyAttrs, invalidateDependentCheckboxesOnLoad} from "../../utilities/helpers";
 import URLSearchParams from '@ungap/url-search-params';
 
 class AssociativeFormSelect extends React.Component {
@@ -122,31 +123,6 @@ class AssociativeFormSelect extends React.Component {
     return $('#filters').data();
   }
 
-  // Re-enables all property attributes which may be filtered out
-  restoreAllPropertyAttrs(){
-    // Iterate over all map inputs/checkboxes etc and do the following:
-    const attrs = Object.values(this.propertyFilterAttrsHash()).reduce((acc, curVal) => {
-      return acc.concat(curVal)
-    }, []);
-
-    for (const attr of attrs){
-      $(`.${attr}`).find('input, select').prop('disabled', false)
-      $(`.form-field-container.${attr}`).removeClass('d-none')
-      $(`.form-group-container.${attr}`).removeClass('d-none')
-    }
-  }
-
-  // Filters out invalid property attributes using DOM operations
-  filterOutInvalidPropertyAttrs(attr){
-    const invalidAttrs = this.propertyFilterAttrsHash()[attr];
-    for (const attr of invalidAttrs) {
-      // Iterate over all map inputs/checkboxes etc and do the following:
-      $(`.${attr}`).find('input, select').prop('disabled', true)
-      $(`.form-field-container.${attr}`).addClass('d-none')
-      $(`.form-group-container.${attr}`).addClass('d-none')
-    }
-  }
-
   // Hides fields according to current selection.
   // i.e. A land plot property can't have bedrooms/bathrooms
   hideInvalidFormFields(selectedOption) {
@@ -155,8 +131,9 @@ class AssociativeFormSelect extends React.Component {
     } else {
       this.enableStepper();
       const optionName = selectedOption['value'];
-      this.restoreAllPropertyAttrs();
-      this.filterOutInvalidPropertyAttrs(optionName)
+      restoreAllPropertyAttrs(this.propertyFilterAttrsHash());
+      filterOutInvalidPropertyAttrs(this.propertyFilterAttrsHash(), optionName)
+      invalidateDependentCheckboxesOnLoad();
     }
   }
 

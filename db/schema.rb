@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_20_161326) do
+ActiveRecord::Schema.define(version: 2022_07_24_224054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -373,6 +373,8 @@ ActiveRecord::Schema.define(version: 2022_07_20_161326) do
     t.string "shopwindow_space"
     t.integer "joinery"
     t.integer "floortype"
+    t.integer "heatingtype"
+    t.integer "heatingmedium"
     t.index ["account_id"], name: "index_properties_on_account_id"
     t.index ["category_id"], name: "index_properties_on_category_id"
     t.index ["ilocation_id"], name: "index_properties_on_ilocation_id"

@@ -121,6 +121,10 @@ class Property < ApplicationRecord
 
   enum floortype: [:marble, :wood, :stone, :ceramic_tiles, :mosaic_tiles, :wood_and_marble, :marble_and_tile, :wood_and_stone, :stone_and_marble, :wood_and_tile, :wood_and_mosaic, :industrial]
 
+  enum heatingtype: [:prive, :central, :no_system]
+
+  enum heatingmedium: [:petrol, :natural_gas, :gas, :current, :thermal_accumulator, :pellet, :stove, :infrared, :fan_coil, :woods, :teleheating, :geothermal_energy]
+
   # Validations should match their ujs_form_handler.js counterparts
   validates :businesstype, presence: true
   # validates :marker, presence: true
@@ -161,10 +165,10 @@ class Property < ApplicationRecord
 
     def filters
       {
-        residential: %w[facade_length distance_from_sea building_coefficient coverage_ratio slope power access within_urban_plan equipment service_lift load_ramp agricultural_use exchange_scheme shopwindow],
+        residential: %w[facade_length building_coefficient coverage_ratio slope power within_urban_plan equipment service_lift load_ramp agricultural_use exchange_scheme shopwindow],
         commercial: %w[facade_length distance_from_sea building_coefficient coverage_ratio orientation view fit_for_professional_use fireplace slope within_urban_plan exchange_scheme pool orientation joinery],
-        land: %w[floor construction renovation living_rooms bedrooms bathrooms kitchens wcs levels energy_cert power housetype heating gas solar_water_heating furnished fireplace awnings clima security_door pool elevator no_utility_bills roofdeck equipment balcony service_lift load_ramp alarm within_urban_plan unit night_power heating_under_floor common_expenses shopwindow joinery floortype pest_net double_glass fresh_paint_coat structured_wiring accessible_for_disabled],
-        other: %w[facade_length distance_from_sea building_coefficient coverage_ratio orientation view fit_for_professional_use fireplace slope within_urban_plan exchange_scheme pool zone power investment no_utility_bills unit night_power heating_under_floor orientation common_expenses shopwindow joinery floortype pest_net double_glass fresh_paint_coat structured_wiring accessible_for_disabled]
+        land: %w[floor construction renovation living_rooms bedrooms bathrooms kitchens wcs levels energy_cert power housetype heating gas solar_water_heating furnished fireplace awnings clima security_door pool elevator no_utility_bills roofdeck equipment balcony service_lift load_ramp alarm within_urban_plan unit night_power heating_under_floor common_expenses shopwindow joinery floortype heatingtype heatingmedium pest_net double_glass fresh_paint_coat structured_wiring accessible_for_disabled],
+        other: %w[facade_length distance_from_sea building_coefficient coverage_ratio orientation view fit_for_professional_use fireplace slope within_urban_plan exchange_scheme pool zone power investment no_utility_bills unit night_power heating_under_floor orientation common_expenses shopwindow joinery floortype heatingtype heatingmedium pest_net double_glass fresh_paint_coat structured_wiring accessible_for_disabled]
       }
     end
 
@@ -204,7 +208,9 @@ class Property < ApplicationRecord
         :power => {:label => 'power', :icon => 'power', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.power.#{value}")} },
         :slope => {:label => 'slope', :icon => 'slope', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.slope.#{value}")} },
         :joinery => {:label => 'joinery', :icon => 'joinery', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.joinery.#{value}")} },
-        :floortype => {:label => 'floortype', :icon => 'floortype', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.floortype.#{value}")} }
+        :floortype => {:label => 'floortype', :icon => 'floortype', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.floortype.#{value}")} },
+        :heatingtype => {:label => 'heatingtype', :icon => 'heatingtype', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.heatingtype.#{value}")} },
+        :heatingmedium => {:label => 'heatingmedium', :icon => 'heatingmedium', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.heatingmedium.#{value}")} }
         # :owner_info => {:label => 'owner', :icon => 'client', :options => 'full_name', :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN}
       }
       if account.greek?
@@ -321,7 +327,8 @@ class Property < ApplicationRecord
     !user.client_ids.include?(client.id)
   end
 
-  # In the 'compound' extra fields for roofdeck, storage, garden and plot where each one comes with its own input,
+  # In the 'compound' extra fields for `Extra.where(subtype: 'dependent').pluck(:name)`
+  # where each one comes with its own input, (currently: "roofdeck", "plot", "garden", "storage", "balcony", "shopwindow")
   # make sure that if unchecked on update action, the existing input value will also be cleared.
   def handle_dependent_extra_fields
     edited_extras = extras.reject { |c| c.blank? }.collect { |extra| Extra.find(extra.id).name }

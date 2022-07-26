@@ -124,38 +124,84 @@ const objectToUrlParams = (obj) => {
   }).join('&');
 }
 
-// Sets up the
-const setup_dependent_checkboxes = () => {
+const invalidateDependentCheckboxesOnLoad = () => {
   var elements = $('.dependent_check');
   var status;
   // On load
   elements.each(function() {
     status = $(this).prop('checked');
-    $(this)
-      .parent()
-      .siblings()
-      .find('.dependent_input')
-      .prop('disabled', !status);
-    $(this)
-      .parent()
-      .siblings()
-      .find('.dependent_label.plain')
-      .toggleClass('disabled', !status);
+    if ($(this).parents('.form-field-container').hasClass('d-none')) {
+      $(this).prop('disabled', true);
+      $(this).parent().siblings().find('.dependent_input').prop('disabled', true);
+    } else {
+      $(this).prop('disabled', false);
+      $(this)
+          .parent()
+          .siblings()
+          .find('.dependent_input')
+          .prop('disabled', !status);
+      $(this)
+          .parent()
+          .siblings()
+          .find('.dependent_label.plain')
+          .toggleClass('disabled', !status);
+    }
   });
+}
+
+const invalidateDependentCheckboxesOnChange = () => {
+  var elements = $('.dependent_check');
   // On change
-  elements.change(function() {
+  elements.change(function () {
     $(this)
-      .parent()
-      .siblings()
-      .find('.dependent_input')
-      .prop('disabled', !this.checked).find('.dependent_label.plain').toggleClass('disabled', !this.checked);
+        .parent()
+        .siblings()
+        .find('.dependent_input')
+        .prop('disabled', !this.checked).find('.dependent_label.plain').toggleClass('disabled', !this.checked);
     $(this)
-      .parent()
-      .siblings()
-      .find('.dependent_label.plain')
-      .toggleClass('disabled', !this.checked);
+        .parent()
+        .siblings()
+        .find('.dependent_label.plain')
+        .toggleClass('disabled', !this.checked);
   });
+}
+
+const setup_dependent_checkboxes = () => {
+  invalidateDependentCheckboxesOnChange();
 };
+
+// Re-enables all property attributes which may be filtered out
+const restoreAllPropertyAttrs = (attributes_hash) => {
+  // Iterate over all map inputs/checkboxes etc and do the following:
+  const attrs = Object.values(attributes_hash).reduce((acc, curVal) => {
+    return acc.concat(curVal)
+  }, []);
+
+  let $selector;
+  let serverDisabledField;
+  for (const attr of attrs){
+    $selector = $(`.${attr}`).find('input:not(.dependent_input, .dependent_check), select');
+    serverDisabledField = $selector.data('deactivated');
+    if (serverDisabledField === true) {
+      $selector.prop('disabled', true)
+    } else{
+      $selector.prop('disabled', false)
+    }
+    $(`.form-field-container.${attr}`).removeClass('d-none')
+    $(`.form-group-container.${attr}`).removeClass('d-none')
+  }
+}
+
+// Filters out invalid property attributes using DOM operations
+const filterOutInvalidPropertyAttrs = (attributes_hash, attribute) => {
+  const invalidAttrs = attributes_hash[attribute];
+  for (const attr of invalidAttrs) {
+    // Iterate over all map inputs/checkboxes etc and do the following:
+    $(`.${attr}`).find('input:not(.dependent_input, .dependent_check), select').prop('disabled', true)
+    $(`.form-field-container.${attr}`).addClass('d-none')
+    $(`.form-group-container.${attr}`).addClass('d-none')
+  }
+}
 
 export {
   debounce,
@@ -172,5 +218,8 @@ export {
   hasParams,
   setup_dependent_checkboxes,
   objectToUrlParams,
-  comesFromClient
+  comesFromClient,
+  restoreAllPropertyAttrs,
+  filterOutInvalidPropertyAttrs,
+  invalidateDependentCheckboxesOnLoad
 };

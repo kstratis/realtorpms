@@ -5,10 +5,14 @@ module Converters
                                     :account_id, :spitogatos_sync, :spitogatos_created_at, :spitogatos_updated_at,
                                     :ilocation_id, :model_type_id, :unit, :preferences, :notes, :has_energy_cert, :garden_space].freeze
 
-    EXTRA_PROPERTY_ATTRIBUTES = %w(display_address currency published_spitogatos heating_controller access_controller view_controller within_city_plan zoning_controller).freeze
+    ADDITIONAL_PROPERTY_ATTRIBUTES = %w(display_address currency published_spitogatos access_controller view_controller within_city_plan zoning_controller).freeze
 
     # Heating is handled differently
-    EXCLUDED_EXTRA_PROPERTY_ATTRIBUTES = %w(prive central asphalt sidewalk cobblestone dirt_road sea other no_access sea_view mountain_view forest_view infinite_view residential agricultural commercial industrial recreational unincorporated).freeze
+    #
+    # These attributes are handled as a single dropdown value through their respective "controller" and processed as regular property attributes
+    DELEGATED_EXTRA_PROPERTY_ATTRIBUTES = %w(asphalt sidewalk cobblestone dirt_road sea other no_access sea_view mountain_view forest_view infinite_view residential agricultural commercial industrial recreational unincorporated).freeze
+
+
     # SPITOGATOS_ATTR_MAPPING = {
     #   price: {
     #     name: 'price',
@@ -283,17 +287,6 @@ module Converters
         type: 'string',
         category: 'detailedCharacteristics'
       },
-      heating_controller: {
-        name: 'heatingController',
-        type: 'enum',
-        category: 'detailedCharacteristics',
-        handler: :heating_controller,
-        values: {
-          prive: 'autonomous',
-          central: 'central',
-          none: 'none'
-        }
-      },
       load_ramp: {
         name: 'loadingDock',
         type: 'string',
@@ -547,6 +540,35 @@ module Converters
           industrial: "industrial"
         }
       },
+      heatingtype: {
+        name: 'heatingController',
+        type: 'enum',
+        category: 'detailedCharacteristics',
+        values: {
+          prive: 'autonomous',
+          central: 'central',
+          no_system: 'none'
+        }
+      },
+      heatingmedium: {
+        name: 'heatingMedium',
+        type: 'enum',
+        category: 'detailedCharacteristics',
+        values: {
+          petrol: "petrol",
+          natural_gas: "natural gas",
+          gas: "gas",
+          current: "current",
+          thermal_accumulator: "thermal accumulator",
+          pellet: "pellet",
+          stove: "stove",
+          infrared: "infrared",
+          fan_coil: "fan coil",
+          woods: "wood",
+          teleheating: "teleheating",
+          geothermal_energy: "geothermal energy"
+        }
+      },
       no_agent_fee: {
         name: 'noAgentFee',
         type: 'string',
@@ -564,15 +586,18 @@ module Converters
     end
 
     def property_attributes
-      basic_attributes = ((@property.attribute_names + EXTRA_PROPERTY_ATTRIBUTES) - EXCLUDED_PROPERTY_ATTRIBUTES.map(&:to_s)).select do |attr|
+      basic_property_attributes = ((@property.attribute_names + ADDITIONAL_PROPERTY_ATTRIBUTES) - EXCLUDED_PROPERTY_ATTRIBUTES.map(&:to_s)).select do |attr|
         fetch_attribute_value(attr).present?
       end
-      extra_attributes = property_extras - EXCLUDED_EXTRA_PROPERTY_ATTRIBUTES
+      extra_property_attributes = property_extras - DELEGATED_EXTRA_PROPERTY_ATTRIBUTES
+
+      blacklist_attrs = Property.filters[Category.find(@property.category_id).parent_slug.to_sym]
+      negative_attrs = all_extra_attrs - extra_property_attributes - blacklist_attrs
+
+      basic_property_attributes.concat(extra_property_attributes).concat(negative_attrs)
 
       # TODO;
       # location & images
-
-      basic_attributes.concat(extra_attributes)
     end
 
     # returns a hash
@@ -590,7 +615,7 @@ module Converters
       # puts '---'
 
       case attr
-      when :businesstype, :marker, :energy_cert, :orientation, :floortype, :power, :slope, :joinery  #For simple enum values - no special handler
+      when :businesstype, :marker, :energy_cert, :orientation, :floortype, :power, :slope, :joinery, :heatingtype, :heatingmedium  #For simple enum values - no special handler
         { spitogatos_attr_name => SPITOGATOS_ATTR_MAPPING.dig(attr, :values)[value&.to_sym] }
       when :floor
         formatted_value = begin
@@ -692,22 +717,6 @@ module Converters
       Rails.env.production? ? 'yes' : 'no'
     end
 
-    def heating_controller
-      private_heating = property_extras.include?('prive') ? 'prive' : nil
-      central_heating = property_extras.include?('central') ? 'central' : nil
-      value = if private_heating.nil? && central_heating.nil?
-                :none
-              elsif private_heating.present? && central_heating.blank?
-                :prive
-              elsif private_heating.nil? && central_heating.present?
-                :central
-              else
-                :central
-              end
-
-      SPITOGATOS_ATTR_MAPPING.dig(:heating_controller, :values)[value]
-    end
-
     def view_controller
       view_attrs = property_extras.intersection(%w(sea_view mountain_view forest_view infinite_view))
       return 'no' if view_attrs.empty?
@@ -728,13 +737,21 @@ module Converters
       SPITOGATOS_ATTR_MAPPING.dig(:access_controller, :values)[value]
     end
 
-    def city_plan_handler
-      if property_extras.include?('unincorporated')
-        'no'
-      else
-        'yes'
-      end
-    end
+    # def heating_controller
+    #   private_heating = property_extras.include?('prive') ? 'prive' : nil
+    #   central_heating = property_extras.include?('central') ? 'central' : nil
+    #   value = if private_heating.nil? && central_heating.nil?
+    #             :none
+    #           elsif private_heating.present? && central_heating.blank?
+    #             :prive
+    #           elsif private_heating.nil? && central_heating.present?
+    #             :central
+    #           else
+    #             :central
+    #           end
+    #
+    #   SPITOGATOS_ATTR_MAPPING.dig(:heating_controller, :values)[value]
+    # end
 
     def zoning_controller
       zoning_attrs = property_extras.intersection(%w(residential agricultural commercial industrial recreational unincorporated))
@@ -747,6 +764,18 @@ module Converters
       return if value.nil?
 
       SPITOGATOS_ATTR_MAPPING.dig(:zoning_controller, :values)[value]
+    end
+
+    def city_plan_handler
+      if property_extras.include?('unincorporated')
+        'no'
+      else
+        'yes'
+      end
+    end
+
+    def all_extra_attrs
+      @all_extra_attrs ||= Extra.pluck(:name)
     end
 
     def property_extras

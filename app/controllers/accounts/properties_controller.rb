@@ -257,18 +257,9 @@ module Accounts
 
         @property.assign_attributes(attributes)
 
-        if @property.category_id_changed?
-          blacklist_attrs = Property.filters[Category.find(@property.category_id).parent_slug.to_sym]
-
-          blacklist_attrs.each do |attr|
-            if @property.respond_to?(attr.to_sym)
-              @property.send("#{attr}=", nil)
-            else
-              extra_attrs = @property.extras.where(subtype: attr.to_s).or(@property.extras.where(name: attr.to_s))
-              extra_attrs.each { |extra_attr| @property.extras.delete(extra_attr) }
-            end
-          end
-        end
+        # TODO; Refactor and move to model
+        invalidate_blacklisted_attrs
+        invalidate_heating_medium
 
         if @property.save
           # Sets the client and its required ownership attribute on the CPA many-to-many table
@@ -460,6 +451,8 @@ module Accounts
                                        :slope,
                                        :joinery,
                                        :floortype,
+                                       :heatingtype,
+                                       :heatingmedium,
                                        { preferences: {} },
                                        delete_images: [],
                                        images: [],
@@ -493,6 +486,27 @@ module Accounts
         property_params[:category].nil? &&
         property_params[:locationid].nil? &&
         property_params[:ilocationid].nil?
+    end
+
+    def invalidate_blacklisted_attrs
+      return unless @property.category_id_changed?
+
+      blacklist_attrs = Property.filters[Category.find(@property.category_id).parent_slug.to_sym]
+
+      blacklist_attrs.each do |attr|
+        if @property.respond_to?(attr.to_sym)
+          @property.send("#{attr}=", nil)
+        else
+          extra_attrs = @property.extras.where(subtype: attr.to_s).or(@property.extras.where(name: attr.to_s))
+          extra_attrs.each { |extra_attr| @property.extras.delete(extra_attr) }
+        end
+      end
+    end
+
+    def invalidate_heating_medium
+      if @property.heatingtype_changed? && (@property.heatingtype.blank? || @property.heatingtype == 'no_system')
+          @property.heatingmedium = nil
+      end
     end
   end
 end

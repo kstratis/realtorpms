@@ -361,6 +361,28 @@
                           </div>
                         </div>
 
+                        <!-- Distance from sea -->
+                        <div class="col-md-4 col-sm-12 form-field-container distance_from_sea">
+                          <div class="form-group mb-4">
+                            <div class="form-label-group">
+                              <%= property.text_field :distance_from_sea,
+                                                      class: 'form-control',
+                                                      autocomplete: "off",
+                                                      'data-parsley-group': "fieldset-2",
+                                                      'data-parsley-type': "integer",
+                                                      'data-parsley-type-message': t("js.validator.digits") %>
+                              <label for="distance_from_sea">
+                                <%= content_tag :span do %>
+                                  <%= content_tag(:i, nil, class: 'fas fa-walking fa-fw') + ' ' + t('activerecord.attributes.property.distance_from_sea') %>
+                                <% end %>
+                              </label>
+                            </div>
+                            <small class="form-text text-muted"><%= t('activerecord.attributes.property.distance_from_sea_feedback_html') %>
+                            </small>
+                            <div class="invalid-feedback"></div>
+                          </div>
+                        </div>
+
                       </div>
 
                       <div class="row">
@@ -497,7 +519,7 @@
                       <div class="row">
 
                       <!-- Facade length -->
-                      <div class="col-md-6 col-sm-12 form-field-container facade_length">
+                      <div class="col-md-4 col-sm-12 form-field-container facade_length">
                         <div class="form-group mb-4">
                           <div class="form-label-group">
                             <%= property.text_field :facade_length,
@@ -518,30 +540,8 @@
                         </div>
                       </div>
 
-                      <!-- Distance from sea -->
-                      <div class="col-md-6 col-sm-12 form-field-container distance_from_sea">
-                        <div class="form-group mb-4">
-                          <div class="form-label-group">
-                            <%= property.text_field :distance_from_sea,
-                                                    class: 'form-control',
-                                                    autocomplete: "off",
-                                                    'data-parsley-group': "fieldset-2",
-                                                    'data-parsley-type': "integer",
-                                                    'data-parsley-type-message': t("js.validator.digits") %>
-                            <label for="distance_from_sea">
-                              <%= content_tag :span do %>
-                                <%= content_tag(:i, nil, class: 'fas fa-walking fa-fw') + ' ' + t('activerecord.attributes.property.distance_from_sea') %>
-                              <% end %>
-                            </label>
-                          </div>
-                          <small class="form-text text-muted"><%= t('activerecord.attributes.property.distance_from_sea_feedback_html') %>
-                          </small>
-                          <div class="invalid-feedback"></div>
-                        </div>
-                      </div>
-
                       <!-- Building coefficient -->
-                      <div class="col-md-6 col-sm-12 form-field-container building_coefficient">
+                      <div class="col-md-4 col-sm-12 form-field-container building_coefficient">
                         <div class="form-group mb-4">
                           <div class="form-label-group">
                             <%= property.text_field :building_coefficient,
@@ -563,7 +563,7 @@
                       </div>
 
                       <!-- Coverage ratio -->
-                      <div class="col-md-6 col-sm-12 form-field-container coverage_ratio">
+                      <div class="col-md-4 col-sm-12 form-field-container coverage_ratio">
                         <div class="form-group mb-4">
                           <div class="form-label-group">
                             <%= property.text_field :coverage_ratio,
@@ -585,7 +585,7 @@
                       </div>
 
                       <!-- Availability -->
-                      <div class="col-md-6 col-sm-12 form-field-container availability">
+                      <div class="col-md-4 col-sm-12 form-field-container availability">
                         <div class="form-group mb-4">
                           <%= property.label :availability, t('activerecord.attributes.property.availability_title'), class: 'control-label' %>
                           <%= property.text_field :availability, class: 'form-control', :data => { :toggle => 'flatpickr' } %>
@@ -594,7 +594,7 @@
                       </div>
 
                       <!-- Energy cert -->
-                      <div class="col-md-6 col-sm-12 form-field-container energy_cert">
+                      <div class="col-md-4 col-sm-12 form-field-container energy_cert">
                         <div class="form-group mb-4">
                           <div class="custom-control custom-checkbox app-checkbox">
                               <div>
@@ -842,6 +842,34 @@
                             </div>
                           </div><!-- /.form-group -->
                         </div> <!-- /Floor type -->
+
+                        <!-- Heating system -->
+                        <div class="col-md-6 col-sm-12 form-field-container heatingtype">
+                          <div class="form-group mb-4">
+                            <div class="mt-1">
+                              <label class="control-label checkbox-header app-checkbox">
+                              <span class="callout-header">
+                                <span class="pin-title font-weight-bold"><%= t('activerecord.attributes.property.enums.heatingtype.title') %></span>
+                              </span>
+                              </label>
+                              <%= property.select :heatingtype, Property.heatingtypes.keys.collect { |heatingtype| [ Property.human_enum_name(:heatingtype, heatingtype), heatingtype ] }, { :include_blank => t('none_specified') }, { class: 'form-control custom-control-label custom-select' } %>
+                            </div>
+                          </div><!-- /.form-group -->
+                        </div> <!-- /Heating system -->
+
+                        <!-- Heating medium -->
+                        <div class="col-md-6 col-sm-12 form-field-container heatingmedium">
+                          <div class="form-group mb-4">
+                            <div class="mt-1">
+                              <label class="control-label checkbox-header app-checkbox">
+                            <span class="callout-header">
+                              <span class="pin-title font-weight-bold"><%= t('activerecord.attributes.property.enums.heatingmedium.title') %></span>
+                            </span>
+                              </label>
+                              <%= property.select :heatingmedium, Property.heatingmedia.keys.collect { |heatingmedium| [ Property.human_enum_name(:heatingmedium, heatingmedium), heatingmedium ] }, { :include_blank => t('none_specified') }, { class: 'form-control custom-control-label custom-select', 'data-deactivated': @property.heatingtype.blank? ||  @property.heatingtype == 'no_system' ? true : false } %>
+                            </div>
+                          </div><!-- /.form-group -->
+                        </div> <!-- /Heating medium -->
 
                       </div>
 
