@@ -418,6 +418,7 @@ el:
         floortype_title: "Δάπεδα"
         heatingtype_title: "Σύστημα θέρμανσης"
         heatingmedium_title: "Μέσο θέρμανσης"
+        access_title: "Πρόσβαση"
         location: "Περιοχή"
         location_title: "Περιοχή"
         status_title: "Κατάσταση"
@@ -545,6 +546,15 @@ el:
             woods: "Ξύλα"
             teleheating: "Τηλεθέρμανση"
             geothermal_energy: "Γεωθερμική ενέργεια"
+          access:
+            title: "Πρόσβαση"
+            asphalt: "Άσφαλτος"
+            sidewalk: "Πεζόδρομος"
+            cobblestone: "Πλακόστρωτο"
+            dirt_road: "Χωματόδρομος"
+            sea: "Θάλασσα"
+            other: "Αλλού"
+            no_access: "Δεν υπάρχει πρόσβαση"
           floor:
             basement: "Υπόγειο"
             semi_basement: "Ημιυπόγειο"

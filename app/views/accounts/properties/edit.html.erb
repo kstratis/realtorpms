@@ -774,7 +774,7 @@
 
                         <div class="row justify-content-center">
                           <!-- Orientation -->
-                          <div class="col-md-6 col-sm-12 form-field-container orientation">
+                          <div class="col-md-4 col-sm-12 form-field-container orientation">
                             <div class="form-group mb-4">
                               <div class="mt-1">
                                 <label class="control-label checkbox-header app-checkbox">
@@ -788,7 +788,7 @@
                           </div> <!-- /Orientation -->
 
                           <!-- Power -->
-                          <div class="col-md-6 col-sm-12 form-field-container power">
+                          <div class="col-md-4 col-sm-12 form-field-container power">
                             <div class="form-group mb-4">
                               <div class="mt-1">
                                 <label class="control-label checkbox-header app-checkbox">
@@ -802,7 +802,7 @@
                           </div> <!-- /Power -->
 
                         <!-- Slope -->
-                        <div class="col-md-6 col-sm-12 form-field-container slope">
+                        <div class="col-md-4 col-sm-12 form-field-container slope">
                           <div class="form-group mb-4">
                             <div class="mt-1">
                               <label class="control-label checkbox-header app-checkbox">
@@ -816,7 +816,7 @@
                         </div> <!-- /Slope -->
 
                         <!-- Joinery -->
-                        <div class="col-md-6 col-sm-12 form-field-container joinery">
+                        <div class="col-md-4 col-sm-12 form-field-container joinery">
                           <div class="form-group mb-4">
                             <div class="mt-1">
                               <label class="control-label checkbox-header app-checkbox">
@@ -830,7 +830,7 @@
                         </div> <!-- /Joinery -->
 
                         <!-- Floor type -->
-                        <div class="col-md-6 col-sm-12 form-field-container floortype">
+                        <div class="col-md-4 col-sm-12 form-field-container floortype">
                           <div class="form-group mb-4">
                             <div class="mt-1">
                               <label class="control-label checkbox-header app-checkbox">
@@ -844,13 +844,13 @@
                         </div> <!-- /Floor type -->
 
                         <!-- Heating system -->
-                        <div class="col-md-6 col-sm-12 form-field-container heatingtype">
+                        <div class="col-md-4 col-sm-12 form-field-container heatingtype">
                           <div class="form-group mb-4">
                             <div class="mt-1">
                               <label class="control-label checkbox-header app-checkbox">
-                              <span class="callout-header">
-                                <span class="pin-title font-weight-bold"><%= t('activerecord.attributes.property.enums.heatingtype.title') %></span>
-                              </span>
+                                <span class="callout-header">
+                                  <span class="pin-title font-weight-bold"><%= t('activerecord.attributes.property.enums.heatingtype.title') %></span>
+                                </span>
                               </label>
                               <%= property.select :heatingtype, Property.heatingtypes.keys.collect { |heatingtype| [ Property.human_enum_name(:heatingtype, heatingtype), heatingtype ] }, { :include_blank => t('none_specified') }, { class: 'form-control custom-control-label custom-select' } %>
                             </div>
@@ -858,18 +858,32 @@
                         </div> <!-- /Heating system -->
 
                         <!-- Heating medium -->
-                        <div class="col-md-6 col-sm-12 form-field-container heatingmedium">
+                        <div class="col-md-4 col-sm-12 form-field-container heatingmedium">
                           <div class="form-group mb-4">
                             <div class="mt-1">
                               <label class="control-label checkbox-header app-checkbox">
-                            <span class="callout-header">
-                              <span class="pin-title font-weight-bold"><%= t('activerecord.attributes.property.enums.heatingmedium.title') %></span>
-                            </span>
+                                <span class="callout-header">
+                                  <span class="pin-title font-weight-bold"><%= t('activerecord.attributes.property.enums.heatingmedium.title') %></span>
+                                </span>
                               </label>
                               <%= property.select :heatingmedium, Property.heatingmedia.keys.collect { |heatingmedium| [ Property.human_enum_name(:heatingmedium, heatingmedium), heatingmedium ] }, { :include_blank => t('none_specified') }, { class: 'form-control custom-control-label custom-select', 'data-deactivated': @property.heatingtype.blank? ||  @property.heatingtype == 'no_system' ? true : false } %>
                             </div>
                           </div><!-- /.form-group -->
                         </div> <!-- /Heating medium -->
+
+                        <!-- Access -->
+                        <div class="col-md-4 col-sm-12 form-field-container access">
+                          <div class="form-group mb-4">
+                            <div class="mt-1">
+                              <label class="control-label checkbox-header app-checkbox">
+                                <span class="callout-header">
+                                  <span class="pin-title font-weight-bold"><%= t('activerecord.attributes.property.enums.access.title') %></span>
+                                </span>
+                              </label>
+                              <%= property.select :access, Property.accesses.keys.collect { |access| [ Property.human_enum_name(:access, access), access ] }, { :include_blank => t('none_specified') }, { class: 'form-control custom-control-label custom-select' } %>
+                            </div>
+                          </div><!-- /.form-group -->
+                        </div> <!-- /Access -->
 
                       </div>
 

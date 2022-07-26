@@ -451,6 +451,7 @@ en:
         floortype_title: "Floor type"
         heatingtype_title: "Heating system"
         heatingmedium_title: "Heating medium"
+        access_title: "Access"
         location: "Location"
         location_title: "Location"
         status_title: "Market status"
@@ -578,6 +579,15 @@ en:
             woods: "Wood"
             teleheating: "Teleheating"
             geothermal_energy: "Geothermal energy"
+          access:
+            title: "Access"
+            asphalt: "Road"
+            sidewalk: "Sidewalk"
+            cobblestone: "Cobblestone street"
+            dirt_road: "Dirt road"
+            sea: "Sea"
+            other: "Other"
+            no_access: "No access"
           floor:
             basement: "Basement"
             semi_basement: "Semi-basement"

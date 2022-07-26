@@ -453,6 +453,7 @@ module Accounts
                                        :floortype,
                                        :heatingtype,
                                        :heatingmedium,
+                                       :access,
                                        { preferences: {} },
                                        delete_images: [],
                                        images: [],

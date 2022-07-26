@@ -851,6 +851,20 @@
                             </div><!-- /.form-group -->
                           </div> <!-- /Heating medium -->
 
+                          <!-- Access -->
+                          <div class="col-md-6 col-sm-12 form-field-container access">
+                            <div class="form-group mb-4">
+                              <div class="mt-1">
+                                <label class="control-label checkbox-header app-checkbox">
+                                <span class="callout-header">
+                                  <span class="pin-title font-weight-bold"><%= t('activerecord.attributes.property.enums.access.title') %></span>
+                                </span>
+                                </label>
+                                <%= property.select :access, Property.accesses.keys.collect { |access| [ Property.human_enum_name(:access, access), access ] }, { :include_blank => t('none_specified') }, { class: 'form-control custom-control-label custom-select' } %>
+                              </div>
+                            </div><!-- /.form-group -->
+                          </div> <!-- /Access -->
+
                         </div>
 
                         <hr />

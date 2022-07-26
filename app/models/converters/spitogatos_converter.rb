@@ -5,42 +5,10 @@ module Converters
                                     :account_id, :spitogatos_sync, :spitogatos_created_at, :spitogatos_updated_at,
                                     :ilocation_id, :model_type_id, :unit, :preferences, :notes, :has_energy_cert, :garden_space].freeze
 
-    ADDITIONAL_PROPERTY_ATTRIBUTES = %w(display_address currency published_spitogatos access_controller view_controller within_city_plan zoning_controller).freeze
+    ADDITIONAL_PROPERTY_ATTRIBUTES = %w(display_address currency published_spitogatos view_controller within_city_plan zoning_controller).freeze
 
-    # Heating is handled differently
-    #
     # These attributes are handled as a single dropdown value through their respective "controller" and processed as regular property attributes
-    DELEGATED_EXTRA_PROPERTY_ATTRIBUTES = %w(asphalt sidewalk cobblestone dirt_road sea other no_access sea_view mountain_view forest_view infinite_view residential agricultural commercial industrial recreational unincorporated).freeze
-
-
-    # SPITOGATOS_ATTR_MAPPING = {
-    #   price: {
-    #     name: 'price',
-    #     type: 'integer',
-    #     category: 'listingDetails'
-    #   },
-    #   description: {
-    #     name: 'descriptionFull',
-    #     type: 'integer',
-    #     category: 'listingDetails',
-    #     nesting: 'gr'
-    #   },
-    #   description_en: {
-    #     name: 'descriptionFull',
-    #     type: 'integer',
-    #     category: 'listingDetails',
-    #     nesting: 'en'
-    #   },
-    #   businesstype: {
-    #     name: 'listingType',
-    #     type: 'for rent/for sale',
-    #     category: 'listingDetailsYO',
-    #     values: {
-    #       sell: 'for sale',
-    #       rent: 'for rent'
-    #     }
-    #   }
-    # }.freeze
+    DELEGATED_EXTRA_PROPERTY_ATTRIBUTES = %w(sea_view mountain_view forest_view infinite_view residential agricultural commercial industrial recreational unincorporated).freeze
 
     SPITOGATOS_ATTR_MAPPING = {
       price: {
@@ -296,21 +264,6 @@ module Converters
         name: 'penthouse',
         type: 'string',
         category: 'detailedCharacteristics'
-      },
-      access_controller: {
-        name: 'roadType',
-        type: 'enum',
-        category: 'detailedCharacteristics',
-        handler: :access_controller,
-        values: {
-          asphalt: 'asphalt',
-          sidewalk: 'pedestrian',
-          cobblestone: 'paved',
-          dirt_road: 'dirt road',
-          sea: 'sea',
-          other: 'other',
-          no_access: 'no road access'
-        }
       },
       security_door: {
         name: 'secureDoor',
@@ -569,6 +522,20 @@ module Converters
           geothermal_energy: "geothermal energy"
         }
       },
+      access: {
+        name: 'roadType',
+        type: 'enum',
+        category: 'detailedCharacteristics',
+        values: {
+          asphalt: 'asphalt',
+          sidewalk: 'pedestrian',
+          cobblestone: 'paved',
+          dirt_road: 'dirt road',
+          sea: 'sea',
+          other: 'other',
+          no_access: 'no road access'
+        }
+      },
       no_agent_fee: {
         name: 'noAgentFee',
         type: 'string',
@@ -615,7 +582,7 @@ module Converters
       # puts '---'
 
       case attr
-      when :businesstype, :marker, :energy_cert, :orientation, :floortype, :power, :slope, :joinery, :heatingtype, :heatingmedium  #For simple enum values - no special handler
+      when :businesstype, :marker, :energy_cert, :orientation, :floortype, :power, :slope, :joinery, :heatingtype, :heatingmedium, :access  #For simple enum values - no special handler
         { spitogatos_attr_name => SPITOGATOS_ATTR_MAPPING.dig(attr, :values)[value&.to_sym] }
       when :floor
         formatted_value = begin
@@ -654,7 +621,7 @@ module Converters
       attrs = property_attributes.map(&:to_sym)
       # attrs = [:price, :description, :description_en, :businesstype, :floor, :renovation, :display_address, :marker, :category_id, :plot_space, :balcony_space,
       #          :currency, :spitogatos_id, :new_development, :published_spitogatos, :clima, :alarm, :balcony, :building_coefficient, :corner, :elevator, :facade, :fireplace,
-      #          :service_lift, :furnished, :parking, :garden, :heating_controller, :load_ramp, :penthouse, :access_controller, :security_door, :solar_water_heating, :storage,
+      #          :service_lift, :furnished, :parking, :garden, :heatingtype, heatingmedium, :load_ramp, :penthouse, :access, :security_door, :solar_water_heating, :storage,
       #          :pool, :view_controller, :within_city_plan, :zoning_controller, :protected_pr, :investment, :unfinished, :renovated, :pest_net, :night_power, :neoclassical, :equipment, :agricultural_use,
       #          :heating_under_floor, :coverage_ratio, :energy_cert, :orientation, :power, :slope, :no_agent_fee, :wcs, :living_rooms, :kitchens, :distance_from_sea, :common_expenses,
       #          :facade_length, :shopwindow_space, :joinery, :floortype, :awnings, :double_glass, :double_frontage, :fresh_paint_coat, :fit_for_professional_use, :structured_wiring, :accessible_for_disabled]
@@ -723,35 +690,6 @@ module Converters
 
       'yes'
     end
-
-    def access_controller
-      access_attrs = property_extras.intersection(%w(asphalt sidewalk cobblestone dirt_road sea other no_access))
-      value = if access_attrs.size.zero?
-                nil
-              else
-                access_attrs.first.to_sym
-              end
-
-      return if value.nil?
-
-      SPITOGATOS_ATTR_MAPPING.dig(:access_controller, :values)[value]
-    end
-
-    # def heating_controller
-    #   private_heating = property_extras.include?('prive') ? 'prive' : nil
-    #   central_heating = property_extras.include?('central') ? 'central' : nil
-    #   value = if private_heating.nil? && central_heating.nil?
-    #             :none
-    #           elsif private_heating.present? && central_heating.blank?
-    #             :prive
-    #           elsif private_heating.nil? && central_heating.present?
-    #             :central
-    #           else
-    #             :central
-    #           end
-    #
-    #   SPITOGATOS_ATTR_MAPPING.dig(:heating_controller, :values)[value]
-    # end
 
     def zoning_controller
       zoning_attrs = property_extras.intersection(%w(residential agricultural commercial industrial recreational unincorporated))

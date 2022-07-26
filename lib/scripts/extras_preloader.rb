@@ -13,9 +13,6 @@ ActiveRecord::Base.transaction do
   %w(roofdeck plot garden storage balcony).each do |extra|
     Extra.create!(name: extra, subtype: 'dependent')
   end
-  %w(asphalt sidewalk cobblestone dirt_road sea other no_access).each do |extra|
-    Extra.create!(name: extra, subtype: 'access')
-  end
   %w(residential agricultural commercial industrial recreational unincorporated).each do |extra|
     Extra.create!(name: extra, subtype: 'zone')
   end

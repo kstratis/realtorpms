@@ -516,6 +516,10 @@
     background-image: url('../images/house_specs/no_access.png');
   }
 
+  &.access{
+    background-image: url('../images/house_specs/entrance.svg');
+  }
+
   &.no_agent_fee{
     background-image: url('../images/house_specs/no_agent_fee.png');
   }
