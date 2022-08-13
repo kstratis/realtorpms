@@ -119,13 +119,15 @@ class Property < ApplicationRecord
 
   enum joinery: [:wooden, :aluminium, :synthetic]
 
-  enum floortype: [:marble, :wood, :stone, :ceramic_tiles, :mosaic_tiles, :wood_and_marble, :marble_and_tile, :wood_and_stone, :stone_and_marble, :wood_and_tile, :wood_and_mosaic, :industrial]
+  enum floortype: [:marble, :wood, :stone, :ceramic_tiles, :mosaic_tiles, :wood_and_marble, :marble_and_tile, :wood_and_stone, :stone_and_marble, :wood_and_tile, :wood_and_mosaic, :industrial_floor]
 
   enum heatingtype: [:prive, :central, :no_system]
 
   enum heatingmedium: [:petrol, :natural_gas, :gas, :current, :thermal_accumulator, :pellet, :stove, :infrared, :fan_coil, :woods, :teleheating, :geothermal_energy]
 
   enum access: [:asphalt, :sidewalk, :cobblestone, :dirt_road, :sea, :other, :no_access]
+
+  enum zoning: [:residential, :agricultural, :commercial, :industrial, :recreational, :unincorporated]
 
   # Validations should match their ujs_form_handler.js counterparts
   validates :businesstype, presence: true
@@ -170,7 +172,7 @@ class Property < ApplicationRecord
         residential: %w[facade_length building_coefficient coverage_ratio slope power within_urban_plan equipment service_lift load_ramp agricultural_use exchange_scheme shopwindow],
         commercial: %w[facade_length distance_from_sea building_coefficient coverage_ratio orientation view fit_for_professional_use fireplace slope within_urban_plan exchange_scheme pool orientation joinery],
         land: %w[floor construction renovation living_rooms bedrooms bathrooms kitchens wcs levels energy_cert power housetype heating gas solar_water_heating furnished fireplace awnings clima security_door pool elevator no_utility_bills roofdeck garden equipment balcony service_lift load_ramp alarm within_urban_plan unit night_power heating_under_floor common_expenses shopwindow joinery floortype heatingtype heatingmedium pest_net double_glass fresh_paint_coat structured_wiring accessible_for_disabled],
-        other: %w[facade_length distance_from_sea building_coefficient coverage_ratio orientation view fit_for_professional_use fireplace slope within_urban_plan exchange_scheme pool zone power investment no_utility_bills unit night_power heating_under_floor orientation common_expenses shopwindow joinery floortype heatingtype heatingmedium pest_net double_glass fresh_paint_coat structured_wiring accessible_for_disabled]
+        other: %w[facade_length distance_from_sea building_coefficient coverage_ratio orientation view fit_for_professional_use fireplace slope within_urban_plan exchange_scheme pool zoning power investment no_utility_bills unit night_power heating_under_floor orientation common_expenses shopwindow joinery floortype heatingtype heatingmedium pest_net double_glass fresh_paint_coat structured_wiring accessible_for_disabled]
       }
     end
 
@@ -213,7 +215,8 @@ class Property < ApplicationRecord
         :floortype => {:label => 'floortype', :icon => 'floortype', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.floortype.#{value}")} },
         :heatingtype => {:label => 'heatingtype', :icon => 'heatingtype', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.heatingtype.#{value}")} },
         :heatingmedium => {:label => 'heatingmedium', :icon => 'heatingmedium', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.heatingmedium.#{value}")} },
-        :access => {:label => 'access', :icon => 'access', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.access.#{value}")} }
+        :access => {:label => 'access', :icon => 'access', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.access.#{value}")} },
+        :zoning => {:label => 'zoning', :icon => 'zoning', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.zoning.#{value}")} }
         # :owner_info => {:label => 'owner', :icon => 'client', :options => 'full_name', :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN}
       }
       if account.greek?

@@ -3,12 +3,12 @@ module Converters
 
     EXCLUDED_PROPERTY_ATTRIBUTES = [:id, :created_at, :updated_at, :website_enabled, :pinned, :sample, :active,
                                     :account_id, :spitogatos_sync, :spitogatos_created_at, :spitogatos_updated_at,
-                                    :ilocation_id, :model_type_id, :unit, :preferences, :notes, :has_energy_cert, :garden_space].freeze
+                                    :ilocation_id, :model_type_id, :unit, :preferences, :notes, :has_energy_cert,
+                                    :garden_space, :roofdeck_space].freeze
 
-    ADDITIONAL_PROPERTY_ATTRIBUTES = %w(display_address currency published_spitogatos view_controller within_city_plan zoning_controller).freeze
+    EXCLUDED_EXTRA_PROPERTY_ATTRIBUTES = %w(roofdeck plot loft_pr traditional villa_pr stone studio_pr prefabricated_pr precast_pr sea_view mountain_view forest_view infinite_view residential agricultural commercial industrial recreational unincorporated).freeze
 
-    # These attributes are handled as a single dropdown value through their respective "controller" and processed as regular property attributes
-    DELEGATED_EXTRA_PROPERTY_ATTRIBUTES = %w(sea_view mountain_view forest_view infinite_view residential agricultural commercial industrial recreational unincorporated).freeze
+    FORCED_PROPERTY_ATTRIBUTES = %w(display_address currency published_spitogatos view_controller within_city_plan).freeze
 
     SPITOGATOS_ATTR_MAPPING = {
       price: {
@@ -303,20 +303,6 @@ module Converters
         category: 'detailedCharacteristics',
         handler: :city_plan_handler
       },
-      zoning_controller: {
-        name: 'zoning',
-        type: 'enum',
-        category: 'detailedCharacteristics',
-        handler: :zoning_controller,
-        values: {
-          residential: 'residential',
-          agricultural: 'agricultural',
-          commercial: 'commercial',
-          industrial: 'industrial',
-          recreational: 'recreational',
-          unincorporated: 'unincorporated'
-        }
-      },
       protected_pr: {
         name: 'preserved',
         type: 'string',
@@ -490,7 +476,7 @@ module Converters
           stone_and_marble: "stone and marble",
           wood_and_tile: "wood and tile",
           wood_and_mosaic: "wood and mosaic",
-          industrial: "industrial"
+          industrial_floor: "industrial"
         }
       },
       heatingtype: {
@@ -536,6 +522,19 @@ module Converters
           no_access: 'no road access'
         }
       },
+      zoning: {
+        name: 'zoning',
+        type: 'enum',
+        category: 'detailedCharacteristics',
+        values: {
+          residential: 'residential',
+          agricultural: 'agricultural',
+          commercial: 'commercial',
+          industrial: 'industrial',
+          recreational: 'recreational',
+          unincorporated: 'unincorporated'
+        }
+      },
       no_agent_fee: {
         name: 'noAgentFee',
         type: 'string',
@@ -553,13 +552,13 @@ module Converters
     end
 
     def property_attributes
-      basic_property_attributes = ((@property.attribute_names + ADDITIONAL_PROPERTY_ATTRIBUTES) - EXCLUDED_PROPERTY_ATTRIBUTES.map(&:to_s)).select do |attr|
+      basic_property_attributes = ((@property.attribute_names + FORCED_PROPERTY_ATTRIBUTES) - EXCLUDED_PROPERTY_ATTRIBUTES.map(&:to_s)).select do |attr|
         fetch_attribute_value(attr).present?
       end
-      extra_property_attributes = property_extras - DELEGATED_EXTRA_PROPERTY_ATTRIBUTES
+      extra_property_attributes = property_extras - EXCLUDED_EXTRA_PROPERTY_ATTRIBUTES
 
       blacklist_attrs = Property.filters[Category.find(@property.category_id).parent_slug.to_sym]
-      negative_attrs = all_extra_attrs - extra_property_attributes - blacklist_attrs
+      negative_attrs = all_extra_attrs - EXCLUDED_EXTRA_PROPERTY_ATTRIBUTES - extra_property_attributes - blacklist_attrs
 
       basic_property_attributes.concat(extra_property_attributes).concat(negative_attrs)
 
@@ -622,7 +621,7 @@ module Converters
       # attrs = [:price, :description, :description_en, :businesstype, :floor, :renovation, :display_address, :marker, :category_id, :plot_space, :balcony_space,
       #          :currency, :spitogatos_id, :new_development, :published_spitogatos, :clima, :alarm, :balcony, :building_coefficient, :corner, :elevator, :facade, :fireplace,
       #          :service_lift, :furnished, :parking, :garden, :heatingtype, heatingmedium, :load_ramp, :penthouse, :access, :security_door, :solar_water_heating, :storage,
-      #          :pool, :view_controller, :within_city_plan, :zoning_controller, :protected_pr, :investment, :unfinished, :renovated, :pest_net, :night_power, :neoclassical, :equipment, :agricultural_use,
+      #          :pool, :view_controller, :within_city_plan, :zoning, :protected_pr, :investment, :unfinished, :renovated, :pest_net, :night_power, :neoclassical, :equipment, :agricultural_use,
       #          :heating_under_floor, :coverage_ratio, :energy_cert, :orientation, :power, :slope, :no_agent_fee, :wcs, :living_rooms, :kitchens, :distance_from_sea, :common_expenses,
       #          :facade_length, :shopwindow_space, :joinery, :floortype, :awnings, :double_glass, :double_frontage, :fresh_paint_coat, :fit_for_professional_use, :structured_wiring, :accessible_for_disabled]
 
@@ -689,19 +688,6 @@ module Converters
       return 'no' if view_attrs.empty?
 
       'yes'
-    end
-
-    def zoning_controller
-      zoning_attrs = property_extras.intersection(%w(residential agricultural commercial industrial recreational unincorporated))
-      value = if zoning_attrs.size.zero?
-                nil
-              else
-                zoning_attrs.first.to_sym
-              end
-
-      return if value.nil?
-
-      SPITOGATOS_ATTR_MAPPING.dig(:zoning_controller, :values)[value]
     end
 
     def city_plan_handler

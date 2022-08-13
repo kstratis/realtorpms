@@ -454,6 +454,7 @@ module Accounts
                                        :heatingtype,
                                        :heatingmedium,
                                        :access,
+                                       :zoning,
                                        { preferences: {} },
                                        delete_images: [],
                                        images: [],

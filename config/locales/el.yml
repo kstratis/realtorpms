@@ -310,14 +310,6 @@ el:
           plane: "Επίπεδο"
           inclining: "Επικλινές"
           amphitheatrical: "Αμφιθεατρικό"
-        zone:
-          title: "Ζώνη"
-          residential: "Οικιστική ζώνη"
-          agricultural: "Αγροτική ζώνη"
-          commercial: "Εμπορική ζώνη"
-          industrial: "Βιομηχανική ζώνη"
-          recreational: "Ζώνη ανάπλασης"
-          unincorporated: "Εκτός σχεδίου"
         dependent:
           storage: "Αποθήκη"
           storage_placeholder: "Εμβαδόν αποθήκης σε τ.μ."
@@ -418,7 +410,8 @@ el:
         floortype_title: "Δάπεδα"
         heatingtype_title: "Σύστημα θέρμανσης"
         heatingmedium_title: "Μέσο θέρμανσης"
-        access_title: "Πρόσβαση"
+        access_title: "Πρόσβαση από:"
+        zoning_title: "Ζώνη"
         location: "Περιοχή"
         location_title: "Περιοχή"
         status_title: "Κατάσταση"
@@ -526,7 +519,7 @@ el:
             stone_and_marble: "Πέτρα – Μάρμαρο"
             wood_and_tile: "Πλακάκι – Ξύλο"
             wood_and_mosaic: "Μωσαϊκό – Ξύλο"
-            industrial: "Βιομηχανικό δάπεδο"
+            industrial_floor: "Βιομηχανικό δάπεδο"
           heatingtype:
             title: "Σύστημα θέρμανης"
             prive: "Αυτόνομη"
@@ -555,6 +548,14 @@ el:
             sea: "Θάλασσα"
             other: "Αλλού"
             no_access: "Δεν υπάρχει πρόσβαση"
+          zoning:
+            title: "Ζώνη"
+            residential: "Οικιστική"
+            agricultural: "Αγροτική"
+            commercial: "Εμπορική"
+            industrial: "Βιομηχανική"
+            recreational: "Ανάπλασης"
+            unincorporated: "Εκτός σχεδίου"
           floor:
             basement: "Υπόγειο"
             semi_basement: "Ημιυπόγειο"

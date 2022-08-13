@@ -328,7 +328,7 @@
                                                       'data-parsley-required-message': t("js.validator.required") %>
                               <label for="kitchens">
                                 <%= content_tag :span do %>
-                                  <%= content_tag(:i, nil, class: '') + ' ' + t('activerecord.attributes.property.kitchens_title') %>
+                                  <%= content_tag(:i, nil, class: 'fas fa-fire fa-fw') + ' ' + t('activerecord.attributes.property.kitchens_title') %>
                                 <% end %>
                               </label>
                             </div>
@@ -884,6 +884,20 @@
                             </div>
                           </div><!-- /.form-group -->
                         </div> <!-- /Access -->
+
+                        <!-- Zoning -->
+                        <div class="col-md-4 col-sm-12 form-field-container zoning">
+                          <div class="form-group mb-4">
+                            <div class="mt-1">
+                              <label class="control-label checkbox-header app-checkbox">
+                              <span class="callout-header">
+                                <span class="pin-title font-weight-bold"><%= t('activerecord.attributes.property.enums.zoning.title') %></span>
+                              </span>
+                              </label>
+                              <%= property.select :zoning, Property.zonings.keys.collect { |zoning| [ Property.human_enum_name(:zoning, zoning), zoning ] }, { :include_blank => t('none_specified') }, { class: 'form-control custom-control-label custom-select' } %>
+                            </div>
+                          </div><!-- /.form-group -->
+                        </div> <!-- /Zoning -->
 
                       </div>
 

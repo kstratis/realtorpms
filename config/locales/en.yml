@@ -343,14 +343,6 @@ en:
           plane: "Plane"
           inclining: "Inclining"
           amphitheatrical: "Amphitheatrical"
-        zone:
-          title: "Zone"
-          residential: "Residential zone"
-          agricultural: "Agricultural zone"
-          commercial: "Commercial zone"
-          industrial: "Industrial zone"
-          recreational: "Recreational zone"
-          unincorporated: "Unincorporated"
         dependent:
           storage: "Storage space"
           storage_placeholder: "Storage size in sq. meters"
@@ -452,6 +444,7 @@ en:
         heatingtype_title: "Heating system"
         heatingmedium_title: "Heating medium"
         access_title: "Access"
+        zoning_title: "Zone"
         location: "Location"
         location_title: "Location"
         status_title: "Market status"
@@ -588,6 +581,14 @@ en:
             sea: "Sea"
             other: "Other"
             no_access: "No access"
+          zoning:
+            title: "Zone"
+            residential: "Residential"
+            agricultural: "Agricultural"
+            commercial: "Commercial"
+            industrial: "Industrial"
+            recreational: "Recreational"
+            unincorporated: "Unincorporated"
           floor:
             basement: "Basement"
             semi_basement: "Semi-basement"
