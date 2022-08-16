@@ -6,7 +6,7 @@ module Converters
                                     :ilocation_id, :model_type_id, :unit, :preferences, :notes, :has_energy_cert,
                                     :garden_space, :roofdeck_space].freeze
 
-    EXCLUDED_EXTRA_PROPERTY_ATTRIBUTES = %w(roofdeck plot loft_pr traditional villa_pr stone studio_pr prefabricated_pr precast_pr sea_view mountain_view forest_view infinite_view residential agricultural commercial industrial recreational unincorporated).freeze
+    EXCLUDED_EXTRA_PROPERTY_ATTRIBUTES = %w(roofdeck plot storage loft_pr traditional villa_pr stone studio_pr prefabricated_pr precast_pr sea_view mountain_view forest_view infinite_view residential agricultural commercial industrial recreational unincorporated no_utility_bills internal).freeze
 
     FORCED_PROPERTY_ATTRIBUTES = %w(display_address currency published_spitogatos view_controller within_city_plan).freeze
 
@@ -163,6 +163,11 @@ module Converters
         type: 'string',
         category: 'detailedCharacteristics'
       },
+      storage_space: {
+        name: 'storageSpace',
+        type: 'string',
+        category: 'detailedCharacteristics'
+      },
       shopwindow_space: {
         name: 'shopWindowLength',
         type: 'string',
@@ -275,11 +280,6 @@ module Converters
         type: 'string',
         category: 'detailedCharacteristics'
       },
-      storage: {
-        name: 'storageSpace',
-        type: 'string',
-        category: 'detailedCharacteristics'
-      },
       pool: {
         name: 'swimmingPool',
         type: 'string',
@@ -362,6 +362,56 @@ module Converters
         name: 'accessibleForDisabled',
         type: 'string',
         category: 'detailedCharacteristics'
+      },
+      internal_staircase: {
+        name: 'internalStairs',
+        type: 'string',
+        category: 'detailedCharacteristics'
+      },
+      attic: {
+        name: 'attic',
+        type: 'string',
+        category: 'detailedCharacteristics'
+      },
+      playroom: {
+        name: 'playroom',
+        type: 'string',
+        category: 'detailedCharacteristics'
+      },
+      pending_renovation: {
+        name: 'requiresRenovation',
+        type: 'string',
+        category: 'detailedCharacteristics'
+      },
+      satellite_antenna: {
+        name: 'satelliteReceiver',
+        type: 'string',
+        category: 'detailedCharacteristics'
+      },
+      pets_allowed: {
+        name: 'petsAllowed',
+        type: 'string',
+        category: 'detailedCharacteristics'
+      },
+      luxurious: {
+        name: 'luxHome',
+        type: 'string',
+        category: 'listingDetails'
+      },
+      bright: {
+        name: 'bright',
+        type: 'string',
+        category: 'detailedCharacteristics'
+      },
+      student_friendly: {
+        name: 'studentHome',
+        type: 'string',
+        category: 'listingDetails'
+      },
+      second_home: {
+        name: 'holidayHome',
+        type: 'string',
+        category: 'listingDetails'
       },
       night_power: {
         name: 'nightPower',
@@ -591,11 +641,13 @@ module Converters
                           end
 
         { spitogatos_attr_name => formatted_value }
+      when :lat, :lng
+        { spitogatos_attr_name => value.to_s }
       when :availability
         { spitogatos_attr_name => value.to_date.strftime("%d/%m/%Y") }
       when :category_id
         { spitogatos_attr_name => @property.category.parent_slug, 'propertyType' => @property.category.spitogatos_slug }
-      when :plot_space, :balcony_space, :shopwindow_space
+      when :plot_space, :balcony_space, :storage_space, :shopwindow_space
         formatted_value = begin
                             Integer(value)
                           rescue
@@ -618,12 +670,13 @@ module Converters
 
     def convert!
       attrs = property_attributes.map(&:to_sym)
-      # attrs = [:price, :description, :description_en, :businesstype, :floor, :renovation, :display_address, :marker, :category_id, :plot_space, :balcony_space,
+      # attrs = [:price, :description, :description_en, :businesstype, :floor, :renovation, :display_address, :marker, :category_id, :plot_space, :storage_space, :balcony_space,
       #          :currency, :spitogatos_id, :new_development, :published_spitogatos, :clima, :alarm, :balcony, :building_coefficient, :corner, :elevator, :facade, :fireplace,
       #          :service_lift, :furnished, :parking, :garden, :heatingtype, heatingmedium, :load_ramp, :penthouse, :access, :security_door, :solar_water_heating, :storage,
       #          :pool, :view_controller, :within_city_plan, :zoning, :protected_pr, :investment, :unfinished, :renovated, :pest_net, :night_power, :neoclassical, :equipment, :agricultural_use,
       #          :heating_under_floor, :coverage_ratio, :energy_cert, :orientation, :power, :slope, :no_agent_fee, :wcs, :living_rooms, :kitchens, :distance_from_sea, :common_expenses,
-      #          :facade_length, :shopwindow_space, :joinery, :floortype, :awnings, :double_glass, :double_frontage, :fresh_paint_coat, :fit_for_professional_use, :structured_wiring, :accessible_for_disabled]
+      #          :facade_length, :shopwindow_space, :joinery, :floortype, :awnings, :double_glass, :double_frontage, :fresh_paint_coat, :fit_for_professional_use, :structured_wiring, :accessible_for_disabled,
+      #          :internal_staircase, :attic, :playroom, :pending_renovation, :satellite_antenna, :pets_allowed, luxurious bright student_friendly second_home]
 
       # This is a special hash. If the key does not exist, creates the key and assigns it an empty hash
       # which in turn has the exact same property: if its key does not exist, creates the key and assigns
