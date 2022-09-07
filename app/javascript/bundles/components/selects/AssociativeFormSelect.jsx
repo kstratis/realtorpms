@@ -137,6 +137,24 @@ class AssociativeFormSelect extends React.Component {
     }
   }
 
+  // Handles the dependant floor field. This is a react-select field which depends
+  // on the isRequired prop. `required` native DOM elements are handled by parsley js
+  // which automatically respects the `disabled` attribute and removes the `required` requirement.
+  // Unfortunately react-select components don't do that which is why they require
+  // special handling.
+  handleDependantRequiredFields(selectedOption){
+    const optionName = selectedOption['value'];
+
+    if (!['residential', 'commercial', 'land', 'other'].includes(optionName)) return;
+    if (!document.querySelector("[name='property[floor]']")) return;
+
+    if (optionName === 'land') {
+      document.querySelector("[name='property[floor]']").removeAttribute('required');
+    } else if (['residential', 'commercial', 'other'].includes(optionName)){
+      document.querySelector("[name='property[floor]']").setAttribute('required', 'true');
+    }
+  }
+
   // Set the subcategory's options according to parent selection.
   // Mind that this fires for both components (master & slave).
   handleOptions = (selectedOption, isMaster) => {
@@ -149,6 +167,7 @@ class AssociativeFormSelect extends React.Component {
     // If left empty, disable the form stepper.
     if (this.props?.formdata?.categoryid === 'property_category') {
       this.hideInvalidFormFields(selectedOption)
+      this.handleDependantRequiredFields(selectedOption)
     }
     // If it fires on the parent, set subcategory's options and enable it
     if (selectedOption) {

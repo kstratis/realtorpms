@@ -38,7 +38,7 @@ gem 'grover'
 gem "mini_magick"
 
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 1.2.3'
+gem 'pg', '~> 1.4.3'
 # Use Puma as the app server
 gem 'puma', '~> 5.3.2'
 # Use SCSS for stylesheets

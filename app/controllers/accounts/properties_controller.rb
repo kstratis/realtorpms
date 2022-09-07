@@ -113,7 +113,11 @@ module Accounts
 
     def delete_avatar
       property = current_account.properties.find(params[:id])
-      property.avatar.purge if property.avatar.attached?
+      if property.avatar.attached?
+        property.avatar.purge
+        # no callback invokation here
+        property.update_column(:spitogatos_images_sync_needed, true)
+      end
       # property.reload
       # render :json => {:status => "OK", :type => 'unfaved' }
       respond_to do |format|
@@ -244,9 +248,7 @@ module Accounts
 
       clients_hash = params_copy.extract!(:clients)
 
-      params[:delete_images]&.reject(&:blank?)&.each do |id|
-        @property.images.find(id).purge
-      end
+      handle_deleted_images
 
       respond_to do |format|
         attributes = if solo_attribute_update?
@@ -255,6 +257,7 @@ module Accounts
                        params_copy.merge({ category_id: category.id }).merge(Hash[attributize_label, location_value])
                      end
 
+        check_for_extra_ids_changes(attributes["extra_ids"])
         @property.assign_attributes(attributes)
 
         # TODO; Refactor and move to model
@@ -301,6 +304,30 @@ module Accounts
 
 
     private
+
+    def check_for_extra_ids_changes(new_extras)
+      return if new_extras.blank?
+
+      new_extra_ids = new_extras.compact_blank
+      existing_extra_ids = @property.extra_ids&.compact_blank.presence || []
+
+      if new_extra_ids.map(&:to_i).sort != existing_extra_ids.sort
+        @property.update_column(:spitogatos_data_sync_needed, true)
+      end
+    end
+
+    def handle_deleted_images
+      deleted_images_count = 0
+
+      params[:delete_images]&.reject(&:blank?)&.each do |id|
+        @property.images.find(id).purge
+        deleted_images_count += 1
+      end
+
+      return if deleted_images_count.zero?
+
+      @property.update_column(:spitogatos_images_sync_needed, true)
+    end
 
     def redirect_to_show
       flash[:danger] = I18n.t('access_denied')

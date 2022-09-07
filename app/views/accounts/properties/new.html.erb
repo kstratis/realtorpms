@@ -586,14 +586,17 @@
                         <div class="col-md-4 col-sm-12 form-field-container energy_cert">
                           <div class="form-group mb-4">
                             <div class="custom-control custom-checkbox app-checkbox">
-                              <div>
-                                <%= property.check_box :has_energy_cert, class: 'custom-control-input dependent_check' %>
-                                <%= property.label :has_energy_cert, class: 'custom-control-label dependent_label' do %>
-                                  <%= t("activerecord.attributes.property.energy_cert_title") %>
-                                <% end %>
-                              </div>
+                              <label class="control-label app-checkbox">
+                                <span><%= t("activerecord.attributes.property.energy_cert_title") %></span>
+                              </label>
                               <div class="mt-1">
-                                <%= property.select :energy_cert, Property.energy_certs.keys.collect { |energy_cert| [ Property.human_enum_name(:energy_cert, energy_cert), energy_cert ] }, {}, {class: 'form-control custom-control-label custom-select dependent_input'} %>
+                                <%= property.select :energy_cert,
+                                                    Property.energy_certs.keys.collect { |energy_cert| [ Property.human_enum_name(:energy_cert, energy_cert), energy_cert ] },
+                                                    { :include_blank => t('none_specified') },
+                                                    { class: 'form-control custom-control-label custom-select dependent_input',
+                                                      'data-parsley-required': "true",
+                                                      'data-parsley-group': "fieldset-2",
+                                                      'data-parsley-required-message': t("js.validator.required") } %>
                               </div>
                             </div>
                           </div><!-- /.form-group -->

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_13_084826) do
+ActiveRecord::Schema.define(version: 2022_09_07_123215) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -343,7 +343,6 @@ ActiveRecord::Schema.define(version: 2022_08_13_084826) do
     t.integer "model_type_id"
     t.jsonb "preferences", default: {}, null: false
     t.integer "energy_cert"
-    t.boolean "has_energy_cert"
     t.boolean "website_enabled", default: true
     t.boolean "pinned", default: false
     t.boolean "active", default: true
@@ -377,6 +376,8 @@ ActiveRecord::Schema.define(version: 2022_08_13_084826) do
     t.integer "heatingmedium"
     t.integer "access"
     t.integer "zoning"
+    t.boolean "spitogatos_data_sync_needed", default: false
+    t.boolean "spitogatos_images_sync_needed", default: false
     t.index ["account_id"], name: "index_properties_on_account_id"
     t.index ["category_id"], name: "index_properties_on_category_id"
     t.index ["ilocation_id"], name: "index_properties_on_ilocation_id"

@@ -8,6 +8,8 @@ class Property < ApplicationRecord
 
   after_destroy :destroy_orphan_ilocations
 
+  before_update :update_syncs
+
   # History module is used for the redirects
   friendly_id :unique_identifier, use: [:slugged, :finders, :history]
 
@@ -31,7 +33,6 @@ class Property < ApplicationRecord
 
   # before_save happens after validation that's why we use before_validation
   before_validation :handle_dependent_extra_fields, on: :update
-  before_validation :handle_dependent_energy_field, on: :update
 
   # before_save happens after validation that's why we use before_validation
   before_validation do
@@ -326,6 +327,18 @@ class Property < ApplicationRecord
 
   private
 
+  def update_syncs
+    return unless spitogatos_sync
+
+    if changed.present? && !spitogatos_sync_changed?
+      self.spitogatos_data_sync_needed = true
+    end
+
+    return if attachment_changes.blank?
+
+    self.spitogatos_images_sync_needed = true
+  end
+
   # Determine whether an owner can be removed when editing a property
   def option_meta(account, user, client)
     return false if user.is_admin?(account)
@@ -345,12 +358,6 @@ class Property < ApplicationRecord
       # MIND THAT THIS won't do any validations or update the updated_at attribute
       write_attribute(:"#{el + '_space'}", nil)
     end
-  end
-
-  def handle_dependent_energy_field
-    return if has_energy_cert?
-
-    write_attribute(:energy_cert, nil)
   end
 
   def destroy_orphan_ilocations
