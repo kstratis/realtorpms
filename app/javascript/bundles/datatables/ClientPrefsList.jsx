@@ -6,7 +6,19 @@ import withDatatable from './withDatatable';
 import React from 'react';
 import PropertyEntry from './PropertyEntry';
 
-const ClientPrefsList = ({ handlePageClick, advanceByTwo, isLoading, dataset, pageCount, selectedPage, i18n, showControls, visited }) => {
+const ClientPrefsList = ({
+  handlePageClick,
+  advanceByTwo,
+  isLoading,
+  dataset,
+  pageCount,
+  selectedPage,
+  i18n,
+  showControls,
+  visited,
+  handleSpitogatosSync,
+  spitogatosEnabled
+}) => {
   return (
     <div className="client-prefs-list">
       <div className={'ClientPrefsListContainer'}>
@@ -17,7 +29,17 @@ const ClientPrefsList = ({ handlePageClick, advanceByTwo, isLoading, dataset, pa
               <>
                 <div className={`row relativeposition ${isLoading ? 'reduced-opacity' : ''}`}>
                   {dataset.map((entry, index) => (
-                    <PropertyEntry key={entry.slug} entry={entry} filtersOpen={false} i18n={i18n} showControls={showControls} visited={visited} active={entry.active} />
+                    <PropertyEntry
+                      key={entry.slug}
+                      entry={entry}
+                      filtersOpen={false}
+                      i18n={i18n}
+                      showControls={showControls}
+                      visited={visited}
+                      active={entry.active}
+                      handleSpitogatosSync={handleSpitogatosSync}
+                      spitogatosEnabled={spitogatosEnabled}
+                    />
                   ))}
                 </div>
                 {/* CARD END */}
@@ -76,7 +98,7 @@ ClientPrefsList.propTypes = {
   handlePageClick: PropTypes.func.isRequired,
   selectedPage: PropTypes.number.isRequired,
   sorting: PropTypes.string.isRequired,
-  ordering: PropTypes.string.isRequired
+  ordering: PropTypes.string.isRequired,
 };
 
 const ClientPrefsListWithDatatable = withDatatable(ClientPrefsList);

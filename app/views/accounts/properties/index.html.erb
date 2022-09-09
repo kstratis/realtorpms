@@ -93,7 +93,8 @@
               object_type: 'properties',
               showControls: true,
               # stick `greek` if you'd like to test
-              accountFlavor: current_account.flavor
+              accountFlavor: current_account.flavor,
+              spitogatos_enabled: current_account.spitogatos_enabled?
           },
           i18n: {
               ok: t('ok'),
@@ -149,6 +150,9 @@
               clone: {
                 label: t('properties.clone.label'),
                 prompt: t('properties.clone.prompt')
+              },
+              sync: {
+                spitogatos_label: t('properties.sync.spitogatos_label')
               },
               website_enabled: t('js.forms.properties.wizard.step1.website_enabled'),
               website_disabled: t('js.forms.properties.wizard.step1.website_disabled'),

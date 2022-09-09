@@ -270,7 +270,7 @@ GEM
     parallel (1.21.0)
     parser (3.1.0.0)
       ast (~> 2.4.1)
-    pg (1.2.3)
+    pg (1.4.3)
     phantomjs (2.1.1.0)
     poltergeist (1.18.1)
       capybara (>= 2.1, < 4)
@@ -460,6 +460,8 @@ GEM
     whenever (1.0.0)
       chronic (>= 0.6.3)
     will_paginate (3.3.1)
+    xmlrpc (0.3.2)
+      webrick
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yard (0.9.27)
@@ -510,7 +512,7 @@ DEPENDENCIES
   nokogiri (~> 1.11)
   noticed (~> 1.4)
   pagy
-  pg (~> 1.2.3)
+  pg (~> 1.4.3)
   phantomjs
   poltergeist
   pry-byebug (~> 3.9)
@@ -545,6 +547,7 @@ DEPENDENCIES
   webpacker (~> 5.4.3)
   whenever
   will_paginate (~> 3.3.0)
+  xmlrpc
 
 BUNDLED WITH
    2.3.5

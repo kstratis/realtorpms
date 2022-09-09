@@ -15,6 +15,7 @@ function withDatatable(WrappedComponent) {
         results_per_page: PropTypes.number.isRequired,
         force_filters_open: PropTypes.bool,
         preselected_client: PropTypes.array,
+        spitogatos_enabled: PropTypes.bool,
         total_entries: PropTypes.number.isRequired,
         object_type: PropTypes.string.isRequired,
         current_page: PropTypes.number,
@@ -100,6 +101,7 @@ function withDatatable(WrappedComponent) {
         resultsPerPage: this.props.initial_payload.results_per_page,
         forceFiltersOpen: this.props.initial_payload.force_filters_open,
         preselectedClient: this.props.initial_payload.preselected_client,
+        spitogatosEnabled: this.props.initial_payload.spitogatos_enabled,
         visited: this.props.visited,
         isLoading: false,
         pageCount: Math.ceil(this.props.initial_payload.total_entries / this.props.initial_payload.results_per_page),
@@ -132,6 +134,7 @@ function withDatatable(WrappedComponent) {
       this.advanceByTwo = this.advanceByTwo.bind(this);
       this.handleFreezeUser = this.handleFreezeUser.bind(this);
       this.handleAdminifyUser = this.handleAdminifyUser.bind(this);
+      this.handleSpitogatosSync = this.handleSpitogatosSync.bind(this);
       this.handleFav = this.handleFav.bind(this);
       this.handleLocationInput = this.handleLocationInput.bind(this);
       this.handleCategoryInput = this.handleCategoryInput.bind(this);
@@ -539,6 +542,21 @@ function withDatatable(WrappedComponent) {
       });
     }
 
+    handleSpitogatosSync(e, spitogatos_sync_url, property_id){
+      e.preventDefault();
+      axios.patch(spitogatos_sync_url).then(response => {
+        // DEBUG
+        // console.log(response);
+        const index = this.state.dataset.findIndex(element => element.id === property_id);
+        let element = this.state.dataset[index];
+        element['spitogatos_sync'] = !element['spitogatos_sync'];
+        let newDataset = [...this.state.dataset];
+        this.setState({
+          dataset: newDataset
+        });
+      });
+    }
+
     handleFreezeUser(e, freeze_url, user_id) {
       e.preventDefault();
       const url = buildUserURL(freeze_url, user_id);
@@ -818,6 +836,7 @@ function withDatatable(WrappedComponent) {
             handleSearchInput={this.handleSearchInput}
             handleFreezeUser={this.handleFreezeUser}
             handleAdminifyUser={this.handleAdminifyUser}
+            handleSpitogatosSync={this.handleSpitogatosSync}
             i18n={this.props.i18n}
             meta={this.props.meta}
             add_user_link={this.props.initial_payload.add_user_link}

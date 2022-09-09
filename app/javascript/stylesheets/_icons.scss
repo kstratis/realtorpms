@@ -83,6 +83,7 @@
 
   &.xxxs { width:  15px; height:  15px; vertical-align: middle;}
   &.xxs { width:  20px; height:  20px; vertical-align: middle;}
+  &.spitogatos-custom-size { width:  28px; height:  18px; vertical-align: middle; }
   &.xs { width:  25px; height:  25px; vertical-align: middle;}
   &.xss { width:  30px; height:  30px; vertical-align: middle;}
   &.cs { width:  35px; height:  35px; }
@@ -215,6 +216,22 @@
     background-image: url('../images/house_specs/bathrooms.svg');
   }
 
+  &.living_rooms{
+    background-image: url('../images/house_specs/living_rooms.svg');
+  }
+
+  &.wcs{
+    background-image: url('../images/house_specs/wcs.svg');
+  }
+
+  &.kitchens{
+    background-image: url('../images/house_specs/oven.svg');
+  }
+
+  &.common_expenses{
+    background-image: url('../images/house_specs/coins.svg');
+  }
+
   &.floor{
     background-image: url('../images/house_specs/floor.svg');
   }
@@ -228,7 +245,75 @@
   }
 
   &.renovation{
-    background-image: url('../images/house_specs/renovation.svg');
+    background-image: url('../images/house_specs/renovated_black.svg');
+  }
+
+  &.renovated{
+    background-image: url('../images/house_specs/renovated.svg');
+  }
+
+  &.pest_net{
+    background-image: url('../images/house_specs/pest_net.svg');
+  }
+
+  &.double_glass{
+    background-image: url('../images/house_specs/double_glass.svg');
+  }
+
+  &.double_glass{
+    background-image: url('../images/house_specs/double_glass.svg');
+  }
+
+  &.fresh_paint_coat {
+    background-image: url('../images/house_specs/fresh_paint_coat.svg');
+  }
+
+  &.structured_wiring {
+    background-image: url('../images/house_specs/structured_wiring.svg');
+  }
+
+  &.accessible_for_disabled {
+    background-image: url('../images/house_specs/accessible.svg');
+  }
+
+  &.internal_staircase {
+    background-image: url('../images/house_specs/internal_staircase.svg');
+  }
+
+  &.attic {
+    background-image: url('../images/house_specs/attic.svg');
+  }
+
+  &.playroom {
+    background-image: url('../images/house_specs/playroom.svg');
+  }
+
+  &.pending_renovation {
+    background-image: url('../images/house_specs/pending_renovation.svg');
+  }
+
+  &.satellite_antenna {
+    background-image: url('../images/house_specs/satellite_antenna.svg');
+  }
+
+  &.pets_allowed {
+    background-image: url('../images/house_specs/pets_allowed.svg');
+  }
+
+  &.luxurious {
+    background-image: url('../images/house_specs/luxurious.svg');
+  }
+
+  &.bright {
+    background-image: url('../images/house_specs/bright.svg');
+  }
+
+  &.student_friendly {
+    background-image: url('../images/house_specs/student_friendly.svg');
+  }
+
+  &.second_home {
+    background-image: url('../images/house_specs/second_home.svg');
   }
 
   &.availability{
@@ -237,6 +322,34 @@
 
   &.energy_cert{
     background-image: url('../images/house_specs/energy_cert.svg');
+  }
+
+  &.orientation{
+    background-image: url('../images/house_specs/compass.svg');
+  }
+
+  &.power{
+    background-image: url('../images/house_specs/bolt.svg');
+  }
+
+  &.slope{
+    background-image: url('../images/house_specs/slope.svg');
+  }
+
+  &.joinery{
+    background-image: url('../images/house_specs/joinery.svg');
+  }
+
+  &.floortype{
+    background-image: url('../images/house_specs/floortype.svg');
+  }
+
+  &.heatingtype{
+    background-image: url('../images/house_specs/heatingtype.svg');
+  }
+
+  &.heatingmedium{
+    background-image: url('../images/house_specs/heatingmedium.svg');
   }
 
   &.unit{
@@ -289,6 +402,14 @@
 
   &.precast_pr{
     background-image: url('../images/house_specs/precast.svg');
+  }
+
+  &.new_development{
+    background-image: url('../images/house_specs/new_development.svg');
+  }
+
+  &.penthouse{
+    background-image: url('../images/house_specs/top_floor.svg');
   }
 
   &.central{
@@ -435,36 +556,20 @@
     background-image: url('../images/house_specs/no_access.png');
   }
 
-  &.one_phase {
-    background-image: url('../images/house_specs/one_phase.png');
+  &.access{
+    background-image: url('../images/house_specs/entrance.svg');
   }
 
-  &.three_phase {
-    background-image: url('../images/house_specs/three_phase.png');
+  &.zoning{
+    background-image: url('../images/house_specs/zoning.svg');
   }
 
-  &.industrial_phase {
-    background-image: url('../images/house_specs/industrial_power.png');
-  }
-
-  &.agricultural_use {
-    background-image: url('../images/house_specs/industrial_power.png');
+  &.no_agent_fee{
+    background-image: url('../images/house_specs/no_agent_fee.png');
   }
 
   &.agricultural_use {
     background-image: url('../images/house_specs/agricultural_zone.png');
-  }
-
-  &.plane {
-    background-image: url('../images/house_specs/straight_line.png');
-  }
-
-  &.inclining {
-    background-image: url('../images/house_specs/inclining.png');
-  }
-
-  &.amphitheatrical {
-    background-image: url('../images/house_specs/amphitheatrical.png');
   }
 
   &.exchange_scheme {
@@ -513,6 +618,10 @@
 
   &.plot{
     background-image: url('../images/house_specs/plot.svg');
+  }
+
+  &.shopwindow{
+    background-image: url('../images/house_specs/shopwindow.svg');
   }
 
   &.garden{
@@ -621,6 +730,11 @@
 
   &.disconnect{
     background-image: url('../images/disconnect.svg');
+  }
+
+  &.spitogatos{
+    background-image: url('../images/spitogatos_logo.svg');
+
   }
 
   & ~ .pr-icon-desc {

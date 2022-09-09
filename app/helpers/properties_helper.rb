@@ -1,7 +1,7 @@
 module PropertiesHelper
   def category_options
     options = {}
-    Category.where(id: (5..32).to_a).each do |entry|
+    Category.where.not(parent_slug: nil).order(:rank).to_a.each do |entry|
       if options.key?(entry[:parent_slug])
         options[entry[:parent_slug]][:subcategory] << { entry[:slug] => t("activerecord.attributes.property.enums.subcategory.#{entry[:slug].to_s}") }
       else
@@ -130,7 +130,7 @@ module PropertiesHelper
           { '0' => I18n.t("activerecord.attributes.property.enums.floor.basement") },
           { '1' => I18n.t("activerecord.attributes.property.enums.floor.semi_basement") },
           { '2' => I18n.t("activerecord.attributes.property.enums.floor.ground_floor") },
-          { '3' => I18n.t("activerecord.attributes.property.enums.floor.mezzanine") },
+          { '3' => I18n.t("activerecord.attributes.property.enums.floor.semi_ground_floor") },
           { '4' => I18n.t("activerecord.attributes.property.enums.floor.1") },
           { '5' => I18n.t("activerecord.attributes.property.enums.floor.2") },
           { '6' => I18n.t("activerecord.attributes.property.enums.floor.3") },
@@ -213,7 +213,7 @@ module PropertiesHelper
     when '2'
       { label: I18n.t("activerecord.attributes.property.enums.floor.ground_floor"), value: floor.to_s }
     when '3'
-      { label: I18n.t("activerecord.attributes.property.enums.floor.mezzanine"), value: floor.to_s }
+      { label: I18n.t("activerecord.attributes.property.enums.floor.semi_ground_floor"), value: floor.to_s }
     else
       { label: I18n.t("activerecord.attributes.property.enums.floor.#{(floor.to_i - 3).to_s}"), value: floor.to_s }
     end

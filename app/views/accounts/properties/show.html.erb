@@ -176,6 +176,16 @@
 
               <% if @property.address.present? && @property.lat.present? && @property.lng.present? %>
                 <div class="col-12">
+
+                  <div class="card-header header-public simplified-header">
+                    <div class="table-entry">
+                      <div class="table-icon-wrapper">
+                        <i class="pr-icon xs map"></i>
+                      </div>
+                      <span class="align-middle">&nbsp; <%= t 'activerecord.attributes.property.map_title' %></span>
+                    </div>
+                  </div>
+
                   <div id="map" data-brand="<%= BRANDNAME %>"
                        data-lat="<%= @property.lat %>"
                        data-lng="<%= @property.lng %>"

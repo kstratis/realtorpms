@@ -66,6 +66,15 @@ module Accounts
       filter_properties(current_account.properties.includes(:location), params)
     end
 
+    # Flagged to sync with Spitogatos
+    def sync
+      return unless current_account.spitogatos_enabled?
+
+      property_to_sync = current_account.properties.find(params[:id])
+      property_to_sync.toggle!(:spitogatos_sync)
+      head :ok
+    end
+
     # GET /properties/1
     # GET /properties/1.json
     def show
@@ -104,7 +113,11 @@ module Accounts
 
     def delete_avatar
       property = current_account.properties.find(params[:id])
-      property.avatar.purge if property.avatar.attached?
+      if property.avatar.attached?
+        property.avatar.purge
+        # no callback invokation here
+        property.update_column(:spitogatos_images_sync_needed, true)
+      end
       # property.reload
       # render :json => {:status => "OK", :type => 'unfaved' }
       respond_to do |format|
@@ -235,9 +248,7 @@ module Accounts
 
       clients_hash = params_copy.extract!(:clients)
 
-      params[:delete_images]&.reject(&:blank?)&.each do |id|
-        @property.images.find(id).purge
-      end
+      handle_deleted_images
 
       respond_to do |format|
         attributes = if solo_attribute_update?
@@ -246,20 +257,12 @@ module Accounts
                        params_copy.merge({ category_id: category.id }).merge(Hash[attributize_label, location_value])
                      end
 
+        check_for_extra_ids_changes(attributes["extra_ids"])
         @property.assign_attributes(attributes)
 
-        if @property.category_id_changed?
-          blacklist_attrs = Property.filters[Category.find(@property.category_id).parent_slug.to_sym]
-
-          blacklist_attrs.each do |attr|
-            if @property.respond_to?(attr.to_sym)
-              @property.send("#{attr}=", nil)
-            else
-              extra_attrs = @property.extras.where(subtype: attr.to_s).or(@property.extras.where(name: attr.to_s))
-              extra_attrs.each { |extra_attr| @property.extras.delete(extra_attr) }
-            end
-          end
-        end
+        # TODO; Refactor and move to model
+        invalidate_blacklisted_attrs
+        invalidate_heating_medium
 
         if @property.save
           # Sets the client and its required ownership attribute on the CPA many-to-many table
@@ -301,6 +304,30 @@ module Accounts
 
 
     private
+
+    def check_for_extra_ids_changes(new_extras)
+      return if new_extras.blank?
+
+      new_extra_ids = new_extras.compact_blank
+      existing_extra_ids = @property.extra_ids&.compact_blank.presence || []
+
+      if new_extra_ids.map(&:to_i).sort != existing_extra_ids.sort
+        @property.update_column(:spitogatos_data_sync_needed, true)
+      end
+    end
+
+    def handle_deleted_images
+      deleted_images_count = 0
+
+      params[:delete_images]&.reject(&:blank?)&.each do |id|
+        @property.images.find(id).purge
+        deleted_images_count += 1
+      end
+
+      return if deleted_images_count.zero?
+
+      @property.update_column(:spitogatos_images_sync_needed, true)
+    end
 
     def redirect_to_show
       flash[:danger] = I18n.t('access_denied')
@@ -409,12 +436,15 @@ module Accounts
                                        :subcategory,
                                        :bedrooms,
                                        :bathrooms,
+                                       :wcs,
+                                       :living_rooms,
+                                       :kitchens,
+                                       :common_expenses,
                                        :price,
                                        :size,
                                        :floor,
                                        :levels,
                                        :availability,
-                                       :has_energy_cert,
                                        :energy_cert,
                                        :construction,
                                        :renovation,
@@ -422,6 +452,8 @@ module Accounts
                                        :storage_space,
                                        :garden_space,
                                        :plot_space,
+                                       :balcony_space,
+                                       :shopwindow_space,
                                        :address,
                                        :notes,
                                        :adxe,
@@ -440,6 +472,15 @@ module Accounts
                                        :lat,
                                        :lng,
                                        :marker,
+                                       :orientation,
+                                       :power,
+                                       :slope,
+                                       :joinery,
+                                       :floortype,
+                                       :heatingtype,
+                                       :heatingmedium,
+                                       :access,
+                                       :zoning,
                                        { preferences: {} },
                                        delete_images: [],
                                        images: [],
@@ -473,6 +514,27 @@ module Accounts
         property_params[:category].nil? &&
         property_params[:locationid].nil? &&
         property_params[:ilocationid].nil?
+    end
+
+    def invalidate_blacklisted_attrs
+      return unless @property.category_id_changed?
+
+      blacklist_attrs = Property.filters[Category.find(@property.category_id).parent_slug.to_sym]
+
+      blacklist_attrs.each do |attr|
+        if @property.respond_to?(attr.to_sym)
+          @property.send("#{attr}=", nil)
+        else
+          extra_attrs = @property.extras.where(subtype: attr.to_s).or(@property.extras.where(name: attr.to_s))
+          extra_attrs.each { |extra_attr| @property.extras.delete(extra_attr) }
+        end
+      end
+    end
+
+    def invalidate_heating_medium
+      if @property.heatingtype_changed? && (@property.heatingtype.blank? || @property.heatingtype == 'no_system')
+          @property.heatingmedium = nil
+      end
     end
   end
 end

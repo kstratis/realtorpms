@@ -167,7 +167,7 @@
                         <!-- grid column -->
 
                         <!-- Price -->
-                        <div class="col-md-6 col-sm-12 form-field-container price">
+                        <div class="col-md-4 col-sm-12 form-field-container price">
                           <div class="form-group mb-4">
                             <div class="form-label-group">
                               <%= property.text_field :price,
@@ -195,7 +195,7 @@
                         </div>
 
                         <!-- Size -->
-                        <div class="col-md-6 col-sm-12 form-field-container size">
+                        <div class="col-md-4 col-sm-12 form-field-container size">
                           <div class="form-group mb-4">
                             <div class="form-label-group">
                               <%= property.text_field :size,
@@ -221,8 +221,32 @@
                           </div>
                         </div>
 
+                        <!-- Living rooms -->
+                        <div class="col-md-4 col-sm-12 form-field-container living_rooms">
+                          <div class="form-group mb-4">
+                            <div class="form-label-group">
+                              <%= property.text_field :living_rooms,
+                                                      class: 'form-control',
+                                                      autocomplete: "off",
+                                                      'data-parsley-required': "true",
+                                                      'data-parsley-group': "fieldset-2",
+                                                      'data-parsley-type': "integer",
+                                                      'data-parsley-type-message': t("js.validator.digits"),
+                                                      'data-parsley-required-message': t("js.validator.required") %>
+                              <label for="living_rooms">
+                                <%= content_tag :span do %>
+                                  <%= content_tag(:i, nil, class: 'fas fa-couch fa-fw') + ' ' + t('activerecord.attributes.property.living_rooms_title') %>
+                                <% end %>
+                              </label>
+                            </div>
+
+                            <small class="form-text text-muted"><%= t('activerecord.attributes.property.living_rooms_feedback_html') %></small>
+                            <div class="invalid-feedback"></div>
+                          </div>
+                        </div>
+
                         <!-- Bedrooms -->
-                        <div class="col-md-6 col-sm-12 form-field-container bedrooms">
+                        <div class="col-md-4 col-sm-12 form-field-container bedrooms">
                           <div class="form-group mb-4">
                             <div class="form-label-group">
                               <%= property.text_field :bedrooms,
@@ -246,7 +270,7 @@
                         </div>
 
                         <!-- Bathrooms -->
-                        <div class="col-md-6 col-sm-12 form-field-container bathrooms">
+                        <div class="col-md-4 col-sm-12 form-field-container bathrooms">
                           <div class="form-group mb-4">
                             <div class="form-label-group">
                               <%= property.text_field :bathrooms,
@@ -267,11 +291,103 @@
                             <div class="invalid-feedback"></div>
                           </div>
                         </div>
+
+                        <!-- WCs -->
+                        <div class="col-md-4 col-sm-12 form-field-container wcs">
+                          <div class="form-group mb-4">
+                            <div class="form-label-group">
+                              <%= property.text_field :wcs,
+                                                      class: 'form-control',
+                                                      autocomplete: "off",
+                                                      'data-parsley-group': "fieldset-2",
+                                                      'data-parsley-type': "integer",
+                                                      'data-parsley-type-message': t("js.validator.digits"),
+                                                      'data-parsley-required-message': t("js.validator.required") %>
+                              <label for="wcs">
+                                <%= content_tag :span do %>
+                                  <%= content_tag(:i, nil, class: 'fas fa-restroom fa-fw') + ' ' + t('activerecord.attributes.property.wcs_title') %>
+                                <% end %>
+                              </label>
+                            </div>
+                            <small class="form-text text-muted"><%= t('activerecord.attributes.property.wcs_feedback_html') %>
+                            </small>
+                            <div class="invalid-feedback"></div>
+                          </div>
+                        </div>
+
+                        <!-- Kitchens -->
+                        <div class="col-md-4 col-sm-12 form-field-container kitchens">
+                          <div class="form-group mb-4">
+                            <div class="form-label-group">
+                              <%= property.text_field :kitchens,
+                                                      class: 'form-control',
+                                                      autocomplete: "off",
+                                                      'data-parsley-group': "fieldset-2",
+                                                      'data-parsley-type': "integer",
+                                                      'data-parsley-type-message': t("js.validator.digits"),
+                                                      'data-parsley-required-message': t("js.validator.required") %>
+                              <label for="kitchens">
+                                <%= content_tag :span do %>
+                                  <%= content_tag(:i, nil, class: 'fas fa-fire fa-fw') + ' ' + t('activerecord.attributes.property.kitchens_title') %>
+                                <% end %>
+                              </label>
+                            </div>
+                            <small class="form-text text-muted"><%= t('activerecord.attributes.property.kitchens_feedback_html') %>
+                            </small>
+                            <div class="invalid-feedback"></div>
+                          </div>
+                        </div>
+
+                        <!-- Common expenses -->
+                        <div class="col-md-4 col-sm-12 form-field-container common_expenses">
+                          <div class="form-group mb-4">
+                            <div class="form-label-group">
+                              <%= property.text_field :common_expenses,
+                                                      class: 'form-control',
+                                                      autocomplete: "off",
+                                                      'data-parsley-group': "fieldset-2",
+                                                      'data-parsley-type': "integer",
+                                                      'data-parsley-type-message': t("js.validator.digits"),
+                                                      'data-parsley-required-message': t("js.validator.required") %>
+                              <label for="common_expenses">
+                                <%= content_tag :span do %>
+                                  <%= content_tag(:i, nil, class: 'fas fa-coins fa-fw') + ' ' + t('activerecord.attributes.property.common_expenses_title') %>
+                                <% end %>
+                              </label>
+                            </div>
+                            <small class="form-text text-muted"><%= t('activerecord.attributes.property.common_expenses_feedback_html') %>
+                            </small>
+                            <div class="invalid-feedback"></div>
+                          </div>
+                        </div>
+
+                        <!-- Distance from sea -->
+                        <div class="col-md-4 col-sm-12 form-field-container distance_from_sea">
+                          <div class="form-group mb-4">
+                            <div class="form-label-group">
+                              <%= property.text_field :distance_from_sea,
+                                                      class: 'form-control',
+                                                      autocomplete: "off",
+                                                      'data-parsley-group': "fieldset-2",
+                                                      'data-parsley-type': "integer",
+                                                      'data-parsley-type-message': t("js.validator.digits") %>
+                              <label for="distance_from_sea">
+                                <%= content_tag :span do %>
+                                  <%= content_tag(:i, nil, class: 'fas fa-walking fa-fw') + ' ' + t('activerecord.attributes.property.distance_from_sea') %>
+                                <% end %>
+                              </label>
+                            </div>
+                            <small class="form-text text-muted"><%= t('activerecord.attributes.property.distance_from_sea_feedback_html') %>
+                            </small>
+                            <div class="invalid-feedback"></div>
+                          </div>
+                        </div>
+
                       </div>
 
                       <div class="row">
                         <!-- Floor -->
-                        <div class="col-md-6 col-sm-12 form-field-container floor">
+                        <div class="col-md-4 col-sm-12 form-field-container floor">
                           <div class="form-group mb-4">
                             <%= property.label :floor do %>
                               <span><i class="fas fa-arrows-alt-v fa-fw"></i></span>&nbsp;<%= Property.human_attribute_name(:floor) %>
@@ -282,7 +398,8 @@
                                 inputName: 'property[floor]',
                                 inputClassName: 'form-control',
                                 validatorGroup: 'fieldset-2',
-                                isRequired: false,
+                                isRequired: @property.category.parent_slug == 'land' ? false : true,
+                                # isRequired: true,
                                 renderFormField: true,
                                 formID: "edit_property_#{@property.id}",
                                 className: 'simple-select',
@@ -303,7 +420,7 @@
                         </div>
 
                         <!-- Levels -->
-                        <div class="col-md-6 col-sm-12 form-field-container levels">
+                        <div class="col-md-4 col-sm-12 form-field-container levels">
                           <div class="form-group mb-4">
                             <%= property.label :levels do %>
                               <span><i class="fas fa-bars fa-fw"></i></span> <%= Property.human_attribute_name(:levels) %>
@@ -335,7 +452,7 @@
                         </div>
 
                         <!-- Construction -->
-                        <div class="col-md-6 col-sm-12 form-field-container construction">
+                        <div class="col-md-4 col-sm-12 form-field-container construction">
                           <div class="form-group mb-4">
                             <%= property.label :construction do %>
                               <span><i class="fas fa-calendar-day fa-fw"></i></span>&nbsp;<%= Property.human_attribute_name(:construction) %>
@@ -367,7 +484,7 @@
                         </div>
 
                         <!-- Renovation -->
-                        <div class="col-md-6 col-sm-12 form-field-container renovation">
+                        <div class="col-md-4 col-sm-12 form-field-container renovation">
                           <div class="form-group mb-4">
                             <%= property.label :renovation do %>
                               <span><i class="fas fa-calendar-day fa-fw"></i></span>&nbsp;<%= Property.human_attribute_name(:renovation) %>
@@ -403,7 +520,7 @@
                       <div class="row">
 
                       <!-- Facade length -->
-                      <div class="col-md-6 col-sm-12 form-field-container facade_length">
+                      <div class="col-md-4 col-sm-12 form-field-container facade_length">
                         <div class="form-group mb-4">
                           <div class="form-label-group">
                             <%= property.text_field :facade_length,
@@ -424,30 +541,8 @@
                         </div>
                       </div>
 
-                      <!-- Distance from sea -->
-                      <div class="col-md-6 col-sm-12 form-field-container distance_from_sea">
-                        <div class="form-group mb-4">
-                          <div class="form-label-group">
-                            <%= property.text_field :distance_from_sea,
-                                                    class: 'form-control',
-                                                    autocomplete: "off",
-                                                    'data-parsley-group': "fieldset-2",
-                                                    'data-parsley-type': "integer",
-                                                    'data-parsley-type-message': t("js.validator.digits") %>
-                            <label for="distance_from_sea">
-                              <%= content_tag :span do %>
-                                <%= content_tag(:i, nil, class: 'fas fa-walking fa-fw') + ' ' + t('activerecord.attributes.property.distance_from_sea') %>
-                              <% end %>
-                            </label>
-                          </div>
-                          <small class="form-text text-muted"><%= t('activerecord.attributes.property.distance_from_sea_feedback_html') %>
-                          </small>
-                          <div class="invalid-feedback"></div>
-                        </div>
-                      </div>
-
                       <!-- Building coefficient -->
-                      <div class="col-md-6 col-sm-12 form-field-container building_coefficient">
+                      <div class="col-md-4 col-sm-12 form-field-container building_coefficient">
                         <div class="form-group mb-4">
                           <div class="form-label-group">
                             <%= property.text_field :building_coefficient,
@@ -469,7 +564,7 @@
                       </div>
 
                       <!-- Coverage ratio -->
-                      <div class="col-md-6 col-sm-12 form-field-container coverage_ratio">
+                      <div class="col-md-4 col-sm-12 form-field-container coverage_ratio">
                         <div class="form-group mb-4">
                           <div class="form-label-group">
                             <%= property.text_field :coverage_ratio,
@@ -490,27 +585,30 @@
                         </div>
                       </div>
 
-                        <!-- Availability -->
-                        <div class="col-md-6 col-sm-12 form-field-container availability">
-                          <div class="form-group mb-4">
-                            <%= property.label :availability, t('activerecord.attributes.property.availability_title'), class: 'control-label' %>
-                            <%= property.text_field :availability, class: 'form-control', :data => { :toggle => 'flatpickr' } %>
-                            <small class="form-text text-muted"><%= t('activerecord.attributes.property.availability_feedback_html') %></small>
-                          </div><!-- /.form-group -->
-                        </div>
+                      <!-- Availability -->
+                      <div class="col-md-4 col-sm-12 form-field-container availability">
+                        <div class="form-group mb-4">
+                          <%= property.label :availability, t('activerecord.attributes.property.availability_title'), class: 'control-label' %>
+                          <%= property.text_field :availability, class: 'form-control', :data => { :toggle => 'flatpickr' } %>
+                          <small class="form-text text-muted"><%= t('activerecord.attributes.property.availability_feedback_html') %></small>
+                        </div><!-- /.form-group -->
+                      </div>
 
                       <!-- Energy cert -->
-                      <div class="col-md-6 col-sm-12 form-field-container energy_cert">
+                      <div class="col-md-4 col-sm-12 form-field-container energy_cert">
                         <div class="form-group mb-4">
                           <div class="custom-control custom-checkbox app-checkbox">
-                              <div>
-                                <%= property.check_box :has_energy_cert, class: 'custom-control-input dependent_check' %>
-                                <%= property.label :has_energy_cert, class: 'custom-control-label dependent_label' do %>
-                                  <%= t("activerecord.attributes.property.energy_cert_title") %>
-                                <% end %>
-                              </div>
+                            <label class="control-label app-checkbox">
+                              <span><%= t("activerecord.attributes.property.energy_cert_title") %></span>
+                            </label>
                               <div class="mt-1">
-                                <%= property.select :energy_cert, Property.energy_certs.keys.collect { |energy_cert| [ Property.human_enum_name(:energy_cert, energy_cert), energy_cert ] }, {}, {class: 'form-control custom-control-label custom-select dependent_input'} %>
+                                <%= property.select :energy_cert,
+                                                    Property.energy_certs.keys.collect { |energy_cert| [ Property.human_enum_name(:energy_cert, energy_cert), energy_cert ] },
+                                                    { :include_blank => t('none_specified') },
+                                                    { class: 'form-control custom-control-label custom-select dependent_input',
+                                                      'data-parsley-required': "true",
+                                                      'data-parsley-group': "fieldset-2",
+                                                      'data-parsley-required-message': t("js.validator.required") } %>
                               </div>
                           </div>
                           </div><!-- /.form-group -->
@@ -539,9 +637,11 @@
                       </div>
                       <!-- /.row -->
 
+                      <hr class="my-4" />
+
                       <div class="row">
                         <!-- Description -->
-                        <div class="col-md-12 form-field-container description">
+                        <div class="col-md-6 col-sm-12 form-field-container description">
                           <div class="form-group mb-4">
                             <label class="control-label" for="notes"><%= t('activerecord.attributes.property.description_title') %></label>
                             <%= property.label :description do %>&nbsp;
@@ -564,12 +664,10 @@
                             <div class="invalid-feedback"></div>
                           </div>
                         </div>
-                      </div><!-- /.row -->
 
                       <% if current_account.greek? %>
-                        <div class="row">
                           <!-- Description (English)-->
-                          <div class="col-md-12 form-field-container description">
+                          <div class="col-md-6 col-sm-12 form-field-container description">
                             <%= property.label :description_en do %>
                               <span><%= t('activerecord.attributes.property.description_en_title') %></span>&nbsp;
                               <span class="property-cover-popover"
@@ -591,11 +689,12 @@
                             <div class="invalid-feedback"></div>
 
                           </div>
-                        </div><!-- /.row -->
-
-                        <hr class="my-4" />
 
                       <% end %>
+
+                      </div>
+
+                      <hr class="my-4" />
 
                       <div class="row">
                         <!-- Notes -->
@@ -649,7 +748,7 @@
 
                       <div class="multivalue-checkboxes">
                         <div class="form-row justify-content-center">
-                          <% %w(housetype heating orientation view other access power slope zone).each do |category| %>
+                          <% (Extra.distinct.pluck(:subtype) - ['dependent']).each do |category| %>
 
                             <div class="form-field-container <%= category.to_s %>">
                               <div class="form-group bottom-corner-separator">
@@ -677,6 +776,135 @@
                           <% end %>
                         </div>
 
+                        <div class="row justify-content-center">
+                          <!-- Orientation -->
+                          <div class="col-md-4 col-sm-12 form-field-container orientation">
+                            <div class="form-group mb-4">
+                              <div class="mt-1">
+                                <label class="control-label checkbox-header app-checkbox">
+                                  <span class="callout-header">
+                                    <span class="pin-title font-weight-bold"><%= t('activerecord.attributes.property.enums.orientation.title') %></span>
+                                  </span>
+                                </label>
+                                <%= property.select :orientation, Property.orientations.keys.collect { |orientation| [ Property.human_enum_name(:orientation, orientation), orientation ] }, { :include_blank => t('none_specified') }, { class: 'form-control custom-control-label custom-select' } %>
+                              </div>
+                            </div><!-- /.form-group -->
+                          </div> <!-- /Orientation -->
+
+                          <!-- Power -->
+                          <div class="col-md-4 col-sm-12 form-field-container power">
+                            <div class="form-group mb-4">
+                              <div class="mt-1">
+                                <label class="control-label checkbox-header app-checkbox">
+                                    <span class="callout-header">
+                                      <span class="pin-title font-weight-bold"><%= t('activerecord.attributes.property.enums.power.title') %></span>
+                                    </span>
+                                </label>
+                                <%= property.select :power, Property.powers.keys.collect { |power| [ Property.human_enum_name(:power, power), power ] }, { :include_blank => t('none_specified') }, { class: 'form-control custom-control-label custom-select' } %>
+                              </div>
+                            </div><!-- /.form-group -->
+                          </div> <!-- /Power -->
+
+                        <!-- Slope -->
+                        <div class="col-md-4 col-sm-12 form-field-container slope">
+                          <div class="form-group mb-4">
+                            <div class="mt-1">
+                              <label class="control-label checkbox-header app-checkbox">
+                                  <span class="callout-header">
+                                    <span class="pin-title font-weight-bold"><%= t('activerecord.attributes.property.enums.slope.title') %></span>
+                                  </span>
+                              </label>
+                              <%= property.select :slope, Property.slopes.keys.collect { |slope| [ Property.human_enum_name(:slope, slope), slope ] }, { :include_blank => t('none_specified') }, { class: 'form-control custom-control-label custom-select' } %>
+                            </div>
+                          </div><!-- /.form-group -->
+                        </div> <!-- /Slope -->
+
+                        <!-- Joinery -->
+                        <div class="col-md-4 col-sm-12 form-field-container joinery">
+                          <div class="form-group mb-4">
+                            <div class="mt-1">
+                              <label class="control-label checkbox-header app-checkbox">
+                                <span class="callout-header">
+                                  <span class="pin-title font-weight-bold"><%= t('activerecord.attributes.property.enums.joinery.title') %></span>
+                                </span>
+                              </label>
+                              <%= property.select :joinery, Property.joineries.keys.collect { |joinery| [ Property.human_enum_name(:joinery, joinery), joinery ] }, { :include_blank => t('none_specified') }, { class: 'form-control custom-control-label custom-select' } %>
+                            </div>
+                          </div><!-- /.form-group -->
+                        </div> <!-- /Joinery -->
+
+                        <!-- Floor type -->
+                        <div class="col-md-4 col-sm-12 form-field-container floortype">
+                          <div class="form-group mb-4">
+                            <div class="mt-1">
+                              <label class="control-label checkbox-header app-checkbox">
+                                <span class="callout-header">
+                                  <span class="pin-title font-weight-bold"><%= t('activerecord.attributes.property.enums.floortype.title') %></span>
+                                </span>
+                              </label>
+                              <%= property.select :floortype, Property.floortypes.keys.collect { |floortype| [ Property.human_enum_name(:floortype, floortype), floortype ] }, { :include_blank => t('none_specified') }, { class: 'form-control custom-control-label custom-select' } %>
+                            </div>
+                          </div><!-- /.form-group -->
+                        </div> <!-- /Floor type -->
+
+                        <!-- Heating system -->
+                        <div class="col-md-4 col-sm-12 form-field-container heatingtype">
+                          <div class="form-group mb-4">
+                            <div class="mt-1">
+                              <label class="control-label checkbox-header app-checkbox">
+                                <span class="callout-header">
+                                  <span class="pin-title font-weight-bold"><%= t('activerecord.attributes.property.enums.heatingtype.title') %></span>
+                                </span>
+                              </label>
+                              <%= property.select :heatingtype, Property.heatingtypes.keys.collect { |heatingtype| [ Property.human_enum_name(:heatingtype, heatingtype), heatingtype ] }, { :include_blank => t('none_specified') }, { class: 'form-control custom-control-label custom-select' } %>
+                            </div>
+                          </div><!-- /.form-group -->
+                        </div> <!-- /Heating system -->
+
+                        <!-- Heating medium -->
+                        <div class="col-md-4 col-sm-12 form-field-container heatingmedium">
+                          <div class="form-group mb-4">
+                            <div class="mt-1">
+                              <label class="control-label checkbox-header app-checkbox">
+                                <span class="callout-header">
+                                  <span class="pin-title font-weight-bold"><%= t('activerecord.attributes.property.enums.heatingmedium.title') %></span>
+                                </span>
+                              </label>
+                              <%= property.select :heatingmedium, Property.heatingmedia.keys.collect { |heatingmedium| [ Property.human_enum_name(:heatingmedium, heatingmedium), heatingmedium ] }, { :include_blank => t('none_specified') }, { class: 'form-control custom-control-label custom-select', 'data-deactivated': @property.heatingtype.blank? ||  @property.heatingtype == 'no_system' ? true : false } %>
+                            </div>
+                          </div><!-- /.form-group -->
+                        </div> <!-- /Heating medium -->
+
+                        <!-- Access -->
+                        <div class="col-md-4 col-sm-12 form-field-container access">
+                          <div class="form-group mb-4">
+                            <div class="mt-1">
+                              <label class="control-label checkbox-header app-checkbox">
+                                <span class="callout-header">
+                                  <span class="pin-title font-weight-bold"><%= t('activerecord.attributes.property.enums.access.title') %></span>
+                                </span>
+                              </label>
+                              <%= property.select :access, Property.accesses.keys.collect { |access| [ Property.human_enum_name(:access, access), access ] }, { :include_blank => t('none_specified') }, { class: 'form-control custom-control-label custom-select' } %>
+                            </div>
+                          </div><!-- /.form-group -->
+                        </div> <!-- /Access -->
+
+                        <!-- Zoning -->
+                        <div class="col-md-4 col-sm-12 form-field-container zoning">
+                          <div class="form-group mb-4">
+                            <div class="mt-1">
+                              <label class="control-label checkbox-header app-checkbox">
+                              <span class="callout-header">
+                                <span class="pin-title font-weight-bold"><%= t('activerecord.attributes.property.enums.zoning.title') %></span>
+                              </span>
+                              </label>
+                              <%= property.select :zoning, Property.zonings.keys.collect { |zoning| [ Property.human_enum_name(:zoning, zoning), zoning ] }, { :include_blank => t('none_specified') }, { class: 'form-control custom-control-label custom-select' } %>
+                            </div>
+                          </div><!-- /.form-group -->
+                        </div> <!-- /Zoning -->
+
+                      </div>
+
                         <hr />
 
                         <div class="form-row justify-content-center">
@@ -684,19 +912,21 @@
                             <div class="form-row form-group justify-content-center">
 
                               <%= property.collection_check_boxes :extra_ids, Extra.where(subtype: 'dependent'), :id, :name do |b| %>
-                                <div class="custom-control custom-checkbox app-checkbox m-2">
-                                  <div>
-                                    <%= b.check_box({ class: "custom-control-input dependent_check", type: 'checkbox' }) %>
-                                    <%= b.label({ class: 'custom-control-label dependent_label' }) do %>
-                                      <%= t("activerecord.attributes.extra.dependent.#{b.text}") %>
-                                    <% end %>
-                                  </div>
-                                  <div class="mt-1">
-                                    <% if current_account.greek? %>
-                                      <input value="<%= @property.send("#{b.text}_space") %>" type="number" name="property[<%= b.text %>_space]" class="form-control custom-control-label dependent_input" placeholder="<%= t("activerecord.attributes.extra.dependent.#{b.text}_placeholder") %>">
-                                    <% else %>
-                                      <input value="<%= @property.send("#{b.text}_space") %>" type="number" name="property[<%= b.text %>_space]" class="form-control custom-control-label dependent_input" placeholder="<%= t("activerecord.attributes.extra.dependent.#{b.text}_placeholder_footage") %>">
-                                    <% end %>
+                                <div class="form-field-container <%= b.text.to_s %>">
+                                  <div class="custom-control custom-checkbox app-checkbox m-2">
+                                    <div>
+                                      <%= b.check_box({ class: "custom-control-input dependent_check", type: 'checkbox' }) %>
+                                      <%= b.label({ class: 'custom-control-label dependent_label' }) do %>
+                                        <%= t("activerecord.attributes.extra.dependent.#{b.text}") %>
+                                      <% end %>
+                                    </div>
+                                    <div class="mt-1">
+                                      <% if current_account.greek? %>
+                                        <input value="<%= @property.send("#{b.text}_space") %>" type="number" name="property[<%= b.text %>_space]" class="form-control custom-control-label dependent_input" placeholder="<%= t("activerecord.attributes.extra.dependent.#{b.text}_placeholder") %>">
+                                      <% else %>
+                                        <input value="<%= @property.send("#{b.text}_space") %>" type="number" name="property[<%= b.text %>_space]" class="form-control custom-control-label dependent_input" placeholder="<%= t("activerecord.attributes.extra.dependent.#{b.text}_placeholder_footage") %>">
+                                      <% end %>
+                                    </div>
                                   </div>
                                 </div>
                               <% end %>
@@ -708,7 +938,8 @@
                       </div>
 
 
-                      <hr class="mt-5">
+                      <hr />
+
                       <div class="d-flex">
                         <div class="flex-grow-1">
                           <button type="button" class="prev btn btn-secondary" data-validate="fieldset-3"><%= t('js.forms.properties.wizard.previous') %></button>
@@ -811,7 +1042,7 @@
                             formID: "edit_property_#{@property.id}",
                             className: 'simple-select',
                             options: Property.markers.keys.collect { |marker| { label: Property.human_enum_name(:marker, marker), value: marker } },
-                            storedOption: { "label": Property.human_enum_name(:marker, @property.marker), "value": @property.marker },
+                            storedOption: @property.marker.blank? ? '' : { "label": Property.human_enum_name(:marker, @property.marker), "value": @property.marker },
                             soloMode: true,
                             ajaxEnabled: false,
                             isClearable: true,

@@ -8,6 +8,8 @@ class Property < ApplicationRecord
 
   after_destroy :destroy_orphan_ilocations
 
+  before_update :update_syncs
+
   # History module is used for the redirects
   friendly_id :unique_identifier, use: [:slugged, :finders, :history]
 
@@ -31,7 +33,6 @@ class Property < ApplicationRecord
 
   # before_save happens after validation that's why we use before_validation
   before_validation :handle_dependent_extra_fields, on: :update
-  before_validation :handle_dependent_energy_field, on: :update
 
   # before_save happens after validation that's why we use before_validation
   before_validation do
@@ -105,11 +106,29 @@ class Property < ApplicationRecord
 
   enum businesstype: [:sell, :rent, :sell_rent]
 
-  enum energy_cert: [:a_plus, :a, :b_plus, :b, :c, :d, :e, :z, :h]
+  enum energy_cert: [:a_plus, :a, :b_plus, :b, :c, :d, :e, :z, :h, :excempt, :processing]
 
-  enum floor: [:basement, :semi_basement, :ground_floor, :mezzanine].concat(Array(1..50).map(&:to_s).map(&:to_sym))
+  enum floor: [:basement, :semi_basement, :ground_floor, :semi_ground_floor].concat(Array(1..50).map(&:to_s).map(&:to_sym))
 
   enum marker: [:exact, :circle, :nonvisible]
+
+  enum orientation: [:east, :east_west, :east_meridian, :north, :north_east, :north_west, :west, :west_meridian, :meridian, :south, :south_east, :south_west]
+
+  enum power: [:one_phase, :three_phase, :industrial_phase]
+
+  enum slope: [:plane, :inclining, :amphitheatrical]
+
+  enum joinery: [:wooden, :aluminium, :synthetic]
+
+  enum floortype: [:marble, :wood, :stone, :ceramic_tiles, :mosaic_tiles, :wood_and_marble, :marble_and_tile, :wood_and_stone, :stone_and_marble, :wood_and_tile, :wood_and_mosaic, :industrial_floor]
+
+  enum heatingtype: [:prive, :central, :no_system]
+
+  enum heatingmedium: [:petrol, :natural_gas, :gas, :current, :thermal_accumulator, :pellet, :stove, :infrared, :fan_coil, :woods, :teleheating, :geothermal_energy]
+
+  enum access: [:asphalt, :sidewalk, :cobblestone, :dirt_road, :sea, :other, :no_access]
+
+  enum zoning: [:residential, :agricultural, :commercial, :industrial, :recreational, :unincorporated]
 
   # Validations should match their ujs_form_handler.js counterparts
   validates :businesstype, presence: true
@@ -151,10 +170,10 @@ class Property < ApplicationRecord
 
     def filters
       {
-        residential: %w[facade_length distance_from_sea building_coefficient coverage_ratio slope power access within_urban_plan equipment service_lift load_ramp agricultural_use exchange_scheme],
-        commercial: %w[facade_length distance_from_sea building_coefficient coverage_ratio orientation view fit_for_professional_use fireplace slope within_urban_plan exchange_scheme pool],
-        land: %w[floor construction renovation bedrooms bathrooms levels energy_cert power housetype heating gas solar_water_heating furnished fireplace awnings clima security_door pool elevator no_utility_bills roofdeck equipment balcony service_lift load_ramp alarm within_urban_plan unit],
-        other: %w[facade_length distance_from_sea building_coefficient coverage_ratio orientation view fit_for_professional_use fireplace slope within_urban_plan exchange_scheme pool zone power investment no_utility_bills unit]
+        residential: %w[facade_length building_coefficient coverage_ratio slope power within_urban_plan equipment service_lift load_ramp agricultural_use exchange_scheme shopwindow],
+        commercial: %w[facade_length distance_from_sea building_coefficient coverage_ratio orientation view fit_for_professional_use fireplace slope within_urban_plan exchange_scheme pool orientation joinery student_friendly second_home],
+        land: %w[floor construction renovation living_rooms bedrooms bathrooms kitchens wcs levels energy_cert power housetype heating gas solar_water_heating furnished fireplace awnings clima security_door pool elevator no_utility_bills roofdeck garden equipment balcony service_lift load_ramp alarm within_urban_plan unit night_power heating_under_floor common_expenses shopwindow joinery floortype heatingtype heatingmedium pest_net double_glass fresh_paint_coat structured_wiring accessible_for_disabled internal_staircase internal_staircase attic playroom pending_renovation satellite_antenna pets_allowed luxurious bright student_friendly second_home],
+        other: %w[facade_length distance_from_sea building_coefficient coverage_ratio orientation view fit_for_professional_use fireplace slope within_urban_plan exchange_scheme pool zoning power investment no_utility_bills unit night_power heating_under_floor orientation common_expenses shopwindow joinery floortype heatingtype heatingmedium pest_net double_glass fresh_paint_coat structured_wiring accessible_for_disabled internal_staircase internal_staircase attic playroom pending_renovation satellite_antenna pets_allowed luxurious bright student_friendly second_home]
       }
     end
 
@@ -174,9 +193,13 @@ class Property < ApplicationRecord
 
     def extended_features(account)
       extended = {
+        :living_rooms => {:label => 'living_rooms', :icon => 'living_rooms', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
         :bedrooms => {:label => 'bedrooms', :icon => 'bedrooms', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
         :bathrooms => {:label => 'bathrooms', :icon => 'bathrooms', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
+        :kitchens => {:label => 'kitchens', :icon => 'kitchens', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
+        :wcs => {:label => 'wcs', :icon => 'wcs', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
         :floor => {:label => 'floor', :icon => 'floor', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.floor.#{value}")}},
+        :common_expenses => {:label => 'common_expenses', :icon => 'common_expenses', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
         # :render_extra => {:label => 'parking', :icon => 'parking', :options => 'parking', :renderfn => Proc.new {|value| value.blank? ? I18n.t('false') : I18n.t('true')}}, # Casting tip see here: https://stackoverflow.com/a/44322375/178728
         :construction => {:label => 'construction', :icon => 'construction', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
         :renovation => {:label => 'renovation', :icon => 'renovation', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
@@ -184,8 +207,17 @@ class Property < ApplicationRecord
         :distance_from_sea => {:label => 'distance_from_sea', :icon => 'distance_from_sea', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
         :building_coefficient => {:label => 'building_coefficient', :icon => 'building_coefficient', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
         :coverage_ratio => {:label => 'coverage_ratio', :icon => 'coverage_ratio', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
+        :availability => {:label => 'availability', :icon => 'availability', :options => nil, :renderfn => Proc.new {|value| value ? (I18n.l value, format: :showings) : '—' }},
         :address => {:label => 'address', :icon => 'address', :options => nil, :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN},
-        :availability => {:label => 'availability', :icon => 'availability', :options => nil, :renderfn => Proc.new {|value| value ? (I18n.l value, format: :showings) : '—' }}
+        :orientation => {:label => 'orientation', :icon => 'orientation', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.orientation.#{value}")} },
+        :power => {:label => 'power', :icon => 'power', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.power.#{value}")} },
+        :slope => {:label => 'slope', :icon => 'slope', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.slope.#{value}")} },
+        :joinery => {:label => 'joinery', :icon => 'joinery', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.joinery.#{value}")} },
+        :floortype => {:label => 'floortype', :icon => 'floortype', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.floortype.#{value}")} },
+        :heatingtype => {:label => 'heatingtype', :icon => 'heatingtype', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.heatingtype.#{value}")} },
+        :heatingmedium => {:label => 'heatingmedium', :icon => 'heatingmedium', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.heatingmedium.#{value}")} },
+        :access => {:label => 'access', :icon => 'access', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.access.#{value}")} },
+        :zoning => {:label => 'zoning', :icon => 'zoning', :options => nil, :renderfn => Proc.new {|value| value.blank? ? '—' : I18n.t("activerecord.attributes.property.enums.zoning.#{value}")} }
         # :owner_info => {:label => 'owner', :icon => 'client', :options => 'full_name', :renderfn => DEFAULT_ATTRIBUTE_RENDER_FN}
       }
       if account.greek?
@@ -295,6 +327,18 @@ class Property < ApplicationRecord
 
   private
 
+  def update_syncs
+    return unless spitogatos_sync.present?
+
+    if changed.present? && !spitogatos_sync_changed?
+      self.spitogatos_data_sync_needed = true
+    end
+
+    return if attachment_changes.blank?
+
+    self.spitogatos_images_sync_needed = true
+  end
+
   # Determine whether an owner can be removed when editing a property
   def option_meta(account, user, client)
     return false if user.is_admin?(account)
@@ -302,23 +346,18 @@ class Property < ApplicationRecord
     !user.client_ids.include?(client.id)
   end
 
-  # In the 'compound' extra fields for roofdeck, storage, garden and plot where each one comes with its own input,
+  # In the 'compound' extra fields for `Extra.where(subtype: 'dependent').pluck(:name)`
+  # where each one comes with its own input, (currently: "roofdeck", "plot", "garden", "storage", "balcony", "shopwindow")
   # make sure that if unchecked on update action, the existing input value will also be cleared.
   def handle_dependent_extra_fields
     edited_extras = extras.reject { |c| c.blank? }.collect { |extra| Extra.find(extra.id).name }
-    set_diff = %w(roofdeck storage garden plot) - edited_extras
+    set_diff = Extra.where(subtype: 'dependent').pluck('name') - edited_extras
     set_diff.each do |el|
       # DEBUG
       # puts "the property is: #{el + '_space'}"
       # MIND THAT THIS won't do any validations or update the updated_at attribute
       write_attribute(:"#{el + '_space'}", nil)
     end
-  end
-
-  def handle_dependent_energy_field
-    return if has_energy_cert?
-
-    write_attribute(:energy_cert, nil)
   end
 
   def destroy_orphan_ilocations

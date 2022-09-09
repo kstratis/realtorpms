@@ -84,6 +84,8 @@ en:
   page_refresh: "Refresh page"
   apply: "Apply"
   ok: "OK"
+  coming_soon: "Coming soon"
+  none_specified: "-=None specified=-"
   plan:
     title: "Subscription"
     trial: "Trial"
@@ -273,16 +275,14 @@ en:
           studio_pr: "Studio"
           prefabricated_pr: "Prefabricated"
           precast_pr: "Precast"
+          new_development: "New development"
+          penthouse: "Penthouse"
+          unfinished: "Unfinished"
+          renovated: "Renovated"
         heating:
           title: "Heating"
           central: "Central heating"
           prive: "Autonomous heating system"
-        orientation:
-          title: "Orientation"
-          facade: "Frontage lot"
-          double_frontage: "Double frontage"
-          corner: "Corner lot"
-          internal: "Inwards facing lot"
         view:
           title: "View"
           sea_view: "Sea view"
@@ -292,7 +292,6 @@ en:
         other:
           title: "Other"
           parking: "Parking"
-          gas: "Natural gas"
           solar_water_heating: "Solar water heating"
           fireplace: "Fireplace"
           furnished: "Furnished"
@@ -312,6 +311,28 @@ en:
           within_urban_plan: "Within urban plan"
           agricultural_use: "Agricultural use"
           exchange_scheme: "Exchange scheme"
+          night_power: "Off-peak electricity discount"
+          heating_under_floor: "Heated floors"
+          facade: "Frontage lot"
+          double_frontage: "Double frontage"
+          corner: "Corner lot"
+          internal: "Inwards facing lot"
+          no_agent_fee: "Agent fee waiver"
+          pest_net: "Pest net"
+          double_glass: "Double glazed windows"
+          fresh_paint_coat: "Freshly painted"
+          structured_wiring: "Structured wiring"
+          accessible_for_disabled: "Accessible"
+          internal_staircase: "Internal staircase"
+          attic: "Attic"
+          playroom: "Playroom"
+          pending_renovation: "Requires renovation"
+          satellite_antenna: "Satellite"
+          pets_allowed: "Pets allowed"
+          luxurious: "Luxurious"
+          bright: "Bright"
+          student_friendly: "Student friendly"
+          second_home: "Second home"
         access:
           title: "Access from"
           asphalt: "Road access"
@@ -322,23 +343,15 @@ en:
           other: "Other access"
           no_access: "No access"
         power:
-          title: "Power"
-          one_phase: "One-phase power"
-          three_phase: "Three-phase power"
-          industrial_phase: "Industrial power"
+          title: "Electricity"
+          one_phase: "One-phase"
+          three_phase: "Three-phase"
+          industrial_phase: "Industrial"
         slope:
           title: "Slope"
           plane: "Plane"
           inclining: "Inclining"
           amphitheatrical: "Amphitheatrical"
-        zone:
-          title: "Zone"
-          residential: "Residential zone"
-          agricultural: "Agricultural zone"
-          commercial: "Commercial zone"
-          industrial: "Industrial zone"
-          recreational: "Recreational zone"
-          unincorporated: "Unincorporated"
         dependent:
           storage: "Storage space"
           storage_placeholder: "Storage size in sq. meters"
@@ -352,6 +365,12 @@ en:
           plot: "Land plot"
           plot_placeholder: "Garden size in sq meters"
           plot_placeholder_footage: "Garden size in sq. feet"
+          balcony: "Balcony"
+          balcony_placeholder: "Balcony size in sq meters"
+          balcony_placeholder_footage: "Balcony size in sq. feet"
+          shopwindow: "Store window"
+          shopwindow_placeholder: "Store window length in meters"
+          shopwindow_placeholder_footage: "Store window length in feet"
       model_type:
         name: "Category"
       entity_field:
@@ -364,6 +383,7 @@ en:
         assignments_title: "Assignment"
         viewings_title: "Viewings"
         extras_not_found: "None found"
+        map_title: "Location"
         description: "Description"
         description_title: "Description"
         description_en_title: "Description (🇺🇸 - English)"
@@ -389,11 +409,19 @@ en:
         price_per_sqmeter_html: "%{price} / m<sup>2</sup>"
         price_per_sqfoot_html: "%{price} / ft<sup>2</sup>"
         bedrooms_title: "Bedrooms"
+        living_rooms_title: "Living rooms"
+        wcs_title: "WC"
+        kitchens_title: "Kitchens"
+        common_expenses_title: "Common expenses"
         bedrooms_short: "Brooms"
         bedroom:
           one: "1 bedroom"
           other: "%{count} bedrooms"
         bedrooms_feedback_html: "i.e. 2"
+        living_rooms_feedback_html: "i.e. 1"
+        wcs_feedback_html: "i.e. 1"
+        kitchens_feedback_html: "i.e. 1"
+        common_expenses_feedback_html: "i.e. 100"
         bathrooms_title: "Bathrooms"
         bathroom:
           one: "1 bathroom"
@@ -417,6 +445,15 @@ en:
         coverage_ratio: "Coverage ratio"
         coverage_ratio_title: "Coverage ratio"
         coverage_ratio_feedback_html: "i.e. 70 (percent)"
+        orientation_title: "Orientation"
+        power_title: "Electricity"
+        slope_title: "Slope"
+        joinery_title: "Window frames"
+        floortype_title: "Floor type"
+        heatingtype_title: "Heating system"
+        heatingmedium_title: "Heating medium"
+        access_title: "Access"
+        zoning_title: "Zone"
         location: "Location"
         location_title: "Location"
         status_title: "Market status"
@@ -464,6 +501,8 @@ en:
             e: 'E'
             z: 'Z'
             h: 'H'
+            excempt: 'Excempt'
+            processing: 'Under processing'
           businesstype:
             title: "Type"
             sell: "Sell"
@@ -480,11 +519,90 @@ en:
             exact: "Exact location (pin)"
             circle: "Loose location (circle)"
             nonvisible: "Non-visible location"
+          orientation:
+            title: "Orientation"
+            east: "East"
+            east_west: "East west"
+            east_meridian: "East meridian"
+            north: "North"
+            north_east: "North east"
+            north_west: "North west"
+            west: "West"
+            west_meridian: "West meridian"
+            meridian: "Meridian"
+            south: "South"
+            south_east: "South east"
+            south_west: "South west"
+          power:
+            title: "Electricity"
+            one_phase: "One phase"
+            three_phase: "Three phase"
+            industrial_phase: "Industrial phase"
+          slope:
+            title: "Slope"
+            plane: "Plane"
+            inclining: "Inclining"
+            amphitheatrical: "Amphitheatrical"
+          joinery:
+            title: "Window frames"
+            wooden: "Wooden"
+            aluminium: "Aluminium"
+            synthetic: "Synthetic"
+          floortype:
+            title: "Floor type"
+            marble: "Marble"
+            wood: "Wood"
+            stone: "Stone"
+            ceramic_tiles: "Ceramic tiles"
+            mosaic_tiles: "Mosaic tiles"
+            wood_and_marble: "Wood & marble"
+            marble_and_tile: "Marble & tile"
+            wood_and_stone: "Wood & stone"
+            stone_and_marble: "Stone & marble"
+            wood_and_tile: "Wood & tile"
+            wood_and_mosaic: "Wood & mosaic"
+            industrial: "Industrial"
+          heatingtype:
+            title: "Heating system"
+            central: "Central"
+            prive: "Private"
+            no_system: "No heating system"
+          heatingmedium:
+            title: "Heating medium"
+            petrol: "Petrol"
+            natural_gas: "Natural gas"
+            gas: "Gas"
+            current: "Electricity"
+            thermal_accumulator: "Thermal accumulator"
+            pellet: "Pellet"
+            stove: "Stove"
+            infrared: "Infrared system"
+            fan_coil: "Fan coil"
+            woods: "Wood"
+            teleheating: "Teleheating"
+            geothermal_energy: "Geothermal energy"
+          access:
+            title: "Access"
+            asphalt: "Road"
+            sidewalk: "Sidewalk"
+            cobblestone: "Cobblestone street"
+            dirt_road: "Dirt road"
+            sea: "Sea"
+            other: "Other"
+            no_access: "No access"
+          zoning:
+            title: "Zone"
+            residential: "Residential"
+            agricultural: "Agricultural"
+            commercial: "Commercial"
+            industrial: "Industrial"
+            recreational: "Recreational"
+            unincorporated: "Unincorporated"
           floor:
             basement: "Basement"
             semi_basement: "Semi-basement"
             ground_floor: "Ground floor"
-            mezzanine: "Mezzanine"
+            semi_ground_floor: "Mezzanine"
             1: "1st"
             2: "2nd"
             3: "3rd"
@@ -569,6 +687,11 @@ en:
             detachable: "Detachable"
             air: "Air"
             other_various: "Other"
+            farm: "Farm"
+            houseboat: "Houseboat"
+            other_residential: "Other categories"
+            other_commercial: "Other categories"
+            other_land: "Other categories"
           type:
             neoclassical: "Neoclassical"
             protected_property: "Protected property"
@@ -579,6 +702,8 @@ en:
             studio: "Studio"
             prefabricated: "Prefabricated"
             precast: "Precasted"
+            penthouse: "Penthouse"
+            unfinished: "Unfinished"
           price:
             all: "All"
             minimum: "Minimum"
@@ -1153,6 +1278,8 @@ en:
     clone:
       label: "Clone"
       prompt: "Are you sure you want to clone this?"
+    sync:
+      spitogatos_label: "Sync with spitogatos.gr"
     print: "Print"
     info: "Details"
     map: "Map"
@@ -1365,7 +1492,30 @@ en:
       subscription: "Subscription"
       support: "Support"
       activate_support: "Activate support widget"
-      integrations: "Integrations"
+      integrations:
+        title: "Integrations"
+        spitogatos:
+          save: "Save"
+          edit: "Edit"
+          check: "Validate"
+          credentials_title: "spitogatos.gr credentials"
+          broker_id: 'Broker ID'
+          broker_id_placeholder: 'Broker ID as given to you by spitogatos'
+          username: 'Username'
+          username_placeholder: 'Username used in spitogatos.gr'
+          password: 'Password'
+          password_placeholder: 'Password used in spitogatos.gr'
+          status:
+            success: "The integration is working fine."
+            error: "Connection error. Please check spitogatos.gr login credentials."
+            unknown: "Unknown error. Please try again."
+          flash:
+            add_success: 'Configuration added successfully'
+            add_failure: 'Oops! Something went wrong!'
+            edit_success: 'Configuration successfully updated'
+            edit_failure: 'Oops! Something went wrong!'
+            destroy_success: 'Configuration settings successfully deleted'
+            destroy_failure: 'Oops! Something went wrong!'
       widget: "Widget"
       under_construction: "Under construction..."
       info: "Details"

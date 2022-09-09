@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FormSelect from './FormSelect';
+import {restoreAllPropertyAttrs, filterOutInvalidPropertyAttrs, invalidateDependentCheckboxesOnLoad} from "../../utilities/helpers";
 import URLSearchParams from '@ungap/url-search-params';
 
 class AssociativeFormSelect extends React.Component {
@@ -122,31 +123,6 @@ class AssociativeFormSelect extends React.Component {
     return $('#filters').data();
   }
 
-  // Re-enables all property attributes which may be filtered out
-  restoreAllPropertyAttrs(){
-    // Iterate over all map inputs/checkboxes etc and do the following:
-    const attrs = Object.values(this.propertyFilterAttrsHash()).reduce((acc, curVal) => {
-      return acc.concat(curVal)
-    }, []);
-
-    for (const attr of attrs){
-      $(`.${attr}`).find('input').prop('disabled', false)
-      $(`.form-field-container.${attr}`).removeClass('d-none')
-      $(`.form-group-container.${attr}`).removeClass('d-none')
-    }
-  }
-
-  // Filters out invalid property attributes using DOM operations
-  filterOutInvalidPropertyAttrs(attr){
-    const invalidAttrs = this.propertyFilterAttrsHash()[attr];
-    for (const attr of invalidAttrs) {
-      // Iterate over all map inputs/checkboxes etc and do the following:
-      $(`.${attr}`).find('input').prop('disabled', true)
-      $(`.form-field-container.${attr}`).addClass('d-none')
-      $(`.form-group-container.${attr}`).addClass('d-none')
-    }
-  }
-
   // Hides fields according to current selection.
   // i.e. A land plot property can't have bedrooms/bathrooms
   hideInvalidFormFields(selectedOption) {
@@ -155,8 +131,27 @@ class AssociativeFormSelect extends React.Component {
     } else {
       this.enableStepper();
       const optionName = selectedOption['value'];
-      this.restoreAllPropertyAttrs();
-      this.filterOutInvalidPropertyAttrs(optionName)
+      restoreAllPropertyAttrs(this.propertyFilterAttrsHash());
+      filterOutInvalidPropertyAttrs(this.propertyFilterAttrsHash(), optionName)
+      invalidateDependentCheckboxesOnLoad();
+    }
+  }
+
+  // Handles the dependant floor field. This is a react-select field which depends
+  // on the isRequired prop. `required` native DOM elements are handled by parsley js
+  // which automatically respects the `disabled` attribute and removes the `required` requirement.
+  // Unfortunately react-select components don't do that which is why they require
+  // special handling.
+  handleDependantRequiredFields(selectedOption){
+    const optionName = selectedOption['value'];
+
+    if (!['residential', 'commercial', 'land', 'other'].includes(optionName)) return;
+    if (!document.querySelector("[name='property[floor]']")) return;
+
+    if (optionName === 'land') {
+      document.querySelector("[name='property[floor]']").removeAttribute('required');
+    } else if (['residential', 'commercial', 'other'].includes(optionName)){
+      document.querySelector("[name='property[floor]']").setAttribute('required', 'true');
     }
   }
 
@@ -172,6 +167,7 @@ class AssociativeFormSelect extends React.Component {
     // If left empty, disable the form stepper.
     if (this.props?.formdata?.categoryid === 'property_category') {
       this.hideInvalidFormFields(selectedOption)
+      this.handleDependantRequiredFields(selectedOption)
     }
     // If it fires on the parent, set subcategory's options and enable it
     if (selectedOption) {

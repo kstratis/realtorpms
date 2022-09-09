@@ -1,0 +1,18 @@
+<% content_for(:nested_settings_header) do %>
+  <%= t('settings.sidebar.integrations.title') %>
+<% end %>
+
+<% content_for(:integrations) do %>
+  <h2>Spitogatos</h2>
+  <div class="col-12 col-lg-6 offset-lg-3 py-4">
+
+    <%= form_for(@spitogatos, url: settings_integrations_spitogatos_path, html: { id: 'spitogatos-settings-form', class: 'js-validatable' }) do |f| %>
+      <%= render 'accounts/settings/integrations/spitogatos/form', f: f %>
+      <hr/>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-outline-primary ml-auto"><%= t('settings.sidebar.integrations.spitogatos.save') %></button>
+      </div>
+    <% end %>
+
+  </div>
+<% end %>

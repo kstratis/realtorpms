@@ -124,38 +124,123 @@ const objectToUrlParams = (obj) => {
   }).join('&');
 }
 
-// Sets up the
-const setup_dependent_checkboxes = () => {
+const invalidateDependentCheckboxesOnLoad = () => {
   var elements = $('.dependent_check');
   var status;
   // On load
   elements.each(function() {
     status = $(this).prop('checked');
-    $(this)
-      .parent()
-      .siblings()
-      .find('.dependent_input')
-      .prop('disabled', !status);
-    $(this)
-      .parent()
-      .siblings()
-      .find('.dependent_label.plain')
-      .toggleClass('disabled', !status);
+    // If the form field container has the `d-none` class (due to category change or simply fresh page load)
+    // disable both the checkbox (`.dependent_check`) and the input (`.dependent_input`)
+    if ($(this).parents('.form-field-container').hasClass('d-none')) {
+      $(this).prop('disabled', true);
+      $(this).parent().siblings().find('.dependent_input').prop('disabled', true);
+    } else {
+      // Otherwise the field should be visible and we should set the `disabled` attribute of the
+      // checkbox to `off` (in other words enable it).
+      // The input (`.dependent_input`) is then enabled/disabled based on the `checked` state of the checkbox.
+      $(this).prop('disabled', false);
+      $(this)
+          .parent()
+          .siblings()
+          .find('.dependent_input')
+          .prop('disabled', !status);
+      $(this)
+          .parent()
+          .siblings()
+          .find('.dependent_label.plain')
+          .toggleClass('disabled', !status);
+    }
   });
+}
+
+const invalidateDependentCheckboxesOnChange = () => {
+  var elements = $('.dependent_check');
   // On change
-  elements.change(function() {
+  elements.change(function () {
     $(this)
-      .parent()
-      .siblings()
-      .find('.dependent_input')
-      .prop('disabled', !this.checked).find('.dependent_label.plain').toggleClass('disabled', !this.checked);
+        .parent()
+        .siblings()
+        .find('.dependent_input')
+        .prop('disabled', !this.checked).find('.dependent_label.plain').toggleClass('disabled', !this.checked);
     $(this)
-      .parent()
-      .siblings()
-      .find('.dependent_label.plain')
-      .toggleClass('disabled', !this.checked);
+        .parent()
+        .siblings()
+        .find('.dependent_label.plain')
+        .toggleClass('disabled', !this.checked);
   });
+}
+
+const invalidateHeatingSelects = () => {
+  // The following code block works in conjunction with the DOM manipulations
+  // taking place in `AssociativeFormSelect`
+  const $heatingType = $('[name="property[heatingtype]"]');
+  const $heatingMedium = $('[name="property[heatingmedium]"]');
+  $heatingType.on('change', (e) => {
+    // DEBUG
+    // console.log(e.target.value);
+    const selection = e.target.value;
+    switch (selection) {
+      case "no_system":
+      case "":
+        $heatingMedium.prop('disabled', true)
+        break;
+      case "prive":
+      case "central":
+        $heatingMedium.prop('disabled', false)
+        break;
+      default:
+        break;
+    }
+  });
+}
+
+// This is just the regular listener of the dependent checkboxes
+const fireDependantFieldListeners = () => {
+  if ($('[name="stepperForm"]').length < 1) return;
+
+  invalidateDependentCheckboxesOnChange();
+  invalidateHeatingSelects();
 };
+
+// Re-enables all property attributes which may be filtered out
+const restoreAllPropertyAttrs = (attributes_hash) => {
+  // Iterate over all map inputs/checkboxes etc and do the following:
+  const attrs = Object.values(attributes_hash).reduce((acc, curVal) => {
+    return acc.concat(curVal)
+  }, []);
+
+  let $selector;
+  let serverDisabledField;
+  for (const attr of attrs) {
+    // Don't touch the disabled attribute of the dependent extra fields. Only hide them.
+    // Effectively the `invalidateDependentCheckboxesOnChange` part needed on page load
+    $selector = $(`.${attr}`).find('input:not(.dependent_input, .dependent_check), select');
+    // This bit here is for the dependency between the heatingtype and heatingmedium selects
+    // In other words the `invalidateHeatingSelects` part needed on page load
+    serverDisabledField = $selector.data('deactivated');
+    if (serverDisabledField === true) {
+      $selector.prop('disabled', true)
+    } else{
+      $selector.prop('disabled', false)
+    }
+    $(`.form-field-container.${attr}`).removeClass('d-none')
+    $(`.form-group-container.${attr}`).removeClass('d-none')
+  }
+}
+
+// Filters out invalid property attributes using DOM operations
+const filterOutInvalidPropertyAttrs = (attributes_hash, attribute) => {
+  const invalidAttrs = attributes_hash[attribute];
+  for (const attr of invalidAttrs) {
+    // Iterate over all map inputs/checkboxes etc and do the following:
+    // Don't touch the disabled attribute of the dependent extra fields. Only hide them.
+    // Effectively the `invalidateDependentCheckboxesOnChange` part needed on page load
+    $(`.${attr}`).find('input:not(.dependent_input, .dependent_check), select').prop('disabled', true)
+    $(`.form-field-container.${attr}`).addClass('d-none')
+    $(`.form-group-container.${attr}`).addClass('d-none')
+  }
+}
 
 export {
   debounce,
@@ -170,7 +255,10 @@ export {
   categoryFilterOptions,
   ifExists,
   hasParams,
-  setup_dependent_checkboxes,
+  fireDependantFieldListeners,
   objectToUrlParams,
-  comesFromClient
+  comesFromClient,
+  restoreAllPropertyAttrs,
+  filterOutInvalidPropertyAttrs,
+  invalidateDependentCheckboxesOnLoad
 };

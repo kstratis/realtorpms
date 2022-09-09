@@ -40,6 +40,7 @@ const PropertiesList = ({
   locations_filter,
   advanceByTwo,
   handleClone,
+  handleSpitogatosSync,
   isLoading,
   dataset,
   pageCount,
@@ -59,6 +60,7 @@ const PropertiesList = ({
   forceFiltersOpen,
   preselectedClient,
   i18n,
+  spitogatosEnabled,
 }) => {
   const { filtersOpen, setFiltersOpen } = useFilterToggle('propertyFiltersOpen', forceFiltersOpen);
   const handleChange = event => setFiltersOpen(filtersOpen => !filtersOpen);
@@ -443,9 +445,11 @@ const PropertiesList = ({
                       userEditable={entry['userEditable']}
                       filtersOpen={filtersOpen}
                       handleClone={handleClone}
+                      handleSpitogatosSync={handleSpitogatosSync}
                       i18n={i18n}
                       showControls={showControls}
                       active={entry['active']}
+                      spitogatosEnabled={spitogatosEnabled}
                     />
                   ))}
                 </div>

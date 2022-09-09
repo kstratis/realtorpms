@@ -1,0 +1,12 @@
+<% content_for(:nested_settings_header) do %>
+  <%= t('settings.sidebar.integrations.title') %>
+<% end %>
+
+<% content_for(:integrations) do %>
+  <div class="text-center py-4">
+    <div class="row">
+      <%= link_to 'Spitogatos', new_settings_integrations_spitogato_path, class: 'integration-visual-block col-6 offset-3 p-5 my-2 spitogatos-visual-block' %>
+      <%= link_to "xe.gr (#{t('coming_soon')})", '', class: 'integration-visual-block col-6 offset-3 p-5 my-2 xe-visual-block disabled' %>
+    </div>
+  </div>
+<% end %>
