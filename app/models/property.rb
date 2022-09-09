@@ -328,7 +328,7 @@ class Property < ApplicationRecord
   private
 
   def update_syncs
-    return unless spitogatos_sync
+    return unless spitogatos_sync.present?
 
     if changed.present? && !spitogatos_sync_changed?
       self.spitogatos_data_sync_needed = true

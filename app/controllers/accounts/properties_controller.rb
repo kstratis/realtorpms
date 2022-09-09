@@ -445,7 +445,6 @@ module Accounts
                                        :floor,
                                        :levels,
                                        :availability,
-                                       :has_energy_cert,
                                        :energy_cert,
                                        :construction,
                                        :renovation,

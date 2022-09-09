@@ -22,11 +22,15 @@ class Spitogatos < ApplicationRecord
     end
   end
 
-  def new_listing(data)  # OK
+  def new_dummy_listing
+    client.call("sync.newListing", SPITOGATOS_APP_KEY, 0, username, password, SPITOGATOS_DUMMY_DATA)
+  end
+
+  def new_listing(data)
     client.call("sync.newListing", SPITOGATOS_APP_KEY, broker_id.to_s, username, password, data)
   end
 
-  def renew_listing(property_spitogatos_id)  # OK
+  def renew_listing(property_spitogatos_id)
     client.call("sync.renewListing", SPITOGATOS_APP_KEY, username, password, property_spitogatos_id)
   end
 
@@ -34,16 +38,16 @@ class Spitogatos < ApplicationRecord
     client.call("sync.editListing", SPITOGATOS_APP_KEY, username, password, property_id.to_i, data)
   end
 
-  def delete_listing(property_id)
-    client.call("sync.deleteListing", SPITOGATOS_APP_KEY, username, password, property_id.to_i)
-  end
-
-  def new_dummy_listing
-    client.call("sync.newListing", SPITOGATOS_APP_KEY, 0, username, password, SPITOGATOS_DUMMY_DATA)
+  def delete_listing(property_spitogatos_id)
+    client.call("sync.deleteListing", SPITOGATOS_APP_KEY, username, password, property_spitogatos_id.to_i)
   end
 
   def add_listing_image(property_spitogatos_id, slot, image_url)
     client.call("sync.addImage", SPITOGATOS_APP_KEY, username, password, property_spitogatos_id, slot, image_url)
+  end
+
+  def get_image_list(property_spitogatos_id)
+    client.call("sync.getImageList", SPITOGATOS_APP_KEY, username, password, property_spitogatos_id)
   end
 
   def remove_listing_image(property_spitogatos_id, slot)
@@ -58,13 +62,13 @@ class Spitogatos < ApplicationRecord
     end
 
     def delete_images(account, property)
-      image_slots_count = @property.images.presence || 0
-      if property.avatar.attached?
-        image_slots_count += 1
-      end
+      property_existing_images_list = account.spitogatos.get_image_list(property.spitogatos_id.to_i)
+      return if property_existing_images_list.blank?
 
-      image_slots_count.times.each.with_index(1) do |_, index|
-        account.spitogatos.add_listing_image(property.spitogatos_id.to_i, index)
+      property_image_slots = property_existing_images_list.keys
+
+      property_image_slots.each do |slot|
+        account.spitogatos.remove_listing_image(property.spitogatos_id.to_i, slot.to_i)
       end
     end
 
@@ -74,7 +78,7 @@ class Spitogatos < ApplicationRecord
         account.spitogatos.add_listing_image(property.spitogatos_id.to_i, slot_start, property.avatar.url)
         slot_start += 1
       end
-      
+
       return if property.images.blank?
 
       property.images.each.with_index(slot_start) do |image, index|
@@ -96,15 +100,25 @@ class Spitogatos < ApplicationRecord
         # 1) `spitogatos_sync` has been turned on
         # 2) `spitogatos_id` is `nil` meaning it's not registered against spitogatos yet
         properties = account.properties.where(spitogatos_sync: true, spitogatos_id: nil)
-        logger.info "Found #{properties.size} new properties to sync"
+        logger.info "-=Found #{properties.size} new properties to sync=-"
         properties.each do |property|
-          logger.info "Syncing property #{property.slug}/#{property.id}"
-          data = convert_to_spitogatos_format(property)
-          logger.info "Uploading property data"
-          spitogatos_id = account.spitogatos.new_listing(data)
+          logger.info "-=Uploading new property #{property.slug}/#{property.id}=-"
+
+          begin
+            data = convert_to_spitogatos_format(property)
+            spitogatos_id = account.spitogatos.new_listing(data)
+          rescue StandardError => e
+            logger.error "-=Error uploading new property #{property.slug}/#{property.id}: #{e}=-"
+            next
+          end
+
           property.update_columns(spitogatos_id: spitogatos_id, spitogatos_created_at: Time.current, spitogatos_updated_at: Time.current)
-          logger.info "Uploading property images"
-          upload_images(account, property)
+
+          begin
+            upload_images(account, property)
+          rescue StandardError => e
+            logger.error "-=Error images for new property #{property.slug}/#{property.id}: #{e}=-"
+          end
         end
       end
     end
@@ -113,18 +127,38 @@ class Spitogatos < ApplicationRecord
       spitogatos_enabled_accounts.each do |account|
         # Fetch only spitogatos activated properties which have already been uploaded to spitogatos portal
         data_sync_properties = account.properties.where(spitogatos_sync: true, spitogatos_data_sync_needed: true).where.not(spitogatos_id: nil)
-        logger.info "Found #{properties.size} properties with data changes to sync"
+
+        logger.info "-=Found #{data_sync_properties.size} properties with data changes to sync=-"
+
         data_sync_properties.each do |property|
-          data = convert_to_spitogatos_format(property)
-          account.spitogatos.edit_listing(property.spitogatos_id, data)
+          logger.info "-=Updating data for property #{property.slug}/#{property.id}/#{property.spitogatos_id}=-"
+
+          begin
+            data = convert_to_spitogatos_format(property)
+            account.spitogatos.edit_listing(property.spitogatos_id, data)
+          rescue StandardError => e
+            logger.error "-=Error updating data for property #{property.slug}/#{property.id}/#{property.spitogatos_id}: #{e}=-"
+            next
+          end
+
           property.update_columns(spitogatos_updated_at: Time.current, spitogatos_data_sync_needed: false)
         end
 
         image_sync_properties = account.properties.where(spitogatos_sync: true, spitogatos_images_sync_needed: true).where.not(spitogatos_id: nil)
-        logger.info "Found #{properties.size} properties with image changes to sync"
+
+        logger.info "-=Found #{image_sync_properties.size} properties with image changes to sync=-"
+
         image_sync_properties.each do |property|
-          delete_images(account, property)
-          upload_images(account, property)
+          logger.info "-=Updating images for property #{property.slug}/#{property.id}/#{property.spitogatos_id}=-"
+
+          begin
+            delete_images(account, property)
+            upload_images(account, property)
+          rescue StandardError => e
+            logger.error "-=Error updating images for property #{property.slug}/#{property.id}/#{property.spitogatos_id}: #{e}=-"
+            next
+          end
+
           property.update_columns(spitogatos_updated_at: Time.current, spitogatos_images_sync_needed: false)
         end
       end
@@ -134,9 +168,16 @@ class Spitogatos < ApplicationRecord
       spitogatos_enabled_accounts.each do |account|
         # Fetch only spitogatos activated properties which have already been uploaded to spitogatos portal
         properties = account.properties.where(spitogatos_sync: true).where.not(spitogatos_id: nil)
+
         logger.info "Found #{properties.size} properties to renew"
+
         properties.each do |property|
-          account.spitogatos.renew_listing(property.spitogatos_id.to_i)
+          begin
+            account.spitogatos.renew_listing(property.spitogatos_id.to_i)
+          rescue StandardError => e
+            logger.error "-=Error renewing property #{property.slug}/#{property.id}/#{property.spitogatos_id}: #{e}=-"
+            next
+          end
           property.update(spitogatos_updated_at: Time.current)
         end
       end
@@ -146,9 +187,17 @@ class Spitogatos < ApplicationRecord
       spitogatos_enabled_accounts.each do |account|
         # Fetch only spitogatos de-activated properties which have already been uploaded to spitogatos portal
         properties = account.properties.where(spitogatos_sync: false).where.not(spitogatos_id: nil)
+
+        logger.info "Found #{properties.size} properties to delete"
+
         properties.each do |property|
-          account.spitogatos.delete_listing(property.spitogatos_id)
-          property.update(spitogatos_id: nil, spitogatos_created_at: nil, spitogatos_updated_at: nil)
+          begin
+            account.spitogatos.delete_listing(property.spitogatos_id)
+          rescue StandardError => e
+            logger.error "-=Error deleting property #{property.slug}/#{property.id}/#{property.spitogatos_id}: #{e}=-"
+            next
+          end
+          property.update_columns(spitogatos_id: nil, spitogatos_sync: false, spitogatos_created_at: nil, spitogatos_updated_at: nil, spitogatos_images_sync_needed: false, spitogatos_data_sync_needed: false)
         end
       end
     end
