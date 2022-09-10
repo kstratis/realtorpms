@@ -26,6 +26,22 @@
             data-unknown-msg="<%= t('settings.sidebar.integrations.spitogatos.status.unknown') %>"
             class="">
       </span>
+      <p id="spitogatos-success-feedback" class="d-none"><%= t('settings.sidebar.integrations.spitogatos.feedback_html', properties_url: properties_path) %></p>
+    </div>
+  </div>
+
+  <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseInstructions" aria-expanded="false" aria-controls="collapseInstructions">
+    <%= t('settings.sidebar.integrations.spitogatos.instructions.show.title_caps') %>&nbsp; <i class="fas fa-book-reader fa-md fa-fw"></i>
+  </button>
+
+  <div class="pt-2">
+      <div class="collapse" id="collapseInstructions">
+        <div class="instructions-wrapper">
+          <div class="d-inline text-center mt-5">
+            <h3><u></u></h3>
+          </div>
+        <%= t('settings.sidebar.integrations.spitogatos.instructions.show.body_html', brandname: BRANDNAME, support_url: settings_chat_index_path ) %>
+      </div>
     </div>
   </div>
 

@@ -2942,3 +2942,23 @@ a.leaflet-control-zoom-in, a.leaflet-control-zoom-out {
 .btn-spitogatos {
   background: #FE900A !important;
 }
+
+#spitogatos-success-feedback {
+  //border: 1px solid #00A28A;
+  background: #00A28A;
+  color: #ffffff;
+  border-radius: 3px;
+  padding: 5px;
+  margin-top: 30px;
+}
+
+.instructions-wrapper{
+  border: 1px solid #346CB0;
+  border-radius: 3px;
+  padding: 10px 15px 0 10px;
+}
+
+.spitogatos-email {
+  font-size: 14px;
+  font-style: italic;
+}

@@ -84,7 +84,7 @@ en:
   page_refresh: "Refresh page"
   apply: "Apply"
   ok: "OK"
-  coming_soon: "Coming soon"
+  coming_soon: "Q4/22"
   none_specified: "-=None specified=-"
   plan:
     title: "Subscription"
@@ -1495,6 +1495,52 @@ en:
       integrations:
         title: "Integrations"
         spitogatos:
+          instructions:
+            new:
+              title: "Instructions"
+              title_caps: "INSTRUCTIONS"
+              body_html: |
+                <p>Fill out the form with the credentials you use to connect to 
+                spitogatos.gr and press 'Save'.</p>
+            show:
+              title: "Instructions"
+              title_caps: "INSTRUCTIONS"
+              body_html:  |
+                <p>To activate the integration with spigogatos.gr using the credentials above you need to 
+                do the following 2 things:</p>
+                <p>
+                  <ol>
+                    <li>Double check your credentials. Make sure there are no typos.</li>
+                    <li>spitogatos.gr has to activate the integration on their end.</li>
+                  </ol>
+                </p>
+                <p>For (2) you need to do the following:</p>
+                <ul>
+                  <li>
+                    <p>Pull together an email and send it over to support@spitogatos.gr, informing them of your intention to integrate %{brandname} with their platform:</p>
+                    <blockquote class="spitogatos-email">
+                    <p>
+                      Dear Sir/Madam, our agency is actively using the property management system called %{brandname}.
+                      As clients/users of the aforementioned software, we'd like to request to unlock our account and allow access to %{brandname}.
+                      Our agency's ID is XXXXXX.
+                    </p>
+                  </blockquote>
+                  </li>
+                  <li><strong>After you receive a response</strong> (usually takes about an hour) you'll need to press the "Validate" button on the lower left corner of this screen.</li>
+                  <li>Given that your credentials are correct and spitogatos.gr unlocked your account, you should see the message "The integration is working fine".
+                      This means that you have successfully completed the integration process and that you can return to the properties list screen and pick the 
+                      properties you wish to sync.</li>
+                  <li>In case of an error, double check your credentials and if the problem persists, contact support <a href="%{support_url}">here</a>.</li>
+                </ul>
+                <hr />
+                <p><u>A few more things to keep in mind:</u></p>
+                <ul>
+                  <li><p>Properties sync about every 30 minutes. For example if you add a new property to %{brandname} it may take up to 30 minutes 
+                before you see it in spitogatos.gr dashboard.</p></li>
+                  <li><p>According to spitogatos.gr policy, %{brandname} may only sync properties created from within the platform. For example, properties that you may 
+                have uploaded to spitogatos.gr before moving to %{brandname} can't be synced through %{brandname}. To workaround that you should delete the property from spitogatos.gr
+                dashboard and recreate it from within %{brandname} to opt into the auto sync feature.</p></li>
+                </ul>
           save: "Save"
           edit: "Edit"
           check: "Validate"
@@ -1505,6 +1551,7 @@ en:
           username_placeholder: 'Username used in spitogatos.gr'
           password: 'Password'
           password_placeholder: 'Password used in spitogatos.gr'
+          feedback_html: "You can now return to <a href='%{properties_url}'>properties list</a> where a new sync button is available 🎉"
           status:
             success: "The integration is working fine."
             error: "Connection error. Please check spitogatos.gr login credentials."
