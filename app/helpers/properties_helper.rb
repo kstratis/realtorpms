@@ -283,6 +283,39 @@ module PropertiesHelper
         }
       },
       {
+        name: 'PromotionOptions',
+        button: {
+          content: '<i class="fas fa-random fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.promotion') + '</span>',
+          size: 'sm',
+          tooltip: t('js.properties_promotion_tooltip')
+        },
+        modal: {
+          i18n: {
+            portal_title: t('properties.show.quick_actions.portal_title'),
+            status_title: t('properties.show.quick_actions.status_title'),
+            show_on_portal: t('properties.show.quick_actions.show_on_website_html', website: websites_root_url(locale: I18n.locale)),
+            pin_html: t('properties.show.quick_actions.pin_html', website: websites_root_url(locale: I18n.locale)),
+            set_available: t('properties.show.quick_actions.set_available')
+
+          },
+          size: 'md',
+          title: t('properties.promotion_options'),
+          modalHeaderHelp: t("promotion_options.help_popover"),
+
+          set_sync_active_property_url: set_sync_active_property_url(property),
+          get_sync_active_property_url: get_sync_active_property_url(property),
+
+          set_sync_website_property_url: set_sync_website_property_url(property),
+          get_sync_website_property_url: get_sync_website_property_url(property),
+
+          set_sync_pinned_property_url: set_sync_pinned_property_url(property),
+          get_sync_pinned_property_url: get_sync_pinned_property_url(property),
+
+          property_id: property.id,
+          buttonCloseLabel: t('properties.close_button'),
+        }
+      },
+      {
         name: 'AddRemoveShowings',
         button: {
           content: '<i class="fas fa-users fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.viewings') + '</span>',

@@ -964,6 +964,7 @@ en:
     properties_view_btn: "View"
     properties_edit_btn: "Edit"
     properties_favourites_tooltip: "Favourites list"
+    properties_promotion_tooltip: "Promotion options"
     properties_showings_tooltip: "List of all clients this property has been shown to"
     clients_showings_tooltip: "List of all properties shown to this client"
     clients_store_searches_tooltip: "Search terms"
@@ -1268,9 +1269,11 @@ en:
     add_fast: "Add property (fast)"
     list: "Property list"
     favourites: "Favourites"
+    promotion: "Promotion"
     viewings: "Showings"
     viewings_history: "Showings log for %{entity}"
     fav_lists: "Favourite lists"
+    promotion_options: "Promotion options"
     ok_button: "Add"
     cancel_button: "Cancel"
     close_button: "Close"
@@ -1365,8 +1368,8 @@ en:
       quick_actions:
         portal_title: "Portal actions"
         status_title: "Status"
-        show_on_website_html: "Enable on your <u><a target=\"_blank\" href=\"%{website}\">portal</a></u>."
-        pin_html: "Pin on your <u><a target=\"_blank\" href=\"%{website}\">portal</a></u>."
+        show_on_website_html: "Show on <u><a target=\"_blank\" href=\"%{website}\">portal</a></u>."
+        pin_html: "Pin on <u><a target=\"_blank\" href=\"%{website}\">portal</a></u>."
         set_available: "Active"
       client_tooltip: "User info %{user}"
       breadcrumb: "Properties"
@@ -1617,3 +1620,5 @@ en:
     help_popover_user: "This is the list of showings for the specified property. You may not be able to view the client of all showings if he/she hasn't been assigned to you."
   favlists:
     help_popover: "Add the property you like in your favourites. You can create any number favourite list. This way your favourite properties are always a click away."
+  promotion_options:
+    help_popover: "These options will help you better promote a property."

@@ -932,6 +932,7 @@ el:
     properties_view_btn: "Προβολή"
     properties_edit_btn: "Επεξεργασία"
     properties_favourites_tooltip: "Λίστες αγαπημένων"
+    properties_promotion_tooltip: "Επιλογές προώθησης"
     properties_showings_tooltip: "Λίστα επιδείξεων του ακινήτου σε πελάτες"
     clients_showings_tooltip: "Λίστα επιδειχθέντων ακινήτων στον πελάτη"
     clients_store_searches_tooltip: "Κριτ. αναζήτησης"
@@ -1237,9 +1238,11 @@ el:
     add_fast: "Προσθήκη ακινήτου (γρήγορη)"
     list: "Κατάλογος"
     favourites: "Αγαπημένα"
+    promotion: "Προώθηση"
     viewings: "Επιδείξεις"
     viewings_history: "Ιστορικό επιδείξεων για <mark>%{entity}</mark>"
     fav_lists: "Λίστες αγαπημένων"
+    promotion_options: "Επιλογές προώθησης"
     ok_button: "Προσθήκη"
     cancel_button: "Ακύρωση"
     close_button: "Κλείσιμο"
@@ -1334,8 +1337,8 @@ el:
       quick_actions:
         portal_title: "Ενέργειες portal"
         status_title: "Κατάσταση"
-        show_on_website_html: "Εμφάνισε το στο <u><a target=\"_blank\" href=\"%{website}\">portal</a></u> σου."
-        pin_html: "Καρφίτσωσε το στο <u><a target=\"_blank\" href=\"%{website}\">portal</a></u> σου."
+        show_on_website_html: "Προβολή στο <u><a target=\"_blank\" href=\"%{website}\">portal</a></u>."
+        pin_html: "Καρφίτσωμα στο <u><a target=\"_blank\" href=\"%{website}\">portal</a></u>."
         set_available: "Ενεργό"
       client_tooltip: "Προβολή καρτέλας %{user}"
       breadcrumb: "Ακίνητα"
@@ -1593,6 +1596,8 @@ el:
     help_popover_user: "Η οθόνη εμφανίζει την λίστα των επιδείξεων που έχουν γίνει για το συγκεκριμένο ακίνητο από το σύνολο των συνεργατών του γραφείου. Ως χρήστης ενδεχομένως να μην μπορείς να δείς τους πελάτες ορισμένων επιδείξεων εφόσον δεν σου έχουν ανατεθεί."
   favlists:
     help_popover: "Εδώ μπορείς να προσθέσεις το εκάστοτε ακίνητο σε όποια απο τις λίστες αγαπημένων επιθυμείς. Μπορείς να δημιουργήσεις όσες λίστες θέλεις. Με αυτόν το τρόπο τα αγαπημένα σου ακίνητα θα βρίσκονται πάντα ένα κλικ μακριά."
+  promotion_options:
+    help_popover: "Εδώ βρίσκονται οι επιλογές που σχετίζονται με την προώθηση του ακινήτου."
 
 
 
