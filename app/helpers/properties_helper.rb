@@ -293,10 +293,11 @@ module PropertiesHelper
           i18n: {
             portal_title: t('properties.show.quick_actions.portal_title'),
             status_title: t('properties.show.quick_actions.status_title'),
+            sync_title: t('properties.show.quick_actions.sync_state'),
             show_on_portal: t('properties.show.quick_actions.show_on_website_html', website: websites_root_url(locale: I18n.locale)),
             pin_html: t('properties.show.quick_actions.pin_html', website: websites_root_url(locale: I18n.locale)),
-            set_available: t('properties.show.quick_actions.set_available')
-
+            set_available: t('properties.show.quick_actions.set_available'),
+            sync_spitogatos: t('properties.show.quick_actions.sync_spitogatos')
           },
           size: 'md',
           title: t('properties.promotion_options'),
@@ -307,6 +308,9 @@ module PropertiesHelper
 
           set_sync_website_property_url: set_sync_website_property_url(property),
           get_sync_website_property_url: get_sync_website_property_url(property),
+
+          set_sync_spitogatos_property_url: set_sync_spitogatos_property_url(property),
+          get_sync_spitogatos_property_url: get_sync_spitogatos_property_url(property),
 
           set_sync_pinned_property_url: set_sync_pinned_property_url(property),
           get_sync_pinned_property_url: get_sync_pinned_property_url(property),

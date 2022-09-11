@@ -187,7 +187,7 @@ class PropertyEntry extends React.Component {
                                 e.preventDefault();
                               }
                             }}>
-                            <i className={'fas fa-copy fa-copy-on fa-fw'} />
+                            <i className={'fas fa-clone fa-fw'} />
                           </div>
                         </div>
                       ) : (

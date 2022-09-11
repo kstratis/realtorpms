@@ -1336,10 +1336,12 @@ el:
     show:
       quick_actions:
         portal_title: "Ενέργειες portal"
+        sync_state: "Συγχρονισμός"
         status_title: "Κατάσταση"
         show_on_website_html: "Προβολή στο <u><a target=\"_blank\" href=\"%{website}\">portal</a></u>."
         pin_html: "Καρφίτσωμα στο <u><a target=\"_blank\" href=\"%{website}\">portal</a></u>."
         set_available: "Ενεργό"
+        sync_spitogatos: "Συγχρονισμός με spitogatos.gr"
       client_tooltip: "Προβολή καρτέλας %{user}"
       breadcrumb: "Ακίνητα"
       catalog: "Κατάλογος"

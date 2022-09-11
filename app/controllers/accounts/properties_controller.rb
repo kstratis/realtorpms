@@ -67,12 +67,21 @@ module Accounts
     end
 
     # Flagged to sync with Spitogatos
-    def sync_spitogatos
+    def set_sync_spitogatos
       return unless current_account.spitogatos_enabled?
 
-      property_to_sync = current_account.properties.find(params[:id])
-      property_to_sync.toggle!(:spitogatos_sync)
-      head :ok
+      property = current_account.properties.find(params[:id])
+      property.toggle!(:spitogatos_sync)
+
+      render json: { message: { spitogatos_sync: property.spitogatos_sync? } }, status: :created
+    end
+
+    def get_sync_spitogatos
+      return unless current_account.spitogatos_enabled?
+
+      property = current_account.properties.find(params[:id])
+
+      render json: { message: { spitogatos_sync: property.spitogatos_sync? } }, status: :ok
     end
 
     def set_sync_website
