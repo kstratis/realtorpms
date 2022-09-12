@@ -791,7 +791,15 @@ en:
         placeholder_floors_max: "To: All"
         placeholder_construction_min: "From: Year"
         placeholder_construction_max: "To: Year"
-        assignments_feedback: "Full property %{property_id} details are available to all admins and any partners specified above."
+        assignments_feedback_html: |
+          <p>When you assign a property to one of your business partners you are essentially doing the following:</p>
+            <ul>
+              <li>You open up the owner's contact details to your business partner.</li>
+              <li>Your business partner may get to edit the property.</li>
+              <li>Ο συνεργάτης θα μπορεί να διαχειρίζεται τις προωθητικές ενέργειες του ακινήτου.</li>
+            </ul>
+          <p>Σε όλες τις υπόλοιπες περιπτώσεις, ο συνεργάτης μπορεί να δεί μόνο την καταχώριση του ακινήτου καθώς και τα βασικά του
+          στοιχεία.</p>
         assignments_client_feedback: "Client %{client_name} is available to all admins and any partners specified above."
         clientship_feedback: "Client search preferences"
         save_btn: "Save"
