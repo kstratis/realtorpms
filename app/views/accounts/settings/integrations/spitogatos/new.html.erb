@@ -4,15 +4,26 @@
 
 <% content_for(:integrations) do %>
   <h2>Spitogatos</h2>
-  <div class="col-12 col-lg-6 offset-lg-3 py-4">
 
+  <div class="col-12 col-lg-6 offset-lg-3 py-4">
     <%= form_for(@spitogatos, url: settings_integrations_spitogatos_path, html: { id: 'spitogatos-settings-form', class: 'js-validatable' }) do |f| %>
       <%= render 'accounts/settings/integrations/spitogatos/form', f: f %>
-      <hr/>
-      <div class="form-actions">
-        <button type="submit" class="btn btn-outline-primary ml-auto"><%= t('settings.sidebar.integrations.spitogatos.save') %></button>
-      </div>
     <% end %>
-
   </div>
+
+  <div class="instructions-wrapper col-12">
+    <div class="d-inline text-center mt-5">
+      <h3><u><%= t('settings.sidebar.integrations.spitogatos.instructions.new.title') %></u></h3>
+    </div>
+    <div class="pt-2">
+      <%= t('settings.sidebar.integrations.spitogatos.instructions.new.body_html') %>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-outline-primary ml-auto" form="spitogatos-settings-form"><%= t('settings.sidebar.integrations.spitogatos.save') %></button>
+  </div>
+
 <% end %>

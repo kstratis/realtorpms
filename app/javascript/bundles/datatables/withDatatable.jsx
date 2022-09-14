@@ -544,7 +544,7 @@ function withDatatable(WrappedComponent) {
 
     handleSpitogatosSync(e, spitogatos_sync_url, property_id){
       e.preventDefault();
-      axios.patch(spitogatos_sync_url).then(response => {
+      axios.post(spitogatos_sync_url).then(response => {
         // DEBUG
         // console.log(response);
         const index = this.state.dataset.findIndex(element => element.id === property_id);

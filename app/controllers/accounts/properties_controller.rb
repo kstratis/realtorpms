@@ -67,12 +67,60 @@ module Accounts
     end
 
     # Flagged to sync with Spitogatos
-    def sync
+    def set_sync_spitogatos
       return unless current_account.spitogatos_enabled?
 
-      property_to_sync = current_account.properties.find(params[:id])
-      property_to_sync.toggle!(:spitogatos_sync)
-      head :ok
+      property = current_account.properties.find(params[:id])
+      property.toggle!(:spitogatos_sync)
+
+      render json: { message: { spitogatos_sync: property.spitogatos_sync? } }, status: :created
+    end
+
+    def get_sync_spitogatos
+      return unless current_account.spitogatos_enabled?
+
+      property = current_account.properties.find(params[:id])
+
+      render json: { message: { spitogatos_sync: property.spitogatos_sync? } }, status: :ok
+    end
+
+    def set_sync_website
+      property = current_account.properties.find(params[:id])
+      property.toggle!(:website_enabled)
+
+      render json: { message: { website_enabled: property.website_enabled? } }, status: :created
+    end
+
+    def get_sync_website
+      property = current_account.properties.find(params[:id])
+
+      render json: { message: { website_enabled: property.website_enabled? } }, status: :ok
+    end
+
+    def set_sync_pinned
+      property = current_account.properties.find(params[:id])
+      property.toggle!(:pinned)
+
+      render json: { message: { pinned: property.pinned? } }, status: :created
+    end
+
+    def get_sync_pinned
+      property = current_account.properties.find(params[:id])
+
+      render json: { message: { pinned: property.pinned? } }, status: :ok
+    end
+
+    def set_sync_active
+      property = current_account.properties.find(params[:id])
+      property.toggle!(:active)
+
+      render json: { message: { active: property.active? } }, status: :created
+    end
+
+    def get_sync_active
+      property = current_account.properties.find(params[:id])
+
+      render json: { message: { active: property.active? } }, status: :ok
     end
 
     # GET /properties/1

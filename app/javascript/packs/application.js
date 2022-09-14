@@ -212,7 +212,12 @@ $(document).on('turbolinks:load', function(e) {
     e.preventDefault();
     // Set the loading state first
     const $result = $('#spitogatos-sync-result');
+    const $syncFeedback = $('#spitogatos-success-feedback');
     $result.removeClass('badge badge-success badge-danger badge-info').html(`<i class="fas fa-cog fa-2x fa-spin"></i>`);
+
+    if (!$syncFeedback.hasClass('d-none')){
+      $syncFeedback.addClass('d-none');
+    }
 
     // disable the button
     $(e.currentTarget).addClass('disabled');
@@ -233,7 +238,13 @@ $(document).on('turbolinks:load', function(e) {
 
         if (message) {
           $result.text(message)
-          $result.addClass('badge').addClass(status === 'ok' ? 'badge-success' : 'badge-danger')
+          $result.addClass('badge')
+          if (status === 'ok'){
+            $syncFeedback.removeClass('d-none');
+            $result.addClass('badge-success');
+          } else {
+            $result.addClass('badge-danger');
+          }
         } else {
           $result.text(unknownMsg)
           $result.addClass('badge badge-info')

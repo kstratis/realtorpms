@@ -7,20 +7,5 @@
     </div>
     <div class="col-lg-8 p-3 p-lg-0 card-middle-heading "><h2 class="card-heading-custom"><%= title.html_safe %></h2>
     </div>
-
-    <div class="col-lg-2 d-none d-lg-block card-end-heading">
-      <% if controller_name == 'properties' %>
-        <div id="quick-actions-dropdown-menu-element" class="dropdown d-md-flex justify-content-end">
-          <button id="quick-actions-button" class="btn btn-outline-primary" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-bolt fa-fw"></i>
-          </button>
-          <div class="dropdown-menu">
-            <h6 class="dropdown-header d-none d-md-block d-lg-none"><%= current_user.full_name %></h6>
-            <%= render 'layouts/property_quick_actions' %>
-          </div>
-        </div>
-      <% end %>
-    </div>
-
   </div>
 </div>

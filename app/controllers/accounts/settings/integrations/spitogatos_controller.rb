@@ -3,6 +3,7 @@ module Accounts
     module Integrations
       class SpitogatosController < Accounts::BaseController
         skip_before_action :verify_authenticity_token
+        before_action :check_account_version
         before_action :fetch_configuration, except: [:create]
 
         layout 'settings'
@@ -68,6 +69,13 @@ module Accounts
 
         def fetch_configuration
           @spitogatos = current_account.spitogatos
+        end
+
+        def check_account_version
+          return if current_account.greek?
+
+          flash[:danger] = I18n.t('settings.sidebar.integrations.spitogatos.flash.integrations_international')
+          redirect_to settings_integrations_root_path
         end
 
         def spitogatos_params

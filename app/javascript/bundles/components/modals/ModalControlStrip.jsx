@@ -6,6 +6,7 @@ import useTooltips from '../../hooks/useTooltips';
 import ModalResourceWrapper from "./ModalResourceWrapper";
 
 const AddRemoveFavLists = preloadableLazy(() => import('../AddRemoveFavLists'));
+const PromotionOptions = preloadableLazy(() => import('../PromotionOptions'));
 const AddRemoveShowings = preloadableLazy(() => import('../AddRemoveShowings'));
 const AddRemovePartners = preloadableLazy(() => import('../AddRemovePartners'));
 const StoreClientSearch = preloadableLazy(() => import('../StoreClientSearch'));
@@ -16,6 +17,7 @@ const AddRemoveProperties = preloadableLazy(() => import('../AddRemoveProperties
 
 const components = {
   AddRemoveFavLists: AddRemoveFavLists,
+  PromotionOptions: PromotionOptions,
   AddRemoveShowings: AddRemoveShowings,
   AddRemovePartners: AddRemovePartners,
   StoreClientSearch: StoreClientSearch,

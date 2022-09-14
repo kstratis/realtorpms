@@ -61,7 +61,19 @@ Rails.application.routes.draw do
 
           member do
             post :clone
-            patch :sync
+
+            post :set_sync_spitogatos
+            get :get_sync_spitogatos
+
+            post :set_sync_website
+            get :get_sync_website
+
+            post :set_sync_pinned
+            get :get_sync_pinned
+
+            post :set_sync_active
+            get :get_sync_active
+
             delete :delete_avatar
           end
         end

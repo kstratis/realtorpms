@@ -36,7 +36,7 @@ const ClientPrefsList = ({
                       i18n={i18n}
                       showControls={showControls}
                       visited={visited}
-                      active={entry.active}
+                      active={entry['active']}
                       handleSpitogatosSync={handleSpitogatosSync}
                       spitogatosEnabled={spitogatosEnabled}
                     />

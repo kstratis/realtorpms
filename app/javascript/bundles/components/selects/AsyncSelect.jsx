@@ -277,7 +277,7 @@ function AsyncSelect({
           defaultOptions={defaultOptions}
         />
       )}
-      {hasFeedback ? <small className="form-text text-muted">{i18n.select.feedback}</small> : ''}
+      {hasFeedback ? <small className="form-text text-muted">{renderHTML(i18n.select.feedback)}</small> : ''}
     </>
   );
 }

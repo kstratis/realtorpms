@@ -84,8 +84,8 @@ en:
   page_refresh: "Refresh page"
   apply: "Apply"
   ok: "OK"
-  coming_soon: "Coming soon"
-  none_specified: "-=None specified=-"
+  coming_soon: "Q4/22"
+  none_specified: "❖ None specified"
   plan:
     title: "Subscription"
     trial: "Trial"
@@ -791,7 +791,14 @@ en:
         placeholder_floors_max: "To: All"
         placeholder_construction_min: "From: Year"
         placeholder_construction_max: "To: Year"
-        assignments_feedback: "Full property %{property_id} details are available to all admins and any partners specified above."
+        assignments_feedback_html: |
+          <p>When you assign a property to one of your business partners (non-admin role) you are essentially doing the following:</p>
+            <ul>
+              <li>You open up the owner's contact details to your business partner.</li>
+              <li>Your business partner may get to edit the property.</li>
+              <li>You business partner may get to manage any promotion actions for the property.</li>
+            </ul>
+          <p>In any other case, you business partner may only view the property entry and its basic details.</p>
         assignments_client_feedback: "Client %{client_name} is available to all admins and any partners specified above."
         clientship_feedback: "Client search preferences"
         save_btn: "Save"
@@ -964,6 +971,7 @@ en:
     properties_view_btn: "View"
     properties_edit_btn: "Edit"
     properties_favourites_tooltip: "Favourites list"
+    properties_promotion_tooltip: "Promotion options"
     properties_showings_tooltip: "List of all clients this property has been shown to"
     clients_showings_tooltip: "List of all properties shown to this client"
     clients_store_searches_tooltip: "Search terms"
@@ -1268,9 +1276,11 @@ en:
     add_fast: "Add property (fast)"
     list: "Property list"
     favourites: "Favourites"
+    promotion: "Promotion"
     viewings: "Showings"
     viewings_history: "Showings log for %{entity}"
     fav_lists: "Favourite lists"
+    promotion_options: "Promotion options"
     ok_button: "Add"
     cancel_button: "Cancel"
     close_button: "Close"
@@ -1357,17 +1367,19 @@ en:
       new_button: "Add new property"
       pin_shoutout_html: |
         <ul>
-        <li>Properties you select show up on your <a target="_blank" href="%{site}"><i class="fas fa-link fa-fw"></i>portal</a> by flipping the "<strong>available on your portal</strong>" switch under the quick actions submenu <nobr>(<i class="fas fa-bolt fa-fw"></i>)</nobr> from within the property <strong>show</strong> screen.</li>
-        <li>If you choose to also "pin" (<i class="fas fa-bookmark fa-fw"></i>) a property, it will show up on your <a href="%{site}">portal</a> <u>when no search query exist</u>.</li> 
+        <li>Properties may show up on your <a target="_blank" href="%{site}"><i class="fas fa-link fa-fw"></i>portal</a> by flipping the "<strong>show on portal</strong>" switch under the promotion settings <nobr>(<i class="fas fa-random fa-fw"></i>)</nobr> from within the property <strong>view</strong> screen.</li>
+        <li>Additionally by choosing to "pin on portal" a property, you force it to always show up on your <a href="%{site}">portal</a> <u>when no search query exists</u>.</li> 
         <li>Try pinning a few properties to enrich your <a href="%{site}">portal</a>'s default look.</li>
         </ul>
     show:
       quick_actions:
         portal_title: "Portal actions"
+        sync_state: "Synchronization"
         status_title: "Status"
-        show_on_website_html: "Enable on your <u><a target=\"_blank\" href=\"%{website}\">portal</a></u>."
-        pin_html: "Pin on your <u><a target=\"_blank\" href=\"%{website}\">portal</a></u>."
+        show_on_website_html: "Show on <u><a target=\"_blank\" href=\"%{website}\">portal</a></u>."
+        pin_html: "Pin on <u><a target=\"_blank\" href=\"%{website}\">portal</a></u>."
         set_available: "Active"
+        sync_spitogatos: "Sync with spitogatos.gr"
       client_tooltip: "User info %{user}"
       breadcrumb: "Properties"
       catalog: "Catalog"
@@ -1495,6 +1507,52 @@ en:
       integrations:
         title: "Integrations"
         spitogatos:
+          instructions:
+            new:
+              title: "Instructions"
+              title_caps: "INSTRUCTIONS"
+              body_html: |
+                <p>Fill out the form with the credentials you use to connect to 
+                spitogatos.gr and press 'Save'.</p>
+            show:
+              title: "Instructions"
+              title_caps: "INSTRUCTIONS"
+              body_html:  |
+                <p>To activate the integration with spigogatos.gr using the credentials above you need to 
+                do the following 2 things:</p>
+                <p>
+                  <ol>
+                    <li>Double check your credentials. Make sure there are no typos.</li>
+                    <li>spitogatos.gr has to activate the integration on their end.</li>
+                  </ol>
+                </p>
+                <p>For (2) you need to do the following:</p>
+                <ul>
+                  <li>
+                    <p>Pull together an email and send it over to support@spitogatos.gr, informing them of your intention to integrate %{brandname} with their platform:</p>
+                    <blockquote class="spitogatos-email">
+                    <p>
+                      Dear Sir/Madam, our agency is actively using the property management system called %{brandname}.
+                      As clients/users of the aforementioned software, we'd like to request to unlock our account and allow access to %{brandname}.
+                      Our agency's ID is XXXXXX.
+                    </p>
+                  </blockquote>
+                  </li>
+                  <li><strong>After you receive a response</strong> (usually takes about an hour) you'll need to press the "Validate" button on the lower left corner of this screen.</li>
+                  <li>Given that your credentials are correct and spitogatos.gr unlocked your account, you should see the message "The integration is working fine".
+                      This means that you have successfully completed the integration process and that you can return to the properties list screen and pick the 
+                      properties you wish to sync.</li>
+                  <li>In case of an error, double check your credentials and if the problem persists, contact support <a href="%{support_url}">here</a>.</li>
+                </ul>
+                <hr />
+                <p><u>A few more things to keep in mind:</u></p>
+                <ul>
+                  <li><p>Properties sync about every 30 minutes. For example if you add a new property to %{brandname} it may take up to 30 minutes 
+                before you see it in spitogatos.gr dashboard.</p></li>
+                  <li><p>According to spitogatos.gr policy, %{brandname} may only sync properties created from within the platform. For example, properties that you may 
+                have uploaded to spitogatos.gr before moving to %{brandname} can't be synced through %{brandname}. To workaround that you should delete the property from spitogatos.gr
+                dashboard and recreate it from within %{brandname} to opt into the auto sync feature.</p></li>
+                </ul>
           save: "Save"
           edit: "Edit"
           check: "Validate"
@@ -1505,6 +1563,7 @@ en:
           username_placeholder: 'Username used in spitogatos.gr'
           password: 'Password'
           password_placeholder: 'Password used in spitogatos.gr'
+          feedback_html: "You can now return to <a href='%{properties_url}'>properties list</a> where a new sync button is available 🎉"
           status:
             success: "The integration is working fine."
             error: "Connection error. Please check spitogatos.gr login credentials."
@@ -1516,6 +1575,7 @@ en:
             edit_failure: 'Oops! Something went wrong!'
             destroy_success: 'Configuration settings successfully deleted'
             destroy_failure: 'Oops! Something went wrong!'
+            integrations_international: "Integrations are currently only available for GR-based accounts"
       widget: "Widget"
       under_construction: "Under construction..."
       info: "Details"
@@ -1570,3 +1630,5 @@ en:
     help_popover_user: "This is the list of showings for the specified property. You may not be able to view the client of all showings if he/she hasn't been assigned to you."
   favlists:
     help_popover: "Add the property you like in your favourites. You can create any number favourite list. This way your favourite properties are always a click away."
+  promotion_options:
+    help_popover: "These options will help you better promote a property."

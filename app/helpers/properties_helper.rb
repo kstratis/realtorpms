@@ -281,68 +281,112 @@ module PropertiesHelper
           buttonCancelLabel: t('properties.cancel_button'),
           buttonCloseLabel: t('properties.close_button'),
         }
-      },
-      {
-        name: 'AddRemoveShowings',
-        button: {
-          content: '<i class="fas fa-users fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.viewings') + '</span>',
-          size: 'sm',
-          tooltip: t('js.properties_showings_tooltip')
-        },
-        modal: {
-          i18n: {
-            table: {
-              client: t('viewings.client'),
-              user: t('viewings.user'),
-              date_title: t('date_title'),
-              add: t("viewings.add_btn"),
-              actions: t("viewings.actions"),
-              tooltip_delete: t('tooltips.delete'),
-              delete_prompt: t('viewings.delete_prompt')
-            },
-            form: {
-              title: t('viewings.add'),
-              client: t('clients.client'),
-              partner: t('users.user'),
-              date: t('viewings.date'),
-              submit: t('viewings.submit'),
-              warning: t('viewings.empty_fields_msg'),
-              list: t('viewings.list'),
-              required: t('js.components.select.required'),
-              comments: t('viewings.comments'),
-              comments_placeholder: t('viewings.comments_placeholder'),
-              comments_feedback: t('viewings.comments_feedback')
-            },
-            select: {
-              placeholder: t('js.components.select.placeholder_title'),
-              noresults: t('js.components.select.noresults'),
-              loading: t('js.components.select.loading_html'),
-              feedback: t('js.components.select.assignments_feedback', property_id: property.slug.upcase)
-            },
-            no_lists_available: t('js.components.modal.favlists.no_results')
-          },
-          avatar: property.avatar.attached? ? url_for(property.avatar.variant(resize: "30%")) : nil,
-          showings_url: showings_url,
-          property_id: property.id,
-          originator: 'property',
-          size: 'lg',
-          title: t('properties.viewings_history', entity: property.slug.upcase),
-          modalHeaderHelp: t("viewings.help_popover_#{current_user.role(current_account)}"),
-          buttonOKLabel: t('properties.ok_button'),
-          buttonCancelLabel: t('properties.cancel_button'),
-          buttonCloseLabel: t('properties.close_button'),
-          soloMode: true,
-          ajaxEnabled: false,
-          isClearable: true,
-          backspaceRemovesValue: true,
-          isSearchable: false,
-          feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
-          clients_url: clients_url,
-          # partners_url: users_url(backend_option: 'all_'),
-          partners_url: users_url,
-          isAdmin: current_user.is_admin?(current_account)
-        }
       }]
+
+    if current_user.is_admin?(current_account) || current_user.properties.exists?(property.id)
+      entries <<
+        {
+          name: 'PromotionOptions',
+          button: {
+            content: '<i class="fas fa-random fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.promotion') + '</span>',
+            size: 'sm',
+            tooltip: t('js.properties_promotion_tooltip')
+          },
+          modal: {
+            i18n: {
+              portal_title: t('properties.show.quick_actions.portal_title'),
+              status_title: t('properties.show.quick_actions.status_title'),
+              sync_title: t('properties.show.quick_actions.sync_state'),
+              show_on_portal: t('properties.show.quick_actions.show_on_website_html', website: websites_root_url(locale: I18n.locale)),
+              pin_html: t('properties.show.quick_actions.pin_html', website: websites_root_url(locale: I18n.locale)),
+              set_available: t('properties.show.quick_actions.set_available'),
+              sync_spitogatos: t('properties.show.quick_actions.sync_spitogatos')
+            },
+            size: 'md',
+            title: t('properties.promotion_options'),
+            modalHeaderHelp: t("promotion_options.help_popover"),
+
+            spitogatosEnabled: current_account.spitogatos_enabled?,
+
+            set_sync_active_property_url: set_sync_active_property_url(property),
+            get_sync_active_property_url: get_sync_active_property_url(property),
+
+            set_sync_website_property_url: set_sync_website_property_url(property),
+            get_sync_website_property_url: get_sync_website_property_url(property),
+
+            set_sync_spitogatos_property_url: set_sync_spitogatos_property_url(property),
+            get_sync_spitogatos_property_url: get_sync_spitogatos_property_url(property),
+
+            set_sync_pinned_property_url: set_sync_pinned_property_url(property),
+            get_sync_pinned_property_url: get_sync_pinned_property_url(property),
+
+            property_id: property.id,
+            buttonCloseLabel: t('properties.close_button'),
+          }
+        }
+    end
+
+    entries << {
+      name: 'AddRemoveShowings',
+      button: {
+        content: '<i class="fas fa-users fa-fw"></i><span class="d-none d-lg-inline">&nbsp;' + t('properties.viewings') + '</span>',
+        size: 'sm',
+        tooltip: t('js.properties_showings_tooltip')
+      },
+      modal: {
+        i18n: {
+          table: {
+            client: t('viewings.client'),
+            user: t('viewings.user'),
+            date_title: t('date_title'),
+            add: t("viewings.add_btn"),
+            actions: t("viewings.actions"),
+            tooltip_delete: t('tooltips.delete'),
+            delete_prompt: t('viewings.delete_prompt')
+          },
+          form: {
+            title: t('viewings.add'),
+            client: t('clients.client'),
+            partner: t('users.user'),
+            date: t('viewings.date'),
+            submit: t('viewings.submit'),
+            warning: t('viewings.empty_fields_msg'),
+            list: t('viewings.list'),
+            required: t('js.components.select.required'),
+            comments: t('viewings.comments'),
+            comments_placeholder: t('viewings.comments_placeholder'),
+            comments_feedback: t('viewings.comments_feedback')
+          },
+          select: {
+            placeholder: t('js.components.select.placeholder_title'),
+            noresults: t('js.components.select.noresults'),
+            loading: t('js.components.select.loading_html'),
+            feedback: t('js.components.select.assignments_feedback_html', property_id: property.slug.upcase)
+          },
+          no_lists_available: t('js.components.modal.favlists.no_results')
+        },
+        avatar: property.avatar.attached? ? url_for(property.avatar.variant(resize: "30%")) : nil,
+        showings_url: showings_url,
+        property_id: property.id,
+        originator: 'property',
+        size: 'lg',
+        title: t('properties.viewings_history', entity: property.slug.upcase),
+        modalHeaderHelp: t("viewings.help_popover_#{current_user.role(current_account)}"),
+        buttonOKLabel: t('properties.ok_button'),
+        buttonCancelLabel: t('properties.cancel_button'),
+        buttonCloseLabel: t('properties.close_button'),
+        soloMode: true,
+        ajaxEnabled: false,
+        isClearable: true,
+        backspaceRemovesValue: true,
+        isSearchable: false,
+        feedback: t('js.forms.properties.wizard.step1.type_of_offer_feedback'),
+        clients_url: clients_url,
+        # partners_url: users_url(backend_option: 'all_'),
+        partners_url: users_url,
+        isAdmin: current_user.is_admin?(current_account)
+      }
+    }
 
     if current_user.is_admin?(current_account)
       entries << {
@@ -358,7 +402,7 @@ module PropertiesHelper
               placeholder: t('js.components.select.placeholder_title'),
               noresults: t('js.components.select.noresults'),
               loading: t('js.components.select.loading_html'),
-              feedback: t('js.components.select.assignments_feedback', property_id: property.slug.upcase)
+              feedback: t('js.components.select.assignments_feedback_html', property_id: property.slug.upcase)
             }
           },
           size: 'md',

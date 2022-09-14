@@ -2528,18 +2528,20 @@ footer:not(.auth-footer){
   &:not(:first-child) {
     &:before {
       content: "\00a0| ";
-      color: #37474f;
+      //color: #37474f;
+      color: #FFFFFF;
     }
   }
 }
 
 .pinned-bookmark{
-  color: #e91e1e;
+  //color: #e91e1e;
+  color: #FFFFFF;
   z-index: 100;
 }
 
 .pinned-globe{
-  color: dodgerblue;
+  color: gold;
   z-index: 100;
 }
 
@@ -2699,6 +2701,25 @@ footer:not(.auth-footer){
                   calc(100% - var(--f)) calc(100% - var(--f)),0 calc(100% - var(--f)),
                   var(--r) calc(50% - var(--f)/2));
   background: #BD1550;
+  color: #ffffff;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  box-shadow: 0 calc(-1*var(--f)) 0 inset #0005;
+}
+
+.info-ribbon {
+  --f: 10px; /* control the folded part*/
+  --r: 15px; /* control the ribbon shape */
+  --t: 0px; /* the top offset */
+
+  position: absolute;
+  inset: var(--t) calc(-1*var(--f)) auto auto;
+  padding: 1px 15px var(--f) calc(20px + var(--r));
+  clip-path:
+          polygon(0 0,100% 0,100% calc(100% - var(--f)),calc(100% - var(--f)) 100%,
+                  calc(100% - var(--f)) calc(100% - var(--f)),0 calc(100% - var(--f)),
+                  var(--r) calc(50% - var(--f)/2));
+  background: #37474f;
   color: #ffffff;
   font-weight: bold;
   letter-spacing: 1.5px;
@@ -2941,4 +2962,23 @@ a.leaflet-control-zoom-in, a.leaflet-control-zoom-out {
 
 .btn-spitogatos {
   background: #FE900A !important;
+}
+
+#spitogatos-success-feedback {
+  background: #00A28A;
+  color: #ffffff;
+  border-radius: 3px;
+  padding: 5px;
+  margin-top: 30px;
+}
+
+.instructions-wrapper{
+  border: 1px solid #346CB0;
+  border-radius: 3px;
+  padding: 10px 15px 0 10px;
+}
+
+.spitogatos-email {
+  font-size: 14px;
+  font-style: italic;
 }
