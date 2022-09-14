@@ -85,7 +85,7 @@ en:
   apply: "Apply"
   ok: "OK"
   coming_soon: "Q4/22"
-  none_specified: "-=None specified=-"
+  none_specified: "❖ None specified"
   plan:
     title: "Subscription"
     trial: "Trial"
@@ -792,14 +792,13 @@ en:
         placeholder_construction_min: "From: Year"
         placeholder_construction_max: "To: Year"
         assignments_feedback_html: |
-          <p>When you assign a property to one of your business partners you are essentially doing the following:</p>
+          <p>When you assign a property to one of your business partners (non-admin role) you are essentially doing the following:</p>
             <ul>
               <li>You open up the owner's contact details to your business partner.</li>
               <li>Your business partner may get to edit the property.</li>
-              <li>Ο συνεργάτης θα μπορεί να διαχειρίζεται τις προωθητικές ενέργειες του ακινήτου.</li>
+              <li>You business partner may get to manage any promotion actions for the property.</li>
             </ul>
-          <p>Σε όλες τις υπόλοιπες περιπτώσεις, ο συνεργάτης μπορεί να δεί μόνο την καταχώριση του ακινήτου καθώς και τα βασικά του
-          στοιχεία.</p>
+          <p>In any other case, you business partner may only view the property entry and its basic details.</p>
         assignments_client_feedback: "Client %{client_name} is available to all admins and any partners specified above."
         clientship_feedback: "Client search preferences"
         save_btn: "Save"
@@ -1368,8 +1367,8 @@ en:
       new_button: "Add new property"
       pin_shoutout_html: |
         <ul>
-        <li>Properties you select show up on your <a target="_blank" href="%{site}"><i class="fas fa-link fa-fw"></i>portal</a> by flipping the "<strong>available on your portal</strong>" switch under the quick actions submenu <nobr>(<i class="fas fa-bolt fa-fw"></i>)</nobr> from within the property <strong>show</strong> screen.</li>
-        <li>If you choose to also "pin" (<i class="fas fa-bookmark fa-fw"></i>) a property, it will show up on your <a href="%{site}">portal</a> <u>when no search query exist</u>.</li> 
+        <li>Properties may show up on your <a target="_blank" href="%{site}"><i class="fas fa-link fa-fw"></i>portal</a> by flipping the "<strong>show on portal</strong>" switch under the promotion settings <nobr>(<i class="fas fa-random fa-fw"></i>)</nobr> from within the property <strong>view</strong> screen.</li>
+        <li>Additionally by choosing to "pin on portal" a property, you force it to always show up on your <a href="%{site}">portal</a> <u>when no search query exists</u>.</li> 
         <li>Try pinning a few properties to enrich your <a href="%{site}">portal</a>'s default look.</li>
         </ul>
     show:
@@ -1576,6 +1575,7 @@ en:
             edit_failure: 'Oops! Something went wrong!'
             destroy_success: 'Configuration settings successfully deleted'
             destroy_failure: 'Oops! Something went wrong!'
+            integrations_international: "Integrations are currently only available for GR-based accounts"
       widget: "Widget"
       under_construction: "Under construction..."
       info: "Details"

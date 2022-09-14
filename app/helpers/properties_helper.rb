@@ -306,6 +306,8 @@ module PropertiesHelper
             title: t('properties.promotion_options'),
             modalHeaderHelp: t("promotion_options.help_popover"),
 
+            spitogatosEnabled: current_account.spitogatos_enabled?,
+
             set_sync_active_property_url: set_sync_active_property_url(property),
             get_sync_active_property_url: get_sync_active_property_url(property),
 

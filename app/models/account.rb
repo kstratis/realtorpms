@@ -116,7 +116,6 @@ class Account < ApplicationRecord
           account: self,
           address: 'Χαρ. Τρικούπη 49, Γαλάτσι 111 47',
           availability: DateTime.current.to_date,
-          has_energy_cert: true,
           energy_cert: :a_plus,
           map_url: '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3143.28739727787!2d23.754468567879663!3d38.01707889941776!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a1a25ac6a0ba1b%3A0x4c11a3d10b1b9f6!2sOfficemall.gr!5e0!3m2!1sen!2sgr!4v1651252591936!5m2!1sen!2sgr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>',
           lat: 38.018231,
@@ -142,7 +141,6 @@ class Account < ApplicationRecord
         availability: DateTime.current.to_date,
         account: self,
         location: Location.find(2205),
-        has_energy_cert: true,
         energy_cert: :b,
         map_url: '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3150.5577598612763!2d23.769326114957284!3d37.84723781576076!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a19566fd450c8b%3A0x905434363ef5e32d!2sDimitrakopoulou%2041%2C%20Voula%20166%2073!5e0!3m2!1sen!2sgr!4v1651252396189!5m2!1sen!2sgr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>',
         lat: 37.847189,
@@ -155,10 +153,11 @@ class Account < ApplicationRecord
       propertyb = properties.create!(sample_data_b)
       propertya = properties.create!(sample_data_a)
 
-      extrasa = Extra.find([19, 20, 24, 31])
+
+      extrasa = Extra.where(name: %w[furnished fireplace clima pool])
       propertya.extras << extrasa
 
-      extrasb = Extra.find([18, 26, 28, 25])
+      extrasb = Extra.where(name: %w[attic playroom solar_water_heating])
       propertyb.extras << extrasb
 
       propertya.avatar.attach(
@@ -189,6 +188,7 @@ class Account < ApplicationRecord
         bathrooms: 3,
         floor: :"2",
         construction: 1990,
+        energy_cert: :a,
         address: '25 Hudson Yards',
         unit: '#19D',
         map_url: '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.3840750732666!2d-74.00477298495468!3d40.75357654300857!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259b43fb6e23d%3A0x2a0089cfcb71e0fe!2s25%20Hudson%20Yards%2C%20New%20York%2C%20NY%2010001%2C%20USA!5e0!3m2!1sen!2sgr!4v1651320937790!5m2!1sen!2sgr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>',
@@ -211,6 +211,7 @@ class Account < ApplicationRecord
         price: 3495000,
         bedrooms: 1,
         bathrooms: 2,
+        energy_cert: :a,
         floor: :"4",
         construction: 1900,
         address: '374 Broome St',
@@ -229,8 +230,8 @@ class Account < ApplicationRecord
       propertyc = properties.create!(sample_data_c)
       propertyd = properties.create!(sample_data_d)
       # central heating, fireplace, clima and furnished
-      extrasc = Extra.find([16, 23, 27, 22])
-      extrasd = Extra.find([25])
+      extrasc = Extra.where(name: %w[fireplace clima furnished])
+      extrasd = Extra.find_by_name('pool')
       propertyc.extras << extrasc
       propertyd.extras << extrasd
       propertyc.avatar.attach(

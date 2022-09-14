@@ -1337,9 +1337,9 @@ el:
       new_button: "Προσθήκη ακινήτου"
       pin_shoutout_html:  |
         <ul>
-        <li>Τα ακίνητα που επιλέγεις εμφανίζονται στο <a target="_blank" href="%{site}"><i class="fas fa-link fa-fw"></i>portal</a> σου ενεργοποιώντας την επιλογή "<strong>ορατό στο portal</strong>" μέσα από το υπομενού γρήγορων ενεργειών <nobr>(<i class="fas fa-bolt fa-fw"></i>)</nobr> στην οθόνη <strong>προβολής</strong> ακινήτου.</li>
-        <li>Όταν "καρφιτσώσεις" (<i class="fas fa-bookmark fa-fw"></i>) κάποιο ακίνητο, τότε εκείνο <strong>εμφανίζεται πάντα</strong> στο <a href="%{site}">portal</a> σου <u>όταν δεν υπάρχει συγκεκριμένη αναζήτηση</u>.</li> 
-        <li>Χρησιμοποίσε το υπομενού γρήγορων ενεργειών <nobr>(<i class="fas fa-bolt fa-fw"></i>)</nobr> και "καρφίτσωσε" τα ακίνητα που σ'ενδιαφέρουν προκειμένου να εμπλουτίσεις την αρχική σελίδα του portal σου.</li> 
+        <li>Τα ακίνητα που επιλέγεις γίνονται διαθέσιμα στο <a target="_blank" href="%{site}"><i class="fas fa-link fa-fw"></i>portal</a> σου ενεργοποιώντας την επιλογή "<strong>ορατό στο portal</strong>" μέσα από το υπομενού προώθησης <nobr>(<i class="fas fa-random fa-fw"></i>)</nobr> στην οθόνη <strong>προβολής</strong> ακινήτου.</li>
+        <li>Επιπλέον όταν "καρφιτσώσεις" κάποιο ακίνητο, τότε εκείνο <strong>εμφανίζεται πάντα</strong> στο <a href="%{site}">portal</a> σου <u>όταν δεν υπάρχει συγκεκριμένη αναζήτηση</u>.</li> 
+        <li>Χρησιμοποίσε το υπομενού προώθησης <nobr>(<i class="fas fa-random fa-fw"></i>)</nobr> και "καρφίτσωσε" ακίνητα υψηλού ενδιαφέροντος για αυξημένη προβολή.</li> 
         </ul>
     show:
       quick_actions:
@@ -1552,6 +1552,7 @@ el:
             edit_failure: 'Κάτι πήγε στραβά!'
             destroy_success: 'Οι ρυθμίσεις διασύνδεσης διαγράφηκαν επιτυχώς'
             destroy_failure: 'Κάτι πήγε στραβά!'
+            integrations_international: "Οι διασυνδέσεις είναι προσωρινά διαθέσιμες μόνο για λογαριασμούς Ελλάδος"
       widget: "Widget"
       under_construction: "Υπό κατασκευή..."
       info: "Αναλυτικά"
