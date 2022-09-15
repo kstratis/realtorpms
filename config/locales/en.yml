@@ -801,6 +801,14 @@ en:
               <li>You business partner may get to manage any promotion actions for the property.</li>
             </ul>
           <p>In any other case, you business partner may only view the property entry and its basic details.</p>
+        assignments_feedback_alt_html: |
+          <p>When one or more properties are assigned to your business partner (non-admin role), you are essentially doing the following:</p>
+            <ul>
+              <li>You let your business partner view the contact details of the property's owner.</li>
+              <li>You let your business partner edit the property details.</li>
+              <li>You let your business partner handle the property's promotional material.</li>
+            </ul>
+          <p>In any other case, you business partner may only view the property entry and its basic details.</p>
         assignments_client_feedback: "Client %{client_name} is available to all admins and any partners specified above."
         clientship_feedback: "Client search preferences"
         save_btn: "Save"
@@ -1291,7 +1299,7 @@ en:
       label: "Clone"
       prompt: "Are you sure you want to clone this?"
     sync:
-      spitogatos_label: "Sync with spitogatos.gr"
+      spitogatos_label: "In sync with spitogatos.gr"
     print: "Print"
     info: "Details"
     map: "Map"

@@ -99,6 +99,7 @@ function AddRemoveProperties({
           calculatePageCount={calculatePageCount}
         />
       </div>
+      {i18n.modal.hasFeedback ? <small className="form-text text-muted">{renderHTML(i18n.modal.feedback)}</small> : ''}
     </>
   );
 }

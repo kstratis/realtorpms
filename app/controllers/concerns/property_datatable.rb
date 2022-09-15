@@ -165,6 +165,7 @@ module PropertyDatatable
         clone_entity_path: clone_property_path(property),
         sync_entity_path: set_sync_spitogatos_property_url(property),
         spitogatos_sync: property.spitogatos_sync,
+        spitogatos_id: property.spitogatos_id.presence,
         purpose: I18n.t("activerecord.attributes.property.enums.businesstype.#{property.businesstype}_banner"),
         businesstype: property.businesstype,
         avatar: pick_avatar_pick(property),

@@ -100,6 +100,7 @@ class PropertyEntry extends React.Component {
                         websiteEnabled={this.props.entry['website_enabled']}
                         pinned={this.props.entry['pinned']}
                         spitogatosSync={this.props.entry['spitogatos_sync']}
+                        spitogatosId={this.props.entry['spitogatos_id']}
                       />
                       <table className="table table-property-entry table-borderless">
                         <tbody>

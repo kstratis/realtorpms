@@ -34,7 +34,9 @@ module UsersHelper
           i18n: {
             modal: {
               search_placeholder: t('header.search'),
-              no_results: t('users.show.modal.no_results')
+              no_results: t('users.show.modal.no_results'),
+              hasFeedback: true,
+              feedback: t('js.components.select.assignments_feedback_alt_html')
             }
           },
           size: 'md',

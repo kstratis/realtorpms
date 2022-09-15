@@ -4,7 +4,7 @@ function allAreFalsy(arr) {
   return arr.every(element => !element);
 }
 
-function PropertyRibbon({ sample, i18n, spitogatosSync, websiteEnabled, pinned }) {
+function PropertyRibbon({ sample, i18n, spitogatosSync, spitogatosId, websiteEnabled, pinned }) {
   return (
     <>
       {sample ? (
@@ -42,7 +42,8 @@ function PropertyRibbon({ sample, i18n, spitogatosSync, websiteEnabled, pinned }
               <span
                 data-toggle="tooltip"
                 data-placement="auto"
-                title={i18n['sync']['spitogatos_label']}
+                data-html={'true'}
+                title={`${i18n['sync']['spitogatos_label']}. ${spitogatosId ? `<u>ID: ${spitogatosId}</u>` : ''}`}
                 className={'btn-action mr-0 text-center pinned-badge'}>
                 <svg width="20px" height="20px" viewBox="0 0 333 295" xmlns="http://www.w3.org/2000/svg">
                   <g fill="#ffffff" fillRule="nonzero">
