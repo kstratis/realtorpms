@@ -16,6 +16,7 @@ import AssociativeFormSelect from '../components/selects/AssociativeFormSelect';
 import FormComponents from './fields/FormComponents';
 
 const PropertiesList = ({
+  accountFlavor,
   handleLocationInput,
   handlePriceInput,
   handleSizeInput,
@@ -29,6 +30,7 @@ const PropertiesList = ({
   handleCfieldTextfield,
   handleCfieldCheckbox,
   handleActiveOnlyFilter,
+  handleSpitogatosSyncFilter,
   buysell_filter,
   category_filter,
   price_filter,
@@ -36,6 +38,7 @@ const PropertiesList = ({
   rooms_filter,
   floors_filter,
   active_only_filter,
+  spitogatos_sync_filter,
   construction_filter,
   locations_filter,
   advanceByTwo,
@@ -66,10 +69,16 @@ const PropertiesList = ({
   const handleChange = event => setFiltersOpen(filtersOpen => !filtersOpen);
 
   const [activeOnlyFilterChecked, setActiveOnlyFilterChecked] = useState(() => (active_only_filter['isChecked'] ? !!active_only_filter['isChecked'] : ''));
+  const [spitogatosSyncFilterChecked, setSpitogatosSyncFilterChecked] = useState(() => (spitogatos_sync_filter['isChecked'] ? !!spitogatos_sync_filter['isChecked'] : ''));
 
-  const handleCheckboxChange = e => {
+  const handleActiveOnlyChange = e => {
     setActiveOnlyFilterChecked(e.target.checked);
     handleActiveOnlyFilter(e.target.checked);
+  };
+
+  const handleSpitogatosSyncChange = e => {
+    setSpitogatosSyncFilterChecked(e.target.checked);
+    handleSpitogatosSyncFilter(e.target.checked);
   };
 
   const clearHandler = e => {
@@ -294,7 +303,7 @@ const PropertiesList = ({
                           name={'active'}
                           className="custom-control-input"
                           checked={!!activeOnlyFilterChecked}
-                          onChange={handleCheckboxChange}
+                          onChange={handleActiveOnlyChange}
                       />
                       <label htmlFor={'active'} className={'custom-control-label'}>
                         {i18n.status_active_only}
@@ -302,6 +311,31 @@ const PropertiesList = ({
                     </div>
                   </div>
                 </div>
+
+                {accountFlavor === 'greek' ? (
+                    <>
+                      <hr />
+                      <label className="d-block">
+                        <h5 className="card-title filter-header">{i18n.sync_title}:</h5>
+                      </label>
+                      <div className={'mb-3'}>
+                        <div className="form-group mb-4">
+                          <div className="custom-control custom-checkbox app-checkbox custom-field-checkbox">
+                            <input
+                                id={'spitogatosSync'}
+                                type="checkbox"
+                                name={'spitogatosSync'}
+                                className="custom-control-input"
+                                checked={!!spitogatosSyncFilterChecked}
+                                onChange={handleSpitogatosSyncChange}
+                            />
+                            <label htmlFor={'spitogatosSync'} className={'custom-control-label'}>
+                              {i18n.sync_body}
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </>) : ''}
 
                 <hr />
                 {cfields.fields.map((cfield, index) => {

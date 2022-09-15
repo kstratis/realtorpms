@@ -426,6 +426,8 @@ el:
         status_title: "Κατάσταση"
         status_active: "Ενεργό"
         status_inactive: "Μη ενεργό"
+        sync_title: "Συγχρονισμός"
+        sync_body: "Με spitogatos.gr"
         owner: "Ιδιοκτήτης"
         owner_title: "Ιδιοκτήτης/ες"
         owner_header_name: "Ονομ/μό"

@@ -117,6 +117,10 @@ module PropertyDatatable
       @properties = @properties.where(active: true)
     end
 
+    if filters[:spitogatos_sync]
+      @properties = @properties.where(spitogatos_sync: true)
+    end
+
     # Custom fields filtering
     @properties, initial_cfields = cfields_filtering('properties', @properties, filters)
 
@@ -206,6 +210,7 @@ module PropertyDatatable
     @initial_constructionmin = filters[:constructionmin] || ''
     @initial_constructionmax = filters[:constructionmax] || ''
     @initial_active_only_filter = filters[:active_only] || ''
+    @initial_spitogatos_sync_filter = filters[:spitogatos_sync] || ''
     @initial_cfields = initial_cfields
 
     respond_to do |format|

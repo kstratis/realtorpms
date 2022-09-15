@@ -68,6 +68,9 @@
               active_only_filter: {
                   isChecked: @initial_active_only_filter
               },
+              spitogatos_sync_filter: {
+                  isChecked: @initial_spitogatos_sync_filter
+              },
               cfields: {
                   fields: get_cfields('properties'),
                   storedSelections: @initial_cfields,
@@ -216,6 +219,8 @@
               status_inactive: t('activerecord.attributes.property.status_inactive'),
               status_active: t('activerecord.attributes.property.status_active'),
               status_active_only: t('js.datatables.filters.property_status.active_only'),
+              sync_title: t('activerecord.attributes.property.sync_title'),
+              sync_body: t('activerecord.attributes.property.sync_body'),
               favourites_tooltip: t('js.properties_favourites_tooltip'),
               popover_title: t('properties.popover_client_title'),
               popover_body: t('properties.popover_client_' + current_user.role(current_account)),

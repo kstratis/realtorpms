@@ -94,6 +94,7 @@ function withDatatable(WrappedComponent) {
           }
           : '',
         active_only_filter: { isChecked: this.props.initial_payload?.active_only_filter?.isChecked || false },
+        spitogatos_sync_filter: { isChecked: this.props.initial_payload?.spitogatos_sync_filter?.isChecked || false },
         cfields: this.props.initial_payload.cfields,
         is_masquerading: this.props.initial_payload.is_masquerading,
         current_user_id: this.props.initial_payload.current_user_id,
@@ -106,6 +107,7 @@ function withDatatable(WrappedComponent) {
         isLoading: false,
         pageCount: Math.ceil(this.props.initial_payload.total_entries / this.props.initial_payload.results_per_page),
         count: this.props.initial_payload.total_entries,
+        accountFlavor: this.props.initial_payload.accountFlavor || null,
 
         /* This is required only in initial loading.
          * We want this to be reflected in our React component. That's why we subtract 1 */
@@ -151,6 +153,7 @@ function withDatatable(WrappedComponent) {
       this.handleClone = this.handleClone.bind(this);
       this.handleReadNotification = this.handleReadNotification.bind(this);
       this.handleActiveOnlyFilter = this.handleActiveOnlyFilter.bind(this);
+      this.handleSpitogatosSyncFilter = this.handleSpitogatosSyncFilter.bind(this);
       this._handleParams = this._handleParams.bind(this);
       this.ajaxCallback = this.ajaxCallback.bind(this);
       this.handleAjaxRequestDelayed = debounce(this.handleAjaxRequest, 300);
@@ -772,6 +775,19 @@ function withDatatable(WrappedComponent) {
       this._handleParams(searchParams);
     }
 
+    handleSpitogatosSyncFilter(selection){
+      this.setState({ isLoading: true });
+      let searchParams = new URLSearchParams(window.location.search);
+
+      if (!selection) {
+        searchParams.delete(`spitogatos_sync`);
+      } else {
+        searchParams.set(`spitogatos_sync`, selection ? '1' : '0');
+        searchParams.delete('page');
+      }
+      this._handleParams(searchParams);
+    }
+
     handleClone(e, cloneUrl){
       e.preventDefault();
       this.setState({ isLoading: true });
@@ -859,6 +875,7 @@ function withDatatable(WrappedComponent) {
             handleClone={this.handleClone}
             handleReadNotification={this.handleReadNotification}
             handleActiveOnlyFilter={this.handleActiveOnlyFilter}
+            handleSpitogatosSyncFilter={this.handleSpitogatosSyncFilter}
             cfields={this.props.initial_payload.cfields}
             {...this.state}
           />

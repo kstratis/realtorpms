@@ -459,6 +459,8 @@ en:
         status_title: "Market status"
         status_active: "Active"
         status_inactive: "Inactive"
+        sync_title: "Sync"
+        sync_body: "With spitogatos.gr"
         owner: "Owner"
         owner_title: "Owner/s"
         owner_header_name: "Name"
