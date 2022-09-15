@@ -12,6 +12,14 @@ every 30.minutes do
   runner "Spitogatos.create_listings"
 end
 
+every 20.minutes do
+  runner "Spitogatos.edit_listings"
+end
+
+every 10.minutes do
+  runner "Spitogatos.delete_listings"
+end
+
 every 8.hours do
   runner "Spitogatos.renew_listings"
 end
