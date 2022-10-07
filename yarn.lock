@@ -4952,9 +4952,9 @@ last-call-webpack-plugin@^3.0.0:
     lodash "^4.17.5"
     webpack-sources "^1.1.0"
 
-"leaflet-geosearch@https://realtorpms.com/static/leaflet-geosearch-3.7-custom.tgz":
+"leaflet-geosearch@file:../../../../var/www/static/leaflet-geosearch-3.7-custom.tgz":
   version "3.6.1"
-  resolved "https://realtorpms.com/static/leaflet-geosearch-3.7-custom.tgz#a096a603336ac78fd50288d1613bae025b235c24"
+  resolved "file:../../../../var/www/static/leaflet-geosearch-3.7-custom.tgz#a096a603336ac78fd50288d1613bae025b235c24"
   optionalDependencies:
     "@googlemaps/js-api-loader" "^1.14.3"
     leaflet "^1.6.0"
