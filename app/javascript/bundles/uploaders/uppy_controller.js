@@ -24,7 +24,7 @@ export default class UppyLoader {
       autoProceed: false,
       restrictions: {
         maxFileSize: 3700000,
-        maxNumberOfFiles: 10 - parseInt(file_count),
+        maxNumberOfFiles: 25 - parseInt(file_count),
         allowedFileTypes: ['image/*']
       },
       // exceedsSize is a Core locale string, so it needs to be passed to the Uppy constructor directly.

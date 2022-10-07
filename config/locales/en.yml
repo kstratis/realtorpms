@@ -997,7 +997,7 @@ en:
       exceedsSize: "The file size is bigger than "
       noDuplicates: "You're trying to upload the same file twice: %{fileName}"
       browse: "browse"
-      notes: "Only images are allowed. Max file size 3.5MB/file. Total max number of files: 10."
+      notes: "Only images are allowed. Max file size 5MB/file. Max number of files: 25."
       filename: "Filename:"
       editing: "Editing"
       done: "Close"
