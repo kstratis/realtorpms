@@ -7,9 +7,11 @@ export default class MapManager {
     const mapDomEl = document.getElementById('map');
     const lat = mapDomEl.dataset.lat
     const lng = mapDomEl.dataset.lng
+    this.setLocale();
     if (lat && lng) {
       this.simpleMode(lat, lng)
     } else {
+      // this.fetchGeocoderObj = this.memoizeGeocoder(this.fetchGeocoder);
       this.fullMode();
     }
   }
@@ -20,7 +22,7 @@ export default class MapManager {
 
     this.map = L.map('map', { gestureHandling: true }).setView([lat, lng], 18);
     this.map.attributionControl.setPrefix(document.getElementById('map').dataset.brand);
-    L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
+    L.tileLayer(`https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}&hl=${this.activeLanguage}`,{
       maxZoom: 18,
       subdomains:['mt0','mt1','mt2','mt3']
     }).addTo(this.map);
@@ -48,32 +50,25 @@ export default class MapManager {
   }
 
   // `add/edit` view
-  fullMode() {
+  async fullMode() {
     this.map = L.map('map').setView(this.fetchCoords(), this.hasInitialCoords() ? 18 : 14);
     this.map.attributionControl.setPrefix(document.getElementById('map').dataset.brand);
     this.markerGroup = L.layerGroup().addTo(this.map);
 
-    L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
+    L.tileLayer(`https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}&hl=${this.activeLanguage}`,{
       maxZoom: 18,
       subdomains: ['mt0','mt1','mt2','mt3']
     }).addTo(this.map);
 
-    this.setLocale();
-
-    // Providers setup
+    // Provider setup
     // ---
-    const developmentProvider = new OpenStreetMapProvider({
-      params: this.setupOpenStreetMapParams()
-    })
-
-    const productionProvider = new GoogleProvider({
-      params: this.setupGoogleParams()
-    });
-    // --------
+    this.provider = this.environment === 'development'
+        ? new OpenStreetMapProvider({params: this.setupOpenStreetMapParams()})
+        : new GoogleProvider(this.setupGoogleParams());
 
     // This is the searchbox
     const searchControl = new GeoSearchControl({
-      provider: this.environment === 'development' ? developmentProvider : productionProvider,
+      provider: this.provider,
       style: 'bar',
       searchLabel: document.getElementById('map').dataset.searchPrompt,
       autoClose: true,
@@ -100,7 +95,8 @@ export default class MapManager {
     // We use this to set the address field value and clear any manually placed markers
     this.map.on('geosearch/showlocation', e => {
       this.markerGroup.clearLayers();
-      this.addressField.value = this.environment === 'development' ? this.formatGRAddress(e.location.label) : e.location.label;
+      // this.addressField.value = this.environment === 'development' ? this.formatGRAddress(e.location.label) : e.location.label;
+      this.addressField.value = e.location.label;
       this.setLagLng({ lat: e.location.y, lng: e.location.x });
       
       this.dispatchEvent(true);
@@ -117,32 +113,31 @@ export default class MapManager {
     });
 
     // We use this when selecting a custom location on the map (marker).
-    this.map.on('click', (e) => {
-      this.resetButton.click();
+    this.map.on('click', this.reverseSearch.bind(this));
+  }
 
-      if (this.environment === 'development'){
-        fetch(`https://nominatim.openstreetmap.org/reverse?&accept-language=${this.active_locale}&format=jsonv2&lat=${e.latlng.lat}&lon=${e.latlng.lng}`)
-            .then(response => response.json())
-            .then(data => {
-              this.geoSearchInput.value = data.display_name;
-              this.addressField.value = this.formatGRAddress(data.display_name);
-              this.setLagLng(e.latlng);
-            });
-      } else {
-        fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${e.latlng.lat},${e.latlng.lng}&key=${this.googleAPIKey}&language=${this.activeLanguage}`)
-            .then(response => response.json())
-            .then(data => {
-              this.geoSearchInput.value = data.results[0]?.formatted_address;
-              this.addressField.value = data.results[0]?.formatted_address;
-              this.setLagLng(e.latlng);
-            });
-      }
+  async reverseSearch(e){
+    this.resetButton.click();
 
-      this.markerGroup.clearLayers();
-      L.marker(e.latlng).addTo(this.markerGroup);
+    if (this.environment === 'development'){
+      fetch(`https://nominatim.openstreetmap.org/reverse?&accept-language=${this.active_locale}&format=jsonv2&lat=${e.latlng.lat}&lon=${e.latlng.lng}`)
+          .then(response => response.json())
+          .then(data => {
+            this.geoSearchInput.value = data.display_name;
+            this.addressField.value = this.formatGRAddress(data.display_name);
+            this.setLagLng(e.latlng);
+          });
+    } else {
+      const results = await this.provider.reverseSearch({ coordinates: e.latlng });
+      this.geoSearchInput.value = results[0].label
+      this.addressField.value = results[0].label
+      this.setLagLng(e.latlng);
+    }
 
-      this.dispatchEvent(true);
-    });
+    this.markerGroup.clearLayers();
+    L.marker(e.latlng).addTo(this.markerGroup);
+
+    this.dispatchEvent(true);
   }
 
   dispatchEvent(detail) {
@@ -209,7 +204,7 @@ export default class MapManager {
   }
 
   get resetButton() {
-    return document.querySelector('.leaflet-control-geosearch.leaflet-geosearch-bar a.reset');
+    return document.querySelector('.leaflet-control-geosearch.leaflet-geosearch-bar button.reset');
   }
 
   get closePopupButton() {
@@ -257,9 +252,10 @@ export default class MapManager {
 
   setupGoogleParams(){
     const base = {
-      key: this.googleAPIKey,
+      apiKey: this.googleAPIKey,
       language: this.activeLanguage
     }
-    return Object.assign({}, base, this.accountFlavor === 'greek' ? { region: 'gr' } : null);
+
+    return Object.assign({}, base, this.accountFlavor === 'greek' ? { region: 'GR' } : null);
   }
 }
