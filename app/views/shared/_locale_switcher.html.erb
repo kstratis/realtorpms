@@ -6,10 +6,11 @@
       </div>
       <div class="col-6 col-lg-4 row align-items-center ">
         <div class="col-12 col-md-6 d-lg-inline-flex justify-content-lg-end">
-          <div class="d-inline country-proposal px-5 py-2"><%= I18n.t('website.locale.country_proposal') %></div>
+<!--          <div class="d-inline country-proposal px-5 py-2"><%#= I18n.t('website.locale.country_proposal') %></div>-->
+          <div class="d-inline px-5 py-2"><span id="us-flag">🇺🇸</span></div>
         </div>
         <div class="col-12 col-md-6 mt-3 mt-md-0 d-inline-flex justify-content-lg-start">
-          <a id="locale-switch-accept" class="d-inline locale-redirect" href="<%= landing_root_url(locale: 'el', params: request.query_parameters) %>"><strong><%= I18n.t('website.locale.continue') %></strong></a>
+          <a id="locale-switch-accept" class="d-inline locale-redirect" href="<%= landing_root_url(locale: 'en', params: request.query_parameters) %>"><strong><%= I18n.t('website.locale.continue') %></strong></a>
           <div id="locale-switch-reject" class="d-inline locale-dismiss ml-2"><strong>Χ</strong></div>
         </div>
       </div>

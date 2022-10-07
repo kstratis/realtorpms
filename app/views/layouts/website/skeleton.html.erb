@@ -51,7 +51,7 @@
 </head>
 
 <body data-turbolinks="false">
-  <% if request.params[:locale].blank? && @locale_switch_dismissed.blank? && !logged_in? && greek_user? %>
+  <% if request.params[:locale].blank? && @locale_switch_dismissed.blank? && !logged_in? && international_user? %>
     <%= render 'shared/locale_switcher' %>
   <% end %>
 

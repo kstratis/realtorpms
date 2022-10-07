@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   include TimelineHelper
   include SizeConverter
 
-  helper_method :greek_user?
+  helper_method :greek_user?, :international_user?
   helper_method :print_size, :print_price_per_size, :print_price, :print_telephones
 
   rescue_from ActiveRecord::RecordNotFound, with: -> { render_404  }

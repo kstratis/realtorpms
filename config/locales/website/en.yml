@@ -4,9 +4,9 @@ en:
     meta:
       description: "RealtorPMS - Real estate brokerage management system"
     locale:
-      prompt: 'Επιβεβαίωσε την χώρα ή την περιοχή, για να δεις περιεχόμενο σχετικό με την τοποθεσία σου.'
-      country_proposal: 'Ελλάδα'
-      continue: 'Συνέχεια'
+      prompt: "Looks like your brokerage isn't based in Greece. Please check out the international version."
+      country_proposal: 'US'
+      continue: 'Continue'
     nav:
       features: 'FEATURES'
       subscription: 'PRICING'
@@ -67,7 +67,7 @@ en:
     pricing:
       full_version: "Full version"
       header_html: 'Single, <u>flat price</u>'
-      subheader_html: '<u>No hidden functionality</u> or features behind a paywall'
+      subheader_html: '<u>Absolutely no surprises</u> or features locked behind a paywall'
       offer: 'Free until the end of %{month}'
       cta: 'Sign up'
       free_trial: 'Free trial'
