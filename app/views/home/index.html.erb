@@ -85,33 +85,33 @@
         </a> <!-- /.navbar-brand -->
 
         <% if logged_in? %>
-          <a class="d-lg-block d-none navbar-btn btn btn-outline-danger ml-auto order-lg-1" href="<%= redirect_to_app_url %>"><%= t('website.nav.app') %></a> <!-- .navbar-collapse -->
+          <a class="d-lg-block d-none navbar-btn btn btn-outline-danger ml-auto order-lg-1 font-weight-800" href="<%= redirect_to_app_url %>"><%= t('website.nav.app') %></a> <!-- .navbar-collapse -->
         <% else %>
-          <a class="d-lg-block d-none navbar-btn btn btn-lg btn-cta ml-auto order-lg-2" href="<%= new_account_url %>"><%= t('website.nav.signup') %></a> <!-- .navbar-collapse -->
-          <a class="d-lg-block d-none navbar-btn btn btn-lg ml-auto order-lg-3" href="<%= login_url %>"><%= t('website.nav.signin') %></a> <!-- .navbar-collapse -->
+          <a class="d-lg-block d-none navbar-btn btn btn-lg btn-cta ml-auto order-lg-2 font-weight-800" href="<%= new_account_url %>"><%= t('website.nav.signup') %></a> <!-- .navbar-collapse -->
+          <a class="d-lg-block d-none navbar-btn btn btn-lg ml-auto order-lg-3 font-weight-800" href="<%= login_url %>"><%= t('website.nav.signin') %></a> <!-- .navbar-collapse -->
         <% end %>
 
         <div class="navbar-collapse collapse" id="navbarTogglerDemo01">
           <ul class="navbar-nav mx-auto">
             <li class="nav-item mr-lg-3 d-lg-none">
               <% if logged_in? %>
-                <a class="nav-link py-2 black-color" href="<%= redirect_to_app_url %>"><%= t('website.nav.app') %></a> <!-- .navbar-collapse -->
+                <a class="nav-link py-2 black-color font-weight-bold" href="<%= redirect_to_app_url %>"><%= t('website.nav.app') %></a> <!-- .navbar-collapse -->
               <% else %>
-                <a class="nav-link py-2 black-color" href="<%= new_account_url %>"><%= t('website.nav.signup') %></a> <!-- .navbar-collapse -->
-                <a class="nav-link py-2 black-color" href="<%= login_url %>"><%= t('website.nav.signin') %></a> <!-- .navbar-collapse -->
+                <a class="nav-link py-2 black-color font-weight-bold" href="<%= new_account_url %>"><%= t('website.nav.signup') %></a> <!-- .navbar-collapse -->
+                <a class="nav-link py-2 black-color font-weight-bold" href="<%= login_url %>"><%= t('website.nav.signin') %></a> <!-- .navbar-collapse -->
               <% end %>
             </li>
             <li class="nav-item mr-lg-3">
-              <a class="nav-link py-2 black-color" href="#features"><%= t('website.nav.features') %></a>
+              <a class="nav-link py-2 black-color font-weight-bold" href="#features"><%= t('website.nav.features') %></a>
             </li>
             <li class="nav-item mr-lg-3">
-              <a class="nav-link py-2 black-color" href="#testimonials"><%= t('website.nav.testimonials') %></a>
+              <a class="nav-link py-2 black-color font-weight-bold" href="#testimonials"><%= t('website.nav.testimonials') %></a>
             </li>
             <li class="nav-item mr-lg-3">
-              <a class="nav-link py-2 black-color" href="#pricing"><%= t('website.nav.subscription') %></a>
+              <a class="nav-link py-2 black-color font-weight-bold" href="#pricing"><%= t('website.nav.subscription') %></a>
             </li>
             <li class="nav-item mr-lg-3">
-              <a class="nav-link py-2 black-color" href="#contact"><%= t('website.nav.contact') %></a>
+              <a class="nav-link py-2 black-color font-weight-bold" href="#contact"><%= t('website.nav.contact') %></a>
             </li>
           </ul>
         </div><!-- /.navbar-collapse -->
@@ -394,30 +394,25 @@
         </div>
         <div class="row">
           <div class="col-lg-6 offset-lg-3">
-            <p class="text-white text-center integrations-section-header">Διασύνδεση με:</p>
+            <p class="text-white text-center integrations-section-header font-weight-bold"><%= t('website.integrations.header') %></p>
           </div>
         </div>
         <div class="row h-100 justify-content-center align-items-center mt-5">
           <div class="col-xl-4 col-12">
             <div class="integration-box">
-<!--              spitogatos_canonical.png-->
               <%= image_pack_tag 'media/images/spitogatos_canonical.png', class: "mx-auto d-block integration-provider-logo" %>
-<!--              <p class="integrations-section-text text-center"><u>Spitogatos</u>&nbsp;&nbsp;<span style="color:red">✔</span></p>-->
             </div>
           </div>
           <div class="col-xl-4 col-12 my-3 my-xl-0">
             <div class="integration-box">
-<!--              <p class="integrations-section-text text-center"><u>Spiti24</u>&nbsp;&nbsp;<span style="color:red">✔</span></p>-->
               <%= image_pack_tag 'media/images/spiti24_canonical.png', class: "mx-auto d-block integration-provider-logo" %>
             </div>
           </div>
           <div class="col-xl-4 col-12">
-<!--            <div class="integration-box"><p class="integrations-section-text text-center"><u>Tospitimou</u>&nbsp;&nbsp;<span style="color:red">✔</span></p>-->
             <%= image_pack_tag 'media/images/tospitimou_canonical.png', class: "mx-auto d-block integration-provider-logo" %>
             </div>
           </div>
         </div>
-      </div>
 
     </section>
 
@@ -505,9 +500,9 @@
               </div>
               <div class="card-footer">
                 <% if logged_in? %>
-                  <a href="<%= redirect_to_app_url %>" class="card-footer-item p-4 px-lg-5 color-white"><strong><%= t('website.gotoapp') %></strong></a>
+                  <a href="<%= redirect_to_app_url %>" class="card-footer-item p-4 px-lg-5 color-white font-size-28px"><strong><%= t('website.gotoapp') %></strong></a>
                 <% else %>
-                  <a href="<%= new_account_url %>" class="card-footer-item p-4 px-lg-5 color-white"><strong><%= t('website.pricing.cta_start_free') %></strong></a>
+                  <a href="<%= new_account_url %>" class="card-footer-item p-4 px-lg-5 color-white font-size-28px"><strong><%= t('website.pricing.cta_start_free') %></strong></a>
                 <% end %>
               </div>
             </div>

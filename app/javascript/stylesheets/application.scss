@@ -2060,8 +2060,17 @@ input.no-full-width{
 
 // --------------------------------- WEBSITE CSS -----------------------------------------------------
 // --------------------------------- =========== -----------------------------------------------------
-#us-flag{
+.text-highlight {
+  background: #F7C46C;
+  color: #000000;
+}
+
+.font-size-28px{
   font-size: 28px;
+}
+
+.font-weight-800 {
+  font-weight: 800;
 }
 
 .integrations-section{
@@ -2095,7 +2104,6 @@ input.no-full-width{
 
   h1{
     line-height: 1.15em;
-    letter-spacing: 0.5px;
     font-weight: 800;
   }
 
