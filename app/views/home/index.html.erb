@@ -368,6 +368,59 @@
       </div><!-- /.container -->
     </section><!-- /feature -->
 
+    <section class="position-relative py-5 integrations-section">
+      <div id="integrations" class="container position-relative">
+        <div class="row mt-n5">
+          <div class="col-sm-12 col-lg-6 offset-lg-3 ">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 40 144 60">
+              <defs>
+                <filter id="a" width="571.9%" height="571.9%" x="-235.9%" y="-235.9%" filterUnits="objectBoundingBox">
+                  <feOffset dy="9" in="SourceAlpha" result="shadowOffsetOuter1"/>
+                  <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="15"/>
+                  <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0"/>
+                  <feMerge>
+                    <feMergeNode in="shadowMatrixOuter1"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+              <g fill="none" fill-rule="evenodd" filter="url(#a)" transform="translate(56 56)">
+                <circle cx="16" cy="16" r="16" fill="gold"/>
+                <path fill="#FFF" fill-rule="nonzero" stroke="#000" d="M15.127273 11.05507h-2.542546c-2.678415-.036116-5.004593 1.795825-5.540072 4.362987h-5.2992v1.745195h5.290278c.526324 2.57625 2.863536 4.41392 5.548994 4.362988h2.542546V11.05507ZM25.107006 15.418216c-.536708-2.573646-2.872826-4.407461-5.557915-4.362875h-2.676364V21.52624h2.676364c2.685458.050931 5.02267-1.786693 5.548994-4.362875h5.15646v-1.74515h-5.147539Z"/>
+                <path d="M0 0h32v32H0z"/>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 offset-lg-3">
+            <p class="text-white text-center integrations-section-header">Διασύνδεση με:</p>
+          </div>
+        </div>
+        <div class="row h-100 justify-content-center align-items-center mt-5">
+          <div class="col-xl-4 col-12">
+            <div class="integration-box">
+<!--              spitogatos_canonical.png-->
+              <%= image_pack_tag 'media/images/spitogatos_canonical.png', class: "mx-auto d-block integration-provider-logo" %>
+<!--              <p class="integrations-section-text text-center"><u>Spitogatos</u>&nbsp;&nbsp;<span style="color:red">✔</span></p>-->
+            </div>
+          </div>
+          <div class="col-xl-4 col-12 my-3 my-xl-0">
+            <div class="integration-box">
+<!--              <p class="integrations-section-text text-center"><u>Spiti24</u>&nbsp;&nbsp;<span style="color:red">✔</span></p>-->
+              <%= image_pack_tag 'media/images/spiti24_canonical.png', class: "mx-auto d-block integration-provider-logo" %>
+            </div>
+          </div>
+          <div class="col-xl-4 col-12">
+<!--            <div class="integration-box"><p class="integrations-section-text text-center"><u>Tospitimou</u>&nbsp;&nbsp;<span style="color:red">✔</span></p>-->
+            <%= image_pack_tag 'media/images/tospitimou_canonical.png', class: "mx-auto d-block integration-provider-logo" %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
     <section class="position-relative py-5 bg-light">
       <div id="testimonials" class="container position-relative">
         <p>
