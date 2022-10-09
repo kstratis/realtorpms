@@ -1438,7 +1438,7 @@ en:
       success: "Account settings successfully updated"
       failed: "Unable to create a new account"
   sessions:
-    flavor_warning: "* Your account will be bound to the version you choose. Once selected, this option can't be changed"
+    flavor_warning: "* Your account will be bound to the version you choose. Once selected, this option can't be changed. If you are not based in Greece, choose International."
     login_title: "Login"
     forgot_title: "Forgot password"
     forgot_password_header: "Password reset request"

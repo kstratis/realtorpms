@@ -34,7 +34,7 @@
       <div class="form-label-group">
         <%= account_builder.select "flavor",
                                    Account.flavors.keys.collect { |flavor| [ Account.human_enum_name(:flavor, flavor), flavor ] },
-                                   { selected:  params[:locale] == 'el' ? :greek : :international },
+                                   { selected: I18n.locale.to_s == 'el' ? :greek : :international },
                                    { class: 'custom-select' } %>
 
         <%= account_builder.label "flavor", Account.human_attribute_name("flavor") %>
