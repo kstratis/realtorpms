@@ -161,6 +161,21 @@
               <h1 class="display-4 enable-responsive-font-size mb-4">
                 <%= t('website.hero1') %><br><%= t('website.hero2') %></h1>
               <p class="px-4 lead text-center mb-5 subheader-text"><%= t('website.subheader', brand: BRANDNAME) %></p>
+              <div class="row" data-aos="fade-up" data-aos-duration="300">
+                <div class="offset-2"></div>
+                <div class="col-4 px-3 py-2">
+                  <div class="cert-container opacity-093">
+                <%= image_pack_tag 'media/images/cert_amazon.png', class: "img-fluid", alt: t('website.feature_strip.b.alt') %>
+                  </div>
+                </div>
+                <div class="col-4 px-3 py-2">
+                  <div class="cert-container opacity-093">
+                <%= image_pack_tag 'media/images/cert_ph.png', class: "img-fluid", alt: t('website.feature_strip.b.alt') %>
+                  </div>
+                </div>
+              </div>
+
+
             </div>
           </div><!-- /.col-md-6 -->
         </div><!-- /.row -->
