@@ -20,7 +20,7 @@ gem 'e2mmap'
 
 gem 'rack-cors'
 
-gem 'image_processing', '~> 1.12.1'
+gem 'image_processing', '~> 1.12.2'
 
 # -----------
 
