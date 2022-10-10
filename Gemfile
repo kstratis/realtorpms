@@ -40,7 +40,7 @@ gem "mini_magick"
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.4.3'
 # Use Puma as the app server
-gem 'puma', '~> 5.3.2'
+gem 'puma', '~> 5.6.4'
 # Use SCSS for stylesheets
 # gem 'sass-rails', '~> 5.0.7'
 gem 'sassc-rails', '~> 2.1.2'
