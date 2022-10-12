@@ -299,7 +299,7 @@
         <p class="lead text-muted color-grey text-center text-sm-left mb-5"><%= t('website.benefits.subheader') %></p><!-- .card-deck -->
         <div class="card-deck-lg">
           <!-- .card -->
-          <div class="card shadow" data-aos="fade-up" data-aos-delay="0">
+          <div class="card shadow">
             <!-- .card-body -->
             <div class="card-body p-4">
               <div class="d-sm-flex align-items-start text-center text-sm-left">
@@ -312,7 +312,7 @@
             </div><!-- /.card-body -->
           </div><!-- /.card -->
           <!-- .card -->
-          <div class="card shadow" data-aos="fade-up" data-aos-delay="100">
+          <div class="card shadow">
             <!-- .card-body -->
             <div class="card-body p-4">
               <div class="d-sm-flex align-items-start text-center text-sm-left">
@@ -328,7 +328,7 @@
         <!-- .card-deck -->
         <div class="card-deck-lg">
           <!-- .card -->
-          <div class="card shadow" data-aos="fade-up" data-aos-delay="200">
+          <div class="card shadow">
             <!-- .card-body -->
             <div class="card-body p-4">
               <div class="d-sm-flex align-items-start text-center text-sm-left">
@@ -341,7 +341,7 @@
             </div><!-- /.card-body -->
           </div><!-- /.card -->
           <!-- .card -->
-          <div class="card shadow" data-aos="fade-up" data-aos-delay="300">
+          <div class="card shadow">
             <!-- .card-body -->
             <div class="card-body p-4">
               <div class="d-sm-flex align-items-start text-center text-sm-left">
@@ -357,7 +357,7 @@
         <!-- .card-deck -->
         <div class="card-deck-lg">
           <!-- .card -->
-          <div class="card shadow" data-aos="fade-up" data-aos-delay="400">
+          <div class="card shadow">
             <!-- .card-body -->
             <div class="card-body p-4">
               <div class="d-sm-flex align-items-start text-center text-sm-left">
@@ -370,7 +370,7 @@
             </div><!-- /.card-body -->
           </div><!-- /.card -->
           <!-- .card -->
-          <div class="card shadow" data-aos="fade-up" data-aos-delay="500">
+          <div class="card shadow">
             <!-- .card-body -->
             <div class="card-body p-4">
               <div class="d-sm-flex align-items-start text-center text-sm-left">
@@ -415,15 +415,15 @@
             <p class="text-white text-center integrations-section-header font-weight-bold"><%= t('website.integrations.header') %></p>
           </div>
         </div>
-        <div class="row h-100 justify-content-center align-items-center mt-5">
-          <div class="col-xl-4 col-12">
-            <div class="integration-box">
-              <%= image_pack_tag 'media/images/spitogatos_canonical.png', class: "mx-auto d-block integration-provider-logo" %>
-            </div>
-          </div>
+        <div class="row h-100 justify-content-center align-items-center mt-5" data-aos="fade-in">
           <div class="col-xl-4 col-12 my-3 my-xl-0">
             <div class="integration-box">
               <%= image_pack_tag 'media/images/spiti24_canonical.png', class: "mx-auto d-block integration-provider-logo" %>
+            </div>
+          </div>
+          <div class="col-xl-4 col-12">
+            <div class="integration-box">
+              <%= image_pack_tag 'media/images/spitogatos_canonical.png', class: "mx-auto d-block integration-provider-logo" %>
             </div>
           </div>
           <div class="col-xl-4 col-12">
@@ -518,9 +518,9 @@
               </div>
               <div class="card-footer">
                 <% if logged_in? %>
-                  <a href="<%= redirect_to_app_url %>" class="card-footer-item p-4 px-lg-5 color-white font-size-28px"><strong><%= t('website.gotoapp') %></strong></a>
+                  <a href="<%= redirect_to_app_url %>" class="card-footer-item p-4 px-lg-5 color-white font-size-24px"><strong><%= t('website.nav.app') %></strong></a>
                 <% else %>
-                  <a href="<%= new_account_url %>" class="card-footer-item p-4 px-lg-5 color-white font-size-28px"><strong><%= t('website.pricing.cta_start_free') %></strong></a>
+                  <a href="<%= new_account_url %>" class="card-footer-item p-4 px-lg-5 color-white font-size-24px"><strong><%= t('website.pricing.cta_start_free') %></strong></a>
                 <% end %>
               </div>
             </div>
@@ -559,7 +559,7 @@
       <!-- .container -->
       <div id="contact" class="container">
         <!-- .card -->
-        <div class="card bg-success text-white position-relative overflow-hidden shadow rounded-lg p-4 mb-0" data-aos="fade-up">
+        <div class="card bg-success text-white position-relative overflow-hidden shadow rounded-lg p-4 mb-0">
           <!-- .sticker -->
           <div class="sticker">
             <div class="sticker-item sticker-middle-left">
