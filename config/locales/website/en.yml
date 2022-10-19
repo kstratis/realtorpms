@@ -17,7 +17,16 @@ en:
       signin: 'LOGIN'
     hero1: 'Flexible business software'
     hero2: 'for modern real estate brokerages'
-    subheader: '%{brand} helps you manage your properties, clients, partners and more using our powerful engine and built-in automations'
+    subheader: '%{brand} helps you better manage your brokerage using our powerful engine and built-in automations'
+    promo_html: |
+      <p class="mini-subheader-text">Το <strong>%{brand}</strong> is a cloud-based web app helping you:</p>
+       <p class="py-2">
+       <ul class="mini-subheader-text">
+       <li>🗄 Manage your portfolio & clients</strong></li>
+       <li>🤝 Get more deals done</strong></li>
+       <li>⏱ Save time by automating routine tasks</li>
+       </ul>
+       </p>
     feature_strip:
       a:
         title: 'Sophisticated management engine'

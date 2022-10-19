@@ -2131,6 +2131,12 @@ input.no-full-width{
     margin-bottom: -20px;
   }
 
+  .mini-subheader-text{
+    font-size: 20px;
+    line-height: 1.3em;
+    margin-bottom: -20px;
+  }
+
   .lead{
     font-weight: 400;
   }
@@ -2465,6 +2471,10 @@ a.icon-font-delete{
 
 .sticker{
   top: 10%;
+}
+
+.sticker-box{
+  top: 20% !important;
 }
 
 .color-black{

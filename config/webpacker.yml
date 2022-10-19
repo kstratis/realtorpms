@@ -37,6 +37,7 @@ default: &default
     - .ttf
     - .woff
     - .woff2
+    - .webp
 
   extensions:
     - .mjs
@@ -53,6 +54,7 @@ default: &default
     - .gif
     - .jpeg
     - .jpg
+    - .webp
 
 development:
   <<: *default
