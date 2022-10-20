@@ -17,7 +17,7 @@
         <button class="hamburger hamburger-squeeze hamburger-light d-flex d-lg-none" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
           <span class="hamburger-box"><span class="hamburger-inner"></span></span></button> <!-- /.hamburger -->
         <!-- .navbar-brand -->
-        <a class="navbar-brand ml-auto mr-0" href="#">
+        <a class="navbar-brand ml-auto mr-0" href="#" aria-label="<%= BRANDNAME %> name & logo">
           <svg width="180" height="61" xmlns="http://www.w3.org/2000/svg">
             <g fill="none" fill-rule="evenodd">
               <rect fill="#47555E" fill-rule="nonzero" width="180" height="52.519" rx="26.259"/>
@@ -281,7 +281,7 @@
       <div class="container">
       <div class="row align-items-center">
         <div class="col-12 col-lg-8">
-          <%= image_pack_tag 'media/images/product_promo_optimized.webp', class: 'img-fluid', 'data-aos': "fade-right" %>
+          <%= image_pack_tag 'media/images/product_promo_optimized.webp', alt: 'product-screenshot', class: 'img-fluid', 'data-aos': "fade-right" %>
         </div>
         <div class="col-12 col-lg-4">
           <p class="text-justify">
@@ -324,7 +324,7 @@
             <!-- .card-body -->
             <div class="card-body p-4">
               <div class="d-sm-flex align-items-start text-center text-sm-left">
-                <%= image_pack_tag 'media/images/website/office.svg', class: 'mr-sm-4 mb-3 mb-sm-0', width: "72" %>
+                <%= image_pack_tag 'media/images/website/office.svg', alt: 'Person working on computer', class: 'mr-sm-4 mb-3 mb-sm-0', width: "72" %>
                 <div class="flex-fill">
                   <h5 class="mt-0"><%= t('website.benefits.a.title') %></h5>
                   <p class="text-muted font-size-lg"><%= t('website.benefits.a.body_html', brand: BRANDNAME) %></p>
@@ -337,7 +337,7 @@
             <!-- .card-body -->
             <div class="card-body p-4">
               <div class="d-sm-flex align-items-start text-center text-sm-left">
-                <%= image_pack_tag 'media/images/website/privacy.svg', class: 'mr-sm-4 mb-3 mb-sm-0', width: "72" %>
+                <%= image_pack_tag 'media/images/website/privacy.svg', alt: 'Woman next to a lock', class: 'mr-sm-4 mb-3 mb-sm-0', width: "72" %>
                 <div class="flex-fill">
                   <h5 class="mt-0"><%= t('website.benefits.b.title') %></h5>
                   <p class="text-muted font-size-lg"><%= t('website.benefits.b.body_html') %></p>
@@ -353,7 +353,7 @@
             <!-- .card-body -->
             <div class="card-body p-4">
               <div class="d-sm-flex align-items-start text-center text-sm-left">
-                <%= image_pack_tag 'media/images/website/server.svg', class: 'mr-sm-4 mb-3 mb-sm-0', width: "72" %>
+                <%= image_pack_tag 'media/images/website/server.svg', alt: 'Visual depiction of a database', class: 'mr-sm-4 mb-3 mb-sm-0', width: "72" %>
                 <div class="flex-fill">
                   <h5 class="mt-0"><%= t('website.benefits.c.title') %></h5>
                   <p class="text-muted font-size-lg"><%= t('website.benefits.c.body_html', brand: BRANDNAME) %></p>
@@ -366,7 +366,7 @@
             <!-- .card-body -->
             <div class="card-body p-4">
               <div class="d-sm-flex align-items-start text-center text-sm-left">
-                <%= image_pack_tag 'media/images/website/clients.svg', class: 'mr-sm-4 mb-3 mb-sm-0', width: "72" %>
+                <%= image_pack_tag 'media/images/website/clients.svg', alt: 'User avatars sitting on a large human palm', class: 'mr-sm-4 mb-3 mb-sm-0', width: "72" %>
                 <div class="flex-fill">
                   <h5 class="mt-0"><%= t('website.benefits.d.title') %></h5>
                   <p class="text-muted font-size-lg"><%= t('website.benefits.d.body_html', brand: BRANDNAME) %></p>
@@ -382,7 +382,7 @@
             <!-- .card-body -->
             <div class="card-body p-4">
               <div class="d-sm-flex align-items-start text-center text-sm-left">
-                <%= image_pack_tag 'media/images/website/showing.svg', class: 'mr-sm-4 mb-3 mb-sm-0', width: "72" %>
+                <%= image_pack_tag 'media/images/website/showing.svg', alt: 'House with multiple users inside', class: 'mr-sm-4 mb-3 mb-sm-0', width: "72" %>
                 <div class="flex-fill">
                   <h5 class="mt-0"><%= t('website.benefits.e.title') %></h5>
                   <p class="text-muted font-size-lg"><%= t('website.benefits.e.body_html', brand: BRANDNAME) %></p>
@@ -395,7 +395,7 @@
             <!-- .card-body -->
             <div class="card-body p-4">
               <div class="d-sm-flex align-items-start text-center text-sm-left">
-                <%= image_pack_tag 'media/images/website/website.svg', class: 'mr-sm-4 mb-3 mb-sm-0', width: "72" %>
+                <%= image_pack_tag 'media/images/website/website.svg', alt: 'Computer screen showing a house and code tags', class: 'mr-sm-4 mb-3 mb-sm-0', width: "72" %>
                 <div class="flex-fill">
                   <h5 class="mt-0"><%= t('website.benefits.f.title') %></h5>
                   <p class="text-muted font-size-lg"><%= t('website.benefits.f.body_html', brand: BRANDNAME) %></p>
@@ -439,16 +439,16 @@
         <div class="row h-100 justify-content-center align-items-center mt-5" data-aos="fade-in">
           <div class="col-xl-4 col-12">
             <div class="integration-box">
-              <%= image_pack_tag 'media/images/spiti24_canonical.png', class: "mx-auto d-block integration-provider-logo" %>
+              <%= image_pack_tag 'media/images/spiti24_canonical.png', alt: 'Spiti24 logo', class: "mx-auto d-block integration-provider-logo" %>
             </div>
           </div>
           <div class="col-xl-4 col-12 my-3 my-xl-0">
             <div class="integration-box">
-              <%= image_pack_tag 'media/images/spitogatos_canonical.png', class: "mx-auto d-block integration-provider-logo" %>
+              <%= image_pack_tag 'media/images/spitogatos_canonical.png', alt: 'spitogatos.gr logo', class: "mx-auto d-block integration-provider-logo" %>
             </div>
           </div>
           <div class="col-xl-4 col-12">
-            <%= image_pack_tag 'media/images/tospitimou_canonical.png', class: "mx-auto d-block integration-provider-logo" %>
+            <%= image_pack_tag 'media/images/tospitimou_canonical.png', alt:'tospitimou logo', class: "mx-auto d-block integration-provider-logo" %>
             </div>
           </div>
         </div>
@@ -470,7 +470,7 @@
               <div class="d-sm-flex align-items-start text-center text-sm-left ">
                 <div class="col-12 text-center">
                   <div class="graphic-container">
-                    <%= image_pack_tag 'media/images/testimonials/psom.jpg', class: "img-fluid w-25 pt-2 pb-3 testimonial-avatar", alt: 'avatar of client testimonial 1' %>
+                    <%= image_pack_tag 'media/images/testimonials/psom.jpg', class: "img-fluid w-25 pt-2 pb-3 testimonial-avatar", alt: 'avatar of broker agent 1' %>
                   </div>
                   <h3 class="lead header"><strong><%= t('website.testimonials.customer_1.identity_html', brand: "#{BRANDNAME.downcase}.com") %></strong></h3>
                   <h3 class="body"><%= t('website.testimonials.customer_1.body_html', brand: BRANDNAME) %></h3>
@@ -485,7 +485,7 @@
               <div class="d-sm-flex align-items-start text-center text-sm-left ">
                 <div class="col-12 text-center">
                   <div class="graphic-container">
-                    <%= image_pack_tag 'media/images/testimonials/eustratiou.png', class: "img-fluid w-25 pt-2 pb-3 testimonial-avatar", alt: 'avatar of client testimonial 2' %>
+                    <%= image_pack_tag 'media/images/testimonials/eustratiou.png', class: "img-fluid w-25 pt-2 pb-3 testimonial-avatar", alt: 'avatar of broker agent 2' %>
                   </div>
                   <h3 class="lead header"><strong><%= t('website.testimonials.customer_2.identity_html') %></strong></h3>
                   <h3 class="body"><%= t('website.testimonials.customer_2.body_html', brand: BRANDNAME) %></h3>
@@ -506,7 +506,7 @@
       <!-- .sticker -->
       <div class="sticker">
         <div class="sticker-item sticker-top-right sticker-soften translate-x-50">
-          <%= image_pack_tag 'media/images/website/bubble1.svg', 'data-aos': "fade-left" %>
+          <%= image_pack_tag 'media/images/website/bubble1.svg', alt:'background graphics', 'data-aos': "fade-left" %>
         </div>
       </div><!-- /.sticker -->
       <!-- .container -->
@@ -525,16 +525,16 @@
                 <p class="text-center text-muted-light mb-5"><u><%= t('website.pricing.paid_license.header') %></u></p>
                 <ul class="list-icons">
                   <li class="mb-2 pl-1">
-                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><%= t('website.pricing.paid_license.bullet1') %></li><li class="mb-2 pl-1">
-                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><%= t('website.pricing.paid_license.bullet2') %></li><li class="mb-2 pl-1">
-                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><%= t('website.pricing.paid_license.bullet3') %></li><li class="mb-2 pl-1">
-                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><%= t('website.pricing.paid_license.bullet4') %></li><li class="mb-2 pl-1">
-                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><%= t('website.pricing.paid_license.bullet5') %></li><li class="mb-2 pl-1">
-                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><strong class="color-gold"><%= t('website.pricing.paid_license.bullet6') %></strong></li><li class="mb-2 pl-1">
-                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><strong class="color-gold"><%= t('website.pricing.paid_license.bullet7') %></strong></li><li class="mb-2 pl-1">
-                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><strong class="color-gold"><%= t('website.pricing.paid_license.bullet8') %></strong></li><li class="mb-2 pl-1">
-                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><strong class="color-gold"><%= t('website.pricing.paid_license.bullet9_html') %></strong></li><li class="mb-2 pl-1">
-                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="" width="16"></span><strong class="color-gold"><%= t('website.pricing.paid_license.bullet10') %></strong></li><li class="mb-2 pl-1">
+                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="checkmark" width="16"></span><%= t('website.pricing.paid_license.bullet1') %></li><li class="mb-2 pl-1">
+                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="checkmark" width="16"></span><%= t('website.pricing.paid_license.bullet2') %></li><li class="mb-2 pl-1">
+                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="checkmark" width="16"></span><%= t('website.pricing.paid_license.bullet3') %></li><li class="mb-2 pl-1">
+                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="checkmark" width="16"></span><%= t('website.pricing.paid_license.bullet4') %></li><li class="mb-2 pl-1">
+                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="checkmark" width="16"></span><%= t('website.pricing.paid_license.bullet5') %></li><li class="mb-2 pl-1">
+                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="checkmark" width="16"></span><strong class="color-gold"><%= t('website.pricing.paid_license.bullet6') %></strong></li><li class="mb-2 pl-1">
+                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="checkmark" width="16"></span><strong class="color-gold"><%= t('website.pricing.paid_license.bullet7') %></strong></li><li class="mb-2 pl-1">
+                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="checkmark" width="16"></span><strong class="color-gold"><%= t('website.pricing.paid_license.bullet8') %></strong></li><li class="mb-2 pl-1">
+                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="checkmark" width="16"></span><strong class="color-gold"><%= t('website.pricing.paid_license.bullet9_html') %></strong></li><li class="mb-2 pl-1">
+                    <span class="list-icon"><img class="mr-2" src="<%= asset_pack_path('media/images/check.svg') %>" alt="checkmark" width="16"></span><strong class="color-gold"><%= t('website.pricing.paid_license.bullet10') %></strong></li><li class="mb-2 pl-1">
                 </ul>
               </div>
               <div class="card-footer">
