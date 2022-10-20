@@ -15,6 +15,7 @@ en:
       app: 'APP'
       signup: 'START FOR FREE'
       signin: 'LOGIN'
+    cta: 'TRY NOW!'
     hero1: 'Flexible business software'
     hero2: 'for modern real estate brokerages'
     subheader: '%{brand} helps you better manage your brokerage using our powerful engine and built-in automations'

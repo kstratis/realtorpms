@@ -2477,6 +2477,18 @@ a.icon-font-delete{
   top: 20% !important;
 }
 
+.cta{
+  font-size: 32px !important;
+  font-weight: bold;
+  background: gold;
+  color: #363642;
+  border-radius: 5px;
+  &:hover{
+    color: #363642;
+    text-decoration: underline;
+  }
+}
+
 .color-black{
   color: #000
 }

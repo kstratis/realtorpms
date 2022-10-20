@@ -1,0 +1,7 @@
+<% unless logged_in? %>
+  <section class="position-relative py-4 bg-dark align-items-center d-flex">
+    <div class="container-fluid bg-dark py-4 text-center justify-content-center d-flex">
+      <%=  link_to t('website.cta'), new_account_url, class: 'cta px-5 py-4'  %>
+    </div>
+  </section>
+<% end %>
