@@ -2477,10 +2477,9 @@ a.icon-font-delete{
   top: 20% !important;
 }
 
-
 .cta{
   font-size: 22px !important;
-  @media (min-width: 478px) {
+  @include media-breakpoint-up('sm') {
     font-size: 32px !important;
   }
   font-weight: bold;
