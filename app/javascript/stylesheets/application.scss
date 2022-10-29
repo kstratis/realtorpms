@@ -2477,8 +2477,12 @@ a.icon-font-delete{
   top: 20% !important;
 }
 
+
 .cta{
-  font-size: 32px !important;
+  font-size: 22px !important;
+  @media (min-width: 479px) {
+    font-size: 32px !important;
+  }
   font-weight: bold;
   background: gold;
   color: #363642;
