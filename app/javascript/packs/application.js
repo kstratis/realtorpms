@@ -53,6 +53,10 @@ function handleChatWidget(response, locale) {
 $(document).on('turbolinks:load', function(e) {
   const active_locale = $('#current_locale').data().i18n.locale || 'en';
 
+  if (window.fathom) {
+    window.fathom.trackPageview()
+  }
+
   if ($(".uppy-emitters, .file-emitters").length > 0){
     let modules = Promise.all([
       import(/* webpackChunkName: "UppyController" */
