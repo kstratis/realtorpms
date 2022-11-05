@@ -8,7 +8,7 @@
 
 <% content_for :content do %>
 
-  <%= form_for(@account, html: {class: 'auth-form'}) do |account_builder| %>
+  <%= form_for(@account, data: { 'splitbee-event': "New account" }, html: {class: 'auth-form'} ) do |account_builder| %>
     <%#= render 'shared/error_messages', locals: {model: @account} %>
 
     <div class="form-group">
