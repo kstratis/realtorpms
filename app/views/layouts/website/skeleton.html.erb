@@ -44,10 +44,9 @@
 
   <%= javascript_packs_with_chunks_tag 'landing', 'data-turbolinks-track': 'reload' %>
 
+<!--  <script defer data-domain="realtorpms.com" src="https://plausible.io/js/plausible.js"></script>-->
   <% if Rails.env.production? %>
-    <!-- Fathom - beautiful, simple website analytics -->
-    <script src="https://cdn.usefathom.com/script.js" data-site="GXWRVMLC" defer></script>
-    <!-- / Fathom -->
+    <script data-token="AOX6ILZTEIVP" async src="https://cdn.splitbee.io/sb.js"></script>
   <% end %>
 
   <%= render 'layouts/shim' %>
