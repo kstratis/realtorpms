@@ -190,10 +190,10 @@ $(document).on('turbolinks:load', function(e) {
     e.preventDefault();
 
     import(/* webpackIgnore: true */ 'https://cdn.paddle.com/paddle/paddle.js').then(()=>{
-      // if ($(e.currentTarget).data('environment') === 'development'){
-      console.log('setting the test mode')
-      Paddle.Environment.set('sandbox');
-      // }
+      if ($(e.currentTarget).data('environment') === 'development'){
+        console.log('setting the test mode')
+        Paddle.Environment.set('sandbox');
+      }
       Paddle.Setup({ vendor: $(e.currentTarget).data('vendor') });
       Paddle.Checkout.open({
         override: $(e.currentTarget).data('paymentLink')
